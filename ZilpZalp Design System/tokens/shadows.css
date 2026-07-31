@@ -1,0 +1,11 @@
+:root{
+/* Warm, soft ambient shadows — never neutral grey */
+--shadow-sm:0 2px 6px rgba(92,58,36,.10);
+--shadow-md:0 8px 20px rgba(92,58,36,.12);
+--shadow-lg:0 18px 40px rgba(92,58,36,.16);
+/* "Toy" shadow: a solid ledge under pressables, pressed away on tap */
+--ledge:0 6px 0; /* @kind shadow */
+--ledge-lg:0 10px 0; /* @kind shadow */
+--inset-soft:inset 0 -4px 0 rgba(34,48,31,.06); /* @kind shadow */
+--ring-focus:0 0 0 5px color-mix(in oklab, var(--focus-ring) 45%, transparent); /* @kind shadow */
+}

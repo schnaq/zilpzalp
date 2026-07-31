@@ -1,0 +1,81 @@
+/* Every hue in this file is derived from the ZilpZalp reference photograph of a
+   Wiedehopf (assets/reference/wiedehopf-reference.png): crest orange, meadow
+   olive, feather clay, bark, and the sooty black of the crest tips.
+   The system is WARM ONLY — there is no blue, no teal, no neutral grey, no red. */
+:root{
+/* --- Olive / meadow (primary): the grass behind the bird --- */
+--olive-50:#F1F4DE;--olive-100:#E5EBBE;--olive-200:#DCE3AE;--olive-300:#C3CE86;--olive-400:#A1AB53;--olive-500:#6E7A21;--olive-600:#5B6519;--olive-700:#4C5413;--olive-800:#3B4218;
+/* --- Hoopoe crest (accent): sampled #ED9156, deepened for contrast --- */
+--orange-50:#FDEBDC;--orange-100:#F9D6BB;--orange-200:#F0B27A;--orange-300:#EF9A45;--orange-400:#E8802F;--orange-500:#DD6E22;--orange-600:#C25C16;--orange-700:#A64B12;
+/* --- Sun (reward, "try again") --- */
+--sun-100:#FBEBC4;--sun-200:#FBE6B0;--sun-300:#F5CF63;--sun-400:#E9B21C;--sun-500:#CE9A0E;--sun-600:#B08000;
+/* --- Clay (feathers) — replaces the old cool "sky" ramp --- */
+--clay-50:#FBE9E1;--clay-100:#F6D6C8;--clay-200:#E9AE94;--clay-300:#DC8A67;--clay-400:#D26E42;--clay-500:#C9552B;--clay-600:#AC4520;--clay-700:#97350F;
+/* --- Bark & earth --- */
+--bark-100:#EFDCC4;--bark-300:#C79A6A;--bark-500:#9A6234;--bark-700:#6E3F1C;
+/* --- Berry (rare finds) --- */
+--berry-100:#F4E2EF;--berry-300:#D9A6CC;--berry-500:#9E5A8E;--berry-700:#74406A;
+/* --- Marsh (wetland topics) --- */
+--marsh-100:#E3EDD2;--marsh-300:#B7CB95;--marsh-500:#7E9B4E;--marsh-700:#5A7332;
+/* --- Warm neutrals: oat paper, sand lines, soot ink --- */
+--cream-50:#FFFCF3;--cream-100:#FBF3E4;--sand-200:#F2E6CE;--sand-300:#EADCC0;--sand-400:#D9C7A4;
+--ink-900:#2A2213;--ink-700:#544730;--ink-500:#7D6E51;--ink-300:#9C8C6D;
+--white:#FFFCF3;--soot:#17140F;
+
+/* ================= SEMANTIC ALIASES ================= */
+--color-primary:var(--olive-500);
+--color-primary-hover:var(--olive-400);
+--color-primary-press:var(--olive-600);
+--color-primary-shadow:var(--olive-700);
+--color-primary-soft:var(--olive-100);
+--color-accent:var(--orange-500);
+--color-accent-press:var(--orange-600);
+--color-accent-shadow:var(--orange-700);
+--color-accent-soft:var(--orange-100);
+--color-info:var(--clay-500);
+--color-info-soft:var(--clay-100);
+--color-reward:var(--sun-400);
+--color-reward-shadow:var(--sun-600);
+--color-rare:var(--berry-500);
+
+/* Feedback is never punishing: correct = olive, retry = sun, never red */
+--color-correct:var(--olive-500);
+--color-correct-soft:var(--olive-200);
+--color-retry:var(--sun-400);
+--color-retry-soft:var(--sun-100);
+
+/* Surfaces */
+--surface-page:var(--cream-100);
+--surface-card:var(--cream-50);
+--surface-sunken:var(--sand-200);
+--surface-forest:var(--olive-800);
+--surface-warm:var(--orange-100);
+--scrim:rgba(42,34,19,.45);
+
+/* Text */
+--text-strong:var(--ink-900);
+--text-body:var(--ink-700);
+--text-muted:var(--ink-500);
+--text-on-color:var(--cream-50);
+--text-on-reward:var(--ink-900);
+--link:var(--olive-600);
+--link-hover:var(--orange-500);
+
+/* Lines & rings */
+--border-card:var(--sand-300);
+--border-strong:var(--sand-400);
+--focus-ring:var(--orange-500);
+
+/* ================= RUBRIC COLOURS =================
+   One colour per topic, all warm. Used for tiles, badges and chapter headers. */
+--rubric-wald:var(--olive-500);
+--rubric-wiese:var(--olive-400);
+--rubric-rufe:var(--orange-500);
+--rubric-belohnung:var(--sun-400);
+--rubric-federn:var(--clay-500);
+--rubric-rinde:var(--bark-500);
+--rubric-beeren:var(--berry-500);
+--rubric-nest:var(--orange-200);
+--rubric-sumpf:var(--marsh-500);
+--rubric-sonne:var(--orange-300);
+}

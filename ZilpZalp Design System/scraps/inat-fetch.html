@@ -1,0 +1,42 @@
+<!doctype html><html lang="de"><head><meta charset="utf-8"><title>iNaturalist-Fotos für ZilpZalp</title>
+<style>body{margin:0;background:#FBF3E4;font:14px/1.4 system-ui;padding:16px}
+.grid{display:flex;flex-wrap:wrap;gap:14px}
+.cell{width:512px;height:512px;overflow:hidden;background:#F2E6CE}
+.cell img{width:100%;height:100%;object-fit:cover;display:block}
+.meta{margin-top:14px;font:12px/1.5 monospace;white-space:pre-wrap;background:#FFFCF3;padding:10px}</style></head>
+<body><div class="grid" id="grid"></div><div class="meta" id="meta">lade …</div>
+<script>
+const SPECIES=[
+ ["zilpzalp","Phylloscopus collybita"],
+ ["wiedehopf","Upupa epops"],
+ ["amsel","Turdus merula"],
+ ["blaumeise","Cyanistes caeruleus"],
+ ["kohlmeise","Parus major"],
+ ["rotkehlchen","Erithacus rubecula"],
+ ["buntspecht","Dendrocopos major"],
+ ["eisvogel","Alcedo atthis"],
+ ["star","Sturnus vulgaris"],
+ ["hausrotschwanz","Phoenicurus ochruros"]
+];
+const credits=[];
+(async()=>{
+ for(const [slug,latin] of SPECIES){
+  const cell=document.createElement('div');cell.className='cell';cell.id='p-'+slug;document.getElementById('grid').appendChild(cell);
+  try{
+   const tr=await (await fetch("https://api.inaturalist.org/v1/taxa?q="+encodeURIComponent(latin)+"&rank=species")).json();
+   const taxon=tr.results.find(t=>t.name===latin)||tr.results[0];
+   const or=await (await fetch("https://api.inaturalist.org/v1/observations?taxon_id="+taxon.id+"&photo_license=cc0,cc-by&quality_grade=research&order_by=votes&per_page=5&locale=de")).json();
+   let photo=null,attr=null;
+   for(const o of or.results){ if(o.photos&&o.photos.length){ photo=o.photos[0]; attr=(photo.attribution||"")+" | obs "+o.uri; break; } }
+   if(!photo){ cell.textContent="keins gefunden: "+latin; continue; }
+   const url=photo.url.replace("square","large");
+   const im=new Image();im.crossOrigin="anonymous";im.src=url;im.alt=latin;
+   await new Promise(r=>{im.onload=r;im.onerror=r});
+   cell.appendChild(im);
+   credits.push({slug,latin,url,license:photo.license_code,attribution:attr});
+  }catch(e){ cell.textContent="Fehler "+latin+": "+e.message; }
+ }
+ window.__credits=credits;
+ document.getElementById('meta').textContent=credits.map(c=>c.slug+" — "+c.license+" — "+c.attribution).join("\n");
+})();
+</script></body></html>

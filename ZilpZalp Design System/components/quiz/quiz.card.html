@@ -1,0 +1,33 @@
+<!-- @dsCard group="Components" viewport="700x400" name="Quiz" subtitle="Answer tiles, sound button, leaf progress, stickers, feedback" -->
+<!doctype html><html lang="de"><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css"><link rel="stylesheet" href="../../guidelines/motion.css">
+<style>body{margin:0;background:var(--surface-page);font-family:var(--font-body);color:var(--text-body)}</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+</head><body><div id="root" style="padding:20px"></div><script type="text/babel">
+const { ChoiceTile, SoundButton, QuizProgress, RewardSticker, FeedbackBanner } = window.ZilpZalpDesignSystem_bd8c6b;
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <div style={{display:'grid',gap:24}}>
+    <div style={{display:'flex',alignItems:'center',gap:24,flexWrap:'wrap'}}>
+      <ChoiceTile name="Amsel" tone="beeren" size={150} photo="../../assets/photos/amsel.png" credit="Foto: A. Tinker-Tsavalas (CC BY)" />
+      <ChoiceTile name="Wiedehopf" tone="rufe" size={150} state="correct" photo="../../assets/photos/wiedehopf.png" credit="Foto: Dmitry Ivanov (CC BY)" />
+      <ChoiceTile name="Kohlmeise" tone="belohnung" size={150} state="retry" photo="../../assets/photos/kohlmeise.png" credit="Foto: SteveM4560 (CC BY)" />
+      <ChoiceTile name="Zilpzalp" tone="wald" size={150} state="chosen" dimmed photo="../../assets/photos/zilpzalp.png" credit="Foto: Tomas Broucek (CC BY)" />
+      <SoundButton size={120} />
+      <SoundButton size={120} playing />
+    </div>
+    <div style={{display:'flex',alignItems:'center',gap:32,flexWrap:'wrap'}}>
+      <QuizProgress total={5} done={2} current={2} />
+      <RewardSticker photo="../../assets/photos/wiedehopf.png" label="Wiedehopf" tone="hoopoe" size={92} />
+      <RewardSticker icon="sparkles" label="Selten" tone="rare" size={92} />
+      <RewardSticker label="Geheim" locked size={92} />
+    </div>
+    <div style={{display:'flex',gap:16,flexWrap:'wrap'}}>
+      <FeedbackBanner tone="correct">Genau!</FeedbackBanner>
+      <FeedbackBanner tone="retry">Fast!</FeedbackBanner>
+      <FeedbackBanner tone="hint">Hör den Ruf</FeedbackBanner>
+    </div>
+  </div>
+);</script></body></html>

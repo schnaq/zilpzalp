@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="iPad quiz round" description="Wordless bird-quiz screen for iPad landscape: call button, four photo answers, feedback." -->
+<helmet><script src="./ds-base.js"></script><style>@keyframes zz-pop{0%{transform:scale(.6);opacity:0}60%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}@keyframes zz-ring{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.55);opacity:0}}body{margin:0}</style></helmet>
+<div style="width:1194px;height:834px;display:flex;flex-direction:column;background:#FFF8EC;font-family:'Baloo 2',system-ui,sans-serif;overflow:hidden">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.TopBar" onBack="{{ noop }}" onSettings="{{ noop }}" center="{{ progress }}" hint-size="100%,104px"></x-import>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;padding:20px 48px 0">
+<div style="display:flex;align-items:center;gap:32px;margin-bottom:18px">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.SoundButton" playing="{{ playing }}" size="150" onClick="{{ replay }}" hint-size="150px,150px"></x-import>
+<h1 style="margin:0;font-weight:800;font-size:48px;line-height:1.1;color:#22301F">Wer singt da?</h1>
+</div>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;width:100%">
+<sc-for list="{{ birds }}" as="bird" hint-placeholder-count="4">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.ChoiceTile" name="{{ bird.name }}" state="{{ bird.state }}" dimmed="{{ bird.dimmed }}" size="230" onSelect="{{ bird.pick }}" hint-size="230px,270px"></x-import>
+</sc-for>
+</div>
+<div style="min-height:100px;display:flex;align-items:center;gap:24px;margin-top:24px">
+<sc-if value="{{ resolved }}" hint-placeholder-val="{{ false }}">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.FeedbackBanner" tone="{{ feedbackTone }}" hint-size="320px,72px">{{ feedbackText }}</x-import>
+</sc-if>
+<sc-if value="{{ right }}" hint-placeholder-val="{{ false }}">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Button" tone="primary" iconRight="arrow-right" onClick="{{ reset }}" hint-size="200px,96px">Weiter</x-import>
+</sc-if>
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1194,&quot;height&quot;:834},&quot;answers&quot;:{&quot;editor&quot;:null,&quot;default&quot;:[&quot;Zilpzalp&quot;,&quot;Amsel&quot;,&quot;Wiedehopf&quot;,&quot;Blaumeise&quot;],&quot;tsType&quot;:&quot;string[]&quot;},&quot;correctIndex&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:0,&quot;min&quot;:0,&quot;max&quot;:3,&quot;tsType&quot;:&quot;number&quot;},&quot;total&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:5,&quot;min&quot;:3,&quot;max&quot;:6,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Runde&quot;},&quot;done&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:2,&quot;min&quot;:0,&quot;max&quot;:6,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Runde&quot;}}">
+class Component extends DCLogic {
+  state = { picked: null, playing: true };
+  componentDidMount() { this.timer = setTimeout(() => this.setState({ playing: false }), 2600); }
+  componentWillUnmount() { clearTimeout(this.timer); }
+  renderVals() {
+    const names = this.props.answers ?? ["Zilpzalp", "Amsel", "Wiedehopf", "Blaumeise"];
+    const correct = this.props.correctIndex ?? 0;
+    const { picked } = this.state;
+    const right = picked === correct;
+    const birds = names.map((name, i) => ({
+      name,
+      state: picked === i ? (i === correct ? "correct" : "retry") : "idle",
+      dimmed: right && i !== correct,
+      pick: () => { if (!right) this.setState({ picked: i }); },
+    }));
+    const QuizProgress = (window.ZilpZalpDesignSystem_bd8c6b || {}).QuizProgress;
+    return {
+      birds, right, playing: this.state.playing,
+      resolved: picked !== null,
+      feedbackTone: right ? "correct" : "retry",
+      feedbackText: right ? "Genau! Das ist der " + names[correct] + "." : "Fast! Hör nochmal hin.",
+      progress: QuizProgress ? React.createElement(QuizProgress, { total: this.props.total ?? 5, done: this.props.done ?? 2, current: this.props.done ?? 2 }) : null,
+      replay: () => this.setState({ playing: true }, () => { clearTimeout(this.timer); this.timer = setTimeout(() => this.setState({ playing: false }), 2600); }),
+      reset: () => this.setState({ picked: null, playing: true }),
+      noop: () => {},
+    };
+  }
+}
+</script>
+</body>
+</html>

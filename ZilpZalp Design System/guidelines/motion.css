@@ -1,0 +1,5 @@
+/* Brand keyframes. Components reference these by name; copy into any consuming page. */
+@keyframes zz-pop{0%{transform:scale(.6);opacity:0}60%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
+@keyframes zz-ring{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.55);opacity:0}}
+@keyframes zz-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes zz-wiggle{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
