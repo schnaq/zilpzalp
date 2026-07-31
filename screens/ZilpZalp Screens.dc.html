@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="stylesheet" href="_ds/zilpzalp-design-system-f3799d9c-7084-4e56-b8b3-489b010d6770/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/zilpzalp-design-system-f3799d9c-7084-4e56-b8b3-489b010d6770/tokens/colors.css">
+<link rel="stylesheet" href="_ds/zilpzalp-design-system-f3799d9c-7084-4e56-b8b3-489b010d6770/tokens/typography.css">
+<link rel="stylesheet" href="_ds/zilpzalp-design-system-f3799d9c-7084-4e56-b8b3-489b010d6770/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/zilpzalp-design-system-f3799d9c-7084-4e56-b8b3-489b010d6770/tokens/radii.css">
+<link rel="stylesheet" href="_ds/zilpzalp-design-system-f3799d9c-7084-4e56-b8b3-489b010d6770/tokens/shadows.css">
+<link rel="stylesheet" href="_ds/zilpzalp-design-system-f3799d9c-7084-4e56-b8b3-489b010d6770/tokens/motion.css">
+<link rel="stylesheet" href="_ds/zilpzalp-design-system-f3799d9c-7084-4e56-b8b3-489b010d6770/guidelines/motion.css">
+<link rel="stylesheet" href="_ds/zilpzalp-design-system-f3799d9c-7084-4e56-b8b3-489b010d6770/styles.css">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script src="_ds/zilpzalp-design-system-f3799d9c-7084-4e56-b8b3-489b010d6770/_ds_bundle.js"></script>
+<style>
+body{margin:0;background:#EFE7D6;font-family:Nunito,system-ui,sans-serif}
+a{color:var(--link)}a:hover{color:var(--link-hover)}
+.dv-turn{padding:40px 44px 32px;border-bottom:1px solid rgba(42,34,19,.12);scroll-margin-top:16px}
+.dv-thd{display:flex;align-items:baseline;gap:10px;margin:0 0 20px}
+.dv-tid{font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#2A2213;color:#FFFCF3;border-radius:4px;text-decoration:none}
+.dv-tname{font:600 14px/1.2 Nunito,sans-serif;color:#2A2213}
+.dv-opts{display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start}
+.dv-opt{flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px}
+.dv-oid{font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(42,34,19,.1);color:#2A2213;border-radius:5px;text-decoration:none}
+.dv-olabel{display:flex;align-items:baseline;gap:8px;font:600 12px/1.3 Nunito,sans-serif;color:rgba(42,34,19,.6)}
+.dv-card{max-width:100%;background:#fff;border:1px solid rgba(42,34,19,.12);border-radius:10px;box-shadow:0 1px 4px rgba(42,34,19,.1);overflow:hidden}
+.dv-opt:target .dv-oid{background:var(--orange-500);color:#FFFCF3}
+.dv-next{margin:24px 0 0;font:12px/1.5 Nunito,sans-serif;color:rgba(42,34,19,.55)}
+</style>
+</helmet>
+<section class="dv-turn" id="t3">
+<div class="dv-thd"><a class="dv-tid" href="#t3">3</a><span class="dv-tname">Fehlversuch-Zustand + klickbarer Prototyp — <a href="ZilpZalp Prototyp.dc.html">ZilpZalp Prototyp.dc.html öffnen</a> (Profil → Home → Spiel 1 mit Vorlesen → Rundenende → Sammlung)</span></div>
+<div class="dv-opts">
+<div class="dv-opt" id="3a"><div class="dv-olabel"><a class="dv-oid" href="#3a">3a</a>Spiel 1 · Fehlversuch · „Fast! Hör nochmal hin." · iPad</div><div class="dv-card" style="width:1194px"><div data-screen-label="Spiel 1 Fehlversuch" style="width:1194px;height:834px;display:flex;flex-direction:column;background:var(--surface-page);overflow:hidden">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.TopBar" onBack="{{ noop }}" onSettings="{{ noop }}" center="{{ progQuiz }}" hint-size="100%,104px"></x-import>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;padding:0 var(--gutter-screen);min-height:0">
+<div style="flex:1;display:flex;align-items:center;justify-content:center;gap:28px;min-height:0">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.SoundButton" size="{{ N.n120 }}" hint-size="120px,120px"></x-import>
+<h1 style="margin:0;font:var(--weight-black) var(--text-display-2)/var(--lh-display-2) var(--font-display);color:var(--text-strong)">Wo ist die Blaumeise?</h1>
+</div>
+<div style="display:flex;align-items:center;justify-content:center;gap:28px;width:100%">
+<sc-for list="{{ retryBirds }}" as="b" hint-placeholder-count="4">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.ChoiceTile" photo="{{ b.photo }}" credit="{{ b.credit }}" name="{{ b.name }}" tone="{{ b.tone }}" state="{{ b.state }}" dimmed="{{ b.dimmed }}" size="{{ N.n260 }}" hint-size="260px,280px"></x-import>
+</sc-for>
+</div>
+<div style="min-height:104px;display:flex;align-items:center;justify-content:center;padding:14px 0 18px">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.FeedbackBanner" tone="retry" dc-props="{{ bannerFit }}" hint-size="420px,72px">Fast! Hör nochmal hin.</x-import>
+</div>
+</div>
+</div></div></div>
+</div>
+<p class="dv-next">Der falsch getippte Star ist markiert und gedimmt, alle anderen bleiben wählbar — kein Rot, kein ✗, die Runde läuft weiter. Genau so verhält es sich im Prototyp.</p>
+</section>
+<section class="dv-turn" id="t2">
+<div class="dv-thd"><a class="dv-tid" href="#t2">2</a><span class="dv-tname">Restliche Screens — Spiele 2–4, Sammlung &amp; Statistik, Erwachsenen-Bereich, iPhone-Home</span></div>
+<div class="dv-opts">
+<div class="dv-opt" id="2a"><div class="dv-olabel"><a class="dv-oid" href="#2a">2a</a>Spiel 2 · Wer singt da? (Frage läuft) · iPad</div><div class="dv-card" style="width:1194px"><div data-screen-label="Spiel 2 Rufe" style="width:1194px;height:834px;display:flex;flex-direction:column;background:var(--surface-page);overflow:hidden">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.TopBar" onBack="{{ noop }}" onSettings="{{ noop }}" center="{{ progQuiz }}" hint-size="100%,104px"></x-import>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;padding:18px var(--gutter-screen) 0;min-height:0">
+<div style="flex:1;display:flex;align-items:center;justify-content:center;gap:28px;min-height:0">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.SoundButton" playing="{{ yes }}" size="{{ N.n140 }}" hint-size="140px,140px"></x-import>
+<h1 style="margin:0;font:var(--weight-black) var(--text-display-2)/var(--lh-display-2) var(--font-display);color:var(--text-strong)">Wer singt da?</h1>
+</div>
+<div style="flex:1;display:flex;align-items:center;justify-content:center;gap:28px;width:100%">
+<sc-for list="{{ quiz2Birds }}" as="b" hint-placeholder-count="4">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.ChoiceTile" photo="{{ b.photo }}" credit="{{ b.credit }}" name="{{ b.name }}" tone="{{ b.tone }}" state="{{ b.state }}" size="{{ N.n260 }}" hint-size="260px,280px"></x-import>
+</sc-for>
+</div>
+<div style="min-height:56px"></div>
+</div>
+</div></div></div>
+<div class="dv-opt" id="2b"><div class="dv-olabel"><a class="dv-oid" href="#2b">2b</a>Spiel 3 · Wessen Feder ist das? · iPad</div><div class="dv-card" style="width:1194px"><div data-screen-label="Spiel 3 Feder" style="width:1194px;height:834px;display:flex;flex-direction:column;background:var(--surface-page);overflow:hidden">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.TopBar" onBack="{{ noop }}" onSettings="{{ noop }}" center="{{ progQuiz }}" hint-size="100%,104px"></x-import>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;padding:18px var(--gutter-screen) 0;min-height:0">
+<div style="flex:1;display:flex;align-items:center;justify-content:center;gap:28px;min-height:0">
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;width:170px;height:170px;background:var(--sand-100);border:5px solid var(--clay-300);border-radius:40px">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Icon" name="feather" size="{{ N.n76 }}" color="var(--clay-500)" strokeWidth="{{ N.sw }}" hint-size="76px,76px"></x-import>
+<span style="font:var(--weight-semibold) 14px/1.3 var(--font-body);color:var(--text-muted);text-align:center;padding:0 10px">Federfoto folgt</span>
+</div>
+<h1 style="margin:0;font:var(--weight-black) var(--text-display-2)/var(--lh-display-2) var(--font-display);color:var(--text-strong)">Wessen Feder ist das?</h1>
+</div>
+<div style="flex:1;display:flex;align-items:center;justify-content:center;gap:28px;width:100%">
+<sc-for list="{{ quiz2Birds }}" as="b" hint-placeholder-count="4">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.ChoiceTile" photo="{{ b.photo }}" credit="{{ b.credit }}" name="{{ b.name }}" tone="{{ b.tone }}" state="{{ b.state }}" size="{{ N.n260 }}" hint-size="260px,280px"></x-import>
+</sc-for>
+</div>
+<div style="min-height:60px"></div>
+</div>
+</div></div></div>
+<div class="dv-opt" id="2c"><div class="dv-olabel"><a class="dv-oid" href="#2c">2c</a>Spiel 4 · Wo wohnt er? · iPad</div><div class="dv-card" style="width:1194px"><div data-screen-label="Spiel 4 Lebensraum" style="width:1194px;height:834px;display:flex;flex-direction:column;background:var(--surface-page);overflow:hidden">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.TopBar" onBack="{{ noop }}" onSettings="{{ noop }}" center="{{ progQuiz }}" hint-size="100%,104px"></x-import>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;padding:0 var(--gutter-screen);min-height:0">
+<div style="flex:1;display:flex;align-items:center;justify-content:center;gap:28px;min-height:0">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.RewardSticker" photo="{{ eisvogelPhoto }}" credit="{{ eisvogelCredit }}" tone="rare" size="{{ N.n200 }}" hint-size="200px,200px"></x-import>
+<h1 style="margin:0;font:var(--weight-black) var(--text-display-2)/var(--lh-display-2) var(--font-display);color:var(--text-strong)">Wo wohnt der Eisvogel?</h1>
+</div>
+<div style="flex:1;display:flex;align-items:center;justify-content:center;gap:28px;width:100%;min-height:0">
+<sc-for list="{{ habitats }}" as="h" hint-placeholder-count="4">
+<button type="button" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;width:230px;height:230px;background:{{ h.bg }};border:5px solid {{ h.edge }};border-radius:40px;box-shadow:0 8px 0 {{ h.ledge }};cursor:pointer">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Icon" name="{{ h.icon }}" size="{{ N.n76 }}" color="{{ h.fg }}" strokeWidth="{{ N.sw }}" hint-size="76px,76px"></x-import>
+<span style="font:var(--weight-black) 28px/1.1 var(--font-display);color:{{ h.fg }}">{{ h.label }}</span>
+</button>
+</sc-for>
+</div>
+<div style="min-height:56px"></div>
+</div>
+</div></div></div>
+<div class="dv-opt" id="2d"><div class="dv-olabel"><a class="dv-oid" href="#2d">2d</a>Sammlung &amp; Statistik · Sticker-Album · iPad</div><div class="dv-card" style="width:1194px"><div data-screen-label="Sammlung" style="width:1194px;height:834px;display:flex;flex-direction:column;background:var(--surface-page);overflow:hidden">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.TopBar" onBack="{{ noop }}" onSettings="{{ noop }}" title="Meine Sammlung" hint-size="100%,104px"></x-import>
+<div style="flex:1;display:flex;gap:28px;padding:22px var(--gutter-screen) 26px;min-height:0">
+<div style="flex:1.35;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;gap:12px">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Badge" tone="leaf" icon="leaf" hint-size="120px,40px">5 Vögel</x-import>
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Badge" tone="sun" icon="star" hint-size="130px,40px">57 Sterne</x-import>
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Badge" tone="rare" icon="sparkles" hint-size="170px,40px">1 seltener Fund</x-import>
+</div>
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Card" tone="paper" pad="26px" hint-size="100%,560px">
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px 14px;justify-items:center">
+<sc-for list="{{ albumStickers }}" as="s" hint-placeholder-count="8">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.RewardSticker" photo="{{ s.photo }}" credit="{{ s.credit }}" label="{{ s.label }}" tone="{{ s.tone }}" locked="{{ s.locked }}" size="{{ N.n120 }}" hint-size="120px,150px"></x-import>
+</sc-for>
+</div>
+</x-import>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font:var(--weight-black) 30px/1.1 var(--font-display);color:var(--text-strong)">Deine Spiele</h2>
+<sc-for list="{{ gameStats }}" as="g" hint-placeholder-count="4">
+<div style="display:flex;align-items:center;gap:18px;padding:16px 22px;background:{{ g.bg }};border:3px solid {{ g.bc }};border-radius:28px">
+<span style="display:flex;align-items:center;justify-content:center;width:64px;height:64px;background:var(--cream-50);border:3px solid {{ g.edge }};border-radius:999px;flex:none">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Icon" name="{{ g.icon }}" size="{{ N.n34 }}" color="{{ g.edge }}" strokeWidth="{{ N.sw }}" hint-size="34px,34px"></x-import>
+</span>
+<div style="display:flex;flex-direction:column;gap:4px;flex:1">
+<span style="font:var(--weight-black) 24px/1.1 var(--font-display);color:var(--text-strong)">{{ g.label }}</span>
+<span style="font:var(--weight-semibold) 17px/1.3 var(--font-body);color:var(--text-muted)">{{ g.runden }}</span>
+</div>
+<div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Badge" tone="sun" icon="star" hint-size="110px,36px">{{ g.stars }}</x-import>
+<sc-if value="{{ g.fav }}" hint-placeholder-val="{{ no }}"><x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Badge" tone="leaf" icon="heart" hint-size="150px,32px">Lieblingsspiel</x-import></sc-if>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+</div></div></div>
+<div class="dv-opt" id="2e"><div class="dv-olabel"><a class="dv-oid" href="#2e">2e</a>Für Erwachsene · Einstellungen · iPad</div><div class="dv-card" style="width:1194px"><div data-screen-label="Für Erwachsene" style="width:1194px;height:834px;display:flex;flex-direction:column;background:var(--surface-page);overflow:hidden">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.TopBar" onBack="{{ noop }}" title="Für Erwachsene" hint-size="100%,104px"></x-import>
+<div style="flex:1;display:flex;gap:32px;padding:14px var(--gutter-screen) 20px;min-height:0">
+<div style="flex:1.4;display:flex;flex-direction:column;gap:12px">
+<p style="margin:0;font:var(--weight-semibold) var(--text-body-lg)/var(--lh-body-lg) var(--font-body);color:var(--text-body)">ZilpZalp lernt Vögel über Rufe und Bilder — ohne Lesen, ohne Punktejagd. Hier stellen Sie ein, wie lange und wie laut gespielt wird.</p>
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Card" pad="0" hint-size="100%,470px">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.SettingRow" icon="volume-2" label="Vogelstimmen" hint="Echte Aufnahmen von xeno-canto (CC)" on="{{ yes }}" onToggle="{{ noop }}" hint-size="100%,76px"></x-import>
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.SettingRow" icon="type" label="Namen anzeigen" hint="Vogelnamen unter den Bildern einblenden" on="{{ no }}" onToggle="{{ noop }}" hint-size="100%,76px"></x-import>
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.SettingRow" icon="clock" label="Spielzeit pro Tag" hint="Die laufende Runde wird immer zu Ende gespielt" value="20 Min" hint-size="100%,76px"></x-import>
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.SettingRow" icon="lock" label="Schutz dieser Einstellungen" hint="Änderungen nur mit Face ID oder PIN" value="Face ID" hint-size="100%,76px"></x-import>
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.SettingRow" icon="code" label="Open Source" hint="Quellcode frei auf GitHub — keine Gewinnabsicht" value="GitHub" hint-size="100%,76px"></x-import>
+</x-import>
+<div style="display:flex;align-items:center;gap:14px">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Badge" tone="sand" icon="shield-check" hint-size="260px,40px">Keine Werbung, keine Käufe</x-import>
+</div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:14px">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Card" tone="sand" pad="24px" hint-size="100%,520px">
+<div style="font:var(--weight-bold) var(--text-headline)/1.2 var(--font-display);color:var(--text-strong);margin-bottom:14px">Fotos &amp; Dank</div>
+<div style="display:flex;flex-direction:column;gap:7px">
+<sc-for list="{{ credits }}" as="c" hint-placeholder-count="10">
+<div style="display:flex;justify-content:space-between;gap:18px;font:var(--weight-semibold) var(--text-caption)/1.5 var(--font-body);color:var(--text-muted);border-bottom:2px solid var(--sand-300);padding-bottom:4px">
+<span style="color:var(--text-strong)">{{ c.name }}</span><span>{{ c.by }}</span>
+</div>
+</sc-for>
+</div>
+<div style="margin-top:14px;font:var(--weight-semibold) var(--text-caption)/1.5 var(--font-body);color:var(--text-muted)">Quelle: iNaturalist, Lizenz CC BY 4.0 · Rufe: xeno-canto</div>
+</x-import>
+</div>
+</div>
+</div></div></div>
+<div class="dv-opt" id="2f"><div class="dv-olabel"><a class="dv-oid" href="#2f">2f</a>Home · iPhone-Variante (390×844)</div><div class="dv-card" style="width:390px"><div data-screen-label="Home iPhone" style="width:390px;height:844px;display:flex;flex-direction:column;background:var(--surface-page);overflow:hidden">
+<div style="display:flex;align-items:center;justify-content:space-between;padding:18px 18px 6px">
+<div style="display:flex;align-items:center;gap:12px">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.RewardSticker" icon="bird" tone="leaf" size="{{ N.n56 }}" hint-size="56px,56px"></x-import>
+<div style="display:flex;flex-direction:column;gap:2px">
+<span style="font:var(--weight-black) 26px/1.05 var(--font-display);color:var(--text-strong)">Hallo Johanna!</span>
+<span style="font:var(--weight-bold) 15px/1.2 var(--font-display);color:var(--olive-500)">Rotkehlchen · 142 Sterne</span>
+</div>
+</div>
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.IconButton" icon="user-round-cog" label="Für Erwachsene" tone="quiet" size="{{ N.n56 }}" hint-size="56px,56px"></x-import>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:14px;padding:14px 18px 0">
+<h1 style="margin:0 0 2px;font:var(--weight-black) 30px/1.1 var(--font-display);color:var(--text-strong)">Was möchtest du spielen?</h1>
+<sc-for list="{{ games }}" as="g" hint-placeholder-count="4">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Card" tone="{{ g.cardTone }}" pad="16px" hint-size="100%,110px">
+<div style="display:flex;align-items:center;gap:16px">
+<span style="display:flex;align-items:center;justify-content:center;width:64px;height:64px;background:var(--cream-50);border:3px solid {{ g.edge }};border-radius:999px;flex:none">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Icon" name="{{ g.icon }}" size="{{ N.n34 }}" color="{{ g.edge }}" strokeWidth="{{ N.sw }}" hint-size="34px,34px"></x-import>
+</span>
+<span style="flex:1;font:var(--weight-black) 22px/1.1 var(--font-display);color:var(--text-strong)">{{ g.label }}</span>
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.IconButton" icon="play" label="Los" tone="accent" size="{{ N.n56 }}" hint-size="56px,56px"></x-import>
+</div>
+</x-import>
+</sc-for>
+</div>
+<div style="display:flex;justify-content:center;gap:20px;padding:14px 0 22px">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.IconButton" icon="album" label="Meine Sammlung" tone="primary" size="{{ N.n64 }}" hint-size="64px,64px"></x-import>
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.IconButton" icon="trophy" label="Unser Schwarm" tone="accent" size="{{ N.n64 }}" hint-size="64px,64px"></x-import>
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.IconButton" icon="users" label="Wer spielt?" tone="clay" size="{{ N.n64 }}" hint-size="64px,64px"></x-import>
+</div>
+</div></div></div>
+</div>
+<p class="dv-next">Damit ist der Kern-Flow komplett: Profil → Home → 4 Spiele → Rundenende → Sammlung/Schwarm → Erwachsene. Try next: „bau den klickbaren Prototyp" · „Federfotos / Lebensraum-Illustrationen einsetzen".</p>
+</section>
+<section class="dv-turn" id="t1">
+<div class="dv-thd"><a class="dv-tid" href="#t1">1</a><span class="dv-tname">ZilpZalp — Kern-Screens, erste Runde (iPad 1194×834 + iPhone)</span></div>
+<div style="max-width:1000px;background:var(--cream-50);border:3px solid var(--sand-300);border-radius:28px;padding:26px 32px;margin:0 0 30px;font:600 15px/1.6 Nunito,sans-serif;color:var(--ink-700)">
+<div style="font:800 20px/1.2 'Baloo 2',sans-serif;color:var(--ink-900);margin-bottom:10px">Annahmen &amp; Entscheidungen</div>
+<ul style="margin:0 0 14px;padding-left:20px;display:flex;flex-direction:column;gap:6px">
+<li><strong>Punkte = Blätter &amp; Sterne.</strong> Jede richtige Antwort füllt ein Blatt in der Runde; die Runde bringt Sterne aufs Profil. Nirgendwo nackte Punktzahlen, nirgendwo Rot oder ✗.</li>
+<li><strong>Rangfolge-Vorschlag</strong> (häufig → selten): Kohlmeise → Amsel → Blaumeise → Rotkehlchen → Star → Buntspecht → Eisvogel → Wiedehopf. Schwellen: Start / 25 / 60 / 100 / 150 / 220 / 300 / 400 Sterne.</li>
+<li><strong>Leaderboard = „Unser Schwarm"</strong> (<a class="dv-oid" href="#1h">1h</a>): alle lokalen Profile nach Gesamtsternen, warm und ohne Verlierergefühl — jeder sieht seinen Rang-Vogel, kein Podest.</li>
+<li><strong>Spieldauer:</strong> Die laufende Runde wird zu Ende gespielt, dann kommt der „Zeit fürs Nest"-Screen (<a class="dv-oid" href="#1k">1k</a>).</li>
+<li><strong>Avatare:</strong> illustrierte Vogel-Sticker als Platzhalter (Lucide-Glyphen), bis Johannas Bilder da sind.</li>
+<li><strong>Spiel 1</strong> („Finde den Vogel", <a class="dv-oid" href="#1c">1c</a>): Der Name wird vorgelesen — die Kacheln zeigen <em>keine</em> Namen (würde die Antwort verraten). Per Tweak einblendbar.</li>
+</ul>
+<div style="font:600 13px/1.5 Nunito,sans-serif;color:var(--ink-500)">Offen: echte Federfotos für Spiel 3 (CC-Quellen sind rar) · Lebensraum-Illustrationen für Spiel 4 · Johannas Avatar-Bilder.</div>
+</div>
+<div class="dv-opts">
+<div class="dv-opt" id="1f"><div class="dv-olabel"><a class="dv-oid" href="#1f">1f</a>Profilwahl · „Wer spielt heute?" · iPad</div><div class="dv-card" style="width:1194px"><div data-screen-label="Profilwahl" style="width:1194px;height:834px;display:flex;flex-direction:column;background:var(--surface-page);overflow:hidden;position:relative">
+<div style="display:flex;justify-content:center;padding:36px 0 8px"><x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Wordmark" size="{{ N.n52 }}" hint-size="220px,60px"></x-import></div>
+<div style="position:absolute;top:24px;right:28px"><x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.IconButton" icon="user-round-cog" label="Für Erwachsene" tone="quiet" size="{{ N.n64 }}" hint-size="64px,64px"></x-import></div>
+<h1 style="margin:18px 0 44px;text-align:center;font:var(--weight-black) var(--text-display-1)/var(--lh-display-1) var(--font-display);color:var(--text-strong)">Wer spielt heute?</h1>
+<div style="display:flex;justify-content:center;gap:28px;padding:0 64px">
+<sc-for list="{{ profiles }}" as="p" hint-placeholder-count="3">
+<div style="display:flex;flex-direction:column;align-items:center;gap:14px;width:230px;padding:30px 20px 26px;background:var(--cream-50);border:3px solid var(--sand-300);border-radius:40px;box-shadow:0 8px 0 var(--sand-400)">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.RewardSticker" icon="{{ p.icon }}" tone="{{ p.tone }}" size="{{ N.n120 }}" hint-size="120px,120px"></x-import>
+<span style="font:var(--weight-bold) 30px/1.1 var(--font-display);color:var(--text-strong)">{{ p.name }}</span>
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Badge" tone="sun" icon="star" hint-size="120px,40px">{{ p.stars }}</x-import>
+</div>
+</sc-for>
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;width:230px;padding:30px 20px 26px;background:var(--sand-200);border:3px solid var(--sand-300);border-radius:40px">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.IconButton" icon="plus" label="Neues Nest" tone="primary" size="{{ N.n96 }}" hint-size="96px,96px"></x-import>
+<span style="font:var(--weight-bold) 26px/1.1 var(--font-display);color:var(--ink-500)">Neues Nest</span>
+</div>
+</div>
+</div></div></div>
+<div class="dv-opt" id="1g"><div class="dv-olabel"><a class="dv-oid" href="#1g">1g</a>Profil anlegen · Avatar &amp; Name · iPad</div><div class="dv-card" style="width:1194px"><div data-screen-label="Profil anlegen" style="width:1194px;height:834px;display:flex;flex-direction:column;background:var(--surface-page);overflow:hidden">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.TopBar" onBack="{{ noop }}" hint-size="100%,104px"></x-import>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:22px;padding-top:10px">
+<h1 style="margin:0;font:var(--weight-black) var(--text-display-2)/var(--lh-display-2) var(--font-display);color:var(--text-strong)">Wie heißt du?</h1>
+<div style="display:flex;align-items:center;justify-content:center;width:440px;height:88px;background:var(--cream-50);border:3px solid var(--sand-400);border-radius:var(--radius-pill);font:var(--weight-bold) 36px/1 var(--font-display);color:var(--text-strong)">Johanna<span style="width:3px;height:44px;background:var(--orange-500);margin-left:6px;border-radius:2px"></span></div>
+<h2 style="margin:10px 0 0;font:var(--weight-bold) 28px/1.2 var(--font-display);color:var(--text-body)">Such dir einen Vogel aus</h2>
+<div style="display:grid;grid-template-columns:repeat(4,130px);gap:22px 34px;justify-content:center">
+<sc-for list="{{ avatars }}" as="a" hint-placeholder-count="8">
+<span style="display:inline-flex;border-radius:999px;box-shadow:{{ a.ring }}">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.RewardSticker" icon="{{ a.icon }}" tone="{{ a.tone }}" size="{{ N.n118 }}" hint-size="118px,118px"></x-import>
+</span>
+</sc-for>
+</div>
+<div style="margin-top:26px"><x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Button" tone="primary" size="lg" hint-size="180px,80px">Los!</x-import></div>
+</div>
+</div></div></div>
+<div class="dv-opt" id="1b"><div class="dv-olabel"><a class="dv-oid" href="#1b">1b</a>Home · Spielregal (Karten) · iPad</div><div class="dv-card" style="width:1194px"><div data-screen-label="Home Regal" style="width:1194px;height:834px;display:flex;flex-direction:column;background:var(--surface-page);overflow:hidden">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.TopBar" onSettings="{{ noop }}" center="{{ wordmark }}" hint-size="100%,104px"></x-import>
+<div style="flex:1;padding:24px var(--gutter-screen) 0">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px">
+<h1 style="margin:0;font:var(--weight-black) var(--text-display-2)/var(--lh-display-2) var(--font-display);color:var(--text-strong)">Was möchtest du spielen?</h1>
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Badge" tone="sun" icon="star" hint-size="140px,40px">142 Sterne</x-import>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+<sc-for list="{{ games }}" as="g" hint-placeholder-count="4">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Card" tone="{{ g.cardTone }}" pad="26px" hint-size="100%,210px">
+<div style="display:flex;align-items:center;gap:24px">
+<span style="display:flex;align-items:center;justify-content:center;width:96px;height:96px;background:var(--cream-50);border:3px solid {{ g.edge }};border-radius:999px">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Icon" name="{{ g.icon }}" size="{{ N.n52 }}" color="{{ g.edge }}" strokeWidth="{{ N.sw }}" hint-size="52px,52px"></x-import>
+</span>
+<span style="font:var(--weight-black) 32px/1.1 var(--font-display);color:var(--text-strong)">{{ g.label }}</span>
+<span style="margin-left:auto"><x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.IconButton" icon="play" label="Los" tone="accent" size="{{ N.n72 }}" hint-size="72px,72px"></x-import></span>
+</div>
+</x-import>
+</sc-for>
+</div>
+</div>
+<div style="display:flex;justify-content:center;gap:var(--space-5);padding:18px 0 var(--space-6)">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.IconButton" icon="album" label="Meine Sammlung" tone="primary" hint-size="96px,96px"></x-import>
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.IconButton" icon="trophy" label="Unser Schwarm" tone="accent" hint-size="96px,96px"></x-import>
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.IconButton" icon="users" label="Wer spielt?" tone="clay" hint-size="96px,96px"></x-import>
+</div>
+</div></div></div>
+<div class="dv-opt" id="1c"><div class="dv-olabel"><a class="dv-oid" href="#1c">1c</a>Spiel 1 · Name hören → Bild tippen (gelöst) · iPad</div><div class="dv-card" style="width:1194px"><div data-screen-label="Spiel 1 Quiz" style="width:1194px;height:834px;display:flex;flex-direction:column;background:var(--surface-page);overflow:hidden">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.TopBar" onBack="{{ noop }}" onSettings="{{ noop }}" center="{{ progQuiz }}" hint-size="100%,104px"></x-import>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;padding:18px var(--gutter-screen) 0;min-height:0">
+<div style="flex:1;display:flex;align-items:center;justify-content:center;gap:28px;min-height:0">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.SoundButton" size="{{ N.n120 }}" hint-size="120px,120px"></x-import>
+<h1 style="margin:0;font:var(--weight-black) var(--text-display-2)/var(--lh-display-2) var(--font-display);color:var(--text-strong)">Wo ist die Blaumeise?</h1>
+</div>
+<div style="flex:1;display:flex;align-items:center;justify-content:center;gap:28px;width:100%">
+<sc-for list="{{ quizBirds }}" as="b" hint-placeholder-count="4">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.ChoiceTile" photo="{{ b.photo }}" credit="{{ b.credit }}" name="{{ b.name }}" tone="{{ b.tone }}" state="{{ b.state }}" dimmed="{{ b.dimmed }}" size="{{ N.n260 }}" hint-size="260px,280px"></x-import>
+</sc-for>
+</div>
+<div style="min-height:100px;display:flex;align-items:center;justify-content:center;gap:24px;padding-bottom:26px">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.FeedbackBanner" tone="correct" dc-props="{{ bannerFit }}" hint-size="420px,72px">Genau!</x-import>
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Button" tone="primary" hint-size="180px,80px">Weiter</x-import>
+</div>
+</div>
+</div></div></div>
+<div class="dv-opt" id="1j"><div class="dv-olabel"><a class="dv-oid" href="#1j">1j</a>Spiel 1 · iPhone-Variante (390×844)</div><div class="dv-card" style="width:390px"><div data-screen-label="Spiel 1 iPhone" style="width:390px;height:844px;display:flex;flex-direction:column;background:var(--surface-page);overflow:hidden">
+<div style="display:flex;align-items:center;justify-content:space-between;padding:14px 14px 4px">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.IconButton" icon="chevron-left" label="Zurück" tone="quiet" size="{{ N.n56 }}" hint-size="56px,56px"></x-import>
+<span>{{ progPhone }}</span>
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.IconButton" icon="user-round-cog" label="Für Erwachsene" tone="quiet" size="{{ N.n56 }}" hint-size="56px,56px"></x-import>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:16px;padding:12px 16px 0">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.SoundButton" playing="{{ yes }}" size="{{ N.n120 }}" hint-size="120px,120px"></x-import>
+<h1 style="margin:0;font:var(--weight-black) 32px/1.1 var(--font-display);color:var(--text-strong);text-align:center">Wo ist der Star?</h1>
+<div style="flex:1;display:flex;align-items:center"><div style="display:grid;grid-template-columns:repeat(2,168px);gap:16px;justify-content:center">
+<sc-for list="{{ phoneBirds }}" as="b" hint-placeholder-count="4">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.ChoiceTile" photo="{{ b.photo }}" credit="{{ b.credit }}" name="{{ b.name }}" tone="{{ b.tone }}" state="{{ b.state }}" dimmed="{{ b.dimmed }}" size="{{ N.n168 }}" hint-size="168px,190px"></x-import>
+</sc-for>
+</div></div>
+<div style="display:flex;align-items:center;justify-content:center;gap:14px;padding-bottom:24px">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.FeedbackBanner" tone="correct" dc-props="{{ bannerFit }}" hint-size="180px,72px">Genau!</x-import>
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Button" tone="primary" hint-size="140px,72px">Weiter</x-import>
+</div>
+</div>
+</div></div></div>
+<div class="dv-opt" id="1d"><div class="dv-olabel"><a class="dv-oid" href="#1d">1d</a>Rundenende A · „Runde geschafft!" · iPad</div><div class="dv-card" style="width:1194px"><div data-screen-label="Rundenende Sterne" style="width:1194px;height:834px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:30px;background:var(--surface-forest);text-align:center;overflow:hidden;position:relative">
+<div style="display:flex;gap:10px">
+<span style="width:26px;height:26px;border-radius:999px;background:var(--sun-400);animation:zz-bob 1.4s var(--ease-in-out) 0s infinite"></span>
+<span style="width:26px;height:26px;border-radius:999px;background:var(--sun-400);animation:zz-bob 1.4s var(--ease-in-out) .15s infinite"></span>
+<span style="width:26px;height:26px;border-radius:999px;background:var(--sun-400);animation:zz-bob 1.4s var(--ease-in-out) .3s infinite"></span>
+</div>
+<h1 style="margin:0;font:var(--weight-black) var(--text-hero)/var(--lh-hero) var(--font-display);color:var(--white)">Super gemacht!</h1>
+<div style="background:var(--cream-50);border-radius:var(--radius-pill);padding:20px 30px">{{ progLeaves }}</div>
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Badge" tone="sun" icon="star" hint-size="160px,44px">+2 Sterne</x-import>
+<div style="display:flex;gap:var(--space-5)">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Button" tone="reward" size="lg" hint-size="220px,88px">Sammlung</x-import>
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Button" tone="primary" size="lg" hint-size="260px,88px">Nochmal spielen</x-import>
+</div>
+<div style="position:absolute;bottom:28px;left:0;right:0;display:flex;justify-content:center"><x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Wordmark" size="{{ N.n34 }}" tone="mono-light" hint-size="160px,40px"></x-import></div>
+</div></div></div>
+<div class="dv-opt" id="1e"><div class="dv-olabel"><a class="dv-oid" href="#1e">1e</a>Rundenende B · Rang-Aufstieg · iPad</div><div class="dv-card" style="width:1194px"><div data-screen-label="Rang-Aufstieg" style="width:1194px;height:834px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;background:var(--surface-page);text-align:center;overflow:hidden">
+<h1 style="margin:0;font:var(--weight-black) var(--text-display-1)/var(--lh-display-1) var(--font-display);color:var(--text-strong)">Du bist jetzt eine Amsel!</h1>
+<div style="animation:zz-pop var(--dur-celebrate) var(--ease-bounce) both">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.RewardSticker" photo="{{ amselPhoto }}" credit="{{ amselCredit }}" label="Amsel" tone="sun" size="{{ N.n200 }}" hint-size="200px,240px"></x-import>
+</div>
+<div style="display:flex;align-items:flex-end;gap:26px">
+<sc-for list="{{ pathRanks }}" as="r" hint-placeholder-count="3">
+<div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+<span style="display:inline-flex;border-radius:999px;box-shadow:{{ r.ring }}">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.RewardSticker" photo="{{ r.photo }}" credit="{{ r.credit }}" locked="{{ r.locked }}" tone="leaf" size="{{ r.size }}" hint-size="100px,100px"></x-import>
+</span>
+<span style="font:var(--weight-bold) 20px/1.1 var(--font-display);color:var(--text-body)">{{ r.name }}</span>
+</div>
+</sc-for>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+<div style="width:520px;height:26px;background:var(--sand-200);border-radius:var(--radius-pill);overflow:hidden"><div style="width:55%;height:100%;background:var(--sun-400);border-radius:var(--radius-pill)"></div></div>
+<span style="font:var(--weight-bold) 22px/1.2 var(--font-display);color:var(--text-body)">Noch 33 Sterne bis zur Blaumeise</span>
+</div>
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Button" tone="primary" size="lg" hint-size="200px,88px">Weiter</x-import>
+</div></div></div>
+<div class="dv-opt" id="1h"><div class="dv-olabel"><a class="dv-oid" href="#1h">1h</a>Leaderboard · „Unser Schwarm" · iPad</div><div class="dv-card" style="width:1194px"><div data-screen-label="Unser Schwarm" style="width:1194px;height:834px;display:flex;flex-direction:column;background:var(--surface-page);overflow:hidden">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.TopBar" onBack="{{ noop }}" onSettings="{{ noop }}" center="{{ wordmarkSmall }}" hint-size="100%,104px"></x-import>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;padding:20px var(--gutter-screen) 0">
+<h1 style="margin:0 0 26px;font:var(--weight-black) var(--text-display-2)/var(--lh-display-2) var(--font-display);color:var(--text-strong)">Unser Schwarm</h1>
+<div style="display:flex;flex-direction:column;gap:18px;width:760px">
+<sc-for list="{{ fam }}" as="f" hint-placeholder-count="3">
+<div style="display:flex;align-items:center;gap:22px;padding:18px 26px;background:{{ f.bg }};border:3px solid {{ f.bc }};border-radius:28px;box-shadow:0 6px 0 {{ f.ledge }}">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.RewardSticker" icon="{{ f.icon }}" tone="{{ f.tone }}" size="{{ N.n84 }}" hint-size="84px,84px"></x-import>
+<div style="display:flex;flex-direction:column;gap:8px;flex:1;align-items:flex-start">
+<span style="font:var(--weight-black) 30px/1.05 var(--font-display);color:var(--text-strong)">{{ f.name }}</span>
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Badge" tone="leaf" icon="bird" hint-size="140px,36px">{{ f.rank }}</x-import>
+</div>
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Badge" tone="sun" icon="star" hint-size="150px,42px">{{ f.stars }}</x-import>
+</div>
+</sc-for>
+</div>
+<div style="margin-top:26px;font:var(--weight-semibold) 20px/1.4 var(--font-body);color:var(--text-muted)">Jeder Stern zählt für den ganzen Schwarm.</div>
+</div>
+</div></div></div>
+<div class="dv-opt" id="1i"><div class="dv-olabel"><a class="dv-oid" href="#1i">1i</a>Rang-Leiter · Kohlmeise → Wiedehopf · iPad</div><div class="dv-card" style="width:1194px"><div data-screen-label="Rang-Leiter" style="width:1194px;height:834px;display:flex;flex-direction:column;background:var(--surface-page);overflow:hidden">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.TopBar" onBack="{{ noop }}" onSettings="{{ noop }}" center="{{ wordmarkSmall }}" hint-size="100%,104px"></x-import>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;padding:24px var(--gutter-screen) 0">
+<h1 style="margin:0 0 10px;font:var(--weight-black) var(--text-display-2)/var(--lh-display-2) var(--font-display);color:var(--text-strong)">Deine Vogel-Leiter</h1>
+<div style="margin-bottom:34px"><x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Badge" tone="sun" icon="star" hint-size="150px,42px">57 Sterne</x-import></div>
+<div style="display:flex;align-items:flex-end;justify-content:center;gap:20px">
+<sc-for list="{{ ranks }}" as="r" hint-placeholder-count="8">
+<div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+<span style="display:inline-flex;border-radius:999px;box-shadow:{{ r.ring }}">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.RewardSticker" photo="{{ r.photo }}" credit="{{ r.credit }}" locked="{{ r.locked }}" tone="{{ r.tone }}" size="{{ r.size }}" hint-size="100px,100px"></x-import>
+</span>
+<span style="font:var(--weight-bold) 20px/1.1 var(--font-display);color:var(--text-strong)">{{ r.name }}</span>
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Badge" tone="sand" icon="star" hint-size="80px,32px">{{ r.thr }}</x-import>
+</div>
+</sc-for>
+</div>
+</div>
+</div></div></div>
+<div class="dv-opt" id="1k"><div class="dv-olabel"><a class="dv-oid" href="#1k">1k</a>Zeit fürs Nest · sanfter Abschluss · iPad</div><div class="dv-card" style="width:1194px"><div data-screen-label="Zeit fürs Nest" style="width:1194px;height:834px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;background:var(--surface-forest);text-align:center;overflow:hidden">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Icon" name="bird" size="{{ N.n110 }}" color="var(--sun-300)" strokeWidth="{{ N.sw }}" hint-size="110px,110px"></x-import>
+<h1 style="margin:0;font:var(--weight-black) var(--text-hero)/var(--lh-hero) var(--font-display);color:var(--white)">Zeit fürs Nest!</h1>
+<p style="margin:0;font:var(--weight-bold) 28px/1.3 var(--font-display);color:var(--olive-100)">Für heute ist Schluss. Bis bald!</p>
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Badge" tone="sun" icon="star" hint-size="180px,44px">+2 Sterne heute</x-import>
+<div style="margin-top:8px;font:var(--weight-semibold) 16px/1.4 var(--font-body);color:var(--olive-300)">Spielzeit erreicht — eingestellt im Erwachsenen-Bereich</div>
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Wordmark" size="{{ N.n34 }}" tone="mono-light" hint-size="160px,40px"></x-import>
+</div></div></div>
+</div>
+<p class="dv-next">Try next: „mehr Varianten für <a class="dv-oid" href="#1h">1h</a>" · „baue den klickbaren Prototyp aus <a class="dv-oid" href="#1b">1b</a> + <a class="dv-oid" href="#1c">1c</a> + <a class="dv-oid" href="#1d">1d</a>" · „zeig Spiel 3 (Feder) und Spiel 4 (Lebensraum) als Screens" · „iPhone-Home ergänzen"</p>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;rundeDone&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:3,&quot;min&quot;:0,&quot;max&quot;:10,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Quiz&quot;},&quot;namenAnzeigen&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Quiz&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const DS = window.ZilpZalpDesignSystem_bd8c6b || {};
+    const el = React.createElement;
+    const prog = (p) => DS.QuizProgress ? el(DS.QuizProgress, p) : null;
+    const wm = (s, t) => DS.Wordmark ? el(DS.Wordmark, { size: s, tone: t || 'duo' }) : null;
+    const done = Math.min(10, Math.max(0, this.props.rundeDone ?? 3));
+    const names = this.props.namenAnzeigen ?? false;
+    const ph = (s) => 'assets/photos/' + s + '.png';
+    const CRED = { zilpzalp: 'Tomas Broucek', wiedehopf: 'Dmitry Ivanov', amsel: 'Alexis Tinker-Tsavalas', blaumeise: 'Thorsten Hackbarth', kohlmeise: 'SteveM4560', rotkehlchen: 'Alexis Tinker-Tsavalas', buntspecht: 'Вячеслав Юсупов', eisvogel: 'Alexis Lours', star: 'egorbirder', hausrotschwanz: 'SteveM4560' };
+    const cr = (s) => 'Foto: ' + CRED[s] + ' (CC BY)';
+    const bird = (slug, nm, tone, state, dimmed) => ({ photo: ph(slug), credit: cr(slug), tone: 'papier', state: state || 'idle', dimmed: !!dimmed, name: names ? nm : undefined });
+    const RING = '0 0 0 5px var(--color-accent)';
+    const rank = (slug, nm, thr, state, tone) => ({
+      name: nm, thr, locked: state === 'locked',
+      photo: state === 'locked' ? undefined : ph(slug),
+      credit: state === 'locked' ? undefined : cr(slug),
+      size: state === 'current' ? 128 : 96,
+      ring: state === 'current' ? RING : 'none',
+      tone: tone || (state === 'current' ? 'sun' : 'leaf'),
+    });
+    return {
+      noop: () => {}, yes: true, no: false,
+      eisvogelPhoto: ph('eisvogel'), eisvogelCredit: cr('eisvogel'),
+      retryBirds: [
+        bird('kohlmeise', 'Kohlmeise'),
+        bird('blaumeise', 'Blaumeise'),
+        bird('rotkehlchen', 'Rotkehlchen'),
+        bird('star', 'Star', undefined, 'retry', true),
+      ],
+      quiz2Birds: [
+        bird('zilpzalp', 'Zilpzalp'),
+        bird('rotkehlchen', 'Rotkehlchen'),
+        bird('kohlmeise', 'Kohlmeise'),
+        bird('buntspecht', 'Buntspecht'),
+      ],
+      habitats: [
+        { icon: 'trees', label: 'Wald', bg: 'var(--olive-100)', edge: 'var(--olive-500)', ledge: 'var(--olive-800)', fg: 'var(--olive-800)' },
+        { icon: 'flower-2', label: 'Wiese', bg: 'var(--sun-100)', edge: 'var(--sun-400)', ledge: 'var(--sun-500, var(--sun-400))', fg: 'var(--bark-700)' },
+        { icon: 'house', label: 'Garten', bg: 'var(--clay-50)', edge: 'var(--clay-500)', ledge: 'var(--clay-700)', fg: 'var(--clay-700)' },
+        { icon: 'waves', label: 'Am Wasser', bg: 'var(--sand-100)', edge: 'var(--bark-500)', ledge: 'var(--bark-700)', fg: 'var(--bark-700)' },
+      ],
+      albumStickers: [
+        { photo: ph('zilpzalp'), credit: cr('zilpzalp'), label: 'Zilpzalp', tone: 'leaf', locked: false },
+        { photo: ph('wiedehopf'), credit: cr('wiedehopf'), label: 'Wiedehopf', tone: 'hoopoe', locked: false },
+        { photo: ph('amsel'), credit: cr('amsel'), label: 'Amsel', tone: 'sun', locked: false },
+        { photo: ph('blaumeise'), credit: cr('blaumeise'), label: 'Blaumeise', tone: 'leaf', locked: false },
+        { photo: ph('eisvogel'), credit: cr('eisvogel'), label: 'Eisvogel', tone: 'rare', locked: false },
+        { label: 'Noch geheim', locked: true },
+        { label: 'Noch geheim', locked: true },
+        { label: 'Noch geheim', locked: true },
+      ],
+      gameStats: [
+        { icon: 'bird', label: 'Finde den Vogel', runden: '28 Runden gespielt', stars: '34 Sterne', fav: true, bg: 'var(--sun-100)', bc: 'var(--sun-300)', edge: 'var(--olive-500)' },
+        { icon: 'volume-2', label: 'Wer singt da?', runden: '9 Runden gespielt', stars: '12 Sterne', fav: false, bg: 'var(--cream-50)', bc: 'var(--sand-300)', edge: 'var(--orange-500)' },
+        { icon: 'feather', label: 'Wessen Feder?', runden: '6 Runden gespielt', stars: '8 Sterne', fav: false, bg: 'var(--cream-50)', bc: 'var(--sand-300)', edge: 'var(--clay-500)' },
+        { icon: 'trees', label: 'Wo wohnt er?', runden: '2 Runden gespielt', stars: '3 Sterne', fav: false, bg: 'var(--cream-50)', bc: 'var(--sand-300)', edge: 'var(--bark-500)' },
+      ],
+      credits: Object.keys(CRED).map((s) => ({ name: s.charAt(0).toUpperCase() + s.slice(1), by: CRED[s] })),
+      bannerFit: { style: { height: 'var(--touch-comfy)', paddingTop: 0, paddingBottom: 0, boxSizing: 'border-box' } },
+      N: { n34: 34, n52: 52, n56: 56, n64: 64, n72: 72, n76: 76, n84: 84, n96: 96, n110: 110, n118: 118, n120: 120, n140: 140, n168: 168, n200: 200, n215: 215, n230: 230, n260: 260, s1: 1, s2: 2, s3: 3, sw: 2.5 },
+      wordmark: wm(44), wordmarkSmall: wm(36),
+      progQuiz: prog({ total: 10, done, current: done, size: 36 }),
+      progLeaves: prog({ total: 10, done: 8, current: -1, size: 52 }),
+      progPhone: prog({ total: 10, done: 5, current: 5, size: 22 }),
+      amselPhoto: ph('amsel'), amselCredit: cr('amsel'),
+      quizBirds: [
+        bird('kohlmeise', 'Kohlmeise', 'wald', 'idle', true),
+        bird('blaumeise', 'Blaumeise', 'sumpf', 'correct'),
+        bird('rotkehlchen', 'Rotkehlchen', 'federn', 'idle', true),
+        bird('star', 'Star', 'beeren', 'idle', true),
+      ],
+      phoneBirds: [
+        bird('star', 'Star', 'rufe', 'correct'),
+        bird('amsel', 'Amsel', 'wiese', 'idle', true),
+        bird('buntspecht', 'Buntspecht', 'rinde', 'idle', true),
+        bird('hausrotschwanz', 'Hausrotschwanz', 'sumpf', 'idle', true),
+      ],
+      games: [
+        { icon: 'bird', label: 'Finde den Vogel', cardTone: 'leaf', edge: 'var(--olive-500)', stars: '3 Sterne gesammelt' },
+        { icon: 'volume-2', label: 'Wer singt da?', cardTone: 'sun', edge: 'var(--orange-500)', stars: '2 Sterne gesammelt' },
+        { icon: 'feather', label: 'Wessen Feder?', cardTone: 'clay', edge: 'var(--clay-500)', stars: '1 Stern gesammelt' },
+        { icon: 'trees', label: 'Wo wohnt er?', cardTone: 'sand', edge: 'var(--bark-500)', stars: 'Neu!' },
+      ],
+      profiles: [
+        { icon: 'bird', tone: 'leaf', name: 'Johanna', stars: '142 Sterne' },
+        { icon: 'feather', tone: 'hoopoe', name: 'Papa', stars: '98 Sterne' },
+        { icon: 'sparkles', tone: 'rare', name: 'Mia', stars: '57 Sterne' },
+      ],
+      avatars: [
+        { icon: 'bird', tone: 'leaf', ring: RING }, { icon: 'feather', tone: 'hoopoe', ring: 'none' },
+        { icon: 'egg', tone: 'sun', ring: 'none' }, { icon: 'sparkles', tone: 'rare', ring: 'none' },
+        { icon: 'leaf', tone: 'leaf', ring: 'none' }, { icon: 'star', tone: 'sun', ring: 'none' },
+        { icon: 'music', tone: 'hoopoe', ring: 'none' }, { icon: 'sun', tone: 'sun', ring: 'none' },
+      ],
+      pathRanks: [
+        { name: 'Kohlmeise', photo: ph('kohlmeise'), credit: cr('kohlmeise'), locked: false, size: 92, ring: 'none' },
+        { name: 'Amsel', photo: ph('amsel'), credit: cr('amsel'), locked: false, size: 122, ring: RING },
+        { name: 'Blaumeise', photo: undefined, credit: undefined, locked: true, size: 92, ring: 'none' },
+      ],
+      ranks: [
+        rank('kohlmeise', 'Kohlmeise', 'Start', 'done'),
+        rank('amsel', 'Amsel', 'ab 25', 'current'),
+        rank('blaumeise', 'Blaumeise', 'ab 60', 'locked'),
+        rank('rotkehlchen', 'Rotkehlchen', 'ab 100', 'locked'),
+        rank('star', 'Star', 'ab 150', 'locked'),
+        rank('buntspecht', 'Buntspecht', 'ab 220', 'locked'),
+        rank('eisvogel', 'Eisvogel', 'ab 300', 'locked'),
+        rank('wiedehopf', 'Wiedehopf', 'ab 400', 'locked'),
+      ],
+      fam: [
+        { icon: 'bird', tone: 'leaf', name: 'Johanna', rank: 'Rotkehlchen', stars: '142 Sterne', bg: 'var(--sun-100)', bc: 'var(--sun-300)', ledge: 'var(--sun-300)' },
+        { icon: 'feather', tone: 'hoopoe', name: 'Papa', rank: 'Blaumeise', stars: '98 Sterne', bg: 'var(--cream-50)', bc: 'var(--sand-300)', ledge: 'var(--sand-400)' },
+        { icon: 'sparkles', tone: 'rare', name: 'Mia', rank: 'Amsel', stars: '57 Sterne', bg: 'var(--cream-50)', bc: 'var(--sand-300)', ledge: 'var(--sand-400)' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

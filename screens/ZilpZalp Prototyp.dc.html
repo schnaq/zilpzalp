@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/zilpzalp-design-system-f3799d9c-7084-4e56-b8b3-489b010d6770/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/zilpzalp-design-system-f3799d9c-7084-4e56-b8b3-489b010d6770/tokens/colors.css">
+<link rel="stylesheet" href="_ds/zilpzalp-design-system-f3799d9c-7084-4e56-b8b3-489b010d6770/tokens/typography.css">
+<link rel="stylesheet" href="_ds/zilpzalp-design-system-f3799d9c-7084-4e56-b8b3-489b010d6770/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/zilpzalp-design-system-f3799d9c-7084-4e56-b8b3-489b010d6770/tokens/radii.css">
+<link rel="stylesheet" href="_ds/zilpzalp-design-system-f3799d9c-7084-4e56-b8b3-489b010d6770/tokens/shadows.css">
+<link rel="stylesheet" href="_ds/zilpzalp-design-system-f3799d9c-7084-4e56-b8b3-489b010d6770/tokens/motion.css">
+<link rel="stylesheet" href="_ds/zilpzalp-design-system-f3799d9c-7084-4e56-b8b3-489b010d6770/guidelines/motion.css">
+<link rel="stylesheet" href="_ds/zilpzalp-design-system-f3799d9c-7084-4e56-b8b3-489b010d6770/styles.css">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script src="_ds/zilpzalp-design-system-f3799d9c-7084-4e56-b8b3-489b010d6770/_ds_bundle.js"></script>
+<style>
+html,body{margin:0;height:100%;background:#EFE7D6;font-family:Nunito,system-ui,sans-serif;overflow:hidden}
+a{color:var(--olive-800)}a:hover{color:var(--orange-500)}
+</style>
+</helmet>
+<div style="width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;background:#EFE7D6">
+<div style="width:1194px;height:834px;flex:none;background:var(--surface-page);border-radius:24px;box-shadow:0 10px 40px rgba(42,34,19,.18);overflow:hidden;display:flex;flex-direction:column;transform:scale({{ scale }})">
+
+<sc-if value="{{ isProfile }}" hint-placeholder-val="{{ true }}">
+<div data-screen-label="Profilwahl" style="flex:1;display:flex;flex-direction:column;position:relative">
+<div style="display:flex;justify-content:center;padding:36px 0 8px"><x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Wordmark" size="{{ N.n52 }}" hint-size="220px,60px"></x-import></div>
+<h1 style="margin:18px 0 44px;text-align:center;font:var(--weight-black) var(--text-display-1)/var(--lh-display-1) var(--font-display);color:var(--text-strong)">Wer spielt heute?</h1>
+<div style="display:flex;justify-content:center;gap:28px;padding:0 64px">
+<sc-for list="{{ profiles }}" as="p" hint-placeholder-count="3">
+<div onClick="{{ p.pick }}" style="display:flex;flex-direction:column;align-items:center;gap:14px;width:230px;padding:30px 20px 26px;background:var(--cream-50);border:3px solid var(--sand-300);border-radius:40px;box-shadow:0 8px 0 var(--sand-400);cursor:pointer" style-hover="border-color:var(--olive-500)" style-active="transform:translateY(6px);box-shadow:0 2px 0 var(--sand-400)">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.RewardSticker" icon="{{ p.icon }}" tone="{{ p.tone }}" size="{{ N.n120 }}" hint-size="120px,120px"></x-import>
+<span style="font:var(--weight-bold) 30px/1.1 var(--font-display);color:var(--text-strong)">{{ p.name }}</span>
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Badge" tone="sun" icon="star" hint-size="120px,40px">{{ p.starText }}</x-import>
+</div>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Home" style="flex:1;display:flex;flex-direction:column;min-height:0">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.TopBar" center="{{ wordmark }}" hint-size="100%,104px"></x-import>
+<div style="flex:1;padding:24px var(--gutter-screen) 0;min-height:0">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px">
+<h1 style="margin:0;font:var(--weight-black) var(--text-display-2)/var(--lh-display-2) var(--font-display);color:var(--text-strong)">{{ greeting }}</h1>
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Badge" tone="sun" icon="star" hint-size="140px,40px">{{ totalStarText }}</x-import>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+<sc-for list="{{ games }}" as="g" hint-placeholder-count="4">
+<div onClick="{{ g.play }}" style="opacity:{{ g.op }};cursor:{{ g.cursor }}">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Card" tone="{{ g.cardTone }}" pad="26px" hint-size="100%,160px">
+<div style="display:flex;align-items:center;gap:24px">
+<span style="display:flex;align-items:center;justify-content:center;width:96px;height:96px;background:var(--cream-50);border:3px solid {{ g.edge }};border-radius:999px">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Icon" name="{{ g.icon }}" size="{{ N.n52 }}" color="{{ g.edge }}" strokeWidth="{{ N.sw }}" hint-size="52px,52px"></x-import>
+</span>
+<div style="display:flex;flex-direction:column;gap:8px">
+<span style="font:var(--weight-black) 32px/1.1 var(--font-display);color:var(--text-strong)">{{ g.label }}</span>
+<span style="font:var(--weight-semibold) 17px/1.3 var(--font-body);color:var(--text-muted)">{{ g.sub }}</span>
+</div>
+<sc-if value="{{ g.playable }}" hint-placeholder-val="{{ false }}"><span style="margin-left:auto"><x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.IconButton" icon="play" label="Los" tone="accent" size="{{ N.n72 }}" hint-size="72px,72px"></x-import></span></sc-if>
+</div>
+</x-import>
+</div>
+</sc-for>
+</div>
+</div>
+<div style="display:flex;justify-content:center;gap:var(--space-5);padding:18px 0 var(--space-6)">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.IconButton" icon="album" label="Meine Sammlung" tone="primary" onClick="{{ goCollection }}" hint-size="96px,96px"></x-import>
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.IconButton" icon="users" label="Wer spielt?" tone="clay" onClick="{{ goProfile }}" hint-size="96px,96px"></x-import>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isQuiz }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Spiel 1" style="flex:1;display:flex;flex-direction:column;min-height:0">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.TopBar" onBack="{{ goHome }}" center="{{ prog }}" hint-size="100%,104px"></x-import>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;padding:0 var(--gutter-screen);min-height:0">
+<div style="flex:1;display:flex;align-items:center;justify-content:center;gap:28px;min-height:0">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.SoundButton" playing="{{ speaking }}" onClick="{{ sayAgain }}" size="{{ N.n120 }}" hint-size="120px,120px"></x-import>
+<h1 style="margin:0;font:var(--weight-black) var(--text-display-2)/var(--lh-display-2) var(--font-display);color:var(--text-strong)">{{ questionText }}</h1>
+</div>
+<div style="display:flex;align-items:center;justify-content:center;gap:28px;width:100%">
+<sc-for list="{{ tiles }}" as="t" hint-placeholder-count="4">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.ChoiceTile" photo="{{ t.photo }}" credit="{{ t.credit }}" name="{{ t.name }}" tone="papier" state="{{ t.state }}" dimmed="{{ t.dimmed }}" onSelect="{{ t.pick }}" size="{{ N.n260 }}" hint-size="260px,280px"></x-import>
+</sc-for>
+</div>
+<div style="min-height:104px;display:flex;align-items:center;justify-content:center;gap:24px;padding:14px 0 18px">
+<sc-if value="{{ showRetry }}" hint-placeholder-val="{{ false }}">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.FeedbackBanner" tone="retry" dc-props="{{ bannerFit }}" hint-size="420px,72px">Fast! Hör nochmal hin.</x-import>
+</sc-if>
+<sc-if value="{{ showCorrect }}" hint-placeholder-val="{{ false }}">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.FeedbackBanner" tone="correct" dc-props="{{ bannerFit }}" hint-size="320px,72px">{{ praiseText }}</x-import>
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Button" tone="primary" onClick="{{ next }}" hint-size="180px,72px">Weiter</x-import>
+</sc-if>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isEnd }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Rundenende" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;background:var(--surface-forest);text-align:center;position:relative">
+<h1 style="margin:0;font:var(--weight-black) var(--text-hero)/var(--lh-hero) var(--font-display);color:var(--white)">Runde geschafft!</h1>
+<div style="background:var(--cream-50);border-radius:var(--radius-pill);padding:20px 30px;animation:zz-pop var(--dur-celebrate) var(--ease-bounce) both">{{ progDone }}</div>
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Badge" tone="sun" icon="star" hint-size="180px,44px">{{ earnedText }}</x-import>
+<div style="display:flex;gap:var(--space-5)">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Button" tone="reward" size="lg" onClick="{{ goCollection }}" hint-size="220px,88px">Sammlung</x-import>
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Button" tone="primary" size="lg" onClick="{{ startRound }}" hint-size="260px,88px">Nochmal spielen</x-import>
+</div>
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Button" tone="quiet" size="md" onClick="{{ goHome }}" hint-size="180px,64px">Zum Nest</x-import>
+<div style="position:absolute;bottom:24px;left:0;right:0;display:flex;justify-content:center"><x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Wordmark" size="{{ N.n34 }}" tone="mono-light" hint-size="160px,40px"></x-import></div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isCollection }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Sammlung" style="flex:1;display:flex;flex-direction:column;min-height:0">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.TopBar" onBack="{{ goHome }}" title="Meine Sammlung" hint-size="100%,104px"></x-import>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;padding:20px var(--gutter-screen) 22px;min-height:0">
+<div style="display:flex;gap:12px">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Badge" tone="leaf" icon="leaf" hint-size="120px,40px">5 Vögel</x-import>
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Badge" tone="sun" icon="star" hint-size="130px,40px">{{ totalStarText }}</x-import>
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Badge" tone="rare" icon="sparkles" hint-size="170px,40px">1 seltener Fund</x-import>
+</div>
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Card" tone="paper" pad="24px" hint-size="100%,470px">
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px 12px;justify-items:center">
+<sc-for list="{{ albumStickers }}" as="s" hint-placeholder-count="8">
+<x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.RewardSticker" photo="{{ s.photo }}" credit="{{ s.credit }}" label="{{ s.label }}" tone="{{ s.tone }}" locked="{{ s.locked }}" size="{{ N.n118 }}" hint-size="118px,148px"></x-import>
+</sc-for>
+</div>
+</x-import>
+<div style="display:flex;justify-content:center"><x-import component-from-global-scope="ZilpZalpDesignSystem_bd8c6b.Button" tone="accent" size="lg" onClick="{{ startRound }}" hint-size="280px,88px">Neuen Vogel finden</x-import></div>
+</div>
+</div>
+</sc-if>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;namenAnzeigen&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Spiel&quot;},&quot;vorlesen&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Spiel&quot;}}">
+class Component extends DCLogic {
+  state = { screen: 'profile', profile: null, scale: 1, round: [], qi: 0, phase: 'ask', wrong: {}, firstTry: 0, earned: 0, speaking: false, totals: null };
+  componentDidMount() {
+    const fit = () => this.setState({ scale: Math.min(window.innerWidth / 1244, window.innerHeight / 884, 1) });
+    fit(); window.addEventListener('resize', fit);
+    let totals = { Johanna: 142, Papa: 98, Mia: 57 };
+    try { const s = localStorage.getItem('zz-proto-totals'); if (s) totals = JSON.parse(s); } catch (e) {}
+    this.setState({ totals });
+  }
+  BIRDS = [
+    { slug: 'zilpzalp', art: 'der', name: 'Zilpzalp' }, { slug: 'wiedehopf', art: 'der', name: 'Wiedehopf' },
+    { slug: 'amsel', art: 'die', name: 'Amsel' }, { slug: 'blaumeise', art: 'die', name: 'Blaumeise' },
+    { slug: 'kohlmeise', art: 'die', name: 'Kohlmeise' }, { slug: 'rotkehlchen', art: 'das', name: 'Rotkehlchen' },
+    { slug: 'buntspecht', art: 'der', name: 'Buntspecht' }, { slug: 'eisvogel', art: 'der', name: 'Eisvogel' },
+    { slug: 'star', art: 'der', name: 'Star' }, { slug: 'hausrotschwanz', art: 'der', name: 'Hausrotschwanz' },
+  ];
+  CRED = { zilpzalp: 'Tomas Broucek', wiedehopf: 'Dmitry Ivanov', amsel: 'Alexis Tinker-Tsavalas', blaumeise: 'Thorsten Hackbarth', kohlmeise: 'SteveM4560', rotkehlchen: 'Alexis Tinker-Tsavalas', buntspecht: 'Вячеслав Юсупов', eisvogel: 'Alexis Lours', star: 'egorbirder', hausrotschwanz: 'SteveM4560' };
+  speak(text) {
+    if (!(this.props.vorlesen ?? true) || !window.speechSynthesis) return;
+    try {
+      speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'de-DE'; u.rate = 0.9;
+      u.onend = () => this.setState({ speaking: false });
+      this.setState({ speaking: true });
+      speechSynthesis.speak(u);
+    } catch (e) {}
+  }
+  question() { return this.state.round[this.state.qi]; }
+  qText() { const q = this.question(); return q ? 'Wo ist ' + q.correct.art + ' ' + q.correct.name + '?' : ''; }
+  startRound = () => {
+    const order = [...this.BIRDS].sort(() => Math.random() - 0.5);
+    const round = order.map((correct) => {
+      const others = this.BIRDS.filter((b) => b.slug !== correct.slug).sort(() => Math.random() - 0.5).slice(0, 3);
+      return { correct, options: [correct, ...others].sort(() => Math.random() - 0.5) };
+    });
+    this.setState({ round, qi: 0, phase: 'ask', wrong: {}, firstTry: 0, earned: 0, screen: 'quiz' }, () => this.speak(this.qText()));
+  };
+  pick(slug) {
+    const { phase, qi, wrong, firstTry } = this.state;
+    if (phase === 'solved') return;
+    const q = this.question();
+    if (slug === q.correct.slug) {
+      const clean = !(wrong[qi] && Object.keys(wrong[qi]).length);
+      this.setState({ phase: 'solved', firstTry: firstTry + (clean ? 1 : 0) });
+      this.speak('Genau! Du hast ' + q.correct.art.replace('der', 'den') + ' ' + q.correct.name + ' gefunden!');
+    } else {
+      const w = { ...wrong, [qi]: { ...(wrong[qi] || {}), [slug]: true } };
+      this.setState({ wrong: w, phase: 'retry' });
+    }
+  }
+  next = () => {
+    const { qi, round, firstTry, totals, profile } = this.state;
+    if (qi + 1 < round.length) {
+      this.setState({ qi: qi + 1, phase: 'ask' }, () => this.speak(this.qText()));
+    } else {
+      const earned = firstTry >= 9 ? 3 : firstTry >= 6 ? 2 : 1;
+      const t = { ...(totals || {}) }; t[profile] = (t[profile] || 0) + earned;
+      try { localStorage.setItem('zz-proto-totals', JSON.stringify(t)); } catch (e) {}
+      this.setState({ screen: 'end', earned, totals: t });
+      this.speak('Runde geschafft!');
+    }
+  };
+  renderVals() {
+    const DS = window.ZilpZalpDesignSystem_bd8c6b || {};
+    const el = React.createElement;
+    const { screen, scale, qi, round, phase, wrong, profile, totals, earned, speaking } = this.state;
+    const names = this.props.namenAnzeigen ?? false;
+    const ph = (s) => 'assets/photos/' + s + '.png';
+    const cr = (s) => 'Foto: ' + this.CRED[s] + ' (CC BY)';
+    const q = round[qi];
+    const wrongNow = (wrong[qi]) || {};
+    const tiles = q ? q.options.map((b) => ({
+      photo: ph(b.slug), credit: cr(b.slug), name: names ? b.name : undefined,
+      state: phase === 'solved' && b.slug === q.correct.slug ? 'correct' : wrongNow[b.slug] ? 'retry' : 'idle',
+      dimmed: (phase === 'solved' && b.slug !== q.correct.slug) || (phase !== 'solved' && !!wrongNow[b.slug]),
+      pick: () => this.pick(b.slug),
+    })) : [];
+    const t = totals || {};
+    const starTxt = (n) => (n || 0) + ' Sterne';
+    const TONES = { Johanna: ['bird', 'leaf'], Papa: ['feather', 'hoopoe'], Mia: ['sparkles', 'rare'] };
+    return {
+      N: { n34: 34, n52: 52, n72: 72, n118: 118, n120: 120, n260: 260, sw: 2.5 },
+      scale,
+      isProfile: screen === 'profile', isHome: screen === 'home', isQuiz: screen === 'quiz', isEnd: screen === 'end', isCollection: screen === 'collection',
+      wordmark: DS.Wordmark ? el(DS.Wordmark, { size: 44 }) : null,
+      prog: DS.QuizProgress ? el(DS.QuizProgress, { total: 10, done: qi + (phase === 'solved' ? 1 : 0), current: qi, size: 36 }) : null,
+      progDone: DS.QuizProgress ? el(DS.QuizProgress, { total: 10, done: 10, current: -1, size: 52 }) : null,
+      profiles: Object.keys(TONES).map((n) => ({ name: n, icon: TONES[n][0], tone: TONES[n][1], starText: starTxt(t[n]), pick: () => { this.setState({ screen: 'home', profile: n }); } })),
+      greeting: 'Hallo ' + (profile || '') + '!',
+      totalStarText: starTxt(t[profile]),
+      games: [
+        { icon: 'bird', label: 'Finde den Vogel', sub: 'Name hören, Bild finden', cardTone: 'leaf', edge: 'var(--olive-500)', playable: true, op: 1, cursor: 'pointer', play: this.startRound },
+        { icon: 'volume-2', label: 'Wer singt da?', sub: 'Kommt bald ins Nest', cardTone: 'sun', edge: 'var(--orange-500)', playable: false, op: 0.45, cursor: 'default', play: undefined },
+        { icon: 'feather', label: 'Wessen Feder?', sub: 'Kommt bald ins Nest', cardTone: 'clay', edge: 'var(--clay-500)', playable: false, op: 0.45, cursor: 'default', play: undefined },
+        { icon: 'trees', label: 'Wo wohnt er?', sub: 'Kommt bald ins Nest', cardTone: 'sand', edge: 'var(--bark-500)', playable: false, op: 0.45, cursor: 'default', play: undefined },
+      ],
+      goHome: () => { try { speechSynthesis.cancel(); } catch (e) {} this.setState({ screen: 'home', speaking: false }); },
+      goProfile: () => this.setState({ screen: 'profile' }),
+      goCollection: () => this.setState({ screen: 'collection' }),
+      startRound: this.startRound, next: this.next,
+      sayAgain: () => this.speak(this.qText()),
+      questionText: this.qText(),
+      praiseText: 'Genau!',
+      earnedText: '+' + earned + (earned === 1 ? ' Stern' : ' Sterne'),
+      speaking, tiles,
+      showRetry: phase === 'retry', showCorrect: phase === 'solved',
+      bannerFit: { style: { height: 'var(--touch-comfy)', paddingTop: 0, paddingBottom: 0, boxSizing: 'border-box' } },
+      albumStickers: [
+        { photo: ph('zilpzalp'), credit: cr('zilpzalp'), label: 'Zilpzalp', tone: 'leaf', locked: false },
+        { photo: ph('wiedehopf'), credit: cr('wiedehopf'), label: 'Wiedehopf', tone: 'hoopoe', locked: false },
+        { photo: ph('amsel'), credit: cr('amsel'), label: 'Amsel', tone: 'sun', locked: false },
+        { photo: ph('blaumeise'), credit: cr('blaumeise'), label: 'Blaumeise', tone: 'leaf', locked: false },
+        { photo: ph('eisvogel'), credit: cr('eisvogel'), label: 'Eisvogel', tone: 'rare', locked: false },
+        { label: 'Noch geheim', locked: true }, { label: 'Noch geheim', locked: true }, { label: 'Noch geheim', locked: true },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+:root{
+--dur-instant:90ms; /* @kind other */
+--dur-fast:160ms; /* @kind other */
+--dur-normal:260ms; /* @kind other */
+--dur-slow:420ms; /* @kind other */
+--dur-celebrate:900ms; /* @kind other */
+--ease-out:cubic-bezier(.22,.61,.36,1); /* @kind other */
+--ease-in-out:cubic-bezier(.45,.05,.55,.95); /* @kind other */
+--ease-bounce:cubic-bezier(.34,1.56,.64,1); /* @kind other */ /* default for anything appearing */
+--ease-squish:cubic-bezier(.5,-0.4,.5,1.4); /* @kind other */
+}

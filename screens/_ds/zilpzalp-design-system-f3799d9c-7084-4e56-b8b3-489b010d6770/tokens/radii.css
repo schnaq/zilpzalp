@@ -1,0 +1,8 @@
+:root{
+--radius-sm:12px;--radius-md:20px;--radius-lg:28px;--radius-xl:40px;--radius-2xl:56px;--radius-pill:999px;
+--radius-card:var(--radius-lg);
+--radius-tile:var(--radius-xl);
+--radius-button:var(--radius-pill);
+--border-width:3px; /* @kind spacing */ /* chunky outlines */
+--border-width-thick:5px; /* @kind spacing */
+}

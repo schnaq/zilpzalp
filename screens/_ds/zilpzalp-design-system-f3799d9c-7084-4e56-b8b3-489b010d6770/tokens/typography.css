@@ -1,0 +1,24 @@
+:root{
+--font-display:"Baloo 2","Trebuchet MS",system-ui,sans-serif;
+--font-body:"Nunito","Segoe UI",system-ui,sans-serif;
+
+/* Kid-facing scale. Nothing kid-facing goes below 20px. */
+--text-hero:88px;      --lh-hero:1.0; /* @kind other */
+--text-display-1:64px; --lh-display-1:1.05; /* @kind other */
+--text-display-2:48px; --lh-display-2:1.1; /* @kind other */
+--text-title:36px;     --lh-title:1.15; /* @kind other */
+--text-headline:28px;  --lh-headline:1.2; /* @kind other */
+--text-body-lg:24px;   --lh-body-lg:1.45; /* @kind other */
+--text-body:20px;      --lh-body:1.5; /* @kind other */
+--text-label:22px;     --lh-label:1.1; /* @kind other */ /* button & tile labels */
+--text-caption:16px;   --lh-caption:1.4; /* @kind other */ /* GROWN-UP AREA ONLY */
+
+--weight-regular:400; /* @kind font */
+--weight-semibold:600; /* @kind font */
+--weight-bold:700; /* @kind font */
+--weight-black:800; /* @kind font */
+--tracking-tight:-0.01em; /* @kind other */
+--tracking-normal:0; /* @kind other */
+--tracking-loose:0.02em; /* @kind other */
+--tracking-caps:0.08em; /* @kind other */
+}
