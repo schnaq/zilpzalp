@@ -41,8 +41,12 @@ Colour choice (see assets/README.md and docs/superpowers/plans/
   is the darkest background that keeps the ink-900 parts of the bird
   legible, not an arbitrary pick.
 - Tinted: iOS applies the user's chosen tint colour itself, so this
-  appearance ships as a plain grayscale desaturation of the Any/Light
-  render (opaque, no colour information for the system to fight with).
+  appearance ships as a plain grayscale desaturation (opaque, no colour
+  information for the system to fight with). Desaturating the *Dark*
+  render rather than Light: cream-50 desaturates to a luma of ~252 (near
+  white), which the system would render as a washed-out, barely-tinted
+  tile; olive-500 desaturates to ~108, a mid-grey that lets the chosen tint
+  actually show.
 
 Beak/crop check: the beak tip and the crest tips are the parts of the
 artwork that reach closest to the edges of the square. Both sit within a
@@ -95,19 +99,14 @@ def render_opaque(svg_path: Path, background: str, size: int) -> Image.Image:
     return image.convert("RGB")
 
 
-def to_tinted(light: Image.Image) -> Image.Image:
-    """Desaturate the light render for the Tinted appearance.
+def to_tinted(source: Image.Image) -> Image.Image:
+    """Desaturate `source` for the Tinted appearance.
 
     iOS re-tints this image with the colour the person picked for their
     home screen; shipping it in colour would fight that, so this is a
     mechanical grayscale conversion, not a hand-redrawn variant.
     """
-    return light.convert("L").convert("RGB")
-
-
-def assert_opaque(image: Image.Image, label: str) -> None:
-    if image.mode != "RGB":
-        raise SystemExit(f"{label}: expected RGB (no alpha channel), got {image.mode}")
+    return source.convert("L").convert("RGB")
 
 
 def main() -> None:
@@ -118,7 +117,7 @@ def main() -> None:
 
     light = render_opaque(SOURCE_SVG, CREAM_50, ICON_SIZE)
     dark = render_opaque(SOURCE_SVG, OLIVE_500, ICON_SIZE)
-    tinted = to_tinted(light)
+    tinted = to_tinted(dark)
 
     renders = (
         (light, "AppIcon-1024.png", "Any/Light"),
@@ -127,7 +126,6 @@ def main() -> None:
     )
 
     for image, filename, label in renders:
-        assert_opaque(image, label)
         out_path = OUTPUT_DIR / filename
         image.save(out_path)
         print(f"wrote {out_path.relative_to(REPO_ROOT)} ({label}, {image.mode}, {image.size[0]}x{image.size[1]})")
