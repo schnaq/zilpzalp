@@ -32,3 +32,13 @@ yarn-error.log*
 # Temporary files
 *.tmp
 *.bak
+
+# Xcode
+DerivedData/
+*.xcuserstate
+
+# Swift Package Manager
+.build/
+
+# Python (tools/)
+__pycache__/

@@ -1,0 +1,85 @@
+# ZilpZalp — zentraler Einstieg für alle Werkzeuge.
+#
+# Alles läuft über `mise run …`. Nicht direkt xcodebuild, swift oder brew
+# aufrufen, sonst weicht die Entwicklungsmaschine vom CI-Runner ab.
+
+[tools]
+# Exakt gepinnt: Entwicklungsmaschine und self-hosted Runner sollen dieselben
+# Binaries benutzen. Kein Homebrew — sonst driften die Versionen auseinander.
+python      = "3.13.14" # für die Werkzeuge in tools/
+swiftformat = "0.62.1"
+swiftlint   = "0.65.0"
+xcbeautify  = "3.2.1"
+
+# Xcode ist nicht über mise installierbar und liefert zugleich den
+# Swift-Compiler, mit dem xcodebuild übersetzt. Deshalb wird Xcode nicht
+# installiert, sondern geprüft — siehe Task `xcode-version`.
+#
+# Zur Sprachversion: Der Spec nennt „Swift 6.2". Xcode 26.6 liefert
+# swiftc 6.3.3. „Swift 6.2" ist deshalb als Sprach- und Tools-Version zu
+# lesen (`// swift-tools-version: 6.2`, Sprachmodus v6) — das legt #2 in den
+# Package.swift-Dateien fest, nicht dieser Task. Ein zweiter Toolchain über
+# mise würde von xcodebuild ohnehin nicht benutzt.
+
+[tasks.setup]
+description = "Werkzeuge und Abhängigkeiten installieren"
+depends = ["xcode-version"]
+run = "mise install"
+
+[tasks.check]
+description = "Format, Lint, Tests, Lizenz-Gate — dasselbe wie in CI"
+depends = ["xcode-version"]
+run = '''
+echo "::notice::Format und Lint laufen noch nicht — .swiftformat und .swiftlint.yml fehlen, kommen mit #3"
+mise run test
+echo "::notice::Lizenz-Gate läuft noch nicht — das Prüfwerkzeug fehlt, kommt mit #17"
+'''
+
+[tasks.test]
+description = "Nur die Package-Tests"
+run = '''
+echo "::notice::Keine Package-Tests — packages/ ist leer, die drei SwiftPM-Pakete kommen mit #2"
+'''
+
+[tasks.build]
+description = "App bauen"
+depends = ["xcode-version"]
+run = '''
+echo "::notice::Kein Build möglich — apps/ ist leer, das Xcode-Projekt kommt mit #2"
+'''
+
+[tasks.fetch-media]
+description = "Medien kuratieren und nach S3 laden"
+run = '''
+echo "::notice::Kein Kurationswerkzeug — tools/fetch-media kommt mit #15"
+'''
+
+[tasks.xcode-version]
+description = "Prüft, ob die gepinnte Xcode-Version aktiv ist"
+hide = true
+run = '''
+expected="26.6"
+abhilfe="Abhilfe: Xcode $expected installieren und per 'sudo xcode-select -s /Pfad/zu/Xcode.app' oder DEVELOPER_DIR aktivieren."
+
+# Fängt beides ab: xcodebuild fehlt ganz, oder das aktive Developer-Verzeichnis
+# sind nur die Command Line Tools — dort gibt es kein xcodebuild.
+if ! ausgabe="$(xcodebuild -version 2>&1)"; then
+  echo "::error::'xcodebuild -version' schlägt fehl, aktives Developer-Verzeichnis: $(xcode-select -p 2>&1)."
+  echo "$ausgabe" | sed 's/^/  /'
+  echo "$abhilfe"
+  exit 1
+fi
+
+found="$(printf '%s\n' "$ausgabe" | head -1 | cut -d' ' -f2)"
+build="$(printf '%s\n' "$ausgabe" | tail -1 | cut -d' ' -f3)"
+
+if [ "$found" != "$expected" ]; then
+  echo "::error::Xcode $expected erwartet, aktiv ist $found (aus $(xcode-select -p))."
+  echo "$abhilfe"
+  exit 1
+fi
+
+echo "Xcode $found (Build $build) — passt"
+echo "  swiftc laut Xcode:     $(xcrun swift --version 2>&1 | head -1)"
+echo "  swift im Suchpfad:     $(command -v swift) — $(swift --version 2>&1 | head -1)"
+'''
