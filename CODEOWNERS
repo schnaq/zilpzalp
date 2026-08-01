@@ -1,0 +1,4 @@
+# Wer wird bei einem Pull Request automatisch als Reviewer angefragt.
+# Letzte passende Regel gewinnt.
+
+* @n2o
