@@ -50,6 +50,9 @@ targets:
         # Generiertes im Quellbaum.
         GENERATE_INFOPLIST_FILE: true
         INFOPLIST_KEY_CFBundleDisplayName: ZilpZalp
+        # Points at Resources/Assets.xcassets/AppIcon.appiconset — single size
+        # (1024x1024) with Dark and Tinted variants, see tools/render_app_icon.py.
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         INFOPLIST_KEY_UILaunchScreen_Generation: true
         # Vorerst alle Orientierungen; was das Design wirklich braucht, klärt
         # sich mit den Spielbildschirmen.
