@@ -1,8 +1,8 @@
 import SwiftUI
 
-/// Platzhalter, bis der Startbildschirm aus M1 kommt.
+/// Placeholder until the start screen from M1 arrives.
 ///
-/// Der Text steht im String Catalog, nicht im Code — siehe
+/// The text lives in the string catalog, not in the code — see
 /// `Resources/Localizable.xcstrings`.
 struct RootView: View {
     var body: some View {

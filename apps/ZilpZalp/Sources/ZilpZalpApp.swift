@@ -1,10 +1,10 @@
 import SwiftUI
 
-/// Einstiegspunkt der App.
+/// Entry point of the app.
 ///
-/// Das App-Target ist reine Verdrahtung: Es hält den Szenen-Aufbau und sonst
-/// nichts. Logik gehört nach `ZilpZalpCore`, Daten nach `ZilpZalpData`,
-/// Komponenten nach `ZilpZalpUI`.
+/// The app target is pure wiring: it holds the scene setup and nothing else.
+/// Logic belongs in `ZilpZalpCore`, data in `ZilpZalpData`, components in
+/// `ZilpZalpUI`.
 @main
 struct ZilpZalpApp: App {
     var body: some Scene {

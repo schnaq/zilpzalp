@@ -1,12 +1,13 @@
-# Quelle der Wahrheit für das Xcode-Projekt.
+# Source of truth for the Xcode project.
 #
-# `ZilpZalp.xcodeproj` wird hieraus erzeugt (`mise run build` ruft XcodeGen
-# auf) und ist git-ignoriert: keine Binär-Blobs im Repo, keine Merge-Konflikte
-# in einem generierten Projektfile.
+# `ZilpZalp.xcodeproj` is generated from this file (`mise run build` invokes
+# XcodeGen) and is git-ignored: no binary blobs in the repo, no merge conflicts
+# in a generated project file.
 
 name: ZilpZalp
 
 options:
+  # The app ships in German only; it is built to be localisable.
   developmentLanguage: de
   deploymentTarget:
     iOS: "18.0"
@@ -28,8 +29,8 @@ targets:
       - path: Sources
       - path: Resources
         buildPhase: resources
-    # Alle drei Pakete hängen am App-Target, damit sie für iOS mitgebaut und
-    # gelinkt werden. Der Platzhalter-Screen braucht sie noch nicht.
+    # All three packages hang off the app target so they are built and linked
+    # for iOS. The placeholder screen does not need them yet.
     dependencies:
       - package: ZilpZalpCore
       - package: ZilpZalpData
@@ -42,17 +43,17 @@ targets:
         CURRENT_PROJECT_VERSION: 1
         # 1 = iPhone, 2 = iPad
         TARGETED_DEVICE_FAMILY: "1,2"
-        # Xcode kennt nur Sprachmodi (4, 4.2, 5, 6) — „Swift 6.2" aus dem Spec
-        # ist der Sprachmodus 6 plus die Toolchain des gepinnten Xcode.
+        # Xcode only knows language modes (4, 4.2, 5, 6). "Swift 6.2" from the
+        # spec means language mode 6 plus the toolchain of the pinned Xcode.
         SWIFT_VERSION: "6.0"
         SWIFT_STRICT_CONCURRENCY: complete
-        # Info.plist entsteht beim Bauen aus diesen Schlüsseln — nichts
-        # Generiertes im Quellbaum.
+        # Info.plist is generated at build time from these keys — nothing
+        # generated sits in the source tree.
         GENERATE_INFOPLIST_FILE: true
         INFOPLIST_KEY_CFBundleDisplayName: ZilpZalp
         INFOPLIST_KEY_UILaunchScreen_Generation: true
-        # Vorerst alle Orientierungen; was das Design wirklich braucht, klärt
-        # sich mit den Spielbildschirmen.
+        # All orientations for now; what the design actually needs becomes
+        # clear with the game screens.
         INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: >-
           UIInterfaceOrientationPortrait
           UIInterfaceOrientationPortraitUpsideDown
