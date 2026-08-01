@@ -239,8 +239,8 @@ Bewusst anders als unlock: Swift statt Flutter, Tag-basiertes Release statt Bran
 | M2 | Daten und Medien | Paket-Schema, S3-Bucket, `fetch-media`, Lizenz-Gate, generierte Credits, **Guidelines-Recherche** |
 | M3 | Spiel 1 | Quiz-Engine, Sprachausgabe, Sterne-Scoring, Layout für iPhone und iPad |
 | M4 | Profile und Fortschritt | Profilwahl, Avatare, Ränge, Sammlung, Leaderboard „Unser Schwarm" |
-| M5 | Spiel 2 und Pakete | Vogelrufe, Audio-Player, Paket-Download, Paketverwaltung |
-| M6 | Eltern und Compliance | FaceID-Schloss, Zeitbudget, Parental Gate, Privacy Manifest, Age Rating |
+| M5 | Spiel 2 und Pakete | Vogelrufe, Audio-Player, Paket-Download, Elternbereich mit Schloss, Paketverwaltung |
+| M6 | Eltern und Compliance | Zeitbudget, Parental Gate, Privacy Manifest, Age Rating |
 | M7 | Release | Signing, TestFlight, Store-Assets, „Designed for iPad" auf Mac |
 | M8 | Danach | Spiel 3 Federn, Spiel 4 Lebensraum, weitere Pakete, Englisch |
 
