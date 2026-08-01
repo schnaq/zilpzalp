@@ -1,4 +1,4 @@
-<img src="assets/logo.svg" alt="" width="96" align="right">
+<img src="assets/logo.svg" alt="ZilpZalp" width="96" align="right">
 
 # ZilpZalp
 
