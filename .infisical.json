@@ -1,0 +1,6 @@
+{
+  "workspaceId": "9820fa11-518f-4760-a64f-7f832e6c2e8a",
+  "defaultEnvironment": "dev",
+  "gitBranchToEnvironmentMapping": null,
+  "domain": "https://secrets.schnaq.com/api"
+}
