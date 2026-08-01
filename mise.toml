@@ -10,6 +10,7 @@ python      = "3.13.14" # für die Werkzeuge in tools/
 swiftformat = "0.62.1"
 swiftlint   = "0.65.0"
 xcbeautify  = "3.2.1"
+xcodegen    = "2.46.0" # erzeugt apps/ZilpZalp/ZilpZalp.xcodeproj aus project.yml
 
 # Xcode ist nicht über mise installierbar und liefert zugleich den
 # Swift-Compiler, mit dem xcodebuild übersetzt. Deshalb wird Xcode nicht
@@ -20,6 +21,12 @@ xcbeautify  = "3.2.1"
 # lesen (`// swift-tools-version: 6.2`, Sprachmodus v6) — das legt #2 in den
 # Package.swift-Dateien fest, nicht dieser Task. Ein zweiter Toolchain über
 # mise würde von xcodebuild ohnehin nicht benutzt.
+#
+# Welches Xcode gilt, entscheidet DEVELOPER_DIR. `xcode-version`, `test` und
+# `build` setzen es auf das Standard-Xcode, falls es nicht schon von außen
+# kommt — der CI-Runner pinnt Xcode selbst und gewinnt dann. Bewusst als eine
+# Zeile pro Task und nicht als [env]-Block: ein [env]-Block macht die Datei
+# trust-pflichtig, und ein frischer Klon soll ohne `mise trust` durchlaufen.
 
 [tasks.setup]
 description = "Werkzeuge und Abhängigkeiten installieren"
@@ -37,15 +44,37 @@ echo "::notice::Lizenz-Gate läuft noch nicht — das Prüfwerkzeug fehlt, kommt
 
 [tasks.test]
 description = "Nur die Package-Tests"
+depends = ["xcode-version"]
 run = '''
-echo "::notice::Keine Package-Tests — packages/ ist leer, die drei SwiftPM-Pakete kommen mit #2"
+set -euo pipefail
+export DEVELOPER_DIR="${DEVELOPER_DIR:-/Applications/Xcode.app/Contents/Developer}"
+
+# `xcrun swift` statt `swift`: nur so kommt die Toolchain aus DEVELOPER_DIR
+# zum Zug und nicht irgendein anderes swift aus dem Suchpfad.
+for paket in packages/*/; do
+  echo "── $(basename "$paket")"
+  xcrun swift test --package-path "$paket"
+done
 '''
 
 [tasks.build]
 description = "App bauen"
 depends = ["xcode-version"]
 run = '''
-echo "::notice::Kein Build möglich — apps/ ist leer, das Xcode-Projekt kommt mit #2"
+set -euo pipefail
+export DEVELOPER_DIR="${DEVELOPER_DIR:-/Applications/Xcode.app/Contents/Developer}"
+
+xcodegen generate --spec apps/ZilpZalp/project.yml --quiet
+
+# generic/platform: baut fürs Simulator-SDK ohne ein bestimmtes Gerät zu
+# verlangen — auf dem Runner ist nicht gesetzt, welche Simulatoren da sind.
+xcodebuild build \
+  -project apps/ZilpZalp/ZilpZalp.xcodeproj \
+  -scheme ZilpZalp \
+  -destination "generic/platform=iOS Simulator" \
+  -derivedDataPath DerivedData \
+  CODE_SIGNING_ALLOWED=NO \
+  | xcbeautify
 '''
 
 [tasks.fetch-media]
@@ -58,6 +87,8 @@ echo "::notice::Kein Kurationswerkzeug — tools/fetch-media kommt mit #15"
 description = "Prüft, ob die gepinnte Xcode-Version aktiv ist"
 hide = true
 run = '''
+export DEVELOPER_DIR="${DEVELOPER_DIR:-/Applications/Xcode.app/Contents/Developer}"
+
 expected="26.6"
 abhilfe="Abhilfe: Xcode $expected installieren und per 'sudo xcode-select -s /Pfad/zu/Xcode.app' oder DEVELOPER_DIR aktivieren."
 

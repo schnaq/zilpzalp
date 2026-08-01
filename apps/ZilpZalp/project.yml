@@ -1,0 +1,79 @@
+# Quelle der Wahrheit für das Xcode-Projekt.
+#
+# `ZilpZalp.xcodeproj` wird hieraus erzeugt (`mise run build` ruft XcodeGen
+# auf) und ist git-ignoriert: keine Binär-Blobs im Repo, keine Merge-Konflikte
+# in einem generierten Projektfile.
+
+name: ZilpZalp
+
+options:
+  developmentLanguage: de
+  deploymentTarget:
+    iOS: "18.0"
+  createIntermediateGroups: true
+
+packages:
+  ZilpZalpCore:
+    path: ../../packages/ZilpZalpCore
+  ZilpZalpData:
+    path: ../../packages/ZilpZalpData
+  ZilpZalpUI:
+    path: ../../packages/ZilpZalpUI
+
+targets:
+  ZilpZalp:
+    type: application
+    platform: iOS
+    sources:
+      - path: Sources
+      - path: Resources
+        buildPhase: resources
+    # Alle drei Pakete hängen am App-Target, damit sie für iOS mitgebaut und
+    # gelinkt werden. Der Platzhalter-Screen braucht sie noch nicht.
+    dependencies:
+      - package: ZilpZalpCore
+      - package: ZilpZalpData
+      - package: ZilpZalpUI
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.schnaq.zilpzalp
+        PRODUCT_NAME: ZilpZalp
+        MARKETING_VERSION: "0.1.0"
+        CURRENT_PROJECT_VERSION: 1
+        # 1 = iPhone, 2 = iPad
+        TARGETED_DEVICE_FAMILY: "1,2"
+        # Xcode kennt nur Sprachmodi (4, 4.2, 5, 6) — „Swift 6.2" aus dem Spec
+        # ist der Sprachmodus 6 plus die Toolchain des gepinnten Xcode.
+        SWIFT_VERSION: "6.0"
+        SWIFT_STRICT_CONCURRENCY: complete
+        # Info.plist entsteht beim Bauen aus diesen Schlüsseln — nichts
+        # Generiertes im Quellbaum.
+        GENERATE_INFOPLIST_FILE: true
+        INFOPLIST_KEY_CFBundleDisplayName: ZilpZalp
+        INFOPLIST_KEY_UILaunchScreen_Generation: true
+        # Vorerst alle Orientierungen; was das Design wirklich braucht, klärt
+        # sich mit den Spielbildschirmen.
+        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: >-
+          UIInterfaceOrientationPortrait
+          UIInterfaceOrientationPortraitUpsideDown
+          UIInterfaceOrientationLandscapeLeft
+          UIInterfaceOrientationLandscapeRight
+        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad: >-
+          UIInterfaceOrientationPortrait
+          UIInterfaceOrientationPortraitUpsideDown
+          UIInterfaceOrientationLandscapeLeft
+          UIInterfaceOrientationLandscapeRight
+
+schemes:
+  ZilpZalp:
+    build:
+      targets:
+        ZilpZalp: all
+    run:
+      config: Debug
+    profile:
+      config: Release
+    analyze:
+      config: Debug
+    archive:
+      config: Release
