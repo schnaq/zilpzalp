@@ -17,6 +17,14 @@ Die verbindliche Spezifikation liegt in [docs/superpowers/specs/2026-08-01-zilpz
 5. **Kein toter Code.** Nichts auskommentiert liegen lassen, keine ungenutzten Hilfsfunktionen für später.
 6. **Zielgruppe mitdenken.** Die App ist für Kinder, die noch nicht lesen können. Jede UI-Entscheidung an dieser Messlatte prüfen.
 
+## Sprache
+
+Alles, was ins Repository geht, ist **englisch**: Code und Bezeichner, Kommentare, Commit-Messages, PR-Texte und Entwickler-Dokumentation. Auch dann, wenn die Absprache darüber auf Deutsch lief.
+
+**Produktinhalte bleiben deutsch.** Der String Catalog, alle Texte, die Kinder oder Eltern zu sehen bekommen, `sourceLanguage` und `developmentLanguage`. Die App erscheint auf Deutsch und ist nur i18n-fähig gebaut — das ist Inhalt, nicht Dokumentation.
+
+Bestandsschutz: der Spec, die vorhandenen deutschen Dateien unter `docs/` und diese Datei bleiben vorerst deutsch. Sie werden in einem eigenen Schritt migriert, nicht nebenbei. Was dort neu entsteht, entsteht englisch.
+
 ## Wo was liegt
 
 | Bereich | Pfad | Zweck |
