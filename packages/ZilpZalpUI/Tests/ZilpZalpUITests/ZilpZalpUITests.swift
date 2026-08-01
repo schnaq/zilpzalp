@@ -1,5 +1,4 @@
 import Testing
-
 import ZilpZalpUI
 
 @Test("Die Modulversion ist ein Semantic-Versioning-Tripel")

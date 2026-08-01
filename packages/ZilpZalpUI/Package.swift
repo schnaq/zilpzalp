@@ -15,5 +15,5 @@ let package = Package(
         .target(name: "ZilpZalpUI"),
         .testTarget(name: "ZilpZalpUITests", dependencies: ["ZilpZalpUI"]),
     ],
-    swiftLanguageModes: [.v6]
+    swiftLanguageModes: [.v6],
 )

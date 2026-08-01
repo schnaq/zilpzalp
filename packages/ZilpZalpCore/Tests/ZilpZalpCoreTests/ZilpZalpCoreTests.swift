@@ -1,5 +1,4 @@
 import Testing
-
 import ZilpZalpCore
 
 @Test("Die Modulversion ist ein Semantic-Versioning-Tripel")
