@@ -1,0 +1,42 @@
+# SwiftFormat für ZilpZalp.
+#
+# Arbeitsteilung mit SwiftLint: Layout gehört ausschließlich hierher, SwiftLint
+# prüft alles, was kein Layout ist. Wo beide Werkzeuge dieselbe Frage
+# beantworten, ist die SwiftLint-Regel in .swiftlint.yml abgeschaltet — sonst
+# formatiert das eine Werkzeug, was das andere anschließend anmeckert.
+
+--swift-version 6.2
+
+# Ältere SwiftFormat-Versionen kennen Optionen dieser Datei nicht und würden
+# still anders formatieren. Passend zur Pinnung in mise.toml.
+--min-version 0.62.1
+
+# `mise run check` übergibt zwar nur apps und packages, aber genau dort
+# entstehen .build und das von XcodeGen erzeugte Projekt.
+--exclude **/.build,**/DerivedData,**/*.xcodeproj
+
+--indent 4
+
+# SwiftFormat entscheidet allein über die Zeilenbreite; SwiftLints line_length
+# ist deshalb aus. Unumbrechbare Zeilen — lange String-Literale etwa — bleiben
+# damit ohne Befund: --lint meldet nur, was das Werkzeug auch ändern würde.
+--max-width 100
+
+# Umbruch immer vor dem ersten Argument. Ein Argument pro Zeile liest sich in
+# Diffs besser als eine an der Klammer ausgerichtete Kolonne.
+--wrap-arguments before-first
+--wrap-parameters before-first
+--wrap-collections before-first
+
+--semicolons never
+--self remove
+
+# Abschließendes Komma auch in Parameter- und Argumentlisten, nicht nur in
+# Literalen — ab Swift 6.1 erlaubt und der Grund, warum das Hinzufügen eines
+# Arguments nur noch eine Zeile im Diff kostet.
+--trailing-commas always
+
+# swiftTestingTestCaseNames baut aus `@Test("Beschreibung") func x()` einen in
+# Backticks gesetzten Funktionsnamen. Das ist ab Swift 6.2 zwar gültig, aber
+# SwiftLints identifier_name lehnt den Namen ab — und lesbarer wird es nicht.
+--disable swiftTestingTestCaseNames

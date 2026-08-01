@@ -46,6 +46,7 @@ Alles läuft über mise. Nicht direkt `xcodebuild` oder `swift` aufrufen, sonder
 ```
 mise run setup      Abhängigkeiten und Werkzeuge installieren
 mise run check      Format, Lint, Tests, Lizenz-Gate — das gleiche wie in CI
+mise run format     Formatieren und behebbare Lint-Funde korrigieren
 mise run test       Nur die Package-Tests
 mise run build      App bauen
 mise run fetch-media  Medien kuratieren und nach S3 laden

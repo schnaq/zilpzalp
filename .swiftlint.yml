@@ -1,0 +1,33 @@
+# SwiftLint für ZilpZalp.
+#
+# Arbeitsteilung mit SwiftFormat: Layout gehört SwiftFormat (.swiftformat),
+# SwiftLint prüft alles andere. Die Regelmenge ist bewusst der Standardsatz —
+# abgezogen werden nur die Regeln, die SwiftFormat gegenläufig umformatiert.
+
+included:
+  - apps
+  - packages
+
+# Generiertes: die SwiftPM-Build-Verzeichnisse und das von XcodeGen erzeugte
+# Projekt liegen innerhalb von included.
+excluded:
+  - "**/.build"
+  - "**/DerivedData"
+  - "**/*.xcodeproj"
+
+disabled_rules:
+  # SwiftFormat-Regel `trailingCommas` setzt in mehrzeiligen Literalen ein
+  # abschließendes Komma; diese Regel will genau das Gegenteil.
+  - trailing_comma
+  # SwiftFormat-Regel `wrapMultilineStatementBraces` zieht die öffnende
+  # Klammer nach einer umbrochenen Signatur oder Bedingung in eine eigene
+  # Zeile; diese Regel verlangt sie am Zeilenende.
+  - opening_brace
+  # Zeilenbreite regelt --max-width in .swiftformat. Zwei Werkzeuge mit zwei
+  # Schwellen wären ein Streit ohne Gewinner.
+  - line_length
+
+identifier_name:
+  excluded:
+    # Zwei Zeichen, aber in Swift der Standardname (Identifiable).
+    - id
