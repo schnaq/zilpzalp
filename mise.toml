@@ -37,9 +37,32 @@ run = "mise install"
 description = "Format, Lint, Tests, Lizenz-Gate — dasselbe wie in CI"
 depends = ["xcode-version"]
 run = '''
-echo "::notice::Format und Lint laufen noch nicht — .swiftformat und .swiftlint.yml fehlen, kommen mit #3"
+set -euo pipefail
+
+# --lint korrigiert nicht, sondern meldet: unformatierter Code soll den Build
+# brechen statt still umgeschrieben zu werden. Zum Korrigieren: mise run format
+#
+# Die Pfade stehen vor --lint, weil SwiftFormat sonst den ersten Pfad als Wert
+# der Option liest und mit „--lint argument does not expect a value" abbricht.
+swiftformat apps packages --lint
+
+# --strict, weil SwiftLint sonst nur bei Regeln mit Schweregrad „error" einen
+# Exit-Code ungleich null liefert und Warnungen durchrutschen würden.
+swiftlint --strict --quiet
+
 mise run test
 echo "::notice::Lizenz-Gate läuft noch nicht — das Prüfwerkzeug fehlt, kommt mit #17"
+'''
+
+[tasks.format]
+description = "Quelltext formatieren und behebbare Lint-Funde korrigieren"
+run = '''
+set -euo pipefail
+
+# Erst SwiftLint, dann SwiftFormat: über das Layout entscheidet am Ende
+# SwiftFormat, damit das Ergebnis dem entspricht, was `mise run check` prüft.
+swiftlint --fix --quiet
+swiftformat apps packages
 '''
 
 [tasks.test]

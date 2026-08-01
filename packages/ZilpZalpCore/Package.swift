@@ -15,5 +15,5 @@ let package = Package(
         .target(name: "ZilpZalpCore"),
         .testTarget(name: "ZilpZalpCoreTests", dependencies: ["ZilpZalpCore"]),
     ],
-    swiftLanguageModes: [.v6]
+    swiftLanguageModes: [.v6],
 )
