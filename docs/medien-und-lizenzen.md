@@ -246,7 +246,7 @@ Eine solche Erlaubnis lässt sich nicht an Leute weitergeben, die das Repository
 ## Wie Medien ins Projekt kommen
 
 ```
-data/packs/*.json ──> tools/fetch-media ──> Scaleway S3 (nl-ams)
+data/packs/*.json ──> tools/fetch-media ──> Scaleway S3 (zilpzalp-media, fr-par)
                                                  │
                      Basis-Paket ────────────────┼──> Asset Catalog ──> App-Bundle
                      Download-Pakete ────────────┴──> zur Laufzeit geladen

@@ -4,12 +4,12 @@ Alle Secrets liegen in der selbst gehosteten Infisical-Instanz unter `https://se
 
 ## Projekt
 
-| Feld | Wert |
-|---|---|
-| Instanz | `https://secrets.schnaq.com` |
-| Projekt | ZilpZalp |
-| Projekt-ID | `9820fa11-518f-4760-a64f-7f832e6c2e8a` |
-| Environments | `dev`, `prod` |
+| Feld         | Wert                                   |
+| ------------ | -------------------------------------- |
+| Instanz      | `https://secrets.schnaq.com`           |
+| Projekt      | ZilpZalp                               |
+| Projekt-ID   | `9820fa11-518f-4760-a64f-7f832e6c2e8a` |
+| Environments | `dev`, `prod`                          |
 
 Die CLI erwartet die Domain **mit** `/api`, die GitHub Action **ohne**. Das ist keine Inkonsistenz im Repo, sondern eine Eigenheit der beiden Werkzeuge — im unlock-Repo hat genau das schon einmal Zeit gekostet.
 
@@ -27,19 +27,29 @@ Danach laufen die mise-Tasks, die Secrets brauchen, automatisch über `infisical
 
 ## Ordner und Inhalte
 
-| Pfad | Secret | Wofür |
-|---|---|---|
-| `/` | `XENO_CANTO_API_KEY` | Vogelrufe kuratieren, `tools/fetch-media` |
-| `/` | `SCW_ACCESS_KEY`, `SCW_SECRET_KEY` | Scaleway Object Storage, Medien-Upload |
-| `/` | `S3_BUCKET`, `S3_REGION`, `S3_ENDPOINT` | Zielbucket für Medien |
-
-Der Bucket liegt bei Scaleway Object Storage in der Region `nl-ams`, Endpunkt `https://s3.nl-ams.scw.cloud`. Die Objekte sind öffentlich lesbar — es sind ausschließlich CC-lizenzierte Medien, und die App soll ohne Zugangsdaten auskommen. Schreibrechte hat nur `tools/fetch-media`.
+| Pfad | Secret                                  | Wofür                                     |
+| ---- | --------------------------------------- | ----------------------------------------- |
+| `/`  | `XENO_CANTO_API_KEY`                    | Vogelrufe kuratieren, `tools/fetch-media` |
+| `/`  | `SCW_ACCESS_KEY`, `SCW_SECRET_KEY`      | Scaleway Object Storage, Medien-Upload    |
+| `/`  | `S3_BUCKET`, `S3_REGION`, `S3_ENDPOINT` | Zielbucket für Medien                     |
 | `/ios` | `IOS_DIST_CERT_P12_BASE64` | Apple-Distribution-Zertifikat |
 | `/ios` | `IOS_DIST_CERT_PASSWORD` | Passwort dazu |
 | `/ios` | `IOS_PROVISIONING_PROFILE_BASE64` | App-Store-Provisioning-Profil |
 | `/ios` | `ASC_KEY_ID`, `ASC_ISSUER_ID`, `ASC_KEY_P8_BASE64` | App Store Connect API, TestFlight-Upload |
 
 Die Signing-Secrets werden erst mit Meilenstein 7 gebraucht. Bis dahin baut CI ohne Codesign.
+
+## Medien-Bucket
+
+| Feld | Wert |
+|---|---|
+| Anbieter | Scaleway Object Storage |
+| Bucket | `zilpzalp-media` |
+| Region | `fr-par` |
+| Endpunkt | `https://s3.fr-par.scw.cloud` |
+| Lesezugriff | öffentlich |
+
+Öffentlich lesbar ist Absicht: es sind ausschließlich CC-lizenzierte Medien, und die App soll sie ohne Zugangsdaten laden können. Schreibrechte hat allein `tools/fetch-media` über `SCW_ACCESS_KEY` und `SCW_SECRET_KEY` aus Infisical.
 
 ## In GitHub Actions
 

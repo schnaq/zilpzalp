@@ -128,7 +128,7 @@ struct Pack: Codable, Identifiable {
 ### Medien-Pipeline
 
 ```
-data/packs/*.json ──> tools/fetch-media ──> Scaleway S3 (nl-ams)
+data/packs/*.json ──> tools/fetch-media ──> Scaleway S3 (zilpzalp-media, fr-par)
                                                  │
                      Basis-Paket ────────────────┼──> Asset Catalog ──> App-Bundle
                      Download-Pakete ────────────┴──> zur Laufzeit per PackDownloader
@@ -142,7 +142,7 @@ Ein CI-Gate bricht den Build ab, sobald ein Asset eine Lizenz außerhalb von CC0
 
 ### Paket-Download
 
-Der Bucket liegt bei Scaleway Object Storage in `nl-ams`, Endpunkt `s3.nl-ams.scw.cloud`, Inhalte öffentlich lesbar. Schreibzugriff hat nur `tools/fetch-media` mit Zugangsdaten aus Infisical. Öffentlich lesbar ist die richtige Wahl, weil es ausschließlich CC-lizenzierte Dateien sind — signierte URLs würden entweder einen Schlüssel in der App oder einen eigenen Dienst erzwingen, und beides ist für eine App ohne Backend der falsche Weg.
+Der Bucket `zilpzalp-media` liegt bei Scaleway Object Storage in `fr-par`, Endpunkt `s3.fr-par.scw.cloud`, Inhalte öffentlich lesbar. Schreibzugriff hat nur `tools/fetch-media` mit Zugangsdaten aus Infisical. Öffentlich lesbar ist die richtige Wahl, weil es ausschließlich CC-lizenzierte Dateien sind — signierte URLs würden entweder einen Schlüssel in der App oder einen eigenen Dienst erzwingen, und beides ist für eine App ohne Backend der falsche Weg.
 
 Die App holt beim Start des Elternbereichs einen Katalog (`packs/index.json`) aus S3 und zeigt verfügbare Pakete mit Größe an. Ein Download läuft über `URLSession` mit Fortschrittsanzeige, prüft jede Datei gegen ihren SHA-256 und legt sie unter Application Support ab, ausgenommen vom iCloud-Backup. Pakete sind einzeln löschbar. Das gebundelte Basis-Paket lässt sich nicht entfernen, damit die App nie inhaltsleer wird.
 
