@@ -1,7 +1,7 @@
 import Testing
 import ZilpZalpData
 
-@Test("Die Modulversion ist ein Semantic-Versioning-Tripel")
+@Test("The module version is a semantic versioning triple")
 func versionIsSemanticVersioningTriple() {
     let components = ZilpZalpData.version.split(separator: ".")
 
