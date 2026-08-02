@@ -9,15 +9,26 @@
 """Render the ZilpZalp App Icon from assets/logo.svg.
 
 `assets/logo.svg` is the brand mark: a hoopoe in front of an open olive ring,
-on a *transparent* background. App icons must not carry any transparency —
-that is an App Store Connect rejection, not a stylistic nicety — so this
-script composites the vector art onto an opaque background at build time
-instead of baking a colour into the source SVG.
+on a *transparent* background. Apple's three App Icon appearances do not all
+want the same treatment of that transparency (see "Configuring your app
+icon" in Apple's Human Interface Guidelines / Xcode docs, checked
+2026-08-02):
+
+- **Any/Light** is the App Store Connect slot: it must be fully opaque, no
+  alpha channel at all — that is a hard rejection, not a stylistic nicety.
+  This script composites it onto an opaque background at build time.
+- **Dark** ships *with* a transparent background, so the system-provided
+  dark background/gradient can show through around the artwork.
+- **Tinted** ships as a grayscale image, also with alpha — the system
+  re-tints it and composites it over its own background too.
+
+So only the Any/Light render is flattened to opaque RGB; Dark and Tinted
+keep their alpha channel.
 
 Produces the "single size" App Icon asset (Xcode 16+ / iOS 18+): one
-1024x1024 PNG per appearance (Any/Light, Dark, Tinted), written straight into
-the app target's asset catalog. iOS derives every smaller icon size from this
-one master at install time; we do not hand-author per-size PNGs.
+1024x1024 PNG per appearance, written straight into the app target's asset
+catalog. iOS derives every smaller icon size from this one master at
+install time; we do not hand-author per-size PNGs.
 
 Rendering uses resvg (via the resvg-py bindings) rather than a
 globally-installed rsvg-convert/ImageMagick, so the pipeline stays
@@ -28,25 +39,17 @@ system libraries.
 Colour choice (see assets/README.md and docs/superpowers/plans/
 2026-08-02-m1-design-system.md, Task 8):
 
-- Any/Light: cream-50 (#FFFCF3). ink-900, the near-black used for the tail
-  stripes, the beak outline and the eye, contrasts 15.3:1 against cream-50 —
-  the fine plumage linework stays crisp even once iOS downsamples this
-  master to the smallest home-screen size.
-- Dark: olive-500 (#6E7A21), the app's primary brand colour and — not
-  coincidentally — the exact fill already used by the "Hintergrund" ring
-  layer inside the SVG, so the ring disappears seamlessly into the
-  background instead of leaving a visible seam. ink-900 only contrasts
-  3.3:1 against olive-500 (checked: still legible in the render), and drops
-  to ~1.5:1 or below against any darker olive shade or near-black — so this
-  is the darkest background that keeps the ink-900 parts of the bird
-  legible, not an arbitrary pick.
-- Tinted: iOS applies the user's chosen tint colour itself, so this
-  appearance ships as a plain grayscale desaturation (opaque, no colour
-  information for the system to fight with). Desaturating the *Dark*
-  render rather than Light: cream-50 desaturates to a luma of ~252 (near
-  white), which the system would render as a washed-out, barely-tinted
-  tile; olive-500 desaturates to ~108, a mid-grey that lets the chosen tint
-  actually show.
+- Any/Light: cream-50 (#FFFCF3) background. ink-900, the near-black used for
+  the tail stripes, the beak outline and the eye, contrasts 15.3:1 against
+  cream-50 — the fine plumage linework stays crisp even once iOS
+  downsamples this master to the smallest home-screen size.
+- Dark: no background fill — the SVG's own transparency is kept as-is, so
+  the olive "Hintergrund" ring layer stays a visible ring (rather than
+  merging into a same-coloured fill) and the system's own dark background
+  shows through around it.
+- Tinted: a grayscale desaturation of the transparent Dark render, alpha
+  preserved. The system applies the user's chosen tint colour itself, so
+  shipping this in colour (or opaque) would fight that.
 
 Beak/crop check: the beak tip and the crest tips are the parts of the
 artwork that reach closest to the edges of the square. Both sit within a
@@ -80,33 +83,34 @@ ICON_SIZE = 1024
 
 # design/tokens/colors.css
 CREAM_50 = "#FFFCF3"
-OLIVE_500 = "#6E7A21"
 
 
-def render_opaque(svg_path: Path, background: str, size: int) -> Image.Image:
-    """Rasterise `svg_path` onto an opaque `background`, dropping any alpha."""
+def render(svg_path: Path, size: int, background: str | None = None) -> Image.Image:
+    """Rasterise `svg_path` at `size`.
+
+    Without `background`, resvg renders on a transparent canvas — the SVG's
+    own transparency, unmodified. With it, every pixel becomes opaque
+    (alpha=255), though the alpha *channel* is still present in the
+    returned image; callers that need a true no-alpha PNG (Any/Light only)
+    must still `.convert("RGB")` themselves.
+    """
     png_bytes = resvg_py.svg_to_bytes(
         svg_path=str(svg_path),
         width=size,
         height=size,
         background=background,
     )
-    image = Image.open(io.BytesIO(bytes(png_bytes)))
-    # resvg always returns RGBA; the background param makes every pixel
-    # opaque (alpha=255) but the alpha channel itself is still present. App
-    # Store Connect rejects icons that carry an alpha channel at all, even a
-    # fully opaque one, so it must be dropped, not just filled in.
-    return image.convert("RGB")
+    return Image.open(io.BytesIO(bytes(png_bytes)))
 
 
 def to_tinted(source: Image.Image) -> Image.Image:
-    """Desaturate `source` for the Tinted appearance.
+    """Desaturate `source` for the Tinted appearance, keeping its alpha.
 
-    iOS re-tints this image with the colour the person picked for their
-    home screen; shipping it in colour would fight that, so this is a
-    mechanical grayscale conversion, not a hand-redrawn variant.
+    The system applies the tint colour the person picked and composites
+    this over its own background, so this stays grayscale-with-alpha
+    (`LA`), not a hand-redrawn or flattened variant.
     """
-    return source.convert("L").convert("RGB")
+    return source.convert("LA")
 
 
 def main() -> None:
@@ -115,8 +119,12 @@ def main() -> None:
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-    light = render_opaque(SOURCE_SVG, CREAM_50, ICON_SIZE)
-    dark = render_opaque(SOURCE_SVG, OLIVE_500, ICON_SIZE)
+    # Any/Light: App Store Connect slot — must be fully opaque, no alpha.
+    light = render(SOURCE_SVG, ICON_SIZE, background=CREAM_50).convert("RGB")
+    # Dark: transparent by design, so the system's own dark background
+    # shows through and the olive ring stays a visible ring.
+    dark = render(SOURCE_SVG, ICON_SIZE)
+    # Tinted: grayscale of the transparent Dark render, alpha preserved.
     tinted = to_tinted(dark)
 
     renders = (
