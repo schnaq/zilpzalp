@@ -2,7 +2,7 @@
   "sourceLanguage" : "de",
   "strings" : {
     "app.name" : {
-      "comment" : "Name der App, angezeigt auf dem Platzhalter-Startbildschirm",
+      "comment" : "Name of the app, shown on the placeholder start screen",
       "extractionState" : "manual",
       "localizations" : {
         "de" : {

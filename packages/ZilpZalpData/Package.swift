@@ -4,9 +4,8 @@ import PackageDescription
 
 let package = Package(
     name: "ZilpZalpData",
-    // Ausgeliefert wird nur iOS. macOS steht mit dabei, damit `swift test`
-    // ohne Simulator direkt auf dem Host läuft — der schnelle Weg für
-    // Logik-Tests.
+    // Only iOS ships. macOS is listed so that `swift test` runs straight on
+    // the host without a simulator — the fast path for logic tests.
     platforms: [.iOS(.v18), .macOS(.v15)],
     products: [
         .library(name: "ZilpZalpData", targets: ["ZilpZalpData"]),

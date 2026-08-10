@@ -1,0 +1,62 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# A new push to a pull request cancels the run still in flight for that ref.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  # Pin Xcode by path rather than with setup-xcode, which only works on
+  # GitHub-hosted images. mise's `xcode-version` guard runs before every task
+  # and fails the job if this path does not provide the pinned version.
+  DEVELOPER_DIR: /Applications/Xcode.app/Contents/Developer
+
+jobs:
+  check:
+    name: Format, lint, tests, build smoke
+    runs-on: [self-hosted, macOS, ARM64]
+    timeout-minutes: 30
+    steps:
+      # The runner is persistent, so the workspace survives between runs.
+      # checkout's default `clean: true` runs `git clean -ffdx`, which removes
+      # DerivedData, the generated .xcodeproj and the SwiftPM .build caches —
+      # all three are gitignored. That is what keeps stale build output from
+      # masking a broken build; no extra cleanup step is needed.
+      - name: Check out code
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+
+      # Tooling is provisioned on the runner, never fetched per run — no
+      # `curl | bash` in CI. Everything below goes through mise, so mise is
+      # the only thing that has to be there already.
+      - name: Verify mise is installed
+        run: |
+          command -v mise || {
+            echo "::error::mise not found. Install it (https://mise.jdx.dev) or, if it is already installed, add its directory to the runner's service PATH — the Actions runner does not inherit an interactive shell's PATH."
+            exit 1
+          }
+
+      - name: Install pinned tooling
+        run: mise install
+
+      # The same definition as locally, not a parallel script: SwiftFormat,
+      # SwiftLint, the package tests and the licence gate. Format, lint and
+      # the licence gate are currently marked skips inside `mise run check`
+      # (they print `::notice::`); they arrive with #3 and #17, and from then
+      # on a missing tool is an error rather than a skip.
+      - name: Format, lint, tests, licence gate
+        run: mise run check
+
+      # Builds without codesigning against the generic iOS Simulator SDK. One
+      # build covers both device families — TARGETED_DEVICE_FAMILY is "1,2" in
+      # project.yml. A named `-destination` would instead depend on which
+      # simulators happen to be installed on the runner.
+      - name: Build smoke (iPhone and iPad, no codesign)
+        run: mise run build

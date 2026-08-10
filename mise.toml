@@ -1,87 +1,88 @@
-# ZilpZalp — zentraler Einstieg für alle Werkzeuge.
+# ZilpZalp — the single entry point for every tool.
 #
-# Alles läuft über `mise run …`. Nicht direkt xcodebuild, swift oder brew
-# aufrufen, sonst weicht die Entwicklungsmaschine vom CI-Runner ab.
+# Everything runs through `mise run …`. Do not call xcodebuild, swift or brew
+# directly, or the development machine drifts away from the CI runner.
 
 [tools]
-# Exakt gepinnt: Entwicklungsmaschine und self-hosted Runner sollen dieselben
-# Binaries benutzen. Kein Homebrew — sonst driften die Versionen auseinander.
-python      = "3.13.14" # für die Werkzeuge in tools/
+# Pinned exactly: the development machine and the self-hosted runner should use
+# the same binaries. No Homebrew — versions would drift apart.
+python      = "3.13.14" # for the tools in tools/
 swiftformat = "0.62.1"
 swiftlint   = "0.65.0"
 xcbeautify  = "3.2.1"
-xcodegen    = "2.46.0" # erzeugt apps/ZilpZalp/ZilpZalp.xcodeproj aus project.yml
+xcodegen    = "2.46.0" # generates apps/ZilpZalp/ZilpZalp.xcodeproj from project.yml
 
-# Xcode ist nicht über mise installierbar und liefert zugleich den
-# Swift-Compiler, mit dem xcodebuild übersetzt. Deshalb wird Xcode nicht
-# installiert, sondern geprüft — siehe Task `xcode-version`.
+# Xcode cannot be installed through mise and at the same time provides the
+# Swift compiler that xcodebuild builds with. So Xcode is not installed but
+# verified — see the `xcode-version` task.
 #
-# Zur Sprachversion: Der Spec nennt „Swift 6.2". Xcode 26.6 liefert
-# swiftc 6.3.3. „Swift 6.2" ist deshalb als Sprach- und Tools-Version zu
-# lesen (`// swift-tools-version: 6.2`, Sprachmodus v6) — das legt #2 in den
-# Package.swift-Dateien fest, nicht dieser Task. Ein zweiter Toolchain über
-# mise würde von xcodebuild ohnehin nicht benutzt.
+# On the language version: the spec says "Swift 6.2". Xcode 26.6 ships swiftc
+# 6.3.3. "Swift 6.2" therefore reads as the language and tools version
+# (`// swift-tools-version: 6.2`, language mode v6), which the Package.swift
+# files pin. A second toolchain through mise would not be used by xcodebuild
+# anyway.
 #
-# Welches Xcode gilt, entscheidet DEVELOPER_DIR. `xcode-version`, `test` und
-# `build` setzen es auf das Standard-Xcode, falls es nicht schon von außen
-# kommt — der CI-Runner pinnt Xcode selbst und gewinnt dann. Bewusst als eine
-# Zeile pro Task und nicht als [env]-Block: ein [env]-Block macht die Datei
-# trust-pflichtig, und ein frischer Klon soll ohne `mise trust` durchlaufen.
+# DEVELOPER_DIR decides which Xcode applies. `xcode-version`, `test` and
+# `build` point it at the default Xcode unless it already comes from the
+# outside — the CI runner pins Xcode itself and then wins. Deliberately one
+# line per task rather than an [env] block: an [env] block makes mise demand
+# `mise trust`, and a fresh clone should run without that step.
 
 [tasks.setup]
-description = "Werkzeuge und Abhängigkeiten installieren"
+description = "Install tools and dependencies"
 depends = ["xcode-version"]
 run = "mise install"
 
 [tasks.check]
-description = "Format, Lint, Tests, Lizenz-Gate — dasselbe wie in CI"
+description = "Format, lint, tests, licence gate — the same as CI"
 depends = ["xcode-version"]
 run = '''
 set -euo pipefail
 
-# --lint korrigiert nicht, sondern meldet: unformatierter Code soll den Build
-# brechen statt still umgeschrieben zu werden. Zum Korrigieren: mise run format
+# --lint does not correct, it reports: unformatted code should break the build
+# rather than be rewritten silently. To correct it, run mise run format.
 #
-# Die Pfade stehen vor --lint, weil SwiftFormat sonst den ersten Pfad als Wert
-# der Option liest und mit „--lint argument does not expect a value" abbricht.
+# The paths come before --lint because SwiftFormat otherwise reads the first
+# path as the option's value and aborts with "--lint argument does not expect
+# a value".
 swiftformat apps packages --lint
 
-# --strict, weil SwiftLint sonst nur bei Regeln mit Schweregrad „error" einen
-# Exit-Code ungleich null liefert und Warnungen durchrutschen würden.
+# --strict, because SwiftLint otherwise only returns a non-zero exit code for
+# rules with severity "error" and warnings would slip through.
 swiftlint --strict --quiet
 
 mise run test
-echo "::notice::Lizenz-Gate läuft noch nicht — das Prüfwerkzeug fehlt, kommt mit #17"
+echo "::notice::The licence gate does not run yet — the checking tool is missing, it arrives with #17"
 '''
 
 [tasks.format]
-description = "Quelltext formatieren und behebbare Lint-Funde korrigieren"
+description = "Format the sources and fix correctable lint findings"
 run = '''
 set -euo pipefail
 
-# Erst SwiftLint, dann SwiftFormat: über das Layout entscheidet am Ende
-# SwiftFormat, damit das Ergebnis dem entspricht, was `mise run check` prüft.
+# SwiftLint first, then SwiftFormat: SwiftFormat has the last word on layout so
+# that the result matches what `mise run check` verifies.
 swiftlint --fix --quiet
 swiftformat apps packages
 '''
 
 [tasks.test]
-description = "Nur die Package-Tests"
+description = "Package tests only"
 depends = ["xcode-version"]
 run = '''
 set -euo pipefail
 export DEVELOPER_DIR="${DEVELOPER_DIR:-/Applications/Xcode.app/Contents/Developer}"
 
-# `xcrun swift` statt `swift`: nur so kommt die Toolchain aus DEVELOPER_DIR
-# zum Zug und nicht irgendein anderes swift aus dem Suchpfad.
-for paket in packages/*/; do
-  echo "── $(basename "$paket")"
-  xcrun swift test --package-path "$paket"
+# `xcrun swift` rather than `swift`: only that way does the toolchain from
+# DEVELOPER_DIR get used instead of some other swift on the search path.
+for package in packages/*/; do
+  echo "── $(basename "$package")"
+  xcrun swift test --package-path "$package"
 done
 '''
 
 [tasks.build]
-description = "App bauen"
+description = "Build the app"
 depends = ["xcode-version"]
 run = '''
 set -euo pipefail
@@ -89,8 +90,8 @@ export DEVELOPER_DIR="${DEVELOPER_DIR:-/Applications/Xcode.app/Contents/Develope
 
 xcodegen generate --spec apps/ZilpZalp/project.yml --quiet
 
-# generic/platform: baut fürs Simulator-SDK ohne ein bestimmtes Gerät zu
-# verlangen — auf dem Runner ist nicht gesetzt, welche Simulatoren da sind.
+# generic/platform: builds against the simulator SDK without demanding a
+# specific device — which simulators exist on the runner is not fixed.
 xcodebuild build \
   -project apps/ZilpZalp/ZilpZalp.xcodeproj \
   -scheme ZilpZalp \
@@ -101,39 +102,39 @@ xcodebuild build \
 '''
 
 [tasks.fetch-media]
-description = "Medien kuratieren und nach S3 laden"
+description = "Curate media and upload it to S3"
 run = '''
-echo "::notice::Kein Kurationswerkzeug — tools/fetch-media kommt mit #15"
+echo "::notice::No curation tool — tools/fetch-media arrives with #15"
 '''
 
 [tasks.xcode-version]
-description = "Prüft, ob die gepinnte Xcode-Version aktiv ist"
+description = "Checks that the pinned Xcode version is active"
 hide = true
 run = '''
 export DEVELOPER_DIR="${DEVELOPER_DIR:-/Applications/Xcode.app/Contents/Developer}"
 
 expected="26.6"
-abhilfe="Abhilfe: Xcode $expected installieren und per 'sudo xcode-select -s /Pfad/zu/Xcode.app' oder DEVELOPER_DIR aktivieren."
+remedy="Remedy: install Xcode $expected and activate it with 'sudo xcode-select -s /path/to/Xcode.app' or DEVELOPER_DIR."
 
-# Fängt beides ab: xcodebuild fehlt ganz, oder das aktive Developer-Verzeichnis
-# sind nur die Command Line Tools — dort gibt es kein xcodebuild.
-if ! ausgabe="$(xcodebuild -version 2>&1)"; then
-  echo "::error::'xcodebuild -version' schlägt fehl, aktives Developer-Verzeichnis: $(xcode-select -p 2>&1)."
-  echo "$ausgabe" | sed 's/^/  /'
-  echo "$abhilfe"
+# Catches both cases: xcodebuild missing entirely, or the active developer
+# directory being the command line tools only — there is no xcodebuild there.
+if ! output="$(xcodebuild -version 2>&1)"; then
+  echo "::error::'xcodebuild -version' fails, active developer directory: $(xcode-select -p 2>&1)."
+  echo "$output" | sed 's/^/  /'
+  echo "$remedy"
   exit 1
 fi
 
-found="$(printf '%s\n' "$ausgabe" | head -1 | cut -d' ' -f2)"
-build="$(printf '%s\n' "$ausgabe" | tail -1 | cut -d' ' -f3)"
+found="$(printf '%s\n' "$output" | head -1 | cut -d' ' -f2)"
+build="$(printf '%s\n' "$output" | tail -1 | cut -d' ' -f3)"
 
 if [ "$found" != "$expected" ]; then
-  echo "::error::Xcode $expected erwartet, aktiv ist $found (aus $(xcode-select -p))."
-  echo "$abhilfe"
+  echo "::error::Xcode $expected expected, active is $found (from $(xcode-select -p))."
+  echo "$remedy"
   exit 1
 fi
 
-echo "Xcode $found (Build $build) — passt"
-echo "  swiftc laut Xcode:     $(xcrun swift --version 2>&1 | head -1)"
-echo "  swift im Suchpfad:     $(command -v swift) — $(swift --version 2>&1 | head -1)"
+echo "Xcode $found (build $build) — matches"
+echo "  swiftc per Xcode:      $(xcrun swift --version 2>&1 | head -1)"
+echo "  swift on the path:     $(command -v swift) — $(swift --version 2>&1 | head -1)"
 '''

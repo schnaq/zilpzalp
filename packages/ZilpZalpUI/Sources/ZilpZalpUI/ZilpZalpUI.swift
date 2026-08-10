@@ -1,9 +1,8 @@
-/// Namensraum des Design-Systems.
+/// Namespace of the design system.
 ///
-/// Tokens und SwiftUI-Komponenten kommen ab M1 hierher. Das Modul kennt keine
-/// Spiellogik: Komponenten bekommen fertige Werte übergeben und melden
-/// Ereignisse nach oben.
+/// Tokens and SwiftUI components move in here from M1 on. The module knows no
+/// game logic: components take finished values and report events upwards.
 public enum ZilpZalpUI {
-    /// Version des Moduls nach Semantic Versioning.
+    /// Version of this module, semantically versioned.
     public static let version = "0.1.0"
 }

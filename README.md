@@ -2,105 +2,108 @@
 
 # ZilpZalp
 
-Eine quelloffene Lern-App, mit der Kinder heimische Vögel kennenlernen. Kein
-Account, keine Werbung, keine Käufe, keine Datenerhebung. Alles bleibt auf dem
-Gerät.
+An open-source learning app that teaches children the birds around them. No
+account, no ads, no purchases, no data collection. Everything stays on the
+device.
 
-iPhone und iPad nativ, auf Apple-Silicon-Macs über „Designed for iPad"
-lauffähig — dort ohne eigene Optimierung.
+Native on iPhone and iPad, and runnable on Apple Silicon Macs through "Designed
+for iPad" — without a dedicated Mac layout.
 
-**Status:** in Entwicklung, noch kein Release. Es gibt die Spezifikation, den
-Design-Export und den Klickprototyp; die Swift-Umsetzung entsteht gerade.
+ZilpZalp is by **Johanna Hillebrand**, in collaboration with
+[schnaq GmbH](https://schnaq.com). The idea and the implementation are hers;
+schnaq provides the home for the project — repository, build and release
+infrastructure, and the media bucket.
 
-## Was drin ist
+**Status:** in development, no release yet. The specification, the design export
+and the clickable prototype exist; the Swift implementation is being built.
 
-In Version 1:
+## What's in it
 
-- **Spiel 1** — der Vogelname wird vorgelesen, aus vier Fotos das richtige antippen
-- **Spiel 2** — ein Vogelruf wird abgespielt, aus vier Fotos das richtige antippen
-- **Profile** — mehrere lokale Profile mit Namen und Avatar, ohne Account
-- **Fortschritt** — Sterne, acht Ränge von Kohlmeise bis Wiedehopf, Sammlung, lokales Leaderboard
-- **Artenpakete** — 10 Arten fest gebundelt, „Vögel Deutschlands" (~60 Arten) als Download
-- **Elternbereich** — per FaceID oder Gerätecode geschützt: Zeitbudget, Pakete, Credits
+In version 1:
 
-Spiel 3 (Federn zuordnen) und Spiel 4 (Lebensraum antippen) sind zurückgestellt.
-Sie sind nicht am Code gescheitert, sondern am Material — siehe
+- **Game 1** — the bird's name is read aloud, tap the right one of four photos
+- **Game 2** — a bird call is played, tap the right one of four photos
+- **Profiles** — several local profiles with a name and an avatar, no account
+- **Progress** — stars, eight ranks from great tit to hoopoe, a collection, a local leaderboard
+- **Species packs** — 10 species bundled with the app, "Birds of Germany" (~60 species) as a download
+- **Parent area** — behind Face ID or the device passcode: time budget, packs, credits
+
+Game 3 (match the feather) and game 4 (tap the habitat) are deferred. They did
+not fail on the code but on the material — see
 [docs/medien-und-lizenzen.md](docs/medien-und-lizenzen.md).
 
-## Bauen
+## Building
 
-Voraussetzungen: macOS auf Apple Silicon, Xcode 26.6 und
-[mise](https://mise.jdx.dev). Alles Weitere installiert mise.
+Requirements: macOS on Apple Silicon, Xcode 26.6 and
+[mise](https://mise.jdx.dev). mise installs everything else.
 
 ```
-mise run setup        Abhängigkeiten und Werkzeuge installieren
-mise run check        Format, Lint, Tests, Lizenz-Gate — das gleiche wie in CI
-mise run format       Formatieren und behebbare Lint-Funde korrigieren
-mise run test         Nur die Package-Tests
-mise run build        App bauen
-mise run fetch-media  Medien kuratieren und nach S3 laden
+mise run setup        install dependencies and tools
+mise run check        format, lint, tests, licence gate — the same as CI
+mise run format       format the sources and fix correctable lint findings
+mise run test         package tests only
+mise run build        build the app
+mise run fetch-media  curate media and upload it to S3
 ```
 
-`xcodebuild` und `swift` nicht direkt aufrufen — die Werkzeugversionen sind in
-`mise.toml` gepinnt, und Abweichungen davon sind die häufigste Ursache für
-„geht lokal, geht in CI nicht".
+Do not call `xcodebuild` or `swift` directly — the tool versions are pinned in
+`mise.toml`, and drifting away from them is the most common cause of "works
+locally, fails in CI".
 
-Die Spiellogik liegt in SwiftPM-Paketen ohne UI-Abhängigkeit. `mise run test`
-braucht deshalb keinen Simulator und ist in Sekunden durch.
+The game logic lives in SwiftPM packages with no UI dependency, so
+`mise run test` needs no simulator and finishes in seconds.
 
-`mise run fetch-media` braucht Zugangsdaten aus Infisical, siehe
-[docs/secrets.md](docs/secrets.md). Für alles andere reicht ein Klon.
+`mise run fetch-media` needs credentials from Infisical, see
+[docs/secrets.md](docs/secrets.md). A plain clone is enough for everything else.
 
-## Aufbau
+## Layout
 
-| Pfad | Inhalt |
+| Path | Contents |
 |---|---|
-| `apps/ZilpZalp/` | Xcode-Projekt: App-Target, Assets, Info.plist, Entitlements |
-| `packages/ZilpZalpCore/` | Spiellogik: Runden, Scoring, Ränge, Zeitbudget — UI-frei |
-| `packages/ZilpZalpData/` | Modelle, Paket-Manifeste, Persistenz, Downloader |
-| `packages/ZilpZalpUI/` | Design-System: Tokens und SwiftUI-Komponenten |
-| `tools/` | Medien-Kuration und Credits-Erzeugung — Python |
-| `data/packs/` | Artenpakete mit Lizenz-Metadaten |
-| `docs/` | Spezifikation, Medienentscheidung, Secrets |
-| `design/`, `screens/` | Design-Export und Klickprototyp, unverändert als Referenz |
+| `apps/ZilpZalp/` | Xcode project: app target, assets, Info.plist, entitlements |
+| `packages/ZilpZalpCore/` | Game logic: rounds, scoring, ranks, time budget — UI-free |
+| `packages/ZilpZalpData/` | Models, pack manifests, persistence, downloader |
+| `packages/ZilpZalpUI/` | Design system: tokens and SwiftUI components |
+| `tools/` | Media curation and credits generation — Python |
+| `data/packs/` | Species packs with licence metadata |
+| `docs/` | Specification, media decision, secrets |
+| `design/`, `screens/` | Design export and clickable prototype, kept unchanged as reference |
 
-Verbindlich ist die Spezifikation:
+The specification is binding:
 [docs/superpowers/specs/2026-08-01-zilpzalp-v1-design.md](docs/superpowers/specs/2026-08-01-zilpzalp-v1-design.md).
 
-## Mitmachen
+## Contributing
 
-Issues und Pull Requests sind willkommen. Vor größeren Änderungen bitte erst
-ein Issue aufmachen — es lohnt sich nicht, an einer Idee zu bauen, die nicht
-zur Spezifikation passt.
+Issues and pull requests are welcome. For anything larger, please open an issue
+first — it is no fun to build out an idea that turns out not to fit the
+specification.
 
-- Branch von `main`, Merge per Pull Request. Kein direkter Push auf `main`
-- Branch-Namen: `feat/…`, `fix/…`, `docs/…`, `chore/…`
-- [Conventional Commits](https://www.conventionalcommits.org/de/v1.0.0/);
-  Betreff imperativ, höchstens 50 Zeichen, kein Punkt am Ende
-- `mise run check` muss durchlaufen, bevor ein PR aufgemacht wird
+- Branch off `main`, merge through a pull request. No direct pushes to `main`
+- Branch names: `feat/…`, `fix/…`, `docs/…`, `chore/…`
+- [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/);
+  imperative subject, 50 characters at most, no trailing period
+- `mise run check` has to pass before a PR goes up
 
-Die vollständigen Arbeitsregeln — Architekturgrenzen, Testkonzept, Fallstricke —
-stehen in [AGENTS.md](AGENTS.md). Die Datei richtet sich an KI-Coding-Agenten,
-gilt aber genauso für Menschen.
+The full working rules — architecture boundaries, testing approach, pitfalls —
+are in [AGENTS.md](AGENTS.md). That file addresses AI coding agents, but it
+applies to humans just as much.
 
-Die App ist für Kinder gedacht, die noch nicht lesen können, und erscheint in
-der Kids Category des App Store. Daraus folgt: kein Third-Party-Analytics, kein
-Crash-Reporting, keine Werbung, kein Tracking. Wer eine Abhängigkeit vorschlägt,
-prüft das vorher.
+The app is meant for children who cannot read yet and will ship in the App
+Store's Kids Category. That rules out third-party analytics, crash reporting,
+ads and tracking. Check for those before proposing a dependency.
 
-## Lizenzen
+## Licences
 
-Der Code steht unter der [MIT-Lizenz](LICENSE).
+The code is under the [MIT licence](LICENSE).
 
-**Für Medien gilt eine eigene, härtere Regel: nur CC0, CC BY und CC BY-SA.**
-Kein NonCommercial, kein NoDerivatives — beides ließe sich nicht an Leute
-weitergeben, die dieses Repository forken. Jedes Foto und jede Tonaufnahme wird
-in `data/packs/*.json` mit Quelle, Urheber, Lizenz und SHA-256 deklariert; ein
-Gate in der CI bricht den Build ab, wenn etwas davon fehlt. Der Credits-Screen
-wird aus denselben Manifesten erzeugt und kann deshalb nicht von den Assets
-abdriften.
+**Media follow a separate, stricter rule: CC0, CC BY and CC BY-SA only.** No
+NonCommercial, no NoDerivatives — neither could be passed on to people who fork
+this repository. Every photo and every recording is declared in
+`data/packs/*.json` with source, creator, licence and SHA-256; a gate in CI
+fails the build if any of that is missing. The credits screen is generated from
+the same manifests and therefore cannot drift away from the assets.
 
-Begründung und Quellenlage: [docs/medien-und-lizenzen.md](docs/medien-und-lizenzen.md).
+Reasoning and sources: [docs/medien-und-lizenzen.md](docs/medien-und-lizenzen.md).
 
-Fotos stammen aus iNaturalist, Rufe aus xeno-canto — beide werden ausschließlich
-zur Kurationszeit angefragt. Die App spricht zur Laufzeit nie mit ihnen.
+Photos come from iNaturalist, calls from xeno-canto — both are queried at
+curation time only. The app never talks to them at runtime.
