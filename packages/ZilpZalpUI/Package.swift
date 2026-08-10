@@ -11,7 +11,7 @@ let package = Package(
         .library(name: "ZilpZalpUI", targets: ["ZilpZalpUI"]),
     ],
     targets: [
-        .target(name: "ZilpZalpUI"),
+        .target(name: "ZilpZalpUI", resources: [.process("Resources")]),
         .testTarget(name: "ZilpZalpUITests", dependencies: ["ZilpZalpUI"]),
     ],
     swiftLanguageModes: [.v6],
