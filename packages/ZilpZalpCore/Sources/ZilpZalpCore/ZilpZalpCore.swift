@@ -1,9 +1,9 @@
-/// Namensraum der Spiellogik.
+/// Namespace of the game logic.
 ///
-/// Das Modul enthält ausschließlich reine Wertetypen und Funktionen — kein
-/// SwiftUI, kein UIKit, keine Netzwerk-APIs. Runden, Scoring, Ränge und
-/// Zeitbudget kommen mit M3.
+/// This module holds pure value types and functions only — no SwiftUI, no
+/// UIKit, no networking. Rounds, scoring, ranks and the time budget arrive
+/// with M3.
 public enum ZilpZalpCore {
-    /// Version des Moduls nach Semantic Versioning.
+    /// Version of this module, semantically versioned.
     public static let version = "0.1.0"
 }

@@ -1,8 +1,8 @@
-/// Namensraum der Datenschicht.
+/// Namespace of the data layer.
 ///
-/// Modelle, Paket-Manifeste, Persistenz und der Downloader für die Artenpakete
-/// kommen ab M2 hierher.
+/// Models, pack manifests, persistence and the downloader for the species
+/// packs move in here from M2 on.
 public enum ZilpZalpData {
-    /// Version des Moduls nach Semantic Versioning.
+    /// Version of this module, semantically versioned.
     public static let version = "0.1.0"
 }
