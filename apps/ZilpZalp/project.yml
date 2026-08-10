@@ -29,6 +29,12 @@ targets:
       - path: Sources
       - path: Resources
         buildPhase: resources
+        # OFL.txt/NOTICE.md travel with the fonts in the source tree (font
+        # licensing requirement + provenance for the future Credits screen,
+        # #18) but are not app resources, so they stay out of the bundle.
+        excludes:
+          - "Fonts/**/OFL.txt"
+          - "Fonts/**/NOTICE.md"
     # All three packages hang off the app target so they are built and linked
     # for iOS. The placeholder screen does not need them yet.
     dependencies:
@@ -64,6 +70,21 @@ targets:
           UIInterfaceOrientationPortraitUpsideDown
           UIInterfaceOrientationLandscapeLeft
           UIInterfaceOrientationLandscapeRight
+    # UIAppFonts is an array, and GENERATE_INFOPLIST_FILE only ever merges in
+    # the curated set of INFOPLIST_KEY_* keys Xcode knows about — confirmed by
+    # building with INFOPLIST_KEY_UIAppFonts set: it is silently dropped from
+    # the compiled Info.plist. `info.path` below is the documented XcodeGen
+    # escape hatch: it writes a small companion plist on every `generate`,
+    # merged with the INFOPLIST_KEY_* values above at build time. Generated
+    # like the .xcodeproj itself, so it is git-ignored, not the source of
+    # truth. Resource copy flattens Resources/ subfolders, so these are bare
+    # filenames, not the Fonts/<Family>/... path they live at in the tree.
+    info:
+      path: Generated/Info.plist
+      properties:
+        UIAppFonts:
+          - Baloo2-VariableFont_wght.ttf
+          - Nunito-VariableFont_wght.ttf
 
 schemes:
   ZilpZalp:
