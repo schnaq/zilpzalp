@@ -31,7 +31,7 @@ jobs:
       # all three are gitignored. That is what keeps stale build output from
       # masking a broken build; no extra cleanup step is needed.
       - name: Check out code
-        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       # Tooling is provisioned on the runner, never fetched per run — no
       # `curl | bash` in CI. Everything below goes through mise, so mise is
