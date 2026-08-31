@@ -12,16 +12,16 @@ instance — are hashed by tools/fetch-media at upload time; CI does not
 download media on every run. Licence, attribution and source URL are checked
 for those assets all the same.
 
-Manifest shape: a pack object whose species live under "species" (or "birds",
-as the Pack model in the spec names them); a bare array of species is
-accepted too. Each species carries a mandatory "photo" and an optional
-"call", both of the same shape:
+Manifest shape: the one the Pack model in the spec defines — a JSON object
+whose "birds" key holds the list of birds. Each bird carries a mandatory
+"photo" and an optional "call", both of the same shape:
 
     {"file": "photos/amsel.jpg", "sha256": "…", "license": "CC-BY-4.0",
      "attribution": "…", "sourceURL": "https://…"}
 
 Usage: python3 tools/license_gate.py [packs_dir]  (default: data/packs)
-Exit code 0 if every asset passes, 1 on the first violation found.
+Exit code 0 if every asset passes, 1 if any violation is found — the gate
+reports all problems before it exits.
 """
 
 from __future__ import annotations
@@ -34,23 +34,16 @@ from pathlib import Path
 
 ALLOWED_LICENCES = ("CC0-1.0", "CC-BY-4.0", "CC-BY-SA-4.0")
 
-# Keys under which a pack object may carry its species. "birds" is what the
-# Pack model in the spec uses, "species" what the manifests are written with.
-SPECIES_KEYS = ("species", "birds")
-
-DEFAULT_PACKS_DIR = "data/packs"
-
-# Read large audio files in pieces rather than into one buffer.
-CHUNK_SIZE = 1 << 20
+# Anchored on the repository, not on the working directory, so the gate finds
+# the manifests no matter where it is called from.
+REPO_ROOT = Path(__file__).resolve().parent.parent
+DEFAULT_PACKS_DIR = REPO_ROOT / "data" / "packs"
 
 
 def file_sha256(path: Path) -> str:
     """Return the lowercase hex SHA-256 of the file at `path`."""
-    digest = hashlib.sha256()
     with path.open("rb") as stream:
-        for chunk in iter(lambda: stream.read(CHUNK_SIZE), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
+        return hashlib.file_digest(stream, "sha256").hexdigest()
 
 
 def text_field(media: dict, name: str) -> str:
@@ -59,14 +52,10 @@ def text_field(media: dict, name: str) -> str:
     return value.strip() if isinstance(value, str) else ""
 
 
-def check_media(media: object, label: str, base_dir: Path) -> tuple[list[str], bool]:
-    """Check one media object.
-
-    Returns the problems found and whether its hash was verified — an asset
-    that is not present locally is not a problem, it is simply not hashed.
-    """
+def check_media(media: object, label: str, base_dir: Path) -> list[str]:
+    """Return the problems found in one media object."""
     if not isinstance(media, dict):
-        return ([f"{label}: is not an object"], False)
+        return [f"{label}: is not an object"]
 
     problems = []
 
@@ -86,77 +75,59 @@ def check_media(media: object, label: str, base_dir: Path) -> tuple[list[str], b
     relative = text_field(media, "file")
     if not relative:
         problems.append(f"{label}: field 'file' is missing or empty")
-        return problems, False
+        return problems
 
     asset = base_dir / relative
     if not asset.is_file():
         # Only in S3 — fetch-media verified the hash when it uploaded the file.
-        return problems, False
+        return problems
 
     expected = text_field(media, "sha256").lower()
     if not expected:
         problems.append(f"{label}: field 'sha256' is missing or empty, but {relative} is present locally")
-        return problems, False
+        return problems
 
     actual = file_sha256(asset)
     if actual != expected:
         problems.append(f"{label}: sha256 does not match {relative} (manifest {expected}, file {actual})")
 
-    return problems, True
+    return problems
 
 
-def species_list(document: object) -> list | None:
-    """Return the species of a manifest, or None if the shape is unrecognised."""
-    if isinstance(document, list):
-        return document
-    if isinstance(document, dict):
-        for key in SPECIES_KEYS:
-            value = document.get(key)
-            if isinstance(value, list):
-                return value
-    return None
-
-
-def check_manifest(path: Path) -> tuple[list[str], int, int]:
-    """Check one manifest. Returns its problems, media asset count and hashed count."""
+def check_manifest(path: Path) -> tuple[list[str], int]:
+    """Check one manifest. Returns its problems and its media asset count."""
     try:
         document = json.loads(path.read_text(encoding="utf-8"))
-    except OSError as error:
-        return ([f"cannot be read: {error.strerror or error}"], 0, 0)
-    except (UnicodeDecodeError, json.JSONDecodeError) as error:
-        return ([f"is not valid JSON: {error}"], 0, 0)
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError) as error:
+        return ([f"cannot be read: {error}"], 0)
 
-    species = species_list(document)
-    if species is None:
-        keys = " or ".join(f"'{key}'" for key in SPECIES_KEYS)
-        return ([f"no species found (expected an object with {keys}, or a bare array)"], 0, 0)
+    birds = document.get("birds") if isinstance(document, dict) else None
+    if not isinstance(birds, list):
+        return (["no birds found (expected an object whose 'birds' key holds a list)"], 0)
 
     problems = []
     media_count = 0
-    hashed_count = 0
 
-    for index, entry in enumerate(species, start=1):
+    for index, entry in enumerate(birds, start=1):
         if not isinstance(entry, dict):
-            problems.append(f"species #{index}: is not an object")
+            problems.append(f"bird #{index}: is not an object")
             continue
 
         identifier = entry.get("id")
-        label = identifier if isinstance(identifier, str) and identifier else f"species #{index}"
+        label = identifier if isinstance(identifier, str) and identifier else f"bird #{index}"
 
         if "photo" not in entry:
             problems.append(f"{label}: field 'photo' is missing")
 
         # The call is optional — it is absent as long as no freely licensed
-        # recording exists for the species.
+        # recording exists for the bird.
         for field in ("photo", "call"):
             if field not in entry:
                 continue
             media_count += 1
-            found, hashed = check_media(entry[field], f"{label} / {field}", path.parent)
-            problems.extend(found)
-            hashed_count += int(hashed)
+            problems.extend(check_media(entry[field], f"{label} / {field}", path.parent))
 
-    return problems, media_count, hashed_count
+    return problems, media_count
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -174,7 +145,9 @@ def main(argv: list[str] | None = None) -> int:
         print(f"::error::Pack directory not found: {args.packs_dir}")
         return 1
 
-    manifests = sorted(args.packs_dir.glob("*.json"))
+    # rglob, not glob: a pack may grow its own directory
+    # (data/packs/deutschland/birds.json) and must not escape the gate by it.
+    manifests = sorted(args.packs_dir.rglob("*.json"))
     if not manifests:
         print(f"::notice::No pack manifests in {args.packs_dir} — the licence gate has nothing to check")
         return 0
@@ -183,23 +156,18 @@ def main(argv: list[str] | None = None) -> int:
     total_media = 0
 
     for manifest in manifests:
-        problems, media_count, hashed_count = check_manifest(manifest)
+        problems, media_count = check_manifest(manifest)
         for problem in problems:
             print(f"::error file={manifest}::{problem}")
         total_problems += len(problems)
         total_media += media_count
-        skipped = media_count - hashed_count
-        print(
-            f"{manifest}: media assets: {media_count}"
-            f" (hashes verified: {hashed_count}, not present locally: {skipped})"
-        )
+        print(f"{manifest}: media assets checked: {media_count}")
 
-    manifest_count = f"{len(manifests)} manifest" + ("" if len(manifests) == 1 else "s")
     if total_problems:
-        print(f"Licence gate failed: {total_problems} problems in {manifest_count}")
+        print(f"Licence gate failed: {total_problems} problem(s) in {len(manifests)} manifest(s)")
         return 1
 
-    print(f"Licence gate passed: {total_media} media assets in {manifest_count}")
+    print(f"Licence gate passed: {total_media} media asset(s) in {len(manifests)} manifest(s)")
     return 0
 
 

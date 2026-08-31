@@ -39,6 +39,10 @@ depends = ["xcode-version"]
 run = '''
 set -euo pipefail
 
+# The cheapest and most deterministic check runs first: a licensing mistake
+# then fails in milliseconds instead of after a cold Swift build.
+mise run license-gate
+
 # --lint does not correct, it reports: unformatted code should break the build
 # rather than be rewritten silently. To correct it, run mise run format.
 #
@@ -52,7 +56,6 @@ swiftformat apps packages --lint
 swiftlint --strict --quiet
 
 mise run test
-mise run license-gate
 '''
 
 [tasks.format]
@@ -72,6 +75,11 @@ depends = ["xcode-version"]
 run = '''
 set -euo pipefail
 export DEVELOPER_DIR="${DEVELOPER_DIR:-/Applications/Xcode.app/Contents/Developer}"
+
+# The Python tools first: seconds rather than minutes, so a broken helper
+# reports before the Swift packages are built. `-t tools` makes tools/ the
+# top-level directory, which is how the tests import license_gate.
+python -m unittest discover -s tools/tests -t tools
 
 # `xcrun swift` rather than `swift`: only that way does the toolchain from
 # DEVELOPER_DIR get used instead of some other swift on the search path.
@@ -107,9 +115,8 @@ run = '''
 set -euo pipefail
 
 # `python` is the interpreter pinned above, not whatever python3 the machine
-# happens to carry. The gate and its tests use the standard library only, so
-# there is nothing else to install.
-python -m unittest discover -s tools/tests
+# happens to carry. The gate uses the standard library only, so there is
+# nothing else to install. Its tests run in `mise run test`.
 python tools/license_gate.py
 '''
 

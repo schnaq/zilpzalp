@@ -1,6 +1,7 @@
 """Tests for the licence gate.
 
-Run from the repository root: python3 -m unittest discover -s tools/tests
+Run from the repository root:
+python3 -m unittest discover -s tools/tests -t tools
 """
 
 from __future__ import annotations
@@ -9,16 +10,11 @@ import contextlib
 import hashlib
 import io
 import json
-import sys
 import tempfile
 import unittest
 from pathlib import Path
 
-# `unittest discover -s tools/tests` puts this directory on the path, not
-# tools/ — so the module under test has to be found explicitly.
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-
-import license_gate  # noqa: E402
+import license_gate
 
 PHOTO_BYTES = b"not really a photo, but it hashes just the same"
 PHOTO_SHA256 = hashlib.sha256(PHOTO_BYTES).hexdigest()
@@ -40,9 +36,9 @@ def media(**overrides) -> dict:
     return {key: value for key, value in asset.items() if value is not None}
 
 
-def species(**overrides) -> dict:
-    """A valid species entry, with the given fields replaced or removed."""
-    bird = {
+def bird(**overrides) -> dict:
+    """A valid bird entry, with the given fields replaced or removed."""
+    entry = {
         "id": "amsel",
         "name": "Amsel",
         "scientificName": "Turdus merula",
@@ -50,8 +46,8 @@ def species(**overrides) -> dict:
         "article": "die",
         "photo": media(),
     }
-    bird.update(overrides)
-    return {key: value for key, value in bird.items() if value is not None}
+    entry.update(overrides)
+    return {key: value for key, value in entry.items() if value is not None}
 
 
 class LicenseGateTestCase(unittest.TestCase):
@@ -73,10 +69,15 @@ class LicenseGateTestCase(unittest.TestCase):
         path.write_bytes(content)
         return path
 
-    def run_gate(self) -> tuple[int, str]:
+    def write_pack(self, **photo_fields) -> Path:
+        """Write the local photo plus a one-bird manifest whose photo carries `photo_fields`."""
+        self.write_photo()
+        return self.write_manifest({"id": "basis", "birds": [bird(photo=media(**photo_fields))]})
+
+    def run_gate(self, packs_dir: Path | None = None) -> tuple[int, str]:
         output = io.StringIO()
         with contextlib.redirect_stdout(output):
-            code = license_gate.main([str(self.packs_dir)])
+            code = license_gate.main([str(packs_dir or self.packs_dir)])
         return code, output.getvalue()
 
     def assertPasses(self) -> str:
@@ -96,45 +97,40 @@ class LicenseGateTestCase(unittest.TestCase):
 
 class ValidManifestTests(LicenseGateTestCase):
     def test_valid_manifest_with_local_file_passes(self):
-        self.write_photo()
-        self.write_manifest({"id": "basis", "species": [species()]})
+        self.write_pack()
 
         output = self.assertPasses()
-        self.assertIn("hashes verified: 1", output)
-
-    def test_bare_array_of_species_is_accepted(self):
-        self.write_photo()
-        self.write_manifest([species()])
-
-        self.assertPasses()
-
-    def test_birds_key_is_accepted(self):
-        self.write_photo()
-        self.write_manifest({"id": "basis", "birds": [species()]})
-
-        self.assertPasses()
+        self.assertIn("Licence gate passed", output)
 
     def test_every_allowed_licence_passes(self):
-        self.write_photo()
         for licence in license_gate.ALLOWED_LICENCES:
             with self.subTest(licence=licence):
-                self.write_manifest({"species": [species(photo=media(license=licence))]})
+                self.write_pack(license=licence)
                 self.assertPasses()
 
     def test_absent_call_is_fine(self):
-        self.write_photo()
-        self.write_manifest({"species": [species()]})
+        self.write_pack()
 
         output = self.assertPasses()
-        self.assertIn("media assets: 1", output)
+        self.assertIn("media assets checked: 1", output)
 
     def test_present_call_is_checked_too(self):
         self.write_photo()
         self.write_manifest(
-            {"species": [species(call=media(file="calls/amsel.mp3", license="CC-BY-NC-SA-4.0"))]}
+            {"birds": [bird(call=media(file="calls/amsel.mp3", license="CC-BY-NC-SA-4.0"))]}
         )
 
         self.assertFails("amsel / call", "CC-BY-NC-SA-4.0")
+
+    def test_manifest_in_a_pack_subdirectory_is_checked(self):
+        # rglob: a pack with its own directory must not escape the gate.
+        nested = self.packs_dir / "deutschland"
+        nested.mkdir()
+        (nested / "birds.json").write_text(
+            json.dumps({"birds": [bird(photo=media(license="CC-BY-NC-4.0"))]}), encoding="utf-8"
+        )
+
+        self.assertFails("deutschland", "CC-BY-NC-4.0")
 
     def test_empty_packs_directory_passes_with_a_notice(self):
         code, output = self.run_gate()
@@ -144,56 +140,41 @@ class ValidManifestTests(LicenseGateTestCase):
 
 
 class LicenceRuleTests(LicenseGateTestCase):
-    def test_noncommercial_licence_fails(self):
-        self.write_photo()
-        self.write_manifest({"species": [species(photo=media(license="CC-BY-NC-4.0"))]})
+    def test_disallowed_licences_fail(self):
+        for licence in ("CC-BY-NC-4.0", "CC-BY-ND-4.0", "CC-BY-NC-SA-4.0", "CC-BY"):
+            with self.subTest(licence=licence):
+                self.write_pack(license=licence)
 
-        output = self.assertFails("basis.json", "amsel / photo", "CC-BY-NC-4.0")
-        self.assertIn("is not permitted", output)
-
-    def test_noderivatives_licence_fails(self):
-        self.write_photo()
-        self.write_manifest({"species": [species(photo=media(license="CC-BY-ND-4.0"))]})
-
-        self.assertFails("amsel / photo", "CC-BY-ND-4.0")
-
-    def test_unversioned_licence_fails(self):
-        self.write_photo()
-        self.write_manifest({"species": [species(photo=media(license="CC-BY"))]})
-
-        self.assertFails("amsel / photo", "CC-BY")
+                output = self.assertFails("basis.json", "amsel / photo", licence)
+                self.assertIn("is not permitted", output)
 
     def test_missing_licence_fails(self):
-        self.write_photo()
-        self.write_manifest({"species": [species(photo=media(license=None))]})
+        self.write_pack(license=None)
 
         self.assertFails("'license' is missing or empty")
 
     def test_empty_attribution_fails(self):
-        self.write_photo()
-        self.write_manifest({"species": [species(photo=media(attribution="   "))]})
+        self.write_pack(attribution="   ")
 
         self.assertFails("'attribution' is missing or empty")
 
     def test_missing_attribution_fails(self):
-        self.write_photo()
-        self.write_manifest({"species": [species(photo=media(attribution=None))]})
+        self.write_pack(attribution=None)
 
         self.assertFails("'attribution' is missing or empty")
 
     def test_missing_source_url_fails(self):
-        self.write_photo()
-        self.write_manifest({"species": [species(photo=media(sourceURL=None))]})
+        self.write_pack(sourceURL=None)
 
         self.assertFails("'sourceURL' is missing or empty")
 
     def test_missing_file_field_fails(self):
-        self.write_manifest({"species": [species(photo=media(file=None))]})
+        self.write_pack(file=None)
 
         self.assertFails("'file' is missing or empty")
 
     def test_missing_photo_fails(self):
-        self.write_manifest({"species": [species(photo=None)]})
+        self.write_manifest({"birds": [bird(photo=None)]})
 
         self.assertFails("'photo' is missing")
 
@@ -201,24 +182,25 @@ class LicenceRuleTests(LicenseGateTestCase):
 class HashTests(LicenseGateTestCase):
     def test_sha256_mismatch_fails(self):
         self.write_photo(content=b"a different photo entirely")
-        self.write_manifest({"species": [species()]})
+        self.write_manifest({"birds": [bird()]})
 
         self.assertFails("sha256 does not match")
 
     def test_missing_sha256_fails_when_the_file_is_present(self):
-        self.write_photo()
-        self.write_manifest({"species": [species(photo=media(sha256=None))]})
+        self.write_pack(sha256=None)
 
         self.assertFails("'sha256' is missing or empty")
 
     def test_absent_file_skips_the_hash_check(self):
-        self.write_manifest({"species": [species(photo=media(sha256="deadbeef"))]})
+        # No write_pack here on purpose: the asset lives in S3 only, so there is
+        # nothing to hash — a wrong sha256 cannot be caught and must not fail.
+        self.write_manifest({"birds": [bird(photo=media(sha256="deadbeef"))]})
 
-        output = self.assertPasses()
-        self.assertIn("not present locally: 1", output)
+        self.assertPasses()
 
     def test_absent_file_still_has_its_metadata_checked(self):
-        self.write_manifest({"species": [species(photo=media(license="CC-BY-NC-4.0"))]})
+        # S3-only again: the hash is skipped, the licence is not.
+        self.write_manifest({"birds": [bird(photo=media(license="CC-BY-NC-4.0"))]})
 
         self.assertFails("amsel / photo", "CC-BY-NC-4.0")
 
@@ -227,30 +209,33 @@ class ManifestShapeTests(LicenseGateTestCase):
     def test_malformed_json_fails(self):
         (self.packs_dir / "basis.json").write_text("{ this is not json", encoding="utf-8")
 
-        self.assertFails("is not valid JSON")
+        self.assertFails("cannot be read")
 
-    def test_unknown_shape_fails(self):
+    def test_manifest_without_a_birds_list_fails(self):
         self.write_manifest({"id": "basis", "title": "Basis"})
 
-        self.assertFails("no species found")
+        self.assertFails("no birds found")
 
-    def test_species_that_is_not_an_object_fails(self):
-        self.write_manifest({"species": ["amsel"]})
+    def test_bare_array_manifest_fails(self):
+        self.write_manifest([bird()])
 
-        self.assertFails("species #1: is not an object")
+        self.assertFails("no birds found")
 
-    def test_species_without_id_is_named_by_position(self):
-        self.write_manifest({"species": [species(id=None, photo=media(license="CC-BY-NC-4.0"))]})
+    def test_bird_that_is_not_an_object_fails(self):
+        self.write_manifest({"birds": ["amsel"]})
 
-        self.assertFails("species #1 / photo")
+        self.assertFails("bird #1: is not an object")
+
+    def test_bird_without_id_is_named_by_position(self):
+        self.write_manifest({"birds": [bird(id=None, photo=media(license="CC-BY-NC-4.0"))]})
+
+        self.assertFails("bird #1 / photo")
 
     def test_missing_packs_directory_fails(self):
-        output = io.StringIO()
-        with contextlib.redirect_stdout(output):
-            code = license_gate.main([str(self.packs_dir / "nowhere")])
+        code, output = self.run_gate(self.packs_dir / "nowhere")
 
-        self.assertEqual(code, 1, output.getvalue())
-        self.assertIn("::error::Pack directory not found", output.getvalue())
+        self.assertEqual(code, 1, output)
+        self.assertIn("::error::Pack directory not found", output)
 
 
 if __name__ == "__main__":
