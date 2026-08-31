@@ -191,6 +191,13 @@ class HashTests(LicenseGateTestCase):
 
         self.assertFails("'sha256' is missing or empty")
 
+    def test_missing_sha256_fails_for_s3_only_assets_too(self):
+        # The Pack model declares sha256 non-optional and the downloader
+        # verifies it — an asset without a declared hash must not pass.
+        self.write_manifest({"birds": [bird(photo=media(sha256=None))]})
+
+        self.assertFails("'sha256' is missing or empty")
+
     def test_absent_file_skips_the_hash_check(self):
         # No write_pack here on purpose: the asset lives in S3 only, so there is
         # nothing to hash — a wrong sha256 cannot be caught and must not fail.
@@ -225,6 +232,21 @@ class ManifestShapeTests(LicenseGateTestCase):
         self.write_manifest({"birds": ["amsel"]})
 
         self.assertFails("bird #1: is not an object")
+
+    def test_non_object_photo_fails_and_is_not_counted(self):
+        self.write_manifest({"birds": [bird(photo="photos/amsel.jpg")]})
+
+        output = self.assertFails("photo: is not an object")
+        self.assertIn("media assets checked: 0", output)
+
+    def test_annotation_data_is_escaped(self):
+        # A newline in manifest data must not split the ::error annotation.
+        self.write_pack(license="CC-BY-NC\n4.0")
+
+        output = self.assertFails("CC-BY-NC%0A4.0")
+        for line in output.splitlines():
+            if line.startswith("::error"):
+                self.assertIn("%0A", line)
 
     def test_bird_without_id_is_named_by_position(self):
         self.write_manifest({"birds": [bird(id=None, photo=media(license="CC-BY-NC-4.0"))]})

@@ -6,11 +6,11 @@ Every NonCommercial and NoDerivatives variant fails the gate, as does a
 missing attribution or a missing source URL. Licence compliance is thereby a
 property of the build rather than a matter of care.
 
-The SHA-256 of an asset is verified only where the file is present next to
-the manifest. Assets that only live in the S3 bucket — the Germany pack, for
-instance — are hashed by tools/fetch-media at upload time; CI does not
-download media on every run. Licence, attribution and source URL are checked
-for those assets all the same.
+Every asset must declare its SHA-256; it is verified where the file is
+present next to the manifest. Assets that only live in the S3 bucket — the
+Germany pack, for instance — are hashed by tools/fetch-media at upload time;
+CI does not download media on every run. Licence, attribution and source URL
+are checked for those assets all the same.
 
 Manifest shape: the one the Pack model in the spec defines — a JSON object
 whose "birds" key holds the list of birds. Each bird carries a mandatory
@@ -46,6 +46,11 @@ def file_sha256(path: Path) -> str:
         return hashlib.file_digest(stream, "sha256").hexdigest()
 
 
+def escape_data(message: str) -> str:
+    """Escape data for a GitHub workflow command — % first, then the line breaks."""
+    return message.replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
+
+
 def text_field(media: dict, name: str) -> str:
     """Return the stripped string value of `name`, empty if absent or not a string."""
     value = media.get(name)
@@ -77,14 +82,16 @@ def check_media(media: object, label: str, base_dir: Path) -> list[str]:
         problems.append(f"{label}: field 'file' is missing or empty")
         return problems
 
+    # Mandatory for every asset, present locally or not: the Pack model
+    # declares sha256 non-optional and the downloader verifies it.
+    expected = text_field(media, "sha256").lower()
+    if not expected:
+        problems.append(f"{label}: field 'sha256' is missing or empty")
+        return problems
+
     asset = base_dir / relative
     if not asset.is_file():
         # Only in S3 — fetch-media verified the hash when it uploaded the file.
-        return problems
-
-    expected = text_field(media, "sha256").lower()
-    if not expected:
-        problems.append(f"{label}: field 'sha256' is missing or empty, but {relative} is present locally")
         return problems
 
     actual = file_sha256(asset)
@@ -124,7 +131,8 @@ def check_manifest(path: Path) -> tuple[list[str], int]:
         for field in ("photo", "call"):
             if field not in entry:
                 continue
-            media_count += 1
+            if isinstance(entry[field], dict):
+                media_count += 1
             problems.extend(check_media(entry[field], f"{label} / {field}", path.parent))
 
     return problems, media_count
@@ -142,7 +150,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     if not args.packs_dir.is_dir():
-        print(f"::error::Pack directory not found: {args.packs_dir}")
+        print(f"::error::{escape_data(f'Pack directory not found: {args.packs_dir}')}")
         return 1
 
     # rglob, not glob: a pack may grow its own directory
@@ -157,11 +165,17 @@ def main(argv: list[str] | None = None) -> int:
 
     for manifest in manifests:
         problems, media_count = check_manifest(manifest)
+        # Workspace-relative, or GitHub cannot anchor the annotation on the
+        # file in the pull request view; absolute paths only show in the log.
+        try:
+            location = manifest.relative_to(Path.cwd())
+        except ValueError:
+            location = manifest
         for problem in problems:
-            print(f"::error file={manifest}::{problem}")
+            print(f"::error file={location}::{escape_data(problem)}")
         total_problems += len(problems)
         total_media += media_count
-        print(f"{manifest}: media assets checked: {media_count}")
+        print(f"{location}: media assets checked: {media_count}")
 
     if total_problems:
         print(f"Licence gate failed: {total_problems} problem(s) in {len(manifests)} manifest(s)")
