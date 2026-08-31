@@ -52,7 +52,7 @@ swiftformat apps packages --lint
 swiftlint --strict --quiet
 
 mise run test
-echo "::notice::The licence gate does not run yet — the checking tool is missing, it arrives with #17"
+mise run license-gate
 '''
 
 [tasks.format]
@@ -99,6 +99,18 @@ xcodebuild build \
   -derivedDataPath DerivedData \
   CODE_SIGNING_ALLOWED=NO \
   | xcbeautify
+'''
+
+[tasks.license-gate]
+description = "Check the pack manifests against the licence rules"
+run = '''
+set -euo pipefail
+
+# `python` is the interpreter pinned above, not whatever python3 the machine
+# happens to carry. The gate and its tests use the standard library only, so
+# there is nothing else to install.
+python -m unittest discover -s tools/tests
+python tools/license_gate.py
 '''
 
 [tasks.fetch-media]

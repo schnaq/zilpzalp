@@ -47,10 +47,10 @@ jobs:
         run: mise install
 
       # The same definition as locally, not a parallel script: SwiftFormat,
-      # SwiftLint, the package tests and the licence gate. Format, lint and
-      # the licence gate are currently marked skips inside `mise run check`
-      # (they print `::notice::`); they arrive with #3 and #17, and from then
-      # on a missing tool is an error rather than a skip.
+      # SwiftLint, the package tests and the licence gate all run inside
+      # `mise run check`. The licence gate reports through `::error::`
+      # annotations, so a badly licensed asset is visible on the pull request
+      # itself, not only in the log.
       - name: Format, lint, tests, licence gate
         run: mise run check
 
