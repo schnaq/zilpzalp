@@ -9,16 +9,20 @@ uv run --locked --project tools python -m unittest discover -s tools/tests -t to
 
 from __future__ import annotations
 
+import contextlib
 import hashlib
+import io
+import os
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 import boto3
 from botocore.exceptions import ClientError
 from botocore.stub import ANY, Stubber
 
-from fetch_media import manifest, s3
+from fetch_media import cli, manifest, s3
 
 BUCKET = "zilpzalp-media"
 PHOTO = b"not really a photo, but it hashes just the same"
@@ -244,6 +248,33 @@ class SyncTests(PackTestCase):
 
         with self.assertRaises(ClientError):
             s3.sync(self.client, BUCKET, self.uploads)
+
+
+class WithoutCredentialsTests(PackTestCase):
+    """Issue #15: the tool has to be usable on a machine without S3 keys."""
+
+    def upload(self, *arguments: str) -> tuple[int, str]:
+        output = io.StringIO()
+        empty = {name: "" for name in s3.REQUIRED_ENV}
+        with mock.patch.dict(os.environ, empty), mock.patch.object(
+            manifest, "PACKS_DIR", self.pack.parent
+        ), contextlib.redirect_stdout(output):
+            exit_code = cli.main(["photos", "upload", "--pack", "basis", *arguments])
+        return exit_code, output.getvalue()
+
+    def test_lists_the_plan_on_a_dry_run(self) -> None:
+        exit_code, output = self.upload("--dry-run")
+
+        self.assertEqual(exit_code, 0)
+        self.assertIn("unchecked  packs/basis/photos/amsel.jpg", output)
+        self.assertIn("unchecked  packs/basis/manifest.json", output)
+
+    def test_refuses_a_real_upload(self) -> None:
+        exit_code, output = self.upload()
+
+        self.assertEqual(exit_code, 1)
+        self.assertIn("::error::", output)
+        self.assertIn("SCW_ACCESS_KEY", output)
 
 
 if __name__ == "__main__":

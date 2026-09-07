@@ -215,7 +215,19 @@ def command_pick(args: argparse.Namespace) -> int:
 def command_upload(args: argparse.Namespace) -> int:
     """Put the pack's media and its manifest into the bucket."""
     uploads = s3.plan(args.pack, manifest.pack_dir(args.pack))
-    client, bucket = s3.client_from_env()
+
+    try:
+        client, bucket = s3.client_from_env()
+    except RuntimeError as error:
+        if not args.dry_run:
+            raise
+        # A dry run has to work on a machine without credentials (#15): it then
+        # shows what would be uploaded, only without asking the bucket what it
+        # already holds.
+        print(f"::notice::{escape_data(f'{error} Listing the plan unchecked.')}")
+        for upload in uploads:
+            print(s3.report_line("unchecked", upload))
+        return 0
 
     for line in s3.sync(client, bucket, uploads, dry_run=args.dry_run):
         print(line)

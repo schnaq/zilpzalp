@@ -150,6 +150,15 @@ def put(client, bucket: str, upload: Upload) -> None:
         )
 
 
+def report_line(verb: str, upload: Upload) -> str:
+    """One line of the upload report: what happens, to which key, how large.
+
+    Keys and sizes and nothing else — the report is read aloud in pull requests
+    and must not be able to carry anything from the environment.
+    """
+    return f"{verb:>13}  {upload.key}  {upload.size} bytes"
+
+
 def sync(client, bucket: str, uploads: list[Upload], dry_run: bool = False) -> list[str]:
     """Upload what has changed. Returns one report line per object."""
     report = []
@@ -157,7 +166,7 @@ def sync(client, bucket: str, uploads: list[Upload], dry_run: bool = False) -> l
     for upload in uploads:
         unchanged = remote_sha256(client, bucket, upload.key) == upload.sha256
         verb = "skip" if unchanged else ("would upload" if dry_run else "upload")
-        report.append(f"{verb:>13}  {upload.key}  {upload.size} bytes")
+        report.append(report_line(verb, upload))
 
         if not unchanged and not dry_run:
             put(client, bucket, upload)
