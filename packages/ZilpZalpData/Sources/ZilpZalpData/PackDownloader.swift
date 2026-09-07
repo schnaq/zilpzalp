@@ -216,7 +216,7 @@ public actor PackDownloader {
         ] {
             do {
                 try FileManager.default.removeItem(at: directory)
-            } catch CocoaError.fileNoSuchFile, CocoaError.fileReadNoSuchFile {
+            } catch CocoaError.fileNoSuchFile {
                 continue
             } catch {
                 throw PackDownloadError.diskFailure(
@@ -238,27 +238,25 @@ public actor PackDownloader {
     /// - Throws: `PackDownloadError.fileUnreachable` for every transport and
     ///   status failure, `CancellationError` when the task was cancelled.
     private func fetch(_ url: URL, named name: String) async throws -> Data {
+        let data: Data
+        let response: URLResponse
         do {
-            let (data, response) = try await session.data(from: url)
-            guard let status = (response as? HTTPURLResponse)?.statusCode else {
-                throw PackDownloadError.fileUnreachable(path: name, reason: "no HTTP response")
-            }
-            guard (200 ..< 300).contains(status) else {
-                throw PackDownloadError.fileUnreachable(path: name, reason: "HTTP \(status)")
-            }
-            return data
-        } catch let error as PackDownloadError {
-            throw error
+            (data, response) = try await session.data(from: url)
         } catch {
             // A cancelled task arrives here as `URLError.cancelled`. It is the
             // caller's decision, not a failed download, and must not be
             // dressed up as one.
             try Task.checkCancellation()
-            throw PackDownloadError.fileUnreachable(
-                path: name,
-                reason: error.localizedDescription,
-            )
+            throw PackDownloadError.fileUnreachable(path: name, reason: error.localizedDescription)
         }
+
+        guard let status = (response as? HTTPURLResponse)?.statusCode else {
+            throw PackDownloadError.fileUnreachable(path: name, reason: "no HTTP response")
+        }
+        guard (200 ..< 300).contains(status) else {
+            throw PackDownloadError.fileUnreachable(path: name, reason: "HTTP \(status)")
+        }
+        return data
     }
 
     /// Every medium a pack declares, photo before call, each file once: two

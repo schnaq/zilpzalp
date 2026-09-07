@@ -39,6 +39,18 @@ struct PackDownloaderTests {
         }
     }
 
+    /// The state every fresh install is in, and the first one the parents'
+    /// area sees: `Packs/` does not exist at all.
+    @Test("without a single download there is nothing installed and nothing to delete")
+    func startsEmpty() async throws {
+        try await withDownloader(routes: [:]) { downloader, _ in
+            let installed = try await downloader.installedPacks()
+            #expect(installed.isEmpty)
+
+            try await downloader.delete(packID: StubPack.id)
+        }
+    }
+
     @Test("a download verifies every file and reports progress up to the total")
     func downloadsAndVerifies() async throws {
         let manifest = StubPack.manifest()
@@ -225,6 +237,27 @@ struct PackDownloaderTests {
             }
 
             #expect(StubBucket.requests.isEmpty)
+        }
+    }
+
+    /// The id is the directory name in the bucket and on disk, so a manifest
+    /// that disagrees with the index would install a pack under a name
+    /// nothing else uses.
+    @Test("a manifest that calls the pack something else is refused")
+    func refusesAManifestWithAnotherID() async throws {
+        let manifest = StubPack.manifest(packID: "woanders")
+
+        try await withDownloader(routes: StubPack.routes(manifest: manifest)) { downloader, home in
+            let expected = PackDownloadError.manifestInvalid(
+                packID: StubPack.id,
+                reason: "the manifest calls the pack 'woanders'",
+            )
+
+            await #expect(throws: expected) {
+                try await downloader.download(StubPack.entry(manifest: manifest))
+            }
+
+            #expect(!exists(home, Self.installed))
         }
     }
 
