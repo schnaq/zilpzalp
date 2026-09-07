@@ -127,6 +127,17 @@ class SquarePhotoTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             images.square_photo(photo(2048, 1538), crop=(0, 0, 1500, 1400))
 
+    def test_reports_a_colour_profile_it_cannot_convert(self) -> None:
+        """As a sentence — a curator picks another photo, not a traceback."""
+        buffer = io.BytesIO()
+        image = Image.new("RGB", (1200, 1200), BLUE)
+        image.save(buffer, format="JPEG", icc_profile=b"not a colour profile")
+
+        with self.assertRaises(ValueError) as error:
+            images.square_photo(buffer.getvalue())
+
+        self.assertIn("colour profile", str(error.exception))
+
 
 if __name__ == "__main__":
     unittest.main()

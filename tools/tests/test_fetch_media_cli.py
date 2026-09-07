@@ -111,8 +111,8 @@ def jpeg(width: int = 1200, height: int = 1200) -> bytes:
     return buffer.getvalue()
 
 
-class PickTests(unittest.TestCase):
-    """`pick` end to end against a throwaway pack — no network, no repository."""
+class PackTestCase(unittest.TestCase):
+    """A throwaway one-bird pack, in place of the one under data/packs."""
 
     def setUp(self) -> None:
         directory = tempfile.TemporaryDirectory()
@@ -154,35 +154,94 @@ class PickTests(unittest.TestCase):
         self.derived = mock.patch.object(cli, "regenerate_derived").start()
         self.addCleanup(mock.patch.stopall)
 
-    def run_pick(self, observation: dict, arguments: list[str] | None = None) -> int:
-        def handle(request: httpx.Request) -> httpx.Response:
-            if "api.inaturalist.org" in str(request.url):
-                return httpx.Response(200, json={"results": [observation]})
-            return httpx.Response(200, content=jpeg())
-
+    def client_answering(self, handle) -> None:
+        """Make every `inaturalist.Client()` answer from `handle`."""
         transport = httpx.MockTransport(handle)
         real_client = inaturalist.Client
 
         def client() -> inaturalist.Client:
             return real_client(transport=transport, min_interval=0)
 
-        with mock.patch.object(cli.inaturalist, "Client", client):
-            with contextlib.redirect_stdout(io.StringIO()):
-                return cli.main(
-                    [
-                        "photos",
-                        "pick",
-                        "--pack",
-                        "basis",
-                        "--species",
-                        "amsel",
-                        "--observation",
-                        "20490738",
-                        "--photo",
-                        "31623386",
-                        *(arguments or []),
-                    ]
-                )
+        mock.patch.object(cli.inaturalist, "Client", client).start()
+
+
+class CandidatesTests(PackTestCase):
+    """`candidates` end to end — no network, no repository."""
+
+    def run_candidates(self, results: list[dict], arguments: list[str] | None = None) -> str:
+        self.client_answering(lambda request: httpx.Response(200, json={"results": results}))
+        self.out = self.packs / "out"
+
+        output = io.StringIO()
+        with contextlib.redirect_stdout(output):
+            code = cli.main(
+                ["photos", "candidates", "--pack", "basis", "--out", str(self.out), *(arguments or [])]
+            )
+
+        self.assertEqual(code, 0)
+        return output.getvalue()
+
+    def candidate_file(self) -> dict:
+        return manifest.load(self.out / "basis-photo-candidates.json")
+
+    def test_writes_the_candidate_list_beside_the_table(self) -> None:
+        table = self.run_candidates([OBSERVATION])
+
+        self.assertIn("20490738", table)
+        document = self.candidate_file()
+        self.assertEqual(document["pack"], "basis")
+        self.assertEqual(len(document["candidates"]), 1)
+        self.assertEqual(document["candidates"][0]["license"], "CC-BY-4.0")
+        self.assertEqual(
+            document["candidates"][0]["photo_url"],
+            "https://inaturalist-open-data.s3.amazonaws.com/photos/31623386/original.jpeg",
+        )
+
+    def test_warns_about_a_species_without_a_usable_photo(self) -> None:
+        table = self.run_candidates([])
+
+        self.assertIn("::warning::amsel: no freely licensed photo found", table)
+        self.assertIn("No usable photo", table)
+        self.assertEqual(self.candidate_file()["candidates"], [])
+
+    def test_reports_a_species_the_pack_does_not_have(self) -> None:
+        self.client_answering(lambda request: httpx.Response(200, json={"results": []}))
+
+        output = io.StringIO()
+        with contextlib.redirect_stdout(output):
+            code = cli.main(["photos", "candidates", "--pack", "basis", "--species", "wiedehopf"])
+
+        self.assertEqual(code, 1)
+        self.assertIn("::error::", output.getvalue())
+
+
+class PickTests(PackTestCase):
+    """`pick` end to end against a throwaway pack — no network, no repository."""
+
+    def run_pick(self, observation: dict, arguments: list[str] | None = None) -> int:
+        def handle(request: httpx.Request) -> httpx.Response:
+            if "api.inaturalist.org" in str(request.url):
+                return httpx.Response(200, json={"results": [observation]})
+            return httpx.Response(200, content=jpeg())
+
+        self.client_answering(handle)
+
+        with contextlib.redirect_stdout(io.StringIO()):
+            return cli.main(
+                [
+                    "photos",
+                    "pick",
+                    "--pack",
+                    "basis",
+                    "--species",
+                    "amsel",
+                    "--observation",
+                    "20490738",
+                    "--photo",
+                    "31623386",
+                    *(arguments or []),
+                ]
+            )
 
     def photo_entry(self) -> dict:
         document = manifest.load(self.pack / "manifest.json")

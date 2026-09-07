@@ -8,8 +8,11 @@ Three steps, and a human between them:
 
 `candidates` asks iNaturalist and lists what may be used; it never chooses.
 `pick` fetches the one photo a human named, crops it, writes the manifest entry
-and regenerates the derived files. `upload` puts the pack in the bucket. Only
-`upload` needs credentials, so the first two run on any machine.
+and regenerates the derived files. `upload` puts the pack in the bucket.
+
+Only `upload` needs credentials, and it reads them from the environment, where
+`infisical run --env=dev --path=/ --` puts them. The other two run on any
+machine, with no login and no key.
 """
 
 from __future__ import annotations

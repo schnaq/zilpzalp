@@ -165,17 +165,18 @@ description = "Curate media: 'photos candidates', 'photos pick', 'upload' — ad
 #   mise run fetch-media photos candidates --pack basis --limit 5
 #   mise run fetch-media photos pick --pack basis --species amsel \
 #       --observation 20490738 --photo 31623386
-#   mise run fetch-media upload --pack basis --dry-run
 #
-# `infisical run` injects the Scaleway keys and the S3_* values; only `upload`
-# needs them, and they never leave the process. Credentials come from Infisical
-# alone — see docs/secrets.md.
+# Finding and picking a photo needs no credential at all — only the upload
+# does, and it is wrapped by the caller, exactly as issue #14 describes:
 #
-# `candidates` and `pick` need no secret at all. Without an Infisical login
-# they run directly:
+#   infisical run --env=dev --path=/ -- mise run fetch-media upload --pack basis
 #
-#   uv run --locked --project tools python -m fetch_media photos candidates …
-run = "infisical run --env=dev --path=/ -- uv run --locked --project tools python -m fetch_media"
+# Deliberately not the other way round. Wrapping the task itself would make
+# every subcommand demand an Infisical login, and the two that never touch the
+# bucket would stop working on a machine without one. Without the prefix the
+# upload names the variables it is missing and the command that provides them.
+# Curation runs against `dev`; `prod` holds only the signing values.
+run = "uv run --locked --project tools python -m fetch_media"
 
 [tasks.xcode-version]
 description = "Checks that the pinned Xcode version is active"

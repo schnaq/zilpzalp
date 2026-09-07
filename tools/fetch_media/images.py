@@ -78,8 +78,12 @@ def square_photo(data: bytes, crop: Box | None = None) -> bytes:
                 ImageCms.createProfile("sRGB"),
                 outputMode="RGB",
             )
-        except ImageCms.PyCMSError as error:
-            raise ValueError(f"the colour profile cannot be converted: {error}") from error
+        # OSError as well as PyCMSError: littlecms rejects a damaged profile
+        # while it is still being read, before any conversion is attempted.
+        except (ImageCms.PyCMSError, OSError) as error:
+            raise ValueError(
+                f"the colour profile cannot be converted ({error}) — pick another candidate"
+            ) from error
     image = image.convert("RGB")
 
     x, y, width, height = crop if crop is not None else centre_box(*image.size)
