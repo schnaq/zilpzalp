@@ -64,7 +64,7 @@ def entry(pack_id: str) -> dict:
     directory may hold.
     """
     pack = manifest.pack_dir(pack_id)
-    document = manifest.load(pack / "manifest.json")
+    document = manifest.load(manifest.manifest_path(pack_id))
 
     declared = document.get("id")
     if declared != pack_id:
@@ -79,9 +79,7 @@ def entry(pack_id: str) -> dict:
         "title": document["title"],
         "speciesCount": len(document.get("birds") or []),
         "downloadSize": sum(upload.size for upload in uploads),
-        # `plan` puts the manifest last; deriving the key from it keeps the
-        # bucket layout spelled out in one place.
-        "manifest": uploads[-1].key,
+        "manifest": s3.manifest_key(pack_id),
     }
 
 
@@ -105,6 +103,6 @@ def build(*, uploading: str | None, in_bucket: Callable[[str], bool]) -> dict:
 
 def staged(document: dict, directory: Path) -> s3.Upload:
     """Write the index into a scratch directory and describe it as an object."""
-    path = directory / "index.json"
+    path = directory / Path(KEY).name
     manifest.save(path, document)
     return s3.Upload(key=KEY, path=path, sha256=manifest.sha256_of(path))

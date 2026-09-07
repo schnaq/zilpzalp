@@ -13,27 +13,18 @@ import contextlib
 import io
 import json
 import os
+import shutil
 import tempfile
 import unittest
 from pathlib import Path
 from unittest import mock
 
-import boto3
 import sync_bundled_packs
-from botocore.stub import Stubber
 
 from fetch_media import cli, index, manifest, s3
 
 BUCKET = "zilpzalp-media"
 PHOTO = b"not really a photo, but it hashes just the same"
-
-ENVIRONMENT = {
-    "SCW_ACCESS_KEY": "access",
-    "SCW_SECRET_KEY": "secret",
-    "S3_BUCKET": BUCKET,
-    "S3_REGION": "fr-par",
-    "S3_ENDPOINT": "https://s3.fr-par.scw.cloud",
-}
 
 
 def never(key: str) -> bool:
@@ -139,10 +130,11 @@ class BuildTests(PacksTestCase):
         """tools/sync_bundled_packs.py is the source of truth; this is a copy."""
         self.assertEqual(index.BUNDLED_PACKS, sync_bundled_packs.BUNDLED_PACKS)
 
-    def test_is_empty_when_every_pack_is_bundled(self) -> None:
-        """Today's state: the base pack is the only one, and it is bundled."""
-        with mock.patch.object(index, "BUNDLED_PACKS", ("basis", "deutschland")):
-            self.assertEqual(index.build(uploading="basis", in_bucket=always), {"packs": []})
+    def test_is_empty_while_the_only_pack_is_the_bundled_one(self) -> None:
+        """Today's state, and the index that goes into the bucket for it."""
+        shutil.rmtree(self.packs / "deutschland")
+
+        self.assertEqual(index.build(uploading="basis", in_bucket=always), {"packs": []})
 
     def test_lists_the_pack_of_this_run_although_the_bucket_has_nothing(self) -> None:
         """It is uploaded moments before the index."""
@@ -216,24 +208,17 @@ class CommandTests(PacksTestCase):
         return len(manifest.dump(document).encode("utf-8"))
 
     def test_reports_the_index_last_on_a_dry_run(self) -> None:
-        client = boto3.client(
-            "s3",
-            endpoint_url=ENVIRONMENT["S3_ENDPOINT"],
-            region_name=ENVIRONMENT["S3_REGION"],
-            aws_access_key_id="access",
-            aws_secret_access_key="secret",
+        """`s3.sync` is covered against a stubbed bucket in the s3 tests; what
+        matters here is that the index is reported, and reported last."""
+        credentials = mock.patch.object(
+            s3, "client_from_env", return_value=(mock.sentinel.client, BUCKET)
         )
-        stubber = Stubber(client)
-        # The pack's three objects and the index itself: the bucket has none.
-        for _ in range(4):
-            stubber.add_client_error("head_object", service_error_code="404", http_status_code=404)
-        stubber.activate()
-        self.addCleanup(stubber.deactivate)
+        # The bucket holds nothing yet, neither the pack nor the index.
+        empty_bucket = mock.patch.object(s3, "remote_sha256", return_value=None)
 
-        with mock.patch.object(s3, "client_from_env", return_value=(client, BUCKET)):
+        with credentials, empty_bucket:
             exit_code, lines = self.upload("--dry-run")
 
-        stubber.assert_no_pending_responses()
         self.assertEqual(exit_code, 0)
         self.assertEqual(
             lines[:4],
