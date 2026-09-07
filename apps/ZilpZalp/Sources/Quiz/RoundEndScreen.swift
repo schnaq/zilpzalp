@@ -57,7 +57,7 @@ struct RoundEndScreen: View {
 #Preview {
     NavigationStack {
         RoundEndScreen(
-            result: RoundResult(stars: 3, firstTryCorrect: 9, questionCount: 10),
+            result: RoundResult(firstTryCorrect: 9, questionCount: 10),
             playAgain: {},
         )
     }

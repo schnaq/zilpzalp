@@ -308,7 +308,7 @@ struct QuizScreen: View {
             - ZSpacing.step5
             - ZSpacing.gapTiles
             - ZShadow.ledgeLargeOffset
-        return clamped(min(across, down) / 2)
+        return tileEdge(across: across, down: down)
     }
 
     /// The tile edge on iPhone: what is left under the question row and above
@@ -321,15 +321,17 @@ struct QuizScreen: View {
             - 2 * ZSpacing.step4
             - ZSpacing.gapTiles
             - 2 * ZShadow.ledgeLargeOffset
-        return clamped(min(across, down) / 2)
+        return tileEdge(across: across, down: down)
     }
 
-    /// Never above the design's tile, never below the touch floor — even where
-    /// the floor means overflowing the space. A tile a four-year-old cannot
-    /// hit breaks a rule the design calls non-negotiable; a few points of
-    /// overhang on a screen no supported device has does not.
-    private func clamped(_ edge: CGFloat) -> CGFloat {
-        max(ZSpacing.touchMinimum, min(Self.maximumTile, edge).rounded(.down))
+    /// Half of whichever of the two runs out first — the tiles are square and
+    /// there are two of them each way — never above the design's tile, and
+    /// never below the touch floor even where the floor means overflowing the
+    /// space. A tile a four-year-old cannot hit breaks a rule the design calls
+    /// non-negotiable; a few points of overhang on a screen no supported
+    /// device has does not.
+    private func tileEdge(across: CGFloat, down: CGFloat) -> CGFloat {
+        max(ZSpacing.touchMinimum, min(Self.maximumTile, min(across, down) / 2).rounded(.down))
     }
 }
 

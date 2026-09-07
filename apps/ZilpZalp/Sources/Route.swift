@@ -1,4 +1,5 @@
 import Foundation
+import ZilpZalpCore
 
 /// The two games of v1.
 ///
@@ -29,14 +30,23 @@ enum Game: Hashable {
 /// of the round just played and forgets them — `ProfileStore` (#27) is what
 /// makes them add up, and a throwaway persistence in the meantime would be a
 /// promise to a four-year-old that the next launch breaks.
+///
+/// An app-target value for as long as nothing outlives the round. The moment
+/// `ProfileStore` (#27) wants to write one down it belongs in a package, and
+/// this is the type that moves.
 struct RoundResult: Hashable {
-    /// One, two or three, from `Scoring.stars(firstTryCorrect:)`.
-    let stars: Int
-    /// Answers right at the first attempt — what the stars are derived from.
+    /// Answers right at the first attempt — the one number a round produces.
     let firstTryCorrect: Int
     /// How many questions the round had, so the end screen never has to assume
     /// the round length.
     let questionCount: Int
+
+    /// One, two or three. Derived rather than stored: `Scoring` is a pure
+    /// function of ``firstTryCorrect``, and a second field holding the answer
+    /// could only ever disagree with it.
+    var stars: Int {
+        Scoring.stars(firstTryCorrect: firstTryCorrect)
+    }
 }
 
 /// Everywhere the shell can go.

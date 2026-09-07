@@ -15,6 +15,15 @@ import ZilpZalpUI
 /// question the screen asks about a tile — which phase, dimmed or not — is
 /// answered by deriving it from those three facts rather than by storing a
 /// fourth that could disagree with them.
+///
+/// **The tap bookkeeping wants to move.** `index`, `wrongTaps`, `isAnswered`
+/// and `firstTryCorrect` are pure transitions with no I/O in them, and
+/// `AGENTS.md` puts everything testable without a simulator in a package.
+/// They sit here because #25 was not allowed to change `ZilpZalpCore`, not
+/// because this is where they belong: the destination is a value type in Core
+/// that takes a tap and returns the next state, with this class left holding
+/// only the photos, the speech and the timer that genuinely cannot go there.
+/// Until then this logic has no unit tests, which is the cost of the shortcut.
 @MainActor
 @Observable
 final class QuizSession {
@@ -171,11 +180,7 @@ final class QuizSession {
 
     /// What the round has come to, once it is over.
     var result: RoundResult {
-        RoundResult(
-            stars: Scoring.stars(firstTryCorrect: firstTryCorrect),
-            firstTryCorrect: firstTryCorrect,
-            questionCount: round.questions.count,
-        )
+        RoundResult(firstTryCorrect: firstTryCorrect, questionCount: round.questions.count)
     }
 
     // MARK: - Playing it
@@ -189,15 +194,22 @@ final class QuizSession {
     func resume() {
         if isFinished {
             var generator = SystemRandomNumberGenerator()
-            // The pool has not changed since `init` accepted it, so the only
-            // reason `make` could throw has already been ruled out. Keeping
-            // the finished round would be visible as a round that will not
-            // start; keeping the old one is not, and cannot happen.
+            // The pool has not changed since `init` accepted it, so the one
+            // reason `make` can throw has already been ruled out. The fallback
+            // deals the finished round's questions again, which is a duller
+            // round and not a broken one.
             round = (try? Round.make(from: species, using: &generator)) ?? round
             index = 0
             wrongTaps = []
             isAnswered = false
             firstTryCorrect = 0
+        } else if isAnswered {
+            // A question that was answered while the screen was going away, so
+            // that the pause after it never ran out. Finish the move rather
+            // than asking an already-answered question again — otherwise the
+            // round comes back showing a check nobody can get past.
+            nextQuestion()
+            return
         }
         askQuestion()
     }
@@ -266,6 +278,11 @@ private extension License {
     ///
     /// Not product copy and therefore not in the String Catalog: these three
     /// names are the same in every language.
+    ///
+    /// App-private only because #25 was not allowed to change `ZilpZalpData`.
+    /// This is a fact about `License`, not about the quiz, and the credits
+    /// screen (#37) will want the same three strings — at which point it
+    /// belongs beside the enum rather than in a second copy here.
     var shortName: String {
         switch self {
         case .cc0: "CC0"
