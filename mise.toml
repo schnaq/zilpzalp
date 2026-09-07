@@ -158,18 +158,23 @@ python tools/generate_credits.py
 '''
 
 [tasks.fetch-media]
-description = "Curate media: photos candidates|pick|upload — see 'mise run fetch-media photos --help'"
+description = "Curate media: 'photos candidates', 'photos pick', 'upload' — add --help for any of them"
 # One line on purpose: mise appends the arguments of `mise run fetch-media …`
 # to the end of the command, so the subcommands reach the tool unchanged.
 #
 #   mise run fetch-media photos candidates --pack basis --limit 5
 #   mise run fetch-media photos pick --pack basis --species amsel \
 #       --observation 20490738 --photo 31623386
-#   mise run fetch-media photos upload --pack basis --dry-run
+#   mise run fetch-media upload --pack basis --dry-run
 #
 # `infisical run` injects the Scaleway keys and the S3_* values; only `upload`
 # needs them, and they never leave the process. Credentials come from Infisical
 # alone — see docs/secrets.md.
+#
+# `candidates` and `pick` need no secret at all. Without an Infisical login
+# they run directly:
+#
+#   uv run --locked --project tools python -m fetch_media photos candidates …
 run = "infisical run --env=dev --path=/ -- uv run --locked --project tools python -m fetch_media"
 
 [tasks.xcode-version]

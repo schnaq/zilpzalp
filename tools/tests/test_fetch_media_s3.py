@@ -259,7 +259,7 @@ class WithoutCredentialsTests(PackTestCase):
         with mock.patch.dict(os.environ, empty), mock.patch.object(
             manifest, "PACKS_DIR", self.pack.parent
         ), contextlib.redirect_stdout(output):
-            exit_code = cli.main(["photos", "upload", "--pack", "basis", *arguments])
+            exit_code = cli.main(["upload", "--pack", "basis", *arguments])
         return exit_code, output.getvalue()
 
     def test_lists_the_plan_on_a_dry_run(self) -> None:

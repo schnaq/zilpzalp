@@ -4,7 +4,7 @@ Three steps, and a human between them:
 
     photos candidates --pack basis [--species amsel …] [--limit 5]
     photos pick --pack basis --species amsel --observation 20490738 --photo 31623386
-    photos upload --pack basis [--dry-run]
+    upload --pack basis [--dry-run]
 
 `candidates` asks iNaturalist and lists what may be used; it never chooses.
 `pick` fetches the one photo a human named, crops it, writes the manifest entry
@@ -45,13 +45,16 @@ def escape_data(message: str) -> str:
 def regenerate_derived() -> None:
     """Bring the bundled pack copy and the credits back in step.
 
-    Both tools heal on their first run and report the healing as exit code 1,
-    which is what makes them drift checks in CI. Here a change is expected, so
-    the first run may heal and only the second one is judged.
+    Both tools heal on their first run and report the healing as exit code 1
+    with an `::error::` line, which is what makes them drift checks in CI. Here
+    the drift is the change that was just made, so the healing run is swallowed
+    — its "the credits were stale" would read as a failure — and only the
+    second, judging run speaks. If something is genuinely broken, the second
+    run says so in its own words.
     """
     for script in DERIVED_TOOLS:
         command = [sys.executable, str(manifest.REPO_ROOT / "tools" / script)]
-        subprocess.run(command, check=False)
+        subprocess.run(command, check=False, capture_output=True)
         if subprocess.run(command, check=False).returncode != 0:
             raise RuntimeError(f"{script} still reports a problem — see its output above")
 
@@ -232,11 +235,18 @@ def command_upload(args: argparse.Namespace) -> int:
 
 
 def build_parser() -> argparse.ArgumentParser:
-    """The whole command line. `photos` leaves room for `calls` (#16)."""
+    """The whole command line.
+
+    Finding a medium is specific to its source, so `candidates` and `pick` sit
+    under `photos` and #16 will add a `calls` beside it. Uploading is not:
+    `upload` puts the whole pack in the bucket, photos and recordings alike,
+    and therefore stays at the top level where a second medium needs no second
+    copy of it.
+    """
     parser = argparse.ArgumentParser(prog="fetch_media", description=__doc__.splitlines()[0])
-    medium = parser.add_subparsers(dest="medium", required=True)
-    photos = medium.add_parser("photos", help="photos from iNaturalist").add_subparsers(
-        dest="command", required=True
+    commands = parser.add_subparsers(dest="command", required=True)
+    photos = commands.add_parser("photos", help="photos from iNaturalist").add_subparsers(
+        dest="step", required=True
     )
 
     candidates = photos.add_parser("candidates", help="list freely licensed photos for a pack")
@@ -267,7 +277,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     pick.set_defaults(run=command_pick)
 
-    upload = photos.add_parser("upload", help="upload a pack to the media bucket")
+    upload = commands.add_parser("upload", help="upload a pack to the media bucket")
     upload.add_argument("--pack", required=True)
     upload.add_argument("--dry-run", action="store_true", help="report what would happen")
     upload.set_defaults(run=command_upload)
