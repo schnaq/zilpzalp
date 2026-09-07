@@ -114,6 +114,18 @@ class ValidManifestTests(LicenseGateTestCase):
         output = self.assertPasses()
         self.assertIn("media assets checked: 1", output)
 
+    def test_null_call_is_fine(self):
+        # How the manifest schema spells "no recording yet": the key is there
+        # and holds null, not absent. bird() drops None values, so the null
+        # has to be put in afterwards.
+        self.write_photo()
+        entry = bird()
+        entry["call"] = None
+        self.write_manifest({"id": "basis", "birds": [entry]})
+
+        output = self.assertPasses()
+        self.assertIn("media assets checked: 1", output)
+
     def test_present_call_is_checked_too(self):
         self.write_photo()
         self.write_manifest(
@@ -175,6 +187,14 @@ class LicenceRuleTests(LicenseGateTestCase):
 
     def test_missing_photo_fails(self):
         self.write_manifest({"birds": [bird(photo=None)]})
+
+        self.assertFails("'photo' is missing")
+
+    def test_null_photo_fails(self):
+        # A null photo is as missing as an absent one — only the call may be null.
+        entry = bird()
+        entry["photo"] = None
+        self.write_manifest({"birds": [entry]})
 
         self.assertFails("'photo' is missing")
 
