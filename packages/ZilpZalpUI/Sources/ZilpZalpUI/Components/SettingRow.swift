@@ -109,7 +109,10 @@ public struct SettingRow: View {
                             }
                             Icon(.chevronRight, size: .small)
                         }
-                        .font(ZType.Step.body.font(.body, weight: .semibold))
+                        // Not `singleLine`: this sets the type for the value
+                        // and the chevron together, and the chevron carries
+                        // its own size.
+                        .typeStyle(.body, .body, weight: .semibold)
                         .foregroundStyle(ZColor.textMuted)
                     }
                     .contentShape(Rectangle())
@@ -147,14 +150,21 @@ public struct SettingRow: View {
 
             VStack(alignment: .leading, spacing: SettingRowMetrics.hintSpacing) {
                 Text(title)
-                    .font(ZType.Step.body.font(.body, weight: .bold))
-                    .lineSpacing(ZType.Step.body.lineSpacing)
+                    // Not `singleLine`, even though a title is one line in
+                    // practice. Nunito's box is smaller than the design's
+                    // here, so the frame would add 2.7 pt inside a row that
+                    // `--touch-min` already holds at 64 — invisible — while
+                    // the `lineLimit(1)` that comes with it would truncate a
+                    // long setting name. Wrapping is the better failure in
+                    // the one area that uses full sentences.
+                    .typeStyle(.body, .body, weight: .bold)
                     .foregroundStyle(ZColor.textStrong)
 
                 if let hint {
                     Text(hint)
-                        .font(ZType.Step.caption.font(.body, weight: .semibold))
-                        .lineSpacing(ZType.Step.caption.lineSpacing)
+                        // Explanatory copy, and the one string in the system
+                        // that regularly runs to two lines.
+                        .typeStyle(.caption, .body, weight: .semibold)
                         .foregroundStyle(ZColor.textMuted)
                 }
             }

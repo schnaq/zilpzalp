@@ -46,7 +46,10 @@ public struct TopBar<Leading: View, Center: View, Trailing: View>: View {
             HStack(spacing: ZSpacing.step4) {
                 center
             }
-            .font(ZType.Step.headline.font(.display, weight: .bold))
+            // Not `singleLine`: this sets the type for whatever the caller
+            // puts in the centre — a title, but equally a wordless progress
+            // row — and a fixed line box would size that content too.
+            .typeStyle(.headline, .display, weight: .bold)
             .foregroundStyle(ZColor.textStrong)
 
             trailing

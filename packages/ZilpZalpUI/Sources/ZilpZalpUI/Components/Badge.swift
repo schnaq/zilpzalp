@@ -70,8 +70,13 @@ public struct Badge: View {
                 Icon(icon, size: .small)
             }
             Text(verbatim: text)
-                .font(ZType.Step.body.font(.display, weight: .bold))
-                .tracking(ZType.Step.body.tracking(ZType.Tracking.looseEm))
+                .typeStyle(
+                    .body,
+                    .display,
+                    weight: .bold,
+                    tracking: ZType.Tracking.looseEm,
+                    singleLine: true,
+                )
         }
         .padding(.vertical, ZSpacing.step2)
         .padding(.horizontal, ZSpacing.step4)

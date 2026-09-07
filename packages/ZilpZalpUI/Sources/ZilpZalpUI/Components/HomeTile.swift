@@ -81,6 +81,9 @@ public struct HomeTile: View {
     /// - Parameters:
     ///   - title: The word under the glyph, and the button's accessibility
     ///     label. Always a parameter — the package carries no product copy.
+    ///     One or two words: the tile draws it on a single line and truncates
+    ///     rather than wrapping. The design's own labels ("Wer singt da?",
+    ///     "Sterne sammeln") reach 161 pt of the 208 pt available.
     ///   - icon: The activity's glyph. Ignored while ``locked``.
     ///   - tone: The tile's tint.
     ///   - stars: How many of the three slots are filled. A number outside
@@ -135,9 +138,9 @@ public struct HomeTile: View {
                 Icon(displayedIcon, size: .custom(size * HomeTileMetrics.iconRatio))
 
                 Text(title)
-                    .font(ZType.Step.label.font(.display, weight: .bold))
-                    .lineSpacing(ZType.Step.label.lineSpacing)
-                    .multilineTextAlignment(.center)
+                    // One line by design, so no `multilineTextAlignment`:
+                    // the frame centres the single line already.
+                    .typeStyle(.label, .display, weight: .bold, singleLine: true)
 
                 // No stars at all until the first one is earned, exactly as
                 // in the JSX: three empty outlines on a fresh tile would read

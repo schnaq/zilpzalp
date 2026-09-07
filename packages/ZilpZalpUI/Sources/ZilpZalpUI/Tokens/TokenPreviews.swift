@@ -34,7 +34,7 @@
         var body: some View {
             VStack(alignment: .leading, spacing: ZSpacing.step2) {
                 Text(group.title)
-                    .font(ZType.Step.label.font(.display, weight: .bold))
+                    .typeStyle(.label, .display, weight: .bold, singleLine: true)
                     .foregroundStyle(ZColor.textStrong)
                 LazyVGrid(columns: columns, alignment: .leading, spacing: ZSpacing.step3) {
                     ForEach(group.swatches) { swatch in
@@ -47,7 +47,7 @@
                                         .strokeBorder(ZColor.borderCard, lineWidth: ZBorder.width)
                                 }
                             Text(swatch.id)
-                                .font(ZType.Step.caption.font(.body, weight: .semibold))
+                                .typeStyle(.caption, .body, weight: .semibold)
                                 .foregroundStyle(ZColor.textMuted)
                         }
                     }
@@ -189,18 +189,22 @@
                 ForEach(ZType.Step.allCases) { step in
                     VStack(alignment: .leading, spacing: ZSpacing.step1) {
                         Text("text-\(step.id) · \(Int(step.size)) pt")
-                            .font(ZType.Step.caption.font(.body, weight: .semibold))
+                            .typeStyle(.caption, .body, weight: .semibold)
                             .foregroundStyle(ZColor.textMuted)
                         Text("Zilpzalp")
-                            .font(step.font(.display, weight: .bold))
-                            .lineSpacing(step.lineSpacing)
+                            // Not `singleLine`: at `hero` the design's box is
+                            // 88 pt and Baloo 2 draws 141, so the glyphs would
+                            // overhang far enough to sit on the caption above.
+                            // A ramp is for reading the sizes off, so it keeps
+                            // the face's own box.
+                            .typeStyle(step, .display, weight: .bold)
                             .foregroundStyle(ZColor.textStrong)
                     }
                 }
                 Divider()
                 ForEach(ZType.Weight.allCases, id: \.rawValue) { weight in
                     Text("Nunito \(weight.rawValue) — Wiedehopf, Rotkehlchen, Zilpzalp")
-                        .font(ZType.Step.bodyLarge.font(.body, weight: weight))
+                        .typeStyle(.bodyLarge, .body, weight: weight)
                         .foregroundStyle(ZColor.textBody)
                 }
             }

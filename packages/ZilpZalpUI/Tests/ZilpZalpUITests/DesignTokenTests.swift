@@ -1,3 +1,4 @@
+import CoreText
 import SwiftUI
 import Testing
 import ZilpZalpUI
@@ -91,6 +92,101 @@ func trackingScalesWithTheStepSize() {
     #expect(ZType.Step.hero.tracking(caps) > caps)
     #expect(ZType.Step.hero.tracking(ZType.Tracking.tightEm) < 0)
     #expect(ZType.Step.body.tracking(ZType.Tracking.normalEm) == 0)
+}
+
+@Test(
+    "Each family's natural line height is the one in the bundled TTF's hhea table",
+    arguments: [
+        (ZType.Family.display, "Baloo2-Bold", "Baloo 2"),
+        (ZType.Family.body, "Nunito-SemiBold", "Nunito"),
+    ],
+)
+func naturalLineHeightsMatchTheBundledFonts(
+    family: ZType.Family,
+    postScriptName: String,
+    familyName: String,
+) throws {
+    try #require(
+        BundledFonts.registered,
+        "neither TTF under apps/ZilpZalp/Resources/Fonts could be registered — check the path walk in BundledFonts",
+    )
+
+    // 100 pt so the returned metrics read as percentages of the em.
+    let font = CTFontCreateWithName(postScriptName as CFString, 100, nil)
+
+    // Before the metric: an unregistered name falls back to the system face,
+    // whose ~1.2 box would fail below without saying why.
+    #expect(
+        CTFontCopyFamilyName(font) as String == familyName,
+        "\(postScriptName) did not resolve to \(familyName) — the fallback face's metrics are not the design's",
+    )
+
+    let natural = (CTFontGetAscent(font) + CTFontGetDescent(font) + CTFontGetLeading(font)) / 100
+    #expect(abs(natural - family.naturalLineHeight) < 0.005)
+}
+
+@Test("Line spacing is what the CSS box has over the face's own box, never negative")
+func lineSpacingCorrectsTowardsTheCSSBox() {
+    // Nunito's 1.364 box is smaller than the body roles ask for, so each one
+    // gets its small correction and lands exactly on the CSS line pitch.
+    #expect(abs(ZType.Step.body.lineSpacing(for: .body) - 2.72) < 0.01) // 30 − 27.28
+    #expect(abs(ZType.Step.caption.lineSpacing(for: .body) - 0.58) < 0.01) // 22.4 − 21.82
+    #expect(abs(ZType.Step.bodyLarge.lineSpacing(for: .body) - 2.06) < 0.01) // 34.8 − 32.74
+
+    // Baloo 2's 1.602 box already overshoots every display role, and nothing
+    // in SwiftUI shrinks a line box — so the correction clamps to zero
+    // rather than adding to an overshoot, which is what the old additive
+    // formula did.
+    #expect(ZType.Step.label.lineSpacing(for: .display) == 0)
+    #expect(ZType.Step.headline.lineSpacing(for: .display) == 0)
+    #expect(ZType.Step.hero.lineSpacing(for: .display) == 0)
+    #expect(ZType.Step.allCases.allSatisfy { $0.lineSpacing(for: .display) == 0 })
+}
+
+@Test("The line box is the CSS one and the natural box is the face's")
+func boxHeightsSeparateTheDesignFromTheFace() {
+    // `--text-label: 22px` / `--lh-label: 1.1`. The design's box does not
+    // depend on the face; the face's box does not depend on the design.
+    #expect(ZType.Step.label.lineBoxHeight == 22 * 1.1)
+    #expect(abs(ZType.Step.label.naturalBoxHeight(for: .display) - 35.244) < 0.001)
+    #expect(abs(ZType.Step.body.naturalBoxHeight(for: .body) - 27.28) < 0.001)
+
+    // The single-line frame `typeStyle(singleLine:)` applies: 24.2 pt for a
+    // Baloo label the face would otherwise lay out in 35.2.
+    #expect(ZType.Step.label.lineBoxHeight < ZType.Step.label
+        .naturalBoxHeight(for: .display))
+}
+
+/// Registers the two variable fonts once for the whole test run — Swift
+/// Testing runs cases in parallel, and registering the same URL twice fails.
+private enum BundledFonts {
+    static let registered: Bool = {
+        let fonts = URL(fileURLWithPath: #filePath)
+            // …/packages/ZilpZalpUI/Tests/ZilpZalpUITests/DesignTokenTests.swift
+            .deletingLastPathComponent() // ZilpZalpUITests
+            .deletingLastPathComponent() // Tests
+            .deletingLastPathComponent() // ZilpZalpUI
+            .deletingLastPathComponent() // packages
+            .deletingLastPathComponent() // repository root
+            .appending(path: "apps/ZilpZalp/Resources/Fonts")
+
+        return [
+            "Baloo2/Baloo2-VariableFont_wght.ttf",
+            "Nunito/Nunito-VariableFont_wght.ttf",
+        ].allSatisfy { relativePath in
+            var error: Unmanaged<CFError>?
+            let url = fonts.appending(path: relativePath) as CFURL
+            if CTFontManagerRegisterFontsForURL(url, .process, &error) {
+                return true
+            }
+            // The app target registers the same files through `UIAppFonts`,
+            // so on a host that already has them this is a success. A
+            // failure without an error is not — and `CFErrorGetCode` takes
+            // its argument implicitly unwrapped, so it has to be checked.
+            guard let failure = error?.takeRetainedValue() else { return false }
+            return CFErrorGetCode(failure) == CTFontManagerError.alreadyRegistered.rawValue
+        }
+    }()
 }
 
 @Test("The spacing scale grows strictly from 4 to 128 pt")

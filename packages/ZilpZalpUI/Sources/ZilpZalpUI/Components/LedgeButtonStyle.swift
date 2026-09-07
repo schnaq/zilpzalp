@@ -175,7 +175,7 @@ private struct Face<Label: View>: View {
                 ForEach([false, true], id: \.self) { pressed in
                     Face(palette: tone.palette, depth: ZShadow.ledgeOffset, isPressed: pressed) {
                         Text(pressed ? "pressed" : "at rest")
-                            .font(ZType.Step.label.font(.display, weight: .bold))
+                            .typeStyle(.label, .display, weight: .bold, singleLine: true)
                             .padding(.horizontal, ZSpacing.step5)
                             .frame(minHeight: ZSpacing.touchMinimum)
                     }
