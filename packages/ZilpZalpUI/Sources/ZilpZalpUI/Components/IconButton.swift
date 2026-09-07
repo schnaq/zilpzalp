@@ -35,7 +35,7 @@ public struct IconButton: View {
     static let glyphRatio: CGFloat = 0.45
 
     private let icon: ZIcon
-    private let label: LocalizedStringKey
+    private let label: String
     private let tone: Tone
     private let action: () -> Void
 
@@ -45,14 +45,14 @@ public struct IconButton: View {
 
     /// - Parameters:
     ///   - icon: The glyph. Decorative on its own; ``label`` names the button.
-    ///   - label: What VoiceOver announces. Mandatory.
+    ///   - label: Finished text for VoiceOver to announce. Mandatory.
     ///   - tone: See ``Tone``.
     ///   - diameter: Clamped to `--touch-min` from below. The default
     ///     `--touch-comfy` is the size for anything a child taps mid-game.
     ///   - action: What the press does.
     public init(
         _ icon: ZIcon,
-        label: LocalizedStringKey,
+        label: String,
         tone: Tone = .quiet,
         diameter: CGFloat = ZSpacing.touchComfortable,
         action: @escaping () -> Void,
@@ -72,7 +72,7 @@ public struct IconButton: View {
         // `--ledge`. `IconButton.jsx` hard-codes 7 px, a value `shadows.css`
         // does not define; 6 pt is the token it was reaching for.
         .buttonStyle(LedgeButtonStyle(palette: tone.palette, depth: ZShadow.ledgeOffset))
-        .accessibilityLabel(Text(label))
+        .accessibilityLabel(label)
     }
 }
 
