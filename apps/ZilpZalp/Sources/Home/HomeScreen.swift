@@ -22,6 +22,11 @@ struct HomeScreen: View {
 
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
+    /// What the headline turned out to need, so the tiles can be sized against
+    /// the rest. It depends on the width and the font and never on the tiles,
+    /// so there is no loop here — one extra layout pass and it settles.
+    @State private var headlineHeight: CGFloat = 0
+
     /// Whether the screen is in a compact width — a phone in portrait, or an
     /// iPad sharing its screen. It settles the two type sizes only; where the
     /// tiles go is measured rather than categorised, see ``tiles(in:)``.
@@ -43,16 +48,26 @@ struct HomeScreen: View {
                 )
             }
 
-            VStack(spacing: ZSpacing.step6) {
-                headline
+            // Headline and tiles are one group, centred in what the top bar
+            // leaves. The reader measures that space so the tiles are sized
+            // against it rather than against an estimate — which is what keeps
+            // both games on screen at once from a 375 pt iPhone up, with no
+            // scroll view — and the headline reports its own height so the
+            // pair can sit in the middle instead of the tiles drifting away
+            // from the words that introduce them.
+            GeometryReader { area in
+                VStack(spacing: ZSpacing.step7) {
+                    headline
+                        .onGeometryChange(for: CGFloat.self) { $0.size.height } action: {
+                            headlineHeight = $0
+                        }
 
-                // The reader reports exactly what the headline left over, so
-                // the tiles are sized against real space rather than an
-                // estimate. That is what keeps both games on screen at once
-                // from a 375 pt iPhone up, with no scroll view.
-                GeometryReader { area in
-                    tiles(in: area.size)
+                    tiles(in: CGSize(
+                        width: area.size.width,
+                        height: max(0, area.size.height - headlineHeight - ZSpacing.step7),
+                    ))
                 }
+                .frame(width: area.size.width, height: area.size.height)
             }
             .frame(maxWidth: ZSpacing.maxContent)
             .padding(.horizontal, ZSpacing.gutterScreen)
@@ -62,12 +77,21 @@ struct HomeScreen: View {
         .background(ZColor.surfacePage)
     }
 
+    /// The one line of text on the screen, and it is for the grown-up looking
+    /// over the shoulder: a child who cannot read navigates by the pictures.
+    ///
+    /// No `.lineSpacing`: `ZType.Step.lineSpacing` adds on top of Baloo 2's
+    /// own generous line box and doubles the leading. The token is being fixed
+    /// in #91 — nothing here works around it, so the fix flows through.
     private var headline: some View {
         Text("home.title")
             .font(titleStep.font(.display, weight: .extraBold))
-            .lineSpacing(titleStep.lineSpacing)
             .foregroundStyle(ZColor.textStrong)
             .multilineTextAlignment(.center)
+            // The group around it has a fixed height and would otherwise
+            // offer the text one line's worth and let it truncate. It takes
+            // the height its own wrapping needs; the tiles get the rest.
+            .fixedSize(horizontal: false, vertical: true)
     }
 
     /// The two games, side by side or stacked — whichever arrangement the
@@ -104,7 +128,9 @@ struct HomeScreen: View {
         // label belongs there too, and this modifier belongs in the bin the
         // day #12's component does it.
         .minimumScaleFactor(ZType.Step.body.size / ZType.Step.label.size)
-        .frame(width: area.width, height: area.height)
+        // Full width so the pair sits on the screen's midline; the height is
+        // the tiles' own, so the group above can centre as one.
+        .frame(maxWidth: .infinity)
     }
 
     private func tile(
