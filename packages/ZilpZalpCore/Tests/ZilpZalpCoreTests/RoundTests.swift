@@ -111,6 +111,18 @@ func repeatsComeAfterAFullPass(poolSize: Int, seed: UInt64) throws {
     #expect(Set(tail).count == tail.count)
 }
 
+@Test("The answer does not always sit in the same place")
+func theAnswerMovesBetweenTheChoices() throws {
+    var generator = SplitMix64(seed: 19)
+    let pool = distinctGenera(10)
+
+    let round = try Round.make(from: pool, using: &generator)
+
+    // A child who learns "the last tile is right" learns nothing about birds.
+    let positions = round.questions.map { $0.choices.firstIndex(of: $0.answer) }
+    #expect(Set(positions).count > 1)
+}
+
 // MARK: - Determinism
 
 @Test("The same pool and the same seed yield the same round")
