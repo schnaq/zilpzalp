@@ -1,0 +1,361 @@
+#!/usr/bin/env python3
+"""Generate the credits from the pack manifests and the vendored licence files.
+
+Attribution is never written by hand. It is derived from `data/packs/*/manifest.json`,
+the same file the licence gate reads and tools/fetch-media writes, so a photo that is
+exchanged changes its credit line with it. Fonts and icons are not in any manifest;
+they come from the static lists below, whose licence files must exist in the
+repository.
+
+Two outputs, both committed:
+
+  CREDITS.md
+      For humans — readers of the repository and of the App Store listing.
+  packages/ZilpZalpData/Sources/ZilpZalpData/Resources/credits.json
+      For the in-app credits screen (#37), decoded by `Credits.bundled()`.
+
+Both are written deterministically: packs sorted by id, birds in manifest order,
+photo before call, no timestamps. Running the tool twice yields identical bytes.
+
+Locally it heals both files and says so. In CI it is the drift check: whenever it
+had to change anything, it exits 1, because the committed credits did not match the
+assets they name.
+
+Usage: python3 tools/generate_credits.py [packs_dir]  (default: data/packs)
+Exit code 0 if both outputs were already current, 1 if one was not or a manifest
+or licence file is unusable.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+# Anchored on the repository, not on the working directory, so the tool finds the
+# manifests no matter where it is called from.
+REPO_ROOT = Path(__file__).resolve().parent.parent
+DEFAULT_PACKS_DIR = REPO_ROOT / "data" / "packs"
+CREDITS_MD = REPO_ROOT / "CREDITS.md"
+CREDITS_JSON = REPO_ROOT / "packages" / "ZilpZalpData" / "Sources" / "ZilpZalpData" / "Resources" / "credits.json"
+
+# Human label and deed for the licences the gate permits. The gate stays the
+# authority on what is allowed; an id missing here is rendered as itself and
+# fails moments later in `mise run check`, which is where that error belongs.
+LICENCES = {
+    "CC0-1.0": ("CC0 1.0", "https://creativecommons.org/publicdomain/zero/1.0/"),
+    "CC-BY-4.0": ("CC BY 4.0", "https://creativecommons.org/licenses/by/4.0/"),
+    "CC-BY-SA-4.0": ("CC BY-SA 4.0", "https://creativecommons.org/licenses/by-sa/4.0/"),
+}
+
+# The keys of a font or icon entry that reach credits.json. `label` and
+# `licenseFile` are for CREDITS.md and for the existence check.
+STATIC_JSON_KEYS = ("name", "authors", "license", "licenseURL")
+
+FONTS = (
+    {
+        "name": "Baloo 2",
+        "authors": ["Ek Type"],
+        "license": "OFL-1.1",
+        "label": "SIL Open Font License 1.1",
+        "licenseURL": "https://openfontlicense.org/",
+        "licenseFile": "apps/ZilpZalp/Resources/Fonts/Baloo2/OFL.txt",
+    },
+    {
+        "name": "Nunito",
+        "authors": ["Vernon Adams", "Cyreal", "Jacques Le Bailly"],
+        "license": "OFL-1.1",
+        "label": "SIL Open Font License 1.1",
+        "licenseURL": "https://openfontlicense.org/",
+        "licenseFile": "apps/ZilpZalp/Resources/Fonts/Nunito/OFL.txt",
+    },
+)
+
+# Lucide is ISC, but part of it descends from Feather under MIT — and icons from
+# that list do ship here (check, chevron-left, clock, feather, lock, music, type
+# among them), so the MIT notice is required, not decorative. Both entries point
+# at the one vendored file, which carries both licence texts.
+ICONS = (
+    {
+        "name": "Lucide",
+        "authors": ["Lucide Icons and Contributors"],
+        "license": "ISC",
+        "label": "ISC",
+        "licenseURL": "https://opensource.org/license/isc-license-txt",
+        "licenseFile": "packages/ZilpZalpUI/Sources/ZilpZalpUI/Resources/Licenses/LICENSE-lucide.txt",
+    },
+    {
+        "name": "Feather",
+        "authors": ["Cole Bemis"],
+        "license": "MIT",
+        "label": "MIT",
+        "licenseURL": "https://opensource.org/license/mit",
+        "licenseFile": "packages/ZilpZalpUI/Sources/ZilpZalpUI/Resources/Licenses/LICENSE-lucide.txt",
+    },
+)
+
+
+def escape_data(message: str) -> str:
+    """Escape data for a GitHub workflow command — % first, then the line breaks."""
+    return message.replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
+
+
+def cell(text: str) -> str:
+    """Escape a value for a Markdown table cell.
+
+    Bird names and attributions are data — a photographer called `A|B` must not
+    be able to shear the table apart.
+    """
+    return text.replace("\\", "\\\\").replace("|", "\\|").replace("\n", " ")
+
+
+def link(label: str, url: str) -> str:
+    """A Markdown link. Only ever called with the fixed URLs of the lists above."""
+    return f"[{label}]({url})"
+
+
+def field(media: dict, name: str, label: str) -> str:
+    """Return the non-empty string value of `name`, or raise naming the field."""
+    value = media.get(name)
+    if not isinstance(value, str) or not value.strip():
+        raise ValueError(f"{label}: field '{name}' is missing or empty")
+    return value.strip()
+
+
+def pack_media(document: object, source: str) -> list[dict]:
+    """Return the credit entries of one manifest, photo before call per bird.
+
+    Raises `ValueError` naming what is wrong. The licence gate checks the same
+    manifests far more thoroughly, but it runs after this tool, so a broken
+    manifest has to fail here as a sentence rather than as a traceback.
+    """
+    if not isinstance(document, dict):
+        raise ValueError(f"{source}: is not an object")
+
+    pack_id = field(document, "id", source)
+    birds = document.get("birds")
+    if not isinstance(birds, list):
+        raise ValueError(f"{pack_id}: no birds found (expected an object whose 'birds' key holds a list)")
+
+    entries = []
+    for index, bird in enumerate(birds, start=1):
+        if not isinstance(bird, dict):
+            raise ValueError(f"{pack_id} / bird #{index}: is not an object")
+
+        bird_id = field(bird, "id", f"{pack_id} / bird #{index}")
+        label = f"{pack_id} / {bird_id}"
+
+        # A bird without a photo is not creditable. The gate says the same, in
+        # its own words, on the next line of `mise run check`.
+        if bird.get("photo") is None:
+            raise ValueError(f"{label}: field 'photo' is missing")
+
+        for kind in ("photo", "call"):
+            # The call is optional and stays null until a freely licensed
+            # recording exists for the bird.
+            media = bird.get(kind)
+            if media is None:
+                continue
+            if not isinstance(media, dict):
+                raise ValueError(f"{label} / {kind}: is not an object")
+
+            entries.append(
+                {
+                    "packID": pack_id,
+                    "birdID": bird_id,
+                    "birdName": field(bird, "name", label),
+                    "kind": kind,
+                    "attribution": field(media, "attribution", f"{label} / {kind}"),
+                    "license": field(media, "license", f"{label} / {kind}"),
+                    "sourceURL": field(media, "sourceURL", f"{label} / {kind}"),
+                }
+            )
+
+    return entries
+
+
+def read_packs(packs_dir: Path) -> list[dict]:
+    """Read every pack under `packs_dir`, sorted by pack id.
+
+    One manifest per pack directory, as the manifest contract has it. Hidden
+    directories are skipped for the same reason `sync_bundled_packs.py` skips
+    hidden files: nothing in a pack starts with a dot, and `.DS_Store` must not
+    turn into drift.
+    """
+    packs = []
+
+    for manifest in sorted(packs_dir.glob("*/manifest.json")):
+        if any(part.startswith(".") for part in manifest.relative_to(packs_dir).parts):
+            continue
+
+        source = str(manifest.relative_to(packs_dir))
+        document = json.loads(manifest.read_text(encoding="utf-8"))
+        packs.append(
+            {
+                "path": manifest,
+                "id": field(document, "id", source),
+                "title": field(document, "title", source),
+                "media": pack_media(document, source),
+            }
+        )
+
+    packs.sort(key=lambda pack: pack["id"])
+    return packs
+
+
+def render_markdown(packs: list[dict]) -> str:
+    """Render CREDITS.md."""
+    lines = [
+        "# Credits",
+        "",
+        "Generated by `tools/generate_credits.py` from the pack manifests under",
+        "`data/packs/` and the licence files vendored in this repository. Do not edit by",
+        "hand — `mise run check` regenerates the file and fails when it had drifted.",
+        "",
+        "Every photo and every recording is used under a licence that permits commercial",
+        "use and derivative works: CC0, CC BY or CC BY-SA. The names below are the ones",
+        "the source declared.",
+        "",
+        "## Photos and calls",
+    ]
+
+    for pack in packs:
+        lines += [
+            "",
+            f"### {cell(pack['title'])} (`{pack['id']}`)",
+            "",
+            "| Bird | Kind | Author | Licence | Source |",
+            "| --- | --- | --- | --- | --- |",
+        ]
+        for entry in pack["media"]:
+            label, deed = LICENCES.get(entry["license"], (entry["license"], ""))
+            licence = link(label, deed) if deed else cell(label)
+            lines.append(
+                f"| {cell(entry['birdName'])} "
+                f"| {entry['kind'].capitalize()} "
+                f"| {cell(entry['attribution'])} "
+                f"| {licence} "
+                # An autolink, so the URL itself stays readable: proof of origin
+                # is worth more here than a tidy column.
+                f"| <{entry['sourceURL']}> |"
+            )
+
+    for heading, group, first_column in (("Fonts", FONTS, "Font"), ("Icons", ICONS, "Set")):
+        lines += [
+            "",
+            f"## {heading}",
+            "",
+            f"| {first_column} | Authors | Licence | Licence text |",
+            "| --- | --- | --- | --- |",
+        ]
+        for entry in group:
+            lines.append(
+                f"| {cell(entry['name'])} "
+                f"| {cell(', '.join(entry['authors']))} "
+                f"| {link(entry['label'], entry['licenseURL'])} "
+                f"| `{entry['licenseFile']}` |"
+            )
+
+    lines += [
+        "",
+        "Some Lucide icons descend from the Feather project and carry the MIT licence",
+        "instead of ISC. The vendored `LICENSE-lucide.txt` names them and holds both",
+        "licence texts.",
+        "",
+    ]
+
+    return "\n".join(lines)
+
+
+def render_json(packs: list[dict]) -> str:
+    """Render credits.json — the document `Credits.bundled()` decodes."""
+    document = {
+        "media": [entry for pack in packs for entry in pack["media"]],
+        "fonts": [{key: entry[key] for key in STATIC_JSON_KEYS} for entry in FONTS],
+        "icons": [{key: entry[key] for key in STATIC_JSON_KEYS} for entry in ICONS],
+    }
+    # ensure_ascii=False, or "Вячеслав Юсупов" would ship as escape sequences and
+    # nobody could read their own name in the credits.
+    return json.dumps(document, indent=2, ensure_ascii=False) + "\n"
+
+
+def repo_relative(path: Path) -> str:
+    """The path as it is written in the repository, absolute when outside it."""
+    try:
+        return str(path.relative_to(REPO_ROOT))
+    except ValueError:
+        return str(path)
+
+
+def write_if_changed(path: Path, text: str) -> bool:
+    """Write `text` to `path` unless it is already there. Returns whether it changed."""
+    encoded = text.encode("utf-8")
+    if path.is_file() and path.read_bytes() == encoded:
+        return False
+
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_bytes(encoded)
+    return True
+
+
+def missing_licence_files() -> list[str]:
+    """Return the licence files of the static lists that are not in the repository."""
+    return sorted(
+        {entry["licenseFile"] for entry in FONTS + ICONS if not (REPO_ROOT / entry["licenseFile"]).is_file()}
+    )
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument(
+        "packs_dir",
+        nargs="?",
+        default=DEFAULT_PACKS_DIR,
+        type=Path,
+        help=f"directory holding the pack manifests (default: {DEFAULT_PACKS_DIR})",
+    )
+    args = parser.parse_args(argv)
+
+    if not args.packs_dir.is_dir():
+        print(f"::error::{escape_data(f'Pack directory not found: {args.packs_dir}')}")
+        return 1
+
+    # A font that ships without its licence text is the same violation as a photo
+    # without attribution, and the credits would name a file that is not there.
+    missing = missing_licence_files()
+    for relative in missing:
+        print(f"::error::{escape_data(f'Licence file missing: {relative}')}")
+    if missing:
+        return 1
+
+    try:
+        packs = read_packs(args.packs_dir)
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError) as error:
+        print(f"::error::{escape_data(f'Credits cannot be generated: {error}')}")
+        return 1
+
+    stale = [
+        repo_relative(path)
+        for path, text in ((CREDITS_MD, render_markdown(packs)), (CREDITS_JSON, render_json(packs)))
+        if write_if_changed(path, text)
+    ]
+    assets = sum(len(pack["media"]) for pack in packs)
+
+    if stale:
+        message = (
+            f"The credits were stale and have been regenerated from {args.packs_dir} "
+            f"({', '.join(stale)}). Commit the result."
+        )
+        print(f"::error::{escape_data(message)}")
+        return 1
+
+    print(
+        f"Credits current: {assets} media asset(s) in {len(packs)} pack(s), "
+        f"{len(FONTS)} font(s), {len(ICONS)} icon set(s)"
+    )
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

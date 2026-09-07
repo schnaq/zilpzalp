@@ -45,6 +45,10 @@ set -euo pipefail
 # without this step drift would only surface minutes later, as a failing
 # PackCatalogTests.
 mise run sync-packs
+# Between the two on purpose: the credits are derived from the manifests, so
+# they are regenerated while the derived files are being made current, and the
+# gate then judges the manifests themselves.
+mise run generate-credits
 mise run license-gate
 
 # --lint does not correct, it reports: unformatted code should break the build
@@ -133,6 +137,17 @@ set -euo pipefail
 # In CI it is the drift check: it exits non-zero whenever it had to change
 # anything, because then the commit ships a pack that differs from data/packs.
 python tools/sync_bundled_packs.py
+'''
+
+[tasks.generate-credits]
+description = "Write CREDITS.md and credits.json from the manifests and fail if they had drifted"
+run = '''
+set -euo pipefail
+
+# Locally this heals both files. In CI it is the drift check: it exits non-zero
+# whenever it had to change anything, because then the committed credits did
+# not match the assets they name. Attribution is never written by hand.
+python tools/generate_credits.py
 '''
 
 [tasks.fetch-media]
