@@ -89,6 +89,13 @@ def build(*, uploading: str | None, in_bucket: Callable[[str], bool]) -> dict:
     A pack is listed only when the bucket holds its manifest, or when this run
     is about to put it there. Without that guard the index of a multi-pack
     repository would advertise packs nobody has ever uploaded.
+
+    Presence, deliberately, not sameness: a pack whose manifest was re-curated
+    but not yet uploaded keeps its entry, described by the local files, rather
+    than vanishing from the app's pack list until somebody uploads it again.
+    The entry is then a little ahead of the bucket — a size, not a broken
+    download, since the downloader verifies every file against the manifest it
+    fetched. Whoever adds the second pack should revisit that trade.
     """
     entries = []
     for pack_id in packs():

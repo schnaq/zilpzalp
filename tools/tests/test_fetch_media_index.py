@@ -203,6 +203,14 @@ class CommandTests(PacksTestCase):
         document = index.build(uploading="deutschland", in_bucket=never)
         return len(manifest.dump(document).encode("utf-8"))
 
+    def staged_index(self):
+        """Catch the document the command hands to `index.staged`."""
+        return mock.patch.object(index, "staged", wraps=index.staged)
+
+    def listed(self, staged) -> list[str]:
+        """The pack ids of that document."""
+        return [pack["id"] for pack in staged.call_args.args[0]["packs"]]
+
     def test_reports_the_index_last_on_a_dry_run(self) -> None:
         """`s3.sync` is covered against a stubbed bucket in the s3 tests; what
         matters here is that the index is reported, and reported last."""
@@ -227,12 +235,31 @@ class CommandTests(PacksTestCase):
             ],
         )
 
+    def test_lists_a_pack_the_bucket_already_holds(self) -> None:
+        """The other half of the guard, through the command this time."""
+        self.write_pack("alpen", "Vögel der Alpen", ["star"])
+        credentials = mock.patch.object(
+            s3, "client_from_env", return_value=(mock.sentinel.client, BUCKET)
+        )
+        holds_everything = mock.patch.object(s3, "remote_sha256", return_value="0" * 64)
+
+        with credentials, holds_everything, self.staged_index() as staged:
+            exit_code, _ = self.upload("--dry-run")
+
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(self.listed(staged), ["alpen", "deutschland"])
+
     def test_lists_the_index_without_credentials(self) -> None:
         """Issue #15: a dry run works on a machine without S3 keys."""
-        exit_code, lines = self.upload("--dry-run")
+        self.write_pack("alpen", "Vögel der Alpen", ["star"])
+
+        with self.staged_index() as staged:
+            exit_code, lines = self.upload("--dry-run")
 
         self.assertEqual(exit_code, 0)
         self.assertIn("unchecked  packs/index.json", lines[-1])
+        # Nothing can be asked about `alpen`, so it stays out of the index.
+        self.assertEqual(self.listed(staged), ["deutschland"])
 
     def test_writes_nothing_below_data_packs(self) -> None:
         """The licence gate and the credits generator read every *.json there."""
