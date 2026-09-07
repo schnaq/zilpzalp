@@ -32,15 +32,18 @@ func withTemporaryDirectory(_ body: (URL) async throws -> Void) async throws {
     try await body(directory)
 }
 
-/// Puts a file where the store looks for it.
-func seedProfileFile(_ contents: Data, in directory: URL) throws {
-    let profiles = directory.appending(path: "Profiles")
-    try FileManager.default.createDirectory(at: profiles, withIntermediateDirectories: true)
-    try contents.write(to: profiles.appending(path: "profiles.json"))
-}
-
 func profileFileURL(in directory: URL) -> URL {
     directory.appending(path: "Profiles/profiles.json")
+}
+
+/// Puts a file where the store looks for it.
+func seedProfileFile(_ contents: Data, in directory: URL) throws {
+    let file = profileFileURL(in: directory)
+    try FileManager.default.createDirectory(
+        at: file.deletingLastPathComponent(),
+        withIntermediateDirectories: true,
+    )
+    try contents.write(to: file)
 }
 
 func profileFileText(in directory: URL) throws -> String {

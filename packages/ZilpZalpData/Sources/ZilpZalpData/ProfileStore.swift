@@ -248,16 +248,16 @@ public actor ProfileStore {
     /// from a build newer than their own should be able to see what they are
     /// holding before trying to understand the rest of it.
     private static func document(of profiles: [Profile]) throws -> Data {
-        // The array is pretty-printed from column zero; in the document it
-        // sits one level in, so every line break gains two spaces.
-        let newline = UInt8(ascii: "\n")
-        let space = UInt8(ascii: " ")
-        let indented = try encoder.encode(profiles).flatMap { byte in
-            byte == newline ? [byte, space, space] : [byte]
-        }
-
         var document = Data("{\n  \"schemaVersion\" : \(schemaVersion),\n  \"profiles\" : ".utf8)
-        document.append(contentsOf: indented)
+        // The array is pretty-printed from column zero; in the document it
+        // sits one level in, so every line break gains two spaces. Line
+        // breaks inside a value cannot be hit: the encoder escapes them.
+        for byte in try encoder.encode(profiles) {
+            document.append(byte)
+            if byte == UInt8(ascii: "\n") {
+                document.append(contentsOf: "  ".utf8)
+            }
+        }
         document.append(contentsOf: "\n}\n".utf8)
         return document
     }

@@ -100,6 +100,19 @@ struct ProfileStoreTests {
         }
     }
 
+    @Test("deleting the last profile leaves a file that still reads")
+    func deletesLastProfile() async throws {
+        try await withTemporaryDirectory { directory in
+            let store = ProfileStore(directory: directory)
+            let mila = try await store.add(name: "Mila", avatar: "feather")
+
+            try await store.delete(mila.id)
+
+            #expect(try await ProfileStore(directory: directory).profiles().isEmpty)
+            #expect(try profileFileText(in: directory).hasPrefix("{\n  \"schemaVersion\" : 1,"))
+        }
+    }
+
     @Test("deleting a profile that is not in the file is an error")
     func rejectsUnknownDelete() async throws {
         try await withTemporaryDirectory { directory in
