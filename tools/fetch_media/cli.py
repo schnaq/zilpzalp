@@ -64,23 +64,39 @@ def selected_birds(document: dict, species: list[str] | None) -> list[dict]:
     return [manifest.bird(document, bird_id) for bird_id in species]
 
 
+def by_observation(candidates: list[inaturalist.Candidate]) -> dict[int, list[inaturalist.Candidate]]:
+    """Group the candidates by observation, keeping the API's order."""
+    grouped: dict[int, list[inaturalist.Candidate]] = {}
+    for candidate in candidates:
+        grouped.setdefault(candidate.observation_id, []).append(candidate)
+    return grouped
+
+
 def print_table(candidates: list[inaturalist.Candidate]) -> None:
-    """Print the candidates as a table a human can read in a terminal."""
+    """Print the candidates as a table a human can read in a terminal.
+
+    One line per observation rather than per photo: a series of a dozen shots
+    of the same bird from the same minute is one decision, not twelve, and the
+    observation page shows them all anyway. The candidate file keeps every
+    photo id, so picking the third shot of a series needs no second query.
+    """
     if not candidates:
         print("No usable photo found.")
         return
 
     rows = []
-    for candidate in candidates:
+    for group in by_observation(candidates).values():
+        candidate = group[0]
         side = candidate.square_side
         size = "unknown" if side is None else f"{candidate.width}×{candidate.height}"
         if side is not None and side < images.SIDE:
             size += " !"
+        further = f" +{len(group) - 1}" if len(group) > 1 else ""
         rows.append(
             [
                 candidate.bird_id,
                 str(candidate.observation_id),
-                str(candidate.photo_id),
+                f"{candidate.photo_id}{further}",
                 candidate.license,
                 size,
                 candidate.photographer,
@@ -96,8 +112,9 @@ def print_table(candidates: list[inaturalist.Candidate]) -> None:
         cells = [cell.ljust(width) for cell, width in zip(row, widths, strict=False)]
         print("  ".join([*cells, row[-1]]).rstrip())
 
+    print("\n+n  further usable photos of the same observation, listed in the candidate file")
     if any(" !" in row[4] for row in rows):
-        print(f"\n!  smaller than {images.SIDE} px on the short side — 'pick' refuses to upscale it")
+        print(f"!   smaller than {images.SIDE} px on the short side — 'pick' refuses to upscale it")
 
 
 def command_candidates(args: argparse.Namespace) -> int:
@@ -132,7 +149,10 @@ def command_candidates(args: argparse.Namespace) -> int:
     )
 
     print_table(candidates)
-    print(f"\n{len(candidates)} candidate(s) for {len(birds)} species → {destination}")
+    print(
+        f"\n{len(candidates)} usable photo(s) in {len(by_observation(candidates))} observation(s) "
+        f"for {len(birds)} species → {destination}"
+    )
     print("Look at the photos, then run 'photos pick' with the observation and photo id.")
     return 0
 

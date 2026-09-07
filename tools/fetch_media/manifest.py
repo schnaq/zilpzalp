@@ -24,14 +24,14 @@ PACKS_DIR = REPO_ROOT / "data" / "packs"
 MEDIA_KEYS = ("file", "sha256", "license", "attribution", "sourceURL", "retrieved")
 
 
-def pack_dir(pack_id: str, packs_dir: Path = PACKS_DIR) -> Path:
+def pack_dir(pack_id: str) -> Path:
     """The directory of one pack — manifest and media sit together."""
-    return packs_dir / pack_id
+    return PACKS_DIR / pack_id
 
 
-def manifest_path(pack_id: str, packs_dir: Path = PACKS_DIR) -> Path:
+def manifest_path(pack_id: str) -> Path:
     """The manifest of one pack."""
-    return pack_dir(pack_id, packs_dir) / "manifest.json"
+    return pack_dir(pack_id) / "manifest.json"
 
 
 def sha256_of(path: Path) -> str:

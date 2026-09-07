@@ -225,15 +225,30 @@ class Client:
     def __exit__(self, *_: object) -> None:
         self._http.close()
 
-    def _get(self, url: str, params: dict | None = None) -> httpx.Response:
-        """Fetch `url`, waiting out the rate limit first."""
+    def _wait(self) -> None:
+        """Hold the request rate the API documentation asks for."""
         if self._last_request is not None:
             pause = self._min_interval - (time.monotonic() - self._last_request)
             if pause > 0:
                 time.sleep(pause)
-
-        response = self._http.get(url, params=params)
         self._last_request = time.monotonic()
+
+    def _get(self, url: str, params: dict | None = None) -> httpx.Response:
+        """Fetch `url`, waiting out the rate limit first.
+
+        One retry, because the server was observed to close a connection
+        without answering. A whole pack is ten requests in a row; losing the
+        ninth to a hiccup would mean asking for all ten again.
+        """
+        for attempt in (1, 2):
+            self._wait()
+            try:
+                response = self._http.get(url, params=params)
+                break
+            except httpx.TransportError:
+                if attempt == 2:
+                    raise
+
         response.raise_for_status()
         return response
 
