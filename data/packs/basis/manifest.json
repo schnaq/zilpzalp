@@ -1,0 +1,176 @@
+{
+  "id": "basis",
+  "title": "Unsere ersten Vögel",
+  "birds": [
+    {
+      "id": "amsel",
+      "name": "Amsel",
+      "scientificName": "Turdus merula",
+      "taxonID": 12716,
+      "article": "die",
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/amsel.png",
+        "sha256": "34812f13fdc872eafca4f5c2081d8e205ee9c2d42638b51a0369897c39f9931b",
+        "license": "CC-BY-4.0",
+        "attribution": "Alexis Tinker-Tsavalas",
+        "sourceURL": "https://www.inaturalist.org/observations/20490738",
+        "retrieved": "2026-07-31"
+      },
+      "call": null
+    },
+    {
+      "id": "blaumeise",
+      "name": "Blaumeise",
+      "scientificName": "Cyanistes caeruleus",
+      "taxonID": 144849,
+      "article": "die",
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/blaumeise.png",
+        "sha256": "c536f4067666a5ecf7cdfc0e942ae31570e6f752acfe51448740fe0de89d352d",
+        "license": "CC-BY-4.0",
+        "attribution": "Thorsten Hackbarth",
+        "sourceURL": "https://www.inaturalist.org/observations/153819994",
+        "retrieved": "2026-07-31"
+      },
+      "call": null
+    },
+    {
+      "id": "buntspecht",
+      "name": "Buntspecht",
+      "scientificName": "Dendrocopos major",
+      "taxonID": 17871,
+      "article": "der",
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/buntspecht.png",
+        "sha256": "eb945da91bd1bfb3ac8d71d8032305a1318f204752f28fcd68b0c7d2766fe4ab",
+        "license": "CC-BY-4.0",
+        "attribution": "Вячеслав Юсупов",
+        "sourceURL": "https://www.inaturalist.org/observations/18530920",
+        "retrieved": "2026-07-31"
+      },
+      "call": null
+    },
+    {
+      "id": "eisvogel",
+      "name": "Eisvogel",
+      "scientificName": "Alcedo atthis",
+      "taxonID": 2599,
+      "article": "der",
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/eisvogel.png",
+        "sha256": "1261715b2d3adc9f5e837ec6110ff040a335555217285115c0ed163ea27633b9",
+        "license": "CC-BY-4.0",
+        "attribution": "Alexis Lours",
+        "sourceURL": "https://www.inaturalist.org/observations/98375354",
+        "retrieved": "2026-07-31"
+      },
+      "call": null
+    },
+    {
+      "id": "hausrotschwanz",
+      "name": "Hausrotschwanz",
+      "scientificName": "Phoenicurus ochruros",
+      "taxonID": 13000,
+      "article": "der",
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/hausrotschwanz.png",
+        "sha256": "3ba2c152bd6475008542ffd759fb7a7442e28779ce34a6358896aa2c8af90b36",
+        "license": "CC-BY-4.0",
+        "attribution": "SteveM4560",
+        "sourceURL": "https://www.inaturalist.org/observations/345090569",
+        "retrieved": "2026-07-31"
+      },
+      "call": null
+    },
+    {
+      "id": "kohlmeise",
+      "name": "Kohlmeise",
+      "scientificName": "Parus major",
+      "taxonID": 203153,
+      "article": "die",
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/kohlmeise.png",
+        "sha256": "a4e99c764ea58648296a108ef2938f8da04e7f3bc0dbdec5c4ba14560174fe78",
+        "license": "CC-BY-4.0",
+        "attribution": "SteveM4560",
+        "sourceURL": "https://www.inaturalist.org/observations/258365796",
+        "retrieved": "2026-07-31"
+      },
+      "call": null
+    },
+    {
+      "id": "rotkehlchen",
+      "name": "Rotkehlchen",
+      "scientificName": "Erithacus rubecula",
+      "taxonID": 13094,
+      "article": "das",
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/rotkehlchen.png",
+        "sha256": "c4d21e4d129bbd60db3d7c6f90c0a589b1606abffdf057276864f0256aaebae5",
+        "license": "CC-BY-4.0",
+        "attribution": "Alexis Tinker-Tsavalas",
+        "sourceURL": "https://www.inaturalist.org/observations/19776411",
+        "retrieved": "2026-07-31"
+      },
+      "call": null
+    },
+    {
+      "id": "star",
+      "name": "Star",
+      "scientificName": "Sturnus vulgaris",
+      "taxonID": 14850,
+      "article": "der",
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/star.png",
+        "sha256": "b6ba9fd29029a5ce00a30794207f17b08be2158b6fee3792ce38972b6ea0b8cd",
+        "license": "CC-BY-4.0",
+        "attribution": "egorbirder",
+        "sourceURL": "https://www.inaturalist.org/observations/72752929",
+        "retrieved": "2026-07-31"
+      },
+      "call": null
+    },
+    {
+      "id": "wiedehopf",
+      "name": "Wiedehopf",
+      "scientificName": "Upupa epops",
+      "taxonID": 20969,
+      "article": "der",
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/wiedehopf.png",
+        "sha256": "dcfc77bd8a31b03148c6e2b853cd46228f6f515eba328d5bcd91a67e1502aaa8",
+        "license": "CC-BY-4.0",
+        "attribution": "Dmitry Ivanov",
+        "sourceURL": "https://www.inaturalist.org/observations/299928082",
+        "retrieved": "2026-07-31"
+      },
+      "call": null
+    },
+    {
+      "id": "zilpzalp",
+      "name": "Zilpzalp",
+      "scientificName": "Phylloscopus collybita",
+      "taxonID": 117016,
+      "article": "der",
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/zilpzalp.png",
+        "sha256": "e198ad12c9cebd9d76d77f84d26977bfa7de0856f426d80f0bba191e3eee5b59",
+        "license": "CC-BY-4.0",
+        "attribution": "Tomas Broucek",
+        "sourceURL": "https://www.inaturalist.org/observations/353438691",
+        "retrieved": "2026-07-31"
+      },
+      "call": null
+    }
+  ]
+}

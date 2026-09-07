@@ -11,7 +11,10 @@ let package = Package(
         .library(name: "ZilpZalpData", targets: ["ZilpZalpData"]),
     ],
     targets: [
-        .target(name: "ZilpZalpData"),
+        // .copy, not .process: the pack directory keeps its shape inside
+        // Bundle.module, so `photos/amsel.png` from the manifest resolves
+        // against the bundle exactly as it does against data/packs.
+        .target(name: "ZilpZalpData", resources: [.copy("Resources/Packs")]),
         // .copy, not .process: Fixtures/valid stays a directory inside
         // Bundle.module, so the tests look the manifests up under the same
         // path the licence gate is run on.
