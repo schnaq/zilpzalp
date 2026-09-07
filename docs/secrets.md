@@ -85,6 +85,10 @@ echo "::add-mask::$XENO_CANTO_API_KEY"
 
 Bei mehrzeiligen Werten wie einem Base64-Zertifikat zeilenweise maskieren.
 
+## Smoke-Test
+
+`.github/workflows/secrets-smoke.yml` (`workflow_dispatch`, self-hosted Runner) prüft, ob die Machine Identity aus CI heraus tatsächlich lesen kann. Er lädt bewusst nur einen unkritischen Wert (`S3_BUCKET`), maskiert ihn und bricht ab, wenn er leer ist. Ein grüner Lauf ist der Beleg für #6, dass die drei `INFISICAL_*`-Repository-Secrets funktionieren — nicht mehr.
+
 ## Wenn ein Secret kompromittiert ist
 
 1. In Infisical rotieren, nicht nur löschen
