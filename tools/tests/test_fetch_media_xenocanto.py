@@ -376,6 +376,12 @@ class CandidatesTests(CallsTestCase):
         self.assertIn("amsel", table)
         self.assertIn("3 usable (0 in A, 3 in B), 3 unusable", table)
 
+    def test_counts_the_recordings_the_type_filter_holds_back(self) -> None:
+        table = self.run_candidates([record(id="1"), record(id="2", type="begging call")])
+
+        self.assertIn("0 unusable, 3 of another type", table)
+        self.assertIn("--type shows it", table)
+
     def test_warns_about_a_species_without_a_usable_recording(self) -> None:
         table = self.run_candidates([record(lic=BY_SA_3)])
 

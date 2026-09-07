@@ -304,19 +304,20 @@ def command_call_candidates(args: argparse.Namespace) -> int:
 
     with xenocanto.Client(xenocanto.api_key()) as client:
         for bird in birds:
-            found = xenocanto.call_candidates(
-                bird["id"], client.recordings(bird["scientificName"]), args.type
-            )
+            records = client.recordings(bird["scientificName"])
+            found = xenocanto.call_candidates(bird["id"], records, args.type)
             usable = [entry for entry in found if entry.usable]
             if not usable:
                 message = f"{bird['id']}: no freely licensed recording found"
                 print(f"::warning::{escape_data(message)}")
 
             quality = collections.Counter(entry.quality for entry in usable)
+            hidden = len(records) - len(found)
             summaries.append(
                 f"{bird['id']:<16}{len(usable):>3} usable "
                 f"({quality['A']} in A, {quality['B']} in B), "
                 f"{len(found) - len(usable)} unusable"
+                + (f", {hidden} of another type" if hidden else "")
             )
             every += found
             listed += found[: args.limit]
@@ -336,6 +337,8 @@ def command_call_candidates(args: argparse.Namespace) -> int:
     print()
     for summary in summaries:
         print(summary)
+    if any("another type" in summary for summary in summaries):
+        print("\nA sound the game cannot use, or not the --type asked for. --type shows it.")
     print(
         f"\n{len(every)} recording(s) for {len(birds)} species, "
         f"{len(listed)} listed → {destination}"
