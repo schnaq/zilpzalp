@@ -12,14 +12,9 @@ import ZilpZalpUI
 ///
 /// The screen holds no state. It reports which game was tapped and when the
 /// grown-ups' door was opened; where those lead is ``RootView``'s business.
-///
-/// `@MainActor` on the type rather than on `body` alone: `HomeTile.defaultSize`
-/// is main-actor isolated because `HomeTile` is a `View`, and the helpers below
-/// reach for it.
-@MainActor
 struct HomeScreen: View {
-    /// The wordmark's size in the top bar. `HomeScreen.jsx` sets 44; on a
-    /// phone it drops to the wordmark's own floor.
+    /// The wordmark's size in the top bar, from `HomeScreen.jsx`. In a compact
+    /// width it drops to the wordmark's own floor.
     private static let wordmarkSize: CGFloat = 44
 
     let openGame: (Game) -> Void
@@ -27,6 +22,9 @@ struct HomeScreen: View {
 
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
+    /// Whether the screen is in a compact width — a phone in portrait, or an
+    /// iPad sharing its screen. It settles the two type sizes only; where the
+    /// tiles go is measured rather than categorised, see ``tiles(in:)``.
     private var isCompact: Bool {
         horizontalSizeClass == .compact
     }
@@ -50,8 +48,8 @@ struct HomeScreen: View {
 
                 // The reader reports exactly what the headline left over, so
                 // the tiles are sized against real space rather than an
-                // estimate — and both games are on screen at once on every
-                // device, without a scroll view and without a device check.
+                // estimate. That is what keeps both games on screen at once
+                // from a 375 pt iPhone up, with no scroll view.
                 GeometryReader { area in
                     tiles(in: area.size)
                 }
@@ -72,13 +70,16 @@ struct HomeScreen: View {
             .multilineTextAlignment(.center)
     }
 
-    /// The two games, side by side in a wide space and stacked in a tall one.
+    /// The two games, side by side or stacked — whichever arrangement the
+    /// space makes the tiles bigger in.
     ///
-    /// The shape of the space decides, not the device: an iPad in Slide Over
-    /// stacks, an iPhone in landscape puts them in a row, and neither case
-    /// needs a rule of its own.
+    /// One rule, no cases: an iPad ends up in a row in either orientation, an
+    /// iPhone stacks in portrait and rows in landscape, an iPad in Slide Over
+    /// stacks. Bigger tiles are the whole goal — they are what a
+    /// four-year-old aims at.
     private func tiles(in area: CGSize) -> some View {
-        let sideBySide = area.width >= area.height
+        let sideBySide = tileSize(in: area, sideBySide: true)
+            >= tileSize(in: area, sideBySide: false)
         let size = tileSize(in: area, sideBySide: sideBySide)
         let arrangement = sideBySide
             ? AnyLayout(HStackLayout(spacing: ZSpacing.gapTiles))
@@ -91,11 +92,15 @@ struct HomeScreen: View {
             tile(.names, icon: .bird, tone: .hoopoe, size: size)
             tile(.calls, icon: .volume2, tone: .leaf, size: size)
         }
-        // `HomeTile` sizes its label off the tile, so on a small screen the
-        // tile shrinks until "Wer singt da?" would read "Wer singt d…". A
-        // second line and a little shrinking keep the words whole instead, and
-        // the floor is the design's own: nothing a child reads goes below
-        // 20 pt.
+        // `HomeTile` draws its label at a fixed 22 pt whatever edge length it
+        // is given, so a tile the space forces down far enough turns "Wer
+        // singt da?" into "Wer singt d…". Letting the label shrink keeps the
+        // words whole, and the floor is the design's own: nothing a child
+        // reads goes below 20 pt.
+        //
+        // The tile scales its glyph off its own size already; scaling the
+        // label belongs there too, and this modifier belongs in the bin the
+        // day #12's component does it.
         .minimumScaleFactor(ZType.Step.body.size / ZType.Step.label.size)
         .frame(width: area.width, height: area.height)
     }
@@ -115,10 +120,10 @@ struct HomeScreen: View {
         )
     }
 
-    /// A screen title is `display-2` in the design. On a phone it steps down
-    /// to `headline`: every point the headline gives back goes into the tiles,
-    /// and on the shortest supported screen that is what keeps both games
-    /// visible at a size their labels still fit.
+    /// A screen title is `display-2` in the design. In a compact width it
+    /// steps down to `headline`: every point the title gives back goes into
+    /// the tiles, and on the shortest supported screen that is what keeps both
+    /// games visible at a size their labels still fit.
     private var titleStep: ZType.Step {
         isCompact ? .headline : .display2
     }

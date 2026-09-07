@@ -1,8 +1,8 @@
 import SwiftUI
 import ZilpZalpUI
 
-/// The app's one navigation stack: the home tree at the root, everything else
-/// pushed onto it.
+/// The app's one navigation stack: the home screen at the root, everything
+/// else pushed onto it.
 ///
 /// Every screen brings its own ``TopBar``, so the system navigation bar stays
 /// hidden throughout — a back chevron a child can hit is 64 pt across and sits
@@ -27,7 +27,7 @@ struct RootView: View {
         }
     }
 
-    @MainActor @ViewBuilder
+    @ViewBuilder
     private var start: some View {
         if model.catalog == nil {
             PackFailure()
