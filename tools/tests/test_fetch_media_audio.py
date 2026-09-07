@@ -16,6 +16,7 @@ import math
 import unittest
 import wave
 from io import BytesIO
+from pathlib import Path
 from unittest import mock
 
 from fetch_media import audio, s3
@@ -78,9 +79,15 @@ class WindowTests(unittest.TestCase):
 
     def test_counts_seconds_in_frames_when_the_source_is_stereo(self) -> None:
         """It runs before the downmix, so six seconds must not become three."""
-        stereo = samples(RATE * 10 * 2)
+        rate = 100
+        stereo = array.array(audio.SAMPLE_TYPE, range(rate * 10 * 2))
 
-        self.assertEqual(len(audio.window(stereo, RATE, 2.0, 6.0, channels=2)), RATE * 6 * 2)
+        cut = audio.window(stereo, rate, 2.0, 6.0, channels=2)
+
+        self.assertEqual(len(cut), rate * 6 * 2)
+        # The start, not only the length: an offset that forgot the channels
+        # would still hand back a slice of the right size.
+        self.assertEqual(cut[0], stereo[rate * 2 * 2])
 
     def test_clamps_a_window_that_reaches_past_the_end(self) -> None:
         """A one-second drumming roll with the six-second default is normal."""
@@ -141,6 +148,18 @@ class TrimTests(unittest.TestCase):
             audio.trim(tone(seconds=0.2), "XC1-mislabelled.mp3")
 
         self.assertIn("afconvert failed", str(error.exception))
+
+    def test_reports_a_wav_the_standard_library_cannot_read(self) -> None:
+        """`wave.Error` would otherwise walk past cli.main and print a stack."""
+
+        def decodes_to_rubbish(arguments: list[str]) -> None:
+            Path(arguments[-1]).write_bytes(b"not a wav at all")
+
+        with mock.patch.object(audio, "afconvert", decodes_to_rubbish):
+            with self.assertRaises(ValueError) as error:
+                audio.trim(tone(seconds=0.2), "XC1-tone.wav")
+
+        self.assertIn("not a readable WAV", str(error.exception))
 
     def test_says_so_when_afconvert_is_missing(self) -> None:
         with mock.patch.object(audio.shutil, "which", return_value=None):

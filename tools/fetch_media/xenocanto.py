@@ -46,8 +46,8 @@ USER_AGENT = "zilpzalp-fetch-media/0.1 (+https://github.com/schnaq/zilpzalp)"
 MIN_INTERVAL = 1.0
 
 # The `lic:` values that return anything at all. `CC0` returns nothing; public
-# domain recordings are filed under `PD`. Ordered as they are asked for:
-# ShareAlike is the largest pool, PD the least demanding licence.
+# domain recordings are filed under `PD`. The order is only the order of the
+# three requests — the results are pooled and sorted afterwards.
 LICENCE_FILTERS = ("BY-SA", "BY", "PD")
 
 # Quality better than C — that is A and B. Issue #16 prefers A and allows B,

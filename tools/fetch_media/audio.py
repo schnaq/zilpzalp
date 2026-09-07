@@ -136,13 +136,24 @@ def fade(samples: array.array, rate: int, seconds: float = FADE) -> array.array:
 
 
 def read_wave(path: Path) -> tuple[array.array, int, int]:
-    """The samples, the sample rate and the channel count of a PCM WAV."""
-    with wave.open(str(path), "rb") as source:
-        if source.getsampwidth() != SAMPLE_WIDTH:
-            raise ValueError(f"{path.name}: expected 16-bit PCM, got {source.getsampwidth() * 8}-bit")
-        samples = array.array(SAMPLE_TYPE)
-        samples.frombytes(source.readframes(source.getnframes()))
-        return samples, source.getframerate(), source.getnchannels()
+    """The samples, the sample rate and the channel count of a PCM WAV.
+
+    `wave.Error` inherits from `Exception` and nothing else, so it would walk
+    past `cli.main`'s except clause and print a traceback where the tool
+    promises one `::error::` line. A WAV afconvert wrote and `wave` cannot read
+    is a broken recording, so `ValueError` is what it is.
+    """
+    try:
+        with wave.open(str(path), "rb") as source:
+            if source.getsampwidth() != SAMPLE_WIDTH:
+                raise ValueError(
+                    f"{path.name}: expected 16-bit PCM, got {source.getsampwidth() * 8}-bit"
+                )
+            samples = array.array(SAMPLE_TYPE)
+            samples.frombytes(source.readframes(source.getnframes()))
+            return samples, source.getframerate(), source.getnchannels()
+    except (wave.Error, EOFError) as error:
+        raise ValueError(f"{path.name}: is not a readable WAV ({error})") from error
 
 
 def write_wave(path: Path, samples: array.array, rate: int) -> None:

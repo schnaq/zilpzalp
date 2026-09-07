@@ -310,10 +310,14 @@ class ClientTests(unittest.TestCase):
                 raise httpx.ConnectError("connection reset", request=request)
             return answer([RECORDED])
 
-        with self.client(handle) as client:
+        with self.client(handle, min_interval=0.2) as client:
+            started = time.monotonic()
             self.assertEqual(client.search("nr:965144"), [RECORDED])
+            elapsed = time.monotonic() - started
 
         self.assertEqual(len(attempts), 2)
+        # The retry is a request like any other and waits its turn.
+        self.assertGreaterEqual(elapsed, 0.2)
 
     def test_gives_up_after_the_second_connection_failure(self) -> None:
         def handle(request: httpx.Request) -> httpx.Response:
