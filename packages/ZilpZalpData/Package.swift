@@ -13,8 +13,14 @@ let package = Package(
     targets: [
         // .copy, not .process: the pack directory keeps its shape inside
         // Bundle.module, so `photos/amsel.png` from the manifest resolves
-        // against the bundle exactly as it does against data/packs.
-        .target(name: "ZilpZalpData", resources: [.copy("Resources/Packs")]),
+        // against the bundle exactly as it does against data/packs. The
+        // generated credits are listed as their own file rather than through
+        // a .process("Resources") over the whole directory, which would
+        // flatten the packs.
+        .target(
+            name: "ZilpZalpData",
+            resources: [.copy("Resources/Packs"), .copy("Resources/credits.json")],
+        ),
         // .copy, not .process: Fixtures/valid stays a directory inside
         // Bundle.module, so the tests look the manifests up under the same
         // path the licence gate is run on.

@@ -1,0 +1,132 @@
+{
+  "media": [
+    {
+      "packID": "basis",
+      "birdID": "amsel",
+      "birdName": "Amsel",
+      "kind": "photo",
+      "attribution": "Alexis Tinker-Tsavalas",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/20490738"
+    },
+    {
+      "packID": "basis",
+      "birdID": "blaumeise",
+      "birdName": "Blaumeise",
+      "kind": "photo",
+      "attribution": "Thorsten Hackbarth",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/153819994"
+    },
+    {
+      "packID": "basis",
+      "birdID": "buntspecht",
+      "birdName": "Buntspecht",
+      "kind": "photo",
+      "attribution": "Вячеслав Юсупов",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/18530920"
+    },
+    {
+      "packID": "basis",
+      "birdID": "eisvogel",
+      "birdName": "Eisvogel",
+      "kind": "photo",
+      "attribution": "Alexis Lours",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/98375354"
+    },
+    {
+      "packID": "basis",
+      "birdID": "hausrotschwanz",
+      "birdName": "Hausrotschwanz",
+      "kind": "photo",
+      "attribution": "SteveM4560",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/345090569"
+    },
+    {
+      "packID": "basis",
+      "birdID": "kohlmeise",
+      "birdName": "Kohlmeise",
+      "kind": "photo",
+      "attribution": "SteveM4560",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/258365796"
+    },
+    {
+      "packID": "basis",
+      "birdID": "rotkehlchen",
+      "birdName": "Rotkehlchen",
+      "kind": "photo",
+      "attribution": "Alexis Tinker-Tsavalas",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/19776411"
+    },
+    {
+      "packID": "basis",
+      "birdID": "star",
+      "birdName": "Star",
+      "kind": "photo",
+      "attribution": "egorbirder",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/72752929"
+    },
+    {
+      "packID": "basis",
+      "birdID": "wiedehopf",
+      "birdName": "Wiedehopf",
+      "kind": "photo",
+      "attribution": "Dmitry Ivanov",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/299928082"
+    },
+    {
+      "packID": "basis",
+      "birdID": "zilpzalp",
+      "birdName": "Zilpzalp",
+      "kind": "photo",
+      "attribution": "Tomas Broucek",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/353438691"
+    }
+  ],
+  "fonts": [
+    {
+      "name": "Baloo 2",
+      "authors": [
+        "Ek Type"
+      ],
+      "license": "OFL-1.1",
+      "licenseURL": "https://openfontlicense.org/"
+    },
+    {
+      "name": "Nunito",
+      "authors": [
+        "Vernon Adams",
+        "Cyreal",
+        "Jacques Le Bailly"
+      ],
+      "license": "OFL-1.1",
+      "licenseURL": "https://openfontlicense.org/"
+    }
+  ],
+  "icons": [
+    {
+      "name": "Lucide",
+      "authors": [
+        "Lucide Icons and Contributors"
+      ],
+      "license": "ISC",
+      "licenseURL": "https://opensource.org/license/isc-license-txt"
+    },
+    {
+      "name": "Feather",
+      "authors": [
+        "Cole Bemis"
+      ],
+      "license": "MIT",
+      "licenseURL": "https://opensource.org/license/mit"
+    }
+  ]
+}
