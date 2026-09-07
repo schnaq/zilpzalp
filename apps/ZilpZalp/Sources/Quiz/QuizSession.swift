@@ -77,6 +77,10 @@ final class QuizSession {
     /// Answers right at the first attempt. The one number the stars come from.
     private(set) var firstTryCorrect = 0
 
+    /// The first species answered right at the first attempt, `nil` until one
+    /// is. The round end celebrates it; see ``RoundResult/celebratedSpecies``.
+    private(set) var firstTrySpecies: String?
+
     /// - Parameter catalog: The opened pack. Every species in it is a possible
     ///   question and a possible distractor.
     /// - Throws: `RoundError.insufficientSpecies` when the pack holds fewer
@@ -181,8 +185,16 @@ final class QuizSession {
     }
 
     /// What the round has come to, once it is over.
+    ///
+    /// The sticker's species falls back to the round's first question when
+    /// nothing was answered at the first attempt, so that a round the child
+    /// found hard still ends with a bird rather than an empty disc.
     var result: RoundResult {
-        RoundResult(firstTryCorrect: firstTryCorrect, questionCount: round.questions.count)
+        RoundResult(
+            firstTryCorrect: firstTryCorrect,
+            questionCount: round.questions.count,
+            celebratedSpecies: firstTrySpecies ?? round.questions.first?.answer,
+        )
     }
 
     // MARK: - Playing it
@@ -208,6 +220,7 @@ final class QuizSession {
             wrongTaps = []
             isAnswered = false
             firstTryCorrect = 0
+            firstTrySpecies = nil
         } else if isAnswered {
             // A question that was answered while the screen was going away, so
             // that the pause after it never ran out. Finish the move rather
@@ -248,6 +261,7 @@ final class QuizSession {
 
         if wrongTaps.isEmpty {
             firstTryCorrect += 1
+            firstTrySpecies = firstTrySpecies ?? bird.id
         }
         isAnswered = true
 
@@ -286,7 +300,7 @@ final class QuizSession {
     }
 }
 
-private extension License {
+extension License {
     /// How a licence is named in a credit line: the short public name, not the
     /// SPDX identifier the manifest carries. "CC BY" is what the licence
     /// deed itself asks to be called; "CC-BY-4.0" is a filing code.
@@ -294,10 +308,12 @@ private extension License {
     /// Not product copy and therefore not in the String Catalog: these three
     /// names are the same in every language.
     ///
-    /// App-private only because #25 was not allowed to change `ZilpZalpData`.
-    /// This is a fact about `License`, not about the quiz, and the credits
-    /// screen (#37) will want the same three strings — at which point it
-    /// belongs beside the enum rather than in a second copy here.
+    /// App-internal only because #25 was not allowed to change `ZilpZalpData`.
+    /// This is a fact about `License`, not about the quiz, and both the round
+    /// end and the credits screen (#37) want the same three strings — at which
+    /// point it belongs beside the enum rather than in a second copy here.
+    /// #26 widened it from `private` for exactly that reason: one copy, in the
+    /// wrong place, beats two.
     var shortName: String {
         switch self {
         case .cc0: "CC0"

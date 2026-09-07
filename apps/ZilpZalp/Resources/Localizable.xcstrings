@@ -181,6 +181,18 @@
         }
       }
     },
+    "roundEnd.collection" : {
+      "comment" : "Button on the round end screen that opens the sticker album. Inert until the collection exists",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sammlung"
+          }
+        }
+      }
+    },
     "roundEnd.playAgain" : {
       "comment" : "Button on the round end screen that starts a new round",
       "extractionState" : "manual",
@@ -194,25 +206,37 @@
       }
     },
     "roundEnd.stars" : {
-      "comment" : "Placeholder line on the round end screen until #26 draws the stars. %1$lld is the stars earned, %2$lld the first-try correct answers, %3$lld the questions in the round",
+      "comment" : "Line under the headline of the round end screen. %lld is the stars the round earned, one to three",
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sterne: %1$lld — auf Anhieb richtig: %2$lld von %3$lld"
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Du hast einen Stern gesammelt"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Du hast %lld Sterne gesammelt"
+                }
+              }
+            }
           }
         }
       }
     },
     "roundEnd.title" : {
-      "comment" : "Headline of the round end screen",
+      "comment" : "Headline of the round end screen, also spoken out loud",
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Geschafft!"
+            "value" : "Super gemacht!"
           }
         }
       }

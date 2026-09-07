@@ -119,6 +119,11 @@ struct QuizScreen: View {
         }
         .onChange(of: session.isFinished) { _, finished in
             if finished {
+                // Before handing over, not only in `onDisappear`: a push runs
+                // the round end's `onAppear` before this screen's
+                // `onDisappear`, so a question still being spoken would talk
+                // over the celebration. Stopping here is deterministic.
+                session.suspend()
                 onFinished(session.result)
             }
         }
