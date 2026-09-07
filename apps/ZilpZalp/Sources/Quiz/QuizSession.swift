@@ -113,8 +113,10 @@ final class QuizSession {
         index < round.questions.count ? round.questions[index] : nil
     }
 
-    /// True once the last question has been answered and the pause after it has
-    /// run out. The screen watches this to leave for the round end.
+    /// True once the round has moved past its last question — normally when
+    /// the pause after the final answer runs out, and equally when ``resume()``
+    /// finishes a pause that was cut short. The screen watches this to leave
+    /// for the round end.
     var isFinished: Bool {
         index >= round.questions.count
     }
@@ -187,10 +189,13 @@ final class QuizSession {
 
     /// Picks the round up where the screen left it, or deals a new one.
     ///
-    /// The screen calls this every time it appears. Opened for the first time
-    /// that means asking the question the constructor's round starts with;
-    /// returned to from the round end — which is all "Nochmal spielen" does —
-    /// it means a fresh round, because the last one is over.
+    /// The screen calls this every time it appears, and it has three cases to
+    /// tell apart. Opened for the first time, it asks the question the
+    /// constructor's round starts with. Returned to from the round end — which
+    /// is all "Nochmal spielen" does — it deals a fresh round, because the last
+    /// one is over. Coming back to a question that was answered while the
+    /// screen was going away, it finishes that move instead of asking an
+    /// already-answered question a second time.
     func resume() {
         if isFinished {
             var generator = SystemRandomNumberGenerator()
@@ -262,7 +267,17 @@ final class QuizSession {
         announcer.stop()
     }
 
+    /// Moves the round on by one, from the pause after an answer or from
+    /// ``resume()`` picking that pause up where it was interrupted.
+    ///
+    /// Cancels the pending move first rather than only dropping the reference:
+    /// a `Task` nobody holds keeps running, so a caller that arrives while one
+    /// is still in flight would advance the round and then have it advanced a
+    /// second time under it — one question the child never got to see. When
+    /// the pending move is the caller, cancelling it here is a no-op: it is
+    /// already past its own cancellation check.
     private func nextQuestion() {
+        advance?.cancel()
         advance = nil
         index += 1
         wrongTaps = []
