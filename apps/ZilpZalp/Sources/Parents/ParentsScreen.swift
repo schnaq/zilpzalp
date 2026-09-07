@@ -1,18 +1,256 @@
 import SwiftUI
+import ZilpZalpData
+import ZilpZalpUI
 
-/// Replaced by #35 — the grown-ups' area behind its `LAContext` lock.
+/// The grown-ups' area: the one screen with small type, full sentences and
+/// switches. After `design/ui_kits/ipad_app/GrownupsScreen.jsx`, minus the
+/// three rows v1 has nothing behind — "Musik" (there is none), "Sprache"
+/// (German only until #46) and "Pakete" (nothing to manage until #33).
 ///
-/// Unlocked while it is empty: the lock, the time budget, the pack management
-/// and the credits all arrive with #35, and a lock in front of an empty room
-/// would only be a lock to test. The door sits on the home screen from the
-/// start because the design puts it in the same corner of every screen.
+/// A door in front of it, and the door has two keys. The device lock
+/// (``ParentsLock``) is the normal one. On a device with neither a code nor a
+/// face on file it cannot be asked at all, and then ``ParentalGate`` — the
+/// same adult-level task the credits screen will put in front of every
+/// external link (#37) — takes over, so the area is reachable on every device
+/// without ever being reachable by a child.
+///
+/// The door falls shut again when the screen goes away or the app is put down.
 struct ParentsScreen: View {
+    /// What the door is doing.
+    private enum Door: Hashable {
+        /// Shut, with the "Entsperren" button. `refused` adds one calm line
+        /// after an attempt that did not go through — never an alert, and
+        /// never a second sheet on top of the first.
+        case shut(refused: Bool)
+        /// The device cannot be asked, so the adult-level task stands in.
+        case task
+        case open
+    }
+
+    /// How far the time-budget row is dimmed until #36 fills it: the design
+    /// system's own disabled opacity, which lives in an internal
+    /// `LedgeButtonStyle` and is not reachable from here. `.disabled(_:)`
+    /// alone changes nothing a plain-styled row can be seen by.
+    private static let notYetOpacity = 0.45
+
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.scenePhase) private var scenePhase
+
+    @State private var parental = ParentalSettingsModel()
+    @State private var door: Door = .shut(refused: false)
+    /// Whether the credits are pushed on top. Read on the way out, so the
+    /// door is not slammed behind a grown-up who only stepped into them.
+    @State private var showsCredits = false
+    /// True while the system sheet is up, so a second tap cannot start a
+    /// second attempt behind the first.
+    @State private var isAsking = false
+
     var body: some View {
-        PlaceholderScreen(title: String(localized: "parents.title"), icon: .shieldCheck)
+        VStack(spacing: 0) {
+            TopBar {
+                IconButton(
+                    .chevronLeft,
+                    label: String(localized: "nav.back.accessibility"),
+                    diameter: ZSpacing.touchMinimum,
+                ) { dismiss() }
+            } center: {
+                Text("parents.title")
+            }
+
+            content
+        }
+        .background(ZColor.surfacePage)
+        // Every screen brings its own `TopBar`; the system bar would stack a
+        // second, smaller back button above it.
+        .toolbar(.hidden, for: .navigationBar)
+        // A destination of this screen rather than a `Route` case: the credits
+        // are a room inside the grown-ups' area and nothing else may navigate
+        // to them, least of all past the lock. #37 replaces the placeholder.
+        .navigationDestination(isPresented: $showsCredits) {
+            PlaceholderScreen(title: String(localized: "parents.credits.title"), icon: .camera)
+        }
+        .task { await parental.load() }
+        .onAppear {
+            // Asked fresh: a grown-up can set a device code up or take it away
+            // while the app sits in the background. Never while the area is
+            // already open — this also runs on the way back from the credits.
+            guard door != .open else { return }
+            door = ParentsLock.isAvailable ? .shut(refused: false) : .task
+        }
+        .onDisappear {
+            // Pushing the credits takes this screen off the screen without
+            // taking anybody out of the area; relocking here would ask for the
+            // code again on the way back.
+            guard !showsCredits else { return }
+            door = .shut(refused: false)
+        }
+        .onChange(of: scenePhase) { _, phase in
+            // `.background` only. The system's own authentication sheet makes
+            // the scene `.inactive`, and relocking on that would shut the door
+            // in the middle of opening it.
+            guard phase == .background else { return }
+            door = .shut(refused: false)
+        }
+    }
+
+    @ViewBuilder
+    private var content: some View {
+        switch door {
+        case let .shut(refused):
+            locked(refused: refused)
+        case .task:
+            ParentalGate(reason: String(localized: "parents.gate.reason")) { door = .open }
+                .padding(ZSpacing.gutterScreen)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+        case .open:
+            settings
+        }
+    }
+
+    // MARK: - Shut
+
+    private func locked(refused: Bool) -> some View {
+        VStack(spacing: ZSpacing.step6) {
+            Icon(.lock, size: .custom(ZSpacing.touchComfortable))
+                .foregroundStyle(ZColor.textMuted)
+
+            Text("parents.lock.explanation")
+                .typeStyle(.bodyLarge, .body, weight: .semibold)
+                .foregroundStyle(ZColor.textBody)
+
+            ZButton(
+                String(localized: "parents.lock.unlock"),
+                size: .large,
+                leadingIcon: .shieldCheck,
+            ) {
+                Task { await knock() }
+            }
+            .disabled(isAsking)
+
+            // Laid out whether or not it is shown, so the button does not jump
+            // out from under the finger that just used it.
+            Text("parents.lock.refused")
+                .typeStyle(.body, .body, weight: .semibold)
+                .foregroundStyle(ZColor.textMuted)
+                .opacity(refused ? 1 : 0)
+                .accessibilityHidden(!refused)
+        }
+        .multilineTextAlignment(.center)
+        .frame(maxWidth: ZSpacing.maxContent)
+        .padding(ZSpacing.gutterScreen)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+
+    /// One attempt. A cancelled sheet, a wrong face and a wrong code all leave
+    /// the door shut and say so in one line; nothing is counted and nobody is
+    /// locked out of their own settings.
+    private func knock() async {
+        isAsking = true
+        defer { isAsking = false }
+
+        let opened = await ParentsLock.unlock(reason: String(localized: "parents.lock.reason"))
+        door = opened ? .open : .shut(refused: true)
+    }
+
+    // MARK: - Open
+
+    private var settings: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: ZSpacing.step6) {
+                Text("parents.intro")
+                    .typeStyle(.bodyLarge, .body, weight: .semibold)
+                    .foregroundStyle(ZColor.textBody)
+
+                rows
+                notice
+            }
+            .frame(maxWidth: ZSpacing.maxContent)
+            .padding(.horizontal, ZSpacing.gutterScreen)
+            .padding(.vertical, ZSpacing.step6)
+            .frame(maxWidth: .infinity)
+        }
+    }
+
+    private var rows: some View {
+        ZCard(padding: 0) {
+            VStack(spacing: 0) {
+                SettingRow(
+                    title: String(localized: "parents.calls.title"),
+                    hint: String(localized: "parents.calls.hint"),
+                    icon: .volume2,
+                    isOn: switchFor(\.callsEnabled),
+                )
+                SettingRow(
+                    title: String(localized: "parents.names.title"),
+                    hint: String(localized: "parents.names.hint"),
+                    icon: .type,
+                    isOn: switchFor(\.showNames),
+                )
+                SettingRow(
+                    title: String(localized: "parents.playtime.title"),
+                    icon: .clock,
+                    value: String(localized: "parents.playtime.none"),
+                ) {}
+                    // Shown so a grown-up can see the limit stands at none, and
+                    // inert because setting one is #36. No copy promising it:
+                    // a date nobody has committed to is not a setting.
+                    .disabled(true)
+                    .opacity(Self.notYetOpacity)
+                SettingRow(
+                    title: String(localized: "parents.credits.title"),
+                    hint: String(localized: "parents.credits.hint"),
+                    icon: .camera,
+                    showsSeparator: false,
+                ) {
+                    showsCredits = true
+                }
+            }
+            // The rows paint their own background to the card's inner edge, so
+            // without this their square corners would sit in the card's round
+            // ones. Inset by the outline the card draws inside its bounds.
+            .clipShape(
+                RoundedRectangle(cornerRadius: ZRadius.card - ZBorder.width, style: .continuous),
+            )
+        }
+    }
+
+    private var notice: some View {
+        ZCard(tone: .sand) {
+            HStack(spacing: ZSpacing.step4) {
+                Icon(.shieldCheck, size: .standard)
+                    .foregroundStyle(ZColor.olive600)
+
+                VStack(alignment: .leading, spacing: ZSpacing.step1) {
+                    Text("parents.notice")
+                        .typeStyle(.body, .body, weight: .bold)
+                        .foregroundStyle(ZColor.textStrong)
+                    Text("parents.notice.hint")
+                        .typeStyle(.caption, .body, weight: .semibold)
+                        .foregroundStyle(ZColor.textMuted)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+            }
+        }
+    }
+
+    /// One switch, reading and writing through the store. Not a `@Bindable`
+    /// path into the model: an assignment has to reach the disk, and only a
+    /// setter can take it there.
+    private func switchFor(_ field: WritableKeyPath<ParentalSettings, Bool>) -> Binding<Bool> {
+        Binding(
+            get: { parental.settings[keyPath: field] },
+            set: { parental.set(field, to: $0) },
+        )
     }
 }
 
-#Preview {
+#Preview("iPhone") {
+    NavigationStack {
+        ParentsScreen()
+    }
+}
+
+#Preview("iPad", traits: .fixedLayout(width: 1194, height: 834)) {
     NavigationStack {
         ParentsScreen()
     }
