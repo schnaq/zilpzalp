@@ -1,0 +1,38 @@
+# The Python tools that need more than the standard library.
+#
+# license_gate.py, sync_bundled_packs.py and generate_credits.py deliberately
+# stay stdlib-only: they run in `mise run check` on every commit and must not
+# depend on a resolved environment. fetch_media does — it speaks HTTP, decodes
+# JPEGs and signs S3 requests — so it lives in this project and runs through
+# `uv run --project tools`.
+#
+# uv.lock is committed and every run passes `--locked`, so a developer machine
+# and the CI runner install the same bytes. Dependabot keeps both files in step
+# through the `uv` ecosystem (.github/dependabot.yml).
+
+[project]
+name = "zilpzalp-tools"
+version = "0.1.0"
+description = "Curation tools for the ZilpZalp media pipeline"
+# Upper bound on purpose: the interpreter is pinned in mise.toml, and without
+# it `uv run` outside a mise shell silently builds the environment on whatever
+# newer Python happens to be installed.
+requires-python = ">=3.13,<3.14"
+dependencies = [
+  "boto3>=1.40",
+  "httpx>=0.28",
+  "pillow>=11.3",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["fetch_media"]
+
+[tool.uv]
+# mise pins the interpreter (python in mise.toml) and puts it on PATH inside
+# every task. Without this setting uv prefers its own managed Python and
+# quietly introduces a second toolchain that nothing pins.
+python-preference = "only-system"
