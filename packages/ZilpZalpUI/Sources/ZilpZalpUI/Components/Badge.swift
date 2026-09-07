@@ -48,15 +48,15 @@ public struct Badge: View {
         }
     }
 
-    private let text: LocalizedStringKey
+    private let text: String
     private let tone: Tone
     private let icon: ZIcon?
 
     /// - Parameters:
-    ///   - text: One or two words. Long text is not wrapped, as in the JSX.
+    ///   - text: Finished text, one or two words. Not wrapped, as in the JSX.
     ///   - tone: See ``Tone``.
     ///   - icon: An optional glyph in front of the text.
-    public init(_ text: LocalizedStringKey, tone: Tone = .leaf, icon: ZIcon? = nil) {
+    public init(_ text: String, tone: Tone = .leaf, icon: ZIcon? = nil) {
         self.text = text
         self.tone = tone
         self.icon = icon
@@ -69,7 +69,7 @@ public struct Badge: View {
                 // existing preset beats adding a raw value for 2 pt.
                 Icon(icon, size: .small)
             }
-            Text(text)
+            Text(verbatim: text)
                 .font(ZType.Step.body.font(.display, weight: .bold))
                 .tracking(ZType.Step.body.tracking(ZType.Tracking.looseEm))
         }
@@ -85,7 +85,7 @@ public struct Badge: View {
 #Preview("Tones") {
     VStack(alignment: .leading, spacing: ZSpacing.step3) {
         ForEach(Badge.Tone.allCases, id: \.self) { tone in
-            Badge("\(String(describing: tone))", tone: tone)
+            Badge(String(describing: tone), tone: tone)
         }
     }
     .padding(ZSpacing.step6)

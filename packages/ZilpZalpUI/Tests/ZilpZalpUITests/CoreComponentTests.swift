@@ -77,8 +77,10 @@ func ledgeDepthsAreTokensDeeperThanTheTravel() {
     #expect(ZButton.Size.medium.ledgeDepth == ZShadow.ledgeOffset)
     #expect(ZButton.Size.large.ledgeDepth == ZShadow.ledgeLargeOffset)
     #expect(ZButton.Size.extraLarge.ledgeDepth == ZShadow.ledgeLargeOffset)
-    // 4 pt down in 90 ms, and the ledge is never fully swallowed by it.
-    #expect(LedgeButtonStyle.travel == ZSpacing.step1)
+    // 4 pt down in 90 ms, and the ledge is never fully swallowed by it. Pinned
+    // to the literal from #10, not to `ZSpacing.step1` — `travel` is defined as
+    // that token, so comparing the two could never fail.
+    #expect(LedgeButtonStyle.travel == 4)
     #expect(ZButton.Size.allCases.allSatisfy { $0.ledgeDepth > LedgeButtonStyle.travel })
 }
 

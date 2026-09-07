@@ -2,12 +2,13 @@ import SwiftUI
 
 /// The one pressable text control: a chunky pill on a solid colour ledge.
 ///
-/// Ported from `design/components/core/Button.jsx`. The label is a
-/// `LocalizedStringKey` and resolves against the app bundle, so the only
-/// String Catalog stays in the app target — this module ships no product text.
+/// Ported from `design/components/core/Button.jsx`. The label is a plain
+/// `String`: the app resolves its String Catalog and hands the finished text
+/// down, so this module ships no product text and knows nothing about
+/// localisation.
 ///
 /// ```swift
-/// ZButton("weiter", trailingIcon: .arrowRight) { advance() }
+/// ZButton(labels.next, trailingIcon: .arrowRight) { advance() }
 /// ```
 ///
 /// Use `.disabled(_:)` as on any SwiftUI button; a disabled pill loses its
@@ -88,7 +89,7 @@ public struct ZButton: View {
         }
     }
 
-    private let title: LocalizedStringKey
+    private let title: String
     private let tone: Tone
     private let size: Size
     private let leadingIcon: ZIcon?
@@ -96,14 +97,14 @@ public struct ZButton: View {
     private let action: () -> Void
 
     /// - Parameters:
-    ///   - title: One or two words, sentence case, no punctuation.
+    ///   - title: Finished text, one or two words, sentence case, no punctuation.
     ///   - tone: See ``Tone``.
     ///   - size: See ``Size``.
     ///   - leadingIcon: `Button.jsx`'s `icon`.
     ///   - trailingIcon: `Button.jsx`'s `iconRight` — the arrow on "Weiter".
     ///   - action: What the press does.
     public init(
-        _ title: LocalizedStringKey,
+        _ title: String,
         tone: Tone = .primary,
         size: Size = .large,
         leadingIcon: ZIcon? = nil,
@@ -130,7 +131,7 @@ public struct ZButton: View {
             if let leadingIcon {
                 Icon(leadingIcon, size: size.glyph)
             }
-            Text(title)
+            Text(verbatim: title)
                 .font(size.step.font(.display, weight: .bold))
                 .tracking(size.step.tracking(ZType.Tracking.looseEm))
             if let trailingIcon {
@@ -145,7 +146,7 @@ public struct ZButton: View {
 #Preview("Tones") {
     VStack(spacing: ZSpacing.step5) {
         ForEach(ZButton.Tone.allCases, id: \.self) { tone in
-            ZButton("\(String(describing: tone))", tone: tone, trailingIcon: .arrowRight) {}
+            ZButton(String(describing: tone), tone: tone, trailingIcon: .arrowRight) {}
         }
     }
     .padding(ZSpacing.step6)
@@ -156,7 +157,7 @@ public struct ZButton: View {
 #Preview("Sizes") {
     VStack(spacing: ZSpacing.step5) {
         ForEach(ZButton.Size.allCases, id: \.self) { size in
-            ZButton("\(String(describing: size))", size: size, leadingIcon: .play) {}
+            ZButton(String(describing: size), size: size, leadingIcon: .play) {}
         }
     }
     .padding(ZSpacing.step6)
@@ -167,7 +168,7 @@ public struct ZButton: View {
 #Preview("Disabled") {
     VStack(spacing: ZSpacing.step5) {
         ForEach(ZButton.Tone.allCases, id: \.self) { tone in
-            ZButton("\(String(describing: tone))", tone: tone) {}
+            ZButton(String(describing: tone), tone: tone) {}
                 .disabled(true)
         }
     }
