@@ -25,7 +25,7 @@ Eine quelloffene Lern-App, mit der Kinder heimische Vögel kennenlernen. Kein Ac
 
 **Bewusst nicht in v1**
 
-Spiel 3 (Federn zuordnen) und Spiel 4 (Lebensraum antippen). Beide sind nicht am Code gescheitert, sondern am Material — siehe [docs/medien-und-lizenzen.md](../../medien-und-lizenzen.md). Sie bleiben im Design als „Kommt bald ins Nest" sichtbar. Ebenso zurückgestellt: echte Accounts, Spiel gegen andere, andere Artengruppen wie Bäume oder Fische.
+Spiel 3 (Federn zuordnen) und Spiel 4 (Lebensraum antippen). Beide sind nicht am Code gescheitert, sondern am Material — siehe [docs/medien-und-lizenzen.md](../../medien-und-lizenzen.md). In v1 tauchen sie in der Oberfläche nicht auf; sie kommen mit Meilenstein 8 zurück. Ebenso zurückgestellt: echte Accounts, Spiel gegen andere, andere Artengruppen wie Bäume oder Fische.
 
 ---
 
@@ -93,7 +93,7 @@ Reine Wertetypen und Funktionen. Vollständig testbar ohne Laufzeitumgebung.
 
 Das Basis-Paket ist eine SwiftPM-Ressource von `ZilpZalpData`, kein Asset Catalog im App-Target: `PackCatalog.bundled()` öffnet es über `Bundle.module`, `photoURL(for:)` löst das Foto eines Vogels relativ zum Paketverzeichnis auf. Einzige Wahrheit bleibt `data/packs/<id>/manifest.json`; `tools/sync_bundled_packs.py` spiegelt es nach `Resources/Packs/` in `ZilpZalpData`, und `mise run check` schlägt bei Abweichung fehl. Ein Symlink funktioniert nicht — SwiftPM kopiert bei einer `.copy`-Ressource den Link selbst, nicht sein Ziel, sodass er im Bundle ins Leere zeigt.
 
-**ZilpZalpUI** übersetzt das Design-System nach SwiftUI: Farb- und Typo-Tokens, `ZButton`, `ZCard`, `ChoiceTile`, `SoundButton`, `QuizProgress`, `FeedbackBanner`, `RewardSticker`, `HomeTile`, `SettingRow`. Eins zu eins zu den Komponenten unter `design/components/`. Komponenten bekommen fertige `String`-Werte übergeben und tragen selbst keine Produkttexte. Gesperrte Sticker und Nester bleiben sichtbar — mit Schloss- bzw. Ei-Symbol statt versteckt. Dynamic Type ist bewusst fest: die Geometrie (220 pt Kacheln, 64/96/160 pt Bedienziele) skaliert nicht mit dem Text (Entscheidung 2026-09-07).
+**ZilpZalpUI** übersetzt das Design-System nach SwiftUI: Farb- und Typo-Tokens, `ZButton`, `ZCard`, `ChoiceTile`, `SoundButton`, `QuizProgress`, `FeedbackBanner`, `RewardSticker`, `HomeTile`, `SettingRow`. Eins zu eins zu den Komponenten unter `design/components/`. Komponenten bekommen fertige `String`-Werte übergeben und tragen selbst keine Produkttexte. Gesperrte Sticker in der Sammlung bleiben sichtbar — mit Schloss-Symbol statt versteckt. `HomeTile` kennt einen gesperrten Zustand mit Ei-Symbol als Komponentenfähigkeit, aber v1 setzt ihn auf dem Startbildschirm nicht ein: der besteht nur aus `TopBar` und den zwei Kacheln für Spiel 1 und Spiel 2, ohne Baum und ohne gesperrte Nester für Spiel 3 und 4. Dynamic Type ist bewusst fest: die Geometrie (220 pt Kacheln, 64/96/160 pt Bedienziele) skaliert nicht mit dem Text (Entscheidung 2026-09-07).
 
 ### Datenmodell
 
