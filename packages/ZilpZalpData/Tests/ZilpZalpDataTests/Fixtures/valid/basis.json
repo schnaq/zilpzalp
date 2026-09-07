@@ -1,0 +1,47 @@
+{
+  "id": "basis",
+  "title": "Unsere ersten Vögel",
+  "birds": [
+    {
+      "id": "amsel",
+      "name": "Amsel",
+      "scientificName": "Turdus merula",
+      "taxonID": 12716,
+      "article": "die",
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/amsel.png",
+        "sha256": "5764f91fdddba228ac22a3905a03b766c3aa023acc2bd8585ef161c2d98892b0",
+        "license": "CC-BY-4.0",
+        "attribution": "Alexis Tinker-Tsavalas",
+        "sourceURL": "https://www.inaturalist.org/observations/20490738",
+        "retrieved": "2026-08-01"
+      },
+      "call": null
+    },
+    {
+      "id": "zilpzalp",
+      "name": "Zilpzalp",
+      "scientificName": "Phylloscopus collybita",
+      "taxonID": 117016,
+      "article": "der",
+      "pronunciation": "Tsilp-Tsalp",
+      "photo": {
+        "file": "photos/zilpzalp.png",
+        "sha256": "f6e01c6b1593da53c45cbeddb90828d39d44e10ae2b8192909900e29988bc995",
+        "license": "CC-BY-4.0",
+        "attribution": "Tomas Broucek",
+        "sourceURL": "https://www.inaturalist.org/observations/353438691",
+        "retrieved": "2026-07-31"
+      },
+      "call": {
+        "file": "calls/zilpzalp.m4a",
+        "sha256": "a2786ec68b6fe55e57dced570debba45d07b5895dd8888f7c58faaa1cc9d01a1",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Fixture Recordist (XC000000)",
+        "sourceURL": "https://xeno-canto.org/000000",
+        "retrieved": "2026-08-02"
+      }
+    }
+  ]
+}

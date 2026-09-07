@@ -12,7 +12,14 @@ let package = Package(
     ],
     targets: [
         .target(name: "ZilpZalpData"),
-        .testTarget(name: "ZilpZalpDataTests", dependencies: ["ZilpZalpData"]),
+        // .copy, not .process: Fixtures/valid stays a directory inside
+        // Bundle.module, so the tests look the manifests up under the same
+        // path the licence gate is run on.
+        .testTarget(
+            name: "ZilpZalpDataTests",
+            dependencies: ["ZilpZalpData"],
+            resources: [.copy("Fixtures")],
+        ),
     ],
     swiftLanguageModes: [.v6],
 )
