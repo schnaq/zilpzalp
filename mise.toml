@@ -39,8 +39,11 @@ depends = ["xcode-version"]
 run = '''
 set -euo pipefail
 
-# The cheapest and most deterministic check runs first: a licensing mistake
-# then fails in milliseconds instead of after a cold Swift build.
+# The cheapest and most deterministic checks run first: a licensing mistake
+# or a stale bundled pack then fails in milliseconds instead of after a cold
+# Swift build. Sync before the gate, so that a drifted copy is reported as
+# what it is instead of as a hash mismatch further down.
+mise run sync-packs
 mise run license-gate
 
 # --lint does not correct, it reports: unformatted code should break the build
@@ -118,6 +121,17 @@ set -euo pipefail
 # happens to carry. The gate uses the standard library only, so there is
 # nothing else to install. Its tests run in `mise run test`.
 python tools/license_gate.py
+'''
+
+[tasks.sync-packs]
+description = "Copy the bundled packs into ZilpZalpData and fail if they had drifted"
+run = '''
+set -euo pipefail
+
+# Locally this heals the copy under packages/ZilpZalpData/…/Resources/Packs.
+# In CI it is the drift check: it exits non-zero whenever it had to change
+# anything, because then the commit ships a pack that differs from data/packs.
+python tools/sync_bundled_packs.py
 '''
 
 [tasks.fetch-media]
