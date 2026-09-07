@@ -174,8 +174,12 @@ class TypeTests(unittest.TestCase):
 
     def test_skips_only_recordings_that_are_all_useless(self) -> None:
         self.assertTrue(xenocanto.is_skipped(["begging call"]))
-        self.assertTrue(xenocanto.is_skipped(["nocturnal flight call", "flight call"]))
+        self.assertTrue(xenocanto.is_skipped(["nocturnal flight call", "wingbeats"]))
         self.assertFalse(xenocanto.is_skipped(["song", "begging call"]))
+
+    def test_keeps_a_plain_flight_call(self) -> None:
+        """The Eisvogel's whistle in flight is the sound a child learns it by."""
+        self.assertFalse(xenocanto.is_skipped(["flight call"]))
 
     def test_does_not_skip_an_unlabelled_recording(self) -> None:
         """Eight of the base pack's free recordings carry no type at all."""

@@ -71,14 +71,17 @@ PERMITTED = ", ".join(sorted(LICENCES.values()))
 
 # What the `type` field says when the recording is not the sound a child should
 # learn: the flapping of a pheasant, a nestling begging, a call only ever heard
-# at night. Measured over the ten base-pack species, these are 23 begging
-# calls, 15 flight calls and 13 nocturnal flight calls out of 320 recordings.
+# at night. Issue #16 names them; measured over the ten base-pack species they
+# are 23 begging calls and 13 nocturnal flight calls out of 320 recordings.
 # They are not errors — they are simply the wrong material for a quiz, so they
 # stay out of the listing unless `--type` asks for them by name.
+#
+# A plain "flight call" is deliberately not in here. The Eisvogel's sharp
+# whistle in flight is exactly the sound a child would learn it by, and hiding
+# it left that species with two candidates out of eight.
 SKIPPED_TYPES = frozenset(
     {
         "begging call",
-        "flight call",
         "nocturnal flight call",
         "wing flaps",
         "wingbeats",
