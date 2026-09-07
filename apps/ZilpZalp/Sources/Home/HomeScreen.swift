@@ -78,9 +78,10 @@ struct HomeScreen: View {
     /// stacks. Bigger tiles are the whole goal — they are what a
     /// four-year-old aims at.
     private func tiles(in area: CGSize) -> some View {
-        let sideBySide = tileSize(in: area, sideBySide: true)
-            >= tileSize(in: area, sideBySide: false)
-        let size = tileSize(in: area, sideBySide: sideBySide)
+        let inARow = tileSize(in: area, sideBySide: true)
+        let stacked = tileSize(in: area, sideBySide: false)
+        let sideBySide = inARow >= stacked
+        let size = sideBySide ? inARow : stacked
         let arrangement = sideBySide
             ? AnyLayout(HStackLayout(spacing: ZSpacing.gapTiles))
             : AnyLayout(VStackLayout(spacing: ZSpacing.gapTiles))
@@ -94,8 +95,9 @@ struct HomeScreen: View {
         }
         // `HomeTile` draws its label at a fixed 22 pt whatever edge length it
         // is given, so a tile the space forces down far enough turns "Wer
-        // singt da?" into "Wer singt d…". Letting the label shrink keeps the
-        // words whole, and the floor is the design's own: nothing a child
+        // singt da?" into "Wer singt d…" — measured on an iPhone SE, which is
+        // the shortest screen the app supports. Letting the label shrink keeps
+        // the words whole, and the floor is the design's own: nothing a child
         // reads goes below 20 pt.
         //
         // The tile scales its glyph off its own size already; scaling the
@@ -130,10 +132,16 @@ struct HomeScreen: View {
 
     /// One tile's edge length: the design's grid cell, and smaller only where
     /// the space cannot hold it — a phone in landscape, an iPad in Slide Over.
+    ///
+    /// Never below the 64 pt touch floor, even where that means overflowing the
+    /// space: a tile a four-year-old cannot hit breaks a rule the design calls
+    /// non-negotiable, and a few points of overhang does not. No supported
+    /// device gets anywhere near it — the floor is here so that none ever can.
     private func tileSize(in area: CGSize, sideBySide: Bool) -> CGFloat {
         let across = sideBySide ? (area.width - ZSpacing.gapTiles) / 2 : area.width
         let down = sideBySide ? area.height : (area.height - ZSpacing.gapTiles) / 2
-        return max(0, min(HomeTile.defaultSize, across, down).rounded(.down))
+        let fitting = min(HomeTile.defaultSize, across, down).rounded(.down)
+        return max(ZSpacing.touchMinimum, fitting)
     }
 }
 
