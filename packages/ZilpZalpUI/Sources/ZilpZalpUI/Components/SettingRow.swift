@@ -150,11 +150,14 @@ public struct SettingRow: View {
 
             VStack(alignment: .leading, spacing: SettingRowMetrics.hintSpacing) {
                 Text(title)
-                    // On its own the title is the row's only line and takes
-                    // the design's box. Above a hint it keeps the freedom to
-                    // wrap, so a long setting name is not truncated in the
-                    // one place the app uses full sentences.
-                    .typeStyle(.body, .body, weight: .bold, singleLine: hint == nil)
+                    // Not `singleLine`, even though a title is one line in
+                    // practice. Nunito's box is smaller than the design's
+                    // here, so the frame would add 2.7 pt inside a row that
+                    // `--touch-min` already holds at 64 — invisible — while
+                    // the `lineLimit(1)` that comes with it would truncate a
+                    // long setting name. Wrapping is the better failure in
+                    // the one area that uses full sentences.
+                    .typeStyle(.body, .body, weight: .bold)
                     .foregroundStyle(ZColor.textStrong)
 
                 if let hint {

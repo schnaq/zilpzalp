@@ -106,7 +106,10 @@ func naturalLineHeightsMatchTheBundledFonts(
     postScriptName: String,
     familyName: String,
 ) throws {
-    try #require(BundledFonts.registered)
+    try #require(
+        BundledFonts.registered,
+        "neither TTF under apps/ZilpZalp/Resources/Fonts could be registered — check the path walk in BundledFonts",
+    )
 
     // 100 pt so the returned metrics read as percentages of the em.
     let font = CTFontCreateWithName(postScriptName as CFString, 100, nil)
@@ -177,9 +180,11 @@ private enum BundledFonts {
                 return true
             }
             // The app target registers the same files through `UIAppFonts`,
-            // so on a host that already has them this is a success.
-            return CFErrorGetCode(error?.takeRetainedValue()) == CTFontManagerError
-                .alreadyRegistered.rawValue
+            // so on a host that already has them this is a success. A
+            // failure without an error is not — and `CFErrorGetCode` takes
+            // its argument implicitly unwrapped, so it has to be checked.
+            guard let failure = error?.takeRetainedValue() else { return false }
+            return CFErrorGetCode(failure) == CTFontManagerError.alreadyRegistered.rawValue
         }
     }()
 }
