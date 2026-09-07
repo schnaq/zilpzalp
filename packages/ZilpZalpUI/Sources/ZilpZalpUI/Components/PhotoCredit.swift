@@ -44,8 +44,8 @@ struct PhotoCredit: View {
     }
 }
 
-/// The credit strip's own numbers. None of them is a token: the type scale
-/// stops at 16 pt and the spacing scale has no 14 or 7, so these are the
+/// The credit strip's own numbers. Most of them have no token: the type scale
+/// stops at 16 pt and the spacing scale has no 14 or 7, so those are the
 /// design's literals, named once instead of sprinkled through the view.
 enum PhotoCreditMetrics {
     /// `13px/1.2 Nunito semibold`, and `design/readme.md`'s hard ceiling of

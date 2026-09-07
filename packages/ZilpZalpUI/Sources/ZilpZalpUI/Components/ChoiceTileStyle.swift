@@ -92,14 +92,17 @@ struct ChoiceTileButtonStyle: ButtonStyle {
                 // shadow is listed first and therefore wins. Negative padding
                 // pushes the halo outside the tile without giving it a say in
                 // the layout, so a tile does not resize when it is touched.
-                if let ring = palette.ring {
-                    RoundedRectangle(
-                        cornerRadius: ZRadius.tile + ChoiceTileMetrics.ringWidth,
-                        style: .continuous,
-                    )
-                    .fill(ring)
-                    .padding(-ChoiceTileMetrics.ringWidth)
-                }
+                //
+                // An idle tile fills the halo with `.clear` rather than
+                // dropping the shape: as with `LedgeButtonStyle`'s ledge, that
+                // fades the halo in on the phase change instead of tearing the
+                // node down and building it again on the game's hottest tap.
+                RoundedRectangle(
+                    cornerRadius: ZRadius.tile + ChoiceTileMetrics.ringWidth,
+                    style: .continuous,
+                )
+                .fill(palette.ring ?? .clear)
+                .padding(-ChoiceTileMetrics.ringWidth)
             }
             // Keeps the ledge inside the tile's own bounds and makes it part
             // of the touch target.

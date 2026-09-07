@@ -7,6 +7,10 @@ import SwiftUI
 /// warm gradient where a photo will be. That is enough to see the square crop,
 /// the rounded clip and the credit strip sitting on top of it.
 ///
+/// It is `internal` rather than `private` only because two files' previews
+/// need it. Nothing outside a `#Preview` body calls it, so it is never on a
+/// render path and never reaches a device screen.
+///
 /// - Parameter size: Edge length of the rendered square. Only the aspect ratio
 ///   matters to the components; they scale it to fill.
 @MainActor

@@ -11,6 +11,11 @@ import SwiftUI
 /// the sentence behind it is "Fast! Hör nochmal hin." There is no red variant
 /// and no X in this component, and there will not be one.
 ///
+/// The banner pops in once, when it appears. Changing ``kind`` or the message
+/// of a banner already on screen swaps the content without a second pop; a
+/// screen that wants each new sentence to pop gives it a fresh identity —
+/// `.id(message)` — which is what the JSX gets for free by remounting.
+///
 /// ```swift
 /// FeedbackBanner("Genau! Das ist der Zilpzalp.", kind: .correct)
 /// ```
@@ -92,14 +97,20 @@ public struct FeedbackBanner: View {
         .padding(.vertical, ZSpacing.step4)
         .padding(.horizontal, ZSpacing.step6)
         .foregroundStyle(palette.foreground)
-        .background(Capsule().fill(palette.fill))
-        .overlay(Capsule().strokeBorder(palette.edge, lineWidth: ZBorder.width))
-        .shadow(
-            color: ZShadow.small.color,
-            radius: ZShadow.small.radius,
-            x: ZShadow.small.offsetX,
-            y: ZShadow.small.offsetY,
+        // The shadow rides on the capsule, not on the composed banner: a
+        // shadow cast by the whole subtree would rasterise glyph and sentence
+        // to derive a silhouette the capsule already is. Same move as `ZCard`.
+        .background(
+            Capsule()
+                .fill(palette.fill)
+                .shadow(
+                    color: ZShadow.small.color,
+                    radius: ZShadow.small.radius,
+                    x: ZShadow.small.offsetX,
+                    y: ZShadow.small.offsetY,
+                ),
         )
+        .overlay(Capsule().strokeBorder(palette.edge, lineWidth: ZBorder.width))
         // `zz-pop`: in from 60 % with `--ease-bounce`, whose overshoot supplies
         // the keyframe's 108 % bump on its own.
         .scaleEffect(isVisible ? 1 : FeedbackBannerMetrics.entryScale)

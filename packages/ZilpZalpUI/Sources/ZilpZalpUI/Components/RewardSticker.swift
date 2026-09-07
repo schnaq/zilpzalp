@@ -82,7 +82,10 @@ public struct RewardSticker: View {
     ///     edge — the same strip ``ChoiceTile`` uses. Required by the licence
     ///     for CC BY material; the caller decides, this package cannot tell.
     ///   - label: The word under the sticker, usually the bird's name.
-    ///     Optional: an album of stickers may caption them or not.
+    ///     Optional, as in the JSX — but it is also the only text the sticker
+    ///     has, and the glyph hides itself from accessibility. A captionless
+    ///     sticker therefore announces nothing, so an album a child navigates
+    ///     with VoiceOver should either pass one here or name the grid itself.
     ///   - tone: See ``Tone``. Ignored while ``locked``.
     ///   - locked: Not earned yet. The sticker turns grey, gains a padlock and
     ///     loses its tilt — but keeps its picture, so a child can see what is
@@ -175,14 +178,24 @@ public struct RewardSticker: View {
             }
             .frame(width: size, height: size)
             .clipShape(Circle())
+            // The shadow rides on a plain circle behind the disc, not on the
+            // composed sticker: the silhouette is that circle either way, so
+            // shadowing the whole stack would only rasterise photo, credit and
+            // badge to derive it. It has to sit *after* the clip, too — a
+            // shadow drawn before `clipShape` is clipped away with everything
+            // else. A locked sticker lies flat on the page and casts none.
+            .background(
+                Circle()
+                    .fill(palette.background)
+                    .shadow(
+                        color: locked ? .clear : ZShadow.medium.color,
+                        radius: ZShadow.medium.radius,
+                        x: ZShadow.medium.offsetX,
+                        y: ZShadow.medium.offsetY,
+                    ),
+            )
             .overlay { Circle().strokeBorder(palette.edge, lineWidth: ZBorder.widthThick) }
             .overlay(alignment: .bottomTrailing) { lockBadge }
-            .shadow(
-                color: locked ? .clear : ZShadow.medium.color,
-                radius: ZShadow.medium.radius,
-                x: ZShadow.medium.offsetX,
-                y: ZShadow.medium.offsetY,
-            )
             .rotationEffect(displayedRotation)
     }
 

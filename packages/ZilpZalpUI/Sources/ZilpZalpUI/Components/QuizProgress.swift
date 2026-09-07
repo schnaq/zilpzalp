@@ -11,9 +11,18 @@ import SwiftUI
 /// demanded it. The row is a shape that fills up, which is a thing a
 /// four-year-old understands without being taught.
 ///
+/// Spoken, the row splits in two: ``label`` names it and never changes,
+/// ``value`` says where it stands. Both are finished text from the caller.
+///
 /// ```swift
 /// TopBar(center: {
-///     QuizProgress(total: 5, completed: 2, current: 2, label: "Zwei von fünf")
+///     QuizProgress(
+///         total: 5,
+///         completed: 2,
+///         current: 2,
+///         label: "Fortschritt",
+///         value: "Zwei von fünf",
+///     )
 /// })
 /// ```
 public struct QuizProgress: View {
@@ -55,8 +64,11 @@ public struct QuizProgress: View {
     /// this size on both iPhone and iPad.
     public static let defaultLeafSize: CGFloat = 44
 
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
     private let leafSize: CGFloat
     private let label: String
+    private let value: String?
 
     /// Questions in this round, never negative.
     let total: Int
@@ -74,17 +86,25 @@ public struct QuizProgress: View {
     ///     mid-game.
     ///   - current: The index of the question in play. Ignored when it falls
     ///     outside the round.
-    ///   - label: What VoiceOver announces for the whole row, composed by the
-    ///     caller. The counts are deliberately *not* assembled here: "2 von 5"
-    ///     is German product copy and "2 of 5" is English copy in a German
-    ///     app, and this package holds neither. The screen has the String
-    ///     Catalog; it says the sentence.
+    ///   - label: What this row *is*, e.g. "Fortschritt". Required, and
+    ///     stable: it names the element and does not change as the round
+    ///     moves on.
+    ///   - value: Where the round stands, as finished text — the counts belong
+    ///     in the value slot, not folded into the name, so VoiceOver can tell
+    ///     "what is this" from "where is it now". `HomeTile` draws the same
+    ///     line for its stars.
+    ///
+    ///     The sentence is deliberately *not* assembled here: "2 von 5" is
+    ///     German product copy and "2 of 5" is English copy in a German app,
+    ///     and this package holds neither. The screen has the String Catalog;
+    ///     it says the sentence, and this component puts it in the right slot.
     ///   - leafSize: Diameter of one leaf.
     public init(
         total: Int,
         completed: Int,
         current: Int? = nil,
         label: String,
+        value: String? = nil,
         leafSize: CGFloat = QuizProgress.defaultLeafSize,
     ) {
         let clampedTotal = max(total, 0)
@@ -92,6 +112,7 @@ public struct QuizProgress: View {
         self.completed = min(max(completed, 0), clampedTotal)
         self.current = current.flatMap { (0 ..< clampedTotal).contains($0) ? $0 : nil }
         self.label = label
+        self.value = value
         self.leafSize = leafSize
     }
 
@@ -123,6 +144,9 @@ public struct QuizProgress: View {
         // noise, and the leaves carry no text of their own to fall back on.
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(label)
+        // An empty value is no value: VoiceOver skips it, so a caller that
+        // passes none simply gets the name.
+        .accessibilityValue(value ?? "")
     }
 
     private func leaf(_ state: LeafState) -> some View {
@@ -132,7 +156,12 @@ public struct QuizProgress: View {
             .background(Circle().fill(state.fill))
             .overlay(Circle().strokeBorder(state.outline, lineWidth: ZBorder.width))
             .scaleEffect(state == .current ? QuizProgressMetrics.currentScale : 1)
-            .animation(ZMotion.easeBounce.animation(duration: ZMotion.normal), value: state)
+            // A leaf filling in is motion like any other: with reduced motion
+            // it simply changes, without the bounce.
+            .animation(
+                reduceMotion ? nil : ZMotion.easeBounce.animation(duration: ZMotion.normal),
+                value: state,
+            )
     }
 }
 
@@ -164,6 +193,8 @@ enum QuizProgressMetrics {
         QuizProgress(total: 10, completed: 10, label: "Fortschritt")
         // Twelve of ten is not a state; the row clamps rather than complains.
         QuizProgress(total: 10, completed: 12, current: 99, label: "Fortschritt")
+        // A smaller leaf, for the narrower top bar on iPhone.
+        QuizProgress(total: 5, completed: 2, current: 2, label: "Fortschritt", leafSize: 32)
     }
     .padding(ZSpacing.step6)
     .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -174,7 +205,15 @@ enum QuizProgressMetrics {
     VStack(spacing: 0) {
         TopBar(
             leading: { IconButton(.chevronLeft, label: "zurück") {} },
-            center: { QuizProgress(total: 5, completed: 2, current: 2, label: "Fortschritt") },
+            center: {
+                QuizProgress(
+                    total: 5,
+                    completed: 2,
+                    current: 2,
+                    label: "Fortschritt",
+                    value: "Zwei von fünf",
+                )
+            },
             trailing: { IconButton(.userRoundCog, label: "für Erwachsene", tone: .clay) {} },
         )
         Spacer()
