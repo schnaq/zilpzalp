@@ -38,6 +38,18 @@ func motionDurationsAreStrictlyAscending() {
     #expect(ZMotion.celebrate == 0.9)
 }
 
+@Test("Easing curves carry the CSS control points in order")
+func easingCurvesMatchTheCSSControlPoints() {
+    // One ordered comparison per curve, so a swap between the two control
+    // points fails. Not a `Curve == Curve` comparison: the memberwise
+    // initialiser of `ZMotion.Curve` is internal, so the expected value
+    // cannot be built from outside the module.
+    #expect(controlPoints(ZMotion.easeOut) == [0.22, 0.61, 0.36, 1])
+    #expect(controlPoints(ZMotion.easeInOut) == [0.45, 0.05, 0.55, 0.95])
+    #expect(controlPoints(ZMotion.easeBounce) == [0.34, 1.56, 0.64, 1])
+    #expect(controlPoints(ZMotion.easeSquish) == [0.5, -0.4, 0.5, 1.4])
+}
+
 @Test("The type scale shrinks strictly from hero to caption")
 func typeScaleIsStrictlyDescending() {
     let sizes = ZType.Step.allCases.map(\.size)
@@ -59,6 +71,16 @@ func onlyTheCaptionIsSmallerThanTwentyPoints() {
 @Test("The four weights are the CSS numeric weights")
 func weightsMatchTheCSSNumbers() {
     #expect(ZType.Weight.allCases.map(\.rawValue) == [400, 600, 700, 800])
+}
+
+@Test("Both typography entry points build the same fixed-size font")
+func zFontAndTypeStepAgree() {
+    // Fails as soon as one of them goes back to the Dynamic-Type-scaling
+    // `Font.custom(_:size:)`.
+    let viaZFont = ZFont.font(.display, weight: .bold, size: ZType.Step.body.size)
+    let viaStep = ZType.Step.body.font(.display, weight: .bold)
+
+    #expect(viaZFont == viaStep)
 }
 
 @Test("Tracking resolves from em to points, so it scales with the step size")
@@ -101,6 +123,25 @@ func radiusScaleIsStrictlyAscending() {
 func borderWidthsAreChunky() {
     #expect(ZBorder.width == 3)
     #expect(ZBorder.widthThick == 5)
+}
+
+@Test("Shadow geometry matches the CSS, with the ambient blur halved")
+func shadowGeometryMatchesTheCSS() {
+    // `--shadow-sm/md/lg: 0 {2,8,18}px {6,20,40}px` — CSS states a blur
+    // diameter, SwiftUI a Gaussian radius.
+    let ambient = [ZShadow.small, ZShadow.medium, ZShadow.large]
+
+    #expect(ambient.map(\.radius) == [3, 10, 20])
+    #expect(ambient.map(\.offsetY) == [2, 8, 18])
+    #expect(ambient.allSatisfy { $0.offsetX == 0 })
+    #expect(ZShadow.ledgeOffset == 6) // --ledge: 0 6px 0
+    #expect(ZShadow.ledgeLargeOffset == 10) // --ledge-lg: 0 10px 0
+    #expect(ZShadow.insetSoftOffset == -4) // --inset-soft: inset 0 -4px 0
+    #expect(ZShadow.focusRingWidth == 5) // --ring-focus: 0 0 0 5px
+}
+
+private func controlPoints(_ curve: ZMotion.Curve) -> [Double] {
+    [curve.p1x, curve.p1y, curve.p2x, curve.p2y]
 }
 
 private func isStrictlyAscending(_ values: [some Comparable]) -> Bool {
