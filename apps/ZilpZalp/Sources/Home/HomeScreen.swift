@@ -79,13 +79,9 @@ struct HomeScreen: View {
 
     /// The one line of text on the screen, and it is for the grown-up looking
     /// over the shoulder: a child who cannot read navigates by the pictures.
-    ///
-    /// No `.lineSpacing`: `ZType.Step.lineSpacing` adds on top of Baloo 2's
-    /// own generous line box and doubles the leading. The token is being fixed
-    /// in #91 — nothing here works around it, so the fix flows through.
     private var headline: some View {
         Text("home.title")
-            .font(titleStep.font(.display, weight: .extraBold))
+            .typeStyle(titleStep, .display, weight: .extraBold)
             .foregroundStyle(ZColor.textStrong)
             .multilineTextAlignment(.center)
             // The group around it has a fixed height and would otherwise
