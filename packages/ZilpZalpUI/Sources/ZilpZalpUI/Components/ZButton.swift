@@ -132,8 +132,13 @@ public struct ZButton: View {
                 Icon(leadingIcon, size: size.glyph)
             }
             Text(verbatim: title)
-                .font(size.step.font(.display, weight: .bold))
-                .tracking(size.step.tracking(ZType.Tracking.looseEm))
+                .typeStyle(
+                    size.step,
+                    .display,
+                    weight: .bold,
+                    tracking: ZType.Tracking.looseEm,
+                    singleLine: true,
+                )
             if let trailingIcon {
                 Icon(trailingIcon, size: size.glyph)
             }

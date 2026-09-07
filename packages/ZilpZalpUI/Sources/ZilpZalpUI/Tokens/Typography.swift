@@ -14,6 +14,35 @@ public enum ZType {
         case display
         /// `--font-body: "Nunito"` — body copy and the grown-up area.
         case body
+
+        /// The line box the bundled face itself asks for, as a multiple of
+        /// the point size.
+        ///
+        /// Read from the `hhea` table of the two variable fonts under
+        /// `apps/ZilpZalp/Resources/Fonts` — `(ascender − descender +
+        /// lineGap) ÷ unitsPerEm`:
+        ///
+        /// | Face | ascender | descender | lineGap | unitsPerEm | natural |
+        /// |---|---|---|---|---|---|
+        /// | Baloo 2 | 1078 | −524 | 0 | 1000 | 1.602 |
+        /// | Nunito | 1011 | −353 | 0 | 1000 | 1.364 |
+        ///
+        /// Both fonts set `USE_TYPO_METRICS` and carry the same values in
+        /// `OS/2`, so every renderer agrees. Neither ships an `MVAR` table,
+        /// so the numbers hold for all named instances of the weight axis —
+        /// one constant per family is enough.
+        ///
+        /// This is the floor SwiftUI cannot go below. A browser shrinks the
+        /// line box to `line-height`; SwiftUI lays every line out in the
+        /// face's own box and `.lineSpacing(_:)` only ever adds to it. Baloo
+        /// 2 is the reason the difference is visible: at 1.602 its box is
+        /// half again as tall as the 1.0–1.2 the display roles ask for.
+        public var naturalLineHeight: CGFloat {
+            switch self {
+            case .display: 1.602
+            case .body: 1.364
+            }
+        }
     }
 
     /// The four weights the design uses, `--weight-regular` through
@@ -95,6 +124,10 @@ public enum ZType {
 
         /// The font for this step in `family` at `weight`.
         ///
+        /// The raw face. Components reach for
+        /// `View.typeStyle(_:_:weight:tracking:singleLine:)` instead, which
+        /// adds the tracking and the line spacing that belong with it.
+        ///
         /// Fixed size on purpose: `Font.custom(_:size:)` would scale the step
         /// with Dynamic Type, relative to `.body` and without a cap, so the
         /// 88 pt hero would render near 270 pt at AX5. The design's geometry
@@ -112,17 +145,80 @@ public enum ZType {
             size * trackingEm
         }
 
-        /// The value for SwiftUI's `.lineSpacing(_:)`, derived from the CSS
-        /// line box: `size × (lineHeight − 1)`.
-        ///
-        /// - Note: An approximation. SwiftUI adds this on top of the font's
-        ///   natural line height (roughly `1.2 × size`), not on top of the
-        ///   point size, so the rendered line box comes out taller than the
-        ///   CSS one. Fine for this generous scale; tune per component where
-        ///   the difference shows.
-        public var lineSpacing: CGFloat {
-            size * (lineHeight - 1)
+        /// The box the design asks for: `size × lineHeight`, the CSS line
+        /// box. Independent of the face — which is the point of the pair.
+        /// ``naturalBoxHeight(for:)`` is what the face insists on, and the
+        /// two take the same argument so a call site compares them at a
+        /// glance.
+        public func lineBoxHeight(for _: Family) -> CGFloat {
+            size * lineHeight
         }
+
+        /// The box the bundled face lays a line out in: `size ×`
+        /// ``ZType/Family/naturalLineHeight``.
+        public func naturalBoxHeight(for family: Family) -> CGFloat {
+            size * family.naturalLineHeight
+        }
+
+        /// The value for SwiftUI's `.lineSpacing(_:)` — the distance still
+        /// missing between two lines once the face's own box is counted.
+        ///
+        /// SwiftUI adds `.lineSpacing(_:)` on top of the natural box rather
+        /// than on top of the point size, so the CSS `size × (lineHeight −
+        /// 1)` overshot every role. Subtracting the natural box lands the
+        /// line pitch exactly on the CSS one wherever the face is small
+        /// enough to allow it: Nunito's 1.364 leaves body 20 pt a 2.7 pt
+        /// correction, caption 16 pt 0.6 pt, body-lg 24 pt 2.1 pt.
+        ///
+        /// Every Baloo 2 role clamps to zero. Its 1.602 box is already
+        /// taller than the 1.0–1.2 the display roles ask for, and nothing in
+        /// SwiftUI shrinks a line box. For a single line the fix is
+        /// ``lineBoxHeight(for:)`` as an explicit frame — see
+        /// `View.typeStyle(_:_:weight:tracking:singleLine:)`.
+        public func lineSpacing(for family: Family) -> CGFloat {
+            max(0, lineBoxHeight(for: family) - naturalBoxHeight(for: family))
+        }
+    }
+}
+
+public extension View {
+    /// Sets one step of the type scale: the face, the tracking and the line
+    /// spacing that belong together.
+    ///
+    /// The one place components reach for type. Applying the three
+    /// separately is how they drifted apart, and `.lineSpacing(_:)` in
+    /// particular is only correct once the face's own line box is subtracted
+    /// — see ``ZType/Step/lineSpacing(for:)``.
+    ///
+    /// Works on a `Text` and equally on a container: SwiftUI carries font,
+    /// tracking and line spacing down through the environment.
+    ///
+    /// - Parameters:
+    ///   - step: The size and line height, from ``ZType/Step``.
+    ///   - family: Display or body. Also picks the natural line box.
+    ///   - weight: One of the four shipped weights.
+    ///   - tracking: An em value from ``ZType/Tracking``, resolved to points
+    ///     against ``ZType/Step/size``.
+    ///   - singleLine: For a label that is one line by design — a button, a
+    ///     badge, a row title. It stops the text wrapping and gives it the
+    ///     design's box instead of the face's, which is the only way a Baloo
+    ///     2 label occupies the 24 pt the design draws rather than 35 pt.
+    ///     The glyphs overhang that frame, exactly as they overhang a CSS
+    ///     line box tighter than 1 em; SwiftUI does not clip without
+    ///     `.clipped()`, so they stay whole. Leave it off for anything that
+    ///     may wrap.
+    func typeStyle(
+        _ step: ZType.Step,
+        _ family: ZType.Family,
+        weight: ZType.Weight,
+        tracking: CGFloat = ZType.Tracking.normalEm,
+        singleLine: Bool = false,
+    ) -> some View {
+        font(step.font(family, weight: weight))
+            .tracking(step.tracking(tracking))
+            .lineSpacing(step.lineSpacing(for: family))
+            .lineLimit(singleLine ? 1 : nil)
+            .frame(height: singleLine ? step.lineBoxHeight(for: family) : nil)
     }
 }
 

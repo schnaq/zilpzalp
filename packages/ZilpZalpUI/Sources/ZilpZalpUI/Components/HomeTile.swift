@@ -135,8 +135,7 @@ public struct HomeTile: View {
                 Icon(displayedIcon, size: .custom(size * HomeTileMetrics.iconRatio))
 
                 Text(title)
-                    .font(ZType.Step.label.font(.display, weight: .bold))
-                    .lineSpacing(ZType.Step.label.lineSpacing)
+                    .typeStyle(.label, .display, weight: .bold, singleLine: true)
                     .multilineTextAlignment(.center)
 
                 // No stars at all until the first one is earned, exactly as

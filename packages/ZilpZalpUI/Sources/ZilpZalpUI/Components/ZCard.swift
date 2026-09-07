@@ -78,8 +78,9 @@ public struct ZCard<Content: View>: View {
 
     public var body: some View {
         content
-            .font(ZType.Step.body.font(.body, weight: .semibold))
-            .lineSpacing(ZType.Step.body.lineSpacing)
+            // Not `singleLine`: a card holds prose, and the grown-up copy in
+            // it wraps by design.
+            .typeStyle(.body, .body, weight: .semibold)
             .foregroundStyle(ZColor.textBody)
             // `strokeBorder` draws the outline inside the bounds, so the width
             // is added here: `padding` stays the gap the caller asked for

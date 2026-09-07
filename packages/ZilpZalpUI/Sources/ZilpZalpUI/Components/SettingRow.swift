@@ -109,7 +109,10 @@ public struct SettingRow: View {
                             }
                             Icon(.chevronRight, size: .small)
                         }
-                        .font(ZType.Step.body.font(.body, weight: .semibold))
+                        // Not `singleLine`: this sets the type for the value
+                        // and the chevron together, and the chevron carries
+                        // its own size.
+                        .typeStyle(.body, .body, weight: .semibold)
                         .foregroundStyle(ZColor.textMuted)
                     }
                     .contentShape(Rectangle())
@@ -147,14 +150,18 @@ public struct SettingRow: View {
 
             VStack(alignment: .leading, spacing: SettingRowMetrics.hintSpacing) {
                 Text(title)
-                    .font(ZType.Step.body.font(.body, weight: .bold))
-                    .lineSpacing(ZType.Step.body.lineSpacing)
+                    // On its own the title is the row's only line and takes
+                    // the design's box. Above a hint it keeps the freedom to
+                    // wrap, so a long setting name is not truncated in the
+                    // one place the app uses full sentences.
+                    .typeStyle(.body, .body, weight: .bold, singleLine: hint == nil)
                     .foregroundStyle(ZColor.textStrong)
 
                 if let hint {
                     Text(hint)
-                        .font(ZType.Step.caption.font(.body, weight: .semibold))
-                        .lineSpacing(ZType.Step.caption.lineSpacing)
+                        // Explanatory copy, and the one string in the system
+                        // that regularly runs to two lines.
+                        .typeStyle(.caption, .body, weight: .semibold)
                         .foregroundStyle(ZColor.textMuted)
                 }
             }
