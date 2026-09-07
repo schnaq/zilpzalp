@@ -160,6 +160,17 @@ struct QuizComponentTests {
         #expect(SoundButtonMetrics.ringOpacity < 1)
     }
 
+    @Test("The reduced-motion ring sits clear of the button, or it is not a ring")
+    func theStaticRingClearsTheButtonFace() {
+        // A ring that does not travel is only visible if it starts outside the
+        // face: at scale 1 it is an accent circle on the accent capsule, the
+        // same size — invisible, not subtle. It still has to stop short of
+        // where a travelling ring ends, or it would not look like a resting
+        // one.
+        #expect(SoundButtonMetrics.restingRingScale > 1)
+        #expect(SoundButtonMetrics.restingRingScale < SoundButtonMetrics.ringScale)
+    }
+
     // MARK: - QuizProgress
 
     @Test("One leaf per question, and never more")

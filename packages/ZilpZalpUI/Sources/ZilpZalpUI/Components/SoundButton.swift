@@ -103,10 +103,22 @@ private struct PulseRing: View {
 
     @State private var expanded = false
 
+    /// Where the ring waits before it sets off.
+    ///
+    /// A travelling ring starts on the button's own edge and becomes visible
+    /// by leaving it. A ring that never travels cannot do that: at scale 1 it
+    /// is a `--color-accent` circle drawn on the `--color-accent` capsule, the
+    /// same size, so it is not a faint ring — it is no ring at all. The static
+    /// one therefore starts clear of the face, where it reads against the
+    /// cream page.
+    private var restingScale: CGFloat {
+        isAnimated ? 1 : SoundButtonMetrics.restingRingScale
+    }
+
     var body: some View {
         Circle()
             .strokeBorder(ZColor.accent, lineWidth: ZBorder.widthThick)
-            .scaleEffect(expanded ? SoundButtonMetrics.ringScale : 1)
+            .scaleEffect(expanded ? SoundButtonMetrics.ringScale : restingScale)
             .opacity(expanded ? 0 : SoundButtonMetrics.ringOpacity)
             .onAppear {
                 guard isAnimated else { return }
@@ -133,6 +145,11 @@ enum SoundButtonMetrics {
     static let pulse = ZMotion.celebrate
     /// `zz-ring` ends at `scale(1.55)`.
     static let ringScale: CGFloat = 1.55
+    /// Where the one static ring sits when the child has asked for reduced
+    /// motion: partway along the journey the animated rings make, far enough
+    /// out to clear the button's own edge and be seen at all. No JSX
+    /// equivalent — the JSX has no reduced-motion case.
+    static let restingRingScale: CGFloat = 1.25
     /// …and starts at `opacity: .7`, fading to nothing.
     static let ringOpacity: Double = 0.7
 }
