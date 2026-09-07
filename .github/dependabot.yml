@@ -10,13 +10,9 @@ updates:
     labels:
       - "type:chore"
 
-  - package-ecosystem: pip
-    directories:
-      - "/tools"
-      - "/tools/*"
-    schedule:
-      interval: weekly
-    commit-message:
-      prefix: chore
-    labels:
-      - "type:chore"
+  # The pip ecosystem is intentionally absent: tools/ has no pyproject.toml
+  # or requirements.txt for Dependabot to resolve against. license_gate.py
+  # is stdlib-only; render_app_icon.py's third-party deps (resvg-py,
+  # pillow) are inline PEP 723 script metadata, which Dependabot does not
+  # read. It comes back once tools/fetch-media (#15) lands with a
+  # tools/pyproject.toml.
