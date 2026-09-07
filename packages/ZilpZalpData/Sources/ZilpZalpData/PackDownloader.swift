@@ -1,31 +1,6 @@
 import CryptoKit
 import Foundation
 
-/// What can go wrong while listing, downloading or opening a pack.
-///
-/// Every case names the thing at fault, because the parents' area has to say
-/// which pack or which file went wrong. Nothing here is ever a crash: a bucket
-/// that answers with nonsense is a bad afternoon, not a broken app.
-public enum PackDownloadError: Error, Sendable, Equatable {
-    /// `packs/index.json` could not be fetched, or does not decode.
-    case indexUnreachable(reason: String)
-    /// A file the download needs could not be fetched from the bucket.
-    case fileUnreachable(path: String, reason: String)
-    /// The manifest was fetched but is not a pack manifest, or names a
-    /// different pack than the index entry it belongs to.
-    case manifestInvalid(packID: String, reason: String)
-    /// An index entry or a manifest names a path that would leave the pack's
-    /// own directory. Rejected before a single byte is fetched or written.
-    case invalidPath(packID: String, path: String)
-    /// A fetched file does not hash to what the manifest declares. The pack
-    /// stays half downloaded and nothing of it becomes visible.
-    case hashMismatch(packID: String, file: String, expected: String, actual: String)
-    /// There is no such pack below `Packs/`.
-    case notInstalled(packID: String)
-    /// Creating, writing, moving or removing below `Packs/` failed.
-    case diskFailure(path: String, reason: String)
-}
-
 /// Fetches species packs from the media bucket into Application Support.
 ///
 /// The only component of the app that talks to the network, and it talks to
@@ -43,13 +18,13 @@ public actor PackDownloader {
     /// Where the index sits in the bucket (#14).
     private static let indexKey = "packs/index.json"
 
-    /// The directory the downloaded packs live in, below the one handed to
-    /// `init` — `Packs/<pack-id>/`, as section 5 of the spec lays it out.
+    /// `Packs/<pack-id>/` below the directory handed to `init`, as section 5
+    /// of the spec lays it out.
     private static let packsDirectoryName = "Packs"
 
-    /// A download in flight is `Packs/<id>.partial/`. The suffix rather than a
-    /// hidden directory: `installedPacks()` skips it by name, and a human
-    /// looking into Application Support sees what happened.
+    /// A download in flight is `Packs/<id>.partial/`. A suffix rather than a
+    /// hidden directory: a human looking into Application Support sees what
+    /// happened.
     private static let partialSuffix = ".partial"
 
     private static let manifestName = "manifest.json"
@@ -108,9 +83,8 @@ public actor PackDownloader {
     ///     entry's `downloadSize`, after the manifest and after every file.
     ///     A closure rather than an `AsyncStream` because the download is one
     ///     awaited call that either returns or throws, and a stream would make
-    ///     the caller drain a second channel to learn what the first already
-    ///     tells it. It runs on the downloader's executor, so a view has to
-    ///     hop to the main actor itself.
+    ///     the caller drain a second channel for what the first already tells
+    ///     it. It runs on this actor's executor, not on the main one.
     /// - Throws: `PackDownloadError`, or `CancellationError`.
     public func download(
         _ entry: PackIndex.Entry,
@@ -175,11 +149,9 @@ public actor PackDownloader {
     /// below `Packs/`, so it appears neither here nor in `delete(packID:)` —
     /// the layout rules that out, no guard needed.
     ///
-    /// - Throws: `PackDownloadError.manifestInvalid` when an installed pack
-    ///   carries a manifest that does not decode, naming the pack so the
-    ///   caller can offer to delete it. A directory without a manifest — a
-    ///   download in flight, or something a human dropped in there — is
-    ///   skipped rather than reported.
+    /// - Throws: `PackDownloadError.manifestInvalid` for an installed pack
+    ///   whose manifest does not decode, naming it so the caller can offer to
+    ///   delete it. A directory without a manifest is skipped instead.
     public func installedPacks() throws -> [Pack] {
         let contents: [URL]
         do {
@@ -216,9 +188,6 @@ public actor PackDownloader {
     ///
     /// The only way to a downloaded pack's files: this actor owns the layout
     /// below `Packs/`, so no view ever assembles such a path itself.
-    ///
-    /// - Throws: `PackDownloadError.notInstalled` when the pack is not there,
-    ///   `.manifestInvalid` when its manifest does not decode.
     public func catalog(for packID: String) throws -> PackCatalog {
         guard Self.isSafeComponent(packID) else {
             throw PackDownloadError.invalidPath(packID: packID, path: packID)
@@ -231,13 +200,11 @@ public actor PackDownloader {
         return try PackCatalog(pack: decodeManifest(data, expecting: packID), directory: directory)
     }
 
-    /// Removes a downloaded pack — the installed directory and a half
-    /// downloaded one, so that deleting really frees the space and a later
-    /// download starts clean.
-    ///
-    /// Removing a pack that is not there is done, not failed: the parents'
-    /// area offers one button per pack and should not have to know which of
-    /// the two directories exist.
+    /// Removes a downloaded pack: the installed directory and a half
+    /// downloaded one, so that deleting frees the space and a later download
+    /// starts clean. Removing what is not there is done, not failed — the
+    /// parents' area has one button per pack and should not have to know
+    /// which of the two directories exist.
     public func delete(packID: String) throws {
         guard Self.isSafeComponent(packID) else {
             throw PackDownloadError.invalidPath(packID: packID, path: packID)
@@ -264,10 +231,10 @@ public actor PackDownloader {
 
     /// Fetches one object of the bucket.
     ///
-    /// - Parameters:
-    ///   - url: built by appending to `baseURL` and nowhere else, which is
-    ///     what keeps the app on the single host it is allowed to talk to.
-    ///   - name: the path an error names, from the caller's point of view.
+    /// `url` is built by appending to `baseURL` and nowhere else, which is
+    /// what keeps the app on the single host it may talk to. `name` is the
+    /// path an error names.
+    ///
     /// - Throws: `PackDownloadError.fileUnreachable` for every transport and
     ///   status failure, `CancellationError` when the task was cancelled.
     private func fetch(_ url: URL, named name: String) async throws -> Data {
@@ -294,10 +261,8 @@ public actor PackDownloader {
         }
     }
 
-    /// Every medium a pack declares, photo before call, each file once.
-    ///
-    /// Deduplicated by path: two birds sharing a file would otherwise be
-    /// fetched twice and counted twice in the progress.
+    /// Every medium a pack declares, photo before call, each file once: two
+    /// birds sharing a file would otherwise be fetched and counted twice.
     private static func assets(of pack: Pack) -> [MediaAsset] {
         var seen: Set<String> = []
         return pack.birds
@@ -337,8 +302,7 @@ public actor PackDownloader {
     /// somebody else generated, so `photos/../../../Preferences/x.plist` has
     /// to be stopped here rather than by the file system. Only plain relative
     /// paths pass: no empty component, no `.`, no `..`, no leading slash, no
-    /// backslash, and no percent escape that could smuggle one of those back
-    /// in. Our own manifests only ever say `photos/<id>.png`.
+    /// backslash, no percent escape that could smuggle one of those back in.
     private static func isSafeRelativePath(_ path: String) -> Bool {
         guard !path.isEmpty, !path.hasPrefix("/"), !path.contains("\\"), !path.contains("%") else {
             return false
@@ -386,8 +350,8 @@ public actor PackDownloader {
     /// when it is missing or does not match.
     ///
     /// This is what makes a download resumable: a file that survived the last
-    /// attempt is not fetched again, and a half written one does not pass and
-    /// is fetched again. Unreadable means "fetch it", so nothing throws here.
+    /// attempt is not fetched again, a half written one does not pass and is.
+    /// Unreadable means "fetch it", so nothing throws here.
     private func verifiedSize(of file: URL, sha256: String) -> Int? {
         guard let data = try? Data(contentsOf: file), Self.hexDigest(of: data) == sha256 else {
             return nil
@@ -419,8 +383,8 @@ public actor PackDownloader {
         let manager = FileManager.default
         do {
             if manager.fileExists(atPath: installed.path(percentEncoded: false)) {
-                // Replacing rather than removing and moving: there is no
-                // moment in which the pack is gone from disk.
+                // Replacing, not removing and moving: there is no moment in
+                // which the pack is gone from disk.
                 _ = try manager.replaceItemAt(installed, withItemAt: partial)
             } else {
                 try manager.moveItem(at: partial, to: installed)

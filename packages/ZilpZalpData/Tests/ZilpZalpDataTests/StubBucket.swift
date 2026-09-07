@@ -14,7 +14,7 @@ import Synchronization
 ///
 /// The bucket is static, as `URLProtocol` instances are made by the session
 /// rather than by us, so the suite using it runs serialized.
-final class StubBucket: URLProtocol {
+class StubBucket: URLProtocol {
     /// One object in the stand-in bucket.
     struct Route: Sendable {
         var body: Data
