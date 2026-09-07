@@ -219,6 +219,10 @@ private struct HomeTileButtonStyle: ButtonStyle {
             if hasLedge {
                 shape
                     .fill(palette.edge)
+                    // A bare shape takes whatever the stack proposes, which
+                    // would grow the tile to fill its slot. The ledge is the
+                    // tile's own size, shifted down.
+                    .frame(width: size, height: size)
                     .offset(y: HomeTileMetrics.restingLedge)
             }
 
