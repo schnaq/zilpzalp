@@ -1,7 +1,7 @@
 # ZilpZalp v1 — Design und Spezifikation
 
 **Datum:** 2026-08-01
-**Status:** Entwurf zur Freigabe
+**Status:** Gültig, zuletzt aktualisiert 2026-09-07
 **Grundlage:** [docs/2026-07_basics.md](../../2026-07_basics.md), Design-Export unter `design/`, Klickprototyp unter `screens/`
 
 ---
@@ -65,9 +65,9 @@ packages/
   ZilpZalpUI/             Design-System: Tokens und Komponenten
 tools/                    Python — HTTP, Bildskalierung, ffmpeg, S3
   fetch-media/            Kuratiert Medien aus iNaturalist/xeno-canto, lädt nach S3
-  generate-credits/       Erzeugt Credits-Daten und CREDITS.md aus den Manifesten
+  generate_credits.py     Erzeugt Credits-Daten und CREDITS.md aus den Manifesten
 data/
-  packs/*.json            Paketdefinitionen inklusive Lizenz-Metadaten
+  packs/<id>/manifest.json  Paketdefinitionen inklusive Lizenz-Metadaten
 docs/                     Spec, Medienentscheidung, Secrets, CD-Runbook
 design/  screens/         Design-Export und Klickprototyp, unverändert als Referenz
 mise.toml                 Werkzeuge und Tasks
@@ -91,7 +91,9 @@ Reine Wertetypen und Funktionen. Vollständig testbar ohne Laufzeitumgebung.
 - `PackDownloader` — lädt Pakete per URLSession aus S3, prüft SHA-256, entpackt nach Application Support
 - `ProfileStore` — ein Actor über einer JSON-Datei; Profile, Sterne, Statistik, Sammlung
 
-**ZilpZalpUI** übersetzt das Design-System nach SwiftUI: Farb- und Typo-Tokens, `ZButton`, `ZCard`, `ChoiceTile`, `SoundButton`, `QuizProgress`, `FeedbackBanner`, `RewardSticker`, `HomeTile`, `SettingRow`. Eins zu eins zu den Komponenten unter `design/components/`.
+Das Basis-Paket ist eine SwiftPM-Ressource von `ZilpZalpData`, kein Asset Catalog im App-Target: `PackCatalog.bundled()` öffnet es über `Bundle.module`, `photoURL(for:)` löst das Foto eines Vogels relativ zum Paketverzeichnis auf. Einzige Wahrheit bleibt `data/packs/<id>/manifest.json`; `tools/sync_bundled_packs.py` spiegelt es nach `Resources/Packs/` in `ZilpZalpData`, und `mise run check` schlägt bei Abweichung fehl. Ein Symlink funktioniert nicht — SwiftPM kopiert bei einer `.copy`-Ressource den Link selbst, nicht sein Ziel, sodass er im Bundle ins Leere zeigt.
+
+**ZilpZalpUI** übersetzt das Design-System nach SwiftUI: Farb- und Typo-Tokens, `ZButton`, `ZCard`, `ChoiceTile`, `SoundButton`, `QuizProgress`, `FeedbackBanner`, `RewardSticker`, `HomeTile`, `SettingRow`. Eins zu eins zu den Komponenten unter `design/components/`. Komponenten bekommen fertige `String`-Werte übergeben und tragen selbst keine Produkttexte. Gesperrte Sticker und Nester bleiben sichtbar — mit Schloss- bzw. Ei-Symbol statt versteckt. Dynamic Type ist bewusst fest: die Geometrie (220 pt Kacheln, 64/96/160 pt Bedienziele) skaliert nicht mit dem Text (Entscheidung 2026-09-07).
 
 ### Datenmodell
 
@@ -102,41 +104,43 @@ struct Bird: Codable, Identifiable {
     let scientificName: String  // "Turdus merula"
     let taxonID: Int            // iNaturalist 12716
     let article: String         // "die" — für "Wo ist die Amsel?"
+    let pronunciation: String?  // Lautschrift-Override für AVSpeechSynthesizer, meist nil
     let photo: MediaAsset
-    let call: MediaAsset?       // fehlt, solange kein freier Ruf vorliegt
+    let call: MediaAsset?       // null, solange kein freier Ruf vorliegt
 }
 
 struct MediaAsset: Codable {
-    let file: String            // "photos/amsel.jpg"
+    let file: String            // "photos/amsel.png"
     let sha256: String
-    let license: License        // .cc0 | .ccBy | .ccBySa
+    let license: License        // .cc0 | .ccBy | .ccBySa — Rohwerte "CC0-1.0" | "CC-BY-4.0" | "CC-BY-SA-4.0"
     let attribution: String     // "Alexis Tinker-Tsavalas"
     let sourceURL: URL          // Beobachtung bzw. Aufnahme
+    let retrieved: Date         // Tag der Kuration, Beleg für den Lizenzstand
 }
 
 struct Pack: Codable, Identifiable {
     let id: String              // "deutschland"
     let title: String           // "Vögel Deutschlands"
     let birds: [Bird]
-    let bundled: Bool           // im App-Bundle oder aus S3 geladen
-    let downloadSize: Int
 }
 ```
 
-`birds.json` je Paket ist die einzige Wahrheit. Aus ihr entstehen zur Build-Zeit sowohl die Assets als auch der Credits-Screen. Attribution kann dadurch nicht von den Assets abdriften.
+`data/packs/<id>/manifest.json` je Paket ist die einzige Wahrheit. Aus ihr entstehen zur Build-Zeit sowohl die Assets als auch der Credits-Screen. Attribution kann dadurch nicht von den Assets abdriften. Ob ein Paket gebundelt ist, erkennt der Katalog daran, woher er es geladen hat — `Pack` braucht dafür kein eigenes Feld; `downloadSize` steht ausschließlich in `packs/index.json`.
 
 ### Medien-Pipeline
 
 ```
-data/packs/*.json ──> tools/fetch-media ──> Scaleway S3 (zilpzalp-media, fr-par)
+data/packs/<id>/manifest.json ──> tools/fetch-media ──> Scaleway S3 (zilpzalp-media, fr-par)
                                                  │
-                     Basis-Paket ────────────────┼──> Asset Catalog ──> App-Bundle
+                     Basis-Paket ────────────────┼──> SwiftPM-Ressource (ZilpZalpData) ──> App-Bundle
                      Download-Pakete ────────────┴──> zur Laufzeit per PackDownloader
                                                  │
-                     tools/generate-credits ─────┴──> Credits-Screen + CREDITS.md
+                     tools/generate_credits.py ──┴──> Credits-Screen + CREDITS.md
 ```
 
 `fetch-media` spricht iNaturalist und xeno-canto **nur zur Kurationszeit** an, niemals die App zur Laufzeit. Das löst gleich mehrere Probleme: keine Rate-Limits im Betrieb, keine verschwindenden Fremd-URLs, geprüfte Lizenzen, gleichbleibende Bildqualität und volle Offline-Fähigkeit.
+
+`tools/generate_credits.py` läuft als Teil von `mise run check`, schreibt `CREDITS.md` und `credits.json` (Letzteres als weitere Ressource in `ZilpZalpData` gebündelt, fürs In-App-Credits) und schlägt bei Abweichung fehl. Die Credits umfassen neben den Medien auch die Fonts (OFL) und die Icons (Lucide, ISC — mit einzelnen Icons aus Feather, MIT).
 
 Ein CI-Gate bricht den Build ab, sobald ein Asset eine Lizenz außerhalb von CC0/CC BY/CC BY-SA trägt oder Attribution fehlt.
 
@@ -155,13 +159,13 @@ Neue Pakete können dadurch ohne App-Update und ohne Review ausgeliefert werden 
 Beide Spiele nutzen dieselbe Engine, sie unterscheiden sich nur darin, wie die Frage gestellt wird.
 
 1. Kind wählt sein Profil, dann ein Spiel
-2. Zehn Fragen. Pro Frage: Aufgabe wird ausgegeben — Spiel 1 liest den Namen per `AVSpeechSynthesizer` vor, Spiel 2 spielt den Ruf ab, wiederholbar per Tippen
-3. Vier Fotokacheln. Richtige Wahl färbt sich olivgrün mit Häkchen, falsche Wahl färbt sich sonnengelb mit „Fast! Hör nochmal hin." — **niemals rot, niemals ein Kreuz, kein Blockieren**. Das Kind darf weiter probieren
+2. Zehn Fragen. Pro Frage: Aufgabe wird ausgegeben — Spiel 1 liest Artikel und Namen (mit `pronunciation`-Override, wo hinterlegt) per `AVSpeechSynthesizer` vor, Spiel 2 spielt den Ruf ab, wiederholbar per Tippen
+3. Vier Fotokacheln. Richtige Wahl färbt sich olivgrün mit Häkchen, falsche Wahl färbt sich sonnengelb mit „Fast! Hör nochmal hin." — **niemals rot, niemals ein Kreuz, kein Blockieren**. Das Kind darf weiter probieren. Die Kacheln zeigen nie den Vogelnamen als Text
 4. Nach zehn Fragen: Sterne, gegebenenfalls Rangaufstieg, neuer Sticker in der Sammlung
 
 Der Blätter-Fortschritt zeigt den Stand ohne Zahlen. Bei erschöpftem Zeitbudget läuft die aktuelle Runde noch zu Ende, danach erscheint „Zeit fürs Nest".
 
-**Sprachausgabe:** `AVSpeechSynthesizer` mit `de-DE` direkt auf dem Gerät. Kein Audio-Asset, keine Lizenzfrage, keine Netzabhängigkeit. Der Klickprototyp macht es mit der Web Speech API bereits genauso.
+**Sprachausgabe:** `AVSpeechSynthesizer` mit `de-DE` direkt auf dem Gerät. Kein Audio-Asset, keine Lizenzfrage, keine Netzabhängigkeit. Der Klickprototyp macht es mit der Web Speech API bereits genauso. Die Sprachausgabe lässt sich in v1 nicht abschalten — ohne sie hätte Spiel 1 für noch nicht lesende Kinder keine Aufgabenstellung. Die Einstellung „Vogelstimmen" im Elternbereich betrifft nur die aufgenommenen Rufe aus Spiel 2. Die Audiosession (`AVAudioSession`, Kategorie `.playback`) wird vom Sprachdienst konfiguriert und vom Rufe-Player mitgenutzt, damit beide auch bei umgelegtem Stummschalter hörbar bleiben.
 
 ---
 
@@ -177,7 +181,7 @@ Packs/<pack-id>/            Heruntergeladene Pakete
 Settings/parental.json      Zeitbudget, ob FaceID aktiv ist
 ```
 
-Kein Passwort im Klartext. Der Elternbereich nutzt `LAContext` mit `deviceOwnerAuthentication`, was automatisch auf den Geräte-Code zurückfällt, wenn keine Biometrie vorhanden ist. Auf „Designed for iPad"-Macs muss dieser Fallback geprüft werden.
+Kein Passwort im Klartext. Der Elternbereich nutzt `LAContext` mit `deviceOwnerAuthentication`, was automatisch auf den Geräte-Code zurückfällt, wenn keine Biometrie vorhanden ist — dieses Schloss schützt nur den Zugang zum Elternbereich selbst; externe Links bekommen ein eigenes Gate, siehe Abschnitt 7. Auf „Designed for iPad"-Macs muss dieser Fallback geprüft werden.
 
 Abstürze werden ausschließlich über Apples eigenes MetricKit und den Xcode Organizer sichtbar. Das ist in der Kids Category der einzig saubere Weg.
 
@@ -201,12 +205,12 @@ Bewusst wenige Simulator-Tests. Ein instabiles Gate auf einem self-hosted Runner
 Die Wahl der Kids Category ist keine reine Metadaten-Entscheidung, sie bindet die Umsetzung:
 
 - **Keine Third-Party-Analytics und kein Third-Party-Crash-Reporting.** Kein Sentry, kein Firebase. Nur MetricKit
-- **Externe Links brauchen ein Parental Gate.** Betrifft direkt den Credits-Screen: die Quellenlinks zu iNaturalist, xeno-canto und den Lizenztexten dürfen nicht ohne Erwachsenen-Prüfung öffnen. Umsetzung: Credits zeigen Namen und Lizenz immer im Klartext, der Link öffnet erst nach der FaceID-Abfrage
+- **Externe Links brauchen ein Parental Gate.** Betrifft direkt den Credits-Screen: die Quellenlinks zu iNaturalist, xeno-canto und den Lizenztexten dürfen nicht ohne Erwachsenen-Prüfung öffnen. Umsetzung: Credits zeigen Namen und Lizenz immer im Klartext, der Link selbst öffnet erst nach einer eigenständigen Erwachsenen-Aufgabe (Rechen- oder Frageaufgabe mit Sprachhinweis) — getrennt vom `LAContext`-Schloss des Elternbereichs, das nur dessen Zugang schützt (Guideline 1.3, siehe `docs/kids-category.md`)
 - **Privacy Manifest** (`PrivacyInfo.xcprivacy`) ist Pflicht und deklariert: keine Datenerhebung
-- **Datenschutzerklärung** muss verlinkt sein — als statische Seite, nicht in der App klickbar ohne Gate
+- **Datenschutzerklärung** muss verlinkt sein — als statische Seite, nicht in der App klickbar ohne dasselbe Aufgaben-Gate wie beim Credits-Screen
 - Werbung, In-App-Käufe und Verhaltens-Targeting entfallen ohnehin
 
-Die genauen Wortlaute der Guidelines 1.3 und 5.1.4 sind noch gegen die aktuelle Fassung zu prüfen; die entsprechende Recherche wurde abgebrochen. Das ist als Aufgabe in Meilenstein 6 eingeplant und blockiert die Entwicklung bis dahin nicht.
+Die Wortlaute der Guidelines 1.3, 5.1.4 und 2.3.8 sind gegen die aktuelle Fassung geprüft, siehe `docs/kids-category.md` (#19, abgeschlossen in M2). Offen bleiben die technischen Umsetzungen: das Aufgaben-Gate für externe Links (#37) und die Altersfreigabe-Einstellungen in App Store Connect (#41); sie blockieren die Entwicklung bis dahin nicht.
 
 ---
 
@@ -246,6 +250,8 @@ Bewusst anders als unlock: Swift statt Flutter, Tag-basiertes Release statt Bran
 
 M0 bis M2 sind Fundament und lassen sich weitgehend parallel bearbeiten. Ab M3 baut jeder Meilenstein auf dem vorherigen auf.
 
+M0 ist am 2026-09-07 mit dem Secrets-Smoke-Workflow (#6) abgeschlossen. Dass die Komponenten aus M1 erst nach dem Start von M2 landeten, ist eine bewusste Entscheidung aus dem Plan vom 2026-09-07: drei Stränge — Komponenten, Datenschema, Spiellogik — laufen dort parallel, keiner wartet auf den anderen.
+
 Die Recherche zu den App-Review-Guidelines liegt bewusst schon in M2 und nicht erst in M6: der Paket-Downloader in M5 erzeugt ausgehenden Netzverkehr, und `PrivacyInfo.xcprivacy` erklärt gleichzeitig, dass keine Daten erhoben werden. Inhalte abrufen ist aller Voraussicht nach keine Datenerhebung — aber das ist eine Aussage in einer verpflichtenden Erklärung, und sie sollte belegt sein, bevor der Netzwerkcode entsteht, nicht danach.
 
 ---
@@ -254,11 +260,12 @@ Die Recherche zu den App-Review-Guidelines liegt bewusst schon in M2 und nicht e
 
 Diese Fragen sind bewusst offen und blockieren den Start nicht:
 
-1. **CC BY-SA bei zugeschnittenen Audios.** Schneiden wir eine BY-SA-Aufnahme auf wenige Sekunden zu, entsteht ein Bearbeitungswerk, das unter derselben Lizenz stehen muss. Für die Audiodateien ist das unproblematisch — sie bleiben BY-SA, der Code bleibt MIT. Ob das Zusammenspiel mit den App-Store-Bedingungen und deren technischen Schutzmaßnahmen sauber ist, muss ein Mensch beurteilen. Ausweg, falls nötig: nur CC0- und CC-BY-Aufnahmen verwenden
-2. **Qualität der Vogelrufe.** Die Verfügbarkeit ist belegt — alle vierzig geprüften Arten haben frei lizenzierte Aufnahmen. Offen ist die inhaltliche Eignung: viele Aufnahmen sind Flügelschläge, Bettelrufe oder nächtliche Flugrufe statt des typischen Gesangs. Jede Aufnahme muss vor Aufnahme ins Paket angehört werden
-3. **Habitat-Zuordnung für Spiel 4** muss selbst erarbeitet und belegt werden. Ein systematisches Übernehmen der Kategorisierung von NABU oder LBV berührt das Datenbankrecht nach §87a UrhG
-4. **Wortlaut der App-Review-Guidelines** zu Kids Category und Altersfreigabe ist gegen die aktuelle Fassung zu verifizieren
-5. **Artenliste und Rangleiter** sind inhaltliche Entscheidungen, die Christian und Johanna treffen — nicht technische
+1. **CC BY-SA bei zugeschnittenen Audios.** Schneiden wir eine BY-SA-Aufnahme auf wenige Sekunden zu, entsteht ein Bearbeitungswerk, das unter derselben Lizenz stehen muss. Für die Audiodateien ist das unproblematisch — sie bleiben BY-SA, der Code bleibt MIT. Ob das Zusammenspiel mit den App-Store-Bedingungen und deren technischen Schutzmaßnahmen sauber ist, muss ein Mensch beurteilen. Ausweg, falls nötig: nur CC0- und CC-BY-Aufnahmen verwenden. Weiterhin offen; blockiert M3 nicht, weil das Basis-Paket nur CC-BY-Fotos und keine Rufe enthält
+2. **Qualität der Vogelrufe.** Die Verfügbarkeit ist belegt — alle vierzig geprüften Arten haben frei lizenzierte Aufnahmen. Offen ist die inhaltliche Eignung: viele Aufnahmen sind Flügelschläge, Bettelrufe oder nächtliche Flugrufe statt des typischen Gesangs. Jede Aufnahme muss vor Aufnahme ins Paket angehört werden. Wartet auf `tools/fetch-media` für Rufe (#16) und das manuelle Anhören (#32)
+3. **Habitat-Zuordnung für Spiel 4** muss selbst erarbeitet und belegt werden. Ein systematisches Übernehmen der Kategorisierung von NABU oder LBV berührt das Datenbankrecht nach §87a UrhG. Unverändert, erst in M8 relevant
+4. ~~**Wortlaut der App-Review-Guidelines** zu Kids Category und Altersfreigabe ist gegen die aktuelle Fassung zu verifizieren~~ — erledigt, siehe `docs/kids-category.md` (#19). Offen bleiben die technischen Umsetzungen: das Aufgaben-Gate für externe Links (#37) und die Altersfreigabe-Einstellungen in App Store Connect (#41)
+5. **Artenliste und Rangleiter** sind inhaltliche Entscheidungen, die Christian und Johanna treffen — nicht technische. Ein Vorschlag für die Artenliste (#21) ist in Arbeit
+6. **`.playback` vs. `.duckOthers` für die Audiosession.** Die Sprachausgabe (#24) nutzt zurzeit `.playback` ohne Ducking — das unterbricht Eltern-Musik im Hintergrund vollständig, und da die Session nie deaktiviert wird, bekommt die Musik kein Fortsetzen-Signal. `.duckOthers` würde nur absenken, verlangt dafür ein Sessions-Lebenszyklus-Management, das mit dem Rufe-Player (#30) geteilt werden muss. Offen; keine einseitige Entscheidung in #24
 
 ---
 
