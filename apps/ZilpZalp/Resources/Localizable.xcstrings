@@ -12,6 +12,18 @@
           }
         }
       }
+    },
+    "quiz.prompt.whereIs" : {
+      "comment" : "Spoken question in game 1. %1$@ is the German article, %2$@ the bird's name",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wo ist %1$@ %2$@?"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"
