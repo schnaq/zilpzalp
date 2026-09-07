@@ -1,14 +1,86 @@
 {
   "sourceLanguage" : "de",
   "strings" : {
-    "app.name" : {
-      "comment" : "Name of the app, shown on the placeholder start screen",
+    "app.pack.failed" : {
+      "comment" : "Shown instead of the home screen when the bundled species pack cannot be opened. Read by a grown-up, so a full sentence",
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ZilpZalp"
+            "value" : "Die Vögel konnten nicht geladen werden."
+          }
+        }
+      }
+    },
+    "home.game.calls.title" : {
+      "comment" : "Nest on the home tree for game 2: a bird call plays, the child taps the bird",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wer singt da?"
+          }
+        }
+      }
+    },
+    "home.game.names.title" : {
+      "comment" : "Nest on the home tree for game 1: the bird's name is read out, the child taps the bird",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wer ist das?"
+          }
+        }
+      }
+    },
+    "home.locked.comingSoon" : {
+      "comment" : "Label of the two nests that have not hatched yet — games 3 and 4. Never a lock, never a wall",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kommt bald ins Nest"
+          }
+        }
+      }
+    },
+    "home.title" : {
+      "comment" : "Headline of the home screen, above the tree with the nests",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Was möchtest du machen?"
+          }
+        }
+      }
+    },
+    "nav.back.accessibility" : {
+      "comment" : "VoiceOver label of the back chevron in the top bar. The button itself is wordless",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zurück"
+          }
+        }
+      }
+    },
+    "parents.title" : {
+      "comment" : "The grown-ups' area: the VoiceOver label of its door in the top bar, and the title of the area itself",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Für Erwachsene"
           }
         }
       }
