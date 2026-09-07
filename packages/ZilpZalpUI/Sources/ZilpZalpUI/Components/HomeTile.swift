@@ -135,8 +135,9 @@ public struct HomeTile: View {
                 Icon(displayedIcon, size: .custom(size * HomeTileMetrics.iconRatio))
 
                 Text(title)
+                    // One line by design, so no `multilineTextAlignment`:
+                    // the frame centres the single line already.
                     .typeStyle(.label, .display, weight: .bold, singleLine: true)
-                    .multilineTextAlignment(.center)
 
                 // No stars at all until the first one is earned, exactly as
                 // in the JSX: three empty outlines on a fresh tile would read

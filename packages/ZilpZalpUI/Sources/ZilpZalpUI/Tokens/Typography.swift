@@ -206,6 +206,11 @@ public extension View {
     ///     line box tighter than 1 em; SwiftUI does not clip without
     ///     `.clipped()`, so they stay whole. Leave it off for anything that
     ///     may wrap.
+    ///
+    /// Left off, the modifier touches neither the line limit nor the height:
+    /// `.lineLimit(nil)` would clear a limit an ancestor had set, so a caller
+    /// wrapping a card in `.lineLimit(2)` would silently lose it.
+    @ViewBuilder
     func typeStyle(
         _ step: ZType.Step,
         _ family: ZType.Family,
@@ -213,11 +218,17 @@ public extension View {
         tracking: CGFloat = ZType.Tracking.normalEm,
         singleLine: Bool = false,
     ) -> some View {
-        font(step.font(family, weight: weight))
+        let styled = font(step.font(family, weight: weight))
             .tracking(step.tracking(tracking))
             .lineSpacing(step.lineSpacing(for: family))
-            .lineLimit(singleLine ? 1 : nil)
-            .frame(height: singleLine ? step.lineBoxHeight : nil)
+
+        if singleLine {
+            styled
+                .lineLimit(1)
+                .frame(height: step.lineBoxHeight)
+        } else {
+            styled
+        }
     }
 }
 

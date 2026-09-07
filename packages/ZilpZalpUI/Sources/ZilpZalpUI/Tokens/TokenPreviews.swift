@@ -192,9 +192,12 @@
                             .typeStyle(.caption, .body, weight: .semibold)
                             .foregroundStyle(ZColor.textMuted)
                         Text("Zilpzalp")
-                            // `singleLine`, so the ramp shows each step in
-                            // the box the design draws it in.
-                            .typeStyle(step, .display, weight: .bold, singleLine: true)
+                            // Not `singleLine`: at `hero` the design's box is
+                            // 88 pt and Baloo 2 draws 141, so the glyphs would
+                            // overhang far enough to sit on the caption above.
+                            // A ramp is for reading the sizes off, so it keeps
+                            // the face's own box.
+                            .typeStyle(step, .display, weight: .bold)
                             .foregroundStyle(ZColor.textStrong)
                     }
                 }
