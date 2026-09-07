@@ -14,7 +14,8 @@ are checked for those assets all the same.
 
 Manifest shape: the one the Pack model in the spec defines — a JSON object
 whose "birds" key holds the list of birds. Each bird carries a mandatory
-"photo" and an optional "call", both of the same shape:
+"photo" and an optional "call" — null or absent while no recording exists —
+both of the same shape:
 
     {"file": "photos/amsel.jpg", "sha256": "…", "license": "CC-BY-4.0",
      "attribution": "…", "sourceURL": "https://…"}
@@ -123,13 +124,14 @@ def check_manifest(path: Path) -> tuple[list[str], int]:
         identifier = entry.get("id")
         label = identifier if isinstance(identifier, str) and identifier else f"bird #{index}"
 
-        if "photo" not in entry:
+        if entry.get("photo") is None:
             problems.append(f"{label}: field 'photo' is missing")
 
-        # The call is optional — it is absent as long as no freely licensed
-        # recording exists for the bird.
+        # The call is optional — it is null, or absent, as long as no freely
+        # licensed recording exists for the bird. The manifest schema spells
+        # it out as `"call": null`, which decodes to nil in the Pack model.
         for field in ("photo", "call"):
-            if field not in entry:
+            if entry.get(field) is None:
                 continue
             if isinstance(entry[field], dict):
                 media_count += 1
