@@ -118,7 +118,7 @@ public struct ZCard<Content: View>: View {
         ZCard(tone: .leaf, padding: ZSpacing.step6) {
             VStack(alignment: .leading, spacing: ZSpacing.step3) {
                 Text("Wide padding")
-                    .font(ZType.Step.headline.font(.display, weight: .bold))
+                    .typeStyle(.headline, .display, weight: .bold, singleLine: true)
                 Badge("rare", tone: .rare, icon: .sparkles)
             }
         }

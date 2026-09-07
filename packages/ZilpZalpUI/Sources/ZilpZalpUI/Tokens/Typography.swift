@@ -146,11 +146,10 @@ public enum ZType {
         }
 
         /// The box the design asks for: `size × lineHeight`, the CSS line
-        /// box. Independent of the face — which is the point of the pair.
-        /// ``naturalBoxHeight(for:)`` is what the face insists on, and the
-        /// two take the same argument so a call site compares them at a
-        /// glance.
-        public func lineBoxHeight(for _: Family) -> CGFloat {
+        /// box. No face enters into it — that is
+        /// ``naturalBoxHeight(for:)``, and the gap between the two is the
+        /// whole problem this type solves.
+        public var lineBoxHeight: CGFloat {
             size * lineHeight
         }
 
@@ -173,10 +172,10 @@ public enum ZType {
         /// Every Baloo 2 role clamps to zero. Its 1.602 box is already
         /// taller than the 1.0–1.2 the display roles ask for, and nothing in
         /// SwiftUI shrinks a line box. For a single line the fix is
-        /// ``lineBoxHeight(for:)`` as an explicit frame — see
+        /// ``lineBoxHeight`` as an explicit frame — see
         /// `View.typeStyle(_:_:weight:tracking:singleLine:)`.
         public func lineSpacing(for family: Family) -> CGFloat {
-            max(0, lineBoxHeight(for: family) - naturalBoxHeight(for: family))
+            max(0, lineBoxHeight - naturalBoxHeight(for: family))
         }
     }
 }
@@ -218,7 +217,7 @@ public extension View {
             .tracking(step.tracking(tracking))
             .lineSpacing(step.lineSpacing(for: family))
             .lineLimit(singleLine ? 1 : nil)
-            .frame(height: singleLine ? step.lineBoxHeight(for: family) : nil)
+            .frame(height: singleLine ? step.lineBoxHeight : nil)
     }
 }
 

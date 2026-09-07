@@ -144,15 +144,13 @@ func lineSpacingCorrectsTowardsTheCSSBox() {
 func boxHeightsSeparateTheDesignFromTheFace() {
     // `--text-label: 22px` / `--lh-label: 1.1`. The design's box does not
     // depend on the face; the face's box does not depend on the design.
-    #expect(ZType.Step.label.lineBoxHeight(for: .display) == 22 * 1.1)
-    #expect(ZType.Step.label.lineBoxHeight(for: .body) == ZType.Step.label
-        .lineBoxHeight(for: .display))
+    #expect(ZType.Step.label.lineBoxHeight == 22 * 1.1)
     #expect(abs(ZType.Step.label.naturalBoxHeight(for: .display) - 35.244) < 0.001)
     #expect(abs(ZType.Step.body.naturalBoxHeight(for: .body) - 27.28) < 0.001)
 
     // The single-line frame `typeStyle(singleLine:)` applies: 24.2 pt for a
     // Baloo label the face would otherwise lay out in 35.2.
-    #expect(ZType.Step.label.lineBoxHeight(for: .display) < ZType.Step.label
+    #expect(ZType.Step.label.lineBoxHeight < ZType.Step.label
         .naturalBoxHeight(for: .display))
 }
 
