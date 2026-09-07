@@ -10,9 +10,18 @@ updates:
     labels:
       - "type:chore"
 
-  # The pip ecosystem is intentionally absent: tools/ has no pyproject.toml
-  # or requirements.txt for Dependabot to resolve against. license_gate.py
-  # is stdlib-only; render_app_icon.py's third-party deps (resvg-py,
-  # pillow) are inline PEP 723 script metadata, which Dependabot does not
-  # read. It comes back once tools/fetch-media (#15) lands with a
-  # tools/pyproject.toml.
+  # tools/pyproject.toml and tools/uv.lock, the environment tools/fetch_media
+  # runs in. The `uv` ecosystem rather than `pip`, because only it updates the
+  # manifest and the lock file together — with `pip` the lock would stay behind
+  # and `uv run --locked` in `mise run test` would fail on every Dependabot
+  # pull request. render_app_icon.py keeps its dependencies as inline PEP 723
+  # script metadata, which Dependabot does not read; it is a one-off renderer
+  # that no build depends on.
+  - package-ecosystem: uv
+    directory: "/tools"
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: chore
+    labels:
+      - "type:chore"
