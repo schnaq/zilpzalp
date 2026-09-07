@@ -58,7 +58,7 @@ def dump(document: dict) -> str:
 
 
 def save(path: Path, document: dict) -> None:
-    """Write a manifest back."""
+    """Write a JSON document — a manifest, or the candidate list beside it."""
     path.write_text(dump(document), encoding="utf-8")
 
 
@@ -80,14 +80,19 @@ def media_block(
     source_url: str,
     retrieved: str,
 ) -> dict:
-    """A media object with its keys in the manifest's order.
+    """A media object with its keys in the manifest's order, `MEDIA_KEYS`.
 
     The manifest spells the field `license`; the parameter is `licence` only
     because `license` is a builtin name in an interactive interpreter.
     """
-    return dict(
-        zip(MEDIA_KEYS, (file, sha256, licence, attribution, source_url, retrieved), strict=True)
-    )
+    return {
+        "file": file,
+        "sha256": sha256,
+        "license": licence,
+        "attribution": attribution,
+        "sourceURL": source_url,
+        "retrieved": retrieved,
+    }
 
 
 def set_photo(document: dict, bird_id: str, block: dict) -> str | None:

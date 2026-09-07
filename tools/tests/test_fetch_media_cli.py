@@ -41,7 +41,7 @@ def candidate(**overrides) -> inaturalist.Candidate:
 def printed(candidates: list[inaturalist.Candidate]) -> str:
     output = io.StringIO()
     with contextlib.redirect_stdout(output):
-        cli.print_table(candidates)
+        cli.print_table(cli.by_observation(candidates))
     return output.getvalue()
 
 

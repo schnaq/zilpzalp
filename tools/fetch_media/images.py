@@ -21,11 +21,18 @@ QUALITY = 88
 Box = tuple[int, int, int, int]
 
 
+def require_square(width: int, height: int) -> None:
+    """Refuse a crop that is not square — resizing it would distort the bird."""
+    if width != height:
+        raise ValueError(f"the crop must be square, got {width}×{height}")
+
+
 def parse_crop(text: str) -> Box | None:
     """Parse `--crop`: `center` (the default) or `x,y,w,h` in source pixels.
 
     Returns `None` for the centre crop, which only the image itself can
-    compute. Raises `ValueError`, which argparse renders as a usage error.
+    compute. Raises `ValueError`, which argparse renders as a usage error —
+    before the photo is downloaded rather than after.
     """
     if text == "center":
         return None
@@ -35,8 +42,7 @@ def parse_crop(text: str) -> Box | None:
         raise ValueError(f"expected 'center' or 'x,y,w,h', got '{text}'")
 
     x, y, width, height = (int(part.strip()) for part in parts)
-    if width != height:
-        raise ValueError(f"the crop must be square, got {width}×{height}")
+    require_square(width, height)
     return (x, y, width, height)
 
 
@@ -65,17 +71,19 @@ def square_photo(data: bytes, crop: Box | None = None) -> bytes:
     # wide-gamut original does not reach the app with washed-out colours.
     profile = image.info.get("icc_profile")
     if profile:
-        image = ImageCms.profileToProfile(
-            image,
-            ImageCms.ImageCmsProfile(io.BytesIO(profile)),
-            ImageCms.createProfile("sRGB"),
-            outputMode="RGB",
-        )
+        try:
+            image = ImageCms.profileToProfile(
+                image,
+                ImageCms.ImageCmsProfile(io.BytesIO(profile)),
+                ImageCms.createProfile("sRGB"),
+                outputMode="RGB",
+            )
+        except ImageCms.PyCMSError as error:
+            raise ValueError(f"the colour profile cannot be converted: {error}") from error
     image = image.convert("RGB")
 
     x, y, width, height = crop if crop is not None else centre_box(*image.size)
-    if width != height:
-        raise ValueError(f"the crop must be square, got {width}×{height}")
+    require_square(width, height)
     if x < 0 or y < 0 or x + width > image.width or y + height > image.height:
         raise ValueError(
             f"the crop {x},{y},{width},{height} lies outside the {image.width}×{image.height} photo"

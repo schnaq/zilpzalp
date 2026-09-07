@@ -17,7 +17,6 @@ from __future__ import annotations
 import argparse
 import dataclasses
 import datetime
-import json
 import subprocess
 import sys
 import tempfile
@@ -51,9 +50,9 @@ def regenerate_derived() -> None:
     the first run may heal and only the second one is judged.
     """
     for script in DERIVED_TOOLS:
-        path = manifest.REPO_ROOT / "tools" / script
-        subprocess.run([sys.executable, str(path)], check=False)
-        if subprocess.run([sys.executable, str(path)], check=False).returncode != 0:
+        command = [sys.executable, str(manifest.REPO_ROOT / "tools" / script)]
+        subprocess.run(command, check=False)
+        if subprocess.run(command, check=False).returncode != 0:
             raise RuntimeError(f"{script} still reports a problem — see its output above")
 
 
@@ -72,7 +71,7 @@ def by_observation(candidates: list[inaturalist.Candidate]) -> dict[int, list[in
     return grouped
 
 
-def print_table(candidates: list[inaturalist.Candidate]) -> None:
+def print_table(grouped: dict[int, list[inaturalist.Candidate]]) -> None:
     """Print the candidates as a table a human can read in a terminal.
 
     One line per observation rather than per photo: a series of a dozen shots
@@ -80,12 +79,12 @@ def print_table(candidates: list[inaturalist.Candidate]) -> None:
     observation page shows them all anyway. The candidate file keeps every
     photo id, so picking the third shot of a series needs no second query.
     """
-    if not candidates:
+    if not grouped:
         print("No usable photo found.")
         return
 
     rows = []
-    for group in by_observation(candidates).values():
+    for group in grouped.values():
         candidate = group[0]
         side = candidate.square_side
         size = "unknown" if side is None else f"{candidate.width}×{candidate.height}"
@@ -134,23 +133,19 @@ def command_candidates(args: argparse.Namespace) -> int:
 
     args.out.mkdir(parents=True, exist_ok=True)
     destination = args.out / f"{args.pack}-photo-candidates.json"
-    destination.write_text(
-        json.dumps(
-            {
-                "pack": args.pack,
-                "retrieved": datetime.date.today().isoformat(),
-                "candidates": [dataclasses.asdict(candidate) for candidate in candidates],
-            },
-            indent=2,
-            ensure_ascii=False,
-        )
-        + "\n",
-        encoding="utf-8",
+    manifest.save(
+        destination,
+        {
+            "pack": args.pack,
+            "retrieved": datetime.date.today().isoformat(),
+            "candidates": [dataclasses.asdict(candidate) for candidate in candidates],
+        },
     )
 
-    print_table(candidates)
+    grouped = by_observation(candidates)
+    print_table(grouped)
     print(
-        f"\n{len(candidates)} usable photo(s) in {len(by_observation(candidates))} observation(s) "
+        f"\n{len(candidates)} usable photo(s) in {len(grouped)} observation(s) "
         f"for {len(birds)} species → {destination}"
     )
     print("Look at the photos, then run 'photos pick' with the observation and photo id.")
