@@ -27,8 +27,12 @@ public enum ZFont {
     }
 
     /// The SwiftUI font for the given family, weight and point size.
+    ///
+    /// Fixed size, no Dynamic Type scaling — the same decision and the same
+    /// rationale as ``ZType/Step/font(_:weight:)``, so both typography entry
+    /// points render a given point size identically.
     public static func font(_ family: Family, weight: Weight, size: CGFloat) -> Font {
-        .custom(postScriptName(family, weight: weight), size: size)
+        .custom(postScriptName(family, weight: weight), fixedSize: size)
     }
 
     /// The PostScript name of the named instance backing `family`/`weight`.

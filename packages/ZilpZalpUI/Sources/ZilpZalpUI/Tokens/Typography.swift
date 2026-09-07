@@ -130,11 +130,11 @@ public enum ZType {
 /// (Nunito), addressed by PostScript name.
 ///
 /// Deliberately the only place in the token layer that spells out a font name.
-/// PR #66 adds a `ZFont` namespace to this module with the same family/weight
-/// vocabulary and the same PostScript names. Unifying the two once #66 lands
-/// is three lines: make ``ZType/Family`` and ``ZType/Weight`` typealiases for
-/// `ZFont.Family` and `ZFont.Weight` — the case names already match — and let
-/// the body below call `ZFont.postScriptName(_:weight:)`.
+/// ``ZFont`` carries the same family/weight vocabulary and the same PostScript
+/// names, and the case names already match. Unifying the two is still more
+/// than a typealias: ``ZType/Weight`` is `Int`-backed and `CaseIterable`,
+/// ``ZFont/Weight`` is neither, so it would have to grow both — plus the call
+/// sites and tests that go with it. A refactor of its own, not a drive-by.
 private enum TokenFontFace {
     static func postScriptName(_ family: ZType.Family, _ weight: ZType.Weight) -> String {
         let familyName = switch family {
