@@ -18,13 +18,14 @@ enum AudioSessionConfigurator {
     /// every single sound, not once at launch.
     ///
     /// Deliberately not latched behind an "already done" flag. iOS deactivates
-    /// the session when a phone call, an alarm or Siri interrupts, and nothing
-    /// hands that fact back to us; asking for the category and activation again
-    /// before each utterance is what brings the question back afterwards.
-    /// `AVSpeechSynthesizer` speaks through this shared session — it does not
-    /// keep one of its own — so a session that stays deactivated means a silent
-    /// game 1. Repeating both calls on an already-configured session is cheap
-    /// next to the speech that follows.
+    /// the session when a phone call, an alarm or Siri interrupts, and posts an
+    /// interruption notification that this app deliberately does not observe:
+    /// asking for the category and activation again before each utterance
+    /// covers the same ground without an observer, without state and without
+    /// `.shouldResume` bookkeeping. `AVSpeechSynthesizer` speaks through this
+    /// shared session — it does not keep one of its own — so a session left
+    /// deactivated means a silent game 1. Repeating both calls on a session
+    /// that is already in that state is cheap next to the speech that follows.
     ///
     /// Called when a sound actually starts rather than at launch: an app that
     /// has not made a sound yet has no business interrupting whatever the
