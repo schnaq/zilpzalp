@@ -91,8 +91,7 @@ public struct FeedbackBanner: View {
         return HStack(spacing: ZSpacing.step4) {
             Icon(displayedIcon, size: .custom(FeedbackBannerMetrics.glyph))
             Text(verbatim: message)
-                .font(ZType.Step.headline.font(.display, weight: .bold))
-                .lineSpacing(ZType.Step.headline.lineSpacing)
+                .typeStyle(.headline, .display, weight: .bold)
         }
         .padding(.vertical, ZSpacing.step4)
         .padding(.horizontal, ZSpacing.step6)

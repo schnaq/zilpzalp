@@ -32,8 +32,7 @@ struct PlaceholderScreen: View {
             VStack(spacing: ZSpacing.step6) {
                 Icon(icon, size: .custom(ZSpacing.touchHero))
                 Text(verbatim: title)
-                    .font(ZType.Step.title.font(.display, weight: .bold))
-                    .lineSpacing(ZType.Step.title.lineSpacing)
+                    .typeStyle(.title, .display, weight: .bold)
                     .multilineTextAlignment(.center)
             }
             .foregroundStyle(ZColor.textMuted)

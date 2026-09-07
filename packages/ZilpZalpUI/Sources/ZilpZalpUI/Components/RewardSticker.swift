@@ -141,10 +141,8 @@ public struct RewardSticker: View {
             disc
             if let label {
                 Text(verbatim: label)
-                    .font(ZType.Step.body.font(.display, weight: .bold))
-                    .lineSpacing(ZType.Step.body.lineSpacing)
+                    .typeStyle(.body, .display, weight: .bold, singleLine: true)
                     .foregroundStyle(locked ? ZColor.textMuted : ZColor.textStrong)
-                    .multilineTextAlignment(.center)
                     .frame(maxWidth: size + RewardStickerMetrics.labelOverhang)
             }
         }

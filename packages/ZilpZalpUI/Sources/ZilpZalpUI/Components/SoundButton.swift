@@ -182,7 +182,7 @@ enum SoundButtonMetrics {
     HStack(spacing: ZSpacing.step6) {
         SoundButton(isPlaying: true, label: "Ruf anhören", diameter: 150)
         Text(verbatim: "Wer singt da?")
-            .font(ZType.Step.display2.font(.display, weight: .extraBold))
+            .typeStyle(.display2, .display, weight: .extraBold, singleLine: true)
             .foregroundStyle(ZColor.textStrong)
     }
     .padding(ZSpacing.step7)
