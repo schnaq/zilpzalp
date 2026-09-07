@@ -186,8 +186,13 @@ public actor ProfileStore {
     /// The oldest ``Profile/playtime`` key a write keeps: `date`'s day and
     /// the six before it.
     private static func oldestRetainedDay(on date: Date, calendar: Calendar) -> String {
-        let today = calendar.startOfDay(for: date)
-        let oldest = calendar.date(byAdding: .day, value: -(retainedDays - 1), to: today) ?? today
+        // The same calendar the keys are formed in, so that counting days
+        // back and spelling them out cannot disagree.
+        let days = Profile.days(in: calendar)
+        let today = days.startOfDay(for: date)
+        // Subtracting days from a midnight has no failing case; falling back
+        // on the day itself would merely keep one day instead of seven.
+        let oldest = days.date(byAdding: .day, value: -(retainedDays - 1), to: today) ?? today
         return Profile.dayKey(for: oldest, calendar: calendar)
     }
 

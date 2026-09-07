@@ -61,7 +61,8 @@ public struct Profile: Codable, Sendable, Hashable, Identifiable {
         self.playtime = playtime
     }
 
-    /// The ``playtime`` key of `date`: `YYYY-MM-DD` in `calendar`.
+    /// The ``playtime`` key of `date`: the Gregorian `YYYY-MM-DD` of the day
+    /// `date` falls on in `calendar`'s time zone.
     ///
     /// Built from date components rather than through a `DateFormatter`,
     /// which carries a calendar and a time zone of its own and would quietly
@@ -69,9 +70,24 @@ public struct Profile: Codable, Sendable, Hashable, Identifiable {
     /// the keys sort and compare as dates, which is what the pruning in
     /// ``ProfileStore`` relies on.
     public static func dayKey(for date: Date, calendar: Calendar = .current) -> String {
-        let day = calendar.dateComponents([.year, .month, .day], from: date)
+        let day = days(in: calendar).dateComponents([.year, .month, .day], from: date)
         // The three components were just requested, so they are all there.
         return String(format: "%04d-%02d-%02d", day.year ?? 0, day.month ?? 0, day.day ?? 0)
+    }
+
+    /// The calendar the day keys are counted in: Gregorian, in `calendar`'s
+    /// time zone.
+    ///
+    /// Only the time zone is taken from the caller, because that is what
+    /// decides when a day turns over. The year and the month are not: on a
+    /// device set to the Japanese calendar, `Calendar.current` numbers this
+    /// year 8, and a family that changed their region afterwards would end up
+    /// with two sets of keys that no longer sort against each other — which
+    /// is exactly what the seven-day pruning compares.
+    static func days(in calendar: Calendar) -> Calendar {
+        var days = Calendar(identifier: .gregorian)
+        days.timeZone = calendar.timeZone
+        return days
     }
 
     private enum CodingKeys: String, CodingKey {

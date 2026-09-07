@@ -50,9 +50,9 @@ func profileFileText(in directory: URL) throws -> String {
     try String(contentsOf: profileFileURL(in: directory), encoding: .utf8)
 }
 
-/// A profile file as an earlier build wrote it. Its keys stand in the order a
-/// person would write them rather than the order the store writes them —
-/// which is the point: reading a file must not depend on its key order.
+/// A profile file as an earlier build wrote it. A profile's keys stand in the
+/// order a person would write them rather than the sorted order the store
+/// writes them in — which is the point: reading must not depend on key order.
 func profileFixture(_ name: String) throws -> Data {
     let url = try #require(
         Bundle.module.url(

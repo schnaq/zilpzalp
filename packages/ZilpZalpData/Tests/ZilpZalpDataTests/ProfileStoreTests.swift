@@ -184,6 +184,21 @@ struct ProfileStoreTests {
         }
     }
 
+    @Test("a file that will not read is not written over either")
+    func refusesToWriteOverCorruptFile() async throws {
+        try await withTemporaryDirectory { directory in
+            let broken = Data("{ \"schemaVersion\": 1, \"profiles\": [ ".utf8)
+            try seedProfileFile(broken, in: directory)
+            let store = ProfileStore(directory: directory)
+
+            await #expect(throws: ProfileStoreError.self) {
+                try await store.add(name: "Mila", avatar: "feather")
+            }
+
+            #expect(try Data(contentsOf: profileFileURL(in: directory)) == broken)
+        }
+    }
+
     // MARK: - Schema version
 
     @Test("a version 1 file decodes with everything it holds")
