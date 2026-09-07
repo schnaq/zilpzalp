@@ -66,8 +66,7 @@ struct RootView: View {
 private struct PackFailure: View {
     var body: some View {
         Text("app.pack.failed")
-            .font(ZType.Step.bodyLarge.font(.body, weight: .regular))
-            .lineSpacing(ZType.Step.bodyLarge.lineSpacing)
+            .typeStyle(.bodyLarge, .body, weight: .regular)
             .foregroundStyle(ZColor.textBody)
             .multilineTextAlignment(.center)
             .padding(ZSpacing.gutterScreen)
