@@ -31,6 +31,10 @@ public enum ZFont {
     /// Fixed size, no Dynamic Type scaling — the same decision and the same
     /// rationale as ``ZType/Step/font(_:weight:)``, so both typography entry
     /// points render a given point size identically.
+    ///
+    /// Components take their sizes from the type scale, so reach for
+    /// ``ZType/Step/font(_:weight:)``; this entry point is for a size the
+    /// scale does not have.
     public static func font(_ family: Family, weight: Weight, size: CGFloat) -> Font {
         .custom(postScriptName(family, weight: weight), fixedSize: size)
     }
