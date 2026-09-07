@@ -45,16 +45,21 @@ def escape_data(message: str) -> str:
 def regenerate_derived() -> None:
     """Bring the bundled pack copy and the credits back in step.
 
-    Both tools heal on their first run and report the healing as exit code 1
+    Both tools heal what they find stale and report the healing as exit code 1
     with an `::error::` line, which is what makes them drift checks in CI. Here
-    the drift is the change that was just made, so the healing run is swallowed
-    — its "the credits were stale" would read as a failure — and only the
-    second, judging run speaks. If something is genuinely broken, the second
-    run says so in its own words.
+    the drift is the change that was just made, so a first run that reports
+    something is swallowed — its "the credits were stale" would read as a
+    failure — and the tool is run again to judge the result it just produced.
+    A first run that is already content has nothing to heal and nothing to
+    repeat; it simply says so.
     """
     for script in DERIVED_TOOLS:
         command = [sys.executable, str(manifest.REPO_ROOT / "tools" / script)]
-        subprocess.run(command, check=False, capture_output=True)
+        healing = subprocess.run(command, check=False, capture_output=True, text=True)
+        if healing.returncode == 0:
+            print(healing.stdout, end="")
+            continue
+
         if subprocess.run(command, check=False).returncode != 0:
             raise RuntimeError(f"{script} still reports a problem — see its output above")
 
