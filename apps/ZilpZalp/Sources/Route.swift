@@ -3,8 +3,8 @@ import Foundation
 /// The two games of v1.
 ///
 /// Game 3 (feathers) and game 4 (habitat) are not cases: they are out of v1 for
-/// want of freely licensed material (spec §1), so nothing can route to them.
-/// Their nests are on the home tree as eggs — see ``HomeScreen``.
+/// want of freely licensed material (spec §1), so nothing can route to them and
+/// nothing announces them — see ``HomeScreen``.
 enum Game: Hashable, CaseIterable {
     /// Game 1: the name is read out, the child taps the bird (#25).
     case names

@@ -14,6 +14,10 @@ struct RootView: View {
     var body: some View {
         NavigationStack(path: $path) {
             start
+                // Hiding the bar is per screen, not per stack: a pushed view
+                // brings its own back button back unless it says otherwise.
+                // The destinations do so themselves.
+                .toolbar(.hidden, for: .navigationBar)
                 .navigationDestination(for: Route.self) { route in
                     switch route {
                     case let .quiz(game): QuizScreen(game: game)
@@ -21,7 +25,6 @@ struct RootView: View {
                     }
                 }
         }
-        .toolbar(.hidden, for: .navigationBar)
     }
 
     @MainActor @ViewBuilder

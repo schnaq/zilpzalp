@@ -1,7 +1,7 @@
 import SwiftUI
 import ZilpZalpUI
 
-/// A screen the shell can already reach and nobody has built yet: its title,
+/// A screen the shell can already reach and nobody has built yet: its name,
 /// its glyph and the way back.
 ///
 /// Scaffolding, on purpose. It carries no state and no logic, so that the
@@ -17,21 +17,33 @@ struct PlaceholderScreen: View {
 
     var body: some View {
         VStack(spacing: 0) {
+            // The name sits in the page rather than in the bar's centre slot:
+            // with nothing in the trailing slot the bar has nothing to
+            // balance against, and a title drifting to the right edge would
+            // be the placeholder's bug, not the bar's.
             TopBar {
                 IconButton(
                     .chevronLeft,
                     label: String(localized: "nav.back.accessibility"),
                     diameter: ZSpacing.touchMinimum,
                 ) { dismiss() }
-            } center: {
-                Text(verbatim: title)
             }
 
-            Icon(icon, size: .custom(ZSpacing.touchHero))
-                .foregroundStyle(ZColor.sand400)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            VStack(spacing: ZSpacing.step6) {
+                Icon(icon, size: .custom(ZSpacing.touchHero))
+                Text(verbatim: title)
+                    .font(ZType.Step.title.font(.display, weight: .bold))
+                    .lineSpacing(ZType.Step.title.lineSpacing)
+                    .multilineTextAlignment(.center)
+            }
+            .foregroundStyle(ZColor.textMuted)
+            .padding(ZSpacing.gutterScreen)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .background(ZColor.surfacePage)
+        // Every screen brings its own `TopBar`; the system bar would stack a
+        // second, smaller back button above it.
+        .toolbar(.hidden, for: .navigationBar)
     }
 }
 
