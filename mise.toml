@@ -158,7 +158,7 @@ python tools/generate_credits.py
 '''
 
 [tasks.fetch-media]
-description = "Curate media: 'photos candidates', 'photos pick', 'upload' — add --help for any of them"
+description = "Curate media: 'photos …', 'calls …', 'upload' — add --help for any of them"
 # One line on purpose: mise appends the arguments of `mise run fetch-media …`
 # to the end of the command, so the subcommands reach the tool unchanged.
 #
@@ -166,15 +166,21 @@ description = "Curate media: 'photos candidates', 'photos pick', 'upload' — ad
 #   mise run fetch-media photos pick --pack basis --species amsel \
 #       --observation 20490738 --photo 31623386
 #
-# Finding and picking a photo needs no credential at all — only the upload
-# does, and it is wrapped by the caller, exactly as issue #14 describes:
+# Finding and picking a photo needs no credential at all. The calls and the
+# upload do, and the caller wraps them, exactly as issue #14 describes:
 #
+#   infisical run --env=dev --path=/ -- mise run fetch-media calls candidates --pack basis
+#   infisical run --env=dev --path=/ -- mise run fetch-media calls pick --pack basis \
+#       --species amsel --recording XC965144 --start 12.5
 #   infisical run --env=dev --path=/ -- mise run fetch-media upload --pack basis
 #
+# The xeno-canto API v3 refuses every request without `XENO_CANTO_API_KEY`, and
+# the upload needs the bucket keys; both read them from the environment.
+#
 # Deliberately not the other way round. Wrapping the task itself would make
-# every subcommand demand an Infisical login, and the two that never touch the
-# bucket would stop working on a machine without one. Without the prefix the
-# upload names the variables it is missing and the command that provides them.
+# every subcommand demand an Infisical login, and the two that need nothing
+# would stop working on a machine without one. Without the prefix each command
+# names the variables it is missing and the command that provides them.
 # Curation runs against `dev`; `prod` holds only the signing values.
 run = "uv run --locked --project tools python -m fetch_media"
 
