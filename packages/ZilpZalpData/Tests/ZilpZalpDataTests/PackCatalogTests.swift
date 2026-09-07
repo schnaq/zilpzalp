@@ -65,4 +65,45 @@ struct PackCatalogTests {
             )
         }
     }
+
+    /// The one branch the bundled pack cannot reach on its own: a manifest
+    /// entry whose file is not there. `nil`, so the caller can show a
+    /// placeholder, rather than a URL that fails to load much later.
+    @Test("a photo that is not in the bundle resolves to nil")
+    func returnsNilForAMissingPhoto() throws {
+        let catalog = try PackCatalog.bundled()
+        let ghost = try #require(
+            PackManifest.decode(Data(Self.missingPhotoManifest.utf8)).birds.first,
+        )
+
+        #expect(catalog.photoURL(for: ghost) == nil)
+    }
+
+    /// A bird whose photo was never copied into the pack. Only `file` matters
+    /// here; the rest is what the schema demands.
+    private static let missingPhotoManifest = """
+    {
+      "id": "basis",
+      "title": "Unsere ersten Vögel",
+      "birds": [
+        {
+          "id": "gespenst",
+          "name": "Gespenst",
+          "scientificName": "Spectrum spectrum",
+          "taxonID": 1,
+          "article": "das",
+          "pronunciation": null,
+          "photo": {
+            "file": "photos/gespenst.png",
+            "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "license": "CC-BY-4.0",
+            "attribution": "Nobody",
+            "sourceURL": "https://example.org/observations/1",
+            "retrieved": "2026-07-31"
+          },
+          "call": null
+        }
+      ]
+    }
+    """
 }

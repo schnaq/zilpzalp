@@ -41,8 +41,9 @@ set -euo pipefail
 
 # The cheapest and most deterministic checks run first: a licensing mistake
 # or a stale bundled pack then fails in milliseconds instead of after a cold
-# Swift build. Sync before the gate, so that a drifted copy is reported as
-# what it is instead of as a hash mismatch further down.
+# Swift build. The gate reads data/packs and never sees the bundled copy, so
+# without this step drift would only surface minutes later, as a failing
+# PackCatalogTests.
 mise run sync-packs
 mise run license-gate
 

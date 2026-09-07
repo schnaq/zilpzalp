@@ -53,12 +53,12 @@ def differences(source: Path, destination: Path) -> list[str]:
         path.relative_to(destination) for path in destination.rglob("*") if path.is_file()
     }
 
-    changed = sorted(source_files ^ destination_files)
-    for relative in sorted(source_files & destination_files):
+    changed = source_files ^ destination_files
+    for relative in source_files & destination_files:
         if not filecmp.cmp(source / relative, destination / relative, shallow=False):
-            changed.append(relative)
+            changed.add(relative)
 
-    return [str(relative) for relative in changed]
+    return sorted(str(relative) for relative in changed)
 
 
 def sync(source: Path, destination: Path) -> list[str]:
