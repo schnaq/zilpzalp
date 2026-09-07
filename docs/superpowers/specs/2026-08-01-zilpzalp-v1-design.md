@@ -67,7 +67,8 @@ tools/                    Python — HTTP, Bildskalierung, ffmpeg, S3
   fetch-media/            Kuratiert Medien aus iNaturalist/xeno-canto, lädt nach S3
   generate_credits.py     Erzeugt Credits-Daten und CREDITS.md aus den Manifesten
 data/
-  packs/<id>/manifest.json  Paketdefinitionen inklusive Lizenz-Metadaten
+  packs/<id>/             Ein Artenpaket, Verzeichnis je Pack-ID
+    manifest.json         Paketdefinition inklusive Lizenz-Metadaten
 docs/                     Spec, Medienentscheidung, Secrets, CD-Runbook
 design/  screens/         Design-Export und Klickprototyp, unverändert als Referenz
 mise.toml                 Werkzeuge und Tasks
@@ -91,9 +92,9 @@ Reine Wertetypen und Funktionen. Vollständig testbar ohne Laufzeitumgebung.
 - `PackDownloader` — lädt Pakete per URLSession aus S3, prüft SHA-256, entpackt nach Application Support
 - `ProfileStore` — ein Actor über einer JSON-Datei; Profile, Sterne, Statistik, Sammlung
 
-Das Basis-Paket ist eine SwiftPM-Ressource von `ZilpZalpData`, kein Asset Catalog im App-Target: `PackCatalog.bundled()` öffnet es über `Bundle.module`, `photoURL(for:)` löst das Foto eines Vogels relativ zum Paketverzeichnis auf. Einzige Wahrheit bleibt `data/packs/<id>/manifest.json`; `tools/sync_bundled_packs.py` spiegelt es nach `Resources/Packs/` in `ZilpZalpData`, und `mise run check` schlägt bei Abweichung fehl. Ein Symlink funktioniert nicht — SwiftPM kopiert bei einer `.copy`-Ressource den Link selbst, nicht sein Ziel, sodass er im Bundle ins Leere zeigt.
+Das Basis-Paket ist eine SwiftPM-Ressource von `ZilpZalpData`, kein Asset Catalog im App-Target: `PackCatalog.bundled()` öffnet es über `Bundle.module`, `photoURL(for:)` löst das Foto eines Vogels relativ zum Paketverzeichnis auf. `tools/sync_bundled_packs.py` spiegelt das Paketverzeichnis nach `Resources/Packs/` in `ZilpZalpData`, und `mise run check` schlägt bei Abweichung fehl. Ein Symlink funktioniert nicht — SwiftPM kopiert bei einer `.copy`-Ressource den Link selbst, nicht sein Ziel, sodass er im Bundle ins Leere zeigt.
 
-**ZilpZalpUI** übersetzt das Design-System nach SwiftUI: Farb- und Typo-Tokens, `ZButton`, `ZCard`, `ChoiceTile`, `SoundButton`, `QuizProgress`, `FeedbackBanner`, `RewardSticker`, `HomeTile`, `SettingRow`. Eins zu eins zu den Komponenten unter `design/components/`. Komponenten bekommen fertige `String`-Werte übergeben und tragen selbst keine Produkttexte. Gesperrte Sticker in der Sammlung bleiben sichtbar — mit Schloss-Symbol statt versteckt. `HomeTile` kennt einen gesperrten Zustand mit Ei-Symbol als Komponentenfähigkeit, aber v1 setzt ihn auf dem Startbildschirm nicht ein: der besteht nur aus `TopBar` und den zwei Kacheln für Spiel 1 und Spiel 2, ohne Baum und ohne gesperrte Nester für Spiel 3 und 4. Dynamic Type ist bewusst fest: die Geometrie (220 pt Kacheln, 64/96/160 pt Bedienziele) skaliert nicht mit dem Text (Entscheidung 2026-09-07).
+**ZilpZalpUI** übersetzt das Design-System nach SwiftUI: Farb- und Typo-Tokens, `ZButton`, `ZCard`, `ChoiceTile`, `SoundButton`, `QuizProgress`, `FeedbackBanner`, `RewardSticker`, `HomeTile`, `SettingRow`. Nach den Komponenten unter `design/components/`, mit bewussten Abweichungen wie unten vermerkt. Komponenten bekommen fertige `String`-Werte übergeben und tragen selbst keine Produkttexte. Gesperrte Sticker in der Sammlung bleiben sichtbar — mit Schloss-Symbol statt versteckt. `HomeTile` kennt einen gesperrten Zustand mit Ei-Symbol als Komponentenfähigkeit, aber v1 setzt ihn auf dem Startbildschirm nicht ein: der besteht nur aus `TopBar` und den zwei Kacheln für Spiel 1 und Spiel 2, ohne Baum und ohne gesperrte Nester für Spiel 3 und 4. Dynamic Type ist bewusst fest: die Geometrie (220 pt Kacheln, 64/96/160 pt Bedienziele) skaliert nicht mit dem Text (Entscheidung 2026-09-07).
 
 ### Datenmodell
 
@@ -131,16 +132,16 @@ struct Pack: Codable, Identifiable {
 
 ```
 data/packs/<id>/manifest.json ──> tools/fetch-media ──> Scaleway S3 (zilpzalp-media, fr-par)
-                                                 │
-                     Basis-Paket ────────────────┼──> SwiftPM-Ressource (ZilpZalpData) ──> App-Bundle
-                     Download-Pakete ────────────┴──> zur Laufzeit per PackDownloader
-                                                 │
-                     tools/generate_credits.py ──┴──> Credits-Screen + CREDITS.md
+                                                             │
+                     Basis-Paket ────────────────────────────┼──> SwiftPM-Ressource (ZilpZalpData) ──> App-Bundle
+                     Download-Pakete ────────────────────────┴──> zur Laufzeit per PackDownloader
+                                                             │
+                     tools/generate_credits.py ──────────────┴──> Credits-Screen + CREDITS.md
 ```
 
 `fetch-media` spricht iNaturalist und xeno-canto **nur zur Kurationszeit** an, niemals die App zur Laufzeit. Das löst gleich mehrere Probleme: keine Rate-Limits im Betrieb, keine verschwindenden Fremd-URLs, geprüfte Lizenzen, gleichbleibende Bildqualität und volle Offline-Fähigkeit.
 
-`tools/generate_credits.py` läuft als Teil von `mise run check`, schreibt `CREDITS.md` und `credits.json` (Letzteres als weitere Ressource in `ZilpZalpData` gebündelt, fürs In-App-Credits) und schlägt bei Abweichung fehl. Die Credits umfassen neben den Medien auch die Fonts (OFL) und die Icons (Lucide, ISC — mit einzelnen Icons aus Feather, MIT).
+`tools/generate_credits.py` läuft als Teil von `mise run check`, schreibt `CREDITS.md` und `credits.json` (Letzteres als weitere Ressource in `ZilpZalpData` gebündelt, für den In-App-Credits-Screen) und schlägt bei Abweichung fehl. Die Credits umfassen neben den Medien auch die Fonts (OFL) und die Icons (Lucide, ISC — mit einzelnen Icons aus Feather, MIT).
 
 Ein CI-Gate bricht den Build ab, sobald ein Asset eine Lizenz außerhalb von CC0/CC BY/CC BY-SA trägt oder Attribution fehlt.
 
@@ -250,7 +251,7 @@ Bewusst anders als unlock: Swift statt Flutter, Tag-basiertes Release statt Bran
 
 M0 bis M2 sind Fundament und lassen sich weitgehend parallel bearbeiten. Ab M3 baut jeder Meilenstein auf dem vorherigen auf.
 
-M0 ist am 2026-09-07 mit dem Secrets-Smoke-Workflow (#6) abgeschlossen. Dass die Komponenten aus M1 erst nach dem Start von M2 landeten, ist eine bewusste Entscheidung aus dem Plan vom 2026-09-07: drei Stränge — Komponenten, Datenschema, Spiellogik — laufen dort parallel, keiner wartet auf den anderen.
+M0 ist am 2026-09-07 mit dem Secrets-Smoke-Workflow (#6) abgeschlossen. Dass die Komponenten aus M1 erst nach dem Start von M2 landeten, ist eine bewusste Entscheidung aus dem Plan vom 2026-09-07: drei Stränge — Komponenten, Datenschema, Spiellogik — laufen dort parallel, keiner hängt an einer offenen Entscheidung.
 
 Die Recherche zu den App-Review-Guidelines liegt bewusst schon in M2 und nicht erst in M6: der Paket-Downloader in M5 erzeugt ausgehenden Netzverkehr, und `PrivacyInfo.xcprivacy` erklärt gleichzeitig, dass keine Daten erhoben werden. Inhalte abrufen ist aller Voraussicht nach keine Datenerhebung — aber das ist eine Aussage in einer verpflichtenden Erklärung, und sie sollte belegt sein, bevor der Netzwerkcode entsteht, nicht danach.
 
@@ -265,7 +266,7 @@ Diese Fragen sind bewusst offen und blockieren den Start nicht:
 3. **Habitat-Zuordnung für Spiel 4** muss selbst erarbeitet und belegt werden. Ein systematisches Übernehmen der Kategorisierung von NABU oder LBV berührt das Datenbankrecht nach §87a UrhG. Unverändert, erst in M8 relevant
 4. ~~**Wortlaut der App-Review-Guidelines** zu Kids Category und Altersfreigabe ist gegen die aktuelle Fassung zu verifizieren~~ — erledigt, siehe `docs/kids-category.md` (#19). Offen bleiben die technischen Umsetzungen: das Aufgaben-Gate für externe Links (#37) und die Altersfreigabe-Einstellungen in App Store Connect (#41)
 5. **Artenliste und Rangleiter** sind inhaltliche Entscheidungen, die Christian und Johanna treffen — nicht technische. Ein Vorschlag für die Artenliste (#21) ist in Arbeit
-6. **`.playback` vs. `.duckOthers` für die Audiosession.** Die Sprachausgabe (#24) nutzt zurzeit `.playback` ohne Ducking — das unterbricht Eltern-Musik im Hintergrund vollständig, und da die Session nie deaktiviert wird, bekommt die Musik kein Fortsetzen-Signal. `.duckOthers` würde nur absenken, verlangt dafür ein Sessions-Lebenszyklus-Management, das mit dem Rufe-Player (#30) geteilt werden muss. Offen; keine einseitige Entscheidung in #24
+6. **`.playback` vs. `.duckOthers` für die Audiosession.** Die Sprachausgabe (#24) nutzt zurzeit `.playback` ohne Ducking — das unterbricht Eltern-Musik im Hintergrund vollständig, und da die Session nie deaktiviert wird, bekommt die Musik kein Fortsetzen-Signal. `.duckOthers` würde nur absenken, verlangt dafür ein Session-Lebenszyklus-Management, das mit dem Rufe-Player (#30) geteilt werden muss. Offen; keine einseitige Entscheidung in #24
 
 ---
 
