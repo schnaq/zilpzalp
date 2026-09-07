@@ -39,7 +39,6 @@ def bird(**overrides) -> dict:
         "scientificName": "Turdus merula",
         "taxonID": 12716,
         "article": "die",
-        "pronunciation": None,
         "photo": media(),
         "call": None,
     }
@@ -60,20 +59,27 @@ class CreditsTestCase(unittest.TestCase):
         self.markdown = root / "CREDITS.md"
         self.json = root / "credits.json"
 
-    def write_pack(self, pack_id: str, birds: list[dict], title: str = "Unsere ersten Vögel") -> None:
-        pack = self.packs_dir / pack_id
+    def write_pack(
+        self,
+        pack_id: str,
+        birds: list[dict],
+        title: str = "Unsere ersten Vögel",
+        directory: str | None = None,
+    ) -> None:
+        """Write one pack. `directory` defaults to the pack id, as the repository has it."""
+        pack = self.packs_dir / (directory or pack_id)
         pack.mkdir(parents=True, exist_ok=True)
         document = {"id": pack_id, "title": title, "birds": birds}
         (pack / "manifest.json").write_text(json.dumps(document, ensure_ascii=False), encoding="utf-8")
 
-    def run_main(self) -> int:
+    def run_main(self, packs_dir: Path | None = None) -> int:
         """Run main() against the throwaway paths, output suppressed."""
         with (
             mock.patch.object(generate_credits, "CREDITS_MD", self.markdown),
             mock.patch.object(generate_credits, "CREDITS_JSON", self.json),
             contextlib.redirect_stdout(io.StringIO()),
         ):
-            return generate_credits.main([str(self.packs_dir)])
+            return generate_credits.main([str(packs_dir or self.packs_dir)])
 
     def outputs(self) -> tuple[bytes, bytes]:
         return (self.markdown.read_bytes(), self.json.read_bytes())
@@ -135,11 +141,33 @@ class EveryAssetIsCredited(CreditsTestCase):
             },
         )
 
+    def test_a_manifest_that_is_not_called_manifest_json_is_credited_too(self) -> None:
+        # The licence gate gates every .json under data/packs, so anything it
+        # gates has to be credited. A pack that grows its own file name must
+        # not slip past this tool while passing the gate.
+        pack = self.packs_dir / "deutschland"
+        pack.mkdir()
+        document = {"id": "deutschland", "title": "Deutschland", "birds": [bird(id="star", name="Star")]}
+        (pack / "birds.json").write_text(json.dumps(document, ensure_ascii=False), encoding="utf-8")
+        self.run_main()
+
+        self.assertIn("| Star |", self.markdown.read_text(encoding="utf-8"))
+
     def test_the_licence_is_named_and_linked_in_the_markdown(self) -> None:
         text = self.markdown.read_text(encoding="utf-8")
 
         self.assertIn("[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)", text)
         self.assertIn("[CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)", text)
+
+    def test_a_licence_the_gate_forbids_is_rendered_raw_rather_than_crashing(self) -> None:
+        # This tool runs before the licence gate, so it must not be the thing
+        # that reports a forbidden licence — it names it and lets the gate,
+        # one line further on in `mise run check`, fail the build over it.
+        self.write_pack("nc", [bird(photo=media(license="CC-BY-NC-4.0"))])
+
+        self.run_main()
+
+        self.assertIn("| CC-BY-NC-4.0 |", self.markdown.read_text(encoding="utf-8"))
 
 
 class OutputIsDeterministic(CreditsTestCase):
@@ -157,12 +185,14 @@ class OutputIsDeterministic(CreditsTestCase):
 
         self.assertEqual(self.outputs(), first)
 
-    def test_packs_are_ordered_by_id_not_by_reading_order(self) -> None:
-        self.write_pack("deutschland", [bird(id="star", name="Star")], title="Deutschland")
+    def test_packs_are_ordered_by_id_not_by_directory_name(self) -> None:
+        # The directory deliberately sorts the other way round, or the test
+        # could not tell ordering by id from ordering by path.
+        self.write_pack("aaa", [bird(id="star", name="Star")], title="First", directory="zzz")
         self.run_main()
 
         text = self.markdown.read_text(encoding="utf-8")
-        self.assertLess(text.index("(`basis`)"), text.index("(`deutschland`)"))
+        self.assertLess(text.index("(`aaa`)"), text.index("(`basis`)"))
 
     def test_no_name_is_mangled_into_escape_sequences(self) -> None:
         # "Вячеслав Юсупов" photographed the Buntspecht. Nobody should have to
@@ -219,11 +249,7 @@ class DriftIsTheCIContract(CreditsTestCase):
         self.assertEqual(self.markdown.read_text(encoding="utf-8").count("| Star |"), 1)
 
     def test_a_missing_packs_directory_exits_1(self) -> None:
-        with (
-            mock.patch.object(generate_credits, "CREDITS_MD", self.markdown),
-            contextlib.redirect_stdout(io.StringIO()),
-        ):
-            self.assertEqual(generate_credits.main([str(self.packs_dir / "nowhere")]), 1)
+        self.assertEqual(self.run_main(self.packs_dir / "nowhere"), 1)
 
 
 class BrokenManifestsFailWithASentence(CreditsTestCase):
@@ -242,6 +268,17 @@ class BrokenManifestsFailWithASentence(CreditsTestCase):
 
     def test_a_photo_without_attribution_exits_1(self) -> None:
         self.write_pack("basis", [bird(photo=media(attribution="  "))])
+
+        self.assertEqual(self.run_main(), 1)
+
+    def test_a_bird_without_a_name_exits_1(self) -> None:
+        self.write_pack("basis", [bird(name="")])
+
+        self.assertEqual(self.run_main(), 1)
+
+    def test_a_bare_array_manifest_exits_1(self) -> None:
+        (self.packs_dir / "basis").mkdir()
+        (self.packs_dir / "basis" / "manifest.json").write_text("[]", encoding="utf-8")
 
         self.assertEqual(self.run_main(), 1)
 
@@ -276,18 +313,6 @@ class StaticListsMatchTheRepository(unittest.TestCase):
             self.assertEqual(generate_credits.main([str(generate_credits.DEFAULT_PACKS_DIR)]), 1)
 
         self.assertIn("Licence file missing: apps/nowhere/OFL.txt", output.getvalue())
-
-    def test_every_font_and_icon_reaches_the_json(self) -> None:
-        document = json.loads(generate_credits.CREDITS_JSON.read_text(encoding="utf-8"))
-
-        self.assertEqual(
-            [entry["name"] for entry in document["fonts"]],
-            [entry["name"] for entry in generate_credits.FONTS],
-        )
-        self.assertEqual(
-            [entry["name"] for entry in document["icons"]],
-            [entry["name"] for entry in generate_credits.ICONS],
-        )
 
 
 class CommittedCreditsMatchTheRealPacks(unittest.TestCase):

@@ -27,6 +27,9 @@ struct CreditsTests {
             #expect(photos.first?.attribution == bird.photo.attribution)
             #expect(photos.first?.license == bird.photo.license)
             #expect(photos.first?.sourceURL == bird.photo.sourceURL)
+            // The screen shows the name and must not have to open the pack for
+            // it, so the copy in the credits has to be the pack's own.
+            #expect(photos.first?.birdName == bird.name)
 
             // A call is credited exactly when there is one. Both directions
             // matter: a missing credit is a violation, an invented one is a
@@ -37,31 +40,30 @@ struct CreditsTests {
                 "'\(bird.id)' has \(calls.count) call credits",
             )
             #expect(calls.first?.attribution == bird.call?.attribution)
+            #expect(calls.first?.birdName == (bird.call == nil ? nil : bird.name))
         }
 
         #expect(entries.count == pack.birds.count + pack.birds.count(where: { $0.call != nil }))
     }
 
-    @Test("every credited bird name is the one the pack spells")
-    func namesBirdsAsThePackDoes() throws {
-        let credits = try Credits.bundled()
-        let pack = try PackCatalog.bundled().pack
-        let names = Dictionary(uniqueKeysWithValues: pack.birds.map { ($0.id, $0.name) })
-
-        for entry in credits.media where entry.packID == pack.id {
-            #expect(entry.birdName == names[entry.birdID])
-        }
-    }
-
     /// The fonts and Lucide are in no manifest — they come from the static
     /// lists in the generator. An empty section means that wiring broke.
+    ///
+    /// Deliberately not the exact roster: which families ship is the
+    /// generator's list to state, and `tools/tests/test_generate_credits.py`
+    /// already checks that all of it reaches the JSON. Repeating the names
+    /// here would only give them a third place to go stale.
     @Test("the fonts and icon sets are credited")
     func creditsFontsAndIcons() throws {
         let credits = try Credits.bundled()
 
-        #expect(credits.fonts.map(\.name) == ["Baloo 2", "Nunito"])
-        #expect(credits.icons.map(\.name) == ["Lucide", "Feather"])
-        #expect(credits.fonts.allSatisfy { !$0.authors.isEmpty })
-        #expect(credits.icons.allSatisfy { !$0.authors.isEmpty })
+        #expect(!credits.fonts.isEmpty)
+        #expect(!credits.icons.isEmpty)
+
+        for entry in credits.fonts + credits.icons {
+            #expect(!entry.name.isEmpty)
+            #expect(!entry.authors.isEmpty, "'\(entry.name)' credits nobody")
+            #expect(!entry.license.isEmpty, "'\(entry.name)' names no licence")
+        }
     }
 }

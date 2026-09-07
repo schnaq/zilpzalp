@@ -38,31 +38,25 @@ public struct Credits: Codable, Sendable, Hashable {
         public let sourceURL: URL
     }
 
-    /// A vendored font family and the licence it ships under.
-    public struct Font: Codable, Sendable, Hashable {
+    /// A vendored font family or icon set and the licence it ships under.
+    ///
+    /// One type for both: they carry the same four fields, and the difference
+    /// between a font and an icon set is which list of `Credits` it stands in.
+    public struct Vendored: Codable, Sendable, Hashable {
         public let name: String
         public let authors: [String]
-        /// SPDX identifier, `OFL-1.1` for both families in v1.
+        /// SPDX identifier — `OFL-1.1` for both font families, `ISC` for
+        /// Lucide, `MIT` for the icons Lucide took from Feather.
         public let license: String
         /// The licence itself. External, so the screen only opens it behind
         /// the parental gate the Kids Category demands.
         public let licenseURL: URL
     }
 
-    /// An icon set and the licence it ships under.
-    public struct Icon: Codable, Sendable, Hashable {
-        public let name: String
-        public let authors: [String]
-        /// SPDX identifier — `ISC` for Lucide, `MIT` for the icons it took
-        /// from Feather.
-        public let license: String
-        public let licenseURL: URL
-    }
-
     /// Packs sorted by id, birds in manifest order, photo before call.
     public let media: [Media]
-    public let fonts: [Font]
-    public let icons: [Icon]
+    public let fonts: [Vendored]
+    public let icons: [Vendored]
 
     /// Reads the credits that ship inside the app.
     ///

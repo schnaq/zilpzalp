@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """Generate the credits from the pack manifests and the vendored licence files.
 
-Attribution is never written by hand. It is derived from `data/packs/*/manifest.json`,
-the same file the licence gate reads and tools/fetch-media writes, so a photo that is
-exchanged changes its credit line with it. Fonts and icons are not in any manifest;
-they come from the static lists below, whose licence files must exist in the
-repository.
+Attribution is never written by hand. It is derived from the manifests under
+`data/packs/`, the same files the licence gate reads and tools/fetch-media writes,
+so a photo that is exchanged changes its credit line with it. Fonts and icons are
+not in any manifest; they come from the static lists below, whose licence files
+must exist in the repository.
 
 Two outputs, both committed:
 
@@ -123,17 +123,13 @@ def field(media: dict, name: str, label: str) -> str:
     return value.strip()
 
 
-def pack_media(document: object, source: str) -> list[dict]:
+def pack_media(document: dict, pack_id: str) -> list[dict]:
     """Return the credit entries of one manifest, photo before call per bird.
 
     Raises `ValueError` naming what is wrong. The licence gate checks the same
     manifests far more thoroughly, but it runs after this tool, so a broken
     manifest has to fail here as a sentence rather than as a traceback.
     """
-    if not isinstance(document, dict):
-        raise ValueError(f"{source}: is not an object")
-
-    pack_id = field(document, "id", source)
     birds = document.get("birds")
     if not isinstance(birds, list):
         raise ValueError(f"{pack_id}: no birds found (expected an object whose 'birds' key holds a list)")
@@ -145,6 +141,7 @@ def pack_media(document: object, source: str) -> list[dict]:
 
         bird_id = field(bird, "id", f"{pack_id} / bird #{index}")
         label = f"{pack_id} / {bird_id}"
+        bird_name = field(bird, "name", label)
 
         # A bird without a photo is not creditable. The gate says the same, in
         # its own words, on the next line of `mise run check`.
@@ -164,7 +161,7 @@ def pack_media(document: object, source: str) -> list[dict]:
                 {
                     "packID": pack_id,
                     "birdID": bird_id,
-                    "birdName": field(bird, "name", label),
+                    "birdName": bird_name,
                     "kind": kind,
                     "attribution": field(media, "attribution", f"{label} / {kind}"),
                     "license": field(media, "license", f"{label} / {kind}"),
@@ -178,25 +175,28 @@ def pack_media(document: object, source: str) -> list[dict]:
 def read_packs(packs_dir: Path) -> list[dict]:
     """Read every pack under `packs_dir`, sorted by pack id.
 
-    One manifest per pack directory, as the manifest contract has it. Hidden
-    directories are skipped for the same reason `sync_bundled_packs.py` skips
-    hidden files: nothing in a pack starts with a dot, and `.DS_Store` must not
-    turn into drift.
+    `rglob("*.json")`, exactly as `tools/license_gate.py` finds its manifests.
+    Deliberately the same rule and not the narrower `*/manifest.json`: whatever
+    the gate lets through as a pack must be credited, and a manifest that
+    escaped this tool while passing the gate would ship assets nobody names.
     """
     packs = []
 
-    for manifest in sorted(packs_dir.glob("*/manifest.json")):
-        if any(part.startswith(".") for part in manifest.relative_to(packs_dir).parts):
-            continue
-
+    # Sorted twice on purpose: by path so that a broken manifest is always the
+    # same one reported first, and by id below so that two packs sharing an id
+    # cannot swap sections depending on how the filesystem lists them.
+    for manifest in sorted(packs_dir.rglob("*.json")):
         source = str(manifest.relative_to(packs_dir))
         document = json.loads(manifest.read_text(encoding="utf-8"))
+        if not isinstance(document, dict):
+            raise ValueError(f"{source}: is not an object")
+
+        pack_id = field(document, "id", source)
         packs.append(
             {
-                "path": manifest,
-                "id": field(document, "id", source),
+                "id": pack_id,
                 "title": field(document, "title", source),
-                "media": pack_media(document, source),
+                "media": pack_media(document, pack_id),
             }
         )
 
@@ -280,14 +280,6 @@ def render_json(packs: list[dict]) -> str:
     return json.dumps(document, indent=2, ensure_ascii=False) + "\n"
 
 
-def repo_relative(path: Path) -> str:
-    """The path as it is written in the repository, absolute when outside it."""
-    try:
-        return str(path.relative_to(REPO_ROOT))
-    except ValueError:
-        return str(path)
-
-
 def write_if_changed(path: Path, text: str) -> bool:
     """Write `text` to `path` unless it is already there. Returns whether it changed."""
     encoded = text.encode("utf-8")
@@ -336,7 +328,7 @@ def main(argv: list[str] | None = None) -> int:
         return 1
 
     stale = [
-        repo_relative(path)
+        path.name
         for path, text in ((CREDITS_MD, render_markdown(packs)), (CREDITS_JSON, render_json(packs)))
         if write_if_changed(path, text)
     ]
