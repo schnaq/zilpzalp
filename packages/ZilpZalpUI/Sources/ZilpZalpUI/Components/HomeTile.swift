@@ -1,0 +1,271 @@
+import SwiftUI
+
+/// A nest on the home tree: one activity, one tap.
+///
+/// Ported from `design/components/navigation/HomeTile.jsx`. The tile is a
+/// large, square pressable that sits on a solid ledge of its own tone and
+/// presses down onto it — a plastic toy button, not a flat rectangle.
+///
+/// It knows nothing about games, ranks or progress. It takes a title, a
+/// glyph, a tone, a number of earned stars and whether it is open yet; what
+/// those stand for is the screen's business. A locked tile shows an egg
+/// waiting to hatch — never a padlock, never a wall.
+///
+/// Accessibility: the button's label is ``title``, which is why the title is
+/// required rather than optional. The stars are deliberately not announced —
+/// saying "two of three stars" would need a sentence, and this package holds
+/// no product strings. A screen that wants them spoken attaches its own
+/// `accessibilityValue`.
+public struct HomeTile: View {
+    /// The four tile tones from the JSX. Each is a background, an edge and a
+    /// foreground drawn from one ramp, so a tile is always monochrome-warm.
+    ///
+    /// Every field names the same custom property the JSX names, semantic
+    /// alias or ramp entry. `ZColor.primarySoft` is the same colour as
+    /// `olive100` and `ZColor.reward` the same as `sun400`, but substituting
+    /// them would claim a role the tile does not have: a tone is a tint, not
+    /// a primary surface and not a reward.
+    public enum Tone: Sendable, Hashable, CaseIterable {
+        /// Meadow olive — the primary tone.
+        case leaf
+        /// Feather clay.
+        case clay
+        /// Sun yellow.
+        case sun
+        /// The hoopoe's crest orange.
+        case hoopoe
+
+        var palette: HomeTilePalette {
+            switch self {
+            case .leaf:
+                HomeTilePalette(
+                    background: ZColor.olive100,
+                    edge: ZColor.primary,
+                    foreground: ZColor.olive700,
+                )
+            case .clay:
+                HomeTilePalette(
+                    background: ZColor.clay100,
+                    edge: ZColor.info,
+                    foreground: ZColor.clay700,
+                )
+            case .sun:
+                HomeTilePalette(
+                    background: ZColor.sun200,
+                    edge: ZColor.sun400,
+                    foreground: ZColor.sun600,
+                )
+            case .hoopoe:
+                HomeTilePalette(
+                    background: ZColor.orange100,
+                    edge: ZColor.accent,
+                    foreground: ZColor.orange700,
+                )
+            }
+        }
+    }
+
+    /// The JSX default and the home screen's grid cell. Public because a
+    /// screen laying out the tree needs the same number for its columns.
+    public static let defaultSize: CGFloat = 240
+
+    let title: String
+    let icon: ZIcon
+    let tone: Tone
+    /// Already clamped to `0 ... 3` by ``init(title:icon:tone:stars:locked:size:action:)``.
+    let stars: Int
+    let locked: Bool
+    let size: CGFloat
+    private let action: () -> Void
+
+    /// - Parameters:
+    ///   - title: The word under the glyph, and the button's accessibility
+    ///     label. Always a parameter — the package carries no product copy.
+    ///   - icon: The activity's glyph. Ignored while ``locked``.
+    ///   - tone: The tile's tint.
+    ///   - stars: How many of the three slots are filled. A number outside
+    ///     `0 ... 3` is clamped, not rejected — the tile has three slots and
+    ///     draws what fits, rather than trapping on a child's home screen.
+    ///     What a star is worth is decided elsewhere.
+    ///   - locked: Not open yet. The tile turns sand, shows an egg, drops its
+    ///     ledge and its stars, and stops responding to taps.
+    ///   - size: Edge length of the square. The default is the home screen's
+    ///     grid cell, far above the 64 pt touch floor; a caller passing its
+    ///     own number keeps that floor itself.
+    ///   - action: Run on tap. Never called while ``locked``.
+    public init(
+        title: String,
+        icon: ZIcon = .bird,
+        tone: Tone = .leaf,
+        stars: Int = 0,
+        locked: Bool = false,
+        size: CGFloat = HomeTile.defaultSize,
+        action: @escaping () -> Void = {},
+    ) {
+        self.title = title
+        self.icon = icon
+        self.tone = tone
+        self.stars = HomeTileMetrics.clampedStars(stars)
+        self.locked = locked
+        self.size = size
+        self.action = action
+    }
+
+    /// The glyph actually drawn: an egg while locked, the activity's own
+    /// otherwise.
+    var displayedIcon: ZIcon {
+        locked ? .egg : icon
+    }
+
+    /// The stars actually drawn. A locked tile shows none — there is nothing
+    /// to have earned yet.
+    var displayedStars: Int {
+        locked ? 0 : stars
+    }
+
+    private var palette: HomeTilePalette {
+        locked ? .locked : tone.palette
+    }
+
+    public var body: some View {
+        let tilePalette = palette
+
+        return Button(action: action) {
+            VStack(spacing: ZSpacing.step3) {
+                Icon(displayedIcon, size: .custom(size * HomeTileMetrics.iconRatio))
+
+                Text(title)
+                    .font(ZType.Step.label.font(.display, weight: .bold))
+                    .lineSpacing(ZType.Step.label.lineSpacing)
+                    .multilineTextAlignment(.center)
+
+                // No stars at all until the first one is earned, exactly as
+                // in the JSX: three empty outlines on a fresh tile would read
+                // as a scoreboard.
+                if displayedStars > 0 {
+                    HStack(spacing: ZSpacing.step1) {
+                        ForEach(0 ..< HomeTileMetrics.starCapacity, id: \.self) { index in
+                            Icon(.star, size: .small)
+                                .foregroundStyle(
+                                    index < displayedStars ? ZColor.sun500 : ZColor.sand400,
+                                )
+                        }
+                    }
+                }
+            }
+            .foregroundStyle(tilePalette.foreground)
+        }
+        .buttonStyle(HomeTileButtonStyle(palette: tilePalette, size: size, hasLedge: !locked))
+        // A locked tile is genuinely not activatable, and VoiceOver should say
+        // so rather than offer a button that does nothing.
+        .disabled(locked)
+    }
+}
+
+/// The three colours one tile is drawn in.
+struct HomeTilePalette: Sendable, Hashable {
+    let background: Color
+    let edge: Color
+    let foreground: Color
+
+    /// A tile that is not open yet: sand, sand, muted ink.
+    static let locked = HomeTilePalette(
+        background: ZColor.surfaceSunken,
+        edge: ZColor.borderCard,
+        foreground: ZColor.ink300,
+    )
+}
+
+/// The tile's geometry. The values without a token are the JSX's own literals
+/// and are named here rather than sprinkled through the view.
+private enum HomeTileMetrics {
+    /// `Math.round(size * 0.34)` — the glyph scales with the tile.
+    static let iconRatio: CGFloat = 0.34
+    /// Three stars per activity, and never a fourth.
+    static let starCapacity = 3
+    /// The resting ledge, `--ledge-lg`.
+    static let restingLedge = ZShadow.ledgeLargeOffset
+    /// What is left of the ledge under a pressed tile. `shadows.css` has no
+    /// token for it; the JSX presses onto a bare 3 px.
+    static let pressedLedge: CGFloat = 3
+    /// How far the tile travels. The difference keeps the ledge's bottom edge
+    /// nailed in place, so only the tile moves.
+    static let pressTravel = restingLedge - pressedLedge
+
+    static func clampedStars(_ stars: Int) -> Int {
+        min(max(stars, 0), starCapacity)
+    }
+}
+
+/// Fills, edge, ledge and the press. Kept next to the tile rather than shared:
+/// the pull request building `ZButton` and `IconButton` grows a ledge style of
+/// its own right now, and the two are folded together once both have landed.
+private struct HomeTileButtonStyle: ButtonStyle {
+    let palette: HomeTilePalette
+    let size: CGFloat
+    let hasLedge: Bool
+
+    private var shape: RoundedRectangle {
+        RoundedRectangle(cornerRadius: ZRadius.tile, style: .continuous)
+    }
+
+    func makeBody(configuration: Configuration) -> some View {
+        let pressed = configuration.isPressed && hasLedge
+
+        return ZStack {
+            // A solid slab rather than a blurred shadow, and it never moves:
+            // the tile pressing down over it is what makes the ledge look as
+            // if it shrinks, exactly as in the JSX.
+            if hasLedge {
+                shape
+                    .fill(palette.edge)
+                    .offset(y: HomeTileMetrics.restingLedge)
+            }
+
+            configuration.label
+                .padding(ZSpacing.step4)
+                .frame(width: size, height: size)
+                .background { shape.fill(palette.background) }
+                .overlay { shape.strokeBorder(palette.edge, lineWidth: ZBorder.widthThick) }
+                .offset(y: pressed ? HomeTileMetrics.pressTravel : 0)
+        }
+        .animation(
+            ZMotion.easeOut.animation(duration: ZMotion.instant),
+            value: configuration.isPressed,
+        )
+    }
+}
+
+// MARK: - Previews
+
+#Preview("All four tones") {
+    HStack(spacing: ZSpacing.gapTiles) {
+        HomeTile(title: "Wer singt da?", icon: .volume2, tone: .leaf, stars: 3)
+        HomeTile(title: "Federn finden", icon: .feather, tone: .clay, stars: 1)
+        HomeTile(title: "Sterne sammeln", icon: .star, tone: .sun, stars: 2)
+        HomeTile(title: "Wer ist das?", icon: .bird, tone: .hoopoe, stars: 2)
+    }
+    .padding(ZSpacing.step6)
+    .background(ZColor.surfacePage)
+}
+
+#Preview("Stars, none to three") {
+    HStack(spacing: ZSpacing.gapTiles) {
+        ForEach(0 ... HomeTileMetrics.starCapacity, id: \.self) { stars in
+            HomeTile(title: "Wer singt da?", icon: .volume2, stars: stars)
+        }
+    }
+    .padding(ZSpacing.step6)
+    .background(ZColor.surfacePage)
+}
+
+#Preview("Locked, and a stray star count") {
+    HStack(spacing: ZSpacing.gapTiles) {
+        HomeTile(title: "Bald!", locked: true)
+        HomeTile(title: "Bald!", icon: .music, tone: .sun, stars: 3, locked: true)
+        // Nine stars is not a state; the tile clamps rather than complains.
+        HomeTile(title: "Wer ist das?", icon: .bird, tone: .hoopoe, stars: 9)
+    }
+    .padding(ZSpacing.step6)
+    .background(ZColor.surfacePage)
+}
