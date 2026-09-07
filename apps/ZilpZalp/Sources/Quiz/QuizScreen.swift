@@ -148,7 +148,12 @@ struct QuizScreen: View {
 
                     grid(session, edge: regularTile(in: area))
                 }
-                .frame(maxHeight: .infinity)
+                // The question and the answers are one group, centred in the
+                // width together. Letting the grid claim the leftover instead
+                // would pin the two of them to opposite edges with a hole
+                // between, and a four-year-old's eyes have to get from one to
+                // the other.
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
 
                 feedback(session).frame(height: Self.feedbackSlot)
             }
@@ -159,24 +164,41 @@ struct QuizScreen: View {
     ///
     /// Built from whatever the round offers rather than from a fixed four, so
     /// a pack that ever runs a question with three choices draws three tiles
-    /// instead of an empty square.
+    /// instead of an empty square, and the last question's answer leaves no
+    /// row behind when the round ends.
+    ///
+    /// The birds travel into the rows as values. Handing the tiles an index
+    /// into `session.choices` instead crashed the app on the tenth answer:
+    /// `ForEach` re-ran a row with the indices it was built with while the
+    /// session had already moved past the last question and was offering
+    /// none. There is no index left here to go stale.
     private func grid(_ session: QuizSession, edge: CGFloat) -> some View {
-        let choices = session.choices
+        let choices = Array(session.choices.enumerated())
         return VStack(spacing: ZSpacing.gapTiles) {
             ForEach(Array(stride(from: 0, to: choices.count, by: 2)), id: \.self) { first in
                 HStack(spacing: ZSpacing.gapTiles) {
-                    ForEach(first ..< min(first + 2, choices.count), id: \.self) { position in
-                        tile(session, at: position, edge: edge)
+                    ForEach(
+                        choices[first ..< min(first + 2, choices.count)],
+                        id: \.element.id,
+                    ) { choice in
+                        tile(session, choice.element, at: choice.offset, edge: edge)
                     }
                 }
             }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        // Height only: the grid takes the vertical room the arrangement leaves
+        // it and centres in it, but its width stays its own so that whatever
+        // stands beside it is centred with it rather than pushed aside.
+        .frame(maxHeight: .infinity)
     }
 
-    private func tile(_ session: QuizSession, at position: Int, edge: CGFloat) -> some View {
-        let bird = session.choices[position]
-        return QuizTile(
+    private func tile(
+        _ session: QuizSession,
+        _ bird: Bird,
+        at position: Int,
+        edge: CGFloat,
+    ) -> some View {
+        QuizTile(
             image: session.photo(for: bird),
             // Never the bird's name: VoiceOver would read the answer out to a
             // child who is meant to find it. The position is all the label can
@@ -308,61 +330,6 @@ struct QuizScreen: View {
     /// overhang on a screen no supported device has does not.
     private func clamped(_ edge: CGFloat) -> CGFloat {
         max(ZSpacing.touchMinimum, min(Self.maximumTile, edge).rounded(.down))
-    }
-}
-
-/// One answer, at whatever edge length the grid worked out.
-///
-/// ``ChoiceTile`` clamps its `size` up to `ChoiceTile.minimumSize` — 220 pt —
-/// and two of those with the gap between them need 464 pt, which is wider than
-/// any iPhone. Above the floor this passes the size straight through; below
-/// it, the tile is drawn at the floor and the result is scaled. `scaleEffect`
-/// transforms hit testing along with the drawing, so the target stays the
-/// whole face, and at the sizes an iPhone works out that is still well over
-/// 64 pt.
-///
-/// A stopgap, and a narrow one: the credit strip scales with everything else,
-/// so a CC BY photo on iPhone carries its attribution at about 10 pt instead
-/// of the design's 13. The fix is a compact size in the component — noted as a
-/// follow-up on #11 rather than reached for here.
-private struct QuizTile: View {
-    let image: Image?
-    let label: String
-    let credit: String
-    let tone: ChoiceTile.Tone
-    let phase: ChoiceTile.Phase
-    let dimmed: Bool
-    let edge: CGFloat
-    let action: () -> Void
-
-    var body: some View {
-        if edge >= ChoiceTile.minimumSize {
-            tile(size: edge)
-        } else {
-            let scale = edge / ChoiceTile.minimumSize
-            tile(size: ChoiceTile.minimumSize)
-                .scaleEffect(scale)
-                // The component's own height is its size plus the ledge the
-                // button style seats it on; both scale, and the frame has to
-                // say so or the grid's arithmetic stops matching the drawing.
-                .frame(
-                    width: edge,
-                    height: (ChoiceTile.minimumSize + ZShadow.ledgeLargeOffset) * scale,
-                )
-        }
-    }
-
-    private func tile(size: CGFloat) -> some View {
-        ChoiceTile(
-            image: image,
-            label: label,
-            credit: credit,
-            tone: tone,
-            phase: phase,
-            dimmed: dimmed,
-            size: size,
-            action: action,
-        )
     }
 }
 
