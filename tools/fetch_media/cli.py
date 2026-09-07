@@ -8,7 +8,8 @@ Three steps, and a human between them:
 
 `candidates` asks iNaturalist and lists what may be used; it never chooses.
 `pick` fetches the one photo a human named, crops it, writes the manifest entry
-and regenerates the derived files. `upload` puts the pack in the bucket.
+and regenerates the derived files. `upload` puts the pack in the bucket and,
+last, the index of the packs that can be downloaded from there.
 
 Only `upload` needs credentials, and it reads them from the environment, where
 `infisical run --env=dev --path=/ --` puts them. The other two run on any
@@ -28,7 +29,7 @@ from pathlib import Path
 import httpx
 from botocore.exceptions import BotoCoreError, ClientError
 
-from fetch_media import images, inaturalist, manifest, s3
+from fetch_media import images, inaturalist, index, manifest, s3
 
 # Candidate lists are working material for a human, not a build artefact, and
 # `data/packs/` is off limits for them: the licence gate reads every *.json
@@ -218,8 +219,36 @@ def command_pick(args: argparse.Namespace) -> int:
     return 0
 
 
+def upload_index(
+    pack: str, client=None, bucket: str | None = None, dry_run: bool = False
+) -> list[str]:
+    """Put the list of downloadable packs. Returns its report line.
+
+    Without a client nothing can be asked of the bucket, so the index then
+    holds the pack of this run and nothing else — all a dry run on a machine
+    without credentials can honestly say.
+    """
+
+    def present(key: str) -> bool:
+        """Whether the bucket holds that object — as this tool would have put it.
+
+        An object without the `sha256` metadata reads as absent, which is the
+        safe direction: it would not have come from here.
+        """
+        return client is not None and s3.remote_sha256(client, bucket, key) is not None
+
+    # Outside the repository on purpose: the licence gate and the credits
+    # generator read every *.json below data/packs/ as a manifest.
+    with tempfile.TemporaryDirectory() as scratch:
+        upload = index.staged(index.build(uploading=pack, in_bucket=present), Path(scratch))
+
+        if client is None:
+            return [s3.report_line("unchecked", upload)]
+        return s3.sync(client, bucket, [upload], dry_run=dry_run)
+
+
 def command_upload(args: argparse.Namespace) -> int:
-    """Put the pack's media and its manifest into the bucket."""
+    """Put the pack's media and its manifest into the bucket, then the index."""
     uploads = s3.plan(args.pack, manifest.pack_dir(args.pack))
 
     try:
@@ -233,12 +262,18 @@ def command_upload(args: argparse.Namespace) -> int:
         print(f"::notice::{escape_data(f'{error} Listing the plan unchecked.')}")
         for upload in uploads:
             print(s3.report_line("unchecked", upload))
+        for line in upload_index(args.pack):
+            print(line)
         return 0
 
     for line in s3.sync(client, bucket, uploads, dry_run=args.dry_run):
         print(line)
 
-    print(f"\n{len(uploads)} object(s) under packs/{args.pack}/ in the media bucket")
+    # The last object of the run, so the index never names one that is missing.
+    for line in upload_index(args.pack, client, bucket, args.dry_run):
+        print(line)
+
+    print(f"\n{len(uploads)} object(s) under packs/{args.pack}/ and {index.KEY} in the bucket")
     return 0
 
 
