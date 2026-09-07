@@ -65,6 +65,10 @@ LICENCES = {
     "creativecommons.org/licenses/by-sa/4.0": "CC-BY-SA-4.0",
 }
 
+# For the messages that have to name what is allowed. Derived, so it cannot
+# drift from the mapping above.
+PERMITTED = ", ".join(sorted(LICENCES.values()))
+
 # What the `type` field says when the recording is not the sound a child should
 # learn: the flapping of a pheasant, a nestling begging, a call only ever heard
 # at night. Measured over the ten base-pack species, these are 23 begging
@@ -92,7 +96,12 @@ TYPE_GROUPS = ("song", "call")
 
 
 class LicenceError(ValueError):
-    """A licence xeno-canto reports that this project may not use."""
+    """A licence xeno-canto reports that this project may not use.
+
+    Nothing catches it by name — it exists because `cli.main` prints the class
+    name, and "LicenceError" says at a glance what went wrong in the one
+    refusal that matters most here.
+    """
 
 
 class XenoCantoError(RuntimeError):
@@ -324,6 +333,7 @@ class Client:
         )
         self._min_interval = min_interval
         self._last_request: float | None = None
+        self.truncated: list[str] = []
 
     def __enter__(self) -> Client:
         return self
@@ -342,38 +352,39 @@ class Client:
     def _get(self, url: str, params: dict | None = None) -> httpx.Response:
         """Fetch `url`, waiting out the rate limit first.
 
+        One retry when the connection itself fails: a pack is thirty searches
+        and ten downloads in a row, each a second apart, and losing the
+        twenty-ninth to a hiccup would mean asking for all of them again.
+
         Every failure is re-raised as a `XenoCantoError` whose message has been
         through `redact`: an `HTTPStatusError` carries the request URL, and the
         request URL of a search carries the key.
         """
-        for attempt in (1, 2):
+        try:
             self._wait()
             try:
                 response = self._http.get(url, params=params)
-                response.raise_for_status()
-                return response
-            except httpx.HTTPError as error:
-                if attempt == 2 or not isinstance(error, httpx.TransportError):
-                    raise XenoCantoError(
-                        redact(f"{type(error).__name__}: {error}")
-                    ) from None
+            except httpx.TransportError:
+                self._wait()
+                response = self._http.get(url, params=params)
 
-        raise AssertionError("unreachable")
+            response.raise_for_status()
+            return response
+        except httpx.HTTPError as error:
+            raise XenoCantoError(redact(f"{type(error).__name__}: {error}")) from None
 
     def search(self, query: str) -> list[dict]:
         """The recordings for one query. The key is added here and nowhere else.
 
-        Page 1 only. A base-pack species has at most 61 free recordings and a
-        page holds 100; a wider search says so rather than walking the pages,
-        because a human cannot listen to several hundred candidates anyway.
+        Page 1 only, a hundred recordings. The richest of the base-pack species
+        offers 61 under one licence, so a second page would be a surprise —
+        and a human cannot listen to several hundred candidates anyway. A
+        query that had more is remembered in `truncated`, so the counts the
+        caller prints can say that they are a floor rather than a total.
         """
         payload = self._get(f"{API_ROOT}/recordings", {"query": query, "key": self._key}).json()
-        pages = int(payload.get("numPages") or 1)
-        if pages > 1:
-            total = payload.get("numRecordings")
-            raise XenoCantoError(
-                f"'{query}' matches {total} recordings on {pages} pages — narrow the query"
-            )
+        if int(payload.get("numPages") or 1) > 1:
+            self.truncated.append(query)
         return payload.get("recordings") or []
 
     def recordings(self, scientific_name: str) -> list[dict]:

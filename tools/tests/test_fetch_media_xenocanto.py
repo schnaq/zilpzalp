@@ -289,12 +289,35 @@ class ClientTests(unittest.TestCase):
 
         self.assertGreaterEqual(elapsed, 0.2)
 
-    def test_refuses_to_walk_a_result_with_several_pages(self) -> None:
+    def test_remembers_a_result_it_did_not_walk_to_the_end(self) -> None:
+        """One page is a hundred recordings; the counts must not claim more."""
         with self.client(lambda request: answer([RECORDED], pages=4)) as client:
-            with self.assertRaises(xenocanto.XenoCantoError) as error:
-                client.search("sp:Turdus")
+            client.search("sp:Turdus")
 
-        self.assertIn("narrow the query", str(error.exception))
+        self.assertEqual(client.truncated, ["sp:Turdus"])
+
+    def test_retries_once_when_the_connection_drops(self) -> None:
+        """Thirty requests a second apart: one hiccup must not cost the run."""
+        attempts = []
+
+        def handle(request: httpx.Request) -> httpx.Response:
+            attempts.append(request)
+            if len(attempts) == 1:
+                raise httpx.ConnectError("connection reset", request=request)
+            return answer([RECORDED])
+
+        with self.client(handle) as client:
+            self.assertEqual(client.search("nr:965144"), [RECORDED])
+
+        self.assertEqual(len(attempts), 2)
+
+    def test_gives_up_after_the_second_connection_failure(self) -> None:
+        def handle(request: httpx.Request) -> httpx.Response:
+            raise httpx.ConnectError("connection reset", request=request)
+
+        with self.client(handle) as client:
+            with self.assertRaises(xenocanto.XenoCantoError):
+                client.search("nr:965144")
 
     def test_reports_an_unknown_catalogue_number(self) -> None:
         with self.client(lambda request: answer([])) as client:
@@ -381,6 +404,16 @@ class CandidatesTests(CallsTestCase):
 
         self.assertIn("0 unusable, 3 of another type", table)
         self.assertIn("--type shows it", table)
+
+    def test_says_when_the_counts_are_only_a_floor(self) -> None:
+        self.client_answering(lambda request: answer([RECORDED], pages=2))
+        self.out = self.packs / "out"
+
+        _, printed = self.run_command(
+            ["calls", "candidates", "--pack", "basis", "--out", str(self.out)]
+        )
+
+        self.assertIn("::warning::3 search(es) had more than one page", printed)
 
     def test_warns_about_a_species_without_a_usable_recording(self) -> None:
         table = self.run_candidates([record(lic=BY_SA_3)])

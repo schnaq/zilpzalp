@@ -97,8 +97,14 @@ def to_mono(samples: array.array, channels: int) -> array.array:
     )
 
 
-def window(samples: array.array, rate: int, start: float, duration: float) -> array.array:
+def window(
+    samples: array.array, rate: int, start: float, duration: float, channels: int = 1
+) -> array.array:
     """The `duration` seconds from `start`, clamped to what the recording has.
+
+    Takes the samples still interleaved, so that it runs before `to_mono` and
+    the averaging touches six seconds rather than the two minutes a raw
+    xeno-canto recording can be.
 
     Raises `ValueError` when `start` lies past the end, naming the length the
     recording really has — the API's `length` field is rounded to seconds and
@@ -107,12 +113,12 @@ def window(samples: array.array, rate: int, start: float, duration: float) -> ar
     if start < 0 or duration <= 0:
         raise ValueError(f"--start must be at least 0 and --duration above 0, got {start}/{duration}")
 
-    length = len(samples) / rate
+    length = len(samples) / channels / rate
     if start >= length:
         raise ValueError(f"--start {start} lies past the end of the recording ({length:.1f} s)")
 
-    first = int(start * rate)
-    return samples[first : first + int(duration * rate)]
+    first = int(start * rate) * channels
+    return samples[first : first + int(duration * rate) * channels]
 
 
 def fade(samples: array.array, rate: int, seconds: float = FADE) -> array.array:
@@ -167,7 +173,8 @@ def trim(data: bytes, file_name: str, start: float = 0.0, duration: float = DURA
         afconvert(["-f", "WAVE", "-d", "LEI16", str(source), str(decoded)])
 
         samples, rate, channels = read_wave(decoded)
-        write_wave(cut, fade(window(to_mono(samples, channels), rate, start, duration), rate), rate)
+        kept = to_mono(window(samples, rate, start, duration, channels), channels)
+        write_wave(cut, fade(kept, rate), rate)
 
         afconvert(
             ["-f", FILE_FORMAT, "-d", DATA_FORMAT, "-b", BITRATE, str(cut), str(encoded)]

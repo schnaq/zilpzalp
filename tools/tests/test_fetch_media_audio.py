@@ -76,6 +76,12 @@ class WindowTests(unittest.TestCase):
     def test_cuts_the_requested_seconds(self) -> None:
         self.assertEqual(len(audio.window(samples(RATE * 10), RATE, 2.0, 6.0)), RATE * 6)
 
+    def test_counts_seconds_in_frames_when_the_source_is_stereo(self) -> None:
+        """It runs before the downmix, so six seconds must not become three."""
+        stereo = samples(RATE * 10 * 2)
+
+        self.assertEqual(len(audio.window(stereo, RATE, 2.0, 6.0, channels=2)), RATE * 6 * 2)
+
     def test_clamps_a_window_that_reaches_past_the_end(self) -> None:
         """A one-second drumming roll with the six-second default is normal."""
         self.assertEqual(len(audio.window(samples(RATE), RATE, 0.0, 6.0)), RATE)

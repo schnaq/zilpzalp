@@ -126,6 +126,19 @@ def selected_birds(document: dict, species: list[str] | None) -> list[dict]:
     return [manifest.bird(document, bird_id) for bird_id in species]
 
 
+def print_columns(header: list[str], rows: list[list[str]]) -> None:
+    """Print a table whose last column is a URL.
+
+    Every column but the last is padded to its widest cell; the last one is
+    left alone so the URL stays clickable in a terminal.
+    """
+    widths = [max(len(row[column]) for row in [header, *rows]) for column in range(len(header) - 1)]
+
+    for row in [header, *rows]:
+        cells = [cell.ljust(width) for cell, width in zip(row, widths, strict=False)]
+        print("  ".join([*cells, row[-1]]).rstrip())
+
+
 def by_observation(candidates: list[inaturalist.Candidate]) -> dict[int, list[inaturalist.Candidate]]:
     """Group the candidates by observation, keeping the API's order."""
     grouped: dict[int, list[inaturalist.Candidate]] = {}
@@ -167,12 +180,7 @@ def print_table(grouped: dict[int, list[inaturalist.Candidate]]) -> None:
         )
 
     header = ["Bird", "Observation", "Photo", "Licence", "Original", "Photographer", "URL"]
-    # The last column is left unpadded so the URL stays clickable.
-    widths = [max(len(row[column]) for row in [header, *rows]) for column in range(len(header) - 1)]
-
-    for row in [header, *rows]:
-        cells = [cell.ljust(width) for cell, width in zip(row, widths, strict=False)]
-        print("  ".join([*cells, row[-1]]).rstrip())
+    print_columns(header, rows)
 
     print("\n+n  further usable photos of the same observation, listed in the candidate file")
     if any(" !" in row[4] for row in rows):
@@ -278,18 +286,12 @@ def print_call_table(candidates: list[xenocanto.Candidate]) -> None:
             ]
         )
 
-    header = ["Bird", "Recording", "Q", "Type", "Length", "Licence", "Recordist", "URL"]
-    # The last column is left unpadded so the URL stays clickable.
-    widths = [max(len(row[column]) for row in [header, *rows]) for column in range(len(header) - 1)]
+    print_columns(["Bird", "Recording", "Q", "Type", "Length", "Licence", "Recordist", "URL"], rows)
 
-    for row in [header, *rows]:
-        cells = [cell.ljust(width) for cell, width in zip(row, widths, strict=False)]
-        print("  ".join([*cells, row[-1]]).rstrip())
-
-    if any(row[5].endswith(" !") for row in rows):
-        print(f"\n!   licence outside {', '.join(sorted(set(xenocanto.LICENCES.values())))}")
+    if not all(entry.usable for entry in candidates):
+        print(f"\n!   licence outside {xenocanto.PERMITTED}")
         print("    — 'calls pick' refuses it, and the recording cannot ship")
-    if any(row[3].endswith(" *") for row in rows):
+    if any(entry.skipped for entry in candidates):
         print("\n*   a sound the game normally hides; --type asked for it by name")
 
 
@@ -301,6 +303,7 @@ def command_call_candidates(args: argparse.Namespace) -> int:
     every: list[xenocanto.Candidate] = []
     listed: list[xenocanto.Candidate] = []
     summaries: list[str] = []
+    held_back = 0
 
     with xenocanto.Client(xenocanto.api_key()) as client:
         for bird in birds:
@@ -313,6 +316,7 @@ def command_call_candidates(args: argparse.Namespace) -> int:
 
             quality = collections.Counter(entry.quality for entry in usable)
             hidden = len(records) - len(found)
+            held_back += hidden
             summaries.append(
                 f"{bird['id']:<16}{len(usable):>3} usable "
                 f"({quality['A']} in A, {quality['B']} in B), "
@@ -321,6 +325,13 @@ def command_call_candidates(args: argparse.Namespace) -> int:
             )
             every += found
             listed += found[: args.limit]
+
+        if client.truncated:
+            message = (
+                f"{len(client.truncated)} search(es) had more than one page of results; "
+                "the counts below are a floor, not a total"
+            )
+            print(f"::warning::{escape_data(message)}")
 
     args.out.mkdir(parents=True, exist_ok=True)
     destination = args.out / f"{args.pack}-call-candidates.json"
@@ -337,7 +348,7 @@ def command_call_candidates(args: argparse.Namespace) -> int:
     print()
     for summary in summaries:
         print(summary)
-    if any("another type" in summary for summary in summaries):
+    if held_back:
         print("\nA sound the game cannot use, or not the --type asked for. --type shows it.")
     print(
         f"\n{len(every)} recording(s) for {len(birds)} species, "
@@ -365,7 +376,7 @@ def command_call_pick(args: argparse.Namespace) -> int:
         if licence is None:
             raise xenocanto.LicenceError(
                 f"XC{args.recording} is under {xenocanto.licence_label(record.get('lic'))}, "
-                f"which is not one of {', '.join(sorted(set(xenocanto.LICENCES.values())))}"
+                f"which is not one of {xenocanto.PERMITTED}"
             )
 
         name = record.get("file-name") or ""
@@ -513,9 +524,10 @@ def main(argv: list[str] | None = None) -> int:
 
     # Everything below reports as one `::error::` line rather than a traceback:
     # the tool is run by a person who wants to know which photo to pick
-    # instead, not by a developer reading a stack. `redact` again although
-    # `xenocanto.Client` already does: this line is the one place every failure
-    # passes through, and the xeno-canto key travels in a URL.
+    # instead, not by a developer reading a stack. `redact` here is a backstop:
+    # `xenocanto.Client` already cleans every message it raises, so today this
+    # changes nothing. It is the one line every failure passes through, and the
+    # cost of being wrong about a key in a CI log is not worth the two words.
     try:
         return args.run(args)
     except (
