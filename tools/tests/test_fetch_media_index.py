@@ -1,7 +1,7 @@
 """Tests for packs/index.json — the list a pack downloader (#33) reads.
 
-No test opens a socket: the packs live in a throwaway directory and the bucket
-answers through a predicate or a stub.
+No test opens a socket and none of them needs a credential: the packs live in a
+throwaway directory, and what the bucket already holds is a predicate.
 
 Run from the repository root:
 uv run --locked --project tools python -m unittest discover -s tools/tests -t tools
@@ -52,7 +52,9 @@ class PacksTestCase(unittest.TestCase):
         self.write_pack("basis", "Unsere ersten Vögel", ["amsel"])
         self.write_pack("deutschland", "Vögel in Deutschland", ["amsel", "star"])
 
-    def write_pack(self, pack_id: str, title: str, birds: list[str], declared: str | None = None) -> None:
+    def write_pack(
+        self, pack_id: str, title: str, birds: list[str], declared: str | None = None
+    ) -> None:
         """A pack of one photo per bird, all with the same made-up bytes."""
         pack = self.packs / pack_id
         (pack / "photos").mkdir(parents=True, exist_ok=True)
@@ -185,12 +187,6 @@ class StagedTests(PacksTestCase):
         self.assertTrue(written.endswith("}\n"))
         self.assertEqual(len(json.loads(written)["packs"]), 1)
 
-    def test_writes_nothing_below_data_packs(self) -> None:
-        """The licence gate reads every *.json there as a manifest."""
-        upload, _ = self.staged({"packs": []})
-
-        self.assertFalse(upload.path.is_relative_to(self.packs))
-
 
 class CommandTests(PacksTestCase):
     """The index is the last object of an upload run."""
@@ -237,6 +233,12 @@ class CommandTests(PacksTestCase):
 
         self.assertEqual(exit_code, 0)
         self.assertIn("unchecked  packs/index.json", lines[-1])
+
+    def test_writes_nothing_below_data_packs(self) -> None:
+        """The licence gate and the credits generator read every *.json there."""
+        self.upload("--dry-run")
+
+        self.assertEqual(list(self.packs.rglob("index.json")), [])
 
 
 if __name__ == "__main__":
