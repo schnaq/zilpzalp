@@ -1,0 +1,269 @@
+"""The command line of the curation tool.
+
+Three steps, and a human between them:
+
+    photos candidates --pack basis [--species amsel …] [--limit 5]
+    photos pick --pack basis --species amsel --observation 20490738 --photo 31623386
+    photos upload --pack basis [--dry-run]
+
+`candidates` asks iNaturalist and lists what may be used; it never chooses.
+`pick` fetches the one photo a human named, crops it, writes the manifest entry
+and regenerates the derived files. `upload` puts the pack in the bucket. Only
+`upload` needs credentials, so the first two run on any machine.
+"""
+
+from __future__ import annotations
+
+import argparse
+import dataclasses
+import datetime
+import json
+import subprocess
+import sys
+import tempfile
+from pathlib import Path
+
+import httpx
+from botocore.exceptions import BotoCoreError, ClientError
+
+from fetch_media import images, inaturalist, manifest, s3
+
+# Candidate lists are working material for a human, not a build artefact, and
+# `data/packs/` is off limits for them: the licence gate reads every *.json
+# below it as a manifest.
+DEFAULT_OUT = Path(tempfile.gettempdir()) / "zilpzalp-fetch-media"
+
+# Run in the order `mise run check` runs them, so a manifest change leaves the
+# repository exactly as CI expects to find it.
+DERIVED_TOOLS = ("sync_bundled_packs.py", "generate_credits.py")
+
+
+def escape_data(message: str) -> str:
+    """Escape data for a GitHub workflow command — % first, then the line breaks."""
+    return message.replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
+
+
+def regenerate_derived() -> None:
+    """Bring the bundled pack copy and the credits back in step.
+
+    Both tools heal on their first run and report the healing as exit code 1,
+    which is what makes them drift checks in CI. Here a change is expected, so
+    the first run may heal and only the second one is judged.
+    """
+    for script in DERIVED_TOOLS:
+        path = manifest.REPO_ROOT / "tools" / script
+        subprocess.run([sys.executable, str(path)], check=False)
+        if subprocess.run([sys.executable, str(path)], check=False).returncode != 0:
+            raise RuntimeError(f"{script} still reports a problem — see its output above")
+
+
+def selected_birds(document: dict, species: list[str] | None) -> list[dict]:
+    """The birds to work on: the named ones, or the whole pack."""
+    if not species:
+        return list(document.get("birds") or [])
+    return [manifest.bird(document, bird_id) for bird_id in species]
+
+
+def print_table(candidates: list[inaturalist.Candidate]) -> None:
+    """Print the candidates as a table a human can read in a terminal."""
+    if not candidates:
+        print("No usable photo found.")
+        return
+
+    rows = []
+    for candidate in candidates:
+        side = candidate.square_side
+        size = "unknown" if side is None else f"{candidate.width}×{candidate.height}"
+        if side is not None and side < images.SIDE:
+            size += " !"
+        rows.append(
+            [
+                candidate.bird_id,
+                str(candidate.observation_id),
+                str(candidate.photo_id),
+                candidate.license,
+                size,
+                candidate.photographer,
+                candidate.observation_url,
+            ]
+        )
+
+    header = ["Bird", "Observation", "Photo", "Licence", "Original", "Photographer", "URL"]
+    # The last column is left unpadded so the URL stays clickable.
+    widths = [max(len(row[column]) for row in [header, *rows]) for column in range(len(header) - 1)]
+
+    for row in [header, *rows]:
+        cells = [cell.ljust(width) for cell, width in zip(row, widths, strict=False)]
+        print("  ".join([*cells, row[-1]]).rstrip())
+
+    if any(" !" in row[4] for row in rows):
+        print(f"\n!  smaller than {images.SIDE} px on the short side — 'pick' refuses to upscale it")
+
+
+def command_candidates(args: argparse.Namespace) -> int:
+    """List the freely licensed photos of a pack's species."""
+    document = manifest.load(manifest.manifest_path(args.pack))
+    birds = selected_birds(document, args.species)
+
+    candidates: list[inaturalist.Candidate] = []
+    with inaturalist.Client() as client:
+        for bird in birds:
+            observations = client.observations(bird["taxonID"], args.limit)
+            found = inaturalist.photo_candidates(bird["id"], bird["taxonID"], observations)
+            if not found:
+                message = f"{bird['id']}: no freely licensed photo found"
+                print(f"::warning::{escape_data(message)}")
+            candidates += found
+
+    args.out.mkdir(parents=True, exist_ok=True)
+    destination = args.out / f"{args.pack}-photo-candidates.json"
+    destination.write_text(
+        json.dumps(
+            {
+                "pack": args.pack,
+                "retrieved": datetime.date.today().isoformat(),
+                "candidates": [dataclasses.asdict(candidate) for candidate in candidates],
+            },
+            indent=2,
+            ensure_ascii=False,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+    print_table(candidates)
+    print(f"\n{len(candidates)} candidate(s) for {len(birds)} species → {destination}")
+    print("Look at the photos, then run 'photos pick' with the observation and photo id.")
+    return 0
+
+
+def command_pick(args: argparse.Namespace) -> int:
+    """Fetch, crop and record the one photo a human chose."""
+    path = manifest.manifest_path(args.pack)
+    document = manifest.load(path)
+    bird = manifest.bird(document, args.species)
+
+    with inaturalist.Client() as client:
+        observation = client.observation(args.observation)
+        if not inaturalist.taxon_matches(observation, bird["taxonID"]):
+            taxon = observation.get("taxon") or {}
+            raise ValueError(
+                f"observation {args.observation} shows {taxon.get('name')} "
+                f"(taxon {taxon.get('id')}), not {bird['scientificName']} (taxon {bird['taxonID']})"
+            )
+
+        photo = inaturalist.find_photo(observation, args.photo)
+        original = inaturalist.original_url(photo["url"])
+        print(f"{args.species}: downloading {original}")
+        encoded = images.square_photo(client.download(original), args.crop)
+
+    pack = manifest.pack_dir(args.pack)
+    relative = f"photos/{args.species}.jpg"
+    destination = pack / relative
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    destination.write_bytes(encoded)
+
+    digest = manifest.sha256_of(destination)
+    previous = manifest.set_photo(
+        document,
+        args.species,
+        manifest.media_block(
+            file=relative,
+            sha256=digest,
+            licence=inaturalist.licence_id(photo["license_code"]),
+            attribution=inaturalist.photographer(observation),
+            source_url=inaturalist.OBSERVATION_URL.format(args.observation),
+            retrieved=datetime.date.today().isoformat(),
+        ),
+    )
+    manifest.save(path, document)
+
+    # The manifest is the truth about the pack directory. A photo it no longer
+    # names would still be copied into the app bundle by sync_bundled_packs.py.
+    if previous and previous != relative:
+        orphan = pack / previous
+        if orphan.is_file() and orphan.resolve().is_relative_to(pack.resolve()):
+            orphan.unlink()
+            print(f"{args.species}: removed the previous {previous}")
+
+    print(f"{args.species}: {relative}  {len(encoded)} bytes  sha256 {digest}")
+    regenerate_derived()
+    print("\nLook at the photo before you commit it — nothing else has seen it yet.")
+    return 0
+
+
+def command_upload(args: argparse.Namespace) -> int:
+    """Put the pack's media and its manifest into the bucket."""
+    uploads = s3.plan(args.pack, manifest.pack_dir(args.pack))
+    client, bucket = s3.client_from_env()
+
+    for line in s3.sync(client, bucket, uploads, dry_run=args.dry_run):
+        print(line)
+
+    print(f"\n{len(uploads)} object(s) under packs/{args.pack}/ in the media bucket")
+    return 0
+
+
+def build_parser() -> argparse.ArgumentParser:
+    """The whole command line. `photos` leaves room for `calls` (#16)."""
+    parser = argparse.ArgumentParser(prog="fetch_media", description=__doc__.splitlines()[0])
+    medium = parser.add_subparsers(dest="medium", required=True)
+    photos = medium.add_parser("photos", help="photos from iNaturalist").add_subparsers(
+        dest="command", required=True
+    )
+
+    candidates = photos.add_parser("candidates", help="list freely licensed photos for a pack")
+    candidates.add_argument("--pack", required=True, help="pack id, for instance 'basis'")
+    candidates.add_argument("--species", nargs="+", help="bird ids; default: every bird in the pack")
+    candidates.add_argument(
+        "--limit", type=int, default=5, help="observations to ask for per species (default: 5)"
+    )
+    candidates.add_argument(
+        "--out",
+        type=Path,
+        default=DEFAULT_OUT,
+        help=f"where to write the candidate list (default: {DEFAULT_OUT})",
+    )
+    candidates.set_defaults(run=command_candidates)
+
+    pick = photos.add_parser("pick", help="fetch and record one photo a human chose")
+    pick.add_argument("--pack", required=True)
+    pick.add_argument("--species", required=True, help="bird id, for instance 'amsel'")
+    pick.add_argument("--observation", required=True, type=int, help="iNaturalist observation id")
+    pick.add_argument("--photo", required=True, type=int, help="iNaturalist photo id")
+    pick.add_argument(
+        "--crop",
+        type=images.parse_crop,
+        # None is what `center` parses to, so the default needs no second path.
+        default=None,
+        help="'center' (default) or 'x,y,w,h' in pixels of the original",
+    )
+    pick.set_defaults(run=command_pick)
+
+    upload = photos.add_parser("upload", help="upload a pack to the media bucket")
+    upload.add_argument("--pack", required=True)
+    upload.add_argument("--dry-run", action="store_true", help="report what would happen")
+    upload.set_defaults(run=command_upload)
+
+    return parser
+
+
+def main(argv: list[str] | None = None) -> int:
+    args = build_parser().parse_args(argv)
+
+    # Everything below reports as one `::error::` line rather than a traceback:
+    # the tool is run by a person who wants to know which photo to pick
+    # instead, not by a developer reading a stack.
+    try:
+        return args.run(args)
+    except (
+        OSError,
+        ValueError,
+        LookupError,
+        RuntimeError,
+        httpx.HTTPError,
+        BotoCoreError,
+        ClientError,
+    ) as error:
+        print(f"::error::{escape_data(f'{type(error).__name__}: {error}')}")
+        return 1

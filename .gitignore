@@ -47,3 +47,6 @@ apps/ZilpZalp/Generated/
 
 # Python (tools/)
 __pycache__/
+# uv builds tools/.venv from tools/pyproject.toml and tools/uv.lock, both of
+# which are committed. The environment itself is not.
+.venv/

@@ -7,6 +7,7 @@
 # Pinned exactly: the development machine and the self-hosted runner should use
 # the same binaries. No Homebrew — versions would drift apart.
 python      = "3.13.14" # for the tools in tools/
+uv          = "0.12.10" # resolves tools/pyproject.toml for tools/fetch_media
 swiftformat = "0.62.1"
 swiftlint   = "0.65.0"
 xcbeautify  = "3.2.1"
@@ -86,8 +87,14 @@ export DEVELOPER_DIR="${DEVELOPER_DIR:-/Applications/Xcode.app/Contents/Develope
 
 # The Python tools first: seconds rather than minutes, so a broken helper
 # reports before the Swift packages are built. `-t tools` makes tools/ the
-# top-level directory, which is how the tests import license_gate.
-python -m unittest discover -s tools/tests -t tools
+# top-level directory, which is how the tests import license_gate — and
+# fetch_media, which is a package below it.
+#
+# Through uv, because the fetch_media tests need httpx, Pillow and boto3.
+# `--locked` refuses to re-resolve, so the versions here are the ones in
+# tools/uv.lock; `python-preference = "only-system"` in tools/pyproject.toml
+# keeps uv on the interpreter mise pinned instead of downloading its own.
+uv run --locked --project tools python -m unittest discover -s tools/tests -t tools
 
 # `xcrun swift` rather than `swift`: only that way does the toolchain from
 # DEVELOPER_DIR get used instead of some other swift on the search path.
@@ -151,10 +158,19 @@ python tools/generate_credits.py
 '''
 
 [tasks.fetch-media]
-description = "Curate media and upload it to S3"
-run = '''
-echo "::notice::No curation tool — tools/fetch-media arrives with #15"
-'''
+description = "Curate media: photos candidates|pick|upload — see 'mise run fetch-media photos --help'"
+# One line on purpose: mise appends the arguments of `mise run fetch-media …`
+# to the end of the command, so the subcommands reach the tool unchanged.
+#
+#   mise run fetch-media photos candidates --pack basis --limit 5
+#   mise run fetch-media photos pick --pack basis --species amsel \
+#       --observation 20490738 --photo 31623386
+#   mise run fetch-media photos upload --pack basis --dry-run
+#
+# `infisical run` injects the Scaleway keys and the S3_* values; only `upload`
+# needs them, and they never leave the process. Credentials come from Infisical
+# alone — see docs/secrets.md.
+run = "infisical run --env=dev --path=/ -- uv run --locked --project tools python -m fetch_media"
 
 [tasks.xcode-version]
 description = "Checks that the pinned Xcode version is active"
