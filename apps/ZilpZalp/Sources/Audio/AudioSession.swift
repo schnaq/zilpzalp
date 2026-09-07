@@ -1,7 +1,11 @@
 import AVFoundation
 import os
 
-private let logger = Logger(subsystem: "com.schnaq.zilpzalp", category: "audio")
+extension Logger {
+    /// Everything that makes a sound logs here — the spoken question (#24) and
+    /// the recorded calls (#30).
+    static let audio = Logger(subsystem: "com.schnaq.zilpzalp", category: "audio")
+}
 
 /// The single audio-session setup for the whole app.
 ///
@@ -9,29 +13,33 @@ private let logger = Logger(subsystem: "com.schnaq.zilpzalp", category: "audio")
 /// flipped. Children flip it, and a game 1 that says nothing is unusable for
 /// someone who cannot read the question. The spoken question (#24) and the
 /// recorded calls (#30) share this configuration.
-@MainActor
 enum AudioSessionConfigurator {
-    private static var isConfigured = false
-
-    /// Configures and activates the shared session.
+    /// Configures and activates the shared session. Meant to be called before
+    /// every single sound, not once at launch.
     ///
-    /// Idempotent after the first success, so every place that makes a sound
-    /// may call it without coordinating with the others. Called when audio
-    /// actually starts rather than at launch: an app that has not made a sound
-    /// yet has no business interrupting whatever the parents are listening to.
+    /// Deliberately not latched behind an "already done" flag. iOS deactivates
+    /// the session when a phone call, an alarm or Siri interrupts, and nothing
+    /// hands that fact back to us; asking for the category and activation again
+    /// before each utterance is what brings the question back afterwards.
+    /// `AVSpeechSynthesizer` speaks through this shared session — it does not
+    /// keep one of its own — so a session that stays deactivated means a silent
+    /// game 1. Repeating both calls on an already-configured session is cheap
+    /// next to the speech that follows.
+    ///
+    /// Called when a sound actually starts rather than at launch: an app that
+    /// has not made a sound yet has no business interrupting whatever the
+    /// parents are listening to.
     static func activatePlayback() {
-        guard !isConfigured else { return }
-
         do {
             let session = AVAudioSession.sharedInstance()
             try session.setCategory(.playback, mode: .spokenAudio, options: [])
             try session.setActive(true)
-            isConfigured = true
         } catch {
             // Audio still plays, it just loses against the mute switch. Not
             // reaching the child at all would be the worse outcome, so this
             // is logged and not surfaced.
-            logger.error("Audio session failed: \(error.localizedDescription, privacy: .public)")
+            let reason = error.localizedDescription
+            Logger.audio.error("Audio session setup failed: \(reason, privacy: .public)")
         }
     }
 }

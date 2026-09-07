@@ -3,8 +3,6 @@ import Foundation
 import os
 import ZilpZalpData
 
-private let logger = Logger(subsystem: "com.schnaq.zilpzalp", category: "audio")
-
 /// Speaks the question of game 1 — "Wo ist die Amsel?" — on the device.
 ///
 /// `AVSpeechSynthesizer` needs no audio asset, so there is no licence to clear
@@ -27,8 +25,13 @@ final class SpeechAnnouncer: NSObject {
     /// voice — a wrong accent is still better than silence.
     private let voice: AVSpeechSynthesisVoice?
 
-    /// The utterance currently on its way to the speaker, held strongly so
-    /// that a late callback for an older utterance cannot be confused with it.
+    /// The utterance currently on its way to the speaker.
+    ///
+    /// Held as the object and not merely as its `ObjectIdentifier` so that the
+    /// replacement in `announce(_:)` is allocated while this one is still
+    /// alive. Two live objects cannot share an address, so the identity check
+    /// in `utteranceEnded(_:)` cannot mistake the outgoing utterance for the
+    /// incoming one.
     private var spokenUtterance: AVSpeechUtterance?
 
     /// `true` from the moment `announce(_:)` hands an utterance over until it
@@ -49,7 +52,7 @@ final class SpeechAnnouncer: NSObject {
         super.init()
 
         if voice == nil {
-            logger.warning("No \(Self.language, privacy: .public) voice, using the default")
+            Logger.audio.warning("No \(Self.language, privacy: .public) voice, using the default")
         }
         synthesizer.delegate = self
     }
