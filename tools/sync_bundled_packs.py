@@ -41,6 +41,23 @@ def escape_data(message: str) -> str:
     return message.replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
 
 
+def pack_files(directory: Path) -> set[Path]:
+    """Return the pack's files, relative to `directory`, hidden ones excluded.
+
+    A pack is a manifest and its media; nothing in it starts with a dot. The
+    exclusion is about `.DS_Store`, which Finder drops into any directory
+    somebody opens. It is git-ignored, so it would be invisible in `git
+    status` while making the next `mise run check` report drift that is not
+    there — and it would end up inside the app bundle.
+    """
+    files = set()
+    for path in directory.rglob("*"):
+        relative = path.relative_to(directory)
+        if path.is_file() and not any(part.startswith(".") for part in relative.parts):
+            files.add(relative)
+    return files
+
+
 def differences(source: Path, destination: Path) -> list[str]:
     """Return the paths, relative to `source`, where the two trees differ.
 
@@ -48,10 +65,8 @@ def differences(source: Path, destination: Path) -> list[str]:
     the same fresh mtime, which would make a shallow comparison see drift that
     is not there.
     """
-    source_files = {path.relative_to(source) for path in source.rglob("*") if path.is_file()}
-    destination_files = {
-        path.relative_to(destination) for path in destination.rglob("*") if path.is_file()
-    }
+    source_files = pack_files(source)
+    destination_files = pack_files(destination)
 
     changed = source_files ^ destination_files
     for relative in source_files & destination_files:
@@ -69,7 +84,9 @@ def sync(source: Path, destination: Path) -> list[str]:
     changed = differences(source, destination) if destination.is_dir() else ["(the whole pack)"]
     if changed:
         shutil.rmtree(destination, ignore_errors=True)
-        shutil.copytree(source, destination)
+        # Same exclusion as pack_files, or a hidden file would be copied and
+        # then never be reported as drift again.
+        shutil.copytree(source, destination, ignore=shutil.ignore_patterns(".*"))
 
     return changed
 
@@ -80,7 +97,7 @@ def main() -> int:
     for pack in BUNDLED_PACKS:
         try:
             changed = sync(SOURCE_DIR / pack, BUNDLE_DIR / pack)
-        except (OSError, shutil.Error) as error:
+        except OSError as error:
             print(f"::error::{escape_data(f'{pack}: cannot be synced: {error}')}")
             return 1
 
