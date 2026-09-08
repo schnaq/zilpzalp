@@ -2,6 +2,7 @@
   "media": [
     {
       "packID": "basis",
+      "packTitle": "Unsere ersten Vögel",
       "birdID": "amsel",
       "birdName": "Amsel",
       "kind": "photo",
@@ -11,15 +12,17 @@
     },
     {
       "packID": "basis",
+      "packTitle": "Unsere ersten Vögel",
       "birdID": "blaumeise",
       "birdName": "Blaumeise",
       "kind": "photo",
-      "attribution": "Thorsten Hackbarth",
+      "attribution": "Vladimir Kharuk",
       "license": "CC-BY-4.0",
-      "sourceURL": "https://www.inaturalist.org/observations/153819994"
+      "sourceURL": "https://www.inaturalist.org/observations/69131007"
     },
     {
       "packID": "basis",
+      "packTitle": "Unsere ersten Vögel",
       "birdID": "buntspecht",
       "birdName": "Buntspecht",
       "kind": "photo",
@@ -29,6 +32,7 @@
     },
     {
       "packID": "basis",
+      "packTitle": "Unsere ersten Vögel",
       "birdID": "eisvogel",
       "birdName": "Eisvogel",
       "kind": "photo",
@@ -38,6 +42,7 @@
     },
     {
       "packID": "basis",
+      "packTitle": "Unsere ersten Vögel",
       "birdID": "hausrotschwanz",
       "birdName": "Hausrotschwanz",
       "kind": "photo",
@@ -47,6 +52,7 @@
     },
     {
       "packID": "basis",
+      "packTitle": "Unsere ersten Vögel",
       "birdID": "kohlmeise",
       "birdName": "Kohlmeise",
       "kind": "photo",
@@ -56,6 +62,7 @@
     },
     {
       "packID": "basis",
+      "packTitle": "Unsere ersten Vögel",
       "birdID": "rotkehlchen",
       "birdName": "Rotkehlchen",
       "kind": "photo",
@@ -65,6 +72,7 @@
     },
     {
       "packID": "basis",
+      "packTitle": "Unsere ersten Vögel",
       "birdID": "star",
       "birdName": "Star",
       "kind": "photo",
@@ -74,6 +82,7 @@
     },
     {
       "packID": "basis",
+      "packTitle": "Unsere ersten Vögel",
       "birdID": "wiedehopf",
       "birdName": "Wiedehopf",
       "kind": "photo",
@@ -83,6 +92,7 @@
     },
     {
       "packID": "basis",
+      "packTitle": "Unsere ersten Vögel",
       "birdID": "zilpzalp",
       "birdName": "Zilpzalp",
       "kind": "photo",

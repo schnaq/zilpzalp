@@ -123,7 +123,7 @@ def field(media: dict, name: str, label: str) -> str:
     return value.strip()
 
 
-def pack_media(document: dict, pack_id: str) -> list[dict]:
+def pack_media(document: dict, pack_id: str, pack_title: str) -> list[dict]:
     """Return the credit entries of one manifest, photo before call per bird.
 
     Raises `ValueError` naming what is wrong. The licence gate checks the same
@@ -160,6 +160,11 @@ def pack_media(document: dict, pack_id: str) -> list[dict]:
             entries.append(
                 {
                     "packID": pack_id,
+                    # The pack's own product title on every entry: the credits
+                    # screen groups by pack and heads each group with it, and
+                    # an id like `basis` is a directory name, not something to
+                    # put in front of a parent.
+                    "packTitle": pack_title,
                     "birdID": bird_id,
                     "birdName": bird_name,
                     "kind": kind,
@@ -192,11 +197,12 @@ def read_packs(packs_dir: Path) -> list[dict]:
             raise ValueError(f"{source}: is not an object")
 
         pack_id = field(document, "id", source)
+        pack_title = field(document, "title", source)
         packs.append(
             {
                 "id": pack_id,
-                "title": field(document, "title", source),
-                "media": pack_media(document, pack_id),
+                "title": pack_title,
+                "media": pack_media(document, pack_id, pack_title),
             }
         )
 

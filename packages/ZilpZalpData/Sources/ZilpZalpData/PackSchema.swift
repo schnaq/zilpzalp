@@ -11,6 +11,27 @@ public enum License: String, Codable, Sendable {
     case ccBySa = "CC-BY-SA-4.0"
 }
 
+public extension License {
+    /// How a licence is named in a credit line: the short public name, not the
+    /// SPDX identifier the manifest carries. "CC BY" is what the licence deed
+    /// itself asks to be called; "CC-BY-4.0" is a filing code.
+    ///
+    /// Not product copy and therefore not in a String Catalog: these three
+    /// names are the same in every language, which is also why they may live
+    /// in a package at all.
+    ///
+    /// Two screens read it — the photo credit in the corner of game 1 and the
+    /// credits screen — so it sits beside the enum rather than in a copy per
+    /// caller (#105).
+    var shortName: String {
+        switch self {
+        case .cc0: "CC0"
+        case .ccBy: "CC BY"
+        case .ccBySa: "CC BY-SA"
+        }
+    }
+}
+
 /// One medium — a photo or a call — with everything the licence gate checks
 /// and the credits screen is generated from.
 public struct MediaAsset: Codable, Sendable, Hashable {

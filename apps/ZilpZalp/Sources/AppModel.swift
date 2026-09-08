@@ -42,6 +42,18 @@ final class AppModel {
     /// says the same calm sentence.
     private(set) var storeFailed = false
 
+    /// What the round the child has just finished changed about its profile,
+    /// `nil` until one has been booked in this run of the app.
+    ///
+    /// Kept because the celebration is more than one screen: the round end
+    /// asks whether the sticker is a first find, and the rank ascent it pushes
+    /// asks the same round about the ladder. Booking twice to answer twice
+    /// would be a second round in the file.
+    private(set) var lastRound: RoundOutcome?
+
+    /// The round ``lastRound`` describes. See ``record(_:)``.
+    private var recordedRound: UUID?
+
     /// `nil` when Application Support itself could not be located, which
     /// leaves ``storeFailed`` set and the app on its failure screen.
     private let store: ProfileStore?
@@ -140,6 +152,57 @@ final class AppModel {
             storeFailed = true
             let reason = String(describing: error)
             Logger.profiles.error("Profile was not written: \(reason, privacy: .public)")
+        }
+    }
+
+    /// Books a finished round onto the child who played it: its stars, its
+    /// species into the album, its seconds onto today.
+    ///
+    /// Called by the round end when it appears. Both `onAppear` and `.task`
+    /// run again when the child comes back from the album, so the round's own
+    /// id — not the fact of having appeared — is what makes this happen once;
+    /// every later call for the same round hands back the outcome of the
+    /// first.
+    ///
+    /// **A store that will not write is not a screen a child sees.** Unlike
+    /// ``load()`` and ``create(name:avatar:)`` this leaves ``storeFailed``
+    /// alone: the round is over, the stars are on the screen, and swapping the
+    /// celebration for a grown-up's sentence about a file would punish a child
+    /// for a broken disk. It is logged, and the next round tries again.
+    ///
+    /// - Returns: the profile before and after, or `nil` when there was
+    ///   nothing to write to or the write did not happen.
+    @discardableResult
+    func record(_ result: RoundResult) async -> RoundOutcome? {
+        guard recordedRound != result.id else { return lastRound }
+        recordedRound = result.id
+        // Cleared before the write, not after it: from here on this round is
+        // the one being answered about, and a write that fails must answer
+        // "nothing" rather than hand back the round before it. Without this,
+        // a failed write followed by a trip to the album would celebrate the
+        // previous round's first find all over again.
+        lastRound = nil
+
+        guard let store, let before = activeProfile else { return nil }
+
+        let round = PlayedRound(
+            stars: result.stars,
+            species: result.species,
+            playtime: result.playtime,
+        )
+
+        do {
+            let after = try await store.record(round: round, for: before.id, on: Date())
+            if let index = profiles.firstIndex(where: { $0.id == after.id }) {
+                profiles[index] = after
+            }
+            let outcome = RoundOutcome(before: before, after: after)
+            lastRound = outcome
+            return outcome
+        } catch {
+            let reason = String(describing: error)
+            Logger.profiles.error("Round was not recorded: \(reason, privacy: .public)")
+            return nil
         }
     }
 
