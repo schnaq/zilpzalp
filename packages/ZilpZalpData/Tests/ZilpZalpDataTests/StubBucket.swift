@@ -144,6 +144,33 @@ class StubBucket: URLProtocol {
     }
 }
 
+/// The host the stand-in bucket answers for. It cannot resolve, so a URL that
+/// escaped `StubBucket` would fail rather than reach anything real.
+let stubBaseURL = URL(string: "https://bucket.invalid")!
+
+/// Runs `body` with a bucket filled from `routes`, a fresh stand-in for
+/// Application Support and a downloader pointed at both. The directory is
+/// removed afterwards, whether the test passed or threw.
+func withDownloader(
+    routes: [String: StubBucket.Route],
+    _ body: (PackDownloader, URL) async throws -> Void,
+) async throws {
+    let home = FileManager.default.temporaryDirectory
+        .appending(path: "zilpzalp-\(UUID().uuidString)")
+    defer { try? FileManager.default.removeItem(at: home) }
+
+    StubBucket.fill(with: routes)
+    try await body(
+        PackDownloader(baseURL: stubBaseURL, directory: home, session: StubBucket.session()),
+        home,
+    )
+}
+
+/// Whether `path` exists below the stand-in Application Support directory.
+func exists(_ home: URL, _ path: String) -> Bool {
+    FileManager.default.fileExists(atPath: home.appending(path: path).path(percentEncoded: false))
+}
+
 /// The pack the stand-in bucket serves, and the bytes behind it.
 ///
 /// Generated rather than copied from `Fixtures/valid/basis.json`: that manifest
