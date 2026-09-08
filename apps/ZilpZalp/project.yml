@@ -75,13 +75,16 @@ targets:
         INFOPLIST_KEY_NSFaceIDUsageDescription: >-
           ZilpZalp fragt nach, ob wirklich ein Erwachsener den Elternbereich
           öffnet. Ohne Face ID geht es genauso mit dem Gerätecode.
-        # All orientations for now; what the design actually needs becomes
-        # clear with the game screens.
+        # Portrait only on iPhone, and measured rather than assumed (#117).
+        # A phone in landscape leaves the quiz 718x216 pt for question,
+        # answers and feedback. The best any arrangement gets out of that is
+        # an 83 pt tile — and only with the feedback band deleted; with it,
+        # 45 pt. The answer tile floor is 220 pt and the smallest thing a
+        # child is asked to hit anywhere else is the 120 pt sound button, so
+        # there is no landscape layout to write. The iPad keeps all four.
         INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: >-
           UIInterfaceOrientationPortrait
           UIInterfaceOrientationPortraitUpsideDown
-          UIInterfaceOrientationLandscapeLeft
-          UIInterfaceOrientationLandscapeRight
         INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad: >-
           UIInterfaceOrientationPortrait
           UIInterfaceOrientationPortraitUpsideDown
