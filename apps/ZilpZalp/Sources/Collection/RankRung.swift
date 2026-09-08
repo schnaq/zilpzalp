@@ -30,10 +30,19 @@ struct RankRung: View {
                 RewardSticker(
                     image: photo,
                     icon: .bird,
-                    label: rank.displayName,
                     locked: !reached,
                     size: size,
                 )
+
+                // The name is drawn here rather than passed to the sticker:
+                // the component caps its caption at the disc's width plus
+                // 40 pt and truncates, and "Rotkehlchen" came out as
+                // "Rotkehlc…". A rank a child cannot read the name of is not
+                // a rung. It shrinks instead.
+                Text(verbatim: rank.displayName)
+                    .typeStyle(.body, .display, weight: .bold, singleLine: true)
+                    .foregroundStyle(reached ? ZColor.textStrong : ZColor.textMuted)
+                    .minimumScaleFactor(0.6)
 
                 Badge(threshold, tone: reached ? .sun : .sand)
             }

@@ -24,8 +24,8 @@ struct RankAscentScreen: View {
 
     /// The three rungs of the path underneath it, small enough that the hero
     /// stays the hero.
-    private static let pathRung: CGFloat = 72
-    private static let compactPathRung: CGFloat = 56
+    private static let pathRung: CGFloat = 80
+    private static let compactPathRung: CGFloat = 64
 
     /// Where `zz-pop` starts the sticker, as on the round end.
     private static let popFromScale: CGFloat = 0.6

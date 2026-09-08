@@ -17,8 +17,7 @@ import ZilpZalpUI
 ///
 /// **This is where a round is written down.** The screen books it through
 /// ``AppModel/record(_:)`` before it says anything about it, and every claim
-/// it then makes — a first find, a new rank — is read off the profile that
-/// was written rather than worked out again.
+/// it makes — a first find, a new rank — is read off the profile written.
 struct RoundEndScreen: View {
     /// How far a star rises, from `zz-bob` in `design/guidelines/motion.css`.
     private static let bobHeight: CGFloat = 8
@@ -48,8 +47,7 @@ struct RoundEndScreen: View {
     /// How long the celebration keeps the screen before the rank ascent
     /// arrives over it: long enough for the sticker to land and the praise to
     /// be said, short enough to still read as one moment. A judgement call
-    /// rather than a token — the design draws 1e *instead of* this screen and
-    /// so never had to time the handover.
+    /// rather than a token — 1e replaces this screen in the design.
     private static let ascentDelay: TimeInterval = 2.2
 
     /// A star that has not been earned. Olive rather than sun: dark enough
@@ -258,7 +256,10 @@ struct RoundEndScreen: View {
         settled || !isFirstFind
     }
 
-    /// The way on, and the door #29 opens.
+    /// The way on first, the album second (#119): a child who can read
+    /// neither label tells the two apart by position and colour, so the
+    /// sun-yellow one at the top must be the one that carries the round on.
+    /// "Sammlung" works now, but the album is still the side door.
     ///
     /// Side by side as in the design, stacked on a phone in portrait: the
     /// design's own row measures 220 + 24 + 260 pt, and no iPhone is that
@@ -267,16 +268,16 @@ struct RoundEndScreen: View {
     private var actions: some View {
         let buttons = Group {
             ZButton(
-                String(localized: "roundEnd.collection"),
+                String(localized: "roundEnd.playAgain"),
                 tone: .reward,
-                leadingIcon: .album,
-                action: openCollection,
+                trailingIcon: .arrowRight,
+                action: startAnotherRound,
             )
 
             ZButton(
-                String(localized: "roundEnd.playAgain"),
-                trailingIcon: .arrowRight,
-                action: startAnotherRound,
+                String(localized: "roundEnd.collection"),
+                leadingIcon: .album,
+                action: openCollection,
             )
         }
 
@@ -322,9 +323,8 @@ struct RoundEndScreen: View {
     }
 
     /// Whether the round put this bird in the album for the first time: read
-    /// off the profile as it stood before the round was booked, never worked
-    /// out a second time. `false` until the booking has been round — one
-    /// frame of saying nothing beats a claim that was not checked.
+    /// off the profile as it stood before the round was booked. `false` until
+    /// then — one frame of silence beats a claim that was not checked.
     private var isFirstFind: Bool {
         outcome?.isFirstFind(of: result.celebratedSpecies) ?? false
     }

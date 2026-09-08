@@ -19,9 +19,9 @@ struct CollectionScreen: View {
     /// The sticker's disc, and how wide a column may get before another
     /// sticker fits beside it. Four across on an iPad, three on a phone.
     private static let stickerSize: CGFloat = 128
-    private static let compactStickerSize: CGFloat = 96
+    private static let compactStickerSize: CGFloat = 80
     private static let stickerColumn: CGFloat = 168
-    private static let compactStickerColumn: CGFloat = 108
+    private static let compactStickerColumn: CGFloat = 88
 
     /// The child whose album this is.
     let profile: Profile
@@ -62,12 +62,11 @@ struct CollectionScreen: View {
                     diameter: ZSpacing.touchMinimum,
                     action: goBack,
                 )
-            } center: {
-                Text("collection.title")
             }
 
             ScrollView {
                 VStack(spacing: ZSpacing.step7) {
+                    title
                     summary
                     album
                     SwarmList(profiles: profiles, activeProfileID: profile.id)
@@ -82,6 +81,18 @@ struct CollectionScreen: View {
         .toolbar(.hidden, for: .navigationBar)
         .navigationBarBackButtonHidden()
         .onDisappear { announcer.stop() }
+    }
+
+    /// The album's name, in the page rather than in the top bar: a phone
+    /// gives the bar's centre a third of a narrow row, and "Meine Sammlung"
+    /// broke across three lines in it. `TopBar`'s own note says a kid screen
+    /// keeps its centre wordless, and the design draws the title as an h1 on
+    /// the page.
+    private var title: some View {
+        Text("collection.title")
+            .typeStyle(isCompact ? .headline : .display2, .display, weight: .extraBold)
+            .foregroundStyle(ZColor.textStrong)
+            .multilineTextAlignment(.center)
     }
 
     /// What the album adds up to, and the door to the ladder.
@@ -121,11 +132,11 @@ struct CollectionScreen: View {
                         .adaptive(
                             minimum: isCompact ? Self.compactStickerColumn : Self.stickerColumn,
                         ),
-                        spacing: ZSpacing.gapTiles,
+                        spacing: gridSpacing,
                         alignment: .top,
                     ),
                 ],
-                spacing: ZSpacing.gapTiles,
+                spacing: gridSpacing,
             ) {
                 ForEach(birds, id: \.id) { bird in
                     sticker(bird)
@@ -133,6 +144,12 @@ struct CollectionScreen: View {
             }
             .frame(maxWidth: .infinity)
         }
+    }
+
+    /// Three stickers across on a 375 pt phone rather than two, which is what
+    /// the design's grid reads as. The gap gives way before the sticker does.
+    private var gridSpacing: CGFloat {
+        isCompact ? ZSpacing.step3 : ZSpacing.gapTiles
     }
 
     /// One sticker. Collected ones are buttons that say their own name; the
@@ -148,17 +165,36 @@ struct CollectionScreen: View {
             Button {
                 announcer.announce(bird.pronunciation ?? bird.name)
             } label: {
-                RewardSticker(image: photos[bird.id], label: bird.name, size: size)
+                labelled(bird.name, collected: true) {
+                    RewardSticker(image: photos[bird.id], size: size)
+                }
             }
             .buttonStyle(.plain)
             .accessibilityLabel(bird.name)
         } else {
-            RewardSticker(
-                image: photos[bird.id],
-                label: String(localized: "collection.locked"),
-                locked: true,
-                size: size,
-            )
+            labelled(String(localized: "collection.locked"), collected: false) {
+                RewardSticker(image: photos[bird.id], locked: true, size: size)
+            }
+            .accessibilityElement(children: .combine)
+        }
+    }
+
+    /// A sticker with its caption drawn here rather than passed into
+    /// `RewardSticker`, which caps its own at the disc's width plus 40 pt and
+    /// truncates — "Rotkehlchen" came out as "Rotkehlc…". A bird whose name a
+    /// child cannot read is not collected. It shrinks instead.
+    private func labelled(
+        _ caption: String,
+        collected: Bool,
+        @ViewBuilder sticker: () -> some View,
+    ) -> some View {
+        VStack(spacing: ZSpacing.step2) {
+            sticker()
+
+            Text(verbatim: caption)
+                .typeStyle(.body, .display, weight: .bold, singleLine: true)
+                .foregroundStyle(collected ? ZColor.textStrong : ZColor.textMuted)
+                .minimumScaleFactor(0.6)
         }
     }
 }

@@ -20,7 +20,7 @@ struct RankLadderScreen: View {
     /// How wide a rung's column may get before another one fits beside it.
     /// Eight rungs make one row on an iPad in landscape and two on a phone.
     private static let rungColumn: CGFloat = 150
-    private static let compactRungColumn: CGFloat = 110
+    private static let compactRungColumn: CGFloat = 104
 
     /// The star count the ladder is read against.
     let stars: Int
@@ -46,12 +46,22 @@ struct RankLadderScreen: View {
                     diameter: ZSpacing.touchMinimum,
                     action: goBack,
                 )
-            } center: {
-                Text("rank.ladder.title")
             }
 
             ScrollView {
                 VStack(spacing: ZSpacing.step6) {
+                    // In the page and not in the top bar: a phone gives the
+                    // bar's centre a third of a narrow row, and this title
+                    // broke across three lines in it.
+                    Text("rank.ladder.title")
+                        .typeStyle(
+                            isCompact ? .headline : .display2,
+                            .display,
+                            weight: .extraBold,
+                        )
+                        .foregroundStyle(ZColor.textStrong)
+                        .multilineTextAlignment(.center)
+
                     Badge(
                         String(format: String(localized: "collection.stars"), stars),
                         tone: .sun,

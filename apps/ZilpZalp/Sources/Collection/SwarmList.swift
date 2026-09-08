@@ -68,6 +68,14 @@ struct SwarmList: View {
         }
     }
 
+    /// One child: the avatar, the name, and under it the rank and the stars.
+    ///
+    /// The design puts the star badge at the right edge of the row. It does
+    /// not fit there on a phone — `Badge` never wraps and never shrinks, so
+    /// "142 Sterne" ate the column and left "Joha…" beside it — and a name a
+    /// child cannot read in full is the one thing a row like this must not
+    /// do. One arrangement for both widths rather than two: the badge sits
+    /// under the name, where it has the room.
     private func row(_ profile: Profile) -> some View {
         ZCard(tone: profile.id == activeProfileID ? .sun : .paper) {
             HStack(spacing: ZSpacing.step4) {
@@ -76,25 +84,32 @@ struct SwarmList: View {
                     diameter: isCompact ? Self.compactDiscDiameter : Self.discDiameter,
                 )
 
-                VStack(alignment: .leading, spacing: ZSpacing.step1) {
+                VStack(alignment: .leading, spacing: ZSpacing.step2) {
                     Text(verbatim: profile.name)
                         .typeStyle(isCompact ? .label : .headline, .display, weight: .bold)
                         .foregroundStyle(ZColor.textStrong)
+                        .lineLimit(1)
                         .minimumScaleFactor(0.6)
 
-                    Text(verbatim: RankLadder.rank(forStars: profile.totalStars).displayName)
-                        .typeStyle(.caption, .body, weight: .semibold)
-                        .foregroundStyle(ZColor.textMuted)
+                    HStack(spacing: ZSpacing.step3) {
+                        Badge(
+                            String(
+                                format: String(localized: "collection.stars"),
+                                profile.totalStars,
+                            ),
+                            tone: .sun,
+                            icon: .star,
+                        )
+
+                        Text(verbatim: RankLadder.rank(forStars: profile.totalStars).displayName)
+                            .typeStyle(.caption, .body, weight: .semibold)
+                            .foregroundStyle(ZColor.textMuted)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.5)
+                    }
                 }
-                .lineLimit(1)
 
-                Spacer(minLength: ZSpacing.step2)
-
-                Badge(
-                    String(format: String(localized: "collection.stars"), profile.totalStars),
-                    tone: .sun,
-                    icon: .star,
-                )
+                Spacer(minLength: 0)
             }
         }
         .accessibilityElement(children: .combine)
