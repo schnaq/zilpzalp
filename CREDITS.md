@@ -15,15 +15,25 @@ the source declared.
 | Bird | Kind | Author | Licence | Source |
 | --- | --- | --- | --- | --- |
 | Amsel | Photo | Alexis Tinker-Tsavalas | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/20490738> |
+| Amsel | Call | craig wilson (XC1051538) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://xeno-canto.org/1051538> |
 | Blaumeise | Photo | Vladimir Kharuk | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/69131007> |
+| Blaumeise | Call | Benoît Van Hecke (XC539315) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/539315> |
 | Buntspecht | Photo | Вячеслав Юсупов | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/18530920> |
+| Buntspecht | Call | Benoît Van Hecke (XC704068) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/704068> |
 | Eisvogel | Photo | Alexis Lours | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/98375354> |
+| Eisvogel | Call | Noé Ferrari (XC991875) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://xeno-canto.org/991875> |
 | Hausrotschwanz | Photo | SteveM4560 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/345090569> |
+| Hausrotschwanz | Call | Sonothèque ADVL (XC816871) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/816871> |
 | Kohlmeise | Photo | SteveM4560 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/258365796> |
+| Kohlmeise | Call | Benoît Van Hecke (XC527981) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/527981> |
 | Rotkehlchen | Photo | Alexis Tinker-Tsavalas | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/19776411> |
+| Rotkehlchen | Call | Benoît Van Hecke (XC527484) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/527484> |
 | Star | Photo | egorbirder | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/72752929> |
+| Star | Call | Philippe_Grange (XC1034387) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1034387> |
 | Wiedehopf | Photo | Dmitry Ivanov | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/299928082> |
+| Wiedehopf | Call | Tanguy Loïs (XC1143457) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/1143457> |
 | Zilpzalp | Photo | Tomas Broucek | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/353438691> |
+| Zilpzalp | Call | steve (XC815470) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/815470> |
 
 ## Fonts
 

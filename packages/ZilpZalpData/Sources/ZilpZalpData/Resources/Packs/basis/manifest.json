@@ -17,7 +17,14 @@
         "sourceURL": "https://www.inaturalist.org/observations/20490738",
         "retrieved": "2026-07-31"
       },
-      "call": null
+      "call": {
+        "file": "audio/amsel.m4a",
+        "sha256": "825fde8b3c6c411e4195f7ada477cd1b6b1de8840068d5c66fec6440fc884a42",
+        "license": "CC-BY-4.0",
+        "attribution": "craig wilson (XC1051538)",
+        "sourceURL": "https://xeno-canto.org/1051538",
+        "retrieved": "2026-09-08"
+      }
     },
     {
       "id": "blaumeise",
@@ -34,7 +41,14 @@
         "sourceURL": "https://www.inaturalist.org/observations/69131007",
         "retrieved": "2026-09-08"
       },
-      "call": null
+      "call": {
+        "file": "audio/blaumeise.m4a",
+        "sha256": "61a2742f6fc861bc2ae25b91ced463440c645d5bcff5b98bc90606ffe73debdc",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Benoît Van Hecke (XC539315)",
+        "sourceURL": "https://xeno-canto.org/539315",
+        "retrieved": "2026-09-08"
+      }
     },
     {
       "id": "buntspecht",
@@ -51,7 +65,14 @@
         "sourceURL": "https://www.inaturalist.org/observations/18530920",
         "retrieved": "2026-07-31"
       },
-      "call": null
+      "call": {
+        "file": "audio/buntspecht.m4a",
+        "sha256": "3ea9bd103c37e22b7b8cc92d459f5b9d02456f4dbc11202a423fb03410e8a77d",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Benoît Van Hecke (XC704068)",
+        "sourceURL": "https://xeno-canto.org/704068",
+        "retrieved": "2026-09-08"
+      }
     },
     {
       "id": "eisvogel",
@@ -68,7 +89,14 @@
         "sourceURL": "https://www.inaturalist.org/observations/98375354",
         "retrieved": "2026-07-31"
       },
-      "call": null
+      "call": {
+        "file": "audio/eisvogel.m4a",
+        "sha256": "db15cff3cb73754c94fa30ec8fa3aac4b31129e8f7463dbf751424c1f6cfefae",
+        "license": "CC-BY-4.0",
+        "attribution": "Noé Ferrari (XC991875)",
+        "sourceURL": "https://xeno-canto.org/991875",
+        "retrieved": "2026-09-08"
+      }
     },
     {
       "id": "hausrotschwanz",
@@ -85,7 +113,14 @@
         "sourceURL": "https://www.inaturalist.org/observations/345090569",
         "retrieved": "2026-07-31"
       },
-      "call": null
+      "call": {
+        "file": "audio/hausrotschwanz.m4a",
+        "sha256": "cc478bcf05a65416928efacb28988fa8ea9421550525e3ff6e3f2ab45066cc75",
+        "license": "CC0-1.0",
+        "attribution": "Sonothèque ADVL (XC816871)",
+        "sourceURL": "https://xeno-canto.org/816871",
+        "retrieved": "2026-09-08"
+      }
     },
     {
       "id": "kohlmeise",
@@ -102,7 +137,14 @@
         "sourceURL": "https://www.inaturalist.org/observations/258365796",
         "retrieved": "2026-07-31"
       },
-      "call": null
+      "call": {
+        "file": "audio/kohlmeise.m4a",
+        "sha256": "c871a031b3456b31c9dac21e24a7dd796009f0d2801a91d0b81f930131a2d6fe",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Benoît Van Hecke (XC527981)",
+        "sourceURL": "https://xeno-canto.org/527981",
+        "retrieved": "2026-09-08"
+      }
     },
     {
       "id": "rotkehlchen",
@@ -119,7 +161,14 @@
         "sourceURL": "https://www.inaturalist.org/observations/19776411",
         "retrieved": "2026-07-31"
       },
-      "call": null
+      "call": {
+        "file": "audio/rotkehlchen.m4a",
+        "sha256": "f587539f94db2ae048d1dd0e7a41e9e2445d7f010d11b767446d96e4f7c425e3",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Benoît Van Hecke (XC527484)",
+        "sourceURL": "https://xeno-canto.org/527484",
+        "retrieved": "2026-09-08"
+      }
     },
     {
       "id": "star",
@@ -136,7 +185,14 @@
         "sourceURL": "https://www.inaturalist.org/observations/72752929",
         "retrieved": "2026-07-31"
       },
-      "call": null
+      "call": {
+        "file": "audio/star.m4a",
+        "sha256": "e2cc4336da16a171b2040d5f94db76af7d0e33235ca4b503df39b0e68f3a16ce",
+        "license": "CC0-1.0",
+        "attribution": "Philippe_Grange (XC1034387)",
+        "sourceURL": "https://xeno-canto.org/1034387",
+        "retrieved": "2026-09-08"
+      }
     },
     {
       "id": "wiedehopf",
@@ -153,7 +209,14 @@
         "sourceURL": "https://www.inaturalist.org/observations/299928082",
         "retrieved": "2026-07-31"
       },
-      "call": null
+      "call": {
+        "file": "audio/wiedehopf.m4a",
+        "sha256": "2ac4d62c4fc97a9a7bcecfba1dc2374416b99de8413d035a0d923d9be4f50972",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Tanguy Loïs (XC1143457)",
+        "sourceURL": "https://xeno-canto.org/1143457",
+        "retrieved": "2026-09-08"
+      }
     },
     {
       "id": "zilpzalp",
@@ -170,7 +233,14 @@
         "sourceURL": "https://www.inaturalist.org/observations/353438691",
         "retrieved": "2026-07-31"
       },
-      "call": null
+      "call": {
+        "file": "audio/zilpzalp.m4a",
+        "sha256": "35bbb90774d9644e99286a96aee6e75db89e1db56b78b01b5173363dba0e969d",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "steve (XC815470)",
+        "sourceURL": "https://xeno-canto.org/815470",
+        "retrieved": "2026-09-08"
+      }
     }
   ]
 }
