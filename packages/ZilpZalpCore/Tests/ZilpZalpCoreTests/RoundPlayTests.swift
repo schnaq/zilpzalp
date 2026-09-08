@@ -3,18 +3,14 @@ import ZilpZalpCore
 
 // MARK: - Rounds to play
 
-/// A pool in which every species is a genus of its own, so that a round can be
-/// dealt from it without the genus rule ever having to fall back.
-private func pool(_ count: Int = 6) -> [QuizSpecies] {
-    (0 ..< count).map { QuizSpecies(id: "species-\($0)", genus: "genus-\($0)") }
-}
-
 /// A play of a freshly dealt round. The seed keeps it the same round on every
-/// machine, so an assertion about a particular question stays true.
+/// machine, so an assertion about a particular question stays true. Six
+/// species are enough for the first questions to ask for different birds,
+/// which is all any of these tests needs of the pool.
 private func dealt(questionCount: Int = 10, seed: UInt64 = 1) throws -> RoundPlay {
     var generator = SplitMix64(seed: seed)
     return try RoundPlay(
-        round: Round.make(from: pool(), questionCount: questionCount, using: &generator),
+        round: Round.make(from: distinctGenera(6), questionCount: questionCount, using: &generator),
     )
 }
 
