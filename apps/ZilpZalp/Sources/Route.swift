@@ -97,6 +97,11 @@ enum Route: Hashable {
     /// "Du bist jetzt eine Amsel!" (#29), pushed by the round end once the
     /// round it just booked has carried the child over a threshold.
     case rankAscent(RankAscent)
+    /// "Zeit fürs Nest" (#36), screen 1k: where a tapped game tile and
+    /// "Nochmal spielen" both lead once the day's budget is spent. Carries no
+    /// payload — what it shows is read off the profile when it is drawn, and
+    /// a number on the path could only go stale behind it.
+    case timeForTheNest
 }
 
 /// A rank the child has just reached, and where it sits on the ladder.

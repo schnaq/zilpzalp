@@ -2,13 +2,12 @@ import Foundation
 import os
 import ZilpZalpData
 
-/// The grown-ups' settings while the area is on screen: read once, written on
-/// every flipped switch.
+/// The grown-ups' settings, read at launch and written on every change.
 ///
-/// The screen owns its own instance rather than reaching into ``AppModel``.
-/// Nothing else reads these values yet — the games start doing so with #30 and
-/// #36 — and at that point one shared instance moves into the shell, which is
-/// a change to a file several branches share and therefore not this one.
+/// ``AppModel`` owns the one instance and the grown-ups' area is handed it —
+/// the move #35 said would happen as soon as a second reader turned up. The
+/// daily limit is that reader: the home screen has to know where a tapped
+/// tile leads before anybody opens the settings.
 @MainActor
 @Observable
 final class ParentalSettingsModel {
@@ -53,11 +52,15 @@ final class ParentalSettingsModel {
         }
     }
 
-    /// Flips one switch and writes the file.
+    /// Changes one setting and writes the file.
     ///
     /// The screen is updated first and does not wait for the disk: a switch
     /// that lags behind the finger reads as a broken switch.
-    func set(_ field: WritableKeyPath<ParentalSettings, Bool>, to value: Bool) {
+    ///
+    /// Generic over the field's type rather than one method per type: the
+    /// daily limit is an `Int?` and the two switches are `Bool`s, and the
+    /// ordering above is what all of them need.
+    func set<Value>(_ field: WritableKeyPath<ParentalSettings, Value>, to value: Value) {
         settings[keyPath: field] = value
 
         let written = settings

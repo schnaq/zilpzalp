@@ -40,11 +40,11 @@ struct RootView: View {
                             result: result,
                             catalog: model.catalog,
                             record: { await model.record($0) },
-                            playAgain: { path.removeLast() },
+                            playAgain: playAnotherRound,
                             openCollection: { path.append(.collection) },
                             showAscent: { path.append(.rankAscent($0)) },
                         )
-                    case .parents: ParentsScreen()
+                    case .parents: ParentsScreen(parental: model.parental)
                     case .collection: collection
                     case .ladder: ladder
                     case let .rankAscent(ascent):
@@ -54,6 +54,12 @@ struct RootView: View {
                             goBack: { path.removeLast() },
                             openLadder: { path.append(.ladder) },
                         )
+                    case .timeForTheNest:
+                        // All the way home rather than back one: under this
+                        // screen is either the celebration of the round that
+                        // used the last minute or the home screen that sent
+                        // the child here, and neither is a way out of the day.
+                        TimeForTheNestScreen(stars: model.starsToday) { path.removeAll() }
                     }
                 }
         }
@@ -124,13 +130,45 @@ struct RootView: View {
         } else if let profile = model.activeProfile {
             HomeScreen(
                 avatar: profile.avatar,
-                openGame: { path.append(.quiz($0)) },
+                openGame: openGame(_:),
                 openParents: { path.append(.parents) },
                 openProfiles: { model.chooseAgain() },
                 openCollection: { path.append(.collection) },
             )
         } else {
             ProfileFlow(model: model)
+        }
+    }
+
+    /// A tapped game tile: the round, or the day's close when the budget is
+    /// spent (#36).
+    ///
+    /// The question is asked here rather than on the home screen, which draws
+    /// two tiles and knows nothing about limits — and asked on the tap rather
+    /// than once on appearance, so a day that turns over while the app is open
+    /// is noticed by the next tap and by nothing else.
+    private func openGame(_ game: Game) {
+        path.append(model.timeBudget.isExhausted ? .timeForTheNest : .quiz(game))
+    }
+
+    /// "Nochmal spielen": back into the quiz, unless the round that just
+    /// ended used the last of the day.
+    ///
+    /// ``RoundEndScreen`` books the round on arrival, so by the time a hand
+    /// has reached this button the seconds it took are counted here. Only in
+    /// practice, not by construction: the button is live from the first frame
+    /// while the write is still in flight, so a tap inside those few
+    /// milliseconds would ask about the day before the round. It would cost
+    /// one more round and the next check would see the truth — which is why
+    /// the guard is not worth disabling the way on for a frame.
+    ///
+    /// **This is the only place the budget can end play**, and it does so
+    /// between two rounds; nothing asks it while a question is up.
+    private func playAnotherRound() {
+        if model.timeBudget.isExhausted {
+            path.append(.timeForTheNest)
+        } else {
+            path.removeLast()
         }
     }
 }

@@ -18,8 +18,8 @@ import SwiftUI
 ///
 /// `.disabled(_:)` works as on any SwiftUI control: a navigation row dims to
 /// the system's one disabled opacity, a switch row lets `Toggle` grey itself.
-/// A row that exists before the screen behind it does — the time budget until
-/// #36 — is drawn this way rather than dimmed by its caller.
+/// A row that exists before the screen behind it does — the time budget
+/// before #36 — is drawn this way rather than dimmed by its caller.
 ///
 /// Every visible string is a parameter. The package holds no product copy.
 public struct SettingRow: View {
@@ -122,6 +122,22 @@ public struct SettingRow: View {
                         // its own size.
                         .typeStyle(.body, .body, weight: .semibold)
                         .foregroundStyle(ZColor.textMuted)
+                        // The title beside it is greedy, so on a narrow phone
+                        // the value was offered a column two words wide and
+                        // broke "45 Min" across two lines — measured on an
+                        // iPhone 17 with the time budget (#36). This takes
+                        // the width the value needs and leaves the rest to
+                        // the title, which is the one this component already
+                        // calls the better thing to wrap.
+                        //
+                        // It states that a value never wraps, not that it
+                        // wraps last: a value long enough to want the whole
+                        // row would push past it rather than break. Every
+                        // value in this system is one short phrase — "Kein
+                        // Limit", "45 Min", "Deutsch" — which is what makes
+                        // that the cheaper promise. `layoutPriority(1)` is
+                        // the softer one if a long value ever turns up.
+                        .fixedSize(horizontal: true, vertical: false)
                     }
                     .contentShape(Rectangle())
                 }

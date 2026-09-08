@@ -42,6 +42,15 @@ public struct Profile: Codable, Sendable, Hashable, Identifiable {
     /// rest — the daily limit needs today, the parents area needs the week,
     /// and nothing needs more than that.
     public var playtime: [String: TimeInterval]
+    /// Stars earned per calendar day, keyed and pruned exactly as
+    /// ``playtime`` is.
+    ///
+    /// Kept beside the running total rather than derived from it, because
+    /// nothing else can answer "what did today bring?" — and "Zeit fürs Nest"
+    /// (#36) is a screen a child may reach after a relaunch, hours after the
+    /// stars were earned. A counter that only remembered this run of the app
+    /// would tell that child it had collected nothing today.
+    public var dailyStars: [String: Int]
 
     public init(
         id: UUID,
@@ -51,6 +60,7 @@ public struct Profile: Codable, Sendable, Hashable, Identifiable {
         roundsPlayed: Int = 0,
         collectedSpecies: Set<String> = [],
         playtime: [String: TimeInterval] = [:],
+        dailyStars: [String: Int] = [:],
     ) {
         self.id = id
         self.name = name
@@ -59,6 +69,24 @@ public struct Profile: Codable, Sendable, Hashable, Identifiable {
         self.roundsPlayed = roundsPlayed
         self.collectedSpecies = collectedSpecies
         self.playtime = playtime
+        self.dailyStars = dailyStars
+    }
+
+    /// Written by hand for ``dailyStars`` alone: it arrived after the file
+    /// format did, and a profile written before it is a profile with no days
+    /// counted yet — not a broken file. Everything else decodes as it always
+    /// has. The schema version stays 1: an older build reading a newer file
+    /// simply ignores the key, which is the whole point of adding it this way.
+    public init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(UUID.self, forKey: .id)
+        name = try container.decode(String.self, forKey: .name)
+        avatar = try container.decode(String.self, forKey: .avatar)
+        totalStars = try container.decode(Int.self, forKey: .totalStars)
+        roundsPlayed = try container.decode(Int.self, forKey: .roundsPlayed)
+        collectedSpecies = try container.decode(Set<String>.self, forKey: .collectedSpecies)
+        playtime = try container.decode([String: TimeInterval].self, forKey: .playtime)
+        dailyStars = try container.decodeIfPresent([String: Int].self, forKey: .dailyStars) ?? [:]
     }
 
     /// The ``playtime`` key of `date`: the Gregorian `YYYY-MM-DD` of the day
@@ -98,6 +126,7 @@ public struct Profile: Codable, Sendable, Hashable, Identifiable {
         case roundsPlayed
         case collectedSpecies
         case playtime
+        case dailyStars
     }
 
     /// Written by hand for one reason: a `Set` iterates in an order that
@@ -114,5 +143,6 @@ public struct Profile: Codable, Sendable, Hashable, Identifiable {
         try container.encode(roundsPlayed, forKey: .roundsPlayed)
         try container.encode(collectedSpecies.sorted(), forKey: .collectedSpecies)
         try container.encode(playtime, forKey: .playtime)
+        try container.encode(dailyStars, forKey: .dailyStars)
     }
 }
