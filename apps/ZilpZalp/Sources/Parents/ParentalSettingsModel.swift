@@ -16,13 +16,6 @@ final class ParentalSettingsModel {
     /// a write always goes through ``set(_:to:)`` and reaches the disk.
     private(set) var settings = ParentalSettings()
 
-    /// Cleared when the file on disk was written by a later version of the
-    /// app. Then a flipped switch changes this screen and not the file — the
-    /// alternative is overwriting settings this version cannot even read.
-    /// Only a downgrade reaches it, which v1 cannot be; the guard is here so
-    /// that the first migration (#36) inherits it instead of inventing it.
-    private var mayWrite = true
-
     private let store: ParentalSettingsStore
 
     /// - Parameter directory: Where `Settings/parental.json` lives underneath.
@@ -39,7 +32,6 @@ final class ParentalSettingsModel {
         do {
             settings = try await store.load()
         } catch {
-            mayWrite = !isFromALaterVersion(error)
             settings = ParentalSettings()
             // The error names a file format, never a setting — `DecodingError`
             // reports the key it tripped over and the type it wanted, not the
@@ -55,7 +47,6 @@ final class ParentalSettingsModel {
     /// that lags behind the finger reads as a broken switch.
     func set(_ field: WritableKeyPath<ParentalSettings, Bool>, to value: Bool) {
         settings[keyPath: field] = value
-        guard mayWrite else { return }
 
         let written = settings
         Task {
@@ -66,13 +57,6 @@ final class ParentalSettingsModel {
                 Logger.parents.error("Settings did not save: \(reason, privacy: .public)")
             }
         }
-    }
-
-    private func isFromALaterVersion(_ error: any Error) -> Bool {
-        guard case .unsupportedSchemaVersion = error as? ParentalSettingsStoreError else {
-            return false
-        }
-        return true
     }
 }
 

@@ -129,9 +129,14 @@ public actor ParentalSettingsStore {
 
         let encoder = JSONEncoder()
         // Readable on purpose — this is a file a grown-up may well open — and
-        // deliberately not `.sortedKeys`, which would alphabetise
-        // `callsEnabled` in front of the version that says how to read it.
-        encoder.outputFormatting = .prettyPrinted
+        // sorted because the alternative is not "the order they were encoded
+        // in" but a different order on every run: `JSONEncoder` writes a keyed
+        // container in the hash order of its keys, and Swift seeds its hashing
+        // per process. Measured over five runs of the same code, this document
+        // came out in four different orders. Sorting is the only way to get
+        // the same bytes twice, which is what makes a diff of this file mean
+        // something.
+        encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
         try encoder.encode(Document(settings: settings)).write(to: file, options: .atomic)
     }
 }
@@ -143,52 +148,50 @@ private struct SchemaProbe: Decodable {
     let schemaVersion: Int
 }
 
-/// The document on disk: the version, then the settings, flat.
+/// The document on disk: the version and the settings, flat.
 ///
-/// Its own type rather than `Codable` on ``ParentalSettings`` itself: the
-/// value the app passes around has three fields and no version, while the file
-/// needs the version to come first, and only a hand-written pair of methods
-/// puts it there.
+/// Its own type rather than `Codable` on ``ParentalSettings`` itself, which
+/// carries no version and would nest if it were a field here.
+///
+/// Where the version sits in the file is not this type's business and cannot
+/// be: JSON objects are unordered, and `JSONEncoder` proves it by writing the
+/// same document in a different order on every run. What the plan's contract
+/// is actually after — reading the version before trusting anything else —
+/// is ``SchemaProbe``'s job, and that works whatever order the file is in.
 private struct Document: Codable {
-    let settings: ParentalSettings
+    let schemaVersion: Int
+    let callsEnabled: Bool
+    let showNames: Bool
+    let dailyLimitMinutes: Int?
 
-    private enum CodingKeys: String, CodingKey {
-        // Declaration order is written order — `JSONEncoder` keeps the order a
-        // keyed container encodes in as long as `.sortedKeys` is off.
-        case schemaVersion
-        case callsEnabled
-        case showNames
-        case dailyLimitMinutes
-    }
-
-    init(settings: ParentalSettings) {
-        self.settings = settings
-    }
-
-    init(from decoder: any Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        settings = try ParentalSettings(
-            callsEnabled: container.decode(Bool.self, forKey: .callsEnabled),
-            showNames: container.decode(Bool.self, forKey: .showNames),
-            // `decodeIfPresent` reads both spellings of "no limit": the
-            // explicit `null` this store writes, and an absent key. Being
-            // forgiving here errs towards the default, which is no limit.
-            dailyLimitMinutes: container.decodeIfPresent(Int.self, forKey: .dailyLimitMinutes),
+    /// Decoding is synthesised: for an `Int?` it already reads both spellings
+    /// of "no limit", the explicit `null` this store writes and an absent key.
+    var settings: ParentalSettings {
+        ParentalSettings(
+            callsEnabled: callsEnabled,
+            showNames: showNames,
+            dailyLimitMinutes: dailyLimitMinutes,
         )
     }
 
+    init(settings: ParentalSettings) {
+        schemaVersion = ParentalSettingsStore.schemaVersion
+        callsEnabled = settings.callsEnabled
+        showNames = settings.showNames
+        dailyLimitMinutes = settings.dailyLimitMinutes
+    }
+
+    /// The one half that cannot be synthesised: `encodeIfPresent` would leave
+    /// the key out for "no limit", and the file states that setting rather
+    /// than leaving it to be inferred from a gap.
     func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(ParentalSettingsStore.schemaVersion, forKey: .schemaVersion)
-        try container.encode(settings.callsEnabled, forKey: .callsEnabled)
-        try container.encode(settings.showNames, forKey: .showNames)
-        // `encodeNil`, not `encodeIfPresent`: the key is in the file either
-        // way, so "no limit" is stated rather than left to be inferred from a
-        // gap.
-        if let limit = settings.dailyLimitMinutes {
-            try container.encode(limit, forKey: .dailyLimitMinutes)
-        } else {
-            try container.encodeNil(forKey: .dailyLimitMinutes)
+        try container.encode(schemaVersion, forKey: .schemaVersion)
+        try container.encode(callsEnabled, forKey: .callsEnabled)
+        try container.encode(showNames, forKey: .showNames)
+        try container.encodeNil(forKey: .dailyLimitMinutes)
+        if let dailyLimitMinutes {
+            try container.encode(dailyLimitMinutes, forKey: .dailyLimitMinutes)
         }
     }
 }

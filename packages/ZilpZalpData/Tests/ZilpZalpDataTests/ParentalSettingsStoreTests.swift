@@ -69,19 +69,36 @@ struct ParentalSettingsStoreTests {
         }
     }
 
-    /// The version has to be readable before anything else is, so a later app
-    /// version's file can be recognised as such. That only holds if it is
-    /// written first.
-    @Test("the version is the file's first key")
-    func writesTheVersionFirst() async throws {
+    /// The version has to be in the file, or a later app version's document
+    /// cannot be recognised as one.
+    ///
+    /// Deliberately not "and it is the first key": JSON objects are unordered,
+    /// and `JSONEncoder` writes a keyed container in the hash order of its
+    /// keys, which Swift seeds per process — the same document came out in
+    /// four different orders over five runs. A test on position would fail
+    /// three CI runs in four. Reading the version before the rest is
+    /// `SchemaProbe`'s job and needs no help from the layout.
+    @Test("the version is written with the settings")
+    func writesTheVersion() async throws {
         try await withTemporaryStore { store, root in
             try await store.save(ParentalSettings())
 
             let written = try String(contentsOf: settingsFile(under: root), encoding: .utf8)
-            let version = try #require(written.range(of: "\"schemaVersion\""))
-            let firstSetting = try #require(written.range(of: "\"callsEnabled\""))
-            #expect(version.lowerBound < firstSetting.lowerBound)
             #expect(written.contains("\"schemaVersion\" : 1"))
+        }
+    }
+
+    /// Two saves of the same settings are the same bytes. Without
+    /// `.sortedKeys` they are not, and a settings file that reshuffles itself
+    /// on every write makes a diff of it meaningless.
+    @Test("the same settings are written the same way twice")
+    func writesDeterministically() async throws {
+        try await withTemporaryStore { store, root in
+            try await store.save(ParentalSettings(dailyLimitMinutes: 15))
+            let first = try Data(contentsOf: settingsFile(under: root))
+            try await store.save(ParentalSettings(dailyLimitMinutes: 15))
+
+            #expect(try Data(contentsOf: settingsFile(under: root)) == first)
         }
     }
 

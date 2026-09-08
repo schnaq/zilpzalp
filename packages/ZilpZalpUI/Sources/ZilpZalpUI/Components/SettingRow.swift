@@ -15,12 +15,19 @@ import SwiftUI
 /// sand and olive. Either way the row is at least 64 pt tall and reads as one
 /// VoiceOver element, title and hint together.
 ///
+/// `.disabled(_:)` works as on any SwiftUI control: a navigation row dims to
+/// the system's one disabled opacity, a switch row lets `Toggle` grey itself.
+/// A row that exists before the screen behind it does — the time budget until
+/// #36 — is drawn this way rather than dimmed by its caller.
+///
 /// Every visible string is a parameter. The package holds no product copy.
 public struct SettingRow: View {
     private enum Kind {
         case navigation(value: String?, action: () -> Void)
         case toggle(isOn: Binding<Bool>)
     }
+
+    @Environment(\.isEnabled) private var isEnabled
 
     private let title: String
     private let hint: String?
@@ -118,6 +125,12 @@ public struct SettingRow: View {
                     .contentShape(Rectangle())
                 }
                 .buttonStyle(.plain)
+                // A `.plain` button does not dim when it is disabled, so a row
+                // that is on the screen before it is live would still look
+                // tappable. The system has one disabled opacity and every
+                // pressable already uses it; this is the same one. Only the
+                // navigation row needs it — `Toggle` greys itself.
+                .opacity(isEnabled ? 1 : LedgeButtonStyle.disabledOpacity)
 
             case let .toggle(isOn):
                 Toggle(isOn: isOn) {

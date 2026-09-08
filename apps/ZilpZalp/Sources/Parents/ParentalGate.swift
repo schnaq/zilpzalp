@@ -131,24 +131,16 @@ private struct Question {
     /// answer cannot be picked out as the odd number in the row.
     private static let distractorSpread = 3
 
-    let left: Int
-    let right: Int
-    /// The right number and three near misses, in a random order.
-    let choices: [Int]
-
-    var answer: Int {
-        left + right
-    }
-
+    let answer: Int
     /// "Wie viel ist sieben plus vier?" — spelled out, never in digits. Digits
     /// are the one thing a four-year-old may well recognise.
-    var text: String {
-        String(
-            format: String(localized: "gate.question"),
-            Self.spelled(left),
-            Self.spelled(right),
-        )
-    }
+    ///
+    /// Written once when the question is made rather than computed on demand:
+    /// a computed property would build two `NumberFormatter`s on every pass of
+    /// the view's body, and the text cannot change while the question stands.
+    let text: String
+    /// The right number and three near misses, in a random order.
+    let choices: [Int]
 
     static func random() -> Question {
         let left = Int.random(in: operands)
@@ -159,7 +151,15 @@ private struct Question {
             .shuffled()
             .prefix(3)
 
-        return Question(left: left, right: right, choices: ([answer] + distractors).shuffled())
+        return Question(
+            answer: answer,
+            text: String(
+                format: String(localized: "gate.question"),
+                spelled(left),
+                spelled(right),
+            ),
+            choices: ([answer] + distractors).shuffled(),
+        )
     }
 
     /// The app's language, not the device's: ZilpZalp ships German only, and

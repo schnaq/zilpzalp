@@ -27,12 +27,6 @@ struct ParentsScreen: View {
         case open
     }
 
-    /// How far the time-budget row is dimmed until #36 fills it: the design
-    /// system's own disabled opacity, which lives in an internal
-    /// `LedgeButtonStyle` and is not reachable from here. `.disabled(_:)`
-    /// alone changes nothing a plain-styled row can be seen by.
-    private static let notYetOpacity = 0.45
-
     @Environment(\.dismiss) private var dismiss
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
@@ -63,6 +57,14 @@ struct ParentsScreen: View {
                     // fits, and below the narrowest supported screen the text
                     // shrinks rather than breaks — the same step down the
                     // home screen makes with its headline.
+                    //
+                    // This belongs in `TopBar`, whose own documentation
+                    // promises that a screen may pass a plain `Text` and get
+                    // it typeset correctly. This is the first screen to take
+                    // it up on that, and fixing it there is a design decision
+                    // about the wordless centre as well — so it waits for a
+                    // change that owns the component (#12), and this goes in
+                    // the bin that day.
                     .typeStyle(
                         horizontalSizeClass == .compact ? .label : .headline,
                         .display,
@@ -125,6 +127,19 @@ struct ParentsScreen: View {
     // MARK: - Shut
 
     private func locked(refused: Bool) -> some View {
+        // Scrolls for the same reason the gate does: a stack that does not fit
+        // truncates its text rather than offering a way down, and this one is
+        // taller than an iPhone in landscape.
+        ScrollView {
+            shutDoor(refused: refused)
+                .frame(maxWidth: ZSpacing.maxContent)
+                .padding(ZSpacing.gutterScreen)
+                .frame(maxWidth: .infinity)
+        }
+        .scrollBounceBehavior(.basedOnSize)
+    }
+
+    private func shutDoor(refused: Bool) -> some View {
         VStack(spacing: ZSpacing.step6) {
             Icon(.lock, size: .custom(ZSpacing.touchComfortable))
                 .foregroundStyle(ZColor.textMuted)
@@ -151,9 +166,6 @@ struct ParentsScreen: View {
                 .accessibilityHidden(!refused)
         }
         .multilineTextAlignment(.center)
-        .frame(maxWidth: ZSpacing.maxContent)
-        .padding(ZSpacing.gutterScreen)
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
     /// One attempt. A cancelled sheet, a wrong face and a wrong code all leave
@@ -208,9 +220,9 @@ struct ParentsScreen: View {
                 ) {}
                     // Shown so a grown-up can see the limit stands at none, and
                     // inert because setting one is #36. No copy promising it:
-                    // a date nobody has committed to is not a setting.
+                    // a date nobody has committed to is not a setting. The row
+                    // dims itself; the caller only says it is off.
                     .disabled(true)
-                    .opacity(Self.notYetOpacity)
                 SettingRow(
                     title: String(localized: "parents.credits.title"),
                     hint: String(localized: "parents.credits.hint"),
@@ -223,6 +235,11 @@ struct ParentsScreen: View {
             // The rows paint their own background to the card's inner edge, so
             // without this their square corners would sit in the card's round
             // ones. Inset by the outline the card draws inside its bounds.
+            //
+            // Every full-bleed card will need this same arithmetic, so it
+            // belongs in `ZCard` — the same seam `SettingRow` already points
+            // at when it says the separator moves there once the card can
+            // interleave rows itself (#12).
             .clipShape(
                 RoundedRectangle(cornerRadius: ZRadius.card - ZBorder.width, style: .continuous),
             )
