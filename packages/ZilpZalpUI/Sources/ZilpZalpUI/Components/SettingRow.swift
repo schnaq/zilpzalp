@@ -195,9 +195,10 @@ public struct SettingRow: View {
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            // The stack takes the height its two paragraphs need rather than
-            // the one `Toggle` has left over for its label. Without it a long
-            // title beside a switch is answered by truncating the hint.
+            // Pins the stack to the height its two paragraphs need, so that
+            // no ancestor can compress it — a `Toggle` label in particular
+            // gets what the switch leaves over. Nothing observed today asks
+            // for less; this states what the row is entitled to.
             .fixedSize(horizontal: false, vertical: true)
 
             trailing()
