@@ -130,6 +130,7 @@ struct RootView: View {
         } else if let profile = model.activeProfile {
             HomeScreen(
                 avatar: profile.avatar,
+                games: model.games,
                 openGame: openGame(_:),
                 openParents: { path.append(.parents) },
                 openProfiles: { model.chooseAgain() },
@@ -144,9 +145,9 @@ struct RootView: View {
     /// spent (#36).
     ///
     /// The question is asked here rather than on the home screen, which draws
-    /// two tiles and knows nothing about limits — and asked on the tap rather
-    /// than once on appearance, so a day that turns over while the app is open
-    /// is noticed by the next tap and by nothing else.
+    /// the tiles it is handed and knows nothing about limits — and asked on the
+    /// tap rather than once on appearance, so a day that turns over while the
+    /// app is open is noticed by the next tap and by nothing else.
     private func openGame(_ game: Game) {
         path.append(model.timeBudget.isExhausted ? .timeForTheNest : .quiz(game))
     }
