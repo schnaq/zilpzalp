@@ -29,6 +29,11 @@ targets:
       - path: Sources
       - path: Resources
         buildPhase: resources
+        # This phase is also what carries PrivacyInfo.xcprivacy, which Apple
+        # reads from the bundle root: the copy flattens Resources/, so the
+        # file needs no entry of its own — verified by reading it back out of
+        # the built .app. Nothing may exclude it.
+        #
         # OFL.txt/NOTICE.md travel with the fonts in the source tree (font
         # licensing requirement + provenance for the future Credits screen,
         # #18) but are not app resources, so they stay out of the bundle.
