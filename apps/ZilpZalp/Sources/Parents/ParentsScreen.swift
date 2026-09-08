@@ -1,4 +1,5 @@
 import SwiftUI
+import ZilpZalpCore
 import ZilpZalpData
 import ZilpZalpUI
 
@@ -211,6 +212,7 @@ struct ParentsScreen: View {
                     .foregroundStyle(ZColor.textBody)
 
                 rows
+                voiceNotice
                 notice
             }
             .frame(maxWidth: ZSpacing.maxContent)
@@ -271,6 +273,59 @@ struct ParentsScreen: View {
             Button("parents.playtime.cancel", role: .cancel) {}
         } message: {
             Text("parents.playtime.hint")
+        }
+    }
+
+    /// Which voice reads the questions, and where a better one comes from.
+    ///
+    /// Not a ``SettingRow``: there is nothing here to switch and nothing to
+    /// open. No app may download a voice, so the only honest thing this screen
+    /// can do is name the one in use and say where Settings keeps the others.
+    /// It borrows the shape of ``notice`` below and leaves that one the sand
+    /// tint, so the sentence about data collection stays the one that stands
+    /// out.
+    ///
+    /// No link into Settings: `App-Prefs:` deep links into a specific pane are
+    /// undocumented, and an app in the Kids Category has no business finding
+    /// out how App Review feels about one.
+    private var voiceNotice: some View {
+        ZCard {
+            HStack(spacing: ZSpacing.step4) {
+                Icon(.volume2, size: .standard)
+                    .foregroundStyle(ZColor.olive600)
+
+                VStack(alignment: .leading, spacing: ZSpacing.step1) {
+                    Text(verbatim: voiceName)
+                        .typeStyle(.body, .body, weight: .bold)
+                        .foregroundStyle(ZColor.textStrong)
+                    Text("parents.voice.hint")
+                        .typeStyle(.caption, .body, weight: .semibold)
+                        .foregroundStyle(ZColor.textMuted)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+            }
+        }
+    }
+
+    /// "Vorlesestimme: Anna (Standard)", or the plain heading on a device
+    /// whose voice the app did not choose — then the name would be a guess.
+    private var voiceName: String {
+        guard let voice = SpeechVoice.chosen else {
+            return String(localized: "parents.voice.unknown")
+        }
+        return String(
+            format: String(localized: "parents.voice.title"),
+            voice.name,
+            qualityName(voice.quality),
+        )
+    }
+
+    /// The three tiers as Settings names them in German.
+    private func qualityName(_ quality: SpeechVoiceQuality) -> String {
+        switch quality {
+        case .standard: String(localized: "parents.voice.quality.standard")
+        case .enhanced: String(localized: "parents.voice.quality.enhanced")
+        case .premium: String(localized: "parents.voice.quality.premium")
         }
     }
 

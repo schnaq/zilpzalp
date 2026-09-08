@@ -517,6 +517,78 @@
         }
       }
     },
+    "parents.voice.hint" : {
+      "comment" : "Second line of the voice card in the grown-ups' area: where a better voice comes from, and why the app cannot fetch it",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bessere Stimmen kann nur das Gerät laden: Einstellungen › Bedienungshilfen › Gesprochene Inhalte › Stimmen › Deutsch."
+          }
+        }
+      }
+    },
+    "parents.voice.quality.enhanced" : {
+      "comment" : "The middle voice tier, as iOS names it in German",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erweitert"
+          }
+        }
+      }
+    },
+    "parents.voice.quality.premium" : {
+      "comment" : "The best voice tier, as iOS names it in German",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Premium"
+          }
+        }
+      }
+    },
+    "parents.voice.quality.standard" : {
+      "comment" : "The compact voice every device ships with. AVFoundation calls the tier 'default'",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Standard"
+          }
+        }
+      }
+    },
+    "parents.voice.title" : {
+      "comment" : "Heading of the voice card in the grown-ups' area. %1$@ is the voice's name, %2$@ its quality tier",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vorlesestimme: %1$@ (%2$@)"
+          }
+        }
+      }
+    },
+    "parents.voice.unknown" : {
+      "comment" : "The same heading on a device with no German voice, where the app cannot name the one the system falls back to",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vorlesestimme: Systemstimme"
+          }
+        }
+      }
+    },
     "profile.avatar.bird" : {
       "comment" : "VoiceOver name of the bird avatar in the creation grid. A child picks it by sight",
       "extractionState" : "manual",
