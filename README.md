@@ -42,6 +42,7 @@ mise run setup        install dependencies and tools
 mise run check        format, lint, tests, licence gate — the same as CI
 mise run format       format the sources and fix correctable lint findings
 mise run test         package tests only
+mise run generate     generate the Xcode project (before opening it in Xcode)
 mise run build        build the app
 mise run fetch-media  curate media and upload it to S3
 ```

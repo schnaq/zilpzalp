@@ -56,9 +56,12 @@ mise run setup      Abhängigkeiten und Werkzeuge installieren
 mise run check      Format, Lint, Tests, Lizenz-Gate — das gleiche wie in CI
 mise run format     Formatieren und behebbare Lint-Funde korrigieren
 mise run test       Nur die Package-Tests
+mise run generate   Xcode-Projekt aus project.yml erzeugen, dann in Xcode öffnen
 mise run build      App bauen
 mise run fetch-media  Medien kuratieren und nach S3 laden
 ```
+
+Das `.xcodeproj` ist nicht eingecheckt. Vor dem Öffnen in Xcode `mise run generate`; ein von Hand in Xcode angelegtes Projekt kennt die Quelldateien nicht. Für Builds auf dem eigenen Gerät steht die Team-ID in einer lokalen, ignorierten `mise.local.toml` (Vorlage im Kommentar von `mise.toml`), nicht im Signing-Tab von Xcode — jedes Generieren würde sie dort wieder löschen.
 
 Xcode-Version ist in `mise.toml` gepinnt. Wenn ein Build lokal geht und in CI nicht, ist fast immer die Xcode-Version die Ursache.
 

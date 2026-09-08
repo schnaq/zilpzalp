@@ -49,6 +49,9 @@ targets:
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.schnaq.zilpzalp
+        # Expanded by XcodeGen at generate time from the environment, which
+        # mise provides: empty unless mise.local.toml sets it (see mise.toml).
+        DEVELOPMENT_TEAM: ${DEVELOPMENT_TEAM}
         PRODUCT_NAME: ZilpZalp
         MARKETING_VERSION: "0.1.0"
         CURRENT_PROJECT_VERSION: 1

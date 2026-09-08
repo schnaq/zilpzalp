@@ -3,6 +3,18 @@
 # Everything runs through `mise run …`. Do not call xcodebuild, swift or brew
 # directly, or the development machine drifts away from the CI runner.
 
+[env]
+# The Apple team that signs local device builds. Empty by default so CI and
+# simulator builds (CODE_SIGNING_ALLOWED=NO) need nothing. For a build on your
+# own iPhone or iPad put the team id into an untracked `mise.local.toml`:
+#
+#   [env]
+#   DEVELOPMENT_TEAM = "XXXXXXXXXX"
+#
+# `mise run generate` bakes it into the Xcode project; Xcode's own Signing
+# tab is not the place, because every regenerate would wipe it again.
+DEVELOPMENT_TEAM = ""
+
 [tools]
 # Pinned exactly: the development machine and the self-hosted runner should use
 # the same binaries. No Homebrew — versions would drift apart.
@@ -104,14 +116,18 @@ for package in packages/*/; do
 done
 '''
 
+[tasks.generate]
+description = "Generate apps/ZilpZalp/ZilpZalp.xcodeproj from project.yml"
+# Run this before opening the project in Xcode. The .xcodeproj is not tracked;
+# a project Xcode created by hand compiles two files and fails on the rest.
+run = "xcodegen generate --spec apps/ZilpZalp/project.yml --quiet"
+
 [tasks.build]
 description = "Build the app"
-depends = ["xcode-version"]
+depends = ["xcode-version", "generate"]
 run = '''
 set -euo pipefail
 export DEVELOPER_DIR="${DEVELOPER_DIR:-/Applications/Xcode.app/Contents/Developer}"
-
-xcodegen generate --spec apps/ZilpZalp/project.yml --quiet
 
 # generic/platform: builds against the simulator SDK without demanding a
 # specific device — which simulators exist on the runner is not fixed.
