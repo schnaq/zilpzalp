@@ -162,6 +162,12 @@ public struct ChoiceTile: View {
     /// Nothing else is under pressure here: the photo still fills the square,
     /// the badge keeps its 56 pt circle and 30 pt glyph, and the touch target
     /// clears ``ZSpacing/touchMinimum`` more than twice over.
+    ///
+    /// It does not fit every phone, and it cannot. A 375×667 pt screen leaves
+    /// the quiz room for about 104 pt a tile, and no floor that small can show
+    /// a credit at all — 13 pt of type over two lines is simply wider than
+    /// that. A screen that short cannot have both, and choosing between them
+    /// is what #111 and #122 are for.
     public static let minimumSize: CGFloat = (PhotoCreditMetrics.minimumColumn
         + PhotoCreditMetrics.leadingPadding
         + PhotoCreditMetrics.trailingPadding).rounded(.up)
