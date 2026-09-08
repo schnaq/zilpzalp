@@ -19,7 +19,7 @@ final class ParentalSettingsModel {
 
     /// The write in flight, if there is one.
     ///
-    /// Two switches flipped in quick succession start two writes, and two
+    /// Two settings changed in quick succession start two writes, and two
     /// unstructured tasks reach an actor in whatever order the runtime hands
     /// them over — no language rule says the first one arrives first. Reversed,
     /// the older snapshot lands last and the file says the opposite of the
@@ -35,7 +35,7 @@ final class ParentalSettingsModel {
 
     /// Reads the file. A device that has never been here gets the defaults
     /// without an error; a file that cannot be read gets them with one in the
-    /// log, because a grown-up cannot act on it and the switches standing at
+    /// log, because a grown-up cannot act on it and the settings standing at
     /// their defaults is the calm answer.
     func load() async {
         await lastWrite?.value
@@ -58,8 +58,8 @@ final class ParentalSettingsModel {
     /// that lags behind the finger reads as a broken switch.
     ///
     /// Generic over the field's type rather than one method per type: the
-    /// daily limit is an `Int?` and the two switches are `Bool`s, and the
-    /// ordering above is what all of them need.
+    /// daily limit is an `Int?` and the switch is a `Bool`, and the ordering
+    /// above is what both of them need.
     func set<Value>(_ field: WritableKeyPath<ParentalSettings, Value>, to value: Value) {
         settings[keyPath: field] = value
 

@@ -88,15 +88,15 @@ final class AppModel {
     ///
     /// Game 1 is always among them. Game 2 asks its question with a recorded
     /// call, so it is offered only where there are calls to ask with: at least
-    /// ``callsForGameTwo`` species of the open pack carrying one on disk, and
-    /// the grown-ups' "Vogelstimmen" left on — a game whose question *is* a
-    /// call cannot run while calls are switched off. Missing either, the tile
-    /// is absent rather than teased or locked, exactly as games 3 and 4 are
-    /// (#31).
+    /// ``callsForGameTwo`` species of the open pack carrying one on disk.
+    /// Below that the tile is absent rather than teased or locked, exactly as
+    /// games 3 and 4 are (#31). Nothing else decides it — where the calls are,
+    /// the game is (#138).
     ///
-    /// Computed on every read like ``timeBudget``, and for the same reason: the
-    /// switch can be flipped while the app runs, and a stored answer would be
-    /// one the home screen could disagree with.
+    /// Computed rather than stored, as it was while a switch could change the
+    /// answer mid-run: the one pack is opened once at launch today, but packs
+    /// arrive and are deleted with #33, and a stored answer would then be one
+    /// the home screen could disagree with.
     var games: [Game] {
         offersCalls ? [.names, .calls] : [.names]
     }
@@ -141,7 +141,7 @@ final class AppModel {
     /// question a child cannot answer, and ``PackCatalog/callURL(for:)`` is
     /// what the round itself will ask.
     private var offersCalls: Bool {
-        guard parental.settings.callsEnabled, let catalog else { return false }
+        guard let catalog else { return false }
         return catalog.pack.birds.count { catalog.callURL(for: $0) != nil } >= Self.callsForGameTwo
     }
 
