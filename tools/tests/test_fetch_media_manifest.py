@@ -103,19 +103,33 @@ class MediaBlockTests(unittest.TestCase):
         self.assertEqual(list(bundled["birds"][0]["photo"]), list(manifest.MEDIA_KEYS))
 
 
-class SetPhotoTests(unittest.TestCase):
+class SetMediaTests(unittest.TestCase):
     def test_replaces_the_photo_and_reports_the_previous_file(self) -> None:
         pack = document()
 
-        previous = manifest.set_photo(pack, "amsel", media(file="photos/amsel.jpg"))
+        previous = manifest.set_media(pack, "amsel", "photo", media(file="photos/amsel.jpg"))
 
         self.assertEqual(previous, "photos/amsel.png")
         self.assertEqual(pack["birds"][0]["photo"]["file"], "photos/amsel.jpg")
 
+    def test_fills_a_call_that_was_null_and_reports_no_previous_file(self) -> None:
+        pack = document()
+
+        previous = manifest.set_media(pack, "amsel", "call", media(file="audio/amsel.m4a"))
+
+        self.assertIsNone(previous)
+        self.assertEqual(pack["birds"][0]["call"]["file"], "audio/amsel.m4a")
+
+    def test_refuses_a_kind_that_is_not_a_medium(self) -> None:
+        with self.assertRaises(ValueError) as error:
+            manifest.set_media(document(), "amsel", "sonogram", media())
+
+        self.assertIn("sonogram", str(error.exception))
+
     def test_leaves_the_bird_s_other_fields_and_their_order_alone(self) -> None:
         pack = document()
 
-        manifest.set_photo(pack, "amsel", media(file="photos/amsel.jpg"))
+        manifest.set_media(pack, "amsel", "photo", media(file="photos/amsel.jpg"))
 
         self.assertEqual(
             list(pack["birds"][0]),

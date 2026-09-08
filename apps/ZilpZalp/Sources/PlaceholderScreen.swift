@@ -6,9 +6,9 @@ import ZilpZalpUI
 ///
 /// Scaffolding, on purpose. It carries no state and no logic, so that the
 /// navigation can be walked end to end in M3 without anything here having to
-/// be unpicked later. ``QuizScreen`` (#25) and ``ParentsScreen`` (#35) each
-/// drop their use of it when the real screen lands; with the second of them
-/// this file goes too.
+/// be unpicked later. ``QuizScreen`` (#25) dropped its use of it with the real
+/// quiz; the last one left is the credits inside the grown-ups' area, which
+/// #37 fills — and this file goes with it.
 struct PlaceholderScreen: View {
     let title: String
     let icon: ZIcon

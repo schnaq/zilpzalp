@@ -6,4 +6,4 @@ candidates, a human picks one, and the tool crops it, writes the manifest
 entry and uploads the result to our own bucket.
 """
 
-__all__ = ["images", "inaturalist", "manifest", "s3"]
+__all__ = ["audio", "images", "inaturalist", "index", "manifest", "s3", "xenocanto"]

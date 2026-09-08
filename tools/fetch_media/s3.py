@@ -37,6 +37,7 @@ CONTENT_TYPES = {
     ".jpg": "image/jpeg",
     ".jpeg": "image/jpeg",
     ".json": "application/json",
+    ".m4a": "audio/mp4",
     ".mp3": "audio/mpeg",
     ".png": "image/png",
 }

@@ -63,28 +63,18 @@ final class SpeechAnnouncer: NSObject {
     /// question again re-reads it instead of queueing a second reading behind
     /// the first.
     func announce(_ bird: Bird) {
-        say(prompt(for: bird))
+        announce(prompt(for: bird))
     }
 
-    /// Reads one finished German sentence out loud.
+    /// Says one finished sentence — the praise on the round end, for a child
+    /// who cannot read the headline.
     ///
-    /// The screens that ask a child a question in words — "Wer spielt heute?",
-    /// "Wie heißt du?" (#28) — need the same voice the game speaks in, so the
-    /// text comes in already resolved from the String Catalog rather than each
-    /// screen growing its own way of talking.
-    ///
-    /// This makes the *class* the one voice, not the instance: a screen holds
-    /// its own announcer, and two screens that were somehow on stage at once
-    /// could still speak over each other. Nothing in the app does that today —
-    /// each screen replaces the last — and the cut-off below covers the
-    /// handover.
-    ///
-    /// Cuts off whatever was still being said, exactly as ``announce(_:)``
-    /// does, and sets ``isSpeaking`` for as long as it runs.
-    func say(_ text: String) {
+    /// Takes text rather than a key: the String Catalog belongs to the app's
+    /// screens, and this type stays the one that only knows how to speak.
+    func announce(_ sentence: String) {
         AudioSessionConfigurator.activatePlayback()
 
-        let utterance = AVSpeechUtterance(string: text)
+        let utterance = AVSpeechUtterance(string: sentence)
         utterance.voice = voice
         utterance.rate = Self.speechRate
 
