@@ -75,7 +75,7 @@ Alles Weitere wird zur Laufzeit geladen:
 
 ```yaml
 - name: Load Infisical secrets into job env
-  uses: Infisical/secrets-action@77ab1f4ccd183a543cb5b42435fbd181189f4995 # v1.0.16
+  uses: Infisical/secrets-action@6cd3f7c0e4cc0d2395ee4ef414eb6eeb5d3e73db # v1.0.17
   with:
     method: universal
     client-id: ${{ secrets.INFISICAL_CLIENT_ID }}

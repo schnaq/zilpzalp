@@ -90,14 +90,21 @@ jobs:
       # is masked by the signing script as a whole (it is single-line) as well.
       - name: Mask the secrets and check they arrived
         run: |
-          for name in IOS_DIST_CERT_P12_BASE64 IOS_DIST_CERT_PASSWORD \
-                      IOS_PROVISIONING_PROFILE_BASE64 \
-                      ASC_KEY_ID ASC_ISSUER_ID ASC_KEY_P8_BASE64; do
-            value="${!name}"
-            printf '%s\n' "$value" | while IFS= read -r line; do
+          required="IOS_DIST_CERT_P12_BASE64 IOS_DIST_CERT_PASSWORD
+                    IOS_PROVISIONING_PROFILE_BASE64
+                    ASC_KEY_ID ASC_ISSUER_ID ASC_KEY_P8_BASE64"
+
+          # IOS_DIST_CERT_CHAIN_BASE64 is masked too but not required: it is the
+          # escape hatch the signing script offers when neither the .p12 nor the
+          # runner brings the WWDR intermediate along.
+          for name in $required IOS_DIST_CERT_CHAIN_BASE64; do
+            printf '%s\n' "${!name}" | while IFS= read -r line; do
               if [ "${#line}" -ge 8 ]; then echo "::add-mask::$line"; fi
             done
-            if [ -z "$value" ]; then
+          done
+
+          for name in $required; do
+            if [ -z "${!name}" ]; then
               echo "::error::$name is empty. The Infisical machine identity used by CI cannot read prod /ios — so far only dev / is proven (secrets-smoke.yml). Grant that identity read access to the prod environment, path /ios, in Infisical."
               exit 1
             fi
