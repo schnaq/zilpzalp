@@ -5,7 +5,8 @@ import Foundation
 ///
 /// The only component of the app that talks to the network, and it talks to
 /// exactly one host: every URL it opens is built by appending a path to
-/// `baseURL`. iNaturalist and xeno-canto are curation-time sources of
+/// `baseURL`, and `NoRedirects` keeps a `3xx` from moving it elsewhere.
+/// iNaturalist and xeno-canto are curation-time sources of
 /// `tools/fetch-media` and are never contacted at runtime.
 ///
 /// A download is resumable at file granularity. Files land in
@@ -241,7 +242,7 @@ public actor PackDownloader {
         let data: Data
         let response: URLResponse
         do {
-            (data, response) = try await session.data(from: url)
+            (data, response) = try await session.data(from: url, delegate: NoRedirects.shared)
         } catch {
             // A cancelled task arrives here as `URLError.cancelled`. It is the
             // caller's decision, not a failed download, and must not be

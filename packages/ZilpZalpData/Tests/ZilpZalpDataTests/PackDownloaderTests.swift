@@ -224,6 +224,28 @@ struct PackDownloaderTests {
         }
     }
 
+    /// `URLSession` follows redirects by default, so without a delegate that
+    /// refuses them a `302` from the bucket would send the next request to
+    /// whatever host it names — and the app is allowed exactly one.
+    @Test("a redirect to another host is not followed")
+    func doesNotFollowARedirect() async throws {
+        let elsewhere = try #require(URL(string: "https://elsewhere.invalid/stolen"))
+        var routes = StubPack.routes()
+        routes[StubPack.indexKey] = StubBucket.Route(
+            body: Data(),
+            status: 302,
+            redirectTo: elsewhere,
+        )
+
+        try await withDownloader(routes: routes) { downloader, _ in
+            await #expect(throws: PackDownloadError.indexUnreachable(reason: "HTTP 302")) {
+                try await downloader.availablePacks()
+            }
+
+            #expect(StubBucket.requests.allSatisfy { $0.host() == "bucket.invalid" })
+        }
+    }
+
     @Test("an index entry whose id is a path is refused")
     func refusesAPackIDThatIsAPath() async throws {
         try await withDownloader(routes: StubPack.routes()) { downloader, _ in

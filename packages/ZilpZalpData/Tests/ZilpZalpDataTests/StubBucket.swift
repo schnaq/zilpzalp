@@ -24,6 +24,9 @@ class StubBucket: URLProtocol {
         /// rather than none at all, so that a cancellation which failed ends
         /// the test instead of hanging it.
         var delay: TimeInterval = 0
+        /// Where this object sends the client instead of answering. Only the
+        /// redirect test uses it.
+        var redirectTo: URL?
     }
 
     private struct Contents {
@@ -97,6 +100,17 @@ class StubBucket: URLProtocol {
             )
         else {
             return
+        }
+
+        // Like a real server: signal the redirect, then answer anyway. A
+        // session that follows it cancels this load and starts a new one, and
+        // `stopped` swallows the answer; one that refuses gets the 3xx.
+        if let elsewhere = answer.redirectTo {
+            client?.urlProtocol(
+                self,
+                wasRedirectedTo: URLRequest(url: elsewhere),
+                redirectResponse: response,
+            )
         }
 
         let delivery = Delivery(bucket: self, response: response, body: answer.body)
