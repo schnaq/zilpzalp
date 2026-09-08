@@ -57,9 +57,9 @@ struct ParentsScreen: View {
         .toolbar(.hidden, for: .navigationBar)
         // A destination of this screen rather than a `Route` case: the credits
         // are a room inside the grown-ups' area and nothing else may navigate
-        // to them, least of all past the lock. #37 replaces the placeholder.
+        // to them, least of all past the lock.
         .navigationDestination(isPresented: $showsCredits) {
-            PlaceholderScreen(title: String(localized: "parents.credits.title"), icon: .camera)
+            CreditsScreen()
         }
         .task { await parental.load() }
         .onAppear {

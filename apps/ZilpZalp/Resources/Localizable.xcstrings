@@ -13,6 +13,114 @@
         }
       }
     },
+    "credits.call.by" : {
+      "comment" : "Under a bird's name in the credits, for a recording. %1$@ is the recordist, %2$@ the licence's short name such as CC BY",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aufnahme von %1$@ · %2$@"
+          }
+        }
+      }
+    },
+    "credits.fonts.title" : {
+      "comment" : "Heading of the credits section that names the bundled font families",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schriften"
+          }
+        }
+      }
+    },
+    "credits.gate.reason" : {
+      "comment" : "Why the parental gate is being shown on the credits screen: a link is about to leave the app",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dieser Link führt aus ZilpZalp hinaus ins Internet."
+          }
+        }
+      }
+    },
+    "credits.icons.title" : {
+      "comment" : "Heading of the credits section that names the bundled icon sets",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Symbole"
+          }
+        }
+      }
+    },
+    "credits.intro" : {
+      "comment" : "The paragraph at the top of the credits screen. Says why the names are there and what happens on a tap",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alle Bilder und Aufnahmen stehen unter einer freien Lizenz. Die Quelle öffnet erst nach einer kurzen Aufgabe für Erwachsene."
+          }
+        }
+      }
+    },
+    "credits.link.accessibility" : {
+      "comment" : "VoiceOver hint on every row of the credits that leads out of the app",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öffnet eine Internetseite. Davor kommt eine Aufgabe für Erwachsene."
+          }
+        }
+      }
+    },
+    "credits.photo.by" : {
+      "comment" : "Under a bird's name in the credits, for a photo. %1$@ is the photographer, %2$@ the licence's short name such as CC BY",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Foto von %1$@ · %2$@"
+          }
+        }
+      }
+    },
+    "credits.unavailable" : {
+      "comment" : "Shown instead of the credits when the generated list is not in the bundle — a broken build rather than a state a parent can act on",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die Liste konnte nicht geladen werden."
+          }
+        }
+      }
+    },
+    "credits.vendored.by" : {
+      "comment" : "Under a font family or an icon set in the credits. %1$@ are its authors, %2$@ the SPDX identifier of its licence such as OFL-1.1",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ · %2$@"
+          }
+        }
+      }
+    },
     "gate.hint.wrong" : {
       "comment" : "Shown under the parental gate's task after a wrong answer. Never a reprimand and never a lockout — the numbers have already changed",
       "extractionState" : "manual",
@@ -33,6 +141,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wie viel ist %1$@ plus %2$@?"
+          }
+        }
+      }
+    },
+    "gate.spoken" : {
+      "comment" : "Spoken aloud when the parental gate appears, for the child who cannot read the task. The hint, never the question: reading the sum out would hand over the one thing the spelled-out numbers withhold",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Frag bitte einen Erwachsenen."
           }
         }
       }
