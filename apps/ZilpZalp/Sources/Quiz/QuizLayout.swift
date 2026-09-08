@@ -11,9 +11,10 @@ import ZilpZalpUI
 /// keying the arrangement on it is what gave an iPad in portrait the
 /// landscape arrangement and left two thirds of the screen empty (#118).
 ///
-/// The 2×2 grid is not one of the choices. Spec §4 fixes it for the iPad, and
-/// a single row loses the measurement everywhere else too — four tiles across
-/// an iPhone in portrait are 74 pt where two are 170.
+/// The shape of the grid is not one of the choices — it is 2×2 everywhere.
+/// Spec §4 fixes that for the iPad, and a single row loses the measurement
+/// everywhere else too: four tiles across an iPhone in portrait are 74 pt
+/// where two are 170.
 ///
 /// The size class still settles how big the parts *around* the answers are
 /// drawn: an iPad in portrait gets the question above the grid, but at the
