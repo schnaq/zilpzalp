@@ -166,17 +166,6 @@ struct HomeScreen: View {
                 tile(game, size: size)
             }
         }
-        // `HomeTile` draws its label at a fixed 22 pt whatever edge length it
-        // is given, so a tile the space forces down far enough turns "Wer
-        // singt da?" into "Wer singt d…" — measured on an iPhone SE, which is
-        // the shortest screen the app supports. Letting the label shrink keeps
-        // the words whole, and the floor is the design's own: nothing a child
-        // reads goes below 20 pt.
-        //
-        // The tile scales its glyph off its own size already; scaling the
-        // label belongs there too, and this modifier belongs in the bin the
-        // day #12's component does it.
-        .minimumScaleFactor(ZType.Step.body.size / ZType.Step.label.size)
         // Full width so the tiles sit on the screen's midline; the height is
         // their own, so the group above can centre as one.
         .frame(maxWidth: .infinity)
