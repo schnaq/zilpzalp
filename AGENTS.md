@@ -58,6 +58,8 @@ mise run format     Formatieren und behebbare Lint-Funde korrigieren
 mise run test       Nur die Package-Tests
 mise run generate   Xcode-Projekt aus project.yml erzeugen (vor dem Öffnen in Xcode)
 mise run build      App bauen
+mise run archive    App für den App Store archivieren, ohne Signatur
+mise run upload     Dieses Archiv signieren und zu TestFlight schicken
 mise run fetch-media  Medien kuratieren und nach S3 laden
 ```
 

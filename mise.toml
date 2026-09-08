@@ -143,9 +143,10 @@ out="${RUNNER_TEMP:-$PWD/DerivedData/release}"
 mkdir -p "$out"
 
 # The build number is the workflow run number: it never repeats and always
-# grows, and App Store Connect refuses a build number it has already seen. A
-# local run has no run number and keeps the 1 from project.yml, so a local
-# archive is good for inspecting the build, not for a second upload.
+# grows, and App Store Connect refuses a build number it has already seen.
+# Outside CI there is no run number, and the 1 below overrides whatever
+# project.yml says — a local archive is for inspecting the build, not for a
+# second upload.
 build_number="${GITHUB_RUN_NUMBER:-1}"
 
 # Archived WITHOUT code signing on purpose. Signing happens at export, so no
@@ -169,6 +170,7 @@ xcodebuild archive \
 
 [tasks.upload]
 description = "Sign the archive from 'mise run archive' and send it to TestFlight"
+depends = ["xcode-version"]
 # Needs the signing material and the App Store Connect key from Infisical:
 #   infisical run --env=prod --path=/ios -- mise run upload
 run = '''

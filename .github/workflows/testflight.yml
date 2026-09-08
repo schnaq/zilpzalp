@@ -123,7 +123,9 @@ jobs:
 
       # The task already tears down from a trap; this repeats it for the
       # cancelled or timed-out job, where the trap never fires. Idempotent, and
-      # it never fails the run it is cleaning up after.
+      # it never fails the run it is cleaning up after. The one step that does
+      # not go through mise, deliberately: it has to clear the runner even when
+      # the job died because mise itself did not come up.
       - name: Remove signing material
         if: always()
         run: bash .github/scripts/ios-signing-teardown.sh
