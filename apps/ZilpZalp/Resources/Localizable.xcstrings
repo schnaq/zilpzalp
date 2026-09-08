@@ -73,14 +73,146 @@
         }
       }
     },
+    "quiz.feedback.correct" : {
+      "comment" : "Banner under the answers when the child taps the right bird",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Genau!"
+          }
+        }
+      }
+    },
+    "quiz.feedback.retry" : {
+      "comment" : "Banner under the answers after a wrong tap. Never a failure: the child may keep tapping, and nothing is blocked",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fast! Hör nochmal hin."
+          }
+        }
+      }
+    },
+    "quiz.photo.credit" : {
+      "comment" : "Credit inside a bird photo. %1$@ is the photographer, %2$@ the licence's short name. Mandatory for CC BY and CC BY-SA",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Foto: %1$@ (%2$@)"
+          }
+        }
+      }
+    },
+    "quiz.progress.label" : {
+      "comment" : "VoiceOver name of the leaf row in the top bar. Names the row; where the round stands is quiz.progress.value",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fortschritt"
+          }
+        }
+      }
+    },
+    "quiz.progress.value" : {
+      "comment" : "VoiceOver value of the leaf row. %1$lld is the question being asked, %2$lld the questions in the round. The row itself shows no digits",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld von %2$lld"
+          }
+        }
+      }
+    },
     "quiz.prompt.whereIs" : {
-      "comment" : "Spoken question in game 1. %1$@ is the German article, %2$@ the bird's name",
+      "comment" : "The question in game 1, spoken by the app and shown above the answers. %1$@ is the German article, %2$@ the bird's name",
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wo ist %1$@ %2$@?"
+          }
+        }
+      }
+    },
+    "quiz.sound.accessibility" : {
+      "comment" : "VoiceOver label of the round button that reads the question out again. The button itself is wordless",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Frage noch einmal hören"
+          }
+        }
+      }
+    },
+    "quiz.tile.accessibility" : {
+      "comment" : "VoiceOver label of one answer tile. %lld is its position in the grid. Never the bird's name — that would read the answer out",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vogelfoto %lld"
+          }
+        }
+      }
+    },
+    "quiz.unavailable" : {
+      "comment" : "Shown instead of a round when the pack holds fewer than four species. Read by a grown-up, so a full sentence",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In diesem Paket sind zu wenige Vögel für ein Spiel."
+          }
+        }
+      }
+    },
+    "roundEnd.playAgain" : {
+      "comment" : "Button on the round end screen that starts a new round",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nochmal spielen"
+          }
+        }
+      }
+    },
+    "roundEnd.stars" : {
+      "comment" : "Placeholder line on the round end screen until #26 draws the stars. %1$lld is the stars earned, %2$lld the first-try correct answers, %3$lld the questions in the round",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sterne: %1$lld — auf Anhieb richtig: %2$lld von %3$lld"
+          }
+        }
+      }
+    },
+    "roundEnd.title" : {
+      "comment" : "Headline of the round end screen",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geschafft!"
           }
         }
       }
