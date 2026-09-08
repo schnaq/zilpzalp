@@ -14,6 +14,18 @@ import SwiftUI
 /// Not a control. Like ``Badge``, it has no action and no press state; a
 /// screen that wants a tappable sticker wraps it in its own `Button`.
 ///
+/// **No credit inside the disc, and none missing.** No screen passes
+/// ``init(image:icon:credit:label:tone:locked:rotation:size:)`` a credit, and
+/// none should: the sticker clips to a `Circle`, where the inset a straight
+/// strip would need against the curve has no one right value — at the 200 pt
+/// the reward screen draws, the circle and its border stand 76 pt off the
+/// edge where the text sits, which is most of the strip. Attribution is
+/// discharged all the same, by the credits screen generated from the pack
+/// manifests (`AGENTS.md`, § Medien und Lizenzen); the strip inside a
+/// ``ChoiceTile`` is a courtesy on top of it, not the thing that makes the
+/// licence work. Should a credit ever be wanted here it needs a straight band
+/// *below* the circle rather than an overlay inside it — see #111.
+///
 /// ```swift
 /// RewardSticker(image: photo, credit: "Foto: … (CC BY)", label: "Zilpzalp")
 /// ```
@@ -79,8 +91,9 @@ public struct RewardSticker: View {
     ///     sticker shows ``icon`` on its tone.
     ///   - icon: The glyph to show when there is no photo.
     ///   - credit: Attribution, rendered inside the photo along its bottom
-    ///     edge — the same strip ``ChoiceTile`` uses. Required by the licence
-    ///     for CC BY material; the caller decides, this package cannot tell.
+    ///     edge — the same strip ``ChoiceTile`` uses. Leave it out: the strip
+    ///     is cut by the disc's own curve, and the licence is served by the
+    ///     generated credits screen either way. See the note above.
     ///   - label: The word under the sticker, usually the bird's name.
     ///     Optional, as in the JSX — but it is also the only text the sticker
     ///     has, and the glyph hides itself from accessibility. A captionless
@@ -275,6 +288,9 @@ enum RewardStickerMetrics {
 }
 
 #Preview("With a photo: collected and still to find") {
+    // The credit is cut off at both ends here, and that is the point: a circle
+    // takes far more off a straight strip than the corner ``PhotoCredit`` is
+    // inset for. No screen passes one — see the note on ``RewardSticker``.
     HStack(spacing: ZSpacing.step7) {
         RewardSticker(
             image: previewPhoto(),
