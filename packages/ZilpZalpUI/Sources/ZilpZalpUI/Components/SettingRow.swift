@@ -121,6 +121,14 @@ public struct SettingRow: View {
                         // its own size.
                         .typeStyle(.body, .body, weight: .semibold)
                         .foregroundStyle(ZColor.textMuted)
+                        // The title beside it is greedy, so on a narrow phone
+                        // the value was offered a column two words wide and
+                        // broke "45 Min" across two lines — measured on an
+                        // iPhone 17 with the time budget (#36). A value is
+                        // one short phrase and takes the width it needs; the
+                        // title is the one that wraps, which this component
+                        // already calls the better failure.
+                        .fixedSize(horizontal: true, vertical: false)
                     }
                     .contentShape(Rectangle())
                 }
