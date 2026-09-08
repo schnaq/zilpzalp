@@ -81,8 +81,8 @@ struct NavigationComponentTests {
     }
 
     /// The tile's own rule, not a taste: a step is worn as long as the
-    /// design's longest label still fits between the paddings, so the
-    /// boundaries are 193 pt for `label` and 236 pt for `headline`. A tile a
+    /// widest label a tile carries still fits between the paddings, so the
+    /// boundaries are 193 pt for `label` and 237 pt for `headline`. A tile a
     /// point short of one steps down rather than truncating (#92).
     @Test(
         "The label's step follows the tile's size",
@@ -92,8 +92,8 @@ struct NavigationComponentTests {
             (127, .body),
             (192, .body),
             (193, .label),
-            (235, .label),
-            (236, .headline),
+            (236, .label),
+            (237, .headline),
             // The JSX's own tile, `HomeTile.defaultSize` — spelled out because
             // an argument list is evaluated off the main actor.
             (240, .headline),
@@ -103,14 +103,14 @@ struct NavigationComponentTests {
         #expect(HomeTile(title: "Wer singt da?", size: size).labelStep == expected)
     }
 
-    /// The 7.28 those boundaries are derived from, checked against the face
-    /// itself rather than trusted. "Sterne sammeln" is the longest label the
-    /// JSX draws on a tile, and it has to survive whole at every size the
-    /// tile steps up at — a font swap that widened it would move the
-    /// boundaries and fail here first.
+    /// The ratio those boundaries are derived from, checked against the face
+    /// itself rather than trusted. "Sterne sammeln" is the widest label this
+    /// tile is drawn with — it comes from the component's own previews — and
+    /// it has to survive whole at every size the tile steps up at, so a font
+    /// swap that widened it fails the derivation before a screenshot.
     @Test(
-        "The step a tile picks keeps the design's longest label whole",
-        arguments: [193, 236, 240] as [CGFloat],
+        "The step a tile picks keeps the widest label it carries whole",
+        arguments: [193, 237, 240] as [CGFloat],
     )
     func theLabelStepKeepsTheLongestLabelWhole(size: CGFloat) throws {
         try #require(BundledFonts.registered)
