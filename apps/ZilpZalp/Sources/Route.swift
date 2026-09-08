@@ -14,8 +14,8 @@ enum Game: Hashable {
     /// button plays the call again. Only species that carry a call are asked
     /// for; the others keep their photos among the choices.
     ///
-    /// Offered only where it can be played: four species with a call and the
-    /// "Vogelstimmen" setting on, see ``AppModel/games``.
+    /// Offered only where it can be played: four species with a call, see
+    /// ``AppModel/games``.
     case calls
 
     /// The word under the glyph on the home screen, and the name of the
