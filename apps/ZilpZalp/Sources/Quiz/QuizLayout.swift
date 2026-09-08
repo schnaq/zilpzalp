@@ -102,24 +102,20 @@ struct QuizLayout {
     /// left is smaller than two touch targets, and since #117 locked the
     /// iPhone to portrait no supported geometry gets near it. The shortest
     /// screen the app supports — an iPhone SE, 343×481 pt of room — works out
-    /// at 104 pt, and every other one is larger.
+    /// at 81 pt, and every other one is larger. (104 until #127; the feedback
+    /// band is measured now rather than assumed, and the retry sentence wraps
+    /// to two lines at that width, which costs the tiles 23 pt.)
     ///
-    /// What comes out here is a measurement, not a promise: ``ChoiceTile`` has
-    /// a floor of its own and clamps up to it, because below that its credit
-    /// strip loses the licence it is there to carry (#104). A short phone
-    /// therefore draws tiles wider than the room measured for them. An iPhone
-    /// 17e measures 162 against the component's 168, and its margins take the
-    /// six points without anything colliding.
+    /// ``ChoiceTile`` has a floor of its own and clamps up to it, because
+    /// below that its credit strip loses the licence it is there to carry
+    /// (#104). Which is above what this measures on the shortest screens, so
+    /// what comes out here is not always what gets drawn. ``QuizTile`` is
+    /// where the two are reconciled, and its documentation says how.
     ///
-    /// An iPhone SE does not get off so lightly. 375×667 pt measures 104 here,
-    /// 64 pt below the floor, and the grid then overruns by about 130 pt: the
-    /// sound button climbs into the leaf row and the feedback band walks off
-    /// the bottom of the screen. Raising this floor to the component's would
-    /// not buy that room back — nothing can, at this tile size. What the
-    /// design needs to give up first is the credit *overlay*: #111's strip
-    /// clipped to the tile shape, or #122's gutter under it, either of which
-    /// lets the tile shrink again. Until one of them lands, the shortest
-    /// screen the app claims to support does not fit the quiz.
+    /// Nothing in that reconciling belongs here. This measures the room; how
+    /// a component behaves in less room than it wants is the component's
+    /// business and the screen's, not the arithmetic's — and raising this
+    /// floor to the component's would not conjure the room either.
     private static func tileEdge(across: CGFloat, down: CGFloat) -> CGFloat {
         max(ZSpacing.touchMinimum, min(maximumTile, min(across, down) / 2).rounded(.down))
     }

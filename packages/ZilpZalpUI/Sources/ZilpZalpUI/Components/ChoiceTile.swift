@@ -164,10 +164,13 @@ public struct ChoiceTile: View {
     /// clears ``ZSpacing/touchMinimum`` more than twice over.
     ///
     /// It does not fit every phone, and it cannot. A 375×667 pt screen leaves
-    /// the quiz room for about 104 pt a tile, and no floor that small can show
+    /// the quiz room for about 81 pt a tile, and no floor that small can show
     /// a credit at all — 13 pt of type over two lines is simply wider than
-    /// that. A screen that short cannot have both, and choosing between them
-    /// is what #111 and #122 are for.
+    /// that. A screen that short has to choose, and the clamp here makes that
+    /// choice badly: it would draw a tile the screen has no room for. So a
+    /// caller with less room than this is expected to say what it wants
+    /// instead of handing the size over and hoping. The quiz scales the tile
+    /// down for exactly one device — see `QuizTile` and #135.
     public static let minimumSize: CGFloat = (PhotoCreditMetrics.minimumColumn
         + PhotoCreditMetrics.leadingPadding
         + PhotoCreditMetrics.trailingPadding).rounded(.up)
