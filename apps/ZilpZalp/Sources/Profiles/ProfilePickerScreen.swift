@@ -22,7 +22,13 @@ struct ProfilePickerScreen: View {
 
     /// Narrower in a compact width, so an iPhone still gets two cards side by
     /// side rather than one enormous one per row.
-    private static let compactCardWidth: CGFloat = 140
+    ///
+    /// 120 rather than 140 because of the shortest screen the app supports: an
+    /// iPhone SE is 375 pt wide, which leaves 279 pt inside the screen gutter,
+    /// and two 140 pt cards with the gap between them want 304. The picker
+    /// fell to a single column there — and a child who has to scroll to find
+    /// their own face is being asked to read the order instead of seeing it.
+    private static let compactCardWidth: CGFloat = 120
 
     /// The avatar inside the card. 1f draws 120 pt.
     private static let discDiameter: CGFloat = 120
@@ -111,7 +117,11 @@ struct ProfilePickerScreen: View {
         action: @escaping () -> Void,
     ) -> some View {
         Button(action: action) {
-            ZCard(tone: tone) {
+            // Less air inside the card in a compact width: at two columns on a
+            // 375 pt screen the column is 127 pt, and the design's own padding
+            // would leave the 88 pt disc less room than it needs and push the
+            // card back out over its column.
+            ZCard(tone: tone, padding: isCompact ? ZSpacing.step4 : ZSpacing.step5) {
                 VStack(spacing: ZSpacing.step3) {
                     AvatarDisc(
                         style: style,
