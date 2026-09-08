@@ -9,10 +9,6 @@ import Testing
 /// classes and therefore keeps its objects and its request log statically.
 @Suite("Pack downloader", .serialized)
 struct PackDownloaderTests {
-    /// A host that cannot resolve. Every request is answered by `StubBucket`,
-    /// so a URL that escaped it would fail rather than reach anything real.
-    private static let baseURL = URL(string: "https://bucket.invalid")!
-
     private static let installed = "Packs/\(StubPack.id)"
     private static let partial = "Packs/\(StubPack.id).partial"
 
@@ -148,6 +144,28 @@ struct PackDownloaderTests {
             #expect(!exists(home, Self.installed))
             let installed = try await downloader.installedPacks()
             #expect(installed.isEmpty)
+        }
+    }
+
+    /// The branch `publish` takes when the pack is already there — a
+    /// `replaceItemAt` on a directory rather than a `moveItem` into an empty
+    /// spot. Parents who load a pack again after it was re-curated take it.
+    @Test("downloading a pack that is already installed replaces it")
+    func replacesAnInstalledPack() async throws {
+        let manifest = StubPack.manifest()
+        try await withDownloader(routes: StubPack.routes(manifest: manifest)) { downloader, home in
+            let entry = StubPack.entry(manifest: manifest)
+            try await downloader.download(entry)
+            try await downloader.download(entry)
+
+            #expect(exists(home, Self.installed + "/manifest.json"))
+            #expect(!exists(home, Self.partial))
+            let installed = try await downloader.installedPacks()
+            #expect(installed.map(\.id) == [StubPack.id])
+
+            let photo = home.appending(path: "\(Self.installed)/\(StubPack.media[0].file)")
+            let written = try Data(contentsOf: photo)
+            #expect(written == StubPack.media[0].bytes)
         }
     }
 
@@ -295,35 +313,5 @@ struct PackDownloaderTests {
 
             #expect(!exists(home, Self.installed))
         }
-    }
-
-    // MARK: - Scaffolding
-
-    /// Runs `body` with a bucket filled from `routes`, a fresh stand-in for
-    /// Application Support and a downloader pointed at both. The directory is
-    /// removed afterwards, whether the test passed or threw.
-    private func withDownloader(
-        routes: [String: StubBucket.Route],
-        _ body: (PackDownloader, URL) async throws -> Void,
-    ) async throws {
-        let home = FileManager.default.temporaryDirectory
-            .appending(path: "zilpzalp-\(UUID().uuidString)")
-        defer { try? FileManager.default.removeItem(at: home) }
-
-        StubBucket.fill(with: routes)
-        try await body(
-            PackDownloader(
-                baseURL: Self.baseURL,
-                directory: home,
-                session: StubBucket.session(),
-            ),
-            home,
-        )
-    }
-
-    private func exists(_ home: URL, _ path: String) -> Bool {
-        FileManager.default.fileExists(
-            atPath: home.appending(path: path).path(percentEncoded: false),
-        )
     }
 }
