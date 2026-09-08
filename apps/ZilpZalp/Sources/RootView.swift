@@ -11,6 +11,13 @@ struct RootView: View {
     @State private var model = AppModel()
     @State private var path: [Route] = []
 
+    /// Every species photo of the opened pack, read once at launch.
+    ///
+    /// The album, the ladder and the ascent all draw pages of stickers, and
+    /// each of them is rebuilt on every layout pass. Opening the files here
+    /// means the three screens are handed pictures rather than a directory.
+    @State private var photos = SpeciesPhotos(nil)
+
     var body: some View {
         NavigationStack(path: $path) {
             start
@@ -29,14 +36,61 @@ struct RootView: View {
                     // `RoundResult` on a navigation path can carry the id but
                     // not the photo.
                     case let .roundEnd(result):
-                        RoundEndScreen(result: result, catalog: model.catalog) {
-                            path.removeLast()
-                        }
+                        RoundEndScreen(
+                            result: result,
+                            catalog: model.catalog,
+                            record: { await model.record($0) },
+                            playAgain: { path.removeLast() },
+                            openCollection: { path.append(.collection) },
+                            showAscent: { path.append(.rankAscent($0)) },
+                        )
                     case .parents: ParentsScreen()
+                    case .collection: collection
+                    case .ladder: ladder
+                    case let .rankAscent(ascent):
+                        RankAscentScreen(
+                            ascent: ascent,
+                            photos: photos,
+                            goBack: { path.removeLast() },
+                            openLadder: { path.append(.ladder) },
+                        )
                     }
                 }
         }
-        .task { await model.load() }
+        .task {
+            photos = SpeciesPhotos(model.catalog)
+            await model.load()
+        }
+    }
+
+    /// The album belongs to a child, and every route to it starts on a screen
+    /// only a chosen child can reach. The failure branch is unreachable for
+    /// the same reason the quiz's is, and is a sentence rather than a `!`.
+    @ViewBuilder
+    private var collection: some View {
+        if let profile = model.activeProfile {
+            CollectionScreen(
+                profile: profile,
+                catalog: model.catalog,
+                photos: photos,
+                profiles: model.profiles,
+                openLadder: { path.append(.ladder) },
+                goBack: { path.removeLast() },
+            )
+        } else {
+            CalmFailure(message: "profile.store.failed")
+        }
+    }
+
+    /// The ladder without a child reads as a ladder nobody is on, which is
+    /// exactly what it is: eight rungs, none of them current. No failure
+    /// screen for that.
+    private var ladder: some View {
+        RankLadderScreen(
+            stars: model.activeProfile?.totalStars ?? 0,
+            photos: photos,
+            goBack: { path.removeLast() },
+        )
     }
 
     /// A game needs the pack the round is drawn from. The home screen is only
@@ -73,6 +127,7 @@ struct RootView: View {
                 openGame: { path.append(.quiz($0)) },
                 openParents: { path.append(.parents) },
                 openProfiles: { model.chooseAgain() },
+                openCollection: { path.append(.collection) },
             )
         } else {
             ProfileFlow(model: model)
