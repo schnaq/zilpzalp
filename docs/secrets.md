@@ -36,9 +36,11 @@ Danach laufen die mise-Tasks, die Secrets brauchen, automatisch über `infisical
 | `/ios` | `IOS_DIST_CERT_PASSWORD` | Passwort dazu |
 | `/ios` | `IOS_PROVISIONING_PROFILE_BASE64` | App-Store-Provisioning-Profil |
 | `/ios` | `ASC_KEY_ID`, `ASC_ISSUER_ID`, `ASC_KEY_P8_BASE64` | App Store Connect API, TestFlight-Upload |
-| `/ios` | `IOS_DIST_CERT_CHAIN_BASE64` | optional: Apple-WWDR-Zwischenzertifikat, nur nötig wenn weder `.p12` noch Runner es mitbringen |
+| `/ios` | `IOS_DIST_CERT_CHAIN_BASE64` | optional: Apple-WWDR-Zwischenzertifikat, nur nötig für eine Generation, die `.github/certs` noch nicht mitbringt |
 
 Die Signing-Secrets liest ausschließlich `.github/workflows/testflight.yml`. Der Workflow läuft nach jedem grünen CI-Lauf auf `main` auf dem self-hosted Runner: Zertifikat und Profil wandern in eine eigene Keychain (`.github/scripts/ios-signing-setup.sh`), das Archiv entsteht ohne Signatur, und `xcodebuild -exportArchive` signiert und lädt es mit dem App-Store-Connect-Schlüssel nach TestFlight. `.github/scripts/ios-signing-teardown.sh` räumt danach alles wieder ab — der Runner ist persistent, Signing-Material darf keinen Lauf überleben. Der normale CI-Lauf baut weiterhin ohne Codesign.
+
+Die Apple-WWDR-Zwischenzertifikate liegen als öffentliche CA-Zertifikate im Repository unter `.github/certs/` und werden bei jedem Release in die Keychain importiert — kein Secret, kein Download zur Laufzeit, und die Kette hängt nicht mehr davon ab, was der Runner zufällig mitbringt (siehe `.github/certs/README.md`).
 
 Lokal mit denselben Befehlen nachvollziehbar:
 

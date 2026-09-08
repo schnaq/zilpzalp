@@ -16,9 +16,10 @@
 #   IOS_DIST_CERT_PASSWORD          password for the .p12
 #   IOS_PROVISIONING_PROFILE_BASE64 base64 of the App Store .mobileprovision
 #   IOS_DIST_CERT_CHAIN_BASE64      optional: base64 of the Apple WWDR
-#                                   intermediate (PEM/DER). Only needed when the
-#                                   .p12 does not already carry the chain and
-#                                   the runner has no copy either.
+#                                   intermediate (PEM/DER). An override for a
+#                                   generation .github/certs does not carry yet;
+#                                   the committed intermediates cover the normal
+#                                   case, so this is normally unset.
 #
 # Writes into $RUNNER_TEMP, for the export step and for the teardown script:
 #   orig-default-keychain, profile_uuid, ExportOptions.plist
@@ -84,35 +85,89 @@ security import "$p12" -k "$kc" -P "$IOS_DIST_CERT_PASSWORD" \
 # This keychain is first in the search list, so codesign builds the signer's
 # chain from what lives HERE: leaf -> Apple WWDR intermediate -> Apple Root. A
 # .p12 that carries only the leaf and the key therefore signs fine on a
-# developer Mac (whose login keychain has the intermediate from Xcode) and fails
-# on the runner. Put the intermediate into THIS keychain: from an explicit
-# secret when one is set, otherwise harvested from the runner's own keychains
-# (macOS and Xcode ship it). Both paths are local — nothing is downloaded during
-# the job. The validity check below is the backstop.
+# developer Mac and failed on the runner: the intermediates arrive with Xcode in
+# an interactive login keychain, and the runner's CI user has none of that. The
+# first TestFlight run died exactly there — the machine offered two
+# intermediates and neither was the generation that issued our certificate.
+#
+# The intermediates therefore come from the repository, not from the machine.
+# Three sources, in this order, all local — nothing is downloaded during a job:
+#   1. .github/certs/*.cer, committed and always imported (README there)
+#   2. the runner's own keychains, kept as a second source
+#   3. IOS_DIST_CERT_CHAIN_BASE64, an override for a generation we do not carry
+# The validity check further down is the backstop for all three.
+certs_dir="$(dirname "${BASH_SOURCE[0]}")/../certs"
+shopt -s nullglob
+vendored=("$certs_dir"/*.cer)
+shopt -u nullglob
+if [ "${#vendored[@]}" -eq 0 ]; then
+  echo "::error::No certificates in $certs_dir. The Apple WWDR intermediates are committed to"
+  echo "::error::this repository on purpose — see .github/certs/README.md. Restore them."
+  exit 1
+fi
+for cer in "${vendored[@]}"; do
+  # No `|| true` here, unlike the harvest below: this keychain was created
+  # seconds ago, so nothing can be a duplicate yet and a failure means the file
+  # is unreadable or not a certificate. That must stop the release.
+  security import "$cer" -k "$kc" -T /usr/bin/codesign -T /usr/bin/xcodebuild >/dev/null
+done
+echo "WWDR intermediates imported from .github/certs: ${#vendored[@]}"
+
 chain="$RUNNER_TEMP/chain.pem"
 if [ -n "${IOS_DIST_CERT_CHAIN_BASE64:-}" ]; then
   printf '%s' "$IOS_DIST_CERT_CHAIN_BASE64" | base64 --decode >"$chain"
+  chain_source="IOS_DIST_CERT_CHAIN_BASE64"
 else
-  # No keychain argument: searches the whole search list (login and System),
-  # which is where macOS and Xcode keep the WWDR intermediates.
+  # The runner's own keychains are named explicitly — the same list the search
+  # list was rebuilt from. Searching the whole search list would find the
+  # release keychain first and count the certificates just imported from
+  # .github/certs, which would make the number below meaningless exactly when
+  # it is needed.
+  # shellcheck disable=SC2086  # deliberate word splitting: one argument per keychain
   security find-certificate -a -c "Apple Worldwide Developer Relations" -p \
-    >"$chain" 2>/dev/null || true
+    $prev /Library/Keychains/System.keychain >"$chain" 2>/dev/null || true
+  chain_source="this runner's own keychains"
 fi
 chain_certs=0
 if [ -s "$chain" ]; then
   chain_certs="$(grep -c 'BEGIN CERTIFICATE' "$chain" || true)"
-  # Duplicates across keychains are expected; re-importing a certificate that is
-  # already there is not worth failing a release over.
+  # Duplicates against the vendored set are the normal case now, and
+  # re-importing a certificate that is already there is not worth failing a
+  # release over.
   security import "$chain" -k "$kc" -T /usr/bin/codesign -T /usr/bin/xcodebuild \
     >/dev/null 2>&1 || true
 fi
 rm -f "$chain"
-# Reported so a chain failure below is immediately attributable: 0 means this
-# runner has no WWDR intermediate to offer and the secret path is required.
-echo "WWDR intermediate certificates imported into the release keychain: $chain_certs"
+echo "WWDR intermediates additionally offered by $chain_source: $chain_certs"
 
 security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$kc_pw" "$kc" >/dev/null
 rm -f "$p12"
+
+# Printed on every run, so a chain problem is diagnosable from the log alone
+# instead of needing a second run with extra echoes. All of it is public
+# certificate metadata: subject, issuer, SHA-1 fingerprint. Nothing else from
+# the .p12 is ever shown — not the password, not the private key.
+leaf="$RUNNER_TEMP/leaf.pem"
+security find-certificate -c "Apple Distribution" -p "$kc" >"$leaf" 2>/dev/null || true
+echo "Signing certificate in the release keychain:"
+if [ -s "$leaf" ]; then
+  openssl x509 -in "$leaf" -noout -subject -issuer -fingerprint -sha1 |
+    sed 's/^/  /' || echo "  (present, but could not be parsed)"
+else
+  echo "  none — no certificate named 'Apple Distribution' is in this keychain"
+fi
+intermediates="$(security find-certificate -a -c "Apple Worldwide Developer Relations" -p "$kc" 2>/dev/null || true)"
+echo "WWDR intermediates now in the release keychain:"
+if [ -n "$intermediates" ]; then
+  # crl2pkcs7 wraps the whole PEM bundle so that `pkcs7 -print_certs` walks
+  # every certificate in it; `openssl x509` would only ever read the first.
+  printf '%s\n' "$intermediates" |
+    openssl crl2pkcs7 -nocrl -certfile /dev/stdin |
+    openssl pkcs7 -print_certs -noout |
+    sed '/^[[:space:]]*$/d; s/^/  /' || echo "  (present, but could not be parsed)"
+else
+  echo "  none"
+fi
 
 # Assert the pinned identity is present AND *valid for codesigning*.
 # `find-identity -v` lists only identities whose chain reaches a trusted anchor,
@@ -129,17 +184,35 @@ if ! security find-identity -p codesigning "$kc" | grep -qi "$identity_sha1"; th
   exit 1
 fi
 if ! security find-identity -v -p codesigning "$kc" | grep -qi "$identity_sha1"; then
-  echo "::error::The Apple Distribution certificate imported, but its chain to the Apple root cannot be built,"
-  echo "::error::so codesign would fail with errSecInternalComponent."
-  echo "::error::WWDR intermediates found on this runner: $chain_certs (0 = none available locally,"
-  echo "::error::so the chain has to come from Infisical). Fix either one:"
-  echo "::error::  (a) re-export the .p12 WITH the chain (Keychain Access: select the certificate, its"
-  echo "::error::      private key and 'Apple Worldwide Developer Relations Certification Authority'"
-  echo "::error::      -> Export) and update IOS_DIST_CERT_P12_BASE64;"
-  echo "::error::  (b) set IOS_DIST_CERT_CHAIN_BASE64 in Infisical prod /ios to the base64 of that"
-  echo "::error::      intermediate certificate."
+  echo "::error::The Apple Distribution certificate imported, but its chain to a trusted Apple root"
+  echo "::error::cannot be built, so codesign would fail with errSecInternalComponent."
+  # -L keeps this strictly local: no CA certificate is fetched from the net, so
+  # the verdict describes this machine and matches the rest of the pipeline.
+  echo "What Security says about the chain:"
+  if [ -s "$leaf" ]; then
+    security verify-cert -k "$kc" -c "$leaf" -p codeSign -L 2>&1 | sed 's/^/  /' || true
+  else
+    echo "  no leaf certificate to verify — see the empty listing above"
+  fi
+  echo "Identities considered valid in this keychain:"
+  security find-identity -v -p codesigning "$kc" || true
+  echo "::error::Compare the certificate's issuer printed above against the intermediates listed"
+  echo "::error::next to it, then take the matching repair:"
+  echo "::error::  (a) the issuer's OU is NOT among them — that generation is missing from"
+  echo "::error::      .github/certs. Download it from https://www.apple.com/certificateauthority/"
+  echo "::error::      and commit it, exactly as .github/certs/README.md describes;"
+  echo "::error::  (b) the issuer's OU IS among them — then the missing link is the root the"
+  echo "::error::      issuer line names. Check it with:"
+  echo "::error::        security find-certificate -c 'Apple Root CA - G3' \\"
+  echo "::error::          /System/Library/Keychains/SystemRootCertificates.keychain"
+  echo "::error::      (a root has to be trusted, so committing one would not help — the runner's"
+  echo "::error::      system trust store has to carry it);"
+  echo "::error::  (c) neither fits — re-export the .p12 WITH its chain and update"
+  echo "::error::      IOS_DIST_CERT_P12_BASE64, or set IOS_DIST_CERT_CHAIN_BASE64 in Infisical"
+  echo "::error::      prod /ios ($chain_certs certificate(s) came from that second source here)."
   exit 1
 fi
+rm -f "$leaf"
 # Install the provisioning profile by UUID and read its name and bundle id.
 prof="$RUNNER_TEMP/profile.mobileprovision"
 plist="$RUNNER_TEMP/profile.plist"
