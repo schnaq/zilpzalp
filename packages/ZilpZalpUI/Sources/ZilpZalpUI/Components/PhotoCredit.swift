@@ -83,6 +83,20 @@ enum PhotoCreditMetrics {
     /// A photographer's name and licence fit on two lines at any tile size we
     /// draw; a third would start eating the bird.
     static let lineLimit = 2
+    /// The narrowest text column this strip may be given.
+    ///
+    /// Measured rather than chosen: the widest attribution the base pack
+    /// produces, "Foto: Alexis Tinker-Tsavalas (CC BY)", needs this much
+    /// column to hold ``lineLimit`` lines of the bundled Nunito SemiBold at
+    /// ``size``. Anything narrower truncates the licence away, which is not a
+    /// cosmetic loss. ``ChoiceTile/minimumSize`` is this plus the two paddings
+    /// — the strip is what decides how small an answer tile can be.
+    ///
+    /// It is a floor for what ships today, not a promise: a longer
+    /// photographer's name, or a `CC BY-SA 4.0` line, still needs a third line
+    /// at that tile size. Widening the column rather than raising this number
+    /// is what #111 is for.
+    static let minimumColumn: CGFloat = 115.3
 }
 
 #Preview("Credit on a photo field") {
@@ -103,6 +117,11 @@ enum PhotoCreditMetrics {
     // component ever draws, over the 40 pt corner *and* under the 5 pt border
     // the tile strokes inside the same shape. Both used to cut into the first
     // glyph — which is why the bare field above is not enough to judge this.
+    //
+    // The `CC BY-SA 4.0` line runs out of column at this size and is truncated.
+    // That is #111 rather than a new fault, and it is the reason the floor is
+    // where it is: the base pack's own longest line, a `CC BY`, still holds two
+    // whole lines here — see ``ChoiceTile/minimumSize``.
     HStack(alignment: .top, spacing: ZSpacing.gapTiles) {
         ForEach(previewCredits, id: \.self) { credit in
             ChoiceTile(
