@@ -88,6 +88,13 @@ struct CreditsScreen: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(ZColor.surfacePage)
+            // A page, not the default form sheet. Measured on an iPad Pro
+            // 13-inch the form sheet is about 620 pt tall and cut the bottom
+            // row of answer pills in half — the gate scrolls, so nothing was
+            // unreachable, but a task whose answers are sliced through reads
+            // as broken rather than as "there is more below". On a phone a
+            // sheet is full width either way and this changes nothing.
+            .presentationSizing(.page)
         }
     }
 
