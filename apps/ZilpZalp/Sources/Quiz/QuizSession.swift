@@ -286,27 +286,6 @@ final class QuizSession {
     }
 }
 
-private extension License {
-    /// How a licence is named in a credit line: the short public name, not the
-    /// SPDX identifier the manifest carries. "CC BY" is what the licence
-    /// deed itself asks to be called; "CC-BY-4.0" is a filing code.
-    ///
-    /// Not product copy and therefore not in the String Catalog: these three
-    /// names are the same in every language.
-    ///
-    /// App-private only because #25 was not allowed to change `ZilpZalpData`.
-    /// This is a fact about `License`, not about the quiz, and the credits
-    /// screen (#37) will want the same three strings — at which point it
-    /// belongs beside the enum rather than in a second copy here.
-    var shortName: String {
-        switch self {
-        case .cc0: "CC0"
-        case .ccBy: "CC BY"
-        case .ccBySa: "CC BY-SA"
-        }
-    }
-}
-
 extension Logger {
     /// Playing a round.
     ///
