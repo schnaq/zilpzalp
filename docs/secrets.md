@@ -36,8 +36,18 @@ Danach laufen die mise-Tasks, die Secrets brauchen, automatisch über `infisical
 | `/ios` | `IOS_DIST_CERT_PASSWORD` | Passwort dazu |
 | `/ios` | `IOS_PROVISIONING_PROFILE_BASE64` | App-Store-Provisioning-Profil |
 | `/ios` | `ASC_KEY_ID`, `ASC_ISSUER_ID`, `ASC_KEY_P8_BASE64` | App Store Connect API, TestFlight-Upload |
+| `/ios` | `IOS_DIST_CERT_CHAIN_BASE64` | optional: Apple-WWDR-Zwischenzertifikat, nur nötig wenn weder `.p12` noch Runner es mitbringen |
 
-Die Signing-Secrets werden erst mit Meilenstein 7 gebraucht. Bis dahin baut CI ohne Codesign.
+Die Signing-Secrets liest ausschließlich `.github/workflows/testflight.yml`. Der Workflow läuft nach jedem grünen CI-Lauf auf `main` auf dem self-hosted Runner: Zertifikat und Profil wandern in eine eigene Keychain (`.github/scripts/ios-signing-setup.sh`), das Archiv entsteht ohne Signatur, und `xcodebuild -exportArchive` signiert und lädt es mit dem App-Store-Connect-Schlüssel nach TestFlight. `.github/scripts/ios-signing-teardown.sh` räumt danach alles wieder ab — der Runner ist persistent, Signing-Material darf keinen Lauf überleben. Der normale CI-Lauf baut weiterhin ohne Codesign.
+
+Lokal mit denselben Befehlen nachvollziehbar:
+
+```
+mise run archive
+infisical run --env=prod --path=/ios -- mise run upload
+```
+
+Das ist ein echter Upload. Ohne `GITHUB_RUN_NUMBER` trägt der Build die Nummer aus `project.yml`, und App Store Connect lehnt eine Build-Nummer ab, die es schon kennt.
 
 ## Medien-Bucket
 
@@ -65,7 +75,7 @@ Alles Weitere wird zur Laufzeit geladen:
 
 ```yaml
 - name: Load Infisical secrets into job env
-  uses: Infisical/secrets-action@77ab1f4ccd183a543cb5b42435fbd181189f4995 # v1.0.16
+  uses: Infisical/secrets-action@6cd3f7c0e4cc0d2395ee4ef414eb6eeb5d3e73db # v1.0.17
   with:
     method: universal
     client-id: ${{ secrets.INFISICAL_CLIENT_ID }}

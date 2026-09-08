@@ -58,6 +58,8 @@ mise run format     Formatieren und behebbare Lint-Funde korrigieren
 mise run test       Nur die Package-Tests
 mise run generate   Xcode-Projekt aus project.yml erzeugen (vor dem Öffnen in Xcode)
 mise run build      App bauen
+mise run archive    App für den App Store archivieren, ohne Signatur
+mise run upload     Dieses Archiv signieren und zu TestFlight schicken
 mise run fetch-media  Medien kuratieren und nach S3 laden
 ```
 
@@ -102,7 +104,7 @@ In GitHub liegen ausschließlich `INFISICAL_CLIENT_ID`, `INFISICAL_CLIENT_SECRET
 - Branch von `main`, Merge per Pull Request. Kein direkter Push auf `main`
 - Branch-Namen: `feat/…`, `fix/…`, `docs/…`, `chore/…`
 - Conventional Commits — git-cliff erzeugt daraus den Changelog. Betreff imperativ, höchstens 50 Zeichen, kein Punkt am Ende. Fließtext bei 72 Zeichen umbrechen
-- Release durch Tag `vX.Y.Z` auf `main`. Der Tag löst Build und TestFlight-Upload aus
+- Jeder grüne CI-Lauf auf `main` baut, signiert und lädt nach TestFlight (`.github/workflows/testflight.yml`); die Tags `vX.Y.Z` bleiben für App-Store-Releases
 - Nicht committen oder pushen, ohne dass es gewünscht wurde
 
 ## Tests

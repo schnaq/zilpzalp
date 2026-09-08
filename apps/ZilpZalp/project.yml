@@ -72,6 +72,13 @@ targets:
         # (1024x1024) with Dark and Tinted variants, see tools/render_app_icon.py.
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         INFOPLIST_KEY_UILaunchScreen_Generation: true
+        # Export compliance, answered here once instead of by hand in App
+        # Store Connect for every build. ZilpZalp ships no encryption of its
+        # own; it downloads packs over HTTPS, which is exactly the exempt
+        # case. Without the key every TestFlight build stops at "Missing
+        # Compliance" and no tester can install it — verified by reading the
+        # key back out of the built Info.plist.
+        INFOPLIST_KEY_ITSAppUsesNonExemptEncryption: false
         # The one purpose string the app needs, shown when the grown-ups' area
         # asks Face ID for the first time. Product copy, so German, and it
         # names what the app wants rather than the technology. Unlike

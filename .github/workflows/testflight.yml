@@ -1,0 +1,139 @@
+# TestFlight delivery, gated on CI.
+#
+# Runs after the "CI" workflow has completed **successfully** for a push to
+# `main`, so every green commit on `main` becomes a TestFlight build. Tags stay
+# what they always were — the App Store release — and do not trigger this.
+#
+# NOTE (workflow_run): GitHub always loads *this* file from the default branch,
+# never from the branch that was pushed. A change here only takes effect once it
+# is on `main`, and it cannot be tried out from a feature branch that way. The
+# build itself checks out the exact commit CI validated (head_sha), not the
+# default branch. `workflow_dispatch` exists so the pipeline can be run by hand
+# — that is a real upload, with the run number as the build number.
+name: TestFlight
+
+on:
+  workflow_run:
+    workflows: ["CI"]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+
+# Never abort an upload in flight (unlike CI, which cancels stale runs). Not
+# keyed by ref: two uploads of the same app must not run at the same time.
+concurrency:
+  group: testflight
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  # Pin Xcode by path rather than with setup-xcode, which only works on
+  # GitHub-hosted images — the same as in ci.yml. mise's `xcode-version` guard
+  # runs before every task and fails the job if this path does not provide the
+  # pinned version.
+  DEVELOPER_DIR: /Applications/Xcode.app/Contents/Developer
+  # The Infisical Action addresses projects by slug, not by the workspace ID in
+  # .infisical.json — see docs/secrets.md and secrets-smoke.yml.
+  INFISICAL_PROJECT_SLUG: ${{ vars.INFISICAL_PROJECT_SLUG }}
+
+jobs:
+  testflight:
+    name: Archive, sign and upload
+    # Only after CI fully succeeded (a 'success' conclusion means every CI job
+    # passed) for a push — never for a pull request run, which CI also does.
+    # A manual dispatch has no workflow_run payload and is allowed outright.
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.workflow_run.conclusion == 'success' &&
+       github.event.workflow_run.event == 'push')
+    runs-on: [self-hosted, macOS, ARM64]
+    timeout-minutes: 45
+    steps:
+      # Check out the exact commit CI validated; workflow_run would otherwise
+      # default to the default branch. A dispatch has no such commit and uses
+      # the ref it was started with.
+      - name: Check out code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.ref }}
+
+      - name: Install pinned tooling
+        run: mise install
+
+      # `mise run check` is deliberately not repeated here: CI ran it on this
+      # very commit, and that is what gates this workflow.
+
+      - name: Load signing secrets from Infisical
+        uses: Infisical/secrets-action@6cd3f7c0e4cc0d2395ee4ef414eb6eeb5d3e73db # v1.0.17
+        with:
+          method: universal
+          client-id: ${{ secrets.INFISICAL_CLIENT_ID }}
+          client-secret: ${{ secrets.INFISICAL_CLIENT_SECRET }}
+          domain: ${{ secrets.INFISICAL_API_URL }}
+          project-slug: ${{ env.INFISICAL_PROJECT_SLUG }}
+          env-slug: prod
+          secret-path: /ios
+          export-type: env
+
+      # Nothing here relies on the action masking what it exports (see
+      # docs/secrets.md): masking is the very first thing that happens, before
+      # any command could print one of these values.
+      #
+      # Line by line, never `echo "::add-mask::$whole_value"`: a workflow
+      # command ends at the first newline, so echoing a multi-line value would
+      # register only its first line as a mask and print every following line to
+      # the log verbatim. Lines shorter than eight characters are skipped so
+      # that no short fragment ends up redacted all over the log; the base64
+      # blobs and the ASC identifiers are all far longer, and the .p12 password
+      # is masked by the signing script as a whole (it is single-line) as well.
+      - name: Mask the secrets and check they arrived
+        run: |
+          required="IOS_DIST_CERT_P12_BASE64 IOS_DIST_CERT_PASSWORD
+                    IOS_PROVISIONING_PROFILE_BASE64
+                    ASC_KEY_ID ASC_ISSUER_ID ASC_KEY_P8_BASE64"
+
+          # IOS_DIST_CERT_CHAIN_BASE64 is masked too but not required: it is the
+          # escape hatch the signing script offers when neither the .p12 nor the
+          # runner brings the WWDR intermediate along.
+          for name in $required IOS_DIST_CERT_CHAIN_BASE64; do
+            printf '%s\n' "${!name}" | while IFS= read -r line; do
+              if [ "${#line}" -ge 8 ]; then echo "::add-mask::$line"; fi
+            done
+          done
+
+          for name in $required; do
+            if [ -z "${!name}" ]; then
+              echo "::error::$name is empty. The Infisical machine identity used by CI cannot read prod /ios — so far only dev / is proven (secrets-smoke.yml). Grant that identity read access to the prod environment, path /ios, in Infisical."
+              exit 1
+            fi
+          done
+
+      # Unsigned, generic iOS device destination, Release, build number =
+      # this run's number. `archive` generates the Xcode project first, exactly
+      # as `build` does, so there is no separate generate step.
+      #
+      # It uses none of the signing secrets and could therefore run before they
+      # are loaded, which would keep them out of the job environment during the
+      # longest step. It runs after them anyway: the likeliest failure of this
+      # whole pipeline is the Infisical read, and finding that out first costs
+      # seconds instead of the ten minutes an archive takes. The project has no
+      # script build phases, so nothing during the archive can read the
+      # environment.
+      - name: Archive
+        run: mise run archive
+
+      # Signing, export and upload in one task, so the same command reproduces
+      # the whole thing locally under `infisical run --env=prod --path=/ios`.
+      - name: Sign and upload to TestFlight
+        run: mise run upload
+
+      # The task already tears down from a trap; this repeats it for the
+      # cancelled or timed-out job, where the trap never fires. Idempotent, and
+      # it never fails the run it is cleaning up after. The one step that does
+      # not go through mise, deliberately: it has to clear the runner even when
+      # the job died because mise itself did not come up.
+      - name: Remove signing material
+        if: always()
+        run: bash .github/scripts/ios-signing-teardown.sh

@@ -128,6 +128,88 @@ xcodebuild build \
   | xcbeautify
 '''
 
+[tasks.archive]
+description = "Archive the app for the App Store, unsigned"
+depends = ["xcode-version", "generate"]
+run = '''
+set -euo pipefail
+export DEVELOPER_DIR="${DEVELOPER_DIR:-/Applications/Xcode.app/Contents/Developer}"
+
+# One place decides where a release build's working files live: $RUNNER_TEMP on
+# the runner, a git-ignored directory on a development machine. The archive, the
+# signing material and the App Store Connect key all land there, and
+# .github/scripts/ios-signing-teardown.sh removes exactly that set again.
+out="${RUNNER_TEMP:-$PWD/DerivedData/release}"
+mkdir -p "$out"
+
+# The build number is the workflow run number: it never repeats and always
+# grows, and App Store Connect refuses a build number it has already seen.
+# Outside CI there is no run number, and the 1 below overrides whatever
+# project.yml says — a local archive is for inspecting the build, not for a
+# second upload.
+build_number="${GITHUB_RUN_NUMBER:-1}"
+
+# Archived WITHOUT code signing on purpose. Signing happens at export, so no
+# provisioning profile is ever forced onto the three local SwiftPM packages —
+# those targets "do not support provisioning profiles" and would fail the
+# archive. generic/platform=iOS builds against the device SDK without naming a
+# device.
+rm -rf "$out/ZilpZalp.xcarchive"
+xcodebuild archive \
+  -project apps/ZilpZalp/ZilpZalp.xcodeproj \
+  -scheme ZilpZalp \
+  -configuration Release \
+  -destination "generic/platform=iOS" \
+  -archivePath "$out/ZilpZalp.xcarchive" \
+  -derivedDataPath DerivedData \
+  CURRENT_PROJECT_VERSION="$build_number" \
+  CODE_SIGNING_ALLOWED=NO \
+  CODE_SIGNING_REQUIRED=NO \
+  | xcbeautify
+'''
+
+[tasks.upload]
+description = "Sign the archive from 'mise run archive' and send it to TestFlight"
+depends = ["xcode-version"]
+# Needs the signing material and the App Store Connect key from Infisical:
+#   infisical run --env=prod --path=/ios -- mise run upload
+run = '''
+set -euo pipefail
+export DEVELOPER_DIR="${DEVELOPER_DIR:-/Applications/Xcode.app/Contents/Developer}"
+
+# The same rule as in `archive` — see the comment there.
+export RUNNER_TEMP="${RUNNER_TEMP:-$PWD/DerivedData/release}"
+
+: "${ASC_KEY_ID:?missing (Infisical prod /ios)}"
+: "${ASC_ISSUER_ID:?missing (Infisical prod /ios)}"
+: "${ASC_KEY_P8_BASE64:?missing (Infisical prod /ios)}"
+
+# Signing material must not outlive the run — the runner is persistent. The
+# workflow repeats this with `if: always()`, for the cancelled or timed-out job
+# in which this trap never fires.
+trap 'bash .github/scripts/ios-signing-teardown.sh' EXIT
+
+bash .github/scripts/ios-signing-setup.sh
+
+# The App Store Connect key authenticates the *upload*, not the signing — the
+# certificate imported above does that. Written readable to its owner only and
+# removed again by the teardown.
+key="$RUNNER_TEMP/asc-key.p8"
+(umask 077 && printf '%s' "$ASC_KEY_P8_BASE64" | base64 --decode >"$key")
+
+# A single call signs the archive and hands it to App Store Connect: the
+# ExportOptions.plist the setup script wrote asks for `destination: upload`.
+# That is why this pipeline needs neither fastlane nor Ruby. -exportPath still
+# receives the export log and the distribution summary.
+xcodebuild -exportArchive \
+  -archivePath "$RUNNER_TEMP/ZilpZalp.xcarchive" \
+  -exportPath "$RUNNER_TEMP/export" \
+  -exportOptionsPlist "$RUNNER_TEMP/ExportOptions.plist" \
+  -authenticationKeyPath "$key" \
+  -authenticationKeyID "$ASC_KEY_ID" \
+  -authenticationKeyIssuerID "$ASC_ISSUER_ID"
+'''
+
 [tasks.license-gate]
 description = "Check the pack manifests against the licence rules"
 run = '''
