@@ -44,56 +44,66 @@ struct TimeForTheNestScreen: View {
     }
 
     var body: some View {
-        ScrollView {
-            VStack(spacing: isTight ? ZSpacing.step4 : ZSpacing.step6) {
-                Icon(.bird, size: .custom(isTight ? Self.compactBird : Self.bird))
-                    .foregroundStyle(ZColor.sun300)
-                    .accessibilityHidden(true)
-
-                Text("timeBudget.title")
-                    .typeStyle(isTight ? .display2 : .hero, .display, weight: .extraBold)
-                    .foregroundStyle(ZColor.white)
-
-                Text("timeBudget.farewell")
-                    .typeStyle(isTight ? .bodyLarge : .headline, .display, weight: .bold)
-                    .foregroundStyle(ZColor.olive100)
-
-                // The day's take as the design draws it: a pill, not a
-                // sentence. The sentence is what the screen says out loud.
-                Badge(starsToday, tone: .sun, icon: .star)
-                    .accessibilityHidden(true)
-
-                // For the grown-up looking over the shoulder, in the one
-                // place a child will not read: where the limit came from and
-                // therefore where it can be changed.
-                Text("timeBudget.setInParents")
-                    .typeStyle(.caption, .body, weight: .semibold)
-                    .foregroundStyle(ZColor.olive300)
-
-                ZButton(
-                    String(localized: "timeBudget.home"),
-                    leadingIcon: .house,
-                    action: goHome,
-                )
-                .padding(.top, ZSpacing.step2)
+        // The column sits in the middle of the screen, as screen 1k draws it,
+        // and scrolls only where it does not fit — a phone in landscape has
+        // 400 pt of height for a bird, a hero line and a button. The reader
+        // is what lets both be true at once: a `minHeight` of the space the
+        // scroll view has centres the column inside it without ever clipping
+        // it.
+        GeometryReader { area in
+            ScrollView {
+                column
+                    .frame(maxWidth: .infinity, minHeight: area.size.height)
             }
-            .multilineTextAlignment(.center)
-            .frame(maxWidth: ZSpacing.maxContent)
-            .padding(.horizontal, isTight ? ZSpacing.step5 : ZSpacing.gutterScreen)
-            .padding(.vertical, ZSpacing.step6)
-            .frame(maxWidth: .infinity)
+            // A stack that does not fit truncates its text rather than
+            // offering a way down — the lesson #35 learned on an iPhone in
+            // landscape — and the bounce is off where everything fits.
+            .scrollBounceBehavior(.basedOnSize)
         }
-        // A stack that does not fit truncates its text rather than offering a
-        // way down — the lesson #35 learned on an iPhone in landscape — and
-        // the bounce is off where everything already fits.
-        .scrollBounceBehavior(.basedOnSize)
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(ZColor.surfaceForest)
         .overlay(alignment: .bottom) { signature }
         // No `TopBar`: 1k has none, and there is nothing here to go back to.
         .toolbar(.hidden, for: .navigationBar)
         .navigationBarBackButtonHidden()
         .readAloudOnce(spoken)
+    }
+
+    private var column: some View {
+        VStack(spacing: isTight ? ZSpacing.step4 : ZSpacing.step6) {
+            Icon(.bird, size: .custom(isTight ? Self.compactBird : Self.bird))
+                .foregroundStyle(ZColor.sun300)
+                .accessibilityHidden(true)
+
+            Text("timeBudget.title")
+                .typeStyle(isTight ? .display2 : .hero, .display, weight: .extraBold)
+                .foregroundStyle(ZColor.white)
+
+            Text("timeBudget.farewell")
+                .typeStyle(isTight ? .bodyLarge : .headline, .display, weight: .bold)
+                .foregroundStyle(ZColor.olive100)
+
+            // The day's take as the design draws it: a pill, not a
+            // sentence. The sentence is what the screen says out loud.
+            Badge(starsToday, tone: .sun, icon: .star)
+
+            // For the grown-up looking over the shoulder, in the one
+            // place a child will not read: where the limit came from and
+            // therefore where it can be changed.
+            Text("timeBudget.setInParents")
+                .typeStyle(.caption, .body, weight: .semibold)
+                .foregroundStyle(ZColor.olive300)
+
+            ZButton(
+                String(localized: "timeBudget.home"),
+                leadingIcon: .house,
+                action: goHome,
+            )
+            .padding(.top, ZSpacing.step2)
+        }
+        .multilineTextAlignment(.center)
+        .frame(maxWidth: ZSpacing.maxContent)
+        .padding(.horizontal, isTight ? ZSpacing.step5 : ZSpacing.gutterScreen)
+        .padding(.vertical, ZSpacing.step6)
     }
 
     /// The wordmark of screen 1k, on the screens with room for it. A phone
