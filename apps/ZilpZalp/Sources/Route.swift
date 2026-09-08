@@ -9,13 +9,18 @@ import ZilpZalpCore
 enum Game: Hashable {
     /// Game 1: the name is read out, the child taps the bird (#25).
     case names
-    /// Game 2: the call plays, the child taps the bird. Playable in M5 (#30);
-    /// until then its round is played as game 1 — same questions, same tiles,
-    /// the spoken name standing in for the call that is not there yet.
+    /// Game 2: the bird's recorded call plays and the child taps the bird
+    /// (#31). Nothing is spoken — the name would be the answer — and the sound
+    /// button plays the call again. Only species that carry a call are asked
+    /// for; the others keep their photos among the choices.
+    ///
+    /// Offered only where it can be played: four species with a call and the
+    /// "Vogelstimmen" setting on, see ``AppModel/games``.
     case calls
 
     /// The word under the glyph on the home screen, and the name of the
-    /// screen the tile opens.
+    /// screen the tile opens — which is why game 2's is also the question
+    /// written beside its sound button (see ``QuizSession/writtenQuestion``).
     var title: String {
         switch self {
         case .names: String(localized: "home.game.names.title")

@@ -6,16 +6,20 @@ import ZilpZalpCore
 import ZilpZalpData
 import ZilpZalpUI
 
-/// One sitting at game 1: the round being played, where in it the child is,
-/// and what has been tapped so far.
+/// One sitting at either game: the round being played, where in it the child
+/// is, and what has been tapped so far.
 ///
 /// Wiring, no rules. Which species may stand beside which is ``Round``'s
 /// business, what a round is worth is ``Scoring``'s, and where a tap leaves
 /// the round is ``RoundPlay``'s; this type maps the pack onto them and owns
-/// only what none of them can hold — the photos, the spoken question and the
-/// pause after an answer. Everything the screen asks about a tile is passed
-/// through to the play rather than answered a second time here, so a tile
-/// cannot end up in a phase the round disagrees with.
+/// only what none of them can hold — the photos, the recordings, the way the
+/// question is put and the pause after an answer. Everything the screen asks
+/// about a tile is passed through to the play rather than answered a second
+/// time here, so a tile cannot end up in a phase the round disagrees with.
+///
+/// The two games differ in one thing and that thing lives here: game 1 reads
+/// the bird's name out, game 2 plays its recorded call and says nothing at all
+/// — the name would be the answer (#31).
 @MainActor
 @Observable
 final class QuizSession {
@@ -24,6 +28,9 @@ final class QuizSession {
     /// somebody who is four; `--dur-celebrate` is the token the design gives
     /// exactly that moment.
     private static let answerPause = ZMotion.celebrate
+
+    /// Which question this sitting asks: the spoken name, or the call.
+    private let game: Game
 
     /// The pack this round is drawn from, by species id — the only way back
     /// from a ``Round``'s identifiers to a bird with a name and a photo.
@@ -38,11 +45,25 @@ final class QuizSession {
     /// would be the most visible thing on the screen.
     private let photos: [String: Image]
 
+    /// Every bird's call, resolved once when the session is built — only the
+    /// birds that carry one on disk are in here, and in game 2 those are
+    /// exactly the birds a question can ask for.
+    ///
+    /// Resolved up front for the same reason the photos are: a round asks its
+    /// question the moment it appears, and looking a file up on the way to the
+    /// speaker would put the disk between the child and the sound.
+    private let calls: [String: URL]
+
     /// The species pool in manifest order, so that a seeded round is
     /// reproducible.
     private let species: [QuizSpecies]
 
     private let announcer = SpeechAnnouncer()
+
+    /// Built for both games and used by one. It holds no recording until a
+    /// call is played, so game 1 carries an empty object rather than an
+    /// optional that would need unwrapping at every call site.
+    private let player = CallPlayer()
 
     /// The pending move to the next question. Held so that leaving the screen
     /// can cancel it — a round that advances behind the child's back is a
@@ -72,12 +93,18 @@ final class QuizSession {
     /// and it should say exactly that.
     private var answeredLastQuestion: Date?
 
-    /// - Parameter catalog: The opened pack. Every species in it is a possible
-    ///   question and a possible distractor.
+    /// - Parameters:
+    ///   - catalog: The opened pack. Every species in it is a possible
+    ///     distractor; which of them a question can ask for depends on the game.
+    ///   - game: Whether the question is the spoken name or the recorded call.
     /// - Throws: `RoundError.insufficientSpecies` when the pack holds fewer
-    ///   than four species and a question therefore cannot be filled. Not
-    ///   reachable with the bundled pack, which has ten.
-    init(catalog: PackCatalog) throws {
+    ///   than four species and a question therefore cannot be filled, or
+    ///   `RoundError.noSpeciesToAskFor` when game 2 is opened on a pack that
+    ///   carries no call at all. Neither is reachable from the home screen: the
+    ///   bundled pack has ten species, and ``AppModel/games`` offers game 2 only
+    ///   where there are calls to ask with.
+    init(catalog: PackCatalog, game: Game) throws {
+        self.game = game
         let pack = catalog.pack
         birds = Dictionary(uniqueKeysWithValues: pack.birds.map { ($0.id, $0) })
         photos = Dictionary(
@@ -87,12 +114,28 @@ final class QuizSession {
                     .map { (bird.id, Image(uiImage: $0)) }
             },
         )
+        let recordings = Dictionary(
+            uniqueKeysWithValues: pack.birds.compactMap { bird in
+                catalog.callURL(for: bird).map { (bird.id, $0) }
+            },
+        )
+        calls = recordings
+
         // The genus is the first word of the scientific name, and Core needs
         // nothing else of a bird: "Turdus merula" is a `Turdus`, and two of
         // those beside each other would make the question a coin toss.
+        //
+        // Game 2 puts its question with the recording, so a bird without one
+        // cannot be the answer there — its photo stays in as a distractor
+        // (#31). The local `recordings` rather than the property: a closure in
+        // an initialiser may not reach for `self` yet.
         species = pack.birds.map { bird in
             let genus = bird.scientificName.split(separator: " ").first
-            return QuizSpecies(id: bird.id, genus: String(genus ?? ""))
+            return QuizSpecies(
+                id: bird.id,
+                genus: String(genus ?? ""),
+                canBeAsked: game == .names || recordings[bird.id] != nil,
+            )
         }
 
         // Built here rather than on the first appearance so that a pack too
@@ -149,6 +192,12 @@ final class QuizSession {
         photos[bird.id]
     }
 
+    /// Whether a call is sounding right now — the rings on the sound button.
+    /// Always false in game 1, which plays no recording at all.
+    var isCallPlaying: Bool {
+        player.isPlaying
+    }
+
     /// Where `bird`'s tile stands, in the design system's terms.
     func phase(for bird: Bird) -> ChoiceTile.Phase {
         switch play.phase(of: bird.id) {
@@ -164,16 +213,27 @@ final class QuizSession {
         play.isDimmed(bird.id)
     }
 
-    /// The question in writing, for the grown-up reading over the shoulder —
-    /// the same sentence the app speaks, but always the written name, never the
-    /// phonetic override that only a speech synthesiser should ever see.
+    /// The question in writing, for the grown-up reading over the shoulder.
+    ///
+    /// Game 1 writes the sentence it speaks, but always with the written name
+    /// and never with the phonetic override that only a speech synthesiser
+    /// should ever see. Game 2 writes its own title instead — "Wer singt da?" —
+    /// because there the name *is* the answer, and printing it would hand it to
+    /// everybody who can read. The title rather than a second catalog entry
+    /// saying the same words: it is what the tile promised, and what a grown-up
+    /// who tapped that tile expects at the top of the screen.
     var writtenQuestion: String {
         guard let answer else { return "" }
-        return String(
-            format: String(localized: "quiz.prompt.whereIs"),
-            answer.article,
-            answer.name,
-        )
+        return switch game {
+        case .names:
+            String(
+                format: String(localized: "quiz.prompt.whereIs"),
+                answer.article,
+                answer.name,
+            )
+        case .calls:
+            game.title
+        }
     }
 
     /// What the round has come to, once it is over.
@@ -209,10 +269,10 @@ final class QuizSession {
     func resume() {
         if play.isFinished {
             var generator = SystemRandomNumberGenerator()
-            // The pool has not changed since `init` accepted it, so the one
-            // reason `make` can throw has already been ruled out. The fallback
-            // deals the finished round's questions again, which is a duller
-            // round and not a broken one.
+            // The pool has not changed since `init` accepted it, so neither
+            // reason `make` can throw has come back. The fallback deals the
+            // finished round's questions again, which is a duller round and
+            // not a broken one.
             let dealt = try? Round.make(from: species, using: &generator)
             play = RoundPlay(round: dealt ?? play.round)
             roundID = UUID()
@@ -229,21 +289,33 @@ final class QuizSession {
         askQuestion()
     }
 
-    /// Reads the question out. The sound button calls this; so does every new
-    /// question.
+    /// Puts the question: game 1 reads the name out, game 2 plays the call. The
+    /// sound button calls this; so does every new question.
     ///
-    /// No guard against speaking over the previous utterance:
-    /// ``SpeechAnnouncer/announce(_:)`` stops whatever is running before it
-    /// starts, so two questions can never sound at once. Refusing the tap
-    /// while the sentence is still running would only make the one button a
-    /// child reaches for feel broken.
+    /// No guard against sounding over whatever is still running, because
+    /// neither side needs one: ``SpeechAnnouncer/announce(_:)`` and
+    /// ``CallPlayer/play(_:)`` both stop what they are doing and begin again,
+    /// so two questions can never sound at once. Refusing the tap while a
+    /// question is still running would only make the one button a child
+    /// reaches for feel broken.
     func askQuestion() {
         guard let answer else { return }
-        // Only the first one: the sound button re-reads the question, and a
-        // round does not start again because a child asked to hear it twice.
+        // Only the first one: the sound button asks again, and a round does not
+        // start again because a child asked to hear it twice.
         askedFirstQuestion = askedFirstQuestion ?? Date()
         Logger.quiz.debug("Asking for \(answer.id, privacy: .public)")
-        announcer.announce(answer)
+
+        switch game {
+        case .names:
+            announcer.announce(answer)
+        case .calls:
+            // Never missing in a round of game 2 — only birds with a recording
+            // are asked for. Silence if it ever were: saying the name instead
+            // would hand the child the answer.
+            if let call = calls[answer.id] {
+                player.play(call)
+            }
+        }
     }
 
     /// A tile was tapped.
@@ -258,6 +330,11 @@ final class QuizSession {
         // finished round, and neither may arm the timer a second time.
         guard case .correct = play.tap(bird.id) else { return }
 
+        // The question has been answered, so it stops being asked. A call left
+        // running would sound over the next question, and over the round end's
+        // praise if this was the last one: that screen speaks as it appears,
+        // and nothing is spoken while a call plays (#30).
+        player.stop()
         answeredLastQuestion = Date()
 
         advance?.cancel()
@@ -268,12 +345,13 @@ final class QuizSession {
         }
     }
 
-    /// Stops everything that outlives the screen: the sentence being spoken and
-    /// the round waiting to move on.
+    /// Stops everything that outlives the screen: the question being spoken or
+    /// played, and the round waiting to move on.
     func suspend() {
         advance?.cancel()
         advance = nil
         announcer.stop()
+        player.stop()
     }
 
     /// Moves the round on by one, from the pause after an answer or from
@@ -290,13 +368,21 @@ final class QuizSession {
         advance = nil
         play.advance()
 
-        // A finished round has nothing left to ask, and the question that was
-        // still being spoken must not run on under the round end's praise.
-        // The session owns the announcer and knows when its round is over, so
-        // it stops itself rather than waiting for a screen to notice: the
-        // push runs the round end's `onAppear` before this screen's
-        // `onDisappear`, which is too late.
-        guard !play.isFinished else { return announcer.stop() }
+        // A finished round has nothing left to ask, and neither the sentence
+        // nor the call may run on under the round end's praise — a call still
+        // sounding would swallow that screen's spoken headline outright (#30).
+        // The session owns both and knows when its round is over, so it stops
+        // them itself rather than waiting for a screen to notice: the push runs
+        // the round end's `onAppear` before this screen's `onDisappear`.
+        //
+        // The call too, though ``choose(_:)`` stopped it on the answer: the
+        // sound button stays live through the pause that follows, and a tap
+        // there starts the answered question's call again.
+        guard !play.isFinished else {
+            announcer.stop()
+            player.stop()
+            return
+        }
         askQuestion()
     }
 }

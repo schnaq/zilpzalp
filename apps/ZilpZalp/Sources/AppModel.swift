@@ -84,6 +84,23 @@ final class AppModel {
         profiles.first { $0.id == activeProfileID }
     }
 
+    /// The games the home screen offers, in the order it draws their tiles.
+    ///
+    /// Game 1 is always among them. Game 2 asks its question with a recorded
+    /// call, so it is offered only where there are calls to ask with: at least
+    /// ``callsForGameTwo`` species of the open pack carrying one on disk, and
+    /// the grown-ups' "Vogelstimmen" left on — a game whose question *is* a
+    /// call cannot run while calls are switched off. Missing either, the tile
+    /// is absent rather than teased or locked, exactly as games 3 and 4 are
+    /// (#31).
+    ///
+    /// Computed on every read like ``timeBudget``, and for the same reason: the
+    /// switch can be flipped while the app runs, and a stored answer would be
+    /// one the home screen could disagree with.
+    var games: [Game] {
+        offersCalls ? [.names, .calls] : [.names]
+    }
+
     /// The playing child's day against the limit the grown-ups set.
     ///
     /// Computed on every read, never stored, and that is the whole of the
@@ -111,6 +128,21 @@ final class AppModel {
     /// the device's own calendar and time zone.
     private static var today: String {
         Profile.dayKey(for: Date())
+    }
+
+    /// How many species of a pack must carry a call before game 2 is worth
+    /// offering. Four is #31's line: below it a round would ask for the same
+    /// two or three birds over and over, and a game like that teaches the
+    /// tiles rather than the birds.
+    private static let callsForGameTwo = 4
+
+    /// Whether game 2 has enough to play with. The file has to be there, not
+    /// merely declared in the manifest: a question whose call is missing is a
+    /// question a child cannot answer, and ``PackCatalog/callURL(for:)`` is
+    /// what the round itself will ask.
+    private var offersCalls: Bool {
+        guard parental.settings.callsEnabled, let catalog else { return false }
+        return catalog.pack.birds.count { catalog.callURL(for: $0) != nil } >= Self.callsForGameTwo
     }
 
     init() {

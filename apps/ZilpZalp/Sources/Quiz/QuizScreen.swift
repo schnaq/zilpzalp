@@ -3,7 +3,10 @@ import SwiftUI
 import ZilpZalpData
 import ZilpZalpUI
 
-/// Game 1: the app asks for a bird, the child taps its photo.
+/// Both games: the app asks for a bird, the child taps its photo. How it asks
+/// — the spoken name in game 1, the recorded call in game 2 — is
+/// ``QuizSession``'s; the screen looks the same either way, which is the whole
+/// point of one engine for two games (spec §4).
 ///
 /// The screen owns the arrangement and nothing else. ``QuizSession`` holds the
 /// round and the taps, `ZilpZalpCore` holds the rules, and every visible part
@@ -208,14 +211,17 @@ struct QuizScreen: View {
         ) { session.choose(bird) }
     }
 
-    /// The question, spoken again on demand.
+    /// The question, put again on demand — read out in game 1, played in game 2.
     ///
-    /// `isPlaying` is left at `false`: `SpeechAnnouncer` is a plain class, so
-    /// whether it is still speaking is not observable, and rings driven by it
-    /// would never switch off. Making the announcer `@Observable` is a
-    /// follow-up in `Audio/`.
+    /// The rings are the call's. In game 1 `isPlaying` stays false throughout:
+    /// nothing there comes out of a file, and whether the synthesiser is still
+    /// speaking is not observable, so rings driven by it would never switch
+    /// off again.
     private func soundButton(_ session: QuizSession, diameter: CGFloat) -> some View {
         SoundButton(
+            isPlaying: session.isCallPlaying,
+            // One label for both games: what the button repeats is the
+            // question, whether that question is a sentence or a bird.
             label: String(localized: "quiz.sound.accessibility"),
             diameter: diameter,
         ) { session.askQuestion() }
@@ -323,8 +329,10 @@ struct QuizScreen: View {
         )
     }
 
-    /// A pack with fewer than four species cannot fill a single question. Not
-    /// reachable with the bundled pack; a sentence rather than a crash all the
+    /// A pack with fewer than four species cannot fill a single question, and
+    /// a pack without calls cannot fill one of game 2's. Neither is reachable
+    /// — the bundled pack has ten species, and ``AppModel/games`` offers game 2
+    /// only where it can be played — but a sentence rather than a crash all the
     /// same, because a downloaded pack (#34) could be anything.
     private var unavailable: some View {
         Text("quiz.unavailable")
@@ -338,7 +346,7 @@ struct QuizScreen: View {
     private func open() {
         if session == nil {
             do {
-                session = try QuizSession(catalog: catalog)
+                session = try QuizSession(catalog: catalog, game: game)
             } catch {
                 let reason = String(describing: error)
                 Logger.quiz.error("No round for \(game.title): \(reason, privacy: .public)")

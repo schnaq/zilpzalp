@@ -8,7 +8,8 @@ import ZilpZalpUI
 /// together with the locked nests for games 3 and 4. Those two games are out
 /// of v1 for want of freely licensed material (spec §1), and nobody can say
 /// what a child would be waiting for, so they are absent rather than teased.
-/// Two games, two tiles, the plain page ground.
+/// The same rule now covers game 2 wherever its calls cannot be played (#31):
+/// one tile per playable game on the plain page ground, and nothing else.
 ///
 /// The screen holds no state. It reports which game was tapped and when the
 /// grown-ups' door was opened; where those lead is ``RootView``'s business.
@@ -22,6 +23,11 @@ struct HomeScreen: View {
     /// decides what it looks like, including when it names something this
     /// build has never heard of.
     let avatar: String
+
+    /// The games to draw a tile for, in the order they are drawn. Which games
+    /// those are is ``AppModel/games``; this screen lays out what it is handed
+    /// and lays out one tile as readily as two.
+    let games: [Game]
 
     let openGame: (Game) -> Void
     let openParents: () -> Void
@@ -135,13 +141,14 @@ struct HomeScreen: View {
             .fixedSize(horizontal: false, vertical: true)
     }
 
-    /// The two games, side by side or stacked — whichever arrangement the
-    /// space makes the tiles bigger in.
+    /// The games, side by side or stacked — whichever arrangement the space
+    /// makes the tiles bigger in.
     ///
     /// One rule, no cases: an iPad ends up in a row in either orientation, an
     /// iPhone stacks in portrait and rows in landscape, an iPad in Slide Over
-    /// stacks. Bigger tiles are the whole goal — they are what a
-    /// four-year-old aims at.
+    /// stacks. A single game is that same rule with nothing to share the space
+    /// with, and its tile comes out as big as the room allows. Bigger tiles are
+    /// the whole goal — they are what a four-year-old aims at.
     private func tiles(in area: CGSize) -> some View {
         let inARow = tileSize(in: area, sideBySide: true)
         let stacked = tileSize(in: area, sideBySide: false)
@@ -155,8 +162,9 @@ struct HomeScreen: View {
         // progress persistence (#27) — and a filled slot the app cannot
         // remember would be a lie told to a four-year-old.
         return arrangement {
-            tile(.names, icon: .bird, tone: .hoopoe, size: size)
-            tile(.calls, icon: .volume2, tone: .leaf, size: size)
+            ForEach(games, id: \.self) { game in
+                tile(game, size: size)
+            }
         }
         // `HomeTile` draws its label at a fixed 22 pt whatever edge length it
         // is given, so a tile the space forces down far enough turns "Wer
@@ -169,18 +177,20 @@ struct HomeScreen: View {
         // label belongs there too, and this modifier belongs in the bin the
         // day #12's component does it.
         .minimumScaleFactor(ZType.Step.body.size / ZType.Step.label.size)
-        // Full width so the pair sits on the screen's midline; the height is
-        // the tiles' own, so the group above can centre as one.
+        // Full width so the tiles sit on the screen's midline; the height is
+        // their own, so the group above can centre as one.
         .frame(maxWidth: .infinity)
     }
 
-    private func tile(
-        _ game: Game,
-        icon: ZIcon,
-        tone: HomeTile.Tone,
-        size: CGFloat,
-    ) -> some View {
-        HomeTile(
+    /// One game's tile. Glyph and rubric tint belong to the game and never
+    /// move between games: a child who cannot read finds its game by them.
+    private func tile(_ game: Game, size: CGFloat) -> some View {
+        let (icon, tone): (ZIcon, HomeTile.Tone) = switch game {
+        case .names: (.bird, .hoopoe)
+        case .calls: (.volume2, .leaf)
+        }
+
+        return HomeTile(
             title: game.title,
             icon: icon,
             tone: tone,
@@ -205,8 +215,10 @@ struct HomeScreen: View {
     /// non-negotiable, and a few points of overhang does not. No supported
     /// device gets anywhere near it — the floor is here so that none ever can.
     private func tileSize(in area: CGSize, sideBySide: Bool) -> CGFloat {
-        let across = sideBySide ? (area.width - ZSpacing.gapTiles) / 2 : area.width
-        let down = sideBySide ? area.height : (area.height - ZSpacing.gapTiles) / 2
+        let tiles = CGFloat(games.count)
+        let gaps = ZSpacing.gapTiles * (tiles - 1)
+        let across = sideBySide ? (area.width - gaps) / tiles : area.width
+        let down = sideBySide ? area.height : (area.height - gaps) / tiles
         let fitting = min(HomeTile.defaultSize, across, down).rounded(.down)
         return max(ZSpacing.touchMinimum, fitting)
     }
@@ -217,6 +229,7 @@ struct HomeScreen: View {
 #Preview("iPad landscape", traits: .fixedLayout(width: 1194, height: 834)) {
     HomeScreen(
         avatar: "feather",
+        games: [.names, .calls],
         openGame: { _ in },
         openParents: {},
         openProfiles: {},
@@ -228,10 +241,25 @@ struct HomeScreen: View {
 #Preview("iPhone portrait", traits: .fixedLayout(width: 390, height: 844)) {
     HomeScreen(
         avatar: "feather",
+        games: [.names, .calls],
         openGame: { _ in },
         openParents: {},
         openProfiles: {},
         openCollection: {},
     )
     .environment(\.horizontalSizeClass, .compact)
+}
+
+// What every device shows while no pack carries a call and until #32 curates
+// them: game 1 alone, in the whole space the pair had.
+#Preview("Without the calls", traits: .fixedLayout(width: 1194, height: 834)) {
+    HomeScreen(
+        avatar: "feather",
+        games: [.names],
+        openGame: { _ in },
+        openParents: {},
+        openProfiles: {},
+        openCollection: {},
+    )
+    .environment(\.horizontalSizeClass, .regular)
 }

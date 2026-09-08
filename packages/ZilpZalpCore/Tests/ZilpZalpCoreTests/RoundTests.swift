@@ -199,3 +199,84 @@ func singleGenusPoolStillWorks() throws {
 
     expectWellFormed(round, questionCount: 10, choiceCount: 4, pool: pool)
 }
+
+// MARK: - Askable species
+
+/// A pool whose first `askable` species may be asked for while the rest can
+/// only ever be distractors — the shape game 2 deals from, where a species
+/// without a recorded call keeps its photo in the game (#31). Every species is
+/// a genus of its own, so the genus rule never interferes.
+private func partlyAskable(_ count: Int, askable: Int) -> [QuizSpecies] {
+    (0 ..< count).map {
+        QuizSpecies(id: "species-\($0)", genus: "genus-\($0)", canBeAsked: $0 < askable)
+    }
+}
+
+@Test("Only species that may be asked for are asked for", arguments: [1, 4, 7])
+func answersComeFromTheAskableSpecies(askable: Int) throws {
+    var generator = SplitMix64(seed: 23)
+    let pool = partlyAskable(10, askable: askable)
+    let identifiers = Set(pool.filter(\.canBeAsked).map(\.id))
+
+    let round = try Round.make(from: pool, using: &generator)
+
+    expectWellFormed(round, questionCount: 10, choiceCount: 4, pool: pool)
+    #expect(round.questions.allSatisfy { identifiers.contains($0.answer) })
+}
+
+@Test("The choices fill up from the whole pool, askable or not")
+func distractorsComeFromTheWholePool() throws {
+    var generator = SplitMix64(seed: 29)
+    // One species to ask for and nine that may only ever be a distractor: no
+    // question can fill its choices without reaching outside the askable set.
+    let pool = partlyAskable(10, askable: 1)
+    let unaskable = Set(pool.filter { !$0.canBeAsked }.map(\.id))
+
+    let round = try Round.make(from: pool, using: &generator)
+
+    for question in round.questions {
+        #expect(question.answer == "species-0")
+        #expect(question.choices.filter(unaskable.contains).count == 3)
+    }
+}
+
+@Test("A small askable set is asked through completely before a species returns")
+func askableRepeatsComeAfterAFullPass() throws {
+    var generator = SplitMix64(seed: 31)
+    // Four species with a call among ten: the small-pool rule of #22 repeats
+    // rather than aborting, and it counts the askable species only.
+    let pool = partlyAskable(10, askable: 4)
+    let identifiers = Set(pool.filter(\.canBeAsked).map(\.id))
+    let pass = identifiers.count
+
+    let round = try Round.make(from: pool, using: &generator)
+
+    let answers = round.questions.map(\.answer)
+    for start in stride(from: 0, through: answers.count - pass, by: pass) {
+        #expect(Set(answers[start ..< start + pass]) == identifiers)
+    }
+
+    // What is left over is a started pass and at least free of repeats.
+    let tail = answers.suffix(answers.count % pass)
+    #expect(Set(tail).count == tail.count)
+}
+
+@Test("Enough species for the choices is judged on all of them, askable or not")
+func theChoiceCountCountsEverySpecies() throws {
+    var generator = SplitMix64(seed: 37)
+    let pool = partlyAskable(4, askable: 1)
+
+    let round = try Round.make(from: pool, using: &generator)
+
+    expectWellFormed(round, questionCount: 10, choiceCount: 4, pool: pool)
+}
+
+@Test("A pool nothing may be asked for in cannot make a round")
+func noAskableSpeciesThrows() {
+    var generator = SplitMix64(seed: 41)
+    let pool = partlyAskable(10, askable: 0)
+
+    #expect(throws: RoundError.noSpeciesToAskFor) {
+        try Round.make(from: pool, using: &generator)
+    }
+}
