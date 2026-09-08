@@ -104,14 +104,18 @@ for package in packages/*/; do
 done
 '''
 
+[tasks.generate]
+description = "Generate apps/ZilpZalp/ZilpZalp.xcodeproj from project.yml"
+# Run this before opening the project in Xcode. The .xcodeproj is not tracked;
+# a project Xcode created by hand compiles two files and fails on the rest.
+run = "xcodegen generate --spec apps/ZilpZalp/project.yml --quiet"
+
 [tasks.build]
 description = "Build the app"
-depends = ["xcode-version"]
+depends = ["xcode-version", "generate"]
 run = '''
 set -euo pipefail
 export DEVELOPER_DIR="${DEVELOPER_DIR:-/Applications/Xcode.app/Contents/Developer}"
-
-xcodegen generate --spec apps/ZilpZalp/project.yml --quiet
 
 # generic/platform: builds against the simulator SDK without demanding a
 # specific device — which simulators exist on the runner is not fixed.

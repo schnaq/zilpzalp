@@ -1,7 +1,7 @@
 # Source of truth for the Xcode project.
 #
-# `ZilpZalp.xcodeproj` is generated from this file (`mise run build` invokes
-# XcodeGen) and is git-ignored: no binary blobs in the repo, no merge conflicts
+# `ZilpZalp.xcodeproj` is generated from this file (`mise run generate`, which
+# `mise run build` runs first) and is git-ignored: no binary blobs in the repo, no merge conflicts
 # in a generated project file.
 
 name: ZilpZalp
@@ -49,6 +49,12 @@ targets:
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.schnaq.zilpzalp
+        # schnaq GmbH signs every build, on a developer's device as in the
+        # release pipeline, so the team lives here and not in Xcode's Signing
+        # tab — the next `mise run generate` would wipe it there. A team id is
+        # public (every shipped app carries its own); if the publisher ever
+        # changes, this is the one line to change. CI builds unsigned.
+        DEVELOPMENT_TEAM: L99L6DPKC7
         PRODUCT_NAME: ZilpZalp
         MARKETING_VERSION: "0.1.0"
         CURRENT_PROJECT_VERSION: 1
