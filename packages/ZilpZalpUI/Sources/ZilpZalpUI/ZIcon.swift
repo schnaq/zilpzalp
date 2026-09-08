@@ -33,6 +33,7 @@ public enum ZIcon: String, CaseIterable, Sendable {
     case music
     case partyPopper = "party-popper"
     case play
+    case plus
     case rotateCcw = "rotate-ccw"
     case shieldCheck = "shield-check"
     case sparkles
