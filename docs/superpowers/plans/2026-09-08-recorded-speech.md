@@ -45,11 +45,17 @@ while the tooling is built.
    credits, enum — stays untouched. The alternative, a fourth "proprietary"
    licence value, touches the hard rule in `AGENTS.md`, the enum, the gate and
    `docs/medien-und-lizenzen.md`. **Proposal: `CC-BY-4.0`, attribution
-   "Stimme: <name>".**
+   "Stimme: <name>".** This works as written for Johanna and for ElevenLabs,
+   whose terms hand us the output in writing. For Google and Azure the
+   ownership clause could not be read at the source (2.1), so either somebody
+   verifies it or the fourth licence value becomes necessary after all.
 4. **The one spoken number.** "Heute hast du 7 Sterne gesammelt" on the
    "Zeit fürs Nest" screen is the only sentence in the app that speaks a
-   number. Three ways out, in section 1.3. **Proposal: rephrase so no number
-   is spoken** — the badge already shows it, and it saves recording 0…N
+   number. Three ways out, in section 1.3. **This is not a free choice:** the
+   spec decided in #36 that this sentence is spoken *because* „ein Kind, das
+   nicht liest, ihn sonst gar nicht bekäme". Rephrasing it away means the
+   child sees the day's count in a badge and never hears it. **Proposal:
+   rephrase anyway** — the badge already shows it, and it saves recording 0…N
    variants of a sentence a child hears once a day.
 5. **Fixed sentences: once, or per pack.** "Super gemacht!", the eight rank
    sentences, the two profile questions, the parental-gate hint — these do not
@@ -132,6 +138,14 @@ is **224**, and **44** for the first shippable step.
   is 31 clips for one sentence heard once a day; (c) leave this one sentence
   on the runtime fallback, which means one screen sounds different from the
   rest of the app. **Product decision → decision 4. Proposal: (a).**
+  Say the cost out loud: (a) reverses a decision the spec took deliberately.
+  §4 records for screen 1k that „der ganze Satz ‚Heute hast du 7 Sterne
+  gesammelt' wird stattdessen **gesprochen**, weil ein Kind, das nicht liest,
+  ihn sonst gar nicht bekäme und ein Satz in einem Badge nicht umbricht"
+  (#36). Under (a) the count stays visible and stops being audible, for
+  exactly the child that sentence was written for. It is once a day, on the
+  screen that ends the day, and the alternative is 31 clips — but it is a
+  loss, not a simplification.
   A second, technical reason for (a): `TimeForTheNestScreen.spoken`
   concatenates two sentences into one string. Two recorded clips would have to
   be played in sequence, and `announce(_:)` deliberately drops whatever is
@@ -190,7 +204,7 @@ over both full texts). Nothing rescues the render path.
 | **Google Cloud TTS** (Chirp 3 HD, 30 de-DE voices) | native German, current top tier | **$0** | **$0** | yes, affirmative grant quoted below | none found | one API call, not byte-identical |
 | **Azure Neural TTS** (17+ de-DE, incl. a child voice) | best inventory; `de-DE-GiselaNeural` is an actual child voice | **$0** (0.5M chars/month free) | **$0** | yes, but grant unverified | **disclosure required**, parent-facing | one API call |
 | **ElevenLabs** (`eleven_multilingual_v2`) | German listed; no German-specific claim published | $6 (Starter) | $6–22 | yes, on any paid tier | none on paid tiers | `seed` is best-effort only |
-| **Coqui VITS `tts_models/de/thorsten/vits`** | VITS-class, one voice | €0, offline | €0, offline | yes, Apache-2.0 weights on CC0 data | „Stimme: Thorsten Müller" by courtesy | deterministic, local |
+| **Coqui VITS `tts_models/de/thorsten/vits`** | VITS-class, one voice | €0, offline | €0, offline | yes, Apache-2.0 weights on CC0 data | „Stimme: Thorsten Müller" — recommended, see 2.1 | deterministic, local |
 | **OpenAI** `gpt-4o-mini-tts` | *"Voices are currently optimized for English"* | ~$0.15 | ~$1 | ownership clause **unverified** | **disclosure required** | no `seed` at all |
 
 Character basis: a short German sentence is 45–60 characters; 224 clips with a
@@ -282,7 +296,10 @@ The clean free option is **`tts_models/de/thorsten/vits` through Coqui**
 2.0"` in `.models.json`, Thorsten's own model card `apache-2.0`, trained on
 his CC0 data, no Blizzard or RyanSpeech ancestor. `Thorsten-Voice/Kokoro`
 (Apache-2.0, German finetune of Kokoro-82M) is the second free option — note
-that base Kokoro-82M itself has **no German**.
+that base Kokoro-82M itself has **no German**. Credit Thorsten Müller if
+either is picked: the dataset cards say CC0, but both Zenodo records
+(5525342, 7265581) carry a formal licence field of CC BY 4.0. An attribution
+line costs nothing and satisfies the stricter reading.
 
 Excluded, with the reason: **Coqui XTTS-v2** — the Coqui Public Model Licence
 permits use *"for any non-commercial purpose"*, *"only so far as you do not
@@ -348,12 +365,18 @@ enabled even though the volume is free; for ElevenLabs, a subscription on a
 Johanna: an hour and a quiet room. In every case the key never enters the
 repository and never enters a log — see 3.5.
 
-**One consequence that outlives the choice:** a vendor's TTS output is *not*
-CC-licensed. We may own it, but "we own it" is not a value the `License` enum
-accepts, and quietly writing `CC0-1.0` into the manifest for a rendered clip
-would be a claim about third-party rights that nobody in this project has
-checked. Johanna's voice avoids the question entirely; any vendor answer has
-to settle decision 3 first.
+**One consequence that outlives the choice:** a vendor's TTS output arrives
+under a contract, not under a CC licence, and the manifest has no field for
+"under contract". The way out is ownership — whoever owns the clip may release
+it under `CC-BY-4.0`, which is decision 3's proposal — but only two of the
+three vendors were shown to grant it. ElevenLabs does, in writing: *"you
+retain all rights in and to your Output"* (§4(c)(ii)). Google's page grants
+**use** — *"You can use the audio data files you create … to power your
+applications"* — which is not the same thing, and GCP ToS §5.1 could not be
+read; Azure's affirmative grant could not be read either. So: releasing a
+Google or Azure render under CC would be a claim about rights nobody in this
+project has verified. Johanna's voice avoids the question entirely, because
+the clip is ours from the start.
 
 ---
 
@@ -673,6 +696,17 @@ gebündelt."
 
 **§5 Datenhaltung:** the `Packs/<pack-id>/` line gains „(Fotos, Rufe und
 Sprachaufnahmen)".
+
+**§4, „Zeit fürs Nest" (screen 1k) — only if decision 4 goes to (a).** The
+sentence „der ganze Satz ‚Heute hast du 7 Sterne gesammelt' wird stattdessen
+**gesprochen**, weil ein Kind, das nicht liest, ihn sonst gar nicht bekäme und
+ein Satz in einem Badge nicht umbricht" is a decision from #36 and would be
+reversed, not merely reworded. It becomes: „Der Tagesertrag steht als Badge wie
+im Design („7 Sterne heute"). Gesprochen wird er seit dem Wechsel auf
+Sprachaufnahmen nicht mehr: eine Zahl lässt sich nicht sinnvoll vorproduzieren,
+und 31 Aufnahmen für einen Satz, den ein Kind einmal am Tag hört, stehen in
+keinem Verhältnis (Entscheidung 2026-09-08)." If decision 4 goes to (b) or (c)
+instead, this paragraph stays as it is.
 
 **§10 Offene Punkte, new item:**
 
