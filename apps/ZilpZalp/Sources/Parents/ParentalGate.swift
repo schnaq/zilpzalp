@@ -67,7 +67,7 @@ struct ParentalGate: View {
             // gate itself rather than at that one call site, because the
             // child meets this view far more often through the fallback on
             // the grown-ups' door.
-            announcer.say(String(localized: "gate.spoken"))
+            announcer.announce(String(localized: "gate.spoken"))
         }
         // A sheet that is swiped away mid-sentence stops talking.
         .onDisappear { announcer.stop() }

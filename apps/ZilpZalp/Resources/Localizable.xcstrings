@@ -409,6 +409,198 @@
         }
       }
     },
+    "profile.avatar.bird" : {
+      "comment" : "VoiceOver name of the bird avatar in the creation grid. A child picks it by sight",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vogel"
+          }
+        }
+      }
+    },
+    "profile.avatar.egg" : {
+      "comment" : "VoiceOver name of the egg avatar in the creation grid",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ei"
+          }
+        }
+      }
+    },
+    "profile.avatar.feather" : {
+      "comment" : "VoiceOver name of the feather avatar in the creation grid",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feder"
+          }
+        }
+      }
+    },
+    "profile.avatar.house" : {
+      "comment" : "VoiceOver name of the house avatar in the creation grid",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haus"
+          }
+        }
+      }
+    },
+    "profile.avatar.leaf" : {
+      "comment" : "VoiceOver name of the leaf avatar in the creation grid",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Blatt"
+          }
+        }
+      }
+    },
+    "profile.avatar.lightbulb" : {
+      "comment" : "VoiceOver name of the light avatar in the creation grid",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Licht"
+          }
+        }
+      }
+    },
+    "profile.avatar.sparkles" : {
+      "comment" : "VoiceOver name of the sparkles avatar in the creation grid",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Funkeln"
+          }
+        }
+      }
+    },
+    "profile.avatar.star" : {
+      "comment" : "VoiceOver name of the star avatar in the creation grid",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stern"
+          }
+        }
+      }
+    },
+    "profile.create.avatar.title" : {
+      "comment" : "Subheading over the avatar grid on the profile creation screen",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Such dir einen Vogel aus"
+          }
+        }
+      }
+    },
+    "profile.create.confirm" : {
+      "comment" : "Button that saves the new profile and starts playing. One word, spoken by a child",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Los!"
+          }
+        }
+      }
+    },
+    "profile.create.name.placeholder" : {
+      "comment" : "Placeholder in the empty name field, and its VoiceOver label. A grown-up or an older sibling types here",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dein Name"
+          }
+        }
+      }
+    },
+    "profile.create.title" : {
+      "comment" : "Headline of the profile creation screen, read aloud on arrival",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wie heißt du?"
+          }
+        }
+      }
+    },
+    "profile.picker.new" : {
+      "comment" : "Card on the profile picker that opens the creation screen. A new nest, not a new profile",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neues Nest"
+          }
+        }
+      }
+    },
+    "profile.picker.title" : {
+      "comment" : "Headline of the profile picker, read aloud on arrival",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wer spielt heute?"
+          }
+        }
+      }
+    },
+    "profile.store.failed" : {
+      "comment" : "Shown instead of any profile screen when profiles.json cannot be read or written. Covers both, so it names neither: a failed save must not say 'could not be loaded'. Read by a grown-up",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mit den Profilen stimmt etwas nicht."
+          }
+        }
+      }
+    },
+    "profile.switch.accessibility" : {
+      "comment" : "VoiceOver label of the avatar button in the home screen's top bar. It reopens the profile picker",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profil wechseln"
+          }
+        }
+      }
+    },
     "quiz.feedback.correct" : {
       "comment" : "Banner under the answers when the child taps the right bird",
       "extractionState" : "manual",
@@ -517,6 +709,18 @@
         }
       }
     },
+    "roundEnd.collection" : {
+      "comment" : "Button on the round end screen that opens the sticker album. Inert until the collection exists",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sammlung"
+          }
+        }
+      }
+    },
     "roundEnd.playAgain" : {
       "comment" : "Button on the round end screen that starts a new round",
       "extractionState" : "manual",
@@ -530,25 +734,37 @@
       }
     },
     "roundEnd.stars" : {
-      "comment" : "Placeholder line on the round end screen until #26 draws the stars. %1$lld is the stars earned, %2$lld the first-try correct answers, %3$lld the questions in the round",
+      "comment" : "Line under the headline of the round end screen. %lld is the stars the round earned, one to three",
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sterne: %1$lld — auf Anhieb richtig: %2$lld von %3$lld"
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Du hast einen Stern gesammelt"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Du hast %lld Sterne gesammelt"
+                }
+              }
+            }
           }
         }
       }
     },
     "roundEnd.title" : {
-      "comment" : "Headline of the round end screen",
+      "comment" : "Headline of the round end screen, also spoken out loud",
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Geschafft!"
+            "value" : "Super gemacht!"
           }
         }
       }

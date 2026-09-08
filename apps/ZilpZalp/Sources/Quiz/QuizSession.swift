@@ -77,6 +77,10 @@ final class QuizSession {
     /// Answers right at the first attempt. The one number the stars come from.
     private(set) var firstTryCorrect = 0
 
+    /// The first species answered right at the first attempt, `nil` until one
+    /// is. The round end celebrates it; see ``RoundResult/celebratedSpecies``.
+    private(set) var firstTrySpecies: String?
+
     /// - Parameter catalog: The opened pack. Every species in it is a possible
     ///   question and a possible distractor.
     /// - Throws: `RoundError.insufficientSpecies` when the pack holds fewer
@@ -158,16 +162,6 @@ final class QuizSession {
         isAnswered && bird.id != question?.answer
     }
 
-    /// The credit line drawn inside the photo. Every base-pack photo is CC BY,
-    /// which makes naming the photographer an obligation and not a courtesy.
-    func credit(for bird: Bird) -> String {
-        String(
-            format: String(localized: "quiz.photo.credit"),
-            bird.photo.attribution,
-            bird.photo.license.shortName,
-        )
-    }
-
     /// The question in writing, for the grown-up reading over the shoulder —
     /// the same sentence the app speaks, but always the written name, never the
     /// phonetic override that only a speech synthesiser should ever see.
@@ -181,8 +175,16 @@ final class QuizSession {
     }
 
     /// What the round has come to, once it is over.
+    ///
+    /// The sticker's species falls back to the round's first question when
+    /// nothing was answered at the first attempt, so that a round the child
+    /// found hard still ends with a bird rather than an empty disc.
     var result: RoundResult {
-        RoundResult(firstTryCorrect: firstTryCorrect, questionCount: round.questions.count)
+        RoundResult(
+            firstTryCorrect: firstTryCorrect,
+            questionCount: round.questions.count,
+            celebratedSpecies: firstTrySpecies ?? round.questions.first?.answer,
+        )
     }
 
     // MARK: - Playing it
@@ -208,6 +210,7 @@ final class QuizSession {
             wrongTaps = []
             isAnswered = false
             firstTryCorrect = 0
+            firstTrySpecies = nil
         } else if isAnswered {
             // A question that was answered while the screen was going away, so
             // that the pause after it never ran out. Finish the move rather
@@ -248,6 +251,7 @@ final class QuizSession {
 
         if wrongTaps.isEmpty {
             firstTryCorrect += 1
+            firstTrySpecies = firstTrySpecies ?? bird.id
         }
         isAnswered = true
 
@@ -282,6 +286,14 @@ final class QuizSession {
         index += 1
         wrongTaps = []
         isAnswered = false
+
+        // A finished round has nothing left to ask, and the question that was
+        // still being spoken must not run on under the round end's praise.
+        // The session owns the announcer and knows when its round is over, so
+        // it stops itself rather than waiting for a screen to notice: the
+        // push runs the round end's `onAppear` before this screen's
+        // `onDisappear`, which is too late.
+        guard !isFinished else { return announcer.stop() }
         askQuestion()
     }
 }
