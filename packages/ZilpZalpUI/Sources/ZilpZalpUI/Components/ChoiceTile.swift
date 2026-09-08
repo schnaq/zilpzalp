@@ -150,14 +150,15 @@ public struct ChoiceTile: View {
     ///
     /// So the floor is what the *credit* needs, not what the photo would like:
     /// the column ``PhotoCredit`` cannot go under, plus the two paddings it
-    /// spends before a glyph is drawn — the leading one clears the tile's own
-    /// corner (#103). That comes to 167.3 pt, hence 168. Below it the licence
-    /// itself would be truncated away, which is the defect #104 set out to
-    /// remove wearing different clothes.
+    /// spends before a glyph is drawn — one per side, each clearing the tile's
+    /// own corner and the border stroked inside it (#103, #111). That comes to
+    /// 167.3 pt, hence 168. Below it the licence itself would be truncated
+    /// away, which is the defect #104 set out to remove wearing different
+    /// clothes.
     ///
     /// Derived rather than written down, because the strip is what moves: when
-    /// #111 or #122 give the credit a wider column — clipped to the tile's
-    /// shape, or a gutter under it — this floor follows them down on its own.
+    /// #122 gives the credit a wider column — a gutter under the tile rather
+    /// than an overlay inside it — this floor follows it down on its own.
     ///
     /// Nothing else is under pressure here: the photo still fills the square,
     /// the badge keeps its 56 pt circle and 30 pt glyph, and the touch target
@@ -170,8 +171,7 @@ public struct ChoiceTile: View {
     /// so a caller with less room than this should scale the tile rather than
     /// hand the size over and hope. See `QuizTile` and #135.
     public static let minimumSize: CGFloat = (PhotoCreditMetrics.minimumColumn
-        + PhotoCreditMetrics.leadingPadding
-        + PhotoCreditMetrics.trailingPadding).rounded(.up)
+        + 2 * PhotoCreditMetrics.horizontalPadding).rounded(.up)
 
     /// `ChoiceTile.jsx`'s own default, and a comfortable iPad grid cell.
     public static let defaultSize: CGFloat = 260
