@@ -32,20 +32,13 @@ final class SpeechAnnouncer: NSObject {
     /// alive. Two live objects cannot share an address, so the identity check
     /// in `utteranceEnded(_:)` cannot mistake the outgoing utterance for the
     /// incoming one.
-    private var spokenUtterance: AVSpeechUtterance?
-
-    /// `true` from the moment `announce(_:)` hands an utterance over until it
-    /// finishes or is cancelled. Callers that play a bird call check this
-    /// first — the child hears one thing at a time (#30).
     ///
-    /// `AVSpeechSynthesizer.isSpeaking` cannot do this job: measured with the
-    /// pinned toolchain it stays `false` for about ten milliseconds after
-    /// `speak(_:)` — even inside `speechSynthesizer(_:didStart:)` — which is
-    /// exactly the window in which a caller would start a call on top of the
-    /// question.
-    var isSpeaking: Bool {
-        spokenUtterance != nil
-    }
+    /// `AVSpeechSynthesizer.isSpeaking` is no substitute for it: measured with
+    /// the pinned toolchain the synthesiser's flag stays `false` for about ten
+    /// milliseconds after `speak(_:)` — even inside
+    /// `speechSynthesizer(_:didStart:)` — so anything derived from it would be
+    /// blind at exactly the start of a sentence.
+    private var spokenUtterance: AVSpeechUtterance?
 
     override init() {
         voice = AVSpeechSynthesisVoice(language: Self.language)
@@ -72,6 +65,16 @@ final class SpeechAnnouncer: NSObject {
     /// Takes text rather than a key: the String Catalog belongs to the app's
     /// screens, and this type stays the one that only knows how to speak.
     func announce(_ sentence: String) {
+        // One sound at a time (#30). A call is what the child asked for by
+        // tapping, and in game 2 it is the question itself; a sentence laid
+        // over it would leave neither intelligible. Dropped rather than
+        // queued — by the time a call has run its course, the screen that
+        // wanted to say something has usually moved on.
+        guard AudioFocus.call?.isPlaying != true else {
+            Logger.audio.debug("Staying silent, a call is playing")
+            return
+        }
+
         AudioSessionConfigurator.activatePlayback()
 
         let utterance = AVSpeechUtterance(string: sentence)
@@ -80,6 +83,7 @@ final class SpeechAnnouncer: NSObject {
 
         _ = synthesizer.stopSpeaking(at: .immediate)
         spokenUtterance = utterance
+        AudioFocus.speech = self
         synthesizer.speak(utterance)
     }
 
