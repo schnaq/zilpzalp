@@ -38,18 +38,33 @@ struct PackCatalogTests {
 
         for bird in catalog.pack.birds {
             let url = try #require(catalog.photoURL(for: bird), "no photo for '\(bird.id)'")
-            let digest = try SHA256.hash(data: Data(contentsOf: url))
-            let hex = digest.map { String(format: "%02x", $0) }.joined()
+            let hex = try Self.sha256(of: url)
 
             #expect(hex == bird.photo.sha256, "photo of '\(bird.id)' does not match its sha256")
         }
     }
 
-    @Test("no bird carries a call yet")
-    func hasNoCalls() throws {
+    /// The twin of ``resolvesEveryPhoto()``, and the reason game 2 appears at
+    /// all: the home screen counts the species whose recording is on disk, not
+    /// the ones the manifest merely declares.
+    @Test("every call is in the bundle and hashes to what the manifest declares")
+    func resolvesEveryCall() throws {
         let catalog = try PackCatalog.bundled()
 
-        #expect(catalog.pack.birds.allSatisfy { $0.call == nil })
+        for bird in catalog.pack.birds {
+            let call = try #require(bird.call, "no call declared for '\(bird.id)'")
+            let url = try #require(catalog.callURL(for: bird), "no call file for '\(bird.id)'")
+            let hex = try Self.sha256(of: url)
+
+            #expect(hex == call.sha256, "call of '\(bird.id)' does not match its sha256")
+        }
+    }
+
+    /// The lowercase hex SHA-256 of a file, spelled the way the manifest
+    /// records it — the one comparison both media checks above make.
+    private static func sha256(of url: URL) throws -> String {
+        let data = try Data(contentsOf: url)
+        return SHA256.hash(data: data).map { String(format: "%02x", $0) }.joined()
     }
 
     /// "Wo ist **die** Amsel?" — the article is spoken and written, and a
