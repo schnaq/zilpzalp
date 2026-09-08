@@ -26,7 +26,6 @@ struct ParentalSettingsStoreTests {
         try await withTemporaryStore { store, _ in
             let settings = try await store.load()
 
-            #expect(settings.callsEnabled)
             #expect(settings.showNames)
             #expect(settings.dailyLimitMinutes == nil)
         }
@@ -44,11 +43,7 @@ struct ParentalSettingsStoreTests {
     @Test("what was saved comes back")
     func roundTripsEveryField() async throws {
         try await withTemporaryStore { store, _ in
-            let saved = ParentalSettings(
-                callsEnabled: false,
-                showNames: false,
-                dailyLimitMinutes: 30,
-            )
+            let saved = ParentalSettings(showNames: false, dailyLimitMinutes: 30)
             try await store.save(saved)
 
             #expect(try await store.load() == saved)
@@ -101,7 +96,7 @@ struct ParentalSettingsStoreTests {
             try await store.save(ParentalSettings(dailyLimitMinutes: 15))
 
             let written = try String(contentsOf: settingsFile(under: root), encoding: .utf8)
-            let positions = try ["callsEnabled", "dailyLimitMinutes", "schemaVersion", "showNames"]
+            let positions = try ["dailyLimitMinutes", "schemaVersion", "showNames"]
                 .map { try #require(written.range(of: "\"\($0)\"")).lowerBound }
             #expect(positions == positions.sorted())
         }
@@ -119,11 +114,10 @@ struct ParentalSettingsStoreTests {
     @Test("saving twice leaves one readable file")
     func overwritesCleanly() async throws {
         try await withTemporaryStore { store, _ in
-            try await store.save(ParentalSettings(callsEnabled: false, dailyLimitMinutes: 45))
+            try await store.save(ParentalSettings(dailyLimitMinutes: 45))
             try await store.save(ParentalSettings(showNames: false))
 
             let settings = try await store.load()
-            #expect(settings.callsEnabled)
             #expect(!settings.showNames)
             #expect(settings.dailyLimitMinutes == nil)
         }
@@ -132,7 +126,7 @@ struct ParentalSettingsStoreTests {
     @Test("a file that is not this document is refused, not guessed at")
     func refusesACorruptFile() async throws {
         try await withTemporaryStore { store, root in
-            try write("{ \"schemaVersion\": 1, \"callsEnabled\":", to: root)
+            try write("{ \"schemaVersion\": 1, \"showNames\":", to: root)
 
             await #expect(throws: ParentalSettingsStoreError.self) {
                 try await store.load()
@@ -144,7 +138,7 @@ struct ParentalSettingsStoreTests {
     func refusesTheWrongTypes() async throws {
         try await withTemporaryStore { store, root in
             try write(
-                #"{"schemaVersion": 1, "callsEnabled": "ja", "showNames": true}"#,
+                #"{"schemaVersion": 1, "showNames": "ja"}"#,
                 to: root,
             )
 
@@ -160,7 +154,7 @@ struct ParentalSettingsStoreTests {
     func refusesAHigherSchemaVersion() async throws {
         try await withTemporaryStore { store, root in
             try write(
-                #"{"schemaVersion": 2, "callsEnabled": false, "showNames": false}"#,
+                #"{"schemaVersion": 2, "showNames": false}"#,
                 to: root,
             )
 
@@ -179,11 +173,26 @@ struct ParentalSettingsStoreTests {
     @Test("a file without a version is a broken file")
     func refusesAFileWithoutAVersion() async throws {
         try await withTemporaryStore { store, root in
-            try write(#"{"callsEnabled": true, "showNames": true}"#, to: root)
+            try write(#"{"showNames": true}"#, to: root)
 
             await #expect(throws: ParentalSettingsStoreError.self) {
                 try await store.load()
             }
+        }
+    }
+
+    /// Every device that has been to the grown-ups' area before #138 has a
+    /// file naming `callsEnabled`. The switch is gone and the version stayed
+    /// at 1, so that key has to read as what it now is: nothing.
+    @Test("a file from before the calls switch was dropped still reads")
+    func ignoresTheDroppedCallsKey() async throws {
+        try await withTemporaryStore { store, root in
+            try write(
+                #"{"schemaVersion": 1, "callsEnabled": false, "showNames": false}"#,
+                to: root,
+            )
+
+            #expect(try await store.load() == ParentalSettings(showNames: false))
         }
     }
 

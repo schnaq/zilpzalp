@@ -2,10 +2,13 @@ import SwiftUI
 import ZilpZalpData
 import ZilpZalpUI
 
-/// The grown-ups' area: the one screen with small type, full sentences and
-/// switches. After `design/ui_kits/ipad_app/GrownupsScreen.jsx`, minus the
-/// three rows v1 has nothing behind — "Musik" (there is none), "Sprache"
-/// (German only until #46) and "Pakete" (nothing to manage until #33).
+/// The grown-ups' area: the one screen with small type, full sentences and a
+/// switch. After `design/ui_kits/ipad_app/GrownupsScreen.jsx`, minus the three
+/// rows v1 has nothing behind — "Musik" (there is none), "Sprache" (German
+/// only until #46) and "Pakete" (nothing to manage until #33) — and minus
+/// "Vogelstimmen", the one row v1 does have something behind and deliberately
+/// does not offer: where there are calls, game 2 is there, and a grown-up who
+/// wants quiet turns the device down (#138).
 ///
 /// A door in front of it, and the door has two keys. The device lock
 /// (``ParentsLock``) is the normal one. On a device with neither a code nor a
@@ -220,12 +223,6 @@ struct ParentsScreen: View {
     private var rows: some View {
         ZCard(padding: 0) {
             VStack(spacing: 0) {
-                SettingRow(
-                    title: String(localized: "parents.calls.title"),
-                    hint: String(localized: "parents.calls.hint"),
-                    icon: .volume2,
-                    isOn: switchFor(\.callsEnabled),
-                )
                 SettingRow(
                     title: String(localized: "parents.names.title"),
                     hint: String(localized: "parents.names.hint"),
