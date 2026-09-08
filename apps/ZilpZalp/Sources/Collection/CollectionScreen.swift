@@ -165,36 +165,17 @@ struct CollectionScreen: View {
             Button {
                 announcer.announce(bird.pronunciation ?? bird.name)
             } label: {
-                labelled(bird.name, collected: true) {
+                StickerCaption(caption: bird.name, earned: true) {
                     RewardSticker(image: photos[bird.id], size: size)
                 }
             }
             .buttonStyle(.plain)
             .accessibilityLabel(bird.name)
         } else {
-            labelled(String(localized: "collection.locked"), collected: false) {
+            StickerCaption(caption: String(localized: "collection.locked"), earned: false) {
                 RewardSticker(image: photos[bird.id], locked: true, size: size)
             }
             .accessibilityElement(children: .combine)
-        }
-    }
-
-    /// A sticker with its caption drawn here rather than passed into
-    /// `RewardSticker`, which caps its own at the disc's width plus 40 pt and
-    /// truncates — "Rotkehlchen" came out as "Rotkehlc…". A bird whose name a
-    /// child cannot read is not collected. It shrinks instead.
-    private func labelled(
-        _ caption: String,
-        collected: Bool,
-        @ViewBuilder sticker: () -> some View,
-    ) -> some View {
-        VStack(spacing: ZSpacing.step2) {
-            sticker()
-
-            Text(verbatim: caption)
-                .typeStyle(.body, .display, weight: .bold, singleLine: true)
-                .foregroundStyle(collected ? ZColor.textStrong : ZColor.textMuted)
-                .minimumScaleFactor(0.6)
         }
     }
 }

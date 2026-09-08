@@ -27,22 +27,9 @@ struct RankRung: View {
     var body: some View {
         ZCard(tone: tone, padding: ZSpacing.step3) {
             VStack(spacing: ZSpacing.step2) {
-                RewardSticker(
-                    image: photo,
-                    icon: .bird,
-                    locked: !reached,
-                    size: size,
-                )
-
-                // The name is drawn here rather than passed to the sticker:
-                // the component caps its caption at the disc's width plus
-                // 40 pt and truncates, and "Rotkehlchen" came out as
-                // "Rotkehlc…". A rank a child cannot read the name of is not
-                // a rung. It shrinks instead.
-                Text(verbatim: rank.displayName)
-                    .typeStyle(.body, .display, weight: .bold, singleLine: true)
-                    .foregroundStyle(reached ? ZColor.textStrong : ZColor.textMuted)
-                    .minimumScaleFactor(0.6)
+                StickerCaption(caption: rank.displayName, earned: reached) {
+                    RewardSticker(image: photo, icon: .bird, locked: !reached, size: size)
+                }
 
                 Badge(threshold, tone: reached ? .sun : .sand)
             }

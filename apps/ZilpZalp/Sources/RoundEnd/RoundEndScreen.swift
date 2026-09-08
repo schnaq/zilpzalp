@@ -24,8 +24,8 @@ struct RoundEndScreen: View {
 
     /// One bob, out and back. No `ZMotion` duration covers it — the tokens
     /// stop at 900 ms because they time reactions, and this is idle life — so
-    /// it is the 1.4 s of screen 1d and `RewardScreen.jsx`. Halved where it is
-    /// used: SwiftUI counts one leg, the autoreverse gives back the other.
+    /// it is the 1.4 s of screen 1d. Halved where it is used: SwiftUI counts
+    /// one leg, the autoreverse gives back the other.
     private static let bobPeriod: TimeInterval = 1.4
 
     /// How far apart the three stars start bobbing, again from screen 1d.
@@ -39,9 +39,8 @@ struct RoundEndScreen: View {
     /// The sticker on iPad, the 200 pt of screen 1e and `RewardScreen.jsx`.
     private static let regularSticker: CGFloat = 200
 
-    /// The strip at the foot that belongs to the wordmark: the mark itself
-    /// plus the gap under it and the same gap above, so the celebration is
-    /// centred in what is left rather than behind it.
+    /// The strip at the foot that belongs to the wordmark, so the
+    /// celebration is centred in what is left rather than behind it.
     private static let signatureBand = Wordmark.minimumSize + 2 * ZSpacing.step5
 
     /// How long the celebration keeps the screen before the rank ascent
@@ -52,8 +51,7 @@ struct RoundEndScreen: View {
 
     /// A star that has not been earned. Olive rather than sun: dark enough
     /// against the forest ground to stay unlit, light enough to stay a star.
-    /// What is missing is shown, exactly as a locked ``RewardSticker`` keeps
-    /// its picture.
+    /// What is missing is shown, as a locked ``RewardSticker`` shows it.
     private static let unlitStar = ZColor.olive600
 
     /// What the round earned. Comes from ``QuizSession`` through
@@ -89,13 +87,13 @@ struct RoundEndScreen: View {
     /// size: nothing moves, and nothing is left half-drawn.
     @State private var settled = false
 
-    /// The bird on the sticker, resolved once. A `View` is built again on
+    /// The bird on the sticker, resolved once: a `View` is built again on
     /// every layout pass, and reading the photo off disk on each of them
     /// would be a file lookup per frame of the pop.
     @State private var sticker: RoundEndSticker?
 
-    /// The praise, spoken. Built on the first appearance for the same reason,
-    /// and because a second synthesiser would talk over the first.
+    /// The praise, spoken. Built once, so no second synthesiser can talk
+    /// over the first.
     @State private var announcer: SpeechAnnouncer?
 
     /// What the round changed about the profile, once booked. `nil` for the
@@ -103,8 +101,8 @@ struct RoundEndScreen: View {
     /// screen then makes no claim it cannot back up.
     @State private var outcome: RoundOutcome?
 
-    /// The ascent has been pushed for this round. `.task` runs again when the
-    /// child comes back from the album, and a second "Du bist jetzt eine
+    /// The ascent has been pushed for this round. `.task` runs again when
+    /// the child comes back from the album, and a second "Du bist jetzt eine
     /// Amsel!" would be a second promotion.
     @State private var ascentShown = false
 
@@ -121,11 +119,9 @@ struct RoundEndScreen: View {
     }
 
     /// Narrow or short — either way there is no room for the iPad's sizes.
-    ///
     /// Width alone is not enough: the two biggest iPhones report a *regular*
-    /// width in landscape, where the height is still a phone's. Keying the
-    /// hero line and the 200 pt sticker on width put both of them into 430 pt
-    /// of height on exactly those devices.
+    /// width in landscape, where the height is still a phone's, and keying
+    /// the sizes on width put a hero line into 430 pt of height there.
     private var isTight: Bool {
         isCompact || isShort
     }
@@ -259,11 +255,9 @@ struct RoundEndScreen: View {
     /// The way on first, the album second (#119): a child who can read
     /// neither label tells the two apart by position and colour, so the
     /// sun-yellow one at the top must be the one that carries the round on.
-    /// "Sammlung" works now, but the album is still the side door.
     ///
-    /// Side by side as in the design, stacked on a phone in portrait: the
-    /// design's own row measures 220 + 24 + 260 pt, and no iPhone is that
-    /// wide.
+    /// Side by side as in the design, stacked on a phone in portrait — the
+    /// design's row measures 220 + 24 + 260 pt, and no iPhone is that wide.
     @ViewBuilder
     private var actions: some View {
         let buttons = Group {
@@ -374,6 +368,9 @@ struct RoundEndScreen: View {
     private func celebrate() async {
         sticker = sticker ?? RoundEndSticker(species: result.celebratedSpecies, from: catalog)
         outcome = await record(result)
+        // Left while the round was being written down: the praise would
+        // land over whatever replaced this screen.
+        guard !Task.isCancelled else { return }
         settled = true
 
         if announcer == nil {
@@ -383,11 +380,14 @@ struct RoundEndScreen: View {
         }
 
         guard !ascentShown, let ascent = outcome?.ascent else { return }
-        ascentShown = true
         // The stars and the sticker get the screen to themselves first: a new
         // rank on top of the praise would take the round away mid-look.
         try? await Task.sleep(for: .seconds(Self.ascentDelay))
+        // Flagged only once it is shown: set before the wait, a child who
+        // opened the album inside those seconds would have turned "once"
+        // into "never".
         guard !Task.isCancelled else { return }
+        ascentShown = true
         showAscent(ascent)
     }
 

@@ -176,6 +176,12 @@ final class AppModel {
     func record(_ result: RoundResult) async -> RoundOutcome? {
         guard recordedRound != result.id else { return lastRound }
         recordedRound = result.id
+        // Cleared before the write, not after it: from here on this round is
+        // the one being answered about, and a write that fails must answer
+        // "nothing" rather than hand back the round before it. Without this,
+        // a failed write followed by a trip to the album would celebrate the
+        // previous round's first find all over again.
+        lastRound = nil
 
         guard let store, let before = activeProfile else { return nil }
 
