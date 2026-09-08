@@ -93,9 +93,10 @@ final class AppModel {
     /// games 3 and 4 are (#31). Nothing else decides it — where the calls are,
     /// the game is (#138).
     ///
-    /// Computed on every read like ``timeBudget``, and for the same reason: a
-    /// pack can arrive or be deleted while the app runs (#33), and a stored
-    /// answer would be one the home screen could disagree with.
+    /// Computed rather than stored, as it was while a switch could change the
+    /// answer mid-run: the one pack is opened once at launch today, but packs
+    /// arrive and are deleted with #33, and a stored answer would then be one
+    /// the home screen could disagree with.
     var games: [Game] {
         offersCalls ? [.names, .calls] : [.names]
     }

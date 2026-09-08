@@ -35,7 +35,7 @@ final class ParentalSettingsModel {
 
     /// Reads the file. A device that has never been here gets the defaults
     /// without an error; a file that cannot be read gets them with one in the
-    /// log, because a grown-up cannot act on it and the switches standing at
+    /// log, because a grown-up cannot act on it and the settings standing at
     /// their defaults is the calm answer.
     func load() async {
         await lastWrite?.value
