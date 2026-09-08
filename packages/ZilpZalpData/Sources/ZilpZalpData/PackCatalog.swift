@@ -24,6 +24,18 @@ public struct PackCatalog: Sendable {
     /// is the same rule `tools/license_gate.py` applies.
     private let directory: URL
 
+    /// Opens a pack that lies in `directory`, next to its own manifest.
+    ///
+    /// Internal on purpose, and spelled out rather than left to the memberwise
+    /// initialiser, which `directory` being private makes unusable: the two
+    /// places a pack can lie are the bundle and `Packs/` in Application
+    /// Support, and `PackCatalog.bundled()` and `PackDownloader.catalog(for:)`
+    /// own those. Nobody else assembles a pack's path.
+    init(pack: Pack, directory: URL) {
+        self.pack = pack
+        self.directory = directory
+    }
+
     /// Opens the pack that ships inside the app.
     ///
     /// - Returns: the bundled catalog.
