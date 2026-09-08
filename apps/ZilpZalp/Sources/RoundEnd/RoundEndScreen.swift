@@ -68,8 +68,8 @@ struct RoundEndScreen: View {
     /// ``AppModel/record(_:)``.
     let record: (RoundResult) async -> RoundOutcome?
 
-    /// Pops back to ``QuizScreen``, which deals a fresh round when it
-    /// reappears with a finished one behind it.
+    /// The way on: a pop back to ``QuizScreen``, or "Zeit fürs Nest" once the
+    /// day's budget is spent (#36). Which of the two is the shell's to decide.
     let playAgain: () -> Void
 
     /// Opens the sticker album, and pushes the rank ascent over this screen.

@@ -42,6 +42,32 @@ struct ProfileTests {
         #expect(Profile.dayKey(for: day, calendar: japanese) == "2026-09-08")
     }
 
+    @Test("a profile written before the daily stars existed reads as none")
+    func decodesWithoutDailyStars() throws {
+        // Exactly what version 1 of the file wrote before #36 added a key to
+        // it. A family that played yesterday must not lose its profiles to a
+        // field that did not exist then.
+        let older = Data(
+            """
+            {
+              "id": "3F2504E0-4F89-11D3-9A0C-0305E82C3301",
+              "name": "Mila",
+              "avatar": "feather",
+              "totalStars": 24,
+              "roundsPlayed": 9,
+              "collectedSpecies": ["amsel"],
+              "playtime": { "2026-09-08": 92 }
+            }
+            """.utf8,
+        )
+
+        let profile = try JSONDecoder().decode(Profile.self, from: older)
+
+        #expect(profile.dailyStars.isEmpty)
+        #expect(profile.totalStars == 24)
+        #expect(profile.playtime == ["2026-09-08": 92])
+    }
+
     @Test("the avatar choices are the eight the profile picker offers")
     func offersEightAvatars() {
         #expect(

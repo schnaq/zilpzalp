@@ -469,6 +469,42 @@
         }
       }
     },
+    "parents.playtime.cancel" : {
+      "comment" : "Leaves the daily time budget dialog without changing the limit",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abbrechen"
+          }
+        }
+      }
+    },
+    "parents.playtime.hint" : {
+      "comment" : "Hint under the daily time budget row, and the message of its preset dialog",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die laufende Runde wird immer zu Ende gespielt"
+          }
+        }
+      }
+    },
+    "parents.playtime.minutes" : {
+      "comment" : "One daily time budget preset, in the row and in its dialog. %lld is the minutes",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld Min"
+          }
+        }
+      }
+    },
     "parents.playtime.none" : {
       "comment" : "The time budget's current value when there is no daily limit",
       "extractionState" : "manual",
@@ -482,7 +518,7 @@
       }
     },
     "parents.playtime.title" : {
-      "comment" : "Row in the grown-ups' area for the daily time budget. Visible and inert until #36 fills it",
+      "comment" : "Row in the grown-ups' area for the daily time budget",
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
@@ -1317,6 +1353,102 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Super gemacht!"
+          }
+        }
+      }
+    },
+    "timeBudget.farewell" : {
+      "comment" : "Line under the headline of the screen that closes the day",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Für heute ist Schluss. Bis bald!"
+          }
+        }
+      }
+    },
+    "timeBudget.home" : {
+      "comment" : "The one button on the screen that closes the day. Leads back to the home screen",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zum Nest"
+          }
+        }
+      }
+    },
+    "timeBudget.setInParents" : {
+      "comment" : "Footnote on the screen that closes the day, for the grown-up looking over the shoulder",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spielzeit erreicht — eingestellt im Erwachsenen-Bereich"
+          }
+        }
+      }
+    },
+    "timeBudget.starsToday" : {
+      "comment" : "Badge on the screen that closes the day. %lld is the stars collected today",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "1 Stern heute"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Sterne heute"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "timeBudget.starsToday.spoken" : {
+      "comment" : "Said out loud after the headline, for the child who cannot read it. %lld is the stars collected today",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Heute hast du einen Stern gesammelt."
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Heute hast du %lld Sterne gesammelt."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "timeBudget.title" : {
+      "comment" : "Headline of the screen that closes the day once the time budget is spent. Spoken as well",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zeit fürs Nest!"
           }
         }
       }
