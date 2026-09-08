@@ -59,9 +59,11 @@ struct TopBarTests {
 
         // The bug, kept as a control: the centre inherits the headline step
         // but no line box, so Baloo 2 lays the line out in 28 × 1.602 and
-        // takes the bar to about 77 pt. That path is unchanged on purpose —
-        // `QuizProgress` and the wordmark ride on it — which is why a title
-        // has its own entry point rather than a fix to this one.
+        // takes the bar to about 77 pt. No screen goes this way any more,
+        // and the number is here so that it cannot come back unnoticed —
+        // it is why a title has its own entry point rather than a fix to
+        // the generic slot, which has to stay generic for `QuizProgress`
+        // and the wordmark.
         let height = renderedSize(TopBar(center: { Text(verbatim: "Für Erwachsene") })).height
 
         #expect(
@@ -186,7 +188,7 @@ struct TopBarTests {
         // The scale factor is a guard, not a target: SwiftUI shrinks only as
         // far as it must. The longest title today lands on 20 pt, which is
         // ``ZType/Step/body`` — the smallest size anything a child reads is
-        // allowed to take. A seventh title longer than that is a design
+        // allowed to take. An eighth title longer than that is a design
         // decision, and this is where it reports itself.
         let natural = BundledFonts.width(
             of: title,

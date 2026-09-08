@@ -17,12 +17,11 @@ import SwiftUI
 /// whole row minus what the side slots need. The generic centre slot stays
 /// for content that draws itself: `QuizProgress`, the wordmark.
 ///
-/// That slot still inherits the grown-up title style, so a plain `Text` there
-/// is typeset rather than left at the system font — but in the face's own
-/// line box, which is the 77 pt bar #93 was about. It is kept only because
-/// the collection screens on #29 still pass a plain `Text` and would
-/// otherwise change under them; they switch to `TopBar(title:)` when that
-/// branch lands, and the inherited style goes with the last caller.
+/// That slot still inherits the grown-up title style, so a stray `Text`
+/// there is typeset rather than left at the system font — but in the face's
+/// own line box, which is the 77 pt bar #93 was about. No screen takes it up
+/// any more; it stays as the softer failure for a title put in the wrong
+/// slot, and `TopBarTests` pins it so the difference cannot go quiet.
 ///
 /// Placement stays with the caller. The bar draws itself and nothing else;
 /// pinning it above a scroll view and letting it reach into the safe area is
