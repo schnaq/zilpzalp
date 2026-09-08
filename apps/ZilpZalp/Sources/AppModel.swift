@@ -53,7 +53,11 @@ final class AppModel {
     /// putting it in the file would mean a write — and a possible write
     /// failure — on every tap of a profile card. `@AppStorage` would do the
     /// same job and buys nothing, because no view reads the value.
-    private static let rememberedKey = "profile.lastActive"
+    ///
+    /// Not spelled `profile.lastActive`: every `profile.`-prefixed name in
+    /// this app is a String Catalog key, and a `UserDefaults` key wearing that
+    /// prefix would send the next reader looking for a translation of it.
+    private static let rememberedKey = "lastActiveProfile"
 
     /// The full profile behind ``activeProfileID``.
     var activeProfile: Profile? {
