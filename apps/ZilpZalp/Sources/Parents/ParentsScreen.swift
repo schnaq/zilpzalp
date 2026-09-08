@@ -35,6 +35,7 @@ struct ParentsScreen: View {
 
     @Environment(\.dismiss) private var dismiss
     @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
     @State private var parental = ParentalSettingsModel()
     @State private var door: Door = .shut(refused: false)
@@ -55,6 +56,20 @@ struct ParentsScreen: View {
                 ) { dismiss() }
             } center: {
                 Text("parents.title")
+                    // `TopBar` offers its centre the headline step, and next
+                    // to a 64 pt back button that is wider than a phone
+                    // holds: measured on an iPhone 17 Pro the title wrapped
+                    // to three lines and took the bar with it. The label step
+                    // fits, and below the narrowest supported screen the text
+                    // shrinks rather than breaks — the same step down the
+                    // home screen makes with its headline.
+                    .typeStyle(
+                        horizontalSizeClass == .compact ? .label : .headline,
+                        .display,
+                        weight: .bold,
+                        singleLine: true,
+                    )
+                    .minimumScaleFactor(ZType.Step.caption.size / ZType.Step.label.size)
             }
 
             content
@@ -99,9 +114,9 @@ struct ParentsScreen: View {
         case let .shut(refused):
             locked(refused: refused)
         case .task:
+            // Undressed: the gate brings its own gutter, so that #37 can put
+            // the same view in a sheet without repeating this.
             ParentalGate(reason: String(localized: "parents.gate.reason")) { door = .open }
-                .padding(ZSpacing.gutterScreen)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
         case .open:
             settings
         }

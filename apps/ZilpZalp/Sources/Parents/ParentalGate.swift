@@ -34,6 +34,27 @@ struct ParentalGate: View {
     @State private var lastAnswerWasWrong = false
 
     var body: some View {
+        // A scroll view, because the task is taller than an iPhone in
+        // landscape and than a slide-over pane: measured without one, the
+        // question and the reason were truncated to "Wie viel ist fünf p…"
+        // rather than allowed to wrap. It carries its own gutter so that #37
+        // can put it in a sheet without dressing it first.
+        ScrollView {
+            task
+                .frame(maxWidth: ZSpacing.maxContent)
+                .padding(ZSpacing.gutterScreen)
+                .frame(maxWidth: .infinity)
+        }
+        // No rubber band on a screen that fits: a page that bounces reads as
+        // one that has more below.
+        .scrollBounceBehavior(.basedOnSize)
+        // A gate that is shown a second time asks something else: `@State`
+        // survives a re-presentation of the same view, so the numbers are
+        // replaced here rather than only at first construction.
+        .onAppear { newQuestion() }
+    }
+
+    private var task: some View {
         VStack(spacing: ZSpacing.step6) {
             Icon(.lock, size: .custom(ZSpacing.touchComfortable))
                 .foregroundStyle(ZColor.textMuted)
@@ -58,26 +79,19 @@ struct ParentalGate: View {
             answers
         }
         .multilineTextAlignment(.center)
-        .frame(maxWidth: ZSpacing.maxContent)
-        // A gate that is shown a second time asks something else: `@State`
-        // survives a re-presentation of the same view, so the numbers are
-        // replaced here rather than only at first construction.
-        .onAppear { newQuestion() }
     }
 
-    /// The four numbers to choose from, two by two. A row of four would fall
-    /// below the touch floor on the narrowest supported screen; two by two
-    /// keeps every one of them a full-width, 64 pt target.
+    /// The four numbers to choose from, two by two. A row of four would put
+    /// them below the touch floor on the narrowest supported screen.
+    ///
+    /// `large`, not the grown-up `medium`: a pill sizes itself around its
+    /// label, and around a single digit `medium` comes out 62 pt across —
+    /// under the floor in the one direction nobody measures. `large` is 96 pt
+    /// tall and wider than that.
     private var answers: some View {
         LazyVGrid(columns: Self.twoColumns, spacing: ZSpacing.step4) {
             ForEach(question.choices, id: \.self) { choice in
-                ZButton(
-                    choice.formatted(),
-                    tone: .quiet,
-                    size: .medium,
-                    action: { answer(choice) },
-                )
-                .frame(maxWidth: .infinity)
+                ZButton(choice.formatted(), tone: .quiet) { answer(choice) }
             }
         }
     }
@@ -161,7 +175,6 @@ private struct Question {
 
 #Preview {
     ParentalGate(reason: "Diese Seite ist für Erwachsene.") {}
-        .padding(ZSpacing.gutterScreen)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(ZColor.surfacePage)
 }
