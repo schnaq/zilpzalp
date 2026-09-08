@@ -36,9 +36,12 @@ private let captionFloor = ZType.Step.headline.size * TopBarTitle.minimumScaleFa
 /// The heights are rendered rather than computed: `ImageRenderer` lays the
 /// real view out and reports the size it would draw, so a change to the
 /// padding or to the title's line box fails here rather than on a device.
-/// The widths are arithmetic against CoreText, because a truncated `Text`
-/// reports the width it was given — a headless render cannot see an
-/// ellipsis. The screenshots in the pull request cover that half.
+/// The width the bar hands its centre is rendered too, through
+/// ``WidthProbe``.
+///
+/// Whether a title *fits* that width is arithmetic against CoreText instead:
+/// a truncated `Text` reports the width it was given, so no headless render
+/// can see an ellipsis. The screenshots in the pull request cover that half.
 @MainActor
 @Suite("Top bar")
 struct TopBarTests {
@@ -159,6 +162,31 @@ struct TopBarTests {
 
     // MARK: - Width, at the narrowest screen there is
 
+    @Test("A real bar at iPhone SE width offers its title the 167 pt claimed for it")
+    func theCompactBarOffersTheTitleTheWholeRemainder() {
+        // End to end rather than arithmetic: a real `TopBar`, laid out at
+        // 375 pt in a compact width class, with a 64 pt button on each side.
+        // What reaches the centre has been through the compact gutter, the
+        // two gaps and the row's reserve — the three numbers this change is
+        // made of, and the ones the rest of this suite only adds up.
+        let offered = OfferedWidth()
+
+        _ = renderedSize(
+            TopBar {
+                Color.clear.frame(width: ZSpacing.touchMinimum, height: ZSpacing.touchMinimum)
+            } center: {
+                WidthProbe(offered) { Color.clear }
+            } trailing: {
+                Color.clear.frame(width: ZSpacing.touchMinimum, height: ZSpacing.touchMinimum)
+            }
+            .environment(\.horizontalSizeClass, .compact),
+            width: 375,
+        )
+
+        #expect(offered.value == compactTitleWidth)
+        #expect(offered.value == 167)
+    }
+
     @Test(
         "Every title in the catalog fits an iPhone SE without an ellipsis",
         arguments: catalogTitles,
@@ -235,11 +263,49 @@ struct TopBarTests {
 
     // MARK: - Helpers
 
-    /// The size the view lays out to at ``regularWidth``, without drawing it.
-    private func renderedSize(_ view: some View) -> CGSize {
+    /// The size the view lays out to, without drawing it.
+    private func renderedSize(_ view: some View, width: CGFloat = regularWidth) -> CGSize {
         var measured = CGSize.zero
-        ImageRenderer(content: view.frame(width: regularWidth))
+        ImageRenderer(content: view.frame(width: width))
             .render { size, _ in measured = size }
         return measured
     }
+}
+
+/// What the bar offered its centre, carried back out of the layout pass.
+///
+/// A reference type because ``WidthProbe`` is a value the layout engine
+/// copies; `@unchecked` because the only write happens inside a synchronous
+/// `ImageRenderer` pass on the same actor that reads it.
+private final class OfferedWidth: @unchecked Sendable {
+    var value: CGFloat = 0
+}
+
+/// Records the width it is proposed and takes up none of it.
+///
+/// The only way to see what the centre slot was actually handed: a rendered
+/// bitmap cannot be asked, and a `Text` that had to shrink reports the width
+/// it was given either way.
+private struct WidthProbe: Layout {
+    private let offered: OfferedWidth
+
+    init(_ offered: OfferedWidth) {
+        self.offered = offered
+    }
+
+    func sizeThatFits(
+        proposal: ProposedViewSize,
+        subviews _: Subviews,
+        cache _: inout (),
+    ) -> CGSize {
+        offered.value = proposal.width ?? 0
+        return .zero
+    }
+
+    func placeSubviews(
+        in _: CGRect,
+        proposal _: ProposedViewSize,
+        subviews _: Subviews,
+        cache _: inout (),
+    ) {}
 }

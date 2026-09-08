@@ -27,9 +27,7 @@ import SwiftUI
 /// pinning it above a scroll view and letting it reach into the safe area is
 /// a screen decision, not a component one.
 public struct TopBar<Leading: View, Center: View, Trailing: View>: View {
-    #if canImport(UIKit)
-        @Environment(\.horizontalSizeClass) private var horizontalSizeClass
-    #endif
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
     private let leading: Leading
     private let center: Center
@@ -51,14 +49,13 @@ public struct TopBar<Leading: View, Center: View, Trailing: View>: View {
     /// the 375 the narrowest supported screen has, which is what starved the
     /// centre until the title read "Für Erwac…" — see
     /// ``TopBarMetrics/compactGutter``.
+    ///
+    /// Nothing outside iOS sets a size class, so a `swift test` render and a
+    /// macOS preview both take the roomy branch unless they say otherwise —
+    /// which they can: the key exists on every platform the package builds
+    /// for, and `TopBarTests` sets it to measure the phone geometry.
     private var gutter: CGFloat {
-        #if canImport(UIKit)
-            horizontalSizeClass == .compact ? TopBarMetrics.compactGutter : ZSpacing.gutterScreen
-        #else
-            // No size class outside UIKit. Only `swift test` and the previews
-            // get here, and both look at the roomy geometry.
-            ZSpacing.gutterScreen
-        #endif
+        horizontalSizeClass == .compact ? TopBarMetrics.compactGutter : ZSpacing.gutterScreen
     }
 
     public var body: some View {
@@ -340,22 +337,20 @@ private struct PreviewSlotButton: View {
 // The size class is set rather than left to the canvas, because the width
 // alone does not carry it — and the compact gutter is half of what this
 // preview is here to show.
-#if canImport(UIKit)
-    #Preview("Worst case — iPhone SE width") {
-        VStack(spacing: 0) {
-            TopBar(title: "Deine Vogel-Leiter") {
-                PreviewSlotButton(icon: .chevronLeft)
-            } trailing: {
-                PreviewSlotButton(icon: .userRoundCog)
-            }
-
-            Spacer()
+#Preview("Worst case — iPhone SE width") {
+    VStack(spacing: 0) {
+        TopBar(title: "Deine Vogel-Leiter") {
+            PreviewSlotButton(icon: .chevronLeft)
+        } trailing: {
+            PreviewSlotButton(icon: .userRoundCog)
         }
-        .frame(width: 375)
-        .environment(\.horizontalSizeClass, .compact)
-        .background(ZColor.surfacePage)
+
+        Spacer()
     }
-#endif
+    .frame(width: 375)
+    .environment(\.horizontalSizeClass, .compact)
+    .background(ZColor.surfacePage)
+}
 
 #Preview("Every slot empty") {
     VStack(spacing: 0) {
