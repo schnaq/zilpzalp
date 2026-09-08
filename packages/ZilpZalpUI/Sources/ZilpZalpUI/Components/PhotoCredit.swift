@@ -8,10 +8,12 @@ import SwiftUI
 /// the image, never over the bird's head.
 ///
 /// Internal on purpose. It is not a component a screen composes with; it is
-/// the one credit rendering shared by ``ChoiceTile`` and ``RewardSticker``, so
-/// that two places showing the same photo cannot drift apart. Whether a photo
-/// needs a credit at all is the caller's call — this package knows nothing
-/// about licences.
+/// the one credit rendering the package has, so that two hosts showing the
+/// same photo cannot drift apart. In practice that is ``ChoiceTile``:
+/// ``RewardSticker`` can be handed a credit but is never given one, because a
+/// straight strip has no right inset inside a circle — see the note there.
+/// Whether a photo needs a credit at all is the caller's call; this package
+/// knows nothing about licences.
 struct PhotoCredit: View {
     /// The finished credit line, e.g. `"Foto: Andrej Chudý (CC BY)"`. Composed
     /// by the app from the pack manifest; never assembled here.
@@ -27,10 +29,9 @@ struct PhotoCredit: View {
             .foregroundStyle(ZColor.cream50)
             .lineLimit(PhotoCreditMetrics.lineLimit)
             .frame(maxWidth: .infinity, alignment: .leading)
-            // Leading and trailing differ: the left edge is the one the
-            // rounded corner eats into. See ``PhotoCreditMetrics/leadingPadding``.
-            .padding(.leading, PhotoCreditMetrics.leadingPadding)
-            .padding(.trailing, PhotoCreditMetrics.trailingPadding)
+            // Both edges by the same amount: both corners are the same
+            // corner. See ``PhotoCreditMetrics/horizontalPadding``.
+            .padding(.horizontal, PhotoCreditMetrics.horizontalPadding)
             .padding(.top, PhotoCreditMetrics.topPadding)
             .padding(.bottom, PhotoCreditMetrics.bottomPadding)
             .background {
@@ -59,27 +60,56 @@ enum PhotoCreditMetrics {
     /// The `14px` top padding, which is also what makes the gradient band
     /// tall enough to protect the text.
     static let topPadding: CGFloat = 14
-    /// `12px` right. The design pads both sides with it; here only this one
-    /// still can — see ``leadingPadding``.
-    static let trailingPadding: CGFloat = 12
-    /// What the left edge needs instead of ``trailingPadding``.
+    /// `7px` in the design, one point more here — see
+    /// ``horizontalPadding``, which that point pays for.
+    static let bottomPadding: CGFloat = 8
+    /// What both side edges have to give up to the host's rounded corner.
     ///
     /// `design/components/quiz/ChoiceTile.jsx` hangs this strip under the
     /// bottom of a `size * 0.78` photo band that has the bird's name below
     /// it, so it sits on a straight edge and `12px` clears everything. This
     /// port draws no name — quiz tiles are wordless — the photo fills the
-    /// whole square, and the strip lands on the tile's own corner. Two things
-    /// then cross the first glyph: the 40 pt curve, and the 5 pt border
+    /// whole square, and the strip lands on the tile's own corner, where two
+    /// things cross a glyph: the 40 pt curve, and the 5 pt border
     /// ``ChoiceTile`` strokes *inside* the same shape, which the CSS draws
-    /// outside the photo. Insetting by the radius puts the text back on the
-    /// straight part of the edge, where the design always had it.
+    /// outside the photo.
     ///
-    /// Only the leading side. Trailing stays at ``trailingPadding``: the text is
-    /// left-aligned, so a wrapped line ends well before the right corner, and
-    /// a second inset would cost width the licence needs.
-    static let leadingPadding = ZRadius.tile
-    /// `7px` — the text sits close to the photo's edge.
-    static let bottomPadding: CGFloat = 7
+    /// So the region a glyph may be drawn in is the tile's shape inset by the
+    /// border, a corner of radius `tile − widthThick`. The lowest line of
+    /// text has its box bottom ``bottomPadding`` above the tile's edge, which
+    /// is `bottomPadding − widthThick` deep into that inner corner, and a
+    /// circle of radius `r` stands `r − √(2rd − d²)` off the edge at depth
+    /// `d`. That is 25.82, so 26.
+    ///
+    /// The tile's corner is `.continuous` rather than circular, and asks for
+    /// about 26.07 at that depth — so the bottom corner of the text's *box*
+    /// lands on the border's inner edge to within a tenth of a point rather
+    /// than safely inside it. What clears it is that no glyph reaches the
+    /// bottom of its own box: the deepest ink these lines draw stops some
+    /// 2.5 pt above it, where the same edge stands under 23 pt off. That is a
+    /// claim about type rather than about geometry, so it is not asserted
+    /// here — `PhotoCreditClippingTests` puts it to the renderer.
+    ///
+    /// Both edges, because both corners are the same corner. #103 inset only
+    /// the leading one, by the whole radius, and left the trailing one at
+    /// `12px` on the grounds that a wrapped line ends well before it — true
+    /// of a line that wraps, false of a credit short enough to stay on one
+    /// (#111). Splitting the same 52 pt evenly fixes that and costs nothing:
+    /// every tile size keeps the column, and therefore the wrap, it had.
+    ///
+    /// The one point of extra ``bottomPadding`` is what makes it fit. The
+    /// corner's demand falls steeply with height — 28.88 pt a side at the
+    /// design's `7px`, 26 at `8px` — and at 29 a side ``ChoiceTile``'s
+    /// derived floor would land at 174 pt, above the 169 an iPhone 17
+    /// measures, which would put the phone back on the transform #104
+    /// removed.
+    static let horizontalPadding: CGFloat = {
+        let radius = ZRadius.tile - ZBorder.widthThick
+        let depth = bottomPadding - ZBorder.widthThick
+        let arc = radius - (2 * radius * depth - depth * depth).squareRoot()
+        return (ZBorder.widthThick + arc).rounded(.up)
+    }()
+
     /// A photographer's name and licence fit on two lines at any tile size we
     /// draw; a third would start eating the bird.
     static let lineLimit = 2
@@ -95,7 +125,7 @@ enum PhotoCreditMetrics {
     /// It is a floor for what ships today, not a promise: a longer
     /// photographer's name, or a `CC BY-SA 4.0` line, still needs a third line
     /// at that tile size. Widening the column rather than raising this number
-    /// is what #111 is for.
+    /// is what #122's gutter is for.
     static let minimumColumn: CGFloat = 115.3
 }
 
@@ -112,34 +142,45 @@ enum PhotoCreditMetrics {
     .background(ZColor.surfacePage)
 }
 
-#Preview("The corner, at the smallest tile there is") {
-    // In its real host, at ``ChoiceTile/minimumSize``: the narrowest strip the
-    // component ever draws, over the 40 pt corner *and* under the 5 pt border
-    // the tile strokes inside the same shape. Both used to cut into the first
-    // glyph — which is why the bare field above is not enough to judge this.
+#Preview("Both corners, at every size the tile draws") {
+    // In its real host: over the 40 pt corner *and* under the 5 pt border the
+    // tile strokes inside the same shape, which is why the bare field above is
+    // not enough to judge this. One size is not enough either — the line that
+    // clipped last was not the one that wraps at the floor but the one short
+    // enough to stay on a single line at 220 pt, where it fills the deepest
+    // line to within a few points of the trailing corner (#111).
     //
-    // The `CC BY-SA 4.0` line runs out of column at this size and is truncated.
-    // That is #111 rather than a new fault, and it is the reason the floor is
-    // where it is: the base pack's own longest line, a `CC BY`, still holds two
-    // whole lines here — see ``ChoiceTile/minimumSize``.
-    HStack(alignment: .top, spacing: ZSpacing.gapTiles) {
-        ForEach(previewCredits, id: \.self) { credit in
-            ChoiceTile(
-                label: "Amsel",
-                credit: credit,
-                tone: .beeren,
-                size: ChoiceTile.minimumSize,
-            )
+    // The `CC BY-SA 4.0` line runs out of column at the floor and is
+    // truncated. It is a fabrication rather than an attribution the base pack
+    // produces, and it is the reason the floor is where it is: the pack's own
+    // longest line, a `CC BY`, still holds two whole lines there — see
+    // ``ChoiceTile/minimumSize``.
+    ScrollView([.horizontal, .vertical]) {
+        VStack(alignment: .leading, spacing: ZSpacing.gapTiles) {
+            ForEach([ChoiceTile.minimumSize, 220, ChoiceTile.defaultSize], id: \.self) { size in
+                HStack(alignment: .top, spacing: ZSpacing.gapTiles) {
+                    ForEach(previewCredits, id: \.self) { credit in
+                        ChoiceTile(label: "Amsel", credit: credit, tone: .beeren, size: size)
+                    }
+                }
+            }
         }
+        .padding(ZSpacing.step7)
     }
-    .padding(ZSpacing.step7)
     .background(ZColor.surfacePage)
 }
 
-/// The worst case for the corner: a name long enough to wrap onto the line
-/// that sits deepest in the curve, and one that starts on a narrow glyph,
-/// where a clip is hardest to spot and easiest to misread.
-private let previewCredits = [
-    "Foto: Alexis Tinker-Tsavalas (CC BY-SA 4.0)",
-    "Jane Ivanović-Tremayne (CC BY)",
+/// The three worst cases for the corners: a credit short enough to stay on one
+/// line, and so to run the full width of the line that sits deepest in the
+/// curve; the longest one the base pack produces, which wraps onto that line
+/// instead; and a name that starts on a narrow glyph, where a clip on the
+/// leading side is hardest to spot and easiest to misread.
+///
+/// Internal rather than private, as `previewPhoto()` is: `PhotoCreditClippingTests`
+/// asserts on exactly these three, and a preview showing a different set from
+/// the one the test guards would be worse than no preview.
+let previewCredits = [
+    "Foto: Dmitry Ivanov (CC BY)",
+    "Foto: Alexis Tinker-Tsavalas (CC BY)",
+    "Jane Ivanović-Tremayne (CC BY-SA 4.0)",
 ]
