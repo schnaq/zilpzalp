@@ -9,28 +9,13 @@ import ZilpZalpUI
 /// round and the taps, `ZilpZalpCore` holds the rules, and every visible part
 /// is a `ZilpZalpUI` component handed finished values.
 ///
-/// Two arrangements, from the design's two reference screens. On iPad the
-/// question stands in a column to the left of a 2×2 grid of answers (1194×834,
-/// screens 1c and 3a); on iPhone it sits in a row above the same grid, drawn
-/// smaller (390×844, screen 1j). Neither ever scrolls: four photos a child
-/// cannot see at once are not four choices.
+/// Two arrangements, from the design's two reference screens: the question in
+/// a column to the left of a 2×2 grid of answers (1194×834, screens 1c and
+/// 3a), or in a row above the same grid (390×844, screen 1j). Which one a
+/// screen gets is measured rather than categorised — see ``QuizLayout``.
+/// Neither ever scrolls: four photos a child cannot see at once are not four
+/// choices.
 struct QuizScreen: View {
-    /// The tile edge the design draws on iPad, and the ceiling everywhere. A
-    /// photo bigger than this does not make the question easier to answer.
-    private static let maximumTile = ChoiceTile.defaultSize
-
-    /// The column the question stands in on iPad, beside the answers. Wide
-    /// enough for the 160 pt sound button and for the longest bird name in the
-    /// base pack to wrap into two lines at 36 pt.
-    private static let promptColumn: CGFloat = 320
-
-    /// The band the feedback banner appears in, kept clear whether or not
-    /// there is anything to say. The design reserves 100 px for it; a grid
-    /// that jumped a banner's height on every answer would move the tiles out
-    /// from under a finger that is still on its way.
-    private static let feedbackSlot: CGFloat = 100
-    private static let compactFeedbackSlot: CGFloat = 76
-
     /// One leaf of the progress row in a compact width.
     ///
     /// ``QuizProgress`` defaults to 44 pt, which its own documentation sizes
@@ -59,8 +44,10 @@ struct QuizScreen: View {
     /// not a round.
     @State private var session: QuizSession?
 
-    /// A phone in portrait, or an iPad sharing its screen. It picks the
-    /// arrangement; the sizes inside it are measured, not categorised.
+    /// A phone, or an iPad sharing its screen. It settles how big the parts
+    /// around the answers are drawn — type step, sound button, leaf row,
+    /// margins, the feedback band. Where those parts *stand* is measured, not
+    /// categorised: see ``QuizLayout``.
     private var isCompact: Bool {
         horizontalSizeClass == .compact
     }
@@ -126,27 +113,28 @@ struct QuizScreen: View {
 
     @ViewBuilder
     private func content(_ session: QuizSession, in area: CGSize) -> some View {
-        if isCompact {
-            VStack(spacing: ZSpacing.step4) {
-                HStack(spacing: ZSpacing.step4) {
-                    soundButton(session, diameter: SoundButton.minimumDiameter)
-                    question(session)
-                }
-                .frame(height: SoundButton.minimumDiameter + ZShadow.ledgeLargeOffset)
+        let layout = QuizLayout(area: area, isCompact: isCompact)
 
-                grid(session, edge: compactTile(in: area))
-                feedback(session).frame(height: Self.compactFeedbackSlot)
-            }
-        } else {
-            VStack(spacing: ZSpacing.step5) {
+        VStack(spacing: layout.stackGap) {
+            switch layout.arrangement {
+            case .above:
+                HStack(spacing: ZSpacing.step4) {
+                    soundButton(session, diameter: layout.soundDiameter)
+                    question(session, alignment: .leading)
+                }
+                .frame(height: layout.soundDiameter + ZShadow.ledgeLargeOffset)
+
+                grid(session, edge: layout.tile)
+
+            case .beside:
                 HStack(spacing: ZSpacing.step7) {
                     VStack(spacing: ZSpacing.step5) {
-                        soundButton(session, diameter: ZSpacing.touchHero)
-                        question(session)
+                        soundButton(session, diameter: layout.soundDiameter)
+                        question(session, alignment: .center)
                     }
-                    .frame(width: Self.promptColumn)
+                    .frame(width: QuizLayout.promptColumn)
 
-                    grid(session, edge: regularTile(in: area))
+                    grid(session, edge: layout.tile)
                 }
                 // The question and the answers are one group, centred in the
                 // width together. Letting the grid claim the leftover instead
@@ -154,9 +142,9 @@ struct QuizScreen: View {
                 // between, and a four-year-old's eyes have to get from one to
                 // the other.
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-
-                feedback(session).frame(height: Self.feedbackSlot)
             }
+
+            feedback(session).frame(height: layout.feedbackSlot)
         }
     }
 
@@ -228,18 +216,19 @@ struct QuizScreen: View {
     /// The question in writing — for the grown-up over the shoulder, exactly
     /// as on the design's screens. The child gets it spoken; the tiles stay
     /// wordless.
-    private func question(_ session: QuizSession) -> some View {
-        Text(verbatim: session.writtenQuestion)
+    private func question(_ session: QuizSession, alignment: Alignment) -> some View {
+        let textAlignment: TextAlignment = alignment == .leading ? .leading : .center
+        return Text(verbatim: session.writtenQuestion)
             .typeStyle(isCompact ? .headline : .title, .display, weight: .extraBold)
             .foregroundStyle(ZColor.textStrong)
-            .multilineTextAlignment(isCompact ? .leading : .center)
+            .multilineTextAlignment(textAlignment)
             .lineLimit(2)
             // "Wo ist der Hausrotschwanz?" is the longest question the base
             // pack asks, and on the narrowest supported screen it needs the
             // room. The floor is the design's own: nothing a child might read
             // goes below 20 pt.
             .minimumScaleFactor(ZType.Step.body.size / ZType.Step.headline.size)
-            .frame(maxWidth: .infinity, alignment: isCompact ? .leading : .center)
+            .frame(maxWidth: .infinity, alignment: alignment)
     }
 
     /// What the app says back. Nothing until something has been tapped.
@@ -284,8 +273,6 @@ struct QuizScreen: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
-    // MARK: - Sizing
-
     private func open() {
         if session == nil {
             do {
@@ -297,41 +284,6 @@ struct QuizScreen: View {
             }
         }
         session?.resume()
-    }
-
-    /// The tile edge on iPad: whatever fits beside the question column and
-    /// above the feedback band, capped at the design's 260 pt.
-    private func regularTile(in area: CGSize) -> CGFloat {
-        let across = area.width - Self.promptColumn - ZSpacing.step7 - ZSpacing.gapTiles
-        let down = area.height
-            - Self.feedbackSlot
-            - ZSpacing.step5
-            - ZSpacing.gapTiles
-            - ZShadow.ledgeLargeOffset
-        return tileEdge(across: across, down: down)
-    }
-
-    /// The tile edge on iPhone: what is left under the question row and above
-    /// the feedback band.
-    private func compactTile(in area: CGSize) -> CGFloat {
-        let across = area.width - ZSpacing.gapTiles
-        let down = area.height
-            - SoundButton.minimumDiameter
-            - Self.compactFeedbackSlot
-            - 2 * ZSpacing.step4
-            - ZSpacing.gapTiles
-            - 2 * ZShadow.ledgeLargeOffset
-        return tileEdge(across: across, down: down)
-    }
-
-    /// Half of whichever of the two runs out first — the tiles are square and
-    /// there are two of them each way — never above the design's tile, and
-    /// never below the touch floor even where the floor means overflowing the
-    /// space. A tile a four-year-old cannot hit breaks a rule the design calls
-    /// non-negotiable; a few points of overhang on a screen no supported
-    /// device has does not.
-    private func tileEdge(across: CGFloat, down: CGFloat) -> CGFloat {
-        max(ZSpacing.touchMinimum, min(Self.maximumTile, min(across, down) / 2).rounded(.down))
     }
 }
 
@@ -351,6 +303,10 @@ private func quizPreview(_ sizeClass: UserInterfaceSizeClass) -> some View {
 }
 
 #Preview("iPad landscape", traits: .fixedLayout(width: 1194, height: 834)) {
+    quizPreview(.regular)
+}
+
+#Preview("iPad portrait", traits: .fixedLayout(width: 834, height: 1194)) {
     quizPreview(.regular)
 }
 
