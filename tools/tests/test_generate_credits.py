@@ -132,6 +132,7 @@ class EveryAssetIsCredited(CreditsTestCase):
             entries[0],
             {
                 "packID": "basis",
+                "packTitle": "Unsere ersten Vögel",
                 "birdID": "amsel",
                 "birdName": "Amsel",
                 "kind": "photo",
