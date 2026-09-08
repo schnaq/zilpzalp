@@ -1,0 +1,34 @@
+{
+  "schemaVersion" : 1,
+  "profiles" : [
+    {
+      "id" : "0F3B6C6E-2E0B-4C7B-9C1E-2A4F7D8E9B01",
+      "name" : "Mila",
+      "avatar" : "feather",
+      "totalStars" : 63,
+      "roundsPlayed" : 24,
+      "collectedSpecies" : [
+        "amsel",
+        "kohlmeise",
+        "zilpzalp"
+      ],
+      "playtime" : {
+        "2026-09-07" : 420,
+        "2026-09-08" : 185.5
+      }
+    },
+    {
+      "id" : "1B7A4D22-5C33-4E90-B1A6-8D2C0F5E4711",
+      "name" : "Jonte",
+      "avatar" : "egg",
+      "totalStars" : 0,
+      "roundsPlayed" : 0,
+      "collectedSpecies" : [
+
+      ],
+      "playtime" : {
+
+      }
+    }
+  ]
+}

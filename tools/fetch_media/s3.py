@@ -2,8 +2,9 @@
 
 Layout in the bucket (issue #14): `packs/<id>/manifest.json`,
 `packs/<id>/photos/…`, `packs/<id>/audio/…`. A bucket policy grants anonymous
-`s3:GetObject` on `packs/*`, so an upload needs no per-object ACL, and
-`packs/index.json` is written by #50, never here.
+`s3:GetObject` on `packs/*`, so an upload needs no per-object ACL.
+`packs/index.json` is built by `index.py` and put through here as well, but
+only after the pack it describes (#50).
 
 Credentials come from Infisical and are only ever read from the environment —
 never printed, never logged, never written to a file. The tool reports keys and
@@ -96,6 +97,11 @@ def client_from_env(environment: dict | None = None):
     return client, environment["S3_BUCKET"]
 
 
+def manifest_key(pack_id: str) -> str:
+    """Where a pack's manifest sits in the bucket."""
+    return f"packs/{pack_id}/manifest.json"
+
+
 def plan(pack_id: str, pack_dir: Path) -> list[Upload]:
     """Everything of one pack that belongs in the bucket, in upload order.
 
@@ -122,9 +128,7 @@ def plan(pack_id: str, pack_dir: Path) -> list[Upload]:
             )
         uploads.append(Upload(key=f"packs/{pack_id}/{relative}", path=media, sha256=actual))
 
-    uploads.append(
-        Upload(key=f"packs/{pack_id}/manifest.json", path=path, sha256=manifest.sha256_of(path))
-    )
+    uploads.append(Upload(key=manifest_key(pack_id), path=path, sha256=manifest.sha256_of(path)))
     return uploads
 
 
