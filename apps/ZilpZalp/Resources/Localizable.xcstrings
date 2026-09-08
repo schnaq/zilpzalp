@@ -13,6 +13,78 @@
         }
       }
     },
+    "collection.birds" : {
+      "comment" : "Badge in the album. %lld is how many species have been collected",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "1 Vogel"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Vögel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "collection.locked" : {
+      "comment" : "Caption under a sticker of a species not yet found. The sticker keeps its photo; only the name is still a secret",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noch geheim"
+          }
+        }
+      }
+    },
+    "collection.stars" : {
+      "comment" : "Badge for a star count, in the album, on the ladder and in the swarm. %lld is the stars",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "1 Stern"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Sterne"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "collection.title" : {
+      "comment" : "Title of the sticker album, and the label of the button that opens it",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meine Sammlung"
+          }
+        }
+      }
+    },
     "credits.call.by" : {
       "comment" : "Under a bird's name in the credits, for a recording. %1$@ is the recordist, %2$@ the licence's short name such as CC BY",
       "extractionState" : "manual",
@@ -189,6 +261,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Was möchtest du machen?"
+          }
+        }
+      }
+    },
+    "leaderboard.motto" : {
+      "comment" : "Line under 'Unser Schwarm'. It is what keeps the list from being a ranking",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jeder Stern zählt für den ganzen Schwarm."
+          }
+        }
+      }
+    },
+    "leaderboard.title" : {
+      "comment" : "Heading of the list of everybody who plays on this device",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unser Schwarm"
           }
         }
       }
@@ -709,6 +805,438 @@
         }
       }
     },
+    "rank.amsel.ascent" : {
+      "comment" : "Headline of the rank ascent when the Amsel rank is reached, also spoken out loud. A whole sentence because German picks the article by gender",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Du bist jetzt eine Amsel!"
+          }
+        }
+      }
+    },
+    "rank.amsel.missing" : {
+      "comment" : "Under the progress bar of the rank ascent, when the Amsel is the next rank. %lld is the stars still missing. A sentence per rank because German contracts the preposition with the article",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Noch ein Stern bis zur Amsel"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Noch %lld Sterne bis zur Amsel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "rank.amsel.name" : {
+      "comment" : "Name of the Amsel rank on the ladder, in the album and in the swarm",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Amsel"
+          }
+        }
+      }
+    },
+    "rank.ascent.continue" : {
+      "comment" : "The button that leaves the rank ascent, back to the round end",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Weiter"
+          }
+        }
+      }
+    },
+    "rank.blaumeise.ascent" : {
+      "comment" : "Headline of the rank ascent when the Blaumeise rank is reached, also spoken out loud. A whole sentence because German picks the article by gender",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Du bist jetzt eine Blaumeise!"
+          }
+        }
+      }
+    },
+    "rank.blaumeise.missing" : {
+      "comment" : "Under the progress bar of the rank ascent, when the Blaumeise is the next rank. %lld is the stars still missing. A sentence per rank because German contracts the preposition with the article",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Noch ein Stern bis zur Blaumeise"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Noch %lld Sterne bis zur Blaumeise"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "rank.blaumeise.name" : {
+      "comment" : "Name of the Blaumeise rank on the ladder, in the album and in the swarm",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Blaumeise"
+          }
+        }
+      }
+    },
+    "rank.buntspecht.ascent" : {
+      "comment" : "Headline of the rank ascent when the Buntspecht rank is reached, also spoken out loud. A whole sentence because German picks the article by gender",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Du bist jetzt ein Buntspecht!"
+          }
+        }
+      }
+    },
+    "rank.buntspecht.missing" : {
+      "comment" : "Under the progress bar of the rank ascent, when the Buntspecht is the next rank. %lld is the stars still missing. A sentence per rank because German contracts the preposition with the article",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Noch ein Stern bis zum Buntspecht"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Noch %lld Sterne bis zum Buntspecht"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "rank.buntspecht.name" : {
+      "comment" : "Name of the Buntspecht rank on the ladder, in the album and in the swarm",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Buntspecht"
+          }
+        }
+      }
+    },
+    "rank.eisvogel.ascent" : {
+      "comment" : "Headline of the rank ascent when the Eisvogel rank is reached, also spoken out loud. A whole sentence because German picks the article by gender",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Du bist jetzt ein Eisvogel!"
+          }
+        }
+      }
+    },
+    "rank.eisvogel.missing" : {
+      "comment" : "Under the progress bar of the rank ascent, when the Eisvogel is the next rank. %lld is the stars still missing. A sentence per rank because German contracts the preposition with the article",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Noch ein Stern bis zum Eisvogel"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Noch %lld Sterne bis zum Eisvogel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "rank.eisvogel.name" : {
+      "comment" : "Name of the Eisvogel rank on the ladder, in the album and in the swarm",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eisvogel"
+          }
+        }
+      }
+    },
+    "rank.kohlmeise.ascent" : {
+      "comment" : "Headline of the rank ascent when the Kohlmeise rank is reached, also spoken out loud. A whole sentence because German picks the article by gender",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Du bist jetzt eine Kohlmeise!"
+          }
+        }
+      }
+    },
+    "rank.kohlmeise.missing" : {
+      "comment" : "Under the progress bar of the rank ascent, when the Kohlmeise is the next rank. %lld is the stars still missing. A sentence per rank because German contracts the preposition with the article",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Noch ein Stern bis zur Kohlmeise"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Noch %lld Sterne bis zur Kohlmeise"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "rank.kohlmeise.name" : {
+      "comment" : "Name of the Kohlmeise rank on the ladder, in the album and in the swarm",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kohlmeise"
+          }
+        }
+      }
+    },
+    "rank.ladder.start" : {
+      "comment" : "Threshold badge of the first rung, which costs no stars at all",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start"
+          }
+        }
+      }
+    },
+    "rank.ladder.threshold" : {
+      "comment" : "Threshold badge of a rung. %lld is the stars it takes to stand on it",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ab %lld"
+          }
+        }
+      }
+    },
+    "rank.ladder.title" : {
+      "comment" : "Title of the rank ladder screen, and of the button that opens it",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deine Vogel-Leiter"
+          }
+        }
+      }
+    },
+    "rank.rotkehlchen.ascent" : {
+      "comment" : "Headline of the rank ascent when the Rotkehlchen rank is reached, also spoken out loud. A whole sentence because German picks the article by gender",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Du bist jetzt ein Rotkehlchen!"
+          }
+        }
+      }
+    },
+    "rank.rotkehlchen.missing" : {
+      "comment" : "Under the progress bar of the rank ascent, when the Rotkehlchen is the next rank. %lld is the stars still missing. A sentence per rank because German contracts the preposition with the article",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Noch ein Stern bis zum Rotkehlchen"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Noch %lld Sterne bis zum Rotkehlchen"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "rank.rotkehlchen.name" : {
+      "comment" : "Name of the Rotkehlchen rank on the ladder, in the album and in the swarm",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rotkehlchen"
+          }
+        }
+      }
+    },
+    "rank.star.ascent" : {
+      "comment" : "Headline of the rank ascent when the Star rank is reached, also spoken out loud. A whole sentence because German picks the article by gender",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Du bist jetzt ein Star!"
+          }
+        }
+      }
+    },
+    "rank.star.missing" : {
+      "comment" : "Under the progress bar of the rank ascent, when the Star is the next rank. %lld is the stars still missing. A sentence per rank because German contracts the preposition with the article",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Noch ein Stern bis zum Star"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Noch %lld Sterne bis zum Star"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "rank.star.name" : {
+      "comment" : "Name of the Star rank on the ladder, in the album and in the swarm",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Star"
+          }
+        }
+      }
+    },
+    "rank.wiedehopf.ascent" : {
+      "comment" : "Headline of the rank ascent when the Wiedehopf rank is reached, also spoken out loud. A whole sentence because German picks the article by gender",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Du bist jetzt ein Wiedehopf!"
+          }
+        }
+      }
+    },
+    "rank.wiedehopf.missing" : {
+      "comment" : "Under the progress bar of the rank ascent, when the Wiedehopf is the next rank. %lld is the stars still missing. A sentence per rank because German contracts the preposition with the article",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Noch ein Stern bis zum Wiedehopf"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Noch %lld Sterne bis zum Wiedehopf"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "rank.wiedehopf.name" : {
+      "comment" : "Name of the Wiedehopf rank on the ladder, in the album and in the swarm",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wiedehopf"
+          }
+        }
+      }
+    },
     "roundEnd.collection" : {
       "comment" : "Button on the round end screen that opens the sticker album. Inert until the collection exists",
       "extractionState" : "manual",
@@ -753,6 +1281,30 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "roundEnd.sticker.new" : {
+      "comment" : "Caption under the round end's sticker when the bird was collected for the first time. %@ is the bird's name",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ gesammelt"
+          }
+        }
+      }
+    },
+    "roundEnd.sticker.new.spoken" : {
+      "comment" : "What the round end says out loud when the bird is a first find, in place of the plain praise. %@ is the bird's name",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Super gemacht! %@ gesammelt!"
           }
         }
       }
