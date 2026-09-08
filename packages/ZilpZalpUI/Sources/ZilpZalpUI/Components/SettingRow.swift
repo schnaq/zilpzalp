@@ -18,8 +18,8 @@ import SwiftUI
 ///
 /// `.disabled(_:)` works as on any SwiftUI control: a navigation row dims to
 /// the system's one disabled opacity, a switch row lets `Toggle` grey itself.
-/// A row that exists before the screen behind it does — the time budget until
-/// #36 — is drawn this way rather than dimmed by its caller.
+/// A row that exists before the screen behind it does — the time budget
+/// before #36 — is drawn this way rather than dimmed by its caller.
 ///
 /// Every visible string is a parameter. The package holds no product copy.
 public struct SettingRow: View {
