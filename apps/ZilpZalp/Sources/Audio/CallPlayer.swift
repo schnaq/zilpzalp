@@ -25,9 +25,13 @@ import os
 final class CallPlayer: NSObject {
     /// The call on its way to the speaker, `nil` while this player is silent.
     ///
-    /// Not observed: a view reads ``isPlaying``, and the player object itself
-    /// is bookkeeping.
-    @ObservationIgnored private var player: AVAudioPlayer?
+    /// Not observed itself — a view reads ``isPlaying``, and the recording is
+    /// bookkeeping — but it is the one fact this type keeps: setting it is what
+    /// moves ``isPlaying``, so no path through here can leave the two of them
+    /// disagreeing.
+    @ObservationIgnored private var player: AVAudioPlayer? {
+        didSet { isPlaying = player != nil }
+    }
 
     /// Whether a call is audible right now — what `SoundButton` draws its
     /// rings from.
@@ -41,8 +45,8 @@ final class CallPlayer: NSObject {
 
     /// Plays `url` from the beginning.
     ///
-    /// Whatever is being spoken stops first, and nothing is spoken until this
-    /// call is over — see ``AudioFocus``.
+    /// Whatever is being spoken stops as this starts, and nothing is spoken
+    /// until the call is over — see ``AudioFocus``.
     ///
     /// Failures are logged and never shown: a file that went missing between
     /// the pack check and the tap, or a recording the decoder refuses. A child
@@ -70,7 +74,6 @@ final class CallPlayer: NSObject {
         }
         recording.delegate = self
 
-        AudioFocus.speech?.stop()
         guard recording.play() else {
             Logger.audio.error(
                 "Call \(url.lastPathComponent, privacy: .public) did not start",
@@ -78,8 +81,12 @@ final class CallPlayer: NSObject {
             return
         }
 
+        // Only now, with the recording actually going: a call that never
+        // started has no business silencing the sentence it was going to
+        // replace. One main-actor tick separates the two, so nobody hears an
+        // overlap.
+        AudioFocus.speech?.stop()
         player = recording
-        isPlaying = true
         AudioFocus.call = self
     }
 
@@ -87,7 +94,6 @@ final class CallPlayer: NSObject {
     func stop() {
         player?.stop()
         player = nil
-        isPlaying = false
     }
 
     /// Clears the flag only for the recording that is actually current.
@@ -102,7 +108,6 @@ final class CallPlayer: NSObject {
             Logger.audio.error("Call stopped: the recording could not be decoded")
         }
         self.player = nil
-        isPlaying = false
     }
 }
 

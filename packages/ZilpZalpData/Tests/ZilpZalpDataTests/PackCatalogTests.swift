@@ -66,31 +66,28 @@ struct PackCatalogTests {
         }
     }
 
-    /// The one branch the bundled pack cannot reach on its own: a manifest
-    /// entry whose file is not there. `nil`, so the caller can show a
-    /// placeholder, rather than a URL that fails to load much later.
-    @Test("media that are not in the bundle resolve to nil")
-    func returnsNilForMissingMedia() throws {
+    /// The two branches the bundled pack cannot reach on its own: a manifest
+    /// entry whose file is not there, and a species that carries no recording
+    /// at all. `nil` for both — so a tile can draw its placeholder and the
+    /// player can stay silent (#30) — rather than a URL that fails much later.
+    ///
+    /// Asserted against a manifest and not against the bundle, so that the
+    /// callless case still says something once a bundled bird gets a call.
+    @Test("media that cannot be resolved come back as nil")
+    func returnsNilForUnresolvableMedia() throws {
         let catalog = try PackCatalog.bundled()
-        let ghost = try #require(
-            PackManifest.decode(Data(Self.ghostManifest.utf8)).birds.first,
-        )
+        let ghosts = try PackManifest.decode(Data(Self.ghostManifest.utf8)).birds
+        let missing = try #require(ghosts.first { $0.id == "gespenst" })
+        let callless = try #require(ghosts.first { $0.id == "schemen" })
 
-        #expect(catalog.photoURL(for: ghost) == nil)
-        #expect(catalog.callURL(for: ghost) == nil)
+        #expect(catalog.photoURL(for: missing) == nil)
+        #expect(catalog.callURL(for: missing) == nil)
+        #expect(catalog.callURL(for: callless) == nil)
     }
 
-    /// The other half of ``hasNoCalls()``, from the player's side: a species
-    /// without a recording is not an error, it is simply silent (#30).
-    @Test("a bird without a call resolves to nil")
-    func returnsNilForACallessBird() throws {
-        let catalog = try PackCatalog.bundled()
-
-        #expect(catalog.pack.birds.allSatisfy { catalog.callURL(for: $0) == nil })
-    }
-
-    /// A bird whose media were never copied into the pack. Only `file` matters
-    /// here; the rest is what the schema demands.
+    /// Two birds no pack directory holds: one whose declared media were never
+    /// copied in, one that carries no call at all. Only `file` and `call`
+    /// matter here; the rest is what the schema demands.
     private static let ghostManifest = """
     {
       "id": "basis",
@@ -119,6 +116,23 @@ struct PackCatalogTests {
             "sourceURL": "https://example.org/recordings/1",
             "retrieved": "2026-07-31"
           }
+        },
+        {
+          "id": "schemen",
+          "name": "Schemen",
+          "scientificName": "Spectrum umbra",
+          "taxonID": 2,
+          "article": "der",
+          "pronunciation": null,
+          "photo": {
+            "file": "photos/schemen.png",
+            "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "license": "CC-BY-4.0",
+            "attribution": "Nobody",
+            "sourceURL": "https://example.org/observations/2",
+            "retrieved": "2026-07-31"
+          },
+          "call": null
         }
       ]
     }
