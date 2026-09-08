@@ -120,7 +120,7 @@ struct QuizScreen: View {
             case .above:
                 HStack(spacing: ZSpacing.step4) {
                     soundButton(session, diameter: layout.soundDiameter)
-                    question(session, alignment: .leading)
+                    question(session, in: .above)
                 }
                 .frame(height: layout.soundDiameter + ZShadow.ledgeLargeOffset)
 
@@ -130,7 +130,7 @@ struct QuizScreen: View {
                 HStack(spacing: ZSpacing.step7) {
                     VStack(spacing: ZSpacing.step5) {
                         soundButton(session, diameter: layout.soundDiameter)
-                        question(session, alignment: .center)
+                        question(session, in: .beside)
                     }
                     .frame(width: QuizLayout.promptColumn)
 
@@ -216,19 +216,26 @@ struct QuizScreen: View {
     /// The question in writing — for the grown-up over the shoulder, exactly
     /// as on the design's screens. The child gets it spoken; the tiles stay
     /// wordless.
-    private func question(_ session: QuizSession, alignment: Alignment) -> some View {
-        let textAlignment: TextAlignment = alignment == .leading ? .leading : .center
+    ///
+    /// It reads from the sound button: beside it in a row, under it in a
+    /// column. So the arrangement settles the alignment, and nothing else
+    /// has to be told about it.
+    private func question(
+        _ session: QuizSession,
+        in arrangement: QuizLayout.Arrangement,
+    ) -> some View {
+        let leading = arrangement == .above
         return Text(verbatim: session.writtenQuestion)
             .typeStyle(isCompact ? .headline : .title, .display, weight: .extraBold)
             .foregroundStyle(ZColor.textStrong)
-            .multilineTextAlignment(textAlignment)
+            .multilineTextAlignment(leading ? .leading : .center)
             .lineLimit(2)
             // "Wo ist der Hausrotschwanz?" is the longest question the base
             // pack asks, and on the narrowest supported screen it needs the
             // room. The floor is the design's own: nothing a child might read
             // goes below 20 pt.
             .minimumScaleFactor(ZType.Step.body.size / ZType.Step.headline.size)
-            .frame(maxWidth: .infinity, alignment: alignment)
+            .frame(maxWidth: .infinity, alignment: leading ? .leading : .center)
     }
 
     /// What the app says back. Nothing until something has been tapped.
