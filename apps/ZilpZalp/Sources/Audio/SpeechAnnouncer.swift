@@ -69,10 +69,15 @@ final class SpeechAnnouncer: NSObject {
     /// Reads one finished German sentence out loud.
     ///
     /// The screens that ask a child a question in words — "Wer spielt heute?",
-    /// "Wie heißt du?" (#28) — need the same voice as the game does, and a
-    /// second `AVSpeechSynthesizer` beside this one would let two questions
-    /// talk over each other. So the text comes in already resolved from the
-    /// String Catalog and this stays the only voice in the app.
+    /// "Wie heißt du?" (#28) — need the same voice the game speaks in, so the
+    /// text comes in already resolved from the String Catalog rather than each
+    /// screen growing its own way of talking.
+    ///
+    /// This makes the *class* the one voice, not the instance: a screen holds
+    /// its own announcer, and two screens that were somehow on stage at once
+    /// could still speak over each other. Nothing in the app does that today —
+    /// each screen replaces the last — and the cut-off below covers the
+    /// handover.
     ///
     /// Cuts off whatever was still being said, exactly as ``announce(_:)``
     /// does, and sets ``isSpeaking`` for as long as it runs.

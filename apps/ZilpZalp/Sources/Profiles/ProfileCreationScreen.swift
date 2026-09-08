@@ -118,6 +118,11 @@ struct ProfileCreationScreen: View {
                 diameter: ZSpacing.touchMinimum,
                 action: back,
             )
+            // Shut while the profile is being written, like the confirm
+            // button. Leaving on it would drop the picker in front of a write
+            // that is still running, and the finished write would then throw
+            // the new child's home screen over the top of it.
+            .disabled(isSaving)
         } else {
             Wordmark(size: isCompact ? Wordmark.minimumSize : Self.wordmarkSize)
         }

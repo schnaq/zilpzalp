@@ -242,13 +242,13 @@
       }
     },
     "profile.store.failed" : {
-      "comment" : "Shown instead of any profile screen when profiles.json cannot be read or written. Read by a grown-up, so a full sentence",
+      "comment" : "Shown instead of any profile screen when profiles.json cannot be read or written. Covers both, so it names neither: a failed save must not say 'could not be loaded'. Read by a grown-up",
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Die Profile konnten nicht geladen werden."
+            "value" : "Mit den Profilen stimmt etwas nicht."
           }
         }
       }

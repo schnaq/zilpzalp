@@ -32,6 +32,17 @@ extension AvatarStyle {
     /// greys a *locked* sticker with, and an avatar that borrows the "not yet"
     /// colour would tell a child their own card is out of reach.
     ///
+    /// Two pairs are closer than the rest, and measuring says how close: leaf
+    /// against lightbulb is ΔE76 10.8, star against house 13.0, where every
+    /// other pair is 24.5 or more. The palette is warm-only — three greens and
+    /// three tan-oranges among eight — so separating those two pairs by hue is
+    /// not on offer, and separating them by lightness would push one of each
+    /// into the dark olive `sparkles` already occupies. They stay, because the
+    /// glyphs carry the difference where the colour thins out: a leaf is not a
+    /// lightbulb and a star is not a house at any size. Worth revisiting when
+    /// Johanna's pictures (#45) replace the glyphs, which is the moment the
+    /// shape stops being a flat line drawing.
+    ///
     /// When Johanna's pictures replace the glyphs (#45) the picture arrives
     /// here and the colours stay: colour is the half of the signal that
     /// survives a dirty screen and a child who looks for a second, not a
