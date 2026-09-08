@@ -91,7 +91,10 @@ final class AppModel {
         do {
             let stored = try await store.profiles()
             profiles = stored
-            activeProfileID = Self.profileToOpen(among: stored, remembered: rememberedProfileID)
+            activeProfileID = ProfileChoice.atLaunch(
+                among: stored,
+                remembered: rememberedProfileID,
+            )
         } catch {
             storeFailed = true
             let reason = String(describing: error)
@@ -134,28 +137,6 @@ final class AppModel {
             let reason = String(describing: error)
             Logger.profiles.error("Profile was not written: \(reason, privacy: .public)")
         }
-    }
-
-    /// Which child the app opens on — the zero/one/many rule, in the one place
-    /// it is allowed to run.
-    ///
-    /// Launch only. A family with a single profile still has to be able to
-    /// reach "Neues Nest", and they reach it through the picker that
-    /// ``chooseAgain()`` opens; if this rule ran there too it would put that
-    /// one child straight back on the home screen and a second child could
-    /// never be created.
-    ///
-    /// The remembered child wins over the count, so a restart lands where the
-    /// iPad was put down. Without one: nobody yet (the creation screen is the
-    /// root), exactly one (that child, no picker), or several (the picker).
-    private static func profileToOpen(
-        among profiles: [Profile],
-        remembered: Profile.ID?,
-    ) -> Profile.ID? {
-        if let remembered, profiles.contains(where: { $0.id == remembered }) {
-            return remembered
-        }
-        return profiles.count == 1 ? profiles.first?.id : nil
     }
 
     private var rememberedProfileID: Profile.ID? {
