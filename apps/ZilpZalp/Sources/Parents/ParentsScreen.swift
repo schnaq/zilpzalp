@@ -261,7 +261,7 @@ struct ParentsScreen: View {
                     title: String(localized: "parents.playtime.title"),
                     hint: String(localized: "parents.playtime.hint"),
                     icon: .clock,
-                    value: dailyLimit,
+                    value: label(forLimit: parental.settings.dailyLimitMinutes),
                 ) {
                     choosingLimit = true
                 }
@@ -319,11 +319,6 @@ struct ParentsScreen: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
         }
-    }
-
-    /// The daily limit as the row states it: "Kein Limit", or the minutes.
-    private var dailyLimit: String {
-        label(forLimit: parental.settings.dailyLimitMinutes)
     }
 
     /// One preset, in the row and in the dialog — one spelling, so the value

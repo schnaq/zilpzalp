@@ -124,10 +124,18 @@ public struct SettingRow: View {
                         // The title beside it is greedy, so on a narrow phone
                         // the value was offered a column two words wide and
                         // broke "45 Min" across two lines — measured on an
-                        // iPhone 17 with the time budget (#36). A value is
-                        // one short phrase and takes the width it needs; the
-                        // title is the one that wraps, which this component
-                        // already calls the better failure.
+                        // iPhone 17 with the time budget (#36). This takes
+                        // the width the value needs and leaves the rest to
+                        // the title, which is the one this component already
+                        // calls the better thing to wrap.
+                        //
+                        // It states that a value never wraps, not that it
+                        // wraps last: a value long enough to want the whole
+                        // row would push past it rather than break. Every
+                        // value in this system is one short phrase — "Kein
+                        // Limit", "45 Min", "Deutsch" — which is what makes
+                        // that the cheaper promise. `layoutPriority(1)` is
+                        // the softer one if a long value ever turns up.
                         .fixedSize(horizontal: true, vertical: false)
                     }
                     .contentShape(Rectangle())
