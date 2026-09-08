@@ -162,16 +162,6 @@ final class QuizSession {
         isAnswered && bird.id != question?.answer
     }
 
-    /// The credit line drawn inside the photo. Every base-pack photo is CC BY,
-    /// which makes naming the photographer an obligation and not a courtesy.
-    func credit(for bird: Bird) -> String {
-        String(
-            format: String(localized: "quiz.photo.credit"),
-            bird.photo.attribution,
-            bird.photo.license.shortName,
-        )
-    }
-
     /// The question in writing, for the grown-up reading over the shoulder —
     /// the same sentence the app speaks, but always the written name, never the
     /// phonetic override that only a speech synthesiser should ever see.
@@ -296,30 +286,15 @@ final class QuizSession {
         index += 1
         wrongTaps = []
         isAnswered = false
-        askQuestion()
-    }
-}
 
-extension License {
-    /// How a licence is named in a credit line: the short public name, not the
-    /// SPDX identifier the manifest carries. "CC BY" is what the licence
-    /// deed itself asks to be called; "CC-BY-4.0" is a filing code.
-    ///
-    /// Not product copy and therefore not in the String Catalog: these three
-    /// names are the same in every language.
-    ///
-    /// App-internal only because #25 was not allowed to change `ZilpZalpData`.
-    /// This is a fact about `License`, not about the quiz, and both the round
-    /// end and the credits screen (#37) want the same three strings — at which
-    /// point it belongs beside the enum rather than in a second copy here.
-    /// #26 widened it from `private` for exactly that reason: one copy, in the
-    /// wrong place, beats two.
-    var shortName: String {
-        switch self {
-        case .cc0: "CC0"
-        case .ccBy: "CC BY"
-        case .ccBySa: "CC BY-SA"
-        }
+        // A finished round has nothing left to ask, and the question that was
+        // still being spoken must not run on under the round end's praise.
+        // The session owns the announcer and knows when its round is over, so
+        // it stops itself rather than waiting for a screen to notice: the
+        // push runs the round end's `onAppear` before this screen's
+        // `onDisappear`, which is too late.
+        guard !isFinished else { return announcer.stop() }
+        askQuestion()
     }
 }
 

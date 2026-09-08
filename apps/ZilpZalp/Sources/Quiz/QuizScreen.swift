@@ -119,11 +119,6 @@ struct QuizScreen: View {
         }
         .onChange(of: session.isFinished) { _, finished in
             if finished {
-                // Before handing over, not only in `onDisappear`: a push runs
-                // the round end's `onAppear` before this screen's
-                // `onDisappear`, so a question still being spoken would talk
-                // over the celebration. Stopping here is deterministic.
-                session.suspend()
                 onFinished(session.result)
             }
         }
@@ -209,7 +204,7 @@ struct QuizScreen: View {
             // child who is meant to find it. The position is all the label can
             // honestly say about a photo the game is asking about.
             label: String(format: String(localized: "quiz.tile.accessibility"), position + 1),
-            credit: session.credit(for: bird),
+            credit: bird.creditLine,
             tone: Self.tones[position % Self.tones.count],
             phase: session.phase(for: bird),
             dimmed: session.isDimmed(bird),

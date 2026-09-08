@@ -106,8 +106,11 @@ struct RoundEndScreen: View {
             .background(ZColor.surfaceForest)
             .overlay(alignment: .bottom) { signature }
             // No `TopBar`: screen 1d has none, and a finished round is
-            // nothing to go back into. "Nochmal spielen" is the way on, and
-            // hiding the navigation bar takes the swipe back with it.
+            // nothing to go back into — "Nochmal spielen" is the way on. The
+            // bar is hidden like everywhere else in this app; it is
+            // `navigationBarBackButtonHidden()` that takes the swipe back
+            // with it, which is why it is here rather than only the toolbar
+            // line.
             .toolbar(.hidden, for: .navigationBar)
             .navigationBarBackButtonHidden()
             .onAppear(perform: celebrate)
@@ -324,14 +327,7 @@ private struct Sticker {
         image = catalog.photoURL(for: bird)
             .flatMap { UIImage(contentsOfFile: $0.path(percentEncoded: false)) }
             .map { Image(uiImage: $0) }
-        // The quiz's own credit line, key and all: the same sentence about the
-        // same photo, and a second copy would be a second place for the
-        // attribution to drift away from the manifest.
-        credit = String(
-            format: String(localized: "quiz.photo.credit"),
-            bird.photo.attribution,
-            bird.photo.license.shortName,
-        )
+        credit = bird.creditLine
     }
 }
 
