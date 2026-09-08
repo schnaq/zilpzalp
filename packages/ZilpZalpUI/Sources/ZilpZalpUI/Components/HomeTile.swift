@@ -82,8 +82,8 @@ public struct HomeTile: View {
     ///   - title: The word under the glyph, and the button's accessibility
     ///     label. Always a parameter — the package carries no product copy.
     ///     One or two words: the tile draws it on a single line and truncates
-    ///     rather than wrapping. The design's own labels ("Wer singt da?",
-    ///     "Sterne sammeln") reach 161 pt of the 208 pt available.
+    ///     rather than wrapping. How large that line is drawn follows the
+    ///     tile, see ``labelStep``.
     ///   - icon: The activity's glyph. Ignored while ``locked``.
     ///   - tone: The tile's tint.
     ///   - stars: How many of the three slots are filled. A number outside
@@ -126,6 +126,30 @@ public struct HomeTile: View {
         locked ? 0 : stars
     }
 
+    /// The step the label is drawn at, derived from ``size`` exactly as the
+    /// glyph is: the largest step of the scale whose line still fits between
+    /// the tile's paddings, and never below `body`, the smallest size
+    /// anything a child reads may take.
+    ///
+    /// What "fits" means is measured rather than guessed. The design's
+    /// longest tile label, "Sterne sammeln", is 7.28 times the type size wide
+    /// in the bundled Baloo 2 Bold, so a step needs that multiple of the
+    /// `size − 2 × --space-4` the padding leaves. That puts `label` — the
+    /// step `typography.css` names for tile labels — at tiles from 193 pt
+    /// and `headline` from 236 pt, which the JSX's own 240 pt tile clears:
+    /// the deliberate deviation issue #92 asks for, so that a big tile does
+    /// not carry a small word under an 82 pt glyph.
+    ///
+    /// Below 193 pt the tile drops to `body` and stays there. A tile under
+    /// 140 pt cannot hold even that — two tiles side by side on a 375 pt
+    /// phone come out at 127 pt — and the label truncates rather than going
+    /// under the floor.
+    var labelStep: ZType.Step {
+        let available = size - 2 * ZSpacing.step4
+        let steps: [ZType.Step] = [.headline, .label]
+        return steps.first { available >= HomeTileMetrics.labelWidthRatio * $0.size } ?? .body
+    }
+
     private var palette: HomeTilePalette {
         locked ? .locked : tone.palette
     }
@@ -140,7 +164,7 @@ public struct HomeTile: View {
                 Text(title)
                     // One line by design, so no `multilineTextAlignment`:
                     // the frame centres the single line already.
-                    .typeStyle(.label, .display, weight: .bold, singleLine: true)
+                    .typeStyle(labelStep, .display, weight: .bold, singleLine: true)
 
                 // No stars at all until the first one is earned, exactly as
                 // in the JSX: three empty outlines on a fresh tile would read
@@ -184,6 +208,16 @@ struct HomeTilePalette: Sendable, Hashable {
 private enum HomeTileMetrics {
     /// `Math.round(size * 0.34)` — the glyph scales with the tile.
     static let iconRatio: CGFloat = 0.34
+    /// How wide the design's longest tile label is per point of type size,
+    /// and with it how far the label may follow the tile up before it stops
+    /// fitting — see ``HomeTile/labelStep``.
+    ///
+    /// Measured with CoreText in the bundled Baloo 2 Bold, which is the only
+    /// face a tile label is ever drawn in. "Sterne sammeln" from the JSX is
+    /// the longest of the four: 145.6 pt at 20 pt, 160.1 at 22 and 203.8 at
+    /// 28. Advances scale with the point size, so one ratio covers the whole
+    /// scale.
+    static let labelWidthRatio: CGFloat = 7.28
     /// Three stars per activity, and never a fourth.
     static let starCapacity = 3
     /// The resting ledge, `--ledge-lg`.

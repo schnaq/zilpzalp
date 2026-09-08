@@ -1,3 +1,4 @@
+import SwiftUI
 import Testing
 @testable import ZilpZalpUI
 
@@ -77,6 +78,48 @@ struct NavigationComponentTests {
     func theDefaultTileIsFarLargerThanTheTouchFloor() {
         #expect(HomeTile.defaultSize == 240)
         #expect(HomeTile(title: "Wer singt da?").size >= ZSpacing.touchMinimum)
+    }
+
+    /// The tile's own rule, not a taste: a step is worn as long as the
+    /// design's longest label still fits between the paddings, so the
+    /// boundaries are 193 pt for `label` and 236 pt for `headline`. A tile a
+    /// point short of one steps down rather than truncating (#92).
+    @Test(
+        "The label's step follows the tile's size",
+        arguments: [
+            (ZSpacing.touchMinimum, ZType.Step.body),
+            // Two tiles side by side on the shortest supported phone.
+            (127, .body),
+            (192, .body),
+            (193, .label),
+            (235, .label),
+            (236, .headline),
+            // The JSX's own tile, `HomeTile.defaultSize` — spelled out because
+            // an argument list is evaluated off the main actor.
+            (240, .headline),
+        ],
+    )
+    func theLabelStepFollowsTheTileSize(size: CGFloat, expected: ZType.Step) {
+        #expect(HomeTile(title: "Wer singt da?", size: size).labelStep == expected)
+    }
+
+    /// The 7.28 those boundaries are derived from, checked against the face
+    /// itself rather than trusted. "Sterne sammeln" is the longest label the
+    /// JSX draws on a tile, and it has to survive whole at every size the
+    /// tile steps up at — a font swap that widened it would move the
+    /// boundaries and fail here first.
+    @Test(
+        "The step a tile picks keeps the design's longest label whole",
+        arguments: [193, 236, 240] as [CGFloat],
+    )
+    func theLabelStepKeepsTheLongestLabelWhole(size: CGFloat) throws {
+        try #require(BundledFonts.registered)
+
+        let longest = "Sterne sammeln"
+        let step = HomeTile(title: longest, size: size).labelStep
+        let width = BundledFonts.width(of: longest, postScriptName: "Baloo2-Bold", size: step.size)
+
+        #expect(width <= size - 2 * ZSpacing.step4)
     }
 
     /// The one number in `SettingRow` that a screenshot caught and no unit
