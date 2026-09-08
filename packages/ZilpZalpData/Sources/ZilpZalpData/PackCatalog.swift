@@ -64,10 +64,29 @@ public struct PackCatalog: Sendable {
     /// themselves, so a pack that moves — into the caches directory for a
     /// downloaded pack, later — changes nothing in the views.
     public func photoURL(for bird: Bird) -> URL? {
-        let photo = directory.appending(path: bird.photo.file)
-        guard FileManager.default.fileExists(atPath: photo.path(percentEncoded: false)) else {
+        mediaURL(bird.photo)
+    }
+
+    /// The recording of `bird`'s call on disk, `nil` when the species carries
+    /// none or the file is not there. The call player (#30) plays nothing in
+    /// either case.
+    ///
+    /// The twin of ``photoURL(for:)`` and for the same reason: a species may
+    /// stay callless — the schema makes ``Bird/call`` optional — and where a
+    /// pack lies is this type's secret, not the player's.
+    public func callURL(for bird: Bird) -> URL? {
+        bird.call.flatMap(mediaURL)
+    }
+
+    /// The file a medium declares, `nil` when it is not on disk.
+    ///
+    /// A manifest names a medium relative to itself, and that one rule is what
+    /// both accessors above share.
+    private func mediaURL(_ asset: MediaAsset) -> URL? {
+        let file = directory.appending(path: asset.file)
+        guard FileManager.default.fileExists(atPath: file.path(percentEncoded: false)) else {
             return nil
         }
-        return photo
+        return file
     }
 }

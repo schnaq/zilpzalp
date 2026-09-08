@@ -69,19 +69,29 @@ struct PackCatalogTests {
     /// The one branch the bundled pack cannot reach on its own: a manifest
     /// entry whose file is not there. `nil`, so the caller can show a
     /// placeholder, rather than a URL that fails to load much later.
-    @Test("a photo that is not in the bundle resolves to nil")
-    func returnsNilForAMissingPhoto() throws {
+    @Test("media that are not in the bundle resolve to nil")
+    func returnsNilForMissingMedia() throws {
         let catalog = try PackCatalog.bundled()
         let ghost = try #require(
-            PackManifest.decode(Data(Self.missingPhotoManifest.utf8)).birds.first,
+            PackManifest.decode(Data(Self.ghostManifest.utf8)).birds.first,
         )
 
         #expect(catalog.photoURL(for: ghost) == nil)
+        #expect(catalog.callURL(for: ghost) == nil)
     }
 
-    /// A bird whose photo was never copied into the pack. Only `file` matters
+    /// The other half of ``hasNoCalls()``, from the player's side: a species
+    /// without a recording is not an error, it is simply silent (#30).
+    @Test("a bird without a call resolves to nil")
+    func returnsNilForACallessBird() throws {
+        let catalog = try PackCatalog.bundled()
+
+        #expect(catalog.pack.birds.allSatisfy { catalog.callURL(for: $0) == nil })
+    }
+
+    /// A bird whose media were never copied into the pack. Only `file` matters
     /// here; the rest is what the schema demands.
-    private static let missingPhotoManifest = """
+    private static let ghostManifest = """
     {
       "id": "basis",
       "title": "Unsere ersten Vögel",
@@ -101,7 +111,14 @@ struct PackCatalogTests {
             "sourceURL": "https://example.org/observations/1",
             "retrieved": "2026-07-31"
           },
-          "call": null
+          "call": {
+            "file": "calls/gespenst.m4a",
+            "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "license": "CC0-1.0",
+            "attribution": "Nobody",
+            "sourceURL": "https://example.org/recordings/1",
+            "retrieved": "2026-07-31"
+          }
         }
       ]
     }
