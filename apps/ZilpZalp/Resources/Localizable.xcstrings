@@ -13,6 +13,30 @@
         }
       }
     },
+    "gate.hint.wrong" : {
+      "comment" : "Shown under the parental gate's task after a wrong answer. Never a reprimand and never a lockout — the numbers have already changed",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Das war nicht die richtige Zahl. Hier ist eine neue Aufgabe."
+          }
+        }
+      }
+    },
+    "gate.question" : {
+      "comment" : "The adult-level task of the parental gate. %1$@ and %2$@ are the two operands, spelled out in words so that solving it needs reading",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wie viel ist %1$@ plus %2$@?"
+          }
+        }
+      }
+    },
     "home.game.calls.title" : {
       "comment" : "Tile on the home screen for game 2: a bird call plays, the child taps the bird",
       "extractionState" : "manual",
@@ -57,6 +81,198 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zurück"
+          }
+        }
+      }
+    },
+    "parents.calls.hint" : {
+      "comment" : "Under the bird-call switch. Says what it does not cover: game 1 reads the question out and stays audible, or the game has no task left",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nur die Aufnahmen. Spiel 1 wird weiter vorgelesen."
+          }
+        }
+      }
+    },
+    "parents.calls.title" : {
+      "comment" : "Switch in the grown-ups' area: whether the recorded bird calls play",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vogelstimmen"
+          }
+        }
+      }
+    },
+    "parents.credits.hint" : {
+      "comment" : "Under the credits row",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Woher die Bilder kommen und wem sie gehören"
+          }
+        }
+      }
+    },
+    "parents.credits.title" : {
+      "comment" : "Row in the grown-ups' area that opens the credits, and the title of that screen",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fotos & Dank"
+          }
+        }
+      }
+    },
+    "parents.gate.reason" : {
+      "comment" : "Why the parental gate is being shown: the device has neither a code nor biometrics on file and cannot be asked",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dieser Bereich ist für Erwachsene. Bitte lösen Sie kurz die Aufgabe."
+          }
+        }
+      }
+    },
+    "parents.intro" : {
+      "comment" : "The paragraph at the top of the unlocked grown-ups' area",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ZilpZalp lernt Vögel über Bilder und Rufe — ohne Lesen, ohne Punktejagd. Hier stellen Sie ein, was dabei zu hören und zu sehen ist."
+          }
+        }
+      }
+    },
+    "parents.lock.explanation" : {
+      "comment" : "The sentence on the locked grown-ups' area, above the unlock button",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hier stellen Erwachsene ein, wie ZilpZalp spielt. Das Gerät fragt einmal kurz nach."
+          }
+        }
+      }
+    },
+    "parents.lock.reason" : {
+      "comment" : "Subtitle of the system's own authentication sheet. LAContext demands a non-empty reason",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Der Elternbereich ist nur für Erwachsene."
+          }
+        }
+      }
+    },
+    "parents.lock.refused" : {
+      "comment" : "Shown after an attempt that did not go through — a wrong face, a wrong code, or a cancelled sheet. Calm, and it names the way on",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Das hat nicht geklappt. Tippen Sie noch einmal auf „Entsperren“."
+          }
+        }
+      }
+    },
+    "parents.lock.unlock" : {
+      "comment" : "The button that asks the device to unlock the grown-ups' area",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entsperren"
+          }
+        }
+      }
+    },
+    "parents.names.hint" : {
+      "comment" : "Under the name switch",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vogelnamen unter den Bildern einblenden"
+          }
+        }
+      }
+    },
+    "parents.names.title" : {
+      "comment" : "Switch in the grown-ups' area: whether the bird's name is printed under its picture",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Namen anzeigen"
+          }
+        }
+      }
+    },
+    "parents.notice" : {
+      "comment" : "Heading of the card in the grown-ups' area that states what the app does not do",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keine Werbung, keine Käufe"
+          }
+        }
+      }
+    },
+    "parents.notice.hint" : {
+      "comment" : "The second line of the same card",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keine Konten, keine Datenerhebung, kein Tracking."
+          }
+        }
+      }
+    },
+    "parents.playtime.none" : {
+      "comment" : "The time budget's current value when there is no daily limit",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kein Limit"
+          }
+        }
+      }
+    },
+    "parents.playtime.title" : {
+      "comment" : "Row in the grown-ups' area for the daily time budget. Visible and inert until #36 fills it",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spielzeit pro Tag"
           }
         }
       }

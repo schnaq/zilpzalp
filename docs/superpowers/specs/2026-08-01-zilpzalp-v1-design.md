@@ -1,7 +1,7 @@
 # ZilpZalp v1 — Design und Spezifikation
 
 **Datum:** 2026-08-01
-**Status:** Gültig, zuletzt aktualisiert 2026-09-07
+**Status:** Gültig, zuletzt aktualisiert 2026-09-08
 **Grundlage:** [docs/2026-07_basics.md](../../2026-07_basics.md), Design-Export unter `design/`, Klickprototyp unter `screens/`
 
 ---
@@ -161,10 +161,10 @@ Beide Spiele nutzen dieselbe Engine, sie unterscheiden sich nur darin, wie die F
 
 1. Kind wählt sein Profil, dann ein Spiel
 2. Zehn Fragen. Pro Frage: Aufgabe wird ausgegeben — Spiel 1 liest Artikel und Namen (mit `pronunciation`-Override, wo hinterlegt) per `AVSpeechSynthesizer` vor, Spiel 2 spielt den Ruf ab, wiederholbar per Tippen
-3. Vier Fotokacheln. Richtige Wahl färbt sich olivgrün mit Häkchen, falsche Wahl färbt sich sonnengelb mit „Fast! Hör nochmal hin." — **niemals rot, niemals ein Kreuz, kein Blockieren**. Das Kind darf weiter probieren. Die Kacheln zeigen nie den Vogelnamen als Text
+3. Vier Fotokacheln. Richtige Wahl färbt sich olivgrün mit Häkchen, falsche Wahl färbt sich sonnengelb mit „Fast! Hör nochmal hin." — **niemals rot, niemals ein Kreuz, kein Blockieren**. Das Kind darf weiter probieren. Die Kacheln zeigen nie den Vogelnamen als Text. Auf dem iPad stehen sie im 2×2-Raster, nicht in der einen Reihe des Design-Exports — Issue #25, Task 15 des Plans und die Umsetzung sind sich darin einig; Grund sind Kachelgröße und Bedienziele auf 11-Zoll-iPads in beiden Ausrichtungen
 4. Nach zehn Fragen: Sterne, gegebenenfalls Rangaufstieg, neuer Sticker in der Sammlung
 
-Der Blätter-Fortschritt zeigt den Stand ohne Zahlen. Bei erschöpftem Zeitbudget läuft die aktuelle Runde noch zu Ende, danach erscheint „Zeit fürs Nest".
+Der Blätter-Fortschritt zeigt den Stand ohne Zahlen. Auf dem iPhone sitzt die Blätterreihe unter der TopBar statt wie im Design darin: Zehn 44-pt-Blätter mit 12 pt Abstand sind 548 pt breit — breiter als jedes iPhone. Bei erschöpftem Zeitbudget läuft die aktuelle Runde noch zu Ende, danach erscheint „Zeit fürs Nest".
 
 **Sprachausgabe:** `AVSpeechSynthesizer` mit `de-DE` direkt auf dem Gerät. Kein Audio-Asset, keine Lizenzfrage, keine Netzabhängigkeit. Der Klickprototyp macht es mit der Web Speech API bereits genauso. Die Sprachausgabe lässt sich in v1 nicht abschalten — ohne sie hätte Spiel 1 für noch nicht lesende Kinder keine Aufgabenstellung. Die Einstellung „Vogelstimmen" im Elternbereich betrifft nur die aufgenommenen Rufe aus Spiel 2. Die Audiosession (`AVAudioSession`, Kategorie `.playback`) wird vom Sprachdienst konfiguriert und vom Rufe-Player mitgenutzt, damit beide auch bei umgelegtem Stummschalter hörbar bleiben.
 

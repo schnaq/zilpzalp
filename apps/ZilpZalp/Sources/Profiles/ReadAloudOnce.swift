@@ -23,7 +23,7 @@ struct ReadAloudOnce: ViewModifier {
             .onAppear {
                 guard !hasSpoken else { return }
                 hasSpoken = true
-                announcer.say(text)
+                announcer.announce(text)
             }
             .onDisappear { announcer.stop() }
     }

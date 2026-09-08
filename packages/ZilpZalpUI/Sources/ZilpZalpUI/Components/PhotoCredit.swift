@@ -27,7 +27,10 @@ struct PhotoCredit: View {
             .foregroundStyle(ZColor.cream50)
             .lineLimit(PhotoCreditMetrics.lineLimit)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.horizontal, PhotoCreditMetrics.horizontalPadding)
+            // Leading and trailing differ: the left edge is the one the
+            // rounded corner eats into. See ``PhotoCreditMetrics/leadingPadding``.
+            .padding(.leading, PhotoCreditMetrics.leadingPadding)
+            .padding(.trailing, PhotoCreditMetrics.trailingPadding)
             .padding(.top, PhotoCreditMetrics.topPadding)
             .padding(.bottom, PhotoCreditMetrics.bottomPadding)
             .background {
@@ -56,8 +59,25 @@ enum PhotoCreditMetrics {
     /// The `14px` top padding, which is also what makes the gradient band
     /// tall enough to protect the text.
     static let topPadding: CGFloat = 14
-    /// `12px` left and right.
-    static let horizontalPadding: CGFloat = 12
+    /// `12px` right. The design pads both sides with it; here only this one
+    /// still can — see ``leadingPadding``.
+    static let trailingPadding: CGFloat = 12
+    /// What the left edge needs instead of ``trailingPadding``.
+    ///
+    /// `design/components/quiz/ChoiceTile.jsx` hangs this strip under the
+    /// bottom of a `size * 0.78` photo band that has the bird's name below
+    /// it, so it sits on a straight edge and `12px` clears everything. This
+    /// port draws no name — quiz tiles are wordless — the photo fills the
+    /// whole square, and the strip lands on the tile's own corner. Two things
+    /// then cross the first glyph: the 40 pt curve, and the 5 pt border
+    /// ``ChoiceTile`` strokes *inside* the same shape, which the CSS draws
+    /// outside the photo. Insetting by the radius puts the text back on the
+    /// straight part of the edge, where the design always had it.
+    ///
+    /// Only the leading side. Trailing stays at ``trailingPadding``: the text is
+    /// left-aligned, so a wrapped line ends well before the right corner, and
+    /// a second inset would cost width the licence needs.
+    static let leadingPadding = ZRadius.tile
     /// `7px` — the text sits close to the photo's edge.
     static let bottomPadding: CGFloat = 7
     /// A photographer's name and licence fit on two lines at any tile size we
@@ -67,10 +87,7 @@ enum PhotoCreditMetrics {
 
 #Preview("Credit on a photo field") {
     VStack(spacing: ZSpacing.step5) {
-        ForEach(
-            ["Foto: Andrej Chudý (CC BY)", "Foto: Alexis Tinker-Tsavalas (CC BY-SA 4.0)"],
-            id: \.self,
-        ) { credit in
+        ForEach(previewCredits, id: \.self) { credit in
             ZColor.bark300
                 .frame(width: 260, height: 180)
                 .overlay(alignment: .bottom) { PhotoCredit(text: credit) }
@@ -80,3 +97,30 @@ enum PhotoCreditMetrics {
     .padding(ZSpacing.step6)
     .background(ZColor.surfacePage)
 }
+
+#Preview("The corner, at the smallest tile there is") {
+    // In its real host, at ``ChoiceTile/minimumSize``: the narrowest strip the
+    // component ever draws, over the 40 pt corner *and* under the 5 pt border
+    // the tile strokes inside the same shape. Both used to cut into the first
+    // glyph — which is why the bare field above is not enough to judge this.
+    HStack(alignment: .top, spacing: ZSpacing.gapTiles) {
+        ForEach(previewCredits, id: \.self) { credit in
+            ChoiceTile(
+                label: "Amsel",
+                credit: credit,
+                tone: .beeren,
+                size: ChoiceTile.minimumSize,
+            )
+        }
+    }
+    .padding(ZSpacing.step7)
+    .background(ZColor.surfacePage)
+}
+
+/// The worst case for the corner: a name long enough to wrap onto the line
+/// that sits deepest in the curve, and one that starts on a narrow glyph,
+/// where a clip is hardest to spot and easiest to misread.
+private let previewCredits = [
+    "Foto: Alexis Tinker-Tsavalas (CC BY-SA 4.0)",
+    "Jane Ivanović-Tremayne (CC BY)",
+]

@@ -61,6 +61,15 @@ targets:
         # (1024x1024) with Dark and Tinted variants, see tools/render_app_icon.py.
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         INFOPLIST_KEY_UILaunchScreen_Generation: true
+        # The one purpose string the app needs, shown when the grown-ups' area
+        # asks Face ID for the first time. Product copy, so German, and it
+        # names what the app wants rather than the technology. Unlike
+        # UIAppFonts below, Xcode does know this key, so it belongs here and
+        # not in the companion plist — verified by reading the compiled
+        # Info.plist out of the build.
+        INFOPLIST_KEY_NSFaceIDUsageDescription: >-
+          ZilpZalp fragt nach, ob wirklich ein Erwachsener den Elternbereich
+          öffnet. Ohne Face ID geht es genauso mit dem Gerätecode.
         # All orientations for now; what the design actually needs becomes
         # clear with the game screens.
         INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: >-
