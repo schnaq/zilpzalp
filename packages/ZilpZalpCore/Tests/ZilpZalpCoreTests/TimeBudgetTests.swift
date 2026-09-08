@@ -66,15 +66,16 @@ func negativeValuesAreClamped() {
     #expect(limit.isExhausted)
 }
 
-@Test("Every preset the grown-ups' area offers behaves the same way")
-func everyPresetCountsDown() {
-    for minutes in [15, 30, 45, 60] {
-        let full = TimeBudget(limitMinutes: minutes, playedToday: 0)
-        #expect(full.isExhausted == false)
-        #expect(full.remaining == TimeInterval(minutes) * 60)
+@Test(
+    "Every preset the grown-ups' area offers behaves the same way",
+    arguments: [15, 30, 45, 60],
+)
+func everyPresetCountsDown(minutes: Int) {
+    let full = TimeBudget(limitMinutes: minutes, playedToday: 0)
+    #expect(full.isExhausted == false)
+    #expect(full.remaining == TimeInterval(minutes) * 60)
 
-        let spent = TimeBudget(limitMinutes: minutes, playedToday: TimeInterval(minutes) * 60)
-        #expect(spent.isExhausted)
-        #expect(spent.remaining == 0)
-    }
+    let spent = TimeBudget(limitMinutes: minutes, playedToday: TimeInterval(minutes) * 60)
+    #expect(spent.isExhausted)
+    #expect(spent.remaining == 0)
 }

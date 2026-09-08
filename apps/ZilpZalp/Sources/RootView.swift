@@ -154,10 +154,16 @@ struct RootView: View {
     /// "Nochmal spielen": back into the quiz, unless the round that just
     /// ended used the last of the day.
     ///
-    /// The round is booked before this can be tapped — ``RoundEndScreen``
-    /// records it on arrival — so the seconds it took are already counted
-    /// here. **This is the only place the budget can end play**, and it does
-    /// so between two rounds; nothing asks it while a question is up.
+    /// ``RoundEndScreen`` books the round on arrival, so by the time a hand
+    /// has reached this button the seconds it took are counted here. Only in
+    /// practice, not by construction: the button is live from the first frame
+    /// while the write is still in flight, so a tap inside those few
+    /// milliseconds would ask about the day before the round. It would cost
+    /// one more round and the next check would see the truth — which is why
+    /// the guard is not worth disabling the way on for a frame.
+    ///
+    /// **This is the only place the budget can end play**, and it does so
+    /// between two rounds; nothing asks it while a question is up.
     private func playAnotherRound() {
         if model.timeBudget.isExhausted {
             path.append(.timeForTheNest)
