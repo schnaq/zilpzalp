@@ -259,8 +259,8 @@ struct QuizScreen: View {
     /// the sentences ever change.
     private func feedbackBand(_ session: QuizSession, reserve: CGFloat) -> some View {
         ZStack {
-            correctBanner.hidden()
-            retryBanner.hidden()
+            template(correctBanner)
+            template(retryBanner)
             feedback(session)
         }
         .onGeometryChange(for: CGFloat.self) { $0.size.height } action: {
@@ -291,6 +291,21 @@ struct QuizScreen: View {
 
     private var retryBanner: FeedbackBanner {
         FeedbackBanner(String(localized: "quiz.feedback.retry"), kind: .retry)
+    }
+
+    /// A banner that is only there to be measured: it holds the band open and
+    /// is otherwise not on the screen at all.
+    ///
+    /// `hidden()` already keeps it out of the drawing, out of hit testing and
+    /// out of the accessibility tree — verified in the simulator, where the
+    /// tree carries no banner at all until one is actually said. The explicit
+    /// `accessibilityHidden(true)` says so anyway: a child sweeping VoiceOver
+    /// across the screen must never meet a sentence the app has not said, and
+    /// that promise is too important to rest on a side effect.
+    private func template(_ banner: FeedbackBanner) -> some View {
+        banner
+            .hidden()
+            .accessibilityHidden(true)
     }
 
     private func progress(_ session: QuizSession) -> some View {
