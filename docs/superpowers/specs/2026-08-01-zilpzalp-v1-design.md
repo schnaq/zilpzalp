@@ -166,6 +166,8 @@ Beide Spiele nutzen dieselbe Engine, sie unterscheiden sich nur darin, wie die F
 
 Der Blätter-Fortschritt zeigt den Stand ohne Zahlen. Auf dem iPhone sitzt die Blätterreihe unter der TopBar statt wie im Design darin: Zehn 44-pt-Blätter mit 12 pt Abstand sind 548 pt breit — breiter als jedes iPhone. Bei erschöpftem Zeitbudget läuft die aktuelle Runde noch zu Ende, danach erscheint „Zeit fürs Nest".
 
+Auch die `TopBar` weicht auf dem iPhone ab: Sie nutzt den Bildschirm-Gutter `--space-4` (16 pt) statt des iPad-`--gutter-screen` (48 pt), denn bei 375 pt blieben der Mitte neben zwei 64-pt-Buttons und zwei 24-pt-Abständen nur 103 pt, während „Für Erwachsene" 114,5 pt braucht — mit 16 pt sind es 167 pt (Issue #93). Ihre Titelzeile misst dabei die Schriftgröße selbst (60-pt-Bar, `--text-headline/1` aus dem JSX), nicht die Zeilenhöhe der Headline-Stufe.
+
 **Sprachausgabe:** `AVSpeechSynthesizer` mit `de-DE` direkt auf dem Gerät. Kein Audio-Asset, keine Lizenzfrage, keine Netzabhängigkeit. Der Klickprototyp macht es mit der Web Speech API bereits genauso. Die Sprachausgabe lässt sich in v1 nicht abschalten — ohne sie hätte Spiel 1 für noch nicht lesende Kinder keine Aufgabenstellung. Die Einstellung „Vogelstimmen" im Elternbereich betrifft nur die aufgenommenen Rufe aus Spiel 2. Die Audiosession (`AVAudioSession`, Kategorie `.playback`) wird vom Sprachdienst konfiguriert und vom Rufe-Player mitgenutzt, damit beide auch bei umgelegtem Stummschalter hörbar bleiben.
 
 ---
