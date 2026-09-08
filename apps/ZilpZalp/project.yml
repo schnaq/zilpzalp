@@ -41,7 +41,7 @@ targets:
           - "Fonts/**/OFL.txt"
           - "Fonts/**/NOTICE.md"
     # All three packages hang off the app target so they are built and linked
-    # for iOS. The placeholder screen does not need them yet.
+    # for iOS.
     dependencies:
       - package: ZilpZalpCore
       - package: ZilpZalpData

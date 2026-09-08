@@ -112,7 +112,7 @@ struct CreditsScreen: View {
                     ForEach(Self.packs(of: credits)) { pack in
                         section(pack.title) {
                             ForEach(Array(pack.media.enumerated()), id: \.element) { index, entry in
-                                mediaRow(entry, isLast: index == pack.media.count - 1)
+                                mediaRow(entry, showsSeparator: index != pack.media.count - 1)
                             }
                         }
                     }
@@ -171,12 +171,12 @@ struct CreditsScreen: View {
     /// about 90 pt of the row's width, which left the credit line four words
     /// wide and broke "Blaumeise" across two lines. The intro says what the
     /// chevron leads to; VoiceOver gets it from the hint below.
-    private func mediaRow(_ entry: Credits.Media, isLast: Bool) -> some View {
+    private func mediaRow(_ entry: Credits.Media, showsSeparator: Bool) -> some View {
         SettingRow(
             title: entry.birdName,
             hint: credit(for: entry),
             icon: entry.kind == .photo ? .camera : .volume2,
-            showsSeparator: !isLast,
+            showsSeparator: showsSeparator,
         ) {
             pendingLink = ExternalLink(url: entry.sourceURL)
         }
@@ -189,10 +189,13 @@ struct CreditsScreen: View {
         ForEach(Array(entries.enumerated()), id: \.element) { index, entry in
             SettingRow(
                 title: entry.name,
-                // `entry.license` is an SPDX identifier and stays one: unlike
-                // the three media licences it has no short public name to map
-                // to, and inventing one would put a second table of licence
-                // names in the app.
+                // `entry.license` is an SPDX identifier and is shown as one.
+                // The app maps exactly one thing, ``License/shortName``, and
+                // that enum holds only the three media licences; OFL, ISC and
+                // MIT are not among them. Their public names live in the
+                // generator's own table, next to the licence texts and the
+                // deed URLs — one table, in the place that already has to
+                // know them for CREDITS.md.
                 hint: String(
                     format: String(localized: "credits.vendored.by"),
                     entry.authors.joined(separator: ", "),
