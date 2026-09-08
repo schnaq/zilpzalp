@@ -301,30 +301,6 @@
         }
       }
     },
-    "parents.calls.hint" : {
-      "comment" : "Under the bird-call switch. Says what it does not cover: game 1 reads the question out and stays audible, or the game has no task left",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nur die Aufnahmen. Spiel 1 wird weiter vorgelesen."
-          }
-        }
-      }
-    },
-    "parents.calls.title" : {
-      "comment" : "Switch in the grown-ups' area: whether the recorded bird calls play",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vogelstimmen"
-          }
-        }
-      }
-    },
     "parents.credits.hint" : {
       "comment" : "Under the credits row",
       "extractionState" : "manual",

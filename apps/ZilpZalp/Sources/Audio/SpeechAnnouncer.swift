@@ -7,8 +7,9 @@ import ZilpZalpData
 ///
 /// `AVSpeechSynthesizer` needs no audio asset, so there is no licence to clear
 /// and no network to wait for. The question is not switchable off: it *is* the
-/// task in game 1, and a child who cannot read has nothing else to go by. The
-/// "Vogelstimmen" setting (#35) only ever concerns the recorded calls.
+/// task in game 1, and a child who cannot read has nothing else to go by.
+/// Neither are the recorded calls of game 2 — nothing this app makes audible
+/// is a setting any more (#138).
 @MainActor
 final class SpeechAnnouncer: NSObject {
     private static let language = "de-DE"

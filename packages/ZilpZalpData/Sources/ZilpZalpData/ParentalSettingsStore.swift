@@ -18,14 +18,10 @@ public enum ParentalSettingsStoreError: Error, Sendable {
 /// What grown-ups decide about the app, for everybody who plays on this device.
 ///
 /// Not per profile: these are house rules, and a four-year-old switching to
-/// their own nest should not switch the bird calls back on. The daily limit
-/// (#36) is the one value that will grow a per-profile twin, which is why it
-/// sits here as a plain number and not as a type yet.
+/// their own nest should not win itself another quarter of an hour. The daily
+/// limit (#36) is the one value that will grow a per-profile twin, which is
+/// why it sits here as a plain number and not as a type yet.
 public struct ParentalSettings: Codable, Sendable, Hashable {
-    /// Whether recorded bird calls play. Only the recordings — game 1 reads
-    /// the bird's name out through `AVSpeechSynthesizer` and stays audible
-    /// whatever this says, because without it the game has no question.
-    public var callsEnabled: Bool
     /// Whether the bird's name is printed under its picture. Off by default it
     /// is not — a grown-up reading along wants the word, and a child who
     /// cannot read is not disturbed by it.
@@ -37,11 +33,9 @@ public struct ParentalSettings: Codable, Sendable, Hashable {
     /// The state a device that has never been to the grown-ups' area is in:
     /// everything on, nothing limited.
     public init(
-        callsEnabled: Bool = true,
         showNames: Bool = true,
         dailyLimitMinutes: Int? = nil,
     ) {
-        self.callsEnabled = callsEnabled
         self.showNames = showNames
         self.dailyLimitMinutes = dailyLimitMinutes
     }
@@ -54,7 +48,7 @@ public struct ParentalSettings: Codable, Sendable, Hashable {
 /// `URL.applicationSupportDirectory` so the tests run against a temporary one
 /// and never touch the machine they run on.
 ///
-/// Nothing is cached. A settings file is three fields read at most once per
+/// Nothing is cached. A settings file is two fields read at most once per
 /// screen, and a cache would be one more thing that can be stale.
 public actor ParentalSettingsStore {
     /// The shape this store writes. Raised only together with a migration
@@ -160,15 +154,17 @@ private struct SchemaProbe: Decodable {
 /// is ``SchemaProbe``'s job, and that works whatever order the file is in.
 private struct Document: Codable {
     let schemaVersion: Int
-    let callsEnabled: Bool
     let showNames: Bool
     let dailyLimitMinutes: Int?
 
     /// Decoding is synthesised: for an `Int?` it already reads both spellings
     /// of "no limit", the explicit `null` this store writes and an absent key.
+    ///
+    /// It also passes over a key it does not know, and that is why dropping
+    /// `callsEnabled` (#138) left the version at 1: every file already on a
+    /// device names the setting, and every one of them still reads.
     var settings: ParentalSettings {
         ParentalSettings(
-            callsEnabled: callsEnabled,
             showNames: showNames,
             dailyLimitMinutes: dailyLimitMinutes,
         )
@@ -176,7 +172,6 @@ private struct Document: Codable {
 
     init(settings: ParentalSettings) {
         schemaVersion = ParentalSettingsStore.schemaVersion
-        callsEnabled = settings.callsEnabled
         showNames = settings.showNames
         dailyLimitMinutes = settings.dailyLimitMinutes
     }
@@ -187,7 +182,6 @@ private struct Document: Codable {
     func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(schemaVersion, forKey: .schemaVersion)
-        try container.encode(callsEnabled, forKey: .callsEnabled)
         try container.encode(showNames, forKey: .showNames)
         if let dailyLimitMinutes {
             try container.encode(dailyLimitMinutes, forKey: .dailyLimitMinutes)
