@@ -87,14 +87,17 @@ struct QuizComponentTests {
     }
 
     @Test(
-        "A tile is never smaller than 220 pt, whatever it is asked for",
+        "A tile is never smaller than 168 pt, whatever it is asked for",
         arguments: [
-            (CGFloat(0), CGFloat(220)),
-            (-40, 220),
-            (64, 220),
-            (219, 220),
+            (CGFloat(0), CGFloat(168)),
+            (-40, 168),
+            (64, 168),
+            (167, 168),
+            // What a phone measures, drawn as measured rather than scaled
+            // down from 220 (#104).
+            (168, 168),
+            (169, 169),
             (220, 220),
-            (230, 230),
             (260, 260),
         ],
     )
@@ -104,9 +107,20 @@ struct QuizComponentTests {
 
     @Test("The tile floor clears the touch minimum several times over")
     func theTileFloorIsFarAboveTheTouchMinimum() {
-        #expect(ChoiceTile.minimumSize == 220)
-        #expect(ChoiceTile.minimumSize > ZSpacing.touchMinimum)
+        #expect(ChoiceTile.minimumSize > 2 * ZSpacing.touchMinimum)
         #expect(ChoiceTile.defaultSize >= ChoiceTile.minimumSize)
+    }
+
+    @Test("The floor is where the credit strip stops fitting")
+    func theTileFloorFollowsTheCreditStrip() {
+        // The floor is derived from ``PhotoCreditMetrics``, so this pins both
+        // ends: the number it comes out at today, and the three values it is
+        // derived from. A credit that had to shrink or lose its licence to fit
+        // is the defect #104 set out to remove.
+        #expect(ChoiceTile.minimumSize == 168)
+        #expect(PhotoCreditMetrics.minimumColumn == 115.3)
+        #expect(PhotoCreditMetrics.size == 13)
+        #expect(PhotoCreditMetrics.lineLimit == 2)
     }
 
     @Test("A dimmed tile is faded, not switched off")

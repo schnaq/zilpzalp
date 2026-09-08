@@ -102,7 +102,20 @@ struct QuizLayout {
     /// left is smaller than two touch targets, and since #117 locked the
     /// iPhone to portrait no supported geometry gets near it. The shortest
     /// screen the app supports — an iPhone SE, 343×481 pt of room — works out
-    /// at 104 pt, and every other one is larger.
+    /// at 81 pt, and every other one is larger. (104 until #127; the feedback
+    /// band is measured now rather than assumed, and the retry sentence wraps
+    /// to two lines at that width, which costs the tiles 23 pt.)
+    ///
+    /// ``ChoiceTile`` has a floor of its own and clamps up to it, because
+    /// below that its credit strip loses the licence it is there to carry
+    /// (#104). Which is above what this measures on the shortest screens, so
+    /// what comes out here is not always what gets drawn. ``QuizTile`` is
+    /// where the two are reconciled, and its documentation says how.
+    ///
+    /// Nothing in that reconciling belongs here. This measures the room; how
+    /// a component behaves in less room than it wants is the component's
+    /// business and the screen's, not the arithmetic's — and raising this
+    /// floor to the component's would not conjure the room either.
     private static func tileEdge(across: CGFloat, down: CGFloat) -> CGFloat {
         max(ZSpacing.touchMinimum, min(maximumTile, min(across, down) / 2).rounded(.down))
     }

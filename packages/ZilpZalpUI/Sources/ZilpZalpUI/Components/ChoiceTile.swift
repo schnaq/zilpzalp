@@ -138,9 +138,40 @@ public struct ChoiceTile: View {
         }
     }
 
-    /// The floor issue #11 sets for an answer tile. Far above the 64 pt touch
-    /// minimum: this is the one control the whole game is played on.
-    public static let minimumSize: CGFloat = 220
+    /// The smallest square this tile draws, and the smallest one it can draw
+    /// honestly.
+    ///
+    /// Issue #11 asked for 220 pt, taken from the design's iPad screens. No
+    /// phone has that much room — the quiz measures 169 pt on an iPhone 17 and
+    /// 162 pt on an iPhone 17e — so the screen used to draw a 220 pt tile and
+    /// shrink the whole thing with a transform. That shrank the credit strip
+    /// with it, and a CC BY attribution came out at about 10 pt instead of the
+    /// design's 13 (#104).
+    ///
+    /// So the floor is what the *credit* needs, not what the photo would like:
+    /// the column ``PhotoCredit`` cannot go under, plus the two paddings it
+    /// spends before a glyph is drawn — the leading one clears the tile's own
+    /// corner (#103). That comes to 167.3 pt, hence 168. Below it the licence
+    /// itself would be truncated away, which is the defect #104 set out to
+    /// remove wearing different clothes.
+    ///
+    /// Derived rather than written down, because the strip is what moves: when
+    /// #111 or #122 give the credit a wider column — clipped to the tile's
+    /// shape, or a gutter under it — this floor follows them down on its own.
+    ///
+    /// Nothing else is under pressure here: the photo still fills the square,
+    /// the badge keeps its 56 pt circle and 30 pt glyph, and the touch target
+    /// clears ``ZSpacing/touchMinimum`` more than twice over.
+    ///
+    /// It does not fit every phone, and it cannot: a 375×667 pt screen leaves
+    /// the quiz room for about 81 pt a tile, and 13 pt of type over two lines
+    /// is simply wider than that. The clamp below is the wrong answer for a
+    /// caller in that position — it draws a tile the screen has no room for —
+    /// so a caller with less room than this should scale the tile rather than
+    /// hand the size over and hope. See `QuizTile` and #135.
+    public static let minimumSize: CGFloat = (PhotoCreditMetrics.minimumColumn
+        + PhotoCreditMetrics.leadingPadding
+        + PhotoCreditMetrics.trailingPadding).rounded(.up)
 
     /// `ChoiceTile.jsx`'s own default, and a comfortable iPad grid cell.
     public static let defaultSize: CGFloat = 260
@@ -288,6 +319,27 @@ public struct ChoiceTile: View {
     .background(ZColor.surfacePage)
 }
 
+#Preview("The size set, and what the credit does across it") {
+    // The floor, the 220 pt #11 asked for, and the design's own tile, with the
+    // longest attribution the base pack produces. The row is about the credit
+    // rather than the photo: 13 pt at all three sizes, at most two lines at
+    // all three, and the licence legible at all three. That is what fixes
+    // ``ChoiceTile/minimumSize`` where it is.
+    HStack(alignment: .top, spacing: ZSpacing.gapTiles) {
+        ForEach([ChoiceTile.minimumSize, 220, ChoiceTile.defaultSize], id: \.self) { size in
+            ChoiceTile(
+                image: previewPhoto(),
+                label: "Amsel",
+                credit: "Foto: Alexis Tinker-Tsavalas (CC BY)",
+                tone: .beeren,
+                size: size,
+            )
+        }
+    }
+    .padding(ZSpacing.step7)
+    .background(ZColor.surfacePage)
+}
+
 #Preview("A resolved round: one answer, three dimmed") {
     HStack(alignment: .top, spacing: ZSpacing.gapTiles) {
         ChoiceTile(
@@ -309,7 +361,7 @@ public struct ChoiceTile: View {
     ScrollView(.horizontal) {
         HStack(alignment: .top, spacing: ZSpacing.gapTiles) {
             ForEach(ChoiceTile.Tone.allCases, id: \.self) { tone in
-                // 120 pt is below the floor and is clamped up to 220.
+                // 120 pt is below the floor and is clamped up to it.
                 ChoiceTile(label: String(describing: tone), tone: tone, size: 120)
             }
         }
