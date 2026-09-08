@@ -83,6 +83,20 @@ enum PhotoCreditMetrics {
     /// A photographer's name and licence fit on two lines at any tile size we
     /// draw; a third would start eating the bird.
     static let lineLimit = 2
+    /// The narrowest text column this strip may be given.
+    ///
+    /// Measured rather than chosen: the widest attribution the base pack
+    /// produces, "Foto: Alexis Tinker-Tsavalas (CC BY)", needs this much
+    /// column to hold ``lineLimit`` lines of the bundled Nunito SemiBold at
+    /// ``size``. Anything narrower truncates the licence away, which is not a
+    /// cosmetic loss. ``ChoiceTile/minimumSize`` is this plus the two paddings
+    /// — the strip is what decides how small an answer tile can be.
+    ///
+    /// It is a floor for what ships today, not a promise: a longer
+    /// photographer's name, or a `CC BY-SA 4.0` line, still needs a third line
+    /// at that tile size. Widening the column rather than raising this number
+    /// is what #111 is for.
+    static let minimumColumn: CGFloat = 115.3
 }
 
 #Preview("Credit on a photo field") {

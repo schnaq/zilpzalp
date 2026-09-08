@@ -204,9 +204,9 @@ struct QuizScreen: View {
             tone: Self.tones[position % Self.tones.count],
             phase: session.phase(for: bird),
             dimmed: session.isDimmed(bird),
-            // Straight through. The component draws every size the quiz
-            // measures on a phone since #104; below its own floor it clamps,
-            // and nothing here scales a tile down any more.
+            // Straight through, and nothing here scales a tile any more; the
+            // component clamps below its own floor. See
+            // ``ChoiceTile/minimumSize``.
             size: edge,
         ) { session.choose(bird) }
     }

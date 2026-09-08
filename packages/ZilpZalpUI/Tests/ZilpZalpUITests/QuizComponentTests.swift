@@ -93,8 +93,8 @@ struct QuizComponentTests {
             (-40, 168),
             (64, 168),
             (167, 168),
-            // The sizes the quiz measures on a phone are now drawn as they
-            // were measured, rather than clamped and scaled back down (#104).
+            // What a phone measures, drawn as measured rather than scaled
+            // down from 220 (#104).
             (168, 168),
             (169, 169),
             (220, 220),
@@ -107,19 +107,18 @@ struct QuizComponentTests {
 
     @Test("The tile floor clears the touch minimum several times over")
     func theTileFloorIsFarAboveTheTouchMinimum() {
-        #expect(ChoiceTile.minimumSize == 168)
         #expect(ChoiceTile.minimumSize > 2 * ZSpacing.touchMinimum)
         #expect(ChoiceTile.defaultSize >= ChoiceTile.minimumSize)
     }
 
-    @Test("The floor leaves the credit strip a two-line text column")
-    func theTileFloorLeavesRoomForACreditLine() {
-        // What fixes the floor: ``PhotoCredit`` spends the leading corner
-        // inset and the trailing padding before a glyph is drawn, and what is
-        // left has to hold the widest attribution the base pack produces —
-        // 115.3 pt of 13 pt Nunito over two lines. See ``ChoiceTile``.
-        let chrome = PhotoCreditMetrics.leadingPadding + PhotoCreditMetrics.trailingPadding
-        #expect(ChoiceTile.minimumSize - chrome >= 115.3)
+    @Test("The floor is where the credit strip stops fitting")
+    func theTileFloorFollowsTheCreditStrip() {
+        // The floor is derived from ``PhotoCreditMetrics``, so this pins both
+        // ends: the number it comes out at today, and the three values it is
+        // derived from. A credit that had to shrink or lose its licence to fit
+        // is the defect #104 set out to remove.
+        #expect(ChoiceTile.minimumSize == 168)
+        #expect(PhotoCreditMetrics.minimumColumn == 115.3)
         #expect(PhotoCreditMetrics.size == 13)
         #expect(PhotoCreditMetrics.lineLimit == 2)
     }

@@ -103,6 +103,13 @@ struct QuizLayout {
     /// iPhone to portrait no supported geometry gets near it. The shortest
     /// screen the app supports — an iPhone SE, 343×481 pt of room — works out
     /// at 104 pt, and every other one is larger.
+    ///
+    /// What comes out here is a measurement, not a promise: ``ChoiceTile`` has
+    /// a floor of its own and clamps up to it (#104). A short phone therefore
+    /// draws tiles a few points wider than the room measured for them — 168
+    /// against 162 on an iPhone 17e — and the screen's own margins take the
+    /// difference. Raising this floor to the component's would not buy the
+    /// room back; only a narrower credit strip would, which is #111.
     private static func tileEdge(across: CGFloat, down: CGFloat) -> CGFloat {
         max(ZSpacing.touchMinimum, min(maximumTile, min(across, down) / 2).rounded(.down))
     }

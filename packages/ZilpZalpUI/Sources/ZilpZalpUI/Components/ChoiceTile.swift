@@ -148,20 +148,23 @@ public struct ChoiceTile: View {
     /// with it, and a CC BY attribution came out at about 10 pt instead of the
     /// design's 13 (#104).
     ///
-    /// So the floor is what the *credit* needs, not what the photo would like.
-    /// ``PhotoCredit`` is fixed at 13 pt and wraps to at most two lines, and
-    /// the strip spends 40 pt clearing the leading corner (#103) plus 12 pt
-    /// trailing. The widest attribution the base pack produces — "Foto: Alexis
-    /// Tinker-Tsavalas (CC BY)" — needs 115.3 pt of text column to hold two
-    /// lines, which is a 167.3 pt tile. This is that, rounded up. Below it the
-    /// licence itself would be truncated away, which is the defect #104 set
-    /// out to remove wearing different clothes.
+    /// So the floor is what the *credit* needs, not what the photo would like:
+    /// the column ``PhotoCredit`` cannot go under, plus the two paddings it
+    /// spends before a glyph is drawn — the leading one clears the tile's own
+    /// corner (#103). That comes to 167.3 pt, hence 168. Below it the licence
+    /// itself would be truncated away, which is the defect #104 set out to
+    /// remove wearing different clothes.
+    ///
+    /// Derived rather than written down, because the strip is what moves: when
+    /// #111 or #122 give the credit a wider column — clipped to the tile's
+    /// shape, or a gutter under it — this floor follows them down on its own.
     ///
     /// Nothing else is under pressure here: the photo still fills the square,
     /// the badge keeps its 56 pt circle and 30 pt glyph, and the touch target
-    /// clears ``ZSpacing/touchMinimum`` more than twice over. A wider credit
-    /// strip is what would let this go lower — see #111 and #122.
-    public static let minimumSize: CGFloat = 168
+    /// clears ``ZSpacing/touchMinimum`` more than twice over.
+    public static let minimumSize: CGFloat = (PhotoCreditMetrics.minimumColumn
+        + PhotoCreditMetrics.leadingPadding
+        + PhotoCreditMetrics.trailingPadding).rounded(.up)
 
     /// `ChoiceTile.jsx`'s own default, and a comfortable iPad grid cell.
     public static let defaultSize: CGFloat = 260
@@ -309,13 +312,14 @@ public struct ChoiceTile: View {
     .background(ZColor.surfacePage)
 }
 
-#Preview("The floor, beside the tile the design draws") {
-    // The two sizes the app really uses, with the longest attribution the base
-    // pack produces. The point of the row is the credit: 13 pt in both, two
-    // lines in both, the licence visible in both. That is what fixes the floor
-    // at ``ChoiceTile/minimumSize`` — see its documentation.
+#Preview("The size set, and what the credit does across it") {
+    // The floor, the 220 pt #11 asked for, and the design's own tile, with the
+    // longest attribution the base pack produces. The row is about the credit
+    // rather than the photo: 13 pt at all three sizes, at most two lines at
+    // all three, and the licence legible at all three. That is what fixes
+    // ``ChoiceTile/minimumSize`` where it is.
     HStack(alignment: .top, spacing: ZSpacing.gapTiles) {
-        ForEach([ChoiceTile.minimumSize, 220], id: \.self) { size in
+        ForEach([ChoiceTile.minimumSize, 220, ChoiceTile.defaultSize], id: \.self) { size in
             ChoiceTile(
                 image: previewPhoto(),
                 label: "Amsel",
