@@ -3,18 +3,6 @@
 # Everything runs through `mise run …`. Do not call xcodebuild, swift or brew
 # directly, or the development machine drifts away from the CI runner.
 
-[env]
-# The Apple team that signs local device builds. Empty by default so CI and
-# simulator builds (CODE_SIGNING_ALLOWED=NO) need nothing. For a build on your
-# own iPhone or iPad put the team id into an untracked `mise.local.toml`:
-#
-#   [env]
-#   DEVELOPMENT_TEAM = "XXXXXXXXXX"
-#
-# `mise run generate` bakes it into the Xcode project; Xcode's own Signing
-# tab is not the place, because every regenerate would wipe it again.
-DEVELOPMENT_TEAM = ""
-
 [tools]
 # Pinned exactly: the development machine and the self-hosted runner should use
 # the same binaries. No Homebrew — versions would drift apart.
