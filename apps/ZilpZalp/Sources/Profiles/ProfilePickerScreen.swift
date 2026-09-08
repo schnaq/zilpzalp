@@ -43,12 +43,7 @@ struct ProfilePickerScreen: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            // The wordmark goes in `leading`, not `center`: only a slot that
-            // holds something real gets the bar's `maxWidth: .infinity`, and
-            // an `EmptyView` on both sides shrinks the whole bar to a pill
-            // floating in the middle of the page. Left-aligned matches the
-            // home screen anyway.
-            TopBar(leading: {
+            TopBar(center: {
                 Wordmark(size: isCompact ? Wordmark.minimumSize : Self.wordmarkSize)
             })
 

@@ -103,10 +103,12 @@ struct ProfileCreationScreen: View {
         .readAloudOnce(String(localized: "profile.create.title"))
     }
 
-    /// The bar's one slot, and it is never empty: a slot holding an
-    /// `EmptyView` does not take the bar's width, and the bar would shrink to
-    /// a pill floating in the middle of the page. On the very first launch
-    /// there is nowhere to go back to, so the brand stands there instead.
+    /// The back button, or the brand where there is nothing to go back to.
+    ///
+    /// On the very first launch this screen is the app's root, so an empty bar
+    /// would be the first thing anyone ever sees of ZilpZalp. The wordmark is
+    /// better company than a blank strip, and it costs a child nothing: they
+    /// are looking at the birds.
     @ViewBuilder private var barContent: some View {
         if canGoBack {
             IconButton(
