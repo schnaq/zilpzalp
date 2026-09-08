@@ -112,7 +112,10 @@ public struct RoundPlay: Hashable, Sendable {
 
     /// A tile was tapped.
     ///
-    /// - Parameter species: The identifier of the species tapped.
+    /// - Parameter species: The identifier of the species tapped. One of the
+    ///   current question's ``Round/Question/choices``; anything else is
+    ///   recorded as a wrong tap, since a play cannot tell a bird it was
+    ///   never offered from one it was.
     /// - Returns: What the tap came to, so the caller can start whatever a
     ///   right answer is worth outside these walls — a sound, a pause, a move
     ///   to the next question.
@@ -133,7 +136,8 @@ public struct RoundPlay: Hashable, Sendable {
         return .correct(firstTry: firstTry)
     }
 
-    /// Moves the round on by one question.
+    /// Moves the round on by one question, answered or not — a question a
+    /// child walked away from is a question that is over.
     ///
     /// A finished round stays where it is: ``index`` is the question being
     /// asked and must never point past the last one, or a progress row would
