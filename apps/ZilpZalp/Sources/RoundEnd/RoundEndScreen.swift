@@ -317,7 +317,7 @@ struct RoundEndScreen: View {
         guard announcer == nil else { return }
         let voice = SpeechAnnouncer()
         announcer = voice
-        voice.say(String(localized: "roundEnd.title"))
+        voice.announce(String(localized: "roundEnd.title"))
     }
 
     /// Stops the praise before leaving, so that it does not run into the
