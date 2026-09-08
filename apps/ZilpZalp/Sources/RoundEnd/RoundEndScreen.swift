@@ -67,9 +67,11 @@ struct RoundEndScreen: View {
     @Environment(\.verticalSizeClass) private var verticalSizeClass
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
-    /// Flipped once on appearance to start the bob and the pop. Both
-    /// animations hang off it, so with Reduce Motion on it changes nothing
-    /// that moves: the stars sit still and the sticker is simply there.
+    /// Flipped once on appearance to start the bob and the pop.
+    ///
+    /// With Reduce Motion on, both animations are `nil` and the stars never
+    /// leave their rest position, so the flip only puts the sticker at full
+    /// size: nothing moves, and nothing is left half-drawn.
     @State private var settled = false
 
     /// The bird on the sticker, resolved once. A `View` is built again on
@@ -93,6 +95,22 @@ struct RoundEndScreen: View {
         verticalSizeClass == .compact
     }
 
+    /// Narrow or short — either way there is no room for the iPad's sizes.
+    ///
+    /// Width alone is not enough: the two biggest iPhones report a *regular*
+    /// width in landscape, where the height is still a phone's. Keying the
+    /// hero line and the 200 pt sticker on width put both of them into 430 pt
+    /// of height on exactly those devices.
+    private var isTight: Bool {
+        isCompact || isShort
+    }
+
+    /// True while the stars are up. Never true with Reduce Motion on, so they
+    /// rest where they are drawn rather than 8 pt above it.
+    private var bobbing: Bool {
+        settled && !reduceMotion
+    }
+
     var body: some View {
         celebration
             .multilineTextAlignment(.center)
@@ -101,7 +119,7 @@ struct RoundEndScreen: View {
             // buttons as soon as the screen is short, which on an iPad in
             // landscape it is.
             .padding(.bottom, showsSignature ? Self.signatureBand : 0)
-            .padding(isCompact ? ZSpacing.step5 : ZSpacing.gutterScreen)
+            .padding(isTight ? ZSpacing.step5 : ZSpacing.gutterScreen)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(ZColor.surfaceForest)
             .overlay(alignment: .bottom) { signature }
@@ -151,8 +169,8 @@ struct RoundEndScreen: View {
             ForEach(0 ..< Scoring.maximumStars, id: \.self) { position in
                 Icon(.star, size: .custom(starSize))
                     .foregroundStyle(position < result.stars ? ZColor.reward : Self.unlitStar)
-                    .offset(y: settled ? -Self.bobHeight : 0)
-                    .animation(bob(delayedBy: Double(position) * Self.bobStagger), value: settled)
+                    .offset(y: bobbing ? -Self.bobHeight : 0)
+                    .animation(bob(delayedBy: Double(position) * Self.bobStagger), value: bobbing)
             }
         }
         .accessibilityHidden(true)
@@ -161,11 +179,11 @@ struct RoundEndScreen: View {
     private var praise: some View {
         VStack(spacing: ZSpacing.step3) {
             Text("roundEnd.title")
-                .typeStyle(isCompact ? .display2 : .hero, .display, weight: .extraBold)
+                .typeStyle(isTight ? .display2 : .hero, .display, weight: .extraBold)
                 .foregroundStyle(ZColor.white)
 
             Text(verbatim: starsEarned)
-                .typeStyle(isCompact ? .body : .bodyLarge, .body, weight: .bold)
+                .typeStyle(isTight ? .body : .bodyLarge, .body, weight: .bold)
                 .foregroundStyle(ZColor.textOnColor)
         }
     }
@@ -183,12 +201,12 @@ struct RoundEndScreen: View {
         VStack(spacing: ZSpacing.step2) {
             RewardSticker(
                 image: sticker?.image,
-                size: isCompact ? RewardSticker.defaultSize : Self.regularSticker,
+                size: isTight ? RewardSticker.defaultSize : Self.regularSticker,
             )
 
             if let sticker {
                 Text(verbatim: sticker.name)
-                    .typeStyle(isCompact ? .body : .bodyLarge, .display, weight: .bold)
+                    .typeStyle(isTight ? .body : .bodyLarge, .display, weight: .bold)
                     .foregroundStyle(ZColor.white)
 
                 Text(verbatim: sticker.credit)
@@ -252,14 +270,21 @@ struct RoundEndScreen: View {
 
     // MARK: - Values
 
-    /// "Du hast zwei Sterne gesammelt" — through the catalog's plural rules,
+    /// "Du hast einen Stern gesammelt" — through the catalog's plural rules,
     /// never assembled here from a number and a noun.
+    ///
+    /// A review read this as always resolving the `other` variant, which is
+    /// what `String(format: String(localized:), _:)` used to do. On the
+    /// toolchain `mise.toml` pins it does not: both categories were checked on
+    /// a device, one star renders "einen Stern" and two render "2 Sterne". If
+    /// that ever changes, the symptom is the German "1 Sterne" — and the fix
+    /// is `String.localizedStringWithFormat`, not two keys.
     private var starsEarned: String {
         String(format: String(localized: "roundEnd.stars"), result.stars)
     }
 
     private var starSize: CGFloat {
-        isCompact ? ZSpacing.step7 : ZSpacing.step8
+        isTight ? ZSpacing.step7 : ZSpacing.step8
     }
 
     /// One bob, forever, offset so the three stars travel as a wave. Reduce
