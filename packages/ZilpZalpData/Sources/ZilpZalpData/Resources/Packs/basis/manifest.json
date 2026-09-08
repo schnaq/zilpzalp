@@ -27,12 +27,12 @@
       "article": "die",
       "pronunciation": null,
       "photo": {
-        "file": "photos/blaumeise.png",
-        "sha256": "c536f4067666a5ecf7cdfc0e942ae31570e6f752acfe51448740fe0de89d352d",
+        "file": "photos/blaumeise.jpg",
+        "sha256": "1e01acc2ddb916f9b43aba34557dbba64ee6220bfcea159929a1d24c01308b41",
         "license": "CC-BY-4.0",
-        "attribution": "Thorsten Hackbarth",
-        "sourceURL": "https://www.inaturalist.org/observations/153819994",
-        "retrieved": "2026-07-31"
+        "attribution": "Vladimir Kharuk",
+        "sourceURL": "https://www.inaturalist.org/observations/69131007",
+        "retrieved": "2026-09-08"
       },
       "call": null
     },
