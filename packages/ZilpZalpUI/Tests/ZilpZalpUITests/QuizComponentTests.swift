@@ -87,14 +87,17 @@ struct QuizComponentTests {
     }
 
     @Test(
-        "A tile is never smaller than 220 pt, whatever it is asked for",
+        "A tile is never smaller than 168 pt, whatever it is asked for",
         arguments: [
-            (CGFloat(0), CGFloat(220)),
-            (-40, 220),
-            (64, 220),
-            (219, 220),
+            (CGFloat(0), CGFloat(168)),
+            (-40, 168),
+            (64, 168),
+            (167, 168),
+            // The sizes the quiz measures on a phone are now drawn as they
+            // were measured, rather than clamped and scaled back down (#104).
+            (168, 168),
+            (169, 169),
             (220, 220),
-            (230, 230),
             (260, 260),
         ],
     )
@@ -104,9 +107,21 @@ struct QuizComponentTests {
 
     @Test("The tile floor clears the touch minimum several times over")
     func theTileFloorIsFarAboveTheTouchMinimum() {
-        #expect(ChoiceTile.minimumSize == 220)
-        #expect(ChoiceTile.minimumSize > ZSpacing.touchMinimum)
+        #expect(ChoiceTile.minimumSize == 168)
+        #expect(ChoiceTile.minimumSize > 2 * ZSpacing.touchMinimum)
         #expect(ChoiceTile.defaultSize >= ChoiceTile.minimumSize)
+    }
+
+    @Test("The floor leaves the credit strip a two-line text column")
+    func theTileFloorLeavesRoomForACreditLine() {
+        // What fixes the floor: ``PhotoCredit`` spends the leading corner
+        // inset and the trailing padding before a glyph is drawn, and what is
+        // left has to hold the widest attribution the base pack produces —
+        // 115.3 pt of 13 pt Nunito over two lines. See ``ChoiceTile``.
+        let chrome = PhotoCreditMetrics.leadingPadding + PhotoCreditMetrics.trailingPadding
+        #expect(ChoiceTile.minimumSize - chrome >= 115.3)
+        #expect(PhotoCreditMetrics.size == 13)
+        #expect(PhotoCreditMetrics.lineLimit == 2)
     }
 
     @Test("A dimmed tile is faded, not switched off")

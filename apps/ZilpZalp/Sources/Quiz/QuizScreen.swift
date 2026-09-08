@@ -194,7 +194,7 @@ struct QuizScreen: View {
         at position: Int,
         edge: CGFloat,
     ) -> some View {
-        QuizTile(
+        ChoiceTile(
             image: session.photo(for: bird),
             // Never the bird's name: VoiceOver would read the answer out to a
             // child who is meant to find it. The position is all the label can
@@ -204,7 +204,10 @@ struct QuizScreen: View {
             tone: Self.tones[position % Self.tones.count],
             phase: session.phase(for: bird),
             dimmed: session.isDimmed(bird),
-            edge: edge,
+            // Straight through. The component draws every size the quiz
+            // measures on a phone since #104; below its own floor it clamps,
+            // and nothing here scales a tile down any more.
+            size: edge,
         ) { session.choose(bird) }
     }
 

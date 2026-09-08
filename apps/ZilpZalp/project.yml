@@ -85,8 +85,8 @@ targets:
         # A phone in landscape leaves the quiz 718x216 pt for question,
         # answers and feedback. The best any arrangement gets out of that is
         # an 83 pt tile — and only with the feedback band deleted; with it,
-        # 45 pt. The answer tile floor is 220 pt and the smallest thing a
-        # child is asked to hit anywhere else is the 120 pt sound button, so
+        # 45 pt. The answer tile floor is 168 pt (#104) and the smallest thing
+        # a child is asked to hit anywhere else is the 120 pt sound button, so
         # there is no landscape layout to write. The iPad keeps all four.
         INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: >-
           UIInterfaceOrientationPortrait

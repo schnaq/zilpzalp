@@ -138,9 +138,30 @@ public struct ChoiceTile: View {
         }
     }
 
-    /// The floor issue #11 sets for an answer tile. Far above the 64 pt touch
-    /// minimum: this is the one control the whole game is played on.
-    public static let minimumSize: CGFloat = 220
+    /// The smallest square this tile draws, and the smallest one it can draw
+    /// honestly.
+    ///
+    /// Issue #11 asked for 220 pt, taken from the design's iPad screens. No
+    /// phone has that much room — the quiz measures 169 pt on an iPhone 17 and
+    /// 162 pt on an iPhone 17e — so the screen used to draw a 220 pt tile and
+    /// shrink the whole thing with a transform. That shrank the credit strip
+    /// with it, and a CC BY attribution came out at about 10 pt instead of the
+    /// design's 13 (#104).
+    ///
+    /// So the floor is what the *credit* needs, not what the photo would like.
+    /// ``PhotoCredit`` is fixed at 13 pt and wraps to at most two lines, and
+    /// the strip spends 40 pt clearing the leading corner (#103) plus 12 pt
+    /// trailing. The widest attribution the base pack produces — "Foto: Alexis
+    /// Tinker-Tsavalas (CC BY)" — needs 115.3 pt of text column to hold two
+    /// lines, which is a 167.3 pt tile. This is that, rounded up. Below it the
+    /// licence itself would be truncated away, which is the defect #104 set
+    /// out to remove wearing different clothes.
+    ///
+    /// Nothing else is under pressure here: the photo still fills the square,
+    /// the badge keeps its 56 pt circle and 30 pt glyph, and the touch target
+    /// clears ``ZSpacing/touchMinimum`` more than twice over. A wider credit
+    /// strip is what would let this go lower — see #111 and #122.
+    public static let minimumSize: CGFloat = 168
 
     /// `ChoiceTile.jsx`'s own default, and a comfortable iPad grid cell.
     public static let defaultSize: CGFloat = 260
@@ -288,6 +309,26 @@ public struct ChoiceTile: View {
     .background(ZColor.surfacePage)
 }
 
+#Preview("The floor, beside the tile the design draws") {
+    // The two sizes the app really uses, with the longest attribution the base
+    // pack produces. The point of the row is the credit: 13 pt in both, two
+    // lines in both, the licence visible in both. That is what fixes the floor
+    // at ``ChoiceTile/minimumSize`` — see its documentation.
+    HStack(alignment: .top, spacing: ZSpacing.gapTiles) {
+        ForEach([ChoiceTile.minimumSize, 220], id: \.self) { size in
+            ChoiceTile(
+                image: previewPhoto(),
+                label: "Amsel",
+                credit: "Foto: Alexis Tinker-Tsavalas (CC BY)",
+                tone: .beeren,
+                size: size,
+            )
+        }
+    }
+    .padding(ZSpacing.step7)
+    .background(ZColor.surfacePage)
+}
+
 #Preview("A resolved round: one answer, three dimmed") {
     HStack(alignment: .top, spacing: ZSpacing.gapTiles) {
         ChoiceTile(
@@ -309,7 +350,7 @@ public struct ChoiceTile: View {
     ScrollView(.horizontal) {
         HStack(alignment: .top, spacing: ZSpacing.gapTiles) {
             ForEach(ChoiceTile.Tone.allCases, id: \.self) { tone in
-                // 120 pt is below the floor and is clamped up to 220.
+                // 120 pt is below the floor and is clamped up to it.
                 ChoiceTile(label: String(describing: tone), tone: tone, size: 120)
             }
         }

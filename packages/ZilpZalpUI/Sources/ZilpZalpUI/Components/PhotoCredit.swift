@@ -103,6 +103,11 @@ enum PhotoCreditMetrics {
     // component ever draws, over the 40 pt corner *and* under the 5 pt border
     // the tile strokes inside the same shape. Both used to cut into the first
     // glyph — which is why the bare field above is not enough to judge this.
+    //
+    // The `CC BY-SA 4.0` line runs out of column at this size and is truncated.
+    // That is #111 rather than a new fault, and it is the reason the floor is
+    // where it is: the base pack's own longest line, a `CC BY`, still holds two
+    // whole lines here — see ``ChoiceTile/minimumSize``.
     HStack(alignment: .top, spacing: ZSpacing.gapTiles) {
         ForEach(previewCredits, id: \.self) { credit in
             ChoiceTile(
