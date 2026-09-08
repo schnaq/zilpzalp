@@ -68,19 +68,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Alle Bilder und Aufnahmen stehen unter einer freien Lizenz. Namen und Lizenz stehen hier immer im Klartext. Die Quelle führt ins Internet und öffnet erst nach einer kurzen Aufgabe für Erwachsene."
-          }
-        }
-      }
-    },
-    "credits.license" : {
-      "comment" : "In front of the chevron of a font or icon row in the credits: what the row opens",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lizenz"
+            "value" : "Alle Bilder und Aufnahmen stehen unter einer freien Lizenz. Die Quelle öffnet erst nach einer kurzen Aufgabe für Erwachsene."
           }
         }
       }
@@ -105,18 +93,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Foto von %1$@ · %2$@"
-          }
-        }
-      }
-    },
-    "credits.source" : {
-      "comment" : "In front of the chevron of a media row in the credits: what the row opens",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Quelle"
           }
         }
       }

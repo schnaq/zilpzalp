@@ -90,8 +90,11 @@ struct CreditsScreen: View {
     private var content: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: ZSpacing.step6) {
+                // The body step, not the `bodyLarge` the grown-ups' area
+                // opens with: this screen is a long list and its opening
+                // paragraph filled an entire phone screen at 24 pt.
                 Text("credits.intro")
-                    .typeStyle(.bodyLarge, .body, weight: .semibold)
+                    .typeStyle(.body, .body, weight: .semibold)
                     .foregroundStyle(ZColor.textBody)
 
                 if let credits = Self.credits {
@@ -104,10 +107,10 @@ struct CreditsScreen: View {
                     }
 
                     section(String(localized: "credits.fonts.title")) {
-                        vendoredRows(credits.fonts)
+                        vendoredRows(credits.fonts, icon: .type)
                     }
                     section(String(localized: "credits.icons.title")) {
-                        vendoredRows(credits.icons)
+                        vendoredRows(credits.icons, icon: .feather)
                     }
                 } else {
                     Text("credits.unavailable")
@@ -151,12 +154,17 @@ struct CreditsScreen: View {
 
     /// One photo or one recording. Name and licence are in the row itself;
     /// only the source leaves the app, and the chevron says where to.
+    ///
+    /// No `value` in front of the chevron, although the row would take one and
+    /// "Quelle" would name what it opens. Measured on an iPhone 17 Pro it cost
+    /// about 90 pt of the row's width, which left the credit line four words
+    /// wide and broke "Blaumeise" across two lines. The intro says what the
+    /// chevron leads to; VoiceOver gets it from the hint below.
     private func mediaRow(_ entry: Credits.Media, isLast: Bool) -> some View {
         SettingRow(
             title: entry.birdName,
             hint: credit(for: entry),
             icon: entry.kind == .photo ? .camera : .volume2,
-            value: String(localized: "credits.source"),
             showsSeparator: !isLast,
         ) {
             pendingLink = ExternalLink(url: entry.sourceURL)
@@ -166,7 +174,7 @@ struct CreditsScreen: View {
 
     /// The font families and the icon sets, which sit in no manifest and come
     /// from the generator's own lists.
-    private func vendoredRows(_ entries: [Credits.Vendored]) -> some View {
+    private func vendoredRows(_ entries: [Credits.Vendored], icon: ZIcon) -> some View {
         ForEach(Array(entries.enumerated()), id: \.element) { index, entry in
             SettingRow(
                 title: entry.name,
@@ -179,8 +187,7 @@ struct CreditsScreen: View {
                     entry.authors.joined(separator: ", "),
                     entry.license,
                 ),
-                icon: .type,
-                value: String(localized: "credits.license"),
+                icon: icon,
                 showsSeparator: index != entries.count - 1,
             ) {
                 pendingLink = ExternalLink(url: entry.licenseURL)
