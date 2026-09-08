@@ -12,12 +12,9 @@ import SwiftUI
 /// plain `Toggle`, so the system switch is the tap target and the system's
 /// own off-state grey shows through — an adult control on an adult screen,
 /// behaving exactly as Settings.app does, rather than a hand-drawn switch in
-/// sand and olive. Either way the row is at least 64 pt tall.
-///
-/// One row is one VoiceOver element, whichever variant it is: the title is the
-/// name, the hint is the hint, and the value is the switch's own on/off or the
-/// navigation row's current setting. Neither is what SwiftUI does on its own —
-/// see the two comments in `body`.
+/// sand and olive. Either way the row is at least 64 pt tall and reads as one
+/// VoiceOver element — which a switch row does not do on its own, see the
+/// comment in `body`.
 ///
 /// `.disabled(_:)` works as on any SwiftUI control: a navigation row dims to
 /// the system's one disabled opacity, a switch row lets `Toggle` grey itself.
@@ -135,11 +132,6 @@ public struct SettingRow: View {
                 // pressable already uses it; this is the same one. Only the
                 // navigation row needs it — `Toggle` greys itself.
                 .opacity(isEnabled ? 1 : LedgeButtonStyle.disabledOpacity)
-                .accessibilityLabel(title)
-                // An empty value is no value: VoiceOver skips it, so a row
-                // without one is simply announced by its name.
-                .accessibilityValue(value ?? "")
-                .accessibilityHint(hint ?? "")
 
             case let .toggle(isOn):
                 Toggle(isOn: isOn) {
@@ -152,7 +144,9 @@ public struct SettingRow: View {
                 // it, named after nothing. Standing in a bare `Toggle` for the
                 // whole row replaces the subtree rather than relabelling it,
                 // so exactly one switch is left — same trait, same on/off
-                // value, same activation, and now with a name.
+                // value, same activation, and now with a name. The hint goes
+                // where a hint belongs; an empty one is no hint, so a row
+                // without one is announced by its name alone.
                 .accessibilityRepresentation {
                     Toggle(title, isOn: isOn)
                         .accessibilityHint(hint ?? "")
@@ -297,28 +291,23 @@ private struct SettingRowPreviewCard: View {
 // theirs. Every title here wraps, which is the whole point — the hint has to
 // stay recognisable as a second paragraph.
 #Preview("Wrapping titles at 375 pt") {
-    VStack(spacing: 0) {
-        SettingRow(
-            title: "Spielzeit pro Tag",
-            hint: "Danach schlafen die Vögel und der Wald wird still",
-            icon: .clock,
-            isOn: .constant(true),
-        )
-        SettingRow(
-            title: "Namen anzeigen",
-            hint: "Vogelnamen unter den Bildern einblenden",
-            icon: .type,
-            isOn: .constant(false),
-        )
-        SettingRow(
-            title: "Spielzeit pro Tag",
-            hint: "Danach schlafen die Vögel",
-            icon: .clock,
-            value: "20 Min",
-            showsSeparator: false,
-        ) {}
+    ZCard(padding: 0) {
+        VStack(spacing: 0) {
+            SettingRow(
+                title: "Namen anzeigen",
+                hint: "Vogelnamen unter den Bildern einblenden",
+                icon: .type,
+                isOn: .constant(true),
+            )
+            SettingRow(
+                title: "Spielzeit pro Tag",
+                hint: "Danach schlafen die Vögel",
+                icon: .clock,
+                value: "20 Min",
+                showsSeparator: false,
+            ) {}
+        }
     }
-    .background(ZColor.surfaceCard)
     .frame(width: 375 - 2 * ZSpacing.gutterScreen)
     .padding(.horizontal, ZSpacing.gutterScreen)
     .background(ZColor.surfacePage)

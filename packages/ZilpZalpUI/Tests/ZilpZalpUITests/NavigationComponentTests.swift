@@ -87,10 +87,6 @@ struct NavigationComponentTests {
     @Test("A wrapped title is further from its hint than from its own next line")
     func theHintClearsAWrappedTitle() {
         #expect(SettingRowMetrics.hintSpacing > ZType.Step.body.lineSpacing(for: .body))
-    }
-
-    @Test("The hint gap is a step of the scale, not a number of its own")
-    func theHintGapIsAToken() {
         #expect(ZSpacing.scale.contains(SettingRowMetrics.hintSpacing))
     }
 }
