@@ -17,8 +17,15 @@ struct HomeScreen: View {
     /// width it drops to the wordmark's own floor.
     private static let wordmarkSize: CGFloat = 44
 
+    /// The playing child's avatar, drawn in the top bar as the way back to
+    /// "Wer spielt heute?". A raw `Profile.avatar` string — ``AvatarStyle``
+    /// decides what it looks like, including when it names something this
+    /// build has never heard of.
+    let avatar: String
+
     let openGame: (Game) -> Void
     let openParents: () -> Void
+    let openProfiles: () -> Void
 
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
@@ -39,13 +46,25 @@ struct HomeScreen: View {
             TopBar {
                 Wordmark(size: isCompact ? Wordmark.minimumSize : Self.wordmarkSize)
             } trailing: {
-                IconButton(
-                    .userRoundCog,
-                    label: String(localized: "parents.title"),
-                    tone: .clay,
-                    diameter: ZSpacing.touchMinimum,
-                    action: openParents,
-                )
+                // Both doors that lead away from the games share this corner:
+                // handing the iPad to the next child, and the grown-ups' room.
+                HStack(spacing: ZSpacing.step3) {
+                    Button(action: openProfiles) {
+                        AvatarDisc(style: .avatar(avatar), diameter: ZSpacing.touchMinimum)
+                    }
+                    // The disc draws its own outline; a button style would put
+                    // a second shape around it.
+                    .buttonStyle(.plain)
+                    .accessibilityLabel(String(localized: "profile.switch.accessibility"))
+
+                    IconButton(
+                        .userRoundCog,
+                        label: String(localized: "parents.title"),
+                        tone: .clay,
+                        diameter: ZSpacing.touchMinimum,
+                        action: openParents,
+                    )
+                }
             }
 
             // Headline and tiles are one group, centred in what the top bar
@@ -170,11 +189,11 @@ struct HomeScreen: View {
 // MARK: - Previews
 
 #Preview("iPad landscape", traits: .fixedLayout(width: 1194, height: 834)) {
-    HomeScreen(openGame: { _ in }, openParents: {})
+    HomeScreen(avatar: "feather", openGame: { _ in }, openParents: {}, openProfiles: {})
         .environment(\.horizontalSizeClass, .regular)
 }
 
 #Preview("iPhone portrait", traits: .fixedLayout(width: 390, height: 844)) {
-    HomeScreen(openGame: { _ in }, openParents: {})
+    HomeScreen(avatar: "feather", openGame: { _ in }, openParents: {}, openProfiles: {})
         .environment(\.horizontalSizeClass, .compact)
 }

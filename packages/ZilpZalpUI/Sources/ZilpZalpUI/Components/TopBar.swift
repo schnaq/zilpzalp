@@ -40,7 +40,16 @@ public struct TopBar<Leading: View, Center: View, Trailing: View>: View {
         HStack(spacing: ZSpacing.step5) {
             // Both outer slots claim the same share of the row, so the centre
             // stays on the screen's midline whatever sits beside it.
-            leading
+            //
+            // The wrapper is what makes that true when a slot is empty. A
+            // frame put straight on `EmptyView` claims nothing — SwiftUI
+            // drops an empty view out of the layout, modifiers and all — so a
+            // bar with one filled slot used to hand that slot the whole row
+            // and shrink to a pill floating in the middle of the page, and a
+            // bar with a filled `leading` pushed its centre off the midline.
+            // The frame lands on the `HStack` instead, which is a real view
+            // whether or not anything is inside it.
+            HStack(spacing: 0) { leading }
                 .frame(maxWidth: .infinity, alignment: .leading)
 
             HStack(spacing: ZSpacing.step4) {
@@ -52,7 +61,7 @@ public struct TopBar<Leading: View, Center: View, Trailing: View>: View {
             .typeStyle(.headline, .display, weight: .bold)
             .foregroundStyle(ZColor.textStrong)
 
-            trailing
+            HStack(spacing: 0) { trailing }
                 .frame(maxWidth: .infinity, alignment: .trailing)
         }
         .padding(.vertical, ZSpacing.step4)
