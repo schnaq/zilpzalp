@@ -27,6 +27,12 @@ struct HomeScreen: View {
     let openParents: () -> Void
     let openProfiles: () -> Void
 
+    /// The sticker album. Its own door at the foot of the screen, where every
+    /// variant of the design puts it (`design/ui_kits/ipad_app/HomeScreen.jsx`
+    /// and screens 1a and 1b): a child who wants to look at its birds should
+    /// not have to play a round to get to them.
+    let openCollection: () -> Void
+
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
     /// What the headline turned out to need, so the tiles can be sized against
@@ -92,8 +98,28 @@ struct HomeScreen: View {
             .padding(.horizontal, ZSpacing.gutterScreen)
             .padding(.vertical, ZSpacing.step6)
             .frame(maxWidth: .infinity)
+
+            album
         }
         .background(ZColor.surfacePage)
+    }
+
+    /// The album's door, centred at the foot as the design draws it.
+    ///
+    /// Outside the reader above rather than inside it, so the tiles are
+    /// measured against what is left over and keep sizing themselves. The
+    /// design's row has two more buttons; "Wer spielt?" is the avatar in the
+    /// top bar here, and "Unser Schwarm" lives inside the album, where a list
+    /// of siblings is a page in a book rather than a door on the home screen.
+    private var album: some View {
+        IconButton(
+            .album,
+            label: String(localized: "collection.title"),
+            tone: .primary,
+            diameter: isCompact ? ZSpacing.touchMinimum : ZSpacing.touchComfortable,
+            action: openCollection,
+        )
+        .padding(.bottom, ZSpacing.step5)
     }
 
     /// The one line of text on the screen, and it is for the grown-up looking
@@ -189,11 +215,23 @@ struct HomeScreen: View {
 // MARK: - Previews
 
 #Preview("iPad landscape", traits: .fixedLayout(width: 1194, height: 834)) {
-    HomeScreen(avatar: "feather", openGame: { _ in }, openParents: {}, openProfiles: {})
-        .environment(\.horizontalSizeClass, .regular)
+    HomeScreen(
+        avatar: "feather",
+        openGame: { _ in },
+        openParents: {},
+        openProfiles: {},
+        openCollection: {},
+    )
+    .environment(\.horizontalSizeClass, .regular)
 }
 
 #Preview("iPhone portrait", traits: .fixedLayout(width: 390, height: 844)) {
-    HomeScreen(avatar: "feather", openGame: { _ in }, openParents: {}, openProfiles: {})
-        .environment(\.horizontalSizeClass, .compact)
+    HomeScreen(
+        avatar: "feather",
+        openGame: { _ in },
+        openParents: {},
+        openProfiles: {},
+        openCollection: {},
+    )
+    .environment(\.horizontalSizeClass, .compact)
 }
