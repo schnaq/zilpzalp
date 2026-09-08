@@ -32,10 +32,13 @@ security delete-keychain "$RUNNER_TEMP/release-signing.keychain-db" 2>/dev/null 
 # The first four are the decoded secrets. The setup script deletes them again
 # as soon as it has imported them, but it runs under `set -e`: a failing
 # `security import` — the wrong password, a chain that will not build — would
-# otherwise leave the private key lying on the runner.
+# otherwise leave the private key lying on the runner. leaf.pem holds only the
+# public certificate the setup script prints its subject and issuer from, and
+# stays behind exactly when the chain check failed.
 rm -rf "$RUNNER_TEMP/dist.p12" "$RUNNER_TEMP/chain.pem" \
   "$RUNNER_TEMP/profile.mobileprovision" "$RUNNER_TEMP/profile.plist" \
   "$RUNNER_TEMP/asc-key.p8" \
+  "$RUNNER_TEMP/leaf.pem" \
   "$RUNNER_TEMP/ZilpZalp.xcarchive" "$RUNNER_TEMP/export" \
   "$RUNNER_TEMP/ExportOptions.plist" \
   "$RUNNER_TEMP/profile_uuid" "$RUNNER_TEMP/orig-default-keychain"
