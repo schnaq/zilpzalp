@@ -368,14 +368,21 @@ final class QuizSession {
         advance = nil
         play.advance()
 
-        // A finished round has nothing left to ask, and the question that was
-        // still being spoken must not run on under the round end's praise.
-        // The session owns the announcer and knows when its round is over, so
-        // it stops itself rather than waiting for a screen to notice: the
-        // push runs the round end's `onAppear` before this screen's
-        // `onDisappear`, which is too late. Game 2's call is silent by now —
-        // ``choose(_:)`` stopped it on the answer that ended the round.
-        guard !play.isFinished else { return announcer.stop() }
+        // A finished round has nothing left to ask, and neither the sentence
+        // nor the call may run on under the round end's praise — a call still
+        // sounding would swallow that screen's spoken headline outright (#30).
+        // The session owns both and knows when its round is over, so it stops
+        // them itself rather than waiting for a screen to notice: the push runs
+        // the round end's `onAppear` before this screen's `onDisappear`.
+        //
+        // The call too, though ``choose(_:)`` stopped it on the answer: the
+        // sound button stays live through the pause that follows, and a tap
+        // there starts the answered question's call again.
+        guard !play.isFinished else {
+            announcer.stop()
+            player.stop()
+            return
+        }
         askQuestion()
     }
 }
