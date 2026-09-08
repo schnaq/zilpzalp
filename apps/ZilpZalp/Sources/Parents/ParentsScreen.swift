@@ -153,6 +153,13 @@ struct ParentsScreen: View {
                 size: .large,
                 leadingIcon: .shieldCheck,
             ) {
+                // The flag is raised here rather than inside `knock()`: the
+                // action closure runs on the main actor before anything can
+                // suspend, while a `Task` body waits for the next turn — long
+                // enough for a second tap to slip past `disabled` and start a
+                // second sheet behind the first.
+                guard !isAsking else { return }
+                isAsking = true
                 Task { await knock() }
             }
             .disabled(isAsking)
@@ -172,7 +179,6 @@ struct ParentsScreen: View {
     /// the door shut and say so in one line; nothing is counted and nobody is
     /// locked out of their own settings.
     private func knock() async {
-        isAsking = true
         defer { isAsking = false }
 
         let opened = await ParentsLock.unlock(reason: String(localized: "parents.lock.reason"))
