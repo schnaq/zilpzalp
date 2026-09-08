@@ -41,6 +41,17 @@ struct RoundResult: Hashable {
     /// the round length.
     let questionCount: Int
 
+    /// The species the round end puts on its sticker: the first one answered
+    /// right at the first attempt, or the round's first question when there
+    /// was none. `nil` only for a round without questions.
+    ///
+    /// Chosen where the round is played rather than where it is celebrated,
+    /// because only ``QuizSession`` knows which answers were first tries — and
+    /// a round hands over one value, not two. A round always earns a sticker,
+    /// which is why the fallback is a species and not nothing: the celebration
+    /// shows what was met, never how well it went.
+    let celebratedSpecies: String?
+
     /// One, two or three. Derived rather than stored: `Scoring` is a pure
     /// function of ``firstTryCorrect``, and a second field holding the answer
     /// could only ever disagree with it.

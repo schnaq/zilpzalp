@@ -63,9 +63,18 @@ final class SpeechAnnouncer: NSObject {
     /// question again re-reads it instead of queueing a second reading behind
     /// the first.
     func announce(_ bird: Bird) {
+        announce(prompt(for: bird))
+    }
+
+    /// Says one finished sentence — the praise on the round end, for a child
+    /// who cannot read the headline.
+    ///
+    /// Takes text rather than a key: the String Catalog belongs to the app's
+    /// screens, and this type stays the one that only knows how to speak.
+    func announce(_ sentence: String) {
         AudioSessionConfigurator.activatePlayback()
 
-        let utterance = AVSpeechUtterance(string: prompt(for: bird))
+        let utterance = AVSpeechUtterance(string: sentence)
         utterance.voice = voice
         utterance.rate = Self.speechRate
 

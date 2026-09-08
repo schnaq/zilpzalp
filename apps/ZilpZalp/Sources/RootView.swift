@@ -24,8 +24,14 @@ struct RootView: View {
                     // Popping is all "Nochmal spielen" needs to do: the quiz
                     // screen is still under this one and deals a fresh round
                     // when it comes back with a finished one behind it.
+                    // The catalog travels with the result: the round end
+                    // draws a sticker of one of the round's species, and a
+                    // `RoundResult` on a navigation path can carry the id but
+                    // not the photo.
                     case let .roundEnd(result):
-                        RoundEndScreen(result: result) { path.removeLast() }
+                        RoundEndScreen(result: result, catalog: model.catalog) {
+                            path.removeLast()
+                        }
                     case .parents: ParentsScreen()
                     }
                 }
