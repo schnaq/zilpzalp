@@ -63,9 +63,23 @@ final class SpeechAnnouncer: NSObject {
     /// question again re-reads it instead of queueing a second reading behind
     /// the first.
     func announce(_ bird: Bird) {
+        say(prompt(for: bird))
+    }
+
+    /// Reads one finished German sentence out loud.
+    ///
+    /// The screens that ask a child a question in words — "Wer spielt heute?",
+    /// "Wie heißt du?" (#28) — need the same voice as the game does, and a
+    /// second `AVSpeechSynthesizer` beside this one would let two questions
+    /// talk over each other. So the text comes in already resolved from the
+    /// String Catalog and this stays the only voice in the app.
+    ///
+    /// Cuts off whatever was still being said, exactly as ``announce(_:)``
+    /// does, and sets ``isSpeaking`` for as long as it runs.
+    func say(_ text: String) {
         AudioSessionConfigurator.activatePlayback()
 
-        let utterance = AVSpeechUtterance(string: prompt(for: bird))
+        let utterance = AVSpeechUtterance(string: text)
         utterance.voice = voice
         utterance.rate = Self.speechRate
 
