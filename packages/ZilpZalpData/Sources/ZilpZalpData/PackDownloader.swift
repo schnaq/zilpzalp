@@ -76,7 +76,9 @@ public actor PackDownloader {
     /// Returns once the pack is installed. On any error — a failed fetch, a
     /// hash that does not match, a cancelled task — the half downloaded
     /// directory stays behind so that the next call resumes instead of
-    /// starting over.
+    /// starting over. One call per pack at a time: two overlapping ones share
+    /// that directory, and the second fails when it publishes what the first
+    /// has already moved.
     ///
     /// - Parameters:
     ///   - entry: an entry from `availablePacks()`.
