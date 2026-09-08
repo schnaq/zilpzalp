@@ -44,6 +44,8 @@ mise run format       format the sources and fix correctable lint findings
 mise run test         package tests only
 mise run generate     generate the Xcode project (before opening it in Xcode)
 mise run build        build the app
+mise run archive      archive the app for the App Store, unsigned
+mise run upload       sign that archive and send it to TestFlight
 mise run fetch-media  curate media and upload it to S3
 ```
 
