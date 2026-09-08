@@ -13,7 +13,8 @@ import SwiftUI
 /// own off-state grey shows through — an adult control on an adult screen,
 /// behaving exactly as Settings.app does, rather than a hand-drawn switch in
 /// sand and olive. Either way the row is at least 64 pt tall and reads as one
-/// VoiceOver element, title and hint together.
+/// VoiceOver element — which a switch row does not do on its own, see the
+/// comment in `body`.
 ///
 /// `.disabled(_:)` works as on any SwiftUI control: a navigation row dims to
 /// the system's one disabled opacity, a switch row lets `Toggle` grey itself.
@@ -154,6 +155,18 @@ public struct SettingRow: View {
                 }
                 .toggleStyle(.switch)
                 .tint(ZColor.primary)
+                // A plain `Toggle` publishes two switches, not one: its own
+                // element, named after the row, and the system switch inside
+                // it, named after nothing. Standing in a bare `Toggle` for the
+                // whole row replaces the subtree rather than relabelling it,
+                // so exactly one switch is left — same trait, same on/off
+                // value, same activation, and now with a name. The hint goes
+                // where a hint belongs; an empty one is no hint, so a row
+                // without one is announced by its name alone.
+                .accessibilityRepresentation {
+                    Toggle(title, isOn: isOn)
+                        .accessibilityHint(hint ?? "")
+                }
             }
         }
         .padding(.horizontal, ZSpacing.step5)
@@ -198,6 +211,11 @@ public struct SettingRow: View {
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
+            // Pins the stack to the height its two paragraphs need, so that
+            // no ancestor can compress it — a `Toggle` label in particular
+            // gets what the switch leaves over. Nothing observed today asks
+            // for less; this states what the row is entitled to.
+            .fixedSize(horizontal: false, vertical: true)
 
             trailing()
         }
@@ -211,10 +229,18 @@ public struct SettingRow: View {
 /// The two icon sizes are not among them: the JSX draws them at 28 px and
 /// 22 px, and both snap to the nearest ``Icon/Size`` preset rather than
 /// introducing a `.custom` size per call site.
-private enum SettingRowMetrics {
-    /// `marginTop: 2` between title and hint — tighter than ``ZSpacing/step1``
-    /// because the two lines belong to each other.
-    static let hintSpacing: CGFloat = 2
+enum SettingRowMetrics {
+    /// The gap between title and hint.
+    ///
+    /// Not the JSX's `marginTop: 2`, which assumes a title that stays on one
+    /// line. A settings row on a phone is 110–140 pt wide in its text column,
+    /// so "Namen anzeigen" wraps — and at 2 pt the second line of the title
+    /// sits *closer* to the hint than to the line above it, which SwiftUI
+    /// separates by ``ZType/Step/lineSpacing(for:)``, 2.7 pt at the body step.
+    /// The two then read as one run-on block. A step of the scale is the
+    /// smallest gap that reads as a break; `NavigationComponentTests` holds it
+    /// above the title's own line spacing.
+    static let hintSpacing: CGFloat = ZSpacing.step2
     /// `borderBottom: 2px` — a hairline inside a card, thinner than
     /// ``ZBorder/width``, which outlines the card itself.
     static let separatorWidth: CGFloat = 2
@@ -274,6 +300,34 @@ private struct SettingRowPreviewCard: View {
 
 #Preview("A card of rows") {
     SettingRowPreviewCard()
+}
+
+// The narrow case, at the width of the smallest phone the app runs on: an
+// iPhone SE is 375 pt across, and the grown-ups' screen leaves a settings row
+// about 110 pt of text column once gutter, card, icon and switch have had
+// theirs. Every title here wraps, which is the whole point — the hint has to
+// stay recognisable as a second paragraph.
+#Preview("Wrapping titles at 375 pt") {
+    ZCard(padding: 0) {
+        VStack(spacing: 0) {
+            SettingRow(
+                title: "Namen anzeigen",
+                hint: "Vogelnamen unter den Bildern einblenden",
+                icon: .type,
+                isOn: .constant(true),
+            )
+            SettingRow(
+                title: "Spielzeit pro Tag",
+                hint: "Danach schlafen die Vögel",
+                icon: .clock,
+                value: "20 Min",
+                showsSeparator: false,
+            ) {}
+        }
+    }
+    .frame(width: 375 - 2 * ZSpacing.gutterScreen)
+    .padding(.horizontal, ZSpacing.gutterScreen)
+    .background(ZColor.surfacePage)
 }
 
 #Preview("Both variants, bare") {
