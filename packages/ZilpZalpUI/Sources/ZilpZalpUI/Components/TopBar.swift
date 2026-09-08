@@ -15,10 +15,14 @@ import SwiftUI
 /// A screen with a title passes it as `TopBar(title:)` and gets
 /// ``TopBarTitle`` in the centre — the design's line box, one line, and the
 /// whole row minus what the side slots need. The generic centre slot stays
-/// for content that draws itself: `QuizProgress`, the wordmark. It still
-/// inherits the grown-up title style, so a plain `Text` there is typeset
-/// rather than left at the system font, but it is not the sized path — a
-/// title belongs in `TopBar(title:)`.
+/// for content that draws itself: `QuizProgress`, the wordmark.
+///
+/// That slot still inherits the grown-up title style, so a plain `Text` there
+/// is typeset rather than left at the system font — but in the face's own
+/// line box, which is the 77 pt bar #93 was about. It is kept only because
+/// the collection screens on #29 still pass a plain `Text` and would
+/// otherwise change under them; they switch to `TopBar(title:)` when that
+/// branch lands, and the inherited style goes with the last caller.
 ///
 /// Placement stays with the caller. The bar draws itself and nothing else;
 /// pinning it above a scroll view and letting it reach into the safe area is
@@ -129,7 +133,8 @@ public struct TopBarTitle: View {
     /// far: the longest title in the catalog, "Deine Vogel-Leiter", needs
     /// 0.72 at 375 pt with both side slots filled — 20 pt, the floor for
     /// anything a child reads.
-    static let minimumScaleFactor: CGFloat = ZType.Step.caption.size / ZType.Step.headline.size
+    nonisolated static let minimumScaleFactor: CGFloat =
+        ZType.Step.caption.size / ZType.Step.headline.size
 
     private let title: String
 
@@ -170,29 +175,34 @@ struct TopBarRow: Layout {
     let spacing: CGFloat
 
     /// How the row divides a width. Pure, so the arithmetic can be tested
-    /// without a render.
-    struct Slots: Equatable {
+    /// without a render, and in one place, so the two `Layout` methods cannot
+    /// drift apart.
+    struct Slots {
         /// Reserved on the left *and* on the right.
         let side: CGFloat
+        /// What both reserves and both gaps take together.
+        let reserved: CGFloat
+
         /// What is left for the centre.
-        let center: CGFloat
+        func center(in barWidth: CGFloat) -> CGFloat {
+            max(0, barWidth - reserved)
+        }
     }
 
-    static func slots(
-        barWidth: CGFloat,
-        leadingWidth: CGFloat,
-        trailingWidth: CGFloat,
-        spacing: CGFloat,
-    ) -> Slots {
+    static func slots(leadingWidth: CGFloat, trailingWidth: CGFloat, spacing: CGFloat) -> Slots {
         let side = max(leadingWidth, trailingWidth)
-        let gaps = side > 0 ? 2 * spacing : 0
-        return Slots(side: side, center: max(0, barWidth - 2 * side - gaps))
+        // A bar with nothing beside the centre has no gap to draw.
+        return Slots(side: side, reserved: side > 0 ? 2 * (side + spacing) : 0)
     }
 
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache _: inout ()) -> CGSize {
-        let natural = subviews.map { $0.sizeThatFits(.unspecified) }
-        let side = max(natural[0].width, natural[2].width)
-        let gaps = side > 0 ? 2 * spacing : 0
+        let leading = subviews[0].sizeThatFits(.unspecified)
+        let trailing = subviews[2].sizeThatFits(.unspecified)
+        let slots = Self.slots(
+            leadingWidth: leading.width,
+            trailingWidth: trailing.width,
+            spacing: spacing,
+        )
 
         // Without a width to divide — a `fixedSize`, a sizing pass, an
         // infinite proposal — the row asks for what its three slots want
@@ -200,26 +210,17 @@ struct TopBarRow: Layout {
         let width: CGFloat = if let offered = proposal.width, offered.isFinite {
             offered
         } else {
-            2 * side + gaps + natural[1].width
+            slots.reserved + subviews[1].sizeThatFits(.unspecified).width
         }
-        let slots = Self.slots(
-            barWidth: width,
-            leadingWidth: natural[0].width,
-            trailingWidth: natural[2].width,
-            spacing: spacing,
-        )
 
         // The centre is measured against the width it will actually get: a
         // title that has to shrink still reports the same box, but content
         // that wraps would not.
         let centerHeight = subviews[1]
-            .sizeThatFits(ProposedViewSize(width: slots.center, height: proposal.height))
+            .sizeThatFits(ProposedViewSize(width: slots.center(in: width), height: proposal.height))
             .height
 
-        return CGSize(
-            width: width,
-            height: max(natural[0].height, max(centerHeight, natural[2].height)),
-        )
+        return CGSize(width: width, height: max(leading.height, centerHeight, trailing.height))
     }
 
     func placeSubviews(
@@ -228,11 +229,9 @@ struct TopBarRow: Layout {
         subviews: Subviews,
         cache _: inout (),
     ) {
-        let natural = subviews.map { $0.sizeThatFits(.unspecified) }
         let slots = Self.slots(
-            barWidth: bounds.width,
-            leadingWidth: natural[0].width,
-            trailingWidth: natural[2].width,
+            leadingWidth: subviews[0].sizeThatFits(.unspecified).width,
+            trailingWidth: subviews[2].sizeThatFits(.unspecified).width,
             spacing: spacing,
         )
 
@@ -244,7 +243,10 @@ struct TopBarRow: Layout {
         subviews[1].place(
             at: CGPoint(x: bounds.midX, y: bounds.midY),
             anchor: .center,
-            proposal: ProposedViewSize(width: slots.center, height: bounds.height),
+            proposal: ProposedViewSize(
+                width: slots.center(in: bounds.width),
+                height: bounds.height,
+            ),
         )
         subviews[2].place(
             at: CGPoint(x: bounds.maxX, y: bounds.midY),

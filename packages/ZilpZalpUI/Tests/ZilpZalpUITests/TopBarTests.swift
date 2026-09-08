@@ -10,6 +10,7 @@ private let catalogTitles = [
     "Fotos & Dank",
     "Wie heißt du?",
     "Unser Schwarm",
+    "Meine Sammlung",
     "Für Erwachsene",
     "Wer spielt heute?",
     "Deine Vogel-Leiter",
@@ -21,11 +22,13 @@ private let regularWidth: CGFloat = 768
 /// What a title gets on an iPhone SE with both side slots filled:
 /// 375 − 2 × 16 gutter − 2 × 24 gap − 2 × 64 button.
 private let compactTitleWidth = TopBarRow.slots(
-    barWidth: 375 - 2 * TopBarMetrics.compactGutter,
     leadingWidth: ZSpacing.touchMinimum,
     trailingWidth: ZSpacing.touchMinimum,
     spacing: TopBarMetrics.slotSpacing,
-).center
+).center(in: 375 - 2 * TopBarMetrics.compactGutter)
+
+/// The smallest the title may ever get: the caption step.
+private let captionFloor = ZType.Step.headline.size * TopBarTitle.minimumScaleFactor
 
 /// What the bar measures and how it divides its row — the two things #93 was
 /// about.
@@ -82,6 +85,24 @@ struct TopBarTests {
         )
     }
 
+    @Test("A wordless centre is sized by the row, not the other way round")
+    func theQuizCentreIsUnaffected() {
+        // The quiz call site: a back button beside the leaf row. The row's
+        // width changed with #93 — the centre is now offered what the sides
+        // do not need rather than a third of the bar — and this is what says
+        // that made no difference to content whose width is its own. Ten
+        // 44 pt leaves are 548 pt wide however they are asked.
+        let height = renderedSize(
+            TopBar {
+                Color.clear.frame(width: ZSpacing.touchMinimum, height: ZSpacing.touchMinimum)
+            } center: {
+                QuizProgress(total: 10, completed: 2, current: 2, label: "Fortschritt")
+            },
+        ).height
+
+        #expect(abs(height - (ZSpacing.touchMinimum + 32)) < 0.5, "the bar rendered \(height) pt")
+    }
+
     // MARK: - The row
 
     @Test("Both sides reserve what the wider of them needs, so the centre stays on the midline")
@@ -95,47 +116,43 @@ struct TopBarTests {
         // `343 / 2` would then quietly be 171.
         let barWidth: CGFloat = 343
         let slots = TopBarRow.slots(
-            barWidth: barWidth,
             leadingWidth: ZSpacing.touchMinimum,
             trailingWidth: 0,
             spacing: TopBarMetrics.slotSpacing,
         )
 
-        let reserved = 2 * ZSpacing.touchMinimum + 2 * TopBarMetrics.slotSpacing
-
         #expect(slots.side == ZSpacing.touchMinimum)
-        #expect(slots.center == barWidth - reserved)
+        #expect(slots.reserved == 2 * ZSpacing.touchMinimum + 2 * TopBarMetrics.slotSpacing)
 
         // The centre's own middle is the bar's middle: the reserve and the
         // gap are the same on both sides.
         let leftEdge = slots.side + TopBarMetrics.slotSpacing
-        #expect(leftEdge + slots.center / 2 == barWidth / 2)
+        #expect(leftEdge + slots.center(in: barWidth) / 2 == barWidth / 2)
     }
 
     @Test("A bar with nothing beside the title spends no width on gaps")
     func anEmptyRowHasNoGaps() {
         let barWidth: CGFloat = 343
         let slots = TopBarRow.slots(
-            barWidth: barWidth,
             leadingWidth: 0,
             trailingWidth: 0,
             spacing: TopBarMetrics.slotSpacing,
         )
 
         #expect(slots.side == 0)
-        #expect(slots.center == barWidth)
+        #expect(slots.reserved == 0)
+        #expect(slots.center(in: barWidth) == barWidth)
     }
 
     @Test("The centre is never handed a negative width")
     func theCentreNeverGoesNegative() {
         let slots = TopBarRow.slots(
-            barWidth: 100,
             leadingWidth: ZSpacing.touchMinimum,
             trailingWidth: ZSpacing.touchMinimum,
             spacing: TopBarMetrics.slotSpacing,
         )
 
-        #expect(slots.center == 0)
+        #expect(slots.center(in: 100) == 0)
     }
 
     // MARK: - Width, at the narrowest screen there is
@@ -147,8 +164,11 @@ struct TopBarTests {
     func everyTitleFitsTheNarrowestScreen(title: String) throws {
         try #require(BundledFonts.registered)
 
-        let floor = ZType.Step.headline.size * TopBarTitle.minimumScaleFactor
-        let smallest = BundledFonts.width(of: title, postScriptName: "Baloo2-Bold", size: floor)
+        let smallest = BundledFonts.width(
+            of: title,
+            postScriptName: "Baloo2-Bold",
+            size: captionFloor,
+        )
 
         #expect(
             smallest <= compactTitleWidth,
@@ -193,25 +213,22 @@ struct TopBarTests {
         // even at the caption floor. That is the "Für Erwac…" in #93, and no
         // scale factor reaches it.
         let starved = TopBarRow.slots(
-            barWidth: 375 - 2 * ZSpacing.gutterScreen,
             leadingWidth: ZSpacing.touchMinimum,
             trailingWidth: ZSpacing.touchMinimum,
             spacing: TopBarMetrics.slotSpacing,
-        ).center
-        let floor = ZType.Step.headline.size * TopBarTitle.minimumScaleFactor
+        ).center(in: 375 - 2 * ZSpacing.gutterScreen)
 
         #expect(starved == 103)
         #expect(BundledFonts.width(
             of: "Für Erwachsene",
             postScriptName: "Baloo2-Bold",
-            size: floor,
+            size: captionFloor,
         ) > starved)
     }
 
     @Test("The title never shrinks past the smallest size the design allows")
     func theScaleFactorStopsAtTheCaptionStep() {
-        #expect(ZType.Step.headline.size * TopBarTitle.minimumScaleFactor == ZType.Step.caption
-            .size)
+        #expect(captionFloor == ZType.Step.caption.size)
     }
 
     // MARK: - Helpers
