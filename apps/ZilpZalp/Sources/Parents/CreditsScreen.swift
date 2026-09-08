@@ -51,11 +51,15 @@ struct CreditsScreen: View {
                 ) { dismiss() }
             } center: {
                 Text("parents.credits.title")
-                    // The same step down on a phone that `ParentsScreen`
-                    // makes, and for the same reason: beside a 64 pt back
-                    // button the headline step wraps and takes the bar with
-                    // it. Both bins go the day `TopBar` typesets its own
-                    // centre (#12).
+                    // Character for character what `ParentsScreen` does, and
+                    // it is not enough on a phone: measured on an iPhone 17
+                    // Pro this bar reads "Fotos & D…" and the grown-ups' own
+                    // reads "Für Erwac…". `TopBar` splits its row three ways
+                    // and hands the centre about 86 pt, which no scale factor
+                    // down to the caption step can fill. That is the
+                    // component's to fix (#12) — deliberately not worked
+                    // around here, so that one change fixes both screens
+                    // instead of two screens drifting apart.
                     .typeStyle(
                         horizontalSizeClass == .compact ? .label : .headline,
                         .display,
