@@ -53,14 +53,13 @@ final class CallPlayer: NSObject {
     /// who taps and hears nothing has a dull moment; a child who is handed an
     /// error message has a broken app, and cannot read it either.
     func play(_ url: URL) {
-        stop()
-
-        // Before every single sound, exactly as the speech does. The category,
-        // mode and options stay untouched on purpose: `.playback` against
-        // `.duckOthers` is open decision 6 in the spec, waiting for a human,
-        // and a call player that quietly asked for ducking here would have
-        // decided it.
-        AudioSessionConfigurator.activatePlayback()
+        // Silenced, but deliberately not released yet: the replacement has to
+        // be allocated while this one is still alive. Two live objects cannot
+        // share an address, so the identity check in ``callEnded(_:successfully:)``
+        // cannot mistake a finish meant for the outgoing recording for the
+        // incoming one — the trap ``SpeechAnnouncer`` guards against the same
+        // way for its utterances.
+        player?.stop()
 
         let recording: AVAudioPlayer
         do {
@@ -70,14 +69,24 @@ final class CallPlayer: NSObject {
             Logger.audio.error(
                 "Call \(url.lastPathComponent, privacy: .public) unreadable: \(reason, privacy: .public)",
             )
+            player = nil
             return
         }
         recording.delegate = self
 
+        // Before every single sound, exactly as the speech does — but only
+        // once there is a sound to make: activating the session interrupts
+        // whatever the grown-ups were listening to, and a file that is not
+        // there has not earned that. The category, mode and options stay
+        // untouched on purpose: `.playback` against `.duckOthers` is open
+        // decision 6 in the spec, waiting for a human, and a call player that
+        // quietly asked for ducking here would have decided it.
+        AudioSessionConfigurator.activatePlayback()
         guard recording.play() else {
             Logger.audio.error(
                 "Call \(url.lastPathComponent, privacy: .public) did not start",
             )
+            player = nil
             return
         }
 

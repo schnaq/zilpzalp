@@ -71,7 +71,7 @@ final class SpeechAnnouncer: NSObject {
         // queued — by the time a call has run its course, the screen that
         // wanted to say something has usually moved on.
         guard AudioFocus.call?.isPlaying != true else {
-            Logger.audio.debug("Silent while a call plays: \(sentence, privacy: .public)")
+            Logger.audio.debug("Staying silent, a call is playing")
             return
         }
 
