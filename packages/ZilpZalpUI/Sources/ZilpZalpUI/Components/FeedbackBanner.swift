@@ -8,8 +8,8 @@ import SwiftUI
 /// cannot read the sentence.
 ///
 /// **``Kind/retry`` is not an error.** It is sun yellow with an open hand, and
-/// the sentence behind it is "Fast! Hör nochmal hin." There is no red variant
-/// and no X in this component, and there will not be one.
+/// the sentence behind it invites another go. There is no red variant and no
+/// X in this component, and there will not be one.
 ///
 /// The banner pops in once, when it appears. Changing ``kind`` or the message
 /// of a banner already on screen swaps the content without a second pop; a
