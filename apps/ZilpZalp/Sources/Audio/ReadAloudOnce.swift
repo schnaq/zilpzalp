@@ -3,15 +3,17 @@ import SwiftUI
 /// Reads a screen's headline out loud the first time the screen arrives.
 ///
 /// A child who cannot read cannot be asked a question in writing, so a screen
-/// that asks one has to say it. Both profile screens ask one.
+/// that asks one has to say it. Both profile screens ask one, and the parental
+/// gate says the one sentence a child who cannot read the task still
+/// understands.
 ///
 /// `onAppear` can fire more than once for the same arrival, so the flag is
 /// what makes "once" true. The announcer cuts off whatever it was still
 /// saying before it starts, and stops when the screen goes — so a headline
 /// can neither repeat itself nor talk over the screen that replaces it.
 ///
-/// Lives beside its two callers. The day a screen outside this folder wants
-/// it, it belongs next to ``SpeechAnnouncer`` in `Audio/`.
+/// Moved out of `Profiles/` and next to ``SpeechAnnouncer`` when the gate
+/// became its third caller, exactly as it said it would.
 struct ReadAloudOnce: ViewModifier {
     let text: String
 
