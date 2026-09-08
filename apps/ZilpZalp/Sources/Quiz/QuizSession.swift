@@ -81,6 +81,25 @@ final class QuizSession {
     /// is. The round end celebrates it; see ``RoundResult/celebratedSpecies``.
     private(set) var firstTrySpecies: String?
 
+    /// What tells this round apart from the next one, so the round end books
+    /// it exactly once. Renewed with every fresh round in ``resume()``.
+    private var roundID = UUID()
+
+    /// When the first question of this round went up, `nil` until it does.
+    ///
+    /// Set where the question is spoken rather than in ``resume()``: a round
+    /// is dealt before the screen it is played on exists, and the seconds a
+    /// child owes the daily budget (#36) start when a bird is on the screen.
+    private var askedFirstQuestion: Date?
+
+    /// When the last answer of this round was tapped.
+    ///
+    /// Taken on the tap and not when the round moves on: `answerPause` is a
+    /// second of check mark and applause that belongs to the round, but the
+    /// pair of timestamps is meant to say "first question to last answer",
+    /// and it should say exactly that.
+    private var answeredLastQuestion: Date?
+
     /// - Parameter catalog: The opened pack. Every species in it is a possible
     ///   question and a possible distractor.
     /// - Throws: `RoundError.insufficientSpecies` when the pack holds fewer
@@ -181,10 +200,20 @@ final class QuizSession {
     /// found hard still ends with a bird rather than an empty disc.
     var result: RoundResult {
         RoundResult(
+            id: roundID,
             firstTryCorrect: firstTryCorrect,
             questionCount: round.questions.count,
             celebratedSpecies: firstTrySpecies ?? round.questions.first?.answer,
+            species: Set(round.questions.map(\.answer)),
+            playtime: playtime,
         )
+    }
+
+    /// First question to last answer. Zero for a round that was never played
+    /// — there is nothing to bill a child for a screen it only looked at.
+    private var playtime: TimeInterval {
+        guard let askedFirstQuestion, let answeredLastQuestion else { return 0 }
+        return max(0, answeredLastQuestion.timeIntervalSince(askedFirstQuestion))
     }
 
     // MARK: - Playing it
@@ -211,6 +240,9 @@ final class QuizSession {
             isAnswered = false
             firstTryCorrect = 0
             firstTrySpecies = nil
+            roundID = UUID()
+            askedFirstQuestion = nil
+            answeredLastQuestion = nil
         } else if isAnswered {
             // A question that was answered while the screen was going away, so
             // that the pause after it never ran out. Finish the move rather
@@ -232,6 +264,9 @@ final class QuizSession {
     /// child reaches for feel broken.
     func askQuestion() {
         guard let answer else { return }
+        // Only the first one: the sound button re-reads the question, and a
+        // round does not start again because a child asked to hear it twice.
+        askedFirstQuestion = askedFirstQuestion ?? Date()
         Logger.quiz.debug("Asking for \(answer.id, privacy: .public)")
         announcer.announce(answer)
     }
@@ -254,6 +289,7 @@ final class QuizSession {
             firstTrySpecies = firstTrySpecies ?? bird.id
         }
         isAnswered = true
+        answeredLastQuestion = Date()
 
         advance?.cancel()
         advance = Task { [weak self] in

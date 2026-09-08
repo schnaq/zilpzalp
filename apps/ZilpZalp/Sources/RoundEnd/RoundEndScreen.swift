@@ -15,17 +15,17 @@ import ZilpZalpUI
 /// two missing ones, and a child who cannot read has only the picture to go
 /// by. The praise is spoken for the same reason.
 ///
-/// Nothing is written down. #29 records the round through `ProfileStore` and
-/// fills the sticker album; until then the sticker says which bird this round
-/// was about, never that it was "new".
+/// **This is where a round is written down.** The screen books it through
+/// ``AppModel/record(_:)`` before it says anything about it, and every claim
+/// it makes — a first find, a new rank — is read off the profile written.
 struct RoundEndScreen: View {
     /// How far a star rises, from `zz-bob` in `design/guidelines/motion.css`.
     private static let bobHeight: CGFloat = 8
 
     /// One bob, out and back. No `ZMotion` duration covers it — the tokens
     /// stop at 900 ms because they time reactions, and this is idle life — so
-    /// it is the 1.4 s of screen 1d and `RewardScreen.jsx`. Halved where it is
-    /// used: SwiftUI counts one leg, the autoreverse gives back the other.
+    /// it is the 1.4 s of screen 1d. Halved where it is used: SwiftUI counts
+    /// one leg, the autoreverse gives back the other.
     private static let bobPeriod: TimeInterval = 1.4
 
     /// How far apart the three stars start bobbing, again from screen 1d.
@@ -39,15 +39,19 @@ struct RoundEndScreen: View {
     /// The sticker on iPad, the 200 pt of screen 1e and `RewardScreen.jsx`.
     private static let regularSticker: CGFloat = 200
 
-    /// The strip at the foot that belongs to the wordmark: the mark itself
-    /// plus the gap under it and the same gap above, so the celebration is
-    /// centred in what is left rather than behind it.
+    /// The strip at the foot that belongs to the wordmark, so the
+    /// celebration is centred in what is left rather than behind it.
     private static let signatureBand = Wordmark.minimumSize + 2 * ZSpacing.step5
+
+    /// How long the celebration keeps the screen before the rank ascent
+    /// arrives over it: long enough for the sticker to land and the praise to
+    /// be said, short enough to still read as one moment. A judgement call
+    /// rather than a token — 1e replaces this screen in the design.
+    private static let ascentDelay: TimeInterval = 2.2
 
     /// A star that has not been earned. Olive rather than sun: dark enough
     /// against the forest ground to stay unlit, light enough to stay a star.
-    /// What is missing is shown, exactly as a locked ``RewardSticker`` keeps
-    /// its picture.
+    /// What is missing is shown, as a locked ``RewardSticker`` shows it.
     private static let unlitStar = ZColor.olive600
 
     /// What the round earned. Comes from ``QuizSession`` through
@@ -59,9 +63,18 @@ struct RoundEndScreen: View {
     /// the sticker falls back to its star glyph rather than to a hole.
     let catalog: PackCatalog?
 
+    /// Books the round onto the playing child and answers with what it
+    /// changed, `nil` when nothing was written. Idempotent; see
+    /// ``AppModel/record(_:)``.
+    let record: (RoundResult) async -> RoundOutcome?
+
     /// Pops back to ``QuizScreen``, which deals a fresh round when it
     /// reappears with a finished one behind it.
     let playAgain: () -> Void
+
+    /// Opens the sticker album, and pushes the rank ascent over this screen.
+    let openCollection: () -> Void
+    let showAscent: (RankAscent) -> Void
 
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(\.verticalSizeClass) private var verticalSizeClass
@@ -74,14 +87,24 @@ struct RoundEndScreen: View {
     /// size: nothing moves, and nothing is left half-drawn.
     @State private var settled = false
 
-    /// The bird on the sticker, resolved once. A `View` is built again on
+    /// The bird on the sticker, resolved once: a `View` is built again on
     /// every layout pass, and reading the photo off disk on each of them
     /// would be a file lookup per frame of the pop.
-    @State private var sticker: Sticker?
+    @State private var sticker: RoundEndSticker?
 
-    /// The praise, spoken. Built on the first appearance for the same reason,
-    /// and because a second synthesiser would talk over the first.
+    /// The praise, spoken. Built once, so no second synthesiser can talk
+    /// over the first.
     @State private var announcer: SpeechAnnouncer?
+
+    /// What the round changed about the profile, once booked. `nil` for the
+    /// frame before that, and for a round that could not be written — the
+    /// screen then makes no claim it cannot back up.
+    @State private var outcome: RoundOutcome?
+
+    /// The ascent has been pushed for this round. `.task` runs again when
+    /// the child comes back from the album, and a second "Du bist jetzt eine
+    /// Amsel!" would be a second promotion.
+    @State private var ascentShown = false
 
     /// A phone in portrait, or an iPad sharing its screen.
     private var isCompact: Bool {
@@ -96,11 +119,9 @@ struct RoundEndScreen: View {
     }
 
     /// Narrow or short — either way there is no room for the iPad's sizes.
-    ///
     /// Width alone is not enough: the two biggest iPhones report a *regular*
-    /// width in landscape, where the height is still a phone's. Keying the
-    /// hero line and the 200 pt sticker on width put both of them into 430 pt
-    /// of height on exactly those devices.
+    /// width in landscape, where the height is still a phone's, and keying
+    /// the sizes on width put a hero line into 430 pt of height there.
     private var isTight: Bool {
         isCompact || isShort
     }
@@ -131,7 +152,11 @@ struct RoundEndScreen: View {
             // line.
             .toolbar(.hidden, for: .navigationBar)
             .navigationBarBackButtonHidden()
-            .onAppear(perform: celebrate)
+            // A `Task` rather than `onAppear`: the round is written down
+            // before anything is said about it, and writing is `await`. Its
+            // cancellation is what stops the ascent from arriving behind a
+            // child who has already tapped on.
+            .task { await celebrate() }
             // The praise must not still be running under the first question
             // of the next round.
             .onDisappear { announcer?.stop() }
@@ -205,7 +230,7 @@ struct RoundEndScreen: View {
             )
 
             if let sticker {
-                Text(verbatim: sticker.name)
+                Text(verbatim: caption(for: sticker))
                     .typeStyle(isTight ? .body : .bodyLarge, .display, weight: .bold)
                     .foregroundStyle(ZColor.white)
 
@@ -215,30 +240,38 @@ struct RoundEndScreen: View {
             }
         }
         .accessibilityElement(children: .combine)
-        .scaleEffect(settled ? 1 : Self.popFromScale)
-        .opacity(settled ? 1 : 0)
+        .scaleEffect(popped ? 1 : Self.popFromScale)
+        .opacity(popped ? 1 : 0)
         .animation(pop, value: settled)
     }
 
-    /// The way on, and the door #29 opens.
+    /// The pop belongs to a bird met for the first time. One already in the
+    /// album is simply there: still shown, still named, but the arrival is
+    /// the reward for finding something new.
+    private var popped: Bool {
+        settled || !isFirstFind
+    }
+
+    /// The way on first, the album second (#119): a child who can read
+    /// neither label tells the two apart by position and colour, so the
+    /// sun-yellow one at the top must be the one that carries the round on.
     ///
-    /// Side by side as in the design, stacked on a phone in portrait: the
-    /// design's own row measures 220 + 24 + 260 pt, and no iPhone is that
-    /// wide.
+    /// Side by side as in the design, stacked on a phone in portrait — the
+    /// design's row measures 220 + 24 + 260 pt, and no iPhone is that wide.
     @ViewBuilder
     private var actions: some View {
         let buttons = Group {
-            // **Inert until #29.** The collection does not exist yet, so this
-            // button has nothing to open. It is drawn all the same because
-            // screen 1d has it and because a button that appears later moves
-            // the one beside it — and it is drawn as itself, not disabled:
-            // the child is not told about a milestone in the issue tracker.
-            ZButton(String(localized: "roundEnd.collection"), tone: .reward, leadingIcon: .album) {}
-
             ZButton(
                 String(localized: "roundEnd.playAgain"),
+                tone: .reward,
                 trailingIcon: .arrowRight,
                 action: startAnotherRound,
+            )
+
+            ZButton(
+                String(localized: "roundEnd.collection"),
+                leadingIcon: .album,
+                action: openCollection,
             )
         }
 
@@ -283,6 +316,26 @@ struct RoundEndScreen: View {
         String(format: String(localized: "roundEnd.stars"), result.stars)
     }
 
+    /// Whether the round put this bird in the album for the first time: read
+    /// off the profile as it stood before the round was booked. `false` until
+    /// then — one frame of silence beats a claim that was not checked.
+    private var isFirstFind: Bool {
+        outcome?.isFirstFind(of: result.celebratedSpecies) ?? false
+    }
+
+    /// "Amsel gesammelt" for a first find, the bare name otherwise.
+    private func caption(for sticker: RoundEndSticker) -> String {
+        guard isFirstFind else { return sticker.name }
+        return String(format: String(localized: "roundEnd.sticker.new"), sticker.name)
+    }
+
+    /// The one sentence this screen says out loud, for the child who cannot
+    /// read it. A first find gets its own, so the news is heard as well.
+    private var spokenPraise: String {
+        guard isFirstFind, let sticker else { return String(localized: "roundEnd.title") }
+        return String(format: String(localized: "roundEnd.sticker.new.spoken"), sticker.name)
+    }
+
     private var starSize: CGFloat {
         isTight ? ZSpacing.step7 : ZSpacing.step8
     }
@@ -304,20 +357,38 @@ struct RoundEndScreen: View {
 
     // MARK: - Behaviour
 
-    /// Starts the motion, resolves the sticker and says the headline out
-    /// loud, once.
+    /// Books the round, then celebrates it: the sticker, the motion, the
+    /// sentence said out loud, and — when the round carried the child onto a
+    /// new rung — the ascent over the top of it.
     ///
-    /// The praise is spoken because the child this screen is for cannot read
-    /// it. The guard is what makes it once: `onAppear` may run again, and the
-    /// same sentence twice sounds like a fault.
-    private func celebrate() {
+    /// The order matters. Being a first find decides both the caption and the
+    /// sentence, so nothing is drawn as new before the profile is written.
+    /// The guards are what make each part happen once: this runs again every
+    /// time the child comes back from the album.
+    private func celebrate() async {
+        sticker = sticker ?? RoundEndSticker(species: result.celebratedSpecies, from: catalog)
+        outcome = await record(result)
+        // Left while the round was being written down: the praise would
+        // land over whatever replaced this screen.
+        guard !Task.isCancelled else { return }
         settled = true
-        sticker = sticker ?? Sticker(species: result.celebratedSpecies, from: catalog)
 
-        guard announcer == nil else { return }
-        let voice = SpeechAnnouncer()
-        announcer = voice
-        voice.announce(String(localized: "roundEnd.title"))
+        if announcer == nil {
+            let voice = SpeechAnnouncer()
+            announcer = voice
+            voice.announce(spokenPraise)
+        }
+
+        guard !ascentShown, let ascent = outcome?.ascent else { return }
+        // The stars and the sticker get the screen to themselves first: a new
+        // rank on top of the praise would take the round away mid-look.
+        try? await Task.sleep(for: .seconds(Self.ascentDelay))
+        // Flagged only once it is shown: set before the wait, a child who
+        // opened the album inside those seconds would have turned "once"
+        // into "never".
+        guard !Task.isCancelled else { return }
+        ascentShown = true
+        showAscent(ascent)
     }
 
     /// Stops the praise before leaving, so that it does not run into the
@@ -326,75 +397,4 @@ struct RoundEndScreen: View {
         announcer?.stop()
         playAgain()
     }
-}
-
-/// What the sticker draws: one species of the round just played, resolved
-/// from the pack.
-private struct Sticker {
-    let name: String
-    /// `nil` when the photo file is missing — ``RewardSticker`` then shows its
-    /// glyph, which is still a sticker.
-    let image: Image?
-    let credit: String
-
-    /// - Returns: `nil` when there is no pack, no species, or the pack does
-    ///   not know the id.
-    init?(species: String?, from catalog: PackCatalog?) {
-        guard
-            let catalog,
-            let species,
-            let bird = catalog.pack.birds.first(where: { $0.id == species })
-        else {
-            return nil
-        }
-
-        name = bird.name
-        image = catalog.photoURL(for: bird)
-            .flatMap { UIImage(contentsOfFile: $0.path(percentEncoded: false)) }
-            .map { Image(uiImage: $0) }
-        credit = bird.creditLine
-    }
-}
-
-// MARK: - Previews
-
-#Preview("iPad, three stars", traits: .fixedLayout(width: 1194, height: 834)) {
-    NavigationStack {
-        RoundEndScreen(
-            result: RoundResult(
-                firstTryCorrect: 10,
-                questionCount: 10,
-                celebratedSpecies: "amsel",
-            ),
-            catalog: try? PackCatalog.bundled(),
-            playAgain: {},
-        )
-    }
-    .environment(\.horizontalSizeClass, .regular)
-}
-
-#Preview("iPhone, one star", traits: .fixedLayout(width: 390, height: 844)) {
-    NavigationStack {
-        RoundEndScreen(
-            result: RoundResult(
-                firstTryCorrect: 3,
-                questionCount: 10,
-                celebratedSpecies: "rotkehlchen",
-            ),
-            catalog: try? PackCatalog.bundled(),
-            playAgain: {},
-        )
-    }
-    .environment(\.horizontalSizeClass, .compact)
-}
-
-#Preview("Without a pack", traits: .fixedLayout(width: 1194, height: 834)) {
-    NavigationStack {
-        RoundEndScreen(
-            result: RoundResult(firstTryCorrect: 7, questionCount: 10, celebratedSpecies: nil),
-            catalog: nil,
-            playAgain: {},
-        )
-    }
-    .environment(\.horizontalSizeClass, .regular)
 }
