@@ -78,4 +78,15 @@ struct NavigationComponentTests {
         #expect(HomeTile.defaultSize == 240)
         #expect(HomeTile(title: "Wer singt da?").size >= ZSpacing.touchMinimum)
     }
+
+    /// The one number in `SettingRow` that a screenshot caught and no unit
+    /// test could: a settings row on a phone is narrow enough that its title
+    /// wraps, and the gap to the hint has to beat the gap SwiftUI leaves
+    /// between two lines of the same paragraph. Below that the wrapped title
+    /// and the hint read as one run-on block (#121).
+    @Test("A wrapped title is further from its hint than from its own next line")
+    func theHintClearsAWrappedTitle() {
+        #expect(SettingRowMetrics.hintSpacing > ZType.Step.body.lineSpacing(for: .body))
+        #expect(ZSpacing.scale.contains(SettingRowMetrics.hintSpacing))
+    }
 }
