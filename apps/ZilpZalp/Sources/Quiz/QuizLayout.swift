@@ -44,10 +44,11 @@ struct QuizLayout {
     /// to wrap into two lines at 36 pt.
     static let promptColumn: CGFloat = 320
 
-    /// The band the feedback banner appears in, kept clear whether or not
-    /// there is anything to say. The design reserves 100 px for it; a grid
-    /// that jumped a banner's height on every answer would move the tiles out
-    /// from under a finger that is still on its way.
+    /// The least room the feedback band gets, whether or not there is
+    /// anything to say — the 100 px the design reserves, and the tighter
+    /// figure the phone screen draws. Both are a floor rather than the whole
+    /// answer: what the band ends up at is measured, because a sentence long
+    /// enough to wrap needs more than either (#116).
     private static let regularSlot: CGFloat = 100
     private static let compactSlot: CGFloat = 76
 
@@ -63,10 +64,15 @@ struct QuizLayout {
     ///   - area: What is left for question, answers and feedback once the top
     ///     bar, the leaf row and the screen margins have had their share.
     ///   - isCompact: A phone, or an iPad sharing its screen.
-    init(area: CGSize, isCompact: Bool) {
+    ///   - feedbackBand: What the banner sentences actually measured at this
+    ///     width, zero until the first layout pass has reported it. The
+    ///     design's reserve is the floor: a band that needs less keeps the
+    ///     100 pt the design draws, a sentence that has to wrap gets the room
+    ///     it needs rather than being truncated (#116).
+    init(area: CGSize, isCompact: Bool, feedbackBand: CGFloat) {
         let gap = isCompact ? ZSpacing.step4 : ZSpacing.step5
         let sound = isCompact ? SoundButton.minimumDiameter : ZSpacing.touchHero
-        let slot = isCompact ? Self.compactSlot : Self.regularSlot
+        let slot = max(isCompact ? Self.compactSlot : Self.regularSlot, feedbackBand)
 
         let beside = Self.tileEdge(
             across: area.width - Self.promptColumn - ZSpacing.step7 - ZSpacing.gapTiles,

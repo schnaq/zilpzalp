@@ -44,6 +44,14 @@ struct QuizScreen: View {
     /// not a round.
     @State private var session: QuizSession?
 
+    /// What the feedback band turned out to need: the taller of the two
+    /// sentences at this width, measured rather than guessed, so the answers
+    /// are sized against the room that is really left. It depends on the
+    /// width and the font and never on the tiles, so there is no loop here —
+    /// one extra layout pass and it settles. Same move as ``HomeScreen``'s
+    /// headline.
+    @State private var feedbackHeight: CGFloat = 0
+
     /// A phone, or an iPad sharing its screen. It settles how big the parts
     /// around the answers are drawn — type step, sound button, leaf row,
     /// margins, the feedback band. Where those parts *stand* is measured, not
@@ -113,7 +121,7 @@ struct QuizScreen: View {
 
     @ViewBuilder
     private func content(_ session: QuizSession, in area: CGSize) -> some View {
-        let layout = QuizLayout(area: area, isCompact: isCompact)
+        let layout = QuizLayout(area: area, isCompact: isCompact, feedbackBand: feedbackHeight)
 
         VStack(spacing: layout.stackGap) {
             switch layout.arrangement {
@@ -144,7 +152,7 @@ struct QuizScreen: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
 
-            feedback(session).frame(height: layout.feedbackSlot)
+            feedbackBand(session, reserve: layout.feedbackSlot)
         }
     }
 
@@ -238,6 +246,32 @@ struct QuizScreen: View {
             .frame(maxWidth: .infinity, alignment: leading ? .leading : .center)
     }
 
+    /// The band the app says something back in, kept clear whether or not
+    /// there is anything to say.
+    ///
+    /// Both sentences are drawn into it invisibly, so the band is always as
+    /// tall as the taller of them needs *at this width* and the one that
+    /// actually appears finds its room already reserved. A
+    /// `frame(height:)` around a branch that produces nothing reserved
+    /// nothing at all — the grid moved 46 pt the instant a banner appeared
+    /// (#115) — and a fixed height the sentence did not fit truncated it to
+    /// one line (#116). Measuring covers both, and keeps covering them if
+    /// the sentences ever change.
+    private func feedbackBand(_ session: QuizSession, reserve: CGFloat) -> some View {
+        ZStack {
+            template(correctBanner)
+            template(retryBanner)
+            feedback(session)
+        }
+        .onGeometryChange(for: CGFloat.self) { $0.size.height } action: {
+            feedbackHeight = $0
+        }
+        // The design's reserve is the floor, never the ceiling: an iPad's
+        // band stays the 100 pt the design draws even though one line needs
+        // less.
+        .frame(maxWidth: .infinity, minHeight: reserve)
+    }
+
     /// What the app says back. Nothing until something has been tapped.
     ///
     /// A fresh identity per kind, so each sentence pops in rather than
@@ -245,12 +279,33 @@ struct QuizScreen: View {
     @ViewBuilder
     private func feedback(_ session: QuizSession) -> some View {
         if session.isAnswered {
-            FeedbackBanner(String(localized: "quiz.feedback.correct"), kind: .correct)
-                .id(ChoiceTile.Phase.correct)
+            correctBanner.id(ChoiceTile.Phase.correct)
         } else if !session.wrongTaps.isEmpty {
-            FeedbackBanner(String(localized: "quiz.feedback.retry"), kind: .retry)
-                .id(ChoiceTile.Phase.retry)
+            retryBanner.id(ChoiceTile.Phase.retry)
         }
+    }
+
+    private var correctBanner: FeedbackBanner {
+        FeedbackBanner(String(localized: "quiz.feedback.correct"), kind: .correct)
+    }
+
+    private var retryBanner: FeedbackBanner {
+        FeedbackBanner(String(localized: "quiz.feedback.retry"), kind: .retry)
+    }
+
+    /// A banner that is only there to be measured: it holds the band open and
+    /// is otherwise not on the screen at all.
+    ///
+    /// `hidden()` already keeps it out of the drawing, out of hit testing and
+    /// out of the accessibility tree — verified in the simulator, where the
+    /// tree carries no banner at all until one is actually said. The explicit
+    /// `accessibilityHidden(true)` says so anyway: a child sweeping VoiceOver
+    /// across the screen must never meet a sentence the app has not said, and
+    /// that promise is too important to rest on a side effect.
+    private func template(_ banner: FeedbackBanner) -> some View {
+        banner
+            .hidden()
+            .accessibilityHidden(true)
     }
 
     private func progress(_ session: QuizSession) -> some View {
