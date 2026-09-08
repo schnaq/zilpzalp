@@ -21,6 +21,7 @@ struct ProfileStoreRecordingTests {
             #expect(recorded.roundsPlayed == 1)
             #expect(recorded.collectedSpecies == ["amsel", "zilpzalp"])
             #expect(recorded.playtime == ["2026-09-08": 92])
+            #expect(recorded.dailyStars == ["2026-09-08": 3])
             #expect(try await store.profiles() == [recorded])
         }
     }
@@ -49,6 +50,7 @@ struct ProfileStoreRecordingTests {
             #expect(recorded.roundsPlayed == 2)
             #expect(recorded.collectedSpecies == ["amsel", "kohlmeise", "zilpzalp"])
             #expect(recorded.playtime == ["2026-09-08": 152])
+            #expect(recorded.dailyStars == ["2026-09-08": 4])
         }
     }
 
@@ -72,10 +74,13 @@ struct ProfileStoreRecordingTests {
             )
 
             #expect(recorded.playtime == ["2026-09-08": 92, "2026-09-09": 45])
+            // A new day starts at nothing collected, which is what makes the
+            // budget and the day's take reset without anybody resetting them.
+            #expect(recorded.dailyStars == ["2026-09-08": 2, "2026-09-09": 2])
         }
     }
 
-    @Test("a write keeps seven days of playtime, in every profile")
+    @Test("a write keeps seven days of playtime and stars, in every profile")
     func prunesPlaytime() async throws {
         try await withTemporaryDirectory { directory in
             let store = ProfileStore(directory: directory)
@@ -84,7 +89,9 @@ struct ProfileStoreRecordingTests {
             // Six days back is the oldest day the week keeps; seven days back
             // is the first one it drops.
             mila.playtime = ["2026-09-01": 300, "2026-09-02": 240, "2026-09-08": 60]
+            mila.dailyStars = ["2026-09-01": 9, "2026-09-02": 6, "2026-09-08": 2]
             jonte.playtime = ["2026-09-01": 120, "2026-09-02": 90]
+            jonte.dailyStars = ["2026-09-01": 4, "2026-09-02": 3]
             try await store.update(mila)
             try await store.update(jonte)
 
@@ -96,8 +103,10 @@ struct ProfileStoreRecordingTests {
             )
 
             #expect(recorded.playtime == ["2026-09-02": 240, "2026-09-08": 90])
+            #expect(recorded.dailyStars == ["2026-09-02": 6, "2026-09-08": 5])
             let others = try await store.profiles()
             #expect(others.last?.playtime == ["2026-09-02": 90])
+            #expect(others.last?.dailyStars == ["2026-09-02": 3])
         }
     }
 

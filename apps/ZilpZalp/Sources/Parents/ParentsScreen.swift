@@ -27,15 +27,31 @@ struct ParentsScreen: View {
         case open
     }
 
+    /// What a day may last, `nil` first because off is the default and
+    /// because a grown-up looking for the way back to no limit should find it
+    /// at the top. Open decision 4 of the night plan.
+    private static let limitPresets: [Int?] = [nil, 15, 30, 45, 60]
+
+    /// The one settings model, owned by ``AppModel``: the home screen reads
+    /// the daily limit off it as well, and two instances would be two
+    /// answers to the same question.
+    let parental: ParentalSettingsModel
+
     @Environment(\.dismiss) private var dismiss
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
-    @State private var parental = ParentalSettingsModel()
     @State private var door: Door = .shut(refused: false)
     /// Whether the credits are pushed on top. Read on the way out, so the
     /// door is not slammed behind a grown-up who only stepped into them.
     @State private var showsCredits = false
+    /// Whether the daily limit's presets are up.
+    ///
+    /// A dialog rather than a pushed screen on purpose: five choices do not
+    /// need a screen, and a screen would take this one off the display —
+    /// which is what shuts the door. A grown-up who picked "30 Minuten" would
+    /// come back to "Entsperren".
+    @State private var choosingLimit = false
     /// True while the system sheet is up, so a second tap cannot start a
     /// second attempt behind the first.
     @State private var isAsking = false
@@ -86,7 +102,6 @@ struct ParentsScreen: View {
         .navigationDestination(isPresented: $showsCredits) {
             CreditsScreen()
         }
-        .task { await parental.load() }
         .onAppear {
             // Never while the area is already open — this also runs on the way
             // back from the credits.
@@ -244,14 +259,12 @@ struct ParentsScreen: View {
                 )
                 SettingRow(
                     title: String(localized: "parents.playtime.title"),
+                    hint: String(localized: "parents.playtime.hint"),
                     icon: .clock,
-                    value: String(localized: "parents.playtime.none"),
-                ) {}
-                    // Shown so a grown-up can see the limit stands at none, and
-                    // inert because setting one is #36. No copy promising it:
-                    // a date nobody has committed to is not a setting. The row
-                    // dims itself; the caller only says it is off.
-                    .disabled(true)
+                    value: dailyLimit,
+                ) {
+                    choosingLimit = true
+                }
                 SettingRow(
                     title: String(localized: "parents.credits.title"),
                     hint: String(localized: "parents.credits.hint"),
@@ -272,6 +285,20 @@ struct ParentsScreen: View {
             .clipShape(
                 RoundedRectangle(cornerRadius: ZRadius.card - ZBorder.width, style: .continuous),
             )
+        }
+        .confirmationDialog(
+            "parents.playtime.title",
+            isPresented: $choosingLimit,
+            titleVisibility: .visible,
+        ) {
+            ForEach(Self.limitPresets, id: \.self) { minutes in
+                Button(label(forLimit: minutes)) {
+                    parental.set(\.dailyLimitMinutes, to: minutes)
+                }
+            }
+            Button("parents.playtime.cancel", role: .cancel) {}
+        } message: {
+            Text("parents.playtime.hint")
         }
     }
 
@@ -294,6 +321,18 @@ struct ParentsScreen: View {
         }
     }
 
+    /// The daily limit as the row states it: "Kein Limit", or the minutes.
+    private var dailyLimit: String {
+        label(forLimit: parental.settings.dailyLimitMinutes)
+    }
+
+    /// One preset, in the row and in the dialog — one spelling, so the value
+    /// a grown-up picked reads back exactly as it was offered.
+    private func label(forLimit minutes: Int?) -> String {
+        guard let minutes else { return String(localized: "parents.playtime.none") }
+        return String(format: String(localized: "parents.playtime.minutes"), minutes)
+    }
+
     /// One switch, reading and writing through the store. Not a `@Bindable`
     /// path into the model: an assignment has to reach the disk, and only a
     /// setter can take it there.
@@ -307,12 +346,12 @@ struct ParentsScreen: View {
 
 #Preview("iPhone") {
     NavigationStack {
-        ParentsScreen()
+        ParentsScreen(parental: ParentalSettingsModel())
     }
 }
 
 #Preview("iPad", traits: .fixedLayout(width: 1194, height: 834)) {
     NavigationStack {
-        ParentsScreen()
+        ParentsScreen(parental: ParentalSettingsModel())
     }
 }

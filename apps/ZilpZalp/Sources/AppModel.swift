@@ -1,6 +1,7 @@
 import Foundation
 import Observation
 import os
+import ZilpZalpCore
 import ZilpZalpData
 
 /// What the shell knows: the species pack that ships inside the app, the
@@ -22,6 +23,13 @@ final class AppModel {
     /// `nil` only when `Bundle.module` carries no manifest, which
     /// `mise run check` already guards through `tools/sync_bundled_packs.py`.
     let catalog: PackCatalog?
+
+    /// What the grown-ups decided, for the whole device.
+    ///
+    /// Here rather than inside the grown-ups' area (#35 left a note asking
+    /// for exactly this move) because the daily limit is read where no
+    /// grown-up is standing: on the home screen, when a child taps a game.
+    let parental = ParentalSettingsModel()
 
     /// The profiles as they are on disk, in the order the store keeps them.
     private(set) var profiles: [Profile] = []
@@ -76,6 +84,35 @@ final class AppModel {
         profiles.first { $0.id == activeProfileID }
     }
 
+    /// The playing child's day against the limit the grown-ups set.
+    ///
+    /// Computed on every read, never stored, and that is the whole of the
+    /// day-rollover handling: today's key is formed from `Date()` each time,
+    /// so an app left open past midnight asks about the new day the next time
+    /// anybody asks at all. Nothing has to notice the day turning over.
+    ///
+    /// Without a chosen child there is nothing to count, and the answer is a
+    /// budget nobody has spent — never an exhausted one, which would strand
+    /// the profile picker behind "Zeit fürs Nest".
+    var timeBudget: TimeBudget {
+        TimeBudget(
+            limitMinutes: parental.settings.dailyLimitMinutes,
+            playedToday: activeProfile?.playtime[Self.today] ?? 0,
+        )
+    }
+
+    /// Stars the playing child has collected today, across every round and
+    /// every launch of the app — what "Zeit fürs Nest" tells it about its day.
+    var starsToday: Int {
+        activeProfile?.dailyStars[Self.today] ?? 0
+    }
+
+    /// Today's key into ``Profile/playtime`` and ``Profile/dailyStars``, in
+    /// the device's own calendar and time zone.
+    private static var today: String {
+        Profile.dayKey(for: Date())
+    }
+
     init() {
         do {
             catalog = try PackCatalog.bundled()
@@ -99,6 +136,11 @@ final class AppModel {
     ///
     /// Awaited once from the root view. Everything after it is a tap.
     func load() async {
+        // Before the profiles, and whatever happens to them: a limit the
+        // shell does not know yet is a limit that does not apply, and the
+        // first tap on a game tile comes soon after this.
+        await parental.load()
+
         guard let store else {
             isLoaded = true
             return
