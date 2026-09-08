@@ -88,26 +88,38 @@ struct ParentsScreen: View {
         }
         .task { await parental.load() }
         .onAppear {
-            // Asked fresh: a grown-up can set a device code up or take it away
-            // while the app sits in the background. Never while the area is
-            // already open — this also runs on the way back from the credits.
+            // Never while the area is already open — this also runs on the way
+            // back from the credits.
             guard door != .open else { return }
-            door = ParentsLock.isAvailable ? .shut(refused: false) : .task
+            door = closedDoor
         }
         .onDisappear {
             // Pushing the credits takes this screen off the screen without
             // taking anybody out of the area; relocking here would ask for the
             // code again on the way back.
             guard !showsCredits else { return }
-            door = .shut(refused: false)
+            door = closedDoor
         }
         .onChange(of: scenePhase) { _, phase in
             // `.background` only. The system's own authentication sheet makes
             // the scene `.inactive`, and relocking on that would shut the door
-            // in the middle of opening it.
+            // in the middle of opening it — and recomputing on `.active` would
+            // race `knock()` for the refused line it just set.
             guard phase == .background else { return }
-            door = .shut(refused: false)
+            door = closedDoor
         }
+    }
+
+    /// The shut door as this device can present it, asked fresh every time.
+    ///
+    /// Fresh because a grown-up can set a device code up or take one away
+    /// while the app sits in the background. And in one expression because
+    /// every place that shuts the door has to agree: a handler that shut it to
+    /// `.shut` on a device that cannot be asked would leave an "Entsperren"
+    /// button that can only ever fail, with no way back to the task except
+    /// leaving the screen and coming back.
+    private var closedDoor: Door {
+        ParentsLock.isAvailable ? .shut(refused: false) : .task
     }
 
     @ViewBuilder

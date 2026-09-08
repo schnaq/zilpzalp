@@ -189,9 +189,10 @@ private struct Document: Codable {
         try container.encode(schemaVersion, forKey: .schemaVersion)
         try container.encode(callsEnabled, forKey: .callsEnabled)
         try container.encode(showNames, forKey: .showNames)
-        try container.encodeNil(forKey: .dailyLimitMinutes)
         if let dailyLimitMinutes {
             try container.encode(dailyLimitMinutes, forKey: .dailyLimitMinutes)
+        } else {
+            try container.encodeNil(forKey: .dailyLimitMinutes)
         }
     }
 }

@@ -88,17 +88,22 @@ struct ParentalSettingsStoreTests {
         }
     }
 
-    /// Two saves of the same settings are the same bytes. Without
-    /// `.sortedKeys` they are not, and a settings file that reshuffles itself
-    /// on every write makes a diff of it meaningless.
-    @Test("the same settings are written the same way twice")
+    /// The same settings are written the same way on any run, which is what
+    /// makes a diff of this file mean something.
+    ///
+    /// Asserted as the sorted layout rather than as "two saves match": Swift's
+    /// hash seed is fixed within a process, so two saves in one test run come
+    /// out identical whether the keys are sorted or not. Only the order itself
+    /// tells the two apart.
+    @Test("the keys are written in a fixed order")
     func writesDeterministically() async throws {
         try await withTemporaryStore { store, root in
             try await store.save(ParentalSettings(dailyLimitMinutes: 15))
-            let first = try Data(contentsOf: settingsFile(under: root))
-            try await store.save(ParentalSettings(dailyLimitMinutes: 15))
 
-            #expect(try Data(contentsOf: settingsFile(under: root)) == first)
+            let written = try String(contentsOf: settingsFile(under: root), encoding: .utf8)
+            let positions = try ["callsEnabled", "dailyLimitMinutes", "schemaVersion", "showNames"]
+                .map { try #require(written.range(of: "\"\($0)\"")).lowerBound }
+            #expect(positions == positions.sorted())
         }
     }
 
