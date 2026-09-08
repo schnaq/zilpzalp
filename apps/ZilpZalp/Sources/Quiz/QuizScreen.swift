@@ -214,9 +214,9 @@ struct QuizScreen: View {
     /// The question, spoken again on demand.
     ///
     /// `isPlaying` is left at `false`: `SpeechAnnouncer` is a plain class, so
-    /// its `isSpeaking` flag is not observable and rings driven by it would
-    /// never switch off. Making the announcer `@Observable` is a follow-up in
-    /// `Audio/`, which this change has no other business in.
+    /// whether it is still speaking is not observable, and rings driven by it
+    /// would never switch off. Making the announcer `@Observable` is a
+    /// follow-up in `Audio/`.
     private func soundButton(_ session: QuizSession, diameter: CGFloat) -> some View {
         SoundButton(
             label: String(localized: "quiz.sound.accessibility"),

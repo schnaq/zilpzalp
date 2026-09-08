@@ -7,8 +7,9 @@ private let tit = "Parus"
 private let thrush = "Turdus"
 
 /// A pool in which every species is a genus of its own — the case where the
-/// genus rule never has to fall back.
-private func distinctGenera(_ count: Int) -> [QuizSpecies] {
+/// genus rule never has to fall back. Shared with ``RoundPlay``'s tests, which
+/// deal their rounds from one too.
+func distinctGenera(_ count: Int) -> [QuizSpecies] {
     (0 ..< count).map { QuizSpecies(id: "species-\($0)", genus: "genus-\($0)") }
 }
 

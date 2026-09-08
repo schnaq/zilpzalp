@@ -50,7 +50,8 @@ public actor ProfileStore {
     /// migration from an older version hooks in where that check stands.
     private static let schemaVersion = 1
 
-    /// How many days of ``Profile/playtime`` the file keeps, today included.
+    /// How many days of ``Profile/playtime`` and ``Profile/dailyStars`` the
+    /// file keeps, today included.
     private static let retainedDays = 7
 
     /// One encoder for every write. Sorted, so that a file only changes when
@@ -133,7 +134,8 @@ public actor ProfileStore {
     }
 
     /// Books a finished round onto a profile: its stars, one more round, its
-    /// species into the collection and its seconds onto `date`'s day.
+    /// species into the collection, and its stars and seconds onto `date`'s
+    /// day.
     ///
     /// The only operation that knows what a round means. Whoever adds the
     /// stars by hand and calls ``update(_:)`` will sooner or later forget the
@@ -163,10 +165,9 @@ public actor ProfileStore {
         profiles[index].totalStars += round.stars
         profiles[index].roundsPlayed += 1
         profiles[index].collectedSpecies.formUnion(round.species)
-        profiles[index].playtime[
-            Profile.dayKey(for: date, calendar: calendar),
-            default: 0,
-        ] += round.playtime
+        let today = Profile.dayKey(for: date, calendar: calendar)
+        profiles[index].playtime[today, default: 0] += round.playtime
+        profiles[index].dailyStars[today, default: 0] += round.stars
 
         // Every profile, not only the one that played: a child who stopped
         // playing a fortnight ago should not keep a fortnight of days in the
@@ -177,14 +178,16 @@ public actor ProfileStore {
             // strings compares them as dates. Days in the future — a clock
             // that was set back — are kept.
             profiles[position].playtime = profiles[position].playtime.filter { $0.key >= oldest }
+            profiles[position].dailyStars = profiles[position].dailyStars
+                .filter { $0.key >= oldest }
         }
 
         try write(profiles)
         return profiles[index]
     }
 
-    /// The oldest ``Profile/playtime`` key a write keeps: `date`'s day and
-    /// the six before it.
+    /// The oldest ``Profile/playtime`` and ``Profile/dailyStars`` key a write
+    /// keeps: `date`'s day and the six before it.
     private static func oldestRetainedDay(on date: Date, calendar: Calendar) -> String {
         // The same calendar the keys are formed in, so that counting days
         // back and spelling them out cannot disagree.
