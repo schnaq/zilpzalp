@@ -23,6 +23,10 @@ PACKS_DIR = REPO_ROOT / "data" / "packs"
 # and as data/packs/basis/manifest.json already carries it.
 MEDIA_KEYS = ("file", "sha256", "license", "attribution", "sourceURL", "retrieved")
 
+# The two media a bird carries. `call` stays null until a freely licensed
+# recording exists — the licence gate and the Swift `Bird` model both allow it.
+MEDIA_KINDS = ("photo", "call")
+
 
 def pack_dir(pack_id: str) -> Path:
     """The directory of one pack — manifest and media sit together."""
@@ -95,16 +99,19 @@ def media_block(
     }
 
 
-def set_photo(document: dict, bird_id: str, block: dict) -> str | None:
-    """Replace a bird's photo. Returns the file the entry pointed at before.
+def set_media(document: dict, bird_id: str, kind: str, block: dict) -> str | None:
+    """Replace a bird's `photo` or `call`. Returns the file it pointed at before.
 
     The caller uses that to delete the previous file: the manifest is the truth
     about the pack directory, and a photo nothing references any more would
     still be copied into the app bundle by tools/sync_bundled_packs.py.
     """
+    if kind not in MEDIA_KINDS:
+        raise ValueError(f"'{kind}' is not a medium (expected one of {', '.join(MEDIA_KINDS)})")
+
     entry = bird(document, bird_id)
-    previous = entry.get("photo") or {}
-    entry["photo"] = block
+    previous = entry.get(kind) or {}
+    entry[kind] = block
     return previous.get("file")
 
 
@@ -117,7 +124,7 @@ def media_files(document: dict) -> list[tuple[str, str]]:
     """
     files = []
     for entry in document.get("birds") or []:
-        for kind in ("photo", "call"):
+        for kind in MEDIA_KINDS:
             media = entry.get(kind)
             if isinstance(media, dict) and media.get("file"):
                 files.append((media["file"], str(media.get("sha256", ""))))
