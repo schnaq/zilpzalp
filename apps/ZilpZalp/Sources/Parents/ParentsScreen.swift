@@ -194,6 +194,17 @@ struct ParentsScreen: View {
         defer { isAsking = false }
 
         let opened = await ParentsLock.unlock(reason: String(localized: "parents.lock.reason"))
+
+        // An answer that arrives after the app was put down does not open
+        // anything: the scene-phase handler already shut the door, and this
+        // would quietly re-open it behind a screen nobody is looking at.
+        // Tested against `.background` rather than for `.active`, because the
+        // system's own sheet leaves the scene `.inactive` while it is up —
+        // which is exactly when the successful answer arrives.
+        guard scenePhase != .background else {
+            door = closedDoor
+            return
+        }
         door = opened ? .open : .shut(refused: true)
     }
 

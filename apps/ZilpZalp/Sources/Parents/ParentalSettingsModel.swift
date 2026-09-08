@@ -18,6 +18,16 @@ final class ParentalSettingsModel {
 
     private let store: ParentalSettingsStore
 
+    /// The write in flight, if there is one.
+    ///
+    /// Two switches flipped in quick succession start two writes, and two
+    /// unstructured tasks reach an actor in whatever order the runtime hands
+    /// them over — no language rule says the first one arrives first. Reversed,
+    /// the older snapshot lands last and the file says the opposite of the
+    /// screen. So each write waits for the one before it, and a read waits for
+    /// all of them rather than racing a save that has not landed yet.
+    private var lastWrite: Task<Void, Never>?
+
     /// - Parameter directory: Where `Settings/parental.json` lives underneath.
     ///   Application Support, except in a preview.
     init(directory: URL = .applicationSupportDirectory) {
@@ -29,6 +39,8 @@ final class ParentalSettingsModel {
     /// log, because a grown-up cannot act on it and the switches standing at
     /// their defaults is the calm answer.
     func load() async {
+        await lastWrite?.value
+
         do {
             settings = try await store.load()
         } catch {
@@ -49,7 +61,10 @@ final class ParentalSettingsModel {
         settings[keyPath: field] = value
 
         let written = settings
-        Task {
+        let previous = lastWrite
+        lastWrite = Task {
+            await previous?.value
+
             do {
                 try await store.save(written)
             } catch {
