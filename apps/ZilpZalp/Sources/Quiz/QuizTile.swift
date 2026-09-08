@@ -29,7 +29,9 @@ import ZilpZalpUI
 /// The SE therefore keeps the layout it has always had and pays in the credit.
 /// Not a stopgap that wants quietly removing: #135 holds the measurements and
 /// the three ways out, and the one that ends this branch is a narrower credit
-/// strip (#111, #122), because the floor follows `PhotoCreditMetrics` down.
+/// strip (#122's gutter), because the floor follows `PhotoCreditMetrics` down.
+/// #111 was not it — clearing both corners cost exactly what clearing one had,
+/// so the floor did not move.
 struct QuizTile: View {
     let image: Image?
     let label: String

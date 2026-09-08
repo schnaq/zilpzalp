@@ -18,28 +18,20 @@ import Testing
 // type and nothing else. It is not a golden image: it compares two live
 // renders, and it fails only when a glyph is actually cut.
 
-/// The three credits that press hardest on the corners.
-///
-/// The first is the case #111 is about: short enough to stay on one line, so it
-/// runs the full width of the line that sits deepest in the curve. The second
-/// is the longest attribution the base pack produces, which wraps onto that
-/// line instead. The third starts on a narrow glyph, where a clip on the
-/// leading side is easiest to misread as kerning.
-private let creditsUnderPressure = [
-    "Foto: Dmitry Ivanov (CC BY)",
-    "Foto: Alexis Tinker-Tsavalas (CC BY)",
-    "Jane Ivanović-Tremayne (CC BY-SA 4.0)",
-]
-
 @MainActor
 @Suite("The photo credit against its host's corners")
 struct PhotoCreditClippingTests {
+    /// The three credits are ``previewCredits``, the same set the component's
+    /// own preview draws: a preview that showed a different worst case from the
+    /// one under test would be worse than no preview at all.
     @Test(
         "No attribution loses a glyph to the tile's corner or its border",
-        arguments: creditsUnderPressure,
+        arguments: previewCredits,
     )
     func nothingIsCut(credit: String) throws {
-        #expect(BundledFonts.registered)
+        // Without the bundled face CoreText hands back the system one, and
+        // every measurement below would be of the wrong type.
+        try #require(BundledFonts.registered)
         // The floor, the 220 pt of #11, and the design's own tile. Read in the
         // test body rather than passed as a second argument set: ``ChoiceTile``
         // is a `View`, so its statics are main-actor isolated, and the `@Test`

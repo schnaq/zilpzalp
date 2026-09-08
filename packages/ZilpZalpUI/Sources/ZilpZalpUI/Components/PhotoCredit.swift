@@ -8,10 +8,12 @@ import SwiftUI
 /// the image, never over the bird's head.
 ///
 /// Internal on purpose. It is not a component a screen composes with; it is
-/// the one credit rendering shared by ``ChoiceTile`` and ``RewardSticker``, so
-/// that two places showing the same photo cannot drift apart. Whether a photo
-/// needs a credit at all is the caller's call — this package knows nothing
-/// about licences.
+/// the one credit rendering the package has, so that two hosts showing the
+/// same photo cannot drift apart. In practice that is ``ChoiceTile``:
+/// ``RewardSticker`` can be handed a credit but is never given one, because a
+/// straight strip has no right inset inside a circle — see the note there.
+/// Whether a photo needs a credit at all is the caller's call; this package
+/// knows nothing about licences.
 struct PhotoCredit: View {
     /// The finished credit line, e.g. `"Foto: Andrej Chudý (CC BY)"`. Composed
     /// by the app from the pack manifest; never assembled here.
@@ -77,9 +79,16 @@ enum PhotoCreditMetrics {
     /// text has its box bottom ``bottomPadding`` above the tile's edge, which
     /// is `bottomPadding − widthThick` deep into that inner corner, and a
     /// circle of radius `r` stands `r − √(2rd − d²)` off the edge at depth
-    /// `d`. The tile's corner is `.continuous` rather than circular; measured
-    /// off the rasterised shape it wants 26.00 pt here against the circle's
-    /// 25.82, which the rounding up covers.
+    /// `d`. That is 25.82, so 26.
+    ///
+    /// The tile's corner is `.continuous` rather than circular, and asks for
+    /// about 26.07 at that depth — so the bottom corner of the text's *box*
+    /// lands on the border's inner edge to within a tenth of a point rather
+    /// than safely inside it. What clears it is that no glyph reaches the
+    /// bottom of its own box: the deepest ink these lines draw stops some
+    /// 2.5 pt above it, where the same edge stands under 23 pt off. That is a
+    /// claim about type rather than about geometry, so it is not asserted
+    /// here — `PhotoCreditClippingTests` puts it to the renderer.
     ///
     /// Both edges, because both corners are the same corner. #103 inset only
     /// the leading one, by the whole radius, and left the trailing one at
@@ -166,7 +175,11 @@ enum PhotoCreditMetrics {
 /// curve; the longest one the base pack produces, which wraps onto that line
 /// instead; and a name that starts on a narrow glyph, where a clip on the
 /// leading side is hardest to spot and easiest to misread.
-private let previewCredits = [
+///
+/// Internal rather than private, as `previewPhoto()` is: `PhotoCreditClippingTests`
+/// asserts on exactly these three, and a preview showing a different set from
+/// the one the test guards would be worse than no preview.
+let previewCredits = [
     "Foto: Dmitry Ivanov (CC BY)",
     "Foto: Alexis Tinker-Tsavalas (CC BY)",
     "Jane Ivanović-Tremayne (CC BY-SA 4.0)",
