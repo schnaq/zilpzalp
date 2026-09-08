@@ -160,6 +160,12 @@ struct AvatarDisc: View {
 
     /// Sits *outside* the disc — negative padding on an overlay grows it
     /// outward — so the ring never eats into the picture it is pointing at.
+    ///
+    /// `ZColor.focusRing` at full strength rather than
+    /// ``ZShadow/focusRingColor``, which is the same orange at 45 %. That one
+    /// is sized for a keyboard focus ring on the cream page; this ring has to
+    /// stay obvious against eight different fills, two of them dark, and it
+    /// says "this is the one you picked" rather than "this has focus".
     @ViewBuilder private var ring: some View {
         if chosen {
             Circle()

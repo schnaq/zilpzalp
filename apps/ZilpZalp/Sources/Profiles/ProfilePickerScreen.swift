@@ -37,13 +37,6 @@ struct ProfilePickerScreen: View {
 
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
-    /// One voice for the whole app, so the question here can never end up
-    /// talking over the question in a round.
-    @State private var announcer = SpeechAnnouncer()
-
-    /// The headline is read once per arrival, not once per layout pass.
-    @State private var hasAsked = false
-
     private var isCompact: Bool {
         horizontalSizeClass == .compact
     }
@@ -81,8 +74,7 @@ struct ProfilePickerScreen: View {
             }
         }
         .background(ZColor.surfacePage)
-        .onAppear(perform: askOnce)
-        .onDisappear { announcer.stop() }
+        .readAloudOnce(String(localized: "profile.picker.title"))
     }
 
     private var cards: some View {
@@ -152,12 +144,6 @@ struct ProfilePickerScreen: View {
         // The card is already a picture with an outline; a button style would
         // draw a second one over it. Its label is the name inside it.
         .buttonStyle(.plain)
-    }
-
-    private func askOnce() {
-        guard !hasAsked else { return }
-        hasAsked = true
-        announcer.say(String(localized: "profile.picker.title"))
     }
 }
 

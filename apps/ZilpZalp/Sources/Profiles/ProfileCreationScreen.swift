@@ -49,8 +49,6 @@ struct ProfileCreationScreen: View {
     /// tap cannot make two children out of one.
     @State private var isSaving = false
 
-    @State private var announcer = SpeechAnnouncer()
-    @State private var hasAsked = false
     @FocusState private var nameFocused: Bool
 
     private var isCompact: Bool {
@@ -102,8 +100,7 @@ struct ProfileCreationScreen: View {
             .scrollDismissesKeyboard(.interactively)
         }
         .background(ZColor.surfacePage)
-        .onAppear(perform: askOnce)
-        .onDisappear { announcer.stop() }
+        .readAloudOnce(String(localized: "profile.create.title"))
     }
 
     /// The bar's one slot, and it is never empty: a slot holding an
@@ -160,11 +157,13 @@ struct ProfileCreationScreen: View {
 
         return LazyVGrid(
             columns: [
-                GridItem(.adaptive(minimum: diameter), spacing: ZSpacing.step5),
+                GridItem(.adaptive(minimum: diameter), spacing: ZSpacing.gapTiles),
             ],
-            spacing: ZSpacing.step5,
+            spacing: ZSpacing.gapTiles,
         ) {
             ForEach(Profile.avatarChoices, id: \.self) { choice in
+                let style = AvatarStyle.avatar(choice)
+
                 Button {
                     chosenAvatar = choice
                     // The bird is the last thing a child picks; taking the
@@ -173,13 +172,13 @@ struct ProfileCreationScreen: View {
                     nameFocused = false
                 } label: {
                     AvatarDisc(
-                        style: .avatar(choice),
+                        style: style,
                         diameter: diameter,
                         chosen: chosenAvatar == choice,
                     )
                 }
                 .buttonStyle(.plain)
-                .accessibilityLabel(Text(AvatarStyle.avatar(choice).name))
+                .accessibilityLabel(Text(style.name))
                 .accessibilityAddTraits(chosenAvatar == choice ? [.isSelected] : [])
             }
         }
@@ -189,7 +188,7 @@ struct ProfileCreationScreen: View {
         // pushes "Los!" off the bottom of a landscape iPad. Narrower screens
         // take fewer columns on their own. The ring around the chosen avatar
         // needs the padding not to be clipped by the row above.
-        .frame(maxWidth: 4 * diameter + 3 * ZSpacing.step5)
+        .frame(maxWidth: 4 * diameter + 3 * ZSpacing.gapTiles)
         .padding(.vertical, ZShadow.focusRingWidth)
     }
 
@@ -214,12 +213,6 @@ struct ProfileCreationScreen: View {
             await create(named, chosenAvatar)
             isSaving = false
         }
-    }
-
-    private func askOnce() {
-        guard !hasAsked else { return }
-        hasAsked = true
-        announcer.say(String(localized: "profile.create.title"))
     }
 }
 
