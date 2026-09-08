@@ -157,38 +157,6 @@ func boxHeightsSeparateTheDesignFromTheFace() {
         .naturalBoxHeight(for: .display))
 }
 
-/// Registers the two variable fonts once for the whole test run — Swift
-/// Testing runs cases in parallel, and registering the same URL twice fails.
-private enum BundledFonts {
-    static let registered: Bool = {
-        let fonts = URL(fileURLWithPath: #filePath)
-            // …/packages/ZilpZalpUI/Tests/ZilpZalpUITests/DesignTokenTests.swift
-            .deletingLastPathComponent() // ZilpZalpUITests
-            .deletingLastPathComponent() // Tests
-            .deletingLastPathComponent() // ZilpZalpUI
-            .deletingLastPathComponent() // packages
-            .deletingLastPathComponent() // repository root
-            .appending(path: "apps/ZilpZalp/Resources/Fonts")
-
-        return [
-            "Baloo2/Baloo2-VariableFont_wght.ttf",
-            "Nunito/Nunito-VariableFont_wght.ttf",
-        ].allSatisfy { relativePath in
-            var error: Unmanaged<CFError>?
-            let url = fonts.appending(path: relativePath) as CFURL
-            if CTFontManagerRegisterFontsForURL(url, .process, &error) {
-                return true
-            }
-            // The app target registers the same files through `UIAppFonts`,
-            // so on a host that already has them this is a success. A
-            // failure without an error is not — and `CFErrorGetCode` takes
-            // its argument implicitly unwrapped, so it has to be checked.
-            guard let failure = error?.takeRetainedValue() else { return false }
-            return CFErrorGetCode(failure) == CTFontManagerError.alreadyRegistered.rawValue
-        }
-    }()
-}
-
 @Test("The spacing scale grows strictly from 4 to 128 pt")
 func spacingScaleIsStrictlyAscending() {
     #expect(ZSpacing.scale.count == 10)

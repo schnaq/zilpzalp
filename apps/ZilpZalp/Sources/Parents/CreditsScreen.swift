@@ -35,7 +35,6 @@ struct CreditsScreen: View {
 
     @Environment(\.dismiss) private var dismiss
     @Environment(\.openURL) private var openURL
-    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
     /// The link a grown-up asked for, waiting for the task to be solved.
     /// `nil` whenever no gate is up — setting it is what puts the sheet there.
@@ -43,30 +42,12 @@ struct CreditsScreen: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            TopBar {
+            TopBar(title: String(localized: "parents.credits.title")) {
                 IconButton(
                     .chevronLeft,
                     label: String(localized: "nav.back.accessibility"),
                     diameter: ZSpacing.touchMinimum,
                 ) { dismiss() }
-            } center: {
-                Text("parents.credits.title")
-                    // Character for character what `ParentsScreen` does, and
-                    // it is not enough on a phone: measured on an iPhone 17
-                    // Pro this bar reads "Fotos & D…" and the grown-ups' own
-                    // reads "Für Erwac…". `TopBar` splits its row three ways
-                    // and hands the centre about 86 pt, which no scale factor
-                    // down to the caption step can fill. That is the
-                    // component's to fix (#12) — deliberately not worked
-                    // around here, so that one change fixes both screens
-                    // instead of two screens drifting apart.
-                    .typeStyle(
-                        horizontalSizeClass == .compact ? .label : .headline,
-                        .display,
-                        weight: .bold,
-                        singleLine: true,
-                    )
-                    .minimumScaleFactor(ZType.Step.caption.size / ZType.Step.label.size)
             }
 
             content
