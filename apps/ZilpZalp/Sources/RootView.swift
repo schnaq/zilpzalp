@@ -20,12 +20,30 @@ struct RootView: View {
                 .toolbar(.hidden, for: .navigationBar)
                 .navigationDestination(for: Route.self) { route in
                     switch route {
-                    case let .quiz(game): QuizScreen(game: game)
+                    case let .quiz(game): quiz(game)
+                    // Popping is all "Nochmal spielen" needs to do: the quiz
+                    // screen is still under this one and deals a fresh round
+                    // when it comes back with a finished one behind it.
+                    case let .roundEnd(result):
+                        RoundEndScreen(result: result) { path.removeLast() }
                     case .parents: ParentsScreen()
                     }
                 }
         }
         .task { await model.load() }
+    }
+
+    /// A game needs the pack the round is drawn from. The home screen is only
+    /// reachable with one open, so the failure branch is unreachable — and it
+    /// is the same sentence rather than a `!`, because an unreachable crash on
+    /// a child's iPad is still a crash.
+    @ViewBuilder
+    private func quiz(_ game: Game) -> some View {
+        if let catalog = model.catalog {
+            QuizScreen(game: game, catalog: catalog) { path.append(.roundEnd($0)) }
+        } else {
+            CalmFailure(message: "app.pack.failed")
+        }
     }
 
     /// What the root is, in the order the answers rule each other out: a
