@@ -32,8 +32,6 @@ struct ParentalGate: View {
     /// Whether the last answer was wrong. Only ever changes the hint line —
     /// the numbers have already been replaced by then.
     @State private var lastAnswerWasWrong = false
-    /// Speaks the one sentence a child who cannot read still understands.
-    @State private var announcer = SpeechAnnouncer()
 
     var body: some View {
         // A scroll view, because the task is taller than an iPhone in
@@ -53,24 +51,20 @@ struct ParentalGate: View {
         // A gate that is shown a second time asks something else: `@State`
         // survives a re-presentation of the same view, so the numbers are
         // replaced here rather than only at first construction.
-        .onAppear {
-            newQuestion()
-            // The spoken hint spec §7 asks for, and the one thing Apple's own
-            // page suggests on top of the task: "If your app is intended for
-            // pre-literate children, consider using a voiceover prompt to help
-            // kids know that they need to involve their parent."
-            //
-            // The hint, never the question. Reading the sum out loud would
-            // hand a child the one thing the spelled-out numbers exist to
-            // withhold. #35 left this to #37 because it is the gate in front
-            // of an external link that the spec names — and it lands in the
-            // gate itself rather than at that one call site, because the
-            // child meets this view far more often through the fallback on
-            // the grown-ups' door.
-            announcer.announce(String(localized: "gate.spoken"))
-        }
-        // A sheet that is swiped away mid-sentence stops talking.
-        .onDisappear { announcer.stop() }
+        .onAppear { newQuestion() }
+        // The spoken hint spec §7 asks for, and the one thing Apple's own page
+        // suggests on top of the task itself: "If your app is intended for
+        // pre-literate children, consider using a voiceover prompt to help
+        // kids know that they need to involve their parent."
+        //
+        // The hint, never the question. Reading the sum out loud would hand a
+        // child the one thing the spelled-out numbers exist to withhold.
+        //
+        // #35 left this to #37 because the spec names the gate in front of an
+        // external link — but it lands in the gate itself rather than at that
+        // one call site, because the child meets this view far more often
+        // through the fallback on the grown-ups' door.
+        .readAloudOnce(String(localized: "gate.spoken"))
     }
 
     private var task: some View {
