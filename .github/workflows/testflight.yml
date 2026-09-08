@@ -77,9 +77,9 @@ jobs:
           secret-path: /ios
           export-type: env
 
-      # GitHub does not mask what this action exports (see docs/secrets.md), so
-      # masking is the very first thing that happens — before any command could
-      # print one of these values.
+      # Nothing here relies on the action masking what it exports (see
+      # docs/secrets.md): masking is the very first thing that happens, before
+      # any command could print one of these values.
       #
       # Line by line, never `echo "::add-mask::$whole_value"`: a workflow
       # command ends at the first newline, so echoing a multi-line value would
@@ -113,6 +113,14 @@ jobs:
       # Unsigned, generic iOS device destination, Release, build number =
       # this run's number. `archive` generates the Xcode project first, exactly
       # as `build` does, so there is no separate generate step.
+      #
+      # It uses none of the signing secrets and could therefore run before they
+      # are loaded, which would keep them out of the job environment during the
+      # longest step. It runs after them anyway: the likeliest failure of this
+      # whole pipeline is the Infisical read, and finding that out first costs
+      # seconds instead of the ten minutes an archive takes. The project has no
+      # script build phases, so nothing during the archive can read the
+      # environment.
       - name: Archive
         run: mise run archive
 

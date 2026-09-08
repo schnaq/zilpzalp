@@ -18,8 +18,15 @@ if [ -n "$uuid" ]; then
   rm -f "$HOME/Library/MobileDevice/Provisioning Profiles/$uuid.mobileprovision"
 fi
 
+# Only when the marker is there, which is exactly when the setup script got far
+# enough to change the default keychain. A guess would be worse than doing
+# nothing: the second run of this script finds the marker already deleted by the
+# first, and would then overwrite a correctly restored default with a hardcoded
+# one.
 orig="$(cat "$RUNNER_TEMP/orig-default-keychain" 2>/dev/null || true)"
-security default-keychain -s "${orig:-$HOME/Library/Keychains/login.keychain-db}" 2>/dev/null || true
+if [ -n "$orig" ]; then
+  security default-keychain -s "$orig" 2>/dev/null || true
+fi
 security delete-keychain "$RUNNER_TEMP/release-signing.keychain-db" 2>/dev/null || true
 
 # The first four are the decoded secrets. The setup script deletes them again

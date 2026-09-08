@@ -24,6 +24,11 @@
 #   orig-default-keychain, profile_uuid, ExportOptions.plist
 set -euo pipefail
 
+# Everything below writes into $RUNNER_TEMP on a shared, persistent machine, and
+# some of it is a private key. One umask covers every file this script creates
+# instead of wrapping each decode.
+umask 077
+
 : "${RUNNER_TEMP:?not set — run this through 'mise run upload', which defaults it}"
 : "${IOS_DIST_CERT_P12_BASE64:?missing (Infisical prod /ios)}"
 : "${IOS_DIST_CERT_PASSWORD:?missing (Infisical prod /ios)}"
