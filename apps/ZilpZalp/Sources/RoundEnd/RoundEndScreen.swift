@@ -39,6 +39,11 @@ struct RoundEndScreen: View {
     /// The sticker on iPad, the 200 pt of screen 1e and `RewardScreen.jsx`.
     private static let regularSticker: CGFloat = 200
 
+    /// The strip at the foot that belongs to the wordmark: the mark itself
+    /// plus the gap under it and the same gap above, so the celebration is
+    /// centred in what is left rather than behind it.
+    private static let signatureBand = Wordmark.minimumSize + 2 * ZSpacing.step5
+
     /// A star that has not been earned. Olive rather than sun: dark enough
     /// against the forest ground to stay unlit, light enough to stay a star.
     /// What is missing is shown, exactly as a locked ``RewardSticker`` keeps
@@ -91,6 +96,11 @@ struct RoundEndScreen: View {
     var body: some View {
         celebration
             .multilineTextAlignment(.center)
+            // The strip the wordmark stands in, kept clear rather than drawn
+            // over: an overlay at the foot of a centred column sits on the
+            // buttons as soon as the screen is short, which on an iPad in
+            // landscape it is.
+            .padding(.bottom, showsSignature ? Self.signatureBand : 0)
             .padding(isCompact ? ZSpacing.step5 : ZSpacing.gutterScreen)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(ZColor.surfaceForest)
@@ -158,13 +168,32 @@ struct RoundEndScreen: View {
     }
 
     /// The bird this round was about, arriving with `zz-pop`.
+    ///
+    /// The name and the credit are drawn here rather than passed into
+    /// ``RewardSticker``, which would otherwise set both inside its disc:
+    /// its caption is `--text-strong` and disappears into the forest ground,
+    /// and its credit strip is clipped away at the left and right of the
+    /// circle — where a CC BY photographer's name must not be. Both are the
+    /// component's to fix (#11); until then this screen keeps its attribution
+    /// whole and legible.
     private var reward: some View {
-        RewardSticker(
-            image: sticker?.image,
-            credit: sticker?.credit,
-            label: sticker?.name,
-            size: isCompact ? RewardSticker.defaultSize : Self.regularSticker,
-        )
+        VStack(spacing: ZSpacing.step2) {
+            RewardSticker(
+                image: sticker?.image,
+                size: isCompact ? RewardSticker.defaultSize : Self.regularSticker,
+            )
+
+            if let sticker {
+                Text(verbatim: sticker.name)
+                    .typeStyle(isCompact ? .body : .bodyLarge, .display, weight: .bold)
+                    .foregroundStyle(ZColor.white)
+
+                Text(verbatim: sticker.credit)
+                    .typeStyle(.caption, .body, weight: .regular)
+                    .foregroundStyle(ZColor.textOnColor)
+            }
+        }
+        .accessibilityElement(children: .combine)
         .scaleEffect(settled ? 1 : Self.popFromScale)
         .opacity(settled ? 1 : 0)
         .animation(pop, value: settled)
@@ -202,14 +231,20 @@ struct RoundEndScreen: View {
     /// The wordmark at the foot of screen 1d, at the smallest size it stays
     /// legible at — which is what the design's own 34 clamps to.
     ///
-    /// The one piece of decoration here, so a phone in landscape, where every
-    /// point of height goes to the celebration, does without it.
+    /// The one piece of decoration here, and screen 1d is an iPad screen. A
+    /// phone goes without: measured in the simulator the mark lands on
+    /// "Nochmal spielen" in portrait, and in landscape every point of height
+    /// belongs to the celebration.
     @ViewBuilder
     private var signature: some View {
-        if !isShort {
+        if showsSignature {
             Wordmark(size: Wordmark.minimumSize, tone: .monoLight)
                 .padding(.bottom, ZSpacing.step5)
         }
+    }
+
+    private var showsSignature: Bool {
+        !isCompact && !isShort
     }
 
     // MARK: - Values
