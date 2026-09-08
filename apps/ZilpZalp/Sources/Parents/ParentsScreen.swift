@@ -29,7 +29,6 @@ struct ParentsScreen: View {
 
     @Environment(\.dismiss) private var dismiss
     @Environment(\.scenePhase) private var scenePhase
-    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
     @State private var parental = ParentalSettingsModel()
     @State private var door: Door = .shut(refused: false)
@@ -42,36 +41,12 @@ struct ParentsScreen: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            TopBar {
+            TopBar(title: String(localized: "parents.title")) {
                 IconButton(
                     .chevronLeft,
                     label: String(localized: "nav.back.accessibility"),
                     diameter: ZSpacing.touchMinimum,
                 ) { dismiss() }
-            } center: {
-                Text("parents.title")
-                    // `TopBar` offers its centre the headline step, and next
-                    // to a 64 pt back button that is wider than a phone
-                    // holds: measured on an iPhone 17 Pro the title wrapped
-                    // to three lines and took the bar with it. The label step
-                    // fits, and below the narrowest supported screen the text
-                    // shrinks rather than breaks — the same step down the
-                    // home screen makes with its headline.
-                    //
-                    // This belongs in `TopBar`, whose own documentation
-                    // promises that a screen may pass a plain `Text` and get
-                    // it typeset correctly. This is the first screen to take
-                    // it up on that, and fixing it there is a design decision
-                    // about the wordless centre as well — so it waits for a
-                    // change that owns the component (#12), and this goes in
-                    // the bin that day.
-                    .typeStyle(
-                        horizontalSizeClass == .compact ? .label : .headline,
-                        .display,
-                        weight: .bold,
-                        singleLine: true,
-                    )
-                    .minimumScaleFactor(ZType.Step.caption.size / ZType.Step.label.size)
             }
 
             content
