@@ -22,8 +22,15 @@ struct ProfileCreationScreen: View {
     private static let fieldWidth: CGFloat = 440
     private static let fieldHeight: CGFloat = 88
 
-    /// One avatar in the grid. 1g draws 118 pt across four columns.
-    private static let discDiameter: CGFloat = 118
+    /// The wordmark that stands in for the back button on the first launch.
+    private static let wordmarkSize: CGFloat = 52
+
+    /// One avatar in the grid. 1g draws 118 pt across four columns; 104 is
+    /// what lets the headline, the field, two rows of eight and "Los!" all
+    /// stand on a landscape iPad at once. A form a grown-up has to scroll to
+    /// find the confirm button in is a form that looks broken, and 104 pt is
+    /// still two thirds again the size of anything a child must hit.
+    private static let discDiameter: CGFloat = 104
     private static let compactDiscDiameter: CGFloat = 76
 
     /// Whether there is anywhere to go back to. False when this screen is the
@@ -60,7 +67,7 @@ struct ProfileCreationScreen: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            TopBar(leading: { backButton })
+            TopBar(leading: { barContent })
 
             ScrollView {
                 VStack(spacing: ZSpacing.step5) {
@@ -79,12 +86,11 @@ struct ProfileCreationScreen: View {
                         .typeStyle(isCompact ? .bodyLarge : .headline, .display, weight: .bold)
                         .foregroundStyle(ZColor.textBody)
                         .multilineTextAlignment(.center)
-                        .padding(.top, ZSpacing.step3)
 
                     avatarGrid
 
                     confirmButton
-                        .padding(.top, ZSpacing.step4)
+                        .padding(.top, ZSpacing.step2)
                 }
                 .frame(maxWidth: ZSpacing.maxContent)
                 .padding(.horizontal, ZSpacing.gutterScreen)
@@ -100,7 +106,11 @@ struct ProfileCreationScreen: View {
         .onDisappear { announcer.stop() }
     }
 
-    @ViewBuilder private var backButton: some View {
+    /// The bar's one slot, and it is never empty: a slot holding an
+    /// `EmptyView` does not take the bar's width, and the bar would shrink to
+    /// a pill floating in the middle of the page. On the very first launch
+    /// there is nowhere to go back to, so the brand stands there instead.
+    @ViewBuilder private var barContent: some View {
         if canGoBack {
             IconButton(
                 .chevronLeft,
@@ -109,6 +119,8 @@ struct ProfileCreationScreen: View {
                 diameter: ZSpacing.touchMinimum,
                 action: back,
             )
+        } else {
+            Wordmark(size: isCompact ? Wordmark.minimumSize : Self.wordmarkSize)
         }
     }
 
@@ -148,10 +160,7 @@ struct ProfileCreationScreen: View {
 
         return LazyVGrid(
             columns: [
-                GridItem(
-                    .adaptive(minimum: diameter + ZSpacing.step4),
-                    spacing: ZSpacing.step5,
-                ),
+                GridItem(.adaptive(minimum: diameter), spacing: ZSpacing.step5),
             ],
             spacing: ZSpacing.step5,
         ) {
@@ -174,9 +183,13 @@ struct ProfileCreationScreen: View {
                 .accessibilityAddTraits(chosenAvatar == choice ? [.isSelected] : [])
             }
         }
-        // Four across at the design's size, as in 1g, and the ring around the
-        // chosen one needs room not to be clipped by the row above.
-        .frame(maxWidth: 4 * (diameter + ZSpacing.step5))
+        // Four across at the design's size, as in 1g: four discs plus the
+        // three gaps between them, and not a point more — an extra gap's worth
+        // of width here is what silently drops the grid to three columns and
+        // pushes "Los!" off the bottom of a landscape iPad. Narrower screens
+        // take fewer columns on their own. The ring around the chosen avatar
+        // needs the padding not to be clipped by the row above.
+        .frame(maxWidth: 4 * diameter + 3 * ZSpacing.step5)
         .padding(.vertical, ZShadow.focusRingWidth)
     }
 
