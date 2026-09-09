@@ -92,7 +92,9 @@ struct RankAscentScreen: View {
         }
         .background(ZColor.surfacePage)
         .toolbar(.hidden, for: .navigationBar)
-        .navigationBarBackButtonHidden()
+        // Back wherever a back button stands (#150): this screen has both a
+        // chevron and "Weiter", and the swipe does what they do.
+        .swipesBack(.pops)
         .readAloudOnce(ascent.reached.ascentSentence)
         .onAppear { settled = true }
     }

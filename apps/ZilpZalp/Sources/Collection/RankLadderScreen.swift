@@ -78,7 +78,9 @@ struct RankLadderScreen: View {
         }
         .background(ZColor.surfacePage)
         .toolbar(.hidden, for: .navigationBar)
-        .navigationBarBackButtonHidden()
+        // The ladder has a back chevron, so it has the gesture that goes with
+        // one (#150).
+        .swipesBack(.pops)
     }
 
     /// The eight rungs, easiest first — the order `Rank.allCases` is declared

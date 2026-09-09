@@ -75,6 +75,10 @@ struct ParentsScreen: View {
         // Every screen brings its own `TopBar`; the system bar would stack a
         // second, smaller back button above it.
         .toolbar(.hidden, for: .navigationBar)
+        // Out of the area the way in was: nothing here is protected on the
+        // way out, and the door shuts behind the swipe exactly as it shuts
+        // behind the chevron (#150).
+        .swipesBack(.pops)
         // A destination of this screen rather than a `Route` case: the credits
         // are a room inside the grown-ups' area and nothing else may navigate
         // to them, least of all past the lock.

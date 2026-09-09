@@ -56,6 +56,9 @@ struct CreditsScreen: View {
         // Every screen brings its own `TopBar`; the system bar would stack a
         // second, smaller back button above it.
         .toolbar(.hidden, for: .navigationBar)
+        // Back into the grown-ups' area, which is what the chevron does; the
+        // area's own lock is untouched by either (#150).
+        .swipesBack(.pops)
         // The gate, undressed: it brings its own gutter and scrolls itself, so
         // the sheet only has to give it the page colour. Swiping it down is
         // the way out — there is nothing to confirm and nothing to save.
