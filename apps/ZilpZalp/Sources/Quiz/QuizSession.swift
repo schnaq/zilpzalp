@@ -58,7 +58,7 @@ final class QuizSession {
     /// reproducible.
     private let species: [QuizSpecies]
 
-    private let announcer = SpeechAnnouncer()
+    private let announcer: SpeechAnnouncer
 
     /// Built for both games and used by one. It holds no recording until a
     /// call is played, so game 1 carries an empty object rather than an
@@ -120,6 +120,7 @@ final class QuizSession {
             },
         )
         calls = recordings
+        announcer = SpeechAnnouncer(pack: catalog)
 
         // The genus is the first word of the scientific name, and Core needs
         // nothing else of a bird: "Turdus merula" is a `Turdus`, and two of
@@ -295,10 +296,9 @@ final class QuizSession {
     ///
     /// No guard against sounding over whatever is still running, because
     /// neither side needs one: ``SpeechAnnouncer/announce(_:)`` and
-    /// ``CallPlayer/play(_:)`` both stop what they are doing and begin again,
-    /// so two questions can never sound at once. Refusing the tap while a
-    /// question is still running would only make the one button a child
-    /// reaches for feel broken.
+    /// ``CallPlayer/play(_:)`` both stop what they do and begin again, so two
+    /// questions can never sound at once. Refusing the tap while a question
+    /// runs would only make the one button a child reaches for feel broken.
     func askQuestion() {
         guard let answer else { return }
         // Only the first one: the sound button asks again, and a round does not
@@ -308,7 +308,7 @@ final class QuizSession {
 
         switch game {
         case .names:
-            announcer.announce(answer)
+            announcer.announce(.whereIs(answer))
         case .calls:
             // Never missing in a round of game 2 — only birds with a recording
             // are asked for. Silence if it ever were: saying the name instead

@@ -36,20 +36,21 @@ extension Rank {
     }
 
     /// "Du bist jetzt eine Amsel!" — the headline of the ascent, spoken as
-    /// well as written.
+    /// well as written, and one line for both: the sentence a clip says and
+    /// the sentence on the screen cannot drift apart if there is only one.
     ///
     /// `kohlmeise` has one too, though nothing can reach it: a profile starts
     /// there and the ladder only climbs. It completes the set.
-    var ascentSentence: String {
+    var ascentLine: SpokenLine {
         switch self {
-        case .kohlmeise: String(localized: "rank.kohlmeise.ascent")
-        case .amsel: String(localized: "rank.amsel.ascent")
-        case .blaumeise: String(localized: "rank.blaumeise.ascent")
-        case .rotkehlchen: String(localized: "rank.rotkehlchen.ascent")
-        case .star: String(localized: "rank.star.ascent")
-        case .buntspecht: String(localized: "rank.buntspecht.ascent")
-        case .eisvogel: String(localized: "rank.eisvogel.ascent")
-        case .wiedehopf: String(localized: "rank.wiedehopf.ascent")
+        case .kohlmeise: .fixed("rank.kohlmeise.ascent")
+        case .amsel: .fixed("rank.amsel.ascent")
+        case .blaumeise: .fixed("rank.blaumeise.ascent")
+        case .rotkehlchen: .fixed("rank.rotkehlchen.ascent")
+        case .star: .fixed("rank.star.ascent")
+        case .buntspecht: .fixed("rank.buntspecht.ascent")
+        case .eisvogel: .fixed("rank.eisvogel.ascent")
+        case .wiedehopf: .fixed("rank.wiedehopf.ascent")
         }
     }
 
