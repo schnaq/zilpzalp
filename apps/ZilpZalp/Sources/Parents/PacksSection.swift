@@ -68,7 +68,12 @@ struct PacksSection: View {
     }
 
     private var card: some View {
-        ZCard(padding: 0) {
+        // Once per pass: every row formats its own second line, and reading
+        // this again inside the loop to find the last row would format the
+        // whole card once per row in it.
+        let rows = rows
+
+        return ZCard(padding: 0) {
             VStack(spacing: 0) {
                 ForEach(rows) { row in
                     SettingRow(
@@ -154,28 +159,21 @@ struct PacksSection: View {
         }
 
         rows += packs.downloadable.map { entry in
-            if let share = packs.downloading[entry.id] {
-                return PackRow(
-                    id: entry.id,
-                    title: entry.title,
-                    hint: detail(
-                        entry.speciesCount,
-                        share.formatted(.percent.precision(.fractionLength(0))),
-                    ),
-                    icon: .plus,
-                )
+            let download = packs.downloads[entry.id]
+            let status = switch download {
+            case let .running(share): share.formatted(.percent.precision(.fractionLength(0)))
+            case .failed: String(localized: "parents.packs.download.failed")
+            case nil: size(entry.downloadSize)
             }
+
             return PackRow(
                 id: entry.id,
                 title: entry.title,
-                hint: detail(
-                    entry.speciesCount,
-                    packs.failed.contains(entry.id)
-                        ? String(localized: "parents.packs.download.failed")
-                        : size(entry.downloadSize),
-                ),
+                hint: detail(entry.speciesCount, status),
                 icon: .plus,
-                tap: .download(entry),
+                // A download in flight is a row to read, not to press; one
+                // that stopped is a row to press again, and it resumes.
+                tap: download.isRunning ? nil : .download(entry),
             )
         }
 

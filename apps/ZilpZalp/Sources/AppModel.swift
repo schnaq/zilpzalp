@@ -152,8 +152,7 @@ final class AppModel {
     /// question a child cannot answer, and ``PackCatalog/callURL(for:)`` is
     /// what the round itself will ask.
     private var offersCalls: Bool {
-        let library = packs.library
-        return library.birds.count { library.callURL(for: $0) != nil } >= Self.callsForGameTwo
+        packs.speciesWithCalls >= Self.callsForGameTwo
     }
 
     init() {
