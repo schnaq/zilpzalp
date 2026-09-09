@@ -1,0 +1,326 @@
+{
+  "id": "welt",
+  "title": "Vögel der Welt",
+  "birds": [
+    {
+      "id": "kaiserpinguin",
+      "name": "Kaiserpinguin",
+      "scientificName": "Aptenodytes forsteri",
+      "taxonID": 3820,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "emu",
+      "name": "Emu",
+      "scientificName": "Dromaius novaehollandiae",
+      "taxonID": 20504,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "helmkasuar",
+      "name": "Helmkasuar",
+      "scientificName": "Casuarius casuarius",
+      "taxonID": 20500,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "nandu",
+      "name": "Nandu",
+      "scientificName": "Rhea americana",
+      "taxonID": 20512,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "pfau",
+      "name": "Pfau",
+      "scientificName": "Pavo cristatus",
+      "taxonID": 1204,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "truthahn",
+      "name": "Truthahn",
+      "scientificName": "Meleagris gallopavo",
+      "taxonID": 906,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "riesentukan",
+      "name": "Riesentukan",
+      "scientificName": "Ramphastos toco",
+      "taxonID": 18793,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "hellroter-ara",
+      "name": "Hellroter Ara",
+      "scientificName": "Ara macao",
+      "taxonID": 19022,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "gelbhaubenkakadu",
+      "name": "Gelbhaubenkakadu",
+      "scientificName": "Cacatua galerita",
+      "taxonID": 116834,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "wellensittich",
+      "name": "Wellensittich",
+      "scientificName": "Melopsittacus undulatus",
+      "taxonID": 19339,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "kea",
+      "name": "Kea",
+      "scientificName": "Nestor notabilis",
+      "taxonID": 18941,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "annakolibri",
+      "name": "Annakolibri",
+      "scientificName": "Calypte anna",
+      "taxonID": 6317,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "quetzal",
+      "name": "Quetzal",
+      "scientificName": "Pharomachrus mocinno",
+      "taxonID": 20856,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "rotkardinal",
+      "name": "Rotkardinal",
+      "scientificName": "Cardinalis cardinalis",
+      "taxonID": 9083,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "blauhaeher",
+      "name": "Blauhäher",
+      "scientificName": "Cyanocitta cristata",
+      "taxonID": 8229,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "weisskopfseeadler",
+      "name": "Weißkopfseeadler",
+      "scientificName": "Haliaeetus leucocephalus",
+      "taxonID": 5305,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "harpyie",
+      "name": "Harpyie",
+      "scientificName": "Harpia harpyja",
+      "taxonID": 5321,
+      "article": "die",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "andenkondor",
+      "name": "Andenkondor",
+      "scientificName": "Vultur gryphus",
+      "taxonID": 4747,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "schnee-eule",
+      "name": "Schnee-Eule",
+      "scientificName": "Bubo scandiacus",
+      "taxonID": 144594,
+      "article": "die",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "papageitaucher",
+      "name": "Papageitaucher",
+      "scientificName": "Fratercula arctica",
+      "taxonID": 4504,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "wanderalbatros",
+      "name": "Wanderalbatros",
+      "scientificName": "Diomedea exulans",
+      "taxonID": 4117,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "prachtfregattvogel",
+      "name": "Prachtfregattvogel",
+      "scientificName": "Fregata magnificens",
+      "taxonID": 4631,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "blaufusstoelpel",
+      "name": "Blaufußtölpel",
+      "scientificName": "Sula nebouxii",
+      "taxonID": 3786,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "eistaucher",
+      "name": "Eistaucher",
+      "scientificName": "Gavia immer",
+      "taxonID": 4626,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "lachender-hans",
+      "name": "Lachender Hans",
+      "scientificName": "Dacelo novaeguineae",
+      "taxonID": 2413,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "raggi-paradiesvogel",
+      "name": "Raggi-Paradiesvogel",
+      "scientificName": "Paradisaea raggiana",
+      "taxonID": 8183,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "doppelhornvogel",
+      "name": "Doppelhornvogel",
+      "scientificName": "Buceros bicornis",
+      "taxonID": 5536,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "mandschurenkranich",
+      "name": "Mandschurenkranich",
+      "scientificName": "Grus japonensis",
+      "taxonID": 39,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "schwarzschwan",
+      "name": "Schwarzschwan",
+      "scientificName": "Cygnus atratus",
+      "taxonID": 6914,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "roter-sichler",
+      "name": "Roter Sichler",
+      "scientificName": "Eudocimus ruber",
+      "taxonID": 3750,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "rosaloeffler",
+      "name": "Rosalöffler",
+      "scientificName": "Platalea ajaja",
+      "taxonID": 62529,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "nordstreifenkiwi",
+      "name": "Nordstreifenkiwi",
+      "scientificName": "Apteryx mantelli",
+      "taxonID": 20496,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    }
+  ]
+}
