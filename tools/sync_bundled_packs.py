@@ -1,10 +1,14 @@
 #!/usr/bin/env python3
-"""Keep the bundled packs inside ZilpZalpData in step with data/packs.
+"""Keep the bundled resources inside ZilpZalpData in step with data/.
 
 `data/packs/<id>/` is the single source of truth for a pack — the licence gate
 reads it, tools/fetch-media writes it. The base pack additionally ships inside
 the app, as a SwiftPM resource of ZilpZalpData, so that PackCatalog can load it
 through Bundle.module and `swift test` can exercise it without a simulator.
+
+`data/speech/` is the same arrangement for the sentences that belong to no
+pack: SpeechCatalog reads them from Bundle.module, so the copy under
+Resources/Speech has to be kept honest by the same check.
 
 A symlink would have been cheaper and was tried first: SwiftPM copies a `.copy`
 resource with the link intact, so the relative target dangles inside .build and
@@ -15,7 +19,7 @@ had to change anything, it exits 1, because the copy in the repository was
 stale and the commit would have shipped a pack that differs from data/packs.
 
 Usage: python3 tools/sync_bundled_packs.py
-Exit code 0 if every bundled pack was already current, 1 if one was not.
+Exit code 0 if every bundled copy was already current, 1 if one was not.
 """
 
 from __future__ import annotations
@@ -29,11 +33,21 @@ from pathlib import Path
 # finds the packs no matter where it is called from.
 REPO_ROOT = Path(__file__).resolve().parent.parent
 SOURCE_DIR = REPO_ROOT / "data" / "packs"
-BUNDLE_DIR = REPO_ROOT / "packages" / "ZilpZalpData" / "Sources" / "ZilpZalpData" / "Resources" / "Packs"
+RESOURCES_DIR = REPO_ROOT / "packages" / "ZilpZalpData" / "Sources" / "ZilpZalpData" / "Resources"
+BUNDLE_DIR = RESOURCES_DIR / "Packs"
 
 # Only the base pack ships with the app. Every other pack is downloaded (#33)
-# and has no business inflating the binary.
+# and has no business inflating the binary. Read by tools/fetch_media/index.py,
+# which keeps the bundled packs out of the downloadable index.
 BUNDLED_PACKS = ("basis",)
+
+# What ships inside the app, as (label, source, destination): the bundled packs,
+# plus the sentences that belong to no pack. The app says those on every screen,
+# so they are bundled rather than downloaded.
+BUNDLED_COPIES = (
+    *((pack, SOURCE_DIR / pack, BUNDLE_DIR / pack) for pack in BUNDLED_PACKS),
+    ("speech", REPO_ROOT / "data" / "speech", RESOURCES_DIR / "Speech"),
+)
 
 
 def escape_data(message: str) -> str:
@@ -81,7 +95,7 @@ def sync(source: Path, destination: Path) -> list[str]:
     if not source.is_dir():
         raise FileNotFoundError(f"no pack at {source}")
 
-    changed = differences(source, destination) if destination.is_dir() else ["(the whole pack)"]
+    changed = differences(source, destination) if destination.is_dir() else ["(the whole directory)"]
     if changed:
         shutil.rmtree(destination, ignore_errors=True)
         # Same exclusion as pack_files, or a hidden file would be copied and
@@ -94,30 +108,33 @@ def sync(source: Path, destination: Path) -> list[str]:
 def main() -> int:
     stale = 0
 
-    for pack in BUNDLED_PACKS:
+    for label, source, destination in BUNDLED_COPIES:
         try:
-            changed = sync(SOURCE_DIR / pack, BUNDLE_DIR / pack)
+            changed = sync(source, destination)
         except OSError as error:
-            print(f"::error::{escape_data(f'{pack}: cannot be synced: {error}')}")
+            print(f"::error::{escape_data(f'{label}: cannot be synced: {error}')}")
             return 1
 
         if not changed:
-            print(f"{pack}: bundled copy is current")
+            print(f"{label}: bundled copy is current")
             continue
 
         stale += 1
         listing = ", ".join(changed)
+        # Named as the repository names it where that is possible; a source
+        # outside the repository — a test's temporary directory — as it is.
+        origin = source if not source.is_relative_to(REPO_ROOT) else source.relative_to(REPO_ROOT)
         message = (
-            f"{pack}: the bundled copy was stale and has been refreshed from "
-            f"data/packs/{pack} ({listing}). Commit the result."
+            f"{label}: the bundled copy was stale and has been refreshed from "
+            f"{origin} ({listing}). Commit the result."
         )
         print(f"::error::{escape_data(message)}")
 
     if stale:
-        print(f"Bundled packs out of date: {stale} of {len(BUNDLED_PACKS)}")
+        print(f"Bundled copies out of date: {stale} of {len(BUNDLED_COPIES)}")
         return 1
 
-    print(f"Bundled packs in sync: {len(BUNDLED_PACKS)} pack(s)")
+    print(f"Bundled copies in sync: {len(BUNDLED_COPIES)}")
     return 0
 
 

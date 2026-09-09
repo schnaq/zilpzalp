@@ -21,7 +21,13 @@ Locally it heals both files and says so. In CI it is the drift check: whenever i
 had to change anything, it exits 1, because the committed credits did not match the
 assets they name.
 
-Usage: python3 tools/generate_credits.py [packs_dir]  (default: data/packs)
+Speech clips are credited through their voice rather than one by one: a manifest
+declares one voice for all the sentences it carries, so the credits name a voice
+once per pack plus once for the fixed sentences under `data/speech/`. Two hundred
+clips spoken by one person would otherwise be two hundred identical lines.
+
+Usage: python3 tools/generate_credits.py [packs_dir] [--speech-dir DIR]
+       (defaults: data/packs, data/speech)
 Exit code 0 if both outputs were already current, 1 if one was not or a manifest
 or licence file is unusable.
 """
@@ -37,6 +43,7 @@ from pathlib import Path
 # manifests no matter where it is called from.
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_PACKS_DIR = REPO_ROOT / "data" / "packs"
+DEFAULT_SPEECH_DIR = REPO_ROOT / "data" / "speech"
 CREDITS_MD = REPO_ROOT / "CREDITS.md"
 CREDITS_JSON = REPO_ROOT / "packages" / "ZilpZalpData" / "Sources" / "ZilpZalpData" / "Resources" / "credits.json"
 
@@ -52,6 +59,9 @@ LICENCES = {
 # The keys of a font or icon entry that reach credits.json. `label` and
 # `licenseFile` are for CREDITS.md and for the existence check.
 STATIC_JSON_KEYS = ("name", "authors", "license", "licenseURL")
+
+# The name of the manifest holding the sentences that belong to no pack.
+SPEECH_MANIFEST_NAME = "manifest.json"
 
 FONTS = (
     {
@@ -177,6 +187,67 @@ def pack_media(document: dict, pack_id: str, pack_title: str) -> list[dict]:
     return entries
 
 
+def clip_count(document: dict) -> int:
+    """How many speech clips a manifest declares.
+
+    A pack keeps them under its birds, one sentence key per clip; the fixed
+    set keeps them under `lines`. Only the number matters here — the licence
+    gate is what checks them.
+    """
+    lines = document.get("lines")
+    if isinstance(lines, dict):
+        return len(lines)
+
+    total = 0
+    for bird in document.get("birds") or []:
+        speech = bird.get("speech") if isinstance(bird, dict) else None
+        if isinstance(speech, dict):
+            total += len(speech)
+    return total
+
+
+def manifest_voice(document: dict, source: str, used_in: str) -> dict | None:
+    """The credit entry for one manifest's voice, `None` when there is nothing to credit.
+
+    A voice that has spoken no clip is not credited: a name in the app that
+    belongs to no asset is as wrong as an asset nobody names. One entry per
+    manifest, so a voice heard in two packs is named for each of them —
+    grouping is the credits screen's business, not this file's.
+    """
+    voice = document.get("voice")
+    if voice is None or not clip_count(document):
+        return None
+    if not isinstance(voice, dict):
+        raise ValueError(f"{source} / voice: is not an object")
+
+    label = f"{source} / voice"
+    return {
+        "attribution": field(voice, "attribution", label),
+        "license": field(voice, "license", label),
+        "sourceURL": field(voice, "sourceURL", label),
+        # The pack's product title, or the fixed set's — what a parent reads
+        # in the credits, never a directory name.
+        "usedIn": used_in,
+    }
+
+
+def read_fixed_sentences(path: Path) -> dict | None:
+    """The voice of the sentences that belong to no pack, `None` when there is none.
+
+    `data/speech/manifest.json` lies outside `data/packs` because it carries no
+    birds, so `read_packs` never sees it. Its clips are credited exactly like a
+    pack's: through the one voice that spoke them.
+    """
+    if not path.is_file():
+        return None
+
+    document = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(document, dict):
+        raise ValueError(f"{path.name}: is not an object")
+
+    return manifest_voice(document, path.name, field(document, "title", path.name))
+
+
 def read_packs(packs_dir: Path) -> list[dict]:
     """Read every pack under `packs_dir`, sorted by pack id.
 
@@ -203,6 +274,7 @@ def read_packs(packs_dir: Path) -> list[dict]:
                 "id": pack_id,
                 "title": pack_title,
                 "media": pack_media(document, pack_id, pack_title),
+                "voice": manifest_voice(document, source, pack_title),
             }
         )
 
@@ -210,7 +282,7 @@ def read_packs(packs_dir: Path) -> list[dict]:
     return packs
 
 
-def render_markdown(packs: list[dict]) -> str:
+def render_markdown(packs: list[dict], voices: list[dict]) -> str:
     """Render CREDITS.md."""
     lines = [
         "# Credits",
@@ -247,6 +319,26 @@ def render_markdown(packs: list[dict]) -> str:
                 f"| <{entry['sourceURL']}> |"
             )
 
+    # Only when somebody has spoken: an empty table would say that the app has
+    # recorded speech, which until Task 4 of the plan it has not.
+    if voices:
+        lines += [
+            "",
+            "## Voices",
+            "",
+            "| Voice | Licence | Spoken for | Source |",
+            "| --- | --- | --- | --- |",
+        ]
+        for entry in voices:
+            label, deed = LICENCES.get(entry["license"], (entry["license"], ""))
+            licence = link(label, deed) if deed else cell(label)
+            lines.append(
+                f"| {cell(entry['attribution'])} "
+                f"| {licence} "
+                f"| {cell(entry['usedIn'])} "
+                f"| <{entry['sourceURL']}> |"
+            )
+
     for heading, group, first_column in (("Fonts", FONTS, "Font"), ("Icons", ICONS, "Set")):
         lines += [
             "",
@@ -274,10 +366,11 @@ def render_markdown(packs: list[dict]) -> str:
     return "\n".join(lines)
 
 
-def render_json(packs: list[dict]) -> str:
+def render_json(packs: list[dict], voices: list[dict]) -> str:
     """Render credits.json — the document `Credits.bundled()` decodes."""
     document = {
         "media": [entry for pack in packs for entry in pack["media"]],
+        "voices": voices,
         "fonts": [{key: entry[key] for key in STATIC_JSON_KEYS} for entry in FONTS],
         "icons": [{key: entry[key] for key in STATIC_JSON_KEYS} for entry in ICONS],
     }
@@ -313,6 +406,12 @@ def main(argv: list[str] | None = None) -> int:
         type=Path,
         help=f"directory holding the pack manifests (default: {DEFAULT_PACKS_DIR})",
     )
+    parser.add_argument(
+        "--speech-dir",
+        default=DEFAULT_SPEECH_DIR,
+        type=Path,
+        help=f"directory holding the fixed sentences (default: {DEFAULT_SPEECH_DIR})",
+    )
     args = parser.parse_args(argv)
 
     if not args.packs_dir.is_dir():
@@ -329,13 +428,23 @@ def main(argv: list[str] | None = None) -> int:
 
     try:
         packs = read_packs(args.packs_dir)
+        # The packs first and the fixed sentences last, so the order of the
+        # voices is the order of the credits screen's sections.
+        voices = [pack["voice"] for pack in packs if pack["voice"]]
+        fixed = read_fixed_sentences(args.speech_dir / SPEECH_MANIFEST_NAME)
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError) as error:
         print(f"::error::{escape_data(f'Credits cannot be generated: {error}')}")
         return 1
 
+    if fixed:
+        voices.append(fixed)
+
     stale = [
         path.name
-        for path, text in ((CREDITS_MD, render_markdown(packs)), (CREDITS_JSON, render_json(packs)))
+        for path, text in (
+            (CREDITS_MD, render_markdown(packs, voices)),
+            (CREDITS_JSON, render_json(packs, voices)),
+        )
         if write_if_changed(path, text)
     ]
     assets = sum(len(pack["media"]) for pack in packs)
@@ -350,7 +459,7 @@ def main(argv: list[str] | None = None) -> int:
 
     print(
         f"Credits current: {assets} media asset(s) in {len(packs)} pack(s), "
-        f"{len(FONTS)} font(s), {len(ICONS)} icon set(s)"
+        f"{len(voices)} voice(s), {len(FONTS)} font(s), {len(ICONS)} icon set(s)"
     )
     return 0
 

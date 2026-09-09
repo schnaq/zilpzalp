@@ -36,25 +36,40 @@ class SyncTestCase(unittest.TestCase):
         (self.source / "manifest.json").write_text('{"id": "basis"}', encoding="utf-8")
         (self.source / "photos" / "amsel.png").write_bytes(b"a photo")
 
+        # The second copy, in the same shape the repository has it: the fixed
+        # sentences, outside the packs directory and bundled all the same.
+        self.speech_source = root / "speech"
+        self.speech_destination = self.bundle_dir / "Speech"
+        self.speech_source.mkdir(parents=True)
+        (self.speech_source / "manifest.json").write_text('{"id": "speech"}', encoding="utf-8")
+
+        self.output = ""
+
     def sync(self) -> list[str]:
         return sync_bundled_packs.sync(self.source, self.destination)
 
     def run_main(self) -> int:
-        """Run main() against the throwaway directories, output suppressed."""
+        """Run main() against the throwaway directories, output kept in `self.output`."""
+        copies = (
+            ("basis", self.source, self.destination),
+            ("speech", self.speech_source, self.speech_destination),
+        )
+        captured = io.StringIO()
         with (
-            mock.patch.object(sync_bundled_packs, "SOURCE_DIR", self.source_dir),
-            mock.patch.object(sync_bundled_packs, "BUNDLE_DIR", self.bundle_dir),
-            mock.patch.object(sync_bundled_packs, "BUNDLED_PACKS", ("basis",)),
-            contextlib.redirect_stdout(io.StringIO()),
+            mock.patch.object(sync_bundled_packs, "BUNDLED_COPIES", copies),
+            contextlib.redirect_stdout(captured),
         ):
-            return sync_bundled_packs.main()
+            code = sync_bundled_packs.main()
+
+        self.output = captured.getvalue()
+        return code
 
 
 class SyncCreatesTheCopy(SyncTestCase):
     def test_reports_a_missing_destination_and_creates_it(self) -> None:
         changed = self.sync()
 
-        self.assertEqual(changed, ["(the whole pack)"])
+        self.assertEqual(changed, ["(the whole directory)"])
         self.assertEqual((self.destination / "photos" / "amsel.png").read_bytes(), b"a photo")
 
     def test_a_second_run_reports_nothing(self) -> None:
@@ -142,13 +157,32 @@ class MainIsTheCIContract(SyncTestCase):
 
         self.assertEqual(self.run_main(), 1)
 
+    def test_drift_in_the_fixed_sentences_is_reported_like_a_packs(self) -> None:
+        # The acceptance of the speech schema: data/speech is checked exactly
+        # the way data/packs/basis is, by the same run and the same exit code.
+        self.run_main()
+        (self.speech_source / "manifest.json").write_text('{"id": "speech2"}', encoding="utf-8")
 
-class BundledPacksMatchTheRepository(unittest.TestCase):
+        self.assertEqual(self.run_main(), 1)
+        self.assertIn("speech: the bundled copy was stale", self.output)
+        self.assertEqual(
+            (self.speech_destination / "manifest.json").read_text(encoding="utf-8"),
+            '{"id": "speech2"}',
+        )
+
+
+class BundledCopiesMatchTheRepository(unittest.TestCase):
     """The paths in the script are only right as long as the repository agrees."""
 
-    def test_every_bundled_pack_exists_in_data_packs(self) -> None:
-        for pack in sync_bundled_packs.BUNDLED_PACKS:
-            self.assertTrue((sync_bundled_packs.SOURCE_DIR / pack).is_dir(), pack)
+    def test_every_source_is_in_the_repository(self) -> None:
+        for label, source, _ in sync_bundled_packs.BUNDLED_COPIES:
+            self.assertTrue(source.is_dir(), label)
+
+    def test_the_base_pack_and_the_fixed_sentences_are_bundled(self) -> None:
+        self.assertEqual(
+            [(label, source.name, destination.name) for label, source, destination in sync_bundled_packs.BUNDLED_COPIES],
+            [("basis", "basis", "basis"), ("speech", "speech", "Speech")],
+        )
 
 
 if __name__ == "__main__":

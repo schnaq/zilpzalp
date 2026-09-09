@@ -20,7 +20,26 @@ both of the same shape:
     {"file": "photos/amsel.jpg", "sha256": "…", "license": "CC-BY-4.0",
      "attribution": "…", "sourceURL": "https://…"}
 
-Usage: python3 tools/license_gate.py [packs_dir]  (default: data/packs)
+Speech clips are the third medium and carry three fields, because the licence
+of a recorded sentence belongs to the voice that spoke it rather than to the
+single clip. A bird's "speech" maps a sentence key to one clip:
+
+    "speech": {"quiz.prompt.whereIs": {"file": "speech/…/amsel.m4a",
+                                       "sha256": "…", "text": "Wo ist die Amsel?"}}
+
+A manifest that declares at least one clip must carry a "voice" block, which
+is checked exactly as a medium is, minus the file:
+
+    "voice": {"license": "CC-BY-4.0", "attribution": "Stimme: …",
+              "sourceURL": "https://…", "retrieved": "2026-09-12"}
+
+The sentences that belong to no species live outside data/packs — they have no
+birds, and the pack shape above would reject them for it. Their manifest,
+data/speech/manifest.json, holds a "lines" object of the same clips and is
+checked by the same rules.
+
+Usage: python3 tools/license_gate.py [packs_dir] [--speech-dir DIR]
+       (defaults: data/packs, data/speech)
 Exit code 0 if every asset passes, 1 if any violation is found — the gate
 reports all problems before it exits.
 """
@@ -39,6 +58,10 @@ ALLOWED_LICENCES = ("CC0-1.0", "CC-BY-4.0", "CC-BY-SA-4.0")
 # the manifests no matter where it is called from.
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_PACKS_DIR = REPO_ROOT / "data" / "packs"
+DEFAULT_SPEECH_DIR = REPO_ROOT / "data" / "speech"
+
+# The manifest of the sentences that belong to no pack.
+SPEECH_MANIFEST_NAME = "manifest.json"
 
 
 def file_sha256(path: Path) -> str:
@@ -58,11 +81,12 @@ def text_field(media: dict, name: str) -> str:
     return value.strip() if isinstance(value, str) else ""
 
 
-def check_media(media: object, label: str, base_dir: Path) -> list[str]:
-    """Return the problems found in one media object."""
-    if not isinstance(media, dict):
-        return [f"{label}: is not an object"]
+def check_licence(media: dict, label: str) -> list[str]:
+    """Return the licence problems of one object.
 
+    The three fields every licensed thing carries — a photo, a recording, and
+    the voice a manifest's speech clips were spoken by.
+    """
     problems = []
 
     licence = media.get("license")
@@ -78,43 +102,110 @@ def check_media(media: object, label: str, base_dir: Path) -> list[str]:
     if not text_field(media, "sourceURL"):
         problems.append(f"{label}: field 'sourceURL' is missing or empty")
 
+    return problems
+
+
+def check_file(media: dict, label: str, base_dir: Path) -> list[str]:
+    """Return the problems of the file half of a medium: path, hash, bytes."""
     relative = text_field(media, "file")
     if not relative:
-        problems.append(f"{label}: field 'file' is missing or empty")
-        return problems
+        return [f"{label}: field 'file' is missing or empty"]
 
     # Mandatory for every asset, present locally or not: the Pack model
     # declares sha256 non-optional and the downloader verifies it.
     expected = text_field(media, "sha256").lower()
     if not expected:
-        problems.append(f"{label}: field 'sha256' is missing or empty")
-        return problems
+        return [f"{label}: field 'sha256' is missing or empty"]
 
     asset = base_dir / relative
     if not asset.is_file():
         # Only in S3 — fetch-media verified the hash when it uploaded the file.
-        return problems
+        return []
 
     actual = file_sha256(asset)
     if actual != expected:
-        problems.append(f"{label}: sha256 does not match {relative} (manifest {expected}, file {actual})")
+        return [f"{label}: sha256 does not match {relative} (manifest {expected}, file {actual})"]
 
+    return []
+
+
+def check_media(media: object, label: str, base_dir: Path) -> list[str]:
+    """Return the problems found in one media object."""
+    if not isinstance(media, dict):
+        return [f"{label}: is not an object"]
+
+    return check_licence(media, label) + check_file(media, label, base_dir)
+
+
+def check_clip(clip: object, label: str, base_dir: Path) -> list[str]:
+    """Return the problems found in one speech clip.
+
+    Three fields and no licence of its own: what a recorded sentence may be
+    used for is a property of the voice that spoke it, and that sits once at
+    the top of the manifest. `text` records what was actually said, so a
+    sentence reworded in the String Catalog cannot ship with a stale clip.
+    """
+    if not isinstance(clip, dict):
+        return [f"{label}: is not an object"]
+
+    problems = check_file(clip, label, base_dir)
+    if not text_field(clip, "text"):
+        problems.append(f"{label}: field 'text' is missing or empty")
     return problems
 
 
-def check_manifest(path: Path) -> tuple[list[str], int]:
-    """Check one manifest. Returns its problems and its media asset count."""
+def check_clips(clips: object, label: str, base_dir: Path) -> tuple[list[str], int]:
+    """Check a sentence key → clip mapping. Returns its problems and its count."""
+    if not isinstance(clips, dict):
+        return ([f"{label}: is not an object"], 0)
+
+    problems = []
+    count = 0
+    for sentence, clip in clips.items():
+        if isinstance(clip, dict):
+            count += 1
+        problems.extend(check_clip(clip, f"{label} / {sentence}", base_dir))
+
+    return problems, count
+
+
+def check_voice(document: dict, clips: int) -> list[str]:
+    """Check the manifest's voice against the clips it is supposed to license.
+
+    The clips demand the voice, not the key: a manifest that declares no clip
+    has nobody to credit, which is what lets `data/speech/manifest.json` exist
+    before a single sentence has been recorded. A voice that is declared is
+    checked either way — a half-filled block should not rot unnoticed.
+    """
+    voice = document.get("voice")
+    if voice is None:
+        return ["speech clips are declared but the manifest carries no 'voice'"] if clips else []
+    if not isinstance(voice, dict):
+        return ["voice: is not an object"]
+
+    return check_licence(voice, "voice")
+
+
+def load_document(path: Path) -> tuple[object, list[str]]:
+    """Read one manifest, or the reason it is unusable."""
     try:
-        document = json.loads(path.read_text(encoding="utf-8"))
+        return json.loads(path.read_text(encoding="utf-8")), []
     except (OSError, UnicodeDecodeError, json.JSONDecodeError) as error:
-        return ([f"cannot be read: {error}"], 0)
+        return None, [f"cannot be read: {error}"]
+
+
+def check_manifest(path: Path) -> tuple[list[str], int]:
+    """Check one pack manifest. Returns its problems and its media asset count."""
+    document, problems = load_document(path)
+    if problems:
+        return problems, 0
 
     birds = document.get("birds") if isinstance(document, dict) else None
     if not isinstance(birds, list):
         return (["no birds found (expected an object whose 'birds' key holds a list)"], 0)
 
-    problems = []
     media_count = 0
+    speech_count = 0
 
     for index, entry in enumerate(birds, start=1):
         if not isinstance(entry, dict):
@@ -137,7 +228,37 @@ def check_manifest(path: Path) -> tuple[list[str], int]:
                 media_count += 1
             problems.extend(check_media(entry[field], f"{label} / {field}", path.parent))
 
-    return problems, media_count
+        # Speech is optional the same way and one level deeper: a sentence key
+        # per clip, so a pack may carry the question for one species and not
+        # for the next.
+        if entry.get("speech") is not None:
+            clip_problems, clips = check_clips(entry["speech"], f"{label} / speech", path.parent)
+            problems.extend(clip_problems)
+            speech_count += clips
+
+    problems.extend(check_voice(document, speech_count))
+
+    return problems, media_count + speech_count
+
+
+def check_speech_manifest(path: Path) -> tuple[list[str], int]:
+    """Check the manifest of the sentences that belong to no pack.
+
+    The same clips and the same voice as a pack's, without the birds: `lines`
+    maps a sentence key to one clip.
+    """
+    document, problems = load_document(path)
+    if problems:
+        return problems, 0
+
+    lines = document.get("lines") if isinstance(document, dict) else None
+    if not isinstance(lines, dict):
+        return (["no lines found (expected an object whose 'lines' key holds an object)"], 0)
+
+    problems, count = check_clips(lines, "lines", path.parent)
+    problems.extend(check_voice(document, count))
+
+    return problems, count
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -149,6 +270,12 @@ def main(argv: list[str] | None = None) -> int:
         type=Path,
         help=f"directory holding the pack manifests (default: {DEFAULT_PACKS_DIR})",
     )
+    parser.add_argument(
+        "--speech-dir",
+        default=DEFAULT_SPEECH_DIR,
+        type=Path,
+        help=f"directory holding the fixed sentences (default: {DEFAULT_SPEECH_DIR})",
+    )
     args = parser.parse_args(argv)
 
     if not args.packs_dir.is_dir():
@@ -157,16 +284,22 @@ def main(argv: list[str] | None = None) -> int:
 
     # rglob, not glob: a pack may grow its own directory
     # (data/packs/deutschland/birds.json) and must not escape the gate by it.
-    manifests = sorted(args.packs_dir.rglob("*.json"))
+    manifests = [(path, check_manifest) for path in sorted(args.packs_dir.rglob("*.json"))]
     if not manifests:
         print(f"::notice::No pack manifests in {args.packs_dir} — the licence gate has nothing to check")
-        return 0
+
+    # The fixed sentences are checked by their own entry point rather than by
+    # the shape of the document: a `lines` manifest dropped into data/packs is
+    # a pack without birds, and has to fail as one.
+    fixed = args.speech_dir / SPEECH_MANIFEST_NAME
+    if fixed.is_file():
+        manifests.append((fixed, check_speech_manifest))
 
     total_problems = 0
     total_media = 0
 
-    for manifest in manifests:
-        problems, media_count = check_manifest(manifest)
+    for manifest, check in manifests:
+        problems, media_count = check(manifest)
         # Workspace-relative, or GitHub cannot anchor the annotation on the
         # file in the pull request view; absolute paths only show in the log.
         try:

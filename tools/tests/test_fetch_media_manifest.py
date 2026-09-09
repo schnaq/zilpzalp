@@ -157,6 +157,31 @@ class MediaFilesTests(unittest.TestCase):
     def test_skips_a_bird_without_a_call(self) -> None:
         self.assertEqual(manifest.media_files(document()), [("photos/amsel.png", "0" * 64)])
 
+    def test_lists_the_speech_clips_after_the_bird_s_own_media(self) -> None:
+        # What makes `fetch-media upload` carry them: a clip that is not in
+        # this list never reaches the bucket, and the downloaded pack is silent.
+        pack = document()
+        pack["birds"][0]["speech"] = {
+            "quiz.prompt.whereIs": {
+                "file": "speech/quiz.prompt.whereIs/amsel.m4a",
+                "sha256": "2" * 64,
+                "text": "Wo ist die Amsel?",
+            }
+        }
+
+        self.assertEqual(
+            manifest.media_files(pack),
+            [("photos/amsel.png", "0" * 64), ("speech/quiz.prompt.whereIs/amsel.m4a", "2" * 64)],
+        )
+
+    def test_refuses_to_set_speech_as_if_it_were_a_medium(self) -> None:
+        # Speech nests one level deeper and carries no licence of its own, so
+        # `set_media` must not be the way it is written.
+        with self.assertRaises(ValueError) as error:
+            manifest.set_media(document(), "amsel", manifest.SPEECH_KIND, media())
+
+        self.assertIn("speech", str(error.exception))
+
 
 if __name__ == "__main__":
     unittest.main()
