@@ -1,7 +1,8 @@
 """Upload a pack to the media bucket.
 
 Layout in the bucket (issue #14): `packs/<id>/manifest.json`,
-`packs/<id>/photos/…`, `packs/<id>/audio/…`. A bucket policy grants anonymous
+`packs/<id>/photos/…`, `packs/<id>/audio/…` and, since #163,
+`packs/<id>/speech/<sentence>/…`. A bucket policy grants anonymous
 `s3:GetObject` on `packs/*`, so an upload needs no per-object ACL.
 `packs/index.json` is built by `index.py` and put through here as well, but
 only after the pack it describes (#50).
