@@ -148,13 +148,16 @@ final class SpeechAnnouncer: NSObject {
         spokenClip?.stop()
         AudioFocus.speech = self
 
-        if let clip = line.key.flatMap({ clips.url(for: $0, about: line.bird) }), play(clip) {
+        // Which of the two voices a sentence reached, in one line either way.
+        // Public: a sentence key and a file name are properties of the build,
+        // not of the child holding the iPad.
+        if let key = line.key, let clip = clips.url(for: key, about: line.bird), play(clip) {
+            Logger.audio.debug(
+                "Said \(key, privacy: .public) from \(clip.lastPathComponent, privacy: .public)",
+            )
             return
         }
 
-        // The ordinary case while nothing is recorded, and the one line that
-        // says which of the two voices a sentence reached. Public: a sentence
-        // key is a property of the build, not of the child holding the iPad.
         Logger.audio.debug(
             "No clip for \(line.key ?? "an assembled sentence", privacy: .public), speaking it",
         )
@@ -199,7 +202,6 @@ final class SpeechAnnouncer: NSObject {
             return false
         }
 
-        Logger.audio.debug("Playing clip \(clip.lastPathComponent, privacy: .public)")
         spokenClip = recording
         return true
     }
