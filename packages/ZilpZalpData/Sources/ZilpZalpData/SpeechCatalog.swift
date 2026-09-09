@@ -25,8 +25,8 @@ struct SpeechManifest: Codable, Sendable, Hashable {
     let lines: [String: MediaClip]
 }
 
-/// The sentences that belong to no species: "Super gemacht!", the rank
-/// ascents, the two profile questions, the parental-gate hint.
+/// The sentences that belong to no species: "Super gemacht!", the two
+/// profile questions, the parental-gate hint.
 ///
 /// They are recorded once and shipped inside the app rather than per pack —
 /// a child hears them in every round, whichever pack is installed. The twin of

@@ -3,11 +3,6 @@ import Foundation
 /// One child's profile: the name it picked, the avatar it picked and
 /// everything the app remembers between rounds.
 ///
-/// The rank is deliberately absent. It follows from ``totalStars`` through
-/// `RankLadder` in `ZilpZalpCore` and is derived on every read, so it cannot
-/// drift away from the stars that earned it. This module does not depend on
-/// `ZilpZalpCore` — the derivation belongs to the caller.
-///
 /// Nothing here leaves the device. There is no account, no identifier that
 /// means anything outside this installation, and no field a child could not
 /// see for itself on the screen.

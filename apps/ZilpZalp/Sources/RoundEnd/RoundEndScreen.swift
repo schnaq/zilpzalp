@@ -15,7 +15,7 @@ import ZilpZalpUI
 ///
 /// **This is where a round is written down.** The screen books it through
 /// ``AppModel/record(_:)`` before it says anything about it, and every claim
-/// it makes — a first find, a new rank — is read off the profile written.
+/// it makes — a first find above all — is read off the profile written.
 struct RoundEndScreen: View {
     /// Where `zz-pop` starts the sticker: a little under full size rather than
     /// at nothing, so it lands instead of exploding.
@@ -27,12 +27,6 @@ struct RoundEndScreen: View {
     /// The strip at the foot that belongs to the wordmark, so the
     /// celebration is centred in what is left rather than behind it.
     private static let signatureBand = Wordmark.minimumSize + 2 * ZSpacing.step5
-
-    /// How long the celebration keeps the screen before the rank ascent
-    /// arrives over it: long enough for the sticker to land and the praise to
-    /// be said, short enough to still read as one moment. A judgement call
-    /// rather than a token — 1e replaces this screen in the design.
-    private static let ascentDelay: TimeInterval = 2.2
 
     /// What the round earned. Comes from ``QuizSession`` through
     /// ``Route/roundEnd(_:)``; nothing here recomputes it.
@@ -52,9 +46,8 @@ struct RoundEndScreen: View {
     /// day's budget is spent (#36). Which of the two is the shell's to decide.
     let playAgain: () -> Void
 
-    /// Opens the sticker album, and pushes the rank ascent over this screen.
+    /// Opens the sticker album.
     let openCollection: () -> Void
-    let showAscent: (RankAscent) -> Void
 
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(\.verticalSizeClass) private var verticalSizeClass
@@ -80,11 +73,6 @@ struct RoundEndScreen: View {
     /// frame before that, and for a round that could not be written — the
     /// screen then makes no claim it cannot back up.
     @State private var outcome: RoundOutcome?
-
-    /// The ascent has been pushed for this round. `.task` runs again when
-    /// the child comes back from the album, and a second "Du bist jetzt eine
-    /// Amsel!" would be a second promotion.
-    @State private var ascentShown = false
 
     /// A phone in portrait, or an iPad sharing its screen.
     private var isCompact: Bool {
@@ -156,7 +144,7 @@ struct RoundEndScreen: View {
             .swipesBack(.disabled)
             // A `Task` rather than `onAppear`: the round is written down
             // before anything is said about it, and writing is `await`. Its
-            // cancellation is what stops the ascent from arriving behind a
+            // cancellation is what stops the praise from landing behind a
             // child who has already tapped on.
             .task { await celebrate() }
             // The praise must not still be running under the first question
@@ -351,9 +339,8 @@ struct RoundEndScreen: View {
 
     // MARK: - Behaviour
 
-    /// Books the round, then celebrates it: the sticker, the motion, the
-    /// sentence said out loud, and — when the round carried the child onto a
-    /// new rung — the ascent over the top of it.
+    /// Books the round, then celebrates it: the sticker, the motion and the
+    /// sentence said out loud.
     ///
     /// The order matters. Being a first find decides both the caption and the
     /// sentence, so nothing is drawn as new before the profile is written.
@@ -372,17 +359,6 @@ struct RoundEndScreen: View {
             announcer = voice
             voice.announce(spokenPraise)
         }
-
-        guard !ascentShown, let ascent = outcome?.ascent else { return }
-        // The stars and the sticker get the screen to themselves first: a new
-        // rank on top of the praise would take the round away mid-look.
-        try? await Task.sleep(for: .seconds(Self.ascentDelay))
-        // Flagged only once it is shown: set before the wait, a child who
-        // opened the album inside those seconds would have turned "once"
-        // into "never".
-        guard !Task.isCancelled else { return }
-        ascentShown = true
-        showAscent(ascent)
     }
 
     /// Stops the praise before leaving, so that it does not run into the

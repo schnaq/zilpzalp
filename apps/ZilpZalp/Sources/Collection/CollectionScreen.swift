@@ -32,7 +32,6 @@ struct CollectionScreen: View {
     let photos: SpeciesPhotos
     /// Everybody who plays on this device, for "Unser Schwarm".
     let profiles: [Profile]
-    let openLadder: () -> Void
     let goBack: () -> Void
 
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
@@ -97,31 +96,21 @@ struct CollectionScreen: View {
             .multilineTextAlignment(.center)
     }
 
-    /// What the album adds up to, and the door to the ladder.
+    /// What the album adds up to: the birds found and the stars collected.
     ///
-    /// Two counts and a rank — never a percentage and never a "3 von 10",
-    /// which is the same sentence with the missing ones put first.
+    /// Two counts — never a percentage and never a "3 von 10", which is the
+    /// same sentence with the missing ones put first.
     private var summary: some View {
-        VStack(spacing: ZSpacing.step4) {
-            HStack(spacing: ZSpacing.step3) {
-                Badge(
-                    String(format: String(localized: "collection.birds"), collected.count),
-                    tone: .leaf,
-                    icon: .album,
-                )
-                Badge(
-                    String(format: String(localized: "collection.stars"), profile.totalStars),
-                    tone: .sun,
-                    icon: .star,
-                )
-            }
-
-            ZButton(
-                String(localized: "rank.ladder.title"),
-                tone: .quiet,
-                size: .medium,
-                trailingIcon: .chevronRight,
-                action: openLadder,
+        HStack(spacing: ZSpacing.step3) {
+            Badge(
+                String(format: String(localized: "collection.birds"), collected.count),
+                tone: .leaf,
+                icon: .album,
+            )
+            Badge(
+                String(format: String(localized: "collection.stars"), profile.totalStars),
+                tone: .sun,
+                icon: .star,
             )
         }
     }
@@ -202,7 +191,6 @@ private func albumProfile() -> Profile {
             catalog: try? .bundled(),
             photos: SpeciesPhotos(try? .bundled()),
             profiles: [albumProfile()],
-            openLadder: {},
             goBack: {},
         )
     }
@@ -216,7 +204,6 @@ private func albumProfile() -> Profile {
             catalog: try? .bundled(),
             photos: SpeciesPhotos(try? .bundled()),
             profiles: [],
-            openLadder: {},
             goBack: {},
         )
     }

@@ -41,7 +41,6 @@ private func previewOutcome(collecting species: String?) -> RoundOutcome {
             record: { _ in previewOutcome(collecting: "amsel") },
             playAgain: {},
             openCollection: {},
-            showAscent: { _ in },
         )
     }
     .environment(\.horizontalSizeClass, .regular)
@@ -55,7 +54,6 @@ private func previewOutcome(collecting species: String?) -> RoundOutcome {
             record: { _ in previewOutcome(collecting: nil) },
             playAgain: {},
             openCollection: {},
-            showAscent: { _ in },
         )
     }
     .environment(\.horizontalSizeClass, .compact)
@@ -69,7 +67,6 @@ private func previewOutcome(collecting species: String?) -> RoundOutcome {
             record: { _ in nil },
             playAgain: {},
             openCollection: {},
-            showAscent: { _ in },
         )
     }
     .environment(\.horizontalSizeClass, .regular)

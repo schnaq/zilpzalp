@@ -97,31 +97,9 @@ enum Route: Hashable {
     case parents
     /// The sticker album (#29), from the round end and from the home screen.
     case collection
-    /// "Deine Vogel-Leiter" (#29), from the album and from the ascent.
-    case ladder
-    /// "Du bist jetzt eine Amsel!" (#29), pushed by the round end once the
-    /// round it just booked has carried the child over a threshold.
-    case rankAscent(RankAscent)
     /// "Zeit fürs Nest" (#36), screen 1k: where a tapped game tile and
     /// "Nochmal spielen" both lead once the day's budget is spent. Carries no
     /// payload — what it shows is read off the profile when it is drawn, and
     /// a number on the path could only go stale behind it.
     case timeForTheNest
-}
-
-/// A rank the child has just reached, and where it sits on the ladder.
-///
-/// A value rather than a look-up on arrival: the screen celebrates the step
-/// that was taken, and by the time it is drawn the profile has already been
-/// written, so asking the store again could only ever answer with the state
-/// after some *other* round.
-struct RankAscent: Hashable {
-    /// The rank held before the round. The mini ladder starts here.
-    let from: Rank
-    /// The rank reached. Everything on the screen is about this one.
-    let reached: Rank
-    /// The star count the round left behind, for "Noch 33 Sterne bis zur
-    /// Blaumeise". Kept rather than derived so the bar and the sentence
-    /// cannot disagree with the rank beside them.
-    let stars: Int
 }

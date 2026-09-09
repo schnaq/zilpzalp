@@ -1,13 +1,13 @@
 import SwiftUI
 import ZilpZalpUI
 
-/// A sticker with its name under it, for the album and for the ladder.
+/// A sticker with its name under it, for the album.
 ///
 /// `RewardSticker` draws a caption of its own, and this is deliberately not
 /// that one: the component caps its label at the disc's width plus 40 pt and
 /// truncates, so "Rotkehlchen" came out as "Rotkehlc…" on a phone. A bird
-/// whose name a child cannot read in full is not collected, and a rank whose
-/// name it cannot read is not a rung, so here the name shrinks instead.
+/// whose name a child cannot read in full is not collected, so here the name
+/// shrinks instead.
 ///
 /// The honest fix is a `minimumScaleFactor` inside `RewardSticker`, which is
 /// a change to a shared package with callers this pull request does not own —
@@ -15,8 +15,8 @@ import ZilpZalpUI
 /// strip #26 already filed there. Until then this is the one copy of the
 /// workaround rather than one per screen.
 struct StickerCaption<Sticker: View>: View {
-    /// The finished word under the disc: a bird's name, a rank's name, or
-    /// "Noch geheim" for something still to be found.
+    /// The finished word under the disc: a bird's name, or "Noch geheim" for
+    /// one still to be found.
     let caption: String
 
     /// Whether the thing above the caption has been earned. Muted ink when it

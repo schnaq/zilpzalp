@@ -13,9 +13,9 @@ struct RootView: View {
 
     /// Every species photo of the opened pack, read once at launch.
     ///
-    /// The album, the ladder and the ascent all draw pages of stickers, and
-    /// each of them is rebuilt on every layout pass. Opening the files here
-    /// means the three screens are handed pictures rather than a directory.
+    /// The album draws a whole page of stickers, and a `View` is rebuilt on
+    /// every layout pass. Opening the files here means the screen is handed
+    /// pictures rather than a directory.
     @State private var photos = SpeciesPhotos(nil)
 
     /// How often "Nochmal spielen" has taken a child back into the quiz.
@@ -55,18 +55,9 @@ struct RootView: View {
                             record: { await model.record($0) },
                             playAgain: playAnotherRound,
                             openCollection: { path.append(.collection) },
-                            showAscent: { path.append(.rankAscent($0)) },
                         )
                     case .parents: ParentsScreen(parental: model.parental)
                     case .collection: collection
-                    case .ladder: ladder
-                    case let .rankAscent(ascent):
-                        RankAscentScreen(
-                            ascent: ascent,
-                            photos: photos,
-                            goBack: { path.removeLast() },
-                            openLadder: { path.append(.ladder) },
-                        )
                     case .timeForTheNest:
                         // All the way home rather than back one: under this
                         // screen is either the celebration of the round that
@@ -93,23 +84,11 @@ struct RootView: View {
                 catalog: model.catalog,
                 photos: photos,
                 profiles: model.profiles,
-                openLadder: { path.append(.ladder) },
                 goBack: { path.removeLast() },
             )
         } else {
             CalmFailure(message: "profile.store.failed")
         }
-    }
-
-    /// The ladder without a child reads as a ladder nobody is on, which is
-    /// exactly what it is: eight rungs, none of them current. No failure
-    /// screen for that.
-    private var ladder: some View {
-        RankLadderScreen(
-            stars: model.activeProfile?.totalStars ?? 0,
-            photos: photos,
-            goBack: { path.removeLast() },
-        )
     }
 
     /// A game needs the pack the round is drawn from. The home screen is only
