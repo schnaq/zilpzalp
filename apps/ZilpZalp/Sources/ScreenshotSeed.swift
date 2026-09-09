@@ -35,12 +35,10 @@ enum ScreenshotSeed {
         "zilpzalp",
     ]
 
-    /// Enough stars for the fourth of the eight rungs, `Rank.rotkehlchen` at
-    /// 100 — the ladder read half way up rather than at either end.
-    ///
-    /// Chosen with the round the screenshot run plays in mind: three stars
-    /// bring the child to 131, still short of `Rank.star`'s 150, so the rank
-    /// ascent never comes over the round end and interrupts the run.
+    /// A believable number of stars for a child who has been playing a while,
+    /// and deliberately not one the run's own round pushes over a threshold:
+    /// the three stars it earns make 131, so nothing arrives over the round
+    /// end to celebrate a new rank and take the picture away mid-run.
     private static let totalStars = 128
 
     /// Rounds behind the stars above, at the two to three a round earns.

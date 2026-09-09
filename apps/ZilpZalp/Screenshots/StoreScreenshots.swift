@@ -1,11 +1,12 @@
 import XCTest
 
-/// The six pictures App Store Connect asks for, taken by playing the app.
+/// The five pictures App Store Connect asks for, taken by playing the app.
 ///
 /// Not a test of anything, and it asserts only enough to fail loudly rather
-/// than write six pictures of the wrong screen. What it produces is
-/// `01-home.png` to `06-ladder.png` under the directory `mise run screenshots`
-/// names — raw captures of the whole screen, no device frames and no captions.
+/// than write five pictures of the wrong screen. What it produces is
+/// `01-home.png` to `05-collection.png` under the directory
+/// `mise run screenshots` names — raw captures of the whole screen, no device
+/// frames and no captions.
 ///
 /// **No part of `mise run check` or of CI.** It wants a booted simulator and
 /// takes minutes, and neither belongs in a gate that runs on every commit.
@@ -33,7 +34,6 @@ final class StoreScreenshots: XCTestCase {
     private static let gameNames = "Wer ist das?"
     private static let gameCalls = "Wer singt da?"
     private static let album = "Meine Sammlung"
-    private static let ladder = "Deine Vogel-Leiter"
     private static let playAgain = "Nochmal spielen"
 
     /// A round is ten questions, and ten answered right at the first attempt
@@ -45,7 +45,7 @@ final class StoreScreenshots: XCTestCase {
     private static let arrival: TimeInterval = 60
 
     /// What a screen is given to come to rest before it is captured. The
-    /// slowest thing any of the six does is the round end, which writes the
+    /// slowest thing any of the five does is the round end, which writes the
     /// round down before it says anything about it and then pops the sticker
     /// in over `--dur-celebrate`.
     private static let settling: TimeInterval = 1.5
@@ -67,20 +67,20 @@ final class StoreScreenshots: XCTestCase {
         // of a running round, a chevron whose twin is still in the hierarchy
         // on the screen underneath — and a relaunch is both shorter to write
         // and a child that has not just played.
-        try captureHomeAndAlbum(app, into: output)
+        try captureHomeAndTheAlbum(app, into: output)
         captureNamesAndItsRoundEnd(app, into: output)
         captureCalls(app, into: output)
     }
 
-    // MARK: - The six screens
+    // MARK: - The five screens
 
-    /// 1, 5 and 6: the home screen, the album and the ladder.
+    /// 1 and 5: the home screen and the album.
     ///
-    /// The album and the ladder are taken before any round is played and not
-    /// after: a round asks for every species of the base pack, so one round
-    /// leaves an album with nothing still to find — and the gap is the whole
-    /// point of a sticker album.
-    private func captureHomeAndAlbum(_ app: XCUIApplication, into output: URL) throws {
+    /// The album is taken before any round is played and not after: a round
+    /// asks for every species of the base pack, so one round leaves an album
+    /// with nothing still to find — and the gap is the whole point of a
+    /// sticker album.
+    private func captureHomeAndTheAlbum(_ app: XCUIApplication, into output: URL) throws {
         launch(app)
 
         XCTAssertTrue(app.buttons[Self.gameNames].waitForExistence(timeout: Self.arrival))
@@ -91,12 +91,11 @@ final class StoreScreenshots: XCTestCase {
         capture("01-home", into: output)
 
         app.buttons[Self.album].tap()
-        XCTAssertTrue(app.buttons[Self.ladder].waitForExistence(timeout: Self.arrival))
+        // The album's own title rather than anything it offers: the home
+        // screen's door to it carries the same words, but as a button's label
+        // and never as a line of text on the page.
+        XCTAssertTrue(app.staticTexts[Self.album].waitForExistence(timeout: Self.arrival))
         capture("05-collection", into: output)
-
-        app.buttons[Self.ladder].tap()
-        XCTAssertTrue(app.staticTexts[Self.ladder].waitForExistence(timeout: Self.arrival))
-        capture("06-ladder", into: output)
     }
 
     /// 2 and 4: game 1's question, and the end of the round it opens.

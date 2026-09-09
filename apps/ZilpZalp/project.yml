@@ -120,7 +120,7 @@ targets:
           - Nunito-VariableFont_wght.ttf
 
   # The App Store screenshots (#168), and nothing else. It drives the app on a
-  # booted simulator and writes six PNGs, which is minutes of work and no
+  # booted simulator and writes five PNGs, which is minutes of work and no
   # gate — so it is deliberately absent from the ZilpZalp scheme, from
   # `mise run check`, from `mise run build` and from CI. `mise run screenshots`
   # is the only thing that builds it.
