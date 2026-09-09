@@ -136,6 +136,9 @@ struct LeaveRequest {
     /// nothing sounds over the question and nothing moves behind it — and the
     /// card's own sentence is not dropped for a call that is still playing
     /// (#30).
+    ///
+    /// Nothing here puts the question away again: leaving pops the screen, and
+    /// this request goes with it.
     mutating func ask(_ round: QuizSession?, orLeave leave: () -> Void) {
         round?.suspend()
         if round?.isFinished == false {

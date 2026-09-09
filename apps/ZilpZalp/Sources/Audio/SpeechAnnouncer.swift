@@ -109,9 +109,9 @@ final class SpeechAnnouncer: NSObject {
         // synthesiser would let the next question start under a sentence that
         // is still being said.
         //
-        // Never `self` here, though `stopSpeaking` below does exactly that:
-        // clearing `spokenUtterance` before the replacement is allocated is
-        // what reopens the address-reuse trap this property documents.
+        // A different one, never this one: this announcer's own hand-over is
+        // the two lines below, and stopping it here would only clear
+        // ``spokenUtterance`` on the way to setting it again.
         if let other = AudioFocus.speech, other !== self {
             other.stop()
         }
