@@ -77,7 +77,7 @@ public struct StickerProgress: View {
         HStack(spacing: (markerSize * StickerProgressMetrics.gapRatio).rounded()) {
             ForEach(Array(filled.enumerated()), id: \.offset) { marker in
                 Circle()
-                    .fill(marker.element ? ZColor.reward : ZColor.surfaceSunken)
+                    .fill(marker.element ? ZColor.rewardShadow : ZColor.surfaceSunken)
                     .frame(width: markerSize, height: markerSize)
             }
         }
