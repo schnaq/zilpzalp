@@ -1,0 +1,306 @@
+{
+  "id": "afrika",
+  "title": "Vögel Afrikas",
+  "birds": [
+    {
+      "id": "strauss",
+      "name": "Strauß",
+      "scientificName": "Struthio camelus",
+      "taxonID": 20526,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "rosaflamingo",
+      "name": "Rosaflamingo",
+      "scientificName": "Phoenicopterus roseus",
+      "taxonID": 73222,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "sekretaer",
+      "name": "Sekretär",
+      "scientificName": "Sagittarius serpentarius",
+      "taxonID": 117214,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "schuhschnabel",
+      "name": "Schuhschnabel",
+      "scientificName": "Balaeniceps rex",
+      "taxonID": 4338,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "marabu",
+      "name": "Marabu",
+      "scientificName": "Leptoptilos crumenifer",
+      "taxonID": 201031,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "brillenpinguin",
+      "name": "Brillenpinguin",
+      "scientificName": "Spheniscus demersus",
+      "taxonID": 3813,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "graupapagei",
+      "name": "Graupapagei",
+      "scientificName": "Psittacus erithacus",
+      "taxonID": 19269,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "gabelracke",
+      "name": "Gabelracke",
+      "scientificName": "Coracias caudatus",
+      "taxonID": 2269,
+      "article": "die",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "rotschnabeltoko",
+      "name": "Rotschnabeltoko",
+      "scientificName": "Tockus erythrorhynchus",
+      "taxonID": 203820,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "suedlicher-hornrabe",
+      "name": "Südlicher Hornrabe",
+      "scientificName": "Bucorvus leadbeateri",
+      "taxonID": 144281,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "kronenkranich",
+      "name": "Kronenkranich",
+      "scientificName": "Balearica regulorum",
+      "taxonID": 53,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "schreiseeadler",
+      "name": "Schreiseeadler",
+      "scientificName": "Icthyophaga vocifer",
+      "taxonID": 1505670,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "weissrueckengeier",
+      "name": "Weißrückengeier",
+      "scientificName": "Gyps africanus",
+      "taxonID": 5363,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "nimmersatt",
+      "name": "Nimmersatt",
+      "scientificName": "Mycteria ibis",
+      "taxonID": 4744,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "sattelstorch",
+      "name": "Sattelstorch",
+      "scientificName": "Ephippiorhynchus senegalensis",
+      "taxonID": 4754,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "hammerkopf",
+      "name": "Hammerkopf",
+      "scientificName": "Scopus umbretta",
+      "taxonID": 3834,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "helmperlhuhn",
+      "name": "Helmperlhuhn",
+      "scientificName": "Numida meleagris",
+      "taxonID": 1428,
+      "article": "das",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "dorfweber",
+      "name": "Dorfweber",
+      "scientificName": "Ploceus cucullatus",
+      "taxonID": 13796,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "karminspint",
+      "name": "Karminspint",
+      "scientificName": "Merops nubicus",
+      "taxonID": 2220,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "malachitnektarvogel",
+      "name": "Malachitnektarvogel",
+      "scientificName": "Nectarinia famosa",
+      "taxonID": 13300,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "graulaermvogel",
+      "name": "Graulärmvogel",
+      "scientificName": "Crinifer concolor",
+      "taxonID": 1506034,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "guinea-turako",
+      "name": "Guinea-Turako",
+      "scientificName": "Tauraco persa",
+      "taxonID": 7200,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "rotschnabel-madenhacker",
+      "name": "Rotschnabel-Madenhacker",
+      "scientificName": "Buphagus erythroryncha",
+      "taxonID": 1584479,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "riesentrappe",
+      "name": "Riesentrappe",
+      "scientificName": "Ardeotis kori",
+      "taxonID": 115,
+      "article": "die",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "nilgans",
+      "name": "Nilgans",
+      "scientificName": "Alopochen aegyptiaca",
+      "taxonID": 72486,
+      "article": "die",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "heiliger-ibis",
+      "name": "Heiliger Ibis",
+      "scientificName": "Threskiornis aethiopicus",
+      "taxonID": 3739,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "dreifarben-glanzstar",
+      "name": "Dreifarben-Glanzstar",
+      "scientificName": "Lamprotornis superbus",
+      "taxonID": 14939,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "kampfadler",
+      "name": "Kampfadler",
+      "scientificName": "Polemaetus bellicosus",
+      "taxonID": 5344,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "rosapelikan",
+      "name": "Rosapelikan",
+      "scientificName": "Pelecanus onocrotalus",
+      "taxonID": 4327,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    },
+    {
+      "id": "hagedasch",
+      "name": "Hagedasch",
+      "scientificName": "Bostrychia hagedash",
+      "taxonID": 3743,
+      "article": "der",
+      "pronunciation": null,
+      "photo": null,
+      "call": null
+    }
+  ]
+}
