@@ -25,6 +25,10 @@ enum SwipeBack {
 
     /// Nothing at all, for the screens that deliberately have no way back:
     /// the round end, the rank ascent, "Zeit fürs Nest".
+    ///
+    /// The rank ascent is the one screen that carries a back chevron and still
+    /// says this. It is left on purpose and deliberately, by that chevron or
+    /// by "Weiter", and not by a gesture — the decision #150 records.
     case disabled
 }
 
@@ -66,6 +70,14 @@ private struct SwipeBackHook: UIViewControllerRepresentable {
         // quiz's round is nil on the first pass and a session on the next.
         controller.policy = policy
     }
+
+    /// The screen can also go without UIKit ever saying goodbye — a changed
+    /// view identity takes the controller apart with no `viewWillDisappear`.
+    /// The delegates would then point at nothing, and a recognizer with no
+    /// delegate answers "yes" to everything.
+    static func dismantleUIViewController(_ controller: SwipeBackController, coordinator _: ()) {
+        controller.restore()
+    }
 }
 
 /// Carries one screen's ``SwipeBack`` to the navigation controller's back
@@ -87,11 +99,13 @@ private final class SwipeBackController: UIViewController, UIGestureRecognizerDe
     /// page of stickers would close the page, and a finger drawn over the quiz
     /// would ask whether to stop playing. What was asked for is the swipe in
     /// from the left, so that is what this lets through.
+    ///
+    /// The left and not the leading edge: the app ships in German and in no
+    /// other direction. A right-to-left language would have to mirror this
+    /// along with everything else.
     private static let edgeWidth: CGFloat = 24
 
-    var policy: SwipeBack {
-        didSet { apply() }
-    }
+    var policy: SwipeBack
 
     /// The navigation controller this is installed on, remembered so its
     /// recognizers can still be found on the way out, when
@@ -101,14 +115,14 @@ private final class SwipeBackController: UIViewController, UIGestureRecognizerDe
     /// The recognizers taken over, each with what it looked like before.
     private var taken: [Taken] = []
 
-    /// Whether the touch now on the screen came down in the leading band.
+    /// Whether the finger now on the screen came down in the band at the left
+    /// edge.
     private var startedAtTheEdge = false
 
-    /// One recognizer as it was found.
+    /// One recognizer and the delegate it had before.
     private struct Taken {
         let recognizer: UIGestureRecognizer
         let delegate: (any UIGestureRecognizerDelegate)?
-        let isEnabled: Bool
     }
 
     init(policy: SwipeBack) {
@@ -177,58 +191,35 @@ private final class SwipeBackController: UIViewController, UIGestureRecognizerDe
         for recognizer in backGestures {
             recognizer.delegate = self
         }
-        apply()
     }
 
-    /// What this recognizer looked like before any screen had an opinion about
-    /// it.
+    /// Which delegate this recognizer had before any screen had an opinion
+    /// about it.
     private func asFound(_ recognizer: UIGestureRecognizer) -> Taken {
         if let hook = recognizer.delegate as? SwipeBackController,
            let inherited = hook.taken.first(where: { $0.recognizer === recognizer })
         {
             return inherited
         }
-        return Taken(
-            recognizer: recognizer,
-            delegate: recognizer.delegate,
-            isEnabled: recognizer.isEnabled,
-        )
+        return Taken(recognizer: recognizer, delegate: recognizer.delegate)
     }
 
-    /// A screen with no way back does not even let the recognizers look at the
-    /// touch. The other two need them to try, so that
-    /// ``gestureRecognizerShouldBegin(_:)`` is asked.
+    /// Gives the gestures back — each one only if it is still ours, because a
+    /// screen pushed on top may have taken it over already, and then it is
+    /// theirs to give back.
     ///
-    /// Only ever written when it actually changes. The policy is handed over
-    /// again on every pass of the screen's body, and a recognizer told what it
-    /// already knows in the middle of a swipe would drop that swipe.
-    private func apply() {
-        for entry in taken
-            where entry.recognizer.delegate === self
-            && entry.recognizer.isEnabled != wantsGesture
-        {
-            entry.recognizer.isEnabled = wantsGesture
-        }
-    }
-
-    /// Puts the gestures back the way they were — each one only if it is still
-    /// ours, because a screen pushed on top may have taken it over already,
-    /// and then it is theirs to give back.
-    private func restore() {
+    /// Only the delegate is ever swapped, never `isEnabled`. Disabling a
+    /// recognizer that is at that moment recognizing cancels the swipe, and
+    /// the two moments this runs at — a screen appearing, a screen leaving —
+    /// are exactly the moments an interactive pop is under way. Saying no in
+    /// ``gestureRecognizerShouldBegin(_:)`` is the whole of ``SwipeBack``'s
+    /// authority, and it needs no second switch.
+    fileprivate func restore() {
         for entry in taken where entry.recognizer.delegate === self {
             entry.recognizer.delegate = entry.delegate
-            entry.recognizer.isEnabled = entry.isEnabled
         }
         taken = []
         installedOn = nil
-    }
-
-    private var wantsGesture: Bool {
-        if case .disabled = policy {
-            false
-        } else {
-            true
-        }
     }
 
     // MARK: - UIGestureRecognizerDelegate
@@ -237,10 +228,18 @@ private final class SwipeBackController: UIViewController, UIGestureRecognizerDe
     /// it is known: by the time the gesture is allowed to begin, the finger
     /// has moved, and the recognizers are UIKit's own — nothing here may
     /// assume what kind they are or ask them for a translation.
-    func gestureRecognizer(_: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+    ///
+    /// The *first* finger of the sequence, and no other: a hand resting on the
+    /// far side of an iPad while the other hand swipes in from the edge must
+    /// not turn that swipe into a touch that started in the middle.
+    func gestureRecognizer(
+        _ recognizer: UIGestureRecognizer,
+        shouldReceive touch: UITouch,
+    ) -> Bool {
+        guard recognizer.numberOfTouches == 0 else { return true }
         // In the navigation controller's own view, so a stack that does not
         // fill the display — an iPad in Slide Over — measures from its own
-        // leading edge rather than the screen's.
+        // left edge rather than the screen's.
         startedAtTheEdge = touch.location(in: installedOn?.view).x <= Self.edgeWidth
         return true
     }
