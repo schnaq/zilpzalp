@@ -24,7 +24,7 @@ import ZilpZalpUI
 struct QuitConfirmation: View {
     /// The question, in one place. Shown and — through ``ReadAloudOnce`` —
     /// said, so the two can never drift apart.
-    static var question: String {
+    private static var question: String {
         String(localized: "quiz.quit.question")
     }
 
