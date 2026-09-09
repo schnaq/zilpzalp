@@ -105,11 +105,13 @@ struct ManifestRulesTests {
 
         let downloader = PackDownloader(baseURL: stubBaseURL, directory: home)
 
-        await #expect(throws: PackDownloadError.manifestInvalid(
+        // Reported rather than thrown: one unusable pack must not take the
+        // packs beside it — or the app — down with it.
+        let installed = await downloader.installations()
+        #expect(installed.installed.isEmpty)
+        #expect(installed.failures == [PackDownloadError.manifestInvalid(
             packID: StubPack.id,
             reason: "the pack has recorded sentences but names no voice",
-        )) {
-            try await downloader.installedPacks()
-        }
+        )])
     }
 }

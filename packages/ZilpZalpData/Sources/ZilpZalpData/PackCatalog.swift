@@ -29,8 +29,9 @@ public struct PackCatalog: Sendable {
     /// Internal on purpose, and spelled out rather than left to the memberwise
     /// initialiser, which `directory` being private makes unusable: the two
     /// places a pack can lie are the bundle and `Packs/` in Application
-    /// Support, and `PackCatalog.bundled()` and `PackDownloader.catalog(for:)`
-    /// own those. Nobody else assembles a pack's path.
+    /// Support, and `PackCatalog.bundled()` and
+    /// `PackDownloader.installations()` own those. Nobody else assembles a
+    /// pack's path.
     init(pack: Pack, directory: URL) {
         self.pack = pack
         self.directory = directory
