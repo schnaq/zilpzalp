@@ -79,7 +79,9 @@ struct CollectionScreen: View {
         }
         .background(ZColor.surfacePage)
         .toolbar(.hidden, for: .navigationBar)
-        .navigationBarBackButtonHidden()
+        // The album has a back chevron, so it has the gesture that goes with
+        // one (#150).
+        .swipesBack(.pops)
         .onDisappear { announcer.stop() }
     }
 

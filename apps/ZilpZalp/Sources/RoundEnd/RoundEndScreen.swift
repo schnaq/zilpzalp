@@ -146,12 +146,11 @@ struct RoundEndScreen: View {
             .overlay(alignment: .bottom) { signature }
             // No `TopBar`: screen 1d has none, and a finished round is
             // nothing to go back into — "Nochmal spielen" is the way on. The
-            // bar is hidden like everywhere else in this app; it is
-            // `navigationBarBackButtonHidden()` that takes the swipe back
-            // with it, which is why it is here rather than only the toolbar
-            // line.
+            // bar is hidden like everywhere else in this app, and the swipe
+            // from the edge is turned down in so many words rather than left
+            // to follow from that (#150).
             .toolbar(.hidden, for: .navigationBar)
-            .navigationBarBackButtonHidden()
+            .swipesBack(.disabled)
             // A `Task` rather than `onAppear`: the round is written down
             // before anything is said about it, and writing is `await`. Its
             // cancellation is what stops the ascent from arriving behind a

@@ -112,10 +112,9 @@ struct QuitConfirmation: View {
 
 /// Everything the way out of a round has to decide, in one place.
 ///
-/// The back chevron asks it, and it is the only thing the swipe from the left
-/// edge will have to ask once that gesture comes back — so the decision lives
-/// here rather than in a button's closure, where a second caller could not
-/// reach it.
+/// The back chevron asks it, and so does the swipe in from the left edge
+/// (#150) — so the decision lives here rather than in a button's closure,
+/// where the second caller could not reach it.
 ///
 /// Main-actor isolated like everything it touches: a ``QuizSession`` is, and
 /// so is the screen that holds this.
@@ -158,15 +157,13 @@ struct LeaveRequest {
     }
 }
 
-/// Puts ``QuitConfirmation`` over a screen, and shuts the other way out of
-/// that screen while it is there.
+/// Puts ``QuitConfirmation`` over a screen, and points the other way out of
+/// that screen at the same question.
 ///
 /// The two belong together: a screen that asks before it is left must not be
-/// leavable by a swipe from the edge either. Measured in the simulator, that
-/// swipe is already dead wherever the navigation bar is hidden — the same
-/// synthetic swipe pops a screen of Settings.app — so this states the
-/// intention rather than inheriting it from a side effect, exactly as
-/// ``TimeForTheNestScreen`` does for its own one-way screen.
+/// leavable by a swipe from the edge either — so the swipe asks instead of
+/// leaving, which is ``SwipeBack/asks(_:)``. That is the whole difference to
+/// every other pushed screen, where the same gesture simply goes back.
 ///
 /// An overlay rather than a sheet: what makes the card understandable to
 /// somebody who cannot read is that the round is still there behind it,
@@ -196,7 +193,10 @@ private struct QuitQuestion: ViewModifier {
                 reduceMotion ? nil : ZMotion.easeOut.animation(duration: ZMotion.fast),
                 value: request.isAsking,
             )
-            .navigationBarBackButtonHidden()
+            // The gesture asks the same question as the chevron above it, and
+            // the round does not move an inch while it is answered. Nothing
+            // follows the finger, because nothing is going anywhere yet.
+            .swipesBack(.asks { $request.wrappedValue.ask(round, orLeave: onLeave) })
     }
 }
 

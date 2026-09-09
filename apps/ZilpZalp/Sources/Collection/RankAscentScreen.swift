@@ -92,7 +92,10 @@ struct RankAscentScreen: View {
         }
         .background(ZColor.surfacePage)
         .toolbar(.hidden, for: .navigationBar)
-        .navigationBarBackButtonHidden()
+        // The second beat of a celebration is left on purpose or not at all:
+        // the chevron and "Weiter" go back, a swipe does not. #150 names this
+        // screen with the round end and "Zeit fürs Nest".
+        .swipesBack(.disabled)
         .readAloudOnce(ascent.reached.ascentSentence)
         .onAppear { settled = true }
     }

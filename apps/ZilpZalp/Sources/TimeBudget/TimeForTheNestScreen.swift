@@ -63,8 +63,9 @@ struct TimeForTheNestScreen: View {
         .background(ZColor.surfaceForest)
         .overlay(alignment: .bottom) { signature }
         // No `TopBar`: 1k has none, and there is nothing here to go back to.
+        // No swipe either, said rather than inherited (#150).
         .toolbar(.hidden, for: .navigationBar)
-        .navigationBarBackButtonHidden()
+        .swipesBack(.disabled)
         .readAloudOnce(spoken)
     }
 
