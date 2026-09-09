@@ -1,6 +1,366 @@
 {
   "media": [
     {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "strauss",
+      "birdName": "Strauß",
+      "kind": "photo",
+      "attribution": "Tom Heijnen",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/231275074"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "rosaflamingo",
+      "birdName": "Rosaflamingo",
+      "kind": "photo",
+      "attribution": "SteveM4560",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/313297928"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "rosaflamingo",
+      "birdName": "Rosaflamingo",
+      "kind": "call",
+      "attribution": "Joost van Bruggen (XC432217)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/432217"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "sekretaer",
+      "birdName": "Sekretär",
+      "kind": "photo",
+      "attribution": "Jan Ebr &amp; Ivana Ebrová",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/71507882"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "schuhschnabel",
+      "birdName": "Schuhschnabel",
+      "kind": "photo",
+      "attribution": "Annika Lindqvist",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/31013216"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "marabu",
+      "birdName": "Marabu",
+      "kind": "photo",
+      "attribution": "avocat",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/310674150"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "brillenpinguin",
+      "birdName": "Brillenpinguin",
+      "kind": "photo",
+      "attribution": "Allan T. Souza",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/162713087"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "graupapagei",
+      "birdName": "Graupapagei",
+      "kind": "photo",
+      "attribution": "avocat",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/363520111"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "gabelracke",
+      "birdName": "Gabelracke",
+      "kind": "photo",
+      "attribution": "Timothy Whitehead",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/232759573"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "rotschnabeltoko",
+      "birdName": "Rotschnabeltoko",
+      "kind": "photo",
+      "attribution": "Jan Ebr &amp; Ivana Ebrová",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/112720162"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "suedlicher-hornrabe",
+      "birdName": "Südlicher Hornrabe",
+      "kind": "photo",
+      "attribution": "Wynand Uys",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/18058749"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "kronenkranich",
+      "birdName": "Kronenkranich",
+      "kind": "photo",
+      "attribution": "M Rutherford",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/38301444"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "kronenkranich",
+      "birdName": "Kronenkranich",
+      "kind": "call",
+      "attribution": "paulo kivuyo (XC627139)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/627139"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "schreiseeadler",
+      "birdName": "Schreiseeadler",
+      "kind": "photo",
+      "attribution": "avocat",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/108635650"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "weissrueckengeier",
+      "birdName": "Weißrückengeier",
+      "kind": "photo",
+      "attribution": "Tom Heijnen",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/231275237"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "nimmersatt",
+      "birdName": "Nimmersatt",
+      "kind": "photo",
+      "attribution": "Timothy Whitehead",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/231594492"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "sattelstorch",
+      "birdName": "Sattelstorch",
+      "kind": "photo",
+      "attribution": "Wynand Uys",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/10002585"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "hammerkopf",
+      "birdName": "Hammerkopf",
+      "kind": "photo",
+      "attribution": "avocat",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/108400859"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "helmperlhuhn",
+      "birdName": "Helmperlhuhn",
+      "kind": "photo",
+      "attribution": "Peter Archdale",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/104021490"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "helmperlhuhn",
+      "birdName": "Helmperlhuhn",
+      "kind": "call",
+      "attribution": "Kileo Jumah (XC1149015)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/1149015"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "dorfweber",
+      "birdName": "Dorfweber",
+      "kind": "photo",
+      "attribution": "Tommy Andriollo",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/247506421"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "karminspint",
+      "birdName": "Karminspint",
+      "kind": "photo",
+      "attribution": "Rafael Würtemberger",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/222517435"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "malachitnektarvogel",
+      "birdName": "Malachitnektarvogel",
+      "kind": "photo",
+      "attribution": "Cecile Roux",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/283577864"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "graulaermvogel",
+      "birdName": "Graulärmvogel",
+      "kind": "photo",
+      "attribution": "Wolfgang Ahlmer",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/178051888"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "guinea-turako",
+      "birdName": "Guinea-Turako",
+      "kind": "photo",
+      "attribution": "Daniel S. Katz",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/151050465"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "rotschnabel-madenhacker",
+      "birdName": "Rotschnabel-Madenhacker",
+      "kind": "photo",
+      "attribution": "gwar",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/254912140"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "riesentrappe",
+      "birdName": "Riesentrappe",
+      "kind": "photo",
+      "attribution": "Tristan Jobin",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/281119644"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "nilgans",
+      "birdName": "Nilgans",
+      "kind": "photo",
+      "attribution": "Justin",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/4583478"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "nilgans",
+      "birdName": "Nilgans",
+      "kind": "call",
+      "attribution": "Sonothèque ADVL (XC918822)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/918822"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "heiliger-ibis",
+      "birdName": "Heiliger Ibis",
+      "kind": "photo",
+      "attribution": "gianluigi",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/69805359"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "dreifarben-glanzstar",
+      "birdName": "Dreifarben-Glanzstar",
+      "kind": "photo",
+      "attribution": "Annika Lindqvist",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/32056150"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "kampfadler",
+      "birdName": "Kampfadler",
+      "kind": "photo",
+      "attribution": "Mark Bolnik",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/99602493"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "kampfadler",
+      "birdName": "Kampfadler",
+      "kind": "call",
+      "attribution": "Kileo Jumah (XC1148983)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/1148983"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "rosapelikan",
+      "birdName": "Rosapelikan",
+      "kind": "photo",
+      "attribution": "marsyd",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/223582865"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "hagedasch",
+      "birdName": "Hagedasch",
+      "kind": "photo",
+      "attribution": "Martin Gutewort",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/197640384"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "hagedasch",
+      "birdName": "Hagedasch",
+      "kind": "call",
+      "attribution": "Frank shirima (XC1163454)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/1163454"
+    },
+    {
       "packID": "basis",
       "packTitle": "Unsere ersten Vögel",
       "birdID": "amsel",
