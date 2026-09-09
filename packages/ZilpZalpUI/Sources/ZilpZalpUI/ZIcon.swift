@@ -1,9 +1,9 @@
 /// Type-safe names for the icon glyphs vendored from [Lucide](https://lucide.dev)
-/// 1.28.0 into `Resources/Icons.xcassets`. Each case's raw value matches both
-/// the upstream icon name and the `.imageset` it resolves to, so there is
-/// never a hand-typed string between a component and its glyph — except for a
-/// case Lucide does not ship, like ``starFilled``: a derivative of ours, which
-/// says in its own doc comment what it was derived from and how.
+/// 1.28.0 into `Resources/Icons.xcassets`. Each case's raw value matches the
+/// `.imageset` it resolves to, so there is never a hand-typed string between a
+/// component and its glyph, and — except where a case is a derivative of ours,
+/// like ``starFilled``, which says so in its own doc comment — it matches the
+/// upstream icon name as well.
 ///
 /// To add an icon: fetch its SVG from the pinned Lucide tag, drop it into a
 /// new `<name>.imageset` next to the others (template rendering, preserved
