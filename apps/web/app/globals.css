@@ -177,11 +177,10 @@ h3 {
   line-height: 1.1;
   text-wrap: balance;
   margin: 0;
-  /* German legal headings are single words wider than a phone —
-     "Geschäftsbedingungen" alone overruns a 390 px screen. `lang="de"` is set
-     on <html>, so the browser hyphenates properly rather than chopping. */
+  /* A German compound can be wider than a phone; this is the floor that keeps
+     one from pushing the page sideways. Hyphenation is not switched on here —
+     see the legal headings below. */
   overflow-wrap: break-word;
-  hyphens: auto;
 }
 
 h1 {
@@ -692,6 +691,17 @@ section {
   border-bottom: 1px solid var(--line);
   padding-bottom: var(--s-5);
   margin-bottom: var(--s-6);
+}
+
+/* Only the legal headings hyphenate. "Geschäftsbedingungen" is 354 px of
+   Baloo 2 against a 342 px column on a 390 px phone and has nowhere else to
+   break; `lang="de"` on <html> gets it a proper German hyphen. The landing
+   page is left out on purpose — its hero has room to break between words, and
+   a hyphen in the first line a parent reads looks like a mistake. */
+.legal-head h1,
+.prose h2,
+.prose h3 {
+  hyphens: auto;
 }
 
 .legal-head h1 {
