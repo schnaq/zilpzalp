@@ -1,5 +1,4 @@
 import SwiftUI
-import UIKit
 import ZilpZalpData
 import ZilpZalpUI
 
@@ -28,33 +27,6 @@ struct RoundEndScreen: View {
     /// The strip at the foot that belongs to the wordmark, so the
     /// celebration is centred in what is left rather than behind it.
     private static let signatureBand = Wordmark.minimumSize + 2 * ZSpacing.step5
-
-    /// How far the praise may shrink before it would rather break: down to
-    /// `--text-title`, one step under the `--text-display-2` a phone gets.
-    ///
-    /// A guard, not a target — the same one ``TopBarTitle`` carries, and for
-    /// the same reason. "Super gemacht!" measures 7.149 times the type size
-    /// in the bundled Baloo 2 ExtraBold (CoreText), so 343.2 pt at 48 pt.
-    /// A 390 pt phone leaves 342 pt between the screen's two `--space-5`
-    /// paddings: 1.2 pt short, and that is the whole of #137 — the 402 pt
-    /// iPhone 17 has 354 pt and shows the line whole. SwiftUI truncates it
-    /// there rather than wrapping it: the column hands the line the ideal
-    /// height it asks for, and that is one line's. It *can* wrap — measured,
-    /// a `.fixedSize(horizontal: false, vertical: true)` on the same `Text`
-    /// puts "gemacht!" on a second line — but two headlines push the sticker
-    /// and both buttons down, and screen 1d draws one.
-    ///
-    /// Spelled from the two steps a phone uses, because a phone is where the
-    /// room runs out. What it actually spends: 0.997 at 390 pt, 0.953 at the
-    /// 375 pt of an iPhone SE — 45.7 pt, a difference no one sees — and 0.79 at the
-    /// narrowest compact width the app can meet at all, an iPad in Slide Over
-    /// at 320 pt. The iPad itself never engages it: `--text-hero` asks for
-    /// 629.1 pt and the narrowest iPad in portrait, the mini's 744, leaves
-    /// 648 pt after the screen gutters.
-    ///
-    /// The design never drew this line on a phone, and its own headline is
-    /// the shorter "Gut gemacht!" — 293.6 pt at 48 pt, which fits everywhere.
-    private static let titleScaleFloor = ZType.Step.title.size / ZType.Step.display2.size
 
     /// How long the celebration keeps the screen before the rank ascent
     /// arrives over it: long enough for the sticker to land and the praise to
@@ -90,9 +62,9 @@ struct RoundEndScreen: View {
 
     /// Flipped once on appearance to start the bob and the pop.
     ///
-    /// With Reduce Motion on, both animations are `nil` and the stars never
-    /// leave their rest position, so the flip only puts the sticker at full
-    /// size: nothing moves, and nothing is left half-drawn.
+    /// With Reduce Motion on the pop is `nil`, so the flip only puts the
+    /// sticker at full size: nothing moves, and nothing is left half-drawn.
+    /// The stars keep that promise themselves — see ``RoundEndStars``.
     @State private var settled = false
 
     /// The bird on the sticker, resolved once: a `View` is built again on
@@ -132,6 +104,35 @@ struct RoundEndScreen: View {
     /// the sizes on width put a hero line into 430 pt of height there.
     private var isTight: Bool {
         isCompact || isShort
+    }
+
+    /// The step the praise is set in: the design's `--text-hero` where the
+    /// screen has an iPad to itself, one step down where it has not.
+    private var titleStep: ZType.Step {
+        isTight ? .display2 : .hero
+    }
+
+    /// How far the praise may shrink before it would rather break: never
+    /// below `--text-title`, whichever step it was set in.
+    ///
+    /// A guard, not a target — the one ``TopBarTitle`` carries, for the same
+    /// reason. "Super gemacht!" measures 7.149 times the type size in the
+    /// bundled Baloo 2 ExtraBold (CoreText), so 343.2 pt at `--text-display-2`.
+    /// A 390 pt phone leaves 342 pt between the screen's two `--space-5`
+    /// paddings: 1.2 pt short, and that is the whole of #137 — the 402 pt
+    /// iPhone 17 has 354 pt and shows the line whole. SwiftUI truncates it
+    /// there rather than wrapping: the column hands the line the ideal height
+    /// it asks for, and that is one line's. It *can* wrap — a `.fixedSize`
+    /// puts "gemacht!" on a second line — but two headlines push the sticker
+    /// and both buttons down, and screen 1d draws one.
+    ///
+    /// What it spends: 0.997 at 390 pt, 0.953 at the 375 pt of an iPhone SE.
+    /// A full-screen iPad never reaches it — `--text-hero` asks for 629.1 pt
+    /// and the narrowest iPad in portrait, the mini's 744, leaves 648 pt —
+    /// but an iPad sharing its screen does: half of a 13" in landscape is
+    /// 678 pt, still a regular width, and the hero line shrinks to 0.925.
+    private var titleScaleFloor: CGFloat {
+        ZType.Step.title.size / titleStep.size
     }
 
     var body: some View {
@@ -196,19 +197,17 @@ struct RoundEndScreen: View {
     private var praise: some View {
         VStack(spacing: ZSpacing.step3) {
             Text("roundEnd.title")
-                .typeStyle(isTight ? .display2 : .hero, .display, weight: .extraBold)
+                .typeStyle(titleStep, .display, weight: .extraBold)
                 // One line, shrunk to fit rather than cut off — see
                 // ``titleScaleFloor``. The praise is the one sentence a child
                 // who cannot read is meant to have read out to them, and a
                 // headline that ends in an ellipsis is not that sentence.
-                //
-                // Deliberately not `typeStyle(singleLine:)`, which would put
-                // the line in the design's box: `--lh-display-2` is 52.8 pt
-                // against Baloo 2's own 76.9 pt, and the celebration under it
-                // would move up by the difference. The same choice, and the
-                // same two modifiers, as ``TopBarTitle``.
+                // Deliberately not `typeStyle(singleLine:)`, which would give
+                // the line the design's 52.8 pt box instead of Baloo 2's own
+                // 76.9 pt one and lift the celebration under it; the two
+                // modifiers below are what ``TopBarTitle`` uses instead.
                 .lineLimit(1)
-                .minimumScaleFactor(Self.titleScaleFloor)
+                .minimumScaleFactor(titleScaleFloor)
                 .foregroundStyle(ZColor.white)
 
             Text(verbatim: starsEarned)
