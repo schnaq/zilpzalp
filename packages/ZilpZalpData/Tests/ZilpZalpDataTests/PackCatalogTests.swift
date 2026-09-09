@@ -1,4 +1,3 @@
-import CryptoKit
 import Foundation
 import Testing
 
@@ -41,7 +40,7 @@ struct PackCatalogTests {
 
         for bird in catalog.pack.birds {
             let url = try #require(catalog.photoURL(for: bird), "no photo for '\(bird.id)'")
-            let hex = try Self.sha256(of: url)
+            let hex = try sha256(of: url)
 
             #expect(hex == bird.photo.sha256, "photo of '\(bird.id)' does not match its sha256")
         }
@@ -57,7 +56,7 @@ struct PackCatalogTests {
         for bird in catalog.pack.birds {
             let call = try #require(bird.call, "no call declared for '\(bird.id)'")
             let url = try #require(catalog.callURL(for: bird), "no call file for '\(bird.id)'")
-            let hex = try Self.sha256(of: url)
+            let hex = try sha256(of: url)
 
             #expect(hex == call.sha256, "call of '\(bird.id)' does not match its sha256")
         }
@@ -77,7 +76,7 @@ struct PackCatalogTests {
                     catalog.speechURL(for: bird, sentence: sentence),
                     "no file for '\(bird.id)' / '\(sentence)'",
                 )
-                let hex = try Self.sha256(of: url)
+                let hex = try sha256(of: url)
 
                 #expect(
                     hex == clip.sha256,
@@ -98,7 +97,7 @@ struct PackCatalogTests {
         let silent = try #require(catalog.pack.birds.first { $0.id == "stumm" })
 
         let url = try #require(catalog.speechURL(for: amsel, sentence: "quiz.prompt.whereIs"))
-        #expect(try Self.sha256(of: url) == amsel.speech?["quiz.prompt.whereIs"]?.sha256)
+        #expect(try sha256(of: url) == amsel.speech?["quiz.prompt.whereIs"]?.sha256)
         #expect(catalog.speechURL(for: amsel, sentence: "collection.name") == nil)
         #expect(catalog.speechURL(for: silent, sentence: "quiz.prompt.whereIs") == nil)
         // The licence of all of them, once, where the credits read it.
@@ -120,13 +119,6 @@ struct PackCatalogTests {
             pack: PackManifest.decode(Data(contentsOf: url)),
             directory: url.deletingLastPathComponent(),
         )
-    }
-
-    /// The lowercase hex SHA-256 of a file, spelled the way the manifest
-    /// records it — the one comparison every media check above makes.
-    private static func sha256(of url: URL) throws -> String {
-        let data = try Data(contentsOf: url)
-        return SHA256.hash(data: data).map { String(format: "%02x", $0) }.joined()
     }
 
     /// "Wo ist **die** Amsel?" — the article is spoken and written, and a

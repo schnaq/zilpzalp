@@ -14,10 +14,10 @@ public enum SpeechCatalogError: Error, Sendable {
 /// A pack's manifest with `lines` where the birds would be. It lives outside
 /// `data/packs/` for exactly that reason: the licence gate reads that
 /// directory as packs, and a document without birds has to fail there.
+/// Only what the app reads: the document also carries an `id` and the `title`
+/// the credits are generated with, and `tools/generate_credits.py` is where
+/// those are needed.
 struct SpeechManifest: Codable, Sendable, Hashable {
-    let id: String
-    /// Product text — what the credits call this set in front of a parent.
-    let title: String
     /// Who spoke the lines. `nil` while there are none.
     let voice: Voice?
     /// String Catalog key → clip. Empty until the sentences have been recorded.
@@ -78,12 +78,6 @@ public struct SpeechCatalog: Sendable {
     /// file is not there. The caller then speaks the sentence with
     /// `AVSpeechSynthesizer` (#151) rather than saying nothing.
     public func url(for sentence: String) -> URL? {
-        guard let clip = manifest.lines[sentence] else { return nil }
-
-        let file = directory.appending(path: clip.file)
-        guard FileManager.default.fileExists(atPath: file.path(percentEncoded: false)) else {
-            return nil
-        }
-        return file
+        manifest.lines[sentence].map(\.file).flatMap(directory.mediaFile)
     }
 }

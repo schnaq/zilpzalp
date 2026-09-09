@@ -94,11 +94,15 @@ class LicenseGateTestCase(unittest.TestCase):
         path.write_text(json.dumps(document), encoding="utf-8")
         return path
 
-    def write_photo(self, relative: str = "photos/amsel.jpg", content: bytes = PHOTO_BYTES) -> Path:
+    def write_asset(self, relative: str, content: bytes) -> Path:
+        """Write one file where a manifest in the packs directory names it."""
         path = self.packs_dir / relative
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_bytes(content)
         return path
+
+    def write_photo(self, relative: str = "photos/amsel.jpg", content: bytes = PHOTO_BYTES) -> Path:
+        return self.write_asset(relative, content)
 
     def write_pack(self, **photo_fields) -> Path:
         """Write the local photo plus a one-bird manifest whose photo carries `photo_fields`."""
@@ -106,10 +110,7 @@ class LicenseGateTestCase(unittest.TestCase):
         return self.write_manifest({"id": "basis", "birds": [bird(photo=media(**photo_fields))]})
 
     def write_clip(self, relative: str = CLIP_FILE, content: bytes = CLIP_BYTES) -> Path:
-        path = self.packs_dir / relative
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_bytes(content)
-        return path
+        return self.write_asset(relative, content)
 
     def write_speech_manifest(self, document) -> Path:
         """Write the manifest of the sentences that belong to no pack."""

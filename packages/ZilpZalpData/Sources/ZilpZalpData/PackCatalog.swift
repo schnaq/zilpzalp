@@ -64,7 +64,7 @@ public struct PackCatalog: Sendable {
     /// themselves, so a pack that moves — into the caches directory for a
     /// downloaded pack, later — changes nothing in the views.
     public func photoURL(for bird: Bird) -> URL? {
-        fileURL(bird.photo.file)
+        directory.mediaFile(bird.photo.file)
     }
 
     /// The recording of `bird`'s call on disk, `nil` when the species carries
@@ -75,7 +75,7 @@ public struct PackCatalog: Sendable {
     /// stay callless — the schema makes ``Bird/call`` optional — and where a
     /// pack lies is this type's secret, not the player's.
     public func callURL(for bird: Bird) -> URL? {
-        bird.call.map(\.file).flatMap(fileURL)
+        bird.call.map(\.file).flatMap(directory.mediaFile)
     }
 
     /// The recorded clip for `sentence` about `bird`, `nil` when the pack
@@ -86,18 +86,6 @@ public struct PackCatalog: Sendable {
     /// the app then speaks the sentence with `AVSpeechSynthesizer` (#151)
     /// rather than saying nothing. `sentence` is a String Catalog key.
     public func speechURL(for bird: Bird, sentence: String) -> URL? {
-        bird.speech?[sentence].map(\.file).flatMap(fileURL)
-    }
-
-    /// The file a manifest declares, `nil` when it is not on disk.
-    ///
-    /// A manifest names a medium relative to itself, and that one rule is what
-    /// all three accessors above share.
-    private func fileURL(_ relative: String) -> URL? {
-        let file = directory.appending(path: relative)
-        guard FileManager.default.fileExists(atPath: file.path(percentEncoded: false)) else {
-            return nil
-        }
-        return file
+        bird.speech?[sentence].map(\.file).flatMap(directory.mediaFile)
     }
 }

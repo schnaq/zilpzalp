@@ -93,7 +93,7 @@ def differences(source: Path, destination: Path) -> list[str]:
 def sync(source: Path, destination: Path) -> list[str]:
     """Make `destination` identical to `source`. Returns what differed."""
     if not source.is_dir():
-        raise FileNotFoundError(f"no pack at {source}")
+        raise FileNotFoundError(f"nothing to sync at {source}")
 
     changed = differences(source, destination) if destination.is_dir() else ["(the whole directory)"]
     if changed:
@@ -121,9 +121,9 @@ def main() -> int:
 
         stale += 1
         listing = ", ".join(changed)
-        # Named as the repository names it where that is possible; a source
-        # outside the repository — a test's temporary directory — as it is.
-        origin = source if not source.is_relative_to(REPO_ROOT) else source.relative_to(REPO_ROOT)
+        # Named as the repository names it — `data/speech` rather than an
+        # absolute path. Only a test's temporary directory lies outside.
+        origin = source.relative_to(REPO_ROOT) if source.is_relative_to(REPO_ROOT) else source
         message = (
             f"{label}: the bundled copy was stale and has been refreshed from "
             f"{origin} ({listing}). Commit the result."

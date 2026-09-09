@@ -264,6 +264,17 @@ class VoicesAreCredited(CreditsTestCase):
 
         self.assertEqual(self.run_main(), 1)
 
+    def test_a_fixed_manifest_without_lines_exits_1(self) -> None:
+        # The gate fails such a manifest loudly with "no lines found". The
+        # credits must not shrug at it and drop the voice in silence.
+        self.write_pack("basis", [bird()])
+        self.speech_dir.mkdir(parents=True, exist_ok=True)
+        (self.speech_dir / "manifest.json").write_text(
+            json.dumps({"id": "speech", "title": "Ansagen", "voice": voice()}), encoding="utf-8"
+        )
+
+        self.assertEqual(self.run_main(), 1)
+
     def test_a_voice_that_is_not_an_object_exits_1(self) -> None:
         self.write_pack("basis", [bird(speech={"quiz.prompt.whereIs": clip()})], voice="Johanna")
 

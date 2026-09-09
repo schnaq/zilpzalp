@@ -125,6 +125,17 @@ def link(label: str, url: str) -> str:
     return f"[{label}]({url})"
 
 
+def licence_cell(identifier: str) -> str:
+    """A licence as a table cell: its public name, linked to its deed.
+
+    An id the list above does not know is rendered as itself — the gate stays
+    the authority on what is allowed, and it says so on the next line of
+    `mise run check`.
+    """
+    label, deed = LICENCES.get(identifier, (identifier, ""))
+    return link(label, deed) if deed else cell(label)
+
+
 def field(media: dict, name: str, label: str) -> str:
     """Return the non-empty string value of `name`, or raise naming the field."""
     value = media.get(name)
@@ -187,35 +198,31 @@ def pack_media(document: dict, pack_id: str, pack_title: str) -> list[dict]:
     return entries
 
 
-def clip_count(document: dict) -> int:
-    """How many speech clips a manifest declares.
-
-    A pack keeps them under its birds, one sentence key per clip; the fixed
-    set keeps them under `lines`. Only the number matters here — the licence
-    gate is what checks them.
-    """
-    lines = document.get("lines")
-    if isinstance(lines, dict):
-        return len(lines)
-
-    total = 0
-    for bird in document.get("birds") or []:
-        speech = bird.get("speech") if isinstance(bird, dict) else None
-        if isinstance(speech, dict):
-            total += len(speech)
-    return total
+def pack_clips(document: dict) -> int:
+    """How many speech clips a pack's birds declare — one sentence key per clip."""
+    return sum(
+        len(bird["speech"])
+        for bird in document.get("birds") or []
+        if isinstance(bird, dict) and isinstance(bird.get("speech"), dict)
+    )
 
 
-def manifest_voice(document: dict, source: str, used_in: str) -> dict | None:
+def manifest_voice(document: dict, source: str, used_in: str, clips: int) -> dict | None:
     """The credit entry for one manifest's voice, `None` when there is nothing to credit.
 
     A voice that has spoken no clip is not credited: a name in the app that
     belongs to no asset is as wrong as an asset nobody names. One entry per
     manifest, so a voice heard in two packs is named for each of them —
     grouping is the credits screen's business, not this file's.
+
+    `clips` is passed in rather than counted here: a pack keeps its clips under
+    the birds and the fixed set under `lines`, and each caller already knows
+    which document it is reading. Deciding that from the document's own keys
+    would let a stray `lines` in a pack silently change the answer — the same
+    reason `tools/license_gate.py` picks its entry point by location.
     """
     voice = document.get("voice")
-    if voice is None or not clip_count(document):
+    if voice is None or not clips:
         return None
     if not isinstance(voice, dict):
         raise ValueError(f"{source} / voice: is not an object")
@@ -245,7 +252,11 @@ def read_fixed_sentences(path: Path) -> dict | None:
     if not isinstance(document, dict):
         raise ValueError(f"{path.name}: is not an object")
 
-    return manifest_voice(document, path.name, field(document, "title", path.name))
+    lines = document.get("lines")
+    if not isinstance(lines, dict):
+        raise ValueError(f"{path.name}: no lines found (expected an object whose 'lines' key holds an object)")
+
+    return manifest_voice(document, path.name, field(document, "title", path.name), len(lines))
 
 
 def read_packs(packs_dir: Path) -> list[dict]:
@@ -274,7 +285,7 @@ def read_packs(packs_dir: Path) -> list[dict]:
                 "id": pack_id,
                 "title": pack_title,
                 "media": pack_media(document, pack_id, pack_title),
-                "voice": manifest_voice(document, source, pack_title),
+                "voice": manifest_voice(document, source, pack_title, pack_clips(document)),
             }
         )
 
@@ -307,13 +318,11 @@ def render_markdown(packs: list[dict], voices: list[dict]) -> str:
             "| --- | --- | --- | --- | --- |",
         ]
         for entry in pack["media"]:
-            label, deed = LICENCES.get(entry["license"], (entry["license"], ""))
-            licence = link(label, deed) if deed else cell(label)
             lines.append(
                 f"| {cell(entry['birdName'])} "
                 f"| {entry['kind'].capitalize()} "
                 f"| {cell(entry['attribution'])} "
-                f"| {licence} "
+                f"| {licence_cell(entry['license'])} "
                 # An autolink, so the URL itself stays readable: proof of origin
                 # is worth more here than a tidy column.
                 f"| <{entry['sourceURL']}> |"
@@ -330,11 +339,9 @@ def render_markdown(packs: list[dict], voices: list[dict]) -> str:
             "| --- | --- | --- | --- |",
         ]
         for entry in voices:
-            label, deed = LICENCES.get(entry["license"], (entry["license"], ""))
-            licence = link(label, deed) if deed else cell(label)
             lines.append(
                 f"| {cell(entry['attribution'])} "
-                f"| {licence} "
+                f"| {licence_cell(entry['license'])} "
                 f"| {cell(entry['usedIn'])} "
                 f"| <{entry['sourceURL']}> |"
             )

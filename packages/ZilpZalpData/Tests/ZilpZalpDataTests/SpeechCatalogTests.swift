@@ -1,4 +1,3 @@
-import CryptoKit
 import Foundation
 import Testing
 @testable import ZilpZalpData
@@ -23,7 +22,7 @@ struct SpeechCatalogTests {
         let catalog = try Self.fixture()
 
         let url = try #require(catalog.url(for: "roundEnd.title"))
-        #expect(try Self.sha256(of: url) == Self.silenceSHA256)
+        #expect(try sha256(of: url) == Self.silenceSHA256)
     }
 
     /// The branch the bundled set cannot reach on its own: a line the manifest
@@ -41,7 +40,6 @@ struct SpeechCatalogTests {
         let data = try Data(contentsOf: Self.fixtureManifest())
         let manifest = try PackManifest.decode(SpeechManifest.self, from: data)
 
-        #expect(manifest.title == "Ansagen")
         #expect(manifest.voice?.license == .ccBy)
         #expect(manifest.voice?.attribution == "Stimme: Niemand")
         #expect(manifest.lines["roundEnd.title"]?.text == "Super gemacht!")
@@ -76,10 +74,5 @@ struct SpeechCatalogTests {
             manifest: PackManifest.decode(SpeechManifest.self, from: Data(contentsOf: url)),
             directory: url.deletingLastPathComponent(),
         )
-    }
-
-    private static func sha256(of url: URL) throws -> String {
-        let data = try Data(contentsOf: url)
-        return SHA256.hash(data: data).map { String(format: "%02x", $0) }.joined()
     }
 }
