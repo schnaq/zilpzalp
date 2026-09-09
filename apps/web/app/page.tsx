@@ -175,7 +175,7 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
-              <p style={{ marginTop: 'var(--s-5)' }}>
+              <p>
                 Ausführlich steht das in der{' '}
                 <Link href="/datenschutz">Datenschutzerklärung</Link>.
               </p>
@@ -186,7 +186,7 @@ export default function Home() {
 
       <section>
         <div className="wrap">
-          <div className="section-head">
+          <div className="section-head section-head--tight">
             <h2>Echte Vögel, freie Medien</h2>
           </div>
           <p>
@@ -202,7 +202,7 @@ export default function Home() {
 
       <section>
         <div className="wrap">
-          <div className="section-head">
+          <div className="section-head section-head--tight">
             <h2>Wer ZilpZalp macht</h2>
           </div>
           <div className="makers">

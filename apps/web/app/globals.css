@@ -324,6 +324,12 @@ section {
   margin-bottom: var(--s-7);
 }
 
+/* A heading with nothing under it needs less air below than a heading with a
+   lead paragraph — otherwise the text it introduces floats away from it. */
+.section-head--tight {
+  margin-bottom: var(--s-5);
+}
+
 .lead {
   font-size: var(--step-1);
   line-height: 1.55;
@@ -360,9 +366,8 @@ section {
 }
 
 .hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+  display: grid;
+  justify-items: start;
   gap: var(--s-4);
   margin-top: var(--s-6);
 }
@@ -388,9 +393,9 @@ section {
 }
 
 .hero-note {
-  font-size: var(--step--1);
-  color: var(--muted);
-  max-width: 22ch;
+  font-size: var(--step-0);
+  color: var(--body);
+  max-width: 40ch;
 }
 
 /* The mark on its meadow: the app's own tile, at rest. */
@@ -491,7 +496,6 @@ section {
 
 .facts div {
   display: grid;
-  gap: var(--s-1);
 }
 
 .facts dt {
@@ -499,6 +503,10 @@ section {
   font-size: var(--step-1);
   font-weight: 700;
   color: var(--strong);
+  /* Baloo 2 carries a line box half again as tall as its point size; without
+     this the label drifts away from the line it belongs to. */
+  line-height: 1.25;
+  margin-bottom: var(--s-1);
 }
 
 .facts dd {
@@ -509,10 +517,43 @@ section {
 
 /* Screenshots ------------------------------------------------------------- */
 
+/* Five phone screens are five tall portraits: stacked on a phone they would be
+   four screens of scrolling, so up to the wide breakpoint they lie in a
+   swipeable strip — the way a store page shows them — and only then in one row
+   of five. */
 .shots {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
-  gap: var(--s-6) var(--s-5);
+  display: flex;
+  gap: var(--s-5);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: var(--s-4);
+  /* The strip may bleed to the edge of the viewport while the text keeps the
+     gutter, so the last card does not look cut off. */
+  margin-inline: calc(-1 * var(--s-5));
+  padding-inline: var(--s-5);
+  /* Without this the mandatory snap pulls the first card past the gutter and
+     parks it flush against the edge of the screen. */
+  scroll-padding-inline: var(--s-5);
+}
+
+.shots > * {
+  flex: 0 0 min(58%, 14rem);
+  scroll-snap-align: start;
+}
+
+@media (min-width: 62rem) {
+  .shots {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    overflow: visible;
+    margin-inline: 0;
+    padding-inline: 0;
+    padding-bottom: 0;
+  }
+
+  .shots > * {
+    flex: initial;
+  }
 }
 
 .shot {
@@ -586,6 +627,10 @@ section {
 
 .column h3 {
   margin-bottom: var(--s-4);
+}
+
+.column > p {
+  margin-top: var(--s-5);
 }
 
 .ticks {
@@ -679,6 +724,24 @@ section {
   padding-left: 1.2em;
   display: grid;
   gap: var(--s-2);
+}
+
+/* One question with its answer. A grid item of .prose, so its own two children
+   need their own, tighter gap. */
+.faq {
+  display: grid;
+  gap: var(--s-2);
+}
+
+/* Real identifiers — a file name, an iOS API — not monospace as decoration. */
+.prose code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.9em;
+  background: var(--sunken);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0.05em 0.35em;
+  white-space: nowrap;
 }
 
 .prose li::marker {

@@ -133,7 +133,7 @@ export default function Support() {
 
       <h2>Häufige Fragen</h2>
       {FAQ.map((entry) => (
-        <div key={entry.q}>
+        <div className="faq" key={entry.q}>
           <h3>{entry.q}</h3>
           <p>{entry.a}</p>
         </div>
