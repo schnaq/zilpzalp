@@ -65,7 +65,12 @@ enum SpeechVoice {
         // Public on purpose: a voice's name and quality are properties of the
         // device's software, not of the person holding it, and this line is
         // the only way to tell whether a downloaded voice was picked up.
-        Logger.audio.info(
+        //
+        // `.notice`, not `.info`: an info message is dropped from the log
+        // archive and hidden in Console until somebody turns info messages on.
+        // This line exists to be found once, by a grown-up who just downloaded
+        // a voice and wants to know whether it took.
+        Logger.audio.notice(
             """
             Speaking German with \(voice.name, privacy: .public) \
             (\(voice.identifier, privacy: .public)), \
