@@ -2,7 +2,7 @@ import type { ReactNode } from 'react'
 
 /// The date every legal page carries. One constant, because four pages drifting
 /// apart is how a reader learns not to trust the date at all.
-export const LEGAL_DATE = 'September 2026'
+const LEGAL_DATE = 'September 2026'
 
 /// The frame around a legal text: heading, date, then prose at a readable
 /// measure. Deliberately plain — this is a Read surface inside a Persuade site.

@@ -45,19 +45,11 @@ export function CallIcon(props: SVGProps<SVGSVGElement> & { size?: number }) {
 }
 
 /// The reward star, filled — the app's own currency.
-export function StarIcon({ size = 20, ...props }: SVGProps<SVGSVGElement> & { size?: number }) {
+export function StarIcon(props: SVGProps<SVGSVGElement> & { size?: number }) {
   return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden
-      focusable="false"
-      {...props}
-    >
+    <Icon size={20} fill="currentColor" stroke="none" {...props}>
       <path d="m12 2.6 2.9 5.9 6.5.9-4.7 4.6 1.1 6.5-5.8-3-5.8 3 1.1-6.5L2.6 9.4l6.5-.9z" />
-    </svg>
+    </Icon>
   )
 }
 

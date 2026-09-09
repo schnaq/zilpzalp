@@ -29,8 +29,6 @@
   --orange-700: #a64b12;
   --sun-300: #f5cf63;
   --sun-400: #e9b21c;
-  --clay-300: #dc8a67;
-  --bark-500: #9a6234;
   --cream-50: #fffcf3;
   --cream-100: #fbf3e4;
   --sand-200: #f2e6ce;
@@ -549,10 +547,6 @@ section {
     margin-inline: 0;
     padding-inline: 0;
     padding-bottom: 0;
-  }
-
-  .shots > * {
-    flex: initial;
   }
 }
 
