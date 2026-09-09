@@ -58,6 +58,13 @@ struct QuitConfirmation: View {
 
             card
         }
+        // What is behind the card is dimmed and unreachable, so VoiceOver must
+        // not offer it either. The trait sits on the whole overlay rather than
+        // on the card: it makes VoiceOver ignore the *siblings* of the element
+        // that carries it, and the round is a sibling of this view, not of the
+        // card inside it.
+        .accessibilityElement(children: .contain)
+        .accessibilityAddTraits(.isModal)
         .readAloudOnce(Self.question)
     }
 
@@ -75,11 +82,6 @@ struct QuitConfirmation: View {
         // Never against the screen edge, and on the narrowest phone this is
         // the width the pills need.
         .padding(ZSpacing.step3)
-        // What is behind the card is dimmed and unreachable, so VoiceOver must
-        // not offer it either: `isModal` is what keeps a swipe inside these
-        // two buttons.
-        .accessibilityElement(children: .contain)
-        .accessibilityAddTraits(.isModal)
         .transition(.scale(scale: 0.92).combined(with: .opacity))
     }
 
