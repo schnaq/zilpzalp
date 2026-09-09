@@ -18,29 +18,6 @@ import ZilpZalpUI
 /// underneath that the rest of the area uses for anything that is not a
 /// setting.
 struct PacksSection: View {
-    /// One row of the card, resolved from the model before anything is drawn:
-    /// which pack is where and what may be done with it is the interesting
-    /// part, and it is easier to read in one list than spread over three.
-    private struct Row: Identifiable {
-        /// What a tap does. `nil` for the base pack and for a download in
-        /// flight — both are rows to read, not to press.
-        enum Tap {
-            case download(PackIndex.Entry)
-            case delete(PackInstallation)
-        }
-
-        let id: String
-        let title: String
-        /// "10 Arten · 1,2 MB" — the species count and then where the pack
-        /// stands: its size, how far its download has got, or why it is not
-        /// there yet. All of it on the hint line rather than half of it in the
-        /// value slot, which takes the width it asks for and left a pack title
-        /// three lines tall on a 390 pt phone.
-        let hint: String
-        let icon: ZIcon
-        var tap: Tap?
-    }
-
     let packs: PackModel
 
     /// The pack a grown-up asked to delete, while the dialog is up.
@@ -151,11 +128,11 @@ struct PacksSection: View {
     }
 
     /// The base pack, then what is installed, then what is still to be had.
-    private var rows: [Row] {
-        var rows: [Row] = []
+    private var rows: [PackRow] {
+        var rows: [PackRow] = []
 
         if let bundled = packs.bundled {
-            rows.append(Row(
+            rows.append(PackRow(
                 id: bundled.id,
                 title: bundled.title,
                 hint: detail(
@@ -167,7 +144,7 @@ struct PacksSection: View {
         }
 
         rows += packs.installed.map { installation in
-            Row(
+            PackRow(
                 id: installation.id,
                 title: installation.pack.title,
                 hint: detail(installation.pack.birds.count, size(installation.bytes)),
@@ -178,7 +155,7 @@ struct PacksSection: View {
 
         rows += packs.downloadable.map { entry in
             if let share = packs.downloading[entry.id] {
-                return Row(
+                return PackRow(
                     id: entry.id,
                     title: entry.title,
                     hint: detail(
@@ -188,7 +165,7 @@ struct PacksSection: View {
                     icon: .plus,
                 )
             }
-            return Row(
+            return PackRow(
                 id: entry.id,
                 title: entry.title,
                 hint: detail(
@@ -205,7 +182,7 @@ struct PacksSection: View {
         return rows
     }
 
-    private func tapped(_ row: Row) {
+    private func tapped(_ row: PackRow) {
         switch row.tap {
         case let .download(entry): packs.download(entry)
         case let .delete(installation): deleting = installation
@@ -235,4 +212,27 @@ struct PacksSection: View {
             .typeStyle(.caption, .body, weight: .semibold)
             .foregroundStyle(ZColor.textMuted)
     }
+}
+
+/// One row of the card, resolved from the model before anything is drawn:
+/// which pack is where and what may be done with it is the interesting
+/// part, and it is easier to read in one list than spread over three.
+private struct PackRow: Identifiable {
+    /// What a tap does. `nil` for the base pack and for a download in
+    /// flight — both are rows to read, not to press.
+    enum Tap {
+        case download(PackIndex.Entry)
+        case delete(PackInstallation)
+    }
+
+    let id: String
+    let title: String
+    /// "10 Arten · 1,2 MB" — the species count and then where the pack
+    /// stands: its size, how far its download has got, or why it is not
+    /// there yet. All of it on the hint line rather than half of it in the
+    /// value slot, which takes the width it asks for and left a pack title
+    /// three lines tall on a 390 pt phone.
+    let hint: String
+    let icon: ZIcon
+    var tap: Tap?
 }

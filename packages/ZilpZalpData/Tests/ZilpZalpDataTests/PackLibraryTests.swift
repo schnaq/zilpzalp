@@ -158,17 +158,24 @@ enum PackFolder {
         var birds: [String] = []
 
         for bird in species {
-            var media = try ["photo": file(id, bird.id, "photo", "photos", "png", in: directory)]
+            var media = try [
+                "photo": file(
+                    bytes(id, bird.id, "photo"),
+                    at: "photos/\(bird.id).png",
+                    in: directory,
+                ),
+            ]
             if bird.call {
-                media["call"] = try file(id, bird.id, "call", "calls", "m4a", in: directory)
+                media["call"] = try file(
+                    bytes(id, bird.id, "call"),
+                    at: "calls/\(bird.id).m4a",
+                    in: directory,
+                )
             }
             if let sentence = bird.sentence {
                 media["speech"] = try file(
-                    id,
-                    bird.id,
-                    "speech",
-                    "speech/\(sentence)",
-                    "m4a",
+                    bytes(id, bird.id, "speech"),
+                    at: "speech/\(sentence)/\(bird.id).m4a",
                     in: directory,
                 )
             }
@@ -197,16 +204,11 @@ enum PackFolder {
 
     /// Writes one medium and hands back the `file`/`sha256` pair naming it.
     private static func file(
-        _ pack: String,
-        _ bird: String,
-        _ kind: String,
-        _ folder: String,
-        _ extension: String,
+        _ data: Data,
+        at path: String,
         in directory: URL,
     ) throws -> (path: String, sha256: String) {
-        let path = "\(folder)/\(bird).\(`extension`)"
         let url = directory.appending(path: path)
-        let data = bytes(pack, bird, kind)
 
         try FileManager.default.createDirectory(
             at: url.deletingLastPathComponent(),

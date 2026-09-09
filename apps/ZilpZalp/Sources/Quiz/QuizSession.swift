@@ -105,7 +105,6 @@ final class QuizSession {
     ///   where there are calls to ask with.
     init(library: PackLibrary, game: Game) throws {
         self.game = game
-        // Every species of every installed pack, in pack order.
         let everySpecies = library.birds
         birds = Dictionary(uniqueKeysWithValues: everySpecies.map { ($0.id, $0) })
         photos = Dictionary(
