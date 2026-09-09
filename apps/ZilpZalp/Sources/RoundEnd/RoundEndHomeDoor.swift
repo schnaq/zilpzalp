@@ -19,13 +19,17 @@ import ZilpZalpUI
 /// screen is for cannot read the word and knows the house; the grown-up is
 /// told by VoiceOver.
 struct RoundEndHomeDoor: View {
-    /// Whether the round has been written down.
+    /// Whether the round has been answered for: ``RoundEndScreen`` has
+    /// awaited `record` and is still on the stack.
     ///
-    /// The door stays shut until it has been: leaving takes this screen off
-    /// the stack, which cancels the task that is at that moment `await`ing the
-    /// write, and a round nobody kept is the one thing this button must not
-    /// cost. That is a local file write, not a wait a child can notice.
-    let isBooked: Bool
+    /// The door stays shut until then, because #175 asks for the way out not
+    /// to race the booking. Not because a write is fragile — `ProfileStore` is
+    /// an actor and its `record` is synchronous, so leaving cannot interrupt
+    /// one already on its way, and where nothing could be written there is
+    /// nothing to lose by leaving either. What the wait buys is an exit that
+    /// never fires before the screen knows what the round changed, and it
+    /// lasts one local file write, which is not a wait a child can notice.
+    let isOpen: Bool
 
     /// Home — the whole stack, not one screen back.
     let goHome: () -> Void
@@ -47,14 +51,14 @@ struct RoundEndHomeDoor: View {
             diameter: ZSpacing.touchMinimum,
             action: goHome,
         )
-        .disabled(!isBooked)
+        .disabled(!isOpen)
         .padding(.horizontal, gutter)
         .padding(.vertical, ZSpacing.step4)
     }
 }
 
 #Preview("On the forest ground") {
-    RoundEndHomeDoor(isBooked: true) {}
+    RoundEndHomeDoor(isOpen: true) {}
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .background(ZColor.surfaceForest)
 }

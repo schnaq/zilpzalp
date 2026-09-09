@@ -149,7 +149,7 @@ struct RoundEndScreen: View {
             // button under the two: this screen does not scroll, and a third
             // pill would be the one a 375 pt phone runs out of height for.
             .overlay(alignment: .topLeading) {
-                RoundEndHomeDoor(isBooked: settled, goHome: goHome)
+                RoundEndHomeDoor(isOpen: settled, goHome: goHome)
             }
             // Still no `TopBar`: screen 1d has none, and a finished round is
             // nothing to go *back* into — the house above leads out of the
