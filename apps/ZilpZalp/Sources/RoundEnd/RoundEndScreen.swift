@@ -151,6 +151,10 @@ struct RoundEndScreen: View {
             .overlay(alignment: .topLeading) {
                 RoundEndHomeDoor(isOpen: settled, goHome: goHome)
             }
+            // The praise is not cut short on the way home: nothing follows it
+            // there that it could talk over, and `.onDisappear` below stops it
+            // a pop later. "Nochmal spielen" is the exit that has to stop it
+            // itself, because the next question follows straight after.
             // Still no `TopBar`: screen 1d has none, and a finished round is
             // nothing to go *back* into — the house above leads out of the
             // stack, not one screen back. The bar is hidden like everywhere
