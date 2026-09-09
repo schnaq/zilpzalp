@@ -28,9 +28,10 @@ struct RoundOutcome: Hashable {
         return !before.hasSticker(for: species) && after.hasSticker(for: species)
     }
 
-    /// How far `species` stands towards its sticker now that the round is
-    /// written down — nought to five, for the markers under it.
-    func stickerProgress(for species: String?) -> Int {
-        species.map { after.stickerProgress(for: $0) } ?? 0
+    /// How often `species` has been recognised now that the round is written
+    /// down, for the markers under it. Unclamped: ``StickerMarkers`` is what
+    /// turns a count into a row of five and into a sentence.
+    func recognitions(of species: String?) -> Int {
+        species.map { after.recognitions[$0, default: 0] } ?? 0
     }
 }

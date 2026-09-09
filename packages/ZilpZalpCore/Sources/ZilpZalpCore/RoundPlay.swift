@@ -138,34 +138,15 @@ public struct RoundPlay: Hashable, Sendable {
                 && total(species) >= Scoring.recognitionsForSticker
         }
         let underway = recognised.filter { total($0) < Scoring.recognitionsForSticker }
+        // The most recognitions among them, then the first bird that has that
+        // many. Not `max(by:)`, which does not promise which of two equals it
+        // answers with — and here that decides which bird a child sees.
+        let furthest = underway.map(total).max()
 
         return completed
-            ?? Self.furthest(among: underway, by: total)
+            ?? underway.first { total($0) == furthest }
             ?? recognised.first
             ?? round.questions.first?.answer
-    }
-
-    /// The species of `candidates` with the most recognitions to its name,
-    /// ties going to the one standing first.
-    ///
-    /// Spelled out rather than `max(by:)`, which does not promise which of two
-    /// equals it answers with — and here that decides which bird a child sees.
-    private static func furthest(
-        among candidates: [String],
-        by total: (String) -> Int,
-    ) -> String? {
-        var best: (species: String, count: Int)?
-        for candidate in candidates {
-            let count = total(candidate)
-            guard let standing = best else {
-                best = (candidate, count)
-                continue
-            }
-            if count > standing.count {
-                best = (candidate, count)
-            }
-        }
-        return best?.species
     }
 
     /// Where `species`' tile stands: the answer once it has been found, a "go

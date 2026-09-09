@@ -28,6 +28,14 @@ public struct StickerProgress: View {
     /// smaller and pass their own; see ``init(count:of:label:value:markerSize:)``.
     public static let defaultMarkerSize: CGFloat = 20
 
+    /// A recognition already earned: the gold the sticker's own rim is drawn
+    /// in, so a filling row reads as that ring coming together. Deliberately
+    /// not `--color-reward`, which is the yellow of the round's stars.
+    static let filled = ZColor.rewardShadow
+
+    /// One still to come: the sunken sand a locked sticker lies on.
+    static let empty = ZColor.surfaceSunken
+
     private let markerSize: CGFloat
     private let label: String
     private let value: String?
@@ -77,7 +85,7 @@ public struct StickerProgress: View {
         HStack(spacing: (markerSize * StickerProgressMetrics.gapRatio).rounded()) {
             ForEach(Array(filled.enumerated()), id: \.offset) { marker in
                 Circle()
-                    .fill(marker.element ? ZColor.rewardShadow : ZColor.surfaceSunken)
+                    .fill(marker.element ? Self.filled : Self.empty)
                     .frame(width: markerSize, height: markerSize)
             }
         }

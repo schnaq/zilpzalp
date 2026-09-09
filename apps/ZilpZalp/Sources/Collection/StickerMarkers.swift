@@ -12,8 +12,10 @@ import ZilpZalpUI
 /// rather than twice over, so the album and the round end cannot end up
 /// showing different rows.
 struct StickerMarkers: View {
-    /// How often the bird has been recognised. Past five is a full row; see
-    /// ``StickerProgress``.
+    /// How often the bird has been recognised, as the profile counts it. Past
+    /// five is a full row and a sentence that still says five — the one place
+    /// on this side of the design system where that is decided, so no screen
+    /// has to clamp before it asks.
     let count: Int
 
     /// Diameter of one marker, chosen by the screen from the sticker it sits

@@ -218,7 +218,7 @@ struct RoundEndScreen: View {
         RoundEndReward(
             sticker: sticker,
             earnedSticker: earnedSticker,
-            progress: outcome.map { $0.stickerProgress(for: result.celebratedSpecies) },
+            progress: outcome.map { $0.recognitions(of: result.celebratedSpecies) },
             isTight: isTight,
             settled: settled,
         )

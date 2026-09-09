@@ -43,13 +43,15 @@ struct StickerProgressTests {
         #expect(!StickerProgress(count: 5, of: 5, label: "").filled.contains(false))
     }
 
-    @Test("A marker is the sticker's own sun, and an empty one the sand it lies on")
+    @Test("A marker is cut from the sticker's rim, not from a star or a leaf")
     func markersWearTheStickerColours() {
-        // Never the star's colour and never the quiz's olive: the stars are
-        // the round's score, the leaves are the round's progress, and this row
-        // is neither.
-        #expect(ZColor.reward == ZColor.sun400)
-        #expect(ZColor.surfaceSunken == ZColor.sand200)
+        // The stars are the round's score and the leaves are the round's
+        // progress; a sticker's markers are neither, so they take the gold of
+        // the rim the sticker is drawn with (#177).
+        #expect(StickerProgress.filled == ZColor.rewardShadow)
+        #expect(StickerProgress.filled != ZColor.reward)
+        #expect(StickerProgress.filled != ZColor.primary)
+        #expect(StickerProgress.empty == ZColor.surfaceSunken)
         // The gaps never grow wider than half a marker, so the row stays a row
         // of markers rather than a dotted line. How wide it may be altogether
         // is the screen's business — it knows the sticker it sits under.
