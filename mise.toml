@@ -6,6 +6,7 @@
 [tools]
 # Pinned exactly: the development machine and the self-hosted runner should use
 # the same binaries. No Homebrew — versions would drift apart.
+bun         = "1.4.2"   # package manager and runtime for the website in apps/web
 python      = "3.13.14" # for the tools in tools/
 uv          = "0.12.10" # resolves tools/pyproject.toml for tools/fetch_media
 swiftformat = "0.62.1"
@@ -354,6 +355,36 @@ description = "Curate media: 'photos …', 'calls …', 'speech …', 'upload' �
 # names the variables it is missing and the command that provides them.
 # Curation runs against `dev`; `prod` holds only the signing values.
 run = "uv run --locked --project tools python -m fetch_media"
+
+[tasks."web:install"]
+description = "Install the dependencies of the website in apps/web"
+dir = "apps/web"
+# --frozen-lockfile on purpose, exactly as in CI: bun.lock is committed, and an
+# install that quietly rewrites it would let a machine build against versions
+# nobody reviewed. Adding a dependency is `bun add …` in apps/web, which updates
+# the lockfile as its own visible change.
+run = "bun install --frozen-lockfile"
+
+[tasks."web:dev"]
+description = "Serve the website on localhost with hot reload"
+dir = "apps/web"
+# NEXT_TELEMETRY_DISABLED, here and in `web:build`: Next.js otherwise reports
+# anonymous usage data home. Nothing in this repository talks to a third party
+# unasked — least of all the site that promises exactly that to parents.
+run = "NEXT_TELEMETRY_DISABLED=1 bun run dev"
+
+[tasks."web:lint"]
+description = "Lint the website"
+dir = "apps/web"
+# Next.js 16 removed `next lint`; this is the ESLint CLI against the flat
+# config in apps/web/eslint.config.mjs. Deliberately not part of
+# `mise run check`, which is the Swift gate and must not need node_modules.
+run = "bun run lint"
+
+[tasks."web:build"]
+description = "Build the website — the same build CI and Vercel run"
+dir = "apps/web"
+run = "NEXT_TELEMETRY_DISABLED=1 bun run build"
 
 [tasks.xcode-version]
 description = "Checks that the pinned Xcode version is active"

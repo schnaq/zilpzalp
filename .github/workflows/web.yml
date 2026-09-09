@@ -1,0 +1,57 @@
+# The website in apps/web — the counterpart to ci.yml, which ignores exactly
+# this directory.
+#
+# On ubuntu-latest, not on the self-hosted macOS runner: a Next.js build needs
+# no Xcode, and the one macOS runner should stay free for the app.
+name: Web
+
+on:
+  push:
+    branches: [main]
+    paths: ['apps/web/**', 'mise.toml', '.github/workflows/web.yml']
+  pull_request:
+    paths: ['apps/web/**', 'mise.toml', '.github/workflows/web.yml']
+
+# A new push to a pull request cancels the run still in flight for that ref —
+# the same rule as in ci.yml.
+concurrency:
+  group: web-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  # Next.js reports anonymous usage data home unless this is set. The site
+  # promises parents that nothing talks to a third party unasked; its own build
+  # holds to that.
+  NEXT_TELEMETRY_DISABLED: '1'
+
+jobs:
+  check:
+    name: Lint and build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      # bun comes from mise, so mise.toml stays the one place its version is
+      # pinned. `install_args: bun` keeps this job from also fetching the Swift
+      # and Python tooling, none of which exists for this runner.
+      - name: Install bun through mise
+        uses: jdx/mise-action@c2a87611a18de5b3828c5652fe268e992400cb5c # v4.3.0
+        with:
+          install_args: bun
+
+      # The same task definitions a developer runs, not a parallel script.
+      # `web:install` installs from the committed bun.lock and fails if the
+      # lockfile is out of date.
+      - name: Install dependencies
+        run: mise run web:install
+
+      - name: Lint
+        run: mise run web:lint
+
+      - name: Build
+        run: mise run web:build
