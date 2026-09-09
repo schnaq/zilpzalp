@@ -29,6 +29,30 @@ struct RoundEndScreen: View {
     /// celebration is centred in what is left rather than behind it.
     private static let signatureBand = Wordmark.minimumSize + 2 * ZSpacing.step5
 
+    /// How far the praise may shrink before it would rather break: down to
+    /// `--text-title`, one step under the `--text-display-2` a phone gets.
+    ///
+    /// A guard, not a target — the same one ``TopBarTitle`` carries, and for
+    /// the same reason. "Super gemacht!" measures 7.149 times the type size
+    /// in the bundled Baloo 2 ExtraBold (CoreText), so 343.2 pt at 48 pt.
+    /// A 390 pt phone leaves 342 pt between the screen's two `--space-5`
+    /// paddings: 1.2 pt short, and that is the whole of #137 — the 402 pt
+    /// iPhone 17 has 354 pt and shows the line whole. SwiftUI does not wrap
+    /// it there. A `VStack` hands a `Text` its ideal height, which is one
+    /// line, and a line that then does not fit is truncated rather than
+    /// broken; the screenshot in #137 is a tail ellipsis, not two lines.
+    ///
+    /// What the guard actually spends: 0.997 at 390 pt, 0.953 at the 375 pt
+    /// of an iPhone SE — 45.7 pt, a difference no one sees — and 0.79 at the
+    /// narrowest compact width the app can meet at all, an iPad in Slide Over
+    /// at 320 pt. The iPad itself never engages it: `--text-hero` asks for
+    /// 629.1 pt and the narrowest iPad in portrait, the mini's 744, leaves
+    /// 648 pt after the screen gutters.
+    ///
+    /// The design never drew this line on a phone, and its own headline is
+    /// the shorter "Gut gemacht!" — 293.6 pt at 48 pt, which fits everywhere.
+    private static let titleScaleFloor = ZType.Step.title.size / ZType.Step.display2.size
+
     /// How long the celebration keeps the screen before the rank ascent
     /// arrives over it: long enough for the sticker to land and the praise to
     /// be said, short enough to still read as one moment. A judgement call
@@ -170,6 +194,12 @@ struct RoundEndScreen: View {
         VStack(spacing: ZSpacing.step3) {
             Text("roundEnd.title")
                 .typeStyle(isTight ? .display2 : .hero, .display, weight: .extraBold)
+                // One line, shrunk to fit rather than cut off — see
+                // ``titleScaleFloor``. The praise is the one sentence a child
+                // who cannot read is meant to have read out to them, and a
+                // headline that ends in an ellipsis is not that sentence.
+                .lineLimit(1)
+                .minimumScaleFactor(Self.titleScaleFloor)
                 .foregroundStyle(ZColor.white)
 
             Text(verbatim: starsEarned)
