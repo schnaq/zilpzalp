@@ -1,8 +1,13 @@
 """Turn a downloaded photo into the square tile the app shows.
 
-One shape for every photo: 1024×1024, sRGB, JPEG, no metadata. The tiles are
+One shape for every photo: 1024×1024, sRGB, HEIC, no metadata. The tiles are
 220 pt in the design and are shown at up to 3× on an iPad, so 1024 px is the
 size that still looks sharp without shipping a 2048 px original per species.
+
+HEIC rather than JPEG because it carries the same tile in roughly half the
+bytes — see docs/medien-und-lizenzen.md for the measurement and for why the
+recordings stay AAC. iOS decodes it through ImageIO, so `UIImage` reads it
+without the app knowing which format it got.
 
 Cropping to a square is a derivative work. That is why NoDerivatives licences
 are excluded project-wide (docs/medien-und-lizenzen.md) — the crop below is
@@ -13,10 +18,24 @@ from __future__ import annotations
 
 import io
 
+import pillow_heif
 from PIL import Image, ImageCms, ImageOps
 
+# Teaches Pillow to read and write HEIF. Called at import so that `save` below
+# and every caller that opens a tile again see the same plugin.
+pillow_heif.register_heif_opener()
+
 SIDE = 1024
-QUALITY = 88
+
+# 60 on the libheif scale. At that setting a tile is indistinguishable from the
+# lossless original at the size it is shown, and still measurably better than
+# the JPEG quality 88 this tool wrote before — which the same photos reach at
+# HEIC quality ~51. Below 55 the fine feather speckle starts to smooth over.
+QUALITY = 60
+
+# 4:2:0, the subsampling every phone camera uses for photographs. Full chroma
+# would only pay off for hard colour edges, which a bird photo does not have.
+CHROMA = 420
 
 Box = tuple[int, int, int, int]
 
@@ -52,8 +71,22 @@ def centre_box(width: int, height: int) -> Box:
     return ((width - side) // 2, (height - side) // 2, side, side)
 
 
+def encode(image: Image.Image) -> bytes:
+    """Encode a tile as HEIC — the single place the format settings live.
+
+    `exif=None` explicitly, and no `icc_profile`, so the file carries no camera
+    model and no GPS position of somebody's garden into the app. Pillow's JPEG
+    encoder wrote metadata only when it was handed some; the HEIF one falls
+    back to whatever `Image.info` still holds, which after `exif_transpose` is
+    the original block minus its orientation tag.
+    """
+    output = io.BytesIO()
+    image.save(output, format="HEIF", quality=QUALITY, chroma=CHROMA, exif=None)
+    return output.getvalue()
+
+
 def square_photo(data: bytes, crop: Box | None = None) -> bytes:
-    """Crop `data` to a square, resize it to 1024×1024 and encode it as JPEG.
+    """Crop `data` to a square, resize it to 1024×1024 and encode it as HEIC.
 
     Raises `ValueError` when the crop lies outside the image or when the
     square would have to be upscaled — a blurry tile is a curation decision, so
@@ -99,10 +132,4 @@ def square_photo(data: bytes, crop: Box | None = None) -> bytes:
         )
 
     image = image.crop((x, y, x + width, y + height))
-    image = image.resize((SIDE, SIDE), Image.LANCZOS)
-
-    # Neither `exif` nor `icc_profile` is passed on, so the file carries no
-    # camera model and no GPS position of somebody's garden into the app.
-    output = io.BytesIO()
-    image.save(output, format="JPEG", quality=QUALITY)
-    return output.getvalue()
+    return encode(image.resize((SIDE, SIDE), Image.LANCZOS))

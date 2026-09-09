@@ -34,6 +34,7 @@ REQUIRED_ENV = ("SCW_ACCESS_KEY", "SCW_SECRET_KEY", "S3_BUCKET", "S3_REGION", "S
 SHA256_METADATA = "sha256"
 
 CONTENT_TYPES = {
+    ".heic": "image/heic",
     ".jpg": "image/jpeg",
     ".jpeg": "image/jpeg",
     ".json": "application/json",

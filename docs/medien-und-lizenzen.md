@@ -262,6 +262,12 @@ Drei Eigenschaften sind wichtig:
 
 **Der Credits-Screen wird erzeugt, nicht geschrieben.** Attribution stammt aus demselben Manifest wie die Assets und kann deshalb nicht von ihnen abdriften. Das ist die wichtigste einzelne Entscheidung in diesem Dokument: sie macht Lizenztreue zu einer Eigenschaft des Build-Prozesses statt zu einer Frage von Sorgfalt.
 
+### Dateiformate
+
+**Fotos: HEIC (HEVC in HEIF), Qualität 60, 4:2:0, sRGB, ohne Metadaten.** Gemessen an den zehn Fotos des Basis-Pakets erreicht HEIC die Qualität des bisherigen JPEG 88 bereits bei Qualität rund 51 und mit etwa 55 bis 65 Prozent der Bytes; Qualität 60 lässt darüber noch Reserve und ist bei Anzeigegröße nicht vom verlustfreien Original zu unterscheiden. iOS dekodiert HEIC über ImageIO, `UIImage(contentsOfFile:)` braucht dafür nichts Eigenes. Der Encoder schreibt `exif=None`: die HEIF-Seite von Pillow würde sonst den EXIF-Block der Vorlage übernehmen, und damit das Kameramodell und die GPS-Position aus dem Garten eines Menschen.
+
+**Rufe bleiben AAC-LC, 64 kbit/s, mono, in `.m4a`.** Sechs Sekunden wiegen damit rund 50 KB — klein genug, dass ein anderes Format nichts Nennenswertes spart, und in Hardware dekodiert auf jedem Gerät, das die App unterstützt. Opus wurde geprüft und verworfen: `AVAudioPlayer` gilt für Opus in einem CAF-Container als abspielbar, dokumentiert ist es nicht belastbar. Für eine Kinder-App, deren Ton auf jedem Gerät funktionieren muss, ist das der falsche Ort für eine Wette.
+
 ### Manifest-Format
 
 ```json
@@ -272,7 +278,7 @@ Drei Eigenschaften sind wichtig:
   "taxonID": 12716,
   "article": "die",
   "photo": {
-    "file": "photos/amsel.jpg",
+    "file": "photos/amsel.heic",
     "sha256": "…",
     "license": "CC-BY-4.0",
     "attribution": "Alexis Tinker-Tsavalas",

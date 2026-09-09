@@ -341,7 +341,7 @@ def command_pick(args: argparse.Namespace) -> int:
         document,
         args.species,
         "photo",
-        f"photos/{args.species}.jpg",
+        f"photos/{args.species}.heic",
         encoded,
         licence=inaturalist.licence_id(photo["license_code"]),
         attribution=inaturalist.photographer(observation),

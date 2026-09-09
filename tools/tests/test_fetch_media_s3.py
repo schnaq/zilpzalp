@@ -142,6 +142,12 @@ class PlanTests(PackTestCase):
         self.assertEqual(uploads[0].content_type, "image/jpeg")
         self.assertEqual(uploads[1].content_type, "application/json")
 
+    def test_names_the_content_type_of_a_photo_tile(self) -> None:
+        """What `photos pick` writes: without the suffix the upload would fail."""
+        upload = s3.Upload(key="packs/basis/photos/amsel.heic", path=Path("amsel.heic"), sha256="")
+
+        self.assertEqual(upload.content_type, "image/heic")
+
     def test_refuses_a_suffix_it_cannot_name(self) -> None:
         upload = s3.Upload(key="packs/basis/photos/amsel.tiff", path=Path("amsel.tiff"), sha256="")
 
