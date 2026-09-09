@@ -23,9 +23,17 @@ PACKS_DIR = REPO_ROOT / "data" / "packs"
 # and as data/packs/basis/manifest.json already carries it.
 MEDIA_KEYS = ("file", "sha256", "license", "attribution", "sourceURL", "retrieved")
 
-# The two media a bird carries. `call` stays null until a freely licensed
-# recording exists — the licence gate and the Swift `Bird` model both allow it.
+# The two media a bird carries directly. `call` stays null until a freely
+# licensed recording exists — the licence gate and the Swift `Bird` model both
+# allow it.
+#
+# Speech is deliberately not among them: a bird's `speech` is a sentence key
+# per clip rather than one object, and its licence sits once on the manifest's
+# `voice`. `set_media` therefore refuses it, and `media_files` reads it apart.
 MEDIA_KINDS = ("photo", "call")
+
+# Where a bird keeps its recorded sentences.
+SPEECH_KIND = "speech"
 
 
 def pack_dir(pack_id: str) -> Path:
@@ -118,14 +126,32 @@ def set_media(document: dict, bird_id: str, kind: str, block: dict) -> str | Non
 def media_files(document: dict) -> list[tuple[str, str]]:
     """Every medium the manifest declares, as (relative path, SHA-256).
 
-    Photo and call of every bird, in manifest order. What is not declared here
-    is not uploaded — the bucket holds what the manifest promises, nothing that
-    was left behind by an earlier curation round.
+    Photo, call and recorded sentences of every bird, in manifest order. What
+    is not declared here is not uploaded — the bucket holds what the manifest
+    promises, nothing that was left behind by an earlier curation round.
+
+    Each file once: two sentence keys may name the same recording — a species
+    whose name is a sentence of its own — and `PackDownloader.assets(of:)`
+    fetches every file once, so uploading or counting it twice would make the
+    download's size and its progress disagree.
     """
     files = []
+    seen = set()
+
+    def declare(media: object) -> None:
+        if isinstance(media, dict) and media.get("file") and media["file"] not in seen:
+            seen.add(media["file"])
+            files.append((media["file"], str(media.get("sha256", ""))))
+
     for entry in document.get("birds") or []:
         for kind in MEDIA_KINDS:
-            media = entry.get(kind)
-            if isinstance(media, dict) and media.get("file"):
-                files.append((media["file"], str(media.get("sha256", ""))))
+            declare(entry.get(kind))
+
+        # One level deeper, and through the same list: a downloaded pack whose
+        # clips never reached the bucket is a pack that says nothing.
+        speech = entry.get(SPEECH_KIND)
+        if isinstance(speech, dict):
+            for clip in speech.values():
+                declare(clip)
+
     return files

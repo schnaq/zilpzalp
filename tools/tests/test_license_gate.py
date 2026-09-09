@@ -19,6 +19,11 @@ import license_gate
 PHOTO_BYTES = b"not really a photo, but it hashes just the same"
 PHOTO_SHA256 = hashlib.sha256(PHOTO_BYTES).hexdigest()
 
+CLIP_BYTES = b"not really a recording either"
+CLIP_SHA256 = hashlib.sha256(CLIP_BYTES).hexdigest()
+
+CLIP_FILE = "speech/quiz.prompt.whereIs/amsel.m4a"
+
 
 def media(**overrides) -> dict:
     """A valid media object, with the given fields replaced or removed.
@@ -31,6 +36,7 @@ def media(**overrides) -> dict:
         "license": "CC-BY-4.0",
         "attribution": "Alexis Tinker-Tsavalas",
         "sourceURL": "https://www.inaturalist.org/observations/1",
+        "retrieved": "2026-07-31",
     }
     asset.update(overrides)
     return {key: value for key, value in asset.items() if value is not None}
@@ -50,34 +56,76 @@ def bird(**overrides) -> dict:
     return {key: value for key, value in entry.items() if value is not None}
 
 
+def clip(**overrides) -> dict:
+    """A valid speech clip — three fields and no licence of its own."""
+    entry = {"file": CLIP_FILE, "sha256": CLIP_SHA256, "text": "Wo ist die Amsel?"}
+    entry.update(overrides)
+    return {key: value for key, value in entry.items() if value is not None}
+
+
+def voice(**overrides) -> dict:
+    """A valid voice block — a medium's licence fields without the file."""
+    block = {
+        "license": "CC-BY-4.0",
+        "attribution": "Stimme: Johanna",
+        "sourceURL": "https://example.org/docs/sprachaufnahmen.md",
+        "retrieved": "2026-09-12",
+    }
+    block.update(overrides)
+    return {key: value for key, value in block.items() if value is not None}
+
+
 class LicenseGateTestCase(unittest.TestCase):
     """Base class providing a throwaway packs directory."""
 
     def setUp(self) -> None:
         self._directory = tempfile.TemporaryDirectory()
         self.addCleanup(self._directory.cleanup)
-        self.packs_dir = Path(self._directory.name)
+        root = Path(self._directory.name)
+
+        # Two directories, as the repository has them. The fixed sentences sit
+        # outside data/packs on purpose — they carry no birds — so a test must
+        # not be able to reach them through the pack directory's rglob.
+        self.packs_dir = root / "packs"
+        self.packs_dir.mkdir()
+        self.speech_dir = root / "speech"
 
     def write_manifest(self, document, name: str = "basis.json") -> Path:
         path = self.packs_dir / name
         path.write_text(json.dumps(document), encoding="utf-8")
         return path
 
-    def write_photo(self, relative: str = "photos/amsel.jpg", content: bytes = PHOTO_BYTES) -> Path:
+    def write_asset(self, relative: str, content: bytes) -> Path:
+        """Write one file where a manifest in the packs directory names it."""
         path = self.packs_dir / relative
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_bytes(content)
         return path
+
+    def write_photo(self, relative: str = "photos/amsel.jpg", content: bytes = PHOTO_BYTES) -> Path:
+        return self.write_asset(relative, content)
 
     def write_pack(self, **photo_fields) -> Path:
         """Write the local photo plus a one-bird manifest whose photo carries `photo_fields`."""
         self.write_photo()
         return self.write_manifest({"id": "basis", "birds": [bird(photo=media(**photo_fields))]})
 
+    def write_clip(self, relative: str = CLIP_FILE, content: bytes = CLIP_BYTES) -> Path:
+        return self.write_asset(relative, content)
+
+    def write_speech_manifest(self, document) -> Path:
+        """Write the manifest of the sentences that belong to no pack."""
+        self.speech_dir.mkdir(parents=True, exist_ok=True)
+        path = self.speech_dir / "manifest.json"
+        path.write_text(json.dumps(document), encoding="utf-8")
+        return path
+
     def run_gate(self, packs_dir: Path | None = None) -> tuple[int, str]:
         output = io.StringIO()
         with contextlib.redirect_stdout(output):
-            code = license_gate.main([str(packs_dir or self.packs_dir)])
+            code = license_gate.main(
+                [str(packs_dir or self.packs_dir), "--speech-dir", str(self.speech_dir)]
+            )
         return code, output.getvalue()
 
     def assertPasses(self) -> str:
@@ -180,6 +228,21 @@ class LicenceRuleTests(LicenseGateTestCase):
 
         self.assertFails("'sourceURL' is missing or empty")
 
+    def test_missing_retrieved_fails(self):
+        # The Swift model parses it into a non-optional Date. A manifest
+        # without it decodes nowhere, and a downloaded pack that carries it
+        # can never be installed.
+        self.write_pack(retrieved=None)
+
+        self.assertFails("'retrieved' is missing or empty")
+
+    def test_a_retrieved_that_is_not_a_plain_date_fails(self):
+        for value in ("12.09.2026", "20260912", "2026-09-12T00:00:00Z", "gestern"):
+            with self.subTest(retrieved=value):
+                self.write_pack(retrieved=value)
+
+                self.assertFails("'retrieved' is not a YYYY-MM-DD date")
+
     def test_missing_file_field_fails(self):
         self.write_pack(file=None)
 
@@ -230,6 +293,187 @@ class HashTests(LicenseGateTestCase):
         self.write_manifest({"birds": [bird(photo=media(license="CC-BY-NC-4.0"))]})
 
         self.assertFails("amsel / photo", "CC-BY-NC-4.0")
+
+
+class SpeechInAPackTests(LicenseGateTestCase):
+    """A pack's species sentences: clips under the bird, licence at the top."""
+
+    def write_speaking_pack(self, speech=None, **document_fields) -> Path:
+        """A one-bird pack whose bird carries one clip, with the voice above it."""
+        self.write_photo()
+        self.write_clip()
+        document = {
+            "id": "basis",
+            "voice": voice(),
+            "birds": [bird(speech=speech if speech is not None else {"quiz.prompt.whereIs": clip()})],
+        }
+        document.update(document_fields)
+        return self.write_manifest({key: value for key, value in document.items() if value is not None})
+
+    def test_a_voice_and_a_clip_pass(self):
+        self.write_speaking_pack()
+
+        output = self.assertPasses()
+        # The photo and the clip — a speech clip is a medium like any other.
+        self.assertIn("media assets checked: 2", output)
+
+    def test_speech_without_a_voice_fails(self):
+        self.write_speaking_pack(voice=None)
+
+        self.assertFails("basis.json", "carries no 'voice'")
+
+    def test_a_clip_without_text_fails(self):
+        self.write_speaking_pack(speech={"quiz.prompt.whereIs": clip(text=None)})
+
+        self.assertFails("amsel / speech / quiz.prompt.whereIs", "'text' is missing or empty")
+
+    def test_a_clip_whose_hash_is_wrong_fails(self):
+        self.write_speaking_pack(speech={"quiz.prompt.whereIs": clip(sha256="0" * 64)})
+
+        self.assertFails("amsel / speech / quiz.prompt.whereIs", "sha256 does not match")
+
+    def test_a_clip_that_is_only_in_the_bucket_skips_the_hash(self):
+        self.write_speaking_pack(speech={"collection.name": clip(file="speech/collection.name/amsel.m4a")})
+
+        self.assertPasses()
+
+    def test_a_clip_that_is_not_an_object_fails(self):
+        self.write_speaking_pack(speech={"quiz.prompt.whereIs": "speech/amsel.m4a"})
+
+        self.assertFails("amsel / speech / quiz.prompt.whereIs: is not an object")
+
+    def test_a_speech_block_that_is_not_an_object_fails(self):
+        self.write_speaking_pack(speech=["quiz.prompt.whereIs"])
+
+        self.assertFails("amsel / speech: is not an object")
+
+    def test_a_pack_without_speech_needs_no_voice(self):
+        # What every pack looks like today, and has to keep looking like.
+        self.write_pack()
+
+        self.assertPasses()
+
+
+class VoiceTests(LicenseGateTestCase):
+    """The voice is checked exactly as a medium is, minus the file."""
+
+    def write_voice(self, **fields) -> Path:
+        self.write_photo()
+        self.write_clip()
+        return self.write_manifest(
+            {
+                "id": "basis",
+                "voice": voice(**fields),
+                "birds": [bird(speech={"quiz.prompt.whereIs": clip()})],
+            }
+        )
+
+    def test_a_disallowed_licence_fails(self):
+        self.write_voice(license="CC-BY-NC-4.0")
+
+        self.assertFails("voice", "CC-BY-NC-4.0", "is not permitted")
+
+    def test_a_missing_attribution_fails(self):
+        self.write_voice(attribution=None)
+
+        self.assertFails("voice: field 'attribution' is missing or empty")
+
+    def test_a_missing_source_url_fails(self):
+        self.write_voice(sourceURL=None)
+
+        self.assertFails("voice: field 'sourceURL' is missing or empty")
+
+    def test_a_voice_without_clips_is_checked_all_the_same(self):
+        self.write_photo()
+        self.write_manifest({"id": "basis", "voice": voice(license="CC-BY-ND-4.0"), "birds": [bird()]})
+
+        self.assertFails("voice", "CC-BY-ND-4.0")
+
+    def test_a_voice_that_is_not_an_object_fails(self):
+        self.write_photo()
+        self.write_manifest({"id": "basis", "voice": "Johanna", "birds": [bird()]})
+
+        self.assertFails("voice: is not an object")
+
+
+class FixedSentenceTests(LicenseGateTestCase):
+    """data/speech/manifest.json — the sentences that belong to no pack."""
+
+    def write_lines(self, lines, **document_fields) -> Path:
+        document = {"id": "speech", "title": "Ansagen", "voice": voice(), "lines": lines}
+        document.update(document_fields)
+        return self.write_speech_manifest(
+            {key: value for key, value in document.items() if value is not None}
+        )
+
+    def write_line_file(self, relative: str = "roundEnd.title.m4a") -> Path:
+        self.speech_dir.mkdir(parents=True, exist_ok=True)
+        path = self.speech_dir / relative
+        path.write_bytes(CLIP_BYTES)
+        return path
+
+    def test_a_voice_and_a_line_pass(self):
+        self.write_lines({"roundEnd.title": clip(file="roundEnd.title.m4a", text="Super gemacht!")})
+        self.write_line_file()
+
+        output = self.assertPasses()
+        self.assertIn("media assets checked: 1", output)
+
+    def test_lines_without_a_voice_fail_naming_the_manifest(self):
+        self.write_lines({"roundEnd.title": clip(file="roundEnd.title.m4a")}, voice=None)
+
+        self.assertFails("manifest.json", "carries no 'voice'")
+
+    def test_an_empty_manifest_needs_no_voice(self):
+        # What ships today: the directory exists, nobody has recorded anything,
+        # and there is nobody to credit.
+        self.write_lines({}, voice=None)
+
+        self.assertPasses()
+
+    def test_a_line_whose_hash_is_wrong_fails(self):
+        self.write_lines({"roundEnd.title": clip(file="roundEnd.title.m4a", sha256="0" * 64)})
+        self.write_line_file()
+
+        self.assertFails("lines / roundEnd.title", "sha256 does not match")
+
+    def test_a_manifest_without_lines_fails(self):
+        self.write_speech_manifest({"id": "speech", "title": "Ansagen"})
+
+        self.assertFails("no lines found")
+
+    def test_a_missing_speech_directory_is_fine(self):
+        self.write_pack()
+
+        self.assertPasses()
+
+    def test_a_speech_directory_without_a_manifest_fails(self):
+        # sync_bundled_packs copies the directory whole, so a recording beside
+        # a manifest that is not there would ship unchecked.
+        self.write_pack()
+        self.speech_dir.mkdir(parents=True)
+        (self.speech_dir / "roundEnd.title.m4a").write_bytes(CLIP_BYTES)
+
+        self.assertFails("would ship unchecked")
+
+    def test_a_title_is_demanded_once_something_is_recorded(self):
+        # The credits head this set with its title. Without it they would fail
+        # instead, one step later and without naming the manifest.
+        self.write_lines({"roundEnd.title": clip(file="roundEnd.title.m4a")}, title=None)
+
+        self.assertFails("'title' is missing or empty")
+
+    def test_an_empty_manifest_needs_no_title(self):
+        self.write_lines({}, voice=None, title=None)
+
+        self.assertPasses()
+
+    def test_a_lines_manifest_below_data_packs_fails_as_a_pack(self):
+        # The shape does not decide which gate applies, the location does —
+        # otherwise a manifest without birds would slip through data/packs.
+        self.write_manifest({"id": "speech", "lines": {"roundEnd.title": clip()}})
+
+        self.assertFails("no birds found")
 
 
 class ManifestShapeTests(LicenseGateTestCase):

@@ -16,10 +16,15 @@ let package = Package(
         // against the bundle exactly as it does against data/packs. The
         // generated credits are listed as their own file rather than through
         // a .process("Resources") over the whole directory, which would
-        // flatten the packs.
+        // flatten the packs. Resources/Speech is the same arrangement for the
+        // sentences that belong to no pack, synced from data/speech.
         .target(
             name: "ZilpZalpData",
-            resources: [.copy("Resources/Packs"), .copy("Resources/credits.json")],
+            resources: [
+                .copy("Resources/Packs"),
+                .copy("Resources/Speech"),
+                .copy("Resources/credits.json"),
+            ],
         ),
         // .copy, not .process: Fixtures/valid stays a directory inside
         // Bundle.module, so the tests look the manifests up under the same

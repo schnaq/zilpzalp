@@ -96,7 +96,7 @@ public actor PackDownloader {
         guard Self.isSafeComponent(entry.id) else {
             throw PackDownloadError.invalidPath(packID: entry.id, path: entry.id)
         }
-        guard Self.isSafeRelativePath(entry.manifest) else {
+        guard isSafeRelativePath(entry.manifest) else {
             throw PackDownloadError.invalidPath(packID: entry.id, path: entry.manifest)
         }
 
@@ -114,7 +114,7 @@ public actor PackDownloader {
         let packURL = manifestURL.deletingLastPathComponent()
         for asset in Self.assets(of: pack) {
             try Task.checkCancellation()
-            guard Self.isSafeRelativePath(asset.file) else {
+            guard isSafeRelativePath(asset.file) else {
                 throw PackDownloadError.invalidPath(packID: entry.id, path: asset.file)
             }
 
@@ -295,23 +295,6 @@ public actor PackDownloader {
     }
 
     // MARK: - Paths
-
-    /// Whether a path out of an index or a manifest may be appended to a
-    /// directory of ours.
-    ///
-    /// Everything this actor fetches and writes is addressed by a string
-    /// somebody else generated, so `photos/../../../Preferences/x.plist` has
-    /// to be stopped here rather than by the file system. Only plain relative
-    /// paths pass: no empty component, no `.`, no `..`, no leading slash, no
-    /// backslash, no percent escape that could smuggle one of those back in.
-    private static func isSafeRelativePath(_ path: String) -> Bool {
-        guard !path.isEmpty, !path.hasPrefix("/"), !path.contains("\\"), !path.contains("%") else {
-            return false
-        }
-        return path
-            .split(separator: "/", omittingEmptySubsequences: false)
-            .allSatisfy { !$0.isEmpty && $0 != "." && $0 != ".." }
-    }
 
     /// Whether a string may be used as a single directory name — a pack id.
     private static func isSafeComponent(_ component: String) -> Bool {

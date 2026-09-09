@@ -46,6 +46,25 @@ def bird(**overrides) -> dict:
     return {key: value for key, value in entry.items() if value is not None or key == "call"}
 
 
+def clip(**overrides) -> dict:
+    """A speech clip as the manifest spells it — three fields, no licence."""
+    entry = {"file": "speech/quiz.prompt.whereIs/amsel.m4a", "sha256": "0" * 64, "text": "Wo ist die Amsel?"}
+    entry.update(overrides)
+    return entry
+
+
+def voice(**overrides) -> dict:
+    """A voice block, with the given fields replaced or removed."""
+    block = {
+        "license": "CC-BY-4.0",
+        "attribution": "Stimme: Johanna",
+        "sourceURL": "https://example.org/docs/sprachaufnahmen.md",
+        "retrieved": "2026-09-12",
+    }
+    block.update(overrides)
+    return {key: value for key, value in block.items() if value is not None}
+
+
 class CreditsTestCase(unittest.TestCase):
     """Base class providing a throwaway packs directory and two output paths."""
 
@@ -56,6 +75,9 @@ class CreditsTestCase(unittest.TestCase):
 
         self.packs_dir = root / "packs"
         self.packs_dir.mkdir()
+        # Outside the packs directory, as the repository has it: the fixed
+        # sentences carry no birds and would fail the pack shape.
+        self.speech_dir = root / "speech"
         self.markdown = root / "CREDITS.md"
         self.json = root / "credits.json"
 
@@ -65,12 +87,25 @@ class CreditsTestCase(unittest.TestCase):
         birds: list[dict],
         title: str = "Unsere ersten Vögel",
         directory: str | None = None,
+        voice: dict | None = None,
     ) -> None:
         """Write one pack. `directory` defaults to the pack id, as the repository has it."""
         pack = self.packs_dir / (directory or pack_id)
         pack.mkdir(parents=True, exist_ok=True)
         document = {"id": pack_id, "title": title, "birds": birds}
+        if voice is not None:
+            document["voice"] = voice
         (pack / "manifest.json").write_text(json.dumps(document, ensure_ascii=False), encoding="utf-8")
+
+    def write_speech(self, lines: dict, voice: dict | None = None, title: str = "Ansagen") -> None:
+        """Write the manifest of the sentences that belong to no pack."""
+        self.speech_dir.mkdir(parents=True, exist_ok=True)
+        document = {"id": "speech", "title": title, "lines": lines}
+        if voice is not None:
+            document["voice"] = voice
+        (self.speech_dir / "manifest.json").write_text(
+            json.dumps(document, ensure_ascii=False), encoding="utf-8"
+        )
 
     def run_main(self, packs_dir: Path | None = None) -> int:
         """Run main() against the throwaway paths, output suppressed."""
@@ -79,7 +114,9 @@ class CreditsTestCase(unittest.TestCase):
             mock.patch.object(generate_credits, "CREDITS_JSON", self.json),
             contextlib.redirect_stdout(io.StringIO()),
         ):
-            return generate_credits.main([str(packs_dir or self.packs_dir)])
+            return generate_credits.main(
+                [str(packs_dir or self.packs_dir), "--speech-dir", str(self.speech_dir)]
+            )
 
     def outputs(self) -> tuple[bytes, bytes]:
         return (self.markdown.read_bytes(), self.json.read_bytes())
@@ -169,6 +206,101 @@ class EveryAssetIsCredited(CreditsTestCase):
         self.run_main()
 
         self.assertIn("| CC-BY-NC-4.0 |", self.markdown.read_text(encoding="utf-8"))
+
+
+class VoicesAreCredited(CreditsTestCase):
+    """One line per voice per manifest — not one per clip, and not none."""
+
+    def voices(self) -> list[dict]:
+        return json.loads(self.json.read_text(encoding="utf-8"))["voices"]
+
+    def test_a_packs_voice_is_credited_once_however_many_clips_it_spoke(self) -> None:
+        self.write_pack(
+            "basis",
+            [bird(speech={"quiz.prompt.whereIs": clip(), "collection.name": clip()})],
+            voice=voice(),
+        )
+        self.run_main()
+
+        self.assertEqual(
+            self.voices(),
+            [
+                {
+                    "attribution": "Stimme: Johanna",
+                    "license": "CC-BY-4.0",
+                    "sourceURL": "https://example.org/docs/sprachaufnahmen.md",
+                    "usedIn": "Unsere ersten Vögel",
+                }
+            ],
+        )
+        self.assertEqual(self.markdown.read_text(encoding="utf-8").count("Stimme: Johanna"), 1)
+
+    def test_the_fixed_sentences_are_credited_after_the_packs(self) -> None:
+        self.write_pack("basis", [bird(speech={"quiz.prompt.whereIs": clip()})], voice=voice())
+        self.write_speech({"roundEnd.title": clip(file="roundEnd.title.m4a")}, voice=voice())
+        self.run_main()
+
+        self.assertEqual(
+            [entry["usedIn"] for entry in self.voices()], ["Unsere ersten Vögel", "Ansagen"]
+        )
+
+    def test_a_voice_that_spoke_nothing_is_not_credited(self) -> None:
+        # A name in the app that belongs to no asset is as wrong as an asset
+        # nobody names. This is also what keeps an empty data/speech legal.
+        self.write_pack("basis", [bird()], voice=voice())
+        self.write_speech({}, voice=None)
+        self.run_main()
+
+        self.assertEqual(self.voices(), [])
+
+    def test_without_voices_the_markdown_has_no_voices_section(self) -> None:
+        self.write_pack("basis", [bird()])
+        self.run_main()
+
+        self.assertNotIn("## Voices", self.markdown.read_text(encoding="utf-8"))
+
+    def test_a_voice_without_attribution_exits_1(self) -> None:
+        self.write_pack("basis", [bird(speech={"quiz.prompt.whereIs": clip()})], voice=voice(attribution=None))
+
+        self.assertEqual(self.run_main(), 1)
+
+    def test_clips_without_a_voice_exit_1(self) -> None:
+        # Not an empty section: CC BY recordings would ship with nobody named.
+        self.write_pack("basis", [bird(speech={"quiz.prompt.whereIs": clip()})])
+
+        self.assertEqual(self.run_main(), 1)
+
+    def test_a_speech_directory_without_a_manifest_exits_1(self) -> None:
+        # Otherwise the voices are quietly dropped from the credits the tool
+        # then rewrites, and the exit code reads as routine drift.
+        self.write_pack("basis", [bird()])
+        self.speech_dir.mkdir(parents=True)
+
+        self.assertEqual(self.run_main(), 1)
+
+    def test_an_empty_fixed_manifest_needs_no_title(self) -> None:
+        self.write_pack("basis", [bird()])
+        self.write_speech({}, voice=None, title="")
+
+        self.run_main()
+
+        self.assertEqual(self.voices(), [])
+
+    def test_a_fixed_manifest_without_lines_exits_1(self) -> None:
+        # The gate fails such a manifest loudly with "no lines found". The
+        # credits must not shrug at it and drop the voice in silence.
+        self.write_pack("basis", [bird()])
+        self.speech_dir.mkdir(parents=True, exist_ok=True)
+        (self.speech_dir / "manifest.json").write_text(
+            json.dumps({"id": "speech", "title": "Ansagen", "voice": voice()}), encoding="utf-8"
+        )
+
+        self.assertEqual(self.run_main(), 1)
+
+    def test_a_voice_that_is_not_an_object_exits_1(self) -> None:
+        self.write_pack("basis", [bird(speech={"quiz.prompt.whereIs": clip()})], voice="Johanna")
+
+        self.assertEqual(self.run_main(), 1)
 
 
 class OutputIsDeterministic(CreditsTestCase):
@@ -323,6 +455,10 @@ class CommittedCreditsMatchTheRealPacks(unittest.TestCase):
     def setUpClass(cls) -> None:
         cls.packs = generate_credits.read_packs(generate_credits.DEFAULT_PACKS_DIR)
         cls.entries = [entry for pack in cls.packs for entry in pack["media"]]
+        fixed = generate_credits.read_fixed_sentences(
+            generate_credits.DEFAULT_SPEECH_DIR / generate_credits.SPEECH_MANIFEST_NAME
+        )
+        cls.voices = [pack["voice"] for pack in cls.packs if pack["voice"]] + ([fixed] if fixed else [])
 
     def test_there_is_something_to_credit(self) -> None:
         self.assertTrue(self.entries)
@@ -344,11 +480,11 @@ class CommittedCreditsMatchTheRealPacks(unittest.TestCase):
         # wiring cannot make the credits drift unnoticed.
         self.assertEqual(
             generate_credits.CREDITS_MD.read_text(encoding="utf-8"),
-            generate_credits.render_markdown(self.packs),
+            generate_credits.render_markdown(self.packs, self.voices),
         )
         self.assertEqual(
             generate_credits.CREDITS_JSON.read_text(encoding="utf-8"),
-            generate_credits.render_json(self.packs),
+            generate_credits.render_json(self.packs, self.voices),
         )
 
 

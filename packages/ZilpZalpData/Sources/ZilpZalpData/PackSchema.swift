@@ -51,6 +51,40 @@ public struct MediaAsset: Codable, Sendable, Hashable {
     public let retrieved: Date
 }
 
+/// One recorded sentence.
+///
+/// Three fields and no licence of its own: what a recording may be used for is
+/// a property of the voice that spoke it, and that sits once on the manifest —
+/// ``Pack/voice``. Two hundred clips of one person would otherwise carry two
+/// hundred identical attributions. ``MediaAsset`` keeps its six fields.
+public struct MediaClip: Codable, Sendable, Hashable {
+    /// Path relative to the manifest's directory, for instance
+    /// `speech/quiz.prompt.whereIs/amsel.m4a`.
+    public let file: String
+    /// Lowercase hexadecimal SHA-256 of the file, as for every medium: it is
+    /// what a download is verified against.
+    public let sha256: String
+    /// What was said when the clip was produced. Recorded so that a sentence
+    /// reworded in the String Catalog cannot ship with a clip that says
+    /// something else than the screen shows.
+    public let text: String
+}
+
+/// Who spoke a manifest's recorded sentences, and under which licence.
+///
+/// One block per manifest rather than one per clip, which is also how the
+/// credits name it: once per pack, never once per sentence.
+public struct Voice: Codable, Sendable, Hashable {
+    public let license: License
+    /// Who spoke — "Stimme: Johanna". Never empty; CC BY and CC BY-SA demand
+    /// the name, and `tools/license_gate.py` insists on it.
+    public let attribution: String
+    /// Where the recordings came from. Proof of origin, as for every medium.
+    public let sourceURL: URL
+    /// The day the recordings were made, `YYYY-MM-DD` in the manifest.
+    public let retrieved: Date
+}
+
 /// One species in a pack.
 public struct Bird: Codable, Sendable, Hashable, Identifiable {
     /// Stable, lowercase identifier such as `amsel`. Unique within the pack.
@@ -69,6 +103,13 @@ public struct Bird: Codable, Sendable, Hashable, Identifiable {
     /// `nil` as long as no freely licensed recording exists — the species
     /// stays usable in the photo games.
     public let call: MediaAsset?
+    /// What the app says about this species, by String Catalog key.
+    ///
+    /// A dictionary rather than an enum of known keys, so a pack may ship a
+    /// sentence an older installed app does not know without failing to
+    /// decode. `nil`, or a key that is missing, means the app speaks the
+    /// sentence with `AVSpeechSynthesizer` instead (#151) — never silence.
+    public let speech: [String: MediaClip]?
 }
 
 /// A pack of species, the unit that is bundled or downloaded.
@@ -78,5 +119,8 @@ public struct Pack: Codable, Sendable, Hashable, Identifiable {
     public let id: String
     /// Product text shown to parents when they pick a pack.
     public let title: String
+    /// Who spoke the pack's ``Bird/speech`` clips. `nil` while it has none —
+    /// there is then nobody to credit.
+    public let voice: Voice?
     public let birds: [Bird]
 }
