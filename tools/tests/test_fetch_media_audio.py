@@ -54,8 +54,13 @@ class SourceSuffixTests(unittest.TestCase):
         self.assertEqual(audio.source_suffix("XC1166016-strakapoud.wav"), ".wav")
         self.assertEqual(audio.source_suffix("XC1-a.flac"), ".flac")
 
+    def test_takes_what_a_microphone_produces_too(self) -> None:
+        """`speech import` hands it a take, and a take is rarely an MP3."""
+        self.assertEqual(audio.source_suffix("take3.aiff"), ".aiff")
+        self.assertEqual(audio.source_suffix("Sprachmemo.m4a"), ".m4a")
+
     def test_refuses_what_it_cannot_decode(self) -> None:
-        for name in ("recording.aiff", "recording", ""):
+        for name in ("recording.ogg", "recording", ""):
             with self.subTest(name=name), self.assertRaises(ValueError) as error:
                 audio.source_suffix(name)
             self.assertIn("cannot decode", str(error.exception))
@@ -128,19 +133,144 @@ class FadeTests(unittest.TestCase):
         self.assertGreater(faded[5], 0)
 
 
+def level(value: int) -> float:
+    """The dBFS a constant amplitude sits at."""
+    return audio.decibels(value / audio.FULL_SCALE)
+
+
+def burst(sound: float, silence: float, value: int = 10000, rate: int = RATE) -> array.array:
+    """`sound` seconds at `value`, then `silence` seconds of nothing.
+
+    A drum roll in miniature: what a plain RMS reads far too quietly and the
+    gated measure reads as what a listener hears.
+    """
+    return array.array(
+        audio.SAMPLE_TYPE, [value] * int(sound * rate) + [0] * int(silence * rate)
+    )
+
+
+class LoudnessTests(unittest.TestCase):
+    def test_measures_a_steady_sound_at_its_own_level(self) -> None:
+        self.assertAlmostEqual(audio.loudness(samples(RATE), RATE), level(10000), delta=0.2)
+
+    def test_ignores_the_silence_between_the_beats(self) -> None:
+        """#148: the Buntspecht drumming is quiet on average and loud to a child."""
+        drumming = burst(sound=0.5, silence=2.0)
+
+        measured = audio.loudness(drumming, RATE)
+        averaged = audio.decibels(
+            math.sqrt(sum(value * value for value in drumming) / len(drumming))
+            / audio.FULL_SCALE
+        )
+
+        self.assertGreater(measured, averaged + 4)
+        self.assertLess(measured, level(10000))
+
+    def test_measures_a_clip_shorter_than_one_block(self) -> None:
+        """„Amsel" is a third of a second, and it still has a loudness."""
+        self.assertAlmostEqual(audio.loudness(samples(RATE // 5), RATE), level(10000), delta=0.2)
+
+    def test_calls_silence_silence_rather_than_raising(self) -> None:
+        self.assertEqual(audio.loudness(samples(RATE, value=0), RATE), -math.inf)
+        self.assertEqual(audio.loudness(array.array(audio.SAMPLE_TYPE), RATE), -math.inf)
+
+
+class NormaliseTests(unittest.TestCase):
+    def test_brings_two_clips_of_different_level_together(self) -> None:
+        """The whole of #148 in one assertion."""
+        quiet = samples(RATE, value=400)
+        loud = samples(RATE, value=20000)
+
+        reached = [audio.normalise(clip, RATE) for clip in (quiet, loud)]
+
+        self.assertAlmostEqual(reached[0], audio.TARGET, delta=0.2)
+        self.assertAlmostEqual(reached[1], audio.TARGET, delta=0.2)
+        self.assertLess(abs(reached[0] - reached[1]), 1.0)
+        self.assertAlmostEqual(audio.loudness(quiet, RATE), audio.loudness(loud, RATE), delta=1.0)
+
+    def test_never_lets_the_peak_pass_the_ceiling(self) -> None:
+        """A clip with more crest than the ceiling allows lands below target.
+
+        Quiet throughout with one short crack in it — the shape the Buntspecht
+        drumming has, and the one case #148's spread survives.
+        """
+        spiky = samples(RATE * 2, value=200)
+        for index in range(RATE, RATE + 10):
+            spiky[index] = 30000
+
+        reached = audio.normalise(spiky, RATE)
+
+        self.assertLessEqual(audio.decibels(audio.peak(spiky)), audio.CEILING + 0.1)
+        self.assertLess(reached, audio.TARGET)
+
+    def test_leaves_silence_alone(self) -> None:
+        silent = samples(RATE, value=0)
+
+        self.assertEqual(audio.normalise(silent, RATE), -math.inf)
+        self.assertEqual(max(silent), 0)
+
+
+class SilenceTests(unittest.TestCase):
+    def sound_at(self, first: float, last: float, length: float = 2.0) -> array.array:
+        """Silence, then sound from `first` to `last` seconds, then silence."""
+        clip = array.array(audio.SAMPLE_TYPE, [0] * int(length * RATE))
+        for index in range(int(first * RATE), int(last * RATE)):
+            clip[index] = 10000
+        return clip
+
+    def test_drops_the_silence_at_both_ends(self) -> None:
+        stripped = audio.strip_silence(self.sound_at(0.5, 1.5), RATE)
+
+        self.assertAlmostEqual(len(stripped) / RATE, 1.0 + 2 * audio.KEEP, delta=0.05)
+
+    def test_keeps_a_little_of_it_so_that_nothing_is_clipped(self) -> None:
+        stripped = audio.strip_silence(self.sound_at(0.5, 1.5), RATE)
+
+        self.assertEqual(stripped[0], 0)
+        self.assertEqual(stripped[-1], 0)
+
+    def test_keeps_the_pause_inside_a_clip(self) -> None:
+        """The gap between two drum rolls is the call, not silence around it."""
+        clip = self.sound_at(0.1, 0.3)
+        for index in range(int(1.5 * RATE), int(1.7 * RATE)):
+            clip[index] = 10000
+
+        stripped = audio.strip_silence(clip, RATE)
+
+        self.assertAlmostEqual(len(stripped) / RATE, 1.6 + 2 * audio.KEEP, delta=0.05)
+
+    def test_hands_back_a_clip_that_is_silent_throughout(self) -> None:
+        """Returning nothing would encode an empty file."""
+        silent = samples(RATE, value=0)
+
+        self.assertEqual(len(audio.strip_silence(silent, RATE)), RATE)
+
+
 class TrimTests(unittest.TestCase):
     def test_produces_an_m4a_smaller_than_the_source(self) -> None:
         source = tone(seconds=0.5)
 
-        encoded = audio.trim(source, "XC1-tone.wav", start=0.0, duration=0.3)
+        clip = audio.trim(source, "XC1-tone.wav", start=0.0, duration=0.3)
 
-        self.assertIn(b"ftyp", encoded[:12])
-        self.assertLess(len(encoded), len(source))
+        self.assertIn(b"ftyp", clip.data[:12])
+        self.assertLess(len(clip.data), len(source))
 
     def test_accepts_a_stereo_source(self) -> None:
-        encoded = audio.trim(tone(seconds=0.5, channels=2), "XC1-tone.wav", duration=0.3)
+        clip = audio.trim(tone(seconds=0.5, channels=2), "XC1-tone.wav", duration=0.3)
 
-        self.assertIn(b"ftyp", encoded[:12])
+        self.assertIn(b"ftyp", clip.data[:12])
+
+    def test_keeps_the_whole_recording_without_a_duration(self) -> None:
+        """What a spoken sentence needs: it is as long as it is."""
+        clip = audio.trim(tone(seconds=0.5), "sentence.wav", duration=None)
+
+        self.assertAlmostEqual(clip.seconds, 0.5, places=1)
+
+    def test_reports_the_loudness_it_reached(self) -> None:
+        clip = audio.trim(tone(seconds=0.5), "XC1-tone.wav", duration=0.3)
+
+        self.assertAlmostEqual(clip.loudness, audio.TARGET, delta=0.5)
+        self.assertFalse(clip.limited)
 
     def test_reports_a_file_afconvert_cannot_read(self) -> None:
         """A WAV named .mp3 is the case that actually happens at xeno-canto."""

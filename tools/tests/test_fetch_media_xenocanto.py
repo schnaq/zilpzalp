@@ -70,42 +70,6 @@ def answer(records: list[dict], pages: int = 1) -> httpx.Response:
     )
 
 
-class RedactTests(unittest.TestCase):
-    def test_removes_the_key_from_a_url(self) -> None:
-        text = f"Client error '401 Unauthorized' for url 'https://xeno-canto.org/api/3/recordings?query=nr%3A1&key={KEY}'"
-
-        redacted = xenocanto.redact(text)
-
-        self.assertNotIn(KEY, redacted)
-        self.assertIn("key=…", redacted)
-        self.assertIn("query=nr%3A1", redacted)
-
-    def test_removes_the_key_wherever_it_sits(self) -> None:
-        for text in (
-            f"?key={KEY}&query=nr:1",
-            f"?KEY={KEY}",
-            f"'https://xeno-canto.org/api/3/recordings?key={KEY}'",
-            f"?key={KEY} trailing words",
-        ):
-            with self.subTest(text=text):
-                self.assertNotIn(KEY, xenocanto.redact(text))
-
-    def test_leaves_text_without_a_key_alone(self) -> None:
-        self.assertEqual(xenocanto.redact("no key here"), "no key here")
-
-
-class ApiKeyTests(unittest.TestCase):
-    def test_reads_the_key_from_the_environment(self) -> None:
-        self.assertEqual(xenocanto.api_key({"XENO_CANTO_API_KEY": KEY}), KEY)
-
-    def test_names_the_variable_and_the_command_that_provides_it(self) -> None:
-        with self.assertRaises(RuntimeError) as error:
-            xenocanto.api_key({})
-
-        self.assertIn("XENO_CANTO_API_KEY", str(error.exception))
-        self.assertIn("infisical run", str(error.exception))
-
-
 class LicenceTests(unittest.TestCase):
     def test_maps_the_three_permitted_urls(self) -> None:
         self.assertEqual(

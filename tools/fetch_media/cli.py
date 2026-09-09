@@ -1,22 +1,30 @@
 """The command line of the curation tool.
 
-Two media, three steps each, and a human between them:
+Three kinds of medium, and a human between every step:
 
     photos candidates --pack basis [--species amsel …] [--limit 5]
     photos pick --pack basis --species amsel --observation 20490738 --photo 31623386
     calls candidates --pack basis [--species amsel …] [--limit 5] [--type song]
     calls pick --pack basis --species amsel --recording XC965144 [--start 12.5]
+    speech render --provider fake --pack basis [--species amsel …] [--sentence …]
+    speech render --provider fake --set fixed --sentence roundEnd.title
+    speech import --pack basis --species amsel --sentence … --file take3.wav
+                  --attribution "Stimme: …"
     upload --pack basis [--dry-run]
 
 `candidates` asks the source and lists what may be used; it never chooses.
 `pick` fetches the one medium a human named, crops or trims it, writes the
-manifest entry and regenerates the derived files. `upload` puts the pack in the
-bucket and, last, the index of the packs that can be downloaded from there.
+manifest entry and regenerates the derived files. `speech` produces the
+sentences the app says out loud — `render` asks a provider, `import` takes a
+recording somebody made — and records them the same way. `upload` puts the
+pack in the bucket and, last, the index of the packs that can be downloaded
+from there.
 
 Credentials come from the environment, where `infisical run --env=dev --path=/
 --` puts them: `upload` needs the bucket keys, and both `calls` steps need
 `XENO_CANTO_API_KEY`, because the xeno-canto API refuses every request without
-it. The two `photos` steps need nothing and run on any machine.
+it. The two `photos` steps need nothing and run on any machine, and so do
+`speech import` and every provider that speaks offline.
 """
 
 from __future__ import annotations
@@ -33,7 +41,8 @@ from pathlib import Path
 import httpx
 from botocore.exceptions import BotoCoreError, ClientError
 
-from fetch_media import audio, images, inaturalist, index, manifest, s3, xenocanto
+from fetch_media import audio, images, inaturalist, index, keys, manifest, s3, speech, xenocanto
+from fetch_media.speech import clips, sentences
 
 # Candidate lists are working material for a human, not a build artefact, and
 # `data/packs/` is off limits for them: the licence gate reads every *.json
@@ -43,6 +52,18 @@ DEFAULT_OUT = Path(tempfile.gettempdir()) / "zilpzalp-fetch-media"
 # Run in the order `mise run check` runs them, so a manifest change leaves the
 # repository exactly as CI expects to find it.
 DERIVED_TOOLS = ("sync_bundled_packs.py", "generate_credits.py")
+
+# What a provider hands back is a WAV, whatever its vendor speaks internally
+# (fetch_media/speech/provider.py). afconvert picks its reader by extension, so
+# the name is what tells it so.
+PROVIDER_FILE = "speech.wav"
+
+# The licence a recording of our own carries, and the document that has to be
+# behind the `sourceURL` every medium needs. Decision 3 of the plan proposes
+# CC BY 4.0 — the gate's `ALLOWED_LICENCES` takes it, and `--attribution` names
+# whose voice it is. A different answer to that decision changes this one line.
+IMPORT_LICENCE = "CC-BY-4.0"
+RECORDING_DOC = "https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md"
 
 
 def escape_data(message: str) -> str:
@@ -72,6 +93,41 @@ def regenerate_derived() -> None:
             raise RuntimeError(f"{script} still reports a problem — see its output above")
 
 
+def warn_if_limited(label: str, clip: audio.Clip) -> None:
+    """Say when the peak ceiling stopped a clip from reaching the target.
+
+    The one case where two clips still sound unequally loud after the
+    normalisation (#148), and the only answer is a different recording — so it
+    is said out loud rather than hidden in a number nobody compares.
+    """
+    if not clip.limited:
+        return
+
+    message = (
+        f"{label}: the peak ceiling held this clip at {clip.loudness:.1f} dBFS instead of "
+        f"{audio.TARGET:g}. It will sound quieter than the rest — another recording is the "
+        "fix, not another gain."
+    )
+    print(f"::warning::{escape_data(message)}")
+
+
+def remove_orphan(directory: Path, label: str, previous: str | None, relative: str) -> None:
+    """Delete the file the manifest no longer names.
+
+    The manifest is the truth about the directory beside it, and a medium
+    nothing references any more would still be copied into the app bundle by
+    sync_bundled_packs.py. Only inside that directory: a manifest that points
+    at `../../something` is a broken manifest, not a licence to unlink.
+    """
+    if not previous or previous == relative:
+        return
+
+    orphan = directory / previous
+    if orphan.is_file() and orphan.resolve().is_relative_to(directory.resolve()):
+        orphan.unlink()
+        print(f"{label}: removed the previous {previous}")
+
+
 def record_medium(
     pack_id: str,
     document: dict,
@@ -83,12 +139,7 @@ def record_medium(
     attribution: str,
     source_url: str,
 ) -> None:
-    """Store one medium beside the manifest and record it there.
-
-    Deletes the file the entry pointed at before: the manifest is the truth
-    about the pack directory, and a medium nothing references any more would
-    still be copied into the app bundle by sync_bundled_packs.py.
-    """
+    """Store one medium beside the manifest and record it there."""
     pack = manifest.pack_dir(pack_id)
     destination = pack / relative
     destination.parent.mkdir(parents=True, exist_ok=True)
@@ -109,14 +160,58 @@ def record_medium(
         ),
     )
     manifest.save(manifest.manifest_path(pack_id), document)
-
-    if previous and previous != relative:
-        orphan = pack / previous
-        if orphan.is_file() and orphan.resolve().is_relative_to(pack.resolve()):
-            orphan.unlink()
-            print(f"{species}: removed the previous {previous}")
+    remove_orphan(pack, species, previous, relative)
 
     print(f"{species}: {relative}  {len(data)} bytes  sha256 {digest}")
+
+
+def record_clip(
+    target: clips.Target,
+    document: dict,
+    sentence: str,
+    clip: audio.Clip,
+    text: str,
+    voice: speech.Voice,
+) -> None:
+    """Store one recorded sentence beside its manifest and record it there.
+
+    The voice goes in first, and it is the step that can refuse: one manifest
+    carries one voice for every clip in it, so a sentence produced by somebody
+    else has to be caught before a file is written rather than after thirty
+    clips have been labelled with the wrong licence.
+    """
+    recorded = manifest.set_voice(
+        document,
+        manifest.voice_block(
+            licence=voice.license,
+            attribution=voice.attribution,
+            source_url=voice.source_url,
+            retrieved=datetime.date.today().isoformat(),
+        ),
+    )
+
+    relative = target.file(sentence)
+    destination = target.directory / relative
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    destination.write_bytes(clip.data)
+
+    digest = manifest.sha256_of(destination)
+    previous = manifest.set_speech(
+        document,
+        target.bird_id,
+        sentence,
+        manifest.speech_block(file=relative, sha256=digest, text=text),
+    )
+    manifest.save(target.path, document)
+    remove_orphan(target.directory, target.label, previous, relative)
+
+    print(f'{target.label}: {sentence}  "{text}"')
+    print(
+        f"{target.label}: {relative}  {len(clip.data)} bytes  {clip.seconds:.1f} s  "
+        f"{clip.loudness:.1f} dBFS  sha256 {digest}"
+    )
+    print(f"{target.label}: voice {recorded['attribution']} ({recorded['license']})")
+    warn_if_limited(f"{target.label} / {sentence}", clip)
 
 
 def selected_birds(document: dict, species: list[str] | None) -> list[dict]:
@@ -305,7 +400,7 @@ def command_call_candidates(args: argparse.Namespace) -> int:
     summaries: list[str] = []
     held_back = 0
 
-    with xenocanto.Client(xenocanto.api_key()) as client:
+    with xenocanto.Client(keys.api_key(keys.XENO_CANTO)) as client:
         for bird in birds:
             records = client.recordings(bird["scientificName"])
             found = xenocanto.call_candidates(bird["id"], records, args.type)
@@ -363,7 +458,7 @@ def command_call_pick(args: argparse.Namespace) -> int:
     document = manifest.load(manifest.manifest_path(args.pack))
     bird = manifest.bird(document, args.species)
 
-    with xenocanto.Client(xenocanto.api_key()) as client:
+    with xenocanto.Client(keys.api_key(keys.XENO_CANTO)) as client:
         record = client.recording(args.recording)
 
         found = xenocanto.binomial(record)
@@ -384,21 +479,107 @@ def command_call_pick(args: argparse.Namespace) -> int:
             f"{args.species}: downloading {name} "
             f"({record.get('length')}, quality {record.get('q')}, {record.get('type')})"
         )
-        encoded = audio.trim(client.download(record["file"]), name, args.start, args.duration)
+        clip = audio.trim(client.download(record["file"]), name, args.start, args.duration)
 
+    print(f"{args.species}: {clip.seconds:.1f} s at {clip.loudness:.1f} dBFS")
+    warn_if_limited(args.species, clip)
     record_medium(
         args.pack,
         document,
         args.species,
         "call",
         f"audio/{args.species}{audio.EXTENSION}",
-        encoded,
+        clip.data,
         licence=licence,
         attribution=xenocanto.attribution(record),
         source_url=xenocanto.RECORDING_URL.format(args.recording),
     )
     regenerate_derived()
     print("\nListen to the file before you commit it — nothing else has heard it yet.")
+    return 0
+
+
+def speech_work(
+    pack: str | None,
+    fixed: str | None,
+    species: list[str] | None,
+    chosen: list[str] | None,
+) -> tuple[dict, list[tuple[clips.Target, str, str]]]:
+    """The manifest to write, and every (target, sentence, German text) in it.
+
+    Resolved before a single clip is produced, so that a misspelt sentence key
+    or a species the pack does not have costs nothing — with a paid provider
+    that is the difference between a typo and an invoice.
+    """
+    if fixed:
+        if species:
+            raise ValueError("--species belongs to a pack; the fixed sentences have no species")
+        if not chosen:
+            # No default list on purpose: which sentences the fixed set holds
+            # still depends on decisions 4 and 7 of the plan and on #146's key,
+            # and rendering "every string in the catalogue" is not a default
+            # anybody wants.
+            raise ValueError("--set fixed needs --sentence: name the sentences to produce")
+
+        document = manifest.load(manifest.speech_manifest_path())
+        target = clips.for_fixed_set()
+        return document, [(target, key, sentences.fixed_text(key)) for key in chosen]
+
+    document = manifest.load(manifest.manifest_path(str(pack)))
+    keys_to_do = chosen or list(sentences.SPECIES_SENTENCES)
+    work = []
+    for bird in selected_birds(document, species):
+        target = clips.for_species(str(pack), str(bird["id"]))
+        work += [(target, key, sentences.species_text(bird, key)) for key in keys_to_do]
+    return document, work
+
+
+def command_speech_render(args: argparse.Namespace) -> int:
+    """Ask a provider for every sentence named, and record what comes back."""
+    provider = speech.provider(args.provider)
+    document, work = speech_work(args.pack, args.set, args.species, args.sentence)
+
+    print(f"{len(work)} clip(s) through '{provider.name}'")
+    for target, sentence, text in work:
+        spoken = provider.render(text, args.voice)
+        record_clip(
+            target,
+            document,
+            sentence,
+            audio.trim(spoken, PROVIDER_FILE, duration=None),
+            text,
+            provider.voice(),
+        )
+
+    regenerate_derived()
+    print("\nListen to every clip before you commit it — nothing else has heard it yet.")
+    return 0
+
+
+def command_speech_import(args: argparse.Namespace) -> int:
+    """Record one take somebody made, through the same encoder as a call."""
+    if args.pack and not args.species:
+        raise ValueError("--species names the bird this take is for")
+
+    document, work = speech_work(
+        args.pack, args.set, [args.species] if args.species else None, [args.sentence]
+    )
+    target, sentence, text = work[0]
+
+    print(f'{target.label}: importing {args.file.name} as "{text}"')
+    record_clip(
+        target,
+        document,
+        sentence,
+        audio.trim(args.file.read_bytes(), args.file.name, duration=None),
+        text,
+        speech.Voice(
+            license=IMPORT_LICENCE, attribution=args.attribution, source_url=RECORDING_DOC
+        ),
+    )
+
+    regenerate_derived()
+    print("\nListen to the clip before you commit it — nothing else has heard it yet.")
     return 0
 
 
@@ -444,6 +625,21 @@ def command_upload(args: argparse.Namespace) -> int:
 
     print(f"\n{len(uploads)} object(s) in the media bucket: packs/{args.pack}/ and {index.KEY}")
     return 0
+
+
+def add_speech_place(parser: argparse.ArgumentParser) -> None:
+    """Which manifest a `speech` step works on — a pack, or the fixed set.
+
+    Exclusive and required: a species sentence belongs to a pack, and „Super
+    gemacht!" belongs to no pack at all (data/speech/, section 3.1 of the plan).
+    """
+    place = parser.add_mutually_exclusive_group(required=True)
+    place.add_argument("--pack", help="pack id, for instance 'basis' — its species sentences")
+    place.add_argument(
+        "--set",
+        choices=("fixed",),
+        help="the sentences that belong to no pack, in data/speech/",
+    )
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -531,6 +727,43 @@ def build_parser() -> argparse.ArgumentParser:
     )
     picking.set_defaults(run=command_call_pick)
 
+    speaking = commands.add_parser("speech", help="the sentences the app says out loud")
+    spoken = speaking.add_subparsers(dest="step", required=True)
+
+    render = spoken.add_parser("render", help="ask a provider for one or more sentences")
+    add_speech_place(render)
+    render.add_argument("--species", nargs="+", help="bird ids; default: every bird in the pack")
+    render.add_argument(
+        "--sentence",
+        nargs="+",
+        help="String Catalog keys; default for a pack: " + ", ".join(sentences.SPECIES_SENTENCES),
+    )
+    render.add_argument(
+        "--provider",
+        required=True,
+        choices=sorted(speech.PROVIDERS),
+        help="which adapter speaks — 'fake' produces tones and reaches no vendor",
+    )
+    render.add_argument("--voice", help="a voice the provider offers; default: its own")
+    render.set_defaults(run=command_speech_render)
+
+    importing = spoken.add_parser("import", help="record one take somebody made")
+    add_speech_place(importing)
+    importing.add_argument("--species", help="bird id, for instance 'amsel'")
+    importing.add_argument("--sentence", required=True, help="String Catalog key")
+    importing.add_argument(
+        "--file",
+        required=True,
+        type=Path,
+        help="the take, in a format afconvert reads: " + ", ".join(sorted(audio.SOURCE_SUFFIXES)),
+    )
+    importing.add_argument(
+        "--attribution",
+        required=True,
+        help="who is heard, as the credits will name them, for instance 'Stimme: Johanna'",
+    )
+    importing.set_defaults(run=command_speech_import)
+
     upload = commands.add_parser("upload", help="upload a pack to the media bucket")
     upload.add_argument("--pack", required=True)
     upload.add_argument("--dry-run", action="store_true", help="report what would happen")
@@ -559,5 +792,5 @@ def main(argv: list[str] | None = None) -> int:
         BotoCoreError,
         ClientError,
     ) as error:
-        print(f"::error::{escape_data(xenocanto.redact(f'{type(error).__name__}: {error}'))}")
+        print(f"::error::{escape_data(keys.redact(f'{type(error).__name__}: {error}'))}")
         return 1
