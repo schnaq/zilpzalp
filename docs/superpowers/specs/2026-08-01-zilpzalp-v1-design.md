@@ -153,6 +153,8 @@ Die App holt beim Start des Elternbereichs einen Katalog (`packs/index.json`) au
 
 Neue Pakete können dadurch ohne App-Update und ohne Review ausgeliefert werden — der Grund, warum wir nicht Apples On-Demand Resources nehmen.
 
+Die Umsetzung (Entscheidung 2026-09-10, Issue #34) weicht in drei Punkten ab. Der Katalog wird geholt, sobald die Paketkarte im Elternbereich erscheint — also hinter dem Schloss, nicht beim Öffnen des Bereichs, damit die einzige Netzverbindung der App zwei Türen tief liegt. Die Spiele lesen nicht mehr ein Paket, sondern eine `PackLibrary` aus Basispaket und allen installierten Paketen; eine Art, die zweimal vorkommt, zählt einmal, und das Basispaket gewinnt. Belegter Speicher wird aus den Dateien gemessen (`.fileSizeKey`, kein Datumsschlüssel), nicht aus der Größe im Index — heruntergeladen wurde vielleicht eine ältere App-Version, und der Index ist genau dann unerreichbar, wenn jemand Platz schaffen will.
+
 ---
 
 ## 4. Spielablauf
