@@ -85,11 +85,17 @@ struct QuizScreen: View {
         // second, smaller back button above it.
         .toolbar(.hidden, for: .navigationBar)
         .onAppear(perform: open)
-        // The next round comes from the count, never from appearing again.
-        // A tap on "Nochmal spielen" that lands while the round end is still
-        // being pushed reverses that push, and this screen is then told
-        // neither that it went away nor that it came back — it kept the
-        // finished round, its ten green leaves and no way out of them (#157).
+        // Every round after the first comes from the count, never from
+        // appearing again. A tap on "Nochmal spielen" that lands while the
+        // round end is still being pushed reverses that push, and this screen
+        // is then told neither that it went away nor that it came back: it
+        // would keep the finished round, its ten green leaves and no way out
+        // of them (#157).
+        //
+        // Not one `onChange(of:initial:)` for both: measured in the simulator,
+        // the initial run and the change fire together in the update that
+        // brings the screen back, and the question is then asked twice in the
+        // same millisecond — audibly, because the second one restarts it.
         .onChange(of: askedFor) { session?.resume() }
         // The question being spoken and the round waiting to move on both
         // outlive this view otherwise — a child who taps back would hear the
@@ -358,7 +364,7 @@ struct QuizScreen: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
-    /// The round this screen opened on, built once and asked once.
+    /// The round this screen opens on, built once and asked once.
     ///
     /// Only the first appearance has anything to do here. Every later one is
     /// a return from the round end, and what deals the round then is
