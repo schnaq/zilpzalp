@@ -123,11 +123,25 @@ def square_photo(data: bytes, crop: Box | None = None) -> bytes:
     # full chroma would only pay off for hard colour edges, which a bird photo
     # does not have.
     #
-    # `exif=None` explicitly, and no `icc_profile`, so the file carries no
-    # camera model and no GPS position of somebody's garden into the app.
-    # Pillow's JPEG encoder wrote metadata only when it was handed some; the
-    # HEIF one falls back to whatever `Image.info` still holds, which after
-    # `exif_transpose` is the source block minus its orientation tag.
+    # Every metadata block is refused by name. Pillow's JPEG encoder wrote
+    # metadata only when it was handed some; the HEIF one falls back to
+    # whatever `Image.info` still holds — the source's EXIF minus the
+    # orientation tag `exif_transpose` consumed, its XMP packet, and the sRGB
+    # profile the conversion above left behind. The XMP is the one that
+    # matters: a phone or Lightroom export carries the shot's GPS position
+    # there as well, and no NoDerivatives clause is needed to make shipping
+    # somebody's garden coordinates in a children's app a mistake. The colour
+    # is not lost with the profile — HEIF signals sRGB in its own NCLX block —
+    # and dropping it makes the tile the same shape whether the original was
+    # tagged or not.
     output = io.BytesIO()
-    image.save(output, format="HEIF", quality=QUALITY, chroma=420, exif=None)
+    image.save(
+        output,
+        format="HEIF",
+        quality=QUALITY,
+        chroma=420,
+        exif=None,
+        xmp=None,
+        icc_profile=None,
+    )
     return output.getvalue()

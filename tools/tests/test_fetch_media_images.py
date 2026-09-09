@@ -12,12 +12,23 @@ from __future__ import annotations
 import io
 import unittest
 
-from PIL import Image
+from PIL import Image, ImageCms
 
 from fetch_media import images
 
 RED = (220, 40, 40)
 BLUE = (40, 60, 220)
+
+# What a phone or a Lightroom export puts beside the EXIF. The GPS position
+# lives in here as well, which is why the encoder has to refuse it by name.
+XMP = (
+    b'<?xpacket begin="" id="W5M0MpCehiHzreSzNTczkc9d"?>'
+    b'<x:xmpmeta xmlns:x="adobe:ns:meta/">'
+    b'<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">'
+    b'<rdf:Description xmlns:exif="http://ns.adobe.com/exif/1.0/"'
+    b' exif:GPSLatitude="51,13.5N"/>'
+    b'</rdf:RDF></x:xmpmeta><?xpacket end="r"?>'
+)
 
 
 def photo(width: int, height: int, orientation: int | None = None, split: str = "vertical") -> bytes:
@@ -25,8 +36,9 @@ def photo(width: int, height: int, orientation: int | None = None, split: str = 
 
     `split="vertical"` puts red on the left, `"horizontal"` puts it on top —
     which half comes back tells the tests what the crop and the EXIF
-    orientation did. An orientation comes with a camera model beside it, the
-    way a real photo carries one, so that the tile can be checked for both.
+    orientation did. An orientation comes with the rest of a real photo's
+    baggage beside it — camera model, XMP packet, colour profile — so that the
+    tile can be checked for all of it.
     """
     image = Image.new("RGB", (width, height), BLUE)
     box = (0, 0, width // 2, height) if split == "vertical" else (0, 0, width, height // 2)
@@ -39,7 +51,14 @@ def photo(width: int, height: int, orientation: int | None = None, split: str = 
         exif = Image.Exif()
         exif[0x0112] = orientation
         exif[0x0110] = "SomebodysPhone"
-        image.save(buffer, format="JPEG", quality=95, exif=exif)
+        image.save(
+            buffer,
+            format="JPEG",
+            quality=95,
+            exif=exif,
+            xmp=XMP,
+            icc_profile=ImageCms.ImageCmsProfile(ImageCms.createProfile("sRGB")).tobytes(),
+        )
     return buffer.getvalue()
 
 
@@ -90,11 +109,20 @@ class SquarePhotoTests(unittest.TestCase):
         self.assertEqual(encoded[4:12], b"ftyp" + images.SUFFIX.encode())
 
     def test_drops_the_metadata(self) -> None:
-        """No camera model, and above all no GPS position of somebody's garden."""
-        result = opened(images.square_photo(photo(2048, 1538, orientation=1)))
+        """No camera model, and above all no GPS position of somebody's garden.
+
+        The GPS sits in the XMP packet as often as in the EXIF, and HEIF
+        carries both — so the bytes are searched, not only the blocks Pillow
+        parses back out.
+        """
+        encoded = images.square_photo(photo(2048, 1538, orientation=1))
+        result = opened(encoded)
 
         self.assertEqual(len(result.getexif()), 0)
         self.assertIsNone(result.info.get("icc_profile"))
+        self.assertNotIn(b"xmpmeta", encoded)
+        self.assertNotIn(b"GPSLatitude", encoded)
+        self.assertNotIn(b"SomebodysPhone", encoded)
 
     def test_takes_the_centre_by_default(self) -> None:
         """A 2048×1200 photo, red on the left: the centre keeps both halves."""
