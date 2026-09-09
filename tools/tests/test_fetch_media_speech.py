@@ -131,6 +131,11 @@ class SentenceTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             sentences.fill("Wo ist %1$@ %2$@?", "die")
 
+    def test_refuses_an_argument_number_that_is_not_one(self) -> None:
+        """`String(format:)` counts from 1; %0$@ would silently take the last."""
+        with self.assertRaises(ValueError):
+            sentences.fill("Wo ist %0$@?", "die", "Amsel")
+
 
 class RealCatalogTests(unittest.TestCase):
     """One assertion against the catalogue the app actually ships."""
@@ -183,6 +188,17 @@ class ProviderTests(unittest.TestCase):
         self.assertEqual(voice.license, "CC0-1.0")
         self.assertTrue(voice.attribution)
         self.assertTrue(voice.source_url)
+
+
+class StoreTests(unittest.TestCase):
+    def test_refuses_to_write_outside_the_directory_it_was_given(self) -> None:
+        """A manifest that names `../../something` is broken, not permission."""
+        with tempfile.TemporaryDirectory() as directory:
+            with self.assertRaises(ValueError) as error:
+                cli.store(Path(directory) / "pack", "../escaped.m4a", b"nothing")
+
+            self.assertIn("outside", str(error.exception))
+            self.assertFalse((Path(directory) / "escaped.m4a").exists())
 
 
 class TargetTests(unittest.TestCase):
@@ -365,6 +381,34 @@ class RenderTests(SpeechTestCase):
 
         self.assertEqual(code, 1)
         self.assertIn("no species", printed)
+
+    def test_refuses_another_voice_before_it_renders_anything(self) -> None:
+        """With a paid provider, after the first clip would already be a bill."""
+        self.run_command(
+            [
+                "speech",
+                "import",
+                "--pack",
+                "basis",
+                "--species",
+                "amsel",
+                "--sentence",
+                "collection.name",
+                "--file",
+                str(self.take()),
+                "--attribution",
+                "Stimme: Johanna",
+            ]
+        )
+
+        with mock.patch.object(fake.FakeProvider, "render", autospec=True) as rendered:
+            code, printed = self.render("--pack", "basis", "--species", "star")
+
+        self.assertEqual(code, 1)
+        self.assertIn("one voice", printed)
+        rendered.assert_not_called()
+        self.assertEqual(self.clips_of("star"), {})
+        self.assertEqual(self.document()["voice"]["attribution"], "Stimme: Johanna")
 
     def test_refuses_the_fixed_set_without_a_sentence(self) -> None:
         code, printed = self.render("--set", "fixed")

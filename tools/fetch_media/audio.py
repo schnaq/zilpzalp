@@ -295,7 +295,8 @@ def strip_silence(samples: array.array, rate: int, keep: float = KEEP) -> array.
     throughout is handed back whole — there is nothing to find, and returning
     nothing would encode an empty file.
     """
-    threshold = peak(samples) * 10 ** (SILENCE / 20) * FULL_SCALE
+    loudest = max((abs(sample) for sample in samples), default=0)
+    threshold = loudest * 10 ** (SILENCE / 20)
     size = max(1, int(SILENCE_BLOCK * rate))
     active = [
         first

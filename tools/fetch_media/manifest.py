@@ -179,10 +179,13 @@ def set_speech(document: dict, bird_id: str | None, sentence: str, block: dict) 
     does — a clip nothing references any more would still be copied into the
     app bundle by tools/sync_bundled_packs.py.
     """
-    if bird_id is None:
-        clips = document.setdefault(LINES_KIND, {})
-    else:
-        clips = bird(document, bird_id).setdefault(SPEECH_KIND, {})
+    # `or {}` rather than `setdefault`, and written back: a manifest may carry
+    # `"speech": null` the way a bird carries `"call": null` — declared and
+    # empty — and `setdefault` would hand that null straight on.
+    holder = document if bird_id is None else bird(document, bird_id)
+    kind = LINES_KIND if bird_id is None else SPEECH_KIND
+    clips = holder.get(kind) or {}
+    holder[kind] = clips
 
     previous = clips.get(sentence) or {}
     clips[sentence] = block

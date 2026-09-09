@@ -124,6 +124,9 @@ def store(directory: Path, relative: str, data: bytes) -> str:
     differ only in what is then written about them.
     """
     destination = directory / relative
+    if not destination.resolve().is_relative_to(directory.resolve()):
+        raise ValueError(f"'{relative}' would be written outside {directory}")
+
     destination.parent.mkdir(parents=True, exist_ok=True)
     destination.write_bytes(data)
     return manifest.sha256_of(destination)
@@ -162,6 +165,16 @@ def record_medium(
     print(f"{species}: {relative}  {len(data)} bytes  sha256 {digest}")
 
 
+def voice_block(voice: speech.Voice) -> dict:
+    """A provider's or a recordist's voice as the manifest carries it, dated today."""
+    return manifest.voice_block(
+        licence=voice.license,
+        attribution=voice.attribution,
+        source_url=voice.source_url,
+        retrieved=datetime.date.today().isoformat(),
+    )
+
+
 def record_clip(
     target: clips.Target,
     document: dict,
@@ -177,15 +190,7 @@ def record_clip(
     else has to be caught before a file is written rather than after thirty
     clips have been labelled with the wrong licence.
     """
-    recorded = manifest.set_voice(
-        document,
-        manifest.voice_block(
-            licence=voice.license,
-            attribution=voice.attribution,
-            source_url=voice.source_url,
-            retrieved=datetime.date.today().isoformat(),
-        ),
-    )
+    recorded = manifest.set_voice(document, voice_block(voice))
 
     relative = target.file(sentence)
     digest = store(target.directory, relative, clip.data)
@@ -532,6 +537,12 @@ def command_speech_render(args: argparse.Namespace) -> int:
     provider = speech.provider(args.provider)
     document, work = speech_work(args.pack, args.set, args.species, args.sentence)
 
+    # Before the first sentence is spoken, not after: a provider that is not
+    # the one this manifest was produced with is refused here, where it has
+    # cost nothing. `record_clip` asks again per clip and finds it agreed.
+    voice = provider.voice()
+    manifest.set_voice(document, voice_block(voice))
+
     print(f"{len(work)} clip(s) through '{provider.name}'")
     for target, sentence, text in work:
         spoken = provider.render(text, args.voice)
@@ -541,7 +552,7 @@ def command_speech_render(args: argparse.Namespace) -> int:
             sentence,
             audio.trim(spoken, speech.RENDERED_FILE, duration=None),
             text,
-            provider.voice(),
+            voice,
         )
 
     regenerate_derived()

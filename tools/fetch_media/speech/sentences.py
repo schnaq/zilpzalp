@@ -91,8 +91,13 @@ def fill(template: str, *arguments: str) -> str:
         else:
             index = unpositional
             unpositional += 1
-        if index >= len(arguments):
-            raise ValueError(f"{template!r} wants more than the {len(arguments)} argument(s) given")
+        # Both ends: `String(format:)` counts from 1, so `%0$@` is not an
+        # argument this can fill — and a negative index would quietly hand back
+        # the last one instead of saying so.
+        if not 0 <= index < len(arguments):
+            raise ValueError(
+                f"{template!r} names an argument outside the {len(arguments)} it was given"
+            )
         return arguments[index]
 
     filled = PLACEHOLDER.sub(resolve, template)
