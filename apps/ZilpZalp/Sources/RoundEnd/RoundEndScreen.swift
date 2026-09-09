@@ -334,9 +334,9 @@ struct RoundEndScreen: View {
 
     /// The one sentence this screen says out loud, for the child who cannot
     /// read it. A first find gets its own, so the news is heard as well.
-    private var spokenPraise: String {
-        guard isFirstFind, let sticker else { return String(localized: "roundEnd.title") }
-        return String(format: String(localized: "roundEnd.sticker.new.spoken"), sticker.name)
+    private var spokenPraise: SpokenLine {
+        guard isFirstFind, let sticker else { return .fixed("roundEnd.title") }
+        return sticker.praise
     }
 
     private var starSize: CGFloat {
@@ -368,7 +368,7 @@ struct RoundEndScreen: View {
         settled = true
 
         if announcer == nil {
-            let voice = SpeechAnnouncer()
+            let voice = SpeechAnnouncer(pack: catalog)
             announcer = voice
             voice.announce(spokenPraise)
         }
