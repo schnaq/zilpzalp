@@ -35,6 +35,10 @@ struct QuizScreen: View {
 
     let game: Game
     let catalog: PackCatalog
+    /// How often "Nochmal spielen" has sent a child back here; see
+    /// ``RootView/roundsAskedFor``. Only ever compared with itself: what the
+    /// screen acts on is the change, never the number.
+    let askedFor: Int
     /// Called once the last question is answered. ``RootView`` pushes
     /// ``Route/roundEnd(_:)`` with it.
     let onFinished: (RoundResult) -> Void
@@ -81,6 +85,19 @@ struct QuizScreen: View {
         // second, smaller back button above it.
         .toolbar(.hidden, for: .navigationBar)
         .onAppear(perform: open)
+        // And on the count as well, because the appearance is not always
+        // delivered: a tap on "Nochmal spielen" that lands while the round end
+        // is still being pushed reverses that push, and this screen is then
+        // told neither that it went away nor that it came back — it would keep
+        // the finished round, its ten green leaves and no way out of them
+        // (#157).
+        //
+        // Both fire in the ordinary case, milliseconds apart, and that is
+        // deliberate. Only the first finds a finished round and deals; the
+        // second puts the same question again, which is inaudible at that
+        // distance — and it is what picks the round back up whenever
+        // something covers this screen and `suspend()` cuts the question.
+        .onChange(of: askedFor) { session?.resume() }
         // The question being spoken and the round waiting to move on both
         // outlive this view otherwise — a child who taps back would hear the
         // last question from the home screen.
@@ -360,31 +377,4 @@ struct QuizScreen: View {
         }
         session?.resume()
     }
-}
-
-// MARK: - Previews
-
-@MainActor
-@ViewBuilder
-private func quizPreview(_ sizeClass: UserInterfaceSizeClass) -> some View {
-    if let catalog = try? PackCatalog.bundled() {
-        NavigationStack {
-            QuizScreen(game: .names, catalog: catalog, onFinished: { _ in })
-        }
-        .environment(\.horizontalSizeClass, sizeClass)
-    } else {
-        Text(verbatim: "The bundled pack did not open.")
-    }
-}
-
-#Preview("iPad landscape", traits: .fixedLayout(width: 1194, height: 834)) {
-    quizPreview(.regular)
-}
-
-#Preview("iPad portrait", traits: .fixedLayout(width: 834, height: 1194)) {
-    quizPreview(.regular)
-}
-
-#Preview("iPhone portrait", traits: .fixedLayout(width: 390, height: 844)) {
-    quizPreview(.compact)
 }

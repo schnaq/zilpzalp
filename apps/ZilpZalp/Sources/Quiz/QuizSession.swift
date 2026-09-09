@@ -259,13 +259,14 @@ final class QuizSession {
 
     /// Picks the round up where the screen left it, or deals a new one.
     ///
-    /// The screen calls this every time it appears, and it has three cases to
-    /// tell apart. Opened for the first time, it asks the question the
-    /// constructor's round starts with. Returned to from the round end — which
-    /// is all "Nochmal spielen" does — it deals a fresh round, because the last
-    /// one is over. Coming back to a question that was answered while the
-    /// screen was going away, it finishes that move instead of asking an
-    /// already-answered question a second time.
+    /// Called when the screen opens the round, when "Nochmal spielen" sends a
+    /// child back for another one, and when "Weiterspielen" puts the quit card
+    /// away again — and it has three cases to tell apart, which the callers do
+    /// not map onto one by one. A finished round is replaced by a fresh one,
+    /// because the last is over. A question answered while the screen was
+    /// going away has its move finished rather than being asked again. And
+    /// anything else is a question to put, whether for the first time or once
+    /// more.
     func resume() {
         if play.isFinished {
             var generator = SystemRandomNumberGenerator()
