@@ -268,21 +268,28 @@ enum StubPack {
 
     static func manifest(
         packID: String = id,
+        voiced: Bool = true,
         amselPhoto: Asset = assets[0],
         zilpzalpPhoto: Asset = assets[1],
         zilpzalpCall: Asset = assets[2],
         amselSpeech: Asset = assets[3],
     ) -> Data {
-        Data("""
-        {
-          "id": "\(packID)",
-          "title": "\(title)",
+        // `voiced: false` is a pack that has recordings and credits nobody —
+        // what the licence gate refuses at curation time.
+        let voice = voiced ? """
           "voice": {
             "license": "CC-BY-4.0",
             "attribution": "Stimme: Niemand",
             "sourceURL": "https://example.org/docs/sprachaufnahmen.md",
             "retrieved": "2026-09-09"
           },
+        """ : ""
+
+        return Data("""
+        {
+          "id": "\(packID)",
+          "title": "\(title)",
+        \(voice)
           "birds": [
             {
               "id": "amsel",

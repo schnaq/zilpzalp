@@ -233,19 +233,16 @@ struct PackDownloaderTests {
         }
     }
 
-    /// Once for a photo, which is the first file of the pack, and once for a
-    /// recorded sentence, which lies one directory deeper: every path a
-    /// manifest names goes through the same guard, and `requests` says how far
-    /// the download got before it refused — the manifest alone, or the
-    /// manifest and the photo that precedes the clip.
+    /// Once for a photo and once for a recorded sentence, which lies one
+    /// directory deeper. Every name a manifest carries is checked before the
+    /// first byte, so a poisoned one at the end of a pack costs no request at
+    /// all — which is what `requests.count == 1`, the manifest alone, says.
     @Test(
         "a manifest naming a path outside the pack is refused before it is fetched",
-        arguments: [
-            (escape: "../../escaped.png", spoken: false, requests: 1),
-            (escape: "../../evil.m4a", spoken: true, requests: 2),
-        ],
+        arguments: [false, true],
     )
-    func refusesAPathOutsideThePack(escape: String, spoken: Bool, requests: Int) async throws {
+    func refusesAPathOutsideThePack(spoken: Bool) async throws {
+        let escape = spoken ? "../../evil.m4a" : "../../escaped.png"
         let asset = StubPack.Asset(file: escape, sha256: StubPack.assets[0].sha256)
         let manifest = spoken
             ? StubPack.manifest(amselSpeech: asset)
@@ -259,7 +256,7 @@ struct PackDownloaderTests {
             }
 
             let name = URL(filePath: escape).lastPathComponent
-            #expect(StubBucket.requests.count == requests)
+            #expect(StubBucket.requests.count == 1)
             #expect(!exists(home, name))
             #expect(!exists(home, "Packs/\(name)"))
         }

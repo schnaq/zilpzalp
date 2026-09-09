@@ -109,15 +109,19 @@ public actor PackDownloader {
         var downloaded = manifestData.count
         progress(downloaded, entry.downloadSize)
 
+        // Every name before the first byte: a poisoned path at the end of a
+        // manifest must not cost a parent the files that precede it, and a
+        // pack of many birds names hundreds of them.
+        let assets = pack.declaredFiles
+        if let unsafe = assets.first(where: { !isSafeRelativePath($0.file) }) {
+            throw PackDownloadError.invalidPath(packID: entry.id, path: unsafe.file)
+        }
+
         // Media are relative to the manifest, not to the base: the manifest
         // says `photos/amsel.png` and sits at `packs/<id>/manifest.json`.
         let packURL = manifestURL.deletingLastPathComponent()
-        for asset in Self.assets(of: pack) {
+        for asset in assets {
             try Task.checkCancellation()
-            guard isSafeRelativePath(asset.file) else {
-                throw PackDownloadError.invalidPath(packID: entry.id, path: asset.file)
-            }
-
             let destination = partial.appending(path: asset.file)
             if let alreadyThere = verifiedSize(of: destination, sha256: asset.sha256) {
                 downloaded += alreadyThere
@@ -263,18 +267,6 @@ public actor PackDownloader {
         return data
     }
 
-    /// Every file the pack declares, each one once.
-    ///
-    /// What a species declares is ``Bird/declaredFiles``, which lies beside
-    /// the schema so that a medium added there is a medium this fetches. Once
-    /// per file because `media_files()` in `tools/fetch_media/manifest.py`
-    /// uploads and sizes it once: a file two birds or two sentence keys share,
-    /// fetched twice, would run the progress past the index's total.
-    private static func assets(of pack: Pack) -> [(file: String, sha256: String)] {
-        var seen: Set<String> = []
-        return pack.birds.flatMap(\.declaredFiles).filter { seen.insert($0.file).inserted }
-    }
-
     private static func hexDigest(of data: Data) -> String {
         SHA256.hash(data: data).map { String(format: "%02x", $0) }.joined()
     }
@@ -285,6 +277,17 @@ public actor PackDownloader {
             pack = try PackManifest.decode(data)
         } catch {
             throw PackDownloadError.manifestInvalid(packID: packID, reason: "\(error)")
+        }
+        guard pack.voice != nil || pack.birds.allSatisfy({ $0.speech?.isEmpty ?? true }) else {
+            // A photo and a call carry their licence in their own fields and
+            // cannot decode without one; a clip's licence is the manifest's
+            // voice. Without it the pack would install recordings nobody may
+            // be credited for — which `tools/license_gate.py` refuses at
+            // curation time and nothing re-checks after a download.
+            throw PackDownloadError.manifestInvalid(
+                packID: packID,
+                reason: "the pack has recorded sentences but names no voice",
+            )
         }
         guard pack.id == packID else {
             // The id is the directory name, in the bucket and on disk. A

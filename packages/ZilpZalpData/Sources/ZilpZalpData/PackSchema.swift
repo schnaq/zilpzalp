@@ -113,21 +113,21 @@ public struct Bird: Codable, Sendable, Hashable, Identifiable {
 }
 
 extension Bird {
-    /// Every file this species declares — its photo, its call and every
-    /// sentence recorded about it — with the digest each has to hash to.
+    /// The files this species declares: its photo, its call, then every
+    /// sentence recorded about it in sentence-key order, each with the digest
+    /// it has to hash to.
     ///
-    /// Beside the fields rather than beside the downloader, and for the reason
-    /// #166 exists: #163 taught the schema `speech` and taught
-    /// `media_files()` in `tools/fetch_media/manifest.py` to upload it, but
-    /// the enumeration a file away in ``PackDownloader`` was not touched, so a
-    /// downloaded pack would have installed without its recordings. A medium
-    /// added here is a medium the download fetches.
+    /// It lists the fields it lies beside, which is the whole reason it lies
+    /// here: #163 taught the schema `speech` and taught `media_files()` in
+    /// `tools/fetch_media/manifest.py` to upload it, while the enumeration a
+    /// file away in ``PackDownloader`` kept fetching photos and calls only —
+    /// that gap is #166. Beside the fields it is at least hard to miss.
     ///
-    /// Photo, call, then the clips in sentence-key order: a dictionary's own
-    /// order is not stable, and a resumed download should walk a pack the way
-    /// the interrupted one did. Path and digest and no more, because that is
-    /// all a download needs — a clip carries no licence of its own, the voice
-    /// that spoke it does, once per manifest.
+    /// Sentence-key order rather than the dictionary's own, which is not
+    /// stable: a resumed download should walk a pack the way the interrupted
+    /// one did. Path and digest and no more, because that is all a download
+    /// needs — a clip carries no licence of its own, the voice that spoke it
+    /// does, once per manifest.
     var declaredFiles: [(file: String, sha256: String)] {
         [photo, call].compactMap(\.self).map { (file: $0.file, sha256: $0.sha256) }
             + (speech ?? [:]).sorted { $0.key < $1.key }
@@ -146,4 +146,25 @@ public struct Pack: Codable, Sendable, Hashable, Identifiable {
     /// there is then nobody to credit.
     public let voice: Voice?
     public let birds: [Bird]
+}
+
+extension Pack {
+    /// Every file the pack declares, in ``Bird/declaredFiles`` order, each one
+    /// once.
+    ///
+    /// The Swift twin of `media_files()` in `tools/fetch_media/manifest.py`:
+    /// that list is what `fetch-media upload` puts in the bucket and what
+    /// `packs/index.json` sizes, so a file only one of the two names is either
+    /// a download that cannot finish or a progress bar that runs past its
+    /// total.
+    ///
+    /// Each file once because a file may be named twice — two birds sharing a
+    /// photo, two sentence keys sharing a recording. The two languages drop
+    /// the later mention in orders of their own, so a file named twice has to
+    /// carry the same digest both times; `tools/license_gate.py` is what says
+    /// so, by checking every mention against the file on disk.
+    var declaredFiles: [(file: String, sha256: String)] {
+        var seen: Set<String> = []
+        return birds.flatMap(\.declaredFiles).filter { seen.insert($0.file).inserted }
+    }
 }

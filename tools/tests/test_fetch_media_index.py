@@ -141,17 +141,12 @@ class EntryTests(PacksTestCase):
     def test_counts_the_speech_clips_in_the_download_size(self) -> None:
         """#166: the size a parent is shown is what the download really costs,
         and since #163 a pack's recordings are part of it."""
-        without = index.entry("deutschland")["downloadSize"]
         self.write_pack("deutschland", "Vögel in Deutschland", ["amsel", "star"], speech=True)
 
-        entry = index.entry("deutschland")
-
         self.assertEqual(
-            entry["downloadSize"],
+            index.entry("deutschland")["downloadSize"],
             2 * len(PHOTO) + 2 * len(CLIP) + self.manifest_size("deutschland"),
         )
-        # The clips and the lines the manifest gained for them.
-        self.assertGreater(entry["downloadSize"] - without, 2 * len(CLIP))
 
     def test_sums_the_objects_that_are_uploaded(self) -> None:
         """Not whatever else the pack directory happens to hold."""
