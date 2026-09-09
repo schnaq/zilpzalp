@@ -28,7 +28,8 @@ enum SpeechVoice {
     /// accent is still better than silence.
     ///
     /// Resolving this is what writes the log line, so it happens exactly once,
-    /// the first time the app speaks.
+    /// the first time a ``SpeechAnnouncer`` is built — which is a little
+    /// before the first thing is said.
     static let forUtterance: AVSpeechSynthesisVoice? = resolve()
 
     /// Every voice on the device, in Core's terms.
@@ -57,7 +58,7 @@ enum SpeechVoice {
             let voice = AVSpeechSynthesisVoice(identifier: chosen.identifier)
         else {
             Logger.audio.warning(
-                "No German voice to choose from, asking the system for \(language, privacy: .public)",
+                "No usable German voice, asking the system for \(language, privacy: .public)",
             )
             return AVSpeechSynthesisVoice(language: language)
         }

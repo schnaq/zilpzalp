@@ -5,7 +5,7 @@
 /// `.default`: the compact voice every device carries out of the box, and the
 /// only tier a simulator ever has. The other two are downloads a grown-up
 /// makes in Settings — an app cannot fetch them.
-public enum SpeechVoiceQuality: Int, CaseIterable, Comparable, Sendable {
+public enum SpeechVoiceQuality: Int, Comparable, Sendable {
     /// The compact voice that ships with the system.
     case standard = 1
     /// Downloaded, noticeably smoother than ``standard``.
@@ -26,7 +26,7 @@ public enum SpeechVoiceQuality: Int, CaseIterable, Comparable, Sendable {
 /// tested at all: a simulator carries compact voices only, so a premium voice,
 /// an Austrian voice and a novelty voice can never be observed on the machine
 /// that runs the tests.
-public struct SpeechVoiceDescription: Hashable, Sendable {
+public struct SpeechVoiceDescription: Equatable, Sendable {
     /// The system's identifier, e.g. `"com.apple.voice.compact.de-DE.Anna"`.
     /// Unique per voice, and what the app looks the winner back up by.
     public let identifier: String
@@ -101,14 +101,17 @@ public enum SpeechVoiceChoice {
             .min { rank(of: $0) < rank(of: $1) }
     }
 
-    /// The three keys of ``best(from:)``, smallest first. A type of its own
-    /// rather than a `Comparable` conformance on ``SpeechVoiceDescription``:
-    /// this is one module's opinion about voices, not a property of a voice.
+    /// The four keys of ``best(from:)``, smallest first.
+    ///
+    /// A type of its own rather than a `Comparable` conformance on
+    /// ``SpeechVoiceDescription``: this is one module's opinion about voices,
+    /// not a property of a voice. And a type rather than the tuple the
+    /// standard library would compare for free — SwiftLint's `large_tuple`
+    /// allows two members, and this needs four.
     private struct Rank: Comparable {
         /// 0 for ``preferredLanguage``, 1 for every other German region.
         let region: Int
-        /// Negated, so that the best quality is the smallest number.
-        let quality: Int
+        let quality: SpeechVoiceQuality
         let name: String
         /// Unique, which is what makes the whole order total.
         let identifier: String
@@ -117,8 +120,9 @@ public enum SpeechVoiceChoice {
             if lhs.region != rhs.region {
                 return lhs.region < rhs.region
             }
+            // The one key that reads backwards: the best quality sorts first.
             if lhs.quality != rhs.quality {
-                return lhs.quality < rhs.quality
+                return lhs.quality > rhs.quality
             }
             if lhs.name != rhs.name {
                 return lhs.name < rhs.name
@@ -130,7 +134,7 @@ public enum SpeechVoiceChoice {
     private static func rank(of voice: SpeechVoiceDescription) -> Rank {
         Rank(
             region: normalized(voice.language) == normalized(preferredLanguage) ? 0 : 1,
-            quality: -voice.quality.rawValue,
+            quality: voice.quality,
             name: voice.name,
             identifier: voice.identifier,
         )
