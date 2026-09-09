@@ -27,15 +27,14 @@ pillow_heif.register_heif_opener()
 
 SIDE = 1024
 
-# 60 on the libheif scale. At that setting a tile is indistinguishable from the
-# lossless original at the size it is shown, and still measurably better than
-# the JPEG quality 88 this tool wrote before — which the same photos reach at
-# HEIC quality ~51. Below 55 the fine feather speckle starts to smooth over.
+# On the libheif scale — see docs/medien-und-lizenzen.md for the measurement
+# this number comes out of.
 QUALITY = 60
 
-# 4:2:0, the subsampling every phone camera uses for photographs. Full chroma
-# would only pay off for hard colour edges, which a bird photo does not have.
-CHROMA = 420
+# What the manifest calls the file, and what tools/fetch_media/s3.py maps to a
+# content type. Here rather than in cli.py, so the name and the bytes cannot
+# disagree.
+SUFFIX = "heic"
 
 Box = tuple[int, int, int, int]
 
@@ -69,20 +68,6 @@ def centre_box(width: int, height: int) -> Box:
     """The largest centred square of an image that size."""
     side = min(width, height)
     return ((width - side) // 2, (height - side) // 2, side, side)
-
-
-def encode(image: Image.Image) -> bytes:
-    """Encode a tile as HEIC — the single place the format settings live.
-
-    `exif=None` explicitly, and no `icc_profile`, so the file carries no camera
-    model and no GPS position of somebody's garden into the app. Pillow's JPEG
-    encoder wrote metadata only when it was handed some; the HEIF one falls
-    back to whatever `Image.info` still holds, which after `exif_transpose` is
-    the original block minus its orientation tag.
-    """
-    output = io.BytesIO()
-    image.save(output, format="HEIF", quality=QUALITY, chroma=CHROMA, exif=None)
-    return output.getvalue()
 
 
 def square_photo(data: bytes, crop: Box | None = None) -> bytes:
@@ -132,4 +117,17 @@ def square_photo(data: bytes, crop: Box | None = None) -> bytes:
         )
 
     image = image.crop((x, y, x + width, y + height))
-    return encode(image.resize((SIDE, SIDE), Image.LANCZOS))
+    image = image.resize((SIDE, SIDE), Image.LANCZOS)
+
+    # 4:2:0 chroma, the subsampling every phone camera uses for a photograph:
+    # full chroma would only pay off for hard colour edges, which a bird photo
+    # does not have.
+    #
+    # `exif=None` explicitly, and no `icc_profile`, so the file carries no
+    # camera model and no GPS position of somebody's garden into the app.
+    # Pillow's JPEG encoder wrote metadata only when it was handed some; the
+    # HEIF one falls back to whatever `Image.info` still holds, which after
+    # `exif_transpose` is the source block minus its orientation tag.
+    output = io.BytesIO()
+    image.save(output, format="HEIF", quality=QUALITY, chroma=420, exif=None)
+    return output.getvalue()

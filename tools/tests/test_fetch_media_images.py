@@ -76,14 +76,18 @@ class CropParsingTests(unittest.TestCase):
 
 class SquarePhotoTests(unittest.TestCase):
     def test_produces_a_1024_pixel_srgb_heic(self) -> None:
-        """Pillow calls the format HEIF; the file it writes is branded `heic`."""
+        """Pillow calls the format HEIF; the file it writes is branded `heic`.
+
+        The brand is compared against `SUFFIX`, which is what the manifest
+        will call the file: the name and the bytes cannot drift apart.
+        """
         encoded = images.square_photo(photo(2048, 1538))
         result = opened(encoded)
 
         self.assertEqual(result.size, (images.SIDE, images.SIDE))
         self.assertEqual(result.format, "HEIF")
         self.assertEqual(result.mode, "RGB")
-        self.assertEqual(encoded[4:12], b"ftypheic")
+        self.assertEqual(encoded[4:12], b"ftyp" + images.SUFFIX.encode())
 
     def test_drops_the_metadata(self) -> None:
         """No camera model, and above all no GPS position of somebody's garden."""
