@@ -59,10 +59,9 @@ final class AppModel {
     /// What the round the child has just finished changed about its profile,
     /// `nil` until one has been booked in this run of the app.
     ///
-    /// Kept because the celebration is more than one screen: the round end
-    /// asks whether the sticker is a first find, and the rank ascent it pushes
-    /// asks the same round about the ladder. Booking twice to answer twice
-    /// would be a second round in the file.
+    /// Kept because the round end asks more than once: it comes back into
+    /// view when the child returns from the album, and booking twice to
+    /// answer twice would be a second round in the file.
     private(set) var lastRound: RoundOutcome?
 
     /// The round ``lastRound`` describes. See ``record(_:)``.
@@ -270,7 +269,7 @@ final class AppModel {
 
         let round = PlayedRound(
             stars: result.stars,
-            species: result.species,
+            recognitions: result.recognitions,
             playtime: result.playtime,
         )
 

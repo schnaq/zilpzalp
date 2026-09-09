@@ -11,7 +11,13 @@ import ZilpZalpData
 private func quizPreview(_ sizeClass: UserInterfaceSizeClass) -> some View {
     if let catalog = try? PackCatalog.bundled() {
         NavigationStack {
-            QuizScreen(game: .names, catalog: catalog, askedFor: 0, onFinished: { _ in })
+            QuizScreen(
+                game: .names,
+                catalog: catalog,
+                askedFor: 0,
+                recognitions: { [:] },
+                onFinished: { _ in },
+            )
         }
         .environment(\.horizontalSizeClass, sizeClass)
     } else {

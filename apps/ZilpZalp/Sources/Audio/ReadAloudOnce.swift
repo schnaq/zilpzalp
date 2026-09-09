@@ -4,9 +4,8 @@ import SwiftUI
 ///
 /// A child who cannot read cannot be asked a question in writing, nor told
 /// news in writing, so a screen that does either has to say it: both profile
-/// screens ask a question, the parental gate says the one sentence a child
-/// who cannot read the task still understands, and the rank ascent (#29)
-/// announces a promotion.
+/// screens ask a question, and the parental gate says the one sentence a
+/// child who cannot read the task still understands.
 ///
 /// `onAppear` can fire more than once for the same arrival, so the flag is
 /// what makes "once" true. The announcer cuts off whatever it was still

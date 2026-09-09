@@ -31,7 +31,7 @@ Bestandsschutz: der Spec, die vorhandenen deutschen Dateien unter `docs/` und di
 |---|---|---|
 | App-Target | `apps/ZilpZalp/` | Xcode-Projekt, Assets, Info.plist, Entitlements |
 | Website | `apps/web/` | Landing page and legal pages, Next.js on Vercel — German copy, English code |
-| Spiellogik | `packages/ZilpZalpCore/` | Runden, Scoring, Ränge, Zeitbudget — ohne UI, ohne I/O |
+| Spiellogik | `packages/ZilpZalpCore/` | Runden, Scoring, Sticker-Schwelle, Zeitbudget — ohne UI, ohne I/O |
 | Daten | `packages/ZilpZalpData/` | Modelle, Paket-Manifeste, Persistenz, Downloader |
 | Design-System | `packages/ZilpZalpUI/` | Tokens und SwiftUI-Komponenten |
 | Werkzeuge | `tools/` | Medien-Kuration, Credits-Erzeugung — **Python**, nicht Swift |

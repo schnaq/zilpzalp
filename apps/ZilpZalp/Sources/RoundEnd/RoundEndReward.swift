@@ -8,6 +8,9 @@ import ZilpZalpUI
 /// on SwiftLint's 400-line ceiling, and the sticker's arrival is a part of it
 /// that nothing else on the screen reads.
 ///
+/// Under the name stand the progress markers, so the bird, its name and how
+/// far it has come arrive as one block (#177).
+///
 /// The name and the credit are drawn here rather than passed into
 /// ``RewardSticker``, which would otherwise set both inside its disc: its
 /// caption is `--text-strong` and disappears into the forest ground, and its
@@ -22,15 +25,26 @@ struct RoundEndReward: View {
     /// The sticker on iPad, the 200 pt of screen 1e and `RewardScreen.jsx`.
     private static let regularSticker: CGFloat = 200
 
+    /// The progress markers under it, sized against the disc they belong to:
+    /// five markers and their gaps measure about six markers across.
+    private static let regularMarker: CGFloat = 24
+    private static let compactMarker: CGFloat = 20
+
     /// The bird to show, `nil` while it is still being resolved and for a
     /// round without a pack — the sticker then falls back to its star glyph
     /// rather than to a hole.
     let sticker: RoundEndSticker?
 
-    /// Whether the round put this bird in the album for the first time. Read
-    /// off the profile the round was booked onto, so it is `false` until the
-    /// screen has written the round down.
-    let isFirstFind: Bool
+    /// Whether the round earned this bird's sticker — its fifth recognition
+    /// (#177). Read off the profiles either side of the write, so it is
+    /// `false` until the screen has written the round down.
+    let earnedSticker: Bool
+
+    /// How often this bird has been recognised now that the round is booked,
+    /// for the markers under it. `nil` until then, and for a round that could
+    /// not be written down: the screen makes no claim it cannot back up, and a
+    /// row that filled in a moment later would be a second, quieter reward.
+    let progress: Int?
 
     /// A phone, or an iPad sharing its screen: the sticker and both lines
     /// under it drop a step there.
@@ -53,6 +67,13 @@ struct RoundEndReward: View {
                     .typeStyle(isTight ? .body : .bodyLarge, .display, weight: .bold)
                     .foregroundStyle(ZColor.white)
 
+                if let progress {
+                    StickerMarkers(
+                        count: progress,
+                        markerSize: isTight ? Self.compactMarker : Self.regularMarker,
+                    )
+                }
+
                 Text(verbatim: sticker.credit)
                     .typeStyle(.caption, .body, weight: .regular)
                     .foregroundStyle(ZColor.textOnColor)
@@ -64,11 +85,11 @@ struct RoundEndReward: View {
         .animation(pop, value: settled)
     }
 
-    /// The pop belongs to a bird met for the first time. One already in the
-    /// album is simply there: still shown, still named, but the arrival is
-    /// the reward for finding something new.
+    /// The pop belongs to a sticker just earned. A bird whose sticker is
+    /// already in the album is simply there: still shown, still named, but the
+    /// arrival is the reward for having earned it.
     private var popped: Bool {
-        settled || !isFirstFind
+        settled || !earnedSticker
     }
 
     /// `zz-pop`: the sticker bounces in over `--dur-celebrate`. Reduce Motion
@@ -77,9 +98,9 @@ struct RoundEndReward: View {
         reduceMotion ? nil : ZMotion.easeBounce.animation(duration: ZMotion.celebrate)
     }
 
-    /// "Amsel gesammelt" for a first find, the bare name otherwise.
+    /// "Amsel gesammelt" for a sticker just earned, the bare name otherwise.
     private func caption(for sticker: RoundEndSticker) -> String {
-        guard isFirstFind else { return sticker.name }
+        guard earnedSticker else { return sticker.name }
         return String(format: String(localized: "roundEnd.sticker.new"), sticker.name)
     }
 }
