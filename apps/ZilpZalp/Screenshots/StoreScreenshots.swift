@@ -150,6 +150,14 @@ final class StoreScreenshots: XCTestCase {
     /// pause: an answered question stays up for `--dur-celebrate` before the
     /// round moves on, and a second tap on the same species is ignored — so a
     /// loop that only slept would answer the first question ten times over.
+    ///
+    /// "Changed" is read off the species, which is only the same thing while
+    /// the pack has at least as many species to ask for as the round has
+    /// questions — `Round.answers` shuffles a fresh pass once it runs out,
+    /// and a smaller pack could put one bird at the end of one pass and the
+    /// start of the next. The bundled pack has ten of each, and the assertion
+    /// below says so rather than leaving a shrunken pack to look like a round
+    /// that hung.
     private func answerCorrectly(_ app: XCUIApplication, startingWith first: String) {
         var asked: String? = first
         for _ in 0 ..< Self.questionsInARound {
@@ -159,7 +167,12 @@ final class StoreScreenshots: XCTestCase {
             // Without this the loop would tap the same tile again, and again,
             // each time waiting out the whole of `arrival`. `setUp` turns the
             // first failure into the end of the run.
-            XCTAssertNotEqual(asked, species, "The round did not move on from \(species)")
+            XCTAssertNotEqual(
+                asked,
+                species,
+                "The round did not move on from \(species) — a pack with fewer "
+                    + "than \(Self.questionsInARound) species can ask twice in a row",
+            )
         }
     }
 

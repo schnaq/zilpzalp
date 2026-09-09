@@ -7,8 +7,10 @@
 /// spoken; it only lets `ZilpZalpScreenshots` answer ten questions correctly
 /// instead of tapping around until a round happens to earn three stars.
 ///
-/// Written by ``QuizScreen`` and read by the UI test target, which cannot
-/// import the app and therefore spells the same two prefixes for itself.
+/// Written by ``QuizScreen`` and read by `ZilpZalpScreenshots`. A UI test
+/// target links nothing of the app, but this file imports nothing either, so
+/// `project.yml` compiles it into both rather than have the run spell the two
+/// prefixes a second time — a rename here is then a compile error there.
 enum QuizIdentifier {
     /// The question in writing, carrying the species it asks for — empty once
     /// the round is over and there is nothing left to ask.

@@ -66,8 +66,13 @@ enum ScreenshotSeed {
     /// no other way in: the first makes the file, the second replaces what it
     /// holds with the profile above. Whatever it throws is what ``AppModel``
     /// already treats as a store that will not open.
+    ///
+    /// Once per store, not once per call. Nothing in the run loads twice
+    /// today, but a second Mia would leave two profiles in the file — and
+    /// `ProfileChoice.atLaunch` asks which of two children is playing, so
+    /// every picture after that would be of the profile picker.
     static func populate(_ store: ProfileStore) async throws {
-        guard directory != nil else { return }
+        guard directory != nil, try await store.profiles().isEmpty else { return }
 
         let created = try await store.add(name: name, avatar: avatar)
         try await store.update(
