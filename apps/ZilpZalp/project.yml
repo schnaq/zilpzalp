@@ -119,6 +119,27 @@ targets:
           - Baloo2-VariableFont_wght.ttf
           - Nunito-VariableFont_wght.ttf
 
+  # The App Store screenshots (#168), and nothing else. It drives the app on a
+  # booted simulator and writes six PNGs, which is minutes of work and no
+  # gate — so it is deliberately absent from the ZilpZalp scheme, from
+  # `mise run check`, from `mise run build` and from CI. `mise run screenshots`
+  # is the only thing that builds it.
+  ZilpZalpScreenshots:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: Screenshots
+    # A UI test target needs the app it drives: XcodeGen turns this into the
+    # target dependency and the TEST_TARGET_NAME that make the runner install
+    # and launch ZilpZalp.
+    dependencies:
+      - target: ZilpZalp
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.schnaq.zilpzalp.screenshots
+        GENERATE_INFOPLIST_FILE: true
+        SWIFT_VERSION: "6.0"
+
 schemes:
   ZilpZalp:
     build:
@@ -132,3 +153,14 @@ schemes:
       config: Debug
     archive:
       config: Release
+
+  # Its own scheme, so that neither Xcode's Cmd-U nor `mise run build` ever
+  # sees the screenshot run.
+  ZilpZalpScreenshots:
+    build:
+      targets:
+        ZilpZalpScreenshots: [test]
+    test:
+      config: Debug
+      targets:
+        - ZilpZalpScreenshots
