@@ -44,6 +44,9 @@ BUNDLED_PACKS = ("basis",)
 # What ships inside the app, as (label, source, destination): the bundled packs,
 # plus the sentences that belong to no pack. The app says those on every screen,
 # so they are bundled rather than downloaded.
+#
+# Built once, at import, so this tuple — not SOURCE_DIR — is what main() reads
+# and what a test patches to sync somewhere else.
 BUNDLED_COPIES = (
     *((pack, SOURCE_DIR / pack, BUNDLE_DIR / pack) for pack in BUNDLED_PACKS),
     ("speech", REPO_ROOT / "data" / "speech", RESOURCES_DIR / "Speech"),

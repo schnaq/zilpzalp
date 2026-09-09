@@ -174,6 +174,19 @@ class MediaFilesTests(unittest.TestCase):
             [("photos/amsel.png", "0" * 64), ("speech/quiz.prompt.whereIs/amsel.m4a", "2" * 64)],
         )
 
+    def test_lists_a_file_two_sentences_share_only_once(self) -> None:
+        # A species whose name is a sentence of its own can carry the same
+        # recording under two keys. The downloader fetches each file once, so
+        # uploading it twice would make the size and the progress disagree.
+        pack = document()
+        clip = {"file": "speech/amsel.m4a", "sha256": "2" * 64, "text": "Amsel"}
+        pack["birds"][0]["speech"] = {"collection.name": clip, "quiz.answer.name": dict(clip)}
+
+        self.assertEqual(
+            manifest.media_files(pack),
+            [("photos/amsel.png", "0" * 64), ("speech/amsel.m4a", "2" * 64)],
+        )
+
     def test_refuses_to_set_speech_as_if_it_were_a_medium(self) -> None:
         # Speech nests one level deeper and carries no licence of its own, so
         # `set_media` must not be the way it is written.

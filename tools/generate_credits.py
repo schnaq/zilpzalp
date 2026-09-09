@@ -222,8 +222,13 @@ def manifest_voice(document: dict, source: str, used_in: str, clips: int) -> dic
     reason `tools/license_gate.py` picks its entry point by location.
     """
     voice = document.get("voice")
-    if voice is None or not clips:
+    if not clips:
         return None
+    # Clips with nobody behind them are a licence violation, not an empty
+    # section: CC BY recordings would ship with no attribution. The gate says
+    # the same, in its own words, on the next line of `mise run check`.
+    if voice is None:
+        raise ValueError(f"{source}: speech clips are declared but the manifest carries no 'voice'")
     if not isinstance(voice, dict):
         raise ValueError(f"{source} / voice: is not an object")
 
@@ -255,6 +260,11 @@ def read_fixed_sentences(path: Path) -> dict | None:
     lines = document.get("lines")
     if not isinstance(lines, dict):
         raise ValueError(f"{path.name}: no lines found (expected an object whose 'lines' key holds an object)")
+
+    # Nothing recorded, nothing to credit — and no title to demand for a
+    # section that is not rendered. `field` would be evaluated eagerly below.
+    if not lines:
+        return None
 
     return manifest_voice(document, path.name, field(document, "title", path.name), len(lines))
 
@@ -423,6 +433,14 @@ def main(argv: list[str] | None = None) -> int:
 
     if not args.packs_dir.is_dir():
         print(f"::error::{escape_data(f'Pack directory not found: {args.packs_dir}')}")
+        return 1
+
+    # A speech directory whose manifest is not where it is looked for would
+    # quietly strip the voices from the credits it then rewrites — attribution
+    # gone, exit code the same as a routine drift.
+    if args.speech_dir.is_dir() and not (args.speech_dir / SPEECH_MANIFEST_NAME).is_file():
+        message = f"No {SPEECH_MANIFEST_NAME} in {args.speech_dir} — its voices cannot be credited"
+        print(f"::error::{escape_data(message)}")
         return 1
 
     # A font that ships without its licence text is the same violation as a photo

@@ -9,14 +9,24 @@
   },
   "lines": {
     "roundEnd.title": {
-      "file": "silence.m4a",
+      "file": "clips/silence.m4a",
       "sha256": "ea4ca100e771dd55182921eac8665571baeb22644fd18dab1f4a7612b7acaff3",
       "text": "Super gemacht!"
     },
     "gate.spoken": {
-      "file": "gate.spoken.m4a",
+      "file": "clips/gate.spoken.m4a",
       "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
       "text": "Frag bitte einen Erwachsenen."
+    },
+    "profile.picker.title": {
+      "file": "../valid/basis.json",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "text": "Wer spielt heute?"
+    },
+    "profile.create.title": {
+      "file": "clips",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "text": "Wie heißt du?"
     }
   }
 }

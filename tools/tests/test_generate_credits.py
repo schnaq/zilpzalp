@@ -264,6 +264,28 @@ class VoicesAreCredited(CreditsTestCase):
 
         self.assertEqual(self.run_main(), 1)
 
+    def test_clips_without_a_voice_exit_1(self) -> None:
+        # Not an empty section: CC BY recordings would ship with nobody named.
+        self.write_pack("basis", [bird(speech={"quiz.prompt.whereIs": clip()})])
+
+        self.assertEqual(self.run_main(), 1)
+
+    def test_a_speech_directory_without_a_manifest_exits_1(self) -> None:
+        # Otherwise the voices are quietly dropped from the credits the tool
+        # then rewrites, and the exit code reads as routine drift.
+        self.write_pack("basis", [bird()])
+        self.speech_dir.mkdir(parents=True)
+
+        self.assertEqual(self.run_main(), 1)
+
+    def test_an_empty_fixed_manifest_needs_no_title(self) -> None:
+        self.write_pack("basis", [bird()])
+        self.write_speech({}, voice=None, title="")
+
+        self.run_main()
+
+        self.assertEqual(self.voices(), [])
+
     def test_a_fixed_manifest_without_lines_exits_1(self) -> None:
         # The gate fails such a manifest loudly with "no lines found". The
         # credits must not shrug at it and drop the voice in silence.

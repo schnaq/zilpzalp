@@ -47,6 +47,7 @@ reports all problems before it exits.
 from __future__ import annotations
 
 import argparse
+import datetime
 import hashlib
 import json
 import sys
@@ -101,6 +102,22 @@ def check_licence(media: dict, label: str) -> list[str]:
 
     if not text_field(media, "sourceURL"):
         problems.append(f"{label}: field 'sourceURL' is missing or empty")
+
+    # A date the Swift model cannot parse fails the whole manifest on the
+    # device, and for a downloaded pack that means it can never be installed.
+    # Cheaper to say so here, where the manifest is written.
+    retrieved = text_field(media, "retrieved")
+    if not retrieved:
+        problems.append(f"{label}: field 'retrieved' is missing or empty")
+    else:
+        try:
+            # Round-tripped, not merely parsed: `fromisoformat` also swallows
+            # `20260912` and week dates, and the Swift formatter is spelled
+            # `yyyy-MM-dd` and nothing else.
+            if datetime.date.fromisoformat(retrieved).isoformat() != retrieved:
+                raise ValueError(retrieved)
+        except ValueError:
+            problems.append(f"{label}: 'retrieved' is not a YYYY-MM-DD date ('{retrieved}')")
 
     return problems
 
@@ -258,6 +275,13 @@ def check_speech_manifest(path: Path) -> tuple[list[str], int]:
     problems, count = check_clips(lines, "lines", path.parent)
     problems.extend(check_voice(document, count))
 
+    # The credits head this set with its title, the way they head a pack with
+    # its own. Demanded once there is something to credit, so that an empty
+    # manifest stays legal and `tools/generate_credits.py` cannot be the first
+    # to notice.
+    if count and not text_field(document, "title"):
+        problems.append("field 'title' is missing or empty")
+
     return problems, count
 
 
@@ -285,8 +309,9 @@ def main(argv: list[str] | None = None) -> int:
     # rglob, not glob: a pack may grow its own directory
     # (data/packs/deutschland/birds.json) and must not escape the gate by it.
     manifests = [(path, check_manifest) for path in sorted(args.packs_dir.rglob("*.json"))]
-    if not manifests:
-        print(f"::notice::No pack manifests in {args.packs_dir} — the licence gate has nothing to check")
+
+    total_problems = 0
+    total_media = 0
 
     # The fixed sentences are checked by their own entry point rather than by
     # the shape of the document: a `lines` manifest dropped into data/packs is
@@ -294,9 +319,15 @@ def main(argv: list[str] | None = None) -> int:
     fixed = args.speech_dir / SPEECH_MANIFEST_NAME
     if fixed.is_file():
         manifests.append((fixed, check_speech_manifest))
+    elif args.speech_dir.is_dir():
+        # The directory is synced into the app whole, so recordings beside a
+        # manifest that is not there would ship unchecked.
+        message = f"No {SPEECH_MANIFEST_NAME} in {args.speech_dir} — its files would ship unchecked"
+        print(f"::error::{escape_data(message)}")
+        total_problems += 1
 
-    total_problems = 0
-    total_media = 0
+    if not manifests:
+        print(f"::notice::No manifests in {args.packs_dir} — the licence gate has nothing to check")
 
     for manifest, check in manifests:
         problems, media_count = check(manifest)

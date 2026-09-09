@@ -25,14 +25,21 @@ struct SpeechCatalogTests {
         #expect(try sha256(of: url) == Self.silenceSHA256)
     }
 
-    /// The branch the bundled set cannot reach on its own: a line the manifest
-    /// declares whose file was never copied in. `nil`, so the caller falls back
-    /// to the synthesiser instead of trying to play a file that is not there.
-    @Test("a line whose file is missing comes back as nil")
-    func returnsNilForAMissingFile() throws {
+    /// The branches the bundled set cannot reach on its own. All `nil`, so the
+    /// caller falls back to the synthesiser instead of trying to play what is
+    /// not a clip:
+    ///
+    /// - a line the manifest declares whose file was never copied in;
+    /// - a name that climbs out of the directory the manifest lies in — a
+    ///   downloaded manifest is a document somebody else wrote;
+    /// - a name that points at a directory, which `fileExists` says yes to.
+    @Test("a line that resolves to no clip comes back as nil")
+    func returnsNilForUnresolvableLines() throws {
         let catalog = try Self.fixture()
 
         #expect(catalog.url(for: "gate.spoken") == nil)
+        #expect(catalog.url(for: "profile.picker.title") == nil)
+        #expect(catalog.url(for: "profile.create.title") == nil)
     }
 
     @Test("the voice is decoded with the lines it licenses")

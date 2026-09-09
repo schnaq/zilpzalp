@@ -36,6 +36,7 @@ def media(**overrides) -> dict:
         "license": "CC-BY-4.0",
         "attribution": "Alexis Tinker-Tsavalas",
         "sourceURL": "https://www.inaturalist.org/observations/1",
+        "retrieved": "2026-07-31",
     }
     asset.update(overrides)
     return {key: value for key, value in asset.items() if value is not None}
@@ -226,6 +227,21 @@ class LicenceRuleTests(LicenseGateTestCase):
         self.write_pack(sourceURL=None)
 
         self.assertFails("'sourceURL' is missing or empty")
+
+    def test_missing_retrieved_fails(self):
+        # The Swift model parses it into a non-optional Date. A manifest
+        # without it decodes nowhere, and a downloaded pack that carries it
+        # can never be installed.
+        self.write_pack(retrieved=None)
+
+        self.assertFails("'retrieved' is missing or empty")
+
+    def test_a_retrieved_that_is_not_a_plain_date_fails(self):
+        for value in ("12.09.2026", "20260912", "2026-09-12T00:00:00Z", "gestern"):
+            with self.subTest(retrieved=value):
+                self.write_pack(retrieved=value)
+
+                self.assertFails("'retrieved' is not a YYYY-MM-DD date")
 
     def test_missing_file_field_fails(self):
         self.write_pack(file=None)
@@ -428,6 +444,27 @@ class FixedSentenceTests(LicenseGateTestCase):
 
     def test_a_missing_speech_directory_is_fine(self):
         self.write_pack()
+
+        self.assertPasses()
+
+    def test_a_speech_directory_without_a_manifest_fails(self):
+        # sync_bundled_packs copies the directory whole, so a recording beside
+        # a manifest that is not there would ship unchecked.
+        self.write_pack()
+        self.speech_dir.mkdir(parents=True)
+        (self.speech_dir / "roundEnd.title.m4a").write_bytes(CLIP_BYTES)
+
+        self.assertFails("would ship unchecked")
+
+    def test_a_title_is_demanded_once_something_is_recorded(self):
+        # The credits head this set with its title. Without it they would fail
+        # instead, one step later and without naming the manifest.
+        self.write_lines({"roundEnd.title": clip(file="roundEnd.title.m4a")}, title=None)
+
+        self.assertFails("'title' is missing or empty")
+
+    def test_an_empty_manifest_needs_no_title(self):
+        self.write_lines({}, voice=None, title=None)
 
         self.assertPasses()
 

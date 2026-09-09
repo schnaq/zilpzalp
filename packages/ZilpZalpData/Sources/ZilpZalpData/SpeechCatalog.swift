@@ -14,8 +14,9 @@ public enum SpeechCatalogError: Error, Sendable {
 /// A pack's manifest with `lines` where the birds would be. It lives outside
 /// `data/packs/` for exactly that reason: the licence gate reads that
 /// directory as packs, and a document without birds has to fail there.
+///
 /// Only what the app reads: the document also carries an `id` and the `title`
-/// the credits are generated with, and `tools/generate_credits.py` is where
+/// the credits are generated from, and `tools/generate_credits.py` is where
 /// those are needed.
 struct SpeechManifest: Codable, Sendable, Hashable {
     /// Who spoke the lines. `nil` while there are none.

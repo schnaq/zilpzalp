@@ -129,20 +129,29 @@ def media_files(document: dict) -> list[tuple[str, str]]:
     Photo, call and recorded sentences of every bird, in manifest order. What
     is not declared here is not uploaded — the bucket holds what the manifest
     promises, nothing that was left behind by an earlier curation round.
+
+    Each file once: two sentence keys may name the same recording — a species
+    whose name is a sentence of its own — and `PackDownloader.assets(of:)`
+    fetches every file once, so uploading or counting it twice would make the
+    download's size and its progress disagree.
     """
     files = []
+    seen = set()
+
+    def declare(media: object) -> None:
+        if isinstance(media, dict) and media.get("file") and media["file"] not in seen:
+            seen.add(media["file"])
+            files.append((media["file"], str(media.get("sha256", ""))))
+
     for entry in document.get("birds") or []:
         for kind in MEDIA_KINDS:
-            media = entry.get(kind)
-            if isinstance(media, dict) and media.get("file"):
-                files.append((media["file"], str(media.get("sha256", ""))))
+            declare(entry.get(kind))
 
         # One level deeper, and through the same list: a downloaded pack whose
         # clips never reached the bucket is a pack that says nothing.
         speech = entry.get(SPEECH_KIND)
         if isinstance(speech, dict):
             for clip in speech.values():
-                if isinstance(clip, dict) and clip.get("file"):
-                    files.append((clip["file"], str(clip.get("sha256", ""))))
+                declare(clip)
 
     return files
