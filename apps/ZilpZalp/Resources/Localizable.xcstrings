@@ -517,6 +517,18 @@
         }
       }
     },
+    "parents.packs.detail" : {
+      "comment" : "The second line of a pack's row: how many species, and then its size, its progress or why it is not there. %1$@ is the species count, %2$@ the rest",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ · %2$@"
+          }
+        }
+      }
+    },
     "parents.packs.download.failed" : {
       "comment" : "Under a pack whose download did not finish. A second tap resumes it",
       "extractionState" : "manual",
@@ -524,7 +536,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nicht fertig geladen. Tippe noch einmal."
+            "value" : "nicht fertig geladen, noch einmal tippen"
           }
         }
       }

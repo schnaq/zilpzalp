@@ -31,9 +31,12 @@ struct PacksSection: View {
 
         let id: String
         let title: String
+        /// "10 Arten · 1,2 MB" — the species count and then where the pack
+        /// stands: its size, how far its download has got, or why it is not
+        /// there yet. All of it on the hint line rather than half of it in the
+        /// value slot, which takes the width it asks for and left a pack title
+        /// three lines tall on a 390 pt phone.
         let hint: String
-        /// Right of the title: a size, or how far a download has got.
-        let value: String
         let icon: ZIcon
         var tap: Tap?
     }
@@ -95,7 +98,6 @@ struct PacksSection: View {
                         title: row.title,
                         hint: row.hint,
                         icon: row.icon,
-                        value: row.value,
                         showsSeparator: row.id != rows.last?.id,
                     ) {
                         tapped(row)
@@ -156,8 +158,10 @@ struct PacksSection: View {
             rows.append(Row(
                 id: bundled.id,
                 title: bundled.title,
-                hint: species(bundled.birds.count),
-                value: String(localized: "parents.packs.alwaysThere"),
+                hint: detail(
+                    bundled.birds.count,
+                    String(localized: "parents.packs.alwaysThere"),
+                ),
                 icon: .check,
             ))
         }
@@ -166,8 +170,7 @@ struct PacksSection: View {
             Row(
                 id: installation.id,
                 title: installation.pack.title,
-                hint: species(installation.pack.birds.count),
-                value: size(installation.bytes),
+                hint: detail(installation.pack.birds.count, size(installation.bytes)),
                 icon: .check,
                 tap: .delete(installation),
             )
@@ -178,18 +181,22 @@ struct PacksSection: View {
                 return Row(
                     id: entry.id,
                     title: entry.title,
-                    hint: species(entry.speciesCount),
-                    value: share.formatted(.percent.precision(.fractionLength(0))),
+                    hint: detail(
+                        entry.speciesCount,
+                        share.formatted(.percent.precision(.fractionLength(0))),
+                    ),
                     icon: .plus,
                 )
             }
             return Row(
                 id: entry.id,
                 title: entry.title,
-                hint: packs.failed.contains(entry.id)
-                    ? String(localized: "parents.packs.download.failed")
-                    : species(entry.speciesCount),
-                value: size(entry.downloadSize),
+                hint: detail(
+                    entry.speciesCount,
+                    packs.failed.contains(entry.id)
+                        ? String(localized: "parents.packs.download.failed")
+                        : size(entry.downloadSize),
+                ),
                 icon: .plus,
                 tap: .download(entry),
             )
@@ -204,6 +211,12 @@ struct PacksSection: View {
         case let .delete(installation): deleting = installation
         case nil: break
         }
+    }
+
+    /// "60 Arten · 12 MB" — the row's second line, assembled through the
+    /// catalog so the separator is translatable with everything else.
+    private func detail(_ count: Int, _ status: String) -> String {
+        String(format: String(localized: "parents.packs.detail"), species(count), status)
     }
 
     /// "60 Arten", through the catalog's plural rules — never assembled from a
