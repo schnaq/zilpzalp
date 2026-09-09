@@ -106,7 +106,7 @@ def taxon_matches(observation: dict, taxon_id: int) -> bool:
 
     The identification may be a subspecies, which carries its own taxon id and
     lists ours among its ancestors. Everything else is a wrong observation id —
-    the one mistake that would file a Kohlmeise under `blaumeise.jpg`.
+    the one mistake that would file a Kohlmeise under `blaumeise.heic`.
     """
     taxon = observation.get("taxon") or {}
     ancestors = taxon.get("ancestor_ids") or []

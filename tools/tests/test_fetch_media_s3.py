@@ -27,6 +27,9 @@ from fetch_media import cli, manifest, s3
 BUCKET = "zilpzalp-media"
 PHOTO = b"not really a photo, but it hashes just the same"
 PHOTO_SHA256 = hashlib.sha256(PHOTO).hexdigest()
+CLIP = b"not really a recording either"
+SENTENCE = "quiz.prompt.whereIs"
+CLIP_FILE = f"speech/{SENTENCE}/amsel.m4a"
 
 ENVIRONMENT = {
     "SCW_ACCESS_KEY": "access",
@@ -84,6 +87,36 @@ class PackTestCase(unittest.TestCase):
             },
         )
 
+    def record_a_sentence(self) -> None:
+        """Give the pack's one bird a recorded sentence, clip and voice.
+
+        Only the tests that are about speech call it: the others assert on an
+        upload plan of exactly two objects.
+        """
+        clip = self.pack / CLIP_FILE
+        clip.parent.mkdir(parents=True, exist_ok=True)
+        clip.write_bytes(CLIP)
+
+        document = manifest.load(self.pack / "manifest.json")
+        manifest.set_voice(
+            document,
+            manifest.voice_block(
+                licence="CC-BY-4.0",
+                attribution="Stimme: Niemand",
+                source_url="https://example.org/docs/sprachaufnahmen.md",
+                retrieved="2026-09-09",
+            ),
+        )
+        manifest.set_speech(
+            document,
+            "amsel",
+            SENTENCE,
+            manifest.speech_block(
+                file=CLIP_FILE, sha256=manifest.sha256_of(clip), text="Wo ist die Amsel?"
+            ),
+        )
+        manifest.save(self.pack / "manifest.json", document)
+
 
 class ClientTests(unittest.TestCase):
     def test_names_the_missing_variables_and_no_value(self) -> None:
@@ -122,6 +155,36 @@ class PlanTests(PackTestCase):
         self.assertEqual(uploads[0].sha256, PHOTO_SHA256)
         self.assertEqual(uploads[0].size, len(PHOTO))
 
+    def test_uploads_a_recorded_sentence_like_every_other_medium(self) -> None:
+        """#166: a clip that is not in the plan never reaches the bucket, and
+        the pack a parent downloads is silent."""
+        self.record_a_sentence()
+
+        uploads = s3.plan("basis", self.pack)
+
+        self.assertEqual(
+            [upload.key for upload in uploads],
+            [
+                "packs/basis/photos/amsel.jpg",
+                f"packs/basis/{CLIP_FILE}",
+                "packs/basis/manifest.json",
+            ],
+        )
+        self.assertEqual(uploads[1].sha256, hashlib.sha256(CLIP).hexdigest())
+        self.assertEqual(uploads[1].size, len(CLIP))
+        self.assertEqual(uploads[1].content_type, "audio/mp4")
+
+    def test_refuses_a_clip_that_does_not_match_its_manifest_entry(self) -> None:
+        """The bucket is what a download is verified against, so a wrong clip
+        there is worse than no clip."""
+        self.record_a_sentence()
+        (self.pack / CLIP_FILE).write_bytes(b"a different sentence")
+
+        with self.assertRaises(ValueError) as error:
+            s3.plan("basis", self.pack)
+
+        self.assertIn(CLIP_FILE, str(error.exception))
+
     def test_refuses_a_file_that_does_not_match_its_manifest_entry(self) -> None:
         self.write_manifest("f" * 64)
 
@@ -141,6 +204,12 @@ class PlanTests(PackTestCase):
 
         self.assertEqual(uploads[0].content_type, "image/jpeg")
         self.assertEqual(uploads[1].content_type, "application/json")
+
+    def test_names_the_content_type_of_a_photo_tile(self) -> None:
+        """What `photos pick` writes: without the suffix the upload would fail."""
+        upload = s3.Upload(key="packs/basis/photos/amsel.heic", path=Path("amsel.heic"), sha256="")
+
+        self.assertEqual(upload.content_type, "image/heic")
 
     def test_refuses_a_suffix_it_cannot_name(self) -> None:
         upload = s3.Upload(key="packs/basis/photos/amsel.tiff", path=Path("amsel.tiff"), sha256="")
@@ -268,6 +337,16 @@ class WithoutCredentialsTests(PackTestCase):
         self.assertEqual(exit_code, 0)
         self.assertIn("unchecked  packs/basis/photos/amsel.jpg", output)
         self.assertIn("unchecked  packs/basis/manifest.json", output)
+
+    def test_lists_the_speech_clips_on_a_dry_run(self) -> None:
+        """The acceptance #166 asks for: what a dry run names is what the app
+        can download, and a pack's clips are part of it."""
+        self.record_a_sentence()
+
+        exit_code, output = self.upload("--dry-run")
+
+        self.assertEqual(exit_code, 0)
+        self.assertIn(f"unchecked  packs/basis/{CLIP_FILE}  {len(CLIP)} bytes", output)
 
     def test_refuses_a_real_upload(self) -> None:
         exit_code, output = self.upload()

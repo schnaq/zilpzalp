@@ -16,8 +16,10 @@ import SwiftUI
 /// Moved out of `Profiles/` and next to ``SpeechAnnouncer`` when the gate
 /// became its third caller, exactly as it said it would.
 struct ReadAloudOnce: ViewModifier {
-    let text: String
+    let line: SpokenLine
 
+    /// No pack: a headline a screen reads out belongs to no species, so
+    /// this announcer only ever looks in the fixed set.
     @State private var announcer = SpeechAnnouncer()
     @State private var hasSpoken = false
 
@@ -26,15 +28,15 @@ struct ReadAloudOnce: ViewModifier {
             .onAppear {
                 guard !hasSpoken else { return }
                 hasSpoken = true
-                announcer.announce(text)
+                announcer.announce(line)
             }
             .onDisappear { announcer.stop() }
     }
 }
 
 extension View {
-    /// Speaks `text` when this view first appears. See ``ReadAloudOnce``.
-    func readAloudOnce(_ text: String) -> some View {
-        modifier(ReadAloudOnce(text: text))
+    /// Speaks `line` when this view first appears. See ``ReadAloudOnce``.
+    func readAloudOnce(_ line: SpokenLine) -> some View {
+        modifier(ReadAloudOnce(line: line))
     }
 }

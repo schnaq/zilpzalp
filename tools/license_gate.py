@@ -17,7 +17,7 @@ whose "birds" key holds the list of birds. Each bird carries a mandatory
 "photo" and an optional "call" — null or absent while no recording exists —
 both of the same shape:
 
-    {"file": "photos/amsel.jpg", "sha256": "…", "license": "CC-BY-4.0",
+    {"file": "photos/amsel.heic", "sha256": "…", "license": "CC-BY-4.0",
      "attribution": "…", "sourceURL": "https://…"}
 
 Speech clips are the third medium and carry three fields, because the licence

@@ -64,7 +64,7 @@ struct ParentalGate: View {
         // external link — but it lands in the gate itself rather than at that
         // one call site, because the child meets this view far more often
         // through the fallback on the grown-ups' door.
-        .readAloudOnce(String(localized: "gate.spoken"))
+        .readAloudOnce(.fixed("gate.spoken"))
     }
 
     private var task: some View {

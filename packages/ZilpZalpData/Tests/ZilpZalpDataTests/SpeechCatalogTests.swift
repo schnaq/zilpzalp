@@ -19,7 +19,7 @@ struct SpeechCatalogTests {
 
     @Test("a declared line resolves to the file beside its manifest")
     func resolvesALine() throws {
-        let catalog = try Self.fixture()
+        let catalog = try SpeechFixtures.fixedSet()
 
         let url = try #require(catalog.url(for: "roundEnd.title"))
         #expect(try sha256(of: url) == Self.silenceSHA256)
@@ -35,7 +35,7 @@ struct SpeechCatalogTests {
     /// - a name that points at a directory, which `fileExists` says yes to.
     @Test("a line that resolves to no clip comes back as nil")
     func returnsNilForUnresolvableLines() throws {
-        let catalog = try Self.fixture()
+        let catalog = try SpeechFixtures.fixedSet()
 
         #expect(catalog.url(for: "gate.spoken") == nil)
         #expect(catalog.url(for: "profile.picker.title") == nil)
@@ -44,7 +44,7 @@ struct SpeechCatalogTests {
 
     @Test("the voice is decoded with the lines it licenses")
     func decodesTheVoice() throws {
-        let data = try Data(contentsOf: Self.fixtureManifest())
+        let data = try Data(contentsOf: SpeechFixtures.fixedManifest())
         let manifest = try PackManifest.decode(SpeechManifest.self, from: data)
 
         #expect(manifest.voice?.license == .ccBy)
@@ -63,23 +63,4 @@ struct SpeechCatalogTests {
     }
 
     private static let silenceSHA256 = "ea4ca100e771dd55182921eac8665571baeb22644fd18dab1f4a7612b7acaff3"
-
-    private static func fixtureManifest() throws -> URL {
-        try #require(
-            Bundle.module.url(
-                forResource: "manifest",
-                withExtension: "json",
-                subdirectory: "Fixtures/speech",
-            ),
-            "no Fixtures/speech/manifest.json in the test bundle",
-        )
-    }
-
-    private static func fixture() throws -> SpeechCatalog {
-        let url = try fixtureManifest()
-        return try SpeechCatalog(
-            manifest: PackManifest.decode(SpeechManifest.self, from: Data(contentsOf: url)),
-            directory: url.deletingLastPathComponent(),
-        )
-    }
 }
