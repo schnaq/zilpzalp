@@ -55,6 +55,10 @@ struct QuizScreen: View {
     /// headline.
     @State private var feedbackHeight: CGFloat = 0
 
+    /// The way out of the round and the question in front of it; see
+    /// ``LeaveRequest``.
+    @State private var leaving = LeaveRequest()
+
     /// A phone, or an iPad sharing its screen. It settles how big the parts
     /// around the answers are drawn — type step, sound button, leaf row,
     /// margins, the feedback band. Where those parts *stand* is measured, not
@@ -72,6 +76,7 @@ struct QuizScreen: View {
             }
         }
         .background(ZColor.surfacePage)
+        .quitQuestion($leaving, round: session) { dismiss() }
         // Every screen brings its own `TopBar`; the system bar would stack a
         // second, smaller back button above it.
         .toolbar(.hidden, for: .navigationBar)
@@ -91,7 +96,7 @@ struct QuizScreen: View {
                     .chevronLeft,
                     label: String(localized: "nav.back.accessibility"),
                     diameter: ZSpacing.touchMinimum,
-                ) { dismiss() }
+                ) { leaving.ask(session) { dismiss() } }
             } center: {
                 if !isCompact {
                     progress(session)

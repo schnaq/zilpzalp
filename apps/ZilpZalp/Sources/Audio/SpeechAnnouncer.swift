@@ -102,6 +102,20 @@ final class SpeechAnnouncer: NSObject {
         utterance.voice = voice
         utterance.rate = speechRate
 
+        // One sentence at a time across announcers, not only inside one.
+        // Every screen builds its own (see ``ReadAloudOnce``), and the quiz
+        // screen now has two of them at once: the round's, and the one the
+        // question about leaving is said with (#146). Stopping only this
+        // synthesiser would let the next question start under a sentence that
+        // is still being said.
+        //
+        // A different one, never this one: this announcer's own hand-over is
+        // the two lines below, and stopping it here would only clear
+        // ``spokenUtterance`` on the way to setting it again.
+        if let other = AudioFocus.speech, other !== self {
+            other.stop()
+        }
+
         _ = synthesizer.stopSpeaking(at: .immediate)
         spokenUtterance = utterance
         AudioFocus.speech = self
