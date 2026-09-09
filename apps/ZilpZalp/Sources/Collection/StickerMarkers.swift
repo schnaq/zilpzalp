@@ -28,7 +28,10 @@ struct StickerMarkers: View {
             of: Scoring.recognitionsForSticker,
             label: String(
                 format: String(localized: "sticker.progress"),
-                min(count, Scoring.recognitionsForSticker),
+                // The same range the markers are drawn in, so what is said
+                // and what is seen cannot disagree — a file edited by hand
+                // could hold anything.
+                min(max(count, 0), Scoring.recognitionsForSticker),
                 Scoring.recognitionsForSticker,
             ),
             markerSize: markerSize,

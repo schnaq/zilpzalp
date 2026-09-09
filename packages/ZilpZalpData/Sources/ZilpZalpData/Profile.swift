@@ -79,14 +79,22 @@ public struct Profile: Codable, Sendable, Hashable, Identifiable {
     /// did: a profile written before ``dailyStars`` is a profile with no days
     /// counted yet, and one written before ``recognitions`` is a profile with
     /// nothing counted yet — neither is a broken file. Everything else decodes
-    /// as it always has. The schema version stays 1: an older build reading a
-    /// newer file simply ignores the key, which is the whole point of adding
-    /// one this way.
+    /// as it always has. The schema version stays 1, which is what lets this
+    /// build read every file written before it.
     ///
     /// A file from before #177 also carries a `collectedSpecies` array, and it
     /// is deliberately ignored: those stickers were handed out for meeting a
     /// bird in a round, which is not what a sticker means any more. The stars
     /// such a profile earned are untouched, and the next write drops the key.
+    ///
+    /// **That last part only reads forwards.** A build from before #177
+    /// decodes `collectedSpecies` as required, so once this one has written a
+    /// profile, going back to that build finds no such key and reports the
+    /// whole file unreadable — not one missing sticker but every child's
+    /// stars. The version is left at 1 all the same: the app is pre-release,
+    /// nobody downgrades a TestFlight build over a sticker rule, and bumping
+    /// it would cost every tester their profiles today to spare a case that
+    /// cannot happen tomorrow (#177).
     public init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(UUID.self, forKey: .id)
