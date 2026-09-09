@@ -119,6 +119,34 @@ targets:
           - Baloo2-VariableFont_wght.ttf
           - Nunito-VariableFont_wght.ttf
 
+  # The App Store screenshots (#168), and nothing else. It drives the app on a
+  # booted simulator and writes five PNGs, which is minutes of work and no
+  # gate — so nothing builds or runs it but `mise run screenshots`: not the
+  # ZilpZalp scheme, not `mise run check`, not `mise run build`, not CI. Its
+  # sources are still formatted and linted with the rest of apps/, which is a
+  # different thing and a good one.
+  ZilpZalpScreenshots:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: Screenshots
+      # The one thing the run and the app have to agree on: the identifiers
+      # the screenshot run finds the question and its answers by. A UI test
+      # links nothing of the app, but a file that imports nothing can simply
+      # be compiled into both — and then a rename is a compile error rather
+      # than a question that never turns up.
+      - path: Sources/Quiz/QuizIdentifier.swift
+    # A UI test target needs the app it drives: XcodeGen turns this into the
+    # target dependency and the TEST_TARGET_NAME that make the runner install
+    # and launch ZilpZalp.
+    dependencies:
+      - target: ZilpZalp
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.schnaq.zilpzalp.screenshots
+        GENERATE_INFOPLIST_FILE: true
+        SWIFT_VERSION: "6.0"
+
 schemes:
   ZilpZalp:
     build:
@@ -132,3 +160,14 @@ schemes:
       config: Debug
     archive:
       config: Release
+
+  # Its own scheme, so that neither Xcode's Cmd-U nor `mise run build` ever
+  # sees the screenshot run.
+  ZilpZalpScreenshots:
+    build:
+      targets:
+        ZilpZalpScreenshots: [test]
+    test:
+      config: Debug
+      targets:
+        - ZilpZalpScreenshots
