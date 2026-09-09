@@ -24,8 +24,8 @@ import ZilpZalpUI
 struct QuitConfirmation: View {
     /// The question, in one place. Shown and — through ``ReadAloudOnce`` —
     /// said, so the two can never drift apart.
-    private static var question: String {
-        String(localized: "quiz.quit.question")
+    private static var question: SpokenLine {
+        .fixed("quiz.quit.question")
     }
 
     /// Back into the round. The scrim calls it too.
@@ -71,7 +71,7 @@ struct QuitConfirmation: View {
     private var card: some View {
         ZCard(padding: isCompact ? ZSpacing.step5 : ZSpacing.step6) {
             VStack(spacing: isCompact ? ZSpacing.step5 : ZSpacing.step6) {
-                Text(verbatim: Self.question)
+                Text(verbatim: Self.question.text)
                     .typeStyle(isCompact ? .headline : .title, .display, weight: .extraBold)
                     .foregroundStyle(ZColor.textStrong)
                     .multilineTextAlignment(.center)
