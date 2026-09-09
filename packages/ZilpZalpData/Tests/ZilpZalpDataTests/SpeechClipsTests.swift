@@ -11,7 +11,7 @@ struct SpeechClipsTests {
     @Test("a sentence about a species is the pack's")
     func resolvesASpeciesSentence() throws {
         let pack = try SpeechFixtures.speakingPack()
-        let clips = try SpeechClips(pack: pack, fixed: SpeechFixtures.fixedSet())
+        let clips = try SpeechClips(library: PackLibrary([pack]), fixed: SpeechFixtures.fixedSet())
         let amsel = try #require(pack.pack.birds.first { $0.id == "amsel" })
 
         let url = try #require(clips.url(for: "quiz.prompt.whereIs", about: amsel))
@@ -21,7 +21,7 @@ struct SpeechClipsTests {
     @Test("a sentence about no species is the fixed set's")
     func resolvesAFixedSentence() throws {
         let clips = try SpeechClips(
-            pack: SpeechFixtures.speakingPack(),
+            library: PackLibrary([SpeechFixtures.speakingPack()]),
             fixed: SpeechFixtures.fixedSet(),
         )
 
@@ -35,7 +35,7 @@ struct SpeechClipsTests {
     @Test("neither catalog answers for the other's sentences")
     func keepsTheTwoSetsApart() throws {
         let pack = try SpeechFixtures.speakingPack()
-        let clips = try SpeechClips(pack: pack, fixed: SpeechFixtures.fixedSet())
+        let clips = try SpeechClips(library: PackLibrary([pack]), fixed: SpeechFixtures.fixedSet())
         let amsel = try #require(pack.pack.birds.first { $0.id == "amsel" })
 
         #expect(clips.url(for: "roundEnd.title", about: amsel) == nil)
@@ -48,7 +48,7 @@ struct SpeechClipsTests {
     @Test("the fixed sentences still resolve without a pack")
     func resolvesWithoutAPack() throws {
         let pack = try SpeechFixtures.speakingPack()
-        let clips = try SpeechClips(pack: nil, fixed: SpeechFixtures.fixedSet())
+        let clips = try SpeechClips(library: .empty, fixed: SpeechFixtures.fixedSet())
         let amsel = try #require(pack.pack.birds.first { $0.id == "amsel" })
 
         #expect(clips.url(for: "roundEnd.title", about: nil) != nil)
@@ -61,7 +61,7 @@ struct SpeechClipsTests {
     @Test("nothing resolves while nothing is recorded")
     func resolvesNothingWithoutClips() throws {
         let pack = try SpeechFixtures.speakingPack()
-        let clips = SpeechClips(pack: nil, fixed: nil)
+        let clips = SpeechClips(library: .empty, fixed: nil)
         let amsel = try #require(pack.pack.birds.first { $0.id == "amsel" })
 
         #expect(clips.url(for: "roundEnd.title", about: nil) == nil)
@@ -74,7 +74,7 @@ struct SpeechClipsTests {
     @Test("a declared clip that is not on disk is not a clip")
     func resolvesNothingForAMissingFile() throws {
         let pack = try SpeechFixtures.speakingPack()
-        let clips = try SpeechClips(pack: pack, fixed: SpeechFixtures.fixedSet())
+        let clips = try SpeechClips(library: PackLibrary([pack]), fixed: SpeechFixtures.fixedSet())
         let amsel = try #require(pack.pack.birds.first { $0.id == "amsel" })
 
         #expect(amsel.speech?["collection.name"] != nil)
