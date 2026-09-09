@@ -21,16 +21,21 @@ public enum ProfileStoreError: Error, Sendable, Equatable {
 public struct PlayedRound: Sendable, Hashable {
     /// The stars the round earned — one, two or three.
     public var stars: Int
-    /// The species the round asked for; they end up in the collection whether
-    /// they were answered right or wrong. The album is a memory of what the
-    /// child has seen, not a record of its mistakes.
-    public var species: Set<String>
+    /// How often the round recognised each species: answered right at the
+    /// first attempt, and nothing else. Added onto the profile's counters,
+    /// where five of them earn the bird's sticker (#177).
+    ///
+    /// A bird the round merely asked about is not in here. Meeting a bird used
+    /// to be enough to collect it; with four choices the right tile is always
+    /// found in the end, and an album filled that way said what the child had
+    /// seen rather than what it knows.
+    public var recognitions: [String: Int]
     /// How long the round took, in seconds.
     public var playtime: TimeInterval
 
-    public init(stars: Int, species: Set<String>, playtime: TimeInterval) {
+    public init(stars: Int, recognitions: [String: Int], playtime: TimeInterval) {
         self.stars = stars
-        self.species = species
+        self.recognitions = recognitions
         self.playtime = playtime
     }
 }
@@ -95,7 +100,7 @@ public actor ProfileStore {
         try read()
     }
 
-    /// Creates a profile with no stars, no rounds and nothing collected.
+    /// Creates a profile with no stars, no rounds and nothing recognised.
     ///
     /// - Returns: the profile that was created, with its fresh id.
     @discardableResult
@@ -134,8 +139,8 @@ public actor ProfileStore {
     }
 
     /// Books a finished round onto a profile: its stars, one more round, its
-    /// species into the collection, and its stars and seconds onto `date`'s
-    /// day.
+    /// recognitions onto the counters the album is derived from, and its stars
+    /// and seconds onto `date`'s day.
     ///
     /// The only operation that knows what a round means. Whoever adds the
     /// stars by hand and calls ``update(_:)`` will sooner or later forget the
@@ -164,7 +169,9 @@ public actor ProfileStore {
 
         profiles[index].totalStars += round.stars
         profiles[index].roundsPlayed += 1
-        profiles[index].collectedSpecies.formUnion(round.species)
+        for (species, times) in round.recognitions {
+            profiles[index].recognitions[species, default: 0] += times
+        }
         let today = Profile.dayKey(for: date, calendar: calendar)
         profiles[index].playtime[today, default: 0] += round.playtime
         profiles[index].dailyStars[today, default: 0] += round.stars

@@ -29,7 +29,13 @@ final class AppModel {
     /// Here rather than inside the grown-ups' area (#35 left a note asking
     /// for exactly this move) because the daily limit is read where no
     /// grown-up is standing: on the home screen, when a child taps a game.
-    let parental = ParentalSettingsModel()
+    ///
+    /// The screenshot run reads and writes its own directory — see
+    /// ``ScreenshotSeed``. A limit a grown-up once set on the machine taking
+    /// the pictures would otherwise send the run to "Zeit fürs Nest".
+    let parental = ParentalSettingsModel(
+        directory: ScreenshotSeed.directory ?? .applicationSupportDirectory,
+    )
 
     /// The profiles as they are on disk, in the order the store keeps them.
     private(set) var profiles: [Profile] = []
@@ -53,10 +59,9 @@ final class AppModel {
     /// What the round the child has just finished changed about its profile,
     /// `nil` until one has been booked in this run of the app.
     ///
-    /// Kept because the celebration is more than one screen: the round end
-    /// asks whether the sticker is a first find, and the rank ascent it pushes
-    /// asks the same round about the ladder. Booking twice to answer twice
-    /// would be a second round in the file.
+    /// Kept because the round end asks more than once: it comes back into
+    /// view when the child returns from the album, and booking twice to
+    /// answer twice would be a second round in the file.
     private(set) var lastRound: RoundOutcome?
 
     /// The round ``lastRound`` describes. See ``record(_:)``.
@@ -155,7 +160,9 @@ final class AppModel {
         }
 
         do {
-            store = try ProfileStore(directory: ProfileStore.applicationSupport())
+            store = try ProfileStore(
+                directory: ScreenshotSeed.directory ?? ProfileStore.applicationSupport(),
+            )
         } catch {
             store = nil
             storeFailed = true
@@ -179,6 +186,7 @@ final class AppModel {
         }
 
         do {
+            try await ScreenshotSeed.populate(store)
             let stored = try await store.profiles()
             profiles = stored
             activeProfileID = ProfileChoice.atLaunch(
@@ -261,7 +269,7 @@ final class AppModel {
 
         let round = PlayedRound(
             stars: result.stars,
-            species: result.species,
+            recognitions: result.recognitions,
             playtime: result.playtime,
         )
 

@@ -30,7 +30,7 @@ struct ProfileStoreTests {
 
             #expect(mila.totalStars == 0)
             #expect(mila.roundsPlayed == 0)
-            #expect(mila.collectedSpecies.isEmpty)
+            #expect(mila.recognitions.isEmpty)
             #expect(mila.playtime.isEmpty)
 
             let profiles = try await store.profiles()
@@ -47,7 +47,7 @@ struct ProfileStoreTests {
             var mila = try await store.add(name: "Mila", avatar: "feather")
             mila.totalStars = 63
             mila.roundsPlayed = 24
-            mila.collectedSpecies = ["zilpzalp", "amsel"]
+            mila.recognitions = ["zilpzalp": 5, "amsel": 2]
             mila.playtime = ["2026-09-08": 185.5]
             try await store.update(mila)
 
@@ -132,7 +132,7 @@ struct ProfileStoreTests {
         try await withTemporaryDirectory { directory in
             let store = ProfileStore(directory: directory)
             var mila = try await store.add(name: "Mila", avatar: "feather")
-            mila.collectedSpecies = ["zilpzalp", "amsel", "kohlmeise"]
+            mila.recognitions = ["zilpzalp": 5, "amsel": 3, "kohlmeise": 1]
             mila.playtime = ["2026-09-08": 60, "2026-09-02": 30]
             try await store.update(mila)
 
@@ -141,8 +141,8 @@ struct ProfileStoreTests {
             let firstKey = try #require(text.split(separator: "\"").dropFirst().first)
             #expect(firstKey == "schemaVersion")
             #expect(text.hasPrefix("{\n  \"schemaVersion\" : 1,\n  \"profiles\" : ["))
-            // A `Set` and a `Dictionary` iterate differently from run to run;
-            // written sorted, the file's bytes only change when a value does.
+            // A `Dictionary` iterates differently from run to run; written
+            // sorted, the file's bytes only change when a value does.
             try #expect(position(of: "amsel", in: text) < position(of: "kohlmeise", in: text))
             try #expect(position(of: "kohlmeise", in: text) < position(of: "zilpzalp", in: text))
             try #expect(position(of: "2026-09-02", in: text) < position(of: "2026-09-08", in: text))
@@ -215,7 +215,9 @@ struct ProfileStoreTests {
             #expect(mila.avatar == "feather")
             #expect(mila.totalStars == 63)
             #expect(mila.roundsPlayed == 24)
-            #expect(mila.collectedSpecies == ["amsel", "kohlmeise", "zilpzalp"])
+            // The fixture was written before #177, so its `collectedSpecies`
+            // is ignored and nothing has been recognised yet.
+            #expect(mila.recognitions.isEmpty)
             #expect(mila.playtime == ["2026-09-07": 420, "2026-09-08": 185.5])
             #expect(profiles.last?.playtime.isEmpty == true)
         }

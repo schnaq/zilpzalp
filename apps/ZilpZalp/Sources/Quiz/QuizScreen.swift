@@ -39,6 +39,13 @@ struct QuizScreen: View {
     /// ``RootView/roundsAskedFor``. Only ever compared with itself: what the
     /// screen acts on is the change, never the number.
     let askedFor: Int
+    /// How often the playing child has recognised each species so far, asked
+    /// when the round ends rather than passed as a value: the round the child
+    /// is about to finish is not the first one this screen has dealt, and the
+    /// answer has to be the one standing on the profile now. It decides which
+    /// bird the round end celebrates — see
+    /// ``RoundPlay/celebratedSpecies(recognisedBefore:)``.
+    let recognitions: () -> [String: Int]
     /// Called once the last question is answered. ``RootView`` pushes
     /// ``Route/roundEnd(_:)`` with it.
     let onFinished: (RoundResult) -> Void
@@ -139,7 +146,7 @@ struct QuizScreen: View {
         }
         .onChange(of: session.isFinished) { _, finished in
             if finished {
-                onFinished(session.result)
+                onFinished(session.result(recognisedBefore: recognitions()))
             }
         }
     }
@@ -231,6 +238,7 @@ struct QuizScreen: View {
             dimmed: session.isDimmed(bird),
             edge: edge,
         ) { session.choose(bird) }
+            .accessibilityIdentifier(QuizIdentifier.tile(bird.id))
     }
 
     /// The question, put again on demand — read out in game 1, played in game 2.
@@ -272,6 +280,7 @@ struct QuizScreen: View {
             // goes below 20 pt.
             .minimumScaleFactor(ZType.Step.body.size / ZType.Step.headline.size)
             .frame(maxWidth: .infinity, alignment: leading ? .leading : .center)
+            .accessibilityIdentifier(QuizIdentifier.question(session.answer?.id))
     }
 
     /// The band the app says something back in, kept clear whether or not

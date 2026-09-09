@@ -240,9 +240,13 @@ def media_files(document: dict) -> list[tuple[str, str]]:
     promises, nothing that was left behind by an earlier curation round.
 
     Each file once: two sentence keys may name the same recording — a species
-    whose name is a sentence of its own — and `PackDownloader.assets(of:)`
-    fetches every file once, so uploading or counting it twice would make the
-    download's size and its progress disagree.
+    whose name is a sentence of its own — and `Pack.declaredFiles` in
+    `ZilpZalpData` fetches every file once, so uploading or counting it twice
+    would make the download's size and its progress disagree. That twin drops
+    the later mention of a shared file in sentence-key order rather than in
+    this one, so a file named twice has to carry the same digest both times —
+    `license_gate.py` checks every mention against the file on disk and is
+    what makes sure of it.
     """
     files = []
     seen = set()

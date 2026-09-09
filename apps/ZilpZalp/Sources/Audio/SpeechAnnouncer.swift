@@ -3,13 +3,22 @@ import Foundation
 import os
 import ZilpZalpData
 
-/// Speaks the question of game 1 — "Wo ist die Amsel?" — on the device.
+/// Everything the app says out loud — the question of game 1, the praise at the
+/// end of a round, the headline of a screen a child cannot read.
 ///
-/// `AVSpeechSynthesizer` needs no audio asset, so there is no licence to clear
-/// and no network to wait for. The question is not switchable off: it *is* the
-/// task in game 1, and a child who cannot read has nothing else to go by.
-/// Neither are the recorded calls of game 2 — nothing this app makes audible
-/// is a setting any more (#138).
+/// A recorded clip first, the synthesiser behind it (#165). A clip is a person
+/// speaking German; `AVSpeechSynthesizer` is what the device can do with no
+/// asset at all, and the decision of 2026-09-08 was that the second one is a
+/// fallback rather than the product. Which of the two spoke is nothing a caller
+/// can see: it hands over a ``SpokenLine`` and the sentence is said.
+///
+/// The fallback is per sentence and silent. A pack whose speech was never
+/// recorded, a species added between two releases, a download that has not
+/// finished — all of them speak, because a child who cannot read and hears
+/// nothing has no task at all.
+///
+/// Nothing this app makes audible is a setting any more (#138): the question
+/// *is* the task in game 1, and the recorded calls of game 2 are the same.
 @MainActor
 final class SpeechAnnouncer: NSObject {
     /// A notch below the system default of 0.5. The default rattles the
@@ -30,7 +39,27 @@ final class SpeechAnnouncer: NSObject {
     /// his device (#151).
     private static let downloadedRate = AVSpeechUtteranceDefaultSpeechRate * 0.95
 
+    /// The sentences that belong to no pack, opened once per launch.
+    ///
+    /// Once, not per announcer, for the reason ``SpeechVoice`` chooses the
+    /// voice once: half a dozen screens build an announcer of their own, and
+    /// decoding the same manifest six times would reach the same answer six
+    /// times. `nil` only when the bundled document is missing, which
+    /// `mise run check` already guards through `tools/sync_bundled_packs.py`.
+    private static let fixedSet: SpeechCatalog? = {
+        do {
+            return try SpeechCatalog.bundled()
+        } catch {
+            let reason = String(describing: error)
+            Logger.audio.error("Fixed sentences did not open: \(reason, privacy: .public)")
+            return nil
+        }
+    }()
+
     private let synthesizer = AVSpeechSynthesizer()
+
+    /// Where a line's recording is looked for. See ``SpeechClips``.
+    private let clips: SpeechClips
 
     /// The voice for every utterance — see ``SpeechVoice``. `nil` when the
     /// device carries no German voice at all. The utterance then keeps
@@ -57,7 +86,18 @@ final class SpeechAnnouncer: NSObject {
     /// blind at exactly the start of a sentence.
     private var spokenUtterance: AVSpeechUtterance?
 
-    override init() {
+    /// The clip currently on its way to the speaker, `nil` while the
+    /// synthesiser is speaking or nothing is. Kept for the same reason and
+    /// with the same identity check as ``spokenUtterance``, which is also how
+    /// ``CallPlayer`` holds its recording.
+    private var spokenClip: AVAudioPlayer?
+
+    /// - Parameter pack: The pack whose species sentences this announcer may
+    ///   play. `nil` on the screens that say nothing about a species — both
+    ///   profile screens, the gate, the rank ascent, "Zeit fürs Nest" — which
+    ///   is why it defaults to nothing.
+    init(pack: PackCatalog? = nil) {
+        clips = SpeechClips(pack: pack, fixed: Self.fixedSet)
         voice = SpeechVoice.forUtterance
         // `.default` covers both the compact voice and the case where there
         // was no voice to look at: today's rate is what the app has always
@@ -71,21 +111,12 @@ final class SpeechAnnouncer: NSObject {
         synthesizer.delegate = self
     }
 
-    /// Asks for one bird: "Wo ist die Amsel?"
+    /// Says one line — as it was recorded, or as the synthesiser reads it.
     ///
     /// Speaks immediately and drops whatever was still running, so tapping the
     /// question again re-reads it instead of queueing a second reading behind
     /// the first.
-    func announce(_ bird: Bird) {
-        announce(prompt(for: bird))
-    }
-
-    /// Says one finished sentence — the praise on the round end, for a child
-    /// who cannot read the headline.
-    ///
-    /// Takes text rather than a key: the String Catalog belongs to the app's
-    /// screens, and this type stays the one that only knows how to speak.
-    func announce(_ sentence: String) {
+    func announce(_ line: SpokenLine) {
         // One sound at a time (#30). A call is what the child asked for by
         // tapping, and in game 2 it is the question itself; a sentence laid
         // over it would leave neither intelligible. Dropped rather than
@@ -96,47 +127,99 @@ final class SpeechAnnouncer: NSObject {
             return
         }
 
+        // One sentence at a time across announcers, not only inside one.
+        // Every screen builds its own (see ``ReadAloudOnce``), and the quiz
+        // screen now has two of them at once: the round's, and the one the
+        // question about leaving is said with (#146). Stopping only this
+        // announcer would let the next question start under a sentence that
+        // is still being said.
+        //
+        // A different one, never this one: this announcer's own hand-over is
+        // the two lines below, and stopping it here would only clear what it
+        // is about to set again.
+        if let other = AudioFocus.speech, other !== self {
+            other.stop()
+        }
+
+        // Silenced, but deliberately not released yet: the replacement has to
+        // be allocated while this one is still alive, so that a finish meant
+        // for the outgoing sound cannot switch off the incoming one.
+        _ = synthesizer.stopSpeaking(at: .immediate)
+        spokenClip?.stop()
+        AudioFocus.speech = self
+
+        // Which of the two voices a sentence reached, in one line either way.
+        // Public: a sentence key and a file name are properties of the build,
+        // not of the child holding the iPad.
+        if let key = line.key, let clip = clips.url(for: key, about: line.bird), play(clip) {
+            Logger.audio.debug(
+                "Said \(key, privacy: .public) from \(clip.lastPathComponent, privacy: .public)",
+            )
+            return
+        }
+
+        Logger.audio.debug(
+            "No clip for \(line.key ?? "an assembled sentence", privacy: .public), speaking it",
+        )
+        speak(line.text)
+    }
+
+    /// Stops the sentence, whichever of the two was saying it. Speaking again
+    /// is a fresh ``announce(_:)``.
+    func stop() {
+        _ = synthesizer.stopSpeaking(at: .immediate)
+        spokenUtterance = nil
+        spokenClip?.stop()
+        spokenClip = nil
+    }
+
+    /// Plays the recording of a sentence.
+    ///
+    /// - Returns: `false` when the clip could not be opened or would not
+    ///   start, which sends the sentence to the synthesiser instead. A file
+    ///   that went missing between the pack check and the tap, or a recording
+    ///   the decoder refuses, must not cost a child the question — and nothing
+    ///   in the UI mentions either.
+    private func play(_ clip: URL) -> Bool {
+        let recording: AVAudioPlayer
+        do {
+            recording = try AVAudioPlayer(contentsOf: clip)
+        } catch {
+            let reason = error.localizedDescription
+            Logger.audio.error(
+                "Clip \(clip.lastPathComponent, privacy: .public) unreadable: \(reason, privacy: .public)",
+            )
+            return false
+        }
+        recording.delegate = self
+
+        // Only once there is a sound to make, exactly as ``CallPlayer`` does
+        // it: activating the session interrupts whatever the grown-ups were
+        // listening to, and a file that is not there has not earned that.
+        AudioSessionConfigurator.activatePlayback()
+        guard recording.play() else {
+            Logger.audio.error("Clip \(clip.lastPathComponent, privacy: .public) did not start")
+            return false
+        }
+
+        spokenClip = recording
+        return true
+    }
+
+    /// Reads a sentence out with the device's own voice — the fallback for
+    /// every line no clip says.
+    private func speak(_ sentence: String) {
         AudioSessionConfigurator.activatePlayback()
 
         let utterance = AVSpeechUtterance(string: sentence)
         utterance.voice = voice
         utterance.rate = speechRate
 
-        // One sentence at a time across announcers, not only inside one.
-        // Every screen builds its own (see ``ReadAloudOnce``), and the quiz
-        // screen now has two of them at once: the round's, and the one the
-        // question about leaving is said with (#146). Stopping only this
-        // synthesiser would let the next question start under a sentence that
-        // is still being said.
-        //
-        // A different one, never this one: this announcer's own hand-over is
-        // the two lines below, and stopping it here would only clear
-        // ``spokenUtterance`` on the way to setting it again.
-        if let other = AudioFocus.speech, other !== self {
-            other.stop()
-        }
-
-        _ = synthesizer.stopSpeaking(at: .immediate)
+        // Nothing came off disk, so nothing is left to stop: the player set
+        // aside above may go now.
+        spokenClip = nil
         spokenUtterance = utterance
-        AudioFocus.speech = self
         synthesizer.speak(utterance)
-    }
-
-    /// Stops the question. Speaking again is a fresh `announce(_:)`.
-    func stop() {
-        _ = synthesizer.stopSpeaking(at: .immediate)
-        spokenUtterance = nil
-    }
-
-    /// Article and name are positional arguments so that a translation may
-    /// reorder them. Where the voice mangles a name, `pronunciation` from the
-    /// manifest overrides it — that fix belongs in the pack data, never here.
-    private func prompt(for bird: Bird) -> String {
-        String(
-            format: String(localized: "quiz.prompt.whereIs"),
-            bird.article,
-            bird.pronunciation ?? bird.name,
-        )
     }
 
     /// Clears the flag only for the utterance that is actually current. A
@@ -145,6 +228,26 @@ final class SpeechAnnouncer: NSObject {
     private func utteranceEnded(_ ended: ObjectIdentifier) {
         guard let spokenUtterance, ObjectIdentifier(spokenUtterance) == ended else { return }
         self.spokenUtterance = nil
+    }
+
+    /// Lets a clip that has run its course go, under the same identity guard
+    /// ``CallPlayer`` documents for its recordings: a finish delivered after
+    /// ``announce(_:)`` has handed the next clip over must not release that
+    /// one.
+    ///
+    /// What it buys is the decoded recording being freed when it stops
+    /// sounding rather than at the next sentence — on the album screen that
+    /// can be minutes — and ``spokenClip`` meaning what it says. Nothing
+    /// branches on it: unlike ``CallPlayer/isPlaying``, which draws
+    /// `SoundButton`'s rings, no view asks this announcer whether it is
+    /// sounding.
+    private func clipEnded(_ ended: ObjectIdentifier, successfully: Bool) {
+        guard let spokenClip, ObjectIdentifier(spokenClip) == ended else { return }
+
+        if !successfully {
+            Logger.audio.error("Sentence stopped: the clip could not be decoded")
+        }
+        self.spokenClip = nil
     }
 }
 
@@ -166,5 +269,17 @@ extension SpeechAnnouncer: AVSpeechSynthesizerDelegate {
     ) {
         let ended = ObjectIdentifier(utterance)
         Task { @MainActor in self.utteranceEnded(ended) }
+    }
+}
+
+/// As above, and for the same reason: `AVAudioPlayer` is not `Sendable`, so
+/// only the identity of the recording that ended crosses to the main actor.
+extension SpeechAnnouncer: AVAudioPlayerDelegate {
+    nonisolated func audioPlayerDidFinishPlaying(
+        _ player: AVAudioPlayer,
+        successfully flag: Bool,
+    ) {
+        let ended = ObjectIdentifier(player)
+        Task { @MainActor in self.clipEnded(ended, successfully: flag) }
     }
 }

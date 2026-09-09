@@ -1,5 +1,4 @@
 import SwiftUI
-import ZilpZalpCore
 import ZilpZalpData
 import ZilpZalpUI
 
@@ -68,7 +67,7 @@ struct SwarmList: View {
         }
     }
 
-    /// One child: the avatar, the name, and under it the rank and the stars.
+    /// One child: the avatar, the name, and under it the stars.
     ///
     /// The design puts the star badge at the right edge of the row. It does
     /// not fit there on a phone — `Badge` never wraps and never shrinks, so
@@ -91,22 +90,14 @@ struct SwarmList: View {
                         .lineLimit(1)
                         .minimumScaleFactor(0.6)
 
-                    HStack(spacing: ZSpacing.step3) {
-                        Badge(
-                            String(
-                                format: String(localized: "collection.stars"),
-                                profile.totalStars,
-                            ),
-                            tone: .sun,
-                            icon: .star,
-                        )
-
-                        Text(verbatim: RankLadder.rank(forStars: profile.totalStars).displayName)
-                            .typeStyle(.caption, .body, weight: .semibold)
-                            .foregroundStyle(ZColor.textMuted)
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.5)
-                    }
+                    Badge(
+                        String(
+                            format: String(localized: "collection.stars"),
+                            profile.totalStars,
+                        ),
+                        tone: .sun,
+                        icon: .star,
+                    )
                 }
 
                 Spacer(minLength: 0)

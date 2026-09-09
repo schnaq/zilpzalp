@@ -176,12 +176,18 @@ func exists(_ home: URL, _ path: String) -> Bool {
 /// Generated rather than copied from `Fixtures/valid/basis.json`: that manifest
 /// carries the digests of the real photos, and a download test needs bytes it
 /// controls together with their true SHA-256. The shape is the base pack's —
-/// two birds, the second with a call — so both kinds of medium are exercised.
+/// two birds, the second with a call, the first with a recorded sentence — so
+/// every kind of medium is exercised.
 enum StubPack {
     static let id = "deutschland"
     static let title = "Vögel in Deutschland"
     static let indexKey = "packs/index.json"
     static let manifestKey = "packs/\(id)/manifest.json"
+
+    /// The String Catalog key of the one sentence the stub pack has recorded.
+    /// A dotted key, as the real ones are, so the path it builds proves that
+    /// `isSafeRelativePath` lets a sentence directory through.
+    static let sentence = "quiz.prompt.whereIs"
 
     /// One medium of a manifest: the path it declares and the digest it promises.
     struct Asset {
@@ -190,11 +196,15 @@ enum StubPack {
     }
 
     /// Path relative to the manifest and the bytes behind it. Tiny on purpose:
-    /// what a download has to get right is the digest, not that it is a PNG.
+    /// what a download has to get right is the digest, not that it is a PNG or
+    /// a playable recording. The clip is made-up bytes for the same reason the
+    /// call is — `Fixtures/speech/clips/silence.m4a` is for the catalogs, which
+    /// open a file; nothing here decodes audio, and no test commits any.
     static let media: [(file: String, bytes: Data)] = [
         ("photos/amsel.png", Data("amsel".utf8)),
         ("photos/zilpzalp.png", Data("zilpzalp".utf8)),
         ("calls/zilpzalp.m4a", Data("zilpzalp ruft".utf8)),
+        ("speech/\(sentence)/amsel.m4a", Data("Wo ist die Amsel?".utf8)),
     ]
 
     static let assets = media.map { Asset(file: $0.file, sha256: sha256(of: $0.bytes)) }
@@ -258,14 +268,28 @@ enum StubPack {
 
     static func manifest(
         packID: String = id,
+        voiced: Bool = true,
         amselPhoto: Asset = assets[0],
         zilpzalpPhoto: Asset = assets[1],
         zilpzalpCall: Asset = assets[2],
+        amselSpeech: Asset = assets[3],
     ) -> Data {
-        Data("""
+        // `voiced: false` is a pack that has recordings and credits nobody —
+        // what the licence gate refuses at curation time.
+        let voice = voiced ? """
+          "voice": {
+            "license": "CC-BY-4.0",
+            "attribution": "Stimme: Niemand",
+            "sourceURL": "https://example.org/docs/sprachaufnahmen.md",
+            "retrieved": "2026-09-09"
+          },
+        """ : ""
+
+        return Data("""
         {
           "id": "\(packID)",
           "title": "\(title)",
+        \(voice)
           "birds": [
             {
               "id": "amsel",
@@ -275,7 +299,14 @@ enum StubPack {
               "article": "die",
               "pronunciation": null,
               "photo": \(json(amselPhoto)),
-              "call": null
+              "call": null,
+              "speech": {
+                "\(sentence)": {
+                  "file": "\(amselSpeech.file)",
+                  "sha256": "\(amselSpeech.sha256)",
+                  "text": "Wo ist die Amsel?"
+                }
+              }
             },
             {
               "id": "zilpzalp",

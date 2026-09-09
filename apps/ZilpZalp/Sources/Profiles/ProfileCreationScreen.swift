@@ -100,7 +100,7 @@ struct ProfileCreationScreen: View {
             .scrollDismissesKeyboard(.interactively)
         }
         .background(ZColor.surfacePage)
-        .readAloudOnce(String(localized: "profile.create.title"))
+        .readAloudOnce(.fixed("profile.create.title"))
     }
 
     /// The back button, or the brand where there is nothing to go back to.
