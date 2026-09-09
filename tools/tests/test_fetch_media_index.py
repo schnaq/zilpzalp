@@ -25,6 +25,7 @@ from fetch_media import cli, index, manifest, s3
 
 BUCKET = "zilpzalp-media"
 PHOTO = b"not really a photo, but it hashes just the same"
+CLIP = b"not really a recording either"
 
 
 def never(key: str) -> bool:
@@ -53,9 +54,18 @@ class PacksTestCase(unittest.TestCase):
         self.write_pack("deutschland", "Vögel in Deutschland", ["amsel", "star"])
 
     def write_pack(
-        self, pack_id: str, title: str, birds: list[str], declared: str | None = None
+        self,
+        pack_id: str,
+        title: str,
+        birds: list[str],
+        declared: str | None = None,
+        speech: bool = False,
     ) -> None:
-        """A pack of one photo per bird, all with the same made-up bytes."""
+        """A pack of one photo per bird, all with the same made-up bytes.
+
+        With `speech`, every bird also has one recorded sentence — the same
+        made-up bytes again, and one voice for the whole manifest.
+        """
         pack = self.packs / pack_id
         (pack / "photos").mkdir(parents=True, exist_ok=True)
 
@@ -78,10 +88,36 @@ class PacksTestCase(unittest.TestCase):
                 }
             )
 
-        manifest.save(
-            pack / "manifest.json",
-            {"id": declared or pack_id, "title": title, "birds": entries},
+        document = {"id": declared or pack_id, "title": title, "birds": entries}
+        if speech:
+            self.record_sentences(pack, document, birds)
+        manifest.save(pack / "manifest.json", document)
+
+    def record_sentences(self, pack: Path, document: dict, birds: list[str]) -> None:
+        """One clip per bird, and the voice that spoke them all."""
+        manifest.set_voice(
+            document,
+            manifest.voice_block(
+                licence="CC-BY-4.0",
+                attribution="Stimme: Niemand",
+                source_url="https://example.org/docs/sprachaufnahmen.md",
+                retrieved="2026-09-09",
+            ),
         )
+        for bird in birds:
+            clip = pack / "speech" / "collection.name" / f"{bird}.m4a"
+            clip.parent.mkdir(parents=True, exist_ok=True)
+            clip.write_bytes(CLIP)
+            manifest.set_speech(
+                document,
+                bird,
+                "collection.name",
+                manifest.speech_block(
+                    file=f"speech/collection.name/{bird}.m4a",
+                    sha256=manifest.sha256_of(clip),
+                    text=bird.capitalize(),
+                ),
+            )
 
     def manifest_size(self, pack_id: str) -> int:
         return (self.packs / pack_id / "manifest.json").stat().st_size
@@ -100,6 +136,16 @@ class EntryTests(PacksTestCase):
                 "downloadSize": 2 * len(PHOTO) + self.manifest_size("deutschland"),
                 "manifest": "packs/deutschland/manifest.json",
             },
+        )
+
+    def test_counts_the_speech_clips_in_the_download_size(self) -> None:
+        """#166: the size a parent is shown is what the download really costs,
+        and since #163 a pack's recordings are part of it."""
+        self.write_pack("deutschland", "Vögel in Deutschland", ["amsel", "star"], speech=True)
+
+        self.assertEqual(
+            index.entry("deutschland")["downloadSize"],
+            2 * len(PHOTO) + 2 * len(CLIP) + self.manifest_size("deutschland"),
         )
 
     def test_sums_the_objects_that_are_uploaded(self) -> None:
