@@ -188,8 +188,7 @@ public actor PackDownloader {
 
     /// Opens an installed pack, the way `PackCatalog.bundled()` opens the one
     /// that ships with the app, so `photoURL(for:)`, `callURL(for:)` and
-    /// `speechURL(for:sentence:)` resolve its media too — a downloaded pack
-    /// speaks in the same voice as the bundled one.
+    /// `speechURL(for:sentence:)` resolve its media too.
     ///
     /// The only way to a downloaded pack's files: this actor owns the layout
     /// below `Packs/`, so no view ever assembles such a path itself.
@@ -265,38 +264,28 @@ public actor PackDownloader {
     }
 
     /// Every file a pack declares — a bird's photo, its call and every
-    /// sentence recorded about it — each one once.
+    /// sentence recorded about it — each one once, with the digest it has to
+    /// hash to. A clip carries no licence of its own; the voice that spoke it
+    /// does, once per manifest, so path and digest are all a download needs.
     ///
-    /// Each file once because `tools/fetch_media/manifest.py` counts it once:
-    /// two birds sharing a photo, or two sentence keys naming the same clip,
-    /// would otherwise be fetched twice while `packs/index.json` sized them
-    /// once, and the progress would run past the total it is reported against.
+    /// Each file once because `media_files()` in
+    /// `tools/fetch_media/manifest.py` uploads and sizes it once: a file two
+    /// birds or two sentence keys share, fetched twice, would run the progress
+    /// past the total the index promised.
     ///
-    /// Photo, call, then the clips in sentence-key order — a dictionary's own
+    /// Photo, call, then the clips in sentence-key order: a dictionary's own
     /// order is not stable, and a resumed download should walk the pack the
     /// way the interrupted one did.
-    ///
-    /// Only the path and the digest, because that is all a download needs: a
-    /// clip carries neither licence nor attribution of its own — the voice
-    /// that spoke it does, once per manifest.
     private static func assets(of pack: Pack) -> [(file: String, sha256: String)] {
         var seen: Set<String> = []
-        var files: [(file: String, sha256: String)] = []
-
-        func declare(_ file: String, _ sha256: String) {
-            guard seen.insert(file).inserted else { return }
-            files.append((file: file, sha256: sha256))
-        }
-
-        for bird in pack.birds {
-            for medium in [bird.photo, bird.call].compactMap(\.self) {
-                declare(medium.file, medium.sha256)
+        return pack.birds
+            .flatMap { bird in
+                let media = [bird.photo, bird.call].compactMap(\.self)
+                let clips = (bird.speech ?? [:]).sorted { $0.key < $1.key }.map(\.value)
+                return media.map { (file: $0.file, sha256: $0.sha256) }
+                    + clips.map { (file: $0.file, sha256: $0.sha256) }
             }
-            for (_, clip) in (bird.speech ?? [:]).sorted(by: { $0.key < $1.key }) {
-                declare(clip.file, clip.sha256)
-            }
-        }
-        return files
+            .filter { seen.insert($0.file).inserted }
     }
 
     private static func hexDigest(of data: Data) -> String {

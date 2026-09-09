@@ -194,7 +194,10 @@ struct PackDownloaderTests {
         }
     }
 
-    @Test("an installed pack opens and resolves its photos")
+    /// The point of #166 in one test: what came down the wire resolves through
+    /// the catalog exactly as the bundled pack's media do — a downloaded pack
+    /// speaks in the same voice as the one that ships with the app.
+    @Test("an installed pack opens and resolves its photos and its sentences")
     func opensAnInstalledPack() async throws {
         let manifest = StubPack.manifest()
         try await withDownloader(routes: StubPack.routes(manifest: manifest)) { downloader, _ in
@@ -203,56 +206,16 @@ struct PackDownloaderTests {
             let catalog = try await downloader.catalog(for: StubPack.id)
             let bird = try #require(catalog.pack.birds.first)
             let photo = try #require(catalog.photoURL(for: bird))
-            let bytes = try Data(contentsOf: photo)
-
-            #expect(catalog.pack.id == StubPack.id)
-            #expect(bytes == StubPack.media[0].bytes)
-        }
-    }
-
-    /// The point of #166: a downloaded pack speaks in the same voice as the
-    /// bundled one, which means the clip is fetched, verified and installed
-    /// where `speechURL(for:sentence:)` looks for it.
-    @Test("an installed pack resolves the sentences it has recorded")
-    func opensAnInstalledPacksSpeech() async throws {
-        let manifest = StubPack.manifest()
-        try await withDownloader(routes: StubPack.routes(manifest: manifest)) { downloader, _ in
-            try await downloader.download(StubPack.entry(manifest: manifest))
-
-            let catalog = try await downloader.catalog(for: StubPack.id)
-            let bird = try #require(catalog.pack.birds.first)
             let clip = try #require(catalog.speechURL(for: bird, sentence: StubPack.sentence))
 
+            #expect(catalog.pack.id == StubPack.id)
+            #expect(try Data(contentsOf: photo) == StubPack.media[0].bytes)
             #expect(try Data(contentsOf: clip) == StubPack.media[3].bytes)
             // Whoever is credited for the voice comes down with the pack.
             #expect(catalog.pack.voice?.attribution == "Stimme: Niemand")
             // A sentence the pack never recorded stays unresolved, and the app
             // speaks it with AVSpeechSynthesizer instead (#151).
             #expect(catalog.speechURL(for: bird, sentence: "roundEnd.title") == nil)
-        }
-    }
-
-    /// The same guard as for a photo, on the path a sentence key builds: a
-    /// clip lies one directory deeper than every other medium, so the check
-    /// has to hold there too.
-    @Test("a manifest naming a clip outside the pack is refused before it is fetched")
-    func refusesAClipOutsideThePack() async throws {
-        let escape = "../../escaped.m4a"
-        let manifest = StubPack.manifest(
-            amselSpeech: StubPack.Asset(file: escape, sha256: StubPack.assets[3].sha256),
-        )
-
-        try await withDownloader(routes: StubPack.routes(manifest: manifest)) { downloader, home in
-            let expected = PackDownloadError.invalidPath(packID: StubPack.id, path: escape)
-
-            await #expect(throws: expected) {
-                try await downloader.download(StubPack.entry(manifest: manifest))
-            }
-
-            // The manifest and the photo that precedes the clip, nothing after.
-            #expect(StubBucket.requests.count == 2)
-            #expect(!exists(home, "escaped.m4a"))
-            #expect(!exists(home, "Packs/escaped.m4a"))
         }
     }
 
@@ -270,12 +233,23 @@ struct PackDownloaderTests {
         }
     }
 
-    @Test("a manifest naming a path outside the pack is refused before it is fetched")
-    func refusesAPathOutsideThePack() async throws {
-        let escape = "../../escaped.png"
-        let manifest = StubPack.manifest(
-            amselPhoto: StubPack.Asset(file: escape, sha256: StubPack.assets[0].sha256),
-        )
+    /// Once for a photo, which is the first file of the pack, and once for a
+    /// recorded sentence, which lies one directory deeper: every path a
+    /// manifest names goes through the same guard, and `requests` says how far
+    /// the download got before it refused — the manifest alone, or the
+    /// manifest and the photo that precedes the clip.
+    @Test(
+        "a manifest naming a path outside the pack is refused before it is fetched",
+        arguments: [
+            (escape: "../../escaped.png", requests: 1),
+            (escape: "../../evil.m4a", requests: 2),
+        ],
+    )
+    func refusesAPathOutsideThePack(escape: String, requests: Int) async throws {
+        let asset = StubPack.Asset(file: escape, sha256: StubPack.assets[0].sha256)
+        let manifest = escape.hasSuffix(".m4a")
+            ? StubPack.manifest(amselSpeech: asset)
+            : StubPack.manifest(amselPhoto: asset)
 
         try await withDownloader(routes: StubPack.routes(manifest: manifest)) { downloader, home in
             let expected = PackDownloadError.invalidPath(packID: StubPack.id, path: escape)
@@ -284,10 +258,10 @@ struct PackDownloaderTests {
                 try await downloader.download(StubPack.entry(manifest: manifest))
             }
 
-            // The manifest, and nothing after it.
-            #expect(StubBucket.requests.count == 1)
-            #expect(!exists(home, "escaped.png"))
-            #expect(!exists(home, "Packs/escaped.png"))
+            let name = URL(filePath: escape).lastPathComponent
+            #expect(StubBucket.requests.count == requests)
+            #expect(!exists(home, name))
+            #expect(!exists(home, "Packs/\(name)"))
         }
     }
 
