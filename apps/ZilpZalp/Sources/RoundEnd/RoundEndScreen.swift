@@ -1,6 +1,4 @@
 import SwiftUI
-import UIKit
-import ZilpZalpCore
 import ZilpZalpData
 import ZilpZalpUI
 
@@ -19,19 +17,6 @@ import ZilpZalpUI
 /// ``AppModel/record(_:)`` before it says anything about it, and every claim
 /// it makes — a first find, a new rank — is read off the profile written.
 struct RoundEndScreen: View {
-    /// How far a star rises, from `zz-bob` in `design/guidelines/motion.css`.
-    private static let bobHeight: CGFloat = 8
-
-    /// One bob, out and back. No `ZMotion` duration covers it — the tokens
-    /// stop at 900 ms because they time reactions, and this is idle life — so
-    /// it is the 1.4 s of screen 1d. Halved where it is used: SwiftUI counts
-    /// one leg, the autoreverse gives back the other.
-    private static let bobPeriod: TimeInterval = 1.4
-
-    /// How far apart the three stars start bobbing, again from screen 1d.
-    /// Together they read as a wave rather than as one blinking row.
-    private static let bobStagger: TimeInterval = 0.15
-
     /// Where `zz-pop` starts the sticker: a little under full size rather than
     /// at nothing, so it lands instead of exploding.
     private static let popFromScale: CGFloat = 0.6
@@ -48,11 +33,6 @@ struct RoundEndScreen: View {
     /// be said, short enough to still read as one moment. A judgement call
     /// rather than a token — 1e replaces this screen in the design.
     private static let ascentDelay: TimeInterval = 2.2
-
-    /// A star that has not been earned: hollow, and olive rather than sun —
-    /// dark enough against the forest ground to stay unlit, light enough to
-    /// stay a star. What is missing is shown, as a locked ``RewardSticker`` is.
-    private static let unlitStar = ZColor.olive600
 
     /// What the round earned. Comes from ``QuizSession`` through
     /// ``Route/roundEnd(_:)``; nothing here recomputes it.
@@ -82,9 +62,9 @@ struct RoundEndScreen: View {
 
     /// Flipped once on appearance to start the bob and the pop.
     ///
-    /// With Reduce Motion on, both animations are `nil` and the stars never
-    /// leave their rest position, so the flip only puts the sticker at full
-    /// size: nothing moves, and nothing is left half-drawn.
+    /// With Reduce Motion on the pop is `nil`, so the flip only puts the
+    /// sticker at full size: nothing moves, and nothing is left half-drawn.
+    /// The stars keep that promise themselves — see ``RoundEndStars``.
     @State private var settled = false
 
     /// The bird on the sticker, resolved once: a `View` is built again on
@@ -126,10 +106,33 @@ struct RoundEndScreen: View {
         isCompact || isShort
     }
 
-    /// True while the stars are up. Never true with Reduce Motion on, so they
-    /// rest where they are drawn rather than 8 pt above it.
-    private var bobbing: Bool {
-        settled && !reduceMotion
+    /// The step the praise is set in: the design's `--text-hero` where the
+    /// screen has an iPad to itself, one step down where it has not.
+    private var titleStep: ZType.Step {
+        isTight ? .display2 : .hero
+    }
+
+    /// How far the praise may shrink before it would rather break: never
+    /// below `--text-title`, whichever step it was set in.
+    ///
+    /// A guard, not a target — the one ``TopBarTitle`` carries, for the same
+    /// reason. "Super gemacht!" measures 7.149 times the type size in the
+    /// bundled Baloo 2 ExtraBold (CoreText), so 343.2 pt at `--text-display-2`.
+    /// A 390 pt phone leaves 342 pt between the screen's two `--space-5`
+    /// paddings: 1.2 pt short, and that is the whole of #137 — the 402 pt
+    /// iPhone 17 has 354 pt and shows the line whole. SwiftUI truncates it
+    /// there rather than wrapping: the column hands the line the ideal height
+    /// it asks for, and that is one line's. It *can* wrap — a `.fixedSize`
+    /// puts "gemacht!" on a second line — but two headlines push the sticker
+    /// and both buttons down, and screen 1d draws one.
+    ///
+    /// What it spends: 0.997 at 390 pt, 0.953 at the 375 pt of an iPhone SE.
+    /// A full-screen iPad never reaches it — `--text-hero` asks for 629.1 pt
+    /// and the narrowest iPad in portrait, the mini's 744, leaves 648 pt —
+    /// but an iPad sharing its screen does: half of a 13" in landscape is
+    /// 678 pt, still a regular width, and the hero line shrinks to 0.925.
+    private var titleScaleFloor: CGFloat {
+        ZType.Step.title.size / titleStep.size
     }
 
     var body: some View {
@@ -186,24 +189,25 @@ struct RoundEndScreen: View {
         }
     }
 
-    /// The three stars, bobbing: earned ones filled, the rest hollow (#149).
-    /// Hidden from VoiceOver because ``praise`` says the same right underneath.
+    /// The three stars, bobbing — see ``RoundEndStars``.
     private var stars: some View {
-        HStack(spacing: ZSpacing.step3) {
-            ForEach(0 ..< Scoring.maximumStars, id: \.self) { position in
-                Icon(position < result.stars ? .starFilled : .star, size: .custom(starSize))
-                    .foregroundStyle(position < result.stars ? ZColor.reward : Self.unlitStar)
-                    .offset(y: bobbing ? -Self.bobHeight : 0)
-                    .animation(bob(delayedBy: Double(position) * Self.bobStagger), value: bobbing)
-            }
-        }
-        .accessibilityHidden(true)
+        RoundEndStars(earned: result.stars, size: starSize, raised: settled)
     }
 
     private var praise: some View {
         VStack(spacing: ZSpacing.step3) {
             Text("roundEnd.title")
-                .typeStyle(isTight ? .display2 : .hero, .display, weight: .extraBold)
+                .typeStyle(titleStep, .display, weight: .extraBold)
+                // One line, shrunk to fit rather than cut off — see
+                // ``titleScaleFloor``. The praise is the one sentence a child
+                // who cannot read is meant to have read out to them, and a
+                // headline that ends in an ellipsis is not that sentence.
+                // Deliberately not `typeStyle(singleLine:)`, which would give
+                // the line the design's 52.8 pt box instead of Baloo 2's own
+                // 76.9 pt one and lift the celebration under it; the two
+                // modifiers below are what ``TopBarTitle`` uses instead.
+                .lineLimit(1)
+                .minimumScaleFactor(titleScaleFloor)
                 .foregroundStyle(ZColor.white)
 
             Text(verbatim: starsEarned)
@@ -337,15 +341,6 @@ struct RoundEndScreen: View {
 
     private var starSize: CGFloat {
         isTight ? ZSpacing.step7 : ZSpacing.step8
-    }
-
-    /// One bob, forever, offset so the three stars travel as a wave. Reduce
-    /// Motion gets no animation, and without one nothing moves.
-    private func bob(delayedBy delay: TimeInterval) -> Animation? {
-        guard !reduceMotion else { return nil }
-        return ZMotion.easeInOut.animation(duration: Self.bobPeriod / 2)
-            .repeatForever(autoreverses: true)
-            .delay(delay)
     }
 
     /// `zz-pop`: the sticker bounces in over `--dur-celebrate`. Reduce Motion
