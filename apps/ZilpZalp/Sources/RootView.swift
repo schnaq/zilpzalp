@@ -18,6 +18,19 @@ struct RootView: View {
     /// means the three screens are handed pictures rather than a directory.
     @State private var photos = SpeciesPhotos(nil)
 
+    /// How often "Nochmal spielen" has taken a child back into the quiz.
+    ///
+    /// The pop is not what deals the next round — ``QuizScreen`` does that,
+    /// and it used to learn of the pop by being told it had appeared again.
+    /// It is not always told: a tap that lands while the round end is still
+    /// being pushed reverses that push before it is over, and SwiftUI then
+    /// sends the screen underneath neither the disappearance nor the
+    /// appearance. Without this number the finished round would stay up with
+    /// all ten leaves green, and since nothing about it ever changed again, no
+    /// round end would come either (#157). This one changes with the pop
+    /// itself, whatever the animation makes of it.
+    @State private var roundsAskedFor = 0
+
     var body: some View {
         NavigationStack(path: $path) {
             start
@@ -28,9 +41,9 @@ struct RootView: View {
                 .navigationDestination(for: Route.self) { route in
                     switch route {
                     case let .quiz(game): quiz(game)
-                    // Popping is all "Nochmal spielen" needs to do: the quiz
-                    // screen is still under this one and deals a fresh round
-                    // when it comes back with a finished one behind it.
+                    // "Nochmal spielen" pops back to the quiz screen still
+                    // under this one. What deals the fresh round there is
+                    // `roundsAskedFor`, never the pop on its own — see there.
                     // The catalog travels with the result: the round end
                     // draws a sticker of one of the round's species, and a
                     // `RoundResult` on a navigation path can carry the id but
@@ -106,7 +119,12 @@ struct RootView: View {
     @ViewBuilder
     private func quiz(_ game: Game) -> some View {
         if let catalog = model.catalog {
-            QuizScreen(game: game, catalog: catalog) { path.append(.roundEnd($0)) }
+            QuizScreen(
+                game: game,
+                catalog: catalog,
+                askedFor: roundsAskedFor,
+                onFinished: { path.append(.roundEnd($0)) },
+            )
         } else {
             CalmFailure(message: "app.pack.failed")
         }
@@ -169,6 +187,10 @@ struct RootView: View {
         if model.timeBudget.isExhausted {
             path.append(.timeForTheNest)
         } else {
+            // Counted in this branch alone. A day that is over leads to the
+            // nest with the finished round still behind it, and a round dealt
+            // and spoken under that screen would be a round nobody asked for.
+            roundsAskedFor += 1
             path.removeLast()
         }
     }

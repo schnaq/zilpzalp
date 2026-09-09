@@ -35,6 +35,10 @@ struct QuizScreen: View {
 
     let game: Game
     let catalog: PackCatalog
+    /// How often "Nochmal spielen" has sent a child back here; see
+    /// ``RootView/roundsAskedFor``. A number this screen has not seen yet is
+    /// a round to deal.
+    let askedFor: Int
     /// Called once the last question is answered. ``RootView`` pushes
     /// ``Route/roundEnd(_:)`` with it.
     let onFinished: (RoundResult) -> Void
@@ -81,6 +85,12 @@ struct QuizScreen: View {
         // second, smaller back button above it.
         .toolbar(.hidden, for: .navigationBar)
         .onAppear(perform: open)
+        // The next round comes from the count, never from appearing again.
+        // A tap on "Nochmal spielen" that lands while the round end is still
+        // being pushed reverses that push, and this screen is then told
+        // neither that it went away nor that it came back — it kept the
+        // finished round, its ten green leaves and no way out of them (#157).
+        .onChange(of: askedFor) { session?.resume() }
         // The question being spoken and the round waiting to move on both
         // outlive this view otherwise — a child who taps back would hear the
         // last question from the home screen.
@@ -348,15 +358,20 @@ struct QuizScreen: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
+    /// The round this screen opened on, built once and asked once.
+    ///
+    /// Only the first appearance has anything to do here. Every later one is
+    /// a return from the round end, and what deals the round then is
+    /// ``askedFor`` — resuming here as well would deal a second round over
+    /// the first and restart the question mid-word.
     private func open() {
-        if session == nil {
-            do {
-                session = try QuizSession(catalog: catalog, game: game)
-            } catch {
-                let reason = String(describing: error)
-                Logger.quiz.error("No round for \(game.title): \(reason, privacy: .public)")
-                return
-            }
+        guard session == nil else { return }
+        do {
+            session = try QuizSession(catalog: catalog, game: game)
+        } catch {
+            let reason = String(describing: error)
+            Logger.quiz.error("No round for \(game.title): \(reason, privacy: .public)")
+            return
         }
         session?.resume()
     }
