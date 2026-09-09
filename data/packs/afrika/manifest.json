@@ -9,7 +9,14 @@
       "taxonID": 20526,
       "article": "der",
       "pronunciation": null,
-      "photo": null,
+      "photo": {
+        "file": "photos/strauss.heic",
+        "sha256": "dd7c4d391e77c2aea4afea7170ba5d3d9b0109855d4f81db0f36b79a8af298c5",
+        "license": "CC-BY-4.0",
+        "attribution": "Tom Heijnen",
+        "sourceURL": "https://www.inaturalist.org/observations/231275074",
+        "retrieved": "2026-09-09"
+      },
       "call": null
     },
     {
@@ -19,8 +26,22 @@
       "taxonID": 73222,
       "article": "der",
       "pronunciation": null,
-      "photo": null,
-      "call": null
+      "photo": {
+        "file": "photos/rosaflamingo.heic",
+        "sha256": "bc7d85217e7fc55b8664d14cef1c18e696732ccbf52f7522c05a99102389e292",
+        "license": "CC-BY-4.0",
+        "attribution": "SteveM4560",
+        "sourceURL": "https://www.inaturalist.org/observations/313297928",
+        "retrieved": "2026-09-09"
+      },
+      "call": {
+        "file": "audio/rosaflamingo.m4a",
+        "sha256": "66b34fb87e1dc14684704646dff56310154365cf63cd243463ede5f65b3dca64",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Joost van Bruggen (XC432217)",
+        "sourceURL": "https://xeno-canto.org/432217",
+        "retrieved": "2026-09-09"
+      }
     },
     {
       "id": "sekretaer",
@@ -29,7 +50,14 @@
       "taxonID": 117214,
       "article": "der",
       "pronunciation": null,
-      "photo": null,
+      "photo": {
+        "file": "photos/sekretaer.heic",
+        "sha256": "1ae2de60d466953aa6d9ba1c850cc88f5e0ccc00a8b950df96eea05776412da4",
+        "license": "CC-BY-4.0",
+        "attribution": "Jan Ebr &amp; Ivana Ebrová",
+        "sourceURL": "https://www.inaturalist.org/observations/71507882",
+        "retrieved": "2026-09-09"
+      },
       "call": null
     },
     {
@@ -39,7 +67,14 @@
       "taxonID": 4338,
       "article": "der",
       "pronunciation": null,
-      "photo": null,
+      "photo": {
+        "file": "photos/schuhschnabel.heic",
+        "sha256": "a46069ecbfd57195c6d8b51abd4e286c022619a912c34504b7094c4b92d5dc0c",
+        "license": "CC-BY-4.0",
+        "attribution": "Annika Lindqvist",
+        "sourceURL": "https://www.inaturalist.org/observations/31013216",
+        "retrieved": "2026-09-09"
+      },
       "call": null
     },
     {
@@ -49,7 +84,14 @@
       "taxonID": 201031,
       "article": "der",
       "pronunciation": null,
-      "photo": null,
+      "photo": {
+        "file": "photos/marabu.heic",
+        "sha256": "87851558837ff7b590f26e87b4a3462289380a1adc6a85862cbf0682541a5c08",
+        "license": "CC-BY-4.0",
+        "attribution": "avocat",
+        "sourceURL": "https://www.inaturalist.org/observations/310674150",
+        "retrieved": "2026-09-09"
+      },
       "call": null
     },
     {
@@ -59,7 +101,14 @@
       "taxonID": 3813,
       "article": "der",
       "pronunciation": null,
-      "photo": null,
+      "photo": {
+        "file": "photos/brillenpinguin.heic",
+        "sha256": "d72cb9b3aba52246cc09d240d889d7aebeaa5f3ef6c1dc9b1df269c09cef39ed",
+        "license": "CC-BY-4.0",
+        "attribution": "Allan T. Souza",
+        "sourceURL": "https://www.inaturalist.org/observations/162713087",
+        "retrieved": "2026-09-09"
+      },
       "call": null
     },
     {
@@ -69,7 +118,14 @@
       "taxonID": 19269,
       "article": "der",
       "pronunciation": null,
-      "photo": null,
+      "photo": {
+        "file": "photos/graupapagei.heic",
+        "sha256": "5f3ef00a3784f9c50d40043312964b0d03d8189afefad78d1cd6d5554f0698ea",
+        "license": "CC-BY-4.0",
+        "attribution": "avocat",
+        "sourceURL": "https://www.inaturalist.org/observations/363520111",
+        "retrieved": "2026-09-09"
+      },
       "call": null
     },
     {
@@ -79,7 +135,14 @@
       "taxonID": 2269,
       "article": "die",
       "pronunciation": null,
-      "photo": null,
+      "photo": {
+        "file": "photos/gabelracke.heic",
+        "sha256": "c8f32b183ea8b69cd57851355a2d763f2b6da556c7c49128285ebfe272bfa6d2",
+        "license": "CC-BY-4.0",
+        "attribution": "Timothy Whitehead",
+        "sourceURL": "https://www.inaturalist.org/observations/232759573",
+        "retrieved": "2026-09-09"
+      },
       "call": null
     },
     {
@@ -89,7 +152,14 @@
       "taxonID": 203820,
       "article": "der",
       "pronunciation": null,
-      "photo": null,
+      "photo": {
+        "file": "photos/rotschnabeltoko.heic",
+        "sha256": "d250885dce9f26e72c027da2763942218f311cd9102769e0f80a85d17af852a0",
+        "license": "CC-BY-4.0",
+        "attribution": "Jan Ebr &amp; Ivana Ebrová",
+        "sourceURL": "https://www.inaturalist.org/observations/112720162",
+        "retrieved": "2026-09-09"
+      },
       "call": null
     },
     {
@@ -99,7 +169,14 @@
       "taxonID": 144281,
       "article": "der",
       "pronunciation": null,
-      "photo": null,
+      "photo": {
+        "file": "photos/suedlicher-hornrabe.heic",
+        "sha256": "5fcc4a6420445a4b778b71e791bc183a52df18e86dcc7614c6f4a3901c775e20",
+        "license": "CC-BY-4.0",
+        "attribution": "Wynand Uys",
+        "sourceURL": "https://www.inaturalist.org/observations/18058749",
+        "retrieved": "2026-09-09"
+      },
       "call": null
     },
     {
@@ -109,8 +186,22 @@
       "taxonID": 53,
       "article": "der",
       "pronunciation": null,
-      "photo": null,
-      "call": null
+      "photo": {
+        "file": "photos/kronenkranich.heic",
+        "sha256": "7e82a91ebc10d89298b8935595a58e562fe08b431a50cafa83a286986905adea",
+        "license": "CC-BY-4.0",
+        "attribution": "M Rutherford",
+        "sourceURL": "https://www.inaturalist.org/observations/38301444",
+        "retrieved": "2026-09-09"
+      },
+      "call": {
+        "file": "audio/kronenkranich.m4a",
+        "sha256": "8390f21a536de8fac83be7eb87d2753e1fc558e08f4ca424ac1bd3e912f23396",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "paulo kivuyo (XC627139)",
+        "sourceURL": "https://xeno-canto.org/627139",
+        "retrieved": "2026-09-09"
+      }
     },
     {
       "id": "schreiseeadler",
@@ -119,7 +210,14 @@
       "taxonID": 1505670,
       "article": "der",
       "pronunciation": null,
-      "photo": null,
+      "photo": {
+        "file": "photos/schreiseeadler.heic",
+        "sha256": "cbc051de781d0ae300e3547af6579291705344761e088a7e6503b85411cb9925",
+        "license": "CC-BY-4.0",
+        "attribution": "avocat",
+        "sourceURL": "https://www.inaturalist.org/observations/108635650",
+        "retrieved": "2026-09-09"
+      },
       "call": null
     },
     {
@@ -129,7 +227,14 @@
       "taxonID": 5363,
       "article": "der",
       "pronunciation": null,
-      "photo": null,
+      "photo": {
+        "file": "photos/weissrueckengeier.heic",
+        "sha256": "e1f558997115836473728a034532033d01b550dabee91ebd514594b9ff52dd94",
+        "license": "CC-BY-4.0",
+        "attribution": "Tom Heijnen",
+        "sourceURL": "https://www.inaturalist.org/observations/231275237",
+        "retrieved": "2026-09-09"
+      },
       "call": null
     },
     {
@@ -139,7 +244,14 @@
       "taxonID": 4744,
       "article": "der",
       "pronunciation": null,
-      "photo": null,
+      "photo": {
+        "file": "photos/nimmersatt.heic",
+        "sha256": "d6060d4f5dce44d155dfa19d97db980a61307688400160b9c3ded5df0eb86114",
+        "license": "CC-BY-4.0",
+        "attribution": "Timothy Whitehead",
+        "sourceURL": "https://www.inaturalist.org/observations/231594492",
+        "retrieved": "2026-09-09"
+      },
       "call": null
     },
     {
@@ -149,7 +261,14 @@
       "taxonID": 4754,
       "article": "der",
       "pronunciation": null,
-      "photo": null,
+      "photo": {
+        "file": "photos/sattelstorch.heic",
+        "sha256": "3daa597f5556f5635f178e5bf5db0389dff122c0ce94c549ad7c2aed1afd82dc",
+        "license": "CC-BY-4.0",
+        "attribution": "Wynand Uys",
+        "sourceURL": "https://www.inaturalist.org/observations/10002585",
+        "retrieved": "2026-09-09"
+      },
       "call": null
     },
     {
@@ -159,7 +278,14 @@
       "taxonID": 3834,
       "article": "der",
       "pronunciation": null,
-      "photo": null,
+      "photo": {
+        "file": "photos/hammerkopf.heic",
+        "sha256": "adeebdf7d655fb0979d950c8c96d55915f78711c023dd482f35b6c673cbb340c",
+        "license": "CC-BY-4.0",
+        "attribution": "avocat",
+        "sourceURL": "https://www.inaturalist.org/observations/108400859",
+        "retrieved": "2026-09-09"
+      },
       "call": null
     },
     {
@@ -169,8 +295,22 @@
       "taxonID": 1428,
       "article": "das",
       "pronunciation": null,
-      "photo": null,
-      "call": null
+      "photo": {
+        "file": "photos/helmperlhuhn.heic",
+        "sha256": "230175421ced622d101663fc6181caf119a2008b1f7510e33ed03c615b3fba7b",
+        "license": "CC-BY-4.0",
+        "attribution": "Peter Archdale",
+        "sourceURL": "https://www.inaturalist.org/observations/104021490",
+        "retrieved": "2026-09-09"
+      },
+      "call": {
+        "file": "audio/helmperlhuhn.m4a",
+        "sha256": "e7b9765cd700007a27eeece7752411b7c804208bcace8983f70a2d1ba8b0e959",
+        "license": "CC0-1.0",
+        "attribution": "Kileo Jumah (XC1149015)",
+        "sourceURL": "https://xeno-canto.org/1149015",
+        "retrieved": "2026-09-09"
+      }
     },
     {
       "id": "dorfweber",
@@ -179,7 +319,14 @@
       "taxonID": 13796,
       "article": "der",
       "pronunciation": null,
-      "photo": null,
+      "photo": {
+        "file": "photos/dorfweber.heic",
+        "sha256": "3a446f8f1e9a65ff8bf360ac055ff1d69a9d516434a0baa4bcae349bce883924",
+        "license": "CC-BY-4.0",
+        "attribution": "Tommy Andriollo",
+        "sourceURL": "https://www.inaturalist.org/observations/247506421",
+        "retrieved": "2026-09-09"
+      },
       "call": null
     },
     {
@@ -189,7 +336,14 @@
       "taxonID": 2220,
       "article": "der",
       "pronunciation": null,
-      "photo": null,
+      "photo": {
+        "file": "photos/karminspint.heic",
+        "sha256": "64770ed34697327002e05dd1a59aa4da2540d58bfdcc9f422b5d9be2ccfa4b39",
+        "license": "CC-BY-4.0",
+        "attribution": "Rafael Würtemberger",
+        "sourceURL": "https://www.inaturalist.org/observations/222517435",
+        "retrieved": "2026-09-09"
+      },
       "call": null
     },
     {
@@ -199,7 +353,14 @@
       "taxonID": 13300,
       "article": "der",
       "pronunciation": null,
-      "photo": null,
+      "photo": {
+        "file": "photos/malachitnektarvogel.heic",
+        "sha256": "12d0e2c910faaf1f6b018b080e46a4c15d9c0fa13cc7c9d681cdedf360acd205",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Cecile Roux",
+        "sourceURL": "https://www.inaturalist.org/observations/283577864",
+        "retrieved": "2026-09-09"
+      },
       "call": null
     },
     {
@@ -209,7 +370,14 @@
       "taxonID": 1506034,
       "article": "der",
       "pronunciation": null,
-      "photo": null,
+      "photo": {
+        "file": "photos/graulaermvogel.heic",
+        "sha256": "f80d055bef2fc87629606da94ad6512b1f80ee7948d3c1ce41a5ac13711502bf",
+        "license": "CC-BY-4.0",
+        "attribution": "Wolfgang Ahlmer",
+        "sourceURL": "https://www.inaturalist.org/observations/178051888",
+        "retrieved": "2026-09-09"
+      },
       "call": null
     },
     {
@@ -219,7 +387,14 @@
       "taxonID": 7200,
       "article": "der",
       "pronunciation": null,
-      "photo": null,
+      "photo": {
+        "file": "photos/guinea-turako.heic",
+        "sha256": "fc62928574918a3829c3bad2bfc4b67872aaad6371e274200602ef0f4d17ebca",
+        "license": "CC-BY-4.0",
+        "attribution": "Daniel S. Katz",
+        "sourceURL": "https://www.inaturalist.org/observations/151050465",
+        "retrieved": "2026-09-09"
+      },
       "call": null
     },
     {
@@ -229,7 +404,14 @@
       "taxonID": 1584479,
       "article": "der",
       "pronunciation": null,
-      "photo": null,
+      "photo": {
+        "file": "photos/rotschnabel-madenhacker.heic",
+        "sha256": "6afa9d313ec41f5982711335935348331a1f40193ffa2a33679a2ea3f1f950ec",
+        "license": "CC-BY-4.0",
+        "attribution": "gwar",
+        "sourceURL": "https://www.inaturalist.org/observations/254912140",
+        "retrieved": "2026-09-09"
+      },
       "call": null
     },
     {
@@ -239,7 +421,14 @@
       "taxonID": 115,
       "article": "die",
       "pronunciation": null,
-      "photo": null,
+      "photo": {
+        "file": "photos/riesentrappe.heic",
+        "sha256": "5f945aadd12ed124505331a35133485da79f3af99c252ee5b4a522f1e2e3835e",
+        "license": "CC-BY-4.0",
+        "attribution": "Tristan Jobin",
+        "sourceURL": "https://www.inaturalist.org/observations/281119644",
+        "retrieved": "2026-09-09"
+      },
       "call": null
     },
     {
@@ -249,8 +438,22 @@
       "taxonID": 72486,
       "article": "die",
       "pronunciation": null,
-      "photo": null,
-      "call": null
+      "photo": {
+        "file": "photos/nilgans.heic",
+        "sha256": "40672772073f4edf00a6766754fec9a99ea3d7bc50f93d456c36a2e5ae1d88c2",
+        "license": "CC-BY-4.0",
+        "attribution": "Justin",
+        "sourceURL": "https://www.inaturalist.org/observations/4583478",
+        "retrieved": "2026-09-09"
+      },
+      "call": {
+        "file": "audio/nilgans.m4a",
+        "sha256": "ca307368345ffd7fb67e59fbaa84f7803e77a67e345775e545dae20ba6834f27",
+        "license": "CC0-1.0",
+        "attribution": "Sonothèque ADVL (XC918822)",
+        "sourceURL": "https://xeno-canto.org/918822",
+        "retrieved": "2026-09-09"
+      }
     },
     {
       "id": "heiliger-ibis",
@@ -259,7 +462,14 @@
       "taxonID": 3739,
       "article": "der",
       "pronunciation": null,
-      "photo": null,
+      "photo": {
+        "file": "photos/heiliger-ibis.heic",
+        "sha256": "6887b02b1ca89ff42c3f1ad5a538547b7c4abfe13e166651ea445d077708f6df",
+        "license": "CC0-1.0",
+        "attribution": "gianluigi",
+        "sourceURL": "https://www.inaturalist.org/observations/69805359",
+        "retrieved": "2026-09-09"
+      },
       "call": null
     },
     {
@@ -269,7 +479,14 @@
       "taxonID": 14939,
       "article": "der",
       "pronunciation": null,
-      "photo": null,
+      "photo": {
+        "file": "photos/dreifarben-glanzstar.heic",
+        "sha256": "cc17dcde0ab44d65f3ba63b353e8ce0218addf7b790e2b83f88c8938fdbe024c",
+        "license": "CC-BY-4.0",
+        "attribution": "Annika Lindqvist",
+        "sourceURL": "https://www.inaturalist.org/observations/32056150",
+        "retrieved": "2026-09-09"
+      },
       "call": null
     },
     {
@@ -279,8 +496,22 @@
       "taxonID": 5344,
       "article": "der",
       "pronunciation": null,
-      "photo": null,
-      "call": null
+      "photo": {
+        "file": "photos/kampfadler.heic",
+        "sha256": "abcbb4d202cc8b02cc70dab93190949526c970abebd138a4bdd72879ba7dc169",
+        "license": "CC-BY-4.0",
+        "attribution": "Mark Bolnik",
+        "sourceURL": "https://www.inaturalist.org/observations/99602493",
+        "retrieved": "2026-09-09"
+      },
+      "call": {
+        "file": "audio/kampfadler.m4a",
+        "sha256": "2c9a64985569c7ba06897d25327a91173966a0bb8c095586450d7c8e853a8a8c",
+        "license": "CC0-1.0",
+        "attribution": "Kileo Jumah (XC1148983)",
+        "sourceURL": "https://xeno-canto.org/1148983",
+        "retrieved": "2026-09-09"
+      }
     },
     {
       "id": "rosapelikan",
@@ -289,7 +520,14 @@
       "taxonID": 4327,
       "article": "der",
       "pronunciation": null,
-      "photo": null,
+      "photo": {
+        "file": "photos/rosapelikan.heic",
+        "sha256": "7ad916a821345ea3c45a01e26d7100cfd7df9a358152a6a51f18581056275b31",
+        "license": "CC0-1.0",
+        "attribution": "marsyd",
+        "sourceURL": "https://www.inaturalist.org/observations/223582865",
+        "retrieved": "2026-09-09"
+      },
       "call": null
     },
     {
@@ -299,8 +537,22 @@
       "taxonID": 3743,
       "article": "der",
       "pronunciation": null,
-      "photo": null,
-      "call": null
+      "photo": {
+        "file": "photos/hagedasch.heic",
+        "sha256": "c43d39d293868febc782439ecaaa6e7cbefe3f1342ba7f55ed0fff4fa63935f8",
+        "license": "CC-BY-4.0",
+        "attribution": "Martin Gutewort",
+        "sourceURL": "https://www.inaturalist.org/observations/197640384",
+        "retrieved": "2026-09-09"
+      },
+      "call": {
+        "file": "audio/hagedasch.m4a",
+        "sha256": "6a3d24fbea063965cef88e9b7d0a1986ab104d21c6d4e4325aadd82eae9f48e5",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Frank shirima (XC1163454)",
+        "sourceURL": "https://xeno-canto.org/1163454",
+        "retrieved": "2026-09-09"
+      }
     }
   ]
 }
