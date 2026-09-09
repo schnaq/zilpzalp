@@ -24,8 +24,9 @@ const FAQ = [
     q: 'Wie öffne ich den Elternbereich?',
     a: (
       <>
-        Über den Knopf „Für Erwachsene“ auf der Startseite. Er fragt Face ID,
-        Touch ID oder den Gerätecode ab — je nachdem, was das Gerät kann. Ist
+        Auf der Startseite oben rechts, neben dem Avatar des Kindes: der runde
+        Knopf mit der Figur und dem Zahnrad. Er fragt Face ID, Touch ID oder
+        den Gerätecode ab — je nachdem, was das Gerät kann. Ist
         auf dem Gerät kein Code eingerichtet, stellt die App stattdessen eine
         kleine Rechenaufgabe, die ein Kind nicht löst.
       </>

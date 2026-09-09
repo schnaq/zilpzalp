@@ -14,8 +14,8 @@ excluded:
   - "**/.build"
   - "**/DerivedData"
   - "**/*.xcodeproj"
-  # Die Website in apps/web enthält keinen Swift-Code, aber node_modules.
-  # Ohne diesen Ausschluss durchsucht SwiftLint zehntausende Dateien umsonst.
+  # The website in apps/web holds no Swift, but it does hold node_modules.
+  # Without this, SwiftLint walks tens of thousands of files for nothing.
   - "apps/web"
 
 disabled_rules:

@@ -32,10 +32,10 @@ const SHOTS = [
     alt: 'Das Rundenende mit drei Sternen und einem neuen Sticker.',
   },
   {
-    file: '05-album.png',
-    title: 'Album',
-    text: 'Fünfmal erkannt — dann klebt der Sticker im Album.',
-    alt: 'Das Album mit den Stickern der schon erkannten Vögel.',
+    file: '05-sammlung.png',
+    title: 'Sammlung',
+    text: 'Fünfmal erkannt — dann klebt der Sticker in der Sammlung.',
+    alt: 'Die Sammlung mit den Stickern der schon erkannten Vögel.',
   },
 ]
 

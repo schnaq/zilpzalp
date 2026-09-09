@@ -296,6 +296,14 @@ dir = "apps/web"
 # unasked — least of all the site that promises exactly that to parents.
 run = "NEXT_TELEMETRY_DISABLED=1 bun run dev"
 
+[tasks."web:lint"]
+description = "Lint the website"
+dir = "apps/web"
+# Next.js 16 removed `next lint`; this is the ESLint CLI against the flat
+# config in apps/web/eslint.config.mjs. Deliberately not part of
+# `mise run check`, which is the Swift gate and must not need node_modules.
+run = "bun run lint"
+
 [tasks."web:build"]
 description = "Build the website — the same build CI and Vercel run"
 dir = "apps/web"

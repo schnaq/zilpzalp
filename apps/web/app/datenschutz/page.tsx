@@ -91,8 +91,8 @@ export default function Datenschutz() {
       <h3>2.3 Elternbereich, Face ID und Gerätecode</h3>
       <p>
         Der Elternbereich ist mit der Geräteauthentifizierung von iOS geschützt
-        (<code>LocalAuthentication</code>, Richtlinie
-        <code> deviceOwnerAuthentication</code>). Je nach Gerät ist das Face ID,
+        (<code>LocalAuthentication</code>, Richtlinie{' '}
+        <code>deviceOwnerAuthentication</code>). Je nach Gerät ist das Face ID,
         Touch ID oder der Gerätecode. Die App bekommt von iOS ausschließlich die
         Antwort „erfolgreich“ oder „nicht erfolgreich“. Biometrische Daten
         verlassen die Sicherheitshardware des Geräts nie und sind für die App

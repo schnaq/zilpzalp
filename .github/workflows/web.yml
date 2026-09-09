@@ -8,9 +8,9 @@ name: Web
 on:
   push:
     branches: [main]
-    paths: ['apps/web/**', '.github/workflows/web.yml']
+    paths: ['apps/web/**', 'mise.toml', '.github/workflows/web.yml']
   pull_request:
-    paths: ['apps/web/**', '.github/workflows/web.yml']
+    paths: ['apps/web/**', 'mise.toml', '.github/workflows/web.yml']
 
 # A new push to a pull request cancels the run still in flight for that ref —
 # the same rule as in ci.yml.
@@ -51,8 +51,7 @@ jobs:
         run: mise run web:install
 
       - name: Lint
-        run: mise exec -- bun run lint
-        working-directory: apps/web
+        run: mise run web:lint
 
       - name: Build
         run: mise run web:build

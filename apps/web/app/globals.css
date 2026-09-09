@@ -177,6 +177,11 @@ h3 {
   line-height: 1.1;
   text-wrap: balance;
   margin: 0;
+  /* German legal headings are single words wider than a phone —
+     "Geschäftsbedingungen" alone overruns a 390 px screen. `lang="de"` is set
+     on <html>, so the browser hyphenates properly rather than chopping. */
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 h1 {
@@ -588,7 +593,9 @@ section {
 .shot-frame span {
   font-family: var(--font-display), ui-rounded, system-ui, sans-serif;
   font-size: var(--step--1);
-  color: var(--muted);
+  /* Body ink, not muted: the frame's gradient ends on the sand band, where
+     muted falls to 4.0:1. */
+  color: var(--body);
   padding: var(--s-4);
   text-align: center;
 }

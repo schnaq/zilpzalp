@@ -15,15 +15,15 @@ const FACTS = [
   },
   {
     term: 'Ohne Lesen',
-    detail: 'Jede Aufgabe wird gesprochen. Auf den Fotos steht kein Name.',
+    detail: 'Jede Aufgabe wird gesprochen, und zur Antwort stehen vier Fotos ohne Namen.',
   },
   {
     term: 'Sterne',
     detail: 'Jede Runde bringt bis zu drei Sterne — je nachdem, wie viel auf Anhieb sitzt.',
   },
   {
-    term: 'Das Album',
-    detail: 'Wer einen Vogel fünfmal erkennt, bekommt seinen Sticker ins Album.',
+    term: 'Die Sammlung',
+    detail: 'Wer einen Vogel fünfmal erkennt, bekommt seinen Sticker in die Sammlung.',
   },
   {
     term: 'Für mehrere Kinder',
@@ -48,6 +48,11 @@ const APP_DOES_NOT = [
   'Kein Analyse- oder Absturzmelde-Werkzeug von Dritten.',
   'Kein Tracking und keine Weitergabe an Dritte.',
 ]
+
+// Static on purpose. The screenshot section reads the file system while the
+// page is prerendered; rendering per request would look in a bundle that has
+// no public/ in it, and every frame would fall back to its placeholder.
+export const dynamic = 'force-static'
 
 export default function Home() {
   return (
