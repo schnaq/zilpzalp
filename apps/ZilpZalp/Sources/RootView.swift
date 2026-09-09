@@ -53,7 +53,8 @@ struct RootView: View {
                             // and that is not a way out of it (#175).
                             goHome: { path.removeAll() },
                         )
-                    case .parents: ParentsScreen(parental: model.parental)
+                    case .parents:
+                        ParentsScreen(parental: model.parental, packs: model.packs)
                     case .collection: collection
                     case .timeForTheNest:
                         // All the way home rather than back one: under this

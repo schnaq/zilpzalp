@@ -445,6 +445,186 @@
         }
       }
     },
+    "parents.packs.alwaysThere" : {
+      "comment" : "Second half of the base pack's row: it ships with the app and cannot be deleted",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "immer dabei"
+          }
+        }
+      }
+    },
+    "parents.packs.complete" : {
+      "comment" : "The bucket offers nothing that is not already on the device",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alle Pakete sind schon auf dem Gerät."
+          }
+        }
+      }
+    },
+    "parents.packs.delete.cancel" : {
+      "comment" : "The way out of the delete dialog",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abbrechen"
+          }
+        }
+      }
+    },
+    "parents.packs.delete.confirm" : {
+      "comment" : "The destructive button of the delete dialog",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Löschen"
+          }
+        }
+      }
+    },
+    "parents.packs.delete.message" : {
+      "comment" : "Message of the delete dialog. %@ is the pack's title",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "„%@“ verschwindet aus den Spielen. Du kannst es später wieder laden."
+          }
+        }
+      }
+    },
+    "parents.packs.delete.title" : {
+      "comment" : "Title of the dialog that asks before a pack is deleted",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paket löschen?"
+          }
+        }
+      }
+    },
+    "parents.packs.download.failed" : {
+      "comment" : "Under a pack whose download did not finish. A second tap resumes it",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nicht fertig geladen. Tippe noch einmal."
+          }
+        }
+      }
+    },
+    "parents.packs.failed" : {
+      "comment" : "The list of downloadable packs could not be fetched — no connection, or the bucket did not answer",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die Paketliste ließ sich nicht laden. Vielleicht ist gerade kein Internet da."
+          }
+        }
+      }
+    },
+    "parents.packs.intro" : {
+      "comment" : "Line under the pack heading: what a pack is, and why it is downloaded here rather than by a child",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neue Vögel für alle Spiele. Geladen wird nur hier — so tippt kein Kind aus Versehen einen Download an."
+          }
+        }
+      }
+    },
+    "parents.packs.loading" : {
+      "comment" : "While the list of downloadable packs is being fetched",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die Paketliste wird geladen …"
+          }
+        }
+      }
+    },
+    "parents.packs.retry" : {
+      "comment" : "Button under the failed pack list",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erneut versuchen"
+          }
+        }
+      }
+    },
+    "parents.packs.species" : {
+      "comment" : "How many species a pack holds, in its row. %lld is the number",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Art"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Arten"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "parents.packs.title" : {
+      "comment" : "Heading of the pack section in the grown-ups' area",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pakete"
+          }
+        }
+      }
+    },
+    "parents.packs.total" : {
+      "comment" : "Under the pack card: what the downloaded packs take up altogether. %@ is a formatted size like \"12 MB\"",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zusammen %@ auf dem Gerät"
+          }
+        }
+      }
+    },
     "parents.playtime.cancel" : {
       "comment" : "Leaves the daily time budget dialog without changing the limit",
       "extractionState" : "manual",

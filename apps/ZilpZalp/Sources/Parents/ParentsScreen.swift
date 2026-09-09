@@ -4,12 +4,13 @@ import ZilpZalpData
 import ZilpZalpUI
 
 /// The grown-ups' area: the one screen with small type, full sentences and a
-/// switch. After `design/ui_kits/ipad_app/GrownupsScreen.jsx`, minus the three
-/// rows v1 has nothing behind — "Musik" (there is none), "Sprache" (German
-/// only until #46) and "Pakete" (nothing to manage until #33) — and minus
-/// "Vogelstimmen", the one row v1 does have something behind and deliberately
-/// does not offer: where there are calls, game 2 is there, and a grown-up who
-/// wants quiet turns the device down (#138).
+/// switch. After `design/ui_kits/ipad_app/GrownupsScreen.jsx`, minus the two
+/// rows v1 has nothing behind — "Musik" (there is none) and "Sprache" (German
+/// only until #46) — and minus "Vogelstimmen", the one row v1 does have
+/// something behind and deliberately does not offer: where there are calls,
+/// game 2 is there, and a grown-up who wants quiet turns the device down
+/// (#138). The design's "Pakete" row is a card of its own here, because packs
+/// are a list that changes rather than a setting — see ``PacksSection``.
 ///
 /// A door in front of it, and the door has two keys. The device lock
 /// (``ParentsLock``) is the normal one. On a device with neither a code nor a
@@ -40,6 +41,11 @@ struct ParentsScreen: View {
     /// the daily limit off it as well, and two instances would be two
     /// answers to the same question.
     let parental: ParentalSettingsModel
+
+    /// The packs on the device. Also owned by ``AppModel``: the games play
+    /// from them, and a download that is running when a grown-up leaves this
+    /// screen keeps running.
+    let packs: PackModel
 
     @Environment(\.dismiss) private var dismiss
     @Environment(\.scenePhase) private var scenePhase
@@ -216,6 +222,7 @@ struct ParentsScreen: View {
                     .foregroundStyle(ZColor.textBody)
 
                 rows
+                PacksSection(packs: packs)
                 voiceNotice
                 notice
             }
@@ -372,12 +379,18 @@ struct ParentsScreen: View {
 
 #Preview("iPhone") {
     NavigationStack {
-        ParentsScreen(parental: ParentalSettingsModel())
+        ParentsScreen(
+            parental: ParentalSettingsModel(),
+            packs: PackModel(directory: .temporaryDirectory),
+        )
     }
 }
 
 #Preview("iPad", traits: .fixedLayout(width: 1194, height: 834)) {
     NavigationStack {
-        ParentsScreen(parental: ParentalSettingsModel())
+        ParentsScreen(
+            parental: ParentalSettingsModel(),
+            packs: PackModel(directory: .temporaryDirectory),
+        )
     }
 }
