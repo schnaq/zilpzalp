@@ -12,19 +12,35 @@ import ZilpZalpData
 /// is a setting any more (#138).
 @MainActor
 final class SpeechAnnouncer: NSObject {
-    private static let language = "de-DE"
-
     /// A notch below the system default of 0.5. The default rattles the
     /// question off faster than a child who is still learning the names can
-    /// follow it.
-    private static let speechRate = AVSpeechUtteranceDefaultSpeechRate * 0.9
+    /// follow it, and a compact voice is the one that rattles hardest: it
+    /// clips the pauses between words as it speeds up.
+    private static let compactRate = AVSpeechUtteranceDefaultSpeechRate * 0.9
+
+    /// Barely slower than the system default, for a downloaded voice.
+    ///
+    /// An enhanced or premium voice already stretches its own vowels and holds
+    /// its own pauses, so the same 0.9 that saves a compact voice makes this
+    /// one drag. Half the correction is enough.
+    ///
+    /// Judgement, not measurement: the simulator has compact voices only, so
+    /// this could not be listened to here. It is the value Christian should
+    /// turn first if a downloaded voice still reads too fast or too slowly on
+    /// his device (#151).
+    private static let downloadedRate = AVSpeechUtteranceDefaultSpeechRate * 0.95
 
     private let synthesizer = AVSpeechSynthesizer()
 
-    /// `nil` when the device carries no German voice at all. The utterance
-    /// then keeps `voice == nil` and the system reads it with its default
-    /// voice — a wrong accent is still better than silence.
+    /// The voice for every utterance — see ``SpeechVoice``. `nil` when the
+    /// device carries no German voice at all. The utterance then keeps
+    /// `voice == nil` and the system reads it with its default voice — a wrong
+    /// accent is still better than silence.
     private let voice: AVSpeechSynthesisVoice?
+
+    /// The rate that suits ``voice``. Stored rather than recomputed per
+    /// sentence: the voice cannot change while the app runs.
+    private let speechRate: Float
 
     /// The utterance currently on its way to the speaker.
     ///
@@ -42,12 +58,16 @@ final class SpeechAnnouncer: NSObject {
     private var spokenUtterance: AVSpeechUtterance?
 
     override init() {
-        voice = AVSpeechSynthesisVoice(language: Self.language)
+        voice = SpeechVoice.forUtterance
+        // `.default` covers both the compact voice and the case where there
+        // was no voice to look at: today's rate is what the app has always
+        // used, and nothing about an unknown voice argues for changing it.
+        speechRate = switch voice?.quality {
+        case .enhanced, .premium: Self.downloadedRate
+        default: Self.compactRate
+        }
         super.init()
 
-        if voice == nil {
-            Logger.audio.warning("No \(Self.language, privacy: .public) voice, using the default")
-        }
         synthesizer.delegate = self
     }
 
@@ -80,7 +100,7 @@ final class SpeechAnnouncer: NSObject {
 
         let utterance = AVSpeechUtterance(string: sentence)
         utterance.voice = voice
-        utterance.rate = Self.speechRate
+        utterance.rate = speechRate
 
         // One sentence at a time across announcers, not only inside one.
         // Every screen builds its own (see ``ReadAloudOnce``), and the quiz
