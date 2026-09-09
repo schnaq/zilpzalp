@@ -184,6 +184,13 @@ struct RootView: View {
     /// **This is the only place the budget can end play**, and it does so
     /// between two rounds; nothing asks it while a question is up.
     private func playAnotherRound() {
+        // The way on is taken once, however often the button is hit. No
+        // device here delivered the second tap of a double tap — the first
+        // one's pop swallowed it every time — but that is an observation and
+        // not a promise, and a second one arriving would pop the quiz away
+        // under the round it had just dealt, or empty the path and trap.
+        guard case .roundEnd = path.last else { return }
+
         if model.timeBudget.isExhausted {
             path.append(.timeForTheNest)
         } else {

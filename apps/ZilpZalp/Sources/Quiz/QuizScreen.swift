@@ -36,8 +36,8 @@ struct QuizScreen: View {
     let game: Game
     let catalog: PackCatalog
     /// How often "Nochmal spielen" has sent a child back here; see
-    /// ``RootView/roundsAskedFor``. A number this screen has not seen yet is
-    /// a round to deal.
+    /// ``RootView/roundsAskedFor``. Only ever compared with itself: what the
+    /// screen acts on is the change, never the number.
     let askedFor: Int
     /// Called once the last question is answered. ``RootView`` pushes
     /// ``Route/roundEnd(_:)`` with it.
@@ -85,17 +85,18 @@ struct QuizScreen: View {
         // second, smaller back button above it.
         .toolbar(.hidden, for: .navigationBar)
         .onAppear(perform: open)
-        // Every round after the first comes from the count, never from
-        // appearing again. A tap on "Nochmal spielen" that lands while the
-        // round end is still being pushed reverses that push, and this screen
-        // is then told neither that it went away nor that it came back: it
-        // would keep the finished round, its ten green leaves and no way out
-        // of them (#157).
+        // And on the count as well, because the appearance is not always
+        // delivered: a tap on "Nochmal spielen" that lands while the round end
+        // is still being pushed reverses that push, and this screen is then
+        // told neither that it went away nor that it came back — it would keep
+        // the finished round, its ten green leaves and no way out of them
+        // (#157).
         //
-        // Not one `onChange(of:initial:)` for both: measured in the simulator,
-        // the initial run and the change fire together in the update that
-        // brings the screen back, and the question is then asked twice in the
-        // same millisecond — audibly, because the second one restarts it.
+        // Both fire in the ordinary case, milliseconds apart, and that is
+        // deliberate. Only the first finds a finished round and deals; the
+        // second puts the same question again, which is inaudible at that
+        // distance — and it is what picks the round back up whenever
+        // something covers this screen and `suspend()` cuts the question.
         .onChange(of: askedFor) { session?.resume() }
         // The question being spoken and the round waiting to move on both
         // outlive this view otherwise — a child who taps back would hear the
@@ -364,20 +365,15 @@ struct QuizScreen: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
-    /// The round this screen opens on, built once and asked once.
-    ///
-    /// Only the first appearance has anything to do here. Every later one is
-    /// a return from the round end, and what deals the round then is
-    /// ``askedFor`` — resuming here as well would deal a second round over
-    /// the first and restart the question mid-word.
     private func open() {
-        guard session == nil else { return }
-        do {
-            session = try QuizSession(catalog: catalog, game: game)
-        } catch {
-            let reason = String(describing: error)
-            Logger.quiz.error("No round for \(game.title): \(reason, privacy: .public)")
-            return
+        if session == nil {
+            do {
+                session = try QuizSession(catalog: catalog, game: game)
+            } catch {
+                let reason = String(describing: error)
+                Logger.quiz.error("No round for \(game.title): \(reason, privacy: .public)")
+                return
+            }
         }
         session?.resume()
     }
