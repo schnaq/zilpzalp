@@ -47,15 +47,13 @@ struct RoundResult: Hashable {
     /// the same birds in the same seconds, and those are not the same round.
     let id: UUID
 
-    /// Answers right at the first attempt — the one number a round produces.
-    let firstTryCorrect: Int
     /// How many questions the round had, so the end screen never has to assume
     /// the round length.
     let questionCount: Int
 
     /// The species the round end puts on its sticker; which one that is, and
     /// why a round without a single first try still names one, is
-    /// ``RoundPlay/celebratedSpecies``.
+    /// ``RoundPlay/celebratedSpecies(recognisedBefore:)``.
     ///
     /// Settled where the round is played rather than where it is celebrated:
     /// a round hands over one value, not two, and the celebration would
@@ -63,12 +61,13 @@ struct RoundResult: Hashable {
     /// to show.
     let celebratedSpecies: String?
 
-    /// Every species the round asked about, right or wrong.
+    /// How often the round recognised each species — answered right at the
+    /// first attempt. What the profile's counters are raised by, and five of
+    /// them earn that bird's sticker (#177).
     ///
-    /// All of them go into the album: it is a memory of what the child has
-    /// seen, never a record of what it got wrong. The set comes from the
-    /// round because only ``QuizSession`` holds the questions.
-    let species: Set<String>
+    /// A bird the round only asked about is not in here. The album says what
+    /// a child knows, not what it has been shown.
+    let recognitions: [String: Int]
 
     /// Seconds from the first question going up to the last answer.
     ///
@@ -76,6 +75,13 @@ struct RoundResult: Hashable {
     /// parent means by "played for twenty minutes". A round is over the
     /// moment the screen is left, so there is no pause to subtract.
     let playtime: TimeInterval
+
+    /// Answers right at the first attempt: the recognitions added up, since
+    /// every one of them is one such answer. Derived rather than carried
+    /// beside them, where the two could disagree.
+    var firstTryCorrect: Int {
+        recognitions.values.reduce(0, +)
+    }
 
     /// One, two or three. Derived rather than stored: `Scoring` is a pure
     /// function of ``firstTryCorrect``, and a second field holding the answer

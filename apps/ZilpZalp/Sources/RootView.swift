@@ -102,6 +102,7 @@ struct RootView: View {
                 game: game,
                 catalog: catalog,
                 askedFor: roundsAskedFor,
+                recognitions: { model.activeProfile?.recognitions ?? [:] },
                 onFinished: { path.append(.roundEnd($0)) },
             )
         } else {

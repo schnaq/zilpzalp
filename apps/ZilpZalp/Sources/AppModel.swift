@@ -260,7 +260,7 @@ final class AppModel {
 
         let round = PlayedRound(
             stars: result.stars,
-            species: result.species,
+            recognitions: result.recognitions,
             playtime: result.playtime,
         )
 

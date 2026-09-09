@@ -15,7 +15,7 @@ import ZilpZalpUI
 ///
 /// **This is where a round is written down.** The screen books it through
 /// ``AppModel/record(_:)`` before it says anything about it, and every claim
-/// it makes — a first find above all — is read off the profile written.
+/// it makes — a sticker earned above all — is read off the profile written.
 struct RoundEndScreen: View {
     /// Where `zz-pop` starts the sticker: a little under full size rather than
     /// at nothing, so it lands instead of exploding.
@@ -236,11 +236,11 @@ struct RoundEndScreen: View {
         .animation(pop, value: settled)
     }
 
-    /// The pop belongs to a bird met for the first time. One already in the
-    /// album is simply there: still shown, still named, but the arrival is
-    /// the reward for finding something new.
+    /// The pop belongs to a sticker just earned. A bird whose sticker is
+    /// already in the album is simply there: still shown, still named, but the
+    /// arrival is the reward for having earned it.
     private var popped: Bool {
-        settled || !isFirstFind
+        settled || !earnedSticker
     }
 
     /// The way on first, the album second (#119): a child who can read
@@ -307,23 +307,24 @@ struct RoundEndScreen: View {
         String(format: String(localized: "roundEnd.stars"), result.stars)
     }
 
-    /// Whether the round put this bird in the album for the first time: read
-    /// off the profile as it stood before the round was booked. `false` until
-    /// then — one frame of silence beats a claim that was not checked.
-    private var isFirstFind: Bool {
-        outcome?.isFirstFind(of: result.celebratedSpecies) ?? false
+    /// Whether the round earned this bird's sticker — its fifth recognition.
+    /// Read off the profiles either side of the write. `false` until then —
+    /// one frame of silence beats a claim that was not checked.
+    private var earnedSticker: Bool {
+        outcome?.earnedSticker(for: result.celebratedSpecies) ?? false
     }
 
-    /// "Amsel gesammelt" for a first find, the bare name otherwise.
+    /// "Amsel gesammelt" for a sticker just earned, the bare name otherwise.
     private func caption(for sticker: RoundEndSticker) -> String {
-        guard isFirstFind else { return sticker.name }
+        guard earnedSticker else { return sticker.name }
         return String(format: String(localized: "roundEnd.sticker.new"), sticker.name)
     }
 
     /// The one sentence this screen says out loud, for the child who cannot
-    /// read it. A first find gets its own, so the news is heard as well.
+    /// read it. A sticker just earned gets its own, so the news is heard as
+    /// well as seen.
     private var spokenPraise: String {
-        guard isFirstFind, let sticker else { return String(localized: "roundEnd.title") }
+        guard earnedSticker, let sticker else { return String(localized: "roundEnd.title") }
         return String(format: String(localized: "roundEnd.sticker.new.spoken"), sticker.name)
     }
 
@@ -342,8 +343,8 @@ struct RoundEndScreen: View {
     /// Books the round, then celebrates it: the sticker, the motion and the
     /// sentence said out loud.
     ///
-    /// The order matters. Being a first find decides both the caption and the
-    /// sentence, so nothing is drawn as new before the profile is written.
+    /// The order matters. A sticker just earned decides both the caption and
+    /// the sentence, so nothing is drawn as new before the profile is written.
     /// The guards are what make each part happen once: this runs again every
     /// time the child comes back from the album.
     private func celebrate() async {

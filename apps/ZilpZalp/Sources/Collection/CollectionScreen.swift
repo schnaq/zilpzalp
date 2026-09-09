@@ -1,5 +1,4 @@
 import SwiftUI
-import ZilpZalpCore
 import ZilpZalpData
 import ZilpZalpUI
 
@@ -49,7 +48,7 @@ struct CollectionScreen: View {
     }
 
     private var collected: [Bird] {
-        birds.filter { profile.collectedSpecies.contains($0.id) }
+        birds.filter { profile.hasSticker(for: $0.id) }
     }
 
     var body: some View {
@@ -149,7 +148,7 @@ struct CollectionScreen: View {
     /// picture that plainly is not one of the bright ones.
     @ViewBuilder
     private func sticker(_ bird: Bird) -> some View {
-        let isCollected = profile.collectedSpecies.contains(bird.id)
+        let isCollected = profile.hasSticker(for: bird.id)
         let size = isCompact ? Self.compactStickerSize : Self.stickerSize
 
         if isCollected {
@@ -180,7 +179,7 @@ private func albumProfile() -> Profile {
         avatar: "star",
         totalStars: 57,
         roundsPlayed: 21,
-        collectedSpecies: ["amsel", "kohlmeise", "rotkehlchen", "zilpzalp"],
+        recognitions: ["amsel": 7, "kohlmeise": 5, "rotkehlchen": 5, "zilpzalp": 5],
     )
 }
 

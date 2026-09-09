@@ -53,14 +53,17 @@ public struct RoundPlay: Hashable, Sendable {
     /// from scoring twice.
     public private(set) var isAnswered = false
 
-    /// Answers right at the first attempt. The one number the stars come
-    /// from; see ``Scoring/stars(firstTryCorrect:)``.
-    public private(set) var firstTryCorrect = 0
-
-    /// The first species answered right at the first attempt, `nil` until one
-    /// is. Only ever set once — the round end celebrates the first such bird,
-    /// not the latest.
-    private var firstTrySpecies: String?
+    /// Every species answered right at the first attempt, in the order those
+    /// answers happened. A species the round asks for twice and the child
+    /// knows twice stands in here twice — a pack with few species to ask for
+    /// repeats them late in the round, see ``Round/make(from:questionCount:choiceCount:using:)``.
+    ///
+    /// The one record behind everything the round has to say about
+    /// recognition: how many stars it earned, how often each bird was known,
+    /// which bird was known first, and which of two birds came first when the
+    /// sticker rule has to choose between them. One fact rather than four, so
+    /// that none of them can disagree with the others.
+    public private(set) var firstTryRecognitions: [String] = []
 
     /// Starts `round` at its first question, with nothing tapped.
     public init(round: Round) {
@@ -77,15 +80,92 @@ public struct RoundPlay: Hashable, Sendable {
         index >= round.questions.count
     }
 
-    /// The species the round end puts on its sticker: the first one answered
-    /// right at the first attempt, or the round's first question when there
-    /// was none. `nil` only for a round without questions.
+    /// Answers right at the first attempt. The one number the stars come
+    /// from; see ``Scoring/stars(firstTryCorrect:)``.
+    public var firstTryCorrect: Int {
+        firstTryRecognitions.count
+    }
+
+    /// How often each species was answered right at the first attempt in this
+    /// round — what the round hands over to be added onto the child's
+    /// counters, five of which earn a sticker.
+    public var recognitions: [String: Int] {
+        firstTryRecognitions.reduce(into: [:]) { counts, species in
+            counts[species, default: 0] += 1
+        }
+    }
+
+    /// The species the round end puts on its sticker, judged against what the
+    /// child had recognised before this round (#177).
     ///
-    /// A round always earns a sticker, which is why the fallback is a species
-    /// and not nothing: the celebration shows what was met, never how well it
-    /// went.
-    public var celebratedSpecies: String? {
-        firstTrySpecies ?? round.questions.first?.answer
+    /// In this order:
+    ///
+    /// 1. a bird whose fifth recognition happened in this round — its sticker
+    ///    was just earned, and that is the news of the round
+    /// 2. otherwise the bird that came closest to its fifth without reaching
+    ///    it, among those recognised in this round: the one whose row of
+    ///    markers has the most to show
+    /// 3. otherwise the first bird recognised in this round, whose sticker was
+    ///    in the album already
+    /// 4. otherwise the first question's answer
+    ///
+    /// A round always shows a bird, which is why the last step is a species
+    /// and not nothing: the celebration shows what was met, never how badly it
+    /// went. `nil` only for a round without questions.
+    ///
+    /// Ties go to the bird recognised first — the order of
+    /// ``firstTryRecognitions`` throughout, so the answer never depends on how
+    /// a dictionary happens to iterate.
+    ///
+    /// - Parameter recognisedBefore: how often the child had recognised each
+    ///   species before this round, as ``recognitions`` counts them. The play
+    ///   does not store it: a round is played by whoever is holding the iPad,
+    ///   and asking at the end is what keeps the answer from being one round
+    ///   out of date.
+    public func celebratedSpecies(recognisedBefore: [String: Int]) -> String? {
+        let inRound = recognitions
+        let total = { (species: String) in
+            (recognisedBefore[species] ?? 0) + (inRound[species] ?? 0)
+        }
+        let recognised = firstTryRecognitions.reduce(into: [String]()) { seen, species in
+            if !seen.contains(species) {
+                seen.append(species)
+            }
+        }
+
+        let completed = recognised.first { species in
+            (recognisedBefore[species] ?? 0) < Scoring.recognitionsForSticker
+                && total(species) >= Scoring.recognitionsForSticker
+        }
+        let underway = recognised.filter { total($0) < Scoring.recognitionsForSticker }
+
+        return completed
+            ?? Self.furthest(among: underway, by: total)
+            ?? recognised.first
+            ?? round.questions.first?.answer
+    }
+
+    /// The species of `candidates` with the most recognitions to its name,
+    /// ties going to the one standing first.
+    ///
+    /// Spelled out rather than `max(by:)`, which does not promise which of two
+    /// equals it answers with — and here that decides which bird a child sees.
+    private static func furthest(
+        among candidates: [String],
+        by total: (String) -> Int,
+    ) -> String? {
+        var best: (species: String, count: Int)?
+        for candidate in candidates {
+            let count = total(candidate)
+            guard let standing = best else {
+                best = (candidate, count)
+                continue
+            }
+            if count > standing.count {
+                best = (candidate, count)
+            }
+        }
+        return best?.species
     }
 
     /// Where `species`' tile stands: the answer once it has been found, a "go
@@ -129,8 +209,7 @@ public struct RoundPlay: Hashable, Sendable {
 
         let firstTry = wrongTaps.isEmpty
         if firstTry {
-            firstTryCorrect += 1
-            firstTrySpecies = firstTrySpecies ?? species
+            firstTryRecognitions.append(species)
         }
         isAnswered = true
         return .correct(firstTry: firstTry)

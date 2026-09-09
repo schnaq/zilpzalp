@@ -236,14 +236,14 @@ final class QuizSession {
         }
     }
 
-    /// What the round has come to, once it is over.
-    var result: RoundResult {
+    /// What the round has come to, once it is over. Which bird of it is
+    /// celebrated is ``RoundPlay/celebratedSpecies(recognisedBefore:)``.
+    func result(recognisedBefore: [String: Int]) -> RoundResult {
         RoundResult(
             id: roundID,
-            firstTryCorrect: play.firstTryCorrect,
             questionCount: play.round.questions.count,
-            celebratedSpecies: play.celebratedSpecies,
-            species: Set(play.round.questions.map(\.answer)),
+            celebratedSpecies: play.celebratedSpecies(recognisedBefore: recognisedBefore),
+            recognitions: play.recognitions,
             playtime: playtime,
         )
     }
