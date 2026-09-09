@@ -1,0 +1,22 @@
+{
+  "id": "speech",
+  "title": "Ansagen",
+  "voice": {
+    "license": "CC-BY-4.0",
+    "attribution": "Stimme: Niemand",
+    "sourceURL": "https://example.org/docs/sprachaufnahmen.md",
+    "retrieved": "2026-09-09"
+  },
+  "lines": {
+    "roundEnd.title": {
+      "file": "silence.m4a",
+      "sha256": "ea4ca100e771dd55182921eac8665571baeb22644fd18dab1f4a7612b7acaff3",
+      "text": "Super gemacht!"
+    },
+    "gate.spoken": {
+      "file": "gate.spoken.m4a",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "text": "Frag bitte einen Erwachsenen."
+    }
+  }
+}

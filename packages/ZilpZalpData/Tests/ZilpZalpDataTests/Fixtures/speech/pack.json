@@ -1,0 +1,58 @@
+{
+  "id": "spricht",
+  "title": "Ein Paket, das spricht",
+  "voice": {
+    "license": "CC-BY-4.0",
+    "attribution": "Stimme: Niemand",
+    "sourceURL": "https://example.org/docs/sprachaufnahmen.md",
+    "retrieved": "2026-09-09"
+  },
+  "birds": [
+    {
+      "id": "amsel",
+      "name": "Amsel",
+      "scientificName": "Turdus merula",
+      "taxonID": 12716,
+      "article": "die",
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/amsel.png",
+        "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "license": "CC-BY-4.0",
+        "attribution": "Nobody",
+        "sourceURL": "https://example.org/observations/1",
+        "retrieved": "2026-09-09"
+      },
+      "call": null,
+      "speech": {
+        "quiz.prompt.whereIs": {
+          "file": "silence.m4a",
+          "sha256": "ea4ca100e771dd55182921eac8665571baeb22644fd18dab1f4a7612b7acaff3",
+          "text": "Wo ist die Amsel?"
+        },
+        "collection.name": {
+          "file": "speech/collection.name/amsel.m4a",
+          "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+          "text": "Amsel"
+        }
+      }
+    },
+    {
+      "id": "stumm",
+      "name": "Stumm",
+      "scientificName": "Spectrum tacitum",
+      "taxonID": 2,
+      "article": "der",
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/stumm.png",
+        "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "license": "CC-BY-4.0",
+        "attribution": "Nobody",
+        "sourceURL": "https://example.org/observations/2",
+        "retrieved": "2026-09-09"
+      },
+      "call": null
+    }
+  ]
+}

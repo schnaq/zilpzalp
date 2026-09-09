@@ -32,6 +32,18 @@ public enum PackManifest {
     ///   required key, a licence outside `License`, or a `retrieved` value
     ///   that is not a `YYYY-MM-DD` date.
     public static func decode(_ data: Data) throws -> Pack {
-        try decoder.decode(Pack.self, from: data)
+        try decode(Pack.self, from: data)
+    }
+
+    /// Decodes any manifest with the one decoder above.
+    ///
+    /// The fixed sentences under `data/speech/` are a manifest too — the same
+    /// dates, the same keys, no birds — and reading them through a second
+    /// decoder is exactly the drift this type exists to prevent.
+    static func decode<Document: Decodable>(
+        _ type: Document.Type,
+        from data: Data,
+    ) throws -> Document {
+        try decoder.decode(type, from: data)
     }
 }

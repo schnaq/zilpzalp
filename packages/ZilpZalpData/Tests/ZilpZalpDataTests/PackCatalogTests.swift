@@ -1,7 +1,10 @@
 import CryptoKit
 import Foundation
 import Testing
-import ZilpZalpData
+
+// @testable for the internal initialiser: a pack lies in the bundle or in
+// Application Support, and the speech fixture below is neither.
+@testable import ZilpZalpData
 
 /// The Swift-side twin of `tools/license_gate.py`: the gate checks the pack in
 /// `data/packs`, this suite checks the copy that actually ships in the bundle.
@@ -60,8 +63,67 @@ struct PackCatalogTests {
         }
     }
 
+    /// The third medium, checked like the other two. Vacuous until the base
+    /// pack has been recorded (Task 4 of the recorded-speech plan) — and that
+    /// is the state it has to survive: with no clips the app speaks every
+    /// sentence through `AVSpeechSynthesizer` and nothing here fails.
+    @Test("every speech clip the bundled pack declares is in the bundle")
+    func resolvesEverySpeechClip() throws {
+        let catalog = try PackCatalog.bundled()
+
+        for bird in catalog.pack.birds {
+            for (sentence, clip) in bird.speech ?? [:] {
+                let url = try #require(
+                    catalog.speechURL(for: bird, sentence: sentence),
+                    "no file for '\(bird.id)' / '\(sentence)'",
+                )
+                let hex = try Self.sha256(of: url)
+
+                #expect(
+                    hex == clip.sha256,
+                    "'\(bird.id)' / '\(sentence)' does not match its sha256",
+                )
+            }
+        }
+    }
+
+    /// What the bundled pack cannot show while it has no clips: a sentence
+    /// that resolves, one that is declared but not on disk, and a species that
+    /// declares none at all. The clip is a real, silent `.m4a` — the rule that
+    /// nothing audible is committed unheard holds for fixtures too.
+    @Test("a speech clip resolves against the pack's own directory")
+    func resolvesSpeechFromAFixture() throws {
+        let catalog = try Self.speakingFixture()
+        let amsel = try #require(catalog.pack.birds.first { $0.id == "amsel" })
+        let silent = try #require(catalog.pack.birds.first { $0.id == "stumm" })
+
+        let url = try #require(catalog.speechURL(for: amsel, sentence: "quiz.prompt.whereIs"))
+        #expect(try Self.sha256(of: url) == amsel.speech?["quiz.prompt.whereIs"]?.sha256)
+        #expect(catalog.speechURL(for: amsel, sentence: "collection.name") == nil)
+        #expect(catalog.speechURL(for: silent, sentence: "quiz.prompt.whereIs") == nil)
+        // The licence of all of them, once, where the credits read it.
+        #expect(catalog.pack.voice?.license == .ccBy)
+        #expect(catalog.pack.voice?.attribution == "Stimme: Niemand")
+    }
+
+    /// A pack that speaks, from the test bundle rather than from `data/packs`.
+    private static func speakingFixture() throws -> PackCatalog {
+        let url = try #require(
+            Bundle.module.url(
+                forResource: "pack",
+                withExtension: "json",
+                subdirectory: "Fixtures/speech",
+            ),
+            "no Fixtures/speech/pack.json in the test bundle",
+        )
+        return try PackCatalog(
+            pack: PackManifest.decode(Data(contentsOf: url)),
+            directory: url.deletingLastPathComponent(),
+        )
+    }
+
     /// The lowercase hex SHA-256 of a file, spelled the way the manifest
-    /// records it — the one comparison both media checks above make.
+    /// records it — the one comparison every media check above makes.
     private static func sha256(of url: URL) throws -> String {
         let data = try Data(contentsOf: url)
         return SHA256.hash(data: data).map { String(format: "%02x", $0) }.joined()

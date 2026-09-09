@@ -1,3 +1,4 @@
+import Foundation
 import Testing
 import ZilpZalpData
 
@@ -44,6 +45,35 @@ struct CreditsTests {
         }
 
         #expect(entries.count == pack.birds.count + pack.birds.count(where: { $0.call != nil }))
+    }
+
+    /// The voices section, decoded from the shape `tools/generate_credits.py`
+    /// writes. Nothing in the repository has a voice yet, so without this a
+    /// renamed key would only be found once the first recording ships — and
+    /// then as a credits screen that decodes to nothing.
+    @Test("a voice decodes the way the generator writes it")
+    func decodesAVoice() throws {
+        let document = """
+        {
+          "media": [],
+          "voices": [
+            {
+              "attribution": "Stimme: Johanna",
+              "license": "CC-BY-4.0",
+              "sourceURL": "https://example.org/docs/sprachaufnahmen.md",
+              "usedIn": "Ansagen"
+            }
+          ],
+          "fonts": [],
+          "icons": []
+        }
+        """
+
+        let credits = try JSONDecoder().decode(Credits.self, from: Data(document.utf8))
+
+        #expect(credits.voices.map(\.attribution) == ["Stimme: Johanna"])
+        #expect(credits.voices.first?.license == .ccBy)
+        #expect(credits.voices.first?.usedIn == "Ansagen")
     }
 
     /// The fonts and Lucide are in no manifest — they come from the static

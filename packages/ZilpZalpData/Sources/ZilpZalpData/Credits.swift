@@ -41,6 +41,23 @@ public struct Credits: Codable, Sendable, Hashable {
         public let sourceURL: URL
     }
 
+    /// One voice and everything it spoke, credited.
+    ///
+    /// Not a ``Kind`` beside `photo` and `call`: a voice licenses every clip
+    /// of a manifest at once, so it is named once per pack and once for the
+    /// fixed sentences. Per-clip rows would be two hundred lines of one name.
+    public struct Voice: Codable, Sendable, Hashable {
+        /// Who spoke — "Stimme: Johanna". Never empty; CC BY and CC BY-SA
+        /// demand the name.
+        public let attribution: String
+        public let license: License
+        /// Where the recordings came from, for proof of origin.
+        public let sourceURL: URL
+        /// The pack's own title, or the fixed set's — what a parent reads,
+        /// never a directory name.
+        public let usedIn: String
+    }
+
     /// A vendored font family or icon set and the licence it ships under.
     ///
     /// One type for both: they carry the same four fields, and the difference
@@ -58,6 +75,9 @@ public struct Credits: Codable, Sendable, Hashable {
 
     /// Packs sorted by id, birds in manifest order, photo before call.
     public let media: [Media]
+    /// Packs sorted by id, the fixed sentences last. Empty until something has
+    /// been recorded.
+    public let voices: [Voice]
     public let fonts: [Vendored]
     public let icons: [Vendored]
 
