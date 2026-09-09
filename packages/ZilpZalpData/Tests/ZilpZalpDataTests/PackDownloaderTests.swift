@@ -72,18 +72,21 @@ struct PackDownloaderTests {
         }
     }
 
-    @Test("a file that does not match its digest fails, naming the file")
-    func rejectsAFileThatDoesNotMatch() async throws {
+    /// Once for a photo and once for a recorded sentence: a clip is verified
+    /// the way every other file is, so a pack cannot install a recording that
+    /// says something else than the manifest promised.
+    @Test("a file that does not match its digest fails, naming the file", arguments: [1, 3])
+    func rejectsAFileThatDoesNotMatch(medium: Int) async throws {
         let manifest = StubPack.manifest()
         let wrong = Data("ein anderer Vogel".utf8)
         var routes = StubPack.routes(manifest: manifest)
-        routes[StubPack.key(for: StubPack.media[1].file)] = StubBucket.Route(body: wrong)
+        routes[StubPack.key(for: StubPack.media[medium].file)] = StubBucket.Route(body: wrong)
 
         try await withDownloader(routes: routes) { downloader, home in
             let expected = PackDownloadError.hashMismatch(
                 packID: StubPack.id,
-                file: StubPack.media[1].file,
-                expected: StubPack.assets[1].sha256,
+                file: StubPack.media[medium].file,
+                expected: StubPack.assets[medium].sha256,
                 actual: StubPack.sha256(of: wrong),
             )
 
@@ -204,6 +207,52 @@ struct PackDownloaderTests {
 
             #expect(catalog.pack.id == StubPack.id)
             #expect(bytes == StubPack.media[0].bytes)
+        }
+    }
+
+    /// The point of #166: a downloaded pack speaks in the same voice as the
+    /// bundled one, which means the clip is fetched, verified and installed
+    /// where `speechURL(for:sentence:)` looks for it.
+    @Test("an installed pack resolves the sentences it has recorded")
+    func opensAnInstalledPacksSpeech() async throws {
+        let manifest = StubPack.manifest()
+        try await withDownloader(routes: StubPack.routes(manifest: manifest)) { downloader, _ in
+            try await downloader.download(StubPack.entry(manifest: manifest))
+
+            let catalog = try await downloader.catalog(for: StubPack.id)
+            let bird = try #require(catalog.pack.birds.first)
+            let clip = try #require(catalog.speechURL(for: bird, sentence: StubPack.sentence))
+
+            #expect(try Data(contentsOf: clip) == StubPack.media[3].bytes)
+            // Whoever is credited for the voice comes down with the pack.
+            #expect(catalog.pack.voice?.attribution == "Stimme: Niemand")
+            // A sentence the pack never recorded stays unresolved, and the app
+            // speaks it with AVSpeechSynthesizer instead (#151).
+            #expect(catalog.speechURL(for: bird, sentence: "roundEnd.title") == nil)
+        }
+    }
+
+    /// The same guard as for a photo, on the path a sentence key builds: a
+    /// clip lies one directory deeper than every other medium, so the check
+    /// has to hold there too.
+    @Test("a manifest naming a clip outside the pack is refused before it is fetched")
+    func refusesAClipOutsideThePack() async throws {
+        let escape = "../../escaped.m4a"
+        let manifest = StubPack.manifest(
+            amselSpeech: StubPack.Asset(file: escape, sha256: StubPack.assets[3].sha256),
+        )
+
+        try await withDownloader(routes: StubPack.routes(manifest: manifest)) { downloader, home in
+            let expected = PackDownloadError.invalidPath(packID: StubPack.id, path: escape)
+
+            await #expect(throws: expected) {
+                try await downloader.download(StubPack.entry(manifest: manifest))
+            }
+
+            // The manifest and the photo that precedes the clip, nothing after.
+            #expect(StubBucket.requests.count == 2)
+            #expect(!exists(home, "escaped.m4a"))
+            #expect(!exists(home, "Packs/escaped.m4a"))
         }
     }
 

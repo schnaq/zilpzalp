@@ -187,7 +187,9 @@ public actor PackDownloader {
     }
 
     /// Opens an installed pack, the way `PackCatalog.bundled()` opens the one
-    /// that ships with the app, so `photoURL(for:)` resolves its media too.
+    /// that ships with the app, so `photoURL(for:)`, `callURL(for:)` and
+    /// `speechURL(for:sentence:)` resolve its media too — a downloaded pack
+    /// speaks in the same voice as the bundled one.
     ///
     /// The only way to a downloaded pack's files: this actor owns the layout
     /// below `Packs/`, so no view ever assembles such a path itself.
@@ -262,13 +264,39 @@ public actor PackDownloader {
         return data
     }
 
-    /// Every medium a pack declares, photo before call, each file once: two
-    /// birds sharing a file would otherwise be fetched and counted twice.
-    private static func assets(of pack: Pack) -> [MediaAsset] {
+    /// Every file a pack declares — a bird's photo, its call and every
+    /// sentence recorded about it — each one once.
+    ///
+    /// Each file once because `tools/fetch_media/manifest.py` counts it once:
+    /// two birds sharing a photo, or two sentence keys naming the same clip,
+    /// would otherwise be fetched twice while `packs/index.json` sized them
+    /// once, and the progress would run past the total it is reported against.
+    ///
+    /// Photo, call, then the clips in sentence-key order — a dictionary's own
+    /// order is not stable, and a resumed download should walk the pack the
+    /// way the interrupted one did.
+    ///
+    /// Only the path and the digest, because that is all a download needs: a
+    /// clip carries neither licence nor attribution of its own — the voice
+    /// that spoke it does, once per manifest.
+    private static func assets(of pack: Pack) -> [(file: String, sha256: String)] {
         var seen: Set<String> = []
-        return pack.birds
-            .flatMap { [$0.photo, $0.call].compactMap(\.self) }
-            .filter { seen.insert($0.file).inserted }
+        var files: [(file: String, sha256: String)] = []
+
+        func declare(_ file: String, _ sha256: String) {
+            guard seen.insert(file).inserted else { return }
+            files.append((file: file, sha256: sha256))
+        }
+
+        for bird in pack.birds {
+            for medium in [bird.photo, bird.call].compactMap(\.self) {
+                declare(medium.file, medium.sha256)
+            }
+            for (_, clip) in (bird.speech ?? [:]).sorted(by: { $0.key < $1.key }) {
+                declare(clip.file, clip.sha256)
+            }
+        }
+        return files
     }
 
     private static func hexDigest(of data: Data) -> String {
