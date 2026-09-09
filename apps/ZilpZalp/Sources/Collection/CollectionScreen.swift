@@ -11,6 +11,11 @@ import ZilpZalpUI
 /// would never say what is still out there; the whole point of a sticker album
 /// is the gap.
 ///
+/// **A bird on its way shows how far it has come.** Under a locked sticker
+/// stand five markers, filled as often as the child has recognised that bird
+/// (#177) — so the album says "nearly" as well as "not yet", which is the
+/// difference between a gap and a goal.
+///
 /// Tapping a bird already collected says its name out loud, because the child
 /// this album is for cannot read the word under it. A locked one says nothing
 /// — its name is the thing still to be found.
@@ -21,6 +26,12 @@ struct CollectionScreen: View {
     private static let compactStickerSize: CGFloat = 80
     private static let stickerColumn: CGFloat = 168
     private static let compactStickerColumn: CGFloat = 88
+
+    /// The progress markers under a locked sticker, sized so that five of them
+    /// and their gaps stay inside the disc above: 104 pt under a 128 pt
+    /// sticker, 76 under an 80 pt one.
+    private static let markerSize: CGFloat = 16
+    private static let compactMarkerSize: CGFloat = 12
 
     /// The child whose album this is.
     let profile: Profile
@@ -162,8 +173,15 @@ struct CollectionScreen: View {
             .buttonStyle(.plain)
             .accessibilityLabel(bird.name)
         } else {
-            StickerCaption(caption: String(localized: "collection.locked"), earned: false) {
-                RewardSticker(image: photos[bird.id], locked: true, size: size)
+            VStack(spacing: ZSpacing.step2) {
+                StickerCaption(caption: String(localized: "collection.locked"), earned: false) {
+                    RewardSticker(image: photos[bird.id], locked: true, size: size)
+                }
+
+                StickerMarkers(
+                    count: profile.recognitions[bird.id, default: 0],
+                    markerSize: isCompact ? Self.compactMarkerSize : Self.markerSize,
+                )
             }
             .accessibilityElement(children: .combine)
         }

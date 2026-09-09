@@ -2,8 +2,9 @@ import SwiftUI
 import ZilpZalpData
 import ZilpZalpUI
 
-/// The end of a round: three stars, a bird to keep, and the way back into a
-/// new round. Screen 1d and `design/ui_kits/ipad_app/RewardScreen.jsx`.
+/// The end of a round: three stars, a bird on its way into the album, and the
+/// way back into a new round. Screen 1d and
+/// `design/ui_kits/ipad_app/RewardScreen.jsx`.
 ///
 /// **Celebration without competition.** The screen shows what was met and
 /// what was earned, and nothing else: no percentage, no error count, no time,
@@ -23,6 +24,12 @@ struct RoundEndScreen: View {
 
     /// The sticker on iPad, the 200 pt of screen 1e and `RewardScreen.jsx`.
     private static let regularSticker: CGFloat = 200
+
+    /// The progress markers under the sticker, sized against it: five of them
+    /// and their gaps measure about six markers across, and the row has to
+    /// stay narrower than the disc it belongs to.
+    private static let regularMarker: CGFloat = 24
+    private static let compactMarker: CGFloat = 20
 
     /// The strip at the foot that belongs to the wordmark, so the
     /// celebration is centred in what is left rather than behind it.
@@ -225,6 +232,8 @@ struct RoundEndScreen: View {
                     .typeStyle(isTight ? .body : .bodyLarge, .display, weight: .bold)
                     .foregroundStyle(ZColor.white)
 
+                markers
+
                 Text(verbatim: sticker.credit)
                     .typeStyle(.caption, .body, weight: .regular)
                     .foregroundStyle(ZColor.textOnColor)
@@ -234,6 +243,21 @@ struct RoundEndScreen: View {
         .scaleEffect(popped ? 1 : Self.popFromScale)
         .opacity(popped ? 1 : 0)
         .animation(pop, value: settled)
+    }
+
+    /// How far this bird has come towards its sticker, once the round is
+    /// written down: five markers, filled to the counter the write left
+    /// behind. Nothing at all until then — the screen makes no claim it
+    /// cannot back up, and a row that filled in a moment later would be a
+    /// second, quieter reward.
+    @ViewBuilder
+    private var markers: some View {
+        if let outcome {
+            StickerMarkers(
+                count: outcome.stickerProgress(for: result.celebratedSpecies),
+                markerSize: isTight ? Self.compactMarker : Self.regularMarker,
+            )
+        }
     }
 
     /// The pop belongs to a sticker just earned. A bird whose sticker is

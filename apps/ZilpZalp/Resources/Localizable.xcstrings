@@ -1009,6 +1009,18 @@
         }
       }
     },
+    "sticker.progress" : {
+      "comment" : "Read out for the row of markers under a bird, in the album and on the round end. %1$lld is how often the child has recognised it, %2$lld how often it takes to earn the sticker. Never shown as text — the audience cannot read",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld von %2$lld erkannt"
+          }
+        }
+      }
+    },
     "timeBudget.farewell" : {
       "comment" : "Line under the headline of the screen that closes the day",
       "extractionState" : "manual",
