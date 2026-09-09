@@ -94,33 +94,34 @@ final class QuizSession {
     private var answeredLastQuestion: Date?
 
     /// - Parameters:
-    ///   - catalog: The opened pack. Every species in it is a possible
+    ///   - library: The packs that opened. Every species in them is a possible
     ///     distractor; which of them a question can ask for depends on the game.
     ///   - game: Whether the question is the spoken name or the recorded call.
-    /// - Throws: `RoundError.insufficientSpecies` when the pack holds fewer
-    ///   than four species and a question therefore cannot be filled, or
-    ///   `RoundError.noSpeciesToAskFor` when game 2 is opened on a pack that
-    ///   carries no call at all. Neither is reachable from the home screen: the
+    /// - Throws: `RoundError.insufficientSpecies` when there are fewer than
+    ///   four species and a question therefore cannot be filled, or
+    ///   `RoundError.noSpeciesToAskFor` when game 2 is opened where nothing
+    ///   carries a call. Neither is reachable from the home screen: the
     ///   bundled pack has ten species, and ``AppModel/games`` offers game 2 only
     ///   where there are calls to ask with.
-    init(catalog: PackCatalog, game: Game) throws {
+    init(library: PackLibrary, game: Game) throws {
         self.game = game
-        let pack = catalog.pack
-        birds = Dictionary(uniqueKeysWithValues: pack.birds.map { ($0.id, $0) })
+        // Every species of every installed pack, in pack order.
+        let everySpecies = library.birds
+        birds = Dictionary(uniqueKeysWithValues: everySpecies.map { ($0.id, $0) })
         photos = Dictionary(
-            uniqueKeysWithValues: pack.birds.compactMap { bird in
-                catalog.photoURL(for: bird)
+            uniqueKeysWithValues: everySpecies.compactMap { bird in
+                library.photoURL(for: bird)
                     .flatMap { UIImage(contentsOfFile: $0.path(percentEncoded: false)) }
                     .map { (bird.id, Image(uiImage: $0)) }
             },
         )
         let recordings = Dictionary(
-            uniqueKeysWithValues: pack.birds.compactMap { bird in
-                catalog.callURL(for: bird).map { (bird.id, $0) }
+            uniqueKeysWithValues: everySpecies.compactMap { bird in
+                library.callURL(for: bird).map { (bird.id, $0) }
             },
         )
         calls = recordings
-        announcer = SpeechAnnouncer(pack: catalog)
+        announcer = SpeechAnnouncer(library: library)
 
         // The genus is the first word of the scientific name, and Core needs
         // nothing else of a bird: "Turdus merula" is a `Turdus`, and two of
@@ -130,7 +131,7 @@ final class QuizSession {
         // cannot be the answer there — its photo stays in as a distractor
         // (#31). The local `recordings` rather than the property: a closure in
         // an initialiser may not reach for `self` yet.
-        species = pack.birds.map { bird in
+        species = everySpecies.map { bird in
             let genus = bird.scientificName.split(separator: " ").first
             return QuizSpecies(
                 id: bird.id,

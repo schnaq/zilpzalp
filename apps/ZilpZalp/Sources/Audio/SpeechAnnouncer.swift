@@ -92,12 +92,12 @@ final class SpeechAnnouncer: NSObject {
     /// ``CallPlayer`` holds its recording.
     private var spokenClip: AVAudioPlayer?
 
-    /// - Parameter pack: The pack whose species sentences this announcer may
-    ///   play. `nil` on the screens that say nothing about a species — both
-    ///   profile screens, the gate, the rank ascent, "Zeit fürs Nest" — which
-    ///   is why it defaults to nothing.
-    init(pack: PackCatalog? = nil) {
-        clips = SpeechClips(pack: pack, fixed: Self.fixedSet)
+    /// - Parameter library: The packs whose species sentences this announcer
+    ///   may play. Empty on the screens that say nothing about a species —
+    ///   both profile screens, the gate, "Zeit fürs Nest" — which is why it
+    ///   defaults to nothing.
+    init(library: PackLibrary = .empty) {
+        clips = SpeechClips(library: library, fixed: Self.fixedSet)
         voice = SpeechVoice.forUtterance
         // `.default` covers both the compact voice and the case where there
         // was no voice to look at: today's rate is what the app has always

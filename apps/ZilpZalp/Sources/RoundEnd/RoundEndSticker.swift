@@ -24,20 +24,19 @@ struct RoundEndSticker {
     let image: Image?
     let credit: String
 
-    /// - Returns: `nil` when there is no pack, no species, or the pack does
-    ///   not know the id.
-    init?(species: String?, from catalog: PackCatalog?) {
+    /// - Returns: `nil` when there is no species, or no installed pack knows
+    ///   the id.
+    init?(species: String?, from library: PackLibrary) {
         guard
-            let catalog,
             let species,
-            let bird = catalog.pack.birds.first(where: { $0.id == species })
+            let bird = library.birds.first(where: { $0.id == species })
         else {
             return nil
         }
 
         name = bird.name
         praise = .firstFind(bird)
-        image = catalog.photoURL(for: bird)
+        image = library.photoURL(for: bird)
             .flatMap { UIImage(contentsOfFile: $0.path(percentEncoded: false)) }
             .map { Image(uiImage: $0) }
         credit = bird.creditLine

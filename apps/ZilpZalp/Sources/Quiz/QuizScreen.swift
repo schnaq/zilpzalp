@@ -34,7 +34,7 @@ struct QuizScreen: View {
     private static let tones: [ChoiceTile.Tone] = [.wald, .beeren, .rufe, .sumpf]
 
     let game: Game
-    let catalog: PackCatalog
+    let library: PackLibrary
     /// How often "Nochmal spielen" has sent a child back here; see
     /// ``RootView/roundsAskedFor``. Only ever compared with itself: what the
     /// screen acts on is the change, never the number.
@@ -377,7 +377,7 @@ struct QuizScreen: View {
     private func open() {
         if session == nil {
             do {
-                session = try QuizSession(catalog: catalog, game: game)
+                session = try QuizSession(library: library, game: game)
             } catch {
                 let reason = String(describing: error)
                 Logger.quiz.error("No round for \(game.title): \(reason, privacy: .public)")

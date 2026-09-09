@@ -9,11 +9,11 @@ import ZilpZalpData
 @MainActor
 @ViewBuilder
 private func quizPreview(_ sizeClass: UserInterfaceSizeClass) -> some View {
-    if let catalog = try? PackCatalog.bundled() {
+    if let library = try? PackLibrary.bundled() {
         NavigationStack {
             QuizScreen(
                 game: .names,
-                catalog: catalog,
+                library: library,
                 askedFor: 0,
                 recognitions: { [:] },
                 onFinished: { _ in },
