@@ -1,6 +1,5 @@
 import SwiftUI
 import UIKit
-import ZilpZalpCore
 import ZilpZalpData
 import ZilpZalpUI
 
@@ -19,19 +18,6 @@ import ZilpZalpUI
 /// ``AppModel/record(_:)`` before it says anything about it, and every claim
 /// it makes — a first find, a new rank — is read off the profile written.
 struct RoundEndScreen: View {
-    /// How far a star rises, from `zz-bob` in `design/guidelines/motion.css`.
-    private static let bobHeight: CGFloat = 8
-
-    /// One bob, out and back. No `ZMotion` duration covers it — the tokens
-    /// stop at 900 ms because they time reactions, and this is idle life — so
-    /// it is the 1.4 s of screen 1d. Halved where it is used: SwiftUI counts
-    /// one leg, the autoreverse gives back the other.
-    private static let bobPeriod: TimeInterval = 1.4
-
-    /// How far apart the three stars start bobbing, again from screen 1d.
-    /// Together they read as a wave rather than as one blinking row.
-    private static let bobStagger: TimeInterval = 0.15
-
     /// Where `zz-pop` starts the sticker: a little under full size rather than
     /// at nothing, so it lands instead of exploding.
     private static let popFromScale: CGFloat = 0.6
@@ -48,11 +34,6 @@ struct RoundEndScreen: View {
     /// be said, short enough to still read as one moment. A judgement call
     /// rather than a token — 1e replaces this screen in the design.
     private static let ascentDelay: TimeInterval = 2.2
-
-    /// A star that has not been earned: hollow, and olive rather than sun —
-    /// dark enough against the forest ground to stay unlit, light enough to
-    /// stay a star. What is missing is shown, as a locked ``RewardSticker`` is.
-    private static let unlitStar = ZColor.olive600
 
     /// What the round earned. Comes from ``QuizSession`` through
     /// ``Route/roundEnd(_:)``; nothing here recomputes it.
@@ -126,12 +107,6 @@ struct RoundEndScreen: View {
         isCompact || isShort
     }
 
-    /// True while the stars are up. Never true with Reduce Motion on, so they
-    /// rest where they are drawn rather than 8 pt above it.
-    private var bobbing: Bool {
-        settled && !reduceMotion
-    }
-
     var body: some View {
         celebration
             .multilineTextAlignment(.center)
@@ -186,18 +161,9 @@ struct RoundEndScreen: View {
         }
     }
 
-    /// The three stars, bobbing: earned ones filled, the rest hollow (#149).
-    /// Hidden from VoiceOver because ``praise`` says the same right underneath.
+    /// The three stars, bobbing — see ``RoundEndStars``.
     private var stars: some View {
-        HStack(spacing: ZSpacing.step3) {
-            ForEach(0 ..< Scoring.maximumStars, id: \.self) { position in
-                Icon(position < result.stars ? .starFilled : .star, size: .custom(starSize))
-                    .foregroundStyle(position < result.stars ? ZColor.reward : Self.unlitStar)
-                    .offset(y: bobbing ? -Self.bobHeight : 0)
-                    .animation(bob(delayedBy: Double(position) * Self.bobStagger), value: bobbing)
-            }
-        }
-        .accessibilityHidden(true)
+        RoundEndStars(earned: result.stars, size: starSize, raised: settled)
     }
 
     private var praise: some View {
@@ -337,15 +303,6 @@ struct RoundEndScreen: View {
 
     private var starSize: CGFloat {
         isTight ? ZSpacing.step7 : ZSpacing.step8
-    }
-
-    /// One bob, forever, offset so the three stars travel as a wave. Reduce
-    /// Motion gets no animation, and without one nothing moves.
-    private func bob(delayedBy delay: TimeInterval) -> Animation? {
-        guard !reduceMotion else { return nil }
-        return ZMotion.easeInOut.animation(duration: Self.bobPeriod / 2)
-            .repeatForever(autoreverses: true)
-            .delay(delay)
     }
 
     /// `zz-pop`: the sticker bounces in over `--dur-celebrate`. Reduce Motion
