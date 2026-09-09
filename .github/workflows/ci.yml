@@ -1,9 +1,16 @@
 name: CI
 
+# apps/web is the website and holds no Swift. A change confined to it would
+# otherwise occupy the macOS runner for the whole Xcode pipeline and — because
+# testflight.yml runs after a successful CI on main — ship a TestFlight build
+# for a typo in a legal page. web.yml checks that directory instead. `main` is
+# not a protected branch, so no required status check goes missing here.
 on:
   push:
     branches: [main]
+    paths-ignore: ['apps/web/**']
   pull_request:
+    paths-ignore: ['apps/web/**']
 
 # A new push to a pull request cancels the run still in flight for that ref.
 concurrency:

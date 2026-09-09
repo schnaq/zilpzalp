@@ -14,6 +14,9 @@ excluded:
   - "**/.build"
   - "**/DerivedData"
   - "**/*.xcodeproj"
+  # Die Website in apps/web enthält keinen Swift-Code, aber node_modules.
+  # Ohne diesen Ausschluss durchsucht SwiftLint zehntausende Dateien umsonst.
+  - "apps/web"
 
 disabled_rules:
   # SwiftFormat-Regel `trailingCommas` setzt in mehrzeiligen Literalen ein

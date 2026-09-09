@@ -30,6 +30,7 @@ Bestandsschutz: der Spec, die vorhandenen deutschen Dateien unter `docs/` und di
 | Bereich | Pfad | Zweck |
 |---|---|---|
 | App-Target | `apps/ZilpZalp/` | Xcode-Projekt, Assets, Info.plist, Entitlements |
+| Website | `apps/web/` | Landing page and legal pages, Next.js on Vercel — German copy, English code |
 | Spiellogik | `packages/ZilpZalpCore/` | Runden, Scoring, Ränge, Zeitbudget — ohne UI, ohne I/O |
 | Daten | `packages/ZilpZalpData/` | Modelle, Paket-Manifeste, Persistenz, Downloader |
 | Design-System | `packages/ZilpZalpUI/` | Tokens und SwiftUI-Komponenten |
@@ -61,7 +62,15 @@ mise run build      App bauen
 mise run archive    App für den App Store archivieren, ohne Signatur
 mise run upload     Dieses Archiv signieren und zu TestFlight schicken
 mise run fetch-media  Medien kuratieren und nach S3 laden
+mise run web:install  Abhängigkeiten der Website installieren (bun, apps/web)
+mise run web:dev      Website lokal servieren
+mise run web:build    Website bauen — derselbe Build wie in CI und auf Vercel
 ```
+
+Die Website hat ihren eigenen Workflow (`.github/workflows/web.yml`); `ci.yml`
+ignoriert `apps/web/**`, damit eine Textänderung an einer Rechtsseite weder den
+macOS-Runner belegt noch einen TestFlight-Build auslöst. Umgekehrt fasst
+`mise run check` `apps/web` nicht an.
 
 Das `.xcodeproj` ist nicht eingecheckt. Vor dem Öffnen in Xcode `mise run generate`; ein von Hand in Xcode angelegtes Projekt kennt die Quelldateien nicht. Das Signing-Team (schnaq GmbH) steht in `project.yml` — im Signing-Tab von Xcode nichts umstellen, jedes Generieren stellt `project.yml` wieder her.
 

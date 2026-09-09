@@ -12,8 +12,10 @@
 --min-version 0.62.1
 
 # `mise run check` übergibt zwar nur apps und packages, aber genau dort
-# entstehen .build und das von XcodeGen erzeugte Projekt.
---exclude **/.build,**/DerivedData,**/*.xcodeproj
+# entstehen .build und das von XcodeGen erzeugte Projekt. apps/web ist die
+# Website: kein Swift, dafür node_modules — ohne Ausschluss läuft SwiftFormat
+# durch zehntausende Dateien umsonst.
+--exclude **/.build,**/DerivedData,**/*.xcodeproj,apps/web
 
 --indent 4
 
