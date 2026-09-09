@@ -56,6 +56,10 @@ struct RootView: View {
                             playAgain: playAnotherRound,
                             openCollection: { path.append(.collection) },
                             showAscent: { path.append(.rankAscent($0)) },
+                            // All the way home, as "Zeit fürs Nest" goes:
+                            // under this screen is the round it celebrates,
+                            // and that is not a way out of it (#175).
+                            goHome: { path.removeAll() },
                         )
                     case .parents: ParentsScreen(parental: model.parental)
                     case .collection: collection

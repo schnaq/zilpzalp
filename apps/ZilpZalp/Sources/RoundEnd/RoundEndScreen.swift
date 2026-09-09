@@ -17,13 +17,6 @@ import ZilpZalpUI
 /// ``AppModel/record(_:)`` before it says anything about it, and every claim
 /// it makes — a first find, a new rank — is read off the profile written.
 struct RoundEndScreen: View {
-    /// Where `zz-pop` starts the sticker: a little under full size rather than
-    /// at nothing, so it lands instead of exploding.
-    private static let popFromScale: CGFloat = 0.6
-
-    /// The sticker on iPad, the 200 pt of screen 1e and `RewardScreen.jsx`.
-    private static let regularSticker: CGFloat = 200
-
     /// The strip at the foot that belongs to the wordmark, so the
     /// celebration is centred in what is left rather than behind it.
     private static let signatureBand = Wordmark.minimumSize + 2 * ZSpacing.step5
@@ -56,15 +49,19 @@ struct RoundEndScreen: View {
     let openCollection: () -> Void
     let showAscent: (RankAscent) -> Void
 
+    /// Out of the celebration and all the way home — see ``RoundEndHomeDoor``.
+    let goHome: () -> Void
+
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(\.verticalSizeClass) private var verticalSizeClass
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
-    /// Flipped once on appearance to start the bob and the pop.
+    /// Flipped once the round is written down: the stars take off, the
+    /// sticker pops in, and the way home opens.
     ///
-    /// With Reduce Motion on the pop is `nil`, so the flip only puts the
-    /// sticker at full size: nothing moves, and nothing is left half-drawn.
-    /// The stars keep that promise themselves — see ``RoundEndStars``.
+    /// It carries all three because it is one fact — ``celebrate()`` sets it
+    /// the moment `record` has answered and the screen is still there. Reduce
+    /// Motion is each animation's own business, so nothing here is left
+    /// half-drawn; see ``RoundEndStars`` and ``RoundEndReward``.
     @State private var settled = false
 
     /// The bird on the sticker, resolved once: a `View` is built again on
@@ -147,11 +144,18 @@ struct RoundEndScreen: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(ZColor.surfaceForest)
             .overlay(alignment: .bottom) { signature }
-            // No `TopBar`: screen 1d has none, and a finished round is
-            // nothing to go back into — "Nochmal spielen" is the way on. The
-            // bar is hidden like everywhere else in this app, and the swipe
-            // from the edge is turned down in so many words rather than left
-            // to follow from that (#150).
+            // The way out, in the corner the centred celebration leaves empty
+            // — see ``RoundEndHomeDoor``. An overlay rather than a third
+            // button under the two: this screen does not scroll, and a third
+            // pill would be the one a 375 pt phone runs out of height for.
+            .overlay(alignment: .topLeading) {
+                RoundEndHomeDoor(isBooked: settled, goHome: goHome)
+            }
+            // Still no `TopBar`: screen 1d has none, and a finished round is
+            // nothing to go *back* into — the house above leads out of the
+            // stack, not one screen back. The bar is hidden like everywhere
+            // else in this app, and the swipe from the edge stays turned down
+            // in so many words: it follows a chevron, and there is none (#150).
             .toolbar(.hidden, for: .navigationBar)
             .swipesBack(.disabled)
             // A `Task` rather than `onAppear`: the round is written down
@@ -216,43 +220,15 @@ struct RoundEndScreen: View {
         }
     }
 
-    /// The bird this round was about, arriving with `zz-pop`.
-    ///
-    /// The name and the credit are drawn here rather than passed into
-    /// ``RewardSticker``, which would otherwise set both inside its disc:
-    /// its caption is `--text-strong` and disappears into the forest ground,
-    /// and its credit strip is clipped away at the left and right of the
-    /// circle — where a CC BY photographer's name must not be. Both are the
-    /// component's to fix (#11); until then this screen keeps its attribution
-    /// whole and legible.
+    /// The bird this round was about, arriving with `zz-pop` — see
+    /// ``RoundEndReward``.
     private var reward: some View {
-        VStack(spacing: ZSpacing.step2) {
-            RewardSticker(
-                image: sticker?.image,
-                size: isTight ? RewardSticker.defaultSize : Self.regularSticker,
-            )
-
-            if let sticker {
-                Text(verbatim: caption(for: sticker))
-                    .typeStyle(isTight ? .body : .bodyLarge, .display, weight: .bold)
-                    .foregroundStyle(ZColor.white)
-
-                Text(verbatim: sticker.credit)
-                    .typeStyle(.caption, .body, weight: .regular)
-                    .foregroundStyle(ZColor.textOnColor)
-            }
-        }
-        .accessibilityElement(children: .combine)
-        .scaleEffect(popped ? 1 : Self.popFromScale)
-        .opacity(popped ? 1 : 0)
-        .animation(pop, value: settled)
-    }
-
-    /// The pop belongs to a bird met for the first time. One already in the
-    /// album is simply there: still shown, still named, but the arrival is
-    /// the reward for finding something new.
-    private var popped: Bool {
-        settled || !isFirstFind
+        RoundEndReward(
+            sticker: sticker,
+            isFirstFind: isFirstFind,
+            isTight: isTight,
+            settled: settled,
+        )
     }
 
     /// The way on first, the album second (#119): a child who can read
@@ -326,12 +302,6 @@ struct RoundEndScreen: View {
         outcome?.isFirstFind(of: result.celebratedSpecies) ?? false
     }
 
-    /// "Amsel gesammelt" for a first find, the bare name otherwise.
-    private func caption(for sticker: RoundEndSticker) -> String {
-        guard isFirstFind else { return sticker.name }
-        return String(format: String(localized: "roundEnd.sticker.new"), sticker.name)
-    }
-
     /// The one sentence this screen says out loud, for the child who cannot
     /// read it. A first find gets its own, so the news is heard as well.
     private var spokenPraise: String {
@@ -341,12 +311,6 @@ struct RoundEndScreen: View {
 
     private var starSize: CGFloat {
         isTight ? ZSpacing.step7 : ZSpacing.step8
-    }
-
-    /// `zz-pop`: the sticker bounces in over `--dur-celebrate`. Reduce Motion
-    /// gets none, and the sticker is at full size from the first frame.
-    private var pop: Animation? {
-        reduceMotion ? nil : ZMotion.easeBounce.animation(duration: ZMotion.celebrate)
     }
 
     // MARK: - Behaviour
