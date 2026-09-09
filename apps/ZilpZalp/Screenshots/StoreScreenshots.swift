@@ -8,8 +8,11 @@ import XCTest
 /// `mise run screenshots` names — raw captures of the whole screen, no device
 /// frames and no captions.
 ///
-/// **No part of `mise run check` or of CI.** It wants a booted simulator and
-/// takes minutes, and neither belongs in a gate that runs on every commit.
+/// **Nothing builds or runs it but `mise run screenshots`** — not the
+/// `ZilpZalp` scheme, not `mise run check`, not CI. It wants a booted
+/// simulator and takes minutes, and neither belongs in a gate that runs on
+/// every commit. The source is still formatted and linted with the rest of
+/// `apps/`, which is a different thing and a good one.
 ///
 /// **It never touches the profiles on the machine it runs on.** The app is
 /// launched with `-screenshots` and then keeps its child, its stars and the
@@ -24,10 +27,12 @@ final class StoreScreenshots: XCTestCase {
     /// `TEST_RUNNER_`-prefixed variable to the runner with the prefix off.
     private static let outputVariable = "SCREENSHOT_DIR"
 
-    /// The prefixes `QuizIdentifier` writes, spelled a second time because a
-    /// UI test runs in its own process and links nothing of the app.
-    private static let questionPrefix = "quiz.question."
-    private static let tilePrefix = "quiz.tile."
+    /// What a question identifier reads before the species it asks for — and
+    /// on its own, what one with nothing left to ask reads. Taken from
+    /// `QuizIdentifier` itself, which `project.yml` compiles into this target
+    /// as well: a rename there is then a compile error here rather than a
+    /// question that never turns up.
+    private static let questionPrefix = QuizIdentifier.question(nil)
 
     /// German, because the app is: these are the words on the things a child
     /// taps, and the app is built to be localisable but ships in one language.
@@ -44,10 +49,16 @@ final class StoreScreenshots: XCTestCase {
     /// simulator that has just been booted is slower than anything else here.
     private static let arrival: TimeInterval = 60
 
-    /// What a screen is given to come to rest before it is captured. The
-    /// slowest thing any of the five does is the round end, which writes the
-    /// round down before it says anything about it and then pops the sticker
-    /// in over `--dur-celebrate`.
+    /// How often the question is read while waiting for it to change.
+    private static let poll: TimeInterval = 0.1
+
+    /// What a screen is given to come to rest before it is captured.
+    ///
+    /// Every capture gets it, not only the round end that needs the most:
+    /// an element existing is not the same as its photos being drawn, and
+    /// four of the five screens are mostly photographs. Fifteen seconds
+    /// across a run this task is measured in minutes is the cheapest
+    /// insurance here against a picture of a half-drawn screen.
     private static let settling: TimeInterval = 1.5
 
     override func setUp() {
@@ -100,14 +111,7 @@ final class StoreScreenshots: XCTestCase {
 
     /// 2 and 4: game 1's question, and the end of the round it opens.
     private func captureNamesAndItsRoundEnd(_ app: XCUIApplication, into output: URL) {
-        launch(app)
-
-        XCTAssertTrue(app.buttons[Self.gameNames].waitForExistence(timeout: Self.arrival))
-        app.buttons[Self.gameNames].tap()
-
-        guard let asked = waitForQuestion(app) else {
-            return XCTFail("Game 1 put no question")
-        }
+        guard let asked = openGame(app, Self.gameNames) else { return }
         capture("02-names", into: output)
 
         answerCorrectly(app, startingWith: asked)
@@ -117,42 +121,66 @@ final class StoreScreenshots: XCTestCase {
 
     /// 3: game 2's question, with the sound button that puts it again.
     private func captureCalls(_ app: XCUIApplication, into output: URL) {
-        launch(app)
-
-        XCTAssertTrue(app.buttons[Self.gameCalls].waitForExistence(timeout: Self.arrival))
-        app.buttons[Self.gameCalls].tap()
-
-        XCTAssertNotNil(waitForQuestion(app), "Game 2 put no question")
+        guard openGame(app, Self.gameCalls) != nil else { return }
         capture("03-calls", into: output)
     }
 
     // MARK: - Playing a round
 
-    /// Answers every question of the round right at the first attempt.
+    /// Launches the app, opens the game whose tile reads `title`, and waits
+    /// for its first question.
     ///
-    /// Waits for the question to change rather than for a fixed pause: an
-    /// answered question stays up for `--dur-celebrate` before the round moves
-    /// on, and a second tap on the same species is ignored — so a loop that
-    /// only slept would answer the first question ten times over.
+    /// - Returns: the species that question asks for, or `nil` — having
+    ///   already failed the test — when no question turned up.
+    private func openGame(_ app: XCUIApplication, _ title: String) -> String? {
+        launch(app)
+
+        XCTAssertTrue(app.buttons[title].waitForExistence(timeout: Self.arrival))
+        app.buttons[title].tap()
+
+        let asked = waitForQuestion(app, after: nil)
+        XCTAssertNotNil(asked, "\(title) put no question")
+        return asked
+    }
+
+    /// Answers every question of the round right at the first attempt, which
+    /// is what a three-star round is.
+    ///
+    /// Each answer waits for the question to change rather than for a fixed
+    /// pause: an answered question stays up for `--dur-celebrate` before the
+    /// round moves on, and a second tap on the same species is ignored — so a
+    /// loop that only slept would answer the first question ten times over.
     private func answerCorrectly(_ app: XCUIApplication, startingWith first: String) {
         var asked: String? = first
         for _ in 0 ..< Self.questionsInARound {
             guard let species = asked else { return }
-            app.buttons[Self.tilePrefix + species].tap()
-            XCTAssertTrue(
-                waitUntil { self.askedSpecies(app) != species },
-                "The round did not move on from \(species)",
-            )
-            asked = askedSpecies(app)
+            app.buttons[QuizIdentifier.tile(species)].tap()
+            asked = waitForQuestion(app, after: species)
+            // Without this the loop would tap the same tile again, and again,
+            // each time waiting out the whole of `arrival`. `setUp` turns the
+            // first failure into the end of the run.
+            XCTAssertNotEqual(asked, species, "The round did not move on from \(species)")
         }
     }
 
-    /// The species the question asks for, once one is up.
-    private func waitForQuestion(_ app: XCUIApplication) -> String? {
-        var species: String?
-        _ = waitUntil(timeout: Self.arrival) {
-            species = self.askedSpecies(app)
-            return species != nil
+    /// The species the question asks for, once it is one other than
+    /// `previous`.
+    ///
+    /// `nil` is "no question up", which is where a round both starts and
+    /// ends — so waiting for the question to *change* covers the first one
+    /// arriving and the last one being answered under a single rule, and
+    /// neither has to be told apart from the other.
+    ///
+    /// Polled rather than expected: `XCTNSPredicateExpectation` watches one
+    /// element, and which element carries the question changes with the
+    /// question. The value that ends the wait is the value handed back, so
+    /// there is one query per poll and no second one that could disagree.
+    private func waitForQuestion(_ app: XCUIApplication, after previous: String?) -> String? {
+        let deadline = Date().addingTimeInterval(Self.arrival)
+        var species = askedSpecies(app)
+        while species == previous, Date() < deadline {
+            Thread.sleep(forTimeInterval: Self.poll)
+            species = askedSpecies(app)
         }
         return species
     }
@@ -181,28 +209,13 @@ final class StoreScreenshots: XCTestCase {
     /// Writes the screen as it stands to `<output>/<name>.png`.
     ///
     /// `XCUIScreen` and not `XCUIApplication`: the app's own screenshot is its
-    /// window, and the store wants the whole screen with its status bar. The
-    /// alpha channel every simulator capture carries is taken out afterwards
-    /// by `tools/strip_alpha.py` — App Store Connect refuses an RGBA PNG.
+    /// window, and the store wants the whole screen with its status bar. What
+    /// the store then insists on — the exact pixel size, and no alpha channel
+    /// — is `tools/finish_screenshots.py`'s to check once the run is over.
     private func capture(_ name: String, into output: URL) {
         Thread.sleep(forTimeInterval: Self.settling)
         let file = output.appending(path: "\(name).png")
         XCTAssertNoThrow(try XCUIScreen.main.screenshot().pngRepresentation.write(to: file))
-    }
-
-    /// Polls until `condition` holds or the wait runs out.
-    ///
-    /// XCTest's own expectations watch one element; what a round waits for is
-    /// the question changing from one species to another, and that is a query.
-    private func waitUntil(timeout: TimeInterval = 20, _ condition: () -> Bool) -> Bool {
-        let deadline = Date().addingTimeInterval(timeout)
-        while Date() < deadline {
-            if condition() {
-                return true
-            }
-            Thread.sleep(forTimeInterval: 0.1)
-        }
-        return condition()
     }
 
     /// The directory the pictures are written to, created if it is not there.

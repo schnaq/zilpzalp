@@ -243,7 +243,9 @@ trap 'if [ -n "$device" ]; then xcrun simctl status_bar "$device" clear || true;
 # iPhone at 1320x2868 and the 13" iPad at 2064x2752, both portrait. By name
 # rather than by udid — a udid belongs to one machine, and simctl takes a
 # device name wherever it takes a device. Read on fd 3 so that xcodebuild,
-# which reads standard input, cannot swallow the list it is looping over.
+# which reads standard input, cannot swallow the list it is looping over. A
+# shell array would sidestep that without a second descriptor and is what this
+# would be in bash; mise runs a task through `sh -c`, where there are none.
 while IFS="|" read -r slug device width height <&3; do
   echo "── $device"
 
