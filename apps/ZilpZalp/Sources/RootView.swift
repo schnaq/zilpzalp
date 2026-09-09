@@ -42,8 +42,8 @@ struct RootView: View {
                     switch route {
                     case let .quiz(game): quiz(game)
                     // "Nochmal spielen" pops back to the quiz screen still
-                    // under this one. What deals the fresh round there is
-                    // `roundsAskedFor`, never the pop on its own — see there.
+                    // under this one. What makes sure a fresh round is dealt
+                    // there is `roundsAskedFor` — see there.
                     // The catalog travels with the result: the round end
                     // draws a sticker of one of the round's species, and a
                     // `RoundResult` on a navigation path can carry the id but
