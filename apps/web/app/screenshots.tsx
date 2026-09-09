@@ -34,7 +34,7 @@ const SHOTS = [
   {
     file: '05-sammlung.png',
     title: 'Sammlung',
-    text: 'Fünfmal erkannt — dann klebt der Sticker in der Sammlung.',
+    text: 'Fünfmal auf Anhieb erkannt — dann klebt der Sticker hier.',
     alt: 'Die Sammlung mit den Stickern der schon erkannten Vögel.',
   },
 ]

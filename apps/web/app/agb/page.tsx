@@ -34,7 +34,7 @@ export default function AGB() {
         <li>zwei Spiele, in denen ein vorgelesener Name oder eine Vogelstimme dem richtigen von vier Fotos zugeordnet wird</li>
         <li>zehn heimische Vogelarten, die mit der App ausgeliefert werden</li>
         <li>mehrere lokale Profile mit Namen und Vogel-Avatar</li>
-        <li>Sterne pro Runde und eine Sammlung, in die ein Vogel als Sticker wandert, sobald ein Kind ihn fünfmal erkannt hat</li>
+        <li>Sterne pro Runde und eine Sammlung, in die ein Vogel als Sticker wandert, sobald ein Kind ihn fünfmal auf Anhieb erkannt hat</li>
         <li>einen Elternbereich hinter der Geräteauthentifizierung mit einer einstellbaren täglichen Spielzeit</li>
         <li>die Möglichkeit, weitere Artenpakete zu laden</li>
       </ul>
