@@ -37,13 +37,16 @@ struct RoundEndScreen: View {
     /// in the bundled Baloo 2 ExtraBold (CoreText), so 343.2 pt at 48 pt.
     /// A 390 pt phone leaves 342 pt between the screen's two `--space-5`
     /// paddings: 1.2 pt short, and that is the whole of #137 — the 402 pt
-    /// iPhone 17 has 354 pt and shows the line whole. SwiftUI does not wrap
-    /// it there. A `VStack` hands a `Text` its ideal height, which is one
-    /// line, and a line that then does not fit is truncated rather than
-    /// broken; the screenshot in #137 is a tail ellipsis, not two lines.
+    /// iPhone 17 has 354 pt and shows the line whole. SwiftUI truncates it
+    /// there rather than wrapping it: the column hands the line the ideal
+    /// height it asks for, and that is one line's. It *can* wrap — measured,
+    /// a `.fixedSize(horizontal: false, vertical: true)` on the same `Text`
+    /// puts "gemacht!" on a second line — but two headlines push the sticker
+    /// and both buttons down, and screen 1d draws one.
     ///
-    /// What the guard actually spends: 0.997 at 390 pt, 0.953 at the 375 pt
-    /// of an iPhone SE — 45.7 pt, a difference no one sees — and 0.79 at the
+    /// Spelled from the two steps a phone uses, because a phone is where the
+    /// room runs out. What it actually spends: 0.997 at 390 pt, 0.953 at the
+    /// 375 pt of an iPhone SE — 45.7 pt, a difference no one sees — and 0.79 at the
     /// narrowest compact width the app can meet at all, an iPad in Slide Over
     /// at 320 pt. The iPad itself never engages it: `--text-hero` asks for
     /// 629.1 pt and the narrowest iPad in portrait, the mini's 744, leaves
@@ -198,6 +201,12 @@ struct RoundEndScreen: View {
                 // ``titleScaleFloor``. The praise is the one sentence a child
                 // who cannot read is meant to have read out to them, and a
                 // headline that ends in an ellipsis is not that sentence.
+                //
+                // Deliberately not `typeStyle(singleLine:)`, which would put
+                // the line in the design's box: `--lh-display-2` is 52.8 pt
+                // against Baloo 2's own 76.9 pt, and the celebration under it
+                // would move up by the difference. The same choice, and the
+                // same two modifiers, as ``TopBarTitle``.
                 .lineLimit(1)
                 .minimumScaleFactor(Self.titleScaleFloor)
                 .foregroundStyle(ZColor.white)
