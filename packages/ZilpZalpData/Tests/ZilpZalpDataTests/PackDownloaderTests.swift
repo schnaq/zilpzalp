@@ -241,13 +241,13 @@ struct PackDownloaderTests {
     @Test(
         "a manifest naming a path outside the pack is refused before it is fetched",
         arguments: [
-            (escape: "../../escaped.png", requests: 1),
-            (escape: "../../evil.m4a", requests: 2),
+            (escape: "../../escaped.png", spoken: false, requests: 1),
+            (escape: "../../evil.m4a", spoken: true, requests: 2),
         ],
     )
-    func refusesAPathOutsideThePack(escape: String, requests: Int) async throws {
+    func refusesAPathOutsideThePack(escape: String, spoken: Bool, requests: Int) async throws {
         let asset = StubPack.Asset(file: escape, sha256: StubPack.assets[0].sha256)
-        let manifest = escape.hasSuffix(".m4a")
+        let manifest = spoken
             ? StubPack.manifest(amselSpeech: asset)
             : StubPack.manifest(amselPhoto: asset)
 

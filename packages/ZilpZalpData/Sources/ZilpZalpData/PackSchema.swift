@@ -112,6 +112,29 @@ public struct Bird: Codable, Sendable, Hashable, Identifiable {
     public let speech: [String: MediaClip]?
 }
 
+extension Bird {
+    /// Every file this species declares — its photo, its call and every
+    /// sentence recorded about it — with the digest each has to hash to.
+    ///
+    /// Beside the fields rather than beside the downloader, and for the reason
+    /// #166 exists: #163 taught the schema `speech` and taught
+    /// `media_files()` in `tools/fetch_media/manifest.py` to upload it, but
+    /// the enumeration a file away in ``PackDownloader`` was not touched, so a
+    /// downloaded pack would have installed without its recordings. A medium
+    /// added here is a medium the download fetches.
+    ///
+    /// Photo, call, then the clips in sentence-key order: a dictionary's own
+    /// order is not stable, and a resumed download should walk a pack the way
+    /// the interrupted one did. Path and digest and no more, because that is
+    /// all a download needs — a clip carries no licence of its own, the voice
+    /// that spoke it does, once per manifest.
+    var declaredFiles: [(file: String, sha256: String)] {
+        [photo, call].compactMap(\.self).map { (file: $0.file, sha256: $0.sha256) }
+            + (speech ?? [:]).sorted { $0.key < $1.key }
+            .map { (file: $0.value.file, sha256: $0.value.sha256) }
+    }
+}
+
 /// A pack of species, the unit that is bundled or downloaded.
 public struct Pack: Codable, Sendable, Hashable, Identifiable {
     /// Stable, lowercase identifier such as `basis`, and the name of the

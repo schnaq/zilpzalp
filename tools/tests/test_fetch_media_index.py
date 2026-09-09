@@ -112,11 +112,11 @@ class PacksTestCase(unittest.TestCase):
                 document,
                 bird,
                 "collection.name",
-                {
-                    "file": f"speech/collection.name/{bird}.m4a",
-                    "sha256": manifest.sha256_of(clip),
-                    "text": bird.capitalize(),
-                },
+                manifest.speech_block(
+                    file=f"speech/collection.name/{bird}.m4a",
+                    sha256=manifest.sha256_of(clip),
+                    text=bird.capitalize(),
+                ),
             )
 
     def manifest_size(self, pack_id: str) -> int:

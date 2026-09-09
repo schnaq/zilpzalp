@@ -263,29 +263,16 @@ public actor PackDownloader {
         return data
     }
 
-    /// Every file a pack declares — a bird's photo, its call and every
-    /// sentence recorded about it — each one once, with the digest it has to
-    /// hash to. A clip carries no licence of its own; the voice that spoke it
-    /// does, once per manifest, so path and digest are all a download needs.
+    /// Every file the pack declares, each one once.
     ///
-    /// Each file once because `media_files()` in
-    /// `tools/fetch_media/manifest.py` uploads and sizes it once: a file two
-    /// birds or two sentence keys share, fetched twice, would run the progress
-    /// past the total the index promised.
-    ///
-    /// Photo, call, then the clips in sentence-key order: a dictionary's own
-    /// order is not stable, and a resumed download should walk the pack the
-    /// way the interrupted one did.
+    /// What a species declares is ``Bird/declaredFiles``, which lies beside
+    /// the schema so that a medium added there is a medium this fetches. Once
+    /// per file because `media_files()` in `tools/fetch_media/manifest.py`
+    /// uploads and sizes it once: a file two birds or two sentence keys share,
+    /// fetched twice, would run the progress past the index's total.
     private static func assets(of pack: Pack) -> [(file: String, sha256: String)] {
         var seen: Set<String> = []
-        return pack.birds
-            .flatMap { bird in
-                let media = [bird.photo, bird.call].compactMap(\.self)
-                let clips = (bird.speech ?? [:]).sorted { $0.key < $1.key }.map(\.value)
-                return media.map { (file: $0.file, sha256: $0.sha256) }
-                    + clips.map { (file: $0.file, sha256: $0.sha256) }
-            }
-            .filter { seen.insert($0.file).inserted }
+        return pack.birds.flatMap(\.declaredFiles).filter { seen.insert($0.file).inserted }
     }
 
     private static func hexDigest(of data: Data) -> String {

@@ -111,7 +111,9 @@ class PackTestCase(unittest.TestCase):
             document,
             "amsel",
             SENTENCE,
-            {"file": CLIP_FILE, "sha256": manifest.sha256_of(clip), "text": "Wo ist die Amsel?"},
+            manifest.speech_block(
+                file=CLIP_FILE, sha256=manifest.sha256_of(clip), text="Wo ist die Amsel?"
+            ),
         )
         manifest.save(self.pack / "manifest.json", document)
 
