@@ -10,8 +10,8 @@ import ZilpZalpUI
 /// **Celebration without competition.** The screen shows what was met and
 /// what was earned, and nothing else: no percentage, no error count, no time,
 /// nothing that measures this round against another one or against another
-/// child. The three stars are always all three — the earned ones lit, the
-/// rest dim — because one star has to read as an achievement rather than as
+/// child. The three stars are always all three — the earned ones filled, the
+/// rest hollow — because one star has to read as an achievement rather than as
 /// two missing ones, and a child who cannot read has only the picture to go
 /// by. The praise is spoken for the same reason.
 ///
@@ -49,9 +49,9 @@ struct RoundEndScreen: View {
     /// rather than a token — 1e replaces this screen in the design.
     private static let ascentDelay: TimeInterval = 2.2
 
-    /// A star that has not been earned. Olive rather than sun: dark enough
-    /// against the forest ground to stay unlit, light enough to stay a star.
-    /// What is missing is shown, as a locked ``RewardSticker`` shows it.
+    /// A star that has not been earned: hollow, and olive rather than sun —
+    /// dark enough against the forest ground to stay unlit, light enough to
+    /// stay a star. What is missing is shown, as a locked ``RewardSticker`` is.
     private static let unlitStar = ZColor.olive600
 
     /// What the round earned. Comes from ``QuizSession`` through
@@ -187,12 +187,12 @@ struct RoundEndScreen: View {
         }
     }
 
-    /// The three stars, bobbing. Hidden from VoiceOver because ``praise``
-    /// says the same thing in words right underneath.
+    /// The three stars, bobbing: earned ones filled, the rest hollow (#149).
+    /// Hidden from VoiceOver because ``praise`` says the same right underneath.
     private var stars: some View {
         HStack(spacing: ZSpacing.step3) {
             ForEach(0 ..< Scoring.maximumStars, id: \.self) { position in
-                Icon(.star, size: .custom(starSize))
+                Icon(position < result.stars ? .starFilled : .star, size: .custom(starSize))
                     .foregroundStyle(position < result.stars ? ZColor.reward : Self.unlitStar)
                     .offset(y: bobbing ? -Self.bobHeight : 0)
                     .animation(bob(delayedBy: Double(position) * Self.bobStagger), value: bobbing)
