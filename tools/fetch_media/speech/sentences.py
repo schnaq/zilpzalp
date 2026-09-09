@@ -52,9 +52,10 @@ PLACEHOLDER = re.compile(r"%(?:(\d+)\$)?@")
 def german(key: str) -> str:
     """The German value of one String Catalog key.
 
-    Read from disk on every call rather than cached: this runs a handful of
-    times per command, and a stale catalog would be a sentence recorded from
-    the wrong words.
+    Read from disk on every call rather than cached: twenty times for a whole
+    pack, of a file the size of a photograph's thumbnail, against a command a
+    human is waiting for anyway. A cache would save milliseconds and cost an
+    invalidation rule.
     """
     catalog = json.loads(CATALOG.read_text(encoding="utf-8"))
     entry = (catalog.get("strings") or {}).get(key)

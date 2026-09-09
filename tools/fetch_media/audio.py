@@ -114,15 +114,21 @@ class Clip:
     """The encoded sound, and what it measured on the way out.
 
     The numbers are what a human needs after a `pick` or a `render`: how long
-    the clip is, how loud it came out, and whether the peak ceiling stopped it
-    from reaching the target — which is the one case where two clips still
-    sound unequally loud and the answer is another recording, not another gain.
+    the clip is and how loud it came out.
     """
 
     data: bytes
     seconds: float
     loudness: float
-    limited: bool
+
+    @property
+    def limited(self) -> bool:
+        """Whether the peak ceiling stopped it from reaching the target.
+
+        The one case where two clips still sound unequally loud, and where the
+        answer is another recording rather than another gain.
+        """
+        return self.loudness < TARGET - TOLERANCE
 
 
 def source_suffix(file_name: str) -> str:
@@ -372,9 +378,4 @@ def trim(
         afconvert(
             ["-f", FILE_FORMAT, "-d", DATA_FORMAT, "-b", BITRATE, str(cut), str(encoded)]
         )
-        return Clip(
-            data=encoded.read_bytes(),
-            seconds=len(kept) / rate,
-            loudness=level,
-            limited=level < TARGET - TOLERANCE,
-        )
+        return Clip(data=encoded.read_bytes(), seconds=len(kept) / rate, loudness=level)

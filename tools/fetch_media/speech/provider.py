@@ -21,7 +21,11 @@ decisions 1 and 2 of docs/superpowers/plans/2026-09-08-recorded-speech.md.
 from __future__ import annotations
 
 import dataclasses
-from typing import ClassVar, Protocol, runtime_checkable
+from typing import ClassVar, Protocol
+
+# What a provider hands back is named for afconvert, which picks its reader by
+# file extension: the name is how the WAV contract above is enforced.
+RENDERED_FILE = "speech.wav"
 
 
 @dataclasses.dataclass(frozen=True)
@@ -39,7 +43,6 @@ class Voice:
     source_url: str
 
 
-@runtime_checkable
 class Provider(Protocol):
     """A source of spoken German."""
 

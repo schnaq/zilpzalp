@@ -53,18 +53,6 @@ DEFAULT_OUT = Path(tempfile.gettempdir()) / "zilpzalp-fetch-media"
 # repository exactly as CI expects to find it.
 DERIVED_TOOLS = ("sync_bundled_packs.py", "generate_credits.py")
 
-# What a provider hands back is a WAV, whatever its vendor speaks internally
-# (fetch_media/speech/provider.py). afconvert picks its reader by extension, so
-# the name is what tells it so.
-PROVIDER_FILE = "speech.wav"
-
-# The licence a recording of our own carries, and the document that has to be
-# behind the `sourceURL` every medium needs. Decision 3 of the plan proposes
-# CC BY 4.0 — the gate's `ALLOWED_LICENCES` takes it, and `--attribution` names
-# whose voice it is. A different answer to that decision changes this one line.
-IMPORT_LICENCE = "CC-BY-4.0"
-RECORDING_DOC = "https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md"
-
 
 def escape_data(message: str) -> str:
     """Escape data for a GitHub workflow command — % first, then the line breaks."""
@@ -128,6 +116,19 @@ def remove_orphan(directory: Path, label: str, previous: str | None, relative: s
         print(f"{label}: removed the previous {previous}")
 
 
+def store(directory: Path, relative: str, data: bytes) -> str:
+    """Write one medium beside its manifest, and return the hash it recorded.
+
+    The manifest names the file by that hash, so the two are produced in one
+    place: a photo, a call and a recorded sentence are stored identically and
+    differ only in what is then written about them.
+    """
+    destination = directory / relative
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    destination.write_bytes(data)
+    return manifest.sha256_of(destination)
+
+
 def record_medium(
     pack_id: str,
     document: dict,
@@ -141,11 +142,7 @@ def record_medium(
 ) -> None:
     """Store one medium beside the manifest and record it there."""
     pack = manifest.pack_dir(pack_id)
-    destination = pack / relative
-    destination.parent.mkdir(parents=True, exist_ok=True)
-    destination.write_bytes(data)
-
-    digest = manifest.sha256_of(destination)
+    digest = store(pack, relative, data)
     previous = manifest.set_media(
         document,
         species,
@@ -191,11 +188,7 @@ def record_clip(
     )
 
     relative = target.file(sentence)
-    destination = target.directory / relative
-    destination.parent.mkdir(parents=True, exist_ok=True)
-    destination.write_bytes(clip.data)
-
-    digest = manifest.sha256_of(destination)
+    digest = store(target.directory, relative, clip.data)
     previous = manifest.set_speech(
         document,
         target.bird_id,
@@ -546,7 +539,7 @@ def command_speech_render(args: argparse.Namespace) -> int:
             target,
             document,
             sentence,
-            audio.trim(spoken, PROVIDER_FILE, duration=None),
+            audio.trim(spoken, speech.RENDERED_FILE, duration=None),
             text,
             provider.voice(),
         )
@@ -573,9 +566,7 @@ def command_speech_import(args: argparse.Namespace) -> int:
         sentence,
         audio.trim(args.file.read_bytes(), args.file.name, duration=None),
         text,
-        speech.Voice(
-            license=IMPORT_LICENCE, attribution=args.attribution, source_url=RECORDING_DOC
-        ),
+        speech.imported_voice(args.attribution),
     )
 
     regenerate_derived()

@@ -313,7 +313,6 @@ class RenderTests(SpeechTestCase):
     def test_leaves_the_date_of_a_voice_that_has_not_changed(self) -> None:
         """A re-render is not a new voice, and must not show up as one."""
         self.render("--pack", "basis", "--species", "amsel")
-        self.document()
         aged = self.document()
         aged["voice"]["retrieved"] = "2026-01-01"
         manifest.save(self.pack / "manifest.json", aged)
@@ -375,15 +374,17 @@ class RenderTests(SpeechTestCase):
 
 
 class ImportTests(SpeechTestCase):
-    def run_import(self, *arguments: str) -> tuple[int, str]:
+    def run_import(
+        self, *arguments: str, file: Path | None = None, attribution: str = "Stimme: Johanna"
+    ) -> tuple[int, str]:
         return self.run_command(
             [
                 "speech",
                 "import",
                 "--file",
-                str(self.take()),
+                str(file or self.take()),
                 "--attribution",
-                "Stimme: Johanna",
+                attribution,
                 *arguments,
             ]
         )
@@ -406,8 +407,8 @@ class ImportTests(SpeechTestCase):
 
         voice = self.document()["voice"]
         self.assertEqual(voice["attribution"], "Stimme: Johanna")
-        self.assertEqual(voice["license"], cli.IMPORT_LICENCE)
-        self.assertEqual(voice["sourceURL"], cli.RECORDING_DOC)
+        self.assertEqual(voice["license"], speech.IMPORT_LICENCE)
+        self.assertEqual(voice["sourceURL"], speech.RECORDING_DOC)
 
     def test_imports_a_fixed_sentence_too(self) -> None:
         code, _ = self.run_import("--set", "fixed", "--sentence", "roundEnd.title")
@@ -423,21 +424,14 @@ class ImportTests(SpeechTestCase):
             "--pack", "basis", "--species", "amsel", "--sentence", "quiz.prompt.whereIs"
         )
 
-        code, printed = self.run_command(
-            [
-                "speech",
-                "import",
-                "--pack",
-                "basis",
-                "--species",
-                "star",
-                "--sentence",
-                "quiz.prompt.whereIs",
-                "--file",
-                str(self.take()),
-                "--attribution",
-                "Stimme: jemand anderes",
-            ]
+        code, printed = self.run_import(
+            "--pack",
+            "basis",
+            "--species",
+            "star",
+            "--sentence",
+            "quiz.prompt.whereIs",
+            attribution="Stimme: jemand anderes",
         )
 
         self.assertEqual(code, 1)
@@ -455,21 +449,8 @@ class ImportTests(SpeechTestCase):
         broken = self.pack.parent / "broken.wav"
         broken.write_bytes(b"not a wav at all")
 
-        code, printed = self.run_command(
-            [
-                "speech",
-                "import",
-                "--pack",
-                "basis",
-                "--species",
-                "amsel",
-                "--sentence",
-                "collection.name",
-                "--file",
-                str(broken),
-                "--attribution",
-                "Stimme: Johanna",
-            ]
+        code, printed = self.run_import(
+            "--pack", "basis", "--species", "amsel", "--sentence", "collection.name", file=broken
         )
 
         self.assertEqual(code, 1)
