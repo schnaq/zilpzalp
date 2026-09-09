@@ -196,7 +196,7 @@ private struct QuitQuestion: ViewModifier {
             // The gesture asks the same question as the chevron above it, and
             // the round does not move an inch while it is answered. Nothing
             // follows the finger, because nothing is going anywhere yet.
-            .swipesBack(.asks { $request.wrappedValue.ask(round, orLeave: onLeave) })
+            .swipesBack(.asks { request.ask(round, orLeave: onLeave) })
     }
 }
 

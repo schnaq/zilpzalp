@@ -125,7 +125,6 @@ private final class SwipeBackController: UIViewController, UIGestureRecognizerDe
         // Nothing to draw and nothing to hit: this controller is here for its
         // place in the hierarchy and for nothing else.
         view = UIView()
-        view.backgroundColor = .clear
         view.isUserInteractionEnabled = false
     }
 
@@ -173,9 +172,8 @@ private final class SwipeBackController: UIViewController, UIGestureRecognizerDe
         let backGestures = recognizers.filter { type(of: $0) == type(of: pop) }
         guard backGestures.contains(where: { $0.delegate !== self }) else { return }
 
-        let found = backGestures.map(asFound(_:))
         installedOn = navigation
-        taken = found
+        taken = backGestures.map(asFound(_:))
         for recognizer in backGestures {
             recognizer.delegate = self
         }
@@ -197,11 +195,18 @@ private final class SwipeBackController: UIViewController, UIGestureRecognizerDe
         )
     }
 
+    /// A screen with no way back does not even let the recognizers look at the
+    /// touch. The other two need them to try, so that
+    /// ``gestureRecognizerShouldBegin(_:)`` is asked.
+    ///
+    /// Only ever written when it actually changes. The policy is handed over
+    /// again on every pass of the screen's body, and a recognizer told what it
+    /// already knows in the middle of a swipe would drop that swipe.
     private func apply() {
-        for entry in taken where entry.recognizer.delegate === self {
-            // A screen with no way back does not even let the recognizers look
-            // at the touch. The other two need them to try, so that
-            // ``gestureRecognizerShouldBegin(_:)`` is asked.
+        for entry in taken
+            where entry.recognizer.delegate === self
+            && entry.recognizer.isEnabled != wantsGesture
+        {
             entry.recognizer.isEnabled = wantsGesture
         }
     }
