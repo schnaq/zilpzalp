@@ -230,8 +230,17 @@ final class SpeechAnnouncer: NSObject {
         self.spokenUtterance = nil
     }
 
-    /// The same guard for a clip that has run its course — the trap
-    /// ``CallPlayer`` documents for its recordings.
+    /// Lets a clip that has run its course go, under the same identity guard
+    /// ``CallPlayer`` documents for its recordings: a finish delivered after
+    /// ``announce(_:)`` has handed the next clip over must not release that
+    /// one.
+    ///
+    /// What it buys is the decoded recording being freed when it stops
+    /// sounding rather than at the next sentence — on the album screen that
+    /// can be minutes — and ``spokenClip`` meaning what it says. Nothing
+    /// branches on it: unlike ``CallPlayer/isPlaying``, which draws
+    /// `SoundButton`'s rings, no view asks this announcer whether it is
+    /// sounding.
     private func clipEnded(_ ended: ObjectIdentifier, successfully: Bool) {
         guard let spokenClip, ObjectIdentifier(spokenClip) == ended else { return }
 

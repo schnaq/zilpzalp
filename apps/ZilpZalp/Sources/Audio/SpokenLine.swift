@@ -16,7 +16,7 @@ import ZilpZalpData
 /// `speech` — `tools/fetch_media/speech/sentences.py` renders exactly these
 /// sentences, filled exactly this way. Two of them are not catalog keys: see
 /// ``name(_:)`` and ``assembled(_:)``.
-struct SpokenLine: Sendable, Hashable {
+struct SpokenLine: Sendable {
     /// The sentence key, `nil` for the one line no single clip can say.
     let key: String?
 
@@ -32,10 +32,7 @@ struct SpokenLine: Sendable, Hashable {
     /// "Wo ist die Amsel?" — the question of game 1.
     ///
     /// Article and name are positional arguments so that a translation may
-    /// reorder them. Where a voice mangles a name, `pronunciation` from the
-    /// manifest overrides it — that fix belongs in the pack data, never here.
-    /// It is the same name the clip was rendered from, so the two say the same
-    /// thing.
+    /// reorder them; the name is the spoken one — see ``spokenName(of:)``.
     static func whereIs(_ bird: Bird) -> SpokenLine {
         SpokenLine(
             key: "quiz.prompt.whereIs",
@@ -43,7 +40,7 @@ struct SpokenLine: Sendable, Hashable {
             text: String(
                 format: String(localized: "quiz.prompt.whereIs"),
                 bird.article,
-                bird.pronunciation ?? bird.name,
+                spokenName(of: bird),
             ),
         )
     }
@@ -56,7 +53,7 @@ struct SpokenLine: Sendable, Hashable {
             bird: bird,
             text: String(
                 format: String(localized: "roundEnd.sticker.new.spoken"),
-                bird.pronunciation ?? bird.name,
+                spokenName(of: bird),
             ),
         )
     }
@@ -71,7 +68,7 @@ struct SpokenLine: Sendable, Hashable {
         SpokenLine(
             key: "collection.name",
             bird: bird,
-            text: bird.pronunciation ?? bird.name,
+            text: spokenName(of: bird),
         )
     }
 
@@ -104,5 +101,16 @@ struct SpokenLine: Sendable, Hashable {
     /// before.
     static func assembled(_ text: String) -> SpokenLine {
         SpokenLine(key: nil, bird: nil, text: text)
+    }
+
+    /// What a bird is called out loud.
+    ///
+    /// `pronunciation` from the manifest wherever a voice would mangle the
+    /// written name — that fix belongs in the pack data, never here — and it
+    /// is also the name a clip was rendered from, so the recording and the
+    /// synthesiser say the same thing. `spoken_name` in
+    /// `tools/fetch_media/speech/sentences.py` is this rule on the other side.
+    private static func spokenName(of bird: Bird) -> String {
+        bird.pronunciation ?? bird.name
     }
 }

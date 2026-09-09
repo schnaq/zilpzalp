@@ -16,14 +16,7 @@ enum SpeechFixtures {
     /// A pack that speaks: `amsel` carries one clip that resolves and one that
     /// is declared but not on disk, `stumm` carries none at all.
     static func speakingPack() throws -> PackCatalog {
-        let url = try #require(
-            Bundle.module.url(
-                forResource: "pack",
-                withExtension: "json",
-                subdirectory: "Fixtures/speech",
-            ),
-            "no Fixtures/speech/pack.json in the test bundle",
-        )
+        let url = try document("pack")
         return try PackCatalog(
             pack: PackManifest.decode(Data(contentsOf: url)),
             directory: url.deletingLastPathComponent(),
@@ -42,13 +35,18 @@ enum SpeechFixtures {
     /// Where ``fixedSet()`` is read from, for the suites that decode the
     /// document itself rather than ask it for a file.
     static func fixedManifest() throws -> URL {
+        try document("manifest")
+    }
+
+    /// One of the two documents, beside the clips they name.
+    private static func document(_ name: String) throws -> URL {
         try #require(
             Bundle.module.url(
-                forResource: "manifest",
+                forResource: name,
                 withExtension: "json",
                 subdirectory: "Fixtures/speech",
             ),
-            "no Fixtures/speech/manifest.json in the test bundle",
+            "no Fixtures/speech/\(name).json in the test bundle",
         )
     }
 }

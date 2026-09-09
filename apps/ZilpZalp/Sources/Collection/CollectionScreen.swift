@@ -40,9 +40,11 @@ struct CollectionScreen: View {
     /// Says a bird's name when its sticker is tapped. One announcer for the
     /// screen, so two quick taps cannot talk over each other.
     ///
-    /// Built on the first tap rather than with the screen: it carries the pack
-    /// the recorded names lie in, and `@State` cannot be handed a property of
-    /// the view it belongs to.
+    /// Built on the first tap rather than with the screen, because it needs
+    /// the pack the recorded names lie in: handing `@State` an initial value
+    /// that reads ``catalog`` would mean writing this screen's six-parameter
+    /// initialiser out by hand, and the previews below use the synthesised
+    /// one. ``RoundEndScreen`` builds its announcer the same way.
     @State private var announcer: SpeechAnnouncer?
 
     private var isCompact: Bool {
