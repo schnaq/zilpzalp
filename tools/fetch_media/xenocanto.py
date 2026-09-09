@@ -5,7 +5,8 @@ Three findings that cost a day when they are rediscovered
 
 - **v2 is switched off** and v3 refuses every request without a key. The key
   lives in Infisical as `XENO_CANTO_API_KEY` and travels as a query parameter,
-  which is why nothing here ever formats a URL into a message — see `redact`.
+  which is why nothing here ever formats a URL into a message — see
+  `fetch_media.keys.redact`.
 - **The `lic:` filter is mandatory.** Without it the answer is practically
   all NonCommercial: `sp:"Turdus merula"` alone returns 9537 recordings whose
   first hundred are exclusively BY-NC, BY-NC-SA and BY-NC-ND. With the filter
@@ -23,18 +24,16 @@ instead of raising, and `pick` refuses them.
 
 from __future__ import annotations
 
-import os
-import re
 import time
 from dataclasses import dataclass
 from urllib.parse import urlparse
 
 import httpx
 
+from fetch_media.keys import redact
+
 API_ROOT = "https://xeno-canto.org/api/3"
 RECORDING_URL = "https://xeno-canto.org/{}"
-
-API_KEY_ENV = "XENO_CANTO_API_KEY"
 
 # The API docs ask for a descriptive user agent, so a problem can be traced
 # back to a project rather than to an anonymous script.
@@ -109,33 +108,6 @@ class LicenceError(ValueError):
 
 class XenoCantoError(RuntimeError):
     """A failed request, with the API key removed from the message."""
-
-
-def redact(text: str) -> str:
-    """Remove the API key from anything that might be printed.
-
-    The key is a query parameter, so it is part of every request URL — and
-    `httpx.HTTPStatusError` puts that URL into its message, which `cli.main`
-    prints as an `::error::` line and CI keeps in its log. This is the single
-    place that decides what a key looks like in text.
-    """
-    return re.sub(r"(?i)(key=)[^&\s'\"]+", r"\1…", text)
-
-
-def api_key(environment: dict | None = None) -> str:
-    """The key for the API, from the environment Infisical fills.
-
-    Raises `RuntimeError` naming the *variable* that is missing — never its
-    value, exactly as `s3.client_from_env` does for the bucket credentials.
-    """
-    environment = os.environ if environment is None else environment
-    key = environment.get(API_KEY_ENV)
-    if not key:
-        raise RuntimeError(
-            f"missing from the environment: {API_KEY_ENV}. "
-            "Run through 'infisical run --env=dev --path=/ --'."
-        )
-    return key
 
 
 def licence_key(url: object) -> str:

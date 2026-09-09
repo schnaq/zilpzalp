@@ -144,6 +144,40 @@ class SetMediaTests(unittest.TestCase):
         self.assertIn("amsel", str(error.exception))
 
 
+class SetSpeechTests(unittest.TestCase):
+    def clip(self) -> dict:
+        return manifest.speech_block(
+            file="speech/collection.name/amsel.m4a", sha256="0" * 64, text="Amsel"
+        )
+
+    def test_fills_a_speech_map_that_a_manifest_declared_as_null(self) -> None:
+        """A bird may carry `"speech": null` the way it carries `"call": null`."""
+        pack = document()
+        pack["birds"][0]["speech"] = None
+
+        previous = manifest.set_speech(pack, "amsel", "collection.name", self.clip())
+
+        self.assertIsNone(previous)
+        self.assertEqual(pack["birds"][0]["speech"]["collection.name"]["text"], "Amsel")
+
+    def test_fills_a_lines_map_that_the_fixed_set_declared_as_null(self) -> None:
+        fixed = {"id": "speech", "title": "Ansagen", "lines": None}
+
+        manifest.set_speech(fixed, None, "roundEnd.title", self.clip())
+
+        self.assertEqual(list(fixed["lines"]), ["roundEnd.title"])
+
+    def test_reports_the_recording_it_replaced(self) -> None:
+        pack = document()
+        manifest.set_speech(pack, "amsel", "collection.name", self.clip())
+
+        previous = manifest.set_speech(
+            pack, "amsel", "collection.name", {**self.clip(), "file": "speech/other.m4a"}
+        )
+
+        self.assertEqual(previous, "speech/collection.name/amsel.m4a")
+
+
 class MediaFilesTests(unittest.TestCase):
     def test_lists_photo_and_call_in_manifest_order(self) -> None:
         pack = document()
