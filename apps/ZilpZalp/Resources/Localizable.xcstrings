@@ -781,6 +781,42 @@
         }
       }
     },
+    "quiz.quit.continue" : {
+      "comment" : "The safe answer to quiz.quit.question, and the primary one: back into the round, nothing lost",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Weiterspielen"
+          }
+        }
+      }
+    },
+    "quiz.quit.leave" : {
+      "comment" : "The second answer to quiz.quit.question: the round ends here and its stars are gone. The only thing on the card that leaves",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aufhören"
+          }
+        }
+      }
+    },
+    "quiz.quit.question" : {
+      "comment" : "Asked — spoken and shown — before a round that is still under way is left. A question a child answers, never a warning",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Willst du aufhören?"
+          }
+        }
+      }
+    },
     "quiz.sound.accessibility" : {
       "comment" : "VoiceOver label of the round button that reads the question out again. The button itself is wordless",
       "extractionState" : "manual",
