@@ -231,6 +231,7 @@ struct QuizScreen: View {
             dimmed: session.isDimmed(bird),
             edge: edge,
         ) { session.choose(bird) }
+            .accessibilityIdentifier(QuizIdentifier.tile(bird.id))
     }
 
     /// The question, put again on demand — read out in game 1, played in game 2.
@@ -272,6 +273,7 @@ struct QuizScreen: View {
             // goes below 20 pt.
             .minimumScaleFactor(ZType.Step.body.size / ZType.Step.headline.size)
             .frame(maxWidth: .infinity, alignment: leading ? .leading : .center)
+            .accessibilityIdentifier(QuizIdentifier.question(session.answer?.id))
     }
 
     /// The band the app says something back in, kept clear whether or not

@@ -1,8 +1,9 @@
 import Foundation
 import Testing
 
-// @testable for the internal initialiser: a pack lies in the bundle or in
-// Application Support, and the speech fixture below is neither.
+// @testable for `PackManifest.decode`: the manifest spelled out below never
+// travels through `PackCatalog.bundled()`. The speaking fixture the speech
+// tests share reaches the internal initialiser the same way.
 @testable import ZilpZalpData
 
 /// The Swift-side twin of `tools/license_gate.py`: the gate checks the pack in
@@ -92,7 +93,7 @@ struct PackCatalogTests {
     /// nothing audible is committed unheard holds for fixtures too.
     @Test("a speech clip resolves against the pack's own directory")
     func resolvesSpeechFromAFixture() throws {
-        let catalog = try Self.speakingFixture()
+        let catalog = try SpeechFixtures.speakingPack()
         let amsel = try #require(catalog.pack.birds.first { $0.id == "amsel" })
         let silent = try #require(catalog.pack.birds.first { $0.id == "stumm" })
 
@@ -103,22 +104,6 @@ struct PackCatalogTests {
         // The licence of all of them, once, where the credits read it.
         #expect(catalog.pack.voice?.license == .ccBy)
         #expect(catalog.pack.voice?.attribution == "Stimme: Niemand")
-    }
-
-    /// A pack that speaks, from the test bundle rather than from `data/packs`.
-    private static func speakingFixture() throws -> PackCatalog {
-        let url = try #require(
-            Bundle.module.url(
-                forResource: "pack",
-                withExtension: "json",
-                subdirectory: "Fixtures/speech",
-            ),
-            "no Fixtures/speech/pack.json in the test bundle",
-        )
-        return try PackCatalog(
-            pack: PackManifest.decode(Data(contentsOf: url)),
-            directory: url.deletingLastPathComponent(),
-        )
     }
 
     /// "Wo ist **die** Amsel?" — the article is spoken and written, and a

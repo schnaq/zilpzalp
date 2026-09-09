@@ -211,6 +211,83 @@ xcodebuild -exportArchive \
   -authenticationKeyIssuerID "$ASC_ISSUER_ID"
 '''
 
+[tasks.screenshots]
+description = "Take the App Store screenshots on the two store simulators"
+depends = ["xcode-version", "generate"]
+# Deliberately not part of `mise run check`, `mise run build` or CI: it drives
+# the app on a booted simulator and takes minutes, and a screenshot is not a
+# gate. The UI test target it builds hangs off its own scheme for the same
+# reason — see apps/ZilpZalp/project.yml.
+run = '''
+set -euo pipefail
+export DEVELOPER_DIR="${DEVELOPER_DIR:-/Applications/Xcode.app/Contents/Developer}"
+
+out="$PWD/DerivedData/screenshots"
+rm -rf "$out"
+
+# Built once against the simulator SDK and then run per device: the same
+# bundle drives both, and building it twice would cost minutes for nothing.
+xcodebuild build-for-testing \
+  -project apps/ZilpZalp/ZilpZalp.xcodeproj \
+  -scheme ZilpZalpScreenshots \
+  -destination "generic/platform=iOS Simulator" \
+  -derivedDataPath DerivedData \
+  | xcbeautify
+
+# The status bar is a setting of the simulator and outlives the run, so it is
+# put back whatever happens — a cancelled run must not leave 9:41 baked into
+# somebody's simulator.
+device=""
+trap 'if [ -n "$device" ]; then xcrun simctl status_bar "$device" clear || true; fi' EXIT
+
+# The two sizes App Store Connect asks for before the first review: the 6.9"
+# iPhone at 1320x2868 and the 13" iPad at 2064x2752, both portrait. By name
+# rather than by udid — a udid belongs to one machine, and simctl takes a
+# device name wherever it takes a device. Read on fd 3 so that xcodebuild,
+# which reads standard input, cannot swallow the list it is looping over. A
+# shell array would sidestep that without a second descriptor and is what this
+# would be in bash; mise runs a task through `sh -c`, where there are none.
+while IFS="|" read -r slug device width height <&3; do
+  echo "── $device"
+
+  # Boots it if it is not up: the status bar can only be set on a booted
+  # device, and the test needs one anyway.
+  xcrun simctl bootstatus "$device" -b
+
+  # 9:41 with everything full, the way Apple's own screenshots read, so that
+  # the pictures do not date themselves by the clock they were taken at.
+  xcrun simctl status_bar "$device" override \
+    --time 9:41 \
+    --batteryState charged \
+    --batteryLevel 100 \
+    --wifiBars 3 \
+    --cellularBars 4
+
+  # xcodebuild hands every TEST_RUNNER_-prefixed variable to the test runner
+  # with the prefix taken off, and that is how the output directory reaches
+  # the test — which is why nothing has to be dug out of an .xcresult after.
+  TEST_RUNNER_SCREENSHOT_DIR="$out/$slug" \
+  xcodebuild test-without-building \
+    -project apps/ZilpZalp/ZilpZalp.xcodeproj \
+    -scheme ZilpZalpScreenshots \
+    -destination "platform=iOS Simulator,name=$device" \
+    -derivedDataPath DerivedData \
+    | xcbeautify
+
+  xcrun simctl status_bar "$device" clear
+
+  # Through uv, because this one needs Pillow. It is what makes the promise
+  # the store cares about: the exact size, and no alpha channel.
+  uv run --locked --project tools python tools/finish_screenshots.py \
+    "$out/$slug" "$width" "$height"
+done 3<<"DEVICES"
+iphone-17-pro-max|iPhone 17 Pro Max|1320|2868
+ipad-pro-13|iPad Pro 13-inch (M5)|2064|2752
+DEVICES
+
+echo "Screenshots in $out"
+'''
+
 [tasks.license-gate]
 description = "Check the pack manifests against the licence rules"
 run = '''

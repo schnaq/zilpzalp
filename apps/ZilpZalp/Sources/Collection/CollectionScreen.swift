@@ -37,9 +37,15 @@ struct CollectionScreen: View {
 
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
-    /// Says a bird's name when its sticker is tapped. One synthesiser for the
+    /// Says a bird's name when its sticker is tapped. One announcer for the
     /// screen, so two quick taps cannot talk over each other.
-    @State private var announcer = SpeechAnnouncer()
+    ///
+    /// Built on the first tap rather than with the screen, because it needs
+    /// the pack the recorded names lie in: handing `@State` an initial value
+    /// that reads ``catalog`` would mean writing this screen's six-parameter
+    /// initialiser out by hand, and the previews below use the synthesised
+    /// one. ``RoundEndScreen`` builds its announcer the same way.
+    @State private var announcer: SpeechAnnouncer?
 
     private var isCompact: Bool {
         horizontalSizeClass == .compact
@@ -82,7 +88,7 @@ struct CollectionScreen: View {
         // The album has a back chevron, so it has the gesture that goes with
         // one (#150).
         .swipesBack(.pops)
-        .onDisappear { announcer.stop() }
+        .onDisappear { announcer?.stop() }
     }
 
     /// The album's name, in the page rather than in the top bar: a phone
@@ -165,7 +171,7 @@ struct CollectionScreen: View {
 
         if isCollected {
             Button {
-                announcer.announce(bird.pronunciation ?? bird.name)
+                say(.name(bird))
             } label: {
                 StickerCaption(caption: bird.name, earned: true) {
                     RewardSticker(image: photos[bird.id], size: size)
@@ -179,6 +185,15 @@ struct CollectionScreen: View {
             }
             .accessibilityElement(children: .combine)
         }
+    }
+
+    /// Says one line, building the announcer the first time something is
+    /// tapped. Kept afterwards, so the second tap cuts the first one off
+    /// instead of talking over it.
+    private func say(_ line: SpokenLine) {
+        let voice = announcer ?? SpeechAnnouncer(pack: catalog)
+        announcer = voice
+        voice.announce(line)
     }
 }
 

@@ -55,7 +55,22 @@ struct RootView: View {
                             record: { await model.record($0) },
                             playAgain: playAnotherRound,
                             openCollection: { path.append(.collection) },
-                            showAscent: { path.append(.rankAscent($0)) },
+                            // Only while the celebration is still on top:
+                            // the ascent arrives 2.2 s after the round was
+                            // booked, and a child who has gone home inside
+                            // those seconds would otherwise be pushed onto
+                            // the rank it earned — the way out has to be a
+                            // way out (#175). The screen's own `.task` is
+                            // cancelled too late to answer this, because a
+                            // pop cancels it when the transition ends.
+                            showAscent: {
+                                guard case .roundEnd = path.last else { return }
+                                path.append(.rankAscent($0))
+                            },
+                            // All the way home, as "Zeit fürs Nest" goes:
+                            // under this screen is the round it celebrates,
+                            // and that is not a way out of it (#175).
+                            goHome: { path.removeAll() },
                         )
                     case .parents: ParentsScreen(parental: model.parental)
                     case .collection: collection

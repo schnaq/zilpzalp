@@ -109,15 +109,19 @@ public actor PackDownloader {
         var downloaded = manifestData.count
         progress(downloaded, entry.downloadSize)
 
+        // Every name before the first byte: a poisoned path at the end of a
+        // manifest must not cost a parent the files that precede it, and a
+        // pack of many birds names hundreds of them.
+        let assets = pack.declaredFiles
+        if let unsafe = assets.first(where: { !isSafeRelativePath($0.file) }) {
+            throw PackDownloadError.invalidPath(packID: entry.id, path: unsafe.file)
+        }
+
         // Media are relative to the manifest, not to the base: the manifest
         // says `photos/amsel.png` and sits at `packs/<id>/manifest.json`.
         let packURL = manifestURL.deletingLastPathComponent()
-        for asset in Self.assets(of: pack) {
+        for asset in assets {
             try Task.checkCancellation()
-            guard isSafeRelativePath(asset.file) else {
-                throw PackDownloadError.invalidPath(packID: entry.id, path: asset.file)
-            }
-
             let destination = partial.appending(path: asset.file)
             if let alreadyThere = verifiedSize(of: destination, sha256: asset.sha256) {
                 downloaded += alreadyThere
@@ -187,7 +191,8 @@ public actor PackDownloader {
     }
 
     /// Opens an installed pack, the way `PackCatalog.bundled()` opens the one
-    /// that ships with the app, so `photoURL(for:)` resolves its media too.
+    /// that ships with the app, so `photoURL(for:)`, `callURL(for:)` and
+    /// `speechURL(for:sentence:)` resolve its media too.
     ///
     /// The only way to a downloaded pack's files: this actor owns the layout
     /// below `Packs/`, so no view ever assembles such a path itself.
@@ -262,15 +267,6 @@ public actor PackDownloader {
         return data
     }
 
-    /// Every medium a pack declares, photo before call, each file once: two
-    /// birds sharing a file would otherwise be fetched and counted twice.
-    private static func assets(of pack: Pack) -> [MediaAsset] {
-        var seen: Set<String> = []
-        return pack.birds
-            .flatMap { [$0.photo, $0.call].compactMap(\.self) }
-            .filter { seen.insert($0.file).inserted }
-    }
-
     private static func hexDigest(of data: Data) -> String {
         SHA256.hash(data: data).map { String(format: "%02x", $0) }.joined()
     }
@@ -281,6 +277,17 @@ public actor PackDownloader {
             pack = try PackManifest.decode(data)
         } catch {
             throw PackDownloadError.manifestInvalid(packID: packID, reason: "\(error)")
+        }
+        guard pack.voice != nil || pack.birds.allSatisfy({ $0.speech?.isEmpty ?? true }) else {
+            // A photo and a call carry their licence in their own fields and
+            // cannot decode without one; a clip's licence is the manifest's
+            // voice. Without it the pack would install recordings nobody may
+            // be credited for — which `tools/license_gate.py` refuses at
+            // curation time and nothing re-checks after a download.
+            throw PackDownloadError.manifestInvalid(
+                packID: packID,
+                reason: "the pack has recorded sentences but names no voice",
+            )
         }
         guard pack.id == packID else {
             // The id is the directory name, in the bucket and on disk. A

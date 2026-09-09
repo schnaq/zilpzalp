@@ -95,7 +95,7 @@ struct RankAscentScreen: View {
         // Back wherever a back button stands (#150): this screen has both a
         // chevron and "Weiter", and the swipe does what they do.
         .swipesBack(.pops)
-        .readAloudOnce(ascent.reached.ascentSentence)
+        .readAloudOnce(ascent.reached.ascentLine)
         .onAppear { settled = true }
     }
 
@@ -113,7 +113,7 @@ struct RankAscentScreen: View {
     }
 
     private var headline: some View {
-        Text(verbatim: ascent.reached.ascentSentence)
+        Text(verbatim: ascent.reached.ascentLine.text)
             .typeStyle(isTight ? .headline : .display2, .display, weight: .extraBold)
             .foregroundStyle(ZColor.textStrong)
             .fixedSize(horizontal: false, vertical: true)
