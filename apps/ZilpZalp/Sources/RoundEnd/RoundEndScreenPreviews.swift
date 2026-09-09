@@ -55,6 +55,7 @@ private func previewOutcome(of species: String?, recognised: Int) -> RoundOutcom
             record: { _ in previewOutcome(of: "amsel", recognised: 4) },
             playAgain: {},
             openCollection: {},
+            goHome: {},
         )
     }
     .environment(\.horizontalSizeClass, .regular)
@@ -71,6 +72,7 @@ private func previewOutcome(of species: String?, recognised: Int) -> RoundOutcom
             record: { _ in previewOutcome(of: "rotkehlchen", recognised: 1) },
             playAgain: {},
             openCollection: {},
+            goHome: {},
         )
     }
     .environment(\.horizontalSizeClass, .compact)
@@ -84,6 +86,7 @@ private func previewOutcome(of species: String?, recognised: Int) -> RoundOutcom
             record: { _ in nil },
             playAgain: {},
             openCollection: {},
+            goHome: {},
         )
     }
     .environment(\.horizontalSizeClass, .regular)

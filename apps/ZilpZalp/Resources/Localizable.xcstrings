@@ -937,6 +937,18 @@
         }
       }
     },
+    "roundEnd.home.accessibility" : {
+      "comment" : "VoiceOver label of the house in the round end's top-left corner, which leads back to the home screen. The button itself is wordless",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nach Hause"
+          }
+        }
+      }
+    },
     "roundEnd.playAgain" : {
       "comment" : "Button on the round end screen that starts a new round",
       "extractionState" : "manual",

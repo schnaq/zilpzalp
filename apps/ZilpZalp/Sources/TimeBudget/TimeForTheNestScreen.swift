@@ -66,7 +66,7 @@ struct TimeForTheNestScreen: View {
         // No swipe either, said rather than inherited (#150).
         .toolbar(.hidden, for: .navigationBar)
         .swipesBack(.disabled)
-        .readAloudOnce(spoken)
+        .readAloudOnce(.assembled(spoken))
     }
 
     private var column: some View {
@@ -125,6 +125,9 @@ struct TimeForTheNestScreen: View {
 
     /// What the screen says out loud, once: the headline and the day's take,
     /// in that order. The child this app is for cannot read either of them.
+    ///
+    /// Two catalog entries and a number, which is why it is the one line no
+    /// clip can say — see ``SpokenLine/assembled(_:)``.
     private var spoken: String {
         String(localized: "timeBudget.title")
             + " "
