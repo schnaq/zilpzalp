@@ -4,7 +4,7 @@ import ZilpZalpData
 
 /// Every photo of an opened pack, keyed by species id.
 ///
-/// The album and the ladder both draw a whole page of stickers at once, and a
+/// The album draws a whole page of stickers at once, and a
 /// `View` is rebuilt on every layout pass — so the files are opened once, when
 /// the screen is built, and never again while it is on stage. `UIImage` maps
 /// the file and defers the decode to the first draw, exactly as `QuizSession`

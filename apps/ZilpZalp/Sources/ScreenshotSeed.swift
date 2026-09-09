@@ -23,22 +23,28 @@ enum ScreenshotSeed {
     private static let name = "Mia"
     private static let avatar = "feather"
 
-    /// Six of the base pack's ten species, so the album shows both what has
-    /// been found and what is still out there — an album with no gap left is
-    /// not what a sticker album looks like.
-    private static let collected: Set<String> = [
-        "amsel",
-        "blaumeise",
-        "kohlmeise",
-        "rotkehlchen",
-        "star",
-        "zilpzalp",
+    /// How often this child has recognised each of the base pack's ten
+    /// species. Six of them are past the five their sticker takes (#177), so
+    /// the album shows what has been found; the other four stand part of the
+    /// way, so it also shows what is still out there and how close it is. An
+    /// album with no gap left is not what a sticker album looks like.
+    private static let recognitions: [String: Int] = [
+        "amsel": 7,
+        "blaumeise": 6,
+        "kohlmeise": 5,
+        "rotkehlchen": 5,
+        "star": 5,
+        "zilpzalp": 8,
+        "buntspecht": 4,
+        "hausrotschwanz": 3,
+        "eisvogel": 1,
+        "wiedehopf": 0,
     ]
 
-    /// A believable number of stars for a child who has been playing a while,
-    /// and deliberately not one the run's own round pushes over a threshold:
-    /// the three stars it earns make 131, so nothing arrives over the round
-    /// end to celebrate a new rank and take the picture away mid-run.
+    /// A believable number of stars for a child who has been playing a while.
+    /// Nothing arrives over the round end at any count — the ranks and their
+    /// thresholds are gone (#177) — so the only rule left is that it should
+    /// look like the album beside it.
     private static let totalStars = 128
 
     /// Rounds behind the stars above, at the two to three a round earns.
@@ -82,7 +88,7 @@ enum ScreenshotSeed {
                 avatar: avatar,
                 totalStars: totalStars,
                 roundsPlayed: roundsPlayed,
-                collectedSpecies: collected,
+                recognitions: recognitions,
             ),
         )
     }

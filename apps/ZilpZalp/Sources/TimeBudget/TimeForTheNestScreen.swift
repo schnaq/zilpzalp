@@ -36,9 +36,9 @@ struct TimeForTheNestScreen: View {
     /// biggest iPhones report a regular width in landscape and a phone's
     /// height, and the iPad's sizes do not fit into either.
     ///
-    /// The third copy of this pair after ``RoundEndScreen`` and
-    /// ``RankAscentScreen``. It belongs in `ZilpZalpUI` as one environment
-    /// value, which is a change to files this branch does not own.
+    /// The second copy of this pair after ``RoundEndScreen``. It belongs in
+    /// `ZilpZalpUI` as one environment value, which is a change to files this
+    /// branch does not own.
     private var isTight: Bool {
         horizontalSizeClass == .compact || verticalSizeClass == .compact
     }
