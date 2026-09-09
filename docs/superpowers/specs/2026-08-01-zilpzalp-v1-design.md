@@ -166,7 +166,7 @@ Beide Spiele nutzen dieselbe Engine, sie unterscheiden sich nur darin, wie die F
 
 Eine laufende Runde verlässt der Zurück-Pfeil der `TopBar` nicht mehr sofort, sondern stellt zuerst die gesprochene und geschriebene Frage „Willst du aufhören?" über der abgedunkelten Runde: Die große, primäre Antwort ist „Weiterspielen", ein Tippen neben die Karte zählt genauso, nur „Aufhören" beendet die Runde, und die Wischgeste von links stellt dieselbe Frage, statt die Runde zu verlassen — für die abgeschlossene Runde und für „Zeit fürs Nest" ändert sich nichts (Entscheidung 2026-09-08, Issue #146).
 
-Von links hereinwischen geht überall dort zurück, wo ein Zurück-Pfeil steht, und tut genau das, was er tut; in der laufenden Runde stellt es die Frage darüber. Ausgenommen sind Rundenende, Rangaufstieg und „Zeit fürs Nest": Dort bleibt die Geste aus — der Rangaufstieg wird über seinen Pfeil und „Weiter" verlassen (Entscheidung 2026-09-08, Issue #150).
+Von links hereinwischen geht überall dort zurück, wo ein Zurück-Pfeil steht, und tut genau das, was er tut; in der laufenden Runde stellt es die Frage darüber. Ausgenommen sind Rundenende und „Zeit fürs Nest": Dort bleibt die Geste aus, weil dort kein Pfeil steht (Entscheidung 2026-09-08, Issue #150).
 
 Der Blätter-Fortschritt zeigt den Stand ohne Zahlen. Auf dem iPhone sitzt die Blätterreihe unter der TopBar statt wie im Design darin: Zehn 44-pt-Blätter mit 12 pt Abstand sind 548 pt breit — breiter als jedes iPhone. Bei erschöpftem Zeitbudget läuft die aktuelle Runde noch zu Ende, danach erscheint „Zeit fürs Nest".
 

@@ -23,12 +23,12 @@ enum SwipeBack {
     /// Nothing moves under the finger, because nothing is going anywhere.
     case asks(@MainActor () -> Void)
 
-    /// Nothing at all, for the screens that deliberately have no way back:
-    /// the round end, the rank ascent, "Zeit fürs Nest".
+    /// Nothing at all, for the two screens that deliberately have no way
+    /// back: the round end and "Zeit fürs Nest".
     ///
-    /// The rank ascent is the one screen that carries a back chevron and still
-    /// says this. It is left on purpose and deliberately, by that chevron or
-    /// by "Weiter", and not by a gesture — the decision #150 records.
+    /// Both are left by the button they offer and by nothing else. This is the
+    /// only policy with no back chevron above it, which is the rule #150 sets:
+    /// wherever a chevron stands, the swipe does what it does.
     case disabled
 }
 
