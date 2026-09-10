@@ -171,10 +171,11 @@ public struct HomeTile: View {
                     .typeStyle(labelStep, .display, weight: .bold, singleLine: true)
                     // The last resort, one step's worth: a label wider than
                     // its tile shrinks rather than losing its ending — the
-                    // ending is where the question mark is. It engages below
-                    // a 147 pt tile, which is smaller than any screen the app
-                    // supports draws (#145), and it keeps the design's line
-                    // box, so the glyph above does not shift.
+                    // ending is where the question mark is. „Finde den Vogel"
+                    // engages it on a 375 pt phone (#220); „Wer singt da?"
+                    // only below a 147 pt tile, which no supported screen
+                    // draws. It keeps the design's line box either way, so the
+                    // glyph above does not shift.
                     .minimumScaleFactor(HomeTileMetrics.labelScaleFloor)
 
                 // No stars at all until the first one is earned, exactly as

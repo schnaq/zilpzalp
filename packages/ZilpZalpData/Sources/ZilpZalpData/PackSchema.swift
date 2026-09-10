@@ -93,7 +93,9 @@ public struct Bird: Codable, Sendable, Hashable, Identifiable {
     public let scientificName: String
     /// iNaturalist taxon identifier, looked up at curation time. Never guessed.
     public let taxonID: Int
-    /// German definite article, needed for "Wo ist **die** Amsel?".
+    /// German definite article — "**die** Amsel". Species data, not screen
+    /// copy: no line the app speaks or writes has carried it since #220, and
+    /// dropping the field is its own change, across schema, packs and tools.
     /// Not derivable from the name, so it is maintained per species.
     public let article: String
     /// Phonetic spelling for `AVSpeechSynthesizer`, `nil` when the written
