@@ -84,8 +84,7 @@ the source declared.
 | Guinea-Turako | Photo | avocat | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/359689325> |
 | Guinea-Turako | Photo | Don Wellmann | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/143541464> |
 | Rotschnabel-Madenhacker | Photo | gwar | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/254912140> |
-| Rotschnabel-Madenhacker | Photo | scaup | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/197990376> |
-| Rotschnabel-Madenhacker | Photo | Rosario Douglas | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/266733229> |
+| Rotschnabel-Madenhacker | Photo | Andra Waagmeester | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/218480428> |
 | Riesentrappe | Photo | Tristan Jobin | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/281119644> |
 | Riesentrappe | Photo | Henggang Cui | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/182467412> |
 | Riesentrappe | Photo | Donald Hampton | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/64891827> |
@@ -94,13 +93,11 @@ the source declared.
 | Nilgans | Photo | Alex Press | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/270816937> |
 | Nilgans | Call | Sonothèque ADVL (XC918822) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/918822> |
 | Heiliger Ibis | Photo | gianluigi | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/69805359> |
-| Heiliger Ibis | Photo | Jared Zachary Herman | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/213098959> |
 | Heiliger Ibis | Photo | Francesco Cecere | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/42938767> |
 | Dreifarben-Glanzstar | Photo | Annika Lindqvist | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/32056150> |
 | Dreifarben-Glanzstar | Photo | Pål A. Olsvik | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/145855897> |
 | Dreifarben-Glanzstar | Photo | William Stephens | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/52371414> |
 | Kampfadler | Photo | Mark Bolnik | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/99602493> |
-| Kampfadler | Photo | Tom Heijnen | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/225181384> |
 | Kampfadler | Photo | Noeleen du Toit | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/250103965> |
 | Kampfadler | Call | Kileo Jumah (XC1148983) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1148983> |
 | Rosapelikan | Photo | marsyd | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/223582865> |
@@ -108,7 +105,6 @@ the source declared.
 | Rosapelikan | Photo | Radu Teodoreanu | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/376121534> |
 | Hagedasch | Photo | Martin Gutewort | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/197640384> |
 | Hagedasch | Photo | Timothy Whitehead | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/248995401> |
-| Hagedasch | Photo | Cecile Roux | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/243356148> |
 | Hagedasch | Call | Frank shirima (XC1163454) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/1163454> |
 
 ### Vögel Deutschlands (`deutschland`)

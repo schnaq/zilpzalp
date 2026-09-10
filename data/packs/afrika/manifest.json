@@ -810,19 +810,19 @@
           "retrieved": "2026-09-09"
         },
         {
-          "file": "photos/rotschnabel-madenhacker-2.heic",
-          "sha256": "8183001ea592567d6e28116d7d4c5aaa20753f016efe093c208cad3b58a64faf",
+          "file": "photos/rotschnabel-madenhacker-3.heic",
+          "sha256": "5093e3ce40accbff787fc82c4e32f092fe4777d7a8f0376aa145f4909db53b0e",
           "license": "CC-BY-4.0",
-          "attribution": "scaup",
-          "sourceURL": "https://www.inaturalist.org/observations/197990376",
+          "attribution": "gwar",
+          "sourceURL": "https://www.inaturalist.org/observations/254912140",
           "retrieved": "2026-09-10"
         },
         {
-          "file": "photos/rotschnabel-madenhacker-3.heic",
-          "sha256": "53d443b427d87454850d6ac04cd8c042aee03694b3cf4d9233edc925bd06b253",
-          "license": "CC-BY-4.0",
-          "attribution": "Rosario Douglas",
-          "sourceURL": "https://www.inaturalist.org/observations/266733229",
+          "file": "photos/rotschnabel-madenhacker-4.heic",
+          "sha256": "30c7984572979a0cc7f85f752f28f4e32268f041939f038717031e657540e8f8",
+          "license": "CC0-1.0",
+          "attribution": "Andra Waagmeester",
+          "sourceURL": "https://www.inaturalist.org/observations/218480428",
           "retrieved": "2026-09-10"
         }
       ],
@@ -922,14 +922,6 @@
           "retrieved": "2026-09-09"
         },
         {
-          "file": "photos/heiliger-ibis-2.heic",
-          "sha256": "95cac2b8d799beb1d342cc43c89112f4c2d235c30e9ea1cbae4d99005da8bfed",
-          "license": "CC-BY-4.0",
-          "attribution": "Jared Zachary Herman",
-          "sourceURL": "https://www.inaturalist.org/observations/213098959",
-          "retrieved": "2026-09-10"
-        },
-        {
           "file": "photos/heiliger-ibis-3.heic",
           "sha256": "fc52330c497283a8e6bfd637603fb9f29a2bc035dc6c3bd1dca6bfd5cb66945b",
           "license": "CC0-1.0",
@@ -990,14 +982,6 @@
           "attribution": "Mark Bolnik",
           "sourceURL": "https://www.inaturalist.org/observations/99602493",
           "retrieved": "2026-09-09"
-        },
-        {
-          "file": "photos/kampfadler-2.heic",
-          "sha256": "c7787760aa2fe428942fa97ebfc9b0d4f2e131a4897cf4cfbd46ba2d80223bff",
-          "license": "CC-BY-4.0",
-          "attribution": "Tom Heijnen",
-          "sourceURL": "https://www.inaturalist.org/observations/225181384",
-          "retrieved": "2026-09-10"
         },
         {
           "file": "photos/kampfadler-3.heic",
@@ -1078,10 +1062,10 @@
         },
         {
           "file": "photos/hagedasch-4.heic",
-          "sha256": "bcc9a6f54cfcb59a2795bb0eda2da6827b32226d58064b06ac789b45673fb25e",
-          "license": "CC-BY-SA-4.0",
-          "attribution": "Cecile Roux",
-          "sourceURL": "https://www.inaturalist.org/observations/243356148",
+          "sha256": "f2bfd0f3f471f0aebb8dddc4ee4ad7a0990d05fe1744854bbdabeca0bce97eef",
+          "license": "CC-BY-4.0",
+          "attribution": "Timothy Whitehead",
+          "sourceURL": "https://www.inaturalist.org/observations/248995401",
           "retrieved": "2026-09-10"
         }
       ],

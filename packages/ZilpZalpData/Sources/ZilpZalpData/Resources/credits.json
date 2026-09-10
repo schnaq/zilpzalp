@@ -706,19 +706,9 @@
       "birdID": "rotschnabel-madenhacker",
       "birdName": "Rotschnabel-Madenhacker",
       "kind": "photo",
-      "attribution": "scaup",
-      "license": "CC-BY-4.0",
-      "sourceURL": "https://www.inaturalist.org/observations/197990376"
-    },
-    {
-      "packID": "afrika",
-      "packTitle": "Vögel Afrikas",
-      "birdID": "rotschnabel-madenhacker",
-      "birdName": "Rotschnabel-Madenhacker",
-      "kind": "photo",
-      "attribution": "Rosario Douglas",
-      "license": "CC-BY-4.0",
-      "sourceURL": "https://www.inaturalist.org/observations/266733229"
+      "attribution": "Andra Waagmeester",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/218480428"
     },
     {
       "packID": "afrika",
@@ -806,16 +796,6 @@
       "birdID": "heiliger-ibis",
       "birdName": "Heiliger Ibis",
       "kind": "photo",
-      "attribution": "Jared Zachary Herman",
-      "license": "CC-BY-4.0",
-      "sourceURL": "https://www.inaturalist.org/observations/213098959"
-    },
-    {
-      "packID": "afrika",
-      "packTitle": "Vögel Afrikas",
-      "birdID": "heiliger-ibis",
-      "birdName": "Heiliger Ibis",
-      "kind": "photo",
       "attribution": "Francesco Cecere",
       "license": "CC0-1.0",
       "sourceURL": "https://www.inaturalist.org/observations/42938767"
@@ -859,16 +839,6 @@
       "attribution": "Mark Bolnik",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/99602493"
-    },
-    {
-      "packID": "afrika",
-      "packTitle": "Vögel Afrikas",
-      "birdID": "kampfadler",
-      "birdName": "Kampfadler",
-      "kind": "photo",
-      "attribution": "Tom Heijnen",
-      "license": "CC-BY-4.0",
-      "sourceURL": "https://www.inaturalist.org/observations/225181384"
     },
     {
       "packID": "afrika",
@@ -939,16 +909,6 @@
       "attribution": "Timothy Whitehead",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/248995401"
-    },
-    {
-      "packID": "afrika",
-      "packTitle": "Vögel Afrikas",
-      "birdID": "hagedasch",
-      "birdName": "Hagedasch",
-      "kind": "photo",
-      "attribution": "Cecile Roux",
-      "license": "CC-BY-SA-4.0",
-      "sourceURL": "https://www.inaturalist.org/observations/243356148"
     },
     {
       "packID": "afrika",
