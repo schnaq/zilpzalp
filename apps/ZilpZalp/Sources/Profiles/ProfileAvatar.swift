@@ -14,8 +14,8 @@ extension EnvironmentValues {
     /// of those views and on everything that draws them.
     ///
     /// Empty by default, which is what a preview and a broken build get: the
-    /// disc then draws the glyph ``AvatarStyle`` carries. It is the app's one
-    /// set of photos, opened once per pack change — never a second cache.
+    /// disc then draws the glyph it falls back to. It is the app's one set of
+    /// photos, opened once per pack change — never a second cache.
     @Entry var speciesPhotos = SpeciesPhotos(.empty)
 }
 

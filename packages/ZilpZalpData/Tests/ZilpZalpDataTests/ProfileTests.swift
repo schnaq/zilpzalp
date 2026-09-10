@@ -193,22 +193,35 @@ struct ProfileTests {
         )
     }
 
-    @Test("a glyph avatar from an older build resolves to one of the choices")
+    @Test("every glyph avatar from an older build keeps its face")
     func migratesGlyphAvatars() {
-        // The eight names version 1 of the file could carry. Each of them has
-        // to land on a bird the creation grid offers, or a child that migrates
-        // could not find its own avatar there any more.
-        let glyphs = ["bird", "egg", "feather", "leaf", "star", "sparkles", "house", "lightbulb"]
+        // The eight names version 1 of the file could carry, each with the
+        // bird it now shows. Pinned pair by pair rather than only checked
+        // against ``Profile/avatarChoices``: the promise to a child on a
+        // TestFlight iPad is that its own card looks the same tomorrow, and a
+        // test that accepted any bird would let that change silently.
+        let migrated = [
+            "bird": "amsel",
+            "egg": "blaumeise",
+            "feather": "wiedehopf",
+            "house": "hausrotschwanz",
+            "leaf": "zilpzalp",
+            "lightbulb": "kohlmeise",
+            "sparkles": "eisvogel",
+            // The starling needs no mapping — it is called `star` itself.
+            "star": "star",
+        ]
 
-        for glyph in glyphs {
-            let species = Profile.species(forAvatar: glyph)
-            #expect(Profile.avatarChoices.contains(species), "\(glyph) became \(species)")
+        for (glyph, bird) in migrated {
+            #expect(Profile.species(forAvatar: glyph) == bird)
+            // And every one of them is offered in the creation grid, so a
+            // migrated child finds its avatar where it left it.
+            #expect(Profile.avatarChoices.contains(bird), "\(bird) is not a choice")
         }
-        // The starling needs no mapping — it is called `star` itself.
-        #expect(Profile.species(forAvatar: "star") == "star")
+
         // A species id, and a name from a build that does not exist yet, are
         // both their own answer.
-        #expect(Profile.species(forAvatar: "wiedehopf") == "wiedehopf")
+        #expect(Profile.species(forAvatar: "rotkehlchen") == "rotkehlchen")
         #expect(Profile
             .species(forAvatar: "a bird from a later build") == "a bird from a later build")
     }

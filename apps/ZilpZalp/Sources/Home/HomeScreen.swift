@@ -324,6 +324,7 @@ private let previewCollections = [
         chooseCollection: { _ in },
         openCollection: {},
     )
+    .environment(\.speciesPhotos, SpeciesPhotos((try? .bundled()) ?? .empty))
     .environment(\.horizontalSizeClass, .regular)
 }
 
@@ -340,6 +341,7 @@ private let previewCollections = [
         chooseCollection: { _ in },
         openCollection: {},
     )
+    .environment(\.speciesPhotos, SpeciesPhotos((try? .bundled()) ?? .empty))
     .environment(\.horizontalSizeClass, .compact)
 }
 
@@ -358,6 +360,7 @@ private let previewCollections = [
         chooseCollection: { _ in },
         openCollection: {},
     )
+    .environment(\.speciesPhotos, SpeciesPhotos((try? .bundled()) ?? .empty))
     .environment(\.horizontalSizeClass, .compact)
 }
 
@@ -376,5 +379,6 @@ private let previewCollections = [
         chooseCollection: { _ in },
         openCollection: {},
     )
+    .environment(\.speciesPhotos, SpeciesPhotos((try? .bundled()) ?? .empty))
     .environment(\.horizontalSizeClass, .regular)
 }
