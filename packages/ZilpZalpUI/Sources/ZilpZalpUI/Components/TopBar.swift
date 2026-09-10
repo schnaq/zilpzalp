@@ -128,9 +128,15 @@ public struct TopBarTitle: View {
     ///
     /// A guard, not a target. SwiftUI shrinks only as far as it must, and on
     /// the narrowest supported screen it does not have to go nearly this
-    /// far: the longest title in the catalog, "Deine Vogel-Leiter", needs
-    /// 0.72 at 375 pt with both side slots filled — 20 pt, the floor for
-    /// anything a child reads.
+    /// far: the longest titles in the catalog, "Deine Vogel-Leiter" and
+    /// „Erkenne den Vogel", need 0.715 at 375 pt with both side slots filled
+    /// — 20.0 pt, the floor for anything a child reads. On a 440 pt phone
+    /// that is 27.8 pt and on an iPad the full step.
+    ///
+    /// It shrinks for *width* alone since #229. A scale factor answers to
+    /// the whole proposal, so the tight line box below — 28 pt against Baloo
+    /// 2's own 44.9 — was reason enough to shrink on its own: every title
+    /// rendered at 18 pt, on an iPad as much as on a phone.
     nonisolated static let minimumScaleFactor: CGFloat =
         ZType.Step.caption.size / ZType.Step.headline.size
 
@@ -146,6 +152,13 @@ public struct TopBarTitle: View {
             .lineLimit(1)
             .minimumScaleFactor(Self.minimumScaleFactor)
             .foregroundStyle(ZColor.textStrong)
+            // The line box below is tighter than the face's own, and a
+            // `minimumScaleFactor` shrinks to fit a height as readily as a
+            // width. So the text is sized against its own box first and the
+            // frame only reports the design's — the glyphs overhang it, as
+            // they overhang a CSS line box under 1 em, and nothing clips
+            // them (#229).
+            .fixedSize(horizontal: false, vertical: true)
             // `var(--text-headline)/1` in the JSX — the bar's title is the
             // one place the design tightens the line box to the type size,
             // and it is what makes the bar 60 pt. Deliberately not

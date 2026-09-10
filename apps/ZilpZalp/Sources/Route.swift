@@ -22,8 +22,8 @@ enum Game: Hashable {
     /// and the title in the round's top bar.
     ///
     /// One string for both places rather than a second catalog entry saying
-    /// nearly the same thing (#220). A child taps „Finde den Vogel" and the
-    /// screen that opens says „Finde den Vogel"; a grown-up asked what the
+    /// nearly the same thing (#220). A child taps „Erkenne den Vogel" and the
+    /// screen that opens says „Erkenne den Vogel"; a grown-up asked what the
     /// child is playing reads the same words in both places.
     var title: String {
         switch self {
