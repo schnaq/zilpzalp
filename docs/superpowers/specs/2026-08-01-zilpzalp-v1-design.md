@@ -1,7 +1,7 @@
 # ZilpZalp v1 — Design und Spezifikation
 
 **Datum:** 2026-08-01
-**Status:** Gültig, zuletzt aktualisiert 2026-09-08
+**Status:** Gültig, zuletzt aktualisiert 2026-09-10
 **Grundlage:** [docs/2026-07_basics.md](../../2026-07_basics.md), Design-Export unter `design/`, Klickprototyp unter `screens/`
 
 ---
@@ -22,7 +22,7 @@ Eine quelloffene Lern-App, mit der Kinder heimische Vögel kennenlernen. Kein Ac
 | Fortschritt | Sterne, Sticker nach fünf Wiedererkennungen, Sammlung, lokales Leaderboard |
 | Artenpakete | „Vögel Deutschlands" (70 Arten) fest gebundelt, weitere Pakete als Download aus S3 |
 | Elternbereich | Per FaceID/Code geschützt: Zeitbudget, Paketverwaltung, Einstellungen |
-| Über ZilpZalp | Öffentlich, ohne Schloss: Version, Herausgeberin, Datenschutz, Internetseite, Support-Mail, Credits |
+| Über ZilpZalp | Öffentlich, ohne Schloss: Version, Autorinnen und Autoren (2026-09-10 von „Herausgeberin" auf „Ein Spiel von Johanna Hillebrand und Christian Meter" geändert, schnaq GmbH bleibt auf den rechtlichen Seiten, #224), Datenschutz, Internetseite, Support-Mail, Credits |
 
 **Bewusst nicht in v1**
 

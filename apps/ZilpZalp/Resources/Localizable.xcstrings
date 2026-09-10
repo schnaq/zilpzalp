@@ -2,13 +2,13 @@
   "sourceLanguage" : "de",
   "strings" : {
     "about.intro" : {
-      "comment" : "The paragraph at the top of the screen about the app: who makes it",
+      "comment" : "The paragraph at the top of the screen about the app: who makes it — the two authors, not the company (#224)",
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ZilpZalp ist ein Projekt von Johanna Hillebrand, zusammen mit der schnaq GmbH."
+            "value" : "Ein Spiel von Johanna Hillebrand und Christian Meter."
           }
         }
       }
