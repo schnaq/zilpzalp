@@ -148,6 +148,15 @@ public struct ZButton: View {
         }
         .padding(.horizontal, size.horizontalPadding)
         .frame(minHeight: size.height)
+        // The one shape in the grown-ups' area that does not follow Dynamic
+        // Type, for the reason ``TopBar``'s title does not: a pill is fixed
+        // geometry — 64/96/120 pt of touch target — around a label that is
+        // one line by design and has no scale factor to fall back on. Let in,
+        // "Entsperren" came out "Entsper…" at AX3 on a 440 pt phone, measured
+        // (#239). Its label is the second-largest step of the scale to begin
+        // with; the prose and the rows around it are what a grown-up needed
+        // bigger.
+        .environment(\.scalesTypeWithDynamicType, false)
     }
 }
 
