@@ -125,6 +125,56 @@ struct ProfileTests {
         #expect(!text.contains("collectedSpecies"))
     }
 
+    @Test("a profile written before the collections plays with every bird")
+    func decodesWithoutCollection() throws {
+        // A file from before #187, which is every file written so far. The
+        // children who are testing the app must not lose their profiles to a
+        // choice they never made — and „no choice" is the choice that plays
+        // with all of it.
+        let older = Data(
+            """
+            {
+              "id": "3F2504E0-4F89-11D3-9A0C-0305E82C3301",
+              "name": "Mila",
+              "avatar": "feather",
+              "totalStars": 24,
+              "roundsPlayed": 9,
+              "recognitions": { "amsel": 5 },
+              "playtime": {},
+              "dailyStars": {}
+            }
+            """.utf8,
+        )
+
+        let profile = try JSONDecoder().decode(Profile.self, from: older)
+
+        #expect(profile.collection == nil)
+        #expect(profile.recognitions == ["amsel": 5])
+    }
+
+    @Test("a chosen collection is read back, and no choice is not written")
+    func decodesCollection() throws {
+        let chosen = Profile(
+            id: UUID(),
+            name: "Mila",
+            avatar: "feather",
+            collection: "afrika",
+        )
+        let everything = Profile(id: UUID(), name: "Jonas", avatar: "bird")
+
+        let written = try JSONEncoder().encode([chosen, everything])
+        let read = try JSONDecoder().decode([Profile].self, from: written)
+
+        #expect(read == [chosen, everything])
+        #expect(read.map(\.collection) == ["afrika", nil])
+        // A child who plays with every bird carries no key for it: the
+        // optional encodes as absent rather than as `null`, which is exactly
+        // what a file written before #187 looks like.
+        let text = try #require(String(data: written, encoding: .utf8))
+        #expect(text.contains("\"collection\":\"afrika\""))
+        #expect(!text.contains("null"))
+    }
+
     @Test("the avatar choices are the eight the profile picker offers")
     func offersEightAvatars() {
         #expect(

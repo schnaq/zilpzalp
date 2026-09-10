@@ -98,18 +98,19 @@ final class AppModel {
     /// The games the home screen offers, in the order it draws their tiles.
     ///
     /// Game 1 is always among them. Game 2 asks its question with a recorded
-    /// call, so it is offered only where there are calls to ask with: at least
-    /// ``callsForGameTwo`` species carrying one on disk, counted across every
-    /// installed pack.
+    /// call, so it is offered only where there are calls to ask with — four
+    /// species carrying one on disk, counted inside the collection the child
+    /// chose rather than across every installed pack (#187).
     /// Below that the tile is absent rather than teased or locked, exactly as
     /// games 3 and 4 are (#31). Nothing else decides it — where the calls are,
     /// the game is (#138).
     ///
     /// Computed rather than stored: packs arrive and are deleted in the
-    /// grown-ups' area while the app runs (#34), and a stored answer would be
-    /// one the home screen could disagree with.
+    /// grown-ups' area while the app runs (#34), a child can change its
+    /// collection between two rounds, and a stored answer would be one the
+    /// home screen could disagree with.
     var games: [Game] {
-        offersCalls ? [.names, .calls] : [.names]
+        collection.offersCalls ? [.names, .calls] : [.names]
     }
 
     /// The playing child's day against the limit the grown-ups set.
@@ -139,20 +140,6 @@ final class AppModel {
     /// the device's own calendar and time zone.
     private static var today: String {
         Profile.dayKey(for: Date())
-    }
-
-    /// How many species must carry a call before game 2 is worth
-    /// offering. Four is #31's line: below it a round would ask for the same
-    /// two or three birds over and over, and a game like that teaches the
-    /// tiles rather than the birds.
-    private static let callsForGameTwo = 4
-
-    /// Whether game 2 has enough to play with. The file has to be there, not
-    /// merely declared in the manifest: a question whose call is missing is a
-    /// question a child cannot answer, and ``PackCatalog/callURL(for:)`` is
-    /// what the round itself will ask.
-    private var offersCalls: Bool {
-        packs.speciesWithCalls >= Self.callsForGameTwo
     }
 
     init() {
@@ -234,6 +221,46 @@ final class AppModel {
             storeFailed = true
             let reason = String(describing: error)
             Logger.profiles.error("Profile was not written: \(reason, privacy: .public)")
+        }
+    }
+
+    /// A child chose which birds it wants to play with (#187).
+    ///
+    /// Kept in memory first and written after, so the home screen answers the
+    /// tap in the same frame however slow the disk is.
+    ///
+    /// **A write that fails is not a screen a child sees.** Like
+    /// ``record(_:)`` and unlike ``load()``, this leaves ``storeFailed``
+    /// alone: the choice is on the screen and the round will ask for the right
+    /// birds, and swapping the games for a grown-up's sentence about a file
+    /// would be a strange answer to tapping a picture of a penguin. It is
+    /// logged, and the choice stands for as long as this app runs.
+    ///
+    /// Not one round longer, though: ``record(_:)`` books a finished round by
+    /// reading the profile off disk and putting what comes back in
+    /// ``profiles``, so a choice that never reached the file is gone the
+    /// moment the next round ends. That is the honest answer — the file is
+    /// what the app believes — and the child sees the collection it chose
+    /// until then. Restoring it instead would mean `record` writing a field
+    /// the round knows nothing about.
+    ///
+    /// - Parameter collection: the pack's id, `nil` for every bird.
+    func choose(collection: String?) async {
+        guard let store, let index = profiles.firstIndex(where: { $0.id == activeProfileID })
+        else {
+            return
+        }
+        // Tapping a collection that is already chosen is a child asking to
+        // hear its name again, not a change to write to disk.
+        guard profiles[index].collection != collection else { return }
+
+        profiles[index].collection = collection
+
+        do {
+            try await store.update(profiles[index])
+        } catch {
+            let reason = String(describing: error)
+            Logger.profiles.error("Collection was not written: \(reason, privacy: .public)")
         }
     }
 

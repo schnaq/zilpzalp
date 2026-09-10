@@ -36,6 +36,11 @@ public struct PackLibrary: Sendable {
     /// pack that ships with the app is the one that keeps its bird.
     public let birds: [Bird]
 
+    /// The packs behind the species, in the same order — what the credits and
+    /// the grown-ups' area name. One pack in a library ``narrowed(toPack:)``
+    /// handed back.
+    public let packs: [Pack]
+
     /// - Parameter catalogs: the opened packs, most authoritative first.
     public init(_ catalogs: [PackCatalog]) {
         self.catalogs = catalogs
@@ -50,6 +55,16 @@ public struct PackLibrary: Sendable {
         }
         self.owners = owners
         self.birds = birds
+        packs = catalogs.map(\.pack)
+    }
+
+    /// A library that names fewer birds than the packs behind it hold. See
+    /// ``narrowed(toPack:)``, the only caller.
+    private init(_ catalogs: [PackCatalog], owners: [String: Int], birds: [Bird], packs: [Pack]) {
+        self.catalogs = catalogs
+        self.owners = owners
+        self.birds = birds
+        self.packs = packs
     }
 
     /// Only the pack that ships inside the app — the library every launch
@@ -60,10 +75,31 @@ public struct PackLibrary: Sendable {
         try PackLibrary([PackCatalog.bundled()])
     }
 
-    /// The packs behind the species, in the same order — what the credits and
-    /// the grown-ups' area name.
-    public var packs: [Pack] {
-        catalogs.map(\.pack)
+    /// This library with only one pack's species in it — what a child that
+    /// asked for „die Vögel aus Afrika" plays with (#187).
+    ///
+    /// **Narrowed rather than rebuilt.** `PackLibrary([thatCatalog])` would be
+    /// the obvious way and the wrong one: the merge above keeps a species that
+    /// two manifests declare in the first pack that declared it, and a library
+    /// built from one catalog alone would answer for such a bird with media
+    /// the album and the round end — which read the merged library — do not
+    /// use. So the packs and the ownership stay exactly as they are, and only
+    /// the list of birds gets shorter. A bird `id` names is therefore the copy
+    /// of it this library already had, whichever pack that came from.
+    ///
+    /// - Parameter id: the pack, as its manifest spells its `id`.
+    /// - Returns: the narrowed library, `nil` when no pack here carries that
+    ///   id — a pack a grown-up has deleted since a child chose it.
+    public func narrowed(toPack id: String) -> PackLibrary? {
+        guard let index = catalogs.firstIndex(where: { $0.pack.id == id }) else { return nil }
+
+        let declared = Set(catalogs[index].pack.birds.map(\.id))
+        return PackLibrary(
+            catalogs,
+            owners: owners,
+            birds: birds.filter { declared.contains($0.id) },
+            packs: [catalogs[index].pack],
+        )
     }
 
     /// Whether there is anything to play with.

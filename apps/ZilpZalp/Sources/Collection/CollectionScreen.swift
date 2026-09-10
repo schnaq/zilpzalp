@@ -20,13 +20,6 @@ import ZilpZalpUI
 /// this album is for cannot read the word under it. A locked one says nothing
 /// — its name is the thing still to be found.
 struct CollectionScreen: View {
-    /// The sticker's disc, and how wide a column may get before another
-    /// sticker fits beside it. Four across on an iPad, three on a phone.
-    private static let stickerSize: CGFloat = 128
-    private static let compactStickerSize: CGFloat = 80
-    private static let stickerColumn: CGFloat = 168
-    private static let compactStickerColumn: CGFloat = 88
-
     /// The progress markers under a locked sticker, sized so that five of them
     /// and their gaps stay inside the disc above: 104 pt under a 128 pt
     /// sticker, 76 under an 80 pt one.
@@ -136,14 +129,12 @@ struct CollectionScreen: View {
             LazyVGrid(
                 columns: [
                     GridItem(
-                        .adaptive(
-                            minimum: isCompact ? Self.compactStickerColumn : Self.stickerColumn,
-                        ),
-                        spacing: gridSpacing,
+                        .adaptive(minimum: StickerGrid.column(compact: isCompact)),
+                        spacing: StickerGrid.spacing(compact: isCompact),
                         alignment: .top,
                     ),
                 ],
-                spacing: gridSpacing,
+                spacing: StickerGrid.spacing(compact: isCompact),
             ) {
                 ForEach(birds, id: \.id) { bird in
                     sticker(bird)
@@ -153,12 +144,6 @@ struct CollectionScreen: View {
         }
     }
 
-    /// Three stickers across on a 375 pt phone rather than two, which is what
-    /// the design's grid reads as. The gap gives way before the sticker does.
-    private var gridSpacing: CGFloat {
-        isCompact ? ZSpacing.step3 : ZSpacing.gapTiles
-    }
-
     /// One sticker. Collected ones are buttons that say their own name; the
     /// rest are pictures, so a child that taps a padlock is not answered with
     /// silence it might read as a broken screen — it is answered with a
@@ -166,7 +151,7 @@ struct CollectionScreen: View {
     @ViewBuilder
     private func sticker(_ bird: Bird) -> some View {
         let isCollected = profile.hasSticker(for: bird.id)
-        let size = isCompact ? Self.compactStickerSize : Self.stickerSize
+        let size = StickerGrid.size(compact: isCompact)
 
         if isCollected {
             Button {

@@ -229,6 +229,54 @@
         }
       }
     },
+    "home.collection.all" : {
+      "comment" : "The collection that holds every bird on the device, first entry of the picker on the home screen",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alle Vögel"
+          }
+        }
+      }
+    },
+    "home.collection.change.accessibility" : {
+      "comment" : "VoiceOver label of the button on the home screen that opens the collection picker. %@ is the collection a child plays with right now",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vögel auswählen, jetzt: %@"
+          }
+        }
+      }
+    },
+    "home.collection.done" : {
+      "comment" : "Closes the collection picker and goes back to the games. The choice is already made, so this confirms nothing",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Los!"
+          }
+        }
+      }
+    },
+    "home.collection.title" : {
+      "comment" : "Asked — spoken and shown — over the collection picker: which birds the next round should be about",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Welche Vögel?"
+          }
+        }
+      }
+    },
     "home.game.calls.title" : {
       "comment" : "Tile on the home screen for game 2: a bird call plays, the child taps the bird",
       "extractionState" : "manual",

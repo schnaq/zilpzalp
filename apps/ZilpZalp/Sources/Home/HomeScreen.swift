@@ -33,6 +33,16 @@ struct HomeScreen: View {
     let openParents: () -> Void
     let openProfiles: () -> Void
 
+    /// What there is to choose between, „Alle Vögel" first — empty while one
+    /// pack alone is installed, and then the screen looks exactly as it did
+    /// before #187.
+    let collections: [CollectionEntry]
+
+    /// The collection being played with, resolved. See ``CollectionChip``.
+    let chosenCollection: String?
+
+    let chooseCollection: (String?) -> Void
+
     /// The sticker album. Its own door at the foot of the screen, where every
     /// variant of the design puts it (`design/ui_kits/ipad_app/HomeScreen.jsx`
     /// and screens 1a and 1b): a child who wants to look at its birds should
@@ -40,11 +50,16 @@ struct HomeScreen: View {
     let openCollection: () -> Void
 
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
-    /// What the headline turned out to need, so the tiles can be sized against
-    /// the rest. It depends on the width and the font and never on the tiles,
-    /// so there is no loop here — one extra layout pass and it settles.
-    @State private var headlineHeight: CGFloat = 0
+    /// What the headline and the collection pill turned out to need, so the
+    /// tiles can be sized against the rest. It depends on the width and the
+    /// font and never on the tiles, so there is no loop here — one extra
+    /// layout pass and it settles.
+    @State private var introHeight: CGFloat = 0
+
+    /// Whether the collections are up. See ``CollectionPicker``.
+    @State private var isPicking = false
 
     /// Whether the screen is in a compact width — a phone in portrait, or an
     /// iPad sharing its screen. It settles the two type sizes only; where the
@@ -79,23 +94,23 @@ struct HomeScreen: View {
                 }
             }
 
-            // Headline and tiles are one group, centred in what the top bar
-            // leaves. The reader measures that space so the tiles are sized
-            // against it rather than against an estimate — which is what keeps
-            // both games on screen at once from a 375 pt iPhone up, with no
-            // scroll view — and the headline reports its own height so the
-            // pair can sit in the middle instead of the tiles drifting away
-            // from the words that introduce them.
+            // Headline, collection pill and tiles are one group, centred in
+            // what the top bar leaves. The reader measures that space so the
+            // tiles are sized against it rather than against an estimate —
+            // which is what keeps both games on screen at once from a 375 pt
+            // iPhone up, with no scroll view — and the intro reports its own
+            // height so the group can sit in the middle instead of the tiles
+            // drifting away from the words that introduce them.
             GeometryReader { area in
                 VStack(spacing: ZSpacing.step7) {
-                    headline
+                    intro
                         .onGeometryChange(for: CGFloat.self) { $0.size.height } action: {
-                            headlineHeight = $0
+                            introHeight = $0
                         }
 
                     tiles(in: CGSize(
                         width: area.size.width,
-                        height: max(0, area.size.height - headlineHeight - ZSpacing.step7),
+                        height: max(0, area.size.height - introHeight - ZSpacing.step7),
                     ))
                 }
                 .frame(width: area.size.width, height: area.size.height)
@@ -108,6 +123,37 @@ struct HomeScreen: View {
             album
         }
         .background(ZColor.surfacePage)
+        .overlay {
+            if isPicking {
+                CollectionPicker(
+                    entries: collections,
+                    chosen: chosenCollection,
+                    choose: chooseCollection,
+                    close: { isPicking = false },
+                )
+            }
+        }
+        // Nothing at all where the system asks for less motion, as the quit
+        // question does it.
+        .animation(
+            reduceMotion ? nil : ZMotion.easeOut.animation(duration: ZMotion.fast),
+            value: isPicking,
+        )
+    }
+
+    /// The headline and, once there is more than one pack on the device, the
+    /// collection this child plays with.
+    ///
+    /// Measured as one so the tiles below know what is left; the pill costs a
+    /// 390 pt phone 40 pt of tile and an iPad nothing at all.
+    private var intro: some View {
+        VStack(spacing: ZSpacing.step4) {
+            headline
+
+            if let chosen = collections.first(where: { $0.id == chosenCollection }) {
+                CollectionChip(entry: chosen) { isPicking = true }
+            }
+        }
     }
 
     /// The album's door, centred at the foot as the design draws it.
@@ -215,6 +261,13 @@ struct HomeScreen: View {
 
 // MARK: - Previews
 
+/// Three packs on the device, so there is something to choose between.
+private let previewCollections = [
+    CollectionEntry(id: nil, title: "Alle Vögel", cover: nil),
+    CollectionEntry(id: "basis", title: "Unsere ersten Vögel", cover: nil),
+    CollectionEntry(id: "afrika", title: "Vögel Afrikas", cover: nil),
+]
+
 #Preview("iPad landscape", traits: .fixedLayout(width: 1194, height: 834)) {
     HomeScreen(
         avatar: "feather",
@@ -222,6 +275,9 @@ struct HomeScreen: View {
         openGame: { _ in },
         openParents: {},
         openProfiles: {},
+        collections: previewCollections,
+        chosenCollection: "afrika",
+        chooseCollection: { _ in },
         openCollection: {},
     )
     .environment(\.horizontalSizeClass, .regular)
@@ -234,6 +290,26 @@ struct HomeScreen: View {
         openGame: { _ in },
         openParents: {},
         openProfiles: {},
+        collections: previewCollections,
+        chosenCollection: nil,
+        chooseCollection: { _ in },
+        openCollection: {},
+    )
+    .environment(\.horizontalSizeClass, .compact)
+}
+
+// The bundled pack alone: nothing to choose between, and the screen as it was
+// before #187 — headline and tiles, and the tiles get every point of it.
+#Preview("One pack, no collections", traits: .fixedLayout(width: 390, height: 844)) {
+    HomeScreen(
+        avatar: "feather",
+        games: [.names, .calls],
+        openGame: { _ in },
+        openParents: {},
+        openProfiles: {},
+        collections: [],
+        chosenCollection: nil,
+        chooseCollection: { _ in },
         openCollection: {},
     )
     .environment(\.horizontalSizeClass, .compact)
@@ -248,6 +324,9 @@ struct HomeScreen: View {
         openGame: { _ in },
         openParents: {},
         openProfiles: {},
+        collections: [],
+        chosenCollection: nil,
+        chooseCollection: { _ in },
         openCollection: {},
     )
     .environment(\.horizontalSizeClass, .regular)

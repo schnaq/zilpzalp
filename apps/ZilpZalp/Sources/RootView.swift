@@ -86,9 +86,11 @@ struct RootView: View {
         }
     }
 
-    /// A game needs the species the round is drawn from. The home screen is
-    /// only reachable with a pack open, so the failure branch is unreachable —
-    /// and it
+    /// A game needs the species the round is drawn from — the collection the
+    /// child chose, which is every bird until it chooses otherwise (#187).
+    ///
+    /// The home screen is only reachable with a pack open, so the failure
+    /// branch is unreachable — and it
     /// is the same sentence rather than a `!`, because an unreachable crash on
     /// a child's iPad is still a crash.
     @ViewBuilder
@@ -96,7 +98,7 @@ struct RootView: View {
         if !model.packs.library.isEmpty {
             QuizScreen(
                 game: game,
-                library: model.packs.library,
+                library: model.collection.library,
                 askedFor: roundsAskedFor,
                 recognitions: { model.activeProfile?.recognitions ?? [:] },
                 onFinished: { path.append(.roundEnd($0)) },
@@ -128,6 +130,14 @@ struct RootView: View {
                 openGame: openGame(_:),
                 openParents: { path.append(.parents) },
                 openProfiles: { model.chooseAgain() },
+                collections: model.collectionEntries,
+                // The resolved choice, not the stored one: a pack deleted
+                // while it was chosen shows „Alle Vögel" here, which is what
+                // the next round will ask about (#187).
+                chosenCollection: model.collection.id,
+                chooseCollection: { collection in
+                    Task { await model.choose(collection: collection) }
+                },
                 openCollection: { path.append(.collection) },
             )
         } else {

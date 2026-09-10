@@ -306,6 +306,30 @@ struct QuizComponentTests {
         #expect(locked.displayedIcon == .lock)
     }
 
+    @Test("A chosen sticker keeps its tone, gains an olive rim and a check")
+    func chosenStickersAreRingedAndChecked() {
+        let chosen = RewardSticker(icon: .bird, tone: .sun, chosen: true)
+        let plain = RewardSticker(icon: .bird, tone: .sun)
+
+        // The disc itself does not change — only the ring around it — so the
+        // picture stays the thing a child recognises the sticker by.
+        #expect(chosen.palette.background == plain.palette.background)
+        #expect(chosen.palette.edge != plain.palette.edge)
+        // Never colour alone: the check is the shape half of the answer.
+        #expect(chosen.badgeIcon == .check)
+        #expect(plain.badgeIcon == nil)
+    }
+
+    @Test("Nothing a child has not earned is a thing it can choose")
+    func lockedStickersAreNeverChosen() {
+        let locked = RewardSticker(image: Image(systemName: "photo"), locked: true, chosen: true)
+
+        #expect(locked.palette == RewardStickerPalette.locked)
+        // The one badge slot goes to the padlock, and the check stays away.
+        #expect(locked.badgeIcon == .lock)
+        #expect(RewardSticker(icon: .star, locked: true, chosen: true).badgeIcon == nil)
+    }
+
     @Test("An earned sticker keeps its own glyph, its tone and its tilt")
     func earnedStickersKeepEverything() {
         let earned = RewardSticker(icon: .feather, tone: .hoopoe, rotation: .degrees(-7))
