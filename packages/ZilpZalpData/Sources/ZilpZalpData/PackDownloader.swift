@@ -152,9 +152,11 @@ public actor PackDownloader {
 
     /// Every pack installed below `Packs/`, opened and measured.
     ///
-    /// The bundled base pack is a resource of this module and never lands
-    /// below `Packs/`, so it appears neither here nor in `delete(packID:)` —
-    /// the layout rules that out, no guard needed.
+    /// **An installation under the bundled pack's id is ignored and deleted.**
+    /// The pack was downloadable before it began shipping inside the app
+    /// (#192), and left alone such a copy would appear as a second pack of the
+    /// same title — in the collection picker and as a deletable row in the
+    /// grown-ups' area.
     ///
     /// - Returns: the packs that opened, in directory order, and one error per
     ///   pack that did not. **A pack that will not open costs its own species
@@ -163,6 +165,11 @@ public actor PackDownloader {
     ///   directory without a manifest is a download that never finished and is
     ///   skipped without a word.
     public func installations() -> (installed: [PackInstallation], failures: [PackDownloadError]) {
+        // Before `Packs/` is read, so what went is not read at all. Silently,
+        // because a removal that fails costs the space and nothing else: the
+        // loop skips the pack either way, and the next launch tries again.
+        try? delete(packID: PackCatalog.bundledPackID)
+
         let contents: [URL]
         do {
             contents = try FileManager.default.contentsOfDirectory(
@@ -184,7 +191,10 @@ public actor PackDownloader {
         var failures: [PackDownloadError] = []
         for directory in contents.sorted(by: { $0.lastPathComponent < $1.lastPathComponent }) {
             let packID = directory.lastPathComponent
-            guard !packID.hasSuffix(Self.partialSuffix),
+            // Never the bundled pack, whose leftovers were just deleted: a
+            // deletion that failed must not put the pack on screen twice.
+            guard packID != PackCatalog.bundledPackID,
+                  !packID.hasSuffix(Self.partialSuffix),
                   let data = try? Data(contentsOf: directory.appending(path: Self.manifestName))
             else {
                 continue

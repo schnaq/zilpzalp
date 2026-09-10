@@ -16,7 +16,11 @@ public enum PackCatalogError: Error, Sendable {
 /// `swift test` can exercise it without a simulator.
 public struct PackCatalog: Sendable {
     /// The identifier — and directory name — of the pack that ships with the app.
-    private static let bundledPackID = "basis"
+    ///
+    /// Read by ``PackDownloader/installations()`` too: the pack was
+    /// downloadable before it began shipping inside the app (#192), so a
+    /// device may still hold an installation under this id.
+    static let bundledPackID = "deutschland"
 
     public let pack: Pack
 

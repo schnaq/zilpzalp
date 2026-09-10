@@ -16,7 +16,7 @@ struct PackLibraryTests {
         let catalog = try PackCatalog.bundled()
 
         #expect(!library.isEmpty)
-        #expect(library.packs.map(\.id) == ["basis"])
+        #expect(library.packs.map(\.id) == [PackCatalog.bundledPackID])
         #expect(library.birds.map(\.id) == catalog.pack.birds.map(\.id))
 
         let amsel = try #require(library.birds.first { $0.id == "amsel" })
