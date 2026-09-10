@@ -39,7 +39,6 @@ const FACTS = [
 const PARENTS_CAN = [
   'Der Elternbereich öffnet sich mit Face ID oder dem Gerätecode — und ohne eingerichteten Code mit einer Rechenaufgabe für Erwachsene.',
   'Die tägliche Spielzeit lässt sich begrenzen. Ist sie aufgebraucht, sagt die App freundlich „Zeit fürs Nest“.',
-  'Unter „Fotos & Dank“ steht, wer welches Foto und welche Aufnahme beigesteuert hat, mit Lizenz und Quelle.',
   'Links, die aus der App hinausführen, öffnen sich erst nach derselben Rechenaufgabe.',
 ]
 
@@ -199,9 +198,10 @@ export default function Home() {
             Die Fotos stammen von Naturbeobachterinnen und Naturbeobachtern auf
             iNaturalist, die Stimmen von Aufnahmen auf xeno-canto — jedes Bild
             und jede Aufnahme unter einer freien Lizenz (CC0, CC BY oder
-            CC BY-SA), keine Ausnahme. Wer was beigesteuert hat, steht in der App
-            unter „Fotos &amp; Dank“, und diese Liste wird aus denselben Daten
-            erzeugt wie die Dateien selbst. Sie kann also gar nicht veralten.
+            CC BY-SA), keine Ausnahme. Wer was beigesteuert hat, steht offen
+            einsehbar in der App unter „Über ZilpZalp“ → „Fotos &amp; Dank“,
+            und diese Liste wird aus denselben Daten erzeugt wie die Dateien
+            selbst. Sie kann also gar nicht veralten.
           </p>
         </div>
       </section>
