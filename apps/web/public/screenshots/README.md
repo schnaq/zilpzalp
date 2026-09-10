@@ -8,7 +8,7 @@ file is missing draws a placeholder instead.
 | File | Screen |
 |---|---|
 | `01-start.png` | Start screen with both game tiles |
-| `02-finde-den-vogel.png` | Game 1 "Finde den Vogel", a question with its four photos |
+| `02-erkenne-den-vogel.png` | Game 1 "Erkenne den Vogel", a question with its four photos |
 | `03-wer-singt-da.png` | Game 2 "Wer singt da?", sound button and four photos |
 | `04-sterne.png` | Round end with its stars and the new sticker |
 | `05-sammlung.png` | Collection with several stickers found |

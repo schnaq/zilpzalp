@@ -103,7 +103,7 @@ export default function Home() {
               <span className="game-mark">
                 <SpeechIcon />
               </span>
-              <h3>Finde den Vogel</h3>
+              <h3>Erkenne den Vogel</h3>
               <p>
                 Ein Vogelname wird vorgelesen, vier Fotos liegen auf dem Tisch.
                 Das Kind tippt den richtigen Vogel an. Beim zweiten Versuch
