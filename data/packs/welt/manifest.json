@@ -9,14 +9,16 @@
       "taxonID": 3820,
       "article": "der",
       "pronunciation": null,
-      "photo": {
-        "file": "photos/kaiserpinguin.heic",
-        "sha256": "c616cc5784963ea50d67f8291fcc7a5f60530381e12561920db89b5ad3cbb6bd",
-        "license": "CC-BY-4.0",
-        "attribution": "Seig",
-        "sourceURL": "https://www.inaturalist.org/observations/31447155",
-        "retrieved": "2026-09-10"
-      },
+      "photos": [
+        {
+          "file": "photos/kaiserpinguin.heic",
+          "sha256": "c616cc5784963ea50d67f8291fcc7a5f60530381e12561920db89b5ad3cbb6bd",
+          "license": "CC-BY-4.0",
+          "attribution": "Seig",
+          "sourceURL": "https://www.inaturalist.org/observations/31447155",
+          "retrieved": "2026-09-10"
+        }
+      ],
       "call": {
         "file": "audio/kaiserpinguin.m4a",
         "sha256": "213b7dc89008b63fcc72c614d2247a1d5deb1da5106a555431d3cd1b5bdbd2c0",
@@ -33,14 +35,16 @@
       "taxonID": 20504,
       "article": "der",
       "pronunciation": null,
-      "photo": {
-        "file": "photos/emu.heic",
-        "sha256": "9550f83781f18fc846cc6ca9d1bc391b5f9ea4cbd7d02f2366d757b3b00afc1c",
-        "license": "CC-BY-4.0",
-        "attribution": "Donald Davesne",
-        "sourceURL": "https://www.inaturalist.org/observations/327879005",
-        "retrieved": "2026-09-10"
-      },
+      "photos": [
+        {
+          "file": "photos/emu.heic",
+          "sha256": "9550f83781f18fc846cc6ca9d1bc391b5f9ea4cbd7d02f2366d757b3b00afc1c",
+          "license": "CC-BY-4.0",
+          "attribution": "Donald Davesne",
+          "sourceURL": "https://www.inaturalist.org/observations/327879005",
+          "retrieved": "2026-09-10"
+        }
+      ],
       "call": null
     },
     {
@@ -50,14 +54,16 @@
       "taxonID": 20500,
       "article": "der",
       "pronunciation": null,
-      "photo": {
-        "file": "photos/helmkasuar.heic",
-        "sha256": "f8da15077044ef234dcd929edc4c150d38831ce53c28c5eefdbb3169bf837244",
-        "license": "CC-BY-4.0",
-        "attribution": "Ian Allen",
-        "sourceURL": "https://www.inaturalist.org/observations/346337206",
-        "retrieved": "2026-09-10"
-      },
+      "photos": [
+        {
+          "file": "photos/helmkasuar.heic",
+          "sha256": "f8da15077044ef234dcd929edc4c150d38831ce53c28c5eefdbb3169bf837244",
+          "license": "CC-BY-4.0",
+          "attribution": "Ian Allen",
+          "sourceURL": "https://www.inaturalist.org/observations/346337206",
+          "retrieved": "2026-09-10"
+        }
+      ],
       "call": null
     },
     {
@@ -67,14 +73,16 @@
       "taxonID": 20512,
       "article": "der",
       "pronunciation": null,
-      "photo": {
-        "file": "photos/nandu.heic",
-        "sha256": "62d200b2ed43e9c783ebea86ba2a7783f0791dfc281577f545e3a711a8cdc2cd",
-        "license": "CC0-1.0",
-        "attribution": "Fernando Sessegolo",
-        "sourceURL": "https://www.inaturalist.org/observations/42772166",
-        "retrieved": "2026-09-10"
-      },
+      "photos": [
+        {
+          "file": "photos/nandu.heic",
+          "sha256": "62d200b2ed43e9c783ebea86ba2a7783f0791dfc281577f545e3a711a8cdc2cd",
+          "license": "CC0-1.0",
+          "attribution": "Fernando Sessegolo",
+          "sourceURL": "https://www.inaturalist.org/observations/42772166",
+          "retrieved": "2026-09-10"
+        }
+      ],
       "call": null
     },
     {
@@ -84,14 +92,16 @@
       "taxonID": 1204,
       "article": "der",
       "pronunciation": null,
-      "photo": {
-        "file": "photos/pfau.heic",
-        "sha256": "f8ee23449549e7a2685e02717827d4c8f4bd46e81a6f75b4d4aebd06844e42ff",
-        "license": "CC-BY-4.0",
-        "attribution": "Jason Alexander",
-        "sourceURL": "https://www.inaturalist.org/observations/153415191",
-        "retrieved": "2026-09-10"
-      },
+      "photos": [
+        {
+          "file": "photos/pfau.heic",
+          "sha256": "f8ee23449549e7a2685e02717827d4c8f4bd46e81a6f75b4d4aebd06844e42ff",
+          "license": "CC-BY-4.0",
+          "attribution": "Jason Alexander",
+          "sourceURL": "https://www.inaturalist.org/observations/153415191",
+          "retrieved": "2026-09-10"
+        }
+      ],
       "call": {
         "file": "audio/pfau.m4a",
         "sha256": "67a497a686338e73a901721ee39db83a26ca6632c2938bab2215d31ae7b25b08",
@@ -108,14 +118,16 @@
       "taxonID": 906,
       "article": "der",
       "pronunciation": null,
-      "photo": {
-        "file": "photos/truthahn.heic",
-        "sha256": "ebac7ec92f6af1d38fc228306e7a436b50e827b47f03c46a74d92b950e50c561",
-        "license": "CC-BY-4.0",
-        "attribution": "kirk gardner",
-        "sourceURL": "https://www.inaturalist.org/observations/153184238",
-        "retrieved": "2026-09-10"
-      },
+      "photos": [
+        {
+          "file": "photos/truthahn.heic",
+          "sha256": "ebac7ec92f6af1d38fc228306e7a436b50e827b47f03c46a74d92b950e50c561",
+          "license": "CC-BY-4.0",
+          "attribution": "kirk gardner",
+          "sourceURL": "https://www.inaturalist.org/observations/153184238",
+          "retrieved": "2026-09-10"
+        }
+      ],
       "call": {
         "file": "audio/truthahn.m4a",
         "sha256": "ff61686a137c365db7f95a8a3434ad713c6505643ce4e88b6f1f4b3910581c1d",
@@ -132,14 +144,16 @@
       "taxonID": 18793,
       "article": "der",
       "pronunciation": null,
-      "photo": {
-        "file": "photos/riesentukan.heic",
-        "sha256": "e8c742c5bf9d92bc34da881b62a0b0b7dfc34cb5ee010c80a12f107e3e175c12",
-        "license": "CC-BY-4.0",
-        "attribution": "Gabriel Martínez",
-        "sourceURL": "https://www.inaturalist.org/observations/198099971",
-        "retrieved": "2026-09-10"
-      },
+      "photos": [
+        {
+          "file": "photos/riesentukan.heic",
+          "sha256": "e8c742c5bf9d92bc34da881b62a0b0b7dfc34cb5ee010c80a12f107e3e175c12",
+          "license": "CC-BY-4.0",
+          "attribution": "Gabriel Martínez",
+          "sourceURL": "https://www.inaturalist.org/observations/198099971",
+          "retrieved": "2026-09-10"
+        }
+      ],
       "call": null
     },
     {
@@ -149,14 +163,16 @@
       "taxonID": 19022,
       "article": "der",
       "pronunciation": null,
-      "photo": {
-        "file": "photos/hellroter-ara.heic",
-        "sha256": "d2dc36cef28f72e666ff22c5aa965a2923c0e38feaabec126c343d7fc065b2b0",
-        "license": "CC-BY-4.0",
-        "attribution": "Cricket Raspet",
-        "sourceURL": "https://www.inaturalist.org/observations/223409469",
-        "retrieved": "2026-09-10"
-      },
+      "photos": [
+        {
+          "file": "photos/hellroter-ara.heic",
+          "sha256": "d2dc36cef28f72e666ff22c5aa965a2923c0e38feaabec126c343d7fc065b2b0",
+          "license": "CC-BY-4.0",
+          "attribution": "Cricket Raspet",
+          "sourceURL": "https://www.inaturalist.org/observations/223409469",
+          "retrieved": "2026-09-10"
+        }
+      ],
       "call": {
         "file": "audio/hellroter-ara.m4a",
         "sha256": "bb99055f129b4649261e6fa303b14bfb385c631d1b5bf7eb467fedfdba34d9a1",
@@ -173,14 +189,16 @@
       "taxonID": 116834,
       "article": "der",
       "pronunciation": null,
-      "photo": {
-        "file": "photos/gelbhaubenkakadu.heic",
-        "sha256": "eb98afeb49386b9d1cd137d8d079b3d7367ba027f21be41e61ad52e7f33b6bae",
-        "license": "CC-BY-4.0",
-        "attribution": "Donald Davesne",
-        "sourceURL": "https://www.inaturalist.org/observations/184938828",
-        "retrieved": "2026-09-10"
-      },
+      "photos": [
+        {
+          "file": "photos/gelbhaubenkakadu.heic",
+          "sha256": "eb98afeb49386b9d1cd137d8d079b3d7367ba027f21be41e61ad52e7f33b6bae",
+          "license": "CC-BY-4.0",
+          "attribution": "Donald Davesne",
+          "sourceURL": "https://www.inaturalist.org/observations/184938828",
+          "retrieved": "2026-09-10"
+        }
+      ],
       "call": null
     },
     {
@@ -190,14 +208,16 @@
       "taxonID": 19339,
       "article": "der",
       "pronunciation": null,
-      "photo": {
-        "file": "photos/wellensittich.heic",
-        "sha256": "f5e5ff582ffed13db2790f7345caf8eb001c7df265727e87ccbd8215d328c8cd",
-        "license": "CC-BY-4.0",
-        "attribution": "cappycollins",
-        "sourceURL": "https://www.inaturalist.org/observations/307179303",
-        "retrieved": "2026-09-10"
-      },
+      "photos": [
+        {
+          "file": "photos/wellensittich.heic",
+          "sha256": "f5e5ff582ffed13db2790f7345caf8eb001c7df265727e87ccbd8215d328c8cd",
+          "license": "CC-BY-4.0",
+          "attribution": "cappycollins",
+          "sourceURL": "https://www.inaturalist.org/observations/307179303",
+          "retrieved": "2026-09-10"
+        }
+      ],
       "call": {
         "file": "audio/wellensittich.m4a",
         "sha256": "fed352553671a613069daeab937efefa725a9422bc98533a8bb02f19497d4cd4",
@@ -214,14 +234,16 @@
       "taxonID": 18941,
       "article": "der",
       "pronunciation": null,
-      "photo": {
-        "file": "photos/kea.heic",
-        "sha256": "a4b7f12521f3f6eb21c766f3327e23b7a5af27b75af3fd069bb3e21c5af99cd7",
-        "license": "CC0-1.0",
-        "attribution": "Mark Fraser",
-        "sourceURL": "https://www.inaturalist.org/observations/217439596",
-        "retrieved": "2026-09-10"
-      },
+      "photos": [
+        {
+          "file": "photos/kea.heic",
+          "sha256": "a4b7f12521f3f6eb21c766f3327e23b7a5af27b75af3fd069bb3e21c5af99cd7",
+          "license": "CC0-1.0",
+          "attribution": "Mark Fraser",
+          "sourceURL": "https://www.inaturalist.org/observations/217439596",
+          "retrieved": "2026-09-10"
+        }
+      ],
       "call": null
     },
     {
@@ -231,14 +253,16 @@
       "taxonID": 6317,
       "article": "der",
       "pronunciation": null,
-      "photo": {
-        "file": "photos/annakolibri.heic",
-        "sha256": "dd9bb0cd3aaac742855e4192441a047cf42128eb378d33bea54c2dfb6dbee88b",
-        "license": "CC-BY-4.0",
-        "attribution": "William Walker",
-        "sourceURL": "https://www.inaturalist.org/observations/250218495",
-        "retrieved": "2026-09-10"
-      },
+      "photos": [
+        {
+          "file": "photos/annakolibri.heic",
+          "sha256": "dd9bb0cd3aaac742855e4192441a047cf42128eb378d33bea54c2dfb6dbee88b",
+          "license": "CC-BY-4.0",
+          "attribution": "William Walker",
+          "sourceURL": "https://www.inaturalist.org/observations/250218495",
+          "retrieved": "2026-09-10"
+        }
+      ],
       "call": null
     },
     {
@@ -248,14 +272,16 @@
       "taxonID": 20856,
       "article": "der",
       "pronunciation": null,
-      "photo": {
-        "file": "photos/quetzal.heic",
-        "sha256": "98eb080014cc66f441444cc2316ac28417518c45804d7c648a8e64168c90754f",
-        "license": "CC-BY-4.0",
-        "attribution": "er-birds",
-        "sourceURL": "https://www.inaturalist.org/observations/156023432",
-        "retrieved": "2026-09-10"
-      },
+      "photos": [
+        {
+          "file": "photos/quetzal.heic",
+          "sha256": "98eb080014cc66f441444cc2316ac28417518c45804d7c648a8e64168c90754f",
+          "license": "CC-BY-4.0",
+          "attribution": "er-birds",
+          "sourceURL": "https://www.inaturalist.org/observations/156023432",
+          "retrieved": "2026-09-10"
+        }
+      ],
       "call": null
     },
     {
@@ -265,14 +291,16 @@
       "taxonID": 9083,
       "article": "der",
       "pronunciation": null,
-      "photo": {
-        "file": "photos/rotkardinal.heic",
-        "sha256": "0d4748ec0595fbc1d3a33068792f5b9a7fbe500b25f5af50dd67e1af968c2e78",
-        "license": "CC-BY-4.0",
-        "attribution": "Michael",
-        "sourceURL": "https://www.inaturalist.org/observations/337375795",
-        "retrieved": "2026-09-10"
-      },
+      "photos": [
+        {
+          "file": "photos/rotkardinal.heic",
+          "sha256": "0d4748ec0595fbc1d3a33068792f5b9a7fbe500b25f5af50dd67e1af968c2e78",
+          "license": "CC-BY-4.0",
+          "attribution": "Michael",
+          "sourceURL": "https://www.inaturalist.org/observations/337375795",
+          "retrieved": "2026-09-10"
+        }
+      ],
       "call": {
         "file": "audio/rotkardinal.m4a",
         "sha256": "a2703432bc0693a0892f9c0a7ca0474887df2ed575df3f0035ba4ddec3371eba",
@@ -289,14 +317,16 @@
       "taxonID": 8229,
       "article": "der",
       "pronunciation": null,
-      "photo": {
-        "file": "photos/blauhaeher.heic",
-        "sha256": "af99a386bd6e19a4ccea41a63a99f8b9128e53171820a2c0cc9145c00973985d",
-        "license": "CC-BY-4.0",
-        "attribution": "Blake Ross",
-        "sourceURL": "https://www.inaturalist.org/observations/144792422",
-        "retrieved": "2026-09-10"
-      },
+      "photos": [
+        {
+          "file": "photos/blauhaeher.heic",
+          "sha256": "af99a386bd6e19a4ccea41a63a99f8b9128e53171820a2c0cc9145c00973985d",
+          "license": "CC-BY-4.0",
+          "attribution": "Blake Ross",
+          "sourceURL": "https://www.inaturalist.org/observations/144792422",
+          "retrieved": "2026-09-10"
+        }
+      ],
       "call": {
         "file": "audio/blauhaeher.m4a",
         "sha256": "09c7849844be6634fe2059fb0b92e8102545435ac9bed0f17d6b5ccdc89e248c",
@@ -313,14 +343,16 @@
       "taxonID": 5305,
       "article": "der",
       "pronunciation": null,
-      "photo": {
-        "file": "photos/weisskopfseeadler.heic",
-        "sha256": "dce25a10a72e31b21059e1117fcc14fd409d395277bab1b04102fbed7c7b716a",
-        "license": "CC-BY-4.0",
-        "attribution": "Justin Flint",
-        "sourceURL": "https://www.inaturalist.org/observations/335312498",
-        "retrieved": "2026-09-10"
-      },
+      "photos": [
+        {
+          "file": "photos/weisskopfseeadler.heic",
+          "sha256": "dce25a10a72e31b21059e1117fcc14fd409d395277bab1b04102fbed7c7b716a",
+          "license": "CC-BY-4.0",
+          "attribution": "Justin Flint",
+          "sourceURL": "https://www.inaturalist.org/observations/335312498",
+          "retrieved": "2026-09-10"
+        }
+      ],
       "call": {
         "file": "audio/weisskopfseeadler.m4a",
         "sha256": "eb6068b9d3ad6b5c9bbab54596619451dbaa901bbb94316dec61f5ffb272d8a2",
@@ -337,14 +369,16 @@
       "taxonID": 5321,
       "article": "die",
       "pronunciation": null,
-      "photo": {
-        "file": "photos/harpyie.heic",
-        "sha256": "88103598b6185429ed787ea0f4da4a3ba800752525dcb518f52b8153e1eaf1cf",
-        "license": "CC-BY-4.0",
-        "attribution": "Luciano Massa",
-        "sourceURL": "https://www.inaturalist.org/observations/134352007",
-        "retrieved": "2026-09-10"
-      },
+      "photos": [
+        {
+          "file": "photos/harpyie.heic",
+          "sha256": "88103598b6185429ed787ea0f4da4a3ba800752525dcb518f52b8153e1eaf1cf",
+          "license": "CC-BY-4.0",
+          "attribution": "Luciano Massa",
+          "sourceURL": "https://www.inaturalist.org/observations/134352007",
+          "retrieved": "2026-09-10"
+        }
+      ],
       "call": null
     },
     {
@@ -354,14 +388,16 @@
       "taxonID": 4747,
       "article": "der",
       "pronunciation": null,
-      "photo": {
-        "file": "photos/andenkondor.heic",
-        "sha256": "8ac30d3c25d564604275baa18a3a4bf74c003e44af6f6441a534fd334a262981",
-        "license": "CC-BY-SA-4.0",
-        "attribution": "Luis Enrique Calderón Franco",
-        "sourceURL": "https://www.inaturalist.org/observations/48609433",
-        "retrieved": "2026-09-10"
-      },
+      "photos": [
+        {
+          "file": "photos/andenkondor.heic",
+          "sha256": "8ac30d3c25d564604275baa18a3a4bf74c003e44af6f6441a534fd334a262981",
+          "license": "CC-BY-SA-4.0",
+          "attribution": "Luis Enrique Calderón Franco",
+          "sourceURL": "https://www.inaturalist.org/observations/48609433",
+          "retrieved": "2026-09-10"
+        }
+      ],
       "call": null
     },
     {
@@ -371,14 +407,16 @@
       "taxonID": 144594,
       "article": "die",
       "pronunciation": null,
-      "photo": {
-        "file": "photos/schnee-eule.heic",
-        "sha256": "3a46e5d649201cd2fcacc10a232cb50577810adab5c6b04c305bf00e17b1c9d6",
-        "license": "CC-BY-4.0",
-        "attribution": "Dustin Snider",
-        "sourceURL": "https://www.inaturalist.org/observations/195441759",
-        "retrieved": "2026-09-10"
-      },
+      "photos": [
+        {
+          "file": "photos/schnee-eule.heic",
+          "sha256": "3a46e5d649201cd2fcacc10a232cb50577810adab5c6b04c305bf00e17b1c9d6",
+          "license": "CC-BY-4.0",
+          "attribution": "Dustin Snider",
+          "sourceURL": "https://www.inaturalist.org/observations/195441759",
+          "retrieved": "2026-09-10"
+        }
+      ],
       "call": null
     },
     {
@@ -388,14 +426,16 @@
       "taxonID": 4504,
       "article": "der",
       "pronunciation": null,
-      "photo": {
-        "file": "photos/papageitaucher.heic",
-        "sha256": "440c6f6c8833c31d26dc1662ea366d552a41f9445165194967b922345374808f",
-        "license": "CC-BY-4.0",
-        "attribution": "Diego González Dopico",
-        "sourceURL": "https://www.inaturalist.org/observations/277865524",
-        "retrieved": "2026-09-10"
-      },
+      "photos": [
+        {
+          "file": "photos/papageitaucher.heic",
+          "sha256": "440c6f6c8833c31d26dc1662ea366d552a41f9445165194967b922345374808f",
+          "license": "CC-BY-4.0",
+          "attribution": "Diego González Dopico",
+          "sourceURL": "https://www.inaturalist.org/observations/277865524",
+          "retrieved": "2026-09-10"
+        }
+      ],
       "call": null
     },
     {
@@ -405,14 +445,16 @@
       "taxonID": 4117,
       "article": "der",
       "pronunciation": null,
-      "photo": {
-        "file": "photos/wanderalbatros.heic",
-        "sha256": "6fbfd0dde96a24becb71cdc92327c0bf133cab685427e718a9286c1012763cde",
-        "license": "CC-BY-4.0",
-        "attribution": "eloise kerroux",
-        "sourceURL": "https://www.inaturalist.org/observations/281029033",
-        "retrieved": "2026-09-10"
-      },
+      "photos": [
+        {
+          "file": "photos/wanderalbatros.heic",
+          "sha256": "6fbfd0dde96a24becb71cdc92327c0bf133cab685427e718a9286c1012763cde",
+          "license": "CC-BY-4.0",
+          "attribution": "eloise kerroux",
+          "sourceURL": "https://www.inaturalist.org/observations/281029033",
+          "retrieved": "2026-09-10"
+        }
+      ],
       "call": null
     },
     {
@@ -422,14 +464,16 @@
       "taxonID": 4631,
       "article": "der",
       "pronunciation": null,
-      "photo": {
-        "file": "photos/prachtfregattvogel.heic",
-        "sha256": "239c099b8ec0e8d4c9664e15a92fa8d416d5cb3a1a8bdc4ba1c7b731671f76c7",
-        "license": "CC-BY-SA-4.0",
-        "attribution": "Thibaud Aronson",
-        "sourceURL": "https://www.inaturalist.org/observations/112046587",
-        "retrieved": "2026-09-10"
-      },
+      "photos": [
+        {
+          "file": "photos/prachtfregattvogel.heic",
+          "sha256": "239c099b8ec0e8d4c9664e15a92fa8d416d5cb3a1a8bdc4ba1c7b731671f76c7",
+          "license": "CC-BY-SA-4.0",
+          "attribution": "Thibaud Aronson",
+          "sourceURL": "https://www.inaturalist.org/observations/112046587",
+          "retrieved": "2026-09-10"
+        }
+      ],
       "call": null
     },
     {
@@ -439,14 +483,16 @@
       "taxonID": 3786,
       "article": "der",
       "pronunciation": null,
-      "photo": {
-        "file": "photos/blaufusstoelpel.heic",
-        "sha256": "3383d9a401654646781eec385c37b10d2f2feb831c375df3f07a81804390ff88",
-        "license": "CC-BY-4.0",
-        "attribution": "Anthony Batista",
-        "sourceURL": "https://www.inaturalist.org/observations/167987942",
-        "retrieved": "2026-09-10"
-      },
+      "photos": [
+        {
+          "file": "photos/blaufusstoelpel.heic",
+          "sha256": "3383d9a401654646781eec385c37b10d2f2feb831c375df3f07a81804390ff88",
+          "license": "CC-BY-4.0",
+          "attribution": "Anthony Batista",
+          "sourceURL": "https://www.inaturalist.org/observations/167987942",
+          "retrieved": "2026-09-10"
+        }
+      ],
       "call": null
     },
     {
@@ -456,14 +502,16 @@
       "taxonID": 4626,
       "article": "der",
       "pronunciation": null,
-      "photo": {
-        "file": "photos/eistaucher.heic",
-        "sha256": "11e12ba5b1547447489ca0cbc411d2643c5c68c18f2d5a4d1b9ac609fd257406",
-        "license": "CC-BY-4.0",
-        "attribution": "Matt Felperin",
-        "sourceURL": "https://www.inaturalist.org/observations/226591176",
-        "retrieved": "2026-09-10"
-      },
+      "photos": [
+        {
+          "file": "photos/eistaucher.heic",
+          "sha256": "11e12ba5b1547447489ca0cbc411d2643c5c68c18f2d5a4d1b9ac609fd257406",
+          "license": "CC-BY-4.0",
+          "attribution": "Matt Felperin",
+          "sourceURL": "https://www.inaturalist.org/observations/226591176",
+          "retrieved": "2026-09-10"
+        }
+      ],
       "call": {
         "file": "audio/eistaucher.m4a",
         "sha256": "355e4d25848ad01eeaa7555e7f4a96c92dbd1243162c60d91066d2ba23ef6ea5",
@@ -480,14 +528,16 @@
       "taxonID": 2413,
       "article": "der",
       "pronunciation": null,
-      "photo": {
-        "file": "photos/lachender-hans.heic",
-        "sha256": "059f7f710fecf20074989f85e05001d8e3dfa9b33205e4337812f96aa876c7ba",
-        "license": "CC-BY-4.0",
-        "attribution": "Sockrosma",
-        "sourceURL": "https://www.inaturalist.org/observations/200607101",
-        "retrieved": "2026-09-10"
-      },
+      "photos": [
+        {
+          "file": "photos/lachender-hans.heic",
+          "sha256": "059f7f710fecf20074989f85e05001d8e3dfa9b33205e4337812f96aa876c7ba",
+          "license": "CC-BY-4.0",
+          "attribution": "Sockrosma",
+          "sourceURL": "https://www.inaturalist.org/observations/200607101",
+          "retrieved": "2026-09-10"
+        }
+      ],
       "call": null
     },
     {
@@ -497,14 +547,16 @@
       "taxonID": 8183,
       "article": "der",
       "pronunciation": null,
-      "photo": {
-        "file": "photos/raggi-paradiesvogel.heic",
-        "sha256": "3eecc17a726b3dc17a7a9d0a3b42493f4d24150600e435be9e0e5addbf30e816",
-        "license": "CC-BY-4.0",
-        "attribution": "avocat",
-        "sourceURL": "https://www.inaturalist.org/observations/381810092",
-        "retrieved": "2026-09-10"
-      },
+      "photos": [
+        {
+          "file": "photos/raggi-paradiesvogel.heic",
+          "sha256": "3eecc17a726b3dc17a7a9d0a3b42493f4d24150600e435be9e0e5addbf30e816",
+          "license": "CC-BY-4.0",
+          "attribution": "avocat",
+          "sourceURL": "https://www.inaturalist.org/observations/381810092",
+          "retrieved": "2026-09-10"
+        }
+      ],
       "call": null
     },
     {
@@ -514,14 +566,16 @@
       "taxonID": 5536,
       "article": "der",
       "pronunciation": null,
-      "photo": {
-        "file": "photos/doppelhornvogel.heic",
-        "sha256": "0481d17eba1751438b7b347a103a9816f11e1743fdf5c9a10410a9304ce2b85e",
-        "license": "CC-BY-SA-4.0",
-        "attribution": "Thibaud Aronson",
-        "sourceURL": "https://www.inaturalist.org/observations/103410527",
-        "retrieved": "2026-09-10"
-      },
+      "photos": [
+        {
+          "file": "photos/doppelhornvogel.heic",
+          "sha256": "0481d17eba1751438b7b347a103a9816f11e1743fdf5c9a10410a9304ce2b85e",
+          "license": "CC-BY-SA-4.0",
+          "attribution": "Thibaud Aronson",
+          "sourceURL": "https://www.inaturalist.org/observations/103410527",
+          "retrieved": "2026-09-10"
+        }
+      ],
       "call": null
     },
     {
@@ -531,14 +585,16 @@
       "taxonID": 39,
       "article": "der",
       "pronunciation": null,
-      "photo": {
-        "file": "photos/mandschurenkranich.heic",
-        "sha256": "594a32399c237d3a2e5d634d4448444b863e20c860a09cb7e42f76dc6f075336",
-        "license": "CC-BY-4.0",
-        "attribution": "Christoph Moning",
-        "sourceURL": "https://www.inaturalist.org/observations/63813237",
-        "retrieved": "2026-09-10"
-      },
+      "photos": [
+        {
+          "file": "photos/mandschurenkranich.heic",
+          "sha256": "594a32399c237d3a2e5d634d4448444b863e20c860a09cb7e42f76dc6f075336",
+          "license": "CC-BY-4.0",
+          "attribution": "Christoph Moning",
+          "sourceURL": "https://www.inaturalist.org/observations/63813237",
+          "retrieved": "2026-09-10"
+        }
+      ],
       "call": null
     },
     {
@@ -548,14 +604,16 @@
       "taxonID": 6914,
       "article": "der",
       "pronunciation": null,
-      "photo": {
-        "file": "photos/schwarzschwan.heic",
-        "sha256": "e86dede1839fff301dd3916d3dd96fb4366b1b368bb858fa3b9bd0233b6a3fe8",
-        "license": "CC0-1.0",
-        "attribution": "Nikolay Martyanov",
-        "sourceURL": "https://www.inaturalist.org/observations/91632451",
-        "retrieved": "2026-09-10"
-      },
+      "photos": [
+        {
+          "file": "photos/schwarzschwan.heic",
+          "sha256": "e86dede1839fff301dd3916d3dd96fb4366b1b368bb858fa3b9bd0233b6a3fe8",
+          "license": "CC0-1.0",
+          "attribution": "Nikolay Martyanov",
+          "sourceURL": "https://www.inaturalist.org/observations/91632451",
+          "retrieved": "2026-09-10"
+        }
+      ],
       "call": {
         "file": "audio/schwarzschwan.m4a",
         "sha256": "e7d3bab0789bff26393325942d232622cac90414ed2009fe4490889b28942948",
@@ -572,14 +630,16 @@
       "taxonID": 3750,
       "article": "der",
       "pronunciation": null,
-      "photo": {
-        "file": "photos/roter-sichler.heic",
-        "sha256": "b009289298c072e76326df5acbd8e8be3be901024f80fa43c16ae78512ff7a5f",
-        "license": "CC-BY-4.0",
-        "attribution": "Odebrecht, Clarisse",
-        "sourceURL": "https://www.inaturalist.org/observations/330283195",
-        "retrieved": "2026-09-10"
-      },
+      "photos": [
+        {
+          "file": "photos/roter-sichler.heic",
+          "sha256": "b009289298c072e76326df5acbd8e8be3be901024f80fa43c16ae78512ff7a5f",
+          "license": "CC-BY-4.0",
+          "attribution": "Odebrecht, Clarisse",
+          "sourceURL": "https://www.inaturalist.org/observations/330283195",
+          "retrieved": "2026-09-10"
+        }
+      ],
       "call": null
     },
     {
@@ -589,14 +649,16 @@
       "taxonID": 62529,
       "article": "der",
       "pronunciation": null,
-      "photo": {
-        "file": "photos/rosaloeffler.heic",
-        "sha256": "37593c7cc5b70bd1f2f8a1c7804660fdac23082502813459d08facdeb7bc0560",
-        "license": "CC-BY-4.0",
-        "attribution": "Nigel Voaden",
-        "sourceURL": "https://www.inaturalist.org/observations/1707823",
-        "retrieved": "2026-09-10"
-      },
+      "photos": [
+        {
+          "file": "photos/rosaloeffler.heic",
+          "sha256": "37593c7cc5b70bd1f2f8a1c7804660fdac23082502813459d08facdeb7bc0560",
+          "license": "CC-BY-4.0",
+          "attribution": "Nigel Voaden",
+          "sourceURL": "https://www.inaturalist.org/observations/1707823",
+          "retrieved": "2026-09-10"
+        }
+      ],
       "call": null
     }
   ]

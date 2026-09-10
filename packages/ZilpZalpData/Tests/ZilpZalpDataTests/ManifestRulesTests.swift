@@ -9,6 +9,21 @@ import Testing
 /// download test, where every stub file is named once.
 @Suite("Declared files")
 struct DeclaredFilesTests {
+    /// One photo of that species, as the manifest spells it. Two of them, so
+    /// that the declared files show every photo and not only the portrait.
+    private static func photo(_ file: String) -> String {
+        """
+        {
+                  "file": "\(file)",
+                  "sha256": "\(String(repeating: "0", count: 64))",
+                  "license": "CC-BY-4.0",
+                  "attribution": "Nobody",
+                  "sourceURL": "https://example.org/observations/1",
+                  "retrieved": "2026-09-09"
+                }
+        """
+    }
+
     /// A manifest with two sentence keys, one of which points at the other's
     /// file, so both properties are exercised at once.
     private static func pack(sharing: Bool) throws -> Pack {
@@ -31,14 +46,7 @@ struct DeclaredFilesTests {
               "taxonID": 12716,
               "article": "die",
               "pronunciation": null,
-              "photo": {
-                "file": "photos/amsel.png",
-                "sha256": "\(String(repeating: "0", count: 64))",
-                "license": "CC-BY-4.0",
-                "attribution": "Nobody",
-                "sourceURL": "https://example.org/observations/1",
-                "retrieved": "2026-09-09"
-              },
+              "photos": [\(photo("photos/amsel.png")), \(photo("photos/amsel-2.png"))],
               "call": null,
               "speech": {
                 "quiz.prompt.whereIs": {
@@ -58,12 +66,15 @@ struct DeclaredFilesTests {
         """.utf8))
     }
 
-    @Test("a species lists its photo, then its clips in sentence-key order")
+    @Test("a species lists every photo, then its clips in sentence-key order")
     func ordersTheClipsBySentenceKey() throws {
         let bird = try #require(Self.pack(sharing: false).birds.first)
 
         #expect(bird.declaredFiles.map(\.file) == [
+            // Every photo of the species, in the order the manifest lists
+            // them: the second one is as much a file to fetch as the first.
             "photos/amsel.png",
+            "photos/amsel-2.png",
             // "collection.name" sorts before "quiz.prompt.whereIs"; the
             // dictionary the manifest decodes into has no order of its own.
             "speech/collection.name/amsel.m4a",
@@ -77,8 +88,12 @@ struct DeclaredFilesTests {
 
         // The bird still names it under both keys — the pack does not, because
         // the bucket holds it once and the index sizes it once.
-        #expect(pack.birds.first?.declaredFiles.count == 3)
-        #expect(pack.declaredFiles.map(\.file) == ["photos/amsel.png", "clips/silence.m4a"])
+        #expect(pack.birds.first?.declaredFiles.count == 4)
+        #expect(pack.declaredFiles.map(\.file) == [
+            "photos/amsel.png",
+            "photos/amsel-2.png",
+            "clips/silence.m4a",
+        ])
     }
 }
 

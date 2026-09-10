@@ -76,14 +76,14 @@ class PacksTestCase(unittest.TestCase):
                 {
                     "id": bird,
                     "name": bird.capitalize(),
-                    "photo": manifest.media_block(
+                    "photos": [manifest.media_block(
                         file=f"photos/{bird}.jpg",
                         sha256=manifest.sha256_of(pack / "photos" / f"{bird}.jpg"),
                         licence="CC-BY-4.0",
                         attribution="Alexis Tinker-Tsavalas",
                         source_url="https://www.inaturalist.org/observations/20490738",
                         retrieved="2026-09-07",
-                    ),
+                    )],
                     "call": None,
                 }
             )

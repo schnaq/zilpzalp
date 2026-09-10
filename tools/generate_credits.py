@@ -15,7 +15,8 @@ Two outputs, both committed:
       For the in-app credits screen (#37), decoded by `Credits.bundled()`.
 
 Both are written deterministically: packs sorted by id, birds in manifest order,
-photo before call, no timestamps. Running the tool twice yields identical bytes.
+every photo in the order the manifest lists them and the call after them, no
+timestamps. Running the tool twice yields identical bytes.
 
 Locally it heals both files and says so. In CI it is the drift check: whenever it
 had to change anything, it exits 1, because the committed credits did not match the
@@ -155,7 +156,36 @@ def pack_media(document: dict, pack_id: str, pack_title: str) -> list[dict]:
     if not isinstance(birds, list):
         raise ValueError(f"{pack_id}: no birds found (expected an object whose 'birds' key holds a list)")
 
-    entries = []
+    entries: list[dict] = []
+    # What has been credited already. Two photos of one observation carry the
+    # same photographer, licence and source, and a second identical line
+    # credits nobody a second time — the credits screen keys its rows by their
+    # content, so it would be the same row twice.
+    seen: set[tuple] = set()
+
+    def credit(media: object, kind: str, bird_id: str, bird_name: str, label: str) -> None:
+        if not isinstance(media, dict):
+            raise ValueError(f"{label} / {kind}: is not an object")
+
+        entry = {
+            "packID": pack_id,
+            # The pack's own product title on every entry: the credits screen
+            # groups by pack and heads each group with it, and an id like
+            # `deutschland` is a directory name, not something to put in front
+            # of a parent.
+            "packTitle": pack_title,
+            "birdID": bird_id,
+            "birdName": bird_name,
+            "kind": kind,
+            "attribution": field(media, "attribution", f"{label} / {kind}"),
+            "license": field(media, "license", f"{label} / {kind}"),
+            "sourceURL": field(media, "sourceURL", f"{label} / {kind}"),
+        }
+        key = tuple(entry.items())
+        if key not in seen:
+            seen.add(key)
+            entries.append(entry)
+
     for index, bird in enumerate(birds, start=1):
         if not isinstance(bird, dict):
             raise ValueError(f"{pack_id} / bird #{index}: is not an object")
@@ -166,34 +196,17 @@ def pack_media(document: dict, pack_id: str, pack_title: str) -> list[dict]:
 
         # A bird without a photo is not creditable. The gate says the same, in
         # its own words, on the next line of `mise run check`.
-        if bird.get("photo") is None:
-            raise ValueError(f"{label}: field 'photo' is missing")
+        photos = bird.get("photos")
+        if not isinstance(photos, list) or not photos:
+            raise ValueError(f"{label}: field 'photos' is missing or empty")
 
-        for kind in ("photo", "call"):
-            # The call is optional and stays null until a freely licensed
-            # recording exists for the bird.
-            media = bird.get(kind)
-            if media is None:
-                continue
-            if not isinstance(media, dict):
-                raise ValueError(f"{label} / {kind}: is not an object")
+        for photo in photos:
+            credit(photo, "photo", bird_id, bird_name, label)
 
-            entries.append(
-                {
-                    "packID": pack_id,
-                    # The pack's own product title on every entry: the credits
-                    # screen groups by pack and heads each group with it, and
-                    # an id like `deutschland` is a directory name, not something to
-                    # put in front of a parent.
-                    "packTitle": pack_title,
-                    "birdID": bird_id,
-                    "birdName": bird_name,
-                    "kind": kind,
-                    "attribution": field(media, "attribution", f"{label} / {kind}"),
-                    "license": field(media, "license", f"{label} / {kind}"),
-                    "sourceURL": field(media, "sourceURL", f"{label} / {kind}"),
-                }
-            )
+        # The call comes after the photos and is optional: it stays null until a
+        # freely licensed recording exists for the bird.
+        if bird.get("call") is not None:
+            credit(bird["call"], "call", bird_id, bird_name, label)
 
     return entries
 

@@ -1,7 +1,6 @@
 import Foundation
 import os
 import SwiftUI
-import UIKit
 import ZilpZalpCore
 import ZilpZalpData
 import ZilpZalpUI
@@ -36,15 +35,6 @@ final class QuizSession {
     /// from a ``Round``'s identifiers to a bird with a name and a photo.
     private let birds: [String: Bird]
 
-    /// Every bird's photo, resolved once when the session is built.
-    ///
-    /// Ten files, opened together rather than per question: `UIImage` maps the
-    /// file and defers the decode to the first draw, so this costs a handful
-    /// of file lookups, and in exchange no tile ever appears as the sand
-    /// placeholder and fills in a moment later. Four such flashes per question
-    /// would be the most visible thing on the screen.
-    private let photos: [String: Image]
-
     /// Every bird's call, resolved once when the session is built — only the
     /// birds that carry one on disk are in here, and in game 2 those are
     /// exactly the birds a question can ask for.
@@ -73,6 +63,9 @@ final class QuizSession {
     /// The round being played and everything tapped in it. Replaced wholesale
     /// by ``resume()`` once the previous one is over.
     private var play: RoundPlay
+
+    /// The photos the tiles draw from, and which of them this round shows.
+    private var photos: QuizPhotos
 
     /// What tells this round apart from the next one, so the round end books
     /// it exactly once. Renewed with every fresh round in ``resume()``.
@@ -107,13 +100,6 @@ final class QuizSession {
         self.game = game
         let everySpecies = library.birds
         birds = Dictionary(uniqueKeysWithValues: everySpecies.map { ($0.id, $0) })
-        photos = Dictionary(
-            uniqueKeysWithValues: everySpecies.compactMap { bird in
-                library.photoURL(for: bird)
-                    .flatMap { UIImage(contentsOfFile: $0.path(percentEncoded: false)) }
-                    .map { (bird.id, Image(uiImage: $0)) }
-            },
-        )
         let recordings = Dictionary(
             uniqueKeysWithValues: everySpecies.compactMap { bird in
                 library.callURL(for: bird).map { (bird.id, $0) }
@@ -142,7 +128,9 @@ final class QuizSession {
         // Built here rather than on the first appearance so that a pack too
         // small to play is refused before a screen is drawn for it.
         var generator = SystemRandomNumberGenerator()
-        play = try RoundPlay(round: Round.make(from: species, using: &generator))
+        let round = try Round.make(from: species, using: &generator)
+        play = RoundPlay(round: round)
+        photos = QuizPhotos(library: library, round: round, using: &generator)
     }
 
     // MARK: - Reading the round
@@ -187,10 +175,15 @@ final class QuizSession {
         play.question?.choices.compactMap { birds[$0] } ?? []
     }
 
-    /// This bird's photo, `nil` when the file was missing — the tile then draws
-    /// its own placeholder rather than an empty square.
+    /// The photo this bird's tile shows in the question being asked, `nil` when
+    /// no file of the species opened — the tile then draws its own placeholder
+    /// rather than an empty square.
+    ///
+    /// Which one comes from ``QuizPhotos``: a species that carries several
+    /// shows a different picture from question to question (#194), and the same
+    /// one for as long as a question stands.
     func photo(for bird: Bird) -> Image? {
-        photos[bird.id]
+        photos.photo(bird.id, question: play.index)
     }
 
     /// Whether a call is sounding right now — the rings on the sound button.
@@ -275,8 +268,9 @@ final class QuizSession {
             // reason `make` can throw has come back. The fallback deals the
             // finished round's questions again, which is a duller round and
             // not a broken one.
-            let dealt = try? Round.make(from: species, using: &generator)
-            play = RoundPlay(round: dealt ?? play.round)
+            let dealt = (try? Round.make(from: species, using: &generator)) ?? play.round
+            play = RoundPlay(round: dealt)
+            photos.deal(dealt, using: &generator)
             roundID = UUID()
             askedFirstQuestion = nil
             answeredLastQuestion = nil

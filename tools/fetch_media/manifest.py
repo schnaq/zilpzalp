@@ -29,14 +29,19 @@ SPEECH_DIR = REPO_ROOT / "data" / "speech"
 # and as data/packs/deutschland/manifest.json already carries it.
 MEDIA_KEYS = ("file", "sha256", "license", "attribution", "sourceURL", "retrieved")
 
-# The two media a bird carries directly. `call` stays null until a freely
-# licensed recording exists — the licence gate and the Swift `Bird` model both
-# allow it.
+# The one medium a bird carries as a single object. `call` stays null until a
+# freely licensed recording exists — the licence gate and the Swift `Bird`
+# model both allow it.
 #
-# Speech is deliberately not among them: a bird's `speech` is a sentence key
-# per clip rather than one object, and its licence sits once on the manifest's
-# `voice`. `set_media` therefore refuses it, and `media_files` reads it apart.
-MEDIA_KINDS = ("photo", "call")
+# Neither photos nor speech are among them. A bird's `photos` is a list of at
+# least one (#194) and `add_photo` appends to it; its `speech` is a sentence key
+# per clip, and its licence sits once on the manifest's `voice`. `set_media`
+# therefore refuses both, and `media_files` reads them apart.
+MEDIA_KINDS = ("call",)
+
+# Where a bird keeps its photos: a list, the curated portrait first. A quiz tile
+# shows one of them at a time, the sticker and the album always the first.
+PHOTOS_KIND = "photos"
 
 # Where a bird keeps its recorded sentences, and where the fixed set keeps its
 # own. One sentence key per clip in both.
@@ -132,8 +137,77 @@ def media_block(
     }
 
 
+def photos(entry: dict) -> list:
+    """A bird's photos, the empty list while it has none.
+
+    `or []` rather than `get(..., [])`: a manifest may carry `"photos": null`
+    the way a bird carries `"call": null`, and a null would reach the caller as
+    something it cannot iterate.
+    """
+    return entry.get(PHOTOS_KIND) or []
+
+
+def next_photo_file(entry: dict, species: str, suffix: str) -> str:
+    """The file name the species' next photo gets.
+
+    `photos/<species>.<suffix>` for the first, then `-2`, `-3`, … — **one past
+    the highest number in use**, never the lowest free one. A name that was
+    dropped stays dropped: it is in the bucket and possibly on a device, and a
+    second, different photo under it would be the one file whose content depends
+    on when it was fetched.
+    """
+    used = [0]
+    for photo in photos(entry):
+        stem = Path(str(photo.get("file", ""))).stem
+        if stem == species:
+            used.append(1)
+        elif stem.startswith(f"{species}-") and stem[len(species) + 1 :].isdigit():
+            used.append(int(stem[len(species) + 1 :]))
+
+    number = max(used) + 1
+    name = species if number == 1 else f"{species}-{number}"
+    return f"photos/{name}.{suffix}"
+
+
+def add_photo(document: dict, bird_id: str, block: dict) -> None:
+    """Append one photo to a bird's set.
+
+    Appended rather than set: every photo of a species is a photo the quiz may
+    show, and the first one stays the curated portrait the sticker and the album
+    use. Replacing one is dropping it and adding another.
+    """
+    entry = bird(document, bird_id)
+    entry[PHOTOS_KIND] = [*photos(entry), block]
+
+
+def drop_photo(document: dict, bird_id: str, file: str) -> dict:
+    """Remove one photo from a bird's set and return the block that went.
+
+    Raises `LookupError` when the bird does not name that file, and `ValueError`
+    when it is the only photo left: a species without a photo has nothing to
+    show in a quiz tile, on a sticker or in the album, and both the licence gate
+    and the Swift model refuse it.
+    """
+    entry = bird(document, bird_id)
+    remaining, gone = [], []
+    for photo in photos(entry):
+        (gone if photo.get("file") == file else remaining).append(photo)
+
+    if not gone:
+        named = ", ".join(str(photo.get("file")) for photo in photos(entry))
+        raise LookupError(f"'{bird_id}' has no photo '{file}' (has: {named})")
+    if not remaining:
+        raise ValueError(
+            f"'{file}' is the only photo of '{bird_id}' — a species without one cannot be "
+            "shown. Add the replacement first, then drop this one"
+        )
+
+    entry[PHOTOS_KIND] = remaining
+    return gone[0]
+
+
 def set_media(document: dict, bird_id: str, kind: str, block: dict) -> str | None:
-    """Replace a bird's `photo` or `call`. Returns the file it pointed at before.
+    """Replace a bird's `call`. Returns the file it pointed at before.
 
     The caller uses that to delete the previous file: the manifest is the truth
     about the pack directory, and a photo nothing references any more would
@@ -235,7 +309,7 @@ def set_voice(document: dict, block: dict) -> dict:
 def media_files(document: dict) -> list[tuple[str, str]]:
     """Every medium the manifest declares, as (relative path, SHA-256).
 
-    Photo, call and recorded sentences of every bird, in manifest order. What
+    Photos, call and recorded sentences of every bird, in manifest order. What
     is not declared here is not uploaded — the bucket holds what the manifest
     promises, nothing that was left behind by an earlier curation round.
 
@@ -257,6 +331,8 @@ def media_files(document: dict) -> list[tuple[str, str]]:
             files.append((media["file"], str(media.get("sha256", ""))))
 
     for entry in document.get("birds") or []:
+        for photo in photos(entry):
+            declare(photo)
         for kind in MEDIA_KINDS:
             declare(entry.get(kind))
 

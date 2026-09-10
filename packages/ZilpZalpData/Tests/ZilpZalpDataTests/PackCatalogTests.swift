@@ -102,10 +102,19 @@ struct PackCatalogTests {
         let catalog = try PackCatalog.bundled()
 
         for bird in catalog.pack.birds {
-            let url = try #require(catalog.photoURL(for: bird), "no photo for '\(bird.id)'")
-            let hex = try sha256(of: url)
+            #expect(!bird.photos.isEmpty, "'\(bird.id)' declares no photo")
+            // Every one of them, not only the portrait: a second photo the
+            // bundle does not hold is a tile that draws its placeholder.
+            for (index, photo) in bird.photos.enumerated() {
+                let url = try #require(
+                    catalog.photoURL(for: bird, at: index),
+                    "no photo \(index) for '\(bird.id)'",
+                )
+                let hex = try sha256(of: url)
 
-            #expect(hex == bird.photo.sha256, "photo of '\(bird.id)' does not match its sha256")
+                #expect(hex == photo.sha256, "\(photo.file) does not match its sha256")
+            }
+            #expect(catalog.photoURL(for: bird, at: bird.photos.count) == nil)
         }
     }
 

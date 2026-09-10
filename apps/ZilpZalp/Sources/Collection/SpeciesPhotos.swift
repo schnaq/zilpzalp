@@ -2,8 +2,12 @@ import SwiftUI
 import UIKit
 import ZilpZalpData
 
-/// Every photo the app can show, keyed by species id — the bundled pack's and
-/// every downloaded one's.
+/// One photo of every species the app knows, keyed by species id — the bundled
+/// pack's and every downloaded one's.
+///
+/// The curated portrait, which is the first of a species' photos: the album and
+/// the sticker show a bird at rest, and only a quiz tile draws from the whole
+/// set (#194).
 ///
 /// The album draws a whole page of stickers at once, and a
 /// `View` is rebuilt on every layout pass — so the files are opened once, when

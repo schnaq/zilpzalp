@@ -455,7 +455,7 @@ class PickTests(CallsTestCase):
         self.run_pick(record(**{"file-name": "XC965144-amsel.wav"}))
 
         document = manifest.load(self.pack / "manifest.json")
-        self.assertEqual(document["birds"][0]["photo"]["file"], "photos/amsel.png")
+        self.assertEqual(document["birds"][0]["photos"][0]["file"], "photos/amsel.png")
 
     def test_regenerates_the_derived_files(self) -> None:
         self.run_pick(record(**{"file-name": "XC965144-amsel.wav"}))

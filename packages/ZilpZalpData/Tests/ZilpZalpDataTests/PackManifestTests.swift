@@ -29,11 +29,12 @@ struct PackManifestTests {
         #expect(zilpzalp.taxonID == 117_016)
         #expect(zilpzalp.article == "der")
         #expect(zilpzalp.pronunciation == "Tsilp-Tsalp")
-        #expect(zilpzalp.photo.license == .ccBy)
-        #expect(zilpzalp.photo.file == "photos/zilpzalp.png")
-        #expect(zilpzalp.photo.attribution == "Tomas Broucek")
+        let portrait = try #require(zilpzalp.photos.first)
+        #expect(portrait.license == .ccBy)
+        #expect(portrait.file == "photos/zilpzalp.png")
+        #expect(portrait.attribution == "Tomas Broucek")
         #expect(
-            zilpzalp.photo.sourceURL
+            portrait.sourceURL
                 == URL(string: "https://www.inaturalist.org/observations/353438691"),
         )
         #expect(zilpzalp.call?.license == .ccBySa)
@@ -67,7 +68,8 @@ struct PackManifestTests {
         // midnight UTC is the day before west of Greenwich.
         var calendar = Calendar(identifier: .gregorian)
         calendar.timeZone = try #require(TimeZone(identifier: "UTC"))
-        let day = calendar.dateComponents([.year, .month, .day], from: amsel.photo.retrieved)
+        let retrieved = try #require(amsel.photos.first).retrieved
+        let day = calendar.dateComponents([.year, .month, .day], from: retrieved)
 
         #expect(day.year == 2026)
         #expect(day.month == 8)
@@ -83,7 +85,37 @@ struct PackManifestTests {
         let pack = try PackManifest.decode(manifest)
         let testvogel = try Self.bird("testvogel", in: pack)
 
-        #expect(testvogel.photo.license == .cc0)
+        #expect(testvogel.photos.first?.license == .cc0)
+    }
+
+    // MARK: - The shape before the photo set
+
+    /// #194 made `photo` a list called `photos`. A device that downloaded
+    /// `welt` or `afrika` before it holds a manifest in the old shape, and a
+    /// pack that will not decode is a pack the grown-ups' area calls broken —
+    /// so the old key is still read, as a species with one photo.
+    @Test("a manifest that names one photo decodes as a species with one")
+    func decodesTheShapeBeforeThePhotoSet() throws {
+        let pack = try PackManifest.decode(Self.species(declaring: #""photo": "# + Self.photo))
+        let testvogel = try Self.bird("testvogel", in: pack)
+
+        #expect(testvogel.photos.count == 1)
+        #expect(testvogel.photos.first?.file == "photos/testvogel.png")
+    }
+
+    @Test(
+        "a species that declares no photo at all fails",
+        arguments: [#""photos": []"#, #""call": null"#],
+    )
+    func failsWithoutAnyPhoto(declaring: String) throws {
+        let error = try #require(throws: DecodingError.self) {
+            try PackManifest.decode(Self.species(declaring: declaring))
+        }
+        guard case let .dataCorrupted(context) = error else {
+            Issue.record("expected a dataCorrupted error, got \(error)")
+            return
+        }
+        #expect(context.codingPath.last?.stringValue == "photos")
     }
 
     // MARK: - Invalid manifests
@@ -178,6 +210,40 @@ extension PackManifestTests {
         return Data(validManifest.replacingOccurrences(of: original, with: replacement).utf8)
     }
 
+    /// One media object, for the manifests the photo-set tests build.
+    private static let photo = """
+    {
+        "file": "photos/testvogel.png",
+        "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "license": "CC-BY-4.0",
+        "attribution": "Test Photographer",
+        "sourceURL": "https://example.org/observations/1",
+        "retrieved": "2026-08-01"
+      }
+    """
+
+    /// A one-species manifest whose photos are whatever `declaring` says —
+    /// the old single `photo`, an empty list, or nothing at all.
+    private static func species(declaring: String) -> Data {
+        Data("""
+        {
+          "id": "test",
+          "title": "Test",
+          "birds": [
+            {
+              "id": "testvogel",
+              "name": "Testvogel",
+              "scientificName": "Testus testus",
+              "taxonID": 1,
+              "article": "die",
+              "pronunciation": null,
+              \(declaring)
+            }
+          ]
+        }
+        """.utf8)
+    }
+
     /// Made up on purpose and independent of the fixtures: it only has to be
     /// a manifest the schema accepts, so that a test may break exactly one
     /// thing in it. Nothing here needs to stay in step with a real pack.
@@ -193,14 +259,16 @@ extension PackManifestTests {
           "taxonID": 1,
           "article": "die",
           "pronunciation": null,
-          "photo": {
-            "file": "photos/testvogel.png",
-            "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
-            "license": "CC-BY-4.0",
-            "attribution": "Test Photographer",
-            "sourceURL": "https://example.org/observations/1",
-            "retrieved": "2026-08-01"
-          },
+          "photos": [
+            {
+              "file": "photos/testvogel.png",
+              "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+              "license": "CC-BY-4.0",
+              "attribution": "Test Photographer",
+              "sourceURL": "https://example.org/observations/1",
+              "retrieved": "2026-08-01"
+            }
+          ],
           "call": null
         }
       ]

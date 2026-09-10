@@ -50,7 +50,7 @@ def bird(**overrides) -> dict:
         "scientificName": "Turdus merula",
         "taxonID": 12716,
         "article": "die",
-        "photo": media(),
+        "photos": [media()],
     }
     entry.update(overrides)
     return {key: value for key, value in entry.items() if value is not None}
@@ -108,7 +108,7 @@ class LicenseGateTestCase(unittest.TestCase):
     def write_pack(self, **photo_fields) -> Path:
         """Write the local photo plus a one-bird manifest whose photo carries `photo_fields`."""
         self.write_photo()
-        return self.write_manifest({"id": "basis", "birds": [bird(photo=media(**photo_fields))]})
+        return self.write_manifest({"id": "basis", "birds": [bird(photos=[media(**photo_fields)])]})
 
     def write_clip(self, relative: str = CLIP_FILE, content: bytes = CLIP_BYTES) -> Path:
         return self.write_asset(relative, content)
@@ -187,7 +187,7 @@ class ValidManifestTests(LicenseGateTestCase):
         nested = self.packs_dir / "deutschland"
         nested.mkdir()
         (nested / "birds.json").write_text(
-            json.dumps({"birds": [bird(photo=media(license="CC-BY-NC-4.0"))]}), encoding="utf-8"
+            json.dumps({"birds": [bird(photos=[media(license="CC-BY-NC-4.0")])]}), encoding="utf-8"
         )
 
         self.assertFails("deutschland", "CC-BY-NC-4.0")
@@ -248,18 +248,43 @@ class LicenceRuleTests(LicenseGateTestCase):
 
         self.assertFails("'file' is missing or empty")
 
-    def test_missing_photo_fails(self):
-        self.write_manifest({"birds": [bird(photo=None)]})
+    def test_missing_photos_fails(self):
+        self.write_manifest({"birds": [bird(photos=None)]})
 
-        self.assertFails("'photo' is missing")
+        self.assertFails("'photos' is missing or empty")
 
-    def test_null_photo_fails(self):
-        # A null photo is as missing as an absent one — only the call may be null.
+    def test_null_photos_fails(self):
+        # A null photo list is as missing as an absent one — only the call may
+        # be null.
         entry = bird()
-        entry["photo"] = None
+        entry["photos"] = None
         self.write_manifest({"birds": [entry]})
 
-        self.assertFails("'photo' is missing")
+        self.assertFails("'photos' is missing or empty")
+
+    def test_empty_photo_list_fails(self):
+        # Every screen that shows a bird shows a photo of it, so a species with
+        # none is a broken manifest rather than a bird that never appears.
+        self.write_manifest({"birds": [bird(photos=[])]})
+
+        self.assertFails("'photos' is missing or empty")
+
+    def test_the_shape_before_the_photo_set_is_named(self):
+        # A hand-written manifest still carrying the single `photo` of #163 gets
+        # told what the field is called now, not that `photos` is missing.
+        entry = bird(photos=None)
+        entry["photo"] = media()
+        self.write_manifest({"birds": [entry]})
+
+        self.assertFails("'photo' is a list called 'photos'")
+
+    def test_every_photo_of_a_species_is_checked(self):
+        # The second photo is licensed as nothing this project may ship, and the
+        # first one is beyond reproach — so only a gate that walks the whole
+        # list catches it.
+        self.write_manifest({"birds": [bird(photos=[media(), media(license="CC-BY-NC-4.0")])]})
+
+        self.assertFails("CC-BY-NC-4.0")
 
 
 class HashTests(LicenseGateTestCase):
@@ -277,20 +302,20 @@ class HashTests(LicenseGateTestCase):
     def test_missing_sha256_fails_for_s3_only_assets_too(self):
         # The Pack model declares sha256 non-optional and the downloader
         # verifies it — an asset without a declared hash must not pass.
-        self.write_manifest({"birds": [bird(photo=media(sha256=None))]})
+        self.write_manifest({"birds": [bird(photos=[media(sha256=None)])]})
 
         self.assertFails("'sha256' is missing or empty")
 
     def test_absent_file_skips_the_hash_check(self):
         # No write_pack here on purpose: the asset lives in S3 only, so there is
         # nothing to hash — a wrong sha256 cannot be caught and must not fail.
-        self.write_manifest({"birds": [bird(photo=media(sha256="deadbeef"))]})
+        self.write_manifest({"birds": [bird(photos=[media(sha256="deadbeef")])]})
 
         self.assertPasses()
 
     def test_absent_file_still_has_its_metadata_checked(self):
         # S3-only again: the hash is skipped, the licence is not.
-        self.write_manifest({"birds": [bird(photo=media(license="CC-BY-NC-4.0"))]})
+        self.write_manifest({"birds": [bird(photos=[media(license="CC-BY-NC-4.0")])]})
 
         self.assertFails("amsel / photo", "CC-BY-NC-4.0")
 
@@ -498,9 +523,9 @@ class ManifestShapeTests(LicenseGateTestCase):
         self.assertFails("bird #1: is not an object")
 
     def test_non_object_photo_fails_and_is_not_counted(self):
-        self.write_manifest({"birds": [bird(photo="photos/amsel.jpg")]})
+        self.write_manifest({"birds": [bird(photos=["photos/amsel.jpg"])]})
 
-        output = self.assertFails("photo: is not an object")
+        output = self.assertFails("photo 1: is not an object")
         self.assertIn("media assets checked: 0", output)
 
     def test_annotation_data_is_escaped(self):
@@ -513,7 +538,7 @@ class ManifestShapeTests(LicenseGateTestCase):
                 self.assertIn("%0A", line)
 
     def test_bird_without_id_is_named_by_position(self):
-        self.write_manifest({"birds": [bird(id=None, photo=media(license="CC-BY-NC-4.0"))]})
+        self.write_manifest({"birds": [bird(id=None, photos=[media(license="CC-BY-NC-4.0")])]})
 
         self.assertFails("bird #1 / photo")
 
