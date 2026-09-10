@@ -77,14 +77,21 @@ struct CollectionScreen: View {
         library.birds
     }
 
+    /// Whether this child has earned `bird`'s sticker. The screen's one
+    /// question, asked by the count, by the order and by the sticker itself,
+    /// so the three of them cannot answer it differently.
+    private func isCollected(_ bird: Bird) -> Bool {
+        profile.hasSticker(for: bird.id)
+    }
+
     private var collected: [Bird] {
-        birds.filter { profile.hasSticker(for: $0.id) }
+        birds.filter(isCollected)
     }
 
     /// The birds in the order the album shows them: everything found first,
     /// the manifest's order kept inside each group (#204).
     private var albumBirds: [Bird] {
-        AlbumOrder.earnedFirst(birds) { profile.hasSticker(for: $0.id) }
+        AlbumOrder.earnedFirst(birds, earned: isCollected)
     }
 
     var body: some View {
@@ -199,10 +206,10 @@ struct CollectionScreen: View {
     /// picture that plainly is not one of the bright ones.
     @ViewBuilder
     private func sticker(_ bird: Bird) -> some View {
-        let isCollected = profile.hasSticker(for: bird.id)
+        let found = isCollected(bird)
         let size = StickerGrid.size(compact: isCompact)
 
-        if isCollected {
+        if found {
             Button {
                 say(.name(bird))
             } label: {
