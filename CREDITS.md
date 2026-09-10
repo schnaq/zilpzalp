@@ -153,23 +153,43 @@ the source declared.
 | Zilpzalp | Photo | Roy Lowry | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/161063758> |
 | Zilpzalp | Call | steve (XC815470) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/815470> |
 | Haussperling | Photo | Esteban Poveda | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/83153529> |
+| Haussperling | Photo | Sascha Nunheim | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/105983364> |
+| Haussperling | Photo | Sandy Wolkenberg | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/69023165> |
 | Haussperling | Call | Philippe_Grange (XC1152146) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1152146> |
 | Grünfink | Photo | Christoph Moning | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/57657970> |
+| Grünfink | Photo | Paulo Martins | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/109256141> |
+| Grünfink | Photo | Chris Acree | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/145525933> |
 | Grünfink | Call | Kevin Ortega (XC642404) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://xeno-canto.org/642404> |
 | Buchfink | Photo | Donald Davesne | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/83075710> |
+| Buchfink | Photo | harry beaman | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/372742290> |
+| Buchfink | Photo | Павел Кунгуров | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/397779576> |
 | Buchfink | Call | Sonothèque ADVL (XC1088506) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1088506> |
 | Stieglitz | Photo | Christoph Moning | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/68095260> |
+| Stieglitz | Photo | Susan Marley | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/106499018> |
+| Stieglitz | Photo | Gergely Nigg | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/76629051> |
 | Stieglitz | Call | Grégoire Chauvot (XC797484) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/797484> |
 | Gimpel | Photo | Ксения Волянская | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/333441894> |
+| Gimpel | Photo | rowan_m | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/66822874> |
+| Gimpel | Photo | Ilya Firsov | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/164462789> |
 | Gimpel | Call | Jurijs Ješkins (XC983039) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://xeno-canto.org/983039> |
 | Kernbeißer | Photo | Лариса Артемьева | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/74825757> |
+| Kernbeißer | Photo | Syd Cannings | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/70283108> |
+| Kernbeißer | Photo | SteveM4560 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/258838733> |
 | Bluthänfling | Photo | Helen Bovill | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/305224073> |
+| Bluthänfling | Photo | SteveM4560 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/262110578> |
+| Bluthänfling | Photo | SteveM4560 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/262109648> |
 | Bluthänfling | Call | Sonothèque ADVL (XC1107823) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1107823> |
 | Goldammer | Photo | joba102 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/78888615> |
+| Goldammer | Photo | SteveM4560 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/262110687> |
+| Goldammer | Photo | SteveM4560 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/337077270> |
 | Goldammer | Call | Philippe_Grange (XC1143669) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1143669> |
 | Elster | Photo | Andrejus Gaidamavičius | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/257350003> |
+| Elster | Photo | bitsnbirds | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/118281033> |
+| Elster | Photo | David Kleuker | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/207398172> |
 | Elster | Call | Philippe_Grange (XC1148526) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1148526> |
 | Eichelhäher | Photo | Helen Bovill | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/273999502> |
+| Eichelhäher | Photo | SteveM4560 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/258364464> |
+| Eichelhäher | Photo | Rhys | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/343819178> |
 | Eichelhäher | Call | Sonothèque ADVL (XC1175981) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1175981> |
 | Rabenkrähe | Photo | Nasser Halaweh | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/18803996> |
 | Rabenkrähe | Call | Marie-Lan Taÿ Pamart (XC511943) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/511943> |

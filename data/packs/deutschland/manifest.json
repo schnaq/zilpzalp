@@ -437,6 +437,22 @@
           "attribution": "Esteban Poveda",
           "sourceURL": "https://www.inaturalist.org/observations/83153529",
           "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/haussperling-2.heic",
+          "sha256": "267108b7d4d43056febde7d282b402c1a36e42aaa0109d57e3e83a373204ea7e",
+          "license": "CC-BY-4.0",
+          "attribution": "Sascha Nunheim",
+          "sourceURL": "https://www.inaturalist.org/observations/105983364",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/haussperling-3.heic",
+          "sha256": "cf9a740f2621ddfd919eaedcbe060474399bf161c5e36674eadcc2c9a80af8fa",
+          "license": "CC-BY-4.0",
+          "attribution": "Sandy Wolkenberg",
+          "sourceURL": "https://www.inaturalist.org/observations/69023165",
+          "retrieved": "2026-09-10"
         }
       ],
       "call": {
@@ -462,6 +478,22 @@
           "license": "CC-BY-4.0",
           "attribution": "Christoph Moning",
           "sourceURL": "https://www.inaturalist.org/observations/57657970",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/gruenfink-2.heic",
+          "sha256": "db7e39d804fd09d7b15612b14b3569be9888bbf2d7b39732925ade841dcffe23",
+          "license": "CC-BY-SA-4.0",
+          "attribution": "Paulo Martins",
+          "sourceURL": "https://www.inaturalist.org/observations/109256141",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/gruenfink-3.heic",
+          "sha256": "afc30f7182779df08710a57c916d98ecbdc960924ac73810d6781ed360a1ff0f",
+          "license": "CC-BY-SA-4.0",
+          "attribution": "Chris Acree",
+          "sourceURL": "https://www.inaturalist.org/observations/145525933",
           "retrieved": "2026-09-10"
         }
       ],
@@ -489,6 +521,22 @@
           "attribution": "Donald Davesne",
           "sourceURL": "https://www.inaturalist.org/observations/83075710",
           "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/buchfink-2.heic",
+          "sha256": "f7ffde7f7ab5c21f8c0219960055e146d1d22bd0512deb913a7992b09c40fa48",
+          "license": "CC-BY-4.0",
+          "attribution": "harry beaman",
+          "sourceURL": "https://www.inaturalist.org/observations/372742290",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/buchfink-3.heic",
+          "sha256": "014be0c427f5bd39a39b0fc2a876ed2f49f2970c3d3b29ecf0de7de38fddae79",
+          "license": "CC-BY-4.0",
+          "attribution": "Павел Кунгуров",
+          "sourceURL": "https://www.inaturalist.org/observations/397779576",
+          "retrieved": "2026-09-10"
         }
       ],
       "call": {
@@ -514,6 +562,22 @@
           "license": "CC-BY-4.0",
           "attribution": "Christoph Moning",
           "sourceURL": "https://www.inaturalist.org/observations/68095260",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/stieglitz-2.heic",
+          "sha256": "4ab018c43c82c7e229ab7faa1e40886cb851b9196b781dce1c670baf323b8962",
+          "license": "CC-BY-4.0",
+          "attribution": "Susan Marley",
+          "sourceURL": "https://www.inaturalist.org/observations/106499018",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/stieglitz-3.heic",
+          "sha256": "269b7894c57649dfeb921f3c2b8df21fbeca50cdff59bfe2270613024a966405",
+          "license": "CC-BY-4.0",
+          "attribution": "Gergely Nigg",
+          "sourceURL": "https://www.inaturalist.org/observations/76629051",
           "retrieved": "2026-09-10"
         }
       ],
@@ -541,6 +605,22 @@
           "attribution": "Ксения Волянская",
           "sourceURL": "https://www.inaturalist.org/observations/333441894",
           "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/gimpel-2.heic",
+          "sha256": "b5c9e75ca2e1210eaf51c733466a384906a409d54473ed0c2d91a651b6bb0dbf",
+          "license": "CC-BY-4.0",
+          "attribution": "rowan_m",
+          "sourceURL": "https://www.inaturalist.org/observations/66822874",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/gimpel-3.heic",
+          "sha256": "65bc8413fecb01face2615f528a63789a6c66ef89c55a5a773b6ac4319158f0a",
+          "license": "CC-BY-4.0",
+          "attribution": "Ilya Firsov",
+          "sourceURL": "https://www.inaturalist.org/observations/164462789",
+          "retrieved": "2026-09-10"
         }
       ],
       "call": {
@@ -567,6 +647,22 @@
           "attribution": "Лариса Артемьева",
           "sourceURL": "https://www.inaturalist.org/observations/74825757",
           "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/kernbeisser-2.heic",
+          "sha256": "0525c803b59e097c0d2e247e054072348a7e133187df4b8c5a75ff07b87aeddf",
+          "license": "CC-BY-4.0",
+          "attribution": "Syd Cannings",
+          "sourceURL": "https://www.inaturalist.org/observations/70283108",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/kernbeisser-3.heic",
+          "sha256": "62907f78a3ca18e054fc88de78917facd1c0dea87062aa74e8eab1fdfb7feeee",
+          "license": "CC-BY-4.0",
+          "attribution": "SteveM4560",
+          "sourceURL": "https://www.inaturalist.org/observations/258838733",
+          "retrieved": "2026-09-10"
         }
       ]
     },
@@ -584,6 +680,22 @@
           "license": "CC-BY-4.0",
           "attribution": "Helen Bovill",
           "sourceURL": "https://www.inaturalist.org/observations/305224073",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/bluthaenfling-3.heic",
+          "sha256": "3118721d20f7c1bd3eeba7cbbb37fc45b0bba24567b604849b1363a26f19ffc0",
+          "license": "CC-BY-4.0",
+          "attribution": "SteveM4560",
+          "sourceURL": "https://www.inaturalist.org/observations/262110578",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/bluthaenfling-4.heic",
+          "sha256": "3578a3d05f95a083f364ca33552f68a5d8026545bcfc8a383cdcf6ccf03ce0df",
+          "license": "CC-BY-4.0",
+          "attribution": "SteveM4560",
+          "sourceURL": "https://www.inaturalist.org/observations/262109648",
           "retrieved": "2026-09-10"
         }
       ],
@@ -611,6 +723,22 @@
           "attribution": "joba102",
           "sourceURL": "https://www.inaturalist.org/observations/78888615",
           "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/goldammer-3.heic",
+          "sha256": "a0ac56bc78495eaefb8e289e458da12c62562df53e532454a74b71a193f38da5",
+          "license": "CC-BY-4.0",
+          "attribution": "SteveM4560",
+          "sourceURL": "https://www.inaturalist.org/observations/262110687",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/goldammer-4.heic",
+          "sha256": "3d6726d2f38124e305da3c34b7918d9720abbe6c5482337b3054ea039844dde9",
+          "license": "CC-BY-4.0",
+          "attribution": "SteveM4560",
+          "sourceURL": "https://www.inaturalist.org/observations/337077270",
+          "retrieved": "2026-09-10"
         }
       ],
       "call": {
@@ -637,6 +765,22 @@
           "attribution": "Andrejus Gaidamavičius",
           "sourceURL": "https://www.inaturalist.org/observations/257350003",
           "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/elster-2.heic",
+          "sha256": "f74fa00dab953457dc2b960de9bc9d1b5a02c3daf0e58b314bbbe8bb46e7ff0e",
+          "license": "CC-BY-4.0",
+          "attribution": "bitsnbirds",
+          "sourceURL": "https://www.inaturalist.org/observations/118281033",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/elster-3.heic",
+          "sha256": "8df59ab8c70119aabdb76cd8149a964bf23dd00017f4dda197efa7b29cc4d6f2",
+          "license": "CC-BY-4.0",
+          "attribution": "David Kleuker",
+          "sourceURL": "https://www.inaturalist.org/observations/207398172",
+          "retrieved": "2026-09-10"
         }
       ],
       "call": {
@@ -662,6 +806,22 @@
           "license": "CC-BY-4.0",
           "attribution": "Helen Bovill",
           "sourceURL": "https://www.inaturalist.org/observations/273999502",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/eichelhaeher-2.heic",
+          "sha256": "f3e9de32023ec0edf0d923ba46fde66006fa516ff8c326babf2217a25afe21f0",
+          "license": "CC-BY-4.0",
+          "attribution": "SteveM4560",
+          "sourceURL": "https://www.inaturalist.org/observations/258364464",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/eichelhaeher-3.heic",
+          "sha256": "539fb1aebd8dc99d048d21fcbc131d5e32daac4f6002ebe01e0bceb9dafb5c1a",
+          "license": "CC-BY-4.0",
+          "attribution": "Rhys",
+          "sourceURL": "https://www.inaturalist.org/observations/343819178",
           "retrieved": "2026-09-10"
         }
       ],
