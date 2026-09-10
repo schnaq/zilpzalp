@@ -242,6 +242,9 @@ final class AppModel {
         else {
             return
         }
+        // Tapping a collection that is already chosen is a child asking to
+        // hear its name again, not a change to write to disk.
+        guard profiles[index].collection != collection else { return }
 
         profiles[index].collection = collection
 

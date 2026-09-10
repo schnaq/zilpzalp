@@ -19,24 +19,12 @@ import ZilpZalpUI
 /// tap beside the card is as safe as the „Los!" pill, and a child can listen
 /// to one collection after another before going back to the games.
 struct CollectionPicker: View {
-    /// The sticker sizes and grid columns of the album (`CollectionScreen`),
-    /// so the two pages of round photos are recognisably the same thing.
-    private static let stickerSize: CGFloat = 128
-    private static let compactStickerSize: CGFloat = 80
-    private static let stickerColumn: CGFloat = 168
-    private static let compactStickerColumn: CGFloat = 88
-
     /// Wide enough for three columns of stickers on an iPad, narrow enough
     /// that the card still reads as a card rather than as a screen.
     private static let maximumWidth: CGFloat = 720
 
-    /// The ring around the chosen sticker, and the check badge on it as a
-    /// share of the disc — the proportions `RewardSticker` gives its padlock.
-    private static let ringWidth: CGFloat = 5
-    private static let badgeRatio: CGFloat = 0.34
-    private static let badgeGlyphRatio: CGFloat = 0.55
-
-    /// How much bigger the chosen sticker sits. Small enough not to jostle the
+    /// How much bigger the chosen sticker sits, on top of the olive rim and
+    /// the check `RewardSticker` gives it. Small enough not to jostle the
     /// grid, big enough to see across a table.
     private static let chosenScale: CGFloat = 1.06
 
@@ -61,7 +49,13 @@ struct CollectionPicker: View {
     /// That is also why the question is not `readAloudOnce`: that modifier
     /// brings an announcer of its own, and it would still be saying „Welche
     /// Vögel?" while this one says „Vögel Afrikas".
-    @State private var announcer = SpeechAnnouncer()
+    ///
+    /// Optional and filled on first use, as the album's is: a `@State`
+    /// default is evaluated again every time the view struct is rebuilt, and
+    /// choosing a collection rebuilds this card — so a stored
+    /// `SpeechAnnouncer()` would allocate an `AVSpeechSynthesizer` per tap and
+    /// throw it away.
+    @State private var announcer: SpeechAnnouncer?
 
     /// `onAppear` can fire more than once for one arrival, so the flag is what
     /// makes "once" true — the same guard `ReadAloudOnce` keeps.
@@ -91,9 +85,9 @@ struct CollectionPicker: View {
         .onAppear {
             guard !hasAsked else { return }
             hasAsked = true
-            announcer.announce(.fixed("home.collection.title"))
+            say(.fixed("home.collection.title"))
         }
-        .onDisappear { announcer.stop() }
+        .onDisappear { announcer?.stop() }
     }
 
     private var card: some View {
@@ -127,18 +121,18 @@ struct CollectionPicker: View {
     /// and a card that scrolls hides what is in it from a child who cannot
     /// read. Should the bucket ever offer more than eight packs, this is where
     /// a scroll view has to be thought about.
+    ///
+    /// The album's grid, at the album's sizes — see ``StickerGrid``.
     private var collections: some View {
         LazyVGrid(
             columns: [
                 GridItem(
-                    .adaptive(
-                        minimum: isCompact ? Self.compactStickerColumn : Self.stickerColumn,
-                    ),
-                    spacing: gridSpacing,
+                    .adaptive(minimum: StickerGrid.column(compact: isCompact)),
+                    spacing: StickerGrid.spacing(compact: isCompact),
                     alignment: .top,
                 ),
             ],
-            spacing: gridSpacing,
+            spacing: StickerGrid.spacing(compact: isCompact),
         ) {
             ForEach(entries, id: \.id) { entry in
                 sticker(entry)
@@ -147,27 +141,25 @@ struct CollectionPicker: View {
         .frame(maxWidth: .infinity)
     }
 
-    private var gridSpacing: CGFloat {
-        isCompact ? ZSpacing.step3 : ZSpacing.gapTiles
-    }
-
     /// One collection: its bird, its name, and — while it is the chosen one —
-    /// an olive ring, a check and a little more size than the others.
+    /// the rim, the check and a little more size than the others.
     private func sticker(_ entry: CollectionEntry) -> some View {
         let isChosen = entry.id == chosen
-        let size = isCompact ? Self.compactStickerSize : Self.stickerSize
 
         return Button {
             choose(entry.id)
-            announcer.announce(entry.spoken)
+            say(entry.spoken)
         } label: {
             StickerCaption(caption: entry.title, earned: true) {
-                RewardSticker(image: entry.cover, icon: .bird, size: size)
-                    .overlay { ring(isChosen) }
-                    .overlay(alignment: .bottomTrailing) { check(isChosen, size: size) }
+                RewardSticker(
+                    image: entry.cover,
+                    icon: .bird,
+                    chosen: isChosen,
+                    size: StickerGrid.size(compact: isCompact),
+                )
             }
             .scaleEffect(isChosen ? Self.chosenScale : 1)
-            // Nothing at all where the system asks for less motion: the ring
+            // Nothing at all where the system asks for less motion: the rim
             // and the check are what carry the choice anyway.
             .animation(
                 reduceMotion ? nil : ZMotion.easeBounce.animation(duration: ZMotion.fast),
@@ -179,27 +171,13 @@ struct CollectionPicker: View {
         .accessibilityAddTraits(isChosen ? .isSelected : [])
     }
 
-    @ViewBuilder
-    private func ring(_ isChosen: Bool) -> some View {
-        if isChosen {
-            Circle().strokeBorder(ZColor.primary, lineWidth: Self.ringWidth)
-        }
-    }
-
-    /// The check on the chosen collection. Shape and colour together, so the
-    /// choice is legible to a child who sees no difference between olive and
-    /// sand.
-    @ViewBuilder
-    private func check(_ isChosen: Bool, size: CGFloat) -> some View {
-        if isChosen {
-            let diameter = (size * Self.badgeRatio).rounded()
-
-            Icon(.check, size: .custom((diameter * Self.badgeGlyphRatio).rounded()))
-                .foregroundStyle(ZColor.textOnColor)
-                .frame(width: diameter, height: diameter)
-                .background(Circle().fill(ZColor.primary))
-                .overlay { Circle().strokeBorder(ZColor.primaryShadow, lineWidth: ZBorder.width) }
-        }
+    /// Says one line, building the announcer the first time something speaks.
+    /// Kept afterwards, so the next line cuts this one off instead of talking
+    /// over it — the album's ``CollectionScreen`` does it the same way.
+    private func say(_ line: SpokenLine) {
+        let voice = announcer ?? SpeechAnnouncer()
+        announcer = voice
+        voice.announce(line)
     }
 }
 

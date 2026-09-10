@@ -94,12 +94,22 @@ public struct PackCollections: Sendable {
 
     /// - Parameter library: every pack that opened, merged — ``PackLibrary``.
     public init(_ library: PackLibrary) {
+        // Which species have a recording on disk, asked once for the whole
+        // library rather than once per collection: the answer costs a file
+        // lookup per species, and every species is in „alle" as well as in its
+        // own pack — so asking per collection would ask about each of them
+        // twice over.
+        let calling = Set(library.birds.filter { library.callURL(for: $0) != nil }.map(\.id))
+        func offersCalls(_ birds: [Bird]) -> Bool {
+            birds.count { calling.contains($0.id) } >= Self.minimumSpecies
+        }
+
         everything = PackCollection(
             id: nil,
             title: nil,
             library: library,
             cover: nil,
-            offersCalls: library.offersCalls(),
+            offersCalls: offersCalls(library.birds),
         )
 
         let packs = library.packs.compactMap { pack -> PackCollection? in
@@ -113,7 +123,7 @@ public struct PackCollections: Sendable {
                 title: pack.title,
                 library: narrowed,
                 cover: narrowed.birds.first,
-                offersCalls: narrowed.offersCalls(),
+                offersCalls: offersCalls(narrowed.birds),
             )
         }
 
@@ -121,18 +131,5 @@ public struct PackCollections: Sendable {
         // same birds, and a picker offering the same thing twice is noise on a
         // screen whose whole job is to be obvious.
         entries = packs.count > 1 ? [everything] + packs : [everything]
-    }
-}
-
-extension PackLibrary {
-    /// Whether game 2 has enough here to ask with — see
-    /// ``PackCollection/offersCalls``. The file has to be on disk, not merely
-    /// declared in the manifest: a question whose recording is missing is a
-    /// question a child cannot answer.
-    ///
-    /// A function rather than a property: it asks the file system once per
-    /// species.
-    func offersCalls() -> Bool {
-        birds.count { callURL(for: $0) != nil } >= PackCollections.minimumSpecies
     }
 }

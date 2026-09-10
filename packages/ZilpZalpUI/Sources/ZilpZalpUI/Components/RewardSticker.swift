@@ -86,6 +86,9 @@ public struct RewardSticker: View {
     /// Not earned yet.
     let locked: Bool
 
+    /// Picked out of several — the collection a child plays with (#187).
+    let chosen: Bool
+
     /// - Parameters:
     ///   - image: The bird photo, already resolved by the app. Without one the
     ///     sticker shows ``icon`` on its tone.
@@ -103,6 +106,12 @@ public struct RewardSticker: View {
     ///   - locked: Not earned yet. The sticker turns grey, gains a padlock and
     ///     loses its tilt — but keeps its picture, so a child can see what is
     ///     still out there.
+    ///   - chosen: One of several stickers, and this is the one — which birds a
+    ///     child plays with (#187). The rim the disc already draws turns olive
+    ///     and a check joins it in the badge corner: a colour *and* a shape,
+    ///     because a child who tells no olive from sand still has to see which
+    ///     one is picked. Ignored while ``locked`` — what has not been earned
+    ///     is not a thing to choose.
     ///   - rotation: How far the sticker is tilted. Straightened while locked.
     ///   - size: Diameter of the disc.
     public init(
@@ -112,6 +121,7 @@ public struct RewardSticker: View {
         label: String? = nil,
         tone: Tone = .sun,
         locked: Bool = false,
+        chosen: Bool = false,
         rotation: Angle = RewardSticker.defaultRotation,
         size: CGFloat = RewardSticker.defaultSize,
     ) {
@@ -121,20 +131,38 @@ public struct RewardSticker: View {
         self.label = label
         self.tone = tone
         self.locked = locked
+        self.chosen = chosen
         self.rotation = rotation
         self.size = size
     }
 
-    /// The colours the disc is drawn in: grey sand while locked, its tone
-    /// otherwise.
+    /// The colours the disc is drawn in: grey sand while locked, its tone with
+    /// an olive rim while chosen, its plain tone otherwise.
     var palette: RewardStickerPalette {
-        locked ? .locked : tone.palette
+        if locked {
+            return .locked
+        }
+        return chosen ? tone.palette.picked : tone.palette
     }
 
     /// The glyph in the middle when there is no photo: a padlock while
     /// locked, the sticker's own otherwise.
     var displayedIcon: ZIcon {
         locked ? .lock : icon
+    }
+
+    /// The glyph in the badge corner, `nil` where the sticker needs none: a
+    /// padlock over a locked photo — without one the padlock is already the
+    /// glyph in the middle, and a second would only shout — and a check on the
+    /// chosen sticker, photo or no photo.
+    ///
+    /// One slot for both, because the two cannot happen at once: a locked
+    /// sticker is not a sticker anybody chooses.
+    var badgeIcon: ZIcon? {
+        if locked {
+            return showsImage ? .lock : nil
+        }
+        return chosen ? .check : nil
     }
 
     /// Whether the photo is drawn. A locked sticker keeps it — greyed out,
@@ -206,27 +234,26 @@ public struct RewardSticker: View {
                     ),
             )
             .overlay { Circle().strokeBorder(palette.edge, lineWidth: ZBorder.widthThick) }
-            .overlay(alignment: .bottomTrailing) { lockBadge }
+            .overlay(alignment: .bottomTrailing) { badge }
             .rotationEffect(displayedRotation)
     }
 
-    /// The padlock for a locked sticker that shows a photo. Without a photo
-    /// the padlock is already the glyph in the middle, and a second one would
-    /// only shout.
-    @ViewBuilder private var lockBadge: some View {
-        if locked, showsImage {
+    /// The padlock or the check in the disc's corner — see ``badgeIcon``. The
+    /// padlock keeps the grey of a locked sticker; the check is olive, so it
+    /// reads as the same "yes" every filled control in the app is painted in.
+    @ViewBuilder private var badge: some View {
+        if let badgeIcon {
             let diameter = (size * RewardStickerMetrics.badgeRatio).rounded()
+            let colours: RewardStickerPalette = locked ? .locked : .checked
 
-            Icon(.lock, size: .custom((diameter * RewardStickerMetrics.badgeGlyphRatio).rounded()))
-                .foregroundStyle(RewardStickerPalette.locked.foreground)
-                .frame(width: diameter, height: diameter)
-                .background(Circle().fill(RewardStickerPalette.locked.background))
-                .overlay {
-                    Circle().strokeBorder(
-                        RewardStickerPalette.locked.edge,
-                        lineWidth: ZBorder.width,
-                    )
-                }
+            Icon(
+                badgeIcon,
+                size: .custom((diameter * RewardStickerMetrics.badgeGlyphRatio).rounded()),
+            )
+            .foregroundStyle(colours.foreground)
+            .frame(width: diameter, height: diameter)
+            .background(Circle().fill(colours.background))
+            .overlay { Circle().strokeBorder(colours.edge, lineWidth: ZBorder.width) }
         }
     }
 }
@@ -244,6 +271,21 @@ struct RewardStickerPalette: Sendable, Hashable {
         edge: ZColor.borderCard,
         foreground: ZColor.ink300,
     )
+
+    /// The check badge on a chosen sticker: the app's own olive, with the
+    /// darker shade around it that every olive pressable carries as its ledge.
+    static let checked = RewardStickerPalette(
+        background: ZColor.primary,
+        edge: ZColor.primaryShadow,
+        foreground: ZColor.textOnColor,
+    )
+
+    /// This palette with an olive rim, for the sticker that is chosen. The
+    /// disc keeps its own colour and its own glyph colour — only the ring
+    /// around it changes, so nothing about *which* sticker it is moves.
+    var picked: RewardStickerPalette {
+        RewardStickerPalette(background: background, edge: ZColor.primary, foreground: foreground)
+    }
 }
 
 /// The sticker's own numbers, from the JSX.

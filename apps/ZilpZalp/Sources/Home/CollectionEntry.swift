@@ -25,11 +25,12 @@ struct CollectionEntry {
 
     /// What the app says when this entry is tapped.
     ///
-    /// The title of a pack comes from its manifest and is spoken by the
-    /// synthesiser; „Alle Vögel" is a String Catalog entry and takes its key,
-    /// so a recording of it would be found the day one is made.
+    /// A pack's title comes from its manifest, which records no clip of its own
+    /// name, so it is spoken by the synthesiser — ``SpokenLine/assembled(_:)``.
+    /// „Alle Vögel" is a String Catalog entry and takes its key, so a
+    /// recording of it would be found the day one is made.
     var spoken: SpokenLine {
-        id == nil ? .fixed("home.collection.all") : .collection(title)
+        id == nil ? .fixed("home.collection.all") : .assembled(title)
     }
 }
 
