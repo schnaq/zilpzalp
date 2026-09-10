@@ -69,7 +69,11 @@ final class QuizSession {
 
     /// What tells this round apart from the next one, so the round end books
     /// it exactly once. Renewed with every fresh round in ``resume()``.
-    private var roundID = UUID()
+    ///
+    /// Readable from outside since #238: it is also the only thing that says
+    /// "a round has just been dealt", which is what ``QuizScreen`` hangs its
+    /// opening haptic on.
+    private(set) var roundID = UUID()
 
     /// When the first question of this round went up, `nil` until it does.
     ///

@@ -77,6 +77,21 @@ struct RoundEndReward: View {
         .scaleEffect(popped ? 1 : Self.popFromScale)
         .opacity(popped ? 1 : 0)
         .animation(pop, value: settled)
+        // The sticker lands in the hand as well as on the screen — the one
+        // moment in the app that is worth a `success`, and only when the bird
+        // is genuinely new. A bird already in the album is simply there, and
+        // so is its arrival.
+        //
+        // On ``settled`` and not on ``popped``, which looks like the thing
+        // that moves and is not: `celebrate()` writes `outcome` and `settled`
+        // back to back without an `await` between them, so SwiftUI coalesces
+        // both into one body pass and ``popped`` goes from `true` to `true`
+        // — a trigger that never changes and a haptic that never fires.
+        // `settled` turns over once, and `earnedSticker` is already answered
+        // by the time it does.
+        .sensoryFeedback(trigger: settled) { _, now in
+            now && earnedSticker ? .success : nil
+        }
     }
 
     /// The pop belongs to a sticker just earned. A bird whose sticker is
