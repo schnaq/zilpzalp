@@ -36,6 +36,16 @@
       "birdID": "rosaflamingo",
       "birdName": "Rosaflamingo",
       "kind": "photo",
+      "attribution": "Nicolás Tamargo",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/185812778"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "rosaflamingo",
+      "birdName": "Rosaflamingo",
+      "kind": "photo",
       "attribution": "SteveM4560",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/313297928"
@@ -46,19 +56,9 @@
       "birdID": "rosaflamingo",
       "birdName": "Rosaflamingo",
       "kind": "photo",
-      "attribution": "Olsza Borys",
-      "license": "CC0-1.0",
-      "sourceURL": "https://www.inaturalist.org/observations/198991178"
-    },
-    {
-      "packID": "afrika",
-      "packTitle": "Vögel Afrikas",
-      "birdID": "rosaflamingo",
-      "birdName": "Rosaflamingo",
-      "kind": "photo",
-      "attribution": "Nicolás Tamargo",
-      "license": "CC0-1.0",
-      "sourceURL": "https://www.inaturalist.org/observations/185812778"
+      "attribution": "SteveM4560",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/313298914"
     },
     {
       "packID": "afrika",
@@ -96,9 +96,9 @@
       "birdID": "sekretaer",
       "birdName": "Sekretär",
       "kind": "photo",
-      "attribution": "Tony Rebelo",
-      "license": "CC-BY-SA-4.0",
-      "sourceURL": "https://www.inaturalist.org/observations/34655242"
+      "attribution": "Tristan Jobin",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/285308541"
     },
     {
       "packID": "afrika",
@@ -176,9 +176,9 @@
       "birdID": "brillenpinguin",
       "birdName": "Brillenpinguin",
       "kind": "photo",
-      "attribution": "Alan Manson",
-      "license": "CC-BY-4.0",
-      "sourceURL": "https://www.inaturalist.org/observations/129130621"
+      "attribution": "Dan Harville",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/145200019"
     },
     {
       "packID": "afrika",
@@ -186,9 +186,9 @@
       "birdID": "brillenpinguin",
       "birdName": "Brillenpinguin",
       "kind": "photo",
-      "attribution": "Dan Harville",
-      "license": "CC-BY-SA-4.0",
-      "sourceURL": "https://www.inaturalist.org/observations/145200019"
+      "attribution": "Cullen Hanks",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/144090534"
     },
     {
       "packID": "afrika",
@@ -206,9 +206,9 @@
       "birdID": "graupapagei",
       "birdName": "Graupapagei",
       "kind": "photo",
-      "attribution": "Sandra Keller",
+      "attribution": "Rafael Würtemberger",
       "license": "CC-BY-4.0",
-      "sourceURL": "https://www.inaturalist.org/observations/27405696"
+      "sourceURL": "https://www.inaturalist.org/observations/222498643"
     },
     {
       "packID": "afrika",
@@ -216,9 +216,9 @@
       "birdID": "graupapagei",
       "birdName": "Graupapagei",
       "kind": "photo",
-      "attribution": "Rafael Würtemberger",
+      "attribution": "agujaceratops",
       "license": "CC-BY-4.0",
-      "sourceURL": "https://www.inaturalist.org/observations/222498643"
+      "sourceURL": "https://www.inaturalist.org/observations/267539814"
     },
     {
       "packID": "afrika",
@@ -236,9 +236,9 @@
       "birdID": "gabelracke",
       "birdName": "Gabelracke",
       "kind": "photo",
-      "attribution": "Liliana Ramírez-Freire",
+      "attribution": "Diogo Luiz",
       "license": "CC-BY-4.0",
-      "sourceURL": "https://www.inaturalist.org/observations/198773604"
+      "sourceURL": "https://www.inaturalist.org/observations/40336608"
     },
     {
       "packID": "afrika",
@@ -246,9 +246,9 @@
       "birdID": "gabelracke",
       "birdName": "Gabelracke",
       "kind": "photo",
-      "attribution": "Diogo Luiz",
+      "attribution": "Tom Kennedy",
       "license": "CC-BY-4.0",
-      "sourceURL": "https://www.inaturalist.org/observations/40336608"
+      "sourceURL": "https://www.inaturalist.org/observations/103099601"
     },
     {
       "packID": "afrika",
@@ -336,9 +336,9 @@
       "birdID": "kronenkranich",
       "birdName": "Kronenkranich",
       "kind": "photo",
-      "attribution": "Michael Bakker Paiva",
+      "attribution": "anasacuta",
       "license": "CC-BY-4.0",
-      "sourceURL": "https://www.inaturalist.org/observations/192937422"
+      "sourceURL": "https://www.inaturalist.org/observations/78499746"
     },
     {
       "packID": "afrika",
@@ -396,9 +396,9 @@
       "birdID": "weissrueckengeier",
       "birdName": "Weißrückengeier",
       "kind": "photo",
-      "attribution": "Tommy Andriollo",
+      "attribution": "Christiaan Viljoen",
       "license": "CC-BY-4.0",
-      "sourceURL": "https://www.inaturalist.org/observations/257467252"
+      "sourceURL": "https://www.inaturalist.org/observations/204147427"
     },
     {
       "packID": "afrika",
@@ -406,9 +406,9 @@
       "birdID": "weissrueckengeier",
       "birdName": "Weißrückengeier",
       "kind": "photo",
-      "attribution": "Sameer Shaik",
+      "attribution": "Claude Kolwelter",
       "license": "CC-BY-4.0",
-      "sourceURL": "https://www.inaturalist.org/observations/341652823"
+      "sourceURL": "https://www.inaturalist.org/observations/36198228"
     },
     {
       "packID": "afrika",
@@ -486,9 +486,9 @@
       "birdID": "hammerkopf",
       "birdName": "Hammerkopf",
       "kind": "photo",
-      "attribution": "Bruno - Yolande Zanette",
+      "attribution": "scaup",
       "license": "CC-BY-4.0",
-      "sourceURL": "https://www.inaturalist.org/observations/342097286"
+      "sourceURL": "https://www.inaturalist.org/observations/151642991"
     },
     {
       "packID": "afrika",
@@ -496,9 +496,9 @@
       "birdID": "hammerkopf",
       "birdName": "Hammerkopf",
       "kind": "photo",
-      "attribution": "scaup",
-      "license": "CC-BY-4.0",
-      "sourceURL": "https://www.inaturalist.org/observations/151642991"
+      "attribution": "Tom Riggle",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/150564216"
     },
     {
       "packID": "afrika",
