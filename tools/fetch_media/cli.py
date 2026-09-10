@@ -554,8 +554,12 @@ def read_verdicts(directory: Path) -> dict[str, dict]:
     return {entry["species"]: entry for entry in document.get("verdicts") or []}
 
 
-def merge_verdicts(directory: Path, pack_id: str, incoming: object, known: set[str]) -> int:
-    """Add a batch of verdicts to `verdicts.json`, the later answer winning.
+def merge_verdicts(
+    directory: Path, pack_id: str, incoming: object, known: set[str]
+) -> dict[str, dict]:
+    """Add a batch of verdicts to `verdicts.json` and return all of them, by species.
+
+    The later answer wins.
 
     Merged rather than appended, and validated before anything is written: the
     judging happens in batches, one batch is one call, and a run that stops
@@ -577,7 +581,7 @@ def merge_verdicts(directory: Path, pack_id: str, incoming: object, known: set[s
             "verdicts": [verdicts[species] for species in sorted(verdicts)],
         },
     )
-    return len(incoming)
+    return verdicts
 
 
 def print_audit(tiles: list[dict], verdicts: dict[str, dict]) -> None:
@@ -628,11 +632,16 @@ def command_audit(args: argparse.Namespace) -> int:
 
     if args.add_verdicts:
         text = sys.stdin.read() if args.add_verdicts == "-" else Path(args.add_verdicts).read_text()
+        # Against the whole pack, not against `tiles`: a batch may name a
+        # species this run did not export, and that is not a mistake.
         known = {bird["id"] for bird in document.get("birds") or [] if bird.get("photo")}
-        added = merge_verdicts(directory, args.pack, json.loads(text), known)
-        print(f"{added} verdict(s) merged into {directory / VERDICTS_FILE}\n")
+        incoming = json.loads(text)
+        verdicts = merge_verdicts(directory, args.pack, incoming, known)
+        print(f"{len(incoming)} verdict(s) merged into {directory / VERDICTS_FILE}\n")
+    else:
+        verdicts = read_verdicts(directory)
 
-    print_audit(tiles, read_verdicts(directory))
+    print_audit(tiles, verdicts)
     return 0
 
 

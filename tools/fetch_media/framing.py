@@ -112,8 +112,8 @@ def saliency_rect(image: Image.Image) -> Rect | None:
         from Foundation import NSData
     except ImportError as error:  # pragma: no cover - macOS-only dependency
         raise FramingError(
-            f"Apple Vision is not available ({error}) — pass the box yourself with "
-            "--box x0,y0,x1,y1, normalised 0–1 with the origin at the top left"
+            f"Apple Vision is not available ({error}), so this machine cannot find the "
+            "box — it has to be passed in instead"
         ) from error
 
     # A PNG of the already-oriented image, never the original bytes: Vision
