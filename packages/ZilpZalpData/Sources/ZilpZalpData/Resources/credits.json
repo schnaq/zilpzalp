@@ -2926,6 +2926,16 @@
       "birdID": "steinkauz",
       "birdName": "Steinkauz",
       "kind": "photo",
+      "attribution": "gianluigi",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/109135249"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "steinkauz",
+      "birdName": "Steinkauz",
+      "kind": "photo",
       "attribution": "SteveM4560",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/151025147"
@@ -2939,16 +2949,6 @@
       "attribution": "SteveM4560",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/151119696"
-    },
-    {
-      "packID": "deutschland",
-      "packTitle": "Vögel Deutschlands",
-      "birdID": "steinkauz",
-      "birdName": "Steinkauz",
-      "kind": "photo",
-      "attribution": "gianluigi",
-      "license": "CC0-1.0",
-      "sourceURL": "https://www.inaturalist.org/observations/109135249"
     },
     {
       "packID": "deutschland",
@@ -3006,6 +3006,16 @@
       "birdID": "turmfalke",
       "birdName": "Turmfalke",
       "kind": "photo",
+      "attribution": "Donsky",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/269108640"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "turmfalke",
+      "birdName": "Turmfalke",
+      "kind": "photo",
       "attribution": "Luis Ferreira",
       "license": "CC0-1.0",
       "sourceURL": "https://www.inaturalist.org/observations/148613413"
@@ -3019,16 +3029,6 @@
       "attribution": "Thorsten Hackbarth",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/105032479"
-    },
-    {
-      "packID": "deutschland",
-      "packTitle": "Vögel Deutschlands",
-      "birdID": "turmfalke",
-      "birdName": "Turmfalke",
-      "kind": "photo",
-      "attribution": "Donsky",
-      "license": "CC-BY-4.0",
-      "sourceURL": "https://www.inaturalist.org/observations/269108640"
     },
     {
       "packID": "deutschland",
@@ -3596,9 +3596,9 @@
       "birdID": "austernfischer",
       "birdName": "Austernfischer",
       "kind": "photo",
-      "attribution": "Олеся",
-      "license": "CC-BY-4.0",
-      "sourceURL": "https://www.inaturalist.org/observations/371927806"
+      "attribution": "Rafael Rosa",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/369928762"
     },
     {
       "packID": "deutschland",
@@ -3606,9 +3606,9 @@
       "birdID": "austernfischer",
       "birdName": "Austernfischer",
       "kind": "photo",
-      "attribution": "Rafael Rosa",
-      "license": "CC-BY-SA-4.0",
-      "sourceURL": "https://www.inaturalist.org/observations/369928762"
+      "attribution": "Charlotte Kirchner",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/366330994"
     },
     {
       "packID": "deutschland",
