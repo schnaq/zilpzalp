@@ -26,7 +26,10 @@ struct NavigationComponentTests {
 
         #expect(HomeTile.Tone.sun.palette.background == ZColor.sun200)
         #expect(HomeTile.Tone.sun.palette.edge == ZColor.sun400)
-        #expect(HomeTile.Tone.sun.palette.foreground == ZColor.sun600)
+        // The one tone that does not take its foreground from its own ramp:
+        // `sun600` on `sun200` is 2.87:1, so the label is dark ink, as
+        // everything written on sun yellow in this system is (#238).
+        #expect(HomeTile.Tone.sun.palette.foreground == ZColor.ink900)
 
         #expect(HomeTile.Tone.hoopoe.palette.background == ZColor.orange100)
         #expect(HomeTile.Tone.hoopoe.palette.edge == ZColor.accent)

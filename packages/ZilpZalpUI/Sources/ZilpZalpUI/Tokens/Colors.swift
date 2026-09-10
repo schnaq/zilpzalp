@@ -35,7 +35,20 @@ public enum ZColor {
     public static let orange400 = Color(hex: 0xE8802F)
     public static let orange500 = Color(hex: 0xDD6E22)
     public static let orange600 = Color(hex: 0xC25C16)
-    public static let orange700 = Color(hex: 0xA64B12)
+    /// Darkened from the `#A64B12` of `colors.css` — the one ramp entry that
+    /// deviates from the export, and the deviation is measured.
+    ///
+    /// It is the only orange the system writes words in: `HomeTile`'s hoopoe
+    /// tile — "Erkenne den Vogel", game 1 — and `Badge.Tone.hoopoe` both set
+    /// it on `orange100`. At the export's value that pair is 4.22:1, and a
+    /// tile label drops to `body` 20 pt on a phone, where SC 1.4.3 asks for
+    /// 4.5:1. `#9C4410` is 4.73:1 and the smallest step down that clears the
+    /// threshold with room to spare. Everywhere else the token is an edge, a
+    /// ledge or a rim (`--color-accent-shadow`, `ChoiceTile.Tone.rufe`,
+    /// `RewardSticker.Tone.hoopoe`), where darker only reads better —
+    /// the sticker's glyph goes from 3.12:1 to 3.50:1 with it, over the 3:1
+    /// SC 1.4.11 asks of a graphic. See `ContrastTests` and issue #238.
+    public static let orange700 = Color(hex: 0x9C4410)
 
     // MARK: - Sun (reward, "try again")
 

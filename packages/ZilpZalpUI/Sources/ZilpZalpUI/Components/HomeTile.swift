@@ -50,10 +50,16 @@ public struct HomeTile: View {
                     foreground: ZColor.clay700,
                 )
             case .sun:
+                // The one tone whose foreground is not its own ramp's dark
+                // shade: `sun600` on `sun200` is 2.87:1, and no shade of sun
+                // yellow is dark enough to write on a light one. Dark ink is
+                // what sun yellow carries everywhere else in this system —
+                // `--text-on-reward`, the reward button, the retry badge —
+                // and at 12.75:1 it reads from across the room (#238).
                 HomeTilePalette(
                     background: ZColor.sun200,
                     edge: ZColor.sun400,
-                    foreground: ZColor.sun600,
+                    foreground: ZColor.ink900,
                 )
             case .hoopoe:
                 HomeTilePalette(
