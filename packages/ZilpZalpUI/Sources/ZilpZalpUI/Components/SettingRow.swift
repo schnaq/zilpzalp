@@ -326,7 +326,7 @@ private struct SettingRowPreviewCard: View {
 
 // The case #142 was opened for, at the width of the smallest phone the app
 // runs on: an iPhone SE is 375 pt across, and behind the iPad's gutter and
-// columns "Spielzeit pro Tag" was left about 60 pt of text column and broke
+// columns "Spielzeit pro Tag" was left about 54 pt of text column and broke
 // over four lines. Stacked, and behind the 16 pt phone gutter, the title has
 // the column to itself and "Kein Limit" takes a line of its own.
 //

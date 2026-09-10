@@ -4,7 +4,7 @@ import SwiftUI
 ///
 /// The design draws one row: icon, text, value — three columns. That row is an
 /// iPad row. On a phone the same three columns behind the same 48 pt gutter
-/// leave the text about 60 pt at 390 pt, so "Spielzeit pro Tag" broke over
+/// leave the text about 54 pt at 390 pt, so "Spielzeit pro Tag" broke over
 /// four lines and its hint broke mid-word (#142). Below the regular size class
 /// the row keeps a column for the icon alone and stacks the rest.
 enum SettingRowLayout: Equatable {
@@ -153,13 +153,15 @@ struct SettingRowStack: Layout {
         let hintTop = stacked
             ? bounds.minY + pass.firstLine + hintSpacing
             : titleTop + pass.title.height + hintSpacing
-        if pass.hasHint {
-            subviews[.hint].place(
-                at: CGPoint(x: leading, y: hintTop),
-                anchor: .topLeading,
-                proposal: ProposedViewSize(width: pass.hintWidth, height: nil),
-            )
-        }
+        // Placed whether or not there is a hint: a `Layout` owes every
+        // subview a place, and an unplaced one is dropped at the container's
+        // middle. The empty slot is invisible there today, and would not stay
+        // invisible the day it carries something without a height.
+        subviews[.hint].place(
+            at: CGPoint(x: leading, y: hintTop),
+            anchor: .topLeading,
+            proposal: ProposedViewSize(width: pass.hintWidth, height: nil),
+        )
 
         switch pass.layout {
         case .columns, .rows:

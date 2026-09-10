@@ -75,7 +75,7 @@ struct SettingRowLayoutTests {
         // The trailing slot of a switch row is empty: `Toggle` places the
         // switch, on the middle of the label. Whatever the width, there is
         // nothing here to move onto a line of its own.
-        for width in [CGFloat(40), 258, 1000] {
+        for width in [CGFloat(40), 256, 1000] {
             #expect(SettingRowLayout.choose(
                 sizeClass: .compact,
                 textWidth: width,
@@ -115,7 +115,7 @@ struct SettingRowLayoutTests {
         try #require(BundledFonts.registered)
 
         // "Spielzeit pro Tag" needs 155.8 pt and "Kein Limit ›" 122.4, which
-        // is 294.2 with the gap between them against a text column of 258.
+        // is 294.2 with the gap between them against a text column of 256.
         // So the value goes to a line of its own and the title gets the
         // column — one line, where it took four before (#142).
         #expect(SettingRowLayout.choose(
@@ -133,7 +133,7 @@ struct SettingRowLayoutTests {
     func theTimeBudgetStaysInlineOnABigPhone() throws {
         try #require(BundledFonts.registered)
 
-        // An iPhone 17 Pro Max is 440 pt across, which leaves 308 — enough
+        // An iPhone 17 Pro Max is 440 pt across, which leaves 306 — enough
         // for the pair. The rule is the width, not the device.
         #expect(SettingRowLayout.choose(
             sizeClass: .compact,
@@ -149,7 +149,7 @@ struct SettingRowLayoutTests {
         try #require(BundledFonts.registered)
 
         // "Sprache" and "Deutsch" need 198.3 pt together on the narrowest
-        // phone's 247 — the row that never had the problem, and it does not
+        // phone's 241 — the row that never had the problem, and it does not
         // get a taller shape for nothing.
         #expect(SettingRowLayout.choose(
             sizeClass: .compact,
@@ -166,7 +166,7 @@ struct SettingRowLayoutTests {
 
         // The control, kept as the number in the issue: behind
         // `--gutter-screen` and beside its value, the title of the time
-        // budget was offered 55.6 pt of a 390 pt phone — a third of the
+        // budget was offered 53.6 pt of a 390 pt phone — a third of the
         // 155.8 it needs, which is the four lines in the screenshot.
         let starved = textColumn(at: 390, gutter: ZSpacing.gutterScreen)
             - valueWidth("Kein Limit")
