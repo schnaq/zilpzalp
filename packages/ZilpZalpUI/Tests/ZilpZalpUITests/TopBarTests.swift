@@ -9,9 +9,9 @@ import Testing
 private let catalogTitles = [
     "Fotos & Dank",
     "Wie heißt du?",
+    "Einstellungen",
     "Unser Schwarm",
     "Meine Sammlung",
-    "Für Erwachsene",
     "Wer spielt heute?",
     "Deine Vogel-Leiter",
 ]
