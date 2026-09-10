@@ -11,8 +11,10 @@ import ZilpZalpUI
 /// The same rule now covers game 2 wherever its calls cannot be played (#31):
 /// one tile per playable game on the plain page ground, and nothing else.
 ///
-/// The screen holds no state. It reports which game was tapped and when the
-/// grown-ups' door was opened; where those lead is ``RootView``'s business.
+/// The screen holds no state. It reports which game was tapped and which of
+/// the doors around them was opened — the grown-ups' room, the album, the
+/// screen about the app, the question who is playing; where those lead is
+/// ``RootView``'s business.
 struct HomeScreen: View {
     /// The wordmark's size in the top bar, from `HomeScreen.jsx`. In a compact
     /// width it drops to the wordmark's own floor.
