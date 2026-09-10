@@ -17,10 +17,28 @@ import ZilpZalpData
 /// finished — all of them speak, because a child who cannot read and hears
 /// nothing has no task at all.
 ///
-/// Nothing this app makes audible is a setting any more (#138): the question
-/// *is* the task in game 1, and the recorded calls of game 2 are the same.
+/// Everything said out loud is one switch in the grown-ups' area (#231), and
+/// ``isEnabled`` is where every announcer reads it. The recorded calls are not:
+/// where there are calls, game 2 is there, and its question is one of them
+/// (#138).
 @MainActor
 final class SpeechAnnouncer: NSObject {
+    /// Whether the app is allowed to say anything at all —
+    /// ``ZilpZalpData/ParentalSettings/speechEnabled``, mirrored here.
+    ///
+    /// A static, and mirrored rather than read from the settings, for the
+    /// reason ``AudioFocus`` is one: half a dozen screens build an announcer
+    /// of their own, several of them far from anything that has ever heard of
+    /// the grown-ups' area — ``ReadAloudOnce`` inside a view modifier,
+    /// ``QuizSession`` inside a round. Threading the settings through all of
+    /// them would be six parameters to carry one `Bool`.
+    ///
+    /// ``ParentalSettingsModel`` sets it: once when the file is read at
+    /// launch, and again on every change, which is what makes the switch
+    /// apply without a restart. Read per sentence, so a sentence already on
+    /// its way is not stopped — the next one simply does not start.
+    static var isEnabled = true
+
     /// A notch below the system default of 0.5. The default rattles the
     /// question off faster than a child who is still learning the names can
     /// follow it, and a compact voice is the one that rattles hardest: it
@@ -128,6 +146,21 @@ final class SpeechAnnouncer: NSObject {
             return
         }
 
+        // Recording, synthesiser or nothing — decided in `ZilpZalpData`,
+        // where it can be asserted without a simulator, and decided here
+        // before anything is stopped or claimed: an announcer that is about
+        // to say nothing has no business taking the speaker off the one that
+        // is still speaking.
+        let decision = clips.decision(
+            for: line.key,
+            about: line.bird,
+            speechEnabled: Self.isEnabled,
+        )
+        guard decision != .silent else {
+            Logger.audio.debug("Staying silent, the announcements are switched off")
+            return
+        }
+
         // One sentence at a time across announcers, not only inside one.
         // Every screen builds its own (see ``ReadAloudOnce``), and the quiz
         // screen now has two of them at once: the round's, and the one the
@@ -152,10 +185,14 @@ final class SpeechAnnouncer: NSObject {
         // Which of the two voices a sentence reached, in one line either way.
         // Public: a sentence key and a file name are properties of the build,
         // not of the child holding the iPad.
-        if let key = line.key, let clip = clips.url(for: key, about: line.bird), play(clip) {
-            Logger.audio.debug(
-                "Said \(key, privacy: .public) from \(clip.lastPathComponent, privacy: .public)",
-            )
+        //
+        // A clip that will not open or will not start is the one branch the
+        // decision cannot make, because the file is opened here: it falls
+        // through to the synthesiser, silently and per sentence.
+        if case let .clip(clip) = decision, play(clip) {
+            let key = line.key ?? ""
+            let file = clip.lastPathComponent
+            Logger.audio.debug("Said \(key, privacy: .public) from \(file, privacy: .public)")
             return
         }
 

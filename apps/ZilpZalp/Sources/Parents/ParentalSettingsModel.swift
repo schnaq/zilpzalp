@@ -50,6 +50,8 @@ final class ParentalSettingsModel {
             let reason = String(describing: error)
             Logger.parents.error("Settings did not open: \(reason, privacy: .public)")
         }
+
+        mirrorSpeechSwitch()
     }
 
     /// Changes one setting and writes the file.
@@ -61,6 +63,7 @@ final class ParentalSettingsModel {
     /// setting needs the same ordering above, whatever its type.
     func set<Value>(_ field: WritableKeyPath<ParentalSettings, Value>, to value: Value) {
         settings[keyPath: field] = value
+        mirrorSpeechSwitch()
 
         let written = settings
         let previous = lastWrite
@@ -74,6 +77,21 @@ final class ParentalSettingsModel {
                 Logger.parents.error("Settings did not save: \(reason, privacy: .public)")
             }
         }
+    }
+
+    /// Hands the speech switch to the announcers (#231).
+    ///
+    /// They are built all over the app, most of them nowhere near a grown-up,
+    /// so they read one static rather than these settings — see
+    /// ``SpeechAnnouncer/isEnabled``. Called after every read and every
+    /// change, whichever setting changed: one unconditional line cannot get
+    /// out of step with the settings, and a comparison per field could.
+    ///
+    /// Before the disk, not after it: the next sentence is usually a tap away,
+    /// and a switch that only takes effect once the file has landed would be a
+    /// switch that lags.
+    private func mirrorSpeechSwitch() {
+        SpeechAnnouncer.isEnabled = settings.speechEnabled
     }
 }
 

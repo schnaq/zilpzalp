@@ -26,12 +26,26 @@ public struct ParentalSettings: Codable, Sendable, Hashable {
     /// from values the shell passes in (#36); nothing here keeps a clock.
     public var dailyLimitMinutes: Int?
 
+    /// Whether the app says its sentences out loud: the bird's name in game 1,
+    /// the praise at the end of a round, the name of a sticker that is tapped,
+    /// every headline a screen reads to a child who cannot read it.
+    ///
+    /// On until a grown-up switches it off (#231). A child who cannot read is
+    /// told what to look for by the voice, so silence is something somebody
+    /// chooses rather than a state a device can drift into.
+    ///
+    /// Not the bird calls: those are the recordings game 2 asks its question
+    /// with, and where there are calls, that game is there (#138).
+    public var speechEnabled: Bool
+
     /// The state a device that has never been to the grown-ups' area is in:
-    /// nothing limited.
+    /// nothing limited, and everything said out loud.
     public init(
         dailyLimitMinutes: Int? = nil,
+        speechEnabled: Bool = true,
     ) {
         self.dailyLimitMinutes = dailyLimitMinutes
+        self.speechEnabled = speechEnabled
     }
 }
 
@@ -149,9 +163,16 @@ private struct SchemaProbe: Decodable {
 private struct Document: Codable {
     let schemaVersion: Int
     let dailyLimitMinutes: Int?
+    /// `Bool?` where the setting is a plain `Bool`, so that a file written
+    /// before #231 — which is every file on every device today — decodes
+    /// instead of throwing on a key it does not carry. ``settings`` fills the
+    /// gap with the default.
+    let speechEnabled: Bool?
 
     /// Decoding is synthesised: for an `Int?` it already reads both spellings
-    /// of "no limit", the explicit `null` this store writes and an absent key.
+    /// of "no limit", the explicit `null` this store writes and an absent key,
+    /// and for a `Bool?` an absent key is what a file from before the setting
+    /// existed has. Which is why every field here is optional.
     ///
     /// It also passes over a key it does not know, and that is why dropping
     /// `callsEnabled` (#138) and `showNames` (#208) left the version at 1:
@@ -160,12 +181,14 @@ private struct Document: Codable {
     var settings: ParentalSettings {
         ParentalSettings(
             dailyLimitMinutes: dailyLimitMinutes,
+            speechEnabled: speechEnabled ?? true,
         )
     }
 
     init(settings: ParentalSettings) {
         schemaVersion = ParentalSettingsStore.schemaVersion
         dailyLimitMinutes = settings.dailyLimitMinutes
+        speechEnabled = settings.speechEnabled
     }
 
     /// The one half that cannot be synthesised: `encodeIfPresent` would leave
@@ -179,5 +202,9 @@ private struct Document: Codable {
         } else {
             try container.encodeNil(forKey: .dailyLimitMinutes)
         }
+        // Stated too, and never `encodeIfPresent`: the setting always stands
+        // somewhere, and a file that left the key out would read back as a
+        // file from before the setting existed.
+        try container.encode(speechEnabled ?? true, forKey: .speechEnabled)
     }
 }
