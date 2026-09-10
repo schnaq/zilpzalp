@@ -202,9 +202,9 @@ public struct RewardSticker: View {
             // The shadow rides on a plain circle behind the disc, not on the
             // composed sticker: the silhouette is that circle either way, so
             // shadowing the whole stack would only rasterise photo and badge
-            // to derive it. It has to sit *after* the clip, too — a
-            // shadow drawn before `clipShape` is clipped away with everything
-            // else. A locked sticker lies flat on the page and casts none.
+            // to derive it. It has to sit *after* the clip, too — a shadow
+            // drawn before `clipShape` is clipped away with everything else.
+            // A locked sticker lies flat on the page and casts none.
             .background(
                 Circle()
                     .fill(palette.background)

@@ -110,9 +110,9 @@ struct QuizComponentTests {
     @Test("The tile floor is the design's hero touch target")
     func theTileFloorIsTheHeroTouchTarget() {
         // 160 pt, the token the design set aside for answer tiles. Pinned to
-        // the token and to the number, because what the floor protects is
-        // fixed-size: the badge, its glyph, the border and the corner are
-        // drawn at one size whatever the square is.
+        // the token and to the number both: since #200 the floor is a design
+        // decision rather than something arithmetic can rederive, so moving
+        // it should have to be deliberate.
         #expect(ChoiceTile.minimumSize == ZSpacing.touchHero)
         #expect(ChoiceTile.minimumSize == 160)
         #expect(ChoiceTile.minimumSize > 2 * ZSpacing.touchMinimum)

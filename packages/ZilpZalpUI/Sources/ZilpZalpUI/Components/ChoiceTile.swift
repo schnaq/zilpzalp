@@ -148,13 +148,14 @@ public struct ChoiceTile: View {
     /// asked for the design's 220 pt tile, which no phone has room for: the
     /// quiz measures 169 pt on an iPhone 17 and 162 pt on an iPhone 17e.
     ///
-    /// Written down rather than derived. Until #200 it was the width the
-    /// attribution strip needed inside the photo, 168 pt, and the strip is
-    /// gone. What is left to protect is the child's finger and the parts of
-    /// the tile that do *not* scale with it: the 56 pt badge, the 30 pt glyph
-    /// inside it, the 5 pt border and the 40 pt corner are drawn at one size
-    /// whatever the square is, and below a hero-sized tile they stop being
-    /// marks on a photo and start being the tile.
+    /// Chosen rather than derived. Until #200 it was the width the attribution
+    /// strip needed inside the photo, 168 pt, and arithmetic settled it; with
+    /// the strip gone there is nothing left to measure. That a floor is wanted
+    /// at all is because a good deal of the tile is drawn at a fixed size —
+    /// the 56 pt badge, its 30 pt glyph, the 5 pt border, the 40 pt corner —
+    /// and a small enough square is more of those than photo. Where exactly
+    /// that starts is a judgement rather than a calculation, and the design
+    /// has made it.
     ///
     /// It does not fit every phone, and it cannot: a 375×667 pt screen leaves
     /// the quiz room for about 81 pt a tile. The clamp below is the wrong

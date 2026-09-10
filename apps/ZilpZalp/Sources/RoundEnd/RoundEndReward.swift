@@ -13,8 +13,8 @@ import ZilpZalpUI
 ///
 /// The name is drawn here rather than passed into ``RewardSticker``, which
 /// would otherwise set it inside its disc: its caption is `--text-strong` and
-/// disappears into the forest ground. The component's to fix (#11); until
-/// then the round end keeps the name legible on its own.
+/// disappears into the forest ground. That is the component's to fix (#11);
+/// until then the round end keeps the name legible on its own.
 struct RoundEndReward: View {
     /// Where `zz-pop` starts the sticker: a little under full size rather than
     /// at nothing, so it lands instead of exploding.
