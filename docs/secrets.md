@@ -65,7 +65,7 @@ Das ist ein echter Upload. Ohne `GITHUB_RUN_NUMBER` trägt der Build die Nummer 
 
 ## In GitHub Actions
 
-Nur drei Werte liegen als GitHub-Repository-Secret vor:
+Für Infisical liegen nur drei Werte als GitHub-Repository-Secret vor:
 
 ```
 INFISICAL_CLIENT_ID
@@ -73,7 +73,7 @@ INFISICAL_CLIENT_SECRET
 INFISICAL_API_URL      # https://secrets.schnaq.com — ohne /api
 ```
 
-Alles Weitere wird zur Laufzeit geladen:
+Alles Weitere wird zur Laufzeit aus Infisical geladen:
 
 ```yaml
 - name: Load Infisical secrets into job env
@@ -96,6 +96,15 @@ echo "::add-mask::$XENO_CANTO_API_KEY"
 ```
 
 Bei mehrzeiligen Werten wie einem Base64-Zertifikat zeilenweise maskieren.
+
+### Ausnahme: Vercel
+
+Der Deploy der Website (`.github/workflows/web.yml`, Job `deploy`) braucht kein
+Infisical: `VERCEL_TOKEN` und `VERCEL_PROJECT_ID` liegen als
+GitHub-Repository-Secret, `VERCEL_ORG_ID` als Organisations-Secret — Christians
+Entscheidung vom 2026-09-10, weil ein reiner Token-Deploy die Infisical-Action
+nicht rechtfertigt. Werte aus `secrets.*` maskiert GitHub im Log automatisch,
+anders als die per Infisical-Action geladenen oben.
 
 ## Smoke-Test
 
