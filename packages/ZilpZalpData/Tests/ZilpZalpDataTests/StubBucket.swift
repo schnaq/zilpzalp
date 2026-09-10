@@ -209,6 +209,9 @@ enum StubPack {
         ("photos/zilpzalp.png", Data("zilpzalp".utf8)),
         ("calls/zilpzalp.m4a", Data("zilpzalp ruft".utf8)),
         ("speech/\(sentence)/amsel.m4a", Data("Wo ist die Amsel?".utf8)),
+        // The Amsel's second photo, so that a download of this pack proves it
+        // fetches every photo of a species and not only the portrait (#194).
+        ("photos/amsel-2.png", Data("amsel von der anderen Seite".utf8)),
     ]
 
     static let assets = media.map { Asset(file: $0.file, sha256: sha256(of: $0.bytes)) }
@@ -277,6 +280,7 @@ enum StubPack {
         zilpzalpPhoto: Asset = assets[1],
         zilpzalpCall: Asset = assets[2],
         amselSpeech: Asset = assets[3],
+        amselSecondPhoto: Asset = assets[4],
     ) -> Data {
         // `voiced: false` is a pack that has recordings and credits nobody —
         // what the licence gate refuses at curation time.
@@ -302,7 +306,7 @@ enum StubPack {
               "taxonID": 12716,
               "article": "die",
               "pronunciation": null,
-              "photo": \(json(amselPhoto)),
+              "photos": [\(json(amselPhoto)), \(json(amselSecondPhoto))],
               "call": null,
               "speech": {
                 "\(sentence)": {
@@ -319,7 +323,7 @@ enum StubPack {
               "taxonID": 117016,
               "article": "der",
               "pronunciation": "Tsilp-Tsalp",
-              "photo": \(json(zilpzalpPhoto)),
+              "photos": [\(json(zilpzalpPhoto))],
               "call": \(json(zilpzalpCall))
             }
           ]

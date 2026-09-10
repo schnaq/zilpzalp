@@ -1,15 +1,11 @@
 import Testing
 import ZilpZalpCore
 
-/// Every (question, species) pair of a round, with the photo it was dealt.
-private func dealt(
-    _ photos: RoundPhotos,
-    in round: Round,
-) -> [(question: Int, species: String, photo: Int)] {
+/// Every tile of a round — the species it shows and the photo it was dealt —
+/// in the order the questions ask them.
+private func dealt(_ photos: RoundPhotos, in round: Round) -> [(species: String, photo: Int)] {
     round.questions.enumerated().flatMap { index, question in
-        question.choices.map {
-            (question: index, species: $0, photo: photos.photo(for: $0, question: index))
-        }
+        question.choices.map { (species: $0, photo: photos.photo(for: $0, question: index)) }
     }
 }
 

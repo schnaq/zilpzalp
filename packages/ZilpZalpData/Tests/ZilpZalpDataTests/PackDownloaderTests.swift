@@ -210,9 +210,13 @@ struct PackDownloaderTests {
             let bird = try #require(catalog.pack.birds.first)
             let photo = try #require(catalog.photoURL(for: bird))
             let clip = try #require(catalog.speechURL(for: bird, sentence: StubPack.sentence))
+            // Every photo of the species, not only the portrait: a download
+            // that fetched one would leave the bird's other tiles empty (#194).
+            let second = try #require(catalog.photoURL(for: bird, at: 1))
 
             #expect(catalog.pack.id == StubPack.id)
             #expect(try Data(contentsOf: photo) == StubPack.media[0].bytes)
+            #expect(try Data(contentsOf: second) == StubPack.media[4].bytes)
             #expect(try Data(contentsOf: clip) == StubPack.media[3].bytes)
             // Whoever is credited for the voice comes down with the pack.
             #expect(catalog.pack.voice?.attribution == "Stimme: Niemand")

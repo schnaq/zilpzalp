@@ -31,10 +31,10 @@ public struct RoundPhotos: Hashable, Sendable {
         photoCounts: [String: Int],
         using generator: inout some RandomNumberGenerator,
     ) {
-        /// What a species has left to show before it may repeat itself. Refilled
-        /// with a fresh shuffle once it runs out, exactly as ``Round`` deals the
-        /// species to ask for — which pushes a repeat as late as the photos
-        /// allow.
+        // What a species has left to show before it may repeat itself. Refilled
+        // with a fresh shuffle once it runs out, exactly as ``Round`` deals the
+        // species to ask for — which pushes a repeat as late as the photos
+        // allow.
         var decks: [String: [Int]] = [:]
 
         var questions: [[String: Int]] = []

@@ -270,13 +270,22 @@ Drei Eigenschaften sind wichtig:
 mise run fetch-media photos frame --pack welt --species schnee-eule \
     --observation 195441759 --photo 343832881 [--box x0,y0,x1,y1] [--dry-run]
 mise run fetch-media photos audit --pack welt [--add-verdicts -]
+mise run fetch-media photos drop --pack welt --species schnee-eule \
+    --file photos/schnee-eule-2.heic
 ```
 
-`photos frame` lädt das Original einmal, sucht darin den Vogel und rechnet dessen Rechteck in das quadratische `--crop x,y,w,h` um, das `photos pick` schon kennt: Kasten plus 18 Prozent seiner langen Seite als Luft, quadriert, nie kleiner als die 1024-px-Kachel (sonst müsste hochskaliert werden), innerhalb des Fotos — und wenn das Quadrat den gepolsterten Kasten senkrecht nicht fasst, an dessen **Oberkante** verankert. Dort sitzt der Kopf, und ein angeschnittener Kopf ist genau der Fehler, um den es geht. Danach schreibt `frame` zwei Vorschau-PNGs nach `DerivedData/frame-preview/` und legt das Foto ab; `--dry-run` hört nach dem Zuschnitt auf. Deckt der Vogel weniger als ein Drittel der Kachel, sagt das Werkzeug es als Warnung: das ist ein Fall für ein anderes Foto (#194), nicht für einen anderen Zuschnitt.
+`pick` und `frame` **legen ein Foto dazu**, sie ersetzen keines: der Name ist
+`photos/<art>.heic`, dann `-2`, `-3` — eins über der höchsten benutzten
+Nummer, damit ein aufgegebener Name nie ein zweites Mal vergeben wird. `drop`
+nimmt ein Foto wieder heraus und ist der einzige Schritt, der eine Datei
+löscht; er weigert sich beim letzten Foto einer Art und lässt eine Datei
+liegen, die noch ein anderer Eintrag nennt.
+
+`photos frame` lädt das Original einmal, sucht darin den Vogel und rechnet dessen Rechteck in das quadratische `--crop x,y,w,h` um, das `photos pick` schon kennt: Kasten plus 18 Prozent seiner langen Seite als Luft, quadriert, nie kleiner als die 1024-px-Kachel (sonst müsste hochskaliert werden), innerhalb des Fotos — und wenn das Quadrat den gepolsterten Kasten senkrecht nicht fasst, an dessen **Oberkante** verankert. Dort sitzt der Kopf, und ein angeschnittener Kopf ist genau der Fehler, um den es geht. Danach schreibt `frame` zwei Vorschau-PNGs nach `DerivedData/frame-preview/` und legt das Foto ab; `--dry-run` hört nach dem Zuschnitt auf. Deckt der Vogel weniger als ein Drittel der Kachel, sagt das Werkzeug es als Warnung: das ist ein Fall für ein anderes Foto, nicht für einen anderen Zuschnitt — seit #194 heißt das `photos drop` und ein neues `pick`.
 
 **Woher der Kasten kommt.** Zuerst aus Apple Vision, `VNGenerateObjectnessBasedSaliencyImageRequest` über `pyobjc-framework-Vision` — deterministisch, offline, ohne Zugangsdaten, nur auf macOS, was bei einer Kuration am Mac genügt. Vision misst normalisiert mit Ursprung unten links; `framing.Rect` dreht das auf oben links, und dieselbe Konvention gilt für `--box`. Über die Fotos dieses Durchgangs traf die Salienz den Vogel zuverlässig, auch bei fliegenden und bei sehr kleinen Motiven. `--box x0,y0,x1,y1` ist der Ausweichweg für den Fall, dass sie sich am Ast, am Zaun oder am Denkmal festhält: Die normalisierten Koordinaten liefert dann ein Mensch oder ein Bildmodell, das die Vorschau des ganzen Fotos betrachtet hat.
 
-**`photos audit` prüft, was das Paket heute ausliefert.** Es exportiert jede Kachel als PNG mit maximal 512 px nach `DerivedData/audit/<pack>/` und legt eine `tiles.json` mit Art, Datei und Attribution daneben. Bewertet wird außerhalb des Werkzeugs — von einem Bildmodell, das drei Fragen beantwortet: Ist ein Vogel klar zu sehen, füllt er etwa ein Drittel des Bildes oder mehr, ist der Kopf vollständig im Bild. In der Praxis sind das Haiku-Subagenten, höchstens zehn Bilder pro Aufruf und höchstens zwei gleichzeitig. Ihre Antworten kommen als JSON-Array über `--add-verdicts` zurück, werden gegen die Arten des Pakets und auf echte Booleans geprüft und nach `verdicts.json` gemischt — nach jedem Aufruf sofort, denn ein Durchgang, der auf halber Strecke abbricht, darf die Urteile davor nicht verlieren. Deshalb braucht `audit` selbst keinerlei Zugangsdaten.
+**`photos audit` prüft, was das Paket heute ausliefert.** Es exportiert jede Kachel als PNG mit maximal 512 px nach `DerivedData/audit/<pack>/` und legt eine `tiles.json` mit Art, Datei und Attribution daneben — **eine Kachel pro Foto, nicht pro Art**, und ein Urteil nennt den Pfad des Fotos im Manifest (`"photo": "photos/amsel-2.heic"`), nicht die Art. Bewertet wird außerhalb des Werkzeugs — von einem Bildmodell, das drei Fragen beantwortet: Ist ein Vogel klar zu sehen, füllt er etwa ein Drittel des Bildes oder mehr, ist der Kopf vollständig im Bild. In der Praxis sind das Haiku-Subagenten, höchstens zehn Bilder pro Aufruf und höchstens zwei gleichzeitig. Ihre Antworten kommen als JSON-Array über `--add-verdicts` zurück, werden gegen die Arten des Pakets und auf echte Booleans geprüft und nach `verdicts.json` gemischt — nach jedem Aufruf sofort, denn ein Durchgang, der auf halber Strecke abbricht, darf die Urteile davor nicht verlieren. Deshalb braucht `audit` selbst keinerlei Zugangsdaten.
 
 `DerivedData/` ist Arbeitsmaterial eines Kurationsdurchgangs und wird nicht eingecheckt — wie die Kandidatenlisten in `$TMPDIR`.
 
@@ -295,16 +304,32 @@ mise run fetch-media photos audit --pack welt [--add-verdicts -]
   "scientificName": "Turdus merula",
   "taxonID": 12716,
   "article": "die",
-  "photo": {
-    "file": "photos/amsel.heic",
-    "sha256": "…",
-    "license": "CC-BY-4.0",
-    "attribution": "Alexis Tinker-Tsavalas",
-    "sourceURL": "https://www.inaturalist.org/observations/20490738",
-    "retrieved": "2026-08-01"
-  }
+  "photos": [
+    {
+      "file": "photos/amsel.heic",
+      "sha256": "…",
+      "license": "CC-BY-4.0",
+      "attribution": "Alexis Tinker-Tsavalas",
+      "sourceURL": "https://www.inaturalist.org/observations/20490738",
+      "retrieved": "2026-08-01"
+    }
+  ]
 }
 ```
+
+`photos` ist eine Liste mit mindestens einem Eintrag, **das kuratierte Porträt
+zuerst** (#194). Jedes Foto trägt seine eigene Lizenz, Attribution, Quelle und
+Prüfsumme — sie kommen aus verschiedenen Beobachtungen und oft von
+verschiedenen Fotografen. Der Sticker, die Belohnung am Rundenende und das
+Sammlungs-Cover zeigen immer das erste; nur die Kacheln im Ratespiel greifen
+in den ganzen Satz, damit ein Kind den Vogel lernt und nicht das Bild.
+
+Ein installiertes Manifest in der alten Form — ein einzelnes `photo` — wird
+weiterhin gelesen, als Art mit genau einem Foto: `welt` und `afrika` waren
+schon vor #194 herunterladbar, und ein Pflichtfeld `photos` hätte jede dieser
+Installationen zu einem Paket gemacht, das der Elternbereich als defekt
+meldet. Das Lizenz-Gate ist strenger und verlangt `photos` — es läuft zur
+Kurationszeit, und die Manifeste im Repository sind alle migriert.
 
 ---
 

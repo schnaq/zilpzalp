@@ -23,11 +23,27 @@ struct CreditsTests {
         let entries = credits.media.filter { $0.packID == pack.id }
 
         for bird in pack.birds {
+            // One credit line per photo, and two photos from the same
+            // observation collapse into the single line they would repeat —
+            // which is why this counts the distinct lines the species declares
+            // rather than its photos.
             let photos = entries.filter { $0.birdID == bird.id && $0.kind == .photo }
-            #expect(photos.count == 1, "'\(bird.id)' has \(photos.count) photo credits")
-            #expect(photos.first?.attribution == bird.photo.attribution)
-            #expect(photos.first?.license == bird.photo.license)
-            #expect(photos.first?.sourceURL == bird.photo.sourceURL)
+            let declared = bird.photos
+                .map { [$0.attribution, $0.license.rawValue, "\($0.sourceURL)"] }
+            #expect(
+                photos.count == Set(declared).count,
+                "'\(bird.id)' has \(photos.count) photo credits for \(bird.photos.count) photos",
+            )
+            for photo in bird.photos {
+                #expect(
+                    photos.contains {
+                        $0.attribution == photo.attribution
+                            && $0.license == photo.license
+                            && $0.sourceURL == photo.sourceURL
+                    },
+                    "\(photo.file) is not credited",
+                )
+            }
             // The screen shows the name and must not have to open the pack for
             // it, so the copy in the credits has to be the pack's own.
             #expect(photos.first?.birdName == bird.name)
