@@ -15,7 +15,9 @@ import SwiftUI
 /// A screen with a title passes it as `TopBar(title:)` and gets
 /// ``TopBarTitle`` in the centre — the design's line box, one line, and the
 /// whole row minus what the side slots need. The generic centre slot stays
-/// for content that draws itself: `QuizProgress`, the wordmark.
+/// for content that draws itself — the wordmark on the profile picker is the
+/// one screen that still takes it up; the quiz gave it back when its bar took
+/// the game's name and its leaf row moved underneath (#220).
 ///
 /// That slot still inherits the grown-up title style, so a stray `Text`
 /// there is typeset rather than left at the system font — but in the face's
@@ -294,8 +296,8 @@ private struct PreviewSlotButton: View {
         TopBar {
             PreviewSlotButton(icon: .chevronLeft)
         } center: {
-            // Stands in for `QuizProgress`, which arrives with the quiz
-            // components.
+            // Stands in for content that draws itself and brings its own
+            // width, which is what the generic centre slot is for.
             ForEach(0 ..< 5) { step in
                 Circle()
                     .fill(step < 2 ? ZColor.primary : ZColor.sand300)

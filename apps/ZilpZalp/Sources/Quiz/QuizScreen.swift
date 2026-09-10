@@ -123,12 +123,9 @@ struct QuizScreen: View {
                 ) { leaving.ask(session) { dismiss() } }
             }
 
-            // Under the bar rather than in it, on every width. The phone never
-            // had room for it up there — ten 44 pt leaves are 548 pt beside a
-            // 64 pt back button — and since #220 the iPad has none either: the
-            // centre carries the game's name, and a title beside ten leaves
-            // would shrink to fit an 11 inch iPad in portrait. One row in one
-            // place is also one arrangement fewer to think about.
+            // Under the bar rather than in it, on every width. Ten 44 pt
+            // leaves are 548 pt, which no phone has beside a back button and,
+            // since the centre carries the game's name (#220), no iPad either.
             progress(session)
                 .padding(.vertical, ZSpacing.step2)
                 .frame(maxWidth: .infinity)
@@ -160,7 +157,12 @@ struct QuizScreen: View {
                         question(name, in: .above)
                     }
                 }
+                // The width explicitly, not as a side effect of the name
+                // stretching the row: game 2 has no name, and a row that hugs
+                // its button is centred by the stack, so the one button a
+                // child reaches for would stand elsewhere in each game.
                 .frame(height: layout.soundDiameter + ZShadow.ledgeLargeOffset)
+                .frame(maxWidth: .infinity, alignment: .leading)
 
                 grid(session, edge: layout.tile)
 
@@ -252,17 +254,14 @@ struct QuizScreen: View {
             label: soundLabel(session),
             diameter: diameter,
         ) { session.askQuestion() }
-            // On the button rather than on the written name, because game 2
-            // has no written name and the screenshot run has to find the
-            // question in both games. It is the one part of the question row
-            // that is on the screen whichever game is being played.
+            // On the button, not on the written name: game 2 has none, and
+            // this is the one part of the row both games draw (#220).
             .accessibilityIdentifier(QuizIdentifier.question(session.answer?.id))
     }
 
     /// What VoiceOver says the button will do, which is what it is about to
     /// say or play. Game 1 names the bird — the name is the whole question,
-    /// and the button says it a second later anyway. Game 2 must not: there
-    /// the name is the answer, for the reason a tile's label is a position.
+    /// and the button says it anyway. Game 2 must not: there it is the answer.
     private func soundLabel(_ session: QuizSession) -> String {
         guard let name = session.writtenQuestion else {
             return String(localized: "quiz.sound.call.accessibility")
@@ -270,15 +269,12 @@ struct QuizScreen: View {
         return String(format: String(localized: "quiz.sound.name.accessibility"), name)
     }
 
-    /// The bird's name in writing — for the grown-up over the shoulder,
-    /// exactly as on the design's screens. The child gets it spoken; the tiles
-    /// stay wordless. Only game 1 has one, and only the name: the sentence
-    /// around it went with #220, together with the article that made it „der
-    /// Lachender Hans".
-    ///
-    /// It reads from the sound button: beside it in a row, under it in a
-    /// column. So the arrangement settles the alignment, and nothing else
-    /// has to be told about it.
+    /// The bird's name in writing — for the grown-up over the shoulder, as on
+    /// the design's screens. The child gets it spoken; the tiles stay
+    /// wordless. Only game 1 has one, and only the name: the sentence around
+    /// it went with #220, with the article that made it „der Lachender Hans".
+    /// It reads from the sound button — beside it in a row, under it in a
+    /// column — so the arrangement settles the alignment.
     private func question(_ name: String, in arrangement: QuizLayout.Arrangement) -> some View {
         let leading = arrangement == .above
         return Text(verbatim: name)
@@ -286,9 +282,9 @@ struct QuizScreen: View {
             .foregroundStyle(ZColor.textStrong)
             .multilineTextAlignment(leading ? .leading : .center)
             .lineLimit(2)
-            // "Hausrotschwanz" is the longest name the base pack asks for, and
-            // on the narrowest supported screen it needs the room. The floor
-            // is the design's own: nothing a child might read goes below 20 pt.
+            // "Hausrotschwanz" is the longest name the base pack asks for and
+            // needs the room on the narrowest screen. The floor is the
+            // design's own: nothing a child might read goes below 20 pt.
             .minimumScaleFactor(ZType.Step.body.size / ZType.Step.headline.size)
             .frame(maxWidth: .infinity, alignment: leading ? .leading : .center)
     }

@@ -95,11 +95,12 @@ struct TopBarTests {
 
     @Test("A wordless centre is sized by the row, not the other way round")
     func theQuizCentreIsUnaffected() {
-        // The quiz call site: a back button beside the leaf row. The row's
-        // width changed with #93 — the centre is now offered what the sides
-        // do not need rather than a third of the bar — and this is what says
-        // that made no difference to content whose width is its own. Ten
-        // 44 pt leaves are 548 pt wide however they are asked.
+        // What the quiz's bar was until #220: a back button beside the leaf
+        // row. The row's width changed with #93 — the centre is now offered
+        // what the sides do not need rather than a third of the bar — and
+        // this is what says that made no difference to content whose width is
+        // its own. Ten 44 pt leaves are 548 pt wide however they are asked,
+        // which is why the row no longer stands in a bar at all.
         let height = renderedSize(
             TopBar {
                 Color.clear.frame(width: ZSpacing.touchMinimum, height: ZSpacing.touchMinimum)
