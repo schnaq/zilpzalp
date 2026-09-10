@@ -78,7 +78,9 @@ The chip is 64 pt tall around a 48 pt disc. Measured against the tokens
 
 Both games stay on screen everywhere, well above the 64 pt floor, because
 `tiles(in:)` already measures the space it is left and picks the arrangement
-the tiles come out bigger in. The iPad pays nothing.
+the tiles come out bigger in. The iPad pays nothing. The two phone rows are
+arithmetic from the tokens — the simulators to hand are a 440 pt iPhone and
+the 13-inch iPad, and both were looked at.
 
 In the card: the spoken question „Welche Vögel?", then a grid of round
 sticker-style entries — `RewardSticker` at 96 pt (compact) / 128 pt, the
