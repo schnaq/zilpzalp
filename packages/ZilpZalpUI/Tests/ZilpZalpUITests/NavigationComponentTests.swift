@@ -159,10 +159,13 @@ struct NavigationComponentTests {
         #expect(width("Erkenne den Vogel") > available)
         #expect(width("Erkenne den Vogel") * HomeTileMetrics.labelScaleFloor > available)
 
-        // Two do, at the full step: SwiftUI breaks at the last space that
-        // fits, which is the one before „Vogel".
+        // Two do, at the full step, and whichever way SwiftUI sets them:
+        // it balanced the label to „Erkenne" over „den Vogel" on the phone
+        // rather than filling the first line, so both splits are checked.
         #expect(width("Erkenne den") <= available)
         #expect(width("Vogel") <= available)
+        #expect(width("Erkenne") <= available)
+        #expect(width("den Vogel") <= available)
     }
 
     /// The other half of the second line: it has to fit *down* the tile too.
