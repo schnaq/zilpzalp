@@ -11,14 +11,12 @@ import ZilpZalpData
 /// photo a tile gets is ``RoundPhotos``'s rule; this type is what holds the
 /// images beside it, so that ``QuizSession`` asks one thing for one tile.
 struct QuizPhotos {
-    /// The species by id, for the file names — no I/O, the manifests are open
-    /// already.
+    /// The species by id, for the file names and for how many photos each one
+    /// declares — no I/O, the manifests are open already.
+    ///
+    /// ``RoundPhotos`` is dealt against what a manifest declares rather than
+    /// what is on disk, because the deal is what says which files to open.
     private let birds: [String: Bird]
-
-    /// How many photos each species declares. What ``RoundPhotos`` deals
-    /// against: the manifest, not the disk, because the deal has to happen
-    /// before anything is opened.
-    private let photoCounts: [String: Int]
 
     /// Where the files are.
     private let library: PackLibrary
@@ -51,10 +49,11 @@ struct QuizPhotos {
     init(library: PackLibrary, round: Round, using generator: inout some RandomNumberGenerator) {
         self.library = library
         birds = Dictionary(uniqueKeysWithValues: library.birds.map { ($0.id, $0) })
-        photoCounts = library.birds.reduce(into: [:]) { counts, bird in
-            counts[bird.id] = bird.photos.count
-        }
-        dealt = RoundPhotos(round: round, photoCounts: photoCounts, using: &generator)
+        dealt = RoundPhotos(
+            round: round,
+            photoCounts: birds.mapValues(\.photos.count),
+            using: &generator,
+        )
         open(dealt.dealtPhotos)
     }
 
@@ -62,7 +61,11 @@ struct QuizPhotos {
     /// wherever a round is, or the new round would draw its tiles from the last
     /// one's table.
     mutating func deal(_ round: Round, using generator: inout some RandomNumberGenerator) {
-        dealt = RoundPhotos(round: round, photoCounts: photoCounts, using: &generator)
+        dealt = RoundPhotos(
+            round: round,
+            photoCounts: birds.mapValues(\.photos.count),
+            using: &generator,
+        )
         open(dealt.dealtPhotos)
     }
 

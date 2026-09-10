@@ -57,11 +57,12 @@ public struct RoundPhotos: Hashable, Sendable {
                     dealtPhotos[species, default: []].insert(0)
                     continue
                 }
-                // A bag over `0 ..< count` with `count > 1` always deals, so
-                // the fallback is unreachable — and it is the portrait, which
-                // is what a species with nothing to deal shows anyway.
-                let index = bags[species, default: ShuffleBag(Array(0 ..< count))]
-                    .next(using: &generator) ?? 0
+                guard let index = bags[species, default: ShuffleBag(Array(0 ..< count))]
+                    .next(using: &generator)
+                else {
+                    dealtPhotos[species, default: []].insert(0)
+                    continue
+                }
                 chosen[species] = index
                 dealtPhotos[species, default: []].insert(index)
             }
