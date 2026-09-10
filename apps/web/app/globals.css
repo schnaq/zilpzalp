@@ -714,6 +714,13 @@ section {
   margin-top: var(--s-3);
 }
 
+/* A legal footnote inside otherwise plain prose — the GmbH stays named where
+   the law needs it, but it must read as small print, not a headline. */
+.fine-print {
+  color: var(--muted);
+  font-size: var(--step--1);
+}
+
 .prose {
   max-width: var(--measure);
   display: grid;

@@ -29,8 +29,8 @@ export function Footer() {
         <div className="footer-grid">
           <div>
             <p>
-              <strong>ZilpZalp</strong> ist ein Projekt von Johanna Hillebrand,
-              zusammen mit der schnaq GmbH.
+              <strong>ZilpZalp</strong> ist ein Spiel von Johanna Hillebrand
+              und Christian Meter.
             </p>
             <p>
               Fragen zur App? <a href={`mailto:${SUPPORT_MAIL}`}>{SUPPORT_MAIL}</a>
