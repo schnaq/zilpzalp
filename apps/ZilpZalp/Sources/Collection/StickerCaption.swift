@@ -11,9 +11,9 @@ import ZilpZalpUI
 ///
 /// The honest fix is a `minimumScaleFactor` inside `RewardSticker`, which is
 /// a change to a shared package with callers this pull request does not own —
-/// **follow-up for #11**, alongside the caption tone and the clipped credit
-/// strip #26 already filed there. Until then this is the one copy of the
-/// workaround rather than one per screen.
+/// **follow-up for #11**, alongside the caption tone #26 already filed there.
+/// Until then this is the one copy of the workaround rather than one per
+/// screen.
 struct StickerCaption<Sticker: View>: View {
     /// The finished word under the disc: a bird's name, or "Noch geheim" for
     /// one still to be found.

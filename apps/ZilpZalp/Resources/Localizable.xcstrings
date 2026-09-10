@@ -1045,18 +1045,6 @@
         }
       }
     },
-    "quiz.photo.credit" : {
-      "comment" : "Credit inside a bird photo. %1$@ is the photographer, %2$@ the licence's short name. Mandatory for CC BY and CC BY-SA",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Foto: %1$@ (%2$@)"
-          }
-        }
-      }
-    },
     "quiz.progress.label" : {
       "comment" : "VoiceOver name of the leaf row in the top bar. Names the row; where the round stands is quiz.progress.value",
       "extractionState" : "manual",
