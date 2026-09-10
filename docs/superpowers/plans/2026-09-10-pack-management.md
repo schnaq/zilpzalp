@@ -72,10 +72,10 @@ above it (`design/` has no pack screen to follow):
 
 | State | Row |
 |---|---|
-| bundled | "Basis-Paket", "10 Arten · immer dabei", not tappable |
-| available | title, "60 Arten", value "12 MB" — a tap starts the download |
-| downloading | value "42 %", row disabled |
-| installed | value "12 MB", a tap asks "löschen?" before it deletes |
+| bundled | title, "10 Arten · immer dabei", not tappable |
+| available | title, "60 Arten · 12 MB" — a tap starts the download |
+| downloading | "60 Arten · 42 %", row disabled |
+| installed | "60 Arten · 12 MB", a tap asks "löschen?" before it deletes |
 
 Under the card the total on the device. Calm sentences instead of the list when
 the index could not be fetched, and one line under a pack whose download failed.

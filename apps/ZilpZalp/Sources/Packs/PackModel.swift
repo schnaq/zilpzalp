@@ -84,6 +84,9 @@ final class PackModel {
     private let bundledCatalog: PackCatalog?
     private let downloader: PackDownloader
 
+    /// How often `Packs/` has been read. See ``readInstalled()``.
+    private var reads = 0
+
     /// The pack that ships inside the app, `nil` only in a broken build.
     /// Listed like the others and deletable by nobody, so the app can never
     /// end up with no birds in it (spec §3).
@@ -152,9 +155,9 @@ final class PackModel {
 
     /// Downloads a pack and makes its species part of the games.
     ///
-    /// Returns at once; the row follows ``downloading``. A second tap while
-    /// one is running is ignored rather than starting a second fetch into the
-    /// same directory.
+    /// Returns at once; the row follows ``downloads``. A second tap while one
+    /// is running is ignored rather than starting a second fetch into the same
+    /// directory.
     func download(_ entry: PackIndex.Entry) {
         if case .running = downloads[entry.id] {
             return
@@ -170,7 +173,6 @@ final class PackModel {
                         self?.note(done, of: total, for: entry.id)
                     }
                 }
-                downloads[entry.id] = nil
             } catch {
                 // Nothing is half installed: the downloader publishes a pack
                 // only once every file it names is there and verified, so what
@@ -179,9 +181,14 @@ final class PackModel {
                 downloads[entry.id] = .failed
                 let reason = String(describing: error)
                 Logger.packs.error("Pack did not download: \(reason, privacy: .public)")
+                return
             }
 
+            // Installed first, and only then no longer a download: in between
+            // the pack belongs to neither list, and the row would offer it for
+            // download all over again.
             await readInstalled()
+            downloads[entry.id] = nil
         }
     }
 
@@ -204,7 +211,16 @@ final class PackModel {
     /// while the app runs reaches the games, the album and the credits without
     /// a restart.
     private func readInstalled() async {
+        // Two reads can be in flight at once — a download finishing while a
+        // deletion is under way — and no rule says the first one back is the
+        // older one. Only the newest read may be believed; the same reason
+        // `ParentalSettingsModel` chains its writes.
+        reads += 1
+        let mine = reads
+
         let opened = await downloader.installations()
+        guard mine == reads else { return }
+
         for failure in opened.failures {
             let reason = String(describing: failure)
             Logger.packs.error("Installed pack did not open: \(reason, privacy: .public)")
