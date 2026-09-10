@@ -175,19 +175,34 @@ struct ProfileTests {
         #expect(!text.contains("null"))
     }
 
-    @Test("the avatar choices are the eight the profile picker offers")
-    func offersEightAvatars() {
+    @Test("the avatar choices are the ten birds the creation screen offers")
+    func offersTenAvatars() {
         #expect(
             Profile.avatarChoices == [
-                "bird",
-                "egg",
-                "feather",
-                "leaf",
+                "amsel",
+                "blaumeise",
+                "buntspecht",
+                "eisvogel",
+                "hausrotschwanz",
+                "kohlmeise",
+                "rotkehlchen",
                 "star",
-                "sparkles",
-                "house",
-                "lightbulb",
+                "wiedehopf",
+                "zilpzalp",
             ],
         )
+    }
+
+    /// The one test that stops an avatar from becoming an empty disc: the
+    /// choices are species ids typed out by hand, and the pack they name is a
+    /// manifest somebody may edit. A bird that leaves the pack has to be
+    /// noticed here rather than on a child's iPad (#205).
+    @Test("every avatar choice is a bird of the pack that ships with the app")
+    func offersOnlyBundledBirds() throws {
+        let bundled = Set(try PackCatalog.bundled().pack.birds.map(\.id))
+
+        for choice in Profile.avatarChoices {
+            #expect(bundled.contains(choice), "\(choice) is not in the bundled pack")
+        }
     }
 }

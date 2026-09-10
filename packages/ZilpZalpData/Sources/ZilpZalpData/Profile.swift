@@ -7,26 +7,41 @@ import Foundation
 /// means anything outside this installation, and no field a child could not
 /// see for itself on the screen.
 public struct Profile: Codable, Sendable, Hashable, Identifiable {
-    /// The avatars a profile can be created with.
+    /// The avatars a profile can be created with: ten species of the pack that
+    /// ships inside the app, drawn as the photo disc the album gives a
+    /// collected bird (#205).
     ///
-    /// Raw values of `ZIcon` in `ZilpZalpUI`, spelled out as strings because
-    /// the data layer does not know the design system. When Johanna's
-    /// pictures arrive (#45) they take the same field: a picture's file name
-    /// is a string as well.
+    /// Birds rather than the Lucide glyphs this used to name, because a child
+    /// told us so — „Das sind keine Vögel" (#193), and „mit den auswählbaren
+    /// Profilbildern nicht zufrieden" (#205). The photos are licensed,
+    /// credited and already on the device, so an avatar costs no new asset.
+    ///
+    /// Ten of the seventy the bundled pack carries, chosen for being told
+    /// apart across a table: no two of them are the same bird in another
+    /// colour. Spelled out rather than taken from the manifest, so the grid a
+    /// child knows does not reshuffle itself when a pack gains a species —
+    /// `ProfileTests` is what keeps the list and the pack in step.
+    ///
+    /// Still plain strings, and still not an enum: a stored avatar may name a
+    /// bird this build has never heard of, and older files name a glyph. What
+    /// to draw for either is the app's business, not this module's.
     public static let avatarChoices = [
-        "bird",
-        "egg",
-        "feather",
-        "leaf",
+        "amsel",
+        "blaumeise",
+        "buntspecht",
+        "eisvogel",
+        "hausrotschwanz",
+        "kohlmeise",
+        "rotkehlchen",
         "star",
-        "sparkles",
-        "house",
-        "lightbulb",
+        "wiedehopf",
+        "zilpzalp",
     ]
 
     public var id: UUID
     public var name: String
-    /// One of ``avatarChoices``. Not an enum: see there.
+    /// One of ``avatarChoices`` — or, in a file an older build wrote, the
+    /// name of a glyph. Not an enum: see there.
     public var avatar: String
     public var totalStars: Int
     public var roundsPlayed: Int
