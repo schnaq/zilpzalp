@@ -128,8 +128,9 @@ struct PackCatalogTests {
             #expect(hex == call.sha256, "call of '\(bird.id)' does not match its sha256")
         }
 
-        // Under four the home screen leaves game 2's tile out altogether (#31).
-        #expect(found >= 4)
+        // Below that the home screen leaves game 2's tile out altogether
+        // (#31), so the threshold is read from where the rule lives.
+        #expect(found >= PackCollections.minimumSpecies)
     }
 
     /// The third medium, checked like the other two. Vacuous until the base

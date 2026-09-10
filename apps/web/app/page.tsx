@@ -9,9 +9,9 @@ import { Screenshots } from './screenshots'
 
 const FACTS = [
   {
-    term: 'Zehn Arten',
+    term: '70 Arten',
     detail:
-      'Amsel, Blaumeise, Buntspecht, Eisvogel, Hausrotschwanz, Kohlmeise, Rotkehlchen, Star, Wiedehopf — und der Zilpzalp.',
+      'Amsel, Blaumeise, Rotkehlchen und der Zilpzalp — bis hin zu Eisvogel, Uhu, Kranich und Weißstorch.',
   },
   {
     term: 'Ohne Lesen',
