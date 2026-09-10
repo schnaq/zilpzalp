@@ -16,6 +16,9 @@ import SwiftUI
 /// VoiceOver element — which a switch row does not do on its own, see the
 /// comment in `body`.
 ///
+/// The design's three columns are an iPad's; below the regular size class the
+/// row stacks instead, and ``SettingRowStack`` says how.
+///
 /// `.disabled(_:)` works as on any SwiftUI control: a navigation row dims to
 /// the system's one disabled opacity, a switch row lets `Toggle` grey itself.
 /// A row that exists before the screen behind it does — the time budget
@@ -29,6 +32,7 @@ public struct SettingRow: View {
     }
 
     @Environment(\.isEnabled) private var isEnabled
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
     private let title: String
     private let hint: String?
@@ -183,25 +187,41 @@ public struct SettingRow: View {
     /// Icon, title and hint. The trailing slot differs per variant: the
     /// navigation row fills it with value and chevron, the switch row leaves
     /// it to `Toggle`, which places the switch itself.
+    ///
+    /// ``SettingRowStack`` decides how the four sit: the design's three
+    /// columns on an iPad, stacked on a phone. A switch row hands it an empty
+    /// trailing slot and so never stacks one — the switch is `Toggle`'s to
+    /// place, on the middle of whatever the label turns out to be, exactly as
+    /// Settings.app does it.
     private func row(@ViewBuilder trailing: () -> some View) -> some View {
-        HStack(spacing: ZSpacing.step4) {
-            if let icon {
-                Icon(icon, size: .standard)
-                    .foregroundStyle(ZColor.olive600)
+        SettingRowStack(
+            sizeClass: horizontalSizeClass,
+            spacing: ZSpacing.step4,
+            hintSpacing: SettingRowMetrics.hintSpacing,
+        ) {
+            // Four slots, always all four, and each optional one wrapped: a
+            // `Layout` never sees an `EmptyView` — SwiftUI drops it before
+            // the layout runs — and a missing slot would shift every other
+            // one onto the wrong place.
+            HStack(spacing: 0) {
+                if let icon {
+                    Icon(icon, size: .standard)
+                        .foregroundStyle(ZColor.olive600)
+                }
             }
 
-            VStack(alignment: .leading, spacing: SettingRowMetrics.hintSpacing) {
-                Text(title)
-                    // Not `singleLine`, even though a title is one line in
-                    // practice. Nunito's box is smaller than the design's
-                    // here, so the frame would add 2.7 pt inside a row that
-                    // `--touch-min` already holds at 64 — invisible — while
-                    // the `lineLimit(1)` that comes with it would truncate a
-                    // long setting name. Wrapping is the better failure in
-                    // the one area that uses full sentences.
-                    .typeStyle(.body, .body, weight: .bold)
-                    .foregroundStyle(ZColor.textStrong)
+            Text(title)
+                // Not `singleLine`, even though a title is one line in
+                // practice. Nunito's box is smaller than the design's here,
+                // so the frame would add 2.7 pt inside a row that
+                // `--touch-min` already holds at 64 — invisible — while the
+                // `lineLimit(1)` that comes with it would truncate a long
+                // setting name. Wrapping is the better failure in the one
+                // area that uses full sentences.
+                .typeStyle(.body, .body, weight: .bold)
+                .foregroundStyle(ZColor.textStrong)
 
+            HStack(spacing: 0) {
                 if let hint {
                     Text(hint)
                         // Explanatory copy, and the one string in the system
@@ -210,15 +230,14 @@ public struct SettingRow: View {
                         .foregroundStyle(ZColor.textMuted)
                 }
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            // Pins the stack to the height its two paragraphs need, so that
-            // no ancestor can compress it — a `Toggle` label in particular
-            // gets what the switch leaves over. Nothing observed today asks
-            // for less; this states what the row is entitled to.
-            .fixedSize(horizontal: false, vertical: true)
 
-            trailing()
+            HStack(spacing: 0) { trailing() }
         }
+        // Pins the row to the height its paragraphs need, so that no ancestor
+        // can compress it — a `Toggle` label in particular gets what the
+        // switch leaves over. Nothing observed today asks for less; this
+        // states what the row is entitled to.
+        .fixedSize(horizontal: false, vertical: true)
         .padding(.vertical, ZSpacing.step4)
     }
 }
@@ -233,13 +252,16 @@ enum SettingRowMetrics {
     /// The gap between title and hint.
     ///
     /// Not the JSX's `marginTop: 2`, which assumes a title that stays on one
-    /// line. A settings row on a phone is 110–140 pt wide in its text column,
-    /// so "Namen anzeigen" wraps — and at 2 pt the second line of the title
-    /// sits *closer* to the hint than to the line above it, which SwiftUI
-    /// separates by ``ZType/Step/lineSpacing(for:)``, 2.7 pt at the body step.
-    /// The two then read as one run-on block. A step of the scale is the
-    /// smallest gap that reads as a break; `NavigationComponentTests` holds it
-    /// above the title's own line spacing.
+    /// line. A title still wraps — a long one, or the hint under it running to
+    /// two lines — and at 2 pt the second line of the title sits *closer* to
+    /// the hint than to the line above it, which SwiftUI separates by
+    /// ``ZType/Step/lineSpacing(for:)``, 2.7 pt at the body step. The two then
+    /// read as one run-on block. A step of the scale is the smallest gap that
+    /// reads as a break; `NavigationComponentTests` holds it above the title's
+    /// own line spacing.
+    ///
+    /// ``SettingRowStack`` leaves it wherever it stacks something inside a
+    /// row, the trailing line of a phone row included.
     static let hintSpacing: CGFloat = ZSpacing.step2
     /// `borderBottom: 2px` — a hairline inside a card, thinner than
     /// ``ZBorder/width``, which outlines the card itself.
@@ -302,12 +324,15 @@ private struct SettingRowPreviewCard: View {
     SettingRowPreviewCard()
 }
 
-// The narrow case, at the width of the smallest phone the app runs on: an
-// iPhone SE is 375 pt across, and the grown-ups' screen leaves a settings row
-// about 110 pt of text column once gutter, card, icon and switch have had
-// theirs. Every title here wraps, which is the whole point — the hint has to
-// stay recognisable as a second paragraph.
-#Preview("Wrapping titles at 375 pt") {
+// The case #142 was opened for, at the width of the smallest phone the app
+// runs on: an iPhone SE is 375 pt across, and behind the iPad's gutter and
+// columns "Spielzeit pro Tag" was left about 60 pt of text column and broke
+// over four lines. Stacked, and behind the 16 pt phone gutter, the title has
+// the column to itself and "Kein Limit" takes a line of its own.
+//
+// The size class is set rather than left to the canvas, because the width
+// alone does not carry it — and it is half of what this preview shows.
+#Preview("Stacked rows at 375 pt") {
     ZCard(padding: 0) {
         VStack(spacing: 0) {
             SettingRow(
@@ -320,13 +345,14 @@ private struct SettingRowPreviewCard: View {
                 title: "Spielzeit pro Tag",
                 hint: "Danach schlafen die Vögel",
                 icon: .clock,
-                value: "20 Min",
+                value: "Kein Limit",
                 showsSeparator: false,
             ) {}
         }
     }
-    .frame(width: 375 - 2 * ZSpacing.gutterScreen)
-    .padding(.horizontal, ZSpacing.gutterScreen)
+    .frame(width: 375 - 2 * ZSpacing.step4)
+    .padding(.horizontal, ZSpacing.step4)
+    .environment(\.horizontalSizeClass, .compact)
     .background(ZColor.surfacePage)
 }
 
