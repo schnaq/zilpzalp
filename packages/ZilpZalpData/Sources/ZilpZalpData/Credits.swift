@@ -27,7 +27,7 @@ public struct Credits: Codable, Sendable, Hashable {
     public struct Media: Codable, Sendable, Hashable {
         public let packID: String
         /// The pack's own title, as its manifest spells it. The screen heads
-        /// each group of credits with it, and `basis` is a directory name.
+        /// each group of credits with it, and `deutschland` is a directory name.
         public let packTitle: String
         public let birdID: String
         /// The bird's name as the manifest spells it — the screen shows it and

@@ -159,7 +159,7 @@ class MainIsTheCIContract(SyncTestCase):
 
     def test_drift_in_the_fixed_sentences_is_reported_like_a_packs(self) -> None:
         # The acceptance of the speech schema: data/speech is checked exactly
-        # the way data/packs/basis is, by the same run and the same exit code.
+        # the way data/packs/deutschland is, by the same run and the same exit code.
         self.run_main()
         (self.speech_source / "manifest.json").write_text('{"id": "speech2"}', encoding="utf-8")
 
@@ -181,7 +181,7 @@ class BundledCopiesMatchTheRepository(unittest.TestCase):
     def test_the_base_pack_and_the_fixed_sentences_are_bundled(self) -> None:
         self.assertEqual(
             [(label, source.name, destination.name) for label, source, destination in sync_bundled_packs.BUNDLED_COPIES],
-            [("basis", "basis", "basis"), ("speech", "speech", "Speech")],
+            [("deutschland", "deutschland", "deutschland"), ("speech", "speech", "Speech")],
         )
 
 

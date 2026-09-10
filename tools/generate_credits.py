@@ -183,7 +183,7 @@ def pack_media(document: dict, pack_id: str, pack_title: str) -> list[dict]:
                     "packID": pack_id,
                     # The pack's own product title on every entry: the credits
                     # screen groups by pack and heads each group with it, and
-                    # an id like `basis` is a directory name, not something to
+                    # an id like `deutschland` is a directory name, not something to
                     # put in front of a parent.
                     "packTitle": pack_title,
                     "birdID": bird_id,

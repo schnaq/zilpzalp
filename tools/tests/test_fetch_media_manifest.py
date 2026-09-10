@@ -1,7 +1,7 @@
 """Tests for reading and writing the pack manifests.
 
 The one that matters most is the round trip against the real
-`data/packs/basis/manifest.json`: whatever the tool writes must differ from
+`data/packs/deutschland/manifest.json`: whatever the tool writes must differ from
 what it read only in the medium that actually changed.
 
 Run from the repository root:
@@ -57,7 +57,7 @@ def document(**overrides) -> dict:
 class RoundTripTests(unittest.TestCase):
     def test_the_bundled_manifest_survives_byte_for_byte(self) -> None:
         """The real file, not a fixture: this is the format the tool must keep."""
-        path = manifest.manifest_path("basis")
+        path = manifest.manifest_path("deutschland")
         original = path.read_bytes()
 
         rewritten = manifest.dump(manifest.load(path)).encode("utf-8")
@@ -98,7 +98,7 @@ class MediaBlockTests(unittest.TestCase):
 
     def test_matches_the_bundled_manifest(self) -> None:
         """The order the repository already carries, so a diff stays small."""
-        bundled = json.loads(manifest.manifest_path("basis").read_text(encoding="utf-8"))
+        bundled = json.loads(manifest.manifest_path("deutschland").read_text(encoding="utf-8"))
 
         self.assertEqual(list(bundled["birds"][0]["photo"]), list(manifest.MEDIA_KEYS))
 

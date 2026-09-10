@@ -2,15 +2,15 @@
 
 Three kinds of medium, and a human between every step:
 
-    photos candidates --pack basis [--species amsel …] [--limit 5]
-    photos pick --pack basis --species amsel --observation 20490738 --photo 31623386
-    calls candidates --pack basis [--species amsel …] [--limit 5] [--type song]
-    calls pick --pack basis --species amsel --recording XC965144 [--start 12.5]
-    speech render --provider fake --pack basis [--species amsel …] [--sentence …]
+    photos candidates --pack deutschland [--species amsel …] [--limit 5]
+    photos pick --pack deutschland --species amsel --observation 20490738 --photo 31623386
+    calls candidates --pack deutschland [--species amsel …] [--limit 5] [--type song]
+    calls pick --pack deutschland --species amsel --recording XC965144 [--start 12.5]
+    speech render --provider fake --pack deutschland [--species amsel …] [--sentence …]
     speech render --provider fake --set fixed --sentence roundEnd.title
-    speech import --pack basis --species amsel --sentence … --file take3.wav
+    speech import --pack deutschland --species amsel --sentence … --file take3.wav
                   --attribution "Stimme: …"
-    upload --pack basis [--dry-run]
+    upload --pack deutschland [--dry-run]
 
 `candidates` asks the source and lists what may be used; it never chooses.
 `pick` fetches the one medium a human named, crops or trims it, writes the
@@ -636,7 +636,7 @@ def add_speech_place(parser: argparse.ArgumentParser) -> None:
     gemacht!" belongs to no pack at all (data/speech/, section 3.1 of the plan).
     """
     place = parser.add_mutually_exclusive_group(required=True)
-    place.add_argument("--pack", help="pack id, for instance 'basis' — its species sentences")
+    place.add_argument("--pack", help="pack id, for instance 'deutschland' — its species sentences")
     place.add_argument(
         "--set",
         choices=("fixed",),
@@ -659,7 +659,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
 
     candidates = photos.add_parser("candidates", help="list freely licensed photos for a pack")
-    candidates.add_argument("--pack", required=True, help="pack id, for instance 'basis'")
+    candidates.add_argument("--pack", required=True, help="pack id, for instance 'deutschland'")
     candidates.add_argument("--species", nargs="+", help="bird ids; default: every bird in the pack")
     candidates.add_argument(
         "--limit", type=int, default=5, help="observations to ask for per species (default: 5)"
@@ -691,7 +691,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
 
     listing = calls.add_parser("candidates", help="list freely licensed recordings for a pack")
-    listing.add_argument("--pack", required=True, help="pack id, for instance 'basis'")
+    listing.add_argument("--pack", required=True, help="pack id, for instance 'deutschland'")
     listing.add_argument("--species", nargs="+", help="bird ids; default: every bird in the pack")
     listing.add_argument(
         "--limit", type=int, default=5, help="recordings to list per species (default: 5)"

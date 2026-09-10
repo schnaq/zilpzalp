@@ -326,10 +326,10 @@ description = "Curate media: 'photos …', 'calls …', 'speech …', 'upload' �
 # One line on purpose: mise appends the arguments of `mise run fetch-media …`
 # to the end of the command, so the subcommands reach the tool unchanged.
 #
-#   mise run fetch-media photos candidates --pack basis --limit 5
-#   mise run fetch-media photos pick --pack basis --species amsel \
+#   mise run fetch-media photos candidates --pack deutschland --limit 5
+#   mise run fetch-media photos pick --pack deutschland --species amsel \
 #       --observation 20490738 --photo 31623386
-#   mise run fetch-media speech import --pack basis --species amsel \
+#   mise run fetch-media speech import --pack deutschland --species amsel \
 #       --sentence quiz.prompt.whereIs --file take3.wav --attribution "Stimme: …"
 #
 # Finding and picking a photo needs no credential at all, and neither does
@@ -337,12 +337,12 @@ description = "Curate media: 'photos …', 'calls …', 'speech …', 'upload' �
 # provider that speaks over the network do, and the caller wraps them, exactly
 # as issue #14 describes:
 #
-#   infisical run --env=dev --path=/ -- mise run fetch-media calls candidates --pack basis
-#   infisical run --env=dev --path=/ -- mise run fetch-media calls pick --pack basis \
+#   infisical run --env=dev --path=/ -- mise run fetch-media calls candidates --pack deutschland
+#   infisical run --env=dev --path=/ -- mise run fetch-media calls pick --pack deutschland \
 #       --species amsel --recording XC965144 --start 12.5
-#   infisical run --env=dev --path=/ -- mise run fetch-media upload --pack basis
+#   infisical run --env=dev --path=/ -- mise run fetch-media upload --pack deutschland
 #   infisical run --env=dev --path=/ -- mise run fetch-media speech render \
-#       --pack basis --species amsel --provider …
+#       --pack deutschland --species amsel --provider …
 #
 # The xeno-canto API v3 refuses every request without `XENO_CANTO_API_KEY`, and
 # the upload needs the bucket keys; both read them from the environment. A

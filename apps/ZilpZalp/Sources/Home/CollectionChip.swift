@@ -77,7 +77,7 @@ struct CollectionChip: View {
             openPicker: {},
         )
         CollectionChip(
-            entry: CollectionEntry(id: "basis", title: "Unsere ersten Vögel", cover: nil),
+            entry: CollectionEntry(id: "deutschland", title: "Vögel Deutschlands", cover: nil),
             openPicker: {},
         )
     }

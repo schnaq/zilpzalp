@@ -32,7 +32,7 @@ const FACTS = [
   },
   {
     term: 'Offline',
-    detail: 'Die zehn Vögel sind in der App. Zum Spielen braucht sie kein Netz.',
+    detail: 'Die 70 Vögel sind in der App. Zum Spielen braucht sie kein Netz.',
   },
 ]
 
@@ -64,7 +64,7 @@ export default function Home() {
             <h1 className="rise">Vögel kennenlernen, bevor man lesen kann.</h1>
             <p className="lead rise rise-2">
               ZilpZalp bringt Kindern die Vögel vor der eigenen Haustür nahe.
-              Zwei Spiele, zehn heimische Arten, viele Sterne.
+              Zwei Spiele, 70 heimische Arten, viele Sterne.
             </p>
             <div className="hero-actions rise rise-3">
               <span className="pill">
