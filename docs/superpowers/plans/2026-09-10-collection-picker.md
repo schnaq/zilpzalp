@@ -34,7 +34,7 @@ library order.
 
 Two rules, in one place so they cannot disagree:
 
-- **A collection needs four species** (`speciesForARound`) — the four choices
+- **A collection needs four species** (`PackCollections.minimumSpecies`) — the four choices
   one question offers, `Round.make`'s `choiceCount`. Below that a pack is not
   offered at all, and choosing one falls back to everything. Every shipped pack
   has ten or more; this is a guard, not a screen.
@@ -83,9 +83,10 @@ arithmetic from the tokens — the simulators to hand are a 440 pt iPhone and
 the 13-inch iPad, and both were looked at.
 
 In the card: the spoken question „Welche Vögel?", then a grid of round
-sticker-style entries — `RewardSticker` at 96 pt (compact) / 128 pt, the
+sticker-style entries — `RewardSticker` at the album's own sizes (80 pt
+compact, 128 pt otherwise; `StickerGrid` holds them for both screens), the
 manifest photo of the pack's first bird, the title beneath in the album's
-`StickerCaption`. The chosen entry carries an olive ring **and** a check badge,
+`StickerCaption`. The chosen entry carries an olive rim **and** a check badge,
 so it is not colour alone. A tap chooses, says the collection's name and leaves
 the card standing, so a child can hear one after another; the primary „Los!"
 pill and a tap beside the card both close it. One announcer for question and
@@ -98,13 +99,15 @@ bucket offers four packs; more than that wants a scroll view and its own issue.
 ## Which bird stands for a pack
 
 The first bird of the manifest — Amsel, Haussperling, Kaiserpinguin, Strauß,
-all four distinctive. **„Alle Vögel" gets no photo but the bird glyph on its
-sun disc**: the first bird of the whole library is the first bird of the
-bundled pack, so on the simulator the two left-hand entries came out as the
-same Amsel, and every bird is not one bird. **No `cover` key**: the issue allows it only if the
+all four distinctive. **No `cover` key**: the issue allows one only if the
 schema, `tools/fetch_media/manifest.py`, `license_gate.py` and the sync tool
 learn it in the same pull request, and that is a second change wearing this
 one's clothes.
+
+**„Alle Vögel" gets no photo but the bird glyph on its sun disc.** The first
+bird of the whole library is the first bird of the bundled pack, so on the
+simulator the two left-hand entries came out as the same Amsel — and every
+bird is not one bird.
 
 ## Tests
 
