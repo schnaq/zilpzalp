@@ -1,3 +1,4 @@
+import Foundation
 import Testing
 @testable import ZilpZalpUI
 
@@ -118,4 +119,32 @@ func badgeForegroundsDifferFromTheirFill() {
     #expect(tones.allSatisfy { $0.fill != $0.foreground })
     #expect(Set(tones.map(\.fill)).count == 6)
     #expect(Set(tones.map(\.foreground)).count == 6)
+}
+
+/// The one piece of screen geometry this package can settle for the app: the
+/// home screen's album pill, centred at the foot, against the „i" in the
+/// corner beside it (#212).
+///
+/// The pill's width is its own — two paddings, a glyph, a gap and a tracked
+/// line of Baloo 2 — so a font swap or a longer word moves it, and what it
+/// would move into is a 64 pt button one phone gutter in from the edge. A
+/// comment on `HomeScreen` claimed the clearance; this measures it, and the
+/// narrowest supported phone is where it is tightest: 192 pt of pill, 11.5 pt
+/// of air.
+///
+/// `ZButton` tracks its label, which a first reading of that arithmetic
+/// missed, and `.tracking(_:)` adds its points after every character rather
+/// than between them — the 3.5 pt that turned 188 into 192.
+@Test("The album's pill leaves the corner button its room on a 375 pt phone")
+func theAlbumPillLeavesTheCornerButtonItsRoom() throws {
+    try #require(BundledFonts.registered)
+
+    let label = "Sammlung"
+    let size = ZButton.Size.medium
+    let line = BundledFonts.width(of: label, postScriptName: "Baloo2-Bold", size: size.step.size)
+    let tracking = CGFloat(label.count) * size.step.tracking(ZType.Tracking.looseEm)
+    let pill = 2 * size.horizontalPadding + size.glyph.points + ZSpacing.step3 + line + tracking
+
+    #expect(pill < 195)
+    #expect((375 - pill) / 2 - (ZSpacing.step4 + ZSpacing.touchMinimum) > ZSpacing.step2)
 }

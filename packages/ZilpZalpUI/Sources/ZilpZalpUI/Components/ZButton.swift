@@ -34,7 +34,10 @@ public struct ZButton: View {
     }
 
     /// How big the pill is. `medium` is the grown-up size — never put it on a
-    /// screen a child uses.
+    /// screen a child uses, with one exception: the album's pill at the foot
+    /// of the home screen (#212, 2026-09-10). It sits on the 64 pt touch
+    /// floor beside a 64 pt "i", and a taller row would take its points off
+    /// the game tiles on a 375 pt phone, where they are worth more.
     public enum Size: CaseIterable, Hashable, Sendable {
         /// `md`, 64 pt: `--touch-min`.
         case medium

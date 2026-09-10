@@ -81,9 +81,9 @@ public struct HomeTile: View {
     /// - Parameters:
     ///   - title: The word under the glyph, and the button's accessibility
     ///     label. Always a parameter — the package carries no product copy.
-    ///     One or two words: the tile draws it on a single line and truncates
-    ///     rather than wrapping. How large that line is drawn follows the
-    ///     tile, see ``labelStep``.
+    ///     One or two words: the tile draws it on a single line and shrinks it
+    ///     rather than wrapping or cutting it off. How large that line is
+    ///     drawn follows the tile, see ``labelStep``.
     ///   - icon: The activity's glyph. Ignored while ``locked``.
     ///   - tone: The tile's tint.
     ///   - stars: How many of the three slots are filled. A number outside
@@ -140,11 +140,12 @@ public struct HomeTile: View {
     /// for, so that a big tile does not carry a small word under an 82 pt
     /// glyph.
     ///
-    /// Below 193 pt the tile drops to `body` and stays there. That floor
-    /// still needs room: at 20 pt the shortest label the app ships, "Wer ist
-    /// das?", asks for a 140 pt tile and the longer "Wer singt da?" for 153
-    /// pt. Two tiles side by side on a 375 pt phone come out at 127 pt, and
-    /// there the label truncates rather than going under the floor.
+    /// Below 193 pt the tile drops to `body` and stays there. That floor still
+    /// needs room: at 20 pt the two labels the app ships ask for a 134.3 pt
+    /// tile („Wer ist das?") and a 147.1 pt one („Wer singt da?"). The home
+    /// screen's narrowest tile is 159 pt since it took the phone gutter
+    /// (#145), so both fit whole; below 147.1 pt the label shrinks instead —
+    /// see ``HomeTileMetrics/labelScaleFloor``.
     var labelStep: ZType.Step {
         let available = size - 2 * ZSpacing.step4
         let steps: [ZType.Step] = [.headline, .label]
@@ -166,6 +167,13 @@ public struct HomeTile: View {
                     // One line by design, so no `multilineTextAlignment`:
                     // the frame centres the single line already.
                     .typeStyle(labelStep, .display, weight: .bold, singleLine: true)
+                    // The last resort, one step's worth: a label wider than
+                    // its tile shrinks rather than losing its ending — the
+                    // ending is where the question mark is. It engages below
+                    // a 147 pt tile, which is smaller than any screen the app
+                    // supports draws (#145), and it keeps the design's line
+                    // box, so the glyph above does not shift.
+                    .minimumScaleFactor(HomeTileMetrics.labelScaleFloor)
 
                 // No stars at all until the first one is earned, exactly as
                 // in the JSX: three empty outlines on a fresh tile would read
@@ -224,6 +232,14 @@ private enum HomeTileMetrics {
     /// Rounded up, so that a boundary lands with a point of slack rather
     /// than on the last glyph's edge.
     static let labelWidthRatio: CGFloat = 7.3
+    /// How far a label may shrink before it would rather be cut off: one step
+    /// of the scale, `body` 20 pt down to `caption` 16 pt.
+    ///
+    /// Not a size a child reads at — 20 pt is the floor the design sets — and
+    /// no supported screen asks for it, see ``HomeTile/labelStep``. It is here
+    /// so that a longer word in another language, or a tile a future screen
+    /// draws smaller, loses a little height rather than its last glyphs.
+    static let labelScaleFloor = ZType.Step.caption.size / ZType.Step.body.size
     /// Three stars per activity, and never a fourth.
     static let starCapacity = 3
     /// The resting ledge, `--ledge-lg`.

@@ -38,13 +38,12 @@ final class StoreScreenshots: XCTestCase {
     /// taps, and the app is built to be localisable but ships in one language.
     private static let gameNames = "Wer ist das?"
     private static let gameCalls = "Wer singt da?"
-    private static let album = "Meine Sammlung"
+    private static let album = "Sammlung"
     private static let playAgain = "Nochmal spielen"
 
     /// The album's own headline, which is the child's name in the genitive
-    /// (#204) — `ScreenshotSeed` names her Mia. Not the words on the button
-    /// that opens it: those two were the same sentence until the album started
-    /// saying whose it is.
+    /// (#204) — `ScreenshotSeed` names her Mia. Not the word on the pill that
+    /// opens it, which the home screen shares with the round end (#212).
     private static let albumTitle = "Mias Sammlung"
 
     /// A round is ten questions, and ten answered right at the first attempt
@@ -109,8 +108,8 @@ final class StoreScreenshots: XCTestCase {
 
         app.buttons[Self.album].tap()
         // The album's own headline, which no other screen carries: the door to
-        // it is a button reading "Meine Sammlung", and the page behind it is
-        // the child's own album.
+        // it is a pill reading "Sammlung", and the page behind it is the
+        // child's own album.
         XCTAssertTrue(app.staticTexts[Self.albumTitle].waitForExistence(timeout: Self.arrival))
         capture("05-collection", into: output)
     }

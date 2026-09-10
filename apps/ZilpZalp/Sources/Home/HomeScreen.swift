@@ -109,6 +109,12 @@ struct HomeScreen: View {
             // iPhone up, with no scroll view — and the intro reports its own
             // height so the group can sit in the middle instead of the tiles
             // drifting away from the words that introduce them.
+            //
+            // A phone keeps the top bar's 16 pt gutter (#124), not the 48 pt
+            // iPad margin, which squeezed two tiles to 127 pt and cut their
+            // labels off (#145). At 16 pt the worst tile is 159 pt —
+            // `(375 − 32 − 24) / 2` — which `HomeTile.labelStep` says is
+            // enough for both.
             GeometryReader { area in
                 VStack(spacing: ZSpacing.step7) {
                     intro
@@ -124,7 +130,7 @@ struct HomeScreen: View {
                 .frame(width: area.size.width, height: area.size.height)
             }
             .frame(maxWidth: ZSpacing.maxContent)
-            .padding(.horizontal, ZSpacing.gutterScreen)
+            .padding(.horizontal, isCompact ? ZSpacing.step4 : ZSpacing.gutterScreen)
             .padding(.vertical, ZSpacing.step6)
             .frame(maxWidth: .infinity)
 
@@ -150,10 +156,8 @@ struct HomeScreen: View {
     }
 
     /// The headline and, once there is more than one pack on the device, the
-    /// collection this child plays with.
-    ///
-    /// Measured as one so the tiles below know what is left; the pill costs a
-    /// 390 pt phone 40 pt of tile and an iPad nothing at all.
+    /// collection this child plays with. Measured as one so the tiles below
+    /// know what is left: the pill costs a phone tile height, an iPad nothing.
     private var intro: some View {
         VStack(spacing: ZSpacing.step4) {
             headline
@@ -176,12 +180,25 @@ struct HomeScreen: View {
     /// An overlay rather than a third element in a row, so the album keeps the
     /// screen's midline: it is the one button here a child aims at, and it may
     /// not move because a grown-up's door appeared beside it.
+    ///
+    /// **A pill with its word on it, not a bare disc** (#212). Unlabelled it
+    /// read as one more utility beside the equally quiet "i", and the album is
+    /// one of three things a child does here. So it is the pill the round end
+    /// offers, with the same word on it, and 64 pt everywhere where the disc
+    /// grew to 96 pt on an iPad. No tile pays for it: a phone's row is the
+    /// same height as before, and an iPad's tiles already sit at the design's
+    /// 240 pt cell, so the 32 pt the row gives back become slack.
+    ///
+    /// It fits beside the "i" on the narrowest screen, which is what lets the
+    /// "i" stay in the corner #201 put it in: 192 pt of pill leaves 11.5 pt of
+    /// air on a 375 pt phone. `ZilpZalpUI` measures that rather than trusting
+    /// it — see the album pill's test in `CoreComponentTests`.
     private var album: some View {
-        IconButton(
-            .album,
-            label: String(localized: "collection.title"),
+        ZButton(
+            String(localized: "collection.title"),
             tone: .primary,
-            diameter: isCompact ? ZSpacing.touchMinimum : ZSpacing.touchComfortable,
+            size: .medium,
+            leadingIcon: .album,
             action: openCollection,
         )
         .frame(maxWidth: .infinity)
@@ -194,14 +211,13 @@ struct HomeScreen: View {
     /// Not in the top bar beside the lock, where #199 expected it, and the
     /// reason is arithmetic. ``TopBarRow`` reserves `max(leading, trailing)`
     /// on *both* sides of the bar, so a third 64 pt button in the trailing
-    /// slot pushes that slot's left edge under the wordmark: with the wordmark
-    /// measured at 144 pt and the compact gutter, the gap between the two is
-    /// 59 pt with two buttons and −17 pt on a 375 pt phone and −2 pt on a
-    /// 390 pt one with three. The overlap would have shown on neither of the
-    /// two devices the screenshots were taken on. So the button goes where
-    /// there is room for it on every supported screen — and the corner is the
-    /// quieter place anyway: it is beside the album rather than among the
-    /// tiles, and it competes with nothing a child is looking for.
+    /// slot pushes that slot's left edge under the 144 pt wordmark: the gap
+    /// between the two is 59 pt with two buttons and −17 pt on a 375 pt phone
+    /// and −2 pt on a 390 pt one with three, an overlap neither of the two
+    /// screenshot devices would have shown. So it goes where there is room on
+    /// every supported screen — and the corner is quieter anyway: beside the
+    /// album rather than among the tiles, competing with nothing a child looks
+    /// for.
     ///
     /// The default `quiet` tone, against the album's `primary`: of the two
     /// doors down here only one is for the child.
