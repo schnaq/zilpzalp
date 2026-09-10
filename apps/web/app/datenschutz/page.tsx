@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { LegalPage, Todo } from '../legal-page'
+import { LegalPage } from '../legal-page'
 import { COMPANY_MAIL, SUPPORT_MAIL } from '../site-chrome'
 
 export const metadata: Metadata = {
@@ -119,11 +119,10 @@ export default function Datenschutz() {
       <p>
         Der Medienserver ist ein Object-Storage-Bereich bei der Scaleway SAS
         (8 rue de la Ville l’Evêque, 75008 Paris, Frankreich), Region „fr-par“ in
-        Frankreich. Die Dateien liegen ausschließlich in der EU.{' '}
-        <Todo>
-          Speicherdauer der Zugriffsprotokolle des Medienservers und Stand des
-          Auftragsverarbeitungsvertrags mit Scaleway eintragen
-        </Todo>
+        Frankreich. Die Dateien liegen ausschließlich in der EU. Mit Scaleway
+        besteht ein Auftragsverarbeitungsvertrag als Teil der
+        Vertragsbedingungen. Die Zugriffsprotokolle des Medienservers bewahrt
+        Scaleway 30 Tage auf.
       </p>
       <p>
         Die Dienste, aus denen die Fotos und Tonaufnahmen stammen — iNaturalist
@@ -163,11 +162,8 @@ export default function Datenschutz() {
         <a href="https://vercel.com/legal/privacy-policy">
           vercel.com/legal/privacy-policy
         </a>
-        .{' '}
-        <Todo>
-          Auftragsverarbeitungsvertrag mit Vercel bestätigen und die
-          Aufbewahrungsdauer der Server-Logs hier eintragen
-        </Todo>
+        . Mit Vercel besteht ein Auftragsverarbeitungsvertrag. Die Server-Logs
+        bewahrt Vercel 24 Stunden auf.
       </p>
 
       <h3>3.2 Keine Cookies, keine Statistik, nichts von fremden Servern</h3>
@@ -213,12 +209,8 @@ export default function Datenschutz() {
           Daten in der App: bleiben auf dem Gerät, bis das Profil oder die App
           gelöscht wird
         </li>
-        <li>
-          Server-Logs dieser Website: <Todo>Dauer eintragen</Todo>
-        </li>
-        <li>
-          Zugriffsprotokolle des Medienservers: <Todo>Dauer eintragen</Todo>
-        </li>
+        <li>Server-Logs dieser Website: 24 Stunden</li>
+        <li>Zugriffsprotokolle des Medienservers: 30 Tage</li>
         <li>E-Mails: bis die Anfrage erledigt ist</li>
       </ul>
 
