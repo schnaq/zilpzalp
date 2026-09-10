@@ -657,30 +657,6 @@ section {
   color: var(--accent-text);
 }
 
-/* Makers ------------------------------------------------------------------ */
-
-.makers {
-  display: grid;
-  gap: var(--s-6);
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-card);
-  padding: var(--s-7) var(--s-6);
-  box-shadow: var(--shadow-sm);
-}
-
-@media (min-width: 48rem) {
-  .makers {
-    grid-template-columns: 1fr 1fr;
-    gap: var(--s-8);
-    padding: var(--s-8) var(--s-7);
-  }
-}
-
-.makers h3 {
-  margin-bottom: var(--s-3);
-}
-
 /* Legal pages ------------------------------------------------------------- */
 
 .legal {

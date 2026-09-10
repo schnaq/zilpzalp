@@ -211,19 +211,6 @@ export default function Home() {
           <div className="section-head section-head--tight">
             <h2>Ein Spiel von Johanna Hillebrand und Christian Meter</h2>
           </div>
-          <div className="makers">
-            <div>
-              <h3>Johanna Hillebrand</h3>
-              <p>
-                Von ihr stammen die Idee, die Auswahl der Vögel und die Tests
-                mit echten Kindern.
-              </p>
-            </div>
-            <div>
-              <h3>Christian Meter</h3>
-              <p>Er schreibt den Code, der daraus die App macht.</p>
-            </div>
-          </div>
         </div>
       </section>
     </main>
