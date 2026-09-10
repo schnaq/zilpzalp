@@ -232,24 +232,42 @@ the source declared.
 | Singdrossel | Photo | Oliver Hlasný | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/234119958> |
 | Singdrossel | Call | Philippe_Grange (XC1151579) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1151579> |
 | Nachtigall | Photo | Codrin Bucur | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/161483028> |
+| Nachtigall | Photo | Олеся | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/368473438> |
+| Nachtigall | Photo | rober025 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/80943993> |
 | Nachtigall | Call | Philippe_Grange (XC1099301) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1099301> |
 | Mönchsgrasmücke | Photo | tobijw | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/365842816> |
+| Mönchsgrasmücke | Photo | Дмитрий Кошелев | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/317740320> |
+| Mönchsgrasmücke | Photo | alcesevropsky | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/137250122> |
 | Mönchsgrasmücke | Call | Philippe_Grange (XC1099296) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1099296> |
 | Kleiber | Photo | Dr. Sven Gippner | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/148024354> |
+| Kleiber | Photo | Вячеслав Юсупов | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/18627217> |
+| Kleiber | Photo | Alexis Tinker-Tsavalas | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/32897568> |
 | Kleiber | Call | Sonothèque ADVL (XC804960) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/804960> |
 | Gartenbaumläufer | Photo | Tomas Broucek | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/65349780> |
+| Gartenbaumläufer | Photo | Donald Davesne | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/257289993> |
 | Gartenbaumläufer | Call | Benoît Van Hecke (XC697961) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/697961> |
 | Schwanzmeise | Photo | Валерия Ковалева | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/108550471> |
+| Schwanzmeise | Photo | Алина Урусова | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/36315159> |
+| Schwanzmeise | Photo | Andrew Bazdyrev | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/323469083> |
 | Schwanzmeise | Call | Sonothèque ADVL (XC707392) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/707392> |
 | Haubenmeise | Photo | Paolo Zucca | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/18084316> |
+| Haubenmeise | Photo | Philipp | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/59300623> |
+| Haubenmeise | Photo | Настя Бухвалова | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/144213587> |
 | Haubenmeise | Call | Sonothèque ADVL (XC1088492) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1088492> |
+| Wintergoldhähnchen | Photo | Andrey Gulivanov | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/40955058> |
 | Wintergoldhähnchen | Photo | Frank Sengpiel | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/67995777> |
+| Wintergoldhähnchen | Photo | harry beaman | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/347612259> |
 | Wintergoldhähnchen | Call | Jochem verweij (XC839791) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/839791> |
 | Gartenrotschwanz | Photo | Tommy Andriollo | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/117909615> |
+| Gartenrotschwanz | Photo | Donald Davesne | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/125291563> |
+| Gartenrotschwanz | Photo | Stefan Haag | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/52292221> |
 | Gartenrotschwanz | Call | Philippe_Grange (XC990430) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/990430> |
 | Feldlerche | Photo | Phil James | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/214550657> |
+| Feldlerche | Photo | Donald Davesne | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/111957295> |
 | Feldlerche | Call | Camille Vacher (XC722292) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://xeno-canto.org/722292> |
 | Neuntöter | Photo | Viktor | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/218436887> |
+| Neuntöter | Photo | SteveM4560 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/238212871> |
+| Neuntöter | Photo | Ben Keen | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/63582146> |
 | Neuntöter | Call | Jochem verweij (XC902159) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/902159> |
 | Pirol | Photo | Donsky | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/375588305> |
 | Pirol | Call | Christian Kahle (XC1009022) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1009022> |
