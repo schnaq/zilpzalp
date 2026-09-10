@@ -17,13 +17,13 @@ the source declared.
 | Strauß | Photo | Tom Heijnen | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/231275074> |
 | Rosaflamingo | Photo | SteveM4560 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/313297928> |
 | Rosaflamingo | Call | Joost van Bruggen (XC432217) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/432217> |
-| Sekretär | Photo | Jan Ebr &amp; Ivana Ebrová | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/71507882> |
+| Sekretär | Photo | Jan Ebr & Ivana Ebrová | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/71507882> |
 | Schuhschnabel | Photo | Annika Lindqvist | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/31013216> |
 | Marabu | Photo | avocat | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/310674150> |
 | Brillenpinguin | Photo | Allan T. Souza | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/162713087> |
 | Graupapagei | Photo | avocat | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/363520111> |
 | Gabelracke | Photo | Timothy Whitehead | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/232759573> |
-| Rotschnabeltoko | Photo | Jan Ebr &amp; Ivana Ebrová | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/112720162> |
+| Rotschnabeltoko | Photo | Jan Ebr & Ivana Ebrová | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/112720162> |
 | Südlicher Hornrabe | Photo | Wynand Uys | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/18058749> |
 | Kronenkranich | Photo | M Rutherford | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/38301444> |
 | Kronenkranich | Call | paulo kivuyo (XC627139) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/627139> |

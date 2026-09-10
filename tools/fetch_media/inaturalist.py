@@ -17,6 +17,7 @@ NonCommercial photo.
 
 from __future__ import annotations
 
+import html
 import time
 from dataclasses import dataclass
 from urllib.parse import urlparse
@@ -84,19 +85,22 @@ def original_url(square_url: str) -> str:
 
 
 def photographer(observation: dict) -> str:
-    """The name to credit, exactly as iNaturalist reports it.
+    """The name to credit, with iNaturalist's HTML escaping undone.
 
     `name` is what contributors fill in and what the base pack credits;
-    `login` is the fallback for the ones who left it empty.
+    `login` is the fallback for the ones who left it empty. Some contributors'
+    `name` field arrives HTML-escaped — `html.unescape` undoes that before the
+    name reaches a manifest, so "Jan Ebr &amp; Ivana Ebrová" is credited as
+    "Jan Ebr & Ivana Ebrová" rather than verbatim.
     """
     user = observation.get("user") or {}
     name = user.get("name")
     if isinstance(name, str) and name.strip():
-        return name.strip()
+        return html.unescape(name.strip())
 
     login = user.get("login")
     if isinstance(login, str) and login.strip():
-        return login.strip()
+        return html.unescape(login.strip())
 
     raise ValueError(f"observation {observation.get('id')}: has no user to credit")
 
