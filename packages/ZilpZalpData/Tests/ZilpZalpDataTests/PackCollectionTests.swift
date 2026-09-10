@@ -129,6 +129,59 @@ struct PackCollectionTests {
         }
     }
 
+    /// The cover is the bird the pack's own manifest opens with. Filtering the
+    /// merged library and taking its first bird is not the same thing: a
+    /// species an earlier pack declared stands earlier in that order, so this
+    /// pack would wear the earlier pack's photo — two collections showing one
+    /// bird, which is the confusion „Alle Vögel" gives up its cover to avoid.
+    @Test("a pack's cover is the bird its own manifest opens with")
+    func coversWithTheManifestsFirstBird() throws {
+        try withPacks { home in
+            let bundled = try PackFolder.write(
+                pack: "basis",
+                species: [Species(id: "amsel")] + Self.fourSpecies("basis"),
+                to: home,
+            )
+            // Opens with its own bird, but declares the Amsel as well — which
+            // the merge leaves in the bundled pack, ahead of everything here.
+            let installed = try PackFolder.write(
+                pack: "deutschland",
+                species: [Species(id: "haussperling"), Species(id: "amsel")]
+                    + Self.fourSpecies("de"),
+                to: home,
+            )
+            let collections = PackCollections(PackLibrary([bundled, installed]))
+
+            #expect(collections.chosen("basis").cover?.id == "amsel")
+            #expect(collections.chosen("deutschland").cover?.id == "haussperling")
+        }
+    }
+
+    @Test("a pack too small to play still leaves the rest a choice")
+    func offersAChoiceBesideAnUnplayablePack() throws {
+        try withPacks { home in
+            let bundled = try PackFolder.write(
+                pack: "basis",
+                species: Self.fourSpecies("basis"),
+                to: home,
+            )
+            let tiny = try PackFolder.write(
+                pack: "australien",
+                species: [Species(id: "emu"), Species(id: "kookaburra")],
+                to: home,
+            )
+            let collections = PackCollections(PackLibrary([bundled, tiny]))
+
+            // „Alle Vögel" holds the small pack's species too, so the two
+            // entries are not the same birds and a child may want them left
+            // out — unlike the bundled pack on its own, which is the whole
+            // library and nothing to choose from.
+            #expect(collections.isChoice)
+            #expect(collections.entries.map(\.id) == [nil, "basis"])
+            #expect(collections.everything.library.birds.count == 6)
+        }
+    }
+
     @Test("a pack too small for a question is not offered, and falls back")
     func skipsAPackWithTooFewSpecies() throws {
         try withPacks { home in

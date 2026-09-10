@@ -118,18 +118,29 @@ public struct PackCollections: Sendable {
             else {
                 return nil
             }
+            // The first bird of *this* manifest, as the merged library holds
+            // it — not the first of `narrowed.birds`, which is in library
+            // order. The two differ exactly when an earlier pack declared the
+            // same species: this pack would then wear that pack's cover, and
+            // two collections showing one photo is the confusion „alle" gives
+            // up its own cover to avoid.
+            let opens = pack.birds.first?.id
             return PackCollection(
                 id: pack.id,
                 title: pack.title,
                 library: narrowed,
-                cover: narrowed.birds.first,
+                cover: narrowed.birds.first { $0.id == opens },
                 offersCalls: offersCalls(narrowed.birds),
             )
         }
 
-        // Two playable packs or none: with one, „alle" and that pack are the
-        // same birds, and a picker offering the same thing twice is noise on a
-        // screen whose whole job is to be obvious.
-        entries = packs.count > 1 ? [everything] + packs : [everything]
+        // A choice is only a choice where something narrows: with the bundled
+        // pack alone, „alle" and that pack are the same birds, and a picker
+        // offering the same thing twice is noise on a screen whose whole job
+        // is to be obvious. One playable pack beside one too small to play is
+        // a choice all the same — „alle" holds the small pack's species too,
+        // and a child may want them left out.
+        let narrows = packs.contains { $0.library.birds.count < library.birds.count }
+        entries = narrows ? [everything] + packs : [everything]
     }
 }

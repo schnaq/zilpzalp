@@ -234,7 +234,15 @@ final class AppModel {
     /// alone: the choice is on the screen and the round will ask for the right
     /// birds, and swapping the games for a grown-up's sentence about a file
     /// would be a strange answer to tapping a picture of a penguin. It is
-    /// logged, and the next choice tries again.
+    /// logged, and the choice stands for as long as this app runs.
+    ///
+    /// Not one round longer, though: ``record(_:)`` books a finished round by
+    /// reading the profile off disk and putting what comes back in
+    /// ``profiles``, so a choice that never reached the file is gone the
+    /// moment the next round ends. That is the honest answer — the file is
+    /// what the app believes — and the child sees the collection it chose
+    /// until then. Restoring it instead would mean `record` writing a field
+    /// the round knows nothing about.
     ///
     /// - Parameter collection: the pack's id, `nil` for every bird.
     func choose(collection: String?) async {
