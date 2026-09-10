@@ -28,10 +28,12 @@ public enum ZIcon: String, CaseIterable, Sendable {
     case feather
     case handHeart = "hand-heart"
     case house
+    case info
     case languages
     case leaf
     case lightbulb
     case lock
+    case mail
     case map
     case music
     case partyPopper = "party-popper"

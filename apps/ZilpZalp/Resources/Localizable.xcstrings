@@ -1,6 +1,114 @@
 {
   "sourceLanguage" : "de",
   "strings" : {
+    "about.intro" : {
+      "comment" : "The paragraph at the top of the screen about the app: who makes it",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ZilpZalp ist ein Projekt von Johanna Hillebrand, zusammen mit der schnaq GmbH."
+          }
+        }
+      }
+    },
+    "about.mail.hint" : {
+      "comment" : "Under the support row. The address itself, so a grown-up can write it down instead of tapping the row",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "zilpzalp-app@posteo.net"
+          }
+        }
+      }
+    },
+    "about.mail.title" : {
+      "comment" : "Row that opens an e-mail to the support address",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fragen zur App?"
+          }
+        }
+      }
+    },
+    "about.privacy.hint" : {
+      "comment" : "Under the privacy policy row",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die Erklärung im Netz — ZilpZalp erhebt keine Daten"
+          }
+        }
+      }
+    },
+    "about.privacy.title" : {
+      "comment" : "Row that opens the privacy policy on the website",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Datenschutz"
+          }
+        }
+      }
+    },
+    "about.title" : {
+      "comment" : "Title of the public screen with information about the app, and the label of the button on the home screen that opens it",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Über ZilpZalp"
+          }
+        }
+      }
+    },
+    "about.version" : {
+      "comment" : "The build a grown-up is looking at, under the app's name. %1$@ is the version such as 0.1.0, %2$@ the build number",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Version %1$@ (%2$@)"
+          }
+        }
+      }
+    },
+    "about.website.hint" : {
+      "comment" : "Under the website row. The address itself, so a grown-up can see where the link leads before it opens",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "zilpzalp.schnaq.com"
+          }
+        }
+      }
+    },
+    "about.website.title" : {
+      "comment" : "Row that opens the app's website",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die Internetseite"
+          }
+        }
+      }
+    },
     "app.pack.failed" : {
       "comment" : "Shown instead of the home screen when the bundled species pack cannot be opened. Read by a grown-up, so a full sentence",
       "extractionState" : "manual",
@@ -109,14 +217,14 @@
         }
       }
     },
-    "credits.gate.reason" : {
-      "comment" : "Why the parental gate is being shown on the credits screen: a link is about to leave the app",
+    "credits.hint" : {
+      "comment" : "Under the credits row",
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dieser Link führt aus ZilpZalp hinaus ins Internet."
+            "value" : "Woher die Bilder kommen und wem sie gehören"
           }
         }
       }
@@ -145,18 +253,6 @@
         }
       }
     },
-    "credits.link.accessibility" : {
-      "comment" : "VoiceOver hint on every row of the credits that leads out of the app",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Öffnet eine Internetseite. Davor kommt eine Aufgabe für Erwachsene."
-          }
-        }
-      }
-    },
     "credits.photo.by" : {
       "comment" : "Under a bird's name in the credits, for a photo. %1$@ is the photographer, %2$@ the licence's short name such as CC BY",
       "extractionState" : "manual",
@@ -165,6 +261,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Foto von %1$@ · %2$@"
+          }
+        }
+      }
+    },
+    "credits.title" : {
+      "comment" : "Row on the screen about the app that opens the credits, and the title of that screen",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fotos & Dank"
           }
         }
       }
@@ -337,6 +445,42 @@
         }
       }
     },
+    "link.gate.reason" : {
+      "comment" : "Why the parental gate is being shown: a link is about to leave the app",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dieser Link führt aus ZilpZalp hinaus."
+          }
+        }
+      }
+    },
+    "link.mail.accessibility" : {
+      "comment" : "VoiceOver hint on the row that opens an e-mail outside the app",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öffnet eine E-Mail. Davor kommt eine Aufgabe für Erwachsene."
+          }
+        }
+      }
+    },
+    "link.web.accessibility" : {
+      "comment" : "VoiceOver hint on a row that opens a web page outside the app",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öffnet eine Internetseite. Davor kommt eine Aufgabe für Erwachsene."
+          }
+        }
+      }
+    },
     "nav.back.accessibility" : {
       "comment" : "VoiceOver label of the back chevron in the top bar. The button itself is wordless",
       "extractionState" : "manual",
@@ -345,30 +489,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zurück"
-          }
-        }
-      }
-    },
-    "parents.credits.hint" : {
-      "comment" : "Under the credits row",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Woher die Bilder kommen und wem sie gehören"
-          }
-        }
-      }
-    },
-    "parents.credits.title" : {
-      "comment" : "Row in the grown-ups' area that opens the credits, and the title of that screen",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fotos & Dank"
           }
         }
       }

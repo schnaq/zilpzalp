@@ -21,7 +21,8 @@ Eine quelloffene Lern-App, mit der Kinder heimische Vögel kennenlernen. Kein Ac
 | Profile | Mehrere lokale Profile mit Namen und Avatar, ohne Account |
 | Fortschritt | Sterne, Sticker nach fünf Wiedererkennungen, Sammlung, lokales Leaderboard |
 | Artenpakete | 10 Arten fest gebundelt, „Vögel Deutschlands" (~60 Arten) als Download aus S3 |
-| Elternbereich | Per FaceID/Code geschützt: Zeitbudget, Paketverwaltung, Credits, Einstellungen |
+| Elternbereich | Per FaceID/Code geschützt: Zeitbudget, Paketverwaltung, Einstellungen |
+| Über ZilpZalp | Öffentlich, ohne Schloss: Version, Herausgeberin, Datenschutz, Internetseite, Support-Mail, Credits |
 
 **Bewusst nicht in v1**
 
@@ -224,9 +225,9 @@ Bewusst wenige Simulator-Tests. Ein instabiles Gate auf einem self-hosted Runner
 Die Wahl der Kids Category ist keine reine Metadaten-Entscheidung, sie bindet die Umsetzung:
 
 - **Keine Third-Party-Analytics und kein Third-Party-Crash-Reporting.** Kein Sentry, kein Firebase. Nur MetricKit
-- **Externe Links brauchen ein Parental Gate.** Betrifft direkt den Credits-Screen: die Quellenlinks zu iNaturalist, xeno-canto und den Lizenztexten dürfen nicht ohne Erwachsenen-Prüfung öffnen. Umsetzung: Credits zeigen Namen und Lizenz immer im Klartext, der Link selbst öffnet erst nach einer eigenständigen Erwachsenen-Aufgabe (Rechen- oder Frageaufgabe mit Sprachhinweis) — getrennt vom `LAContext`-Schloss des Elternbereichs, das nur dessen Zugang schützt (Guideline 1.3, siehe `docs/kids-category.md`)
+- **Externe Links brauchen ein Parental Gate.** Betrifft den öffentlichen Screen „Über ZilpZalp" und die von ihm geöffneten Credits: Datenschutz-, Web- und Mail-Link ebenso wie die Quellenlinks zu iNaturalist, xeno-canto und den Lizenztexten dürfen nicht ohne Erwachsenen-Prüfung öffnen. Umsetzung: Credits zeigen Namen und Lizenz immer im Klartext, der Link selbst öffnet erst nach einer eigenständigen Erwachsenen-Aufgabe (Rechen- oder Frageaufgabe mit Sprachhinweis) — getrennt vom `LAContext`-Schloss des Elternbereichs, das nur dessen Zugang schützt (Guideline 1.3, siehe `docs/kids-category.md`). Die Credits liegen bewusst *nicht* hinter diesem Schloss: die Attribution, die CC BY 4.0 §3(a)(2) verlangt, muss ohne Gerätecode erreichbar sein (#199)
 - **Privacy Manifest** (`PrivacyInfo.xcprivacy`) ist Pflicht und deklariert: keine Datenerhebung
-- **Datenschutzerklärung** muss verlinkt sein — als statische Seite, nicht in der App klickbar ohne dasselbe Aufgaben-Gate wie beim Credits-Screen
+- **Datenschutzerklärung** muss verlinkt sein — als statische Seite, nicht in der App klickbar ohne dasselbe Aufgaben-Gate. Der Link steht auf „Über ZilpZalp"
 - Werbung, In-App-Käufe und Verhaltens-Targeting entfallen ohnehin
 
 Die Wortlaute der Guidelines 1.3, 5.1.4 und 2.3.8 sind gegen die aktuelle Fassung geprüft, siehe `docs/kids-category.md` (#19, abgeschlossen in M2). Offen bleiben die technischen Umsetzungen: das Aufgaben-Gate für externe Links (#37) und die Altersfreigabe-Einstellungen in App Store Connect (#41); sie blockieren die Entwicklung bis dahin nicht.

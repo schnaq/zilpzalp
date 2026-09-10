@@ -101,6 +101,11 @@ enum Route: Hashable {
     /// that seam agree before either is written.
     case roundEnd(RoundResult)
     case parents
+    /// „Über ZilpZalp" (#199): what the app is, who publishes it, and the
+    /// credits. A case of its own and not a room inside ``parents``, because
+    /// nothing on it is private — the attribution the photo licences ask for
+    /// has to be reachable without a device code.
+    case about
     /// The sticker album (#29), from the round end and from the home screen.
     case collection
     /// "Zeit fürs Nest" (#36), screen 1k: where a tapped game tile and
