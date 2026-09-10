@@ -199,7 +199,7 @@ struct ProfileTests {
     /// noticed here rather than on a child's iPad (#205).
     @Test("every avatar choice is a bird of the pack that ships with the app")
     func offersOnlyBundledBirds() throws {
-        let bundled = Set(try PackCatalog.bundled().pack.birds.map(\.id))
+        let bundled = try Set(PackCatalog.bundled().pack.birds.map(\.id))
 
         for choice in Profile.avatarChoices {
             #expect(bundled.contains(choice), "\(choice) is not in the bundled pack")

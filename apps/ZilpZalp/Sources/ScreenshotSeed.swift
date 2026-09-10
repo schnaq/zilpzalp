@@ -21,7 +21,7 @@ enum ScreenshotSeed {
     /// A first name and one of ``Profile/avatarChoices``. Data, not product
     /// copy: nothing here belongs in the String Catalog.
     private static let name = "Mia"
-    private static let avatar = "feather"
+    private static let avatar = "rotkehlchen"
 
     /// How often this child has recognised ten species of the bundled pack.
     /// Six of them are past the five their sticker takes (#177), so

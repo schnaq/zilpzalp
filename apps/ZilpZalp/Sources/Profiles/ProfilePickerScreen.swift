@@ -8,9 +8,10 @@ import ZilpZalpUI
 /// at a picture, not at a button, and the picture is the middle of a card that
 /// is 200 pt across on an iPad and never below the 64 pt floor anywhere.
 ///
-/// A child who cannot read finds their own card by the avatar and its colour —
-/// see ``AvatarStyle`` for why no two of them share one. The name underneath is
-/// for the grown-up and for the older sibling, and nothing depends on it.
+/// A child who cannot read finds their own card by the bird on it — a photo
+/// from the pack that ships with the app, drawn as the album's own sticker
+/// (#205). The name underneath is for the grown-up and for the older sibling,
+/// and nothing depends on it.
 ///
 /// The screen holds no state beyond having spoken. Which child was picked is
 /// ``AppModel``'s business.
@@ -156,18 +157,22 @@ struct ProfilePickerScreen: View {
 
 private func previewProfiles() -> [Profile] {
     [
-        Profile(id: UUID(), name: "Mila", avatar: "feather"),
-        Profile(id: UUID(), name: "Jonas", avatar: "star"),
-        Profile(id: UUID(), name: "Frieda", avatar: "sparkles"),
+        // The middle one keeps a glyph name, as a profile from before #205
+        // does: it draws the bird that name now maps to.
+        Profile(id: UUID(), name: "Mila", avatar: "rotkehlchen"),
+        Profile(id: UUID(), name: "Jonas", avatar: "feather"),
+        Profile(id: UUID(), name: "Frieda", avatar: "eisvogel"),
     ]
 }
 
 #Preview("iPad landscape", traits: .fixedLayout(width: 1194, height: 834)) {
     ProfilePickerScreen(profiles: previewProfiles(), choose: { _ in }, createNew: {})
         .environment(\.horizontalSizeClass, .regular)
+        .environment(\.speciesPhotos, SpeciesPhotos((try? .bundled()) ?? .empty))
 }
 
 #Preview("iPhone portrait", traits: .fixedLayout(width: 390, height: 844)) {
     ProfilePickerScreen(profiles: previewProfiles(), choose: { _ in }, createNew: {})
         .environment(\.horizontalSizeClass, .compact)
+        .environment(\.speciesPhotos, SpeciesPhotos((try? .bundled()) ?? .empty))
 }
