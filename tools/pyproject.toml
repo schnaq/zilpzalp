@@ -23,6 +23,10 @@ dependencies = [
   "httpx>=0.28",
   "pillow>=11.3",
   "pillow-heif>=1.7",
+  # Apple Vision finds the bird's box for `photos frame`; the marker keeps it
+  # out of a Linux resolution, where the wheel does not exist. Curation runs on
+  # a Mac, and every other subcommand works without it.
+  "pyobjc-framework-Vision>=11.1; sys_platform == 'darwin'",
 ]
 
 [build-system]

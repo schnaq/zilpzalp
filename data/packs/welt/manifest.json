@@ -373,10 +373,10 @@
       "pronunciation": null,
       "photo": {
         "file": "photos/schnee-eule.heic",
-        "sha256": "27295ebb3f17fe0a7be19d6f8c0bd477f335936366a2ff35641c4cdd3441f31e",
+        "sha256": "3a46e5d649201cd2fcacc10a232cb50577810adab5c6b04c305bf00e17b1c9d6",
         "license": "CC-BY-4.0",
-        "attribution": "Matt Felperin",
-        "sourceURL": "https://www.inaturalist.org/observations/104681391",
+        "attribution": "Dustin Snider",
+        "sourceURL": "https://www.inaturalist.org/observations/195441759",
         "retrieved": "2026-09-10"
       },
       "call": null
@@ -482,10 +482,10 @@
       "pronunciation": null,
       "photo": {
         "file": "photos/lachender-hans.heic",
-        "sha256": "3e49bb95de302af2a7f971d4b624a31582d804c33c0166a28d07027a389432d1",
-        "license": "CC-BY-SA-4.0",
-        "attribution": "Emanuele Santarelli",
-        "sourceURL": "https://www.inaturalist.org/observations/318413460",
+        "sha256": "059f7f710fecf20074989f85e05001d8e3dfa9b33205e4337812f96aa876c7ba",
+        "license": "CC-BY-4.0",
+        "attribution": "Sockrosma",
+        "sourceURL": "https://www.inaturalist.org/observations/200607101",
         "retrieved": "2026-09-10"
       },
       "call": null
@@ -550,10 +550,10 @@
       "pronunciation": null,
       "photo": {
         "file": "photos/schwarzschwan.heic",
-        "sha256": "2f17c94def0bd17dac93a0bb64b51587f97dbc45848bc6e011dcfe1102f79ac7",
-        "license": "CC-BY-SA-4.0",
-        "attribution": "Micha Baum",
-        "sourceURL": "https://www.inaturalist.org/observations/275164038",
+        "sha256": "e86dede1839fff301dd3916d3dd96fb4366b1b368bb858fa3b9bd0233b6a3fe8",
+        "license": "CC0-1.0",
+        "attribution": "Nikolay Martyanov",
+        "sourceURL": "https://www.inaturalist.org/observations/91632451",
         "retrieved": "2026-09-10"
       },
       "call": {
@@ -574,10 +574,10 @@
       "pronunciation": null,
       "photo": {
         "file": "photos/roter-sichler.heic",
-        "sha256": "ddbe3c6a3398928bd65e3b4f08588833fbac4fc4f7c930d9fd840afb98da4529",
+        "sha256": "b009289298c072e76326df5acbd8e8be3be901024f80fa43c16ae78512ff7a5f",
         "license": "CC-BY-4.0",
-        "attribution": "Luis G Restrepo",
-        "sourceURL": "https://www.inaturalist.org/observations/254450271",
+        "attribution": "Odebrecht, Clarisse",
+        "sourceURL": "https://www.inaturalist.org/observations/330283195",
         "retrieved": "2026-09-10"
       },
       "call": null

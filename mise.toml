@@ -329,8 +329,19 @@ description = "Curate media: 'photos …', 'calls …', 'speech …', 'upload' �
 #   mise run fetch-media photos candidates --pack deutschland --limit 5
 #   mise run fetch-media photos pick --pack deutschland --species amsel \
 #       --observation 20490738 --photo 31623386
+#   mise run fetch-media photos frame --pack deutschland --species amsel \
+#       --observation 20490738 --photo 31623386 [--dry-run]
+#   mise run fetch-media photos audit --pack deutschland [--add-verdicts -]
 #   mise run fetch-media speech import --pack deutschland --species amsel \
 #       --sentence quiz.prompt.whereIs --file take3.wav --attribution "Stimme: …"
+#
+# `photos frame` is `photos pick` with the square computed around the bird
+# instead of around the middle of the photo: Apple Vision finds the bird, and
+# `--box x0,y0,x1,y1` overrides it with normalised coordinates when saliency
+# picks the wrong thing. `photos audit` exports every tile of a pack to
+# DerivedData/audit/<pack>/ and merges the verdicts back — the judging itself
+# is a vision model outside the tool, which is why neither step needs a
+# credential. docs/medien-und-lizenzen.md describes the whole round.
 #
 # Finding and picking a photo needs no credential at all, and neither does
 # importing a recording somebody made. The calls, the upload and a speech

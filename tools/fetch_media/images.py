@@ -36,6 +36,11 @@ QUALITY = 60
 # disagree.
 SUFFIX = "heic"
 
+# The long side of a preview PNG. Small enough that a vision model reads it in
+# one glance and a human sees it without scrolling, large enough that a bird in
+# the corner is still recognisable.
+PREVIEW_SIDE = 512
+
 Box = tuple[int, int, int, int]
 
 
@@ -70,6 +75,34 @@ def centre_box(width: int, height: int) -> Box:
     return ((width - side) // 2, (height - side) // 2, side, side)
 
 
+def oriented(data: bytes) -> Image.Image:
+    """Decode a photo and turn it the way it is meant to be looked at.
+
+    A phone photo carries its rotation in the EXIF orientation tag, and
+    iNaturalist shows it rotated. Every reader of pixel coordinates has to go
+    through here: `square_photo` crops in this coordinate space, and
+    `fetch_media.framing` measures the bird's box in it. If the two used
+    different spaces, the crop would be turned by 90 degrees and nothing but a
+    human looking at the tile would notice.
+    """
+    return ImageOps.exif_transpose(Image.open(io.BytesIO(data)))
+
+
+def preview_png(image: Image.Image, side: int = PREVIEW_SIDE) -> bytes:
+    """The image as a PNG of at most `side` px, for a human or a model to judge.
+
+    PNG rather than HEIC or JPEG because everything that looks at these reads
+    PNG, and `thumbnail` rather than a fit into a square because the aspect
+    ratio has to survive: a box measured on the preview is converted back into
+    source pixels by its normalised coordinates.
+    """
+    preview = image.convert("RGB")
+    preview.thumbnail((side, side), Image.LANCZOS)
+    output = io.BytesIO()
+    preview.save(output, format="PNG")
+    return output.getvalue()
+
+
 def square_photo(data: bytes, crop: Box | None = None) -> bytes:
     """Crop `data` to a square, resize it to 1024×1024 and encode it as HEIC.
 
@@ -77,13 +110,7 @@ def square_photo(data: bytes, crop: Box | None = None) -> bytes:
     square would have to be upscaled — a blurry tile is a curation decision, so
     the tool refuses and the human picks another candidate.
     """
-    image = Image.open(io.BytesIO(data))
-
-    # Before anything reads coordinates: a phone photo carries its rotation in
-    # the EXIF orientation tag, and iNaturalist shows it rotated. Without this
-    # the crop box would address a different image than the human saw, and the
-    # bird would land sideways in the pack.
-    image = ImageOps.exif_transpose(image)
+    image = oriented(data)
 
     # Untagged data is sRGB by convention; a tagged photo is converted, so a
     # wide-gamut original does not reach the app with washed-out colours.

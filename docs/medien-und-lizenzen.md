@@ -262,6 +262,24 @@ Drei Eigenschaften sind wichtig:
 
 **Der Credits-Screen wird erzeugt, nicht geschrieben.** Attribution stammt aus demselben Manifest wie die Assets und kann deshalb nicht von ihnen abdriften. Das ist die wichtigste einzelne Entscheidung in diesem Dokument: sie macht Lizenztreue zu einer Eigenschaft des Build-Prozesses statt zu einer Frage von Sorgfalt.
 
+### Zuschnitt und Prüfung der Fotos
+
+**Der Zuschnitt folgt dem Vogel, nicht der Bildmitte.** Ein zentriertes Quadrat ist für Vogelfotos die falsche Regel: Fotografen komponieren für das Bild, nicht für eine 220-pt-Kachel. Der erste Playtest fand deshalb einen Weißstorch mit angeschnittenem Kopf, einen Brillenpinguin ohne Scheitel, eine Straße statt eines Lachenden Hans und ein Denkmal bei Nacht statt einer Schnee-Eule (#195).
+
+```
+mise run fetch-media photos frame --pack welt --species schnee-eule \
+    --observation 195441759 --photo 343832881 [--box x0,y0,x1,y1] [--dry-run]
+mise run fetch-media photos audit --pack welt [--add-verdicts -]
+```
+
+`photos frame` lädt das Original einmal, sucht darin den Vogel und rechnet dessen Rechteck in das quadratische `--crop x,y,w,h` um, das `photos pick` schon kennt: Kasten plus 18 Prozent seiner langen Seite als Luft, quadriert, nie kleiner als die 1024-px-Kachel (sonst müsste hochskaliert werden), innerhalb des Fotos — und wenn das Quadrat den gepolsterten Kasten senkrecht nicht fasst, an dessen **Oberkante** verankert. Dort sitzt der Kopf, und ein angeschnittener Kopf ist genau der Fehler, um den es geht. Danach schreibt `frame` zwei Vorschau-PNGs nach `DerivedData/frame-preview/` und legt das Foto ab; `--dry-run` hört nach dem Zuschnitt auf. Deckt der Vogel weniger als ein Drittel der Kachel, sagt das Werkzeug es als Warnung: das ist ein Fall für ein anderes Foto (#194), nicht für einen anderen Zuschnitt.
+
+**Woher der Kasten kommt.** Zuerst aus Apple Vision, `VNGenerateObjectnessBasedSaliencyImageRequest` über `pyobjc-framework-Vision` — deterministisch, offline, ohne Zugangsdaten, nur auf macOS, was bei einer Kuration am Mac genügt. Vision misst normalisiert mit Ursprung unten links; `framing.Rect` dreht das auf oben links, und dieselbe Konvention gilt für `--box`. Über die Fotos dieses Durchgangs traf die Salienz den Vogel zuverlässig, auch bei fliegenden und bei sehr kleinen Motiven. `--box x0,y0,x1,y1` ist der Ausweichweg für den Fall, dass sie sich am Ast, am Zaun oder am Denkmal festhält: Die normalisierten Koordinaten liefert dann ein Mensch oder ein Bildmodell, das die Vorschau des ganzen Fotos betrachtet hat.
+
+**`photos audit` prüft, was das Paket heute ausliefert.** Es exportiert jede Kachel als PNG mit maximal 512 px nach `DerivedData/audit/<pack>/` und legt eine `tiles.json` mit Art, Datei und Attribution daneben. Bewertet wird außerhalb des Werkzeugs — von einem Bildmodell, das drei Fragen beantwortet: Ist ein Vogel klar zu sehen, füllt er etwa ein Drittel des Bildes oder mehr, ist der Kopf vollständig im Bild. In der Praxis sind das Haiku-Subagenten, höchstens zehn Bilder pro Aufruf und höchstens zwei gleichzeitig. Ihre Antworten kommen als JSON-Array über `--add-verdicts` zurück, werden gegen die Arten des Pakets und auf echte Booleans geprüft und nach `verdicts.json` gemischt — nach jedem Aufruf sofort, denn ein Durchgang, der auf halber Strecke abbricht, darf die Urteile davor nicht verlieren. Deshalb braucht `audit` selbst keinerlei Zugangsdaten.
+
+`DerivedData/` ist Arbeitsmaterial eines Kurationsdurchgangs und wird nicht eingecheckt — wie die Kandidatenlisten in `$TMPDIR`.
+
 ### Dateiformate
 
 **Fotos: HEIC (HEVC in HEIF), Qualität 60, 4:2:0, sRGB, ohne Metadaten.** Gemessen an den ersten zehn Fotos der App erreicht HEIC die Qualität des bisherigen JPEG 88 bereits bei Qualität rund 51 und mit etwa 55 bis 65 Prozent der Bytes; Qualität 60 lässt darüber noch Reserve und ist bei Anzeigegröße nicht vom verlustfreien Original zu unterscheiden. iOS dekodiert HEIC über ImageIO, `UIImage(contentsOfFile:)` braucht dafür nichts Eigenes. Der Encoder lehnt jeden Metadatenblock einzeln ab (`exif=None`, `xmp=None`, `icc_profile=None`): die HEIF-Seite von Pillow übernimmt sonst, was `Image.info` noch trägt — den EXIF-Block der Vorlage und vor allem ihr XMP-Paket, in dem Telefone und Lightroom die GPS-Position der Aufnahme ablegen. Beim JPEG-Encoder von Pillow stellte sich die Frage nicht, der schrieb nur, was man ihm gab. Die Farbe geht mit dem Profil nicht verloren: HEIF signalisiert sRGB in seinem eigenen NCLX-Block.

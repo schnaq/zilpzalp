@@ -4,6 +4,8 @@ Three kinds of medium, and a human between every step:
 
     photos candidates --pack deutschland [--species amsel …] [--limit 5]
     photos pick --pack deutschland --species amsel --observation 20490738 --photo 31623386
+    photos frame --pack deutschland --species amsel --observation 20490738 --photo 31623386
+    photos audit --pack deutschland [--species amsel …] [--add-verdicts -]
     calls candidates --pack deutschland [--species amsel …] [--limit 5] [--type song]
     calls pick --pack deutschland --species amsel --recording XC965144 [--start 12.5]
     speech render --provider fake --pack deutschland [--species amsel …] [--sentence …]
@@ -14,11 +16,13 @@ Three kinds of medium, and a human between every step:
 
 `candidates` asks the source and lists what may be used; it never chooses.
 `pick` fetches the one medium a human named, crops or trims it, writes the
-manifest entry and regenerates the derived files. `speech` produces the
-sentences the app says out loud — `render` asks a provider, `import` takes a
-recording somebody made — and records them the same way. `upload` puts the
-pack in the bucket and, last, the index of the packs that can be downloaded
-from there.
+manifest entry and regenerates the derived files. `frame` is `pick` with the
+square computed from where the bird actually is instead of from the middle of
+the photo, and `audit` exports the tiles a pack ships so that they can be
+judged and takes the verdicts back. `speech` produces the sentences the app
+says out loud — `render` asks a provider, `import` takes a recording somebody
+made — and records them the same way. `upload` puts the pack in the bucket
+and, last, the index of the packs that can be downloaded from there.
 
 Credentials come from the environment, where `infisical run --env=dev --path=/
 --` puts them: `upload` needs the bucket keys, and both `calls` steps need
@@ -33,6 +37,7 @@ import argparse
 import collections
 import dataclasses
 import datetime
+import json
 import subprocess
 import sys
 import tempfile
@@ -41,7 +46,18 @@ from pathlib import Path
 import httpx
 from botocore.exceptions import BotoCoreError, ClientError
 
-from fetch_media import audio, images, inaturalist, index, keys, manifest, s3, speech, xenocanto
+from fetch_media import (
+    audio,
+    framing,
+    images,
+    inaturalist,
+    index,
+    keys,
+    manifest,
+    s3,
+    speech,
+    xenocanto,
+)
 from fetch_media.speech import clips, sentences
 
 # Candidate lists are working material for a human, not a build artefact, and
@@ -52,6 +68,27 @@ DEFAULT_OUT = Path(tempfile.gettempdir()) / "zilpzalp-fetch-media"
 # Run in the order `mise run check` runs them, so a manifest change leaves the
 # repository exactly as CI expects to find it.
 DERIVED_TOOLS = ("sync_bundled_packs.py", "generate_credits.py")
+
+# Where `frame` and `audit` put the previews somebody has to look at. Below
+# DerivedData/, which is ignored by the repository: they are working material
+# for one curation round, like the candidate lists, and none of them is an
+# asset.
+DERIVED_DATA = manifest.REPO_ROOT / "DerivedData"
+AUDIT_DIR = DERIVED_DATA / "audit"
+FRAME_PREVIEW_DIR = DERIVED_DATA / "frame-preview"
+
+# What the audit writes and reads beside the previews.
+TILES_FILE = "tiles.json"
+VERDICTS_FILE = "verdicts.json"
+
+# The three questions a tile is judged by, in the order the table shows them.
+# `fills_frame` is "the bird covers roughly a third of the frame or more".
+VERDICT_FLAGS = ("bird_visible", "fills_frame", "head_inside")
+
+# Below this fraction of the tile's side the bird is a speck. The crop cannot
+# fix that — another photo can (#194) — so `frame` says so instead of
+# pretending otherwise.
+FAR_AWAY = 1 / 3
 
 
 def escape_data(message: str) -> str:
@@ -316,39 +353,298 @@ def command_candidates(args: argparse.Namespace) -> int:
     return 0
 
 
-def command_pick(args: argparse.Namespace) -> int:
-    """Fetch, crop and record the one photo a human chose."""
-    path = manifest.manifest_path(args.pack)
-    document = manifest.load(path)
-    bird = manifest.bird(document, args.species)
+def fetch_photo(
+    client: inaturalist.Client, bird: dict, observation_id: int, photo_id: int
+) -> tuple[dict, dict, bytes]:
+    """The observation, the photo and the original's bytes, both licences checked.
 
-    with inaturalist.Client() as client:
-        observation = client.observation(args.observation)
-        if not inaturalist.taxon_matches(observation, bird["taxonID"]):
-            taxon = observation.get("taxon") or {}
-            raise ValueError(
-                f"observation {args.observation} shows {taxon.get('name')} "
-                f"(taxon {taxon.get('id')}), not {bird['scientificName']} (taxon {bird['taxonID']})"
-            )
+    Shared by `pick` and `frame`: framing has to see the pixels before it can
+    name a crop, and asking a server that wants one request per second for the
+    same original twice would be rude.
+    """
+    observation = client.observation(observation_id)
+    if not inaturalist.taxon_matches(observation, bird["taxonID"]):
+        taxon = observation.get("taxon") or {}
+        raise ValueError(
+            f"observation {observation_id} shows {taxon.get('name')} "
+            f"(taxon {taxon.get('id')}), not {bird['scientificName']} (taxon {bird['taxonID']})"
+        )
 
-        photo = inaturalist.find_photo(observation, args.photo)
-        original = inaturalist.original_url(photo["url"])
-        print(f"{args.species}: downloading {original}")
-        encoded = images.square_photo(client.download(original), args.crop)
+    photo = inaturalist.find_photo(observation, photo_id)
+    original = inaturalist.original_url(photo["url"])
+    print(f"{bird['id']}: downloading {original}")
+    return observation, photo, client.download(original)
 
+
+def record_photo(
+    pack_id: str,
+    document: dict,
+    species: str,
+    observation: dict,
+    photo: dict,
+    data: bytes,
+    crop: images.Box | None,
+) -> None:
+    """Crop the original to a tile, record it, and bring the derived files along."""
     record_medium(
-        args.pack,
+        pack_id,
         document,
-        args.species,
+        species,
         "photo",
-        f"photos/{args.species}.{images.SUFFIX}",
-        encoded,
+        f"photos/{species}.{images.SUFFIX}",
+        images.square_photo(data, crop),
         licence=inaturalist.licence_id(photo["license_code"]),
         attribution=inaturalist.photographer(observation),
-        source_url=inaturalist.OBSERVATION_URL.format(args.observation),
+        source_url=inaturalist.OBSERVATION_URL.format(observation["id"]),
     )
     regenerate_derived()
     print("\nLook at the photo before you commit it — nothing else has seen it yet.")
+
+
+def command_pick(args: argparse.Namespace) -> int:
+    """Fetch, crop and record the one photo a human chose."""
+    document = manifest.load(manifest.manifest_path(args.pack))
+    bird = manifest.bird(document, args.species)
+
+    with inaturalist.Client() as client:
+        observation, photo, data = fetch_photo(client, bird, args.observation, args.photo)
+
+    record_photo(args.pack, document, args.species, observation, photo, data, args.crop)
+    return 0
+
+
+def command_frame(args: argparse.Namespace) -> int:
+    """Find the bird in the original, square the crop around it, and pick it.
+
+    Two previews are written for every run, because a crop nobody looked at is
+    a crop nobody checked: the whole photo, which is what a vision model is
+    asked about when saliency locks onto the wrong thing, and the tile itself.
+    """
+    document = manifest.load(manifest.manifest_path(args.pack))
+    bird = manifest.bird(document, args.species)
+
+    with inaturalist.Client() as client:
+        observation, photo, data = fetch_photo(client, bird, args.observation, args.photo)
+
+    image = images.oriented(data)
+    args.preview.mkdir(parents=True, exist_ok=True)
+    whole = args.preview / f"{args.pack}-{args.species}-source.png"
+    whole.write_bytes(images.preview_png(image))
+    print(f"{args.species}: {image.width}×{image.height} px → {whole}")
+
+    # Before Vision rather than after: `square_photo` would refuse this photo
+    # at the end of the run, and the answer is another candidate either way.
+    if min(image.size) < images.SIDE:
+        raise ValueError(
+            f"the original is {image.width}×{image.height} px and no {images.SIDE} px square "
+            "fits in it — pick a candidate with a larger original"
+        )
+
+    rect, found_by = args.box, "--box"
+    if rect is None:
+        rect, found_by = framing.saliency_rect(image), "Vision saliency"
+    if rect is None:
+        raise framing.FramingError(
+            f"Vision found nothing salient — look at {whole} and pass the box yourself "
+            "with --box x0,y0,x1,y1, normalised 0–1 with the origin at the top left"
+        )
+
+    crop, fill = framing.square_crop(rect, image.width, image.height, args.margin)
+    x, y, side, _ = crop
+    print(
+        f"{args.species}: {found_by} says the bird is at "
+        f"{rect.x0:.3f},{rect.y0:.3f},{rect.x1:.3f},{rect.y1:.3f} → --crop {x},{y},{side},{side}"
+    )
+
+    tile = args.preview / f"{args.pack}-{args.species}-tile.png"
+    tile.write_bytes(images.preview_png(image.crop((x, y, x + side, y + side))))
+    print(f"{args.species}: the bird's longer side covers {fill:.0%} of the tile → {tile}")
+    if fill < FAR_AWAY:
+        message = (
+            f"{args.species}: the bird fills {fill:.0%} of the tile, less than a third. "
+            "The crop is right and the photo is too distant — that is a case for another "
+            "photo, not another crop."
+        )
+        print(f"::warning::{escape_data(message)}")
+
+    if args.dry_run:
+        print("\nDry run: nothing was written. Pass the crop above to 'photos pick', or "
+              "run this again without --dry-run.")
+        return 0
+
+    record_photo(args.pack, document, args.species, observation, photo, data, crop)
+    return 0
+
+
+def audit_tiles(pack_id: str, birds: list[dict], directory: Path) -> list[dict]:
+    """Export every named tile as a preview PNG and describe it in `tiles.json`.
+
+    The tiles ship as 1024 px HEIC, which is neither small enough to hand to a
+    model nor a format every reader opens. The preview is what gets judged, and
+    `tiles.json` is what says which species and which photographer a verdict
+    belongs to.
+    """
+    pack = manifest.pack_dir(pack_id)
+    directory.mkdir(parents=True, exist_ok=True)
+
+    tiles = []
+    for bird in birds:
+        photo = bird.get("photo") or {}
+        if not photo.get("file"):
+            message = f"{bird['id']}: has no photo to audit"
+            print(f"::warning::{escape_data(message)}")
+            continue
+
+        preview = f"{bird['id']}.png"
+        original = images.oriented((pack / photo["file"]).read_bytes())
+        (directory / preview).write_bytes(images.preview_png(original))
+        tiles.append(
+            {
+                "species": bird["id"],
+                "name": bird.get("name"),
+                "file": preview,
+                "attribution": photo.get("attribution"),
+                "license": photo.get("license"),
+                "sourceURL": photo.get("sourceURL"),
+            }
+        )
+
+    manifest.save(
+        directory / TILES_FILE,
+        {
+            "pack": pack_id,
+            "generated": datetime.date.today().isoformat(),
+            "tiles": tiles,
+        },
+    )
+    return tiles
+
+
+def checked_verdict(entry: object, known: set[str]) -> dict:
+    """One judged tile, or a `ValueError` naming what is wrong with the answer.
+
+    A model writes these, so nothing is trusted: an answer about a species this
+    pack does not hold, or a flag that is not a boolean, is a mistake that
+    would otherwise sit in `verdicts.json` and be counted as a verdict.
+    """
+    if not isinstance(entry, dict):
+        raise ValueError(f"a verdict has to be an object, got {entry!r}")
+
+    # `isinstance` first: `known` is a set, and a verdict whose species is a
+    # list would otherwise raise an unhashable TypeError past every handler
+    # instead of the sentence that says what is wrong with it.
+    species = entry.get("species")
+    if not isinstance(species, str) or species not in known:
+        raise ValueError(f"'{species}' is not a species with a tile in this pack")
+
+    verdict = {"species": species}
+    for flag in VERDICT_FLAGS:
+        if not isinstance(entry.get(flag), bool):
+            raise ValueError(f"{species}: '{flag}' has to be true or false, got {entry.get(flag)!r}")
+        verdict[flag] = entry[flag]
+
+    verdict["reason"] = str(entry.get("reason") or "").strip()
+    return verdict
+
+
+def read_verdicts(directory: Path) -> dict[str, dict]:
+    """The verdicts written so far, by species."""
+    path = directory / VERDICTS_FILE
+    if not path.is_file():
+        return {}
+
+    document = manifest.load(path)
+    return {entry["species"]: entry for entry in document.get("verdicts") or []}
+
+
+def merge_verdicts(
+    directory: Path, pack_id: str, incoming: object, known: set[str]
+) -> dict[str, dict]:
+    """Add a batch of verdicts to `verdicts.json` and return all of them, by species.
+
+    The later answer wins.
+
+    Merged rather than appended, and validated before anything is written: the
+    judging happens in batches, one batch is one call, and a run that stops
+    halfway has to leave the batches before it on disk.
+    """
+    if not isinstance(incoming, list):
+        raise ValueError("the verdicts have to be a JSON array of objects")
+
+    verdicts = read_verdicts(directory)
+    for entry in incoming:
+        checked = checked_verdict(entry, known)
+        verdicts[checked["species"]] = checked
+
+    directory.mkdir(parents=True, exist_ok=True)
+    manifest.save(
+        directory / VERDICTS_FILE,
+        {
+            "pack": pack_id,
+            "verdicts": [verdicts[species] for species in sorted(verdicts)],
+        },
+    )
+    return verdicts
+
+
+def print_audit(tiles: list[dict], verdicts: dict[str, dict]) -> None:
+    """The judged tiles as a table, and what a curator has to do about them."""
+    rows = []
+    for tile in tiles:
+        verdict = verdicts.get(tile["species"])
+        flags = ["?", "?", "?"] if verdict is None else [
+            "yes" if verdict[flag] else "NO" for flag in VERDICT_FLAGS
+        ]
+        rows.append([tile["species"], *flags, "" if verdict is None else verdict["reason"]])
+
+    print_columns(["Bird", "Bird visible", "Fills frame", "Head inside", "Reason"], rows)
+
+    def failing(flag: str) -> list[str]:
+        return [
+            tile["species"]
+            for tile in tiles
+            if tile["species"] in verdicts and not verdicts[tile["species"]][flag]
+        ]
+
+    judged = [tile for tile in tiles if tile["species"] in verdicts]
+    print(f"\n{len(tiles)} tile(s), {len(judged)} judged")
+
+    for flag, headline, remedy in (
+        ("bird_visible", "no bird visible", "re-frame or re-pick these now"),
+        ("head_inside", "head cut off", "re-frame or re-pick these now"),
+        ("fills_frame", "too far away", "these wait for the multi-photo pass (#194)"),
+    ):
+        birds = failing(flag)
+        print(f"{headline}: {len(birds)}" + (f" — {', '.join(birds)} ({remedy})" if birds else ""))
+
+
+def command_audit(args: argparse.Namespace) -> int:
+    """Export a pack's tiles for judging, and merge the verdicts back in.
+
+    The judging itself is not in here. It is a vision model looking at the
+    previews — Haiku, in batches of at most ten, two calls at a time — and it
+    writes its answers back through `--add-verdicts`, which is why this
+    subcommand needs no credential at all. See docs/medien-und-lizenzen.md.
+    """
+    document = manifest.load(manifest.manifest_path(args.pack))
+    birds = selected_birds(document, args.species)
+    directory = AUDIT_DIR / args.pack
+
+    tiles = audit_tiles(args.pack, birds, directory)
+    print(f"{len(tiles)} tile(s) → {directory}/\n")
+
+    if args.add_verdicts:
+        text = sys.stdin.read() if args.add_verdicts == "-" else Path(args.add_verdicts).read_text()
+        # Against the whole pack, not against `tiles`: a batch may name a
+        # species this run did not export, and that is not a mistake.
+        known = {bird["id"] for bird in document.get("birds") or [] if bird.get("photo")}
+        incoming = json.loads(text)
+        verdicts = merge_verdicts(directory, args.pack, incoming, known)
+        print(f"{len(incoming)} verdict(s) merged into {directory / VERDICTS_FILE}\n")
+    else:
+        verdicts = read_verdicts(directory)
+
+    print_audit(tiles, verdicts)
     return 0
 
 
@@ -685,6 +981,46 @@ def build_parser() -> argparse.ArgumentParser:
         help="'center' (default) or 'x,y,w,h' in pixels of the original",
     )
     pick.set_defaults(run=command_pick)
+
+    frame = photos.add_parser("frame", help="pick a photo with the square computed around the bird")
+    frame.add_argument("--pack", required=True)
+    frame.add_argument("--species", required=True, help="bird id, for instance 'amsel'")
+    frame.add_argument("--observation", required=True, type=int, help="iNaturalist observation id")
+    frame.add_argument("--photo", required=True, type=int, help="iNaturalist photo id")
+    frame.add_argument(
+        "--box",
+        type=framing.parse_box,
+        help="the bird as 'x0,y0,x1,y1', normalised 0–1 from the top left; "
+        "default: whatever Apple Vision finds salient",
+    )
+    frame.add_argument(
+        "--margin",
+        type=float,
+        default=framing.MARGIN,
+        help=f"air around the bird, as a fraction of its longer side (default {framing.MARGIN})",
+    )
+    frame.add_argument(
+        "--preview",
+        type=Path,
+        default=FRAME_PREVIEW_DIR,
+        help="where the two preview PNGs go (default DerivedData/frame-preview)",
+    )
+    frame.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="print the crop and write the previews, but record nothing",
+    )
+    frame.set_defaults(run=command_frame)
+
+    audit = photos.add_parser("audit", help="export a pack's tiles for judging")
+    audit.add_argument("--pack", required=True, help="pack id, for instance 'basis'")
+    audit.add_argument("--species", nargs="+", help="bird ids; default: every bird in the pack")
+    audit.add_argument(
+        "--add-verdicts",
+        metavar="FILE",
+        help="merge a JSON array of verdicts into verdicts.json ('-' reads standard input)",
+    )
+    audit.set_defaults(run=command_audit)
 
     calls = commands.add_parser("calls", help="calls from xeno-canto").add_subparsers(
         dest="step", required=True
