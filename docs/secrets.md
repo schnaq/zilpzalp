@@ -37,6 +37,7 @@ Danach laufen die mise-Tasks, die Secrets brauchen, automatisch über `infisical
 | `/ios` | `IOS_PROVISIONING_PROFILE_BASE64` | App-Store-Provisioning-Profil |
 | `/ios` | `ASC_KEY_ID`, `ASC_ISSUER_ID`, `ASC_KEY_P8_BASE64` | App Store Connect API, TestFlight-Upload |
 | `/ios` | `IOS_DIST_CERT_CHAIN_BASE64` | optional: Apple-WWDR-Zwischenzertifikat, nur nötig für eine Generation, die `.github/certs` noch nicht mitbringt |
+| `/actions` (Environment `dev`) | `VERCEL_TOKEN`, `VERCEL_PROJECT_ID` | Website-Deploy, `.github/workflows/web.yml` |
 
 Die Signing-Secrets liest ausschließlich `.github/workflows/testflight.yml`. Der Workflow läuft nach jedem grünen CI-Lauf auf `main` auf dem self-hosted Runner: Zertifikat und Profil wandern in eine eigene Keychain (`.github/scripts/ios-signing-setup.sh`), das Archiv entsteht ohne Signatur, und `xcodebuild -exportArchive` signiert und lädt es mit dem App-Store-Connect-Schlüssel nach TestFlight. `.github/scripts/ios-signing-teardown.sh` räumt danach alles wieder ab — der Runner ist persistent, Signing-Material darf keinen Lauf überleben. Der normale CI-Lauf baut weiterhin ohne Codesign.
 
@@ -99,12 +100,16 @@ Bei mehrzeiligen Werten wie einem Base64-Zertifikat zeilenweise maskieren.
 
 ### Ausnahme: Vercel
 
-Der Deploy der Website (`.github/workflows/web.yml`, Job `deploy`) braucht kein
-Infisical: `VERCEL_TOKEN` und `VERCEL_PROJECT_ID` liegen als
-GitHub-Repository-Secret, `VERCEL_ORG_ID` als Organisations-Secret — Christians
-Entscheidung vom 2026-09-10, weil ein reiner Token-Deploy die Infisical-Action
-nicht rechtfertigt. Werte aus `secrets.*` maskiert GitHub im Log automatisch,
-anders als die per Infisical-Action geladenen oben.
+Der Deploy der Website (`.github/workflows/web.yml`, Job `deploy`) braucht nur
+zwei Werte: `VERCEL_TOKEN` (projekt-scoped) und `VERCEL_PROJECT_ID`. Beide
+liegen in Infisical (Environment `dev`, Ordner `/actions`) und werden von dort
+nach GitHub Actions als Repository-Secret synchronisiert — so kommen sie in
+GitHub an, ohne dass der Workflow selbst die Infisical-Action aufruft.
+`VERCEL_ORG_ID` wird nicht mehr gebraucht: der projekt-scoped Token liefert
+über `GET /v9/projects/{id}` auch die `accountId`, aus der der Workflow die
+Org-ID selbst herleitet (siehe Kommentar in `web.yml`). Das Secret kann aus
+den GitHub-Org-Secrets gelöscht werden. Werte aus `secrets.*` maskiert GitHub
+im Log automatisch, anders als die per Infisical-Action geladenen oben.
 
 ## Smoke-Test
 

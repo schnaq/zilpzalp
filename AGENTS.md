@@ -111,7 +111,7 @@ Niemals ein Secret ins Repo, auch nicht in eine Beispieldatei mit echtem Wert. A
 
 Für alles, was über Infisical läuft, liegen in GitHub ausschließlich `INFISICAL_CLIENT_ID`, `INFISICAL_CLIENT_SECRET` und `INFISICAL_API_URL`. Jeder aus Infisical geladene Wert wird in CI mit `::add-mask::` maskiert — GitHub tut das nicht von selbst.
 
-Der Vercel-Deploy ist die eine Ausnahme: `VERCEL_TOKEN` und `VERCEL_PROJECT_ID` liegen als Repository-Secret, `VERCEL_ORG_ID` als Organisations-Secret — direkt in GitHub, nicht in Infisical, weil ein reiner Token-Deploy die Infisical-Action nicht braucht. GitHub maskiert Werte aus `secrets.*` ohnehin automatisch im Log.
+Der Vercel-Deploy ist die eine Ausnahme: nur `VERCEL_TOKEN` (projekt-scoped) und `VERCEL_PROJECT_ID` werden gebraucht. Beide liegen in Infisical (Environment `dev`, Ordner `/actions`) und werden von dort als GitHub-Repository-Secret synchronisiert — so kommen sie in GitHub an. `VERCEL_ORG_ID` wird nicht mehr gebraucht, der Workflow leitet die Org-ID selbst aus der Projekt-API her. GitHub maskiert Werte aus `secrets.*` ohnehin automatisch im Log.
 
 ## Git
 

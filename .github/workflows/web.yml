@@ -80,7 +80,6 @@ jobs:
       group: web-deploy
       cancel-in-progress: false
     env:
-      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
       VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
     steps:
@@ -109,10 +108,54 @@ jobs:
       # install` only provisions the tools, it does not shim them onto PATH
       # the way `jdx/mise-action` does for the ubuntu job above.
       #
-      # `vercel pull` writes .vercel/project.json from the project's dashboard
-      # settings — that is the only place this workflow learns them from.
-      - name: Pull Vercel project settings
-        run: mise x -- bun x vercel@$VERCEL_CLI_VERSION pull --yes --environment=production --token=$VERCEL_TOKEN
+      # `vercel pull` needs a user token to call /v2/user and the team
+      # endpoints; ours is a project-scoped token (least privilege — it can
+      # only see this one project) and gets 404/403 from those. It can,
+      # however, read /v9/projects/{id} directly, which carries everything
+      # `vercel pull` would have written to .vercel/project.json — including
+      # the org id, as the project's accountId. So we fetch that ourselves
+      # and write the file in the shape the CLI expects, instead of asking
+      # the CLI to pull it. GitHub Actions sets `CI=true`, which keeps the
+      # Vercel CLI from prompting interactively in the steps below.
+      - name: Fetch Vercel project settings
+        run: |
+          command -v jq >/dev/null || {
+            echo "::error::jq not found on the runner. Install it (e.g. 'brew install jq') so this step can shape .vercel/project.json."
+            exit 1
+          }
+
+          mkdir -p .vercel
+          # Belt and braces on the persistent runner: the trap below does not
+          # fire on a hard kill (e.g. an OOM or a forcibly cancelled job), so
+          # also clear out anything a previous run left behind before we
+          # write a fresh copy.
+          rm -f .vercel/project.api.json
+          trap 'rm -f .vercel/project.api.json' EXIT
+
+          curl --fail-with-body --silent --show-error \
+            --header "Authorization: Bearer $VERCEL_TOKEN" \
+            "https://api.vercel.com/v9/projects/$VERCEL_PROJECT_ID" \
+            --output .vercel/project.api.json
+
+          jq '{
+            orgId: .accountId,
+            projectId: .id,
+            projectName: .name,
+            settings: {
+              framework,
+              rootDirectory,
+              buildCommand,
+              devCommand,
+              installCommand,
+              outputDirectory,
+              nodeVersion,
+              createdAt,
+              directoryListing,
+              commandForIgnoringBuildStep
+            }
+          }' .vercel/project.api.json > .vercel/project.json
+
+          echo "VERCEL_ORG_ID=$(jq -r .orgId .vercel/project.json)" >> "$GITHUB_ENV"
 
       # The one Vercel project setting this workflow cannot see any other way.
       # Every command below assumes the project root is apps/web; if the
@@ -120,11 +163,6 @@ jobs:
       # directory.
       - name: Verify the Vercel project's Root Directory
         run: |
-          command -v jq >/dev/null || {
-            echo "::error::jq not found on the runner. Install it (e.g. 'brew install jq') so this step can read .vercel/project.json."
-            exit 1
-          }
-
           root_dir=$(jq -r '.settings.rootDirectory' .vercel/project.json)
           if [ "$root_dir" != "apps/web" ]; then
             echo "::error::The Vercel project's Root Directory is '${root_dir}', expected 'apps/web'. Set Root Directory to apps/web in the Vercel project settings (Project -> Settings -> General -> Root Directory), then re-run this workflow."
