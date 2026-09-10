@@ -23,14 +23,12 @@ struct AboutScreen: View {
     /// there is one website and one mailbox, and a `nil` here would be a typo
     /// in this file rather than anything a grown-up could act on — the same
     /// reasoning, and the same `URL(string:)!`, as ``PackModel/bucket``.
-    private enum Link {
-        static let privacy = URL(string: "https://zilpzalp.schnaq.com/datenschutz")!
-        static let website = URL(string: "https://zilpzalp.schnaq.com")!
-        /// Johanna's mailbox, which is the address the website gives for
-        /// questions about the app — deliberately not the company address in
-        /// the Impressum.
-        static let support = URL(string: "mailto:zilpzalp-app@posteo.net")!
-    }
+    private static let privacyURL = URL(string: "https://zilpzalp.schnaq.com/datenschutz")!
+    private static let websiteURL = URL(string: "https://zilpzalp.schnaq.com")!
+
+    /// Johanna's mailbox, which is the address the website gives for questions
+    /// about the app — deliberately not the company address in the Impressum.
+    private static let supportURL = URL(string: "mailto:zilpzalp-app@posteo.net")!
 
     /// "Version 0.1.0 (12)", read out of the bundle so that no number on this
     /// screen can drift from the build a grown-up is looking at.
@@ -152,19 +150,19 @@ struct AboutScreen: View {
                     title: "about.privacy.title",
                     hint: "about.privacy.hint",
                     icon: .shieldCheck,
-                    url: Link.privacy,
+                    url: Self.privacyURL,
                 )
                 linkRow(
                     title: "about.website.title",
                     hint: "about.website.hint",
                     icon: .house,
-                    url: Link.website,
+                    url: Self.websiteURL,
                 )
                 linkRow(
                     title: "about.mail.title",
                     hint: "about.mail.hint",
                     icon: .mail,
-                    url: Link.support,
+                    url: Self.supportURL,
                     accessibilityHint: "link.mail.accessibility",
                     showsSeparator: false,
                 )
