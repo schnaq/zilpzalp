@@ -185,8 +185,9 @@ struct HomeScreen: View {
     /// read as one more utility beside the equally quiet "i", and the album is
     /// one of three things a child does here. So it is the pill the round end
     /// offers, with the same word on it, and 64 pt everywhere where the disc
-    /// grew to 96 pt on an iPad — the iPad's tiles gain those 32 pt and the
-    /// phones' keep their size.
+    /// grew to 96 pt on an iPad. No tile pays for it: a phone's row is the
+    /// same height as before, and an iPad's tiles already sit at the design's
+    /// 240 pt cell, so the 32 pt the row gives back become slack.
     ///
     /// It fits beside the "i" on the narrowest screen, which is what lets the
     /// "i" stay in the corner #201 put it in: 24 + 24 + 12 + 103.6 + 24 =
