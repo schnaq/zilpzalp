@@ -9,7 +9,9 @@ import ZilpZalpUI
 /// #46) — minus "Vogelstimmen", the one row v1 does have something behind and
 /// deliberately does not offer: where there are calls, game 2 is there, and a
 /// grown-up who wants quiet turns the device down (#138) — and minus "Namen
-/// anzeigen", which never had a name to show (#208). The design's "Pakete"
+/// anzeigen", which never had a name to show (#208) — and plus „Ansagen
+/// vorlesen", the switch that silences everything the app *says*, which is a
+/// different question from the calls (#231). The design's "Pakete"
 /// row is a card of its own here, because packs are a list that changes
 /// rather than a setting — see ``PacksSection``.
 ///
@@ -230,6 +232,16 @@ struct ParentsScreen: View {
     private var rows: some View {
         ZCard(padding: 0) {
             VStack(spacing: 0) {
+                SettingRow(
+                    title: String(localized: "parents.speech.title"),
+                    hint: String(localized: "parents.speech.hint"),
+                    icon: .volume2,
+                    isOn: Binding(
+                        get: { parental.settings.speechEnabled },
+                        set: { parental.set(\.speechEnabled, to: $0) },
+                    ),
+                )
+
                 SettingRow(
                     title: String(localized: "parents.playtime.title"),
                     hint: String(localized: "parents.playtime.hint"),

@@ -81,4 +81,57 @@ struct SpeechClipsTests {
         #expect(clips.url(for: "collection.name", about: amsel) == nil)
         #expect(clips.url(for: "gate.spoken", about: nil) == nil)
     }
+
+    // MARK: - The switch (#231)
+
+    /// The one thing the switch has to do: a recording that is right there on
+    /// disk is not played either. Off means silence, not "the synthesiser
+    /// instead of the recording".
+    @Test("the switch silences a sentence that has a recording")
+    func silencesARecordedSentence() throws {
+        let pack = try SpeechFixtures.speakingPack()
+        let clips = try SpeechClips(library: PackLibrary([pack]), fixed: SpeechFixtures.fixedSet())
+        let amsel = try #require(pack.pack.birds.first { $0.id == "amsel" })
+
+        #expect(clips.url(for: "quiz.prompt.whereIs", about: amsel) != nil)
+        #expect(
+            clips.decision(for: "quiz.prompt.whereIs", about: amsel, speechEnabled: false)
+                == .silent,
+        )
+    }
+
+    /// And the sentences that would have gone to the synthesiser — which is
+    /// every sentence the app ships with today.
+    @Test("the switch silences a sentence nobody recorded")
+    func silencesAnUnrecordedSentence() {
+        let clips = SpeechClips(library: .empty, fixed: nil)
+
+        #expect(clips.decision(for: "gate.spoken", about: nil, speechEnabled: false) == .silent)
+        #expect(clips.decision(for: nil, about: nil, speechEnabled: false) == .silent)
+    }
+
+    @Test("switched on, a recorded sentence is its recording")
+    func playsTheClipWhileSwitchedOn() throws {
+        let pack = try SpeechFixtures.speakingPack()
+        let clips = try SpeechClips(library: PackLibrary([pack]), fixed: SpeechFixtures.fixedSet())
+        let amsel = try #require(pack.pack.birds.first { $0.id == "amsel" })
+
+        let expected = try #require(clips.url(for: "quiz.prompt.whereIs", about: amsel))
+        #expect(
+            clips.decision(for: "quiz.prompt.whereIs", about: amsel, speechEnabled: true)
+                == .clip(expected),
+        )
+    }
+
+    /// Both halves of "no recording": a sentence nobody has recorded, and the
+    /// assembled line that carries no key at all.
+    @Test("switched on, everything else is read out")
+    func synthesisesTheRestWhileSwitchedOn() {
+        let clips = SpeechClips(library: .empty, fixed: nil)
+
+        #expect(
+            clips.decision(for: "gate.spoken", about: nil, speechEnabled: true) == .synthesise,
+        )
+        #expect(clips.decision(for: nil, about: nil, speechEnabled: true) == .synthesise)
+    }
 }

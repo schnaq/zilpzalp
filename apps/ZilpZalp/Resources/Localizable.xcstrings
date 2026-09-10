@@ -853,6 +853,30 @@
         }
       }
     },
+    "parents.speech.hint" : {
+      "comment" : "Hint under the switch that turns the spoken announcements off",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vogelnamen und Lob werden vorgelesen. Die Vogelrufe bleiben an."
+          }
+        }
+      }
+    },
+    "parents.speech.title" : {
+      "comment" : "Row in the grown-ups' area: the switch for the spoken announcements",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ansagen vorlesen"
+          }
+        }
+      }
+    },
     "parents.title" : {
       "comment" : "The grown-ups' area: the VoiceOver label of its door in the top bar, and the title of the area itself",
       "extractionState" : "manual",

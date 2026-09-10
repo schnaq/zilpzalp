@@ -46,4 +46,44 @@ public struct SpeechClips: Sendable {
         guard let bird else { return fixed?.url(for: sentence) }
         return library.speechURL(for: bird, sentence: sentence)
     }
+
+    /// What is to become of a line the app was asked to say.
+    ///
+    /// The whole of the announcer's decision, in one place that can be
+    /// asserted without a simulator — the reason this type lives here at all.
+    /// The switch comes first: a grown-up who turned the announcements off
+    /// (#231) turned off the recordings too, not only the synthesiser.
+    ///
+    /// - Parameters:
+    ///   - sentence: The sentence key, `nil` for a line the app puts together
+    ///     at runtime, which no single recording says.
+    ///   - bird: The species the sentence is about, `nil` for a sentence that
+    ///     belongs to none.
+    ///   - speechEnabled: ``ParentalSettings/speechEnabled``.
+    public func decision(
+        for sentence: String?,
+        about bird: Bird?,
+        speechEnabled: Bool,
+    ) -> SpeechDecision {
+        guard speechEnabled else { return .silent }
+        guard let sentence, let clip = url(for: sentence, about: bird) else { return .synthesise }
+        return .clip(clip)
+    }
+}
+
+/// What the app does with one line: play the recording of it, read it out, or
+/// say nothing at all.
+///
+/// ``SpeechClips/decision(for:about:speechEnabled:)`` is where it is made;
+/// the announcer in the app target only carries it out. `.synthesise` is the
+/// ordinary case for a sentence nobody has recorded yet, never a failure — and
+/// a recording that will not open falls back to it in the announcer, where the
+/// file is opened.
+public enum SpeechDecision: Sendable, Equatable {
+    /// This file says the sentence.
+    case clip(URL)
+    /// No recording says it, so the device reads the words out.
+    case synthesise
+    /// The grown-ups switched the announcements off. Nothing sounds.
+    case silent
 }

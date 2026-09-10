@@ -27,6 +27,9 @@ struct ParentalSettingsStoreTests {
             let settings = try await store.load()
 
             #expect(settings.dailyLimitMinutes == nil)
+            // Spoken, not silent: without the voice a child who cannot read
+            // has no task in game 1 (#231).
+            #expect(settings.speechEnabled)
         }
     }
 
@@ -42,7 +45,7 @@ struct ParentalSettingsStoreTests {
     @Test("what was saved comes back")
     func roundTripsEveryField() async throws {
         try await withTemporaryStore { store, _ in
-            let saved = ParentalSettings(dailyLimitMinutes: 30)
+            let saved = ParentalSettings(dailyLimitMinutes: 30, speechEnabled: false)
             try await store.save(saved)
 
             #expect(try await store.load() == saved)
@@ -95,7 +98,7 @@ struct ParentalSettingsStoreTests {
             try await store.save(ParentalSettings(dailyLimitMinutes: 15))
 
             let written = try String(contentsOf: settingsFile(under: root), encoding: .utf8)
-            let positions = try ["dailyLimitMinutes", "schemaVersion"]
+            let positions = try ["dailyLimitMinutes", "schemaVersion", "speechEnabled"]
                 .map { try #require(written.range(of: "\"\($0)\"")).lowerBound }
             #expect(positions == positions.sorted())
         }
@@ -207,6 +210,41 @@ struct ParentalSettingsStoreTests {
             )
 
             #expect(try await store.load() == ParentalSettings(dailyLimitMinutes: 30))
+        }
+    }
+
+    /// Every device that has been to the grown-ups' area before #231 has a
+    /// file that names no `speechEnabled`. The version stayed at 1, so the
+    /// missing key has to read as the default rather than as "off" — a family
+    /// that updates the app must not find game 1 gone quiet.
+    @Test("a file from before the speech switch reads as spoken")
+    func defaultsTheMissingSpeechKey() async throws {
+        try await withTemporaryStore { store, root in
+            try write(#"{"schemaVersion": 1, "dailyLimitMinutes": 30}"#, to: root)
+
+            #expect(try await store.load() == ParentalSettings(dailyLimitMinutes: 30))
+            #expect(try await store.load().speechEnabled)
+        }
+    }
+
+    @Test("a file that switches the announcements off reads as off")
+    func readsTheSpeechSwitchOff() async throws {
+        try await withTemporaryStore { store, root in
+            try write(#"{"schemaVersion": 1, "speechEnabled": false}"#, to: root)
+
+            #expect(try await !store.load().speechEnabled)
+        }
+    }
+
+    /// Stated in the file at its default too, for the same reason "no limit"
+    /// is: a grown-up reading the file sees the setting and where it stands.
+    @Test("the speech switch is written even where it stands at its default")
+    func writesTheSpeechSwitchAtItsDefault() async throws {
+        try await withTemporaryStore { store, root in
+            try await store.save(ParentalSettings())
+
+            let written = try String(contentsOf: settingsFile(under: root), encoding: .utf8)
+            #expect(written.contains("\"speechEnabled\" : true"))
         }
     }
 
