@@ -4,8 +4,9 @@ import Testing
 
 /// What a navigation component decides before it draws anything: which colours
 /// a tone resolves to, how many stars survive, and what a locked tile shows.
-/// Nothing here renders — the visual result is what the `#Preview` blocks and
-/// the screenshot in the pull request are for.
+/// Only the label goes through a real render, and only to read back the size
+/// it was drawn at (#229); how the result looks is what the `#Preview` blocks
+/// and the screenshots in the pull request are for.
 ///
 /// The suite is `@MainActor` because SwiftUI's `View` is: constructing a
 /// `HomeTile` and reading its properties is main-actor work, even without a
@@ -133,28 +134,87 @@ struct NavigationComponentTests {
         #expect(width <= size - 2 * ZSpacing.step4)
     }
 
-    /// „Finde den Vogel" (#220) is the first shipped label that does not fit
-    /// the narrowest tile whole: 142.4 pt at 20 pt against the 127 pt a 159 pt
-    /// tile leaves. It is not cut off — the component shrinks it instead — and
-    /// this is where that guarantee stops being theory: the label has to fit
-    /// once it has shrunk as far as ``HomeTileMetrics/labelScaleFloor`` lets
-    /// it, which puts it at 17.8 pt on a 375 pt phone and leaves it whole.
+    /// „Erkenne den Vogel" (#229) is the first shipped label that does not fit
+    /// the narrowest tile on one line: 166.7 pt at 20 pt against the 127 pt a
+    /// 159 pt tile leaves. Shrinking it to fit would put it at 15.2 pt, under
+    /// the floor the design sets for anything a child reads *and* under
+    /// ``HomeTileMetrics/labelScaleFloor``, so the tile takes a second line
+    /// instead and keeps the step it chose.
     ///
     /// Separate from the test above rather than folded into it, because the
-    /// two say different things: every other label keeps its step, and this
-    /// one is allowed to lose it.
-    @Test("A label too wide for the narrowest tile shrinks rather than breaks")
-    func theWidestShippedLabelSurvivesByShrinking() throws {
+    /// two say different things: every other label fits on one line, and this
+    /// one is allowed to need two.
+    @Test("A label too wide for the narrowest tile takes a second line")
+    func theWidestShippedLabelSurvivesOnTwoLines() throws {
         try #require(BundledFonts.registered)
 
-        let label = "Finde den Vogel"
         let tile: CGFloat = 159
-        let step = HomeTile(title: label, size: tile).labelStep
-        let width = BundledFonts.width(of: label, postScriptName: "Baloo2-Bold", size: step.size)
+        let step = HomeTile(title: "Erkenne den Vogel", size: tile).labelStep
         let available = tile - 2 * ZSpacing.step4
+        func width(_ text: String) -> CGFloat {
+            BundledFonts.width(of: text, postScriptName: "Baloo2-Bold", size: step.size)
+        }
 
-        #expect(width > available)
-        #expect(width * HomeTileMetrics.labelScaleFloor <= available)
+        // One line does not fit, and shrinking is no way out of it.
+        #expect(width("Erkenne den Vogel") > available)
+        #expect(width("Erkenne den Vogel") * HomeTileMetrics.labelScaleFloor > available)
+
+        // Two do, at the full step: SwiftUI breaks at the last space that
+        // fits, which is the one before „Vogel".
+        #expect(width("Erkenne den") <= available)
+        #expect(width("Vogel") <= available)
+    }
+
+    /// The other half of the second line: it has to fit *down* the tile too.
+    ///
+    /// The narrowest tile is the tightest case — glyph, gap and two line boxes
+    /// against what the paddings leave — and it is the one a 375 pt phone
+    /// draws. A tile of that size showing stars as well would be 35 pt over —
+    /// a row of stars is `--space-3` plus a 24 pt glyph — which is why this is
+    /// written down: the stars arrive with the progress persistence (#27), and
+    /// this is where the tile reports that it has no room left for them.
+    @Test("Two lines still fit down the narrowest tile")
+    func twoLinesFitDownTheNarrowestTile() {
+        let tile: CGFloat = 159
+        let step = HomeTile(title: "Erkenne den Vogel", size: tile).labelStep
+        let content = tile * HomeTileMetrics.iconRatio
+            + ZSpacing.step3
+            + 2 * step.lineBoxHeight
+
+        #expect(content <= tile - 2 * ZSpacing.step4)
+    }
+
+    /// What #229 was reported for, on the tile rather than in the bar: the
+    /// label is declared at a step and was drawn a step below it, because a
+    /// `minimumScaleFactor` shrinks to fit the design's line box — tighter
+    /// than Baloo 2's own — as readily as it shrinks to fit a width.
+    ///
+    /// Read back from the width, as `TopBarTests` does it: a loose render
+    /// reports the width the label was actually drawn at, and advances scale
+    /// with the point size.
+    @Test(
+        "A label with room around it is drawn at the step its tile picked",
+        arguments: [CGFloat(159), 240],
+    )
+    func theLabelKeepsItsStep(tile: CGFloat) throws {
+        try #require(BundledFonts.registered)
+
+        let label = "Wer singt da?"
+        let component = HomeTile(title: label, size: tile)
+        var loose = CGSize.zero
+        ImageRenderer(content: component.label(lines: 1)).render { size, _ in loose = size }
+        let natural = BundledFonts.width(
+            of: label,
+            postScriptName: "Baloo2-Bold",
+            size: component.labelStep.size,
+        )
+        let drawn = component.labelStep.size * loose.width / natural
+
+        // A point of tolerance: `ImageRenderer` reports whole points.
+        #expect(
+            abs(drawn - component.labelStep.size) < 1,
+            "the label was drawn at \(drawn) pt, not at \(component.labelStep.size)",
+        )
     }
 
     /// The one number in `SettingRow` that a screenshot caught and no unit

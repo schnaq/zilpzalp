@@ -36,7 +36,7 @@ final class StoreScreenshots: XCTestCase {
 
     /// German, because the app is: these are the words on the things a child
     /// taps, and the app is built to be localisable but ships in one language.
-    private static let gameNames = "Finde den Vogel"
+    private static let gameNames = "Erkenne den Vogel"
     private static let gameCalls = "Wer singt da?"
     private static let album = "Sammlung"
     private static let playAgain = "Nochmal spielen"

@@ -5,7 +5,7 @@ import Testing
 /// The titles the German catalog holds today, longest last.
 ///
 /// The two game names joined them with #220: a round's bar carries the name of
-/// the game it is a round of, so „Finde den Vogel" and „Wer singt da?" are
+/// the game it is a round of, so „Erkenne den Vogel" and „Wer singt da?" are
 /// titles now and answer to the same two rules as the grown-up screens'.
 ///
 /// File scope rather than a member of the suite: `@Test(arguments:)` reads
@@ -17,9 +17,9 @@ private let catalogTitles = [
     "Einstellungen",
     "Unser Schwarm",
     "Über ZilpZalp",
-    "Finde den Vogel",
     "Wer spielt heute?",
     "Deine Vogel-Leiter",
+    "Erkenne den Vogel",
 ]
 
 /// What a title gets on an iPhone SE with both side slots filled:
@@ -110,6 +110,40 @@ struct TopBarTests {
         ).height
 
         #expect(abs(height - (ZSpacing.touchMinimum + 32)) < 0.5, "the bar rendered \(height) pt")
+    }
+
+    // MARK: - Size
+
+    @Test(
+        "A title with room around it is drawn at the step it is declared at",
+        arguments: catalogTitles,
+    )
+    func theTitleKeepsItsStepWhereTheWidthAllows(title: String) throws {
+        try #require(BundledFonts.registered)
+
+        // The bug #229 reports, measured rather than looked at: the title is
+        // declared at `headline` and rendered at 18 pt, on an iPad as much as
+        // on a phone. Nothing about the width caused it — the tight line box
+        // did, and a `minimumScaleFactor` shrinks to fit a height too.
+        //
+        // What the title was actually drawn at cannot be asked, so it is read
+        // back from the width: advances scale with the point size, so the
+        // width a loose render reports, over the width CoreText typesets the
+        // same string at 28 pt, is the size that reached the screen.
+        var loose = CGSize.zero
+        ImageRenderer(content: TopBarTitle(title)).render { size, _ in loose = size }
+        let natural = BundledFonts.width(
+            of: title,
+            postScriptName: "Baloo2-Bold",
+            size: ZType.Step.headline.size,
+        )
+        let drawn = ZType.Step.headline.size * loose.width / natural
+
+        // A point of tolerance: `ImageRenderer` reports whole points.
+        #expect(
+            abs(drawn - ZType.Step.headline.size) < 1,
+            "\(title) was drawn at \(drawn) pt, not at the headline step",
+        )
     }
 
     // MARK: - The row
@@ -218,10 +252,11 @@ struct TopBarTests {
         try #require(BundledFonts.registered)
 
         // The scale factor is a guard, not a target: SwiftUI shrinks only as
-        // far as it must. The longest title today lands on 20 pt, which is
-        // ``ZType/Step/body`` — the smallest size anything a child reads is
-        // allowed to take. An eighth title longer than that is a design
-        // decision, and this is where it reports itself.
+        // far as it must. The longest title today, „Erkenne den Vogel" (#229),
+        // lands on 20.0 pt — 167 ÷ 233.3 × 28 — which is ``ZType/Step/body``,
+        // the smallest size anything a child reads is allowed to take. A tenth
+        // title longer than that is a design decision, and this is where it
+        // reports itself.
         let natural = BundledFonts.width(
             of: title,
             postScriptName: "Baloo2-Bold",

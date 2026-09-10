@@ -81,9 +81,9 @@ public struct HomeTile: View {
     /// - Parameters:
     ///   - title: The word under the glyph, and the button's accessibility
     ///     label. Always a parameter — the package carries no product copy.
-    ///     One or two words: the tile draws it on a single line and shrinks it
-    ///     rather than wrapping or cutting it off. How large that line is
-    ///     drawn follows the tile, see ``labelStep``.
+    ///     A few words: the tile draws them on one line where they fit, on two
+    ///     where they do not, and shrinks them rather than cutting them off.
+    ///     How large those lines are drawn follows the tile, see ``labelStep``.
     ///   - icon: The activity's glyph. Ignored while ``locked``.
     ///   - tone: The tile's tint.
     ///   - stars: How many of the three slots are filled. A number outside
@@ -141,13 +141,12 @@ public struct HomeTile: View {
     /// glyph.
     ///
     /// Below 193 pt the tile drops to `body` and stays there. That floor still
-    /// needs room: at 20 pt the two labels the app ships ask for a 174.4 pt
-    /// tile („Finde den Vogel") and a 147.1 pt one („Wer singt da?"). The home
-    /// screen's narrowest tile is 159 pt since it took the phone gutter
-    /// (#145), so the shorter one fits whole and the longer one shrinks —
-    /// 17.8 pt on a 375 pt phone, see ``HomeTileMetrics/labelScaleFloor``.
-    /// That is the first time the shrink is needed on a supported width, and
-    /// it is the price of calling game 1 what it asks the child to do (#220).
+    /// needs room: at 20 pt the two labels the app ships ask for a 198.7 pt
+    /// tile („Erkenne den Vogel") and a 153.0 pt one („Wer singt da?"). The
+    /// home screen's narrowest tile is 159 pt since it took the phone gutter
+    /// (#145), so the shorter one fits on one line and the longer one takes
+    /// two — the step stays 20 pt either way, which is what the shrink could
+    /// not promise (#229).
     var labelStep: ZType.Step {
         let available = size - 2 * ZSpacing.step4
         let steps: [ZType.Step] = [.headline, .label]
@@ -158,6 +157,30 @@ public struct HomeTile: View {
         locked ? .locked : tone.palette
     }
 
+    /// The word under the glyph, in as many lines as it is offered.
+    ///
+    /// The frame is the design's line box per line, not the face's own —
+    /// Baloo 2 lays a line out in 1.602 boxes, and a tile that reserved those
+    /// would push its stars out. Since the box is the tighter of the two, the
+    /// text is sized against its own first: a `minimumScaleFactor` answers to
+    /// a height as readily as a width, and without that every label rendered a
+    /// step below the one it was given (#229). The glyphs overhang the frame
+    /// and nothing clips them.
+    ///
+    /// The scale factor is the last resort, one step's worth: a label wider
+    /// than its tile even after the second line shrinks rather than losing its
+    /// ending — the ending is where the question mark is. No label the app
+    /// ships engages it on a supported width.
+    func label(lines: Int) -> some View {
+        Text(title)
+            .typeStyle(labelStep, .display, weight: .bold)
+            .lineLimit(lines)
+            .multilineTextAlignment(.center)
+            .minimumScaleFactor(HomeTileMetrics.labelScaleFloor)
+            .fixedSize(horizontal: false, vertical: true)
+            .frame(height: CGFloat(lines) * labelStep.lineBoxHeight)
+    }
+
     public var body: some View {
         let tilePalette = palette
 
@@ -165,18 +188,17 @@ public struct HomeTile: View {
             VStack(spacing: ZSpacing.step3) {
                 Icon(displayedIcon, size: .custom(size * HomeTileMetrics.iconRatio))
 
-                Text(title)
-                    // One line by design, so no `multilineTextAlignment`:
-                    // the frame centres the single line already.
-                    .typeStyle(labelStep, .display, weight: .bold, singleLine: true)
-                    // The last resort, one step's worth: a label wider than
-                    // its tile shrinks rather than losing its ending — the
-                    // ending is where the question mark is. „Finde den Vogel"
-                    // engages it on a 375 pt phone (#220); „Wer singt da?"
-                    // only below a 147 pt tile, which no supported screen
-                    // draws. It keeps the design's line box either way, so the
-                    // glyph above does not shift.
-                    .minimumScaleFactor(HomeTileMetrics.labelScaleFloor)
+                // One line wherever the tile is wide enough for one, a second
+                // line where it is not. „Erkenne den Vogel" is the first
+                // shipped label that needs one: 166.7 pt at `body` against
+                // the 127 pt a 159 pt tile leaves, and shrinking it to fit
+                // would put it at 15.2 pt, below the size a child reads at
+                // (#229). Broken after „den" both halves are well inside the
+                // tile and the word keeps the step it was given.
+                ViewThatFits(in: .horizontal) {
+                    label(lines: 1)
+                    label(lines: 2)
+                }
 
                 // No stars at all until the first one is earned, exactly as
                 // in the JSX: three empty outlines on a fresh tile would read
@@ -229,12 +251,18 @@ enum HomeTileMetrics {
     /// stops fitting — see ``HomeTile/labelStep``.
     ///
     /// Measured with CoreText in the bundled Baloo 2 Bold, which is the only
-    /// face a tile label is ever drawn in. "Sterne sammeln" is the widest —
-    /// 145.6 pt at 20 pt, 160.1 at 22 and 203.8 at 28, so 7.278 throughout,
-    /// since advances scale with the point size. It comes from this file's
-    /// own previews rather than from the JSX, whose four tiles are all
-    /// shorter; the widest label the tile is asked to draw is what a
-    /// truncation rule has to hold against.
+    /// face a tile label is ever drawn in. "Sterne sammeln" is the widest that
+    /// still asks for a single line — 145.6 pt at 20 pt, 160.1 at 22 and 203.8
+    /// at 28, so 7.278 throughout, since advances scale with the point size.
+    /// It comes from this file's own previews rather than from the JSX, whose
+    /// four tiles are all shorter.
+    ///
+    /// A longer label does not lower the step: „Erkenne den Vogel" is 8.33
+    /// times its size wide and takes a second line instead (#229), where its
+    /// widest line, „Erkenne den", is 5.59. Raising the ratio to cover it
+    /// would drop both tiles on an iPad from `headline` to `label` to spare
+    /// game 1 a line break, which is the wrong trade: the step is what a
+    /// child sees from across the room.
     ///
     /// Rounded up, so that a boundary lands with a point of slack rather
     /// than on the last glyph's edge.
@@ -313,7 +341,7 @@ private struct HomeTileButtonStyle: ButtonStyle {
         HomeTile(title: "Wer singt da?", icon: .volume2, tone: .leaf, stars: 3)
         HomeTile(title: "Federn finden", icon: .feather, tone: .clay, stars: 1)
         HomeTile(title: "Sterne sammeln", icon: .star, tone: .sun, stars: 2)
-        HomeTile(title: "Finde den Vogel", icon: .bird, tone: .hoopoe, stars: 2)
+        HomeTile(title: "Erkenne den Vogel", icon: .bird, tone: .hoopoe, stars: 2)
     }
     .padding(ZSpacing.step6)
     .background(ZColor.surfacePage)
@@ -334,7 +362,7 @@ private struct HomeTileButtonStyle: ButtonStyle {
         HomeTile(title: "Bald!", locked: true)
         HomeTile(title: "Bald!", icon: .music, tone: .sun, stars: 3, locked: true)
         // Nine stars is not a state; the tile clamps rather than complains.
-        HomeTile(title: "Finde den Vogel", icon: .bird, tone: .hoopoe, stars: 9)
+        HomeTile(title: "Erkenne den Vogel", icon: .bird, tone: .hoopoe, stars: 9)
     }
     .padding(ZSpacing.step6)
     .background(ZColor.surfacePage)
