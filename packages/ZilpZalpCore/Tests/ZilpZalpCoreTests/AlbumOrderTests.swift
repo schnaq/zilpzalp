@@ -4,7 +4,7 @@ import ZilpZalpCore
 @Test("What has been found comes first, everything else keeps its place")
 func earnedFirstMovesOnlyTheGroups() {
     let birds = ["amsel", "blaumeise", "rotkehlchen", "star", "zilpzalp"]
-    let earned: Set<String> = ["rotkehlchen", "star"]
+    let earned: Set = ["rotkehlchen", "star"]
 
     #expect(
         AlbumOrder.earnedFirst(birds) { earned.contains($0) }
