@@ -45,6 +45,22 @@ public struct Profile: Codable, Sendable, Hashable, Identifiable {
     /// rest — the daily limit needs today, the parents area needs the week,
     /// and nothing needs more than that.
     public var playtime: [String: TimeInterval]
+    /// Which birds this child's rounds ask about: the id of one installed
+    /// pack, or `nil` for every bird there is (#187).
+    ///
+    /// A field of the child rather than of the device, because it is a taste
+    /// and not a setting — one sibling wants Africa, the next one wants
+    /// everything, and handing the iPad on has to hand the choice on with it.
+    ///
+    /// Nothing here checks that such a pack is installed. A grown-up may
+    /// delete one while the choice stands, so the id is resolved against what
+    /// is on the device every time it is read — see ``PackCollections`` — and
+    /// it is deliberately left standing when it resolves to nothing: a read
+    /// must not write, and downloading the pack again brings the choice back.
+    ///
+    /// Not the sticker album, which is `collection.*` in the String Catalog
+    /// and ``recognitions`` in this file.
+    public var collection: String?
     /// Stars earned per calendar day, keyed and pruned exactly as
     /// ``playtime`` is.
     ///
@@ -62,6 +78,7 @@ public struct Profile: Codable, Sendable, Hashable, Identifiable {
         totalStars: Int = 0,
         roundsPlayed: Int = 0,
         recognitions: [String: Int] = [:],
+        collection: String? = nil,
         playtime: [String: TimeInterval] = [:],
         dailyStars: [String: Int] = [:],
     ) {
@@ -71,16 +88,18 @@ public struct Profile: Codable, Sendable, Hashable, Identifiable {
         self.totalStars = totalStars
         self.roundsPlayed = roundsPlayed
         self.recognitions = recognitions
+        self.collection = collection
         self.playtime = playtime
         self.dailyStars = dailyStars
     }
 
-    /// Written by hand for the two keys that arrived after the file format
-    /// did: a profile written before ``dailyStars`` is a profile with no days
-    /// counted yet, and one written before ``recognitions`` is a profile with
-    /// nothing counted yet — neither is a broken file. Everything else decodes
-    /// as it always has. The schema version stays 1, which is what lets this
-    /// build read every file written before it.
+    /// Written by hand for the keys that arrived after the file format did: a
+    /// profile written before ``dailyStars`` is a profile with no days counted
+    /// yet, one written before ``recognitions`` is a profile with nothing
+    /// counted yet, and one written before ``collection`` is a profile that
+    /// plays with every bird — none of them is a broken file. Everything else
+    /// decodes as it always has. The schema version stays 1, which is what
+    /// lets this build read every file written before it.
     ///
     /// A file from before #177 also carries a `collectedSpecies` array, and it
     /// is deliberately ignored: those stickers were handed out for meeting a
@@ -104,6 +123,7 @@ public struct Profile: Codable, Sendable, Hashable, Identifiable {
         roundsPlayed = try container.decode(Int.self, forKey: .roundsPlayed)
         recognitions = try container.decodeIfPresent([String: Int].self, forKey: .recognitions)
             ?? [:]
+        collection = try container.decodeIfPresent(String.self, forKey: .collection)
         playtime = try container.decode([String: TimeInterval].self, forKey: .playtime)
         dailyStars = try container.decodeIfPresent([String: Int].self, forKey: .dailyStars) ?? [:]
     }
@@ -144,6 +164,7 @@ public struct Profile: Codable, Sendable, Hashable, Identifiable {
         case totalStars
         case roundsPlayed
         case recognitions
+        case collection
         case playtime
         case dailyStars
     }
