@@ -204,7 +204,10 @@ private struct Document: Codable {
         }
         // Stated too, and never `encodeIfPresent`: the setting always stands
         // somewhere, and a file that left the key out would read back as a
-        // file from before the setting existed.
+        // file from before the setting existed. The default is the same one
+        // ``settings`` fills a missing key with, and it is written rather than
+        // forced because a document on its way to disk always came through
+        // `init(settings:)`, where the field is a plain `Bool`.
         try container.encode(speechEnabled ?? true, forKey: .speechEnabled)
     }
 }

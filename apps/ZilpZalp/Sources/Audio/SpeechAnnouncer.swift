@@ -37,7 +37,12 @@ final class SpeechAnnouncer: NSObject {
     /// launch, and again on every change, which is what makes the switch
     /// apply without a restart. Read per sentence, so a sentence already on
     /// its way is not stopped — the next one simply does not start.
-    static var isEnabled = true
+    ///
+    /// Until that first read it stands where the settings stand — taken from
+    /// the defaults rather than written out as `true`, so the two cannot say
+    /// different things about a device that has never been to the grown-ups'
+    /// area.
+    static var isEnabled = ParentalSettings().speechEnabled
 
     /// A notch below the system default of 0.5. The default rattles the
     /// question off faster than a child who is still learning the names can
