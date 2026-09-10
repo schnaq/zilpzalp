@@ -15,9 +15,13 @@ import ZilpZalpUI
 /// A door in front of it, and the door has two keys. The device lock
 /// (``ParentsLock``) is the normal one. On a device with neither a code nor a
 /// face on file it cannot be asked at all, and then ``ParentalGate`` — the
-/// same adult-level task the credits screen will put in front of every
-/// external link (#37) — takes over, so the area is reachable on every device
-/// without ever being reachable by a child.
+/// same adult-level task that stands in front of every external link (#37) —
+/// takes over, so the area is reachable on every device without ever being
+/// reachable by a child.
+///
+/// What is *not* behind this door: the credits and everything else there is
+/// to say about the app. They are public and live in ``AboutScreen``, which
+/// the home screen opens without a lock (#199).
 ///
 /// The door falls shut again when the screen goes away or the app is put down.
 struct ParentsScreen: View {
@@ -52,9 +56,6 @@ struct ParentsScreen: View {
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
     @State private var door: Door = .shut(refused: false)
-    /// Whether the credits are pushed on top. Read on the way out, so the
-    /// door is not slammed behind a grown-up who only stepped into them.
-    @State private var showsCredits = false
     /// Whether the daily limit's presets are up.
     ///
     /// A dialog rather than a pushed screen on purpose: five choices do not
@@ -86,25 +87,13 @@ struct ParentsScreen: View {
         // way out, and the door shuts behind the swipe exactly as it shuts
         // behind the chevron (#150).
         .swipesBack(.pops)
-        // A destination of this screen rather than a `Route` case: the credits
-        // are a room inside the grown-ups' area and nothing else may navigate
-        // to them, least of all past the lock.
-        .navigationDestination(isPresented: $showsCredits) {
-            CreditsScreen()
-        }
-        .onAppear {
-            // Never while the area is already open — this also runs on the way
-            // back from the credits.
-            guard door != .open else { return }
-            door = closedDoor
-        }
-        .onDisappear {
-            // Pushing the credits takes this screen off the screen without
-            // taking anybody out of the area; relocking here would ask for the
-            // code again on the way back.
-            guard !showsCredits else { return }
-            door = closedDoor
-        }
+        // Nothing is pushed from this screen any more since the credits went
+        // public (#199) — the packs and the daily limit are a sheet and a
+        // dialog, and neither takes the screen off the display. So the door
+        // can shut on every appearance and every disappearance, with nothing
+        // to make an exception for.
+        .onAppear { door = closedDoor }
+        .onDisappear { door = closedDoor }
         .onChange(of: scenePhase) { _, phase in
             // `.background` only. The system's own authentication sheet makes
             // the scene `.inactive`, and relocking on that would shut the door
@@ -251,16 +240,9 @@ struct ParentsScreen: View {
                     hint: String(localized: "parents.playtime.hint"),
                     icon: .clock,
                     value: label(forLimit: parental.settings.dailyLimitMinutes),
-                ) {
-                    choosingLimit = true
-                }
-                SettingRow(
-                    title: String(localized: "parents.credits.title"),
-                    hint: String(localized: "parents.credits.hint"),
-                    icon: .camera,
                     showsSeparator: false,
                 ) {
-                    showsCredits = true
+                    choosingLimit = true
                 }
             }
             // The rows paint their own background to the card's inner edge, so

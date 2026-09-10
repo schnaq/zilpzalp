@@ -55,6 +55,7 @@ struct RootView: View {
                         )
                     case .parents:
                         ParentsScreen(parental: model.parental, packs: model.packs)
+                    case .about: AboutScreen()
                     case .collection: collection
                     case .timeForTheNest:
                         // All the way home rather than back one: under this
@@ -129,6 +130,7 @@ struct RootView: View {
                 games: model.games,
                 openGame: openGame(_:),
                 openParents: { path.append(.parents) },
+                openAbout: { path.append(.about) },
                 openProfiles: { model.chooseAgain() },
                 collections: model.collectionEntries,
                 // The resolved choice, not the stored one: a pack deleted

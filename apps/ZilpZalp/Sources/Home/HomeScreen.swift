@@ -31,6 +31,12 @@ struct HomeScreen: View {
 
     let openGame: (Game) -> Void
     let openParents: () -> Void
+
+    /// „Über ZilpZalp" (#199), the one door on this screen that leads to
+    /// words rather than to a game. Where its button sits, and why not in the
+    /// top bar beside the lock, is ``album``.
+    let openAbout: () -> Void
+
     let openProfiles: () -> Void
 
     /// What there is to choose between, „Alle Vögel" first — empty while one
@@ -156,13 +162,18 @@ struct HomeScreen: View {
         }
     }
 
-    /// The album's door, centred at the foot as the design draws it.
+    /// The album's door, centred at the foot as the design draws it, with the
+    /// way to „Über ZilpZalp" in the corner beside it.
     ///
     /// Outside the reader above rather than inside it, so the tiles are
     /// measured against what is left over and keep sizing themselves. The
     /// design's row has two more buttons; "Wer spielt?" is the avatar in the
     /// top bar here, and "Unser Schwarm" lives inside the album, where a list
     /// of siblings is a page in a book rather than a door on the home screen.
+    ///
+    /// An overlay rather than a third element in a row, so the album keeps the
+    /// screen's midline: it is the one button here a child aims at, and it may
+    /// not move because a grown-up's door appeared beside it.
     private var album: some View {
         IconButton(
             .album,
@@ -171,7 +182,37 @@ struct HomeScreen: View {
             diameter: isCompact ? ZSpacing.touchMinimum : ZSpacing.touchComfortable,
             action: openCollection,
         )
+        .frame(maxWidth: .infinity)
+        .overlay(alignment: .trailing) { about }
         .padding(.bottom, ZSpacing.step5)
+    }
+
+    /// „Über ZilpZalp" (#199): the quiet "i" in the bottom corner.
+    ///
+    /// Not in the top bar beside the lock, where #199 expected it, and the
+    /// reason is arithmetic. ``TopBarRow`` reserves `max(leading, trailing)`
+    /// on *both* sides of the bar, so a third 64 pt button in the trailing
+    /// slot pushes that slot's left edge under the wordmark: with the wordmark
+    /// measured at 144 pt and the compact gutter, the gap between the two is
+    /// 59 pt with two buttons and −17 pt on a 375 pt phone and −2 pt on a
+    /// 390 pt one with three. The overlap would have shown on neither of the
+    /// two devices the screenshots were taken on. So the button goes where
+    /// there is room for it on every supported screen — and the corner is the
+    /// quieter place anyway: it is beside the album rather than among the
+    /// tiles, and it competes with nothing a child is looking for.
+    ///
+    /// The default `quiet` tone, against the album's `primary`: of the two
+    /// doors down here only one is for the child.
+    private var about: some View {
+        IconButton(
+            .info,
+            label: String(localized: "about.title"),
+            diameter: ZSpacing.touchMinimum,
+            action: openAbout,
+        )
+        // The screen gutter the rest of this screen keeps, so the glyph sits
+        // in from the edge rather than on it.
+        .padding(.trailing, isCompact ? ZSpacing.step4 : ZSpacing.gutterScreen)
     }
 
     /// The one line of text on the screen, and it is for the grown-up looking
@@ -274,6 +315,7 @@ private let previewCollections = [
         games: [.names, .calls],
         openGame: { _ in },
         openParents: {},
+        openAbout: {},
         openProfiles: {},
         collections: previewCollections,
         chosenCollection: "afrika",
@@ -289,6 +331,7 @@ private let previewCollections = [
         games: [.names, .calls],
         openGame: { _ in },
         openParents: {},
+        openAbout: {},
         openProfiles: {},
         collections: previewCollections,
         chosenCollection: nil,
@@ -306,6 +349,7 @@ private let previewCollections = [
         games: [.names, .calls],
         openGame: { _ in },
         openParents: {},
+        openAbout: {},
         openProfiles: {},
         collections: [],
         chosenCollection: nil,
@@ -323,6 +367,7 @@ private let previewCollections = [
         games: [.names],
         openGame: { _ in },
         openParents: {},
+        openAbout: {},
         openProfiles: {},
         collections: [],
         chosenCollection: nil,

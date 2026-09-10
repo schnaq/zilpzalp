@@ -10,21 +10,27 @@ import ZilpZalpUI
 /// into a view drifts away from the assets the moment anybody exchanges a
 /// photo, and CC BY is not satisfied by a name that used to be right.
 ///
-/// A room inside the grown-ups' area rather than a `Route` case — the only way
-/// in is past the lock, and its type is the grown-ups' type: full sentences,
-/// body sizes, settings rows.
+/// Pushed from ``AboutScreen`` rather than a `Route` case of its own: the
+/// credits are one part of what there is to say about the app, and the screen
+/// above them is where a grown-up arrives. Its type is theirs as well: full
+/// sentences, body sizes, settings rows.
+///
+/// Public since #199. Behind the grown-ups' lock the attribution CC BY 4.0
+/// §3(a)(2) asks for was the weakest form of it — a name nobody without a
+/// device code can read; here anybody who opens the app can.
 ///
 /// **Every external link on this screen opens through ``ParentalGate``.**
 /// Names and licences stand in plain text and need no gate; the source and
 /// the licence text leave the app, and Guideline 1.3 asks for an adult-level
-/// task in front of that. This is the app's only `openURL` call site.
+/// task in front of that — see ``SwiftUI/View/opensExternalLinks(_:)``, which
+/// is where the link actually opens.
 struct CreditsScreen: View {
     /// The credits as they ship, decoded once per process.
     ///
     /// A `static let` because this is a constant of the build, not state: the
     /// file is a resource that cannot change while the app runs, and a stored
     /// property would re-read and re-decode it on every construction of this
-    /// view — that is, on every pass of the grown-ups' screen's body.
+    /// view — that is, on every pass of ``AboutScreen``'s body.
     ///
     /// `try?` because there is no useful thing to say to a parent about a
     /// missing bundle resource. `mise run check` regenerates the file and
@@ -34,16 +40,15 @@ struct CreditsScreen: View {
     private static let credits = try? Credits.bundled()
 
     @Environment(\.dismiss) private var dismiss
-    @Environment(\.openURL) private var openURL
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
     /// The link a grown-up asked for, waiting for the task to be solved.
-    /// `nil` whenever no gate is up — setting it is what puts the sheet there.
+    /// See ``SwiftUI/View/opensExternalLinks(_:)``.
     @State private var pendingLink: ExternalLink?
 
     var body: some View {
         VStack(spacing: 0) {
-            TopBar(title: String(localized: "parents.credits.title")) {
+            TopBar(title: String(localized: "credits.title")) {
                 IconButton(
                     .chevronLeft,
                     label: String(localized: "nav.back.accessibility"),
@@ -57,30 +62,10 @@ struct CreditsScreen: View {
         // Every screen brings its own `TopBar`; the system bar would stack a
         // second, smaller back button above it.
         .toolbar(.hidden, for: .navigationBar)
-        // Back into the grown-ups' area, which is what the chevron does; the
-        // area's own lock is untouched by either (#150).
+        // Back up to the screen about the app, which is what the chevron does
+        // (#150).
         .swipesBack(.pops)
-        // The gate, undressed: it brings its own gutter and scrolls itself, so
-        // the sheet only has to give it the page colour. Swiping it down is
-        // the way out — there is nothing to confirm and nothing to save.
-        .sheet(item: $pendingLink) { link in
-            ParentalGate(reason: String(localized: "credits.gate.reason")) {
-                // Down first, then out: the sheet is gone before the browser
-                // comes up, so coming back lands on the credits and not on a
-                // solved task.
-                pendingLink = nil
-                openURL(link.url)
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(ZColor.surfacePage)
-            // A page, not the default form sheet. Measured on an iPad Pro
-            // 13-inch the form sheet is about 620 pt tall and cut the bottom
-            // row of answer pills in half — the gate scrolls, so nothing was
-            // unreachable, but a task whose answers are sliced through reads
-            // as broken rather than as "there is more below". On a phone a
-            // sheet is full width either way and this changes nothing.
-            .presentationSizing(.page)
-        }
+        .opensExternalLinks($pendingLink)
     }
 
     private var content: some View {
@@ -172,7 +157,7 @@ struct CreditsScreen: View {
         ) {
             pendingLink = ExternalLink(url: entry.sourceURL)
         }
-        .accessibilityHint(Text("credits.link.accessibility"))
+        .accessibilityHint(Text("link.web.accessibility"))
     }
 
     /// The font families and the icon sets, which sit in no manifest and come
@@ -198,7 +183,7 @@ struct CreditsScreen: View {
             ) {
                 pendingLink = ExternalLink(url: entry.licenseURL)
             }
-            .accessibilityHint(Text("credits.link.accessibility"))
+            .accessibilityHint(Text("link.web.accessibility"))
         }
     }
 
@@ -237,19 +222,6 @@ private struct CreditedPack: Identifiable {
     let id: String
     let title: String
     var media: [Credits.Media]
-}
-
-/// A URL on its way out of the app, waiting behind the task.
-///
-/// A wrapper rather than the bare `URL` because `.sheet(item:)` needs an
-/// `Identifiable`, and the URL is its own identity: two rows pointing at the
-/// same page are the same pending link.
-private struct ExternalLink: Identifiable {
-    let url: URL
-
-    var id: URL {
-        url
-    }
 }
 
 #Preview("iPhone") {

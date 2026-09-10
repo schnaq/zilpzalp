@@ -13,9 +13,10 @@ import ZilpZalpUI
 ///
 /// Two callers, one view. ``ParentsScreen`` puts it up when the device has
 /// neither a code nor a face on file, so the grown-ups' area is reachable on
-/// every device; the credits screen (#37) puts it in front of every external
-/// link. Its whole surface is the reason to show it and what to do when it is
-/// solved — no result to read out, no state to hand back in.
+/// every device; ``SwiftUI/View/opensExternalLinks(_:)`` puts it in front of
+/// every link that leaves the app (#37). Its whole surface is the reason to
+/// show it and what to do when it is solved — no result to read out, no state
+/// to hand back in.
 ///
 /// Nothing is stored. Not the question, not the answer, not that anybody
 /// passed: the view is built fresh, and the numbers change on every attempt.

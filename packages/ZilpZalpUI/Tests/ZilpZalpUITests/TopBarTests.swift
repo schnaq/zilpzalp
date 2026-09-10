@@ -11,6 +11,7 @@ private let catalogTitles = [
     "Wie heißt du?",
     "Einstellungen",
     "Unser Schwarm",
+    "Über ZilpZalp",
     "Meine Sammlung",
     "Wer spielt heute?",
     "Deine Vogel-Leiter",
