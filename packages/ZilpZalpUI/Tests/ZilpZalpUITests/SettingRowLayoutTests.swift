@@ -37,8 +37,9 @@ private func valueWidth(_ value: String) -> CGFloat {
 /// is the whole rule, and a rendered bitmap cannot be asked which of the
 /// three it drew. What the strings actually measure comes from CoreText with
 /// the bundled faces registered, exactly as `TopBarTests` measures titles;
-/// that the row is wired to the rule at all is the one rendered case at the
-/// bottom, and the screenshots in the pull request cover how it looks.
+/// that the row is wired to the rule at all is the one case at the bottom
+/// that goes through ``renderedSize(_:width:)``, and the screenshots in the
+/// pull request cover how it looks.
 @MainActor
 @Suite("Setting row layout")
 struct SettingRowLayoutTests {
@@ -195,21 +196,18 @@ struct SettingRowLayoutTests {
         ) {}
         let width = textColumn(at: 390) + Icon.Size.standard.points + spacing + 2 * ZSpacing.step5
 
-        let stacked = renderedHeight(row.environment(\.horizontalSizeClass, .compact), width: width)
-        let columns = renderedHeight(row.environment(\.horizontalSizeClass, .regular), width: width)
+        let stacked = renderedSize(
+            row.environment(\.horizontalSizeClass, .compact),
+            width: width,
+        ).height
+        let columns = renderedSize(
+            row.environment(\.horizontalSizeClass, .regular),
+            width: width,
+        ).height
 
         #expect(stacked < columns, "the phone row rendered \(stacked) pt, the iPad row \(columns)")
         // Still a row a four-year-old's parent can hit, whatever the type
         // does: `--touch-min` holds every row at 64 pt.
         #expect(stacked >= ZSpacing.touchMinimum)
-    }
-
-    /// What the row would draw at `width`: `ImageRenderer` lays the real view
-    /// out and reports the size, as `TopBarTests` measures the bar.
-    private func renderedHeight(_ view: some View, width: CGFloat) -> CGFloat {
-        var measured = CGSize.zero
-        ImageRenderer(content: view.frame(width: width))
-            .render { size, _ in measured = size }
-        return measured.height
     }
 }

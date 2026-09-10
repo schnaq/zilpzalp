@@ -82,16 +82,26 @@ struct SettingRowStack: Layout {
     let hintSpacing: CGFloat
 
     /// One pass: what the four slots measure, how the width was divided and
-    /// the height that follows. Measured once and shared by both `Layout`
-    /// methods, so the two cannot drift apart.
+    /// the height that follows. Both `Layout` methods take it from the one
+    /// function below rather than dividing the width themselves, so the two
+    /// cannot disagree about the shape.
     private struct Pass {
         let layout: SettingRowLayout
         /// Where title and hint start: the icon's column, or 0 without one.
         let indent: CGFloat
         let icon: CGSize
+        /// The title's own size at ``titleWidth``, and the hint's at
+        /// ``hintWidth`` — a text reports what it needs, not what it was
+        /// offered.
         let title: CGSize
         let hint: CGSize
         let trailing: CGSize
+        /// What title and hint were offered. Kept so that placing them can
+        /// propose the same width they were measured against: proposing the
+        /// width a text reported instead is how a line that fitted comes back
+        /// wrapped, half a point short of itself.
+        let titleWidth: CGFloat
+        let hintWidth: CGFloat
         /// The line the icon and the title share — with the trailing slot in
         /// ``SettingRowLayout/rows``, without it in the other two.
         let firstLine: CGFloat
@@ -137,7 +147,7 @@ struct SettingRowStack: Layout {
         subviews[.title].place(
             at: CGPoint(x: leading, y: titleTop),
             anchor: .topLeading,
-            proposal: ProposedViewSize(pass.title),
+            proposal: ProposedViewSize(width: pass.titleWidth, height: nil),
         )
 
         let hintTop = stacked
@@ -147,7 +157,7 @@ struct SettingRowStack: Layout {
             subviews[.hint].place(
                 at: CGPoint(x: leading, y: hintTop),
                 anchor: .topLeading,
-                proposal: ProposedViewSize(pass.hint),
+                proposal: ProposedViewSize(width: pass.hintWidth, height: nil),
             )
         }
 
@@ -178,10 +188,8 @@ struct SettingRowStack: Layout {
     private func pass(_ subviews: Subviews, width: CGFloat) -> Pass {
         let icon = subviews[.icon].sizeThatFits(.unspecified)
         let trailing = subviews[.trailing].sizeThatFits(.unspecified)
-        // No icon, no column and no gap after it — the rule `TopBarRow` has
-        // for a bar with nothing beside its centre.
-        let indent = icon.width > 0 ? icon.width + spacing : 0
-        let trailingColumn = trailing.width > 0 ? trailing.width + spacing : 0
+        let indent = column(of: icon.width)
+        let trailingColumn = column(of: trailing.width)
         let textWidth = max(0, width - indent)
 
         let layout = SettingRowLayout.choose(
@@ -198,12 +206,11 @@ struct SettingRowStack: Layout {
         let titleWidth = layout == .rowsWithTrailingLine
             ? textWidth
             : max(0, textWidth - trailingColumn)
+        let hintWidth = layout == .columns ? titleWidth : textWidth
         let title = subviews[.title]
             .sizeThatFits(ProposedViewSize(width: titleWidth, height: nil))
         let hint = subviews[.hint]
-            .sizeThatFits(
-                ProposedViewSize(width: layout == .columns ? titleWidth : textWidth, height: nil),
-            )
+            .sizeThatFits(ProposedViewSize(width: hintWidth, height: nil))
 
         // A row without a hint has no gap to leave for one.
         let hintBlock = hint.height > 0 ? hintSpacing + hint.height : 0
@@ -223,10 +230,19 @@ struct SettingRowStack: Layout {
             title: title,
             hint: hint,
             trailing: trailing,
+            titleWidth: titleWidth,
+            hintWidth: hintWidth,
             firstLine: firstLine,
             textBlock: title.height + hintBlock,
             height: height,
         )
+    }
+
+    /// What a slot of this width takes off the row: itself and the gap beside
+    /// it, or nothing at all. An empty slot has no gap to draw — the rule
+    /// `TopBarRow` has for a bar with nothing beside its centre.
+    private func column(of slotWidth: CGFloat) -> CGFloat {
+        slotWidth > 0 ? slotWidth + spacing : 0
     }
 
     /// The width to divide. Without one — a sizing pass, an infinite
@@ -242,8 +258,7 @@ struct SettingRowStack: Layout {
         let hint = subviews[.hint].sizeThatFits(.unspecified).width
         let trailing = subviews[.trailing].sizeThatFits(.unspecified).width
 
-        return (icon > 0 ? icon + spacing : 0)
-            + max(title + (trailing > 0 ? spacing + trailing : 0), hint)
+        return column(of: icon) + max(title + column(of: trailing), hint)
     }
 }
 
