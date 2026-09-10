@@ -41,6 +41,12 @@ final class StoreScreenshots: XCTestCase {
     private static let album = "Meine Sammlung"
     private static let playAgain = "Nochmal spielen"
 
+    /// The album's own headline, which is the child's name in the genitive
+    /// (#204) — `ScreenshotSeed` names her Mia. Not the words on the button
+    /// that opens it: those two were the same sentence until the album started
+    /// saying whose it is.
+    private static let albumTitle = "Mias Sammlung"
+
     /// A round is ten questions, and ten answered right at the first attempt
     /// is exactly what earns the three stars screenshot 4 is about.
     private static let questionsInARound = 10
@@ -102,10 +108,10 @@ final class StoreScreenshots: XCTestCase {
         capture("01-home", into: output)
 
         app.buttons[Self.album].tap()
-        // The album's own title rather than anything it offers: the home
-        // screen's door to it carries the same words, but as a button's label
-        // and never as a line of text on the page.
-        XCTAssertTrue(app.staticTexts[Self.album].waitForExistence(timeout: Self.arrival))
+        // The album's own headline, which no other screen carries: the door to
+        // it is a button reading "Meine Sammlung", and the page behind it is
+        // the child's own album.
+        XCTAssertTrue(app.staticTexts[Self.albumTitle].waitForExistence(timeout: Self.arrival))
         capture("05-collection", into: output)
     }
 

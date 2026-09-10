@@ -121,6 +121,18 @@
         }
       }
     },
+    "collection.album.title" : {
+      "comment" : "Title of the album screen. %@ is the child's name, already in the genitive („Johannas“, „Hans’“) — the app forms it, so a language that shows possession another way can restructure the whole line",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ Sammlung"
+          }
+        }
+      }
+    },
     "collection.birds" : {
       "comment" : "Badge in the album. %lld is how many species have been collected",
       "extractionState" : "manual",
@@ -182,7 +194,7 @@
       }
     },
     "collection.title" : {
-      "comment" : "Title of the sticker album, and the label of the button that opens it",
+      "comment" : "Label of the button that opens the album — on the home screen and at the end of a round. The album screen itself is titled with the child's name, see collection.album.title",
       "extractionState" : "manual",
       "localizations" : {
         "de" : {

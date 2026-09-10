@@ -1,9 +1,20 @@
 import SwiftUI
+import ZilpZalpCore
 import ZilpZalpData
 import ZilpZalpUI
 
-/// "Meine Sammlung" — screen 2d: every bird of the pack as a sticker, the ones
-/// already met in colour and the rest still waiting.
+/// "Johannas Sammlung" — screen 2d: every bird of the pack as a sticker, the
+/// ones already met in colour and the rest still waiting.
+///
+/// **The album belongs to one child, and says so.** Its headline is that
+/// child's name and their avatar, not "Meine Sammlung" (#204): a device is
+/// passed around a family, and whoever holds it should see at a glance whose
+/// birds these are. The door to the album keeps the words a child taps —
+/// "Sammlung" on the home screen and at the round end.
+///
+/// **What has been found stands at the top.** Inside the two groups the
+/// manifest's order survives, so a bird a child looked for yesterday is where
+/// they left it (#204).
 ///
 /// **A species not yet found stays on the page.** Grey, straight, padlocked,
 /// and keeping its photo, exactly as `RewardSticker` draws a locked one. An
@@ -25,6 +36,15 @@ struct CollectionScreen: View {
     /// sticker, 76 under an 80 pt one.
     private static let markerSize: CGFloat = 16
     private static let compactMarkerSize: CGFloat = 12
+
+    /// The avatar leading the headline, a little taller than the line of type
+    /// beside it: 64 pt against the iPad's 48 pt display-2, 44 pt against the
+    /// phone's 28 pt headline. Big enough to be the child's own picture from
+    /// across the table, small enough to stay part of the line rather than a
+    /// second thing above it. `SwarmList` draws its rows at 72/56, where the
+    /// avatar is the row's subject and not its ornament.
+    private static let titleAvatar: CGFloat = 64
+    private static let compactTitleAvatar: CGFloat = 44
 
     /// The child whose album this is.
     let profile: Profile
@@ -57,8 +77,21 @@ struct CollectionScreen: View {
         library.birds
     }
 
+    /// Whether this child has earned `bird`'s sticker. The screen's one
+    /// question, asked by the count, by the order and by the sticker itself,
+    /// so the three of them cannot answer it differently.
+    private func isCollected(_ bird: Bird) -> Bool {
+        profile.hasSticker(for: bird.id)
+    }
+
     private var collected: [Bird] {
-        birds.filter { profile.hasSticker(for: $0.id) }
+        birds.filter(isCollected)
+    }
+
+    /// The birds in the order the album shows them: everything found first,
+    /// the manifest's order kept inside each group (#204).
+    private var albumBirds: [Bird] {
+        AlbumOrder.earnedFirst(birds, earned: isCollected)
     }
 
     var body: some View {
@@ -93,16 +126,39 @@ struct CollectionScreen: View {
         .onDisappear { announcer?.stop() }
     }
 
-    /// The album's name, in the page rather than in the top bar: a phone
-    /// gives the bar's centre a third of a narrow row, and "Meine Sammlung"
-    /// broke across three lines in it. `TopBar`'s own note says a kid screen
-    /// keeps its centre wordless, and the design draws the title as an h1 on
-    /// the page.
+    /// Whose album this is: the child's avatar and their name in the genitive
+    /// (#204). ``GermanName`` forms the word, the String Catalog holds the
+    /// sentence it goes into.
+    ///
+    /// In the page rather than in the top bar: a phone gives the bar's centre
+    /// a third of a narrow row, and even "Meine Sammlung" broke across three
+    /// lines in it — a name in front of it has no chance there. `TopBar`'s own
+    /// note says a kid screen keeps its centre wordless, and the design draws
+    /// the title as an h1 on the page.
+    ///
+    /// Two lines and a scale factor, because the name is as long as a grown-up
+    /// typed it: 20 characters is what `ProfileCreationScreen` allows, and
+    /// "Charlotte-Antoinettes Sammlung" needs both on a 375 pt phone. Three
+    /// lines would push the badges under the fold on the smallest screen.
     private var title: some View {
-        Text("collection.title")
+        HStack(spacing: isCompact ? ZSpacing.step3 : ZSpacing.step4) {
+            AvatarDisc(
+                style: .avatar(profile.avatar),
+                diameter: isCompact ? Self.compactTitleAvatar : Self.titleAvatar,
+            )
+
+            Text(
+                verbatim: String(
+                    format: String(localized: "collection.album.title"),
+                    GermanName.possessive(of: profile.name),
+                ),
+            )
             .typeStyle(isCompact ? .headline : .display2, .display, weight: .extraBold)
             .foregroundStyle(ZColor.textStrong)
-            .multilineTextAlignment(.center)
+            .multilineTextAlignment(.leading)
+            .lineLimit(2)
+            .minimumScaleFactor(0.7)
+        }
     }
 
     /// What the album adds up to: the birds found and the stars collected.
@@ -136,7 +192,7 @@ struct CollectionScreen: View {
                 ],
                 spacing: StickerGrid.spacing(compact: isCompact),
             ) {
-                ForEach(birds, id: \.id) { bird in
+                ForEach(albumBirds, id: \.id) { bird in
                     sticker(bird)
                 }
             }
@@ -150,10 +206,10 @@ struct CollectionScreen: View {
     /// picture that plainly is not one of the bright ones.
     @ViewBuilder
     private func sticker(_ bird: Bird) -> some View {
-        let isCollected = profile.hasSticker(for: bird.id)
+        let found = isCollected(bird)
         let size = StickerGrid.size(compact: isCompact)
 
-        if isCollected {
+        if found {
             Button {
                 say(.name(bird))
             } label: {
