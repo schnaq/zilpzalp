@@ -359,6 +359,11 @@ struct RoundEndScreen: View {
     /// spoken sentence rather than joining it: two voices over each other are
     /// worse than either, and this one says more.
     ///
+    /// The grown-ups' "Ansagen vorlesen" switch does not reach it, and should
+    /// not: it turns off the voice *this app* adds, and VoiceOver is the one
+    /// the device already speaks every other screen with. Silencing it here
+    /// would leave a round ending in nothing at all.
+    ///
     /// Where a second screen ever needs the same thing, the choice between
     /// the two voices belongs in ``SpeechAnnouncer`` rather than in a second
     /// view — it is the one that owns everything the app says out loud.
