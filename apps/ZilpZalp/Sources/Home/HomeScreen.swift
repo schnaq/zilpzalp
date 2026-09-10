@@ -190,8 +190,9 @@ struct HomeScreen: View {
     /// 240 pt cell, so the 32 pt the row gives back become slack.
     ///
     /// It fits beside the "i" on the narrowest screen, which is what lets the
-    /// "i" stay in the corner #201 put it in: 24 + 24 + 12 + 103.6 + 24 =
-    /// 187.6 pt of pill leaves 13.7 pt of air on a 375 pt phone.
+    /// "i" stay in the corner #201 put it in: 192 pt of pill leaves 11.5 pt of
+    /// air on a 375 pt phone. `ZilpZalpUI` measures that rather than trusting
+    /// it — see the album pill's test in `CoreComponentTests`.
     private var album: some View {
         ZButton(
             String(localized: "collection.title"),
