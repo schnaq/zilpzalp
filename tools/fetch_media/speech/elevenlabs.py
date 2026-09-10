@@ -37,13 +37,11 @@ the account offers; `--voice` then names one, by id or by name.
 from __future__ import annotations
 
 import json
-import wave
-from io import BytesIO
 
 import httpx
 
 from fetch_media import keys
-from fetch_media.speech.provider import RECORDING_DOC, Voice, VoiceOption
+from fetch_media.speech.provider import RECORDING_DOC, Voice, VoiceOption, wav_bytes
 
 API_ROOT = "https://api.elevenlabs.io/v1"
 
@@ -57,8 +55,6 @@ MODEL = "eleven_multilingual_v2"
 # thrown away by the encoder rather than heard by a child.
 OUTPUT_FORMAT = "pcm_24000"
 RATE = 24000
-SAMPLE_WIDTH = 2
-CHANNELS = 1
 
 # Deterministic as far as the vendor allows: a fixed seed, no style
 # exaggeration, and a stability high enough that two renders of one sentence
@@ -89,17 +85,6 @@ class ElevenLabsError(RuntimeError):
 def attribution(name: str) -> str:
     """How the credits screen names the voice."""
     return f"Stimme: {name} (ElevenLabs)"
-
-
-def wrapped(samples: bytes) -> bytes:
-    """Raw PCM as the WAV every adapter owes `audio.trim`."""
-    buffer = BytesIO()
-    with wave.open(buffer, "wb") as sink:
-        sink.setnchannels(CHANNELS)
-        sink.setsampwidth(SAMPLE_WIDTH)
-        sink.setframerate(RATE)
-        sink.writeframes(samples)
-    return buffer.getvalue()
 
 
 def message(response: httpx.Response) -> str:
@@ -152,7 +137,9 @@ class ElevenLabsProvider:
 
     name = "elevenlabs"
 
-    def __init__(self, key: str | None = None, transport: httpx.BaseTransport | None = None) -> None:
+    def __init__(
+        self, key: str | None = None, transport: httpx.BaseTransport | None = None
+    ) -> None:
         # Read at construction, not at the first request: a missing key is a
         # missing Infisical wrapper, and finding that out before a hundred
         # sentences have been resolved is the friendlier order.
@@ -236,4 +223,4 @@ class ElevenLabsProvider:
                 "seed": SEED,
             },
         )
-        return wrapped(response.content)
+        return wav_bytes(response.content, RATE)

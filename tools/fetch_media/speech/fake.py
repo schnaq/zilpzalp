@@ -19,10 +19,8 @@ from __future__ import annotations
 import array
 import hashlib
 import math
-import wave
-from io import BytesIO
 
-from fetch_media.speech.provider import Voice, VoiceOption
+from fetch_media.speech.provider import Voice, VoiceOption, wav_bytes
 
 RATE = 22050
 
@@ -90,10 +88,4 @@ class FakeProvider:
 
     def render(self, text: str, voice: str | None = None) -> bytes:
         """The sentence as tones, in a WAV container. `voice` changes nothing."""
-        buffer = BytesIO()
-        with wave.open(buffer, "wb") as sink:
-            sink.setnchannels(1)
-            sink.setsampwidth(2)
-            sink.setframerate(RATE)
-            sink.writeframes(samples(text).tobytes())
-        return buffer.getvalue()
+        return wav_bytes(samples(text).tobytes(), RATE)

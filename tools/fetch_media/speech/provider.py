@@ -23,6 +23,8 @@ docs/superpowers/plans/2026-09-08-recorded-speech.md.
 from __future__ import annotations
 
 import dataclasses
+import wave
+from io import BytesIO
 from typing import ClassVar, Protocol
 
 # What a provider hands back is named for afconvert, which picks its reader by
@@ -34,6 +36,22 @@ RENDERED_FILE = "speech.wav"
 # lives here rather than in the package's `__init__` because an adapter needs
 # it and the `__init__` imports the adapters.
 RECORDING_DOC = "https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md"
+
+
+def wav_bytes(samples: bytes, rate: int, channels: int = 1, sample_width: int = 2) -> bytes:
+    """Raw 16-bit PCM as the WAV container every adapter owes `audio.trim`.
+
+    Here rather than in an adapter because it is the contract above rather
+    than a vendor's business: `fake` synthesises the samples and ElevenLabs
+    fetches them, and both hand back the same kind of file.
+    """
+    buffer = BytesIO()
+    with wave.open(buffer, "wb") as sink:
+        sink.setnchannels(channels)
+        sink.setsampwidth(sample_width)
+        sink.setframerate(rate)
+        sink.writeframes(samples)
+    return buffer.getvalue()
 
 
 @dataclasses.dataclass(frozen=True)
