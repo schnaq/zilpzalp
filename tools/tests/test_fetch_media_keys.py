@@ -49,9 +49,19 @@ class RedactTests(unittest.TestCase):
         self.assertNotIn(SPEECH_KEY, redacted)
         self.assertIn("the voice API refused", redacted)
 
-    def test_knows_the_key_the_speech_adapter_reads(self) -> None:
-        """The adapter must not be the thing that teaches this — by then it is logged."""
+    def test_knows_the_keys_the_speech_adapters_read(self) -> None:
+        """An adapter must not be the thing that teaches this — by then it is logged."""
         self.assertIn("ELEVENLABS_API_KEY", keys.NAMES)
+        self.assertIn("GOOGLE_TTS_SERVICE_ACCOUNT_JSON", keys.NAMES)
+
+    def test_removes_a_secret_an_adapter_derived_rather_than_read(self) -> None:
+        """The Google adapter signs and exchanges; neither result is in an env."""
+        token = "ya29.a-token-no-environment-ever-held"
+
+        redacted = keys.redact(f"401: refused {token}", {}, extra=(token, None))
+
+        self.assertNotIn(token, redacted)
+        self.assertIn("401: refused", redacted)
 
     def test_leaves_a_value_too_short_to_be_a_key_alone(self) -> None:
         """Blanking every 'x' would make the message it appears in unreadable."""

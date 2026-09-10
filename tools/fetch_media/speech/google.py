@@ -29,9 +29,9 @@ Findings that would otherwise be rediscovered against a live project:
   `cryptography` is the one dependency this adapter adds.
 - **Three secrets, and only one of them is in the environment.** `keys.redact`
   blanks what the environment holds — the JSON blob. The private key inside it,
-  the signed assertion and the access token are derived, so `_scrub` blanks
-  those as well. A token endpoint that echoes an assertion back inside
-  `error_description` is not hypothetical.
+  the signed assertion and the access token are derived, so `_scrub` hands
+  those to `redact` as `extra`. A token endpoint that echoes an assertion back
+  inside `error_description` is not hypothetical.
 - **`pitch` is not sent.** Chirp 3 HD documents `pace`/`speakingRate` and says
   nothing about the `AudioConfig` `pitch` field for these voices; sending a
   field a model does not take is a 400 rather than a hint. `pitch: 0` means
@@ -213,19 +213,16 @@ def said(response: httpx.Response) -> str:
     somebody to the wrong console page.
     """
     try:
-        error = (response.json() or {}).get("error")
-    except (json.JSONDecodeError, ValueError, AttributeError):
-        error = None
+        body = response.json() or {}
+    except (json.JSONDecodeError, ValueError):
+        body = {}
+    error = body.get("error") if isinstance(body, dict) else None
 
     if isinstance(error, dict):
         told = str(error.get("message") or error.get("status") or "").strip()
     elif isinstance(error, str):
-        description = ""
-        try:
-            description = str((response.json() or {}).get("error_description") or "").strip()
-        except (json.JSONDecodeError, ValueError, AttributeError):
-            description = ""
-        told = f"{error}: {description}".strip(": ") if description else error.strip()
+        described = str(body.get("error_description") or "").strip()
+        told = f"{error}: {described}" if described else error.strip()
     else:
         told = ""
 
@@ -284,10 +281,11 @@ class GoogleProvider:
         # once, and again only if a run outlives it.
         self._token: str | None = None
         self._expires = 0.0
-        # Everything derived from the key that must never reach a message. The
-        # environment holds only the JSON blob, so `keys.redact` alone would
-        # not catch these.
-        self._derived: list[str] = [self._key["private_key"]]
+        # The two secrets that exist only while a run does. The third — the
+        # private key — is `self._key["private_key"]`, and the environment
+        # holds only the JSON blob around it, so none of them is something
+        # `keys.redact` finds on its own: `_scrub` hands them over.
+        self._assertion: str | None = None
         # One listing per run: every `render()` resolves the same `--voice`,
         # and asking the vendor once per clip would be a request per sentence
         # for an answer that cannot change.
@@ -295,11 +293,7 @@ class GoogleProvider:
 
     def _scrub(self, text: str) -> str:
         """A message with every secret gone — the environment's and the derived."""
-        scrubbed = keys.redact(text)
-        for secret in self._derived:
-            if secret:
-                scrubbed = scrubbed.replace(secret, keys.REPLACEMENT)
-        return scrubbed
+        return keys.redact(text, extra=(self._key["private_key"], self._assertion, self._token))
 
     def _fail(self, response: httpx.Response) -> GoogleTTSError:
         told = said(response)
@@ -312,12 +306,13 @@ class GoogleProvider:
         if self._token and time.time() < self._expires - TOKEN_MARGIN:
             return self._token
 
-        signed = assertion(self._key, int(time.time()))
-        self._derived.append(signed)
+        # Assigned before it is sent, not after: the token endpoint is the one
+        # place that could echo an assertion back inside `error_description`.
+        self._assertion = assertion(self._key, int(time.time()))
         try:
             response = self._http.post(
                 self._key["token_uri"],
-                data={"grant_type": GRANT, "assertion": signed},
+                data={"grant_type": GRANT, "assertion": self._assertion},
                 headers={"Content-Type": "application/x-www-form-urlencoded"},
             )
         except httpx.HTTPError as error:
@@ -331,10 +326,7 @@ class GoogleProvider:
         granted = response.json() or {}
         self._token = str(granted.get("access_token") or "")
         if not self._token:
-            raise GoogleTTSError(
-                f"{self._key['token_uri']} answered without an access token."
-            )
-        self._derived.append(self._token)
+            raise GoogleTTSError(f"{self._key['token_uri']} answered without an access token.")
         self._expires = time.time() + float(granted.get("expires_in") or TOKEN_LIFETIME)
         return self._token
 

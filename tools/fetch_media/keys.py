@@ -24,8 +24,8 @@ reach a CI log.
 uses reads (issue #234). It is not a key but a whole key *file*: the service
 account's JSON, in one variable. Blanking it here covers the blob; the private
 key inside it, the assertion signed with that key and the access token bought
-with the assertion are derived rather than held in the environment, so
-`speech/google.py` blanks those itself.
+with the assertion are derived rather than held in the environment, so the
+adapter hands them to `redact` as `extra`.
 """
 
 from __future__ import annotations
@@ -50,13 +50,20 @@ REPLACEMENT = "…"
 SHORTEST = 8
 
 
-def redact(text: str, environment: dict | None = None) -> str:
-    """Remove every API key from anything that might be printed."""
+def redact(text: str, environment: dict | None = None, extra: tuple = ()) -> str:
+    """Remove every API key from anything that might be printed.
+
+    `extra` is for the secrets an adapter *derives* rather than reads: the
+    Google adapter signs a JWT with the private key inside its service account
+    and exchanges it for an access token, and neither of those is in the
+    environment. They are blanked here rather than in the adapter so that
+    "never print a secret" stays one mechanism with one rule.
+    """
     environment = os.environ if environment is None else environment
 
     redacted = IN_A_URL.sub(rf"\1{REPLACEMENT}", text)
-    for name in NAMES:
-        value = environment.get(name)
+    values = [environment.get(name) for name in NAMES] + list(extra)
+    for value in values:
         if value and len(value) >= SHORTEST:
             redacted = redacted.replace(value, REPLACEMENT)
     return redacted

@@ -111,11 +111,12 @@ This is Christian's, and it is done once:
    project. This is the single commonest first-day failure, and it comes back
    as a 403 that names the API.
 3. A **service account** in the same project — `zilpzalp-speech-render` — with
-   the **Cloud Text-to-Speech User** role (`roles/cloudtts.user`). If the role
-   picker does not offer it, the API is not enabled yet (step 2); a project
-   whose API is enabled also grants it through
-   `roles/serviceusage.serviceUsageConsumer` plus billing, but the narrow role
-   is the right one. Nothing here needs Editor or Owner.
+   the narrowest role the picker offers for Text-to-Speech — **Cloud
+   Text-to-Speech User**, `roles/cloudtts.user` as this was written. Take the
+   name from the picker rather than from here; a wrong role shows up as a 403
+   at the first render and nowhere earlier. If the picker offers nothing for
+   Text-to-Speech at all, the API is not enabled yet (step 2). Nothing here
+   needs Editor or Owner.
 4. **Keys → Add key → Create new key → JSON.** Download it once; Google keeps
    no copy. A newer organisation may refuse this with a policy error
    (`iam.disableServiceAccountKeyCreation`) — the constraint has to be lifted
