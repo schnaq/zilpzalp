@@ -63,13 +63,18 @@ public struct PackCatalog: Sendable {
         )
     }
 
-    /// The photo file of `bird` on disk, `nil` when it is not there.
+    /// One photo file of `bird` on disk, `nil` when it is not there.
     ///
     /// The only way to a pack's photos. Callers never assemble the path
     /// themselves, so a pack that moves — into the caches directory for a
     /// downloaded pack, later — changes nothing in the views.
-    public func photoURL(for bird: Bird) -> URL? {
-        directory.mediaFile(bird.photo.file)
+    ///
+    /// - Parameter index: which of ``Bird/photos``. The default is the curated
+    ///   portrait, which is what the sticker, the round end's reward and the
+    ///   collection cover show; only a quiz tile asks for another one (#194).
+    public func photoURL(for bird: Bird, at index: Int = 0) -> URL? {
+        guard bird.photos.indices.contains(index) else { return nil }
+        return directory.mediaFile(bird.photos[index].file)
     }
 
     /// The recording of `bird`'s call on disk, `nil` when the species carries

@@ -99,7 +99,16 @@ public struct Bird: Codable, Sendable, Hashable, Identifiable {
     /// Phonetic spelling for `AVSpeechSynthesizer`, `nil` when the written
     /// name is spoken correctly.
     public let pronunciation: String?
-    public let photo: MediaAsset
+    /// Every photo of the species, at least one, **the curated portrait
+    /// first**. A child that meets the same picture in every round learns the
+    /// picture and not the bird (#194), so a quiz tile shows one of them at a
+    /// time — while the sticker, the round end's reward and the collection
+    /// cover always show the first, which is the one that was framed to be
+    /// looked at on its own.
+    ///
+    /// Each photo carries its own licence, attribution and source: they come
+    /// from different observations and often from different photographers.
+    public let photos: [MediaAsset]
     /// `nil` as long as no freely licensed recording exists — the species
     /// stays usable in the photo games.
     public let call: MediaAsset?
@@ -112,10 +121,71 @@ public struct Bird: Codable, Sendable, Hashable, Identifiable {
     public let speech: [String: MediaClip]?
 }
 
+public extension Bird {
+    /// The manifest's keys, spelled out rather than synthesised: ``photo``
+    /// below has to stay out of them, so that what this type writes carries
+    /// only the shape the manifests have now.
+    private enum CodingKeys: String, CodingKey {
+        case id, name, scientificName, taxonID, article, pronunciation
+        case photos, call, speech
+    }
+
+    /// The key a manifest wrote a single photo under before #194.
+    ///
+    /// Read only by ``init(from:)``, and never written.
+    private enum LegacyKeys: String, CodingKey {
+        case photo
+    }
+
+    /// Decodes a species, from a manifest in either shape.
+    ///
+    /// **A manifest that carries `photo` instead of `photos` still decodes**,
+    /// as the single photo of a species. Not a courtesy to old files in the
+    /// repository — the migration rewrote those in one step — but to the packs
+    /// that are *installed on devices*: `welt` and `afrika` were downloaded in
+    /// the old shape, and a required `photos` would turn each of them into a
+    /// pack the grown-ups' area names as broken until somebody deletes and
+    /// fetches it again. Two lines here are cheaper than that, and cheaper than
+    /// a schema version the pack manifests have never carried.
+    ///
+    /// Everything else is what the compiler would have synthesised.
+    ///
+    /// - Throws: `DecodingError.dataCorrupted` when a species declares no photo
+    ///   at all — under either key, or as an empty list. Every screen that
+    ///   shows a bird shows a photo of it, so a species without one is a broken
+    ///   manifest rather than a bird that quietly never appears.
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(String.self, forKey: .id)
+        name = try container.decode(String.self, forKey: .name)
+        scientificName = try container.decode(String.self, forKey: .scientificName)
+        taxonID = try container.decode(Int.self, forKey: .taxonID)
+        article = try container.decode(String.self, forKey: .article)
+        pronunciation = try container.decodeIfPresent(String.self, forKey: .pronunciation)
+        call = try container.decodeIfPresent(MediaAsset.self, forKey: .call)
+        speech = try container.decodeIfPresent([String: MediaClip].self, forKey: .speech)
+
+        if let photos = try container.decodeIfPresent([MediaAsset].self, forKey: .photos) {
+            self.photos = photos
+        } else {
+            let legacy = try decoder.container(keyedBy: LegacyKeys.self)
+            photos = try legacy.decodeIfPresent(MediaAsset.self, forKey: .photo).map { [$0] } ?? []
+        }
+        guard !photos.isEmpty else {
+            throw DecodingError.dataCorrupted(
+                DecodingError.Context(
+                    codingPath: container.codingPath + [CodingKeys.photos],
+                    debugDescription: "a species has to declare at least one photo",
+                ),
+            )
+        }
+    }
+}
+
 extension Bird {
-    /// The files this species declares: its photo, its call, then every
-    /// sentence recorded about it in sentence-key order, each with the digest
-    /// it has to hash to.
+    /// The files this species declares: its photos in manifest order, its
+    /// call, then every sentence recorded about it in sentence-key order, each
+    /// with the digest it has to hash to.
     ///
     /// It lists the fields it lies beside, which is the whole reason it lies
     /// here: #163 taught the schema `speech` and taught `media_files()` in
@@ -129,7 +199,7 @@ extension Bird {
     /// needs — a clip carries no licence of its own, the voice that spoke it
     /// does, once per manifest.
     var declaredFiles: [(file: String, sha256: String)] {
-        [photo, call].compactMap(\.self).map { (file: $0.file, sha256: $0.sha256) }
+        (photos + [call].compactMap(\.self)).map { (file: $0.file, sha256: $0.sha256) }
             + (speech ?? [:]).sorted { $0.key < $1.key }
             .map { (file: $0.value.file, sha256: $0.value.sha256) }
     }

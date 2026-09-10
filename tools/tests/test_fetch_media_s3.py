@@ -73,14 +73,14 @@ class PackTestCase(unittest.TestCase):
                     {
                         "id": "amsel",
                         "name": "Amsel",
-                        "photo": manifest.media_block(
+                        "photos": [manifest.media_block(
                             file="photos/amsel.jpg",
                             sha256=sha256,
                             licence="CC-BY-4.0",
                             attribution="Alexis Tinker-Tsavalas",
                             source_url="https://www.inaturalist.org/observations/20490738",
                             retrieved="2026-09-07",
-                        ),
+                        )],
                         "call": None,
                     }
                 ],

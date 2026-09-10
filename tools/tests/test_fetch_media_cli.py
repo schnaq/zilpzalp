@@ -134,14 +134,16 @@ class PackTestCase(unittest.TestCase):
                         "taxonID": 12716,
                         "article": "die",
                         "pronunciation": None,
-                        "photo": manifest.media_block(
-                            file="photos/amsel.png",
-                            sha256="0" * 64,
-                            licence="CC-BY-4.0",
-                            attribution="somebody else",
-                            source_url="https://www.inaturalist.org/observations/1",
-                            retrieved="2026-07-31",
-                        ),
+                        "photos": [
+                            manifest.media_block(
+                                file="photos/amsel.png",
+                                sha256="0" * 64,
+                                licence="CC-BY-4.0",
+                                attribution="somebody else",
+                                source_url="https://www.inaturalist.org/observations/1",
+                                retrieved="2026-07-31",
+                            )
+                        ],
                         "call": None,
                     }
                 ],
@@ -243,28 +245,32 @@ class PickTests(PackTestCase):
                 ]
             )
 
-    def photo_entry(self) -> dict:
+    def photos(self) -> list[dict]:
         document = manifest.load(self.pack / "manifest.json")
-        return document["birds"][0]["photo"]
+        return document["birds"][0]["photos"]
 
     def test_writes_the_photo_and_the_manifest_entry(self) -> None:
         self.assertEqual(self.run_pick(OBSERVATION), 0)
 
-        entry = self.photo_entry()
-        self.assertEqual(entry["file"], "photos/amsel.heic")
+        entry = self.photos()[-1]
+        self.assertEqual(entry["file"], "photos/amsel-2.heic")
         self.assertEqual(entry["license"], "CC-BY-4.0")
         self.assertEqual(entry["attribution"], "Alexis Tinker-Tsavalas")
         self.assertEqual(entry["sourceURL"], "https://www.inaturalist.org/observations/20490738")
         self.assertEqual(list(entry), list(manifest.MEDIA_KEYS))
         self.assertEqual(
-            entry["sha256"], manifest.sha256_of(self.pack / "photos" / "amsel.heic")
+            entry["sha256"], manifest.sha256_of(self.pack / "photos" / "amsel-2.heic")
         )
 
-    def test_removes_the_photo_the_manifest_no_longer_names(self) -> None:
-        """It would otherwise still be copied into the app bundle."""
+    def test_adds_the_photo_and_keeps_the_one_the_species_had(self) -> None:
+        """Added, never overwritten (#194) — the portrait stays the first."""
         self.run_pick(OBSERVATION)
 
-        self.assertFalse((self.pack / "photos" / "amsel.png").exists())
+        self.assertEqual(
+            [photo["file"] for photo in self.photos()],
+            ["photos/amsel.png", "photos/amsel-2.heic"],
+        )
+        self.assertTrue((self.pack / "photos" / "amsel.png").exists())
 
     def test_regenerates_the_derived_files(self) -> None:
         self.run_pick(OBSERVATION)
@@ -275,13 +281,13 @@ class PickTests(PackTestCase):
         wrong = {**OBSERVATION, "taxon": {"id": 144849, "name": "Cyanistes caeruleus"}}
 
         self.assertEqual(self.run_pick(wrong), 1)
-        self.assertEqual(self.photo_entry()["file"], "photos/amsel.png")
+        self.assertEqual([photo["file"] for photo in self.photos()], ["photos/amsel.png"])
 
     def test_refuses_a_photo_whose_licence_changed(self) -> None:
         changed = {**OBSERVATION, "photos": [{**OBSERVATION["photos"][0], "license_code": "cc-by-nc"}]}
 
         self.assertEqual(self.run_pick(changed), 1)
-        self.assertEqual(self.photo_entry()["attribution"], "somebody else")
+        self.assertEqual(self.photos()[0]["attribution"], "somebody else")
 
 
 class FrameTests(PackTestCase):
@@ -322,8 +328,8 @@ class FrameTests(PackTestCase):
             )
         return code, output.getvalue()
 
-    def photo_entry(self) -> dict:
-        return manifest.load(self.pack / "manifest.json")["birds"][0]["photo"]
+    def photos(self) -> list[dict]:
+        return manifest.load(self.pack / "manifest.json")["birds"][0]["photos"]
 
     def test_crops_around_the_box_and_records_the_photo(self) -> None:
         # A 600×800 bird in the upper half: 144 px of air around it makes a
@@ -332,7 +338,7 @@ class FrameTests(PackTestCase):
 
         self.assertEqual(code, 0)
         self.assertIn("--crop 56,0,1088,1088", output)
-        self.assertEqual(self.photo_entry()["file"], "photos/amsel.heic")
+        self.assertEqual(self.photos()[-1]["file"], "photos/amsel-2.heic")
 
     def test_dry_run_writes_the_previews_and_nothing_else(self) -> None:
         code, output = self.run_frame(["--box", "0.25,0.05,0.75,0.55", "--dry-run"])
@@ -341,7 +347,7 @@ class FrameTests(PackTestCase):
         self.assertIn("Dry run", output)
         self.assertTrue((self.previews / "basis-amsel-source.png").is_file())
         self.assertTrue((self.previews / "basis-amsel-tile.png").is_file())
-        self.assertEqual(self.photo_entry()["file"], "photos/amsel.png")
+        self.assertEqual([photo["file"] for photo in self.photos()], ["photos/amsel.png"])
         self.derived.assert_not_called()
 
     def test_says_when_the_bird_is_too_far_away(self) -> None:
@@ -382,7 +388,71 @@ class FrameTests(PackTestCase):
 
         self.assertEqual(code, 1)
         self.assertIn("::error::", output.getvalue())
-        self.assertEqual(self.photo_entry()["file"], "photos/amsel.png")
+        self.assertEqual([photo["file"] for photo in self.photos()], ["photos/amsel.png"])
+
+
+class DropTests(PackTestCase):
+    """`photos drop` end to end — the one step that unlinks a photo."""
+
+    def setUp(self) -> None:
+        super().setUp()
+        (self.pack / "photos" / "amsel-2.png").write_bytes(b"the second photo")
+        document = manifest.load(self.pack / "manifest.json")
+        manifest.add_photo(document, "amsel", manifest.media_block(
+            file="photos/amsel-2.png",
+            sha256="1" * 64,
+            licence="CC0-1.0",
+            attribution="Somebody",
+            source_url="https://www.inaturalist.org/observations/2",
+            retrieved="2026-09-10",
+        ))
+        manifest.save(self.pack / "manifest.json", document)
+
+    def run_drop(self, file: str) -> tuple[int, str]:
+        output = io.StringIO()
+        with contextlib.redirect_stdout(output):
+            code = cli.main(
+                ["photos", "drop", "--pack", "basis", "--species", "amsel", "--file", file]
+            )
+        return code, output.getvalue()
+
+    def photos(self) -> list[dict]:
+        return manifest.load(self.pack / "manifest.json")["birds"][0]["photos"]
+
+    def test_removes_the_entry_and_the_file(self) -> None:
+        code, output = self.run_drop("photos/amsel-2.png")
+
+        self.assertEqual(code, 0)
+        self.assertEqual([photo["file"] for photo in self.photos()], ["photos/amsel.png"])
+        self.assertFalse((self.pack / "photos" / "amsel-2.png").exists())
+        self.assertIn("Somebody", output)
+        self.derived.assert_called_once_with()
+
+    def test_keeps_a_file_another_species_still_names(self) -> None:
+        # Two birds may share a photo; the manifest is what says whether one is
+        # still in use.
+        document = manifest.load(self.pack / "manifest.json")
+        second = dict(document["birds"][0], id="schwarzdrossel")
+        document["birds"].append(second)
+        manifest.save(self.pack / "manifest.json", document)
+
+        self.assertEqual(self.run_drop("photos/amsel-2.png")[0], 0)
+        self.assertTrue((self.pack / "photos" / "amsel-2.png").exists())
+
+    def test_refuses_to_drop_the_last_photo(self) -> None:
+        self.run_drop("photos/amsel-2.png")
+
+        code, output = self.run_drop("photos/amsel.png")
+
+        self.assertEqual(code, 1)
+        self.assertIn("::error::", output)
+        self.assertEqual(len(self.photos()), 1)
+
+    def test_reports_a_photo_the_species_does_not_have(self) -> None:
+        code, output = self.run_drop("photos/kohlmeise.png")
+
+        self.assertEqual(code, 1)
+        self.assertIn("::error::", output)
 
 
 class AuditTests(PackTestCase):
@@ -414,6 +484,7 @@ class AuditTests(PackTestCase):
             tiles,
             [
                 {
+                    "photo": "photos/amsel.png",
                     "species": "amsel",
                     "name": "Amsel",
                     "file": "amsel.png",
@@ -425,9 +496,34 @@ class AuditTests(PackTestCase):
         )
         self.assertIn("1 tile(s), 0 judged", output)
 
+    def test_exports_one_tile_per_photo(self) -> None:
+        # A species with two photos ships two tiles, and each of them is right
+        # or wrong on its own.
+        (self.pack / "photos" / "amsel-2.png").write_bytes(jpeg(1024, 1024))
+        document = manifest.load(self.pack / "manifest.json")
+        manifest.add_photo(document, "amsel", manifest.media_block(
+            file="photos/amsel-2.png",
+            sha256="1" * 64,
+            licence="CC0-1.0",
+            attribution="Somebody",
+            source_url="https://www.inaturalist.org/observations/2",
+            retrieved="2026-09-10",
+        ))
+        manifest.save(self.pack / "manifest.json", document)
+
+        code, output = self.run_audit()
+
+        self.assertEqual(code, 0)
+        self.assertTrue((self.directory / "amsel-2.png").is_file())
+        tiles = manifest.load(self.directory / cli.TILES_FILE)["tiles"]
+        self.assertEqual(
+            [tile["photo"] for tile in tiles], ["photos/amsel.png", "photos/amsel-2.png"]
+        )
+        self.assertIn("2 tile(s), 0 judged", output)
+
     def test_merges_a_verdict_and_counts_it(self) -> None:
         verdict = (
-            '[{"species": "amsel", "bird_visible": true, "fills_frame": false, '
+            '[{"photo": "photos/amsel.png", "bird_visible": true, "fills_frame": false, '
             '"head_inside": true, "reason": "a speck on a wire"}]'
         )
 
@@ -435,11 +531,14 @@ class AuditTests(PackTestCase):
 
         self.assertEqual(code, 0)
         self.assertEqual(self.verdict_file()[0]["reason"], "a speck on a wire")
-        self.assertIn("too far away: 1 — amsel", output)
+        self.assertIn("too far away: 1 — photos/amsel.png", output)
         self.assertIn("no bird visible: 0", output)
 
     def test_keeps_the_verdicts_of_the_batches_before(self) -> None:
-        first = '[{"species": "amsel", "bird_visible": false, "fills_frame": false, "head_inside": false}]'
+        first = (
+            '[{"photo": "photos/amsel.png", "bird_visible": false, "fills_frame": false, '
+            '"head_inside": false}]'
+        )
         self.run_audit(["--add-verdicts", "-"], stdin=first)
 
         # A second batch about nothing: the answer from the first has to
@@ -450,15 +549,21 @@ class AuditTests(PackTestCase):
         self.assertFalse(self.verdict_file()[0]["bird_visible"])
 
     def test_lets_a_later_verdict_win(self) -> None:
-        judged = '[{"species": "amsel", "bird_visible": %s, "fills_frame": true, "head_inside": true}]'
+        judged = (
+            '[{"photo": "photos/amsel.png", "bird_visible": %s, "fills_frame": true, '
+            '"head_inside": true}]'
+        )
         self.run_audit(["--add-verdicts", "-"], stdin=judged % "false")
         self.run_audit(["--add-verdicts", "-"], stdin=judged % "true")
 
         self.assertEqual(len(self.verdict_file()), 1)
         self.assertTrue(self.verdict_file()[0]["bird_visible"])
 
-    def test_refuses_a_verdict_about_a_species_the_pack_lacks(self) -> None:
-        stray = '[{"species": "wiedehopf", "bird_visible": true, "fills_frame": true, "head_inside": true}]'
+    def test_refuses_a_verdict_about_a_photo_the_pack_lacks(self) -> None:
+        stray = (
+            '[{"photo": "photos/wiedehopf.png", "bird_visible": true, "fills_frame": true, '
+            '"head_inside": true}]'
+        )
 
         code, output = self.run_audit(["--add-verdicts", "-"], stdin=stray)
 
@@ -469,7 +574,7 @@ class AuditTests(PackTestCase):
     def test_writes_nothing_when_half_a_batch_is_refused(self) -> None:
         """A batch is validated before it is written, so the one before survives."""
         first = (
-            '[{"species": "amsel", "bird_visible": true, "fills_frame": true, '
+            '[{"photo": "photos/amsel.png", "bird_visible": true, "fills_frame": true, '
             '"head_inside": true}]'
         )
         self.run_audit(["--add-verdicts", "-"], stdin=first)
@@ -478,8 +583,8 @@ class AuditTests(PackTestCase):
         # hold. Neither may reach the file, and the verdict already in it may
         # not be overwritten by the half that passed.
         mixed = (
-            '[{"species": "amsel", "bird_visible": false, "fills_frame": false, '
-            '"head_inside": false}, {"species": "wiedehopf", "bird_visible": true, '
+            '[{"photo": "photos/amsel.png", "bird_visible": false, "fills_frame": false, '
+            '"head_inside": false}, {"photo": "photos/wiedehopf.png", "bird_visible": true, '
             '"fills_frame": true, "head_inside": true}]'
         )
         code, _ = self.run_audit(["--add-verdicts", "-"], stdin=mixed)
@@ -488,10 +593,10 @@ class AuditTests(PackTestCase):
         self.assertEqual(len(self.verdict_file()), 1)
         self.assertTrue(self.verdict_file()[0]["bird_visible"])
 
-    def test_refuses_a_species_that_is_not_even_a_name(self) -> None:
-        """An unhashable species is a refused verdict, not a stray TypeError."""
+    def test_refuses_a_photo_that_is_not_even_a_name(self) -> None:
+        """An unhashable photo is a refused verdict, not a stray TypeError."""
         nested = (
-            '[{"species": ["amsel"], "bird_visible": true, "fills_frame": true, '
+            '[{"photo": ["photos/amsel.png"], "bird_visible": true, "fills_frame": true, '
             '"head_inside": true}]'
         )
 
@@ -502,7 +607,10 @@ class AuditTests(PackTestCase):
         self.assertFalse((self.directory / cli.VERDICTS_FILE).exists())
 
     def test_refuses_an_answer_that_is_not_yes_or_no(self) -> None:
-        vague = '[{"species": "amsel", "bird_visible": "maybe", "fills_frame": true, "head_inside": true}]'
+        vague = (
+            '[{"photo": "photos/amsel.png", "bird_visible": "maybe", "fills_frame": true, '
+            '"head_inside": true}]'
+        )
 
         code, output = self.run_audit(["--add-verdicts", "-"], stdin=vague)
 
@@ -511,7 +619,7 @@ class AuditTests(PackTestCase):
 
     def test_warns_about_a_species_without_a_photo(self) -> None:
         document = manifest.load(self.pack / "manifest.json")
-        document["birds"][0]["photo"] = None
+        document["birds"][0]["photos"] = []
         manifest.save(self.pack / "manifest.json", document)
 
         code, output = self.run_audit()

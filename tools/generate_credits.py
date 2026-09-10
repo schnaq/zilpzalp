@@ -15,7 +15,8 @@ Two outputs, both committed:
       For the in-app credits screen (#37), decoded by `Credits.bundled()`.
 
 Both are written deterministically: packs sorted by id, birds in manifest order,
-photo before call, no timestamps. Running the tool twice yields identical bytes.
+every photo in the order the manifest lists them and the call after them, no
+timestamps. Running the tool twice yields identical bytes.
 
 Locally it heals both files and says so. In CI it is the drift check: whenever it
 had to change anything, it exits 1, because the committed credits did not match the
@@ -166,34 +167,39 @@ def pack_media(document: dict, pack_id: str, pack_title: str) -> list[dict]:
 
         # A bird without a photo is not creditable. The gate says the same, in
         # its own words, on the next line of `mise run check`.
-        if bird.get("photo") is None:
-            raise ValueError(f"{label}: field 'photo' is missing")
+        photos = bird.get("photos")
+        if not isinstance(photos, list) or not photos:
+            raise ValueError(f"{label}: field 'photos' is missing or empty")
 
-        for kind in ("photo", "call"):
+        # Every photo is credited, and the call after them. Two photos from the
+        # same observation would produce the same line twice — same
+        # photographer, same licence, same source — so an entry that is already
+        # there is dropped: a second identical line credits nobody a second
+        # time, and the credits screen keys its rows by their content.
+        for kind, media in [("photo", photo) for photo in photos] + [("call", bird.get("call"))]:
             # The call is optional and stays null until a freely licensed
             # recording exists for the bird.
-            media = bird.get(kind)
             if media is None:
                 continue
             if not isinstance(media, dict):
                 raise ValueError(f"{label} / {kind}: is not an object")
 
-            entries.append(
-                {
-                    "packID": pack_id,
-                    # The pack's own product title on every entry: the credits
-                    # screen groups by pack and heads each group with it, and
-                    # an id like `deutschland` is a directory name, not something to
-                    # put in front of a parent.
-                    "packTitle": pack_title,
-                    "birdID": bird_id,
-                    "birdName": bird_name,
-                    "kind": kind,
-                    "attribution": field(media, "attribution", f"{label} / {kind}"),
-                    "license": field(media, "license", f"{label} / {kind}"),
-                    "sourceURL": field(media, "sourceURL", f"{label} / {kind}"),
-                }
-            )
+            entry = {
+                "packID": pack_id,
+                # The pack's own product title on every entry: the credits
+                # screen groups by pack and heads each group with it, and
+                # an id like `deutschland` is a directory name, not something to
+                # put in front of a parent.
+                "packTitle": pack_title,
+                "birdID": bird_id,
+                "birdName": bird_name,
+                "kind": kind,
+                "attribution": field(media, "attribution", f"{label} / {kind}"),
+                "license": field(media, "license", f"{label} / {kind}"),
+                "sourceURL": field(media, "sourceURL", f"{label} / {kind}"),
+            }
+            if entry not in entries:
+                entries.append(entry)
 
     return entries
 

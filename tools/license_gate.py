@@ -13,9 +13,10 @@ CI does not download media on every run. Licence, attribution and source URL
 are checked for those assets all the same.
 
 Manifest shape: the one the Pack model in the spec defines — a JSON object
-whose "birds" key holds the list of birds. Each bird carries a mandatory
-"photo" and an optional "call" — null or absent while no recording exists —
-both of the same shape:
+whose "birds" key holds the list of birds. Each bird carries a non-empty
+"photos" list — the curated portrait first, then the alternatives a quiz tile
+may show (#194) — and an optional "call", null or absent while no recording
+exists. Every one of them has the same shape:
 
     {"file": "photos/amsel.heic", "sha256": "…", "license": "CC-BY-4.0",
      "attribution": "…", "sourceURL": "https://…"}
@@ -232,18 +233,29 @@ def check_manifest(path: Path) -> tuple[list[str], int]:
         identifier = entry.get("id")
         label = identifier if isinstance(identifier, str) and identifier else f"bird #{index}"
 
-        if entry.get("photo") is None:
-            problems.append(f"{label}: field 'photo' is missing")
+        # Every screen that shows a bird shows a photo of it, so a species
+        # without one is a broken manifest. `photo`, the shape before #194, is
+        # named rather than silently treated as none: a hand-written manifest
+        # that still carries it would otherwise fail as "photos is missing".
+        photos = entry.get("photos")
+        if "photo" in entry:
+            problems.append(f"{label}: field 'photo' is a list called 'photos' since #194")
+        elif not isinstance(photos, list) or not photos:
+            problems.append(f"{label}: field 'photos' is missing or empty")
+
+        if isinstance(photos, list):
+            for number, photo in enumerate(photos, start=1):
+                if isinstance(photo, dict):
+                    media_count += 1
+                problems.extend(check_media(photo, f"{label} / photo {number}", path.parent))
 
         # The call is optional — it is null, or absent, as long as no freely
         # licensed recording exists for the bird. The manifest schema spells
         # it out as `"call": null`, which decodes to nil in the Pack model.
-        for field in ("photo", "call"):
-            if entry.get(field) is None:
-                continue
-            if isinstance(entry[field], dict):
+        if entry.get("call") is not None:
+            if isinstance(entry["call"], dict):
                 media_count += 1
-            problems.extend(check_media(entry[field], f"{label} / {field}", path.parent))
+            problems.extend(check_media(entry["call"], f"{label} / call", path.parent))
 
         # Speech is optional the same way and one level deeper: a sentence key
         # per clip, so a pack may carry the question for one species and not

@@ -39,7 +39,7 @@ def bird(**overrides) -> dict:
         "scientificName": "Turdus merula",
         "taxonID": 12716,
         "article": "die",
-        "photo": media(),
+        "photos": [media()],
         "call": None,
     }
     entry.update(overrides)
@@ -134,7 +134,7 @@ class EveryAssetIsCredited(CreditsTestCase):
                 bird(
                     id="zilpzalp",
                     name="Zilpzalp",
-                    photo=media(attribution="Tomas Broucek", sourceURL="https://example.org/photo/2"),
+                    photos=[media(attribution="Tomas Broucek", sourceURL="https://example.org/photo/2")],
                     call=media(
                         file="calls/zilpzalp.mp3",
                         license="CC0-1.0",
@@ -161,6 +161,30 @@ class EveryAssetIsCredited(CreditsTestCase):
             [(entry["birdID"], entry["kind"]) for entry in entries],
             [("amsel", "photo"), ("zilpzalp", "photo"), ("zilpzalp", "call")],
         )
+
+    def test_every_photo_of_a_species_is_credited(self) -> None:
+        # Each photo carries its own licence and photographer, so each one gets
+        # its own line (#194).
+        self.write_pack(
+            "mehr",
+            [bird(photos=[media(), media(attribution="Somebody Else", license="CC0-1.0")])],
+        )
+        self.run_main()
+
+        entries = json.loads(self.json.read_text(encoding="utf-8"))["media"]
+        self.assertEqual(
+            [entry["attribution"] for entry in entries if entry["packID"] == "mehr"],
+            ["Alexis Tinker-Tsavalas", "Somebody Else"],
+        )
+
+    def test_two_photos_from_one_observation_are_credited_once(self) -> None:
+        # Same photographer, same licence, same source: a second identical line
+        # credits nobody a second time, and the screen keys its rows by content.
+        self.write_pack("gleich", [bird(photos=[media(), media(file="photos/amsel-2.png")])])
+        self.run_main()
+
+        entries = json.loads(self.json.read_text(encoding="utf-8"))["media"]
+        self.assertEqual(len([entry for entry in entries if entry["packID"] == "gleich"]), 1)
 
     def test_the_json_entry_carries_what_the_screen_needs(self) -> None:
         entries = json.loads(self.json.read_text(encoding="utf-8"))["media"]
@@ -201,7 +225,7 @@ class EveryAssetIsCredited(CreditsTestCase):
         # This tool runs before the licence gate, so it must not be the thing
         # that reports a forbidden licence — it names it and lets the gate,
         # one line further on in `mise run check`, fail the build over it.
-        self.write_pack("nc", [bird(photo=media(license="CC-BY-NC-4.0"))])
+        self.write_pack("nc", [bird(photos=[media(license="CC-BY-NC-4.0")])])
 
         self.run_main()
 
@@ -330,13 +354,13 @@ class OutputIsDeterministic(CreditsTestCase):
     def test_no_name_is_mangled_into_escape_sequences(self) -> None:
         # "Вячеслав Юсупов" photographed the Buntspecht. Nobody should have to
         # read their own name as В…
-        self.write_pack("cyrillic", [bird(photo=media(attribution="Вячеслав Юсупов"))])
+        self.write_pack("cyrillic", [bird(photos=[media(attribution="Вячеслав Юсупов")])])
         self.run_main()
 
         self.assertIn("Вячеслав Юсупов", self.json.read_text(encoding="utf-8"))
 
     def test_a_pipe_in_a_name_does_not_shear_the_table(self) -> None:
-        self.write_pack("piped", [bird(name="Am|sel", photo=media(attribution="A|B"))])
+        self.write_pack("piped", [bird(name="Am|sel", photos=[media(attribution="A|B")])])
         self.run_main()
 
         self.assertIn(r"| Am\|sel | Photo | A\|B |", self.markdown.read_text(encoding="utf-8"))
@@ -395,12 +419,12 @@ class BrokenManifestsFailWithASentence(CreditsTestCase):
         self.assertEqual(self.run_main(), 1)
 
     def test_a_bird_without_a_photo_exits_1(self) -> None:
-        self.write_pack("basis", [bird(photo=None)])
+        self.write_pack("basis", [bird(photos=None)])
 
         self.assertEqual(self.run_main(), 1)
 
     def test_a_photo_without_attribution_exits_1(self) -> None:
-        self.write_pack("basis", [bird(photo=media(attribution="  "))])
+        self.write_pack("basis", [bird(photos=[media(attribution="  ")])])
 
         self.assertEqual(self.run_main(), 1)
 
@@ -424,7 +448,7 @@ class BrokenManifestsFailWithASentence(CreditsTestCase):
         self.assertEqual(self.run_main(), 1)
 
     def test_nothing_is_written_when_a_manifest_is_broken(self) -> None:
-        self.write_pack("basis", [bird(photo=None)])
+        self.write_pack("basis", [bird(photos=None)])
         self.run_main()
 
         self.assertFalse(self.markdown.exists())

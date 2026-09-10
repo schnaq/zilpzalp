@@ -6,6 +6,7 @@ Three kinds of medium, and a human between every step:
     photos pick --pack deutschland --species amsel --observation 20490738 --photo 31623386
     photos frame --pack deutschland --species amsel --observation 20490738 --photo 31623386
     photos audit --pack deutschland [--species amsel …] [--add-verdicts -]
+    photos drop --pack deutschland --species amsel --file photos/amsel-2.heic
     calls candidates --pack deutschland [--species amsel …] [--limit 5] [--type song]
     calls pick --pack deutschland --species amsel --recording XC965144 [--start 12.5]
     speech render --provider fake --pack deutschland [--species amsel …] [--sentence …]
@@ -16,7 +17,8 @@ Three kinds of medium, and a human between every step:
 
 `candidates` asks the source and lists what may be used; it never chooses.
 `pick` fetches the one medium a human named, crops or trims it, writes the
-manifest entry and regenerates the derived files. `frame` is `pick` with the
+manifest entry and regenerates the derived files — a photo is *added* to the
+species' set (#194), and `drop` takes one out again. `frame` is `pick` with the
 square computed from where the bird actually is instead of from the middle of
 the photo, and `audit` exports the tiles a pack ships so that they can be
 judged and takes the verdicts back. `speech` produces the sentences the app
@@ -136,8 +138,12 @@ def warn_if_limited(label: str, clip: audio.Clip) -> None:
     print(f"::warning::{escape_data(message)}")
 
 
-def remove_orphan(directory: Path, label: str, previous: str | None, relative: str) -> None:
+def remove_orphan(directory: Path, label: str, previous: str | None, relative: str = "") -> None:
     """Delete the file the manifest no longer names.
+
+    `relative` is what took its place, so that re-recording a medium under the
+    same name deletes nothing. It stays empty where nothing replaced the file —
+    `photos drop`, which takes a photo out of a species' set.
 
     The manifest is the truth about the directory beside it, and a medium
     nothing references any more would still be copied into the app bundle by
@@ -385,20 +391,62 @@ def record_photo(
     data: bytes,
     crop: images.Box | None,
 ) -> None:
-    """Crop the original to a tile, record it, and bring the derived files along."""
-    record_medium(
-        pack_id,
+    """Crop the original to a tile, add it to the species' set, and regenerate.
+
+    **Added, never overwritten** (#194): the photo lands beside the ones the
+    species already has, under the next free name — `photos/amsel.heic`, then
+    `photos/amsel-2.heic`. Nothing is orphaned, because nothing was replaced; a
+    photo that should go is dropped with `photos drop`, which is the one step
+    that unlinks a file.
+    """
+    pack = manifest.pack_dir(pack_id)
+    entry = manifest.bird(document, species)
+    relative = manifest.next_photo_file(entry, species, images.SUFFIX)
+
+    tile = images.square_photo(data, crop)
+    digest = store(pack, relative, tile)
+    manifest.add_photo(
         document,
         species,
-        "photo",
-        f"photos/{species}.{images.SUFFIX}",
-        images.square_photo(data, crop),
-        licence=inaturalist.licence_id(photo["license_code"]),
-        attribution=inaturalist.photographer(observation),
-        source_url=inaturalist.OBSERVATION_URL.format(observation["id"]),
+        manifest.media_block(
+            file=relative,
+            sha256=digest,
+            licence=inaturalist.licence_id(photo["license_code"]),
+            attribution=inaturalist.photographer(observation),
+            source_url=inaturalist.OBSERVATION_URL.format(observation["id"]),
+            retrieved=datetime.date.today().isoformat(),
+        ),
     )
+    manifest.save(manifest.manifest_path(pack_id), document)
+    print(f"{species}: {relative}  {len(tile)} bytes  sha256 {digest}")
+    print(f"{species}: {len(manifest.photos(entry))} photo(s) now")
+
     regenerate_derived()
     print("\nLook at the photo before you commit it — nothing else has seen it yet.")
+
+
+def command_drop(args: argparse.Namespace) -> int:
+    """Remove one photo of a species from the manifest and from the pack.
+
+    The file goes only when nothing else names it — two species may share a
+    photo, and the manifest is what says whether one is still in use.
+    """
+    document = manifest.load(manifest.manifest_path(args.pack))
+    gone = manifest.drop_photo(document, args.species, args.file)
+    manifest.save(manifest.manifest_path(args.pack), document)
+
+    if args.file in {file for file, _ in manifest.media_files(document)}:
+        print(f"{args.species}: {args.file} is still named elsewhere and stays on disk")
+    else:
+        remove_orphan(manifest.pack_dir(args.pack), args.species, args.file)
+
+    print(f"{args.species}: dropped {args.file} ({gone.get('attribution')})")
+    regenerate_derived()
+    print(
+        "\nThe pack no longer names the photo. It stays in the bucket until somebody "
+        "prunes it, and a device that has it keeps it until the pack is fetched again."
+    )
+    return 0
 
 
 def command_pick(args: argparse.Namespace) -> int:
@@ -483,31 +531,37 @@ def audit_tiles(pack_id: str, birds: list[dict], directory: Path) -> list[dict]:
     model nor a format every reader opens. The preview is what gets judged, and
     `tiles.json` is what says which species and which photographer a verdict
     belongs to.
+
+    One tile per photo, not per species (#194): a bird with three photos ships
+    three tiles, and each of them is right or wrong on its own. The photo's path
+    in the manifest is what a verdict names, and the preview is called after it.
     """
     pack = manifest.pack_dir(pack_id)
     directory.mkdir(parents=True, exist_ok=True)
 
     tiles = []
     for bird in birds:
-        photo = bird.get("photo") or {}
-        if not photo.get("file"):
+        photos = [photo for photo in manifest.photos(bird) if photo.get("file")]
+        if not photos:
             message = f"{bird['id']}: has no photo to audit"
             print(f"::warning::{escape_data(message)}")
             continue
 
-        preview = f"{bird['id']}.png"
-        original = images.oriented((pack / photo["file"]).read_bytes())
-        (directory / preview).write_bytes(images.preview_png(original))
-        tiles.append(
-            {
-                "species": bird["id"],
-                "name": bird.get("name"),
-                "file": preview,
-                "attribution": photo.get("attribution"),
-                "license": photo.get("license"),
-                "sourceURL": photo.get("sourceURL"),
-            }
-        )
+        for photo in photos:
+            preview = f"{Path(photo['file']).stem}.png"
+            original = images.oriented((pack / photo["file"]).read_bytes())
+            (directory / preview).write_bytes(images.preview_png(original))
+            tiles.append(
+                {
+                    "photo": photo["file"],
+                    "species": bird["id"],
+                    "name": bird.get("name"),
+                    "file": preview,
+                    "attribution": photo.get("attribution"),
+                    "license": photo.get("license"),
+                    "sourceURL": photo.get("sourceURL"),
+                }
+            )
 
     manifest.save(
         directory / TILES_FILE,
@@ -523,24 +577,24 @@ def audit_tiles(pack_id: str, birds: list[dict], directory: Path) -> list[dict]:
 def checked_verdict(entry: object, known: set[str]) -> dict:
     """One judged tile, or a `ValueError` naming what is wrong with the answer.
 
-    A model writes these, so nothing is trusted: an answer about a species this
-    pack does not hold, or a flag that is not a boolean, is a mistake that
+    A model writes these, so nothing is trusted: an answer about a photo this
+    pack does not ship, or a flag that is not a boolean, is a mistake that
     would otherwise sit in `verdicts.json` and be counted as a verdict.
     """
     if not isinstance(entry, dict):
         raise ValueError(f"a verdict has to be an object, got {entry!r}")
 
-    # `isinstance` first: `known` is a set, and a verdict whose species is a
+    # `isinstance` first: `known` is a set, and a verdict whose photo is a
     # list would otherwise raise an unhashable TypeError past every handler
     # instead of the sentence that says what is wrong with it.
-    species = entry.get("species")
-    if not isinstance(species, str) or species not in known:
-        raise ValueError(f"'{species}' is not a species with a tile in this pack")
+    photo = entry.get("photo")
+    if not isinstance(photo, str) or photo not in known:
+        raise ValueError(f"'{photo}' is not a photo this pack ships")
 
-    verdict = {"species": species}
+    verdict = {"photo": photo}
     for flag in VERDICT_FLAGS:
         if not isinstance(entry.get(flag), bool):
-            raise ValueError(f"{species}: '{flag}' has to be true or false, got {entry.get(flag)!r}")
+            raise ValueError(f"{photo}: '{flag}' has to be true or false, got {entry.get(flag)!r}")
         verdict[flag] = entry[flag]
 
     verdict["reason"] = str(entry.get("reason") or "").strip()
@@ -548,19 +602,19 @@ def checked_verdict(entry: object, known: set[str]) -> dict:
 
 
 def read_verdicts(directory: Path) -> dict[str, dict]:
-    """The verdicts written so far, by species."""
+    """The verdicts written so far, by photo."""
     path = directory / VERDICTS_FILE
     if not path.is_file():
         return {}
 
     document = manifest.load(path)
-    return {entry["species"]: entry for entry in document.get("verdicts") or []}
+    return {entry["photo"]: entry for entry in document.get("verdicts") or []}
 
 
 def merge_verdicts(
     directory: Path, pack_id: str, incoming: object, known: set[str]
 ) -> dict[str, dict]:
-    """Add a batch of verdicts to `verdicts.json` and return all of them, by species.
+    """Add a batch of verdicts to `verdicts.json` and return all of them, by photo.
 
     The later answer wins.
 
@@ -574,14 +628,14 @@ def merge_verdicts(
     verdicts = read_verdicts(directory)
     for entry in incoming:
         checked = checked_verdict(entry, known)
-        verdicts[checked["species"]] = checked
+        verdicts[checked["photo"]] = checked
 
     directory.mkdir(parents=True, exist_ok=True)
     manifest.save(
         directory / VERDICTS_FILE,
         {
             "pack": pack_id,
-            "verdicts": [verdicts[species] for species in sorted(verdicts)],
+            "verdicts": [verdicts[photo] for photo in sorted(verdicts)],
         },
     )
     return verdicts
@@ -591,28 +645,30 @@ def print_audit(tiles: list[dict], verdicts: dict[str, dict]) -> None:
     """The judged tiles as a table, and what a curator has to do about them."""
     rows = []
     for tile in tiles:
-        verdict = verdicts.get(tile["species"])
+        verdict = verdicts.get(tile["photo"])
         flags = ["?", "?", "?"] if verdict is None else [
             "yes" if verdict[flag] else "NO" for flag in VERDICT_FLAGS
         ]
-        rows.append([tile["species"], *flags, "" if verdict is None else verdict["reason"]])
+        rows.append(
+            [tile["species"], tile["photo"], *flags, "" if verdict is None else verdict["reason"]]
+        )
 
-    print_columns(["Bird", "Bird visible", "Fills frame", "Head inside", "Reason"], rows)
+    print_columns(["Bird", "Photo", "Bird visible", "Fills frame", "Head inside", "Reason"], rows)
 
     def failing(flag: str) -> list[str]:
         return [
-            tile["species"]
+            tile["photo"]
             for tile in tiles
-            if tile["species"] in verdicts and not verdicts[tile["species"]][flag]
+            if tile["photo"] in verdicts and not verdicts[tile["photo"]][flag]
         ]
 
-    judged = [tile for tile in tiles if tile["species"] in verdicts]
+    judged = [tile for tile in tiles if tile["photo"] in verdicts]
     print(f"\n{len(tiles)} tile(s), {len(judged)} judged")
 
     for flag, headline, remedy in (
         ("bird_visible", "no bird visible", "re-frame or re-pick these now"),
         ("head_inside", "head cut off", "re-frame or re-pick these now"),
-        ("fills_frame", "too far away", "these wait for the multi-photo pass (#194)"),
+        ("fills_frame", "too far away", "drop these and pick a closer photo"),
     ):
         birds = failing(flag)
         print(f"{headline}: {len(birds)}" + (f" — {', '.join(birds)} ({remedy})" if birds else ""))
@@ -636,8 +692,13 @@ def command_audit(args: argparse.Namespace) -> int:
     if args.add_verdicts:
         text = sys.stdin.read() if args.add_verdicts == "-" else Path(args.add_verdicts).read_text()
         # Against the whole pack, not against `tiles`: a batch may name a
-        # species this run did not export, and that is not a mistake.
-        known = {bird["id"] for bird in document.get("birds") or [] if bird.get("photo")}
+        # photo this run did not export, and that is not a mistake.
+        known = {
+            photo["file"]
+            for bird in document.get("birds") or []
+            for photo in manifest.photos(bird)
+            if photo.get("file")
+        }
         incoming = json.loads(text)
         verdicts = merge_verdicts(directory, args.pack, incoming, known)
         print(f"{len(incoming)} verdict(s) merged into {directory / VERDICTS_FILE}\n")
@@ -1021,6 +1082,16 @@ def build_parser() -> argparse.ArgumentParser:
         help="merge a JSON array of verdicts into verdicts.json ('-' reads standard input)",
     )
     audit.set_defaults(run=command_audit)
+
+    drop = photos.add_parser("drop", help="take one photo out of a species' set")
+    drop.add_argument("--pack", required=True)
+    drop.add_argument("--species", required=True, help="bird id, for instance 'amsel'")
+    drop.add_argument(
+        "--file",
+        required=True,
+        help="the photo as the manifest names it, for instance 'photos/amsel-2.heic'",
+    )
+    drop.set_defaults(run=command_drop)
 
     calls = commands.add_parser("calls", help="calls from xeno-canto").add_subparsers(
         dest="step", required=True

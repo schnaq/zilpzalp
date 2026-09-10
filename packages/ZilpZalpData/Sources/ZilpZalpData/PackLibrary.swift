@@ -107,10 +107,13 @@ public struct PackLibrary: Sendable {
         birds.isEmpty
     }
 
-    /// The photo file of `bird`, `nil` when no pack here holds the species or
-    /// the file is not on disk.
-    public func photoURL(for bird: Bird) -> URL? {
-        catalog(for: bird)?.photoURL(for: bird)
+    /// One photo file of `bird`, `nil` when no pack here holds the species, the
+    /// species has no such photo, or the file is not on disk.
+    ///
+    /// - Parameter index: which of ``Bird/photos``; the default is the curated
+    ///   portrait. See ``PackCatalog/photoURL(for:at:)``.
+    public func photoURL(for bird: Bird, at index: Int = 0) -> URL? {
+        catalog(for: bird)?.photoURL(for: bird, at: index)
     }
 
     /// The recording of `bird`'s call, `nil` when the species carries none or
