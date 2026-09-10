@@ -109,9 +109,9 @@ struct NavigationComponentTests {
     /// checked against the face itself rather than trusted — so a font swap
     /// that widened a glyph fails here before a screenshot finds it.
     ///
-    /// "Sterne sammeln" is the widest label the component carries anywhere; it
-    /// comes from the previews below, and it has to survive whole at each size
-    /// the step boundaries step up at. „Wer singt da?" has to survive at
+    /// "Sterne sammeln" is the widest label the component carries that still
+    /// asks for a single line; it comes from the previews below, and it has to
+    /// survive whole at each size the step boundaries step up at. „Wer singt da?" has to survive at
     /// 159 pt as well: two tiles side by side on a 375 pt phone with the 16 pt
     /// phone gutter, `(375 − 2 × 16 − 24) / 2`. On the 48 pt iPad gutter that
     /// tile was 127 pt and the label was cut off — the bug #145 reports, and a
@@ -193,8 +193,9 @@ struct NavigationComponentTests {
     /// than Baloo 2's own — as readily as it shrinks to fit a width.
     ///
     /// Both tile sizes that pick a different step, because the gap between the
-    /// design's box and the face's grows with the step: `body` lost a quarter
-    /// of a step, `headline` a fifth of its size.
+    /// design's box and the face's grows with the step: a `body` label drew at
+    /// 18.75 pt instead of 20, and a `headline` one at 22.4 — there the scale
+    /// floor was all that stopped it.
     @Test(
         "A label with room around it is drawn at the step its tile picked",
         arguments: [CGFloat(159), 240],
