@@ -13,12 +13,52 @@
     {
       "packID": "afrika",
       "packTitle": "Vögel Afrikas",
+      "birdID": "strauss",
+      "birdName": "Strauß",
+      "kind": "photo",
+      "attribution": "Andrew Allen",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/35215841"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "strauss",
+      "birdName": "Strauß",
+      "kind": "photo",
+      "attribution": "Viktor",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/255497966"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "rosaflamingo",
+      "birdName": "Rosaflamingo",
+      "kind": "photo",
+      "attribution": "Nicolás Tamargo",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/185812778"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
       "birdID": "rosaflamingo",
       "birdName": "Rosaflamingo",
       "kind": "photo",
       "attribution": "SteveM4560",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/313297928"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "rosaflamingo",
+      "birdName": "Rosaflamingo",
+      "kind": "photo",
+      "attribution": "SteveM4560",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/313298914"
     },
     {
       "packID": "afrika",
@@ -43,12 +83,52 @@
     {
       "packID": "afrika",
       "packTitle": "Vögel Afrikas",
+      "birdID": "sekretaer",
+      "birdName": "Sekretär",
+      "kind": "photo",
+      "attribution": "Jean-Paul Boerekamps",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/68263290"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "sekretaer",
+      "birdName": "Sekretär",
+      "kind": "photo",
+      "attribution": "Tristan Jobin",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/285308541"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
       "birdID": "schuhschnabel",
       "birdName": "Schuhschnabel",
       "kind": "photo",
       "attribution": "Annika Lindqvist",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/31013216"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "schuhschnabel",
+      "birdName": "Schuhschnabel",
+      "kind": "photo",
+      "attribution": "benjchristensen",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/145236156"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "schuhschnabel",
+      "birdName": "Schuhschnabel",
+      "kind": "photo",
+      "attribution": "Peter Archdale",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/121474218"
     },
     {
       "packID": "afrika",
@@ -63,12 +143,52 @@
     {
       "packID": "afrika",
       "packTitle": "Vögel Afrikas",
+      "birdID": "marabu",
+      "birdName": "Marabu",
+      "kind": "photo",
+      "attribution": "Manuel Schwarz",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/123066162"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "marabu",
+      "birdName": "Marabu",
+      "kind": "photo",
+      "attribution": "Ben Keen",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/193007295"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
       "birdID": "brillenpinguin",
       "birdName": "Brillenpinguin",
       "kind": "photo",
       "attribution": "Allan T. Souza",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/162713087"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "brillenpinguin",
+      "birdName": "Brillenpinguin",
+      "kind": "photo",
+      "attribution": "Dan Harville",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/145200019"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "brillenpinguin",
+      "birdName": "Brillenpinguin",
+      "kind": "photo",
+      "attribution": "Cullen Hanks",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/144090534"
     },
     {
       "packID": "afrika",
@@ -83,12 +203,52 @@
     {
       "packID": "afrika",
       "packTitle": "Vögel Afrikas",
+      "birdID": "graupapagei",
+      "birdName": "Graupapagei",
+      "kind": "photo",
+      "attribution": "Rafael Würtemberger",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/222498643"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "graupapagei",
+      "birdName": "Graupapagei",
+      "kind": "photo",
+      "attribution": "agujaceratops",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/267539814"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
       "birdID": "gabelracke",
       "birdName": "Gabelracke",
       "kind": "photo",
       "attribution": "Timothy Whitehead",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/232759573"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "gabelracke",
+      "birdName": "Gabelracke",
+      "kind": "photo",
+      "attribution": "Diogo Luiz",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/40336608"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "gabelracke",
+      "birdName": "Gabelracke",
+      "kind": "photo",
+      "attribution": "Tom Kennedy",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/103099601"
     },
     {
       "packID": "afrika",
@@ -103,6 +263,26 @@
     {
       "packID": "afrika",
       "packTitle": "Vögel Afrikas",
+      "birdID": "rotschnabeltoko",
+      "birdName": "Rotschnabeltoko",
+      "kind": "photo",
+      "attribution": "Hydrocycler (Elizabeth Dougherty)",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/35649717"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "rotschnabeltoko",
+      "birdName": "Rotschnabeltoko",
+      "kind": "photo",
+      "attribution": "danpatrick",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/34489925"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
       "birdID": "suedlicher-hornrabe",
       "birdName": "Südlicher Hornrabe",
       "kind": "photo",
@@ -113,12 +293,52 @@
     {
       "packID": "afrika",
       "packTitle": "Vögel Afrikas",
+      "birdID": "suedlicher-hornrabe",
+      "birdName": "Südlicher Hornrabe",
+      "kind": "photo",
+      "attribution": "Steven Smethurst",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/67917402"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "suedlicher-hornrabe",
+      "birdName": "Südlicher Hornrabe",
+      "kind": "photo",
+      "attribution": "Tom Field",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/284958816"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
       "birdID": "kronenkranich",
       "birdName": "Kronenkranich",
       "kind": "photo",
       "attribution": "M Rutherford",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/38301444"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "kronenkranich",
+      "birdName": "Kronenkranich",
+      "kind": "photo",
+      "attribution": "Dan Harville",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/135164739"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "kronenkranich",
+      "birdName": "Kronenkranich",
+      "kind": "photo",
+      "attribution": "anasacuta",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/78499746"
     },
     {
       "packID": "afrika",
@@ -143,12 +363,52 @@
     {
       "packID": "afrika",
       "packTitle": "Vögel Afrikas",
+      "birdID": "schreiseeadler",
+      "birdName": "Schreiseeadler",
+      "kind": "photo",
+      "attribution": "Wynand Uys",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/14133040"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "schreiseeadler",
+      "birdName": "Schreiseeadler",
+      "kind": "photo",
+      "attribution": "Paul Hoekman",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/173728397"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
       "birdID": "weissrueckengeier",
       "birdName": "Weißrückengeier",
       "kind": "photo",
       "attribution": "Tom Heijnen",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/231275237"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "weissrueckengeier",
+      "birdName": "Weißrückengeier",
+      "kind": "photo",
+      "attribution": "Christiaan Viljoen",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/204147427"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "weissrueckengeier",
+      "birdName": "Weißrückengeier",
+      "kind": "photo",
+      "attribution": "Claude Kolwelter",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/36198228"
     },
     {
       "packID": "afrika",
@@ -163,12 +423,52 @@
     {
       "packID": "afrika",
       "packTitle": "Vögel Afrikas",
+      "birdID": "nimmersatt",
+      "birdName": "Nimmersatt",
+      "kind": "photo",
+      "attribution": "Wynand Uys",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/14133114"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "nimmersatt",
+      "birdName": "Nimmersatt",
+      "kind": "photo",
+      "attribution": "Eduardo Luis Beltrocco",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/261072131"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
       "birdID": "sattelstorch",
       "birdName": "Sattelstorch",
       "kind": "photo",
       "attribution": "Wynand Uys",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/10002585"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "sattelstorch",
+      "birdName": "Sattelstorch",
+      "kind": "photo",
+      "attribution": "Tero Linjama",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/63888566"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "sattelstorch",
+      "birdName": "Sattelstorch",
+      "kind": "photo",
+      "attribution": "Haneef Tayob",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/195277868"
     },
     {
       "packID": "afrika",
@@ -183,12 +483,52 @@
     {
       "packID": "afrika",
       "packTitle": "Vögel Afrikas",
+      "birdID": "hammerkopf",
+      "birdName": "Hammerkopf",
+      "kind": "photo",
+      "attribution": "scaup",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/151642991"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "hammerkopf",
+      "birdName": "Hammerkopf",
+      "kind": "photo",
+      "attribution": "Tom Riggle",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/150564216"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
       "birdID": "helmperlhuhn",
       "birdName": "Helmperlhuhn",
       "kind": "photo",
       "attribution": "Peter Archdale",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/104021490"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "helmperlhuhn",
+      "birdName": "Helmperlhuhn",
+      "kind": "photo",
+      "attribution": "Eugene Hahndiek",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/247285295"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "helmperlhuhn",
+      "birdName": "Helmperlhuhn",
+      "kind": "photo",
+      "attribution": "Mayela y Ramón",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/68830198"
     },
     {
       "packID": "afrika",
@@ -213,12 +553,52 @@
     {
       "packID": "afrika",
       "packTitle": "Vögel Afrikas",
+      "birdID": "dorfweber",
+      "birdName": "Dorfweber",
+      "kind": "photo",
+      "attribution": "William Stephens",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/246517754"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "dorfweber",
+      "birdName": "Dorfweber",
+      "kind": "photo",
+      "attribution": "Donald Davesne",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/126917398"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
       "birdID": "karminspint",
       "birdName": "Karminspint",
       "kind": "photo",
       "attribution": "Rafael Würtemberger",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/222517435"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "karminspint",
+      "birdName": "Karminspint",
+      "kind": "photo",
+      "attribution": "Rafael Würtemberger",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/222517433"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "karminspint",
+      "birdName": "Karminspint",
+      "kind": "photo",
+      "attribution": "avocat",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/339487668"
     },
     {
       "packID": "afrika",
@@ -233,12 +613,52 @@
     {
       "packID": "afrika",
       "packTitle": "Vögel Afrikas",
+      "birdID": "malachitnektarvogel",
+      "birdName": "Malachitnektarvogel",
+      "kind": "photo",
+      "attribution": "bdhimes",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/325855545"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "malachitnektarvogel",
+      "birdName": "Malachitnektarvogel",
+      "kind": "photo",
+      "attribution": "Cecile Roux",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/358556377"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
       "birdID": "graulaermvogel",
       "birdName": "Graulärmvogel",
       "kind": "photo",
       "attribution": "Wolfgang Ahlmer",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/178051888"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "graulaermvogel",
+      "birdName": "Graulärmvogel",
+      "kind": "photo",
+      "attribution": "Irene",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/333392081"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "graulaermvogel",
+      "birdName": "Graulärmvogel",
+      "kind": "photo",
+      "attribution": "datadan",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/39246939"
     },
     {
       "packID": "afrika",
@@ -253,12 +673,42 @@
     {
       "packID": "afrika",
       "packTitle": "Vögel Afrikas",
+      "birdID": "guinea-turako",
+      "birdName": "Guinea-Turako",
+      "kind": "photo",
+      "attribution": "avocat",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/359689325"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "guinea-turako",
+      "birdName": "Guinea-Turako",
+      "kind": "photo",
+      "attribution": "Don Wellmann",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/143541464"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
       "birdID": "rotschnabel-madenhacker",
       "birdName": "Rotschnabel-Madenhacker",
       "kind": "photo",
       "attribution": "gwar",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/254912140"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "rotschnabel-madenhacker",
+      "birdName": "Rotschnabel-Madenhacker",
+      "kind": "photo",
+      "attribution": "Andra Waagmeester",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/218480428"
     },
     {
       "packID": "afrika",
@@ -273,12 +723,52 @@
     {
       "packID": "afrika",
       "packTitle": "Vögel Afrikas",
+      "birdID": "riesentrappe",
+      "birdName": "Riesentrappe",
+      "kind": "photo",
+      "attribution": "Henggang Cui",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/182467412"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "riesentrappe",
+      "birdName": "Riesentrappe",
+      "kind": "photo",
+      "attribution": "Donald Hampton",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/64891827"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
       "birdID": "nilgans",
       "birdName": "Nilgans",
       "kind": "photo",
       "attribution": "Justin",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/4583478"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "nilgans",
+      "birdName": "Nilgans",
+      "kind": "photo",
+      "attribution": "cello caruso-turiello",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/284549464"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "nilgans",
+      "birdName": "Nilgans",
+      "kind": "photo",
+      "attribution": "Alex Press",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/270816937"
     },
     {
       "packID": "afrika",
@@ -303,6 +793,16 @@
     {
       "packID": "afrika",
       "packTitle": "Vögel Afrikas",
+      "birdID": "heiliger-ibis",
+      "birdName": "Heiliger Ibis",
+      "kind": "photo",
+      "attribution": "Francesco Cecere",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/42938767"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
       "birdID": "dreifarben-glanzstar",
       "birdName": "Dreifarben-Glanzstar",
       "kind": "photo",
@@ -313,12 +813,42 @@
     {
       "packID": "afrika",
       "packTitle": "Vögel Afrikas",
+      "birdID": "dreifarben-glanzstar",
+      "birdName": "Dreifarben-Glanzstar",
+      "kind": "photo",
+      "attribution": "Pål A. Olsvik",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/145855897"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "dreifarben-glanzstar",
+      "birdName": "Dreifarben-Glanzstar",
+      "kind": "photo",
+      "attribution": "William Stephens",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/52371414"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
       "birdID": "kampfadler",
       "birdName": "Kampfadler",
       "kind": "photo",
       "attribution": "Mark Bolnik",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/99602493"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "kampfadler",
+      "birdName": "Kampfadler",
+      "kind": "photo",
+      "attribution": "Noeleen du Toit",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/250103965"
     },
     {
       "packID": "afrika",
@@ -343,12 +873,52 @@
     {
       "packID": "afrika",
       "packTitle": "Vögel Afrikas",
+      "birdID": "rosapelikan",
+      "birdName": "Rosapelikan",
+      "kind": "photo",
+      "attribution": "Viktor",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/255665193"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "rosapelikan",
+      "birdName": "Rosapelikan",
+      "kind": "photo",
+      "attribution": "Radu Teodoreanu",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/376121534"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
       "birdID": "hagedasch",
       "birdName": "Hagedasch",
       "kind": "photo",
       "attribution": "Martin Gutewort",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/197640384"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "hagedasch",
+      "birdName": "Hagedasch",
+      "kind": "photo",
+      "attribution": "Timothy Whitehead",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/248995401"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "hagedasch",
+      "birdName": "Hagedasch",
+      "kind": "photo",
+      "attribution": "stephen",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/39380393"
     },
     {
       "packID": "afrika",
@@ -1745,6 +2315,26 @@
       "packTitle": "Vögel der Welt",
       "birdID": "kaiserpinguin",
       "birdName": "Kaiserpinguin",
+      "kind": "photo",
+      "attribution": "mattward",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/146195342"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "kaiserpinguin",
+      "birdName": "Kaiserpinguin",
+      "kind": "photo",
+      "attribution": "John Barkla",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/2606935"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "kaiserpinguin",
+      "birdName": "Kaiserpinguin",
       "kind": "call",
       "attribution": "steve (XC877994)",
       "license": "CC-BY-SA-4.0",
@@ -1763,12 +2353,52 @@
     {
       "packID": "welt",
       "packTitle": "Vögel der Welt",
+      "birdID": "emu",
+      "birdName": "Emu",
+      "kind": "photo",
+      "attribution": "Tony Eales",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/313747476"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "emu",
+      "birdName": "Emu",
+      "kind": "photo",
+      "attribution": "Dimitri Brosens",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/188234539"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
       "birdID": "helmkasuar",
       "birdName": "Helmkasuar",
       "kind": "photo",
       "attribution": "Ian Allen",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/346337206"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "helmkasuar",
+      "birdName": "Helmkasuar",
+      "kind": "photo",
+      "attribution": "Oscar Dove",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/196978347"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "helmkasuar",
+      "birdName": "Helmkasuar",
+      "kind": "photo",
+      "attribution": "Tim",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/98776913"
     },
     {
       "packID": "welt",
@@ -1783,12 +2413,52 @@
     {
       "packID": "welt",
       "packTitle": "Vögel der Welt",
+      "birdID": "nandu",
+      "birdName": "Nandu",
+      "kind": "photo",
+      "attribution": "Donald Davesne",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/375784667"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "nandu",
+      "birdName": "Nandu",
+      "kind": "photo",
+      "attribution": "Hugo Hulsberg",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/141888635"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
       "birdID": "pfau",
       "birdName": "Pfau",
       "kind": "photo",
       "attribution": "Jason Alexander",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/153415191"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "pfau",
+      "birdName": "Pfau",
+      "kind": "photo",
+      "attribution": "Parth Kansara",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/176588709"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "pfau",
+      "birdName": "Pfau",
+      "kind": "photo",
+      "attribution": "Afsar Nayakkan",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/182017396"
     },
     {
       "packID": "welt",
@@ -1815,6 +2485,26 @@
       "packTitle": "Vögel der Welt",
       "birdID": "truthahn",
       "birdName": "Truthahn",
+      "kind": "photo",
+      "attribution": "Dario Taraborelli",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/68393009"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "truthahn",
+      "birdName": "Truthahn",
+      "kind": "photo",
+      "attribution": "Kari Moreland",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/158122427"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "truthahn",
+      "birdName": "Truthahn",
       "kind": "call",
       "attribution": "Jonathon Jongsma (XC320490)",
       "license": "CC-BY-SA-4.0",
@@ -1833,12 +2523,52 @@
     {
       "packID": "welt",
       "packTitle": "Vögel der Welt",
+      "birdID": "riesentukan",
+      "birdName": "Riesentukan",
+      "kind": "photo",
+      "attribution": "Diogo Luiz",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/59738495"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "riesentukan",
+      "birdName": "Riesentukan",
+      "kind": "photo",
+      "attribution": "Paulo Mascaretti",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/143502779"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
       "birdID": "hellroter-ara",
       "birdName": "Hellroter Ara",
       "kind": "photo",
       "attribution": "Cricket Raspet",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/223409469"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "hellroter-ara",
+      "birdName": "Hellroter Ara",
+      "kind": "photo",
+      "attribution": "Luis G Restrepo",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/254918218"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "hellroter-ara",
+      "birdName": "Hellroter Ara",
+      "kind": "photo",
+      "attribution": "Uma Mezzanotte",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/341786058"
     },
     {
       "packID": "welt",
@@ -1863,12 +2593,52 @@
     {
       "packID": "welt",
       "packTitle": "Vögel der Welt",
+      "birdID": "gelbhaubenkakadu",
+      "birdName": "Gelbhaubenkakadu",
+      "kind": "photo",
+      "attribution": "John Cull",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/165108397"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "gelbhaubenkakadu",
+      "birdName": "Gelbhaubenkakadu",
+      "kind": "photo",
+      "attribution": "Austen Armstrong",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/185535253"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
       "birdID": "wellensittich",
       "birdName": "Wellensittich",
       "kind": "photo",
       "attribution": "cappycollins",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/307179303"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "wellensittich",
+      "birdName": "Wellensittich",
+      "kind": "photo",
+      "attribution": "Lachlan Copeland",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/268144312"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "wellensittich",
+      "birdName": "Wellensittich",
+      "kind": "photo",
+      "attribution": "Lawrence Hylton",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/340687411"
     },
     {
       "packID": "welt",
@@ -1893,12 +2663,52 @@
     {
       "packID": "welt",
       "packTitle": "Vögel der Welt",
+      "birdID": "kea",
+      "birdName": "Kea",
+      "kind": "photo",
+      "attribution": "Carey_Knox_Southern_Scales",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/103356401"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "kea",
+      "birdName": "Kea",
+      "kind": "photo",
+      "attribution": "John Barkla",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/34230917"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
       "birdID": "annakolibri",
       "birdName": "Annakolibri",
       "kind": "photo",
       "attribution": "William Walker",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/250218495"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "annakolibri",
+      "birdName": "Annakolibri",
+      "kind": "photo",
+      "attribution": "Rudyard",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/250712213"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "annakolibri",
+      "birdName": "Annakolibri",
+      "kind": "photo",
+      "attribution": "John Powers",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/36843492"
     },
     {
       "packID": "welt",
@@ -1913,12 +2723,52 @@
     {
       "packID": "welt",
       "packTitle": "Vögel der Welt",
+      "birdID": "quetzal",
+      "birdName": "Quetzal",
+      "kind": "photo",
+      "attribution": "Morten Ross",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/68706945"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "quetzal",
+      "birdName": "Quetzal",
+      "kind": "photo",
+      "attribution": "Paul Hoekman",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/104830643"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
       "birdID": "rotkardinal",
       "birdName": "Rotkardinal",
       "kind": "photo",
       "attribution": "Michael",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/337375795"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "rotkardinal",
+      "birdName": "Rotkardinal",
+      "kind": "photo",
+      "attribution": "Daughter Dad",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/287527828"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "rotkardinal",
+      "birdName": "Rotkardinal",
+      "kind": "photo",
+      "attribution": "Bill Levine",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/104353677"
     },
     {
       "packID": "welt",
@@ -1945,6 +2795,26 @@
       "packTitle": "Vögel der Welt",
       "birdID": "blauhaeher",
       "birdName": "Blauhäher",
+      "kind": "photo",
+      "attribution": "Texas Bird Family",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/339251426"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "blauhaeher",
+      "birdName": "Blauhäher",
+      "kind": "photo",
+      "attribution": "Blake Ross",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/144792423"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "blauhaeher",
+      "birdName": "Blauhäher",
       "kind": "call",
       "attribution": "Anonymous (XC924514)",
       "license": "CC0-1.0",
@@ -1959,6 +2829,26 @@
       "attribution": "Justin Flint",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/335312498"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "weisskopfseeadler",
+      "birdName": "Weißkopfseeadler",
+      "kind": "photo",
+      "attribution": "Marcel_Pepin",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/217347432"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "weisskopfseeadler",
+      "birdName": "Weißkopfseeadler",
+      "kind": "photo",
+      "attribution": "Daughter Dad",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/330275420"
     },
     {
       "packID": "welt",
@@ -1983,12 +2873,52 @@
     {
       "packID": "welt",
       "packTitle": "Vögel der Welt",
+      "birdID": "harpyie",
+      "birdName": "Harpyie",
+      "kind": "photo",
+      "attribution": "Sidnei Dantas",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/93205945"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "harpyie",
+      "birdName": "Harpyie",
+      "kind": "photo",
+      "attribution": "Christoph Moning",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/250038602"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
       "birdID": "andenkondor",
       "birdName": "Andenkondor",
       "kind": "photo",
       "attribution": "Luis Enrique Calderón Franco",
       "license": "CC-BY-SA-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/48609433"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "andenkondor",
+      "birdName": "Andenkondor",
+      "kind": "photo",
+      "attribution": "Sebastian Serna Muñoz",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/18386019"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "andenkondor",
+      "birdName": "Andenkondor",
+      "kind": "photo",
+      "attribution": "Frank Dietze",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/382338173"
     },
     {
       "packID": "welt",
@@ -2003,12 +2933,52 @@
     {
       "packID": "welt",
       "packTitle": "Vögel der Welt",
+      "birdID": "schnee-eule",
+      "birdName": "Schnee-Eule",
+      "kind": "photo",
+      "attribution": "Matt Felperin",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/104681391"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "schnee-eule",
+      "birdName": "Schnee-Eule",
+      "kind": "photo",
+      "attribution": "Andrew Bazdyrev",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/149963344"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
       "birdID": "papageitaucher",
       "birdName": "Papageitaucher",
       "kind": "photo",
       "attribution": "Diego González Dopico",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/277865524"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "papageitaucher",
+      "birdName": "Papageitaucher",
+      "kind": "photo",
+      "attribution": "Julia Moning",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/114739787"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "papageitaucher",
+      "birdName": "Papageitaucher",
+      "kind": "photo",
+      "attribution": "allan5519",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/260466628"
     },
     {
       "packID": "welt",
@@ -2023,12 +2993,52 @@
     {
       "packID": "welt",
       "packTitle": "Vögel der Welt",
+      "birdID": "wanderalbatros",
+      "birdName": "Wanderalbatros",
+      "kind": "photo",
+      "attribution": "Peter Shanks",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/250080678"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "wanderalbatros",
+      "birdName": "Wanderalbatros",
+      "kind": "photo",
+      "attribution": "Saryu Mae 前 朝琉",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/265575462"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
       "birdID": "prachtfregattvogel",
       "birdName": "Prachtfregattvogel",
       "kind": "photo",
       "attribution": "Thibaud Aronson",
       "license": "CC-BY-SA-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/112046587"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "prachtfregattvogel",
+      "birdName": "Prachtfregattvogel",
+      "kind": "photo",
+      "attribution": "steve b",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/258500351"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "prachtfregattvogel",
+      "birdName": "Prachtfregattvogel",
+      "kind": "photo",
+      "attribution": "steve b",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/262657239"
     },
     {
       "packID": "welt",
@@ -2043,12 +3053,52 @@
     {
       "packID": "welt",
       "packTitle": "Vögel der Welt",
+      "birdID": "blaufusstoelpel",
+      "birdName": "Blaufußtölpel",
+      "kind": "photo",
+      "attribution": "steve b",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/263834304"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "blaufusstoelpel",
+      "birdName": "Blaufußtölpel",
+      "kind": "photo",
+      "attribution": "Bill Levine",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/191370726"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
       "birdID": "eistaucher",
       "birdName": "Eistaucher",
       "kind": "photo",
       "attribution": "Matt Felperin",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/226591176"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "eistaucher",
+      "birdName": "Eistaucher",
+      "kind": "photo",
+      "attribution": "Andrew Hrycyna",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/123770073"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "eistaucher",
+      "birdName": "Eistaucher",
+      "kind": "photo",
+      "attribution": "Alexis Tinker-Tsavalas",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/235220977"
     },
     {
       "packID": "welt",
@@ -2073,12 +3123,52 @@
     {
       "packID": "welt",
       "packTitle": "Vögel der Welt",
+      "birdID": "lachender-hans",
+      "birdName": "Lachender Hans",
+      "kind": "photo",
+      "attribution": "bpryor",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/338178915"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "lachender-hans",
+      "birdName": "Lachender Hans",
+      "kind": "photo",
+      "attribution": "graeme lunt",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/152807601"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "raggi-paradiesvogel",
+      "birdName": "Raggi-Paradiesvogel",
+      "kind": "photo",
+      "attribution": "Abby Darrah",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/319445764"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
       "birdID": "raggi-paradiesvogel",
       "birdName": "Raggi-Paradiesvogel",
       "kind": "photo",
       "attribution": "avocat",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/381810092"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "raggi-paradiesvogel",
+      "birdName": "Raggi-Paradiesvogel",
+      "kind": "photo",
+      "attribution": "themaskedlapwing",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/313689521"
     },
     {
       "packID": "welt",
@@ -2093,6 +3183,26 @@
     {
       "packID": "welt",
       "packTitle": "Vögel der Welt",
+      "birdID": "doppelhornvogel",
+      "birdName": "Doppelhornvogel",
+      "kind": "photo",
+      "attribution": "Jay Pruett",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/104729364"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "doppelhornvogel",
+      "birdName": "Doppelhornvogel",
+      "kind": "photo",
+      "attribution": "Aparna Krishnan",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/144356773"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
       "birdID": "mandschurenkranich",
       "birdName": "Mandschurenkranich",
       "kind": "photo",
@@ -2103,12 +3213,52 @@
     {
       "packID": "welt",
       "packTitle": "Vögel der Welt",
+      "birdID": "mandschurenkranich",
+      "birdName": "Mandschurenkranich",
+      "kind": "photo",
+      "attribution": "Austin 0201",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/9600943"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "mandschurenkranich",
+      "birdName": "Mandschurenkranich",
+      "kind": "photo",
+      "attribution": "Christoph Moning",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/63813236"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
       "birdID": "schwarzschwan",
       "birdName": "Schwarzschwan",
       "kind": "photo",
       "attribution": "Nikolay Martyanov",
       "license": "CC0-1.0",
       "sourceURL": "https://www.inaturalist.org/observations/91632451"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "schwarzschwan",
+      "birdName": "Schwarzschwan",
+      "kind": "photo",
+      "attribution": "Terra Occ",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/19064555"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "schwarzschwan",
+      "birdName": "Schwarzschwan",
+      "kind": "photo",
+      "attribution": "Terra Occ",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/19869983"
     },
     {
       "packID": "welt",
@@ -2133,12 +3283,52 @@
     {
       "packID": "welt",
       "packTitle": "Vögel der Welt",
+      "birdID": "roter-sichler",
+      "birdName": "Roter Sichler",
+      "kind": "photo",
+      "attribution": "Miguel",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/361869680"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "roter-sichler",
+      "birdName": "Roter Sichler",
+      "kind": "photo",
+      "attribution": "Luis G Restrepo",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/254450271"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
       "birdID": "rosaloeffler",
       "birdName": "Rosalöffler",
       "kind": "photo",
       "attribution": "Nigel Voaden",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/1707823"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "rosaloeffler",
+      "birdName": "Rosalöffler",
+      "kind": "photo",
+      "attribution": "kirk gardner",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/226336174"
+    },
+    {
+      "packID": "welt",
+      "packTitle": "Vögel der Welt",
+      "birdID": "rosaloeffler",
+      "birdName": "Rosalöffler",
+      "kind": "photo",
+      "attribution": "carbenoid",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/145164091"
     }
   ],
   "voices": [],
