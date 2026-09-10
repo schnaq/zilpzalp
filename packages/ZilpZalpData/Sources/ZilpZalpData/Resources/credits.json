@@ -3323,12 +3323,52 @@
     {
       "packID": "deutschland",
       "packTitle": "Vögel Deutschlands",
+      "birdID": "mandarinente",
+      "birdName": "Mandarinente",
+      "kind": "photo",
+      "attribution": "Diego González Dopico",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/204451732"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "mandarinente",
+      "birdName": "Mandarinente",
+      "kind": "photo",
+      "attribution": "Susan Marley",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/106805518"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
       "birdID": "hoeckerschwan",
       "birdName": "Höckerschwan",
       "kind": "photo",
       "attribution": "Radu Teodoreanu",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/340807169"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "hoeckerschwan",
+      "birdName": "Höckerschwan",
+      "kind": "photo",
+      "attribution": "Philipp Pavelka",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/13231757"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "hoeckerschwan",
+      "birdName": "Höckerschwan",
+      "kind": "photo",
+      "attribution": "Thomas Koffel",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/297841724"
     },
     {
       "packID": "deutschland",
@@ -3355,6 +3395,26 @@
       "packTitle": "Vögel Deutschlands",
       "birdID": "graugans",
       "birdName": "Graugans",
+      "kind": "photo",
+      "attribution": "olmagon",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/281640151"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "graugans",
+      "birdName": "Graugans",
+      "kind": "photo",
+      "attribution": "SIA",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/274898523"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "graugans",
+      "birdName": "Graugans",
       "kind": "call",
       "attribution": "Petr Holecek (XC1174837)",
       "license": "CC0-1.0",
@@ -3369,6 +3429,26 @@
       "attribution": "petehawkins",
       "license": "CC0-1.0",
       "sourceURL": "https://www.inaturalist.org/observations/269486317"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "blaesshuhn",
+      "birdName": "Blässhuhn",
+      "kind": "photo",
+      "attribution": "Diego González Dopico",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/208001735"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "blaesshuhn",
+      "birdName": "Blässhuhn",
+      "kind": "photo",
+      "attribution": "Alexis Tinker-Tsavalas",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/17933973"
     },
     {
       "packID": "deutschland",
@@ -3395,6 +3475,26 @@
       "packTitle": "Vögel Deutschlands",
       "birdID": "haubentaucher",
       "birdName": "Haubentaucher",
+      "kind": "photo",
+      "attribution": "M. Baran",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/341909121"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "haubentaucher",
+      "birdName": "Haubentaucher",
+      "kind": "photo",
+      "attribution": "Diego González Dopico",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/263911192"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "haubentaucher",
+      "birdName": "Haubentaucher",
       "kind": "call",
       "attribution": "Sonothèque ADVL (XC925320)",
       "license": "CC0-1.0",
@@ -3409,6 +3509,26 @@
       "attribution": "Frank Sengpiel",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/151715487"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "kormoran",
+      "birdName": "Kormoran",
+      "kind": "photo",
+      "attribution": "rowan_m",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/70246533"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "kormoran",
+      "birdName": "Kormoran",
+      "kind": "photo",
+      "attribution": "Diego González Dopico",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/252021566"
     },
     {
       "packID": "deutschland",
@@ -3435,6 +3555,26 @@
       "packTitle": "Vögel Deutschlands",
       "birdID": "lachmoewe",
       "birdName": "Lachmöwe",
+      "kind": "photo",
+      "attribution": "Owen Strickland",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/278297590"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "lachmoewe",
+      "birdName": "Lachmöwe",
+      "kind": "photo",
+      "attribution": "Christoph Moning",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/58483685"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "lachmoewe",
+      "birdName": "Lachmöwe",
       "kind": "call",
       "attribution": "Marie-Lan Taÿ Pamart (XC512864)",
       "license": "CC-BY-SA-4.0",
@@ -3449,6 +3589,26 @@
       "attribution": "Ged Tranter",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/241437631"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "austernfischer",
+      "birdName": "Austernfischer",
+      "kind": "photo",
+      "attribution": "Олеся",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/371927806"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "austernfischer",
+      "birdName": "Austernfischer",
+      "kind": "photo",
+      "attribution": "Rafael Rosa",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/369928762"
     },
     {
       "packID": "deutschland",
@@ -3475,6 +3635,26 @@
       "packTitle": "Vögel Deutschlands",
       "birdID": "kiebitz",
       "birdName": "Kiebitz",
+      "kind": "photo",
+      "attribution": "Marco Mussita",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/68098192"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "kiebitz",
+      "birdName": "Kiebitz",
+      "kind": "photo",
+      "attribution": "Christoph Moning",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/272460517"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "kiebitz",
+      "birdName": "Kiebitz",
       "kind": "call",
       "attribution": "Sonothèque ADVL (XC919264)",
       "license": "CC0-1.0",
@@ -3489,6 +3669,26 @@
       "attribution": "John Krampl",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/77794790"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "fasan",
+      "birdName": "Fasan",
+      "kind": "photo",
+      "attribution": "John Krampl",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/64745794"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "fasan",
+      "birdName": "Fasan",
+      "kind": "photo",
+      "attribution": "Daughter Dad",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/342178415"
     },
     {
       "packID": "deutschland",

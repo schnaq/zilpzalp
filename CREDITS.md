@@ -351,23 +351,43 @@ the source declared.
 | Stockente | Photo | John Brew | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/159942431> |
 | Stockente | Call | Sonothèque ADVL (XC730554) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/730554> |
 | Mandarinente | Photo | Blake Ross | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/102309745> |
+| Mandarinente | Photo | Diego González Dopico | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/204451732> |
+| Mandarinente | Photo | Susan Marley | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/106805518> |
 | Höckerschwan | Photo | Radu Teodoreanu | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/340807169> |
+| Höckerschwan | Photo | Philipp Pavelka | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/13231757> |
+| Höckerschwan | Photo | Thomas Koffel | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/297841724> |
 | Höckerschwan | Call | Sonothèque ADVL (XC730790) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/730790> |
 | Graugans | Photo | Rhys | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/339953969> |
+| Graugans | Photo | olmagon | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/281640151> |
+| Graugans | Photo | SIA | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/274898523> |
 | Graugans | Call | Petr Holecek (XC1174837) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1174837> |
 | Blässhuhn | Photo | petehawkins | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/269486317> |
+| Blässhuhn | Photo | Diego González Dopico | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/208001735> |
+| Blässhuhn | Photo | Alexis Tinker-Tsavalas | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/17933973> |
 | Blässhuhn | Call | Joost van Bruggen (XC432890) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/432890> |
 | Haubentaucher | Photo | Hendrik Luup | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/361492755> |
+| Haubentaucher | Photo | M. Baran | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/341909121> |
+| Haubentaucher | Photo | Diego González Dopico | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/263911192> |
 | Haubentaucher | Call | Sonothèque ADVL (XC925320) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/925320> |
 | Kormoran | Photo | Frank Sengpiel | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/151715487> |
+| Kormoran | Photo | rowan_m | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/70246533> |
+| Kormoran | Photo | Diego González Dopico | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/252021566> |
 | Kormoran | Call | Sonothèque ADVL (XC1059525) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1059525> |
 | Lachmöwe | Photo | Diego González Dopico | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/369715830> |
+| Lachmöwe | Photo | Owen Strickland | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/278297590> |
+| Lachmöwe | Photo | Christoph Moning | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/58483685> |
 | Lachmöwe | Call | Marie-Lan Taÿ Pamart (XC512864) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/512864> |
 | Austernfischer | Photo | Ged Tranter | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/241437631> |
+| Austernfischer | Photo | Олеся | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/371927806> |
+| Austernfischer | Photo | Rafael Rosa | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/369928762> |
 | Austernfischer | Call | Sonothèque ADVL (XC730817) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/730817> |
 | Kiebitz | Photo | 雲一百香果 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/143935728> |
+| Kiebitz | Photo | Marco Mussita | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/68098192> |
+| Kiebitz | Photo | Christoph Moning | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/272460517> |
 | Kiebitz | Call | Sonothèque ADVL (XC919264) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/919264> |
 | Fasan | Photo | John Krampl | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/77794790> |
+| Fasan | Photo | John Krampl | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/64745794> |
+| Fasan | Photo | Daughter Dad | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/342178415> |
 | Fasan | Call | Sonothèque ADVL (XC705907) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/705907> |
 
 ### Vögel der Welt (`welt`)
