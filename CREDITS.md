@@ -192,24 +192,44 @@ the source declared.
 | Eichelhäher | Photo | Rhys | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/343819178> |
 | Eichelhäher | Call | Sonothèque ADVL (XC1175981) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1175981> |
 | Rabenkrähe | Photo | Nasser Halaweh | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/18803996> |
+| Rabenkrähe | Photo | Priya Sandhu | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/263296471> |
+| Rabenkrähe | Photo | Rhys | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/339187840> |
 | Rabenkrähe | Call | Marie-Lan Taÿ Pamart (XC511943) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/511943> |
 | Dohle | Photo | Adam Jackson | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/193317621> |
+| Dohle | Photo | Charlie Farrell | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/121937015> |
+| Dohle | Photo | Radu Teodoreanu | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/340812653> |
 | Dohle | Call | Joost van Bruggen (XC436939) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/436939> |
 | Kolkrabe | Photo | Mila C. | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/215780666> |
+| Kolkrabe | Photo | emilyd47 | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/124616321> |
+| Kolkrabe | Photo | Jacek Pietruszewski | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/179940275> |
 | Kolkrabe | Call | Doug Hynes (XC922424) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/922424> |
 | Ringeltaube | Photo | Codrin Bucur | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/127095661> |
+| Ringeltaube | Photo | Owen | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/298864321> |
+| Ringeltaube | Photo | Stephen James McWilliam | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/73335948> |
 | Ringeltaube | Call | Benoît Van Hecke (XC561877) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/561877> |
 | Türkentaube | Photo | zebedeugalinha | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/253298182> |
+| Türkentaube | Photo | Radu Teodoreanu | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/337930388> |
+| Türkentaube | Photo | Pablo F. Domínguez | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/264043479> |
 | Türkentaube | Call | Philippe_Grange (XC1142043) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1142043> |
 | Mauersegler | Photo | Настя Бухвалова | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/385189352> |
+| Mauersegler | Photo | euqirneto | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/230851928> |
+| Mauersegler | Photo | Mourad Harzallah | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/168339242> |
 | Mauersegler | Call | Pascal Christe (XC816518) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/816518> |
 | Rauchschwalbe | Photo | Robbie Hannawacker | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/6487004> |
+| Rauchschwalbe | Photo | Diego González Dopico | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/239048645> |
+| Rauchschwalbe | Photo | Nelson Chu Pavlosky | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/186839287> |
 | Rauchschwalbe | Call | Marie-Lan Taÿ Pamart (XC492100) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/492100> |
 | Bachstelze | Photo | Вячеслав Юсупов | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/74657457> |
+| Bachstelze | Photo | Ani Sarkisyan | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/1217900> |
+| Bachstelze | Photo | Марат Адиев | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/331531554> |
 | Bachstelze | Call | Sonothèque ADVL (XC1100607) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1100607> |
 | Zaunkönig | Photo | William Stephens | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/75531686> |
+| Zaunkönig | Photo | Philipp | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/93298792> |
+| Zaunkönig | Photo | Martin M | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/339204284> |
 | Zaunkönig | Call | Philippe_Grange (XC1133863) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1133863> |
 | Singdrossel | Photo | Antoine Thivolle | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/334875213> |
+| Singdrossel | Photo | Евгений Маринкин | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/269077977> |
+| Singdrossel | Photo | Oliver Hlasný | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/234119958> |
 | Singdrossel | Call | Philippe_Grange (XC1151579) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1151579> |
 | Nachtigall | Photo | Codrin Bucur | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/161483028> |
 | Nachtigall | Call | Philippe_Grange (XC1099301) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1099301> |

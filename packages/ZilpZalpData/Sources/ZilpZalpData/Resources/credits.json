@@ -1735,6 +1735,26 @@
       "packTitle": "Vögel Deutschlands",
       "birdID": "rabenkraehe",
       "birdName": "Rabenkrähe",
+      "kind": "photo",
+      "attribution": "Priya Sandhu",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/263296471"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "rabenkraehe",
+      "birdName": "Rabenkrähe",
+      "kind": "photo",
+      "attribution": "Rhys",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/339187840"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "rabenkraehe",
+      "birdName": "Rabenkrähe",
       "kind": "call",
       "attribution": "Marie-Lan Taÿ Pamart (XC511943)",
       "license": "CC-BY-SA-4.0",
@@ -1749,6 +1769,26 @@
       "attribution": "Adam Jackson",
       "license": "CC0-1.0",
       "sourceURL": "https://www.inaturalist.org/observations/193317621"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "dohle",
+      "birdName": "Dohle",
+      "kind": "photo",
+      "attribution": "Charlie Farrell",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/121937015"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "dohle",
+      "birdName": "Dohle",
+      "kind": "photo",
+      "attribution": "Radu Teodoreanu",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/340812653"
     },
     {
       "packID": "deutschland",
@@ -1775,6 +1815,26 @@
       "packTitle": "Vögel Deutschlands",
       "birdID": "kolkrabe",
       "birdName": "Kolkrabe",
+      "kind": "photo",
+      "attribution": "emilyd47",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/124616321"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "kolkrabe",
+      "birdName": "Kolkrabe",
+      "kind": "photo",
+      "attribution": "Jacek Pietruszewski",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/179940275"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "kolkrabe",
+      "birdName": "Kolkrabe",
       "kind": "call",
       "attribution": "Doug Hynes (XC922424)",
       "license": "CC-BY-SA-4.0",
@@ -1789,6 +1849,26 @@
       "attribution": "Codrin Bucur",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/127095661"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "ringeltaube",
+      "birdName": "Ringeltaube",
+      "kind": "photo",
+      "attribution": "Owen",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/298864321"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "ringeltaube",
+      "birdName": "Ringeltaube",
+      "kind": "photo",
+      "attribution": "Stephen James McWilliam",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/73335948"
     },
     {
       "packID": "deutschland",
@@ -1815,6 +1895,26 @@
       "packTitle": "Vögel Deutschlands",
       "birdID": "tuerkentaube",
       "birdName": "Türkentaube",
+      "kind": "photo",
+      "attribution": "Radu Teodoreanu",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/337930388"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "tuerkentaube",
+      "birdName": "Türkentaube",
+      "kind": "photo",
+      "attribution": "Pablo F. Domínguez",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/264043479"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "tuerkentaube",
+      "birdName": "Türkentaube",
       "kind": "call",
       "attribution": "Philippe_Grange (XC1142043)",
       "license": "CC0-1.0",
@@ -1829,6 +1929,26 @@
       "attribution": "Настя Бухвалова",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/385189352"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "mauersegler",
+      "birdName": "Mauersegler",
+      "kind": "photo",
+      "attribution": "euqirneto",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/230851928"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "mauersegler",
+      "birdName": "Mauersegler",
+      "kind": "photo",
+      "attribution": "Mourad Harzallah",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/168339242"
     },
     {
       "packID": "deutschland",
@@ -1855,6 +1975,26 @@
       "packTitle": "Vögel Deutschlands",
       "birdID": "rauchschwalbe",
       "birdName": "Rauchschwalbe",
+      "kind": "photo",
+      "attribution": "Diego González Dopico",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/239048645"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "rauchschwalbe",
+      "birdName": "Rauchschwalbe",
+      "kind": "photo",
+      "attribution": "Nelson Chu Pavlosky",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/186839287"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "rauchschwalbe",
+      "birdName": "Rauchschwalbe",
       "kind": "call",
       "attribution": "Marie-Lan Taÿ Pamart (XC492100)",
       "license": "CC-BY-SA-4.0",
@@ -1869,6 +2009,26 @@
       "attribution": "Вячеслав Юсупов",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/74657457"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "bachstelze",
+      "birdName": "Bachstelze",
+      "kind": "photo",
+      "attribution": "Ani Sarkisyan",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/1217900"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "bachstelze",
+      "birdName": "Bachstelze",
+      "kind": "photo",
+      "attribution": "Марат Адиев",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/331531554"
     },
     {
       "packID": "deutschland",
@@ -1895,6 +2055,26 @@
       "packTitle": "Vögel Deutschlands",
       "birdID": "zaunkoenig",
       "birdName": "Zaunkönig",
+      "kind": "photo",
+      "attribution": "Philipp",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/93298792"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "zaunkoenig",
+      "birdName": "Zaunkönig",
+      "kind": "photo",
+      "attribution": "Martin M",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/339204284"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "zaunkoenig",
+      "birdName": "Zaunkönig",
       "kind": "call",
       "attribution": "Philippe_Grange (XC1133863)",
       "license": "CC0-1.0",
@@ -1909,6 +2089,26 @@
       "attribution": "Antoine Thivolle",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/334875213"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "singdrossel",
+      "birdName": "Singdrossel",
+      "kind": "photo",
+      "attribution": "Евгений Маринкин",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/269077977"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "singdrossel",
+      "birdName": "Singdrossel",
+      "kind": "photo",
+      "attribution": "Oliver Hlasný",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/234119958"
     },
     {
       "packID": "deutschland",
