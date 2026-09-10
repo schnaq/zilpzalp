@@ -48,6 +48,20 @@ struct QuizComponentTests {
         #expect(badges.map(\.icon) == [.check, .rotateCcw])
     }
 
+    @Test("A resolved tile is felt as well as seen, and never as a failure")
+    func tilePhasesCarryTheirOwnHaptic() {
+        #expect(ChoiceTile.Phase.correct.feedback == .success)
+        // A warning, not an error: the system's failure buzz would say
+        // "wrong" through the fingertips, and this control has no wrong.
+        #expect(ChoiceTile.Phase.retry.feedback == .warning)
+        #expect(ChoiceTile.Phase.allCases.allSatisfy { $0.feedback != .error })
+
+        // Nothing between the tap and the verdict, and nothing on the way
+        // back to rest — otherwise a whole grid would buzz per question.
+        #expect(ChoiceTile.Phase.idle.feedback == nil)
+        #expect(ChoiceTile.Phase.chosen.feedback == nil)
+    }
+
     @Test("An idle tile is dressed by its rubric; a touched one is dressed by its phase")
     func idleTakesItsColoursFromTheToneAndTheRestFromThePhase() {
         let idle = ChoiceTile.Phase.idle.palette(on: .beeren)

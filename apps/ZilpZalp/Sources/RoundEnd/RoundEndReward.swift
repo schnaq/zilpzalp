@@ -77,6 +77,17 @@ struct RoundEndReward: View {
         .scaleEffect(popped ? 1 : Self.popFromScale)
         .opacity(popped ? 1 : 0)
         .animation(pop, value: settled)
+        // The sticker lands in the hand as well as on the screen — the one
+        // moment in the app that is worth a `success`, and only when the bird
+        // is genuinely new. A bird already in the album is simply there, and
+        // so is its arrival.
+        //
+        // The closure form because ``popped`` is written twice: `outcome`
+        // arrives one frame before `settled`, so an earned sticker goes true,
+        // false, true. Only the rise into place is felt.
+        .sensoryFeedback(trigger: popped) { was, now in
+            was || !now || !earnedSticker ? nil : .success
+        }
     }
 
     /// The pop belongs to a sticker just earned. A bird whose sticker is

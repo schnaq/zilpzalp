@@ -57,6 +57,30 @@ public struct ChoiceTile: View {
             }
         }
 
+        /// What the tile feels like when it reaches this phase, `nil` where it
+        /// should feel like nothing at all.
+        ///
+        /// The taps a child cannot hear over a playground still land: the
+        /// answer is a `success`, another go is a `warning`. Deliberately
+        /// **not** `.error`, which is the system's failure signal — this
+        /// control has no failure state, no red and no X, and a buzz that
+        /// says "wrong" would put one back in through the fingertips.
+        ///
+        /// `idle` and `chosen` feel like nothing: `chosen` is the frame
+        /// between the tap and the verdict, and `idle` is what every tile
+        /// returns to when the next question is dealt — a whole grid buzzing
+        /// its way back to rest would be the loudest thing in the round.
+        ///
+        /// Whether the phone plays it at all is the system's: SwiftUI honours
+        /// the device's haptics setting, and this control never asks twice.
+        var feedback: SensoryFeedback? {
+            switch self {
+            case .idle, .chosen: nil
+            case .correct: .success
+            case .retry: .warning
+            }
+        }
+
         /// How the border, the ledge and the ring are painted. `idle` takes
         /// all three from the tile's own ``Tone``; the other three phases
         /// override them, exactly as `STATE` does in the JSX.
@@ -232,6 +256,11 @@ public struct ChoiceTile: View {
             value: phase,
         )
         .animation(ZMotion.easeOut.animation(duration: ZMotion.fast), value: dimmed)
+        // The verdict in the hand, beside the colour and the badge — see
+        // ``Phase/feedback``. The closure form rather than the plain one:
+        // only the phase a tile arrives at decides, so the whole grid falling
+        // back to `idle` on the next question stays silent.
+        .sensoryFeedback(trigger: phase) { _, arrived in arrived.feedback }
         .accessibilityLabel(label)
     }
 

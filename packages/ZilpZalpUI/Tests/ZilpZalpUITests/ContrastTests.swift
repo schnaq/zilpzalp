@@ -30,10 +30,9 @@ import ZilpZalpUI
 // - Locked states are exempt. `HomeTile` and `RewardSticker` draw a locked
 //   tile in `ink300` on `sand200`, 2.66:1, and SC 1.4.3 excludes inactive
 //   components. A locked `HomeTile` is not on any v1 screen either (spec §3).
-// - `LedgePalette.clay` carries no text: `ZButton.Tone` has no clay, so only
-//   `IconButton` uses it and its glyph is not text. `textOnColor` on `clay500`
-//   measures 4.25:1, which is why issue #238 asked for a darker `clay500` —
-//   the pair it names is not one this system ever writes on. See the PR.
+//
+// `LedgePalette.clay` is the one exception to that second point and is in the
+// list anyway, at the graphic threshold — see ``ContrastPair/glyphs``.
 
 /// One text colour on one background, and the ratio SC 1.4.3 asks of them.
 struct ContrastPair: Sendable, CustomStringConvertible {
@@ -84,7 +83,25 @@ extension ContrastPair {
     /// them. Spelled out rather than derived from the components: what a tone
     /// paints is internal to `ZilpZalpUI`, and a list that walked the same
     /// switch statements would pass whatever those statements said.
-    static let all: [ContrastPair] = homeTile + pressables + banners + badges + cards + surfaces
+    static let all: [ContrastPair] = homeTile + pressables + glyphs + banners + badges + cards
+        + surfaces
+
+    /// The one non-text pair worth pinning: `LedgePalette.clay`.
+    ///
+    /// Issue #238 asked for a darker `clay500` because `textOnColor` on it is
+    /// 4.25:1. No text is ever set on that palette — `ZButton.Tone` has no
+    /// clay, so `IconButton` is its only user and a glyph is judged by SC
+    /// 1.4.11 at 3:1, which it clears. It is listed rather than left out so
+    /// that the reasoning is a test rather than a paragraph, and so that a
+    /// future clay button with a label meets a threshold that has moved.
+    static let glyphs: [ContrastPair] = [
+        ContrastPair(
+            name: "IconButton .clay glyph",
+            foreground: ZColor.textOnColor,
+            background: ZColor.info,
+            minimum: WCAG.largeText,
+        ),
+    ]
 
     /// `HomeTile.Tone.palette` — foreground on background. The label follows
     /// the tile down to `body` 20 pt on a phone, so all four are normal text.

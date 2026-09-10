@@ -105,6 +105,11 @@ struct QuizScreen: View {
         // distance — and it is what picks the round back up whenever
         // something covers this screen and `suspend()` cuts the question.
         .onChange(of: askedFor) { session?.resume() }
+        // Off we go: one tap of the phone as a round is dealt. Keyed to the
+        // round and not to the appearance — this screen is told it came back
+        // for reasons that are not a new round, and `resume()` renews
+        // ``QuizSession/roundID`` for exactly the ones that are.
+        .sensoryFeedback(.start, trigger: session?.roundID)
         // The question being spoken and the round waiting to move on both
         // outlive this view otherwise — a child who taps back would hear the
         // last question from the home screen.
