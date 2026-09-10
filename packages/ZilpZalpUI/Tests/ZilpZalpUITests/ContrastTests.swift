@@ -41,7 +41,9 @@ struct ContrastPair: Sendable, CustomStringConvertible {
     let foreground: Color
     let background: Color
     /// ``WCAG/normalText`` or ``WCAG/largeText``, see the file comment.
-    let minimum: Double
+    /// Defaulted, so that only the pairs judged at the large threshold spell
+    /// one out — and every one of those carries the reason beside it.
+    var minimum = WCAG.normalText
 
     var description: String {
         name
@@ -110,25 +112,21 @@ extension ContrastPair {
             name: "HomeTile .leaf label",
             foreground: ZColor.olive700,
             background: ZColor.olive100,
-            minimum: WCAG.normalText,
         ),
         ContrastPair(
             name: "HomeTile .clay label",
             foreground: ZColor.clay700,
             background: ZColor.clay100,
-            minimum: WCAG.normalText,
         ),
         ContrastPair(
             name: "HomeTile .sun label",
             foreground: ZColor.ink900,
             background: ZColor.sun200,
-            minimum: WCAG.normalText,
         ),
         ContrastPair(
             name: "HomeTile .hoopoe label",
             foreground: ZColor.orange700,
             background: ZColor.orange100,
-            minimum: WCAG.normalText,
         ),
     ]
 
@@ -140,16 +138,14 @@ extension ContrastPair {
             name: "ZButton .primary label",
             foreground: ZColor.textOnColor,
             background: ZColor.primary,
-            minimum: WCAG.normalText,
         ),
         ContrastPair(
             name: "ZButton .primary label, pressed",
             foreground: ZColor.textOnColor,
             background: ZColor.primaryPress,
-            minimum: WCAG.normalText,
         ),
-        // The one pair judged at the large threshold: `ZButton`'s default size
-        // sets `headline` 28 pt bold, and no screen draws an accent button
+        // Large text because `ZButton`'s default size sets `headline` 28 pt
+        // bold, and no screen draws an accent button
         // with a label at all — the tone reaches a child through `SoundButton`
         // and `IconButton`, both wordless. A `.medium` accent button would be
         // 3.23:1 against a 22 pt label, and darkening `orange500` — the crest,
@@ -164,25 +160,21 @@ extension ContrastPair {
             name: "ZButton .reward label",
             foreground: ZColor.textOnReward,
             background: ZColor.reward,
-            minimum: WCAG.normalText,
         ),
         ContrastPair(
             name: "ZButton .reward label, pressed",
             foreground: ZColor.textOnReward,
             background: ZColor.sun500,
-            minimum: WCAG.normalText,
         ),
         ContrastPair(
             name: "ZButton .quiet label",
             foreground: ZColor.textStrong,
             background: ZColor.white,
-            minimum: WCAG.normalText,
         ),
         ContrastPair(
             name: "ZButton .quiet label, pressed",
             foreground: ZColor.textStrong,
             background: ZColor.cream100,
-            minimum: WCAG.normalText,
         ),
     ]
 
@@ -215,37 +207,31 @@ extension ContrastPair {
             name: "Badge .leaf text",
             foreground: ZColor.olive700,
             background: ZColor.primarySoft,
-            minimum: WCAG.normalText,
         ),
         ContrastPair(
             name: "Badge .hoopoe text",
             foreground: ZColor.orange700,
             background: ZColor.accentSoft,
-            minimum: WCAG.normalText,
         ),
         ContrastPair(
             name: "Badge .sun text",
             foreground: ZColor.bark700,
             background: ZColor.sun200,
-            minimum: WCAG.normalText,
         ),
         ContrastPair(
             name: "Badge .clay text",
             foreground: ZColor.clay700,
             background: ZColor.clay100,
-            minimum: WCAG.normalText,
         ),
         ContrastPair(
             name: "Badge .rare text",
             foreground: ZColor.berry700,
             background: ZColor.berry100,
-            minimum: WCAG.normalText,
         ),
         ContrastPair(
             name: "Badge .sand text",
             foreground: ZColor.ink700,
             background: ZColor.sand200,
-            minimum: WCAG.normalText,
         ),
     ]
 
@@ -256,31 +242,26 @@ extension ContrastPair {
             name: "ZCard .paper copy",
             foreground: ZColor.textBody,
             background: ZColor.surfaceCard,
-            minimum: WCAG.normalText,
         ),
         ContrastPair(
             name: "ZCard .leaf copy",
             foreground: ZColor.textBody,
             background: ZColor.olive50,
-            minimum: WCAG.normalText,
         ),
         ContrastPair(
             name: "ZCard .clay copy",
             foreground: ZColor.textBody,
             background: ZColor.clay50,
-            minimum: WCAG.normalText,
         ),
         ContrastPair(
             name: "ZCard .sun copy",
             foreground: ZColor.textBody,
             background: ZColor.sun100,
-            minimum: WCAG.normalText,
         ),
         ContrastPair(
             name: "ZCard .sand copy",
             foreground: ZColor.textBody,
             background: ZColor.surfaceSunken,
-            minimum: WCAG.normalText,
         ),
     ]
 
@@ -293,37 +274,31 @@ extension ContrastPair {
             name: "Strong text on the page",
             foreground: ZColor.textStrong,
             background: ZColor.surfacePage,
-            minimum: WCAG.normalText,
         ),
         ContrastPair(
             name: "Body text on the page",
             foreground: ZColor.textBody,
             background: ZColor.surfacePage,
-            minimum: WCAG.normalText,
         ),
         ContrastPair(
             name: "RewardSticker caption, locked (muted on the page)",
             foreground: ZColor.textMuted,
             background: ZColor.surfacePage,
-            minimum: WCAG.normalText,
         ),
         ContrastPair(
             name: "Link on the page",
             foreground: ZColor.link,
             background: ZColor.surfacePage,
-            minimum: WCAG.normalText,
         ),
         ContrastPair(
             name: "RewardSticker caption on a card",
             foreground: ZColor.textStrong,
             background: ZColor.surfaceCard,
-            minimum: WCAG.normalText,
         ),
         ContrastPair(
             name: "Round end, text on the forest ground",
             foreground: ZColor.textOnColor,
             background: ZColor.surfaceForest,
-            minimum: WCAG.normalText,
         ),
     ]
 }
@@ -331,9 +306,10 @@ extension ContrastPair {
 @MainActor
 @Test("Every text pair the components draw clears its WCAG threshold", arguments: ContrastPair.all)
 func textContrastClearsItsThreshold(pair: ContrastPair) {
+    let ratio = pair.ratio
     #expect(
-        pair.ratio >= pair.minimum,
-        "\(pair.name): \(String(format: "%.2f", pair.ratio)):1, below \(pair.minimum):1",
+        ratio >= pair.minimum,
+        "\(pair.name): \(String(format: "%.2f", ratio)):1, below \(pair.minimum):1",
     )
 }
 
@@ -347,7 +323,6 @@ func theContrastFormulaIsWCAGs() {
         name: "soot on white",
         foreground: Color(.sRGB, red: 0, green: 0, blue: 0),
         background: Color(.sRGB, red: 1, green: 1, blue: 1),
-        minimum: WCAG.normalText,
     )
     #expect(abs(extreme.ratio - 21) < 0.01)
 
@@ -355,7 +330,6 @@ func theContrastFormulaIsWCAGs() {
         name: "olive on olive",
         foreground: ZColor.olive500,
         background: ZColor.olive500,
-        minimum: WCAG.normalText,
     )
     #expect(abs(flat.ratio - 1) < 0.001)
 
@@ -365,7 +339,6 @@ func theContrastFormulaIsWCAGs() {
         name: "ZButton .primary label",
         foreground: ZColor.textOnColor,
         background: ZColor.primary,
-        minimum: WCAG.normalText,
     )
     #expect(abs(primary.ratio - 4.58) < 0.01)
 }

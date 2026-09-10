@@ -256,10 +256,11 @@ public struct ChoiceTile: View {
             value: phase,
         )
         .animation(ZMotion.easeOut.animation(duration: ZMotion.fast), value: dimmed)
-        // The verdict in the hand, beside the colour and the badge — see
-        // ``Phase/feedback``. The closure form rather than the plain one:
-        // only the phase a tile arrives at decides, so the whole grid falling
-        // back to `idle` on the next question stays silent.
+        // The verdict in the hand, beside the colour and the badge. The
+        // closure form because two of the four phases feel like nothing —
+        // only it takes an optional, and it is what keeps the whole grid
+        // silent as it falls back to `idle` for the next question. Which
+        // phase feels like what is ``Phase/feedback``'s.
         .sensoryFeedback(trigger: phase) { _, arrived in arrived.feedback }
         .accessibilityLabel(label)
     }

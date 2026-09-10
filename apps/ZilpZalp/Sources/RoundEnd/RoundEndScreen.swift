@@ -323,9 +323,19 @@ struct RoundEndScreen: View {
         // Left while the round was being written down: the praise would
         // land over whatever replaced this screen.
         guard !Task.isCancelled else { return }
+        // Read before the flag is set: this runs again every time the child
+        // comes back from the album, and neither voice may start a second
+        // time there. `announcer` is the speech side's guard; this is the
+        // announcement's.
+        let arriving = !settled
         settled = true
 
-        guard !voiceOverIsOn else { return await announceToVoiceOver() }
+        guard !voiceOverIsOn else {
+            if arriving {
+                await announceToVoiceOver()
+            }
+            return
+        }
 
         if announcer == nil {
             let voice = SpeechAnnouncer(library: library)
@@ -348,6 +358,10 @@ struct RoundEndScreen: View {
     /// count, which no single element on the screen says. And it replaces that
     /// spoken sentence rather than joining it: two voices over each other are
     /// worse than either, and this one says more.
+    ///
+    /// Where a second screen ever needs the same thing, the choice between
+    /// the two voices belongs in ``SpeechAnnouncer`` rather than in a second
+    /// view — it is the one that owns everything the app says out loud.
     ///
     /// The pause is what makes it arrive. VoiceOver drops an announcement
     /// posted into the screen change that caused it; half a second later the
