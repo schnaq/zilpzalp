@@ -59,7 +59,7 @@ public struct MediaAsset: Codable, Sendable, Hashable {
 /// hundred identical attributions. ``MediaAsset`` keeps its six fields.
 public struct MediaClip: Codable, Sendable, Hashable {
     /// Path relative to the manifest's directory, for instance
-    /// `speech/quiz.prompt.whereIs/amsel.m4a`.
+    /// `speech/collection.name/amsel.m4a` — see ``SpeechKey/speciesName``.
     public let file: String
     /// Lowercase hexadecimal SHA-256 of the file, as for every medium: it is
     /// what a download is verified against.
