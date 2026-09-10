@@ -25,8 +25,8 @@ Speech clips are the third medium and carry three fields, because the licence
 of a recorded sentence belongs to the voice that spoke it rather than to the
 single clip. A bird's "speech" maps a sentence key to one clip:
 
-    "speech": {"quiz.prompt.whereIs": {"file": "speech/…/amsel.m4a",
-                                       "sha256": "…", "text": "Wo ist die Amsel?"}}
+    "speech": {"collection.name": {"file": "speech/…/amsel.m4a",
+                                   "sha256": "…", "text": "Amsel"}}
 
 A manifest that declares at least one clip must carry a "voice" block, which
 is checked exactly as a medium is, minus the file:
