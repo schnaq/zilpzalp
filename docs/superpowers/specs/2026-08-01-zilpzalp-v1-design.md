@@ -19,7 +19,7 @@ Eine quelloffene Lern-App, mit der Kinder heimische Vögel kennenlernen. Kein Ac
 | Spiel 1 | Vogelname wird vorgelesen, aus vier Fotos das richtige antippen |
 | Spiel 2 | Vogelruf wird abgespielt, aus vier Fotos das richtige antippen |
 | Profile | Mehrere lokale Profile mit Namen und Avatar, ohne Account |
-| Fortschritt | Sterne, acht Ränge von Kohlmeise bis Wiedehopf, Sammlung, lokales Leaderboard |
+| Fortschritt | Sterne, Sticker nach fünf Wiedererkennungen, Sammlung, lokales Leaderboard |
 | Artenpakete | 10 Arten fest gebundelt, „Vögel Deutschlands" (~60 Arten) als Download aus S3 |
 | Elternbereich | Per FaceID/Code geschützt: Zeitbudget, Paketverwaltung, Credits, Einstellungen |
 
@@ -60,7 +60,7 @@ Spiel 3 (Federn zuordnen) und Spiel 4 (Lebensraum antippen). Beide sind nicht am
 ```
 apps/ZilpZalp/            Xcode-Projekt: App-Target, Assets, Info.plist, Entitlements
 packages/
-  ZilpZalpCore/           Spiellogik: Runden, Scoring, Ränge, Zeitbudget — UI-frei
+  ZilpZalpCore/           Spiellogik: Runden, Scoring, Sticker-Schwelle, Zeitbudget — UI-frei
   ZilpZalpData/           Bird-Modell, Paket-Manifeste, Profil-Persistenz, Downloader
   ZilpZalpUI/             Design-System: Tokens und Komponenten
 tools/                    Python — HTTP, Bildskalierung, ffmpeg, S3
@@ -80,8 +80,8 @@ Die gesamte Logik liegt in SwiftPM-Paketen ohne UI-Abhängigkeit. Dadurch läuft
 
 **ZilpZalpCore** kennt weder SwiftUI noch Dateisystem noch Netzwerk. Es enthält:
 - `Round` — erzeugt aus einer Artenmenge eine Runde aus 10 Fragen mit je vier Antwortoptionen, wobei die Ablenker zufällig, aber reproduzierbar über einen injizierten Zufallsgenerator gezogen werden
-- `Scoring` — aus der Zahl der auf Anhieb richtigen Antworten die Sterne: ab 9 drei Sterne, ab 6 zwei, sonst einer
-- `RankLadder` — Sternschwellen 0/25/60/100/150/220/300/400 für Kohlmeise, Amsel, Blaumeise, Rotkehlchen, Star, Buntspecht, Eisvogel, Wiedehopf
+- `Scoring` — aus der Zahl der auf Anhieb richtigen Antworten die Sterne: ab 9 drei Sterne, ab 6 zwei, sonst einer; dazu die Zahl der Wiedererkennungen, die einen Sticker verdient (fünf)
+- `RoundPlay` — der Verlauf einer Runde: welche Art auf Anhieb erkannt wurde, in welcher Reihenfolge, und welcher Vogel am Rundenende gefeiert wird
 - `PlayBudget` — verbrauchte Spielzeit pro Tag und Profil gegen ein eingestelltes Limit
 
 Reine Wertetypen und Funktionen. Vollständig testbar ohne Laufzeitumgebung.
@@ -90,11 +90,11 @@ Reine Wertetypen und Funktionen. Vollständig testbar ohne Laufzeitumgebung.
 - `Bird`, `MediaAsset`, `Pack` als Codable-Modelle
 - `PackCatalog` — liest das gebundelte Basis-Paket und die geladenen Pakete
 - `PackDownloader` — lädt Pakete per URLSession aus S3, prüft SHA-256, entpackt nach Application Support
-- `ProfileStore` — ein Actor über einer JSON-Datei; Profile, Sterne, Statistik, Sammlung
+- `ProfileStore` — ein Actor über einer JSON-Datei; Profile, Sterne, Statistik, Wiedererkennungen je Art
 
 Das Basis-Paket ist eine SwiftPM-Ressource von `ZilpZalpData`, kein Asset Catalog im App-Target: `PackCatalog.bundled()` öffnet es über `Bundle.module`, `photoURL(for:)` löst das Foto eines Vogels relativ zum Paketverzeichnis auf. `tools/sync_bundled_packs.py` spiegelt das Paketverzeichnis nach `Resources/Packs/` in `ZilpZalpData`, und `mise run check` schlägt bei Abweichung fehl. Ein Symlink funktioniert nicht — SwiftPM kopiert bei einer `.copy`-Ressource den Link selbst, nicht sein Ziel, sodass er im Bundle ins Leere zeigt.
 
-**ZilpZalpUI** übersetzt das Design-System nach SwiftUI: Farb- und Typo-Tokens, `ZButton`, `ZCard`, `ChoiceTile`, `SoundButton`, `QuizProgress`, `FeedbackBanner`, `RewardSticker`, `HomeTile`, `SettingRow`. Nach den Komponenten unter `design/components/`, mit bewussten Abweichungen wie unten vermerkt. Komponenten bekommen fertige `String`-Werte übergeben und tragen selbst keine Produkttexte. Gesperrte Sticker in der Sammlung bleiben sichtbar — mit Schloss-Symbol statt versteckt. `HomeTile` kennt einen gesperrten Zustand mit Ei-Symbol als Komponentenfähigkeit, aber v1 setzt ihn auf dem Startbildschirm nicht ein: der besteht nur aus `TopBar` und den zwei Kacheln für Spiel 1 und Spiel 2, ohne Baum und ohne gesperrte Nester für Spiel 3 und 4. Dynamic Type ist bewusst fest: die Geometrie (220 pt Kacheln, 64/96/160 pt Bedienziele) skaliert nicht mit dem Text (Entscheidung 2026-09-07).
+**ZilpZalpUI** übersetzt das Design-System nach SwiftUI: Farb- und Typo-Tokens, `ZButton`, `ZCard`, `ChoiceTile`, `SoundButton`, `QuizProgress`, `FeedbackBanner`, `RewardSticker`, `HomeTile`, `SettingRow`. Nach den Komponenten unter `design/components/`, mit bewussten Abweichungen wie unten vermerkt. Komponenten bekommen fertige `String`-Werte übergeben und tragen selbst keine Produkttexte. Gesperrte Sticker in der Sammlung bleiben sichtbar — mit Schloss-Symbol statt versteckt, und darunter zeigt `StickerProgress` in fünf Markierungen, wie weit dieser Vogel gekommen ist (Entscheidung 2026-09-09, Issue #177). `HomeTile` kennt einen gesperrten Zustand mit Ei-Symbol als Komponentenfähigkeit, aber v1 setzt ihn auf dem Startbildschirm nicht ein: der besteht nur aus `TopBar` und den zwei Kacheln für Spiel 1 und Spiel 2, ohne Baum und ohne gesperrte Nester für Spiel 3 und 4. Dynamic Type ist bewusst fest: die Geometrie (220 pt Kacheln, 64/96/160 pt Bedienziele) skaliert nicht mit dem Text (Entscheidung 2026-09-07).
 
 ### Datenmodell
 
@@ -153,6 +153,8 @@ Die App holt beim Start des Elternbereichs einen Katalog (`packs/index.json`) au
 
 Neue Pakete können dadurch ohne App-Update und ohne Review ausgeliefert werden — der Grund, warum wir nicht Apples On-Demand Resources nehmen.
 
+Die Umsetzung (Entscheidung 2026-09-10, Issue #34) weicht in drei Punkten ab. Der Katalog wird geholt, sobald die Paketkarte im Elternbereich erscheint — also hinter dem Schloss, nicht beim Öffnen des Bereichs, damit die einzige Netzverbindung der App zwei Türen tief liegt. Die Spiele lesen nicht mehr ein Paket, sondern eine `PackLibrary` aus Basispaket und allen installierten Paketen; eine Art, die zweimal vorkommt, zählt einmal, und das Basispaket gewinnt. Belegter Speicher wird aus den Dateien gemessen (`.fileSizeKey`, kein Datumsschlüssel), nicht aus der Größe im Index — heruntergeladen wurde vielleicht eine ältere App-Version, und der Index ist genau dann unerreichbar, wenn jemand Platz schaffen will.
+
 ---
 
 ## 4. Spielablauf
@@ -162,11 +164,13 @@ Beide Spiele nutzen dieselbe Engine, sie unterscheiden sich nur darin, wie die F
 1. Kind wählt sein Profil, dann ein Spiel
 2. Zehn Fragen. Pro Frage: Aufgabe wird ausgegeben — Spiel 1 liest Artikel und Namen (mit `pronunciation`-Override, wo hinterlegt) per `AVSpeechSynthesizer` vor, Spiel 2 spielt den Ruf ab, wiederholbar per Tippen
 3. Vier Fotokacheln. Richtige Wahl färbt sich olivgrün mit Häkchen, falsche Wahl färbt sich sonnengelb mit „Versuchs nochmal" — **niemals rot, niemals ein Kreuz, kein Blockieren**. Das Kind darf weiter probieren. Die Kacheln zeigen nie den Vogelnamen als Text. Auf dem iPad stehen sie im 2×2-Raster, nicht in der einen Reihe des Design-Exports — Issue #25, Task 15 des Plans und die Umsetzung sind sich darin einig; Grund sind Kachelgröße und Bedienziele auf 11-Zoll-iPads in beiden Ausrichtungen. Ob die Frage neben dem Raster oder darüber steht, wird am tatsächlich verfügbaren Platz gemessen statt an der Größenklasse — auf dem iPad im Hochformat steht sie deshalb darüber (Issue #118). Das iPhone läuft nur noch im Hochformat: quer bleiben für Frage, Antworten und Rückmeldung 718×216 pt, und die größte Kachel, die daraus zu holen ist, misst 83 pt (Issue #117)
-4. Nach zehn Fragen: Sterne, gegebenenfalls Rangaufstieg, neuer Sticker in der Sammlung. Am Rundenende sind verdiente Sterne ausgefüllt und nicht verdiente nur umrandet: `RewardScreen.jsx` zeichnet dort drei gleiche gefüllte Kreise und unterscheidet verdient und nicht verdient überhaupt nicht, die Umriss-Sterne aus `HomeTile.jsx` unterscheiden nur über die Farbe — beides kann ein Kind, das nicht liest, nicht zählen (Entscheidung 2026-09-08, Issue #149). Die Überschrift „Super gemacht!" schrumpft so weit, wie sie zu breit ist, statt abgeschnitten zu werden — auf einem 390-pt-iPhone fehlen ihr 1,2 pt; Untergrenze ist `--text-title`, auf dem iPad im Vollbild bleibt die Zeile bei `--text-hero`, und der Design-Export zeichnet mit „Gut gemacht!" eine kürzere Überschrift und kein Telefon (Entscheidung 2026-09-09, Issue #137)
+4. Nach zehn Fragen: Sterne und der Weg zum nächsten Sticker. Ränge und Vogel-Leiter sind abgeschafft; einen Sticker gibt es, wenn ein Kind denselben Vogel **fünfmal auf Anhieb erkannt** hat — nach einem Fehlversuch gefunden zählt nicht, denn unter vier Kacheln findet man die richtige immer irgendwann. Unter dem gefeierten Vogel stehen fünf Markierungen, so weit gefüllt, wie der Zähler steht; die fünfte ist der neue Sticker und wird gefeiert wie früher der erste Fund. Gefeiert wird der Vogel, dessen Sticker in dieser Runde vollständig wurde, sonst der, der einem Sticker am nächsten gekommen ist (Entscheidung 2026-09-09, Christian und Johanna, Issue #177). Am Rundenende sind verdiente Sterne ausgefüllt und nicht verdiente nur umrandet: `RewardScreen.jsx` zeichnet dort drei gleiche gefüllte Kreise und unterscheidet verdient und nicht verdient überhaupt nicht, die Umriss-Sterne aus `HomeTile.jsx` unterscheiden nur über die Farbe — beides kann ein Kind, das nicht liest, nicht zählen (Entscheidung 2026-09-08, Issue #149). Die Überschrift „Super gemacht!" schrumpft so weit, wie sie zu breit ist, statt abgeschnitten zu werden — auf einem 390-pt-iPhone fehlen ihr 1,2 pt; Untergrenze ist `--text-title`, auf dem iPad im Vollbild bleibt die Zeile bei `--text-hero`, und der Design-Export zeichnet mit „Gut gemacht!" eine kürzere Überschrift und kein Telefon (Entscheidung 2026-09-09, Issue #137)
 
 Eine laufende Runde verlässt der Zurück-Pfeil der `TopBar` nicht mehr sofort, sondern stellt zuerst die gesprochene und geschriebene Frage „Willst du aufhören?" über der abgedunkelten Runde: Die große, primäre Antwort ist „Weiterspielen", ein Tippen neben die Karte zählt genauso, nur „Aufhören" beendet die Runde, und die Wischgeste von links stellt dieselbe Frage, statt die Runde zu verlassen — für die abgeschlossene Runde und für „Zeit fürs Nest" ändert sich nichts (Entscheidung 2026-09-08, Issue #146).
 
 Von links hereinwischen geht überall dort zurück, wo ein Zurück-Pfeil steht, und tut genau das, was er tut; in der laufenden Runde stellt es die Frage darüber. Ausgenommen sind Rundenende und „Zeit fürs Nest": Dort bleibt die Geste aus, weil dort kein Pfeil steht (Entscheidung 2026-09-08, Issue #150).
+
+Das Rundenende bekommt links oben ein Haus zur Startseite (Issue #175). Im Design ist 1d ein Endbild, in der App liegt es auf dem `NavigationStack`, und beide Buttons darunter führen weiter hinein — wer aufhören oder das iPad weitergeben wollte, kam nur über eine weitere Runde heraus. Es ist ein wortloser Icon-Button an der Stelle, an der jeder andere Screen seinen Zurück-Pfeil hat, und keine dritte Pille neben „Nochmal spielen" und „Sammlung": Der Screen scrollt nicht, und auf einem 375-pt-iPhone geht die Höhe dafür nicht auf. Eine `TopBar` bekommt 1d weiterhin nicht, und die Wischgeste bleibt aus — das Haus führt nicht zurück, sondern ganz heraus, und es öffnet erst, wenn die Runde verbucht ist (Entscheidung 2026-09-09, Issue #175).
 
 Der Blätter-Fortschritt zeigt den Stand ohne Zahlen. Auf dem iPhone sitzt die Blätterreihe unter der TopBar statt wie im Design darin: Zehn 44-pt-Blätter mit 12 pt Abstand sind 548 pt breit — breiter als jedes iPhone. Bei erschöpftem Zeitbudget läuft die aktuelle Runde noch zu Ende, danach erscheint „Zeit fürs Nest".
 
@@ -185,7 +189,7 @@ Alles liegt lokal. Kein Netzwerkverkehr außer den ausdrücklich von Eltern ange
 Profile liegen als JSON in Application Support:
 
 ```
-Profiles/profiles.json      Name, Avatar, Sterne, Rang, Statistik, Sammlung
+Profiles/profiles.json      Name, Avatar, Sterne, Statistik, Wiedererkennungen je Art
 Packs/<pack-id>/            Heruntergeladene Pakete
 Settings/parental.json      Zeitbudget, ob FaceID aktiv ist
 ```
@@ -200,7 +204,7 @@ Abstürze werden ausschließlich über Apples eigenes MetricKit und den Xcode Or
 
 | Ebene | Werkzeug | Umfang |
 |---|---|---|
-| Logik | Swift Testing (`@Test`) in SwiftPM | Rundenerzeugung, Scoring, Rangschwellen, Zeitbudget, Manifest-Parsing, SHA-Prüfung |
+| Logik | Swift Testing (`@Test`) in SwiftPM | Rundenerzeugung, Scoring, Wiedererkennungen und Sticker-Schwelle, Zeitbudget, Manifest-Parsing, SHA-Prüfung |
 | Lizenz-Gate | eigenes Tool in CI | Jedes Asset hat erlaubte Lizenz und Attribution |
 | Snapshot | Xcode-Previews, manuell | Design-Komponenten gegen `design/` |
 | Integration | XCTest im Simulator, sparsam | Ein Durchlauf pro Spiel, Profilanlage, Paket-Download gegen einen lokalen Server |
@@ -251,7 +255,7 @@ Bewusst anders als unlock: Swift statt Flutter, Tag-basiertes Release statt Bran
 | M1 | Design-System in Swift | Tokens und alle Komponenten als SwiftUI, Fonts und Lucide-Icons eingebunden |
 | M2 | Daten und Medien | Paket-Schema, S3-Bucket, `fetch-media`, Lizenz-Gate, generierte Credits, **Guidelines-Recherche** |
 | M3 | Spiel 1 | Quiz-Engine, Sprachausgabe, Sterne-Scoring, Layout für iPhone und iPad |
-| M4 | Profile und Fortschritt | Profilwahl, Avatare, Ränge, Sammlung, Leaderboard „Unser Schwarm" |
+| M4 | Profile und Fortschritt | Profilwahl, Avatare, ~~Ränge~~ (2026-09-09 abgeschafft, #177), Sammlung, Leaderboard „Unser Schwarm" |
 | M5 | Spiel 2 und Pakete | Vogelrufe, Audio-Player, Paket-Download, Elternbereich mit Schloss, Paketverwaltung |
 | M6 | Eltern und Compliance | Zeitbudget, Parental Gate, Privacy Manifest, Age Rating |
 | M7 | Release | Signing, TestFlight, Store-Assets, „Designed for iPad" auf Mac |
@@ -273,7 +277,7 @@ Diese Fragen sind bewusst offen und blockieren den Start nicht:
 2. **Qualität der Vogelrufe.** Die Verfügbarkeit ist belegt — alle vierzig geprüften Arten haben frei lizenzierte Aufnahmen. Offen ist die inhaltliche Eignung: viele Aufnahmen sind Flügelschläge, Bettelrufe oder nächtliche Flugrufe statt des typischen Gesangs. Jede Aufnahme muss vor Aufnahme ins Paket angehört werden. Wartet auf `tools/fetch-media` für Rufe (#16) und das manuelle Anhören (#32). Entscheidung 2026-09-08 (Christian, #32): Für die zehn Rufe des Basis-Pakets tritt das Anhören im Spiel an die Stelle des Anhörens vorab. Ausgewählt wurden sie nach den xeno-canto-Metadaten und einer einmaligen Messung des Signalverlaufs im PR — nicht durch `fetch-media`, das nichts misst. Eine Aufnahme, die im Spiel durchfällt, wird per `fetch-media calls pick` ausgetauscht
 3. **Habitat-Zuordnung für Spiel 4** muss selbst erarbeitet und belegt werden. Ein systematisches Übernehmen der Kategorisierung von NABU oder LBV berührt das Datenbankrecht nach §87a UrhG. Unverändert, erst in M8 relevant
 4. ~~**Wortlaut der App-Review-Guidelines** zu Kids Category und Altersfreigabe ist gegen die aktuelle Fassung zu verifizieren~~ — erledigt, siehe `docs/kids-category.md` (#19). Offen bleiben die technischen Umsetzungen: das Aufgaben-Gate für externe Links (#37) und die Altersfreigabe-Einstellungen in App Store Connect (#41)
-5. **Artenliste und Rangleiter** sind inhaltliche Entscheidungen, die Christian und Johanna treffen — nicht technische. Ein Vorschlag für die Artenliste (#21) ist in Arbeit
+5. **Artenliste** ist eine inhaltliche Entscheidung, die Christian und Johanna treffen — nicht eine technische. Ein Vorschlag (#21) ist in Arbeit. Die Rangleiter ist damit erledigt: sie ist abgeschafft, an ihrer Stelle steht der Sticker nach fünf Wiedererkennungen (Entscheidung 2026-09-09, Christian und Johanna, Issue #177)
 6. **`.playback` vs. `.duckOthers` für die Audiosession.** Die Sprachausgabe (#24) nutzt zurzeit `.playback` ohne Ducking — das unterbricht Eltern-Musik im Hintergrund vollständig, und da die Session nie deaktiviert wird, bekommt die Musik kein Fortsetzen-Signal. `.duckOthers` würde nur absenken, verlangt dafür ein Session-Lebenszyklus-Management, das mit dem Rufe-Player (#30) geteilt werden muss. Offen; keine einseitige Entscheidung in #24
 
 ---

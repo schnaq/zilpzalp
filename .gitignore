@@ -16,13 +16,20 @@ Desktop.ini
 *.swo
 *~
 
-# Node / JS tooling (for when a build setup is added)
+# Node / JS tooling
 node_modules/
 dist/
 build/
 *.log
 npm-debug.log*
 yarn-error.log*
+
+# Next.js website (apps/web). bun.lock is committed; these are build output and
+# generated types — next-env.d.ts is written by every `next build`.
+.next/
+.vercel/
+next-env.d.ts
+*.tsbuildinfo
 
 # Environment / secrets
 .env

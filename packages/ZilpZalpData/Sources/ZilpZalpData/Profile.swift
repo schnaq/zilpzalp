@@ -3,11 +3,6 @@ import Foundation
 /// One child's profile: the name it picked, the avatar it picked and
 /// everything the app remembers between rounds.
 ///
-/// The rank is deliberately absent. It follows from ``totalStars`` through
-/// `RankLadder` in `ZilpZalpCore` and is derived on every read, so it cannot
-/// drift away from the stars that earned it. This module does not depend on
-/// `ZilpZalpCore` — the derivation belongs to the caller.
-///
 /// Nothing here leaves the device. There is no account, no identifier that
 /// means anything outside this installation, and no field a child could not
 /// see for itself on the screen.
@@ -35,8 +30,16 @@ public struct Profile: Codable, Sendable, Hashable, Identifiable {
     public var avatar: String
     public var totalStars: Int
     public var roundsPlayed: Int
-    /// Bird ids from the pack manifests.
-    public var collectedSpecies: Set<String>
+    /// How often each bird has been recognised — answered right at the first
+    /// attempt — keyed by the bird id from the pack manifests.
+    ///
+    /// The album is derived from this and stored nowhere: a bird's sticker is
+    /// in it once the counter reaches the five that `Scoring` in
+    /// `ZilpZalpCore` names (#177). The threshold is not repeated here,
+    /// because this module does not depend on that one and should not for one
+    /// number; the app target links both and answers the question in one
+    /// place.
+    public var recognitions: [String: Int]
     /// Seconds played per calendar day, keyed as ``dayKey(for:calendar:)``
     /// spells it. ``ProfileStore`` keeps the last seven days and drops the
     /// rest — the daily limit needs today, the parents area needs the week,
@@ -58,7 +61,7 @@ public struct Profile: Codable, Sendable, Hashable, Identifiable {
         avatar: String,
         totalStars: Int = 0,
         roundsPlayed: Int = 0,
-        collectedSpecies: Set<String> = [],
+        recognitions: [String: Int] = [:],
         playtime: [String: TimeInterval] = [:],
         dailyStars: [String: Int] = [:],
     ) {
@@ -67,16 +70,31 @@ public struct Profile: Codable, Sendable, Hashable, Identifiable {
         self.avatar = avatar
         self.totalStars = totalStars
         self.roundsPlayed = roundsPlayed
-        self.collectedSpecies = collectedSpecies
+        self.recognitions = recognitions
         self.playtime = playtime
         self.dailyStars = dailyStars
     }
 
-    /// Written by hand for ``dailyStars`` alone: it arrived after the file
-    /// format did, and a profile written before it is a profile with no days
-    /// counted yet — not a broken file. Everything else decodes as it always
-    /// has. The schema version stays 1: an older build reading a newer file
-    /// simply ignores the key, which is the whole point of adding it this way.
+    /// Written by hand for the two keys that arrived after the file format
+    /// did: a profile written before ``dailyStars`` is a profile with no days
+    /// counted yet, and one written before ``recognitions`` is a profile with
+    /// nothing counted yet — neither is a broken file. Everything else decodes
+    /// as it always has. The schema version stays 1, which is what lets this
+    /// build read every file written before it.
+    ///
+    /// A file from before #177 also carries a `collectedSpecies` array, and it
+    /// is deliberately ignored: those stickers were handed out for meeting a
+    /// bird in a round, which is not what a sticker means any more. The stars
+    /// such a profile earned are untouched, and the next write drops the key.
+    ///
+    /// **That last part only reads forwards.** A build from before #177
+    /// decodes `collectedSpecies` as required, so once this one has written a
+    /// profile, going back to that build finds no such key and reports the
+    /// whole file unreadable — not one missing sticker but every child's
+    /// stars. The version is left at 1 all the same: the app is pre-release,
+    /// nobody downgrades a TestFlight build over a sticker rule, and bumping
+    /// it would cost every tester their profiles today to spare a case that
+    /// cannot happen tomorrow (#177).
     public init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(UUID.self, forKey: .id)
@@ -84,7 +102,8 @@ public struct Profile: Codable, Sendable, Hashable, Identifiable {
         avatar = try container.decode(String.self, forKey: .avatar)
         totalStars = try container.decode(Int.self, forKey: .totalStars)
         roundsPlayed = try container.decode(Int.self, forKey: .roundsPlayed)
-        collectedSpecies = try container.decode(Set<String>.self, forKey: .collectedSpecies)
+        recognitions = try container.decodeIfPresent([String: Int].self, forKey: .recognitions)
+            ?? [:]
         playtime = try container.decode([String: TimeInterval].self, forKey: .playtime)
         dailyStars = try container.decodeIfPresent([String: Int].self, forKey: .dailyStars) ?? [:]
     }
@@ -124,25 +143,8 @@ public struct Profile: Codable, Sendable, Hashable, Identifiable {
         case avatar
         case totalStars
         case roundsPlayed
-        case collectedSpecies
+        case recognitions
         case playtime
         case dailyStars
-    }
-
-    /// Written by hand for one reason: a `Set` iterates in an order that
-    /// changes from run to run, and `JSONEncoder`'s `.sortedKeys` sorts the
-    /// keys of objects, not the elements of an array. Without this the
-    /// file's bytes would churn without a single value having changed.
-    /// ``playtime`` needs no such help — `.sortedKeys` covers it.
-    public func encode(to encoder: any Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(id, forKey: .id)
-        try container.encode(name, forKey: .name)
-        try container.encode(avatar, forKey: .avatar)
-        try container.encode(totalStars, forKey: .totalStars)
-        try container.encode(roundsPlayed, forKey: .roundsPlayed)
-        try container.encode(collectedSpecies.sorted(), forKey: .collectedSpecies)
-        try container.encode(playtime, forKey: .playtime)
-        try container.encode(dailyStars, forKey: .dailyStars)
     }
 }

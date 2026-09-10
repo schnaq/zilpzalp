@@ -1,5 +1,4 @@
 import SwiftUI
-import ZilpZalpCore
 import ZilpZalpData
 import ZilpZalpUI
 
@@ -12,6 +11,11 @@ import ZilpZalpUI
 /// would never say what is still out there; the whole point of a sticker album
 /// is the gap.
 ///
+/// **A bird on its way shows how far it has come.** Under a locked sticker
+/// stand five markers, filled as often as the child has recognised that bird
+/// (#177) — so the album says "nearly" as well as "not yet", which is the
+/// difference between a gap and a goal.
+///
 /// Tapping a bird already collected says its name out loud, because the child
 /// this album is for cannot read the word under it. A locked one says nothing
 /// — its name is the thing still to be found.
@@ -23,34 +27,45 @@ struct CollectionScreen: View {
     private static let stickerColumn: CGFloat = 168
     private static let compactStickerColumn: CGFloat = 88
 
+    /// The progress markers under a locked sticker, sized so that five of them
+    /// and their gaps stay inside the disc above: 104 pt under a 128 pt
+    /// sticker, 76 under an 80 pt one.
+    private static let markerSize: CGFloat = 16
+    private static let compactMarkerSize: CGFloat = 12
+
     /// The child whose album this is.
     let profile: Profile
-    /// Every species that can be collected — the bundled pack, and later the
-    /// downloaded ones. `nil` when no pack opened, which leaves the grid empty
+    /// Every species that can be collected — the bundled pack and every
+    /// downloaded one. Empty when no pack opened, which leaves the grid empty
     /// rather than the screen broken.
-    let catalog: PackCatalog?
+    let library: PackLibrary
     let photos: SpeciesPhotos
     /// Everybody who plays on this device, for "Unser Schwarm".
     let profiles: [Profile]
-    let openLadder: () -> Void
     let goBack: () -> Void
 
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
-    /// Says a bird's name when its sticker is tapped. One synthesiser for the
+    /// Says a bird's name when its sticker is tapped. One announcer for the
     /// screen, so two quick taps cannot talk over each other.
-    @State private var announcer = SpeechAnnouncer()
+    ///
+    /// Built on the first tap rather than with the screen, because it needs
+    /// the packs the recorded names lie in: handing `@State` an initial value
+    /// that reads ``library`` would mean writing this screen's six-parameter
+    /// initialiser out by hand, and the previews below use the synthesised
+    /// one. ``RoundEndScreen`` builds its announcer the same way.
+    @State private var announcer: SpeechAnnouncer?
 
     private var isCompact: Bool {
         horizontalSizeClass == .compact
     }
 
     private var birds: [Bird] {
-        catalog?.pack.birds ?? []
+        library.birds
     }
 
     private var collected: [Bird] {
-        birds.filter { profile.collectedSpecies.contains($0.id) }
+        birds.filter { profile.hasSticker(for: $0.id) }
     }
 
     var body: some View {
@@ -82,7 +97,7 @@ struct CollectionScreen: View {
         // The album has a back chevron, so it has the gesture that goes with
         // one (#150).
         .swipesBack(.pops)
-        .onDisappear { announcer.stop() }
+        .onDisappear { announcer?.stop() }
     }
 
     /// The album's name, in the page rather than in the top bar: a phone
@@ -97,31 +112,21 @@ struct CollectionScreen: View {
             .multilineTextAlignment(.center)
     }
 
-    /// What the album adds up to, and the door to the ladder.
+    /// What the album adds up to: the birds found and the stars collected.
     ///
-    /// Two counts and a rank — never a percentage and never a "3 von 10",
-    /// which is the same sentence with the missing ones put first.
+    /// Two counts — never a percentage and never a "3 von 10", which is the
+    /// same sentence with the missing ones put first.
     private var summary: some View {
-        VStack(spacing: ZSpacing.step4) {
-            HStack(spacing: ZSpacing.step3) {
-                Badge(
-                    String(format: String(localized: "collection.birds"), collected.count),
-                    tone: .leaf,
-                    icon: .album,
-                )
-                Badge(
-                    String(format: String(localized: "collection.stars"), profile.totalStars),
-                    tone: .sun,
-                    icon: .star,
-                )
-            }
-
-            ZButton(
-                String(localized: "rank.ladder.title"),
-                tone: .quiet,
-                size: .medium,
-                trailingIcon: .chevronRight,
-                action: openLadder,
+        HStack(spacing: ZSpacing.step3) {
+            Badge(
+                String(format: String(localized: "collection.birds"), collected.count),
+                tone: .leaf,
+                icon: .album,
+            )
+            Badge(
+                String(format: String(localized: "collection.stars"), profile.totalStars),
+                tone: .sun,
+                icon: .star,
             )
         }
     }
@@ -160,12 +165,12 @@ struct CollectionScreen: View {
     /// picture that plainly is not one of the bright ones.
     @ViewBuilder
     private func sticker(_ bird: Bird) -> some View {
-        let isCollected = profile.collectedSpecies.contains(bird.id)
+        let isCollected = profile.hasSticker(for: bird.id)
         let size = isCompact ? Self.compactStickerSize : Self.stickerSize
 
         if isCollected {
             Button {
-                announcer.announce(bird.pronunciation ?? bird.name)
+                say(.name(bird))
             } label: {
                 StickerCaption(caption: bird.name, earned: true) {
                     RewardSticker(image: photos[bird.id], size: size)
@@ -174,11 +179,27 @@ struct CollectionScreen: View {
             .buttonStyle(.plain)
             .accessibilityLabel(bird.name)
         } else {
-            StickerCaption(caption: String(localized: "collection.locked"), earned: false) {
-                RewardSticker(image: photos[bird.id], locked: true, size: size)
+            VStack(spacing: ZSpacing.step2) {
+                StickerCaption(caption: String(localized: "collection.locked"), earned: false) {
+                    RewardSticker(image: photos[bird.id], locked: true, size: size)
+                }
+
+                StickerMarkers(
+                    count: profile.recognitions[bird.id, default: 0],
+                    markerSize: isCompact ? Self.compactMarkerSize : Self.markerSize,
+                )
             }
             .accessibilityElement(children: .combine)
         }
+    }
+
+    /// Says one line, building the announcer the first time something is
+    /// tapped. Kept afterwards, so the second tap cuts the first one off
+    /// instead of talking over it.
+    private func say(_ line: SpokenLine) {
+        let voice = announcer ?? SpeechAnnouncer(library: library)
+        announcer = voice
+        voice.announce(line)
     }
 }
 
@@ -191,7 +212,7 @@ private func albumProfile() -> Profile {
         avatar: "star",
         totalStars: 57,
         roundsPlayed: 21,
-        collectedSpecies: ["amsel", "kohlmeise", "rotkehlchen", "zilpzalp"],
+        recognitions: ["amsel": 7, "kohlmeise": 5, "rotkehlchen": 5, "zilpzalp": 5],
     )
 }
 
@@ -199,10 +220,9 @@ private func albumProfile() -> Profile {
     NavigationStack {
         CollectionScreen(
             profile: albumProfile(),
-            catalog: try? .bundled(),
-            photos: SpeciesPhotos(try? .bundled()),
+            library: (try? .bundled()) ?? .empty,
+            photos: SpeciesPhotos((try? .bundled()) ?? .empty),
             profiles: [albumProfile()],
-            openLadder: {},
             goBack: {},
         )
     }
@@ -213,10 +233,9 @@ private func albumProfile() -> Profile {
     NavigationStack {
         CollectionScreen(
             profile: Profile(id: UUID(), name: "Jonas", avatar: "bird"),
-            catalog: try? .bundled(),
-            photos: SpeciesPhotos(try? .bundled()),
+            library: (try? .bundled()) ?? .empty,
+            photos: SpeciesPhotos((try? .bundled()) ?? .empty),
             profiles: [],
-            openLadder: {},
             goBack: {},
         )
     }

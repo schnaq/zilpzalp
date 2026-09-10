@@ -75,7 +75,7 @@ struct ProfilePickerScreen: View {
             }
         }
         .background(ZColor.surfacePage)
-        .readAloudOnce(String(localized: "profile.picker.title"))
+        .readAloudOnce(.fixed("profile.picker.title"))
     }
 
     private var cards: some View {

@@ -251,13 +251,13 @@ class PickTests(PackTestCase):
         self.assertEqual(self.run_pick(OBSERVATION), 0)
 
         entry = self.photo_entry()
-        self.assertEqual(entry["file"], "photos/amsel.jpg")
+        self.assertEqual(entry["file"], "photos/amsel.heic")
         self.assertEqual(entry["license"], "CC-BY-4.0")
         self.assertEqual(entry["attribution"], "Alexis Tinker-Tsavalas")
         self.assertEqual(entry["sourceURL"], "https://www.inaturalist.org/observations/20490738")
         self.assertEqual(list(entry), list(manifest.MEDIA_KEYS))
         self.assertEqual(
-            entry["sha256"], manifest.sha256_of(self.pack / "photos" / "amsel.jpg")
+            entry["sha256"], manifest.sha256_of(self.pack / "photos" / "amsel.heic")
         )
 
     def test_removes_the_photo_the_manifest_no_longer_names(self) -> None:

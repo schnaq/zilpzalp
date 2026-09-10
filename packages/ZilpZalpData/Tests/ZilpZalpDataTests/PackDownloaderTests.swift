@@ -40,8 +40,9 @@ struct PackDownloaderTests {
     @Test("without a single download there is nothing installed and nothing to delete")
     func startsEmpty() async throws {
         try await withDownloader(routes: [:]) { downloader, _ in
-            let installed = try await downloader.installedPacks()
-            #expect(installed.isEmpty)
+            let installed = await downloader.installations()
+            #expect(installed.installed.isEmpty)
+            #expect(installed.failures.isEmpty)
 
             try await downloader.delete(packID: StubPack.id)
         }
@@ -72,18 +73,21 @@ struct PackDownloaderTests {
         }
     }
 
-    @Test("a file that does not match its digest fails, naming the file")
-    func rejectsAFileThatDoesNotMatch() async throws {
+    /// Once for a photo and once for a recorded sentence: a clip is verified
+    /// the way every other file is, so a pack cannot install a recording that
+    /// says something else than the manifest promised.
+    @Test("a file that does not match its digest fails, naming the file", arguments: [1, 3])
+    func rejectsAFileThatDoesNotMatch(medium: Int) async throws {
         let manifest = StubPack.manifest()
         let wrong = Data("ein anderer Vogel".utf8)
         var routes = StubPack.routes(manifest: manifest)
-        routes[StubPack.key(for: StubPack.media[1].file)] = StubBucket.Route(body: wrong)
+        routes[StubPack.key(for: StubPack.media[medium].file)] = StubBucket.Route(body: wrong)
 
         try await withDownloader(routes: routes) { downloader, home in
             let expected = PackDownloadError.hashMismatch(
                 packID: StubPack.id,
-                file: StubPack.media[1].file,
-                expected: StubPack.assets[1].sha256,
+                file: StubPack.media[medium].file,
+                expected: StubPack.assets[medium].sha256,
                 actual: StubPack.sha256(of: wrong),
             )
 
@@ -91,8 +95,7 @@ struct PackDownloaderTests {
                 try await downloader.download(StubPack.entry(manifest: manifest))
             }
 
-            let installed = try await downloader.installedPacks()
-            #expect(installed.isEmpty)
+            #expect(await downloader.installations().installed.isEmpty)
             #expect(!exists(home, Self.installed))
             #expect(exists(home, Self.partial))
         }
@@ -114,7 +117,7 @@ struct PackDownloaderTests {
 
             #expect(StubBucket.requestCount(for: StubPack.key(for: StubPack.media[0].file)) == 1)
             #expect(StubBucket.requestCount(for: call) == 2)
-            let installed = try await downloader.installedPacks()
+            let installed = await downloader.installations().installed
             #expect(installed.map(\.id) == [StubPack.id])
         }
     }
@@ -142,8 +145,7 @@ struct PackDownloaderTests {
             await #expect(throws: CancellationError.self) { try await download.value }
             #expect(exists(home, Self.partial))
             #expect(!exists(home, Self.installed))
-            let installed = try await downloader.installedPacks()
-            #expect(installed.isEmpty)
+            #expect(await downloader.installations().installed.isEmpty)
         }
     }
 
@@ -160,8 +162,12 @@ struct PackDownloaderTests {
 
             #expect(exists(home, Self.installed + "/manifest.json"))
             #expect(!exists(home, Self.partial))
-            let installed = try await downloader.installedPacks()
+            let installed = await downloader.installations().installed
             #expect(installed.map(\.id) == [StubPack.id])
+            // What the grown-ups' area prints beside the pack and adds up
+            // under the card: every file of it, the manifest included, and
+            // none of them counted twice for the second download.
+            #expect(installed.first?.bytes == StubPack.downloadSize(of: manifest))
 
             let photo = home.appending(path: "\(Self.installed)/\(StubPack.media[0].file)")
             let written = try Data(contentsOf: photo)
@@ -184,26 +190,35 @@ struct PackDownloaderTests {
 
             #expect(!exists(home, Self.installed))
             #expect(!exists(home, Self.partial))
-            let installed = try await downloader.installedPacks()
-            #expect(installed.isEmpty)
+            #expect(await downloader.installations().installed.isEmpty)
             // Deleting what is no longer there is done, not failed.
             try await downloader.delete(packID: StubPack.id)
         }
     }
 
-    @Test("an installed pack opens and resolves its photos")
+    /// The point of #166 in one test: what came down the wire resolves through
+    /// the catalog exactly as the bundled pack's media do — a downloaded pack
+    /// speaks in the same voice as the one that ships with the app.
+    @Test("an installed pack opens and resolves its photos and its sentences")
     func opensAnInstalledPack() async throws {
         let manifest = StubPack.manifest()
         try await withDownloader(routes: StubPack.routes(manifest: manifest)) { downloader, _ in
             try await downloader.download(StubPack.entry(manifest: manifest))
 
-            let catalog = try await downloader.catalog(for: StubPack.id)
+            let installed = try #require(await downloader.installations().installed.first)
+            let catalog = installed.catalog
             let bird = try #require(catalog.pack.birds.first)
             let photo = try #require(catalog.photoURL(for: bird))
-            let bytes = try Data(contentsOf: photo)
+            let clip = try #require(catalog.speechURL(for: bird, sentence: StubPack.sentence))
 
             #expect(catalog.pack.id == StubPack.id)
-            #expect(bytes == StubPack.media[0].bytes)
+            #expect(try Data(contentsOf: photo) == StubPack.media[0].bytes)
+            #expect(try Data(contentsOf: clip) == StubPack.media[3].bytes)
+            // Whoever is credited for the voice comes down with the pack.
+            #expect(catalog.pack.voice?.attribution == "Stimme: Niemand")
+            // A sentence the pack never recorded stays unresolved, and the app
+            // speaks it with AVSpeechSynthesizer instead (#151).
+            #expect(catalog.speechURL(for: bird, sentence: "roundEnd.title") == nil)
         }
     }
 
@@ -221,12 +236,20 @@ struct PackDownloaderTests {
         }
     }
 
-    @Test("a manifest naming a path outside the pack is refused before it is fetched")
-    func refusesAPathOutsideThePack() async throws {
-        let escape = "../../escaped.png"
-        let manifest = StubPack.manifest(
-            amselPhoto: StubPack.Asset(file: escape, sha256: StubPack.assets[0].sha256),
-        )
+    /// Once for a photo and once for a recorded sentence, which lies one
+    /// directory deeper. Every name a manifest carries is checked before the
+    /// first byte, so a poisoned one at the end of a pack costs no request at
+    /// all — which is what `requests.count == 1`, the manifest alone, says.
+    @Test(
+        "a manifest naming a path outside the pack is refused before it is fetched",
+        arguments: [false, true],
+    )
+    func refusesAPathOutsideThePack(spoken: Bool) async throws {
+        let escape = spoken ? "../../evil.m4a" : "../../escaped.png"
+        let asset = StubPack.Asset(file: escape, sha256: StubPack.assets[0].sha256)
+        let manifest = spoken
+            ? StubPack.manifest(amselSpeech: asset)
+            : StubPack.manifest(amselPhoto: asset)
 
         try await withDownloader(routes: StubPack.routes(manifest: manifest)) { downloader, home in
             let expected = PackDownloadError.invalidPath(packID: StubPack.id, path: escape)
@@ -235,10 +258,10 @@ struct PackDownloaderTests {
                 try await downloader.download(StubPack.entry(manifest: manifest))
             }
 
-            // The manifest, and nothing after it.
+            let name = URL(filePath: escape).lastPathComponent
             #expect(StubBucket.requests.count == 1)
-            #expect(!exists(home, "escaped.png"))
-            #expect(!exists(home, "Packs/escaped.png"))
+            #expect(!exists(home, name))
+            #expect(!exists(home, "Packs/\(name)"))
         }
     }
 

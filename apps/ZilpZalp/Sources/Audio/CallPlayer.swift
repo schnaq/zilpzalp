@@ -17,7 +17,7 @@ import os
 ///
 /// ```swift
 /// SoundButton(isPlaying: player.isPlaying, label: "Ruf noch einmal hören") {
-///     if let call = catalog.callURL(for: bird) { player.play(call) }
+///     if let call = library.callURL(for: bird) { player.play(call) }
 /// }
 /// ```
 @MainActor

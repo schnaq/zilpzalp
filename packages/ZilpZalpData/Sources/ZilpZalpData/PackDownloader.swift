@@ -109,15 +109,19 @@ public actor PackDownloader {
         var downloaded = manifestData.count
         progress(downloaded, entry.downloadSize)
 
+        // Every name before the first byte: a poisoned path at the end of a
+        // manifest must not cost a parent the files that precede it, and a
+        // pack of many birds names hundreds of them.
+        let assets = pack.declaredFiles
+        if let unsafe = assets.first(where: { !isSafeRelativePath($0.file) }) {
+            throw PackDownloadError.invalidPath(packID: entry.id, path: unsafe.file)
+        }
+
         // Media are relative to the manifest, not to the base: the manifest
         // says `photos/amsel.png` and sits at `packs/<id>/manifest.json`.
         let packURL = manifestURL.deletingLastPathComponent()
-        for asset in Self.assets(of: pack) {
+        for asset in assets {
             try Task.checkCancellation()
-            guard isSafeRelativePath(asset.file) else {
-                throw PackDownloadError.invalidPath(packID: entry.id, path: asset.file)
-            }
-
             let destination = partial.appending(path: asset.file)
             if let alreadyThere = verifiedSize(of: destination, sha256: asset.sha256) {
                 downloaded += alreadyThere
@@ -146,16 +150,19 @@ public actor PackDownloader {
 
     // MARK: - What is on disk
 
-    /// Every installed pack, by id.
+    /// Every pack installed below `Packs/`, opened and measured.
     ///
     /// The bundled base pack is a resource of this module and never lands
     /// below `Packs/`, so it appears neither here nor in `delete(packID:)` —
     /// the layout rules that out, no guard needed.
     ///
-    /// - Throws: `PackDownloadError.manifestInvalid` for an installed pack
-    ///   whose manifest does not decode, naming it so the caller can offer to
-    ///   delete it. A directory without a manifest is skipped instead.
-    public func installedPacks() throws -> [Pack] {
+    /// - Returns: the packs that opened, in directory order, and one error per
+    ///   pack that did not. **A pack that will not open costs its own species
+    ///   and nothing else**: the app keeps playing with the rest, and the
+    ///   grown-ups' area can name the broken one and offer to delete it. A
+    ///   directory without a manifest is a download that never finished and is
+    ///   skipped without a word.
+    public func installations() -> (installed: [PackInstallation], failures: [PackDownloadError]) {
         let contents: [URL]
         do {
             contents = try FileManager.default.contentsOfDirectory(
@@ -165,15 +172,16 @@ public actor PackDownloader {
         } catch CocoaError.fileReadNoSuchFile {
             // Nothing has ever been downloaded. That is the normal state of a
             // fresh install, not a failure.
-            return []
+            return ([], [])
         } catch {
-            throw PackDownloadError.diskFailure(
+            return ([], [.diskFailure(
                 path: packsDirectory.path(percentEncoded: false),
                 reason: error.localizedDescription,
-            )
+            )])
         }
 
-        var packs: [Pack] = []
+        var installed: [PackInstallation] = []
+        var failures: [PackDownloadError] = []
         for directory in contents.sorted(by: { $0.lastPathComponent < $1.lastPathComponent }) {
             let packID = directory.lastPathComponent
             guard !packID.hasSuffix(Self.partialSuffix),
@@ -181,26 +189,23 @@ public actor PackDownloader {
             else {
                 continue
             }
-            try packs.append(decodeManifest(data, expecting: packID))
-        }
-        return packs
-    }
 
-    /// Opens an installed pack, the way `PackCatalog.bundled()` opens the one
-    /// that ships with the app, so `photoURL(for:)` resolves its media too.
-    ///
-    /// The only way to a downloaded pack's files: this actor owns the layout
-    /// below `Packs/`, so no view ever assembles such a path itself.
-    public func catalog(for packID: String) throws -> PackCatalog {
-        guard Self.isSafeComponent(packID) else {
-            throw PackDownloadError.invalidPath(packID: packID, path: packID)
+            do {
+                try installed.append(PackInstallation(
+                    catalog: PackCatalog(
+                        pack: decodeManifest(data, expecting: packID),
+                        directory: directory,
+                    ),
+                    bytes: directory.directoryBytes(),
+                ))
+            } catch {
+                failures.append(
+                    error as? PackDownloadError
+                        ?? .manifestInvalid(packID: packID, reason: "\(error)"),
+                )
+            }
         }
-
-        let directory = packsDirectory.appending(path: packID)
-        guard let data = try? Data(contentsOf: directory.appending(path: Self.manifestName)) else {
-            throw PackDownloadError.notInstalled(packID: packID)
-        }
-        return try PackCatalog(pack: decodeManifest(data, expecting: packID), directory: directory)
+        return (installed, failures)
     }
 
     /// Removes a downloaded pack: the installed directory and a half
@@ -262,15 +267,6 @@ public actor PackDownloader {
         return data
     }
 
-    /// Every medium a pack declares, photo before call, each file once: two
-    /// birds sharing a file would otherwise be fetched and counted twice.
-    private static func assets(of pack: Pack) -> [MediaAsset] {
-        var seen: Set<String> = []
-        return pack.birds
-            .flatMap { [$0.photo, $0.call].compactMap(\.self) }
-            .filter { seen.insert($0.file).inserted }
-    }
-
     private static func hexDigest(of data: Data) -> String {
         SHA256.hash(data: data).map { String(format: "%02x", $0) }.joined()
     }
@@ -281,6 +277,17 @@ public actor PackDownloader {
             pack = try PackManifest.decode(data)
         } catch {
             throw PackDownloadError.manifestInvalid(packID: packID, reason: "\(error)")
+        }
+        guard pack.voice != nil || pack.birds.allSatisfy({ $0.speech?.isEmpty ?? true }) else {
+            // A photo and a call carry their licence in their own fields and
+            // cannot decode without one; a clip's licence is the manifest's
+            // voice. Without it the pack would install recordings nobody may
+            // be credited for — which `tools/license_gate.py` refuses at
+            // curation time and nothing re-checks after a download.
+            throw PackDownloadError.manifestInvalid(
+                packID: packID,
+                reason: "the pack has recorded sentences but names no voice",
+            )
         }
         guard pack.id == packID else {
             // The id is the directory name, in the bucket and on disk. A

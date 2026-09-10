@@ -1,0 +1,804 @@
+/* ZilpZalp — website tokens and base styles.
+ *
+ * The palette is the app's, taken from design/tokens/colors.css and the Swift
+ * mirror in packages/ZilpZalpUI/…/Tokens. WARM ONLY: no blue, no teal, no
+ * neutral grey, no red. What the design system does not define is a dark
+ * theme — the app has none — so the dark values below are derived from soot
+ * and the ink ramp and stay inside the same warm world.
+ *
+ * Contrast was measured, not guessed. Two results shape the tokens: orange
+ * carries text only from --orange-700 downwards on cream (orange-500 lands at
+ * 3.0:1), and --muted holds 4.5:1 on the cream surfaces but not on the sand
+ * band, which therefore uses body ink.
+ */
+
+:root {
+  color-scheme: light;
+
+  /* Palette — the ramps this site actually uses. */
+  --olive-100: #e5ebbe;
+  --olive-300: #c3ce86;
+  --olive-500: #6e7a21;
+  --olive-600: #5b6519;
+  --olive-700: #4c5413;
+  --olive-800: #3b4218;
+  --orange-100: #f9d6bb;
+  --orange-200: #f0b27a;
+  --orange-300: #ef9a45;
+  --orange-500: #dd6e22;
+  --orange-700: #a64b12;
+  --sun-300: #f5cf63;
+  --sun-400: #e9b21c;
+  --cream-50: #fffcf3;
+  --cream-100: #fbf3e4;
+  --sand-200: #f2e6ce;
+  --sand-300: #eadcc0;
+  --sand-400: #d9c7a4;
+  --ink-900: #2a2213;
+  --ink-700: #544730;
+  --ink-500: #7d6e51;
+  --ink-300: #9c8c6d;
+  --soot: #17140f;
+
+  /* Surfaces */
+  --page: var(--cream-100);
+  --card: var(--cream-50);
+  --sunken: var(--sand-200);
+  --deep: var(--olive-800);
+
+  /* Text */
+  --strong: var(--ink-900);
+  --body: var(--ink-700);
+  --muted: var(--ink-500);
+  --on-color: var(--cream-50);
+
+  /* Roles */
+  --primary: var(--olive-500);
+  --primary-ledge: var(--olive-700);
+  --accent: var(--orange-500);
+  --accent-text: var(--orange-700);
+  --reward: var(--sun-300);
+  --link: var(--olive-600);
+  --link-hover: var(--orange-700);
+  --line: var(--sand-300);
+  --line-strong: var(--sand-400);
+  --focus: var(--orange-500);
+
+  /* Warm brown shadows, never neutral grey — shadows.css */
+  --shadow-sm: 0 2px 6px rgb(92 58 36 / 0.1);
+  --shadow-md: 0 8px 20px rgb(92 58 36 / 0.12);
+  --shadow-lg: 0 18px 40px rgb(92 58 36 / 0.16);
+  /* The app's signature: a solid, unblurred slab under a pressable that gets
+     pressed away on tap. Not a decorative offset shadow — it is the one piece
+     of the app's toy physics this site borrows. */
+  --ledge: 6px;
+
+  /* Type */
+  --step--1: 0.9375rem;
+  --step-0: 1.0625rem;
+  --step-1: 1.25rem;
+  --step-2: 1.5rem;
+  --step-3: clamp(1.75rem, 1.45rem + 1.4vw, 2.25rem);
+  --step-4: clamp(2rem, 1.5rem + 2.4vw, 3rem);
+  --step-hero: clamp(2.5rem, 1.6rem + 4.4vw, 4.25rem);
+
+  /* Space — the app's scale, in rem */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+  --s-6: 2rem;
+  --s-7: 3rem;
+  --s-8: 4rem;
+  --s-9: 6rem;
+
+  --radius-card: 28px;
+  --radius-tile: 40px;
+  --radius-pill: 999px;
+
+  --measure: 66ch;
+  --width: 68rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+
+    --page: var(--soot);
+    --card: #231d14;
+    --sunken: #1f1a12;
+    --deep: #1b2410;
+
+    --strong: var(--cream-50);
+    --body: var(--sand-300);
+    --muted: var(--ink-300);
+    --on-color: var(--soot);
+
+    --primary: var(--olive-300);
+    --primary-ledge: var(--olive-700);
+    --accent: var(--orange-300);
+    --accent-text: var(--orange-200);
+    --reward: var(--sun-400);
+    --link: var(--olive-300);
+    --link-hover: var(--orange-300);
+    --line: #3b3227;
+    --line-strong: #4d4133;
+    --focus: var(--orange-300);
+
+    /* Shadow does not read on a dark ground; the card is lifted by its line
+       instead, and the ambient shadows go nearly black rather than brown. */
+    --shadow-sm: 0 2px 6px rgb(0 0 0 / 0.4);
+    --shadow-md: 0 8px 20px rgb(0 0 0 / 0.45);
+    --shadow-lg: 0 18px 40px rgb(0 0 0 / 0.5);
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scrollbar-color: var(--line-strong) var(--page);
+}
+
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--body);
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: var(--step-0);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* The surfaces nobody draws but everybody sees. */
+::selection {
+  background: var(--sun-300);
+  color: var(--ink-900);
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display), ui-rounded, system-ui, sans-serif;
+  color: var(--strong);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  text-wrap: balance;
+  margin: 0;
+  /* A German compound can be wider than a phone; this is the floor that keeps
+     one from pushing the page sideways. Hyphenation is not switched on here —
+     see the legal headings below. */
+  overflow-wrap: break-word;
+}
+
+h1 {
+  font-size: var(--step-hero);
+}
+
+h2 {
+  font-size: var(--step-4);
+}
+
+h3 {
+  font-size: var(--step-2);
+  font-weight: 700;
+}
+
+p {
+  margin: 0;
+  max-width: var(--measure);
+  text-wrap: pretty;
+}
+
+a {
+  color: var(--link);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
+  text-decoration-color: color-mix(in srgb, var(--link) 40%, transparent);
+  transition: color 0.16s ease, text-decoration-color 0.16s ease;
+}
+
+a:hover {
+  color: var(--link-hover);
+  text-decoration-color: currentColor;
+}
+
+strong {
+  color: var(--strong);
+  font-weight: 700;
+}
+
+/* Layout ------------------------------------------------------------------ */
+
+.wrap {
+  width: 100%;
+  max-width: var(--width);
+  margin-inline: auto;
+  padding-inline: var(--s-5);
+}
+
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: var(--s-3);
+  background: var(--card);
+  color: var(--strong);
+  padding: var(--s-3) var(--s-5);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-md);
+  z-index: 10;
+}
+
+.skip:focus {
+  left: var(--s-5);
+}
+
+/* Site chrome ------------------------------------------------------------- */
+
+.masthead {
+  padding-block: var(--s-5);
+}
+
+.masthead .wrap {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  font-family: var(--font-display), ui-rounded, system-ui, sans-serif;
+  font-size: var(--step-1);
+  font-weight: 800;
+  color: var(--strong);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+
+.wordmark img {
+  display: block;
+  border-radius: 12px;
+}
+
+.footer {
+  margin-top: var(--s-9);
+  border-top: 1px solid var(--line);
+  background: var(--sunken);
+  padding-block: var(--s-7) var(--s-6);
+  color: var(--body);
+  font-size: var(--step--1);
+}
+
+.footer-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-6);
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.footer nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2) var(--s-5);
+}
+
+.footer p {
+  margin-block: var(--s-2) 0;
+}
+
+.footer-legal {
+  margin-top: var(--s-6);
+  padding-top: var(--s-4);
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2) var(--s-5);
+  justify-content: space-between;
+}
+
+/* Sections ---------------------------------------------------------------- */
+
+section {
+  padding-block: var(--s-8);
+}
+
+.section-head {
+  display: grid;
+  gap: var(--s-4);
+  margin-bottom: var(--s-7);
+}
+
+/* A heading with nothing under it needs less air below than a heading with a
+   lead paragraph — otherwise the text it introduces floats away from it. */
+.section-head--tight {
+  margin-bottom: var(--s-5);
+}
+
+.lead {
+  font-size: var(--step-1);
+  line-height: 1.55;
+  color: var(--body);
+}
+
+/* Hero -------------------------------------------------------------------- */
+
+.hero {
+  padding-block: var(--s-6) var(--s-8);
+}
+
+.hero .wrap {
+  display: grid;
+  gap: var(--s-7);
+  align-items: center;
+}
+
+@media (min-width: 56rem) {
+  .hero .wrap {
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: var(--s-8);
+  }
+}
+
+.hero h1 {
+  margin-bottom: var(--s-5);
+}
+
+.hero .lead {
+  font-size: var(--step-2);
+  line-height: 1.4;
+  max-width: 30ch;
+}
+
+.hero-actions {
+  display: grid;
+  justify-items: start;
+  gap: var(--s-4);
+  margin-top: var(--s-6);
+}
+
+/* "Bald im App Store" — a pill, deliberately not an App Store badge: Apple's
+   badge artwork may only be used as a link to a published app. */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  background: var(--primary);
+  color: var(--on-color);
+  font-family: var(--font-display), ui-rounded, system-ui, sans-serif;
+  font-size: var(--step-1);
+  font-weight: 700;
+  padding: var(--s-3) var(--s-5);
+  border-radius: var(--radius-pill);
+  box-shadow: 0 var(--ledge) 0 var(--primary-ledge);
+}
+
+.pill svg {
+  flex: none;
+}
+
+.hero-note {
+  font-size: var(--step-0);
+  color: var(--body);
+  max-width: 40ch;
+}
+
+/* The mark on its meadow: the app's own tile, at rest. */
+.hero-art {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  max-width: 26rem;
+  margin-inline: auto;
+  width: 100%;
+  border-radius: var(--radius-tile);
+  background:
+    radial-gradient(circle at 50% 42%, var(--olive-100) 0%, transparent 62%),
+    linear-gradient(160deg, var(--card) 0%, var(--sunken) 100%);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-lg), 0 10px 0 var(--line-strong);
+}
+
+@media (prefers-color-scheme: dark) {
+  .hero-art {
+    background:
+      radial-gradient(circle at 50% 42%, color-mix(in srgb, var(--olive-800) 70%, transparent) 0%, transparent 62%),
+      linear-gradient(160deg, var(--card) 0%, var(--sunken) 100%);
+    box-shadow: var(--shadow-lg), 0 10px 0 var(--line);
+  }
+}
+
+.hero-art img {
+  width: 72%;
+  height: auto;
+  display: block;
+}
+
+/* Games ------------------------------------------------------------------- */
+
+.games {
+  display: grid;
+  gap: var(--s-5);
+}
+
+@media (min-width: 48rem) {
+  .games {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.game {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  padding: var(--s-6);
+  display: grid;
+  gap: var(--s-4);
+  align-content: start;
+  box-shadow: var(--shadow-sm);
+}
+
+.game h3 {
+  font-size: var(--step-3);
+  color: var(--strong);
+}
+
+.game-mark {
+  width: 3rem;
+  height: 3rem;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-pill);
+  background: var(--sunken);
+  color: var(--accent-text);
+}
+
+/* Facts ------------------------------------------------------------------- */
+
+.facts {
+  background: var(--sunken);
+  border-radius: var(--radius-card);
+  padding: var(--s-6);
+  display: grid;
+  gap: var(--s-5) var(--s-6);
+  margin-top: var(--s-6);
+  /* Body ink, not muted: --muted holds 4.5:1 on cream but only 4.0:1 here. */
+  color: var(--body);
+}
+
+@media (min-width: 40rem) {
+  .facts {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 62rem) {
+  .facts {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.facts div {
+  display: grid;
+}
+
+.facts dt {
+  font-family: var(--font-display), ui-rounded, system-ui, sans-serif;
+  font-size: var(--step-1);
+  font-weight: 700;
+  color: var(--strong);
+  /* Baloo 2 carries a line box half again as tall as its point size; without
+     this the label drifts away from the line it belongs to. */
+  line-height: 1.25;
+  margin-bottom: var(--s-1);
+}
+
+.facts dd {
+  margin: 0;
+  font-size: var(--step--1);
+  line-height: 1.5;
+}
+
+/* Screenshots ------------------------------------------------------------- */
+
+/* Five phone screens are five tall portraits: stacked on a phone they would be
+   four screens of scrolling, so up to the wide breakpoint they lie in a
+   swipeable strip — the way a store page shows them — and only then in one row
+   of five. */
+.shots {
+  display: flex;
+  gap: var(--s-5);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: var(--s-4);
+  /* The strip may bleed to the edge of the viewport while the text keeps the
+     gutter, so the last card does not look cut off. */
+  margin-inline: calc(-1 * var(--s-5));
+  padding-inline: var(--s-5);
+  /* Without this the mandatory snap pulls the first card past the gutter and
+     parks it flush against the edge of the screen. */
+  scroll-padding-inline: var(--s-5);
+}
+
+.shots > * {
+  flex: 0 0 min(58%, 14rem);
+  scroll-snap-align: start;
+}
+
+@media (min-width: 62rem) {
+  .shots {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    overflow: visible;
+    margin-inline: 0;
+    padding-inline: 0;
+    padding-bottom: 0;
+  }
+}
+
+.shot {
+  margin: 0;
+  display: grid;
+  gap: var(--s-3);
+}
+
+.shot-frame {
+  aspect-ratio: 1320 / 2868;
+  border-radius: 26px;
+  border: 1px solid var(--line-strong);
+  background:
+    radial-gradient(circle at 50% 28%, var(--orange-100) 0%, transparent 55%),
+    linear-gradient(165deg, var(--card) 0%, var(--sunken) 55%, var(--sand-300) 100%);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+@media (prefers-color-scheme: dark) {
+  .shot-frame {
+    background:
+      radial-gradient(circle at 50% 28%, color-mix(in srgb, var(--olive-800) 60%, transparent) 0%, transparent 55%),
+      linear-gradient(165deg, var(--card) 0%, var(--sunken) 100%);
+  }
+}
+
+.shot-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.shot-frame span {
+  font-family: var(--font-display), ui-rounded, system-ui, sans-serif;
+  font-size: var(--step--1);
+  /* Body ink, not muted: the frame's gradient ends on the sand band, where
+     muted falls to 4.0:1. */
+  color: var(--body);
+  padding: var(--s-4);
+  text-align: center;
+}
+
+.shot figcaption {
+  font-size: var(--step--1);
+  color: var(--body);
+}
+
+.shot b {
+  display: block;
+  font-family: var(--font-display), ui-rounded, system-ui, sans-serif;
+  font-size: var(--step-0);
+  color: var(--strong);
+}
+
+/* Two lists side by side -------------------------------------------------- */
+
+.columns {
+  display: grid;
+  gap: var(--s-6);
+}
+
+@media (min-width: 48rem) {
+  .columns {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-7);
+  }
+}
+
+.column h3 {
+  margin-bottom: var(--s-4);
+}
+
+.column > p {
+  margin-top: var(--s-5);
+}
+
+.ticks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--s-3);
+}
+
+.ticks li {
+  display: grid;
+  grid-template-columns: 1.5rem 1fr;
+  gap: var(--s-3);
+  align-items: start;
+}
+
+.ticks svg {
+  margin-top: 0.3em;
+  color: var(--primary);
+}
+
+.ticks--none svg {
+  color: var(--accent-text);
+}
+
+/* Makers ------------------------------------------------------------------ */
+
+.makers {
+  display: grid;
+  gap: var(--s-6);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  padding: var(--s-7) var(--s-6);
+  box-shadow: var(--shadow-sm);
+}
+
+@media (min-width: 48rem) {
+  .makers {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-8);
+    padding: var(--s-8) var(--s-7);
+  }
+}
+
+.makers h3 {
+  margin-bottom: var(--s-3);
+}
+
+/* Legal pages ------------------------------------------------------------- */
+
+.legal {
+  padding-block: var(--s-6) var(--s-8);
+}
+
+.legal-head {
+  border-bottom: 1px solid var(--line);
+  padding-bottom: var(--s-5);
+  margin-bottom: var(--s-6);
+}
+
+/* Only the legal headings hyphenate. "Geschäftsbedingungen" is 354 px of
+   Baloo 2 against a 342 px column on a 390 px phone and has nowhere else to
+   break; `lang="de"` on <html> gets it a proper German hyphen. The landing
+   page is left out on purpose — its hero has room to break between words, and
+   a hyphen in the first line a parent reads looks like a mistake. */
+.legal-head h1,
+.prose h2,
+.prose h3 {
+  hyphens: auto;
+}
+
+.legal-head h1 {
+  font-size: var(--step-4);
+}
+
+.legal-date {
+  color: var(--muted);
+  font-size: var(--step--1);
+  margin-top: var(--s-3);
+}
+
+.prose {
+  max-width: var(--measure);
+  display: grid;
+  gap: var(--s-4);
+}
+
+.prose h2 {
+  font-size: var(--step-3);
+  margin-top: var(--s-6);
+}
+
+.prose h3 {
+  font-size: var(--step-1);
+  margin-top: var(--s-4);
+}
+
+.prose ul {
+  margin: 0;
+  padding-left: 1.2em;
+  display: grid;
+  gap: var(--s-2);
+}
+
+/* One question with its answer. A grid item of .prose, so its own two children
+   need their own, tighter gap. */
+.faq {
+  display: grid;
+  gap: var(--s-2);
+}
+
+/* Real identifiers — a file name, an iOS API — not monospace as decoration. */
+.prose code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.9em;
+  background: var(--sunken);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0.05em 0.35em;
+  white-space: nowrap;
+}
+
+.prose li::marker {
+  color: var(--accent-text);
+}
+
+.prose address {
+  font-style: normal;
+  background: var(--sunken);
+  border-radius: 18px;
+  padding: var(--s-4) var(--s-5);
+  color: var(--body);
+  line-height: 1.7;
+}
+
+/* A placeholder Christian has to replace before this page goes live. Loud on
+   purpose — an unfilled gap in a legal text must not read as finished copy. */
+.todo {
+  display: inline-block;
+  background: var(--reward);
+  color: var(--ink-900);
+  font-weight: 700;
+  padding: 0.1em 0.5em;
+  border-radius: 8px;
+  border: 2px dashed var(--orange-700);
+}
+
+/* Motion ------------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: no-preference) {
+  .rise {
+    animation: rise 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) backwards;
+  }
+
+  .rise-2 {
+    animation-delay: 0.09s;
+  }
+
+  .rise-3 {
+    animation-delay: 0.18s;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
