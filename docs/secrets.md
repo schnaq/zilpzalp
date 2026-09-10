@@ -37,6 +37,7 @@ Danach laufen die mise-Tasks, die Secrets brauchen, automatisch über `infisical
 | `/ios` | `IOS_PROVISIONING_PROFILE_BASE64` | App-Store-Provisioning-Profil |
 | `/ios` | `ASC_KEY_ID`, `ASC_ISSUER_ID`, `ASC_KEY_P8_BASE64` | App Store Connect API, TestFlight-Upload |
 | `/ios` | `IOS_DIST_CERT_CHAIN_BASE64` | optional: Apple-WWDR-Zwischenzertifikat, nur nötig für eine Generation, die `.github/certs` noch nicht mitbringt |
+| `/actions` (Environment `dev`) | `VERCEL_TOKEN`, `VERCEL_PROJECT_ID` | Website-Deploy, `.github/workflows/web.yml` |
 
 Die Signing-Secrets liest ausschließlich `.github/workflows/testflight.yml`. Der Workflow läuft nach jedem grünen CI-Lauf auf `main` auf dem self-hosted Runner: Zertifikat und Profil wandern in eine eigene Keychain (`.github/scripts/ios-signing-setup.sh`), das Archiv entsteht ohne Signatur, und `xcodebuild -exportArchive` signiert und lädt es mit dem App-Store-Connect-Schlüssel nach TestFlight. `.github/scripts/ios-signing-teardown.sh` räumt danach alles wieder ab — der Runner ist persistent, Signing-Material darf keinen Lauf überleben. Der normale CI-Lauf baut weiterhin ohne Codesign.
 
