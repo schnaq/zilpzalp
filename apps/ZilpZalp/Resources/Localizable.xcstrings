@@ -1189,6 +1189,18 @@
         }
       }
     },
+    "roundEnd.announcement" : {
+      "comment" : "What VoiceOver announces when the round end arrives, in place of the sentence the app would otherwise speak out loud. %1$@ is that sentence — the praise, or the praise with a first find in it — and %2$@ is the star count, which no single element on the screen says. A joiner rather than copy: a language that punctuates or orders the two differently rewrites it here",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ %2$@"
+          }
+        }
+      }
+    },
     "roundEnd.collection" : {
       "comment" : "Button on the round end screen that opens the sticker album. Inert until the collection exists",
       "extractionState" : "manual",

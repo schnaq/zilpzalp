@@ -47,6 +47,7 @@ struct RoundEndScreen: View {
 
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(\.verticalSizeClass) private var verticalSizeClass
+    @Environment(\.accessibilityVoiceOverEnabled) private var voiceOverIsOn
 
     /// Flipped once the round is written down: the stars take off, the
     /// sticker pops in, and the way home opens.
@@ -324,11 +325,43 @@ struct RoundEndScreen: View {
         guard !Task.isCancelled else { return }
         settled = true
 
+        guard !voiceOverIsOn else { return await announceToVoiceOver() }
+
         if announcer == nil {
             let voice = SpeechAnnouncer(library: library)
             announcer = voice
             voice.announce(spokenPraise)
         }
+    }
+
+    /// Tells VoiceOver what the screen is celebrating, because nothing here
+    /// tells it otherwise.
+    ///
+    /// Measured on an iPhone 17 Pro Max on 2026-09-11: when the round end
+    /// arrives, VoiceOver says nothing at all. Its cursor stays where the last
+    /// question left it, the stars are hidden from the tree on purpose — the
+    /// praise beside them says the same — and the star count and the sticker
+    /// are read only by a child who thinks to swipe for them. A round has to
+    /// end out loud (#238).
+    ///
+    /// It carries the sentence the app would otherwise speak *and* the star
+    /// count, which no single element on the screen says. And it replaces that
+    /// spoken sentence rather than joining it: two voices over each other are
+    /// worse than either, and this one says more.
+    ///
+    /// The pause is what makes it arrive. VoiceOver drops an announcement
+    /// posted into the screen change that caused it; half a second later the
+    /// screen is its own and the sentence lands.
+    private func announceToVoiceOver() async {
+        try? await Task.sleep(for: .milliseconds(500))
+        guard !Task.isCancelled else { return }
+        AccessibilityNotification.Announcement(
+            String(
+                format: String(localized: "roundEnd.announcement"),
+                spokenPraise.text,
+                starsEarned,
+            ),
+        ).post()
     }
 
     /// Stops the praise before leaving, so that it does not run into the
