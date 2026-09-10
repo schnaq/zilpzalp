@@ -156,6 +156,24 @@ class PackTestCase(unittest.TestCase):
         self.derived = mock.patch.object(cli, "regenerate_derived").start()
         self.addCleanup(mock.patch.stopall)
 
+    def add_second_photo(self, content: bytes) -> None:
+        """Give the pack's one bird a second photo, as `photos pick` would."""
+        (self.pack / "photos" / "amsel-2.png").write_bytes(content)
+        document = manifest.load(self.pack / "manifest.json")
+        manifest.add_photo(
+            document,
+            "amsel",
+            manifest.media_block(
+                file="photos/amsel-2.png",
+                sha256=manifest.sha256_of(self.pack / "photos" / "amsel-2.png"),
+                licence="CC0-1.0",
+                attribution="Somebody",
+                source_url="https://www.inaturalist.org/observations/2",
+                retrieved="2026-09-10",
+            ),
+        )
+        manifest.save(self.pack / "manifest.json", document)
+
     def client_answering(self, handle) -> None:
         """Make every `inaturalist.Client()` answer from `handle`."""
         transport = httpx.MockTransport(handle)
@@ -396,17 +414,7 @@ class DropTests(PackTestCase):
 
     def setUp(self) -> None:
         super().setUp()
-        (self.pack / "photos" / "amsel-2.png").write_bytes(b"the second photo")
-        document = manifest.load(self.pack / "manifest.json")
-        manifest.add_photo(document, "amsel", manifest.media_block(
-            file="photos/amsel-2.png",
-            sha256="1" * 64,
-            licence="CC0-1.0",
-            attribution="Somebody",
-            source_url="https://www.inaturalist.org/observations/2",
-            retrieved="2026-09-10",
-        ))
-        manifest.save(self.pack / "manifest.json", document)
+        self.add_second_photo(b"the second photo")
 
     def run_drop(self, file: str) -> tuple[int, str]:
         output = io.StringIO()
@@ -499,17 +507,7 @@ class AuditTests(PackTestCase):
     def test_exports_one_tile_per_photo(self) -> None:
         # A species with two photos ships two tiles, and each of them is right
         # or wrong on its own.
-        (self.pack / "photos" / "amsel-2.png").write_bytes(jpeg(1024, 1024))
-        document = manifest.load(self.pack / "manifest.json")
-        manifest.add_photo(document, "amsel", manifest.media_block(
-            file="photos/amsel-2.png",
-            sha256="1" * 64,
-            licence="CC0-1.0",
-            attribution="Somebody",
-            source_url="https://www.inaturalist.org/observations/2",
-            retrieved="2026-09-10",
-        ))
-        manifest.save(self.pack / "manifest.json", document)
+        self.add_second_photo(jpeg(1024, 1024))
 
         code, output = self.run_audit()
 

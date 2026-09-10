@@ -84,20 +84,20 @@ public struct Round: Hashable, Sendable {
 
     /// Draws the species to ask for: a random pass through every askable
     /// species, then the next one, until there are enough. That is what pushes
-    /// the repeats of a small askable set to the end of the round.
+    /// the repeats of a small askable set to the end of the round, and it is
+    /// ``ShuffleBag``'s rule — the same one a tile picks its photo by.
     private static func answers(
         from askable: [QuizSpecies],
         questionCount: Int,
         using generator: inout some RandomNumberGenerator,
     ) -> [QuizSpecies] {
+        var bag = ShuffleBag(askable)
         var answers: [QuizSpecies] = []
         answers.reserveCapacity(questionCount)
-        var pass: [QuizSpecies] = []
         for _ in 0 ..< questionCount {
-            if pass.isEmpty {
-                pass = askable.shuffled(using: &generator)
-            }
-            answers.append(pass.removeLast())
+            // Never nil: the caller has refused an empty askable set already.
+            guard let answer = bag.next(using: &generator) else { break }
+            answers.append(answer)
         }
         return answers
     }

@@ -31,11 +31,10 @@ public struct RoundPhotos: Hashable, Sendable {
         photoCounts: [String: Int],
         using generator: inout some RandomNumberGenerator,
     ) {
-        // What a species has left to show before it may repeat itself. Refilled
-        // with a fresh shuffle once it runs out, exactly as ``Round`` deals the
-        // species to ask for — which pushes a repeat as late as the photos
-        // allow.
-        var decks: [String: [Int]] = [:]
+        // One bag per species, which is what pushes a repeated photo as late as
+        // the species' set allows — the same rule ``Round`` deals the species
+        // to ask for by.
+        var bags: [String: ShuffleBag<Int>] = [:]
 
         var questions: [[String: Int]] = []
         questions.reserveCapacity(round.questions.count)
@@ -43,10 +42,8 @@ public struct RoundPhotos: Hashable, Sendable {
             var chosen: [String: Int] = [:]
             for species in question.choices {
                 guard let count = photoCounts[species], count > 1 else { continue }
-                if decks[species]?.isEmpty ?? true {
-                    decks[species] = Array(0 ..< count).shuffled(using: &generator)
-                }
-                chosen[species] = decks[species]?.removeLast()
+                chosen[species] = bags[species, default: ShuffleBag(Array(0 ..< count))]
+                    .next(using: &generator)
             }
             questions.append(chosen)
         }

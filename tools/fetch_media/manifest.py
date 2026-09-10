@@ -189,8 +189,9 @@ def drop_photo(document: dict, bird_id: str, file: str) -> dict:
     and the Swift model refuse it.
     """
     entry = bird(document, bird_id)
-    remaining = [photo for photo in photos(entry) if photo.get("file") != file]
-    gone = [photo for photo in photos(entry) if photo.get("file") == file]
+    remaining, gone = [], []
+    for photo in photos(entry):
+        (gone if photo.get("file") == file else remaining).append(photo)
 
     if not gone:
         named = ", ".join(str(photo.get("file")) for photo in photos(entry))

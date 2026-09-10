@@ -54,8 +54,8 @@ struct QuizPhotos {
     /// an empty square.
     ///
     /// The counts ``RoundPhotos`` was dealt with are the opened photos', so the
-    /// index is in range; the fallback is what a species whose files changed
-    /// under a running session would take.
+    /// index is in range. The fallback is there because a tile that showed
+    /// nothing would be worse than a tile that shows the portrait twice.
     func photo(_ species: String, question: Int) -> Image? {
         guard let photos = images[species], !photos.isEmpty else { return nil }
         let index = dealt.photo(for: species, question: question)
