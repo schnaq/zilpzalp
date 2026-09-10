@@ -945,6 +945,26 @@
       "packTitle": "Vögel Deutschlands",
       "birdID": "amsel",
       "birdName": "Amsel",
+      "kind": "photo",
+      "attribution": "Codrin Bucur",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/110684075"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "amsel",
+      "birdName": "Amsel",
+      "kind": "photo",
+      "attribution": "Yehor Yatsiuk",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/49017862"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "amsel",
+      "birdName": "Amsel",
       "kind": "call",
       "attribution": "craig wilson (XC1051538)",
       "license": "CC-BY-4.0",
@@ -959,6 +979,26 @@
       "attribution": "Vladimir Kharuk",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/69131007"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "blaumeise",
+      "birdName": "Blaumeise",
+      "kind": "photo",
+      "attribution": "Alexis Tinker-Tsavalas",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/19776441"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "blaumeise",
+      "birdName": "Blaumeise",
+      "kind": "photo",
+      "attribution": "Radu Teodoreanu",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/330569928"
     },
     {
       "packID": "deutschland",
@@ -985,6 +1025,26 @@
       "packTitle": "Vögel Deutschlands",
       "birdID": "buntspecht",
       "birdName": "Buntspecht",
+      "kind": "photo",
+      "attribution": "Константин Селивёрстов",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/36065019"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "buntspecht",
+      "birdName": "Buntspecht",
+      "kind": "photo",
+      "attribution": "Francesco Cecere",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/2633975"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "buntspecht",
+      "birdName": "Buntspecht",
       "kind": "call",
       "attribution": "Benoît Van Hecke (XC704068)",
       "license": "CC-BY-SA-4.0",
@@ -999,6 +1059,26 @@
       "attribution": "Alexis Lours",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/98375354"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "eisvogel",
+      "birdName": "Eisvogel",
+      "kind": "photo",
+      "attribution": "SteveM4560",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/197233516"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "eisvogel",
+      "birdName": "Eisvogel",
+      "kind": "photo",
+      "attribution": "SteveM4560",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/182911525"
     },
     {
       "packID": "deutschland",
@@ -1025,6 +1105,26 @@
       "packTitle": "Vögel Deutschlands",
       "birdID": "hausrotschwanz",
       "birdName": "Hausrotschwanz",
+      "kind": "photo",
+      "attribution": "SteveM4560",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/343636642"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "hausrotschwanz",
+      "birdName": "Hausrotschwanz",
+      "kind": "photo",
+      "attribution": "SteveM4560",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/189450325"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "hausrotschwanz",
+      "birdName": "Hausrotschwanz",
       "kind": "call",
       "attribution": "Sonothèque ADVL (XC816871)",
       "license": "CC0-1.0",
@@ -1036,9 +1136,29 @@
       "birdID": "kohlmeise",
       "birdName": "Kohlmeise",
       "kind": "photo",
+      "attribution": "William Stephens",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/144741127"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "kohlmeise",
+      "birdName": "Kohlmeise",
+      "kind": "photo",
       "attribution": "SteveM4560",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/258365796"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "kohlmeise",
+      "birdName": "Kohlmeise",
+      "kind": "photo",
+      "attribution": "Нурхайдарова Татьяна",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/332465687"
     },
     {
       "packID": "deutschland",
@@ -1065,6 +1185,26 @@
       "packTitle": "Vögel Deutschlands",
       "birdID": "rotkehlchen",
       "birdName": "Rotkehlchen",
+      "kind": "photo",
+      "attribution": "Alexis Tinker-Tsavalas",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/19776476"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "rotkehlchen",
+      "birdName": "Rotkehlchen",
+      "kind": "photo",
+      "attribution": "Nigel Voaden",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/8640718"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "rotkehlchen",
+      "birdName": "Rotkehlchen",
       "kind": "call",
       "attribution": "Benoît Van Hecke (XC527484)",
       "license": "CC-BY-SA-4.0",
@@ -1079,6 +1219,26 @@
       "attribution": "egorbirder",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/72752929"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "star",
+      "birdName": "Star",
+      "kind": "photo",
+      "attribution": "Paolo Zucca",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/7251144"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "star",
+      "birdName": "Star",
+      "kind": "photo",
+      "attribution": "Alexis Tinker-Tsavalas",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/24384388"
     },
     {
       "packID": "deutschland",
@@ -1105,6 +1265,26 @@
       "packTitle": "Vögel Deutschlands",
       "birdID": "wiedehopf",
       "birdName": "Wiedehopf",
+      "kind": "photo",
+      "attribution": "Diego González Dopico",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/250060194"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "wiedehopf",
+      "birdName": "Wiedehopf",
+      "kind": "photo",
+      "attribution": "SteveM4560",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/209231854"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "wiedehopf",
+      "birdName": "Wiedehopf",
       "kind": "call",
       "attribution": "Tanguy Loïs (XC1143457)",
       "license": "CC-BY-SA-4.0",
@@ -1119,6 +1299,26 @@
       "attribution": "Tomas Broucek",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/353438691"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "zilpzalp",
+      "birdName": "Zilpzalp",
+      "kind": "photo",
+      "attribution": "Tomas Broucek",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/155117339"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "zilpzalp",
+      "birdName": "Zilpzalp",
+      "kind": "photo",
+      "attribution": "Roy Lowry",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/161063758"
     },
     {
       "packID": "deutschland",
@@ -1145,6 +1345,26 @@
       "packTitle": "Vögel Deutschlands",
       "birdID": "haussperling",
       "birdName": "Haussperling",
+      "kind": "photo",
+      "attribution": "Sascha Nunheim",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/105983364"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "haussperling",
+      "birdName": "Haussperling",
+      "kind": "photo",
+      "attribution": "Sandy Wolkenberg",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/69023165"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "haussperling",
+      "birdName": "Haussperling",
       "kind": "call",
       "attribution": "Philippe_Grange (XC1152146)",
       "license": "CC0-1.0",
@@ -1159,6 +1379,26 @@
       "attribution": "Christoph Moning",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/57657970"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "gruenfink",
+      "birdName": "Grünfink",
+      "kind": "photo",
+      "attribution": "Paulo Martins",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/109256141"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "gruenfink",
+      "birdName": "Grünfink",
+      "kind": "photo",
+      "attribution": "Chris Acree",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/145525933"
     },
     {
       "packID": "deutschland",
@@ -1185,6 +1425,26 @@
       "packTitle": "Vögel Deutschlands",
       "birdID": "buchfink",
       "birdName": "Buchfink",
+      "kind": "photo",
+      "attribution": "harry beaman",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/372742290"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "buchfink",
+      "birdName": "Buchfink",
+      "kind": "photo",
+      "attribution": "Павел Кунгуров",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/397779576"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "buchfink",
+      "birdName": "Buchfink",
       "kind": "call",
       "attribution": "Sonothèque ADVL (XC1088506)",
       "license": "CC0-1.0",
@@ -1199,6 +1459,26 @@
       "attribution": "Christoph Moning",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/68095260"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "stieglitz",
+      "birdName": "Stieglitz",
+      "kind": "photo",
+      "attribution": "Susan Marley",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/106499018"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "stieglitz",
+      "birdName": "Stieglitz",
+      "kind": "photo",
+      "attribution": "Gergely Nigg",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/76629051"
     },
     {
       "packID": "deutschland",
@@ -1225,6 +1505,26 @@
       "packTitle": "Vögel Deutschlands",
       "birdID": "gimpel",
       "birdName": "Gimpel",
+      "kind": "photo",
+      "attribution": "rowan_m",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/66822874"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "gimpel",
+      "birdName": "Gimpel",
+      "kind": "photo",
+      "attribution": "Ilya Firsov",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/164462789"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "gimpel",
+      "birdName": "Gimpel",
       "kind": "call",
       "attribution": "Jurijs Ješkins (XC983039)",
       "license": "CC-BY-4.0",
@@ -1243,12 +1543,52 @@
     {
       "packID": "deutschland",
       "packTitle": "Vögel Deutschlands",
+      "birdID": "kernbeisser",
+      "birdName": "Kernbeißer",
+      "kind": "photo",
+      "attribution": "Syd Cannings",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/70283108"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "kernbeisser",
+      "birdName": "Kernbeißer",
+      "kind": "photo",
+      "attribution": "SteveM4560",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/258838733"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
       "birdID": "bluthaenfling",
       "birdName": "Bluthänfling",
       "kind": "photo",
       "attribution": "Helen Bovill",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/305224073"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "bluthaenfling",
+      "birdName": "Bluthänfling",
+      "kind": "photo",
+      "attribution": "SteveM4560",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/262110578"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "bluthaenfling",
+      "birdName": "Bluthänfling",
+      "kind": "photo",
+      "attribution": "SteveM4560",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/262109648"
     },
     {
       "packID": "deutschland",
@@ -1275,6 +1615,26 @@
       "packTitle": "Vögel Deutschlands",
       "birdID": "goldammer",
       "birdName": "Goldammer",
+      "kind": "photo",
+      "attribution": "SteveM4560",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/262110687"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "goldammer",
+      "birdName": "Goldammer",
+      "kind": "photo",
+      "attribution": "SteveM4560",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/337077270"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "goldammer",
+      "birdName": "Goldammer",
       "kind": "call",
       "attribution": "Philippe_Grange (XC1143669)",
       "license": "CC0-1.0",
@@ -1289,6 +1649,26 @@
       "attribution": "Andrejus Gaidamavičius",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/257350003"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "elster",
+      "birdName": "Elster",
+      "kind": "photo",
+      "attribution": "bitsnbirds",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/118281033"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "elster",
+      "birdName": "Elster",
+      "kind": "photo",
+      "attribution": "David Kleuker",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/207398172"
     },
     {
       "packID": "deutschland",
@@ -1315,6 +1695,26 @@
       "packTitle": "Vögel Deutschlands",
       "birdID": "eichelhaeher",
       "birdName": "Eichelhäher",
+      "kind": "photo",
+      "attribution": "SteveM4560",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/258364464"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "eichelhaeher",
+      "birdName": "Eichelhäher",
+      "kind": "photo",
+      "attribution": "Rhys",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/343819178"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "eichelhaeher",
+      "birdName": "Eichelhäher",
       "kind": "call",
       "attribution": "Sonothèque ADVL (XC1175981)",
       "license": "CC0-1.0",
@@ -1329,6 +1729,26 @@
       "attribution": "Nasser Halaweh",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/18803996"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "rabenkraehe",
+      "birdName": "Rabenkrähe",
+      "kind": "photo",
+      "attribution": "Priya Sandhu",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/263296471"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "rabenkraehe",
+      "birdName": "Rabenkrähe",
+      "kind": "photo",
+      "attribution": "Rhys",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/339187840"
     },
     {
       "packID": "deutschland",
@@ -1355,6 +1775,26 @@
       "packTitle": "Vögel Deutschlands",
       "birdID": "dohle",
       "birdName": "Dohle",
+      "kind": "photo",
+      "attribution": "Charlie Farrell",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/121937015"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "dohle",
+      "birdName": "Dohle",
+      "kind": "photo",
+      "attribution": "Radu Teodoreanu",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/340812653"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "dohle",
+      "birdName": "Dohle",
       "kind": "call",
       "attribution": "Joost van Bruggen (XC436939)",
       "license": "CC-BY-SA-4.0",
@@ -1369,6 +1809,26 @@
       "attribution": "Mila C.",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/215780666"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "kolkrabe",
+      "birdName": "Kolkrabe",
+      "kind": "photo",
+      "attribution": "emilyd47",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/124616321"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "kolkrabe",
+      "birdName": "Kolkrabe",
+      "kind": "photo",
+      "attribution": "Jacek Pietruszewski",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/179940275"
     },
     {
       "packID": "deutschland",
@@ -1395,6 +1855,26 @@
       "packTitle": "Vögel Deutschlands",
       "birdID": "ringeltaube",
       "birdName": "Ringeltaube",
+      "kind": "photo",
+      "attribution": "Owen",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/298864321"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "ringeltaube",
+      "birdName": "Ringeltaube",
+      "kind": "photo",
+      "attribution": "Stephen James McWilliam",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/73335948"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "ringeltaube",
+      "birdName": "Ringeltaube",
       "kind": "call",
       "attribution": "Benoît Van Hecke (XC561877)",
       "license": "CC-BY-SA-4.0",
@@ -1409,6 +1889,26 @@
       "attribution": "zebedeugalinha",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/253298182"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "tuerkentaube",
+      "birdName": "Türkentaube",
+      "kind": "photo",
+      "attribution": "Radu Teodoreanu",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/337930388"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "tuerkentaube",
+      "birdName": "Türkentaube",
+      "kind": "photo",
+      "attribution": "Pablo F. Domínguez",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/264043479"
     },
     {
       "packID": "deutschland",
@@ -1435,6 +1935,26 @@
       "packTitle": "Vögel Deutschlands",
       "birdID": "mauersegler",
       "birdName": "Mauersegler",
+      "kind": "photo",
+      "attribution": "euqirneto",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/230851928"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "mauersegler",
+      "birdName": "Mauersegler",
+      "kind": "photo",
+      "attribution": "Mourad Harzallah",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/168339242"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "mauersegler",
+      "birdName": "Mauersegler",
       "kind": "call",
       "attribution": "Pascal Christe (XC816518)",
       "license": "CC-BY-SA-4.0",
@@ -1449,6 +1969,26 @@
       "attribution": "Robbie Hannawacker",
       "license": "CC0-1.0",
       "sourceURL": "https://www.inaturalist.org/observations/6487004"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "rauchschwalbe",
+      "birdName": "Rauchschwalbe",
+      "kind": "photo",
+      "attribution": "Diego González Dopico",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/239048645"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "rauchschwalbe",
+      "birdName": "Rauchschwalbe",
+      "kind": "photo",
+      "attribution": "Nelson Chu Pavlosky",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/186839287"
     },
     {
       "packID": "deutschland",
@@ -1475,6 +2015,26 @@
       "packTitle": "Vögel Deutschlands",
       "birdID": "bachstelze",
       "birdName": "Bachstelze",
+      "kind": "photo",
+      "attribution": "Ani Sarkisyan",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/1217900"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "bachstelze",
+      "birdName": "Bachstelze",
+      "kind": "photo",
+      "attribution": "Марат Адиев",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/331531554"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "bachstelze",
+      "birdName": "Bachstelze",
       "kind": "call",
       "attribution": "Sonothèque ADVL (XC1100607)",
       "license": "CC0-1.0",
@@ -1489,6 +2049,26 @@
       "attribution": "William Stephens",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/75531686"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "zaunkoenig",
+      "birdName": "Zaunkönig",
+      "kind": "photo",
+      "attribution": "Philipp",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/93298792"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "zaunkoenig",
+      "birdName": "Zaunkönig",
+      "kind": "photo",
+      "attribution": "Martin M",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/339204284"
     },
     {
       "packID": "deutschland",
@@ -1515,6 +2095,26 @@
       "packTitle": "Vögel Deutschlands",
       "birdID": "singdrossel",
       "birdName": "Singdrossel",
+      "kind": "photo",
+      "attribution": "Евгений Маринкин",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/269077977"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "singdrossel",
+      "birdName": "Singdrossel",
+      "kind": "photo",
+      "attribution": "Oliver Hlasný",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/234119958"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "singdrossel",
+      "birdName": "Singdrossel",
       "kind": "call",
       "attribution": "Philippe_Grange (XC1151579)",
       "license": "CC0-1.0",
@@ -1529,6 +2129,26 @@
       "attribution": "Codrin Bucur",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/161483028"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "nachtigall",
+      "birdName": "Nachtigall",
+      "kind": "photo",
+      "attribution": "Олеся",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/368473438"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "nachtigall",
+      "birdName": "Nachtigall",
+      "kind": "photo",
+      "attribution": "rober025",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/80943993"
     },
     {
       "packID": "deutschland",
@@ -1555,6 +2175,26 @@
       "packTitle": "Vögel Deutschlands",
       "birdID": "moenchsgrasmuecke",
       "birdName": "Mönchsgrasmücke",
+      "kind": "photo",
+      "attribution": "Дмитрий Кошелев",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/317740320"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "moenchsgrasmuecke",
+      "birdName": "Mönchsgrasmücke",
+      "kind": "photo",
+      "attribution": "alcesevropsky",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/137250122"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "moenchsgrasmuecke",
+      "birdName": "Mönchsgrasmücke",
       "kind": "call",
       "attribution": "Philippe_Grange (XC1099296)",
       "license": "CC0-1.0",
@@ -1569,6 +2209,26 @@
       "attribution": "Dr. Sven Gippner",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/148024354"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "kleiber",
+      "birdName": "Kleiber",
+      "kind": "photo",
+      "attribution": "Вячеслав Юсупов",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/18627217"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "kleiber",
+      "birdName": "Kleiber",
+      "kind": "photo",
+      "attribution": "Alexis Tinker-Tsavalas",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/32897568"
     },
     {
       "packID": "deutschland",
@@ -1595,6 +2255,26 @@
       "packTitle": "Vögel Deutschlands",
       "birdID": "gartenbaumlaeufer",
       "birdName": "Gartenbaumläufer",
+      "kind": "photo",
+      "attribution": "Donald Davesne",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/257289993"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "gartenbaumlaeufer",
+      "birdName": "Gartenbaumläufer",
+      "kind": "photo",
+      "attribution": "euqirneto",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/150185747"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "gartenbaumlaeufer",
+      "birdName": "Gartenbaumläufer",
       "kind": "call",
       "attribution": "Benoît Van Hecke (XC697961)",
       "license": "CC-BY-SA-4.0",
@@ -1609,6 +2289,26 @@
       "attribution": "Валерия Ковалева",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/108550471"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "schwanzmeise",
+      "birdName": "Schwanzmeise",
+      "kind": "photo",
+      "attribution": "Алина Урусова",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/36315159"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "schwanzmeise",
+      "birdName": "Schwanzmeise",
+      "kind": "photo",
+      "attribution": "Andrew Bazdyrev",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/323469083"
     },
     {
       "packID": "deutschland",
@@ -1635,6 +2335,26 @@
       "packTitle": "Vögel Deutschlands",
       "birdID": "haubenmeise",
       "birdName": "Haubenmeise",
+      "kind": "photo",
+      "attribution": "Philipp",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/59300623"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "haubenmeise",
+      "birdName": "Haubenmeise",
+      "kind": "photo",
+      "attribution": "Настя Бухвалова",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/144213587"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "haubenmeise",
+      "birdName": "Haubenmeise",
       "kind": "call",
       "attribution": "Sonothèque ADVL (XC1088492)",
       "license": "CC0-1.0",
@@ -1646,9 +2366,29 @@
       "birdID": "wintergoldhaehnchen",
       "birdName": "Wintergoldhähnchen",
       "kind": "photo",
+      "attribution": "Andrey Gulivanov",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/40955058"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "wintergoldhaehnchen",
+      "birdName": "Wintergoldhähnchen",
+      "kind": "photo",
       "attribution": "Frank Sengpiel",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/67995777"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "wintergoldhaehnchen",
+      "birdName": "Wintergoldhähnchen",
+      "kind": "photo",
+      "attribution": "harry beaman",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/347612259"
     },
     {
       "packID": "deutschland",
@@ -1675,6 +2415,26 @@
       "packTitle": "Vögel Deutschlands",
       "birdID": "gartenrotschwanz",
       "birdName": "Gartenrotschwanz",
+      "kind": "photo",
+      "attribution": "Donald Davesne",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/125291563"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "gartenrotschwanz",
+      "birdName": "Gartenrotschwanz",
+      "kind": "photo",
+      "attribution": "Stefan Haag",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/52292221"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "gartenrotschwanz",
+      "birdName": "Gartenrotschwanz",
       "kind": "call",
       "attribution": "Philippe_Grange (XC990430)",
       "license": "CC0-1.0",
@@ -1689,6 +2449,26 @@
       "attribution": "Phil James",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/214550657"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "feldlerche",
+      "birdName": "Feldlerche",
+      "kind": "photo",
+      "attribution": "Donald Davesne",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/111957295"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "feldlerche",
+      "birdName": "Feldlerche",
+      "kind": "photo",
+      "attribution": "Ксения Волянская",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/359507099"
     },
     {
       "packID": "deutschland",
@@ -1715,6 +2495,26 @@
       "packTitle": "Vögel Deutschlands",
       "birdID": "neuntoeter",
       "birdName": "Neuntöter",
+      "kind": "photo",
+      "attribution": "SteveM4560",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/238212871"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "neuntoeter",
+      "birdName": "Neuntöter",
+      "kind": "photo",
+      "attribution": "Ben Keen",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/63582146"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "neuntoeter",
+      "birdName": "Neuntöter",
       "kind": "call",
       "attribution": "Jochem verweij (XC902159)",
       "license": "CC-BY-SA-4.0",
@@ -1729,6 +2529,26 @@
       "attribution": "Donsky",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/375588305"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "pirol",
+      "birdName": "Pirol",
+      "kind": "photo",
+      "attribution": "Andrey Gulivanov",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/127233810"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "pirol",
+      "birdName": "Pirol",
+      "kind": "photo",
+      "attribution": "euqirneto",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/280780303"
     },
     {
       "packID": "deutschland",
@@ -1755,6 +2575,26 @@
       "packTitle": "Vögel Deutschlands",
       "birdID": "seidenschwanz",
       "birdName": "Seidenschwanz",
+      "kind": "photo",
+      "attribution": "Christian Back",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/203258788"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "seidenschwanz",
+      "birdName": "Seidenschwanz",
+      "kind": "photo",
+      "attribution": "Owen Strickland",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/142515021"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "seidenschwanz",
+      "birdName": "Seidenschwanz",
       "kind": "call",
       "attribution": "Doug Hynes (XC935618)",
       "license": "CC-BY-SA-4.0",
@@ -1766,9 +2606,29 @@
       "birdID": "wasseramsel",
       "birdName": "Wasseramsel",
       "kind": "photo",
+      "attribution": "Frank Sengpiel",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/45783324"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "wasseramsel",
+      "birdName": "Wasseramsel",
+      "kind": "photo",
       "attribution": "Dario Taraborelli",
       "license": "CC0-1.0",
       "sourceURL": "https://www.inaturalist.org/observations/87177852"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "wasseramsel",
+      "birdName": "Wasseramsel",
+      "kind": "photo",
+      "attribution": "Евгений Егорейченков",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/198135250"
     },
     {
       "packID": "deutschland",
@@ -1795,6 +2655,26 @@
       "packTitle": "Vögel Deutschlands",
       "birdID": "kuckuck",
       "birdName": "Kuckuck",
+      "kind": "photo",
+      "attribution": "Вячеслав Юсупов",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/46645572"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "kuckuck",
+      "birdName": "Kuckuck",
+      "kind": "photo",
+      "attribution": "Tyler Ekholm",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/64192945"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "kuckuck",
+      "birdName": "Kuckuck",
       "kind": "call",
       "attribution": "Tanguy Loïs (XC1143461)",
       "license": "CC-BY-SA-4.0",
@@ -1809,6 +2689,26 @@
       "attribution": "SteveM4560",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/148448012"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "gruenspecht",
+      "birdName": "Grünspecht",
+      "kind": "photo",
+      "attribution": "Andrea Poggi",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/141624066"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "gruenspecht",
+      "birdName": "Grünspecht",
+      "kind": "photo",
+      "attribution": "SteveM4560",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/199975809"
     },
     {
       "packID": "deutschland",
@@ -1835,6 +2735,26 @@
       "packTitle": "Vögel Deutschlands",
       "birdID": "schwarzspecht",
       "birdName": "Schwarzspecht",
+      "kind": "photo",
+      "attribution": "Ирина Хохрякова",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/329464126"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "schwarzspecht",
+      "birdName": "Schwarzspecht",
+      "kind": "photo",
+      "attribution": "SteveM4560",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/204591714"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "schwarzspecht",
+      "birdName": "Schwarzspecht",
       "kind": "call",
       "attribution": "Sonothèque ADVL (XC1107912)",
       "license": "CC0-1.0",
@@ -1849,6 +2769,26 @@
       "attribution": "Tomas Broucek",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/219995225"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "bienenfresser",
+      "birdName": "Bienenfresser",
+      "kind": "photo",
+      "attribution": "SteveM4560",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/177799732"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "bienenfresser",
+      "birdName": "Bienenfresser",
+      "kind": "photo",
+      "attribution": "SteveM4560",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/392040916"
     },
     {
       "packID": "deutschland",
@@ -1875,6 +2815,26 @@
       "packTitle": "Vögel Deutschlands",
       "birdID": "waldkauz",
       "birdName": "Waldkauz",
+      "kind": "photo",
+      "attribution": "Christoph Moning",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/68095259"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "waldkauz",
+      "birdName": "Waldkauz",
+      "kind": "photo",
+      "attribution": "Donald Davesne",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/358550704"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "waldkauz",
+      "birdName": "Waldkauz",
       "kind": "call",
       "attribution": "Benoît Van Hecke (XC696425)",
       "license": "CC-BY-SA-4.0",
@@ -1895,6 +2855,26 @@
       "packTitle": "Vögel Deutschlands",
       "birdID": "uhu",
       "birdName": "Uhu",
+      "kind": "photo",
+      "attribution": "Andrey Gulivanov",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/97347230"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "uhu",
+      "birdName": "Uhu",
+      "kind": "photo",
+      "attribution": "Artemy Savko",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/232657564"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "uhu",
+      "birdName": "Uhu",
       "kind": "call",
       "attribution": "Lionel Triboulin (XC1070276)",
       "license": "CC0-1.0",
@@ -1906,9 +2886,29 @@
       "birdID": "schleiereule",
       "birdName": "Schleiereule",
       "kind": "photo",
+      "attribution": "Chris Kirby-Lambert",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/332190606"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "schleiereule",
+      "birdName": "Schleiereule",
+      "kind": "photo",
       "attribution": "Nathan Mesnildrey",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/98811449"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "schleiereule",
+      "birdName": "Schleiereule",
+      "kind": "photo",
+      "attribution": "Christoph Moning",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/125001826"
     },
     {
       "packID": "deutschland",
@@ -1926,9 +2926,29 @@
       "birdID": "steinkauz",
       "birdName": "Steinkauz",
       "kind": "photo",
+      "attribution": "gianluigi",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/109135249"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "steinkauz",
+      "birdName": "Steinkauz",
+      "kind": "photo",
       "attribution": "SteveM4560",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/151025147"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "steinkauz",
+      "birdName": "Steinkauz",
+      "kind": "photo",
+      "attribution": "SteveM4560",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/151119696"
     },
     {
       "packID": "deutschland",
@@ -1955,6 +2975,26 @@
       "packTitle": "Vögel Deutschlands",
       "birdID": "maeusebussard",
       "birdName": "Mäusebussard",
+      "kind": "photo",
+      "attribution": "Christoph Moning",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/192097624"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "maeusebussard",
+      "birdName": "Mäusebussard",
+      "kind": "photo",
+      "attribution": "Alexis Tinker-Tsavalas",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/25390413"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "maeusebussard",
+      "birdName": "Mäusebussard",
       "kind": "call",
       "attribution": "Fiete Nörenberg (XC1036868)",
       "license": "CC-BY-4.0",
@@ -1966,9 +3006,29 @@
       "birdID": "turmfalke",
       "birdName": "Turmfalke",
       "kind": "photo",
+      "attribution": "Donsky",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/269108640"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "turmfalke",
+      "birdName": "Turmfalke",
+      "kind": "photo",
       "attribution": "Luis Ferreira",
       "license": "CC0-1.0",
       "sourceURL": "https://www.inaturalist.org/observations/148613413"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "turmfalke",
+      "birdName": "Turmfalke",
+      "kind": "photo",
+      "attribution": "Thorsten Hackbarth",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/105032479"
     },
     {
       "packID": "deutschland",
@@ -1995,6 +3055,26 @@
       "packTitle": "Vögel Deutschlands",
       "birdID": "rotmilan",
       "birdName": "Rotmilan",
+      "kind": "photo",
+      "attribution": "bigben747400",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/163852654"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "rotmilan",
+      "birdName": "Rotmilan",
+      "kind": "photo",
+      "attribution": "Dr. Sven Gippner",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/217856101"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "rotmilan",
+      "birdName": "Rotmilan",
       "kind": "call",
       "attribution": "Pascal Christe (XC518958)",
       "license": "CC-BY-SA-4.0",
@@ -2013,12 +3093,52 @@
     {
       "packID": "deutschland",
       "packTitle": "Vögel Deutschlands",
+      "birdID": "seeadler",
+      "birdName": "Seeadler",
+      "kind": "photo",
+      "attribution": "Alexis Tinker-Tsavalas",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/263174785"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "seeadler",
+      "birdName": "Seeadler",
+      "kind": "photo",
+      "attribution": "Alexis Tinker-Tsavalas",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/35711121"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
       "birdID": "wanderfalke",
       "birdName": "Wanderfalke",
       "kind": "photo",
       "attribution": "Shirley Zundell",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/12075369"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "wanderfalke",
+      "birdName": "Wanderfalke",
+      "kind": "photo",
+      "attribution": "Andrea Poggi",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/107502796"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "wanderfalke",
+      "birdName": "Wanderfalke",
+      "kind": "photo",
+      "attribution": "Vladimir Kharuk",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/40072653"
     },
     {
       "packID": "deutschland",
@@ -2045,6 +3165,26 @@
       "packTitle": "Vögel Deutschlands",
       "birdID": "weissstorch",
       "birdName": "Weißstorch",
+      "kind": "photo",
+      "attribution": "SteveM4560",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/202678318"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "weissstorch",
+      "birdName": "Weißstorch",
+      "kind": "photo",
+      "attribution": "SteveM4560",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/156429936"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "weissstorch",
+      "birdName": "Weißstorch",
       "kind": "call",
       "attribution": "Sonothèque ADVL (XC1143178)",
       "license": "CC0-1.0",
@@ -2059,6 +3199,26 @@
       "attribution": "Alex Press",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/235722159"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "graureiher",
+      "birdName": "Graureiher",
+      "kind": "photo",
+      "attribution": "joba102",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/103982370"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "graureiher",
+      "birdName": "Graureiher",
+      "kind": "photo",
+      "attribution": "Alexis Lours",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/108042236"
     },
     {
       "packID": "deutschland",
@@ -2085,6 +3245,26 @@
       "packTitle": "Vögel Deutschlands",
       "birdID": "kranich",
       "birdName": "Kranich",
+      "kind": "photo",
+      "attribution": "Donald Davesne",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/262191857"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "kranich",
+      "birdName": "Kranich",
+      "kind": "photo",
+      "attribution": "Donald Davesne",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/101649379"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "kranich",
+      "birdName": "Kranich",
       "kind": "call",
       "attribution": "Grégoire Chauvot (XC803895)",
       "license": "CC0-1.0",
@@ -2099,6 +3279,26 @@
       "attribution": "Codrin Bucur",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/105737491"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "stockente",
+      "birdName": "Stockente",
+      "kind": "photo",
+      "attribution": "euqirneto",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/65460972"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "stockente",
+      "birdName": "Stockente",
+      "kind": "photo",
+      "attribution": "John Brew",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/159942431"
     },
     {
       "packID": "deutschland",
@@ -2123,12 +3323,52 @@
     {
       "packID": "deutschland",
       "packTitle": "Vögel Deutschlands",
+      "birdID": "mandarinente",
+      "birdName": "Mandarinente",
+      "kind": "photo",
+      "attribution": "Diego González Dopico",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/204451732"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "mandarinente",
+      "birdName": "Mandarinente",
+      "kind": "photo",
+      "attribution": "Susan Marley",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/106805518"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
       "birdID": "hoeckerschwan",
       "birdName": "Höckerschwan",
       "kind": "photo",
       "attribution": "Radu Teodoreanu",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/340807169"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "hoeckerschwan",
+      "birdName": "Höckerschwan",
+      "kind": "photo",
+      "attribution": "Philipp Pavelka",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/13231757"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "hoeckerschwan",
+      "birdName": "Höckerschwan",
+      "kind": "photo",
+      "attribution": "Thomas Koffel",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/297841724"
     },
     {
       "packID": "deutschland",
@@ -2155,6 +3395,26 @@
       "packTitle": "Vögel Deutschlands",
       "birdID": "graugans",
       "birdName": "Graugans",
+      "kind": "photo",
+      "attribution": "olmagon",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/281640151"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "graugans",
+      "birdName": "Graugans",
+      "kind": "photo",
+      "attribution": "SIA",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/274898523"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "graugans",
+      "birdName": "Graugans",
       "kind": "call",
       "attribution": "Petr Holecek (XC1174837)",
       "license": "CC0-1.0",
@@ -2169,6 +3429,26 @@
       "attribution": "petehawkins",
       "license": "CC0-1.0",
       "sourceURL": "https://www.inaturalist.org/observations/269486317"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "blaesshuhn",
+      "birdName": "Blässhuhn",
+      "kind": "photo",
+      "attribution": "Diego González Dopico",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/208001735"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "blaesshuhn",
+      "birdName": "Blässhuhn",
+      "kind": "photo",
+      "attribution": "Alexis Tinker-Tsavalas",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/17933973"
     },
     {
       "packID": "deutschland",
@@ -2195,6 +3475,26 @@
       "packTitle": "Vögel Deutschlands",
       "birdID": "haubentaucher",
       "birdName": "Haubentaucher",
+      "kind": "photo",
+      "attribution": "M. Baran",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/341909121"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "haubentaucher",
+      "birdName": "Haubentaucher",
+      "kind": "photo",
+      "attribution": "Diego González Dopico",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/263911192"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "haubentaucher",
+      "birdName": "Haubentaucher",
       "kind": "call",
       "attribution": "Sonothèque ADVL (XC925320)",
       "license": "CC0-1.0",
@@ -2209,6 +3509,26 @@
       "attribution": "Frank Sengpiel",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/151715487"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "kormoran",
+      "birdName": "Kormoran",
+      "kind": "photo",
+      "attribution": "rowan_m",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/70246533"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "kormoran",
+      "birdName": "Kormoran",
+      "kind": "photo",
+      "attribution": "Diego González Dopico",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/252021566"
     },
     {
       "packID": "deutschland",
@@ -2235,6 +3555,26 @@
       "packTitle": "Vögel Deutschlands",
       "birdID": "lachmoewe",
       "birdName": "Lachmöwe",
+      "kind": "photo",
+      "attribution": "Owen Strickland",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/278297590"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "lachmoewe",
+      "birdName": "Lachmöwe",
+      "kind": "photo",
+      "attribution": "Christoph Moning",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/58483685"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "lachmoewe",
+      "birdName": "Lachmöwe",
       "kind": "call",
       "attribution": "Marie-Lan Taÿ Pamart (XC512864)",
       "license": "CC-BY-SA-4.0",
@@ -2249,6 +3589,26 @@
       "attribution": "Ged Tranter",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/241437631"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "austernfischer",
+      "birdName": "Austernfischer",
+      "kind": "photo",
+      "attribution": "Rafael Rosa",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/369928762"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "austernfischer",
+      "birdName": "Austernfischer",
+      "kind": "photo",
+      "attribution": "Charlotte Kirchner",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/366330994"
     },
     {
       "packID": "deutschland",
@@ -2275,6 +3635,26 @@
       "packTitle": "Vögel Deutschlands",
       "birdID": "kiebitz",
       "birdName": "Kiebitz",
+      "kind": "photo",
+      "attribution": "Marco Mussita",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/68098192"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "kiebitz",
+      "birdName": "Kiebitz",
+      "kind": "photo",
+      "attribution": "Christoph Moning",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/272460517"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "kiebitz",
+      "birdName": "Kiebitz",
       "kind": "call",
       "attribution": "Sonothèque ADVL (XC919264)",
       "license": "CC0-1.0",
@@ -2289,6 +3669,26 @@
       "attribution": "John Krampl",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/77794790"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "fasan",
+      "birdName": "Fasan",
+      "kind": "photo",
+      "attribution": "John Krampl",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/64745794"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "fasan",
+      "birdName": "Fasan",
+      "kind": "photo",
+      "attribution": "Daughter Dad",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/342178415"
     },
     {
       "packID": "deutschland",

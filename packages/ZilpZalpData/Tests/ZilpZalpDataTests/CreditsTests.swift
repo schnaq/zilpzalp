@@ -60,7 +60,15 @@ struct CreditsTests {
             #expect(calls.first?.birdName == (bird.call == nil ? nil : bird.name))
         }
 
-        #expect(entries.count == pack.birds.count + pack.birds.count(where: { $0.call != nil }))
+        // Each bird can ship several photos now (#194), and two photos from the
+        // same observation collapse into one credit line — so the pack total is
+        // the sum of each bird's distinct photo credits, not one per bird.
+        let expectedPhotoCredits = pack.birds.reduce(0) { total, bird in
+            let declared = bird.photos
+                .map { [$0.attribution, $0.license.rawValue, "\($0.sourceURL)"] }
+            return total + Set(declared).count
+        }
+        #expect(entries.count == expectedPhotoCredits + pack.birds.count(where: { $0.call != nil }))
     }
 
     /// The voices section, decoded from the shape `tools/generate_credits.py`
