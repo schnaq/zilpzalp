@@ -171,18 +171,23 @@ public struct HomeTile: View {
     /// than its tile even after the second line shrinks rather than losing its
     /// ending — the ending is where the question mark is. No label the app
     /// ships engages it on a supported width.
-    func label(lines: Int) -> some View {
+    ///
+    /// - Parameter step: Handed in rather than read from ``labelStep``, which
+    ///   is computed: the body draws this twice and would work it out four
+    ///   times over.
+    func label(lines: Int, step: ZType.Step) -> some View {
         Text(title)
-            .typeStyle(labelStep, .display, weight: .bold)
+            .typeStyle(step, .display, weight: .bold)
             .lineLimit(lines)
             .multilineTextAlignment(.center)
             .minimumScaleFactor(HomeTileMetrics.labelScaleFloor)
             .fixedSize(horizontal: false, vertical: true)
-            .frame(height: CGFloat(lines) * labelStep.lineBoxHeight)
+            .frame(height: CGFloat(lines) * step.lineBoxHeight)
     }
 
     public var body: some View {
         let tilePalette = palette
+        let step = labelStep
 
         return Button(action: action) {
             VStack(spacing: ZSpacing.step3) {
@@ -193,11 +198,11 @@ public struct HomeTile: View {
                 // shipped label that needs one: 166.7 pt at `body` against
                 // the 127 pt a 159 pt tile leaves, and shrinking it to fit
                 // would put it at 15.2 pt, below the size a child reads at
-                // (#229). Broken after „den" both halves are well inside the
-                // tile and the word keeps the step it was given.
+                // (#229). Split, both lines are well inside the tile and the
+                // word keeps the step it was given.
                 ViewThatFits(in: .horizontal) {
-                    label(lines: 1)
-                    label(lines: 2)
+                    label(lines: 1, step: step)
+                    label(lines: 2, step: step)
                 }
 
                 // No stars at all until the first one is earned, exactly as

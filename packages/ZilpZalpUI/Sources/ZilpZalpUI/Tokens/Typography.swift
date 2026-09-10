@@ -207,6 +207,15 @@ public extension View {
     ///     `.clipped()`, so they stay whole. Leave it off for anything that
     ///     may wrap.
     ///
+    ///     **Not on its own under a `minimumScaleFactor`.** A scale factor
+    ///     shrinks to fit the whole proposal, and the design's box is tighter
+    ///     than the face's, so the pair alone draws the label a step or more
+    ///     below the one it was given — 18 pt for a 28 pt headline. A
+    ///     `.fixedSize(horizontal: false, vertical: true)` between the two
+    ///     sizes the text against its own box first; ``TopBarTitle`` and
+    ///     `HomeTile`'s label do it that way since #229, and the screens that
+    ///     still pair the two without it are a fix of their own.
+    ///
     /// Left off, the modifier touches neither the line limit nor the height:
     /// `.lineLimit(nil)` would clear a limit an ancestor had set, so a caller
     /// wrapping a card in `.lineLimit(2)` would silently lose it.

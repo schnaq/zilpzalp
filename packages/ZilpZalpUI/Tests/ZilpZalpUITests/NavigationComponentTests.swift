@@ -192,9 +192,9 @@ struct NavigationComponentTests {
     /// `minimumScaleFactor` shrinks to fit the design's line box — tighter
     /// than Baloo 2's own — as readily as it shrinks to fit a width.
     ///
-    /// Read back from the width, as `TopBarTests` does it: a loose render
-    /// reports the width the label was actually drawn at, and advances scale
-    /// with the point size.
+    /// Both tile sizes that pick a different step, because the gap between the
+    /// design's box and the face's grows with the step: `body` lost a quarter
+    /// of a step, `headline` a fifth of its size.
     @Test(
         "A label with room around it is drawn at the step its tile picked",
         arguments: [CGFloat(159), 240],
@@ -204,19 +204,17 @@ struct NavigationComponentTests {
 
         let label = "Wer singt da?"
         let component = HomeTile(title: label, size: tile)
-        var loose = CGSize.zero
-        ImageRenderer(content: component.label(lines: 1)).render { size, _ in loose = size }
-        let natural = BundledFonts.width(
-            of: label,
-            postScriptName: "Baloo2-Bold",
-            size: component.labelStep.size,
+        let step = component.labelStep
+        let drawn = drawnSize(
+            of: component.label(lines: 1, step: step),
+            text: label,
+            declaredAt: step,
         )
-        let drawn = component.labelStep.size * loose.width / natural
 
         // A point of tolerance: `ImageRenderer` reports whole points.
         #expect(
-            abs(drawn - component.labelStep.size) < 1,
-            "the label was drawn at \(drawn) pt, not at \(component.labelStep.size)",
+            abs(drawn - step.size) < 1,
+            "the label was drawn at \(drawn) pt, not at \(step.size)",
         )
     }
 

@@ -125,19 +125,11 @@ struct TopBarTests {
         // declared at `headline` and rendered at 18 pt, on an iPad as much as
         // on a phone. Nothing about the width caused it — the tight line box
         // did, and a `minimumScaleFactor` shrinks to fit a height too.
-        //
-        // What the title was actually drawn at cannot be asked, so it is read
-        // back from the width: advances scale with the point size, so the
-        // width a loose render reports, over the width CoreText typesets the
-        // same string at 28 pt, is the size that reached the screen.
-        var loose = CGSize.zero
-        ImageRenderer(content: TopBarTitle(title)).render { size, _ in loose = size }
-        let natural = BundledFonts.width(
-            of: title,
-            postScriptName: "Baloo2-Bold",
-            size: ZType.Step.headline.size,
+        let drawn = drawnSize(
+            of: TopBarTitle(title),
+            text: title,
+            declaredAt: ZType.Step.headline,
         )
-        let drawn = ZType.Step.headline.size * loose.width / natural
 
         // A point of tolerance: `ImageRenderer` reports whole points.
         #expect(
