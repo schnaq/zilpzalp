@@ -203,6 +203,14 @@ class RecordTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             xenocanto.attribution(record(rec=" "))
 
+    def test_unescapes_html_entities_in_the_recordist(self) -> None:
+        escaped = record(rec="Jan Ebr &amp; Ivana Ebrov&#39;a")
+
+        self.assertEqual(xenocanto.attribution(escaped), "Jan Ebr & Ivana Ebrov'a (XC965144)")
+
+    def test_leaves_a_plain_recordist_unchanged(self) -> None:
+        self.assertEqual(xenocanto.attribution(record(rec="Mirko Tomasi")), "Mirko Tomasi (XC965144)")
+
 
 class ClientTests(unittest.TestCase):
     def client(self, handle, min_interval: float = 0.0) -> xenocanto.Client:

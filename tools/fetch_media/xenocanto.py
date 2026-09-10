@@ -24,6 +24,7 @@ instead of raising, and `pick` refuses them.
 
 from __future__ import annotations
 
+import html
 import time
 from dataclasses import dataclass
 from urllib.parse import urlparse
@@ -282,12 +283,14 @@ def attribution(record: dict) -> str:
 
     The terms demand recordist, licence and catalogue number. The licence is a
     field of its own in the manifest and a column of its own in CREDITS.md, so
-    repeating it here would print it twice on the credits screen.
+    repeating it here would print it twice on the credits screen. The API
+    returns some recordist names HTML-escaped; `html.unescape` undoes that
+    before the name reaches a manifest.
     """
     recordist = str(record.get("rec") or "").strip()
     if not recordist:
         raise ValueError(f"XC{record.get('id')}: has no recordist to credit")
-    return f"{recordist} (XC{record['id']})"
+    return f"{html.unescape(recordist)} (XC{record['id']})"
 
 
 class Client:

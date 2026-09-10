@@ -139,6 +139,21 @@ class CandidateTests(unittest.TestCase):
 
         self.assertEqual(candidates[0].photographer, "alexis_orion")
 
+    def test_unescapes_html_entities_in_the_name(self) -> None:
+        escaped = observation(user={"login": "jan", "name": "Jan Ebr &amp; Ivana Ebrov&#39;a"})
+
+        self.assertEqual(inaturalist.photographer(escaped), "Jan Ebr & Ivana Ebrov'a")
+
+    def test_unescapes_html_entities_in_the_login_fallback(self) -> None:
+        escaped = observation(user={"login": "Tom &amp; Jerry", "name": ""})
+
+        self.assertEqual(inaturalist.photographer(escaped), "Tom & Jerry")
+
+    def test_leaves_a_plain_name_unchanged(self) -> None:
+        plain = observation(user={"login": "alexis_orion", "name": "Alexis Tinker-Tsavalas"})
+
+        self.assertEqual(inaturalist.photographer(plain), "Alexis Tinker-Tsavalas")
+
     def test_reports_an_unknown_square_side(self) -> None:
         without = observation(photos=[photo(original_dimensions=None)])
 
