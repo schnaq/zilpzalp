@@ -323,6 +323,14 @@ enum RewardStickerMetrics {
                 )
             }
         }
+
+        // Chosen: the rim goes olive whatever the tone underneath, and the
+        // check lands where a locked sticker's padlock would.
+        HStack(spacing: ZSpacing.step6) {
+            ForEach(RewardSticker.Tone.allCases, id: \.self) { tone in
+                RewardSticker(icon: .bird, label: "gewählt", tone: tone, chosen: true)
+            }
+        }
     }
     .padding(ZSpacing.step7)
     .frame(maxWidth: .infinity, maxHeight: .infinity)
