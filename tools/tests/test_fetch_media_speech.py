@@ -2,8 +2,9 @@
 
 Nothing here reaches a vendor, and nothing reaches the repository: every test
 works on a throwaway pack, a throwaway fixed set and a throwaway String
-Catalog. The only provider that exists is `fake`, which produces tones — the
-rule `tools/tests/` already follows for iNaturalist and xeno-canto.
+Catalog. `fake` produces tones and reaches nobody, and the ElevenLabs adapter
+is driven through an `httpx.MockTransport` — the rule `tools/tests/` already
+follows for iNaturalist and xeno-canto.
 
 Run from the repository root:
 uv run --locked --project tools python -m unittest discover -s tools/tests -t tools
@@ -21,8 +22,27 @@ import wave
 from pathlib import Path
 from unittest import mock
 
-from fetch_media import audio, cli, manifest, speech
-from fetch_media.speech import clips, fake, sentences
+import httpx
+
+from fetch_media import audio, cli, keys, manifest, speech
+from fetch_media.speech import clips, elevenlabs, fake, sentences
+
+# Not a real key, and never a real one: it is here so that a test can assert
+# that it does not come out the other end of an error message.
+KEY = "sk-not-a-real-elevenlabs-key-0123456789"
+
+# Two voices as `GET /v1/voices` reports them, cut down to the fields the
+# adapter reads.
+OFFERED = {
+    "voices": [
+        {"voice_id": "v-johanna", "name": "Johanna", "description": "warm, German"},
+        {"voice_id": "v-max", "name": "Max", "category": "premade"},
+    ]
+}
+
+# A quarter of a second of raw 16-bit little-endian samples, which is what
+# `pcm_24000` hands back: no header, no container, just the samples.
+SAMPLES = b"\x00\x01" * (elevenlabs.RATE // 4)
 
 # The three keys the base pack's species sentences use, as the app's own
 # catalogue spells them, plus the one that cannot become a clip.
@@ -145,13 +165,13 @@ class RealCatalogTests(unittest.TestCase):
 
 
 class ProviderTests(unittest.TestCase):
-    def test_the_only_adapter_is_the_one_that_reaches_nobody(self) -> None:
-        """Until decisions 1 and 2 are answered there is no vendor to reach."""
-        self.assertEqual(sorted(speech.PROVIDERS), ["fake"])
+    def test_the_adapters_are_the_tones_and_the_vendor(self) -> None:
+        """Decisions 1 and 2: ElevenLabs speaks, `fake` reaches nobody."""
+        self.assertEqual(sorted(speech.PROVIDERS), ["elevenlabs", "fake"])
 
     def test_names_what_it_has_when_asked_for_something_else(self) -> None:
         with self.assertRaises(LookupError) as error:
-            speech.provider("elevenlabs")
+            speech.provider("nonsense")
 
         self.assertIn("fake", str(error.exception))
 
@@ -182,12 +202,178 @@ class ProviderTests(unittest.TestCase):
         self.assertEqual(frames[-1], 0)
         self.assertLess(audio.loudness(frames, rate), audio.TARGET)
 
+    def test_the_tones_offer_no_choice_of_voice(self) -> None:
+        self.assertEqual(speech.provider("fake").voices(), [])
+
     def test_it_licenses_what_it_produces(self) -> None:
         voice = speech.provider("fake").voice()
 
         self.assertEqual(voice.license, "CC0-1.0")
         self.assertTrue(voice.attribution)
         self.assertTrue(voice.source_url)
+
+
+class ElevenLabsTests(unittest.TestCase):
+    """The vendor adapter, driven through a transport that reaches nobody."""
+
+    def setUp(self) -> None:
+        self.requests: list[httpx.Request] = []
+        mock.patch.dict("os.environ", {keys.ELEVENLABS: KEY}).start()
+        self.addCleanup(mock.patch.stopall)
+
+    def provider(self, answer=None) -> elevenlabs.ElevenLabsProvider:
+        """An adapter whose every request is answered by `answer`."""
+
+        def handle(request: httpx.Request) -> httpx.Response:
+            self.requests.append(request)
+            if answer is not None:
+                return answer(request)
+            if request.url.path.endswith("/voices"):
+                return httpx.Response(200, json=OFFERED)
+            return httpx.Response(200, content=SAMPLES)
+
+        return elevenlabs.ElevenLabsProvider(transport=httpx.MockTransport(handle))
+
+    def render(self, voice: str = "Johanna") -> bytes:
+        return self.provider().render("Wo ist die Amsel?", voice)
+
+    def refusing(self, status: int, payload: object) -> elevenlabs.ElevenLabsProvider:
+        """An adapter whose vendor refuses everything with that body."""
+        return self.provider(lambda _: httpx.Response(status, json=payload))
+
+    def test_reads_its_key_from_the_environment_infisical_fills(self) -> None:
+        with mock.patch.dict("os.environ", {keys.ELEVENLABS: ""}), self.assertRaises(
+            RuntimeError
+        ) as error:
+            elevenlabs.ElevenLabsProvider()
+
+        self.assertIn(keys.ELEVENLABS, str(error.exception))
+        self.assertIn("infisical run", str(error.exception))
+
+    def test_asks_for_the_sentence_the_way_the_api_expects_it(self) -> None:
+        self.render()
+        spoken = self.requests[-1]
+
+        self.assertEqual(spoken.method, "POST")
+        self.assertEqual(spoken.url.path, "/v1/text-to-speech/v-johanna")
+        self.assertEqual(spoken.url.params["output_format"], elevenlabs.OUTPUT_FORMAT)
+
+        body = json.loads(spoken.content)
+        self.assertEqual(body["text"], "Wo ist die Amsel?")
+        self.assertEqual(body["model_id"], "eleven_multilingual_v2")
+        self.assertEqual(body["seed"], elevenlabs.SEED)
+        self.assertEqual(body["voice_settings"], elevenlabs.VOICE_SETTINGS)
+
+    def test_does_not_send_a_language_code(self) -> None:
+        """`eleven_multilingual_v2` rejects it; German comes from the words."""
+        self.render()
+
+        self.assertNotIn("language_code", json.loads(self.requests[-1].content))
+
+    def test_carries_the_key_in_the_header_and_not_in_the_url(self) -> None:
+        self.render()
+
+        for request in self.requests:
+            self.assertEqual(request.headers["xi-api-key"], KEY)
+            self.assertNotIn(KEY, str(request.url))
+
+    def test_hands_back_the_samples_as_a_wav_the_encoder_can_read(self) -> None:
+        """Raw PCM in, the WAV contract of provider.py out."""
+        with wave.open(io.BytesIO(self.render()), "rb") as handle:
+            self.assertEqual(handle.getnchannels(), 1)
+            self.assertEqual(handle.getsampwidth(), audio.SAMPLE_WIDTH)
+            self.assertEqual(handle.getframerate(), elevenlabs.RATE)
+            self.assertEqual(handle.readframes(handle.getnframes()), SAMPLES)
+
+    def test_lists_the_voices_the_account_offers(self) -> None:
+        offered = self.provider().voices()
+
+        self.assertEqual([option.id for option in offered], ["v-johanna", "v-max"])
+        self.assertEqual(offered[0].description, "warm, German")
+        self.assertEqual(offered[1].description, "premade")
+
+    def test_asks_the_vendor_who_a_voice_is_only_once_per_run(self) -> None:
+        """Otherwise a pack of 130 names is 130 listings nobody needs."""
+        provider = self.provider()
+        provider.voice("Johanna")
+        provider.render("Amsel", "Johanna")
+        provider.render("Star", "Johanna")
+
+        listings = [request for request in self.requests if request.url.path.endswith("/voices")]
+        self.assertEqual(len(listings), 1)
+
+    def test_takes_a_voice_by_id_as_well_as_by_name(self) -> None:
+        self.assertEqual(self.provider().chosen("v-max").name, "Max")
+        self.assertEqual(self.provider().chosen("Max").id, "v-max")
+
+    def test_refuses_a_run_without_a_voice(self) -> None:
+        """No default: nobody chose it, and the pack would carry it for good."""
+        with self.assertRaises(ValueError) as error:
+            self.provider().render("Amsel")
+
+        self.assertIn("--voice", str(error.exception))
+
+    def test_names_the_voices_it_has_when_asked_for_another(self) -> None:
+        with self.assertRaises(LookupError) as error:
+            self.provider().chosen("Gisela")
+
+        self.assertIn("Johanna", str(error.exception))
+        self.assertIn("v-max", str(error.exception))
+
+    def test_credits_the_voice_that_speaks_under_the_licence_we_own(self) -> None:
+        voice = self.provider().voice("Johanna")
+
+        self.assertEqual(voice.license, "CC-BY-4.0")
+        self.assertEqual(voice.attribution, "Stimme: Johanna (ElevenLabs)")
+        self.assertEqual(voice.source_url, speech.RECORDING_DOC)
+
+    def test_says_what_a_refusal_means(self) -> None:
+        expected = {
+            401: "subscription",
+            402: "quota",
+            429: "wait and render again",
+        }
+        for status, hint in expected.items():
+            with self.subTest(status=status):
+                provider = self.refusing(status, {"detail": {"message": "no"}})
+
+                with self.assertRaises(elevenlabs.ElevenLabsError) as error:
+                    provider.render("Amsel", "v-johanna")
+
+                self.assertIn(str(status), str(error.exception))
+                self.assertIn(hint, str(error.exception))
+
+    def test_reads_a_detail_that_is_a_bare_string(self) -> None:
+        provider = self.refusing(422, {"detail": "output_format is not available"})
+
+        with self.assertRaises(elevenlabs.ElevenLabsError) as error:
+            provider.render("Amsel", "v-johanna")
+
+        self.assertIn("mp3_44100_128", str(error.exception))
+
+    def test_reads_a_body_that_is_not_json_at_all(self) -> None:
+        provider = self.provider(lambda _: httpx.Response(500, content=b"<html>gateway</html>"))
+
+        with self.assertRaises(elevenlabs.ElevenLabsError) as error:
+            provider.render("Amsel", "v-johanna")
+
+        self.assertIn("500", str(error.exception))
+
+    def test_never_repeats_the_key_a_vendor_echoes_back(self) -> None:
+        """An error body reaches a CI log; the key must not travel with it."""
+        provider = self.refusing(401, {"detail": {"message": f"invalid key {KEY}"}})
+
+        with self.assertRaises(elevenlabs.ElevenLabsError) as error:
+            provider.render("Amsel", "v-johanna")
+
+        self.assertNotIn(KEY, str(error.exception))
+
+    def test_reports_a_connection_that_never_answered(self) -> None:
+        def refuse(request: httpx.Request) -> httpx.Response:
+            raise httpx.ConnectError("nothing listening")
+
+        with self.assertRaises(elevenlabs.ElevenLabsError):
+            self.provider(refuse).voices()
 
 
 class StoreTests(unittest.TestCase):
@@ -409,6 +595,28 @@ class RenderTests(SpeechTestCase):
         rendered.assert_not_called()
         self.assertEqual(self.clips_of("star"), {})
         self.assertEqual(self.document()["voice"]["attribution"], "Stimme: Johanna")
+
+    def test_says_what_the_run_costs_at_the_meter(self) -> None:
+        """A paid provider bills characters, so the count is the price."""
+        code, printed = self.render("--pack", "basis", "--sentence", "collection.name")
+
+        self.assertEqual(code, 0)
+        self.assertIn(f"{len('Amsel') + len('Star')} character(s)", printed)
+
+    def test_refuses_a_run_longer_than_the_cap_before_it_speaks(self) -> None:
+        with mock.patch.object(fake.FakeProvider, "render", autospec=True) as rendered:
+            code, printed = self.render(
+                "--pack", "basis", "--sentence", "collection.name", "--max-chars", "5"
+            )
+
+        self.assertEqual(code, 1)
+        self.assertIn("--max-chars", printed)
+        rendered.assert_not_called()
+        self.assertEqual(list(self.pack.rglob("*.m4a")), [])
+
+    def test_the_cap_is_thirty_thousand_characters(self) -> None:
+        """Everything the app says is a few thousand; this catches a mistake."""
+        self.assertEqual(cli.MAX_CHARS, 30000)
 
     def test_refuses_the_fixed_set_without_a_sentence(self) -> None:
         code, printed = self.render("--set", "fixed")

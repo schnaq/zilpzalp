@@ -22,7 +22,7 @@ import math
 import wave
 from io import BytesIO
 
-from fetch_media.speech.provider import Voice
+from fetch_media.speech.provider import Voice, VoiceOption
 
 RATE = 22050
 
@@ -74,7 +74,11 @@ class FakeProvider:
 
     name = "fake"
 
-    def voice(self) -> Voice:
+    def voices(self) -> list[VoiceOption]:
+        """None: there is one set of tones and `--voice` does not change it."""
+        return []
+
+    def voice(self, voice: str | None = None) -> Voice:
         """Nobody, in the public domain — there is no performance to license."""
         return Voice(
             license="CC0-1.0",
