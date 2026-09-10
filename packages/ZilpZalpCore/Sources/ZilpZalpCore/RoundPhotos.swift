@@ -5,6 +5,10 @@
 /// tile of a round draws one, under one rule: **a species does not show a
 /// photo twice in a round while it has one it has not shown yet.**
 ///
+/// The rule is about the photos a manifest declares, which is all this module
+/// can know: whoever opens the files deals with a declared photo that is not
+/// on disk, and shows the portrait in its place — see `QuizPhotos` in the app.
+///
 /// Dealt once for the whole round rather than asked per draw, because a tile is
 /// rebuilt on every layout pass and a photo that changed under a child's finger
 /// would be the most visible thing on the screen. Randomness comes solely from
@@ -17,6 +21,17 @@ public struct RoundPhotos: Hashable, Sendable {
     /// keeps a pack of single-photo species from consuming any randomness at
     /// all.
     private let questions: [[String: Int]]
+
+    /// Which photos the round asks for at all: per species, every index one of
+    /// its tiles shows.
+    ///
+    /// Every species the round offers is a key — one that carries a single
+    /// photo with `[0]` — so whoever opens the files can open exactly these
+    /// and nothing else. That is the whole point of the property: with three
+    /// photos per species, opening every installed species' set at the start
+    /// of a session is hundreds of file look-ups, and a round of ten questions
+    /// shows at most forty pictures (#214).
+    public let dealtPhotos: [String: Set<Int>]
 
     /// Deals the photos of one round.
     ///
@@ -38,16 +53,27 @@ public struct RoundPhotos: Hashable, Sendable {
 
         var questions: [[String: Int]] = []
         questions.reserveCapacity(round.questions.count)
+        var dealtPhotos: [String: Set<Int>] = [:]
         for question in round.questions {
             var chosen: [String: Int] = [:]
             for species in question.choices {
-                guard let count = photoCounts[species], count > 1 else { continue }
-                chosen[species] = bags[species, default: ShuffleBag(Array(0 ..< count))]
+                guard let count = photoCounts[species], count > 1 else {
+                    dealtPhotos[species, default: []].insert(0)
+                    continue
+                }
+                guard let index = bags[species, default: ShuffleBag(Array(0 ..< count))]
                     .next(using: &generator)
+                else {
+                    dealtPhotos[species, default: []].insert(0)
+                    continue
+                }
+                chosen[species] = index
+                dealtPhotos[species, default: []].insert(index)
             }
             questions.append(chosen)
         }
         self.questions = questions
+        self.dealtPhotos = dealtPhotos
     }
 
     /// Which photo `species` shows in the question at `question`.
