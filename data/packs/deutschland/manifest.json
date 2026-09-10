@@ -1,0 +1,486 @@
+{
+  "id": "deutschland",
+  "title": "Vögel Deutschlands",
+  "birds": [
+    {
+      "id": "haussperling",
+      "name": "Haussperling",
+      "scientificName": "Passer domesticus",
+      "taxonID": 13858,
+      "article": "der",
+      "pronunciation": null
+    },
+    {
+      "id": "gruenfink",
+      "name": "Grünfink",
+      "scientificName": "Chloris chloris",
+      "taxonID": 145360,
+      "article": "der",
+      "pronunciation": null
+    },
+    {
+      "id": "buchfink",
+      "name": "Buchfink",
+      "scientificName": "Fringilla coelebs",
+      "taxonID": 10070,
+      "article": "der",
+      "pronunciation": null
+    },
+    {
+      "id": "stieglitz",
+      "name": "Stieglitz",
+      "scientificName": "Carduelis carduelis",
+      "taxonID": 9398,
+      "article": "der",
+      "pronunciation": null
+    },
+    {
+      "id": "gimpel",
+      "name": "Gimpel",
+      "scientificName": "Pyrrhula pyrrhula",
+      "taxonID": 9462,
+      "article": "der",
+      "pronunciation": null
+    },
+    {
+      "id": "kernbeisser",
+      "name": "Kernbeißer",
+      "scientificName": "Coccothraustes coccothraustes",
+      "taxonID": 9801,
+      "article": "der",
+      "pronunciation": null
+    },
+    {
+      "id": "bluthaenfling",
+      "name": "Bluthänfling",
+      "scientificName": "Linaria cannabina",
+      "taxonID": 558634,
+      "article": "der",
+      "pronunciation": null
+    },
+    {
+      "id": "goldammer",
+      "name": "Goldammer",
+      "scientificName": "Emberiza citrinella",
+      "taxonID": 9195,
+      "article": "die",
+      "pronunciation": null
+    },
+    {
+      "id": "elster",
+      "name": "Elster",
+      "scientificName": "Pica pica",
+      "taxonID": 891696,
+      "article": "die",
+      "pronunciation": null
+    },
+    {
+      "id": "eichelhaeher",
+      "name": "Eichelhäher",
+      "scientificName": "Garrulus glandarius",
+      "taxonID": 8088,
+      "article": "der",
+      "pronunciation": null
+    },
+    {
+      "id": "rabenkraehe",
+      "name": "Rabenkrähe",
+      "scientificName": "Corvus corone",
+      "taxonID": 204496,
+      "article": "die",
+      "pronunciation": null
+    },
+    {
+      "id": "dohle",
+      "name": "Dohle",
+      "scientificName": "Coloeus monedula",
+      "taxonID": 336399,
+      "article": "die",
+      "pronunciation": null
+    },
+    {
+      "id": "kolkrabe",
+      "name": "Kolkrabe",
+      "scientificName": "Corvus corax",
+      "taxonID": 8010,
+      "article": "der",
+      "pronunciation": null
+    },
+    {
+      "id": "ringeltaube",
+      "name": "Ringeltaube",
+      "scientificName": "Columba palumbus",
+      "taxonID": 3048,
+      "article": "die",
+      "pronunciation": null
+    },
+    {
+      "id": "tuerkentaube",
+      "name": "Türkentaube",
+      "scientificName": "Streptopelia decaocto",
+      "taxonID": 2969,
+      "article": "die",
+      "pronunciation": null
+    },
+    {
+      "id": "mauersegler",
+      "name": "Mauersegler",
+      "scientificName": "Apus apus",
+      "taxonID": 6638,
+      "article": "der",
+      "pronunciation": null
+    },
+    {
+      "id": "rauchschwalbe",
+      "name": "Rauchschwalbe",
+      "scientificName": "Hirundo rustica",
+      "taxonID": 11901,
+      "article": "die",
+      "pronunciation": null
+    },
+    {
+      "id": "bachstelze",
+      "name": "Bachstelze",
+      "scientificName": "Motacilla alba",
+      "taxonID": 13695,
+      "article": "die",
+      "pronunciation": null
+    },
+    {
+      "id": "zaunkoenig",
+      "name": "Zaunkönig",
+      "scientificName": "Troglodytes troglodytes",
+      "taxonID": 145363,
+      "article": "der",
+      "pronunciation": null
+    },
+    {
+      "id": "singdrossel",
+      "name": "Singdrossel",
+      "scientificName": "Turdus philomelos",
+      "taxonID": 12748,
+      "article": "die",
+      "pronunciation": null
+    },
+    {
+      "id": "nachtigall",
+      "name": "Nachtigall",
+      "scientificName": "Luscinia megarhynchos",
+      "taxonID": 13079,
+      "article": "die",
+      "pronunciation": null
+    },
+    {
+      "id": "moenchsgrasmuecke",
+      "name": "Mönchsgrasmücke",
+      "scientificName": "Sylvia atricapilla",
+      "taxonID": 15282,
+      "article": "die",
+      "pronunciation": null
+    },
+    {
+      "id": "kleiber",
+      "name": "Kleiber",
+      "scientificName": "Sitta europaea",
+      "taxonID": 14824,
+      "article": "der",
+      "pronunciation": null
+    },
+    {
+      "id": "gartenbaumlaeufer",
+      "name": "Gartenbaumläufer",
+      "scientificName": "Certhia brachydactyla",
+      "taxonID": 7462,
+      "article": "der",
+      "pronunciation": null
+    },
+    {
+      "id": "schwanzmeise",
+      "name": "Schwanzmeise",
+      "scientificName": "Aegithalos caudatus",
+      "taxonID": 7278,
+      "article": "die",
+      "pronunciation": null
+    },
+    {
+      "id": "haubenmeise",
+      "name": "Haubenmeise",
+      "scientificName": "Lophophanes cristatus",
+      "taxonID": 144830,
+      "article": "die",
+      "pronunciation": null
+    },
+    {
+      "id": "wintergoldhaehnchen",
+      "name": "Wintergoldhähnchen",
+      "scientificName": "Regulus regulus",
+      "taxonID": 793469,
+      "article": "das",
+      "pronunciation": null
+    },
+    {
+      "id": "gartenrotschwanz",
+      "name": "Gartenrotschwanz",
+      "scientificName": "Phoenicurus phoenicurus",
+      "taxonID": 12992,
+      "article": "der",
+      "pronunciation": null
+    },
+    {
+      "id": "feldlerche",
+      "name": "Feldlerche",
+      "scientificName": "Alauda arvensis",
+      "taxonID": 7347,
+      "article": "die",
+      "pronunciation": null
+    },
+    {
+      "id": "neuntoeter",
+      "name": "Neuntöter",
+      "scientificName": "Lanius collurio",
+      "taxonID": 12038,
+      "article": "der",
+      "pronunciation": null
+    },
+    {
+      "id": "pirol",
+      "name": "Pirol",
+      "scientificName": "Oriolus oriolus",
+      "taxonID": 204556,
+      "article": "der",
+      "pronunciation": null
+    },
+    {
+      "id": "seidenschwanz",
+      "name": "Seidenschwanz",
+      "scientificName": "Bombycilla garrulus",
+      "taxonID": 7429,
+      "article": "der",
+      "pronunciation": null
+    },
+    {
+      "id": "wasseramsel",
+      "name": "Wasseramsel",
+      "scientificName": "Cinclus cinclus",
+      "taxonID": 7647,
+      "article": "die",
+      "pronunciation": null
+    },
+    {
+      "id": "kuckuck",
+      "name": "Kuckuck",
+      "scientificName": "Cuculus canorus",
+      "taxonID": 1907,
+      "article": "der",
+      "pronunciation": null
+    },
+    {
+      "id": "gruenspecht",
+      "name": "Grünspecht",
+      "scientificName": "Picus viridis",
+      "taxonID": 144243,
+      "article": "der",
+      "pronunciation": null
+    },
+    {
+      "id": "schwarzspecht",
+      "name": "Schwarzspecht",
+      "scientificName": "Dryocopus martius",
+      "taxonID": 17835,
+      "article": "der",
+      "pronunciation": null
+    },
+    {
+      "id": "bienenfresser",
+      "name": "Bienenfresser",
+      "scientificName": "Merops apiaster",
+      "taxonID": 2191,
+      "article": "der",
+      "pronunciation": null
+    },
+    {
+      "id": "waldkauz",
+      "name": "Waldkauz",
+      "scientificName": "Strix aluco",
+      "taxonID": 19898,
+      "article": "der",
+      "pronunciation": null
+    },
+    {
+      "id": "uhu",
+      "name": "Uhu",
+      "scientificName": "Bubo bubo",
+      "taxonID": 20059,
+      "article": "der",
+      "pronunciation": null
+    },
+    {
+      "id": "schleiereule",
+      "name": "Schleiereule",
+      "scientificName": "Tyto alba",
+      "taxonID": 20445,
+      "article": "die",
+      "pronunciation": null
+    },
+    {
+      "id": "steinkauz",
+      "name": "Steinkauz",
+      "scientificName": "Athene noctua",
+      "taxonID": 19998,
+      "article": "der",
+      "pronunciation": null
+    },
+    {
+      "id": "maeusebussard",
+      "name": "Mäusebussard",
+      "scientificName": "Buteo buteo",
+      "taxonID": 204472,
+      "article": "der",
+      "pronunciation": null
+    },
+    {
+      "id": "turmfalke",
+      "name": "Turmfalke",
+      "scientificName": "Falco tinnunculus",
+      "taxonID": 472766,
+      "article": "der",
+      "pronunciation": null
+    },
+    {
+      "id": "rotmilan",
+      "name": "Rotmilan",
+      "scientificName": "Milvus milvus",
+      "taxonID": 5267,
+      "article": "der",
+      "pronunciation": null
+    },
+    {
+      "id": "seeadler",
+      "name": "Seeadler",
+      "scientificName": "Haliaeetus albicilla",
+      "taxonID": 5309,
+      "article": "der",
+      "pronunciation": null
+    },
+    {
+      "id": "wanderfalke",
+      "name": "Wanderfalke",
+      "scientificName": "Falco peregrinus",
+      "taxonID": 4647,
+      "article": "der",
+      "pronunciation": null
+    },
+    {
+      "id": "weissstorch",
+      "name": "Weißstorch",
+      "scientificName": "Ciconia ciconia",
+      "taxonID": 4733,
+      "article": "der",
+      "pronunciation": null
+    },
+    {
+      "id": "graureiher",
+      "name": "Graureiher",
+      "scientificName": "Ardea cinerea",
+      "taxonID": 4954,
+      "article": "der",
+      "pronunciation": null
+    },
+    {
+      "id": "kranich",
+      "name": "Kranich",
+      "scientificName": "Grus grus",
+      "taxonID": 41,
+      "article": "der",
+      "pronunciation": null
+    },
+    {
+      "id": "stockente",
+      "name": "Stockente",
+      "scientificName": "Anas platyrhynchos",
+      "taxonID": 6930,
+      "article": "die",
+      "pronunciation": null
+    },
+    {
+      "id": "mandarinente",
+      "name": "Mandarinente",
+      "scientificName": "Aix galericulata",
+      "taxonID": 7106,
+      "article": "die",
+      "pronunciation": null
+    },
+    {
+      "id": "hoeckerschwan",
+      "name": "Höckerschwan",
+      "scientificName": "Cygnus olor",
+      "taxonID": 6921,
+      "article": "der",
+      "pronunciation": null
+    },
+    {
+      "id": "graugans",
+      "name": "Graugans",
+      "scientificName": "Anser anser",
+      "taxonID": 7018,
+      "article": "die",
+      "pronunciation": null
+    },
+    {
+      "id": "blaesshuhn",
+      "name": "Blässhuhn",
+      "scientificName": "Fulica atra",
+      "taxonID": 482,
+      "article": "das",
+      "pronunciation": null
+    },
+    {
+      "id": "haubentaucher",
+      "name": "Haubentaucher",
+      "scientificName": "Podiceps cristatus",
+      "taxonID": 4208,
+      "article": "der",
+      "pronunciation": null
+    },
+    {
+      "id": "kormoran",
+      "name": "Kormoran",
+      "scientificName": "Phalacrocorax carbo",
+      "taxonID": 4270,
+      "article": "der",
+      "pronunciation": null
+    },
+    {
+      "id": "lachmoewe",
+      "name": "Lachmöwe",
+      "scientificName": "Chroicocephalus ridibundus",
+      "taxonID": 144510,
+      "article": "die",
+      "pronunciation": null
+    },
+    {
+      "id": "austernfischer",
+      "name": "Austernfischer",
+      "scientificName": "Haematopus ostralegus",
+      "taxonID": 4843,
+      "article": "der",
+      "pronunciation": null
+    },
+    {
+      "id": "kiebitz",
+      "name": "Kiebitz",
+      "scientificName": "Vanellus vanellus",
+      "taxonID": 4857,
+      "article": "der",
+      "pronunciation": null
+    },
+    {
+      "id": "fasan",
+      "name": "Fasan",
+      "scientificName": "Phasianus colchicus",
+      "taxonID": 981,
+      "article": "der",
+      "pronunciation": null
+    }
+  ]
+}
