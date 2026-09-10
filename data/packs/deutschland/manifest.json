@@ -8,7 +8,23 @@
       "scientificName": "Passer domesticus",
       "taxonID": 13858,
       "article": "der",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/haussperling.heic",
+        "sha256": "aece3efc3ea45d3e3f46249259949118e4344f637e532a7a9c725db3198864dc",
+        "license": "CC-BY-4.0",
+        "attribution": "Esteban Poveda",
+        "sourceURL": "https://www.inaturalist.org/observations/83153529",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/haussperling.m4a",
+        "sha256": "01d14d43fa1658eb961f212edc27894dae7e79e0343478012d21703a7d63f645",
+        "license": "CC0-1.0",
+        "attribution": "Philippe_Grange (XC1152146)",
+        "sourceURL": "https://xeno-canto.org/1152146",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "gruenfink",
@@ -16,7 +32,23 @@
       "scientificName": "Chloris chloris",
       "taxonID": 145360,
       "article": "der",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/gruenfink.heic",
+        "sha256": "a6ea5b3090f00c3025a8477c6a5f18bd8978745960d29c41006f007d37165a79",
+        "license": "CC-BY-4.0",
+        "attribution": "Christoph Moning",
+        "sourceURL": "https://www.inaturalist.org/observations/57657970",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/gruenfink.m4a",
+        "sha256": "64e554073dc929dd791a5520953f570754daa0da5a2d2ac5b2def0dd2b066047",
+        "license": "CC-BY-4.0",
+        "attribution": "Kevin Ortega (XC642404)",
+        "sourceURL": "https://xeno-canto.org/642404",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "buchfink",
@@ -24,7 +56,23 @@
       "scientificName": "Fringilla coelebs",
       "taxonID": 10070,
       "article": "der",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/buchfink.heic",
+        "sha256": "e07cbf18b6b5c537972700f16791523a75ce0539426fd473354534dbe68d3423",
+        "license": "CC-BY-4.0",
+        "attribution": "Donald Davesne",
+        "sourceURL": "https://www.inaturalist.org/observations/83075710",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/buchfink.m4a",
+        "sha256": "3794b0cf209f880527a7585e01eae536291f9db047e462c30ec34f8883c36c73",
+        "license": "CC0-1.0",
+        "attribution": "Sonothèque ADVL (XC1088506)",
+        "sourceURL": "https://xeno-canto.org/1088506",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "stieglitz",
@@ -32,7 +80,23 @@
       "scientificName": "Carduelis carduelis",
       "taxonID": 9398,
       "article": "der",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/stieglitz.heic",
+        "sha256": "891aafcdfded0df173268c3548e35678325673ae64afa70a77984e98536b67e6",
+        "license": "CC-BY-4.0",
+        "attribution": "Christoph Moning",
+        "sourceURL": "https://www.inaturalist.org/observations/68095260",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/stieglitz.m4a",
+        "sha256": "82859788055258974795845f9926994d5d7976c4d254f25c4d35dfc359f4c445",
+        "license": "CC0-1.0",
+        "attribution": "Grégoire Chauvot (XC797484)",
+        "sourceURL": "https://xeno-canto.org/797484",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "gimpel",
@@ -40,7 +104,23 @@
       "scientificName": "Pyrrhula pyrrhula",
       "taxonID": 9462,
       "article": "der",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/gimpel.heic",
+        "sha256": "7138e917b7acbbaf5920cb2073235a46bbfe33315bce211552c7a772e7eb9e39",
+        "license": "CC-BY-4.0",
+        "attribution": "Ксения Волянская",
+        "sourceURL": "https://www.inaturalist.org/observations/333441894",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/gimpel.m4a",
+        "sha256": "0b1f93fcc45239d62cf0e53df30e95fbbf9d5bf2d0da6baeb47d1456126dff6d",
+        "license": "CC-BY-4.0",
+        "attribution": "Jurijs Ješkins (XC983039)",
+        "sourceURL": "https://xeno-canto.org/983039",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "kernbeisser",
@@ -48,7 +128,15 @@
       "scientificName": "Coccothraustes coccothraustes",
       "taxonID": 9801,
       "article": "der",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/kernbeisser.heic",
+        "sha256": "31c150340efe65606ab47a456341b12cd86a654a598b82f0f0349996f3fca69e",
+        "license": "CC0-1.0",
+        "attribution": "Лариса Артемьева",
+        "sourceURL": "https://www.inaturalist.org/observations/74825757",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "bluthaenfling",
@@ -56,7 +144,23 @@
       "scientificName": "Linaria cannabina",
       "taxonID": 558634,
       "article": "der",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/bluthaenfling.heic",
+        "sha256": "a50f4a0cbd128e658d358477a3aab0925c85c0ca442e2133cfe3c46d7d5b8e54",
+        "license": "CC-BY-4.0",
+        "attribution": "Helen Bovill",
+        "sourceURL": "https://www.inaturalist.org/observations/305224073",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/bluthaenfling.m4a",
+        "sha256": "acd4767b982ffb12f1957adc1c604b654eb0354821c80cc4696a76577b324183",
+        "license": "CC0-1.0",
+        "attribution": "Sonothèque ADVL (XC1107823)",
+        "sourceURL": "https://xeno-canto.org/1107823",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "goldammer",
@@ -64,7 +168,23 @@
       "scientificName": "Emberiza citrinella",
       "taxonID": 9195,
       "article": "die",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/goldammer.heic",
+        "sha256": "2689d537968a5e337cb0b4a83f1e2e5e043c821076e727165c91b88bfc6bb05b",
+        "license": "CC-BY-4.0",
+        "attribution": "joba102",
+        "sourceURL": "https://www.inaturalist.org/observations/78888615",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/goldammer.m4a",
+        "sha256": "0cd4b17532d839f018582cdf9dd2f8f285f57dd4892ce8b8787e30b227527b70",
+        "license": "CC0-1.0",
+        "attribution": "Philippe_Grange (XC1143669)",
+        "sourceURL": "https://xeno-canto.org/1143669",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "elster",
@@ -72,7 +192,23 @@
       "scientificName": "Pica pica",
       "taxonID": 891696,
       "article": "die",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/elster.heic",
+        "sha256": "6da346b31a190e04f1a39318b86c49512dc1edb613c33bad39a3410a680e15d6",
+        "license": "CC-BY-4.0",
+        "attribution": "Andrejus Gaidamavičius",
+        "sourceURL": "https://www.inaturalist.org/observations/257350003",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/elster.m4a",
+        "sha256": "ee180715a72b98bb8462c73a205827f8553b813dfc1b219ff87c561b0419b615",
+        "license": "CC0-1.0",
+        "attribution": "Philippe_Grange (XC1148526)",
+        "sourceURL": "https://xeno-canto.org/1148526",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "eichelhaeher",
@@ -80,7 +216,23 @@
       "scientificName": "Garrulus glandarius",
       "taxonID": 8088,
       "article": "der",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/eichelhaeher.heic",
+        "sha256": "09a474609fc438d12ac09e8d8eb7e12408ab0913a66c39ca95d499482cb0c94f",
+        "license": "CC-BY-4.0",
+        "attribution": "Helen Bovill",
+        "sourceURL": "https://www.inaturalist.org/observations/273999502",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/eichelhaeher.m4a",
+        "sha256": "a793dc1876e828a947864b8b0d4fa533e9692c5e51f77d31a3d285666f977323",
+        "license": "CC0-1.0",
+        "attribution": "Sonothèque ADVL (XC1175981)",
+        "sourceURL": "https://xeno-canto.org/1175981",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "rabenkraehe",
@@ -88,7 +240,23 @@
       "scientificName": "Corvus corone",
       "taxonID": 204496,
       "article": "die",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/rabenkraehe.heic",
+        "sha256": "bf120d5f1bd562f4ba9d7aebb56c69c2232299448b20db9d0c88109b909094ee",
+        "license": "CC-BY-4.0",
+        "attribution": "Nasser Halaweh",
+        "sourceURL": "https://www.inaturalist.org/observations/18803996",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/rabenkraehe.m4a",
+        "sha256": "3da97e37a970613871feebf3bfcb550994547ab8b1a2b0e761ca7e9e312b3b3a",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Marie-Lan Taÿ Pamart (XC511943)",
+        "sourceURL": "https://xeno-canto.org/511943",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "dohle",
@@ -96,7 +264,23 @@
       "scientificName": "Coloeus monedula",
       "taxonID": 336399,
       "article": "die",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/dohle.heic",
+        "sha256": "0601008114408edbc961d2fb97893db8c4495ff6963ec9249d735f27a660fd13",
+        "license": "CC0-1.0",
+        "attribution": "Adam Jackson",
+        "sourceURL": "https://www.inaturalist.org/observations/193317621",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/dohle.m4a",
+        "sha256": "501d3ddf4ba5da85039b70aae063591e0988454797304cfd8028c4a102f1d7c2",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Joost van Bruggen (XC436939)",
+        "sourceURL": "https://xeno-canto.org/436939",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "kolkrabe",
@@ -104,7 +288,23 @@
       "scientificName": "Corvus corax",
       "taxonID": 8010,
       "article": "der",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/kolkrabe.heic",
+        "sha256": "7f2f376c8b058b2a192c74298e2082173014b69a1cdfc0bd90dd37ccc53d8859",
+        "license": "CC-BY-4.0",
+        "attribution": "Mila C.",
+        "sourceURL": "https://www.inaturalist.org/observations/215780666",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/kolkrabe.m4a",
+        "sha256": "dbfaba8382ebc7ea52a3dc521cd59d40da3cbb248934b3cd5e8b61a1beb639e0",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Doug Hynes (XC922424)",
+        "sourceURL": "https://xeno-canto.org/922424",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "ringeltaube",
@@ -112,7 +312,23 @@
       "scientificName": "Columba palumbus",
       "taxonID": 3048,
       "article": "die",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/ringeltaube.heic",
+        "sha256": "861b4ebd09ed7114858f206a68d7bc44bcc132365618becdfd9d7468148d5e14",
+        "license": "CC-BY-4.0",
+        "attribution": "Codrin Bucur",
+        "sourceURL": "https://www.inaturalist.org/observations/127095661",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/ringeltaube.m4a",
+        "sha256": "5603f42bdd0ccacc506dcbf09d53587f25a26918a47a38ff819ef5d8ab125fcb",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Benoît Van Hecke (XC561877)",
+        "sourceURL": "https://xeno-canto.org/561877",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "tuerkentaube",
@@ -120,7 +336,23 @@
       "scientificName": "Streptopelia decaocto",
       "taxonID": 2969,
       "article": "die",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/tuerkentaube.heic",
+        "sha256": "3283fd10a600cebc46020b78a5d90e34dd5179e7a4d9a333a75dd9f65c3e8782",
+        "license": "CC-BY-4.0",
+        "attribution": "zebedeugalinha",
+        "sourceURL": "https://www.inaturalist.org/observations/253298182",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/tuerkentaube.m4a",
+        "sha256": "ab67285d67cf20c5283f9619c428df91f62689b51e523e27afa8b37dd268d1aa",
+        "license": "CC0-1.0",
+        "attribution": "Philippe_Grange (XC1142043)",
+        "sourceURL": "https://xeno-canto.org/1142043",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "mauersegler",
@@ -128,7 +360,23 @@
       "scientificName": "Apus apus",
       "taxonID": 6638,
       "article": "der",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/mauersegler.heic",
+        "sha256": "85c1f4625f13934f56d6c4607e49eb35e7ad2610907aec69f24c5014132755aa",
+        "license": "CC-BY-4.0",
+        "attribution": "Настя Бухвалова",
+        "sourceURL": "https://www.inaturalist.org/observations/385189352",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/mauersegler.m4a",
+        "sha256": "ffcbe7e8962cf44fb09f105cbdbf0218f35cac97945580093ebad082e7e9456d",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Pascal Christe (XC816518)",
+        "sourceURL": "https://xeno-canto.org/816518",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "rauchschwalbe",
@@ -136,7 +384,23 @@
       "scientificName": "Hirundo rustica",
       "taxonID": 11901,
       "article": "die",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/rauchschwalbe.heic",
+        "sha256": "439eed5ab9a6642ba0f01c11fe3b8c10424e0c7a5cd68b1652431e5d0ee5a228",
+        "license": "CC0-1.0",
+        "attribution": "Robbie Hannawacker",
+        "sourceURL": "https://www.inaturalist.org/observations/6487004",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/rauchschwalbe.m4a",
+        "sha256": "7643c47302535c006469872877f6ef014b4731ac25b142c2b4e6d1337fcbad7c",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Marie-Lan Taÿ Pamart (XC492100)",
+        "sourceURL": "https://xeno-canto.org/492100",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "bachstelze",
@@ -144,7 +408,23 @@
       "scientificName": "Motacilla alba",
       "taxonID": 13695,
       "article": "die",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/bachstelze.heic",
+        "sha256": "555de6629896cf9e9a9c763c215a7906202f84b8e6b9f471e4c128dbfc32a48b",
+        "license": "CC-BY-4.0",
+        "attribution": "Вячеслав Юсупов",
+        "sourceURL": "https://www.inaturalist.org/observations/74657457",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/bachstelze.m4a",
+        "sha256": "989b6a098cd0da59ad0c711f1d86b25c1528c0c0b11f15f766669d5c81f9d46e",
+        "license": "CC0-1.0",
+        "attribution": "Sonothèque ADVL (XC1100607)",
+        "sourceURL": "https://xeno-canto.org/1100607",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "zaunkoenig",
@@ -152,7 +432,23 @@
       "scientificName": "Troglodytes troglodytes",
       "taxonID": 145363,
       "article": "der",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/zaunkoenig.heic",
+        "sha256": "273f031135349669c8ae17142bbb37f1f15851393f58db1d4c6f81478e513e6a",
+        "license": "CC-BY-4.0",
+        "attribution": "William Stephens",
+        "sourceURL": "https://www.inaturalist.org/observations/75531686",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/zaunkoenig.m4a",
+        "sha256": "8e148ae7d0fb048829be0ce07909589765908d02bc7bf3e820bb0645f09bcfa1",
+        "license": "CC0-1.0",
+        "attribution": "Philippe_Grange (XC1133863)",
+        "sourceURL": "https://xeno-canto.org/1133863",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "singdrossel",
@@ -160,7 +456,23 @@
       "scientificName": "Turdus philomelos",
       "taxonID": 12748,
       "article": "die",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/singdrossel.heic",
+        "sha256": "ca23ade396cb82f5cd74943f789947edfdbdd063762696cb390661b330de84e9",
+        "license": "CC-BY-4.0",
+        "attribution": "Antoine Thivolle",
+        "sourceURL": "https://www.inaturalist.org/observations/334875213",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/singdrossel.m4a",
+        "sha256": "1f5da88f482b663aeaaec01bedb42cc9cde07bad7f42ebfa1507862f839dca9a",
+        "license": "CC0-1.0",
+        "attribution": "Philippe_Grange (XC1151579)",
+        "sourceURL": "https://xeno-canto.org/1151579",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "nachtigall",
@@ -168,7 +480,23 @@
       "scientificName": "Luscinia megarhynchos",
       "taxonID": 13079,
       "article": "die",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/nachtigall.heic",
+        "sha256": "f271595c9fff9cd7e797a10e164212b3367dd436aeef46aed696b6e43ebceacc",
+        "license": "CC-BY-4.0",
+        "attribution": "Codrin Bucur",
+        "sourceURL": "https://www.inaturalist.org/observations/161483028",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/nachtigall.m4a",
+        "sha256": "4ecbe07ddf5c7239a5c64125a3a858c7b0fea66c060f4f3813106a86d6157967",
+        "license": "CC0-1.0",
+        "attribution": "Philippe_Grange (XC1099301)",
+        "sourceURL": "https://xeno-canto.org/1099301",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "moenchsgrasmuecke",
@@ -176,7 +504,23 @@
       "scientificName": "Sylvia atricapilla",
       "taxonID": 15282,
       "article": "die",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/moenchsgrasmuecke.heic",
+        "sha256": "5d5fb9a34a225e3cbb7c7a46c67c659d4cf1bde64c63b752f44dfb0cd38579f7",
+        "license": "CC-BY-4.0",
+        "attribution": "tobijw",
+        "sourceURL": "https://www.inaturalist.org/observations/365842816",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/moenchsgrasmuecke.m4a",
+        "sha256": "1e559c47280ad7b424353cc3aaa01a1e208acd3270c626c3510895bebb641aca",
+        "license": "CC0-1.0",
+        "attribution": "Philippe_Grange (XC1099296)",
+        "sourceURL": "https://xeno-canto.org/1099296",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "kleiber",
@@ -184,7 +528,23 @@
       "scientificName": "Sitta europaea",
       "taxonID": 14824,
       "article": "der",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/kleiber.heic",
+        "sha256": "f4a39169dbc087e1c910d8cd68e96c7926232fe80595b7f04d8dec2064751855",
+        "license": "CC-BY-4.0",
+        "attribution": "Dr. Sven Gippner",
+        "sourceURL": "https://www.inaturalist.org/observations/148024354",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/kleiber.m4a",
+        "sha256": "f024a318cca55a5849aff3c107cfb7e12694b6eaeaa9b7d91900b5efbced7996",
+        "license": "CC0-1.0",
+        "attribution": "Sonothèque ADVL (XC804960)",
+        "sourceURL": "https://xeno-canto.org/804960",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "gartenbaumlaeufer",
@@ -192,7 +552,23 @@
       "scientificName": "Certhia brachydactyla",
       "taxonID": 7462,
       "article": "der",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/gartenbaumlaeufer.heic",
+        "sha256": "331ac4da895f1fd42134193613c26c84b5a8f7e9659be3ed9ceb5a8ef05ca633",
+        "license": "CC-BY-4.0",
+        "attribution": "Tomas Broucek",
+        "sourceURL": "https://www.inaturalist.org/observations/65349780",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/gartenbaumlaeufer.m4a",
+        "sha256": "8c7a307cbf60449dac20c71bee08dcd7a1414493af4cb7578136d6bf774d26e9",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Benoît Van Hecke (XC697961)",
+        "sourceURL": "https://xeno-canto.org/697961",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "schwanzmeise",
@@ -200,7 +576,23 @@
       "scientificName": "Aegithalos caudatus",
       "taxonID": 7278,
       "article": "die",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/schwanzmeise.heic",
+        "sha256": "361e72b43c356159738d289c64e6e902d216cd4618460e2bb8e50a10bff50837",
+        "license": "CC-BY-4.0",
+        "attribution": "Валерия Ковалева",
+        "sourceURL": "https://www.inaturalist.org/observations/108550471",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/schwanzmeise.m4a",
+        "sha256": "c4ef7157ac7bc5b9a08ac2179fda68015aa78a7d280fe7d35bd9cc6e4cc1e17e",
+        "license": "CC0-1.0",
+        "attribution": "Sonothèque ADVL (XC707392)",
+        "sourceURL": "https://xeno-canto.org/707392",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "haubenmeise",
@@ -208,7 +600,23 @@
       "scientificName": "Lophophanes cristatus",
       "taxonID": 144830,
       "article": "die",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/haubenmeise.heic",
+        "sha256": "add0efd5417785d6c17a8efce867297ece6365a80b017b01c4c724a94b95d307",
+        "license": "CC-BY-4.0",
+        "attribution": "Paolo Zucca",
+        "sourceURL": "https://www.inaturalist.org/observations/18084316",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/haubenmeise.m4a",
+        "sha256": "bc85e9fc49e552061f1786a436883271159e490490617f33838d9bb131bd9abb",
+        "license": "CC0-1.0",
+        "attribution": "Sonothèque ADVL (XC1088492)",
+        "sourceURL": "https://xeno-canto.org/1088492",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "wintergoldhaehnchen",
@@ -216,7 +624,23 @@
       "scientificName": "Regulus regulus",
       "taxonID": 793469,
       "article": "das",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/wintergoldhaehnchen.heic",
+        "sha256": "d59d20c32af4ffc2fd9446b99b277390ad16b09b389f9231995aa423035c9bf8",
+        "license": "CC-BY-4.0",
+        "attribution": "Frank Sengpiel",
+        "sourceURL": "https://www.inaturalist.org/observations/67995777",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/wintergoldhaehnchen.m4a",
+        "sha256": "8608d98a0e6859bd40a17312d39386dc587a4773ff298ea24ba794dfa6223250",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Jochem verweij (XC839791)",
+        "sourceURL": "https://xeno-canto.org/839791",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "gartenrotschwanz",
@@ -224,7 +648,23 @@
       "scientificName": "Phoenicurus phoenicurus",
       "taxonID": 12992,
       "article": "der",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/gartenrotschwanz.heic",
+        "sha256": "6f4cedf2f54753b9a930381a16fd4fb64efdf8639c883196310bd05a6127f6bb",
+        "license": "CC-BY-4.0",
+        "attribution": "Tommy Andriollo",
+        "sourceURL": "https://www.inaturalist.org/observations/117909615",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/gartenrotschwanz.m4a",
+        "sha256": "c1b43a160cdb26da1f19c8d01a744588536e7a1b243d80ed499ce361100df9ea",
+        "license": "CC0-1.0",
+        "attribution": "Philippe_Grange (XC990430)",
+        "sourceURL": "https://xeno-canto.org/990430",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "feldlerche",
@@ -232,7 +672,23 @@
       "scientificName": "Alauda arvensis",
       "taxonID": 7347,
       "article": "die",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/feldlerche.heic",
+        "sha256": "f4a3ce719c0399b33ad3c5b2949e61b4539893f42e9640c9598798d06be07681",
+        "license": "CC-BY-4.0",
+        "attribution": "Phil James",
+        "sourceURL": "https://www.inaturalist.org/observations/214550657",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/feldlerche.m4a",
+        "sha256": "d3506028915aec11aeace922be6d3435f47c4305bd55e855dd04bdfba256b8d8",
+        "license": "CC-BY-4.0",
+        "attribution": "Camille Vacher (XC722292)",
+        "sourceURL": "https://xeno-canto.org/722292",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "neuntoeter",
@@ -240,7 +696,23 @@
       "scientificName": "Lanius collurio",
       "taxonID": 12038,
       "article": "der",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/neuntoeter.heic",
+        "sha256": "eaeb53b287956f0744f002a8f615265b530b7af6daeb2595472c43a6aa6149b8",
+        "license": "CC-BY-4.0",
+        "attribution": "Viktor",
+        "sourceURL": "https://www.inaturalist.org/observations/218436887",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/neuntoeter.m4a",
+        "sha256": "e94b8a6c17df9abfab030ed04e9590aa097790d05489882f76edcd980162ab8b",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Jochem verweij (XC902159)",
+        "sourceURL": "https://xeno-canto.org/902159",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "pirol",
@@ -248,7 +720,23 @@
       "scientificName": "Oriolus oriolus",
       "taxonID": 204556,
       "article": "der",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/pirol.heic",
+        "sha256": "de1aec47874fb2595840c80826a59796c7e2ed5d800fd00d53d487a84810d2a5",
+        "license": "CC-BY-4.0",
+        "attribution": "Donsky",
+        "sourceURL": "https://www.inaturalist.org/observations/375588305",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/pirol.m4a",
+        "sha256": "adf9a9ce094dad7b645ed666a4bd9b7f1d0d29898581890cfd881de33e04db3b",
+        "license": "CC0-1.0",
+        "attribution": "Christian Kahle (XC1009022)",
+        "sourceURL": "https://xeno-canto.org/1009022",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "seidenschwanz",
@@ -256,7 +744,23 @@
       "scientificName": "Bombycilla garrulus",
       "taxonID": 7429,
       "article": "der",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/seidenschwanz.heic",
+        "sha256": "451cc3e219bb0edc68ef56827a3e56a6f14614f6368125e971293f657d6483f1",
+        "license": "CC0-1.0",
+        "attribution": "Thompson Hyggen",
+        "sourceURL": "https://www.inaturalist.org/observations/106691654",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/seidenschwanz.m4a",
+        "sha256": "1df3f8b9bc9c7544f33d41cea9d9418124ef6f9ee0942572e3b01f7c05cdac44",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Doug Hynes (XC935618)",
+        "sourceURL": "https://xeno-canto.org/935618",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "wasseramsel",
@@ -264,7 +768,23 @@
       "scientificName": "Cinclus cinclus",
       "taxonID": 7647,
       "article": "die",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/wasseramsel.heic",
+        "sha256": "5cd4a6b7fe5eee0403228b8885d2912dc67325a8e802307456fbde61f9f1a5b0",
+        "license": "CC0-1.0",
+        "attribution": "Dario Taraborelli",
+        "sourceURL": "https://www.inaturalist.org/observations/87177852",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/wasseramsel.m4a",
+        "sha256": "d2a088990c41f376c9667b3a55df70794801fe86c8749892f03c545a98f3f886",
+        "license": "CC-BY-4.0",
+        "attribution": "Terje Kolaas (XC425880)",
+        "sourceURL": "https://xeno-canto.org/425880",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "kuckuck",
@@ -272,7 +792,23 @@
       "scientificName": "Cuculus canorus",
       "taxonID": 1907,
       "article": "der",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/kuckuck.heic",
+        "sha256": "c7061e6c2e046497a87d2f9a2af7f4c70f631311baab999dee958c336fbd1a99",
+        "license": "CC-BY-4.0",
+        "attribution": "Ramnarayan K",
+        "sourceURL": "https://www.inaturalist.org/observations/85476479",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/kuckuck.m4a",
+        "sha256": "7473c8fe9c8750565ccd4b94c6f3deeeb5bec5945e389c23dd611c92075ea829",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Tanguy Loïs (XC1143461)",
+        "sourceURL": "https://xeno-canto.org/1143461",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "gruenspecht",
@@ -280,7 +816,23 @@
       "scientificName": "Picus viridis",
       "taxonID": 144243,
       "article": "der",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/gruenspecht.heic",
+        "sha256": "fbd3dc260169e9be5e6c073cd4ee5f64d0deee16aba32fc603367ddb4f750517",
+        "license": "CC-BY-4.0",
+        "attribution": "SteveM4560",
+        "sourceURL": "https://www.inaturalist.org/observations/148448012",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/gruenspecht.m4a",
+        "sha256": "8848938de0c2b003c8bbbe48f61ae630d108fc88de0e4c043bbec8c379dc9b42",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Marie-Lan Taÿ Pamart (XC468402)",
+        "sourceURL": "https://xeno-canto.org/468402",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "schwarzspecht",
@@ -288,7 +840,23 @@
       "scientificName": "Dryocopus martius",
       "taxonID": 17835,
       "article": "der",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/schwarzspecht.heic",
+        "sha256": "2da3a2eae3d4e70f38d08a95a6ba294f6f29088a74c8742886b203de4ee61deb",
+        "license": "CC-BY-4.0",
+        "attribution": "Ксения Волянская",
+        "sourceURL": "https://www.inaturalist.org/observations/251555173",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/schwarzspecht.m4a",
+        "sha256": "c24df358d58da4dcc01bbd3e3ed937897e3b8a0954bdff5156d056a1a5f3fd99",
+        "license": "CC0-1.0",
+        "attribution": "Sonothèque ADVL (XC1107912)",
+        "sourceURL": "https://xeno-canto.org/1107912",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "bienenfresser",
@@ -296,7 +864,23 @@
       "scientificName": "Merops apiaster",
       "taxonID": 2191,
       "article": "der",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/bienenfresser.heic",
+        "sha256": "536a296375358fd12770295f7888e4bef3242e6182508ad0b941470c14e21ca2",
+        "license": "CC-BY-4.0",
+        "attribution": "Tomas Broucek",
+        "sourceURL": "https://www.inaturalist.org/observations/219995225",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/bienenfresser.m4a",
+        "sha256": "0802b29a59f5fc031f3b9e4dc122a3566c102030ac67627dc6277d90f82ca7d3",
+        "license": "CC0-1.0",
+        "attribution": "wilmet sebastien (XC811551)",
+        "sourceURL": "https://xeno-canto.org/811551",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "waldkauz",
@@ -304,7 +888,23 @@
       "scientificName": "Strix aluco",
       "taxonID": 19898,
       "article": "der",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/waldkauz.heic",
+        "sha256": "0ebeceddb46f8b064a875f89a2151b125151439385200d985f931d8e3f215ba6",
+        "license": "CC-BY-4.0",
+        "attribution": "Christoph Moning",
+        "sourceURL": "https://www.inaturalist.org/observations/73835627",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/waldkauz.m4a",
+        "sha256": "41540db1c68e33692ad108ae6c56533215a7c085c815662ed8a379bea8a6e61b",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Benoît Van Hecke (XC696425)",
+        "sourceURL": "https://xeno-canto.org/696425",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "uhu",
@@ -312,7 +912,23 @@
       "scientificName": "Bubo bubo",
       "taxonID": 20059,
       "article": "der",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/uhu.heic",
+        "sha256": "b574fdf4d53cf7d3108b4b20a177f92506ba9ce130cb724535088099c614decc",
+        "license": "CC-BY-4.0",
+        "attribution": "Susan Marley",
+        "sourceURL": "https://www.inaturalist.org/observations/90584037",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/uhu.m4a",
+        "sha256": "742793862270dae58d5259c02ea424b2bd07e3c7122bb289936f048dd3f18625",
+        "license": "CC0-1.0",
+        "attribution": "Lionel Triboulin (XC1070276)",
+        "sourceURL": "https://xeno-canto.org/1070276",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "schleiereule",
@@ -320,7 +936,23 @@
       "scientificName": "Tyto alba",
       "taxonID": 20445,
       "article": "die",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/schleiereule.heic",
+        "sha256": "d3cfb36515882ff3bc36cf9321c6e6384d6ddc0ab1a9d4ccbff7aefae8a1a373",
+        "license": "CC-BY-4.0",
+        "attribution": "Nathan Mesnildrey",
+        "sourceURL": "https://www.inaturalist.org/observations/98811449",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/schleiereule.m4a",
+        "sha256": "c81399797b165cdbc9a897bfac27e28da2658c79f071acb9fd5d1f1df85e7247",
+        "license": "CC0-1.0",
+        "attribution": "Sonothèque ADVL (XC707104)",
+        "sourceURL": "https://xeno-canto.org/707104",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "steinkauz",
@@ -328,7 +960,23 @@
       "scientificName": "Athene noctua",
       "taxonID": 19998,
       "article": "der",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/steinkauz.heic",
+        "sha256": "125ec9eea842940cfde5b7f7aaf723620d19c9c7240cf1b310ecd1a7d5c25e3c",
+        "license": "CC-BY-4.0",
+        "attribution": "SteveM4560",
+        "sourceURL": "https://www.inaturalist.org/observations/151025147",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/steinkauz.m4a",
+        "sha256": "659a0a984a5ea5f2a0f4c885745ca21667535874de0b22de900afc440cf94872",
+        "license": "CC0-1.0",
+        "attribution": "Sonothèque ADVL (XC1079674)",
+        "sourceURL": "https://xeno-canto.org/1079674",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "maeusebussard",
@@ -336,7 +984,23 @@
       "scientificName": "Buteo buteo",
       "taxonID": 204472,
       "article": "der",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/maeusebussard.heic",
+        "sha256": "5bb1c5fae78f975a20937b42c76d24ff260dc3fd4eb9973adee93edd7ef5d99a",
+        "license": "CC0-1.0",
+        "attribution": "Andrew Deacon",
+        "sourceURL": "https://www.inaturalist.org/observations/195355285",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/maeusebussard.m4a",
+        "sha256": "8902a716462dddbab478a415216686011b57740f2f8ee64ee11fb8cb1acbee44",
+        "license": "CC-BY-4.0",
+        "attribution": "Fiete Nörenberg (XC1036868)",
+        "sourceURL": "https://xeno-canto.org/1036868",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "turmfalke",
@@ -344,7 +1008,23 @@
       "scientificName": "Falco tinnunculus",
       "taxonID": 472766,
       "article": "der",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/turmfalke.heic",
+        "sha256": "d0d786692e2ccd0f3c86c2d42b44e453d5da634bfceaacb7ee1c57890f3500b2",
+        "license": "CC0-1.0",
+        "attribution": "Luis Ferreira",
+        "sourceURL": "https://www.inaturalist.org/observations/148613413",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/turmfalke.m4a",
+        "sha256": "095b5544700f1afacbd9e6ed3860e08c8a7e05c119c251dcfb13db17c53e0b4d",
+        "license": "CC0-1.0",
+        "attribution": "Sonothèque ADVL (XC705934)",
+        "sourceURL": "https://xeno-canto.org/705934",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "rotmilan",
@@ -352,7 +1032,23 @@
       "scientificName": "Milvus milvus",
       "taxonID": 5267,
       "article": "der",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/rotmilan.heic",
+        "sha256": "44ee4b86b1db9b43aa2b0ed63358e678675c5257409358c1cc6389dba08823ad",
+        "license": "CC-BY-4.0",
+        "attribution": "Charlotte Kirchner",
+        "sourceURL": "https://www.inaturalist.org/observations/38980950",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/rotmilan.m4a",
+        "sha256": "9671afabe2339f5598670ec04fa2f6d345dd7cd0d17dd1be58a186416f1a9075",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Pascal Christe (XC518958)",
+        "sourceURL": "https://xeno-canto.org/518958",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "seeadler",
@@ -360,7 +1056,15 @@
       "scientificName": "Haliaeetus albicilla",
       "taxonID": 5309,
       "article": "der",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/seeadler.heic",
+        "sha256": "cb80d857fad66e3ec87a82d7289b1f2eac43d0c297577362fc445e1a1bbc4975",
+        "license": "CC-BY-4.0",
+        "attribution": "Diego González Dopico",
+        "sourceURL": "https://www.inaturalist.org/observations/278432305",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "wanderfalke",
@@ -368,7 +1072,23 @@
       "scientificName": "Falco peregrinus",
       "taxonID": 4647,
       "article": "der",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/wanderfalke.heic",
+        "sha256": "7db472d76f1838dac512794b56e0cae6c59b9cc5e0e38e47ff31ca573bad5d85",
+        "license": "CC-BY-4.0",
+        "attribution": "Shirley Zundell",
+        "sourceURL": "https://www.inaturalist.org/observations/12075369",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/wanderfalke.m4a",
+        "sha256": "90ce0a06b9235cb9f211ff328437cdbdc9a341c803260eb729e410ad37ef8cff",
+        "license": "CC0-1.0",
+        "attribution": "Sonothèque ADVL (XC705937)",
+        "sourceURL": "https://xeno-canto.org/705937",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "weissstorch",
@@ -376,7 +1096,23 @@
       "scientificName": "Ciconia ciconia",
       "taxonID": 4733,
       "article": "der",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/weissstorch.heic",
+        "sha256": "2d6c833db7713fe9a1e7dfd50a2bef6a33995082816b9f6b932a0a718159b5ca",
+        "license": "CC-BY-4.0",
+        "attribution": "SteveM4560",
+        "sourceURL": "https://www.inaturalist.org/observations/152829548",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/weissstorch.m4a",
+        "sha256": "c66529c66a954a90bdf80f93a2d60cf560abcf941cf2955329a900b0c6474ac3",
+        "license": "CC0-1.0",
+        "attribution": "Sonothèque ADVL (XC1143178)",
+        "sourceURL": "https://xeno-canto.org/1143178",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "graureiher",
@@ -384,7 +1120,23 @@
       "scientificName": "Ardea cinerea",
       "taxonID": 4954,
       "article": "der",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/graureiher.heic",
+        "sha256": "213c237aaadec97420dc856d8e8fbb16e7f51d45a910b5d0f059af4cebf71e76",
+        "license": "CC-BY-4.0",
+        "attribution": "Alex Press",
+        "sourceURL": "https://www.inaturalist.org/observations/235722159",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/graureiher.m4a",
+        "sha256": "e49c4fcc733734d77fe6ec8e1628f2b522a401ee66d56997d636df98084d9bf7",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Joost van Bruggen (XC432922)",
+        "sourceURL": "https://xeno-canto.org/432922",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "kranich",
@@ -392,7 +1144,23 @@
       "scientificName": "Grus grus",
       "taxonID": 41,
       "article": "der",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/kranich.heic",
+        "sha256": "40f5418addd70e446ac9a05ac9eff1b5be27e5f1cc672f27a5a354b550bd9248",
+        "license": "CC-BY-4.0",
+        "attribution": "Parth Kansara",
+        "sourceURL": "https://www.inaturalist.org/observations/141518478",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/kranich.m4a",
+        "sha256": "cd4badb7e82f93acdfe11c30499b062f3eb5e0f0158a6dfa1c99510215dcb889",
+        "license": "CC0-1.0",
+        "attribution": "Grégoire Chauvot (XC803895)",
+        "sourceURL": "https://xeno-canto.org/803895",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "stockente",
@@ -400,7 +1168,23 @@
       "scientificName": "Anas platyrhynchos",
       "taxonID": 6930,
       "article": "die",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/stockente.heic",
+        "sha256": "caf1d00b8a6e6d75a968d4c1c25118864164f990dfb40716d54a40b0eda93faf",
+        "license": "CC-BY-4.0",
+        "attribution": "Codrin Bucur",
+        "sourceURL": "https://www.inaturalist.org/observations/105737491",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/stockente.m4a",
+        "sha256": "d33c8094e5160bf1aaa6f476c870434a74c8304f004781bf2c2af42aa3d7d1fc",
+        "license": "CC0-1.0",
+        "attribution": "Sonothèque ADVL (XC730554)",
+        "sourceURL": "https://xeno-canto.org/730554",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "mandarinente",
@@ -408,7 +1192,15 @@
       "scientificName": "Aix galericulata",
       "taxonID": 7106,
       "article": "die",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/mandarinente.heic",
+        "sha256": "9572843349a36851a47706bd571fb0eb504253c040fb2402f9ed27b072424764",
+        "license": "CC-BY-4.0",
+        "attribution": "Blake Ross",
+        "sourceURL": "https://www.inaturalist.org/observations/102309745",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "hoeckerschwan",
@@ -416,7 +1208,23 @@
       "scientificName": "Cygnus olor",
       "taxonID": 6921,
       "article": "der",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/hoeckerschwan.heic",
+        "sha256": "8f44c3027679de2d1f8032a938365305ff697a906bed37904903aed08d9852ad",
+        "license": "CC-BY-4.0",
+        "attribution": "Radu Teodoreanu",
+        "sourceURL": "https://www.inaturalist.org/observations/340807169",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/hoeckerschwan.m4a",
+        "sha256": "ea8cd951ec183d3503382f7a0c374223e8a9635a26ec49541a62eb9ad825af41",
+        "license": "CC0-1.0",
+        "attribution": "Sonothèque ADVL (XC730790)",
+        "sourceURL": "https://xeno-canto.org/730790",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "graugans",
@@ -424,7 +1232,23 @@
       "scientificName": "Anser anser",
       "taxonID": 7018,
       "article": "die",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/graugans.heic",
+        "sha256": "52a224a8cb11c1e51e1041cd4660475e36003a8bcfc365d910d228f353d819ba",
+        "license": "CC-BY-4.0",
+        "attribution": "Rhys",
+        "sourceURL": "https://www.inaturalist.org/observations/339953969",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/graugans.m4a",
+        "sha256": "2b84696cad9371d5eab2df3dc78262c1db31de5120757a1226d8a0d285cf00f7",
+        "license": "CC0-1.0",
+        "attribution": "Petr Holecek (XC1174837)",
+        "sourceURL": "https://xeno-canto.org/1174837",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "blaesshuhn",
@@ -432,7 +1256,23 @@
       "scientificName": "Fulica atra",
       "taxonID": 482,
       "article": "das",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/blaesshuhn.heic",
+        "sha256": "58b29db7cddd5e8cdbac287eb854448f957353fc27f4119b9b0b3a7e21e39aa0",
+        "license": "CC0-1.0",
+        "attribution": "petehawkins",
+        "sourceURL": "https://www.inaturalist.org/observations/269486317",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/blaesshuhn.m4a",
+        "sha256": "06e40b6ff7e9ea1b5b3ff36eabc5b235882f85db45e6ef011fd4174b9e31f08b",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Joost van Bruggen (XC432890)",
+        "sourceURL": "https://xeno-canto.org/432890",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "haubentaucher",
@@ -440,7 +1280,23 @@
       "scientificName": "Podiceps cristatus",
       "taxonID": 4208,
       "article": "der",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/haubentaucher.heic",
+        "sha256": "ff4878554a6dadf0cfc090e2d551f5486695622a2f206edecb879e62de4c016d",
+        "license": "CC-BY-4.0",
+        "attribution": "Hendrik Luup",
+        "sourceURL": "https://www.inaturalist.org/observations/361492755",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/haubentaucher.m4a",
+        "sha256": "ef55058f8cbc59017c49323986f62795a2eada7c437aecfa1181bcd0e941a12e",
+        "license": "CC0-1.0",
+        "attribution": "Sonothèque ADVL (XC925320)",
+        "sourceURL": "https://xeno-canto.org/925320",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "kormoran",
@@ -448,7 +1304,23 @@
       "scientificName": "Phalacrocorax carbo",
       "taxonID": 4270,
       "article": "der",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/kormoran.heic",
+        "sha256": "9240132d9aebe93a7d26950a97de8c63f433afefe4c1de9d7451574d967feace",
+        "license": "CC-BY-4.0",
+        "attribution": "Frank Sengpiel",
+        "sourceURL": "https://www.inaturalist.org/observations/151715487",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/kormoran.m4a",
+        "sha256": "1243a1dc0d5c83050ce2f3118cb33f8f5ebe271970f095fd1bdb1ff7c98c4899",
+        "license": "CC0-1.0",
+        "attribution": "Sonothèque ADVL (XC1059525)",
+        "sourceURL": "https://xeno-canto.org/1059525",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "lachmoewe",
@@ -456,7 +1328,23 @@
       "scientificName": "Chroicocephalus ridibundus",
       "taxonID": 144510,
       "article": "die",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/lachmoewe.heic",
+        "sha256": "d445710c13db6e6079f49cd9d833e66ce1e64875944552c2d066a21db4c580ed",
+        "license": "CC-BY-4.0",
+        "attribution": "Diego González Dopico",
+        "sourceURL": "https://www.inaturalist.org/observations/369715830",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/lachmoewe.m4a",
+        "sha256": "bece32f74fc743117b354d4fcd074964afaf8d9056f582710e140c7246272eac",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Marie-Lan Taÿ Pamart (XC512864)",
+        "sourceURL": "https://xeno-canto.org/512864",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "austernfischer",
@@ -464,7 +1352,23 @@
       "scientificName": "Haematopus ostralegus",
       "taxonID": 4843,
       "article": "der",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/austernfischer.heic",
+        "sha256": "415c869c912a44e30f77301f959fdf91fd3f1592389b9394716e5e05ff6b8ac6",
+        "license": "CC-BY-4.0",
+        "attribution": "Ged Tranter",
+        "sourceURL": "https://www.inaturalist.org/observations/241437631",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/austernfischer.m4a",
+        "sha256": "753a61be36db85f25c718cd30188970cc7224f6e8aabfed7cc275a4059393b78",
+        "license": "CC0-1.0",
+        "attribution": "Sonothèque ADVL (XC730817)",
+        "sourceURL": "https://xeno-canto.org/730817",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "kiebitz",
@@ -472,7 +1376,23 @@
       "scientificName": "Vanellus vanellus",
       "taxonID": 4857,
       "article": "der",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/kiebitz.heic",
+        "sha256": "378e5d7bba4dc6665157e70140a2bb0ba49ff9b662e03b015f02a78f01e155a7",
+        "license": "CC-BY-4.0",
+        "attribution": "雲一百香果",
+        "sourceURL": "https://www.inaturalist.org/observations/143935728",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/kiebitz.m4a",
+        "sha256": "4488e672e31b366da6ff80d1dbfaf07c0b49713e15fb9e7fc3b4408d6c78ce3f",
+        "license": "CC0-1.0",
+        "attribution": "Sonothèque ADVL (XC919264)",
+        "sourceURL": "https://xeno-canto.org/919264",
+        "retrieved": "2026-09-10"
+      }
     },
     {
       "id": "fasan",
@@ -480,7 +1400,23 @@
       "scientificName": "Phasianus colchicus",
       "taxonID": 981,
       "article": "der",
-      "pronunciation": null
+      "pronunciation": null,
+      "photo": {
+        "file": "photos/fasan.heic",
+        "sha256": "aa151a5b1202237ba267c1d8fbd5ff03662fbeb93ef0026febe5e6c03ebc5a8f",
+        "license": "CC-BY-4.0",
+        "attribution": "John Krampl",
+        "sourceURL": "https://www.inaturalist.org/observations/77794790",
+        "retrieved": "2026-09-10"
+      },
+      "call": {
+        "file": "audio/fasan.m4a",
+        "sha256": "0a56c2589a19dad8a9abc1392cf710c037fed8665dd5d287f637e176ddeedfc1",
+        "license": "CC0-1.0",
+        "attribution": "Sonothèque ADVL (XC705907)",
+        "sourceURL": "https://xeno-canto.org/705907",
+        "retrieved": "2026-09-10"
+      }
     }
   ]
 }

@@ -76,6 +76,128 @@ the source declared.
 | Zilpzalp | Photo | Tomas Broucek | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/353438691> |
 | Zilpzalp | Call | steve (XC815470) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/815470> |
 
+### Vögel Deutschlands (`deutschland`)
+
+| Bird | Kind | Author | Licence | Source |
+| --- | --- | --- | --- | --- |
+| Haussperling | Photo | Esteban Poveda | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/83153529> |
+| Haussperling | Call | Philippe_Grange (XC1152146) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1152146> |
+| Grünfink | Photo | Christoph Moning | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/57657970> |
+| Grünfink | Call | Kevin Ortega (XC642404) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://xeno-canto.org/642404> |
+| Buchfink | Photo | Donald Davesne | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/83075710> |
+| Buchfink | Call | Sonothèque ADVL (XC1088506) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1088506> |
+| Stieglitz | Photo | Christoph Moning | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/68095260> |
+| Stieglitz | Call | Grégoire Chauvot (XC797484) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/797484> |
+| Gimpel | Photo | Ксения Волянская | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/333441894> |
+| Gimpel | Call | Jurijs Ješkins (XC983039) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://xeno-canto.org/983039> |
+| Kernbeißer | Photo | Лариса Артемьева | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/74825757> |
+| Bluthänfling | Photo | Helen Bovill | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/305224073> |
+| Bluthänfling | Call | Sonothèque ADVL (XC1107823) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1107823> |
+| Goldammer | Photo | joba102 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/78888615> |
+| Goldammer | Call | Philippe_Grange (XC1143669) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1143669> |
+| Elster | Photo | Andrejus Gaidamavičius | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/257350003> |
+| Elster | Call | Philippe_Grange (XC1148526) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1148526> |
+| Eichelhäher | Photo | Helen Bovill | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/273999502> |
+| Eichelhäher | Call | Sonothèque ADVL (XC1175981) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1175981> |
+| Rabenkrähe | Photo | Nasser Halaweh | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/18803996> |
+| Rabenkrähe | Call | Marie-Lan Taÿ Pamart (XC511943) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/511943> |
+| Dohle | Photo | Adam Jackson | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/193317621> |
+| Dohle | Call | Joost van Bruggen (XC436939) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/436939> |
+| Kolkrabe | Photo | Mila C. | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/215780666> |
+| Kolkrabe | Call | Doug Hynes (XC922424) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/922424> |
+| Ringeltaube | Photo | Codrin Bucur | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/127095661> |
+| Ringeltaube | Call | Benoît Van Hecke (XC561877) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/561877> |
+| Türkentaube | Photo | zebedeugalinha | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/253298182> |
+| Türkentaube | Call | Philippe_Grange (XC1142043) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1142043> |
+| Mauersegler | Photo | Настя Бухвалова | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/385189352> |
+| Mauersegler | Call | Pascal Christe (XC816518) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/816518> |
+| Rauchschwalbe | Photo | Robbie Hannawacker | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/6487004> |
+| Rauchschwalbe | Call | Marie-Lan Taÿ Pamart (XC492100) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/492100> |
+| Bachstelze | Photo | Вячеслав Юсупов | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/74657457> |
+| Bachstelze | Call | Sonothèque ADVL (XC1100607) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1100607> |
+| Zaunkönig | Photo | William Stephens | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/75531686> |
+| Zaunkönig | Call | Philippe_Grange (XC1133863) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1133863> |
+| Singdrossel | Photo | Antoine Thivolle | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/334875213> |
+| Singdrossel | Call | Philippe_Grange (XC1151579) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1151579> |
+| Nachtigall | Photo | Codrin Bucur | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/161483028> |
+| Nachtigall | Call | Philippe_Grange (XC1099301) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1099301> |
+| Mönchsgrasmücke | Photo | tobijw | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/365842816> |
+| Mönchsgrasmücke | Call | Philippe_Grange (XC1099296) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1099296> |
+| Kleiber | Photo | Dr. Sven Gippner | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/148024354> |
+| Kleiber | Call | Sonothèque ADVL (XC804960) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/804960> |
+| Gartenbaumläufer | Photo | Tomas Broucek | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/65349780> |
+| Gartenbaumläufer | Call | Benoît Van Hecke (XC697961) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/697961> |
+| Schwanzmeise | Photo | Валерия Ковалева | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/108550471> |
+| Schwanzmeise | Call | Sonothèque ADVL (XC707392) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/707392> |
+| Haubenmeise | Photo | Paolo Zucca | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/18084316> |
+| Haubenmeise | Call | Sonothèque ADVL (XC1088492) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1088492> |
+| Wintergoldhähnchen | Photo | Frank Sengpiel | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/67995777> |
+| Wintergoldhähnchen | Call | Jochem verweij (XC839791) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/839791> |
+| Gartenrotschwanz | Photo | Tommy Andriollo | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/117909615> |
+| Gartenrotschwanz | Call | Philippe_Grange (XC990430) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/990430> |
+| Feldlerche | Photo | Phil James | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/214550657> |
+| Feldlerche | Call | Camille Vacher (XC722292) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://xeno-canto.org/722292> |
+| Neuntöter | Photo | Viktor | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/218436887> |
+| Neuntöter | Call | Jochem verweij (XC902159) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/902159> |
+| Pirol | Photo | Donsky | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/375588305> |
+| Pirol | Call | Christian Kahle (XC1009022) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1009022> |
+| Seidenschwanz | Photo | Thompson Hyggen | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/106691654> |
+| Seidenschwanz | Call | Doug Hynes (XC935618) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/935618> |
+| Wasseramsel | Photo | Dario Taraborelli | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/87177852> |
+| Wasseramsel | Call | Terje Kolaas (XC425880) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://xeno-canto.org/425880> |
+| Kuckuck | Photo | Ramnarayan K | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/85476479> |
+| Kuckuck | Call | Tanguy Loïs (XC1143461) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/1143461> |
+| Grünspecht | Photo | SteveM4560 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/148448012> |
+| Grünspecht | Call | Marie-Lan Taÿ Pamart (XC468402) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/468402> |
+| Schwarzspecht | Photo | Ксения Волянская | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/251555173> |
+| Schwarzspecht | Call | Sonothèque ADVL (XC1107912) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1107912> |
+| Bienenfresser | Photo | Tomas Broucek | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/219995225> |
+| Bienenfresser | Call | wilmet sebastien (XC811551) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/811551> |
+| Waldkauz | Photo | Christoph Moning | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/73835627> |
+| Waldkauz | Call | Benoît Van Hecke (XC696425) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/696425> |
+| Uhu | Photo | Susan Marley | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/90584037> |
+| Uhu | Call | Lionel Triboulin (XC1070276) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1070276> |
+| Schleiereule | Photo | Nathan Mesnildrey | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/98811449> |
+| Schleiereule | Call | Sonothèque ADVL (XC707104) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/707104> |
+| Steinkauz | Photo | SteveM4560 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/151025147> |
+| Steinkauz | Call | Sonothèque ADVL (XC1079674) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1079674> |
+| Mäusebussard | Photo | Andrew Deacon | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/195355285> |
+| Mäusebussard | Call | Fiete Nörenberg (XC1036868) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://xeno-canto.org/1036868> |
+| Turmfalke | Photo | Luis Ferreira | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/148613413> |
+| Turmfalke | Call | Sonothèque ADVL (XC705934) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/705934> |
+| Rotmilan | Photo | Charlotte Kirchner | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/38980950> |
+| Rotmilan | Call | Pascal Christe (XC518958) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/518958> |
+| Seeadler | Photo | Diego González Dopico | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/278432305> |
+| Wanderfalke | Photo | Shirley Zundell | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/12075369> |
+| Wanderfalke | Call | Sonothèque ADVL (XC705937) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/705937> |
+| Weißstorch | Photo | SteveM4560 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/152829548> |
+| Weißstorch | Call | Sonothèque ADVL (XC1143178) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1143178> |
+| Graureiher | Photo | Alex Press | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/235722159> |
+| Graureiher | Call | Joost van Bruggen (XC432922) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/432922> |
+| Kranich | Photo | Parth Kansara | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/141518478> |
+| Kranich | Call | Grégoire Chauvot (XC803895) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/803895> |
+| Stockente | Photo | Codrin Bucur | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/105737491> |
+| Stockente | Call | Sonothèque ADVL (XC730554) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/730554> |
+| Mandarinente | Photo | Blake Ross | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/102309745> |
+| Höckerschwan | Photo | Radu Teodoreanu | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/340807169> |
+| Höckerschwan | Call | Sonothèque ADVL (XC730790) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/730790> |
+| Graugans | Photo | Rhys | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/339953969> |
+| Graugans | Call | Petr Holecek (XC1174837) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1174837> |
+| Blässhuhn | Photo | petehawkins | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/269486317> |
+| Blässhuhn | Call | Joost van Bruggen (XC432890) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/432890> |
+| Haubentaucher | Photo | Hendrik Luup | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/361492755> |
+| Haubentaucher | Call | Sonothèque ADVL (XC925320) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/925320> |
+| Kormoran | Photo | Frank Sengpiel | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/151715487> |
+| Kormoran | Call | Sonothèque ADVL (XC1059525) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1059525> |
+| Lachmöwe | Photo | Diego González Dopico | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/369715830> |
+| Lachmöwe | Call | Marie-Lan Taÿ Pamart (XC512864) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/512864> |
+| Austernfischer | Photo | Ged Tranter | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/241437631> |
+| Austernfischer | Call | Sonothèque ADVL (XC730817) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/730817> |
+| Kiebitz | Photo | 雲一百香果 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/143935728> |
+| Kiebitz | Call | Sonothèque ADVL (XC919264) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/919264> |
+| Fasan | Photo | John Krampl | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/77794790> |
+| Fasan | Call | Sonothèque ADVL (XC705907) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/705907> |
+
 ### Vögel der Welt (`welt`)
 
 | Bird | Kind | Author | Licence | Source |
