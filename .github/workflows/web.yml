@@ -125,6 +125,11 @@ jobs:
           }
 
           mkdir -p .vercel
+          # Belt and braces on the persistent runner: the trap below does not
+          # fire on a hard kill (e.g. an OOM or a forcibly cancelled job), so
+          # also clear out anything a previous run left behind before we
+          # write a fresh copy.
+          rm -f .vercel/project.api.json
           trap 'rm -f .vercel/project.api.json' EXIT
 
           curl --fail-with-body --silent --show-error \
