@@ -127,7 +127,7 @@ export default function Support() {
       <address>
         <a href={`mailto:${SUPPORT_MAIL}`}>{SUPPORT_MAIL}</a>
       </address>
-      <p>
+      <p className="fine-print">
         Rechtliche Anfragen und alles, was die schnaq GmbH als Anbieter betrifft,
         gehen an die Adresse im <Link href="/impressum">Impressum</Link>.
       </p>

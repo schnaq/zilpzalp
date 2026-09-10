@@ -14,8 +14,8 @@ const SHOTS = [
     alt: 'Der Startbildschirm von ZilpZalp mit den Kacheln für beide Spiele.',
   },
   {
-    file: '02-wer-ist-das.png',
-    title: 'Wer ist das?',
+    file: '02-finde-den-vogel.png',
+    title: 'Finde den Vogel',
     text: 'Der Name wird vorgelesen, vier Fotos warten.',
     alt: 'Spiel 1: eine vorgelesene Frage über vier Vogelfotos.',
   },

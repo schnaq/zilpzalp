@@ -103,7 +103,7 @@ export default function Home() {
               <span className="game-mark">
                 <SpeechIcon />
               </span>
-              <h3>Wer ist das?</h3>
+              <h3>Finde den Vogel</h3>
               <p>
                 Ein Vogelname wird vorgelesen, vier Fotos liegen auf dem Tisch.
                 Das Kind tippt den richtigen Vogel an. Beim zweiten Versuch
@@ -209,24 +209,19 @@ export default function Home() {
       <section>
         <div className="wrap">
           <div className="section-head section-head--tight">
-            <h2>Wer ZilpZalp macht</h2>
+            <h2>Ein Spiel von Johanna Hillebrand und Christian Meter</h2>
           </div>
           <div className="makers">
             <div>
               <h3>Johanna Hillebrand</h3>
               <p>
-                Die Idee und die Umsetzung sind ihre. ZilpZalp ist aus der Frage
-                entstanden, wie Kinder die Vögel im eigenen Garten
-                kennenlernen, bevor sie ein Bestimmungsbuch lesen können.
+                Von ihr stammen die Idee, die Auswahl der Vögel und die Tests
+                mit echten Kindern.
               </p>
             </div>
             <div>
-              <h3>schnaq GmbH</h3>
-              <p>
-                Die schnaq GmbH aus Düsseldorf gibt dem Projekt sein Zuhause:
-                Repository, Bau- und Release-Infrastruktur und den Server für
-                die Medien. Der Quellcode ist quelloffen unter der MIT-Lizenz.
-              </p>
+              <h3>Christian Meter</h3>
+              <p>Er schreibt den Code, der daraus die App macht.</p>
             </div>
           </div>
         </div>
