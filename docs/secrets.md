@@ -99,12 +99,16 @@ Bei mehrzeiligen Werten wie einem Base64-Zertifikat zeilenweise maskieren.
 
 ### Ausnahme: Vercel
 
-Der Deploy der Website (`.github/workflows/web.yml`, Job `deploy`) braucht kein
-Infisical: `VERCEL_TOKEN` und `VERCEL_PROJECT_ID` liegen als
-GitHub-Repository-Secret, `VERCEL_ORG_ID` als Organisations-Secret — Christians
-Entscheidung vom 2026-09-10, weil ein reiner Token-Deploy die Infisical-Action
-nicht rechtfertigt. Werte aus `secrets.*` maskiert GitHub im Log automatisch,
-anders als die per Infisical-Action geladenen oben.
+Der Deploy der Website (`.github/workflows/web.yml`, Job `deploy`) braucht nur
+zwei Werte: `VERCEL_TOKEN` (projekt-scoped) und `VERCEL_PROJECT_ID`. Beide
+liegen in Infisical (Environment `dev`, Ordner `/actions`) und werden von dort
+nach GitHub Actions als Repository-Secret synchronisiert — so kommen sie in
+GitHub an, ohne dass der Workflow selbst die Infisical-Action aufruft.
+`VERCEL_ORG_ID` wird nicht mehr gebraucht: der projekt-scoped Token liefert
+über `GET /v9/projects/{id}` auch die `accountId`, aus der der Workflow die
+Org-ID selbst herleitet (siehe Kommentar in `web.yml`). Das Secret kann aus
+den GitHub-Org-Secrets gelöscht werden. Werte aus `secrets.*` maskiert GitHub
+im Log automatisch, anders als die per Infisical-Action geladenen oben.
 
 ## Smoke-Test
 
