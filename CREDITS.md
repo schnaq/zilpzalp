@@ -51,7 +51,7 @@ the source declared.
 | Hagedasch | Photo | Martin Gutewort | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/197640384> |
 | Hagedasch | Call | Frank shirima (XC1163454) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/1163454> |
 
-### Unsere ersten Vögel (`basis`)
+### Vögel Deutschlands (`deutschland`)
 
 | Bird | Kind | Author | Licence | Source |
 | --- | --- | --- | --- | --- |
@@ -75,11 +75,6 @@ the source declared.
 | Wiedehopf | Call | Tanguy Loïs (XC1143457) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/1143457> |
 | Zilpzalp | Photo | Tomas Broucek | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/353438691> |
 | Zilpzalp | Call | steve (XC815470) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/815470> |
-
-### Vögel Deutschlands (`deutschland`)
-
-| Bird | Kind | Author | Licence | Source |
-| --- | --- | --- | --- | --- |
 | Haussperling | Photo | Esteban Poveda | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/83153529> |
 | Haussperling | Call | Philippe_Grange (XC1152146) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1152146> |
 | Grünfink | Photo | Christoph Moning | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/57657970> |
