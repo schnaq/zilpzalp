@@ -38,17 +38,18 @@ RENDERED_FILE = "speech.wav"
 RECORDING_DOC = "https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md"
 
 
-def wav_bytes(samples: bytes, rate: int, channels: int = 1, sample_width: int = 2) -> bytes:
-    """Raw 16-bit PCM as the WAV container every adapter owes `audio.trim`.
+def wav_bytes(samples: bytes, rate: int) -> bytes:
+    """Mono 16-bit PCM as the WAV container every adapter owes `audio.trim`.
 
     Here rather than in an adapter because it is the contract above rather
     than a vendor's business: `fake` synthesises the samples and ElevenLabs
-    fetches them, and both hand back the same kind of file.
+    fetches them, and both hand back the same kind of file. Mono and 16-bit
+    are not parameters for the same reason — they are the contract.
     """
     buffer = BytesIO()
     with wave.open(buffer, "wb") as sink:
-        sink.setnchannels(channels)
-        sink.setsampwidth(sample_width)
+        sink.setnchannels(1)
+        sink.setsampwidth(2)
         sink.setframerate(rate)
         sink.writeframes(samples)
     return buffer.getvalue()

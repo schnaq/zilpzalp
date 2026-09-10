@@ -1194,7 +1194,11 @@ def build_parser() -> argparse.ArgumentParser:
         choices=sorted(speech.PROVIDERS),
         help="which adapter speaks — 'fake' produces tones and reaches no vendor",
     )
-    render.add_argument("--voice", help="a voice the provider offers; default: its own")
+    render.add_argument(
+        "--voice",
+        help="a voice the provider offers, by id or by name — "
+        "required wherever there is a choice; see 'speech voices'",
+    )
     render.add_argument(
         "--max-chars",
         type=int,

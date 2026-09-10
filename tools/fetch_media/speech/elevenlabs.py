@@ -125,8 +125,8 @@ def message(response: httpx.Response) -> str:
     elif "output_format" in said:
         hint = (
             f" — {OUTPUT_FORMAT} needs a tier this account does not have. The "
-            "Starter fallback is mp3_44100_128, and that also means naming the "
-            "rendered file .mp3 in speech/provider.py."
+            "fallback is mp3_44100_128, which this adapter would then have to "
+            "decode before it returns: a render is WAV, see speech/provider.py."
         )
 
     return keys.redact(f"{response.status_code}: {said}{hint}")
@@ -137,16 +137,16 @@ class ElevenLabsProvider:
 
     name = "elevenlabs"
 
-    def __init__(
-        self, key: str | None = None, transport: httpx.BaseTransport | None = None
-    ) -> None:
-        # Read at construction, not at the first request: a missing key is a
-        # missing Infisical wrapper, and finding that out before a hundred
-        # sentences have been resolved is the friendlier order.
-        self._key = key or keys.api_key(keys.ELEVENLABS)
+    def __init__(self, transport: httpx.BaseTransport | None = None) -> None:
+        # The key comes from the environment and from nowhere else: `redact`
+        # blanks what the environment holds, so a key handed in by another
+        # route would be the one that reaches a log. Read at construction
+        # rather than at the first request, because a missing key is a missing
+        # Infisical wrapper and that is worth hearing before a hundred
+        # sentences have been resolved.
         self._http = httpx.Client(
             base_url=API_ROOT,
-            headers={"xi-api-key": self._key},
+            headers={"xi-api-key": keys.api_key(keys.ELEVENLABS)},
             timeout=TIMEOUT,
             transport=transport,
         )

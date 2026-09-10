@@ -625,6 +625,66 @@ class RenderTests(SpeechTestCase):
         self.assertIn("--sentence", printed)
 
 
+class VendorCommandTests(SpeechTestCase):
+    """The command line with a vendor behind it, and no network under it."""
+
+    def setUp(self) -> None:
+        super().setUp()
+        mock.patch.dict("os.environ", {keys.ELEVENLABS: KEY}).start()
+
+        def answer(request: httpx.Request) -> httpx.Response:
+            if request.url.path.endswith("/voices"):
+                return httpx.Response(200, json=OFFERED)
+            return httpx.Response(200, content=SAMPLES)
+
+        transport = httpx.MockTransport(answer)
+        mock.patch.dict(
+            cli.speech.PROVIDERS,
+            {"elevenlabs": lambda: elevenlabs.ElevenLabsProvider(transport=transport)},
+        ).start()
+
+    def test_lists_the_voices_a_provider_offers(self) -> None:
+        code, printed = self.run_command(["speech", "voices", "--provider", "elevenlabs"])
+
+        self.assertEqual(code, 0)
+        self.assertIn("v-johanna  Johanna", printed)
+        self.assertIn("2 voice(s)", printed)
+
+    def test_says_so_where_a_provider_offers_no_choice(self) -> None:
+        code, printed = self.run_command(["speech", "voices", "--provider", "fake"])
+
+        self.assertEqual(code, 0)
+        self.assertIn("no choice of voice", printed)
+
+    def test_records_the_rendered_clip_under_the_voice_that_spoke_it(self) -> None:
+        code, printed = self.run_command(
+            [
+                "speech", "render", "--provider", "elevenlabs", "--voice", "Johanna",
+                "--pack", "basis", "--species", "amsel", "--sentence", "collection.name",
+            ]
+        )
+
+        self.assertEqual(code, 0)
+        voice = self.document()["voice"]
+        self.assertEqual(voice["attribution"], "Stimme: Johanna (ElevenLabs)")
+        self.assertEqual(voice["license"], "CC-BY-4.0")
+        self.assertEqual(voice["sourceURL"], speech.RECORDING_DOC)
+        self.assertEqual(list(self.clips_of("amsel")), ["collection.name"])
+        self.assertIn("5 character(s)", printed)
+
+    def test_refuses_a_vendor_run_without_a_voice_before_it_writes(self) -> None:
+        code, printed = self.run_command(
+            [
+                "speech", "render", "--provider", "elevenlabs",
+                "--pack", "basis", "--sentence", "collection.name",
+            ]
+        )
+
+        self.assertEqual(code, 1)
+        self.assertIn("--voice", printed)
+        self.assertEqual(list(self.pack.rglob("*.m4a")), [])
+
+
 class ImportTests(SpeechTestCase):
     def run_import(
         self, *arguments: str, file: Path | None = None, attribution: str = "Stimme: Johanna"
