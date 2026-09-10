@@ -49,6 +49,11 @@ struct ParentalGate: View {
         // No rubber band on a screen that fits: a page that bounces reads as
         // one that has more below.
         .scrollBounceBehavior(.basedOnSize)
+        // Here rather than at the two call sites: the task is a grown-up's
+        // whether it stands in the door of the grown-ups' area or in the
+        // sheet in front of a link, and the sheet is presented from above the
+        // screen's own content (#239).
+        .grownUpDynamicType()
         // A gate that is shown a second time asks something else: `@State`
         // survives a re-presentation of the same view, so the numbers are
         // replaced here rather than only at first construction.

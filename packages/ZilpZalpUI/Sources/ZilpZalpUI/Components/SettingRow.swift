@@ -16,8 +16,9 @@ import SwiftUI
 /// VoiceOver element — which a switch row does not do on its own, see the
 /// comment in `body`.
 ///
-/// The design's three columns are an iPad's; below the regular size class the
-/// row stacks instead, and ``SettingRowStack`` says how.
+/// The design's three columns are an iPad's; below the regular size class, and
+/// at an accessibility text size whatever the class, the row stacks instead —
+/// ``SettingRowStack`` says how.
 ///
 /// `.disabled(_:)` works as on any SwiftUI control: a navigation row dims to
 /// the system's one disabled opacity, a switch row lets `Toggle` grey itself.
@@ -33,6 +34,7 @@ public struct SettingRow: View {
 
     @Environment(\.isEnabled) private var isEnabled
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     private let title: String
     private let hint: String?
@@ -196,6 +198,7 @@ public struct SettingRow: View {
     private func row(@ViewBuilder trailing: () -> some View) -> some View {
         SettingRowStack(
             sizeClass: horizontalSizeClass,
+            typeSize: dynamicTypeSize,
             spacing: ZSpacing.step4,
             hintSpacing: SettingRowMetrics.hintSpacing,
         ) {

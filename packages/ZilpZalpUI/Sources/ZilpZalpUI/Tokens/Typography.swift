@@ -133,10 +133,32 @@ public enum ZType {
         /// 88 pt hero would render near 270 pt at AX5. The design's geometry
         /// is fixed — answer tiles are 220 pt with a 22 pt label, touch
         /// targets 64/96/160 — and the scale is already generous, with 20 pt
-        /// the floor for anything a child reads. Adding Dynamic Type later
-        /// means clamping it here, once, for the whole system.
+        /// the floor for anything a child reads.
+        ///
+        /// The grown-ups' screens do follow Dynamic Type, and they do it by
+        /// resolving a step at the size the system asks for and handing
+        /// *that* step here — see ``SwiftUI/View/grownUpDynamicType()``. The
+        /// face stays fixed either way; nothing in this type scales itself.
         public func font(_ family: Family, weight: Weight) -> Font {
             .custom(TokenFontFace.postScriptName(family, weight), fixedSize: size)
+        }
+
+        /// The system text style this step follows where Dynamic Type is let
+        /// in — the `relativeTo:` of `@ScaledMetric`.
+        ///
+        /// Not `.body` for all nine. `UIFontMetrics` scales the small styles
+        /// hardest, by design: at AX3 `.body` takes 17 pt to 40 (2.35×) while
+        /// `.largeTitle` takes 34 to 60 (1.76×). Anchored to `.body`
+        /// throughout, the gate's 36 pt question would land near 85 pt and no
+        /// phone would hold it. Each step follows the style of its own rank
+        /// instead, so the scale keeps its shape as it grows.
+        var dynamicTypeAnchor: Font.TextStyle {
+            switch self {
+            case .hero, .display1, .display2, .title: .largeTitle
+            case .headline: .title2
+            case .caption: .footnote
+            default: .body
+            }
         }
 
         /// Converts an em value from ``ZType/Tracking`` into the points that
@@ -192,6 +214,12 @@ public extension View {
     /// Works on a `Text` and equally on a container: SwiftUI carries font,
     /// tracking and line spacing down through the environment.
     ///
+    /// Fixed size unless the subtree asked for Dynamic Type through
+    /// ``SwiftUI/View/grownUpDynamicType()``, which the grown-ups' screens do
+    /// and no screen a child sees does. Where it is on, the step is resolved
+    /// at the scaled size first and everything below it — tracking, line
+    /// spacing, the single-line box — follows from that one number.
+    ///
     /// - Parameters:
     ///   - step: The size and line height, from ``ZType/Step``.
     ///   - family: Display or body. Also picks the natural line box.
@@ -219,7 +247,6 @@ public extension View {
     /// Left off, the modifier touches neither the line limit nor the height:
     /// `.lineLimit(nil)` would clear a limit an ancestor had set, so a caller
     /// wrapping a card in `.lineLimit(2)` would silently lose it.
-    @ViewBuilder
     func typeStyle(
         _ step: ZType.Step,
         _ family: ZType.Family,
@@ -227,17 +254,13 @@ public extension View {
         tracking: CGFloat = ZType.Tracking.normalEm,
         singleLine: Bool = false,
     ) -> some View {
-        let styled = font(step.font(family, weight: weight))
-            .tracking(step.tracking(tracking))
-            .lineSpacing(step.lineSpacing(for: family))
-
-        if singleLine {
-            styled
-                .lineLimit(1)
-                .frame(height: step.lineBoxHeight)
-        } else {
-            styled
-        }
+        modifier(TypeStyle(spec: TypeSpec(
+            step: step,
+            family: family,
+            weight: weight,
+            trackingEm: tracking,
+            singleLine: singleLine,
+        )))
     }
 }
 

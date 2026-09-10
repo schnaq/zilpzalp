@@ -80,7 +80,9 @@ struct ParentsScreen: View {
                 ) { dismiss() }
             }
 
+            // Content only, never the bar — see ``grownUpDynamicType()``.
             content
+                .grownUpDynamicType()
         }
         .background(ZColor.surfacePage)
         // Every screen brings its own `TopBar`; the system bar would stack a

@@ -7,6 +7,13 @@ import SwiftUI
 /// leave the text about 54 pt at 390 pt, so "Spielzeit pro Tag" broke over
 /// four lines and its hint broke mid-word (#142). Below the regular size class
 /// the row keeps a column for the icon alone and stacks the rest.
+///
+/// An accessibility text size does the same thing to an iPad that a phone
+/// does to the design's row: the grown-ups' screens scale their type with the
+/// system (#239), and at AX1 a title is already wider than the column three
+/// of them leave it. So the size counts here beside the size class — the cap
+/// in ``ZType/dynamicTypeCap`` says how far the type grows, and this says
+/// what the row does about it.
 enum SettingRowLayout: Equatable {
     /// Icon, the text block and the trailing slot side by side, each in a
     /// column of its own — the design's row, and what an iPad shows.
@@ -29,6 +36,9 @@ enum SettingRowLayout: Equatable {
     ///   - sizeClass: `nil` takes the roomy branch, as it does in ``TopBar``:
     ///     nothing outside iOS sets a size class, so a `swift test` render and
     ///     a macOS preview get the iPad row unless they say otherwise.
+    ///   - typeSize: The system text size. Anything from AX1 up stacks
+    ///     whatever the size class says. The default is the system's own, so
+    ///     a caller that does not scale its type need not mention it.
     ///   - textWidth: What is left of the row once the icon has had its column.
     ///   - titleWidth: The title on one line.
     ///   - trailingWidth: The value and its chevron. Zero on a switch row,
@@ -37,12 +47,13 @@ enum SettingRowLayout: Equatable {
     ///   - spacing: The gap between title and trailing slot.
     static func choose(
         sizeClass: UserInterfaceSizeClass?,
+        typeSize: DynamicTypeSize = .large,
         textWidth: CGFloat,
         titleWidth: CGFloat,
         trailingWidth: CGFloat,
         spacing: CGFloat,
     ) -> Self {
-        guard sizeClass == .compact else { return .columns }
+        guard sizeClass == .compact || typeSize.isAccessibilitySize else { return .columns }
         guard trailingWidth > 0 else { return .rows }
 
         // The title is the string here that may not be squeezed: it is what a
@@ -76,6 +87,9 @@ private enum SettingRowSlot: Int {
 /// the hint on screen leaves it where it was in the tree.
 struct SettingRowStack: Layout {
     let sizeClass: UserInterfaceSizeClass?
+    /// The system text size, for the half of the rule that is not the size
+    /// class. ``SettingRow`` reads it off the environment.
+    let typeSize: DynamicTypeSize
     /// The gap after the icon, and between title and trailing slot.
     let spacing: CGFloat
     /// The gap between title and hint, and above a trailing line.
@@ -196,6 +210,7 @@ struct SettingRowStack: Layout {
 
         let layout = SettingRowLayout.choose(
             sizeClass: sizeClass,
+            typeSize: typeSize,
             textWidth: textWidth,
             titleWidth: subviews[.title].sizeThatFits(.unspecified).width,
             trailingWidth: trailing.width,

@@ -37,8 +37,20 @@ func renderedSize(_ view: some View, width: CGFloat = 768) -> CGSize {
 ///   - step: The step it is declared at.
 @MainActor
 func drawnSize(of view: some View, text: String, declaredAt step: ZType.Step) -> CGFloat {
-    var loose = CGSize.zero
-    ImageRenderer(content: view).render { size, _ in loose = size }
     let natural = BundledFonts.width(of: text, postScriptName: "Baloo2-Bold", size: step.size)
-    return step.size * loose.width / natural
+    return step.size * looseSize(of: view).width / natural
+}
+
+/// What a view lays out to with nothing around it to squeeze it.
+///
+/// The other half of ``renderedSize(_:width:)``, and the reason it is a
+/// function of its own: a view that shrank or wrapped inside a frame reports
+/// the frame, so anything measured against its own content has to be rendered
+/// without one. ``drawnSize(of:text:declaredAt:)`` and `GrownUpTypeTests`
+/// both go through here, so how the render is driven stays in one place.
+@MainActor
+func looseSize(of view: some View) -> CGSize {
+    var measured = CGSize.zero
+    ImageRenderer(content: view).render { size, _ in measured = size }
+    return measured
 }
