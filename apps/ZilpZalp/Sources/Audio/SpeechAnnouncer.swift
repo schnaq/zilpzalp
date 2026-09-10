@@ -94,8 +94,9 @@ final class SpeechAnnouncer: NSObject {
 
     /// - Parameter library: The packs whose species sentences this announcer
     ///   may play. Empty on the screens that say nothing about a species —
-    ///   both profile screens, the gate, "Zeit fürs Nest" — which is why it
-    ///   defaults to nothing.
+    ///   the picker, the gate, "Zeit fürs Nest" — which is why it defaults to
+    ///   nothing. The creation screen does name one, since its avatars became
+    ///   birds (#205), and hands its packs over.
     init(library: PackLibrary = .empty) {
         clips = SpeechClips(library: library, fixed: Self.fixedSet)
         voice = SpeechVoice.forUtterance

@@ -193,6 +193,26 @@ struct ProfileTests {
         )
     }
 
+    @Test("a glyph avatar from an older build resolves to one of the choices")
+    func migratesGlyphAvatars() {
+        // The eight names version 1 of the file could carry. Each of them has
+        // to land on a bird the creation grid offers, or a child that migrates
+        // could not find its own avatar there any more.
+        let glyphs = ["bird", "egg", "feather", "leaf", "star", "sparkles", "house", "lightbulb"]
+
+        for glyph in glyphs {
+            let species = Profile.species(forAvatar: glyph)
+            #expect(Profile.avatarChoices.contains(species), "\(glyph) became \(species)")
+        }
+        // The starling needs no mapping — it is called `star` itself.
+        #expect(Profile.species(forAvatar: "star") == "star")
+        // A species id, and a name from a build that does not exist yet, are
+        // both their own answer.
+        #expect(Profile.species(forAvatar: "wiedehopf") == "wiedehopf")
+        #expect(Profile
+            .species(forAvatar: "a bird from a later build") == "a bird from a later build")
+    }
+
     /// The one test that stops an avatar from becoming an empty disc: the
     /// choices are species ids typed out by hand, and the pack they name is a
     /// manifest somebody may edit. A bird that leaves the pack has to be

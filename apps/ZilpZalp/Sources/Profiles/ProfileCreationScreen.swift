@@ -81,8 +81,13 @@ struct ProfileCreationScreen: View {
     /// open pack carries, which is a broken build rather than a state to
     /// design for: the disc then shows the glyph and says nothing.
     private var choices: [(id: String, bird: Bird?)] {
-        let birds = Dictionary(library.birds.map { ($0.id, $0) }) { first, _ in first }
-        return Profile.avatarChoices.map { ($0, birds[$0]) }
+        // Ten searches through the open packs rather than a dictionary of all
+        // of them: this is read on every keystroke in the name field, and
+        // building a map of seventy birds to ask it ten questions is the more
+        // expensive half of that.
+        Profile.avatarChoices.map { choice in
+            (choice, library.birds.first { $0.id == choice })
+        }
     }
 
     var body: some View {

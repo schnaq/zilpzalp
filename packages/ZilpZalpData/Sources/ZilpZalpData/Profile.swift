@@ -38,6 +38,47 @@ public struct Profile: Codable, Sendable, Hashable, Identifiable {
         "zilpzalp",
     ]
 
+    /// **What a profile written before #205 keeps for a face.**
+    ///
+    /// The avatar was one of eight glyph names until a child said they were
+    /// not birds (#193, #205), and a profile on a TestFlight iPhone still
+    /// names one. Each of them gets the bird it was closest to — the house
+    /// becomes the Hausrotschwanz, the leaf the leaf-green Zilpzalp, the
+    /// feather the Wiedehopf and its crest.
+    ///
+    /// `star` is missing on purpose: the starling's species id *is* `star`,
+    /// so that profile resolves to a bird with no mapping at all.
+    private static let glyphBirds = [
+        "bird": "amsel",
+        "egg": "blaumeise",
+        "feather": "wiedehopf",
+        "house": "hausrotschwanz",
+        "leaf": "zilpzalp",
+        "lightbulb": "kohlmeise",
+        "sparkles": "eisvogel",
+    ]
+
+    /// The species a stored ``avatar`` means.
+    ///
+    /// Three kinds of string arrive here: one of ``avatarChoices``, one of the
+    /// eight glyph names an older build wrote, and a name this build has never
+    /// heard of — a file written by a newer version. The first and the last
+    /// are their own answer; only the middle one is translated, and every bird
+    /// it translates to is one of ``avatarChoices``, so a migrated child finds
+    /// its own avatar in the creation grid where it left it.
+    ///
+    /// Read only, and nothing rewrites the file: a child that picks a new bird
+    /// overwrites the old name itself, and until then the glyph name is what
+    /// an older build would still read. That is what makes this enough and a
+    /// schema bump unnecessary (#205).
+    ///
+    /// Whether any pack carries such a species is not asked here — that is a
+    /// question about what is installed, and the app answers it when it draws
+    /// the disc.
+    public static func species(forAvatar avatar: String) -> String {
+        glyphBirds[avatar] ?? avatar
+    }
+
     public var id: UUID
     public var name: String
     /// One of ``avatarChoices`` — or, in a file an older build wrote, the

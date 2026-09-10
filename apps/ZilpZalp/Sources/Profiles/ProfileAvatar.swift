@@ -19,85 +19,32 @@ extension EnvironmentValues {
     @Entry var speciesPhotos = SpeciesPhotos(.empty)
 }
 
-/// How one avatar is drawn: which bird's photo, and what to show instead when
-/// there is no photo to show.
+/// What one disc in the profile screens shows.
 ///
-/// The colours are the fallback's, not the avatar's. A bird photo fills the
-/// disc and identifies the child by itself — which is the whole point of #205
-/// — so the palette here is only ever seen on the two discs that hold no
-/// photo: the plus of „Neues Nest", and an avatar this build cannot place.
-struct AvatarStyle {
-    /// The species whose photo the disc shows, `nil` on a disc that is not a
-    /// bird at all — see ``newNest``.
-    let species: String?
-    /// The glyph for a disc with no photo behind it.
-    let icon: ZIcon
-    let fill: Color
-    let edge: Color
-    let glyph: Color
-}
-
-extension AvatarStyle {
-    /// **What a profile written before #205 keeps for a face.**
-    ///
-    /// The avatar was one of eight Lucide glyphs until a child said they were
-    /// not birds (#193, #205), and a profile on a TestFlight iPhone still
-    /// names one. Each of them gets the bird it was closest to — the house
-    /// becomes the Hausrotschwanz, the leaf the leaf-green Zilpzalp, the
-    /// feather the Wiedehopf and its crest — so a child finds the same card
-    /// where it left it, in the same corner of the picker, rather than the
-    /// grey disc an unknown name would draw.
-    ///
-    /// `star` is missing on purpose: the starling's species id *is* `star`,
-    /// so that profile resolves to a bird with no mapping at all. Every bird
-    /// named here is one of ``Profile/avatarChoices``, so a migrated child can
-    /// still find its own avatar in the creation grid.
-    ///
-    /// Read only, and nothing rewrites the file: a child that picks a new bird
-    /// overwrites the old name itself, and until then the glyph name is what
-    /// an older build would still read. That is what makes this enough and a
-    /// schema bump unnecessary (#205).
-    private static let glyphBirds = [
-        "bird": "amsel",
-        "egg": "blaumeise",
-        "feather": "wiedehopf",
-        "house": "hausrotschwanz",
-        "leaf": "zilpzalp",
-        "lightbulb": "kohlmeise",
-        "sparkles": "eisvogel",
-    ]
-
-    /// What to draw for a stored `Profile.avatar`.
-    ///
-    /// The name is a species id, one of the eight glyph names above, or
-    /// something this build has never heard of — a file written by a newer
-    /// version. All three end up as a species id here, and whether a photo
-    /// answers to it is ``AvatarDisc``'s question: a name with no photo draws
-    /// the bird glyph on sand, never a crash and never an empty hole where a
-    /// child's own card should be.
-    static func avatar(_ name: String) -> AvatarStyle {
-        AvatarStyle(
-            species: glyphBirds[name] ?? name,
-            icon: .bird,
-            // Sand, muted ink: `RewardStickerPalette.locked`, which is also
-            // what a locked sticker and a dimmed tile wear. A disc that holds
-            // no picture should look like a picture that has not arrived.
-            fill: ZColor.surfaceSunken,
-            edge: ZColor.borderCard,
-            glyph: ZColor.ink300,
-        )
-    }
+/// Two things, and the second one is not a child: a bird, and the plus that
+/// opens a new nest. There is nothing per-avatar left to carry beyond the
+/// species — a photo fills the disc and identifies the child by itself, which
+/// is the whole point of #205, where eight hand-picked colour triples used to
+/// do that job for eight glyphs.
+enum AvatarStyle {
+    /// The bird whose photo the disc shows, by species id.
+    case bird(species: String)
 
     /// The plus on the "Neues Nest" card. The one disc that is a door rather
     /// than a bird, so it wears the primary olive instead of a photo and
     /// cannot be mistaken for a child who already exists.
-    static let newNest = AvatarStyle(
-        species: nil,
-        icon: .plus,
-        fill: ZColor.primary,
-        edge: ZColor.primaryShadow,
-        glyph: ZColor.textOnColor,
-    )
+    case newNest
+
+    /// What to draw for a stored `Profile.avatar` — a species id, a glyph name
+    /// an older build wrote, or a name this build has never heard of, all
+    /// resolved by ``Profile/species(forAvatar:)``.
+    ///
+    /// Whether a photo answers to that species is ``AvatarDisc``'s question: a
+    /// bird with no photo draws the glyph on sand, never a crash and never an
+    /// empty hole where a child's own card should be.
+    static func avatar(_ name: String) -> AvatarStyle {
+        .bird(species: Profile.species(forAvatar: name))
+    }
 }
 
 /// A bird photo on a round, outlined disc: a profile's avatar, and the plus
@@ -129,32 +76,52 @@ struct AvatarDisc: View {
 
     @Environment(\.speciesPhotos) private var photos
 
-    private var photo: Image? {
-        style.species.flatMap { photos[$0] }
-    }
-
     var body: some View {
-        if let photo {
-            RewardSticker(
-                image: photo,
-                chosen: chosen,
-                rotation: .zero,
-                size: diameter,
+        switch style {
+        case let .bird(species):
+            bird(photos[species])
+        case .newNest:
+            // The plus is a door, so it is olive rather than photographed.
+            glyphDisc(
+                .plus,
+                fill: ZColor.primary,
+                edge: ZColor.primaryShadow,
+                glyph: ZColor.textOnColor,
             )
-            .accessibilityHidden(true)
-        } else {
-            glyphDisc
         }
     }
 
-    /// The disc without a photo: the plus of „Neues Nest", and an avatar whose
-    /// species no open pack carries.
-    private var glyphDisc: some View {
-        Icon(style.icon, size: .custom((diameter * Self.glyphRatio).rounded()))
-            .foregroundStyle(style.glyph)
+    /// One child's bird — its photo, or the glyph that stands in for a species
+    /// no open pack carries.
+    @ViewBuilder private func bird(_ photo: Image?) -> some View {
+        if let photo {
+            RewardSticker(image: photo, chosen: chosen, rotation: .zero, size: diameter)
+                .accessibilityHidden(true)
+        } else {
+            // Sand and muted ink: `RewardStickerPalette.locked`, which is also
+            // what a locked sticker and a dimmed tile wear. A disc that holds
+            // no picture should look like a picture that has not arrived.
+            glyphDisc(
+                .bird,
+                fill: ZColor.surfaceSunken,
+                edge: ZColor.borderCard,
+                glyph: ZColor.ink300,
+            )
+        }
+    }
+
+    /// A disc with no photo in it.
+    private func glyphDisc(
+        _ icon: ZIcon,
+        fill: Color,
+        edge: Color,
+        glyph: Color,
+    ) -> some View {
+        Icon(icon, size: .custom((diameter * Self.glyphRatio).rounded()))
+            .foregroundStyle(glyph)
             .frame(width: diameter, height: diameter)
-            .background(Circle().fill(style.fill))
-            .overlay { Circle().strokeBorder(style.edge, lineWidth: ZBorder.width) }
+            .background(Circle().fill(fill))
+            .overlay { Circle().strokeBorder(edge, lineWidth: ZBorder.width) }
             .overlay { ring }
             .accessibilityHidden(true)
     }
