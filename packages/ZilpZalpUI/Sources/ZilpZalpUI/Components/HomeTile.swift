@@ -236,10 +236,9 @@ private enum HomeTileMetrics {
     /// of the scale, `body` 20 pt down to `caption` 16 pt.
     ///
     /// Not a size a child reads at — 20 pt is the floor the design sets — and
-    /// no supported screen asks for it since the home screen took the phone
-    /// gutter (#145). It is here so that a longer word in another language, or
-    /// a tile a future screen draws smaller, loses a little height rather than
-    /// its last glyphs.
+    /// no supported screen asks for it, see ``HomeTile/labelStep``. It is here
+    /// so that a longer word in another language, or a tile a future screen
+    /// draws smaller, loses a little height rather than its last glyphs.
     static let labelScaleFloor = ZType.Step.caption.size / ZType.Step.body.size
     /// Three stars per activity, and never a fourth.
     static let starCapacity = 3

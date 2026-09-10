@@ -111,10 +111,10 @@ struct HomeScreen: View {
             // drifting away from the words that introduce them.
             //
             // A phone keeps the top bar's 16 pt gutter (#124), not the 48 pt
-            // iPad margin: it squeezed two tiles to 127 pt, and 95 pt of
-            // inner width cut „Wer singt da?" off — 115.1 pt at the 20 pt
-            // floor (#145). At 16 pt the worst tile is (375 − 32 − 24) / 2 =
-            // 159 pt, and 127 pt of that is the label's.
+            // iPad margin, which squeezed two tiles to 127 pt and cut their
+            // labels off (#145). At 16 pt the worst tile is 159 pt —
+            // `(375 − 32 − 24) / 2` — which `HomeTile.labelStep` says is
+            // enough for both.
             GeometryReader { area in
                 VStack(spacing: ZSpacing.step7) {
                     intro
@@ -191,8 +191,7 @@ struct HomeScreen: View {
     ///
     /// It fits beside the "i" on the narrowest screen, which is what lets the
     /// "i" stay in the corner #201 put it in: 24 + 24 + 12 + 103.6 + 24 =
-    /// 187.6 pt of pill leaves 13.7 pt of air on a 375 pt phone, more on any
-    /// wider one.
+    /// 187.6 pt of pill leaves 13.7 pt of air on a 375 pt phone.
     private var album: some View {
         ZButton(
             String(localized: "collection.title"),

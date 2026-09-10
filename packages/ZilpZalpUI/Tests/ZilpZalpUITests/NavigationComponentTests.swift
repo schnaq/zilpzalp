@@ -104,45 +104,34 @@ struct NavigationComponentTests {
         #expect(HomeTile(title: "Wer singt da?", size: size).labelStep == expected)
     }
 
-    /// The ratio those boundaries are derived from, checked against the face
-    /// itself rather than trusted. "Sterne sammeln" is the widest label this
-    /// tile is drawn with — it comes from the component's own previews — and
-    /// it has to survive whole at every size the tile steps up at, so a font
-    /// swap that widened it fails the derivation before a screenshot.
+    /// Every label the tile is drawn with, on every size that has to hold it,
+    /// checked against the face itself rather than trusted — so a font swap
+    /// that widened a glyph fails here before a screenshot finds it.
+    ///
+    /// "Sterne sammeln" is the widest label the component carries anywhere; it
+    /// comes from the previews below, and it has to survive whole at each size
+    /// the step boundaries step up at. The two the app actually ships have to
+    /// survive at 159 pt as well: two tiles side by side on a 375 pt phone
+    /// with the 16 pt phone gutter, `(375 − 2 × 16 − 24) / 2`. On the 48 pt
+    /// iPad gutter that tile was 127 pt and „Wer singt da?" was cut off — the
+    /// bug #145 reports, and a number a screenshot found before a test did.
     @Test(
-        "The step a tile picks keeps the widest label it carries whole",
-        arguments: [193, 237, 240] as [CGFloat],
+        "The step a tile picks keeps the labels it carries whole",
+        arguments: [
+            ("Sterne sammeln", CGFloat(193)),
+            ("Sterne sammeln", 237),
+            ("Sterne sammeln", 240),
+            ("Wer ist das?", 159),
+            ("Wer singt da?", 159),
+        ],
     )
-    func theLabelStepKeepsTheLongestLabelWhole(size: CGFloat) throws {
+    func theLabelStepKeepsTheLabelsWhole(label: String, size: CGFloat) throws {
         try #require(BundledFonts.registered)
 
-        let longest = "Sterne sammeln"
-        let step = HomeTile(title: longest, size: size).labelStep
-        let width = BundledFonts.width(of: longest, postScriptName: "Baloo2-Bold", size: step.size)
+        let step = HomeTile(title: label, size: size).labelStep
+        let width = BundledFonts.width(of: label, postScriptName: "Baloo2-Bold", size: step.size)
 
         #expect(width <= size - 2 * ZSpacing.step4)
-    }
-
-    /// The two labels the app actually ships, on the smallest tile the home
-    /// screen ever draws them at: two side by side on a 375 pt phone with the
-    /// 16 pt phone gutter, so `(375 − 2 × 16 − 24) / 2 = 159` pt. On the
-    /// 48 pt iPad gutter it was 127 pt and „Wer singt da?" was cut off — the
-    /// bug #145 reports, and the number a screenshot found before a test did.
-    @Test("A phone's tile holds the game labels whole")
-    func aPhoneTileHoldsTheGameLabelsWhole() throws {
-        try #require(BundledFonts.registered)
-
-        let tile: CGFloat = 159
-        let step = HomeTile(title: "Wer singt da?", size: tile).labelStep
-
-        for label in ["Wer ist das?", "Wer singt da?"] {
-            let width = BundledFonts.width(
-                of: label,
-                postScriptName: "Baloo2-Bold",
-                size: step.size,
-            )
-            #expect(width <= tile - 2 * ZSpacing.step4)
-        }
     }
 
     /// The one number in `SettingRow` that a screenshot caught and no unit
