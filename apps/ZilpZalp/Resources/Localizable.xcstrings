@@ -194,13 +194,13 @@
       }
     },
     "collection.title" : {
-      "comment" : "Label of the button that opens the album — on the home screen and at the end of a round. The album screen itself is titled with the child's name, see collection.album.title",
+      "comment" : "Label on the home screen's pill that opens the album. The same word the round end's pill carries, see roundEnd.collection. The album screen itself is titled with the child's name, see collection.album.title",
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Meine Sammlung"
+            "value" : "Sammlung"
           }
         }
       }

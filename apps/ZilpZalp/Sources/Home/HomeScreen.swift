@@ -176,12 +176,29 @@ struct HomeScreen: View {
     /// An overlay rather than a third element in a row, so the album keeps the
     /// screen's midline: it is the one button here a child aims at, and it may
     /// not move because a grown-up's door appeared beside it.
+    ///
+    /// **A pill with its word on it, not a bare disc** (#212). As an
+    /// unlabelled olive disc it read as one more utility beside the equally
+    /// quiet "i", and the album is one of the three things a child does here.
+    /// So it is the same pill the round end offers after a round, carrying the
+    /// same word: a grown-up reads „Sammlung" in both places, and a child that
+    /// cannot read still has the glyph.
+    ///
+    /// The pill is 64 pt on every device, where the disc grew to 96 pt on an
+    /// iPad — a pill that wide needs no extra height to be aimed at, so the
+    /// phones keep their tile size and the iPad's tiles gain those 32 pt.
+    ///
+    /// It fits beside the "i" on the narrowest supported screen, which is what
+    /// lets the "i" stay in the corner #201 put it in: 24 + 24 + 12 + 103.6 +
+    /// 24 = 187.6 pt of pill, so on a 375 pt phone its right edge lands at
+    /// 281.3 pt and the "i" begins at 375 − 16 − 64 = 295 pt. 13.7 pt of air,
+    /// 21.2 pt on a 390 pt phone, 46.2 pt on a 440 pt one.
     private var album: some View {
-        IconButton(
-            .album,
-            label: String(localized: "collection.title"),
+        ZButton(
+            String(localized: "collection.title"),
             tone: .primary,
-            diameter: isCompact ? ZSpacing.touchMinimum : ZSpacing.touchComfortable,
+            size: .medium,
+            leadingIcon: .album,
             action: openCollection,
         )
         .frame(maxWidth: .infinity)
