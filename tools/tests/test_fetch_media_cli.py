@@ -466,6 +466,41 @@ class AuditTests(PackTestCase):
         self.assertIn("::error::", output)
         self.assertFalse((self.directory / cli.VERDICTS_FILE).exists())
 
+    def test_writes_nothing_when_half_a_batch_is_refused(self) -> None:
+        """A batch is validated before it is written, so the one before survives."""
+        first = (
+            '[{"species": "amsel", "bird_visible": true, "fills_frame": true, '
+            '"head_inside": true}]'
+        )
+        self.run_audit(["--add-verdicts", "-"], stdin=first)
+
+        # A usable answer followed by one about a species the pack does not
+        # hold. Neither may reach the file, and the verdict already in it may
+        # not be overwritten by the half that passed.
+        mixed = (
+            '[{"species": "amsel", "bird_visible": false, "fills_frame": false, '
+            '"head_inside": false}, {"species": "wiedehopf", "bird_visible": true, '
+            '"fills_frame": true, "head_inside": true}]'
+        )
+        code, _ = self.run_audit(["--add-verdicts", "-"], stdin=mixed)
+
+        self.assertEqual(code, 1)
+        self.assertEqual(len(self.verdict_file()), 1)
+        self.assertTrue(self.verdict_file()[0]["bird_visible"])
+
+    def test_refuses_a_species_that_is_not_even_a_name(self) -> None:
+        """An unhashable species is a refused verdict, not a stray TypeError."""
+        nested = (
+            '[{"species": ["amsel"], "bird_visible": true, "fills_frame": true, '
+            '"head_inside": true}]'
+        )
+
+        code, output = self.run_audit(["--add-verdicts", "-"], stdin=nested)
+
+        self.assertEqual(code, 1)
+        self.assertIn("::error::", output)
+        self.assertFalse((self.directory / cli.VERDICTS_FILE).exists())
+
     def test_refuses_an_answer_that_is_not_yes_or_no(self) -> None:
         vague = '[{"species": "amsel", "bird_visible": "maybe", "fills_frame": true, "head_inside": true}]'
 

@@ -530,8 +530,11 @@ def checked_verdict(entry: object, known: set[str]) -> dict:
     if not isinstance(entry, dict):
         raise ValueError(f"a verdict has to be an object, got {entry!r}")
 
+    # `isinstance` first: `known` is a set, and a verdict whose species is a
+    # list would otherwise raise an unhashable TypeError past every handler
+    # instead of the sentence that says what is wrong with it.
     species = entry.get("species")
-    if species not in known:
+    if not isinstance(species, str) or species not in known:
         raise ValueError(f"'{species}' is not a species with a tile in this pack")
 
     verdict = {"species": species}

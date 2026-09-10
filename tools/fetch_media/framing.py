@@ -119,7 +119,10 @@ def saliency_rect(image: Image.Image) -> Rect | None:
     # A PNG of the already-oriented image, never the original bytes: Vision
     # would apply the EXIF orientation a second time and the box would then
     # address a different image than `images.square_photo` crops.
-    small = image.copy()
+    # RGB before PNG: a few iNaturalist originals are CMYK JPEGs, and Pillow's
+    # PNG encoder refuses that mode outright — the same conversion every other
+    # reader of a photo in this project does.
+    small = image.convert("RGB")
     small.thumbnail((SALIENCY_SIDE, SALIENCY_SIDE), Image.LANCZOS)
     buffer = io.BytesIO()
     small.save(buffer, format="PNG")
