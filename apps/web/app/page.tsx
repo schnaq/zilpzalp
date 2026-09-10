@@ -32,7 +32,7 @@ const FACTS = [
   },
   {
     term: 'Offline',
-    detail: 'Die 70 Vögel sind in der App. Zum Spielen braucht sie kein Netz.',
+    detail: 'Alle 70 Vögel sind in der App. Zum Spielen braucht sie kein Netz.',
   },
 ]
 

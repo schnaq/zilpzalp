@@ -109,7 +109,7 @@ export default function Datenschutz() {
 
       <h3>2.5 Wann die App überhaupt ins Netz geht</h3>
       <p>
-        Zum Spielen braucht ZilpZalp kein Internet. Die 70 Arten der
+        Zum Spielen braucht ZilpZalp kein Internet. Alle 70 Arten der
         Grundausstattung stecken in der App. Eine Verbindung entsteht nur, wenn
         eine erwachsene Person im Elternbereich ausdrücklich ein zusätzliches
         Artenpaket lädt. Dann holt die App die Dateien von unserem Medienserver;
