@@ -49,6 +49,7 @@ struct ParentsScreen: View {
 
     @Environment(\.dismiss) private var dismiss
     @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
     @State private var door: Door = .shut(refused: false)
     /// Whether the credits are pushed on top. Read on the way out, so the
@@ -215,7 +216,10 @@ struct ParentsScreen: View {
     // MARK: - Open
 
     private var settings: some View {
-        ScrollView {
+        // The phone gutter the `TopBar` takes: 96 pt of a 390 pt phone is most
+        // of a settings row's text (#93, #142). The shut door keeps the iPad's.
+        let gutter = horizontalSizeClass == .compact ? ZSpacing.step4 : ZSpacing.gutterScreen
+        return ScrollView {
             VStack(alignment: .leading, spacing: ZSpacing.step6) {
                 Text("parents.intro")
                     .typeStyle(.bodyLarge, .body, weight: .semibold)
@@ -227,7 +231,7 @@ struct ParentsScreen: View {
                 notice
             }
             .frame(maxWidth: ZSpacing.maxContent)
-            .padding(.horizontal, ZSpacing.gutterScreen)
+            .padding(.horizontal, gutter)
             .padding(.vertical, ZSpacing.step6)
             .frame(maxWidth: .infinity)
         }

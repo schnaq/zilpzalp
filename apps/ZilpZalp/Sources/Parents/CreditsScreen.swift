@@ -35,6 +35,7 @@ struct CreditsScreen: View {
 
     @Environment(\.dismiss) private var dismiss
     @Environment(\.openURL) private var openURL
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
     /// The link a grown-up asked for, waiting for the task to be solved.
     /// `nil` whenever no gate is up — setting it is what puts the sheet there.
@@ -114,7 +115,14 @@ struct CreditsScreen: View {
                 }
             }
             .frame(maxWidth: ZSpacing.maxContent)
-            .padding(.horizontal, ZSpacing.gutterScreen)
+            // The same phone gutter the room next door takes (#142): these
+            // are the longest strings in the area — a credit line is a name,
+            // a licence and sometimes a recording number — and behind the
+            // iPad margin a 375 pt phone left them 177 pt.
+            .padding(
+                .horizontal,
+                horizontalSizeClass == .compact ? ZSpacing.step4 : ZSpacing.gutterScreen,
+            )
             .padding(.vertical, ZSpacing.step6)
             .frame(maxWidth: .infinity)
         }

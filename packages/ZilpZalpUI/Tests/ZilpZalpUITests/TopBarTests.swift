@@ -9,15 +9,12 @@ import Testing
 private let catalogTitles = [
     "Fotos & Dank",
     "Wie heißt du?",
+    "Einstellungen",
     "Unser Schwarm",
     "Meine Sammlung",
-    "Für Erwachsene",
     "Wer spielt heute?",
     "Deine Vogel-Leiter",
 ]
-
-/// A roomy width, so nothing in the height tests is decided by a squeeze.
-private let regularWidth: CGFloat = 768
 
 /// What a title gets on an iPhone SE with both side slots filled:
 /// 375 − 2 × 16 gutter − 2 × 24 gap − 2 × 64 button.
@@ -259,16 +256,6 @@ struct TopBarTests {
     @Test("The title never shrinks past the smallest size the design allows")
     func theScaleFactorStopsAtTheCaptionStep() {
         #expect(captionFloor == ZType.Step.caption.size)
-    }
-
-    // MARK: - Helpers
-
-    /// The size the view lays out to, without drawing it.
-    private func renderedSize(_ view: some View, width: CGFloat = regularWidth) -> CGSize {
-        var measured = CGSize.zero
-        ImageRenderer(content: view.frame(width: width))
-            .render { size, _ in measured = size }
-        return measured
     }
 }
 
