@@ -114,10 +114,10 @@ struct ParentalSettingsStoreTests {
     func overwritesCleanly() async throws {
         try await withTemporaryStore { store, _ in
             try await store.save(ParentalSettings(dailyLimitMinutes: 45))
-            try await store.save(ParentalSettings(dailyLimitMinutes: 30))
+            try await store.save(ParentalSettings())
 
             let settings = try await store.load()
-            #expect(settings.dailyLimitMinutes == 30)
+            #expect(settings.dailyLimitMinutes == nil)
         }
     }
 
