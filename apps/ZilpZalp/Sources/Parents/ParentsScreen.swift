@@ -80,7 +80,11 @@ struct ParentsScreen: View {
                 ) { dismiss() }
             }
 
+            // Everything below the bar is a grown-up's to read, so it
+            // follows the system text size (#239). The bar itself does not —
+            // its title already shrinks to the width two buttons leave it.
             content
+                .grownUpDynamicType()
         }
         .background(ZColor.surfacePage)
         // Every screen brings its own `TopBar`; the system bar would stack a
