@@ -73,13 +73,14 @@ final class PackModel {
     /// kept in step by hand would eventually disagree.
     private(set) var downloads: [String: Download] = [:]
 
-    /// How many species carry a recording on disk, across every open pack.
+    /// What a child can choose between: every bird, or one pack's (#187).
     ///
-    /// Counted when the library changes rather than when it is asked for: the
-    /// home screen asks on every layout pass whether game 2 is worth offering,
-    /// and the answer costs one `fileExists` per species — ten of them for the
-    /// bundled pack alone, and a hundred more with every pack downloaded.
-    private(set) var speciesWithCalls = 0
+    /// Built when the library changes rather than when it is asked for: the
+    /// home screen asks on every layout pass which collection is chosen and
+    /// whether game 2 is worth offering, and counting the recordings costs one
+    /// `fileExists` per species — ten for the bundled pack alone, and a
+    /// hundred more with every pack downloaded.
+    private(set) var collections = PackCollections(.empty)
 
     private let bundledCatalog: PackCatalog?
     private let downloader: PackDownloader
@@ -237,13 +238,13 @@ final class PackModel {
     }
 
     /// Puts the open packs together again. The one place ``library``,
-    /// ``photos`` and ``speciesWithCalls`` change, so they cannot disagree
-    /// about which packs are there.
+    /// ``photos`` and ``collections`` change, so they cannot disagree about
+    /// which packs are there.
     private func rebuild() {
         let library = PackLibrary(catalogs)
         self.library = library
         photos = SpeciesPhotos(library)
-        speciesWithCalls = library.birds.count { library.callURL(for: $0) != nil }
+        collections = PackCollections(library)
     }
 
     /// One progress report, ignored once the download it belongs to is over —

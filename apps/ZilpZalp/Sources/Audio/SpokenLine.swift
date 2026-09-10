@@ -72,6 +72,17 @@ struct SpokenLine: Sendable {
         )
     }
 
+    /// „Vögel Afrikas" — a collection's own name, said when its picture is
+    /// tapped in the picker (#187).
+    ///
+    /// No key, and therefore never a clip: a pack records sentences about its
+    /// species, never its own title, so this line always reaches the
+    /// synthesiser. The words come from the manifest all the same, which is
+    /// where every other pack title on a screen comes from.
+    static func collection(_ title: String) -> SpokenLine {
+        SpokenLine(key: nil, bird: nil, text: title)
+    }
+
     /// A sentence that belongs to no species: the praise, the eight rank
     /// ascents, both profile questions, the gate's hint, the question before a
     /// round is left.
