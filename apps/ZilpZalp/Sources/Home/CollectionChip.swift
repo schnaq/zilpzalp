@@ -30,7 +30,16 @@ struct CollectionChip: View {
     var body: some View {
         Button(action: openPicker) {
             HStack(spacing: ZSpacing.step3) {
-                disc
+                // The picker's own sticker, small and sitting straight: the
+                // tilt is what a sticker in an album wears, and this is a
+                // pill. Without a photo — „Alle Vögel" — it is the glyph on
+                // its sun disc, which is exactly what the picker shows.
+                RewardSticker(
+                    image: entry.cover,
+                    icon: .bird,
+                    rotation: .zero,
+                    size: Self.discDiameter,
+                )
 
                 Text(verbatim: entry.title)
                     .typeStyle(.label, .display, weight: .bold, singleLine: true)
@@ -58,27 +67,6 @@ struct CollectionChip: View {
                 entry.title,
             ),
         )
-    }
-
-    /// The collection's bird, or the glyph a sticker falls back to. Drawn here
-    /// rather than with `RewardSticker`, which brings a tilt and a shadow that
-    /// belong to a sticker in an album and not to a pill.
-    private var disc: some View {
-        Circle()
-            .fill(ZColor.surfaceSunken)
-            .overlay {
-                if let cover = entry.cover {
-                    cover
-                        .resizable()
-                        .scaledToFill()
-                } else {
-                    Icon(.bird, size: .standard)
-                        .foregroundStyle(ZColor.textMuted)
-                }
-            }
-            .frame(width: Self.discDiameter, height: Self.discDiameter)
-            .clipShape(Circle())
-            .overlay { Circle().strokeBorder(ZColor.borderCard, lineWidth: ZBorder.width) }
     }
 }
 

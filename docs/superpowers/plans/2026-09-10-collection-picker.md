@@ -96,7 +96,10 @@ bucket offers four packs; more than that wants a scroll view and its own issue.
 ## Which bird stands for a pack
 
 The first bird of the manifest — Amsel, Haussperling, Kaiserpinguin, Strauß,
-all four distinctive. **No `cover` key**: the issue allows it only if the
+all four distinctive. **„Alle Vögel" gets no photo but the bird glyph on its
+sun disc**: the first bird of the whole library is the first bird of the
+bundled pack, so on the simulator the two left-hand entries came out as the
+same Amsel, and every bird is not one bird. **No `cover` key**: the issue allows it only if the
 schema, `tools/fetch_media/manifest.py`, `license_gate.py` and the sync tool
 learn it in the same pull request, and that is a second change wearing this
 one's clothes.

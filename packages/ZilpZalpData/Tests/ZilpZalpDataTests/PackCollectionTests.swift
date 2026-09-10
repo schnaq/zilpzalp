@@ -108,8 +108,9 @@ struct PackCollectionTests {
             #expect(collections.everything.library.birds.count == 8)
             #expect(collections.entries.last?.library.birds.count == 4)
             // The picture that stands for a collection is the first bird of
-            // its manifest.
-            #expect(collections.entries.map(\.cover?.id) == ["basis0", "basis0", "welt0"])
+            // its manifest — and every bird at once stands for none of them,
+            // or it would wear the bundled pack's first bird twice.
+            #expect(collections.entries.map(\.cover?.id) == [nil, "basis0", "welt0"])
         }
     }
 

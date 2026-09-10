@@ -23,7 +23,13 @@ public struct PackCollection: Sendable {
     public let library: PackLibrary
 
     /// The bird whose photo stands for the collection: the first of the
-    /// manifest, `nil` only for an empty library.
+    /// manifest.
+    ///
+    /// **`nil` for every bird at once**, and not because there is nothing to
+    /// show: the first bird of the whole library is the first bird of the
+    /// bundled pack, so the two entries came out as the same photo of the same
+    /// Amsel and a child could not tell them apart. Every bird is not one
+    /// bird, and the picker draws a glyph for it instead.
     ///
     /// The first rather than a `cover` key in the manifest, which #187 allowed
     /// only together with the schema, `tools/fetch_media/manifest.py`,
@@ -92,7 +98,7 @@ public struct PackCollections: Sendable {
             id: nil,
             title: nil,
             library: library,
-            cover: library.birds.first,
+            cover: nil,
             offersCalls: library.offersCalls(),
         )
 
