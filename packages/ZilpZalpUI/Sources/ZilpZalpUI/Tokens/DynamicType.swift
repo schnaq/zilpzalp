@@ -38,11 +38,13 @@ public extension View {
 public extension ZType {
     /// How far the grown-ups' screens follow the system text size.
     ///
-    /// AX3 is where their rows still lay out: at the cap a settings row on a
-    /// 440 pt phone is the stacked ``SettingRowLayout``, its title over two
-    /// lines and its hint over four — tall, but whole, and the screens
-    /// scroll. Above it the type keeps growing while the screen does not, so
-    /// the two larger sizes buy a little type for a lot of scrolling.
+    /// AX3 is where their rows still lay out. Measured at the cap on an
+    /// iPhone 17 Pro Max, the time budget's row is the stacked
+    /// ``SettingRowLayout``: its title over two lines, its hint over three,
+    /// and „Kein Limit" on a line of its own along the trailing edge — tall,
+    /// but whole, and the screens scroll. Above the cap the type keeps
+    /// growing while the screen does not, so the two larger sizes buy a
+    /// little type for a lot of scrolling.
     static let dynamicTypeCap: DynamicTypeSize = .accessibility3
 }
 
