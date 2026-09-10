@@ -128,6 +128,14 @@ struct RootView: View {
                 openGame: openGame(_:),
                 openParents: { path.append(.parents) },
                 openProfiles: { model.chooseAgain() },
+                collections: model.collectionEntries,
+                // The resolved choice, not the stored one: a pack deleted
+                // while it was chosen shows „Alle Vögel" here, which is what
+                // the next round will ask about (#187).
+                chosenCollection: model.collection.id,
+                chooseCollection: { collection in
+                    Task { await model.choose(collection: collection) }
+                },
                 openCollection: { path.append(.collection) },
             )
         } else {
