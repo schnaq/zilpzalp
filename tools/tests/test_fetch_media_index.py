@@ -50,8 +50,8 @@ class PacksTestCase(unittest.TestCase):
         patched.start()
         self.addCleanup(patched.stop)
 
-        self.write_pack("basis", "Unsere ersten Vögel", ["amsel"])
-        self.write_pack("deutschland", "Vögel in Deutschland", ["amsel", "star"])
+        self.write_pack("deutschland", "Vögel Deutschlands", ["amsel"])
+        self.write_pack("welt", "Vögel der Welt", ["amsel", "star"])
 
     def write_pack(
         self,
@@ -127,34 +127,34 @@ class EntryTests(PacksTestCase):
     def test_names_every_field_of_a_pack(self) -> None:
         """Field by field, as #50 asks."""
         self.assertEqual(
-            index.entry("deutschland"),
+            index.entry("welt"),
             {
-                "id": "deutschland",
-                "title": "Vögel in Deutschland",
+                "id": "welt",
+                "title": "Vögel der Welt",
                 "speciesCount": 2,
                 # Both photos and the manifest — what a download really costs.
-                "downloadSize": 2 * len(PHOTO) + self.manifest_size("deutschland"),
-                "manifest": "packs/deutschland/manifest.json",
+                "downloadSize": 2 * len(PHOTO) + self.manifest_size("welt"),
+                "manifest": "packs/welt/manifest.json",
             },
         )
 
     def test_counts_the_speech_clips_in_the_download_size(self) -> None:
         """#166: the size a parent is shown is what the download really costs,
         and since #163 a pack's recordings are part of it."""
-        self.write_pack("deutschland", "Vögel in Deutschland", ["amsel", "star"], speech=True)
+        self.write_pack("welt", "Vögel der Welt", ["amsel", "star"], speech=True)
 
         self.assertEqual(
-            index.entry("deutschland")["downloadSize"],
-            2 * len(PHOTO) + 2 * len(CLIP) + self.manifest_size("deutschland"),
+            index.entry("welt")["downloadSize"],
+            2 * len(PHOTO) + 2 * len(CLIP) + self.manifest_size("welt"),
         )
 
     def test_sums_the_objects_that_are_uploaded(self) -> None:
         """Not whatever else the pack directory happens to hold."""
-        (self.packs / "deutschland" / "photos" / "orphan.jpg").write_bytes(b"x" * 4096)
+        (self.packs / "welt" / "photos" / "orphan.jpg").write_bytes(b"x" * 4096)
 
         self.assertEqual(
-            index.entry("deutschland")["downloadSize"],
-            sum(upload.size for upload in s3.plan("deutschland", self.packs / "deutschland")),
+            index.entry("welt")["downloadSize"],
+            sum(upload.size for upload in s3.plan("welt", self.packs / "welt")),
         )
 
     def test_refuses_a_pack_whose_manifest_calls_it_something_else(self) -> None:
@@ -172,34 +172,34 @@ class BuildTests(PacksTestCase):
         """It ships inside the app and cannot be downloaded."""
         document = index.build(uploading=None, in_bucket=always)
 
-        self.assertEqual([entry["id"] for entry in document["packs"]], ["deutschland"])
+        self.assertEqual([entry["id"] for entry in document["packs"]], ["welt"])
 
     def test_bundled_packs_agree_with_the_sync_script(self) -> None:
         """tools/sync_bundled_packs.py is the source of truth; this is a copy."""
         self.assertEqual(index.BUNDLED_PACKS, sync_bundled_packs.BUNDLED_PACKS)
 
     def test_is_empty_while_the_only_pack_is_the_bundled_one(self) -> None:
-        """Today's state, and the index that goes into the bucket for it."""
-        shutil.rmtree(self.packs / "deutschland")
+        """The state the app shipped in first: one pack, and it is inside the app."""
+        shutil.rmtree(self.packs / "welt")
 
-        self.assertEqual(index.build(uploading="basis", in_bucket=always), {"packs": []})
+        self.assertEqual(index.build(uploading="deutschland", in_bucket=always), {"packs": []})
 
     def test_lists_the_pack_of_this_run_although_the_bucket_has_nothing(self) -> None:
         """It is uploaded moments before the index."""
-        document = index.build(uploading="deutschland", in_bucket=never)
+        document = index.build(uploading="welt", in_bucket=never)
 
-        self.assertEqual([entry["id"] for entry in document["packs"]], ["deutschland"])
+        self.assertEqual([entry["id"] for entry in document["packs"]], ["welt"])
 
     def test_leaves_out_a_pack_the_bucket_does_not_have(self) -> None:
         """The index must never name a manifest nobody can fetch."""
-        self.assertEqual(index.build(uploading="basis", in_bucket=never), {"packs": []})
+        self.assertEqual(index.build(uploading="deutschland", in_bucket=never), {"packs": []})
 
     def test_asks_the_bucket_for_the_manifest_of_every_other_pack(self) -> None:
         asked = []
 
         index.build(uploading=None, in_bucket=lambda key: asked.append(key) or True)
 
-        self.assertEqual(asked, ["packs/deutschland/manifest.json"])
+        self.assertEqual(asked, ["packs/welt/manifest.json"])
 
     def test_orders_the_packs_by_id(self) -> None:
         """A second run must produce the same bytes as the first."""
@@ -207,7 +207,7 @@ class BuildTests(PacksTestCase):
 
         document = index.build(uploading=None, in_bucket=always)
 
-        self.assertEqual([entry["id"] for entry in document["packs"]], ["alpen", "deutschland"])
+        self.assertEqual([entry["id"] for entry in document["packs"]], ["alpen", "welt"])
 
 
 class StagedTests(PacksTestCase):
@@ -218,7 +218,7 @@ class StagedTests(PacksTestCase):
         return upload, upload.path.read_text(encoding="utf-8")
 
     def test_describes_the_index_as_the_object_it_becomes(self) -> None:
-        upload, written = self.staged(index.build(uploading="deutschland", in_bucket=never))
+        upload, written = self.staged(index.build(uploading="welt", in_bucket=never))
 
         self.assertEqual(upload.key, "packs/index.json")
         self.assertEqual(upload.content_type, "application/json")
@@ -227,9 +227,9 @@ class StagedTests(PacksTestCase):
 
     def test_writes_the_document_as_the_repository_writes_json(self) -> None:
         """Two-space indent, a trailing newline, umlauts as themselves."""
-        _, written = self.staged(index.build(uploading="deutschland", in_bucket=never))
+        _, written = self.staged(index.build(uploading="welt", in_bucket=never))
 
-        self.assertIn('\n      "title": "Vögel in Deutschland",', written)
+        self.assertIn('\n      "title": "Vögel der Welt",', written)
         self.assertTrue(written.endswith("}\n"))
         self.assertEqual(len(json.loads(written)["packs"]), 1)
 
@@ -241,12 +241,12 @@ class CommandTests(PacksTestCase):
         output = io.StringIO()
         empty = {name: "" for name in s3.REQUIRED_ENV}
         with mock.patch.dict(os.environ, empty), contextlib.redirect_stdout(output):
-            exit_code = cli.main(["upload", "--pack", "deutschland", *arguments])
+            exit_code = cli.main(["upload", "--pack", "welt", *arguments])
         return exit_code, output.getvalue().splitlines()
 
     def index_size(self) -> int:
         """The bytes the index of this run amounts to."""
-        document = index.build(uploading="deutschland", in_bucket=never)
+        document = index.build(uploading="welt", in_bucket=never)
         return len(manifest.dump(document).encode("utf-8"))
 
     def staged_index(self):
@@ -273,10 +273,10 @@ class CommandTests(PacksTestCase):
         self.assertEqual(
             lines[:4],
             [
-                f" would upload  packs/deutschland/photos/amsel.jpg  {len(PHOTO)} bytes",
-                f" would upload  packs/deutschland/photos/star.jpg  {len(PHOTO)} bytes",
-                " would upload  packs/deutschland/manifest.json  "
-                f"{self.manifest_size('deutschland')} bytes",
+                f" would upload  packs/welt/photos/amsel.jpg  {len(PHOTO)} bytes",
+                f" would upload  packs/welt/photos/star.jpg  {len(PHOTO)} bytes",
+                " would upload  packs/welt/manifest.json  "
+                f"{self.manifest_size('welt')} bytes",
                 f" would upload  packs/index.json  {self.index_size()} bytes",
             ],
         )
@@ -293,7 +293,7 @@ class CommandTests(PacksTestCase):
             exit_code, _ = self.upload("--dry-run")
 
         self.assertEqual(exit_code, 0)
-        self.assertEqual(self.listed(staged), ["alpen", "deutschland"])
+        self.assertEqual(self.listed(staged), ["alpen", "welt"])
 
     def test_lists_the_index_without_credentials(self) -> None:
         """Issue #15: a dry run works on a machine without S3 keys."""
@@ -305,7 +305,7 @@ class CommandTests(PacksTestCase):
         self.assertEqual(exit_code, 0)
         self.assertIn("unchecked  packs/index.json", lines[-1])
         # Nothing can be asked about `alpen`, so it stays out of the index.
-        self.assertEqual(self.listed(staged), ["deutschland"])
+        self.assertEqual(self.listed(staged), ["welt"])
 
     def test_writes_nothing_below_data_packs(self) -> None:
         """The licence gate and the credits generator read every *.json there."""

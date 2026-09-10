@@ -137,7 +137,7 @@ extension Bird {
 
 /// A pack of species, the unit that is bundled or downloaded.
 public struct Pack: Codable, Sendable, Hashable, Identifiable {
-    /// Stable, lowercase identifier such as `basis`, and the name of the
+    /// Stable, lowercase identifier such as `deutschland`, and the name of the
     /// pack's directory.
     public let id: String
     /// Product text shown to parents when they pick a pack.

@@ -11,9 +11,11 @@ import Testing
 /// A pack that drifts between the two fails here rather than on a device.
 @Suite("Bundled pack catalog")
 struct PackCatalogTests {
-    /// Alphabetical, and the order the manifest lists them in. Pinned because
-    /// the round builder (#22) takes the pack's order as its input and a
-    /// silently reordered manifest would change every seeded round.
+    /// The order the manifest lists them in: the ten species the app first
+    /// shipped with, then the sixty „Vögel Deutschlands" brought (#192).
+    /// Pinned because the round builder (#22) takes the pack's order as its
+    /// input and a silently reordered manifest would change every seeded
+    /// round.
     private static let expectedIDs = [
         "amsel",
         "blaumeise",
@@ -25,13 +27,73 @@ struct PackCatalogTests {
         "star",
         "wiedehopf",
         "zilpzalp",
+        "haussperling",
+        "gruenfink",
+        "buchfink",
+        "stieglitz",
+        "gimpel",
+        "kernbeisser",
+        "bluthaenfling",
+        "goldammer",
+        "elster",
+        "eichelhaeher",
+        "rabenkraehe",
+        "dohle",
+        "kolkrabe",
+        "ringeltaube",
+        "tuerkentaube",
+        "mauersegler",
+        "rauchschwalbe",
+        "bachstelze",
+        "zaunkoenig",
+        "singdrossel",
+        "nachtigall",
+        "moenchsgrasmuecke",
+        "kleiber",
+        "gartenbaumlaeufer",
+        "schwanzmeise",
+        "haubenmeise",
+        "wintergoldhaehnchen",
+        "gartenrotschwanz",
+        "feldlerche",
+        "neuntoeter",
+        "pirol",
+        "seidenschwanz",
+        "wasseramsel",
+        "kuckuck",
+        "gruenspecht",
+        "schwarzspecht",
+        "bienenfresser",
+        "waldkauz",
+        "uhu",
+        "schleiereule",
+        "steinkauz",
+        "maeusebussard",
+        "turmfalke",
+        "rotmilan",
+        "seeadler",
+        "wanderfalke",
+        "weissstorch",
+        "graureiher",
+        "kranich",
+        "stockente",
+        "mandarinente",
+        "hoeckerschwan",
+        "graugans",
+        "blaesshuhn",
+        "haubentaucher",
+        "kormoran",
+        "lachmoewe",
+        "austernfischer",
+        "kiebitz",
+        "fasan",
     ]
 
-    @Test("the bundled pack holds the ten base species in manifest order")
+    @Test("the bundled pack holds the seventy German species in manifest order")
     func decodesBundledPack() throws {
         let catalog = try PackCatalog.bundled()
 
-        #expect(catalog.pack.id == "basis")
+        #expect(catalog.pack.id == PackCatalog.bundledPackID)
         #expect(catalog.pack.birds.map(\.id) == Self.expectedIDs)
     }
 
@@ -49,18 +111,26 @@ struct PackCatalogTests {
 
     /// The twin of ``resolvesEveryPhoto()``, and the reason game 2 appears at
     /// all: the home screen counts the species whose recording is on disk, not
-    /// the ones the manifest merely declares.
-    @Test("every call is in the bundle and hashes to what the manifest declares")
+    /// the ones the manifest merely declares. A handful of the seventy carry
+    /// no call yet — those are asked about in game 1 alone, which is why the
+    /// count is checked instead of demanded per bird.
+    @Test("every call the bundled pack declares hashes to what the manifest says")
     func resolvesEveryCall() throws {
         let catalog = try PackCatalog.bundled()
+        var found = 0
 
         for bird in catalog.pack.birds {
-            let call = try #require(bird.call, "no call declared for '\(bird.id)'")
+            guard let call = bird.call else { continue }
             let url = try #require(catalog.callURL(for: bird), "no call file for '\(bird.id)'")
             let hex = try sha256(of: url)
+            found += 1
 
             #expect(hex == call.sha256, "call of '\(bird.id)' does not match its sha256")
         }
+
+        // Below that the home screen leaves game 2's tile out altogether
+        // (#31), so the threshold is read from where the rule lives.
+        #expect(found >= PackCollections.minimumSpecies)
     }
 
     /// The third medium, checked like the other two. Vacuous until the base
@@ -144,8 +214,8 @@ struct PackCatalogTests {
     /// matter here; the rest is what the schema demands.
     private static let ghostManifest = """
     {
-      "id": "basis",
-      "title": "Unsere ersten Vögel",
+      "id": "gespenster",
+      "title": "Vögel, die es nicht gibt",
       "birds": [
         {
           "id": "gespenst",

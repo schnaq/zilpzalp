@@ -23,8 +23,8 @@ enum ScreenshotSeed {
     private static let name = "Mia"
     private static let avatar = "feather"
 
-    /// How often this child has recognised each of the base pack's ten
-    /// species. Six of them are past the five their sticker takes (#177), so
+    /// How often this child has recognised ten species of the bundled pack.
+    /// Six of them are past the five their sticker takes (#177), so
     /// the album shows what has been found; the other four stand part of the
     /// way, so it also shows what is still out there and how close it is. An
     /// album with no gap left is not what a sticker album looks like.

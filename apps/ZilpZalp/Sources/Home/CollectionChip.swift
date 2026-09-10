@@ -44,7 +44,7 @@ struct CollectionChip: View {
                 Text(verbatim: entry.title)
                     .typeStyle(.label, .display, weight: .bold, singleLine: true)
                     .foregroundStyle(ZColor.textStrong)
-                    // „Unsere ersten Vögel" is the longest title the packs
+                    // „Vögel Deutschlands" is the longest title the packs
                     // carry; on the narrowest phone it shrinks rather than
                     // ending in an ellipsis.
                     .minimumScaleFactor(0.6)
@@ -77,7 +77,7 @@ struct CollectionChip: View {
             openPicker: {},
         )
         CollectionChip(
-            entry: CollectionEntry(id: "basis", title: "Unsere ersten Vögel", cover: nil),
+            entry: CollectionEntry(id: "deutschland", title: "Vögel Deutschlands", cover: nil),
             openPicker: {},
         )
     }

@@ -185,7 +185,6 @@ struct CollectionPicker: View {
 
 private let previewEntries = [
     CollectionEntry(id: nil, title: "Alle Vögel", cover: nil),
-    CollectionEntry(id: "basis", title: "Unsere ersten Vögel", cover: nil),
     CollectionEntry(id: "deutschland", title: "Vögel Deutschlands", cover: nil),
     CollectionEntry(id: "welt", title: "Vögel der Welt", cover: nil),
     CollectionEntry(id: "afrika", title: "Vögel Afrikas", cover: nil),

@@ -46,7 +46,7 @@ KEY = "packs/index.json"
 # editable install drops into the environment — a wheel or `--no-editable`
 # would break the upload. So the tuple is duplicated here, and
 # test_fetch_media_index.py fails as soon as the two disagree.
-BUNDLED_PACKS = ("basis",)
+BUNDLED_PACKS = ("deutschland",)
 
 
 def packs() -> list[str]:

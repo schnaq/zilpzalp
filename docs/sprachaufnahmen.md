@@ -52,7 +52,7 @@ the clip where the manifest expects it, and only that copy is committed.
 ## Importing a take
 
 ```
-mise run fetch-media speech import --pack basis --species amsel \
+mise run fetch-media speech import --pack deutschland --species amsel \
     --sentence quiz.prompt.whereIs --file whereIs-amsel-3.wav \
     --attribution "Stimme: <name>"
 

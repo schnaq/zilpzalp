@@ -26,7 +26,7 @@ PACKS_DIR = REPO_ROOT / "data" / "packs"
 SPEECH_DIR = REPO_ROOT / "data" / "speech"
 
 # The key order of a media object, as docs/medien-und-lizenzen.md spells it out
-# and as data/packs/basis/manifest.json already carries it.
+# and as data/packs/deutschland/manifest.json already carries it.
 MEDIA_KEYS = ("file", "sha256", "license", "attribution", "sourceURL", "retrieved")
 
 # The two media a bird carries directly. `call` stays null until a freely

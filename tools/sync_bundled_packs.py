@@ -39,7 +39,7 @@ BUNDLE_DIR = RESOURCES_DIR / "Packs"
 # Only the base pack ships with the app. Every other pack is downloaded (#33)
 # and has no business inflating the binary. Read by tools/fetch_media/index.py,
 # which keeps the bundled packs out of the downloadable index.
-BUNDLED_PACKS = ("basis",)
+BUNDLED_PACKS = ("deutschland",)
 
 # What ships inside the app, as (label, source, destination): the bundled packs,
 # plus the sentences that belong to no pack. The app says those on every screen,

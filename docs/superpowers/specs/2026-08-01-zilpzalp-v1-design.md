@@ -20,7 +20,7 @@ Eine quelloffene Lern-App, mit der Kinder heimische Vögel kennenlernen. Kein Ac
 | Spiel 2 | Vogelruf wird abgespielt, aus vier Fotos das richtige antippen |
 | Profile | Mehrere lokale Profile mit Namen und Avatar, ohne Account |
 | Fortschritt | Sterne, Sticker nach fünf Wiedererkennungen, Sammlung, lokales Leaderboard |
-| Artenpakete | 10 Arten fest gebundelt, „Vögel Deutschlands" (~60 Arten) als Download aus S3 |
+| Artenpakete | „Vögel Deutschlands" (70 Arten) fest gebundelt, weitere Pakete als Download aus S3 |
 | Elternbereich | Per FaceID/Code geschützt: Zeitbudget, Paketverwaltung, Einstellungen |
 | Über ZilpZalp | Öffentlich, ohne Schloss: Version, Herausgeberin, Datenschutz, Internetseite, Support-Mail, Credits |
 
@@ -155,6 +155,8 @@ Die App holt beim Start des Elternbereichs einen Katalog (`packs/index.json`) au
 Neue Pakete können dadurch ohne App-Update und ohne Review ausgeliefert werden — der Grund, warum wir nicht Apples On-Demand Resources nehmen.
 
 Die Umsetzung (Entscheidung 2026-09-10, Issue #34) weicht in drei Punkten ab. Der Katalog wird geholt, sobald die Paketkarte im Elternbereich erscheint — also hinter dem Schloss, nicht beim Öffnen des Bereichs, damit die einzige Netzverbindung der App zwei Türen tief liegt. Die Spiele lesen nicht mehr ein Paket, sondern eine `PackLibrary` aus Basispaket und allen installierten Paketen; eine Art, die zweimal vorkommt, zählt einmal, und das Basispaket gewinnt. Belegter Speicher wird aus den Dateien gemessen (`.fileSizeKey`, kein Datumsschlüssel), nicht aus der Größe im Index — heruntergeladen wurde vielleicht eine ältere App-Version, und der Index ist genau dann unerreichbar, wenn jemand Platz schaffen will.
+
+Das gebundelte Paket ist „Vögel Deutschlands" mit 70 Arten; das frühere Zehn-Arten-Paket `basis` ist darin aufgegangen und gelöscht (Entscheidung 2026-09-10, Christian und Johanna, Issue #192). Zehn Arten waren zu wenige — ein Kind lernt dann die Bilder statt der Vögel. Weil das Paket vorher aus dem Bucket geladen werden konnte, tragen manche Geräte eine Installation unter derselben ID wie das gebundelte Paket: `PackDownloader.installations()` übergeht sie und löscht ihre Dateien, sonst stünde dasselbe Paket zweimal in der Kollektionsauswahl und im Elternbereich mit Löschknopf. `packs/index.json` nennt das gebundelte Paket nicht mehr, die Objekte unter `packs/deutschland/` bleiben im Bucket liegen.
 
 ---
 

@@ -307,7 +307,7 @@ struct HomeScreen: View {
 /// Three packs on the device, so there is something to choose between.
 private let previewCollections = [
     CollectionEntry(id: nil, title: "Alle Vögel", cover: nil),
-    CollectionEntry(id: "basis", title: "Unsere ersten Vögel", cover: nil),
+    CollectionEntry(id: "deutschland", title: "Vögel Deutschlands", cover: nil),
     CollectionEntry(id: "afrika", title: "Vögel Afrikas", cover: nil),
 ]
 

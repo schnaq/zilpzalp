@@ -175,12 +175,16 @@ func exists(_ home: URL, _ path: String) -> Bool {
 ///
 /// Generated rather than copied from `Fixtures/valid/basis.json`: that manifest
 /// carries the digests of the real photos, and a download test needs bytes it
-/// controls together with their true SHA-256. The shape is the base pack's —
-/// two birds, the second with a call, the first with a recorded sentence — so
-/// every kind of medium is exercised.
+/// controls together with their true SHA-256. The shape is a real pack's — two
+/// birds, the second with a call, the first with a recorded sentence — so every
+/// kind of medium is exercised.
 enum StubPack {
-    static let id = "deutschland"
-    static let title = "Vögel in Deutschland"
+    /// A pack that exists nowhere else, and above all not the bundled one:
+    /// `PackDownloader.installations()` ignores and deletes an installation
+    /// under `PackCatalog.bundledPackID` (#192), so a stub carrying that id
+    /// would install and then vanish under every test here.
+    static let id = "alpen"
+    static let title = "Vögel der Alpen"
     static let indexKey = "packs/index.json"
     static let manifestKey = "packs/\(id)/manifest.json"
 

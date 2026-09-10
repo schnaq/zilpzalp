@@ -57,7 +57,7 @@ const FAQ = [
     q: 'Braucht die App Internet?',
     a: (
       <>
-        Zum Spielen nicht. Die zehn Vogelarten stecken in der App. Eine
+        Zum Spielen nicht. Alle 70 Vogelarten stecken in der App. Eine
         Verbindung entsteht nur, wenn Erwachsene im Elternbereich ausdrücklich
         ein weiteres Artenpaket laden.
       </>
