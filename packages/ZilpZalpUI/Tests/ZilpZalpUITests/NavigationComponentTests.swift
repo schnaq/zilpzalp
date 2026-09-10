@@ -110,18 +110,17 @@ struct NavigationComponentTests {
     ///
     /// "Sterne sammeln" is the widest label the component carries anywhere; it
     /// comes from the previews below, and it has to survive whole at each size
-    /// the step boundaries step up at. The two the app actually ships have to
-    /// survive at 159 pt as well: two tiles side by side on a 375 pt phone
-    /// with the 16 pt phone gutter, `(375 − 2 × 16 − 24) / 2`. On the 48 pt
-    /// iPad gutter that tile was 127 pt and „Wer singt da?" was cut off — the
-    /// bug #145 reports, and a number a screenshot found before a test did.
+    /// the step boundaries step up at. „Wer singt da?" has to survive at
+    /// 159 pt as well: two tiles side by side on a 375 pt phone with the 16 pt
+    /// phone gutter, `(375 − 2 × 16 − 24) / 2`. On the 48 pt iPad gutter that
+    /// tile was 127 pt and the label was cut off — the bug #145 reports, and a
+    /// number a screenshot found before a test did.
     @Test(
         "The step a tile picks keeps the labels it carries whole",
         arguments: [
             ("Sterne sammeln", CGFloat(193)),
             ("Sterne sammeln", 237),
             ("Sterne sammeln", 240),
-            ("Wer ist das?", 159),
             ("Wer singt da?", 159),
         ],
     )
@@ -132,6 +131,30 @@ struct NavigationComponentTests {
         let width = BundledFonts.width(of: label, postScriptName: "Baloo2-Bold", size: step.size)
 
         #expect(width <= size - 2 * ZSpacing.step4)
+    }
+
+    /// „Finde den Vogel" (#220) is the first shipped label that does not fit
+    /// the narrowest tile whole: 142.4 pt at 20 pt against the 127 pt a 159 pt
+    /// tile leaves. It is not cut off — the component shrinks it instead — and
+    /// this is where that guarantee stops being theory: the label has to fit
+    /// once it has shrunk as far as ``HomeTileMetrics/labelScaleFloor`` lets
+    /// it, which puts it at 17.8 pt on a 375 pt phone and leaves it whole.
+    ///
+    /// Separate from the test above rather than folded into it, because the
+    /// two say different things: every other label keeps its step, and this
+    /// one is allowed to lose it.
+    @Test("A label too wide for the narrowest tile shrinks rather than breaks")
+    func theWidestShippedLabelSurvivesByShrinking() throws {
+        try #require(BundledFonts.registered)
+
+        let label = "Finde den Vogel"
+        let tile: CGFloat = 159
+        let step = HomeTile(title: label, size: tile).labelStep
+        let width = BundledFonts.width(of: label, postScriptName: "Baloo2-Bold", size: step.size)
+        let available = tile - 2 * ZSpacing.step4
+
+        #expect(width > available)
+        #expect(width * HomeTileMetrics.labelScaleFloor <= available)
     }
 
     /// The one number in `SettingRow` that a screenshot caught and no unit

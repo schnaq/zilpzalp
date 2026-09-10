@@ -36,7 +36,7 @@ final class StoreScreenshots: XCTestCase {
 
     /// German, because the app is: these are the words on the things a child
     /// taps, and the app is built to be localisable but ships in one language.
-    private static let gameNames = "Wer ist das?"
+    private static let gameNames = "Finde den Vogel"
     private static let gameCalls = "Wer singt da?"
     private static let album = "Sammlung"
     private static let playAgain = "Nochmal spielen"
@@ -205,8 +205,12 @@ final class StoreScreenshots: XCTestCase {
 
     /// The species the question asks for right now, `nil` between rounds and
     /// once the last question is answered.
+    ///
+    /// The sound button carries it, in both games. Game 2 writes no question
+    /// at all since #220 — the name would be the answer — so a text is not
+    /// something both games have; the button that puts the question again is.
     private func askedSpecies(_ app: XCUIApplication) -> String? {
-        let question = app.staticTexts
+        let question = app.buttons
             .matching(NSPredicate(format: "identifier BEGINSWITH %@", Self.questionPrefix))
             .firstMatch
         guard question.exists else { return nil }

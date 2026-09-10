@@ -333,7 +333,7 @@ description = "Curate media: 'photos …', 'calls …', 'speech …', 'upload' �
 #       --observation 20490738 --photo 31623386 [--dry-run]
 #   mise run fetch-media photos audit --pack deutschland [--add-verdicts -]
 #   mise run fetch-media speech import --pack deutschland --species amsel \
-#       --sentence quiz.prompt.whereIs --file take3.wav --attribution "Stimme: …"
+#       --sentence collection.name --file take3.wav --attribution "Stimme: …"
 #   mise run fetch-media speech render --provider fake --pack deutschland
 #
 # `photos frame` is `photos pick` with the square computed around the bird

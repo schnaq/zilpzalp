@@ -15,8 +15,10 @@ Two groups of sentence, and they are produced separately:
 
 - **the fixed set** — „Super gemacht!", the eight rank ascents, the parental
   gate, the two profile screens. One clip each, valid for the whole app.
-- **a pack's species sentences** — „Wo ist die Amsel?", „Super gemacht! Amsel
-  gesammelt!" and the bare name, one clip per species per sentence.
+- **a pack's species sentences** — „Super gemacht! Amsel gesammelt!" and the
+  bare name „Amsel", one clip per species per sentence. The bare name is what
+  game 1 asks with as well since #220, so it is recorded once and heard in two
+  places.
 
 The exact wording never comes from memory. `fetch-media speech` takes it from
 the String Catalog and prints it before it records, and the manifest keeps it
@@ -45,7 +47,7 @@ in the clip's `text`. Read what the tool prints, not what you remember.
 Any format `afconvert` reads: WAV, AIFF, M4A, FLAC, MP3. Uncompressed if the
 recorder offers it.
 
-Name a take so that it says which sentence it is — `whereIs-amsel-3.wav`,
+Name a take so that it says which sentence it is — `amsel-3.wav`,
 `roundEnd.title-1.wav`. The name never reaches the repository: the tool puts
 the clip where the manifest expects it, and only that copy is committed.
 
@@ -53,7 +55,7 @@ the clip where the manifest expects it, and only that copy is committed.
 
 ```
 mise run fetch-media speech import --pack deutschland --species amsel \
-    --sentence quiz.prompt.whereIs --file whereIs-amsel-3.wav \
+    --sentence collection.name --file amsel-3.wav \
     --attribution "Stimme: <name>"
 
 mise run fetch-media speech import --set fixed --sentence roundEnd.title \

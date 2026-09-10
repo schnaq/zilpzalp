@@ -18,9 +18,13 @@ enum Game: Hashable {
     /// ``AppModel/games``.
     case calls
 
-    /// The word under the glyph on the home screen, and the name of the
-    /// screen the tile opens — which is why game 2's is also the question
-    /// written beside its sound button (see ``QuizSession/writtenQuestion``).
+    /// What the game is called: the word under the glyph on the home screen
+    /// and the title in the round's top bar.
+    ///
+    /// One string for both places rather than a second catalog entry saying
+    /// nearly the same thing (#220). A child taps „Finde den Vogel" and the
+    /// screen that opens says „Finde den Vogel"; a grown-up asked what the
+    /// child is playing reads the same words in both places.
     var title: String {
         switch self {
         case .names: String(localized: "home.game.names.title")

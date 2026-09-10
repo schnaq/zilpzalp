@@ -49,9 +49,6 @@ SAMPLES = b"\x00\x01" * (elevenlabs.RATE // 4)
 CATALOG = {
     "sourceLanguage": "de",
     "strings": {
-        "quiz.prompt.whereIs": {
-            "localizations": {"de": {"stringUnit": {"state": "translated", "value": "Wo ist %1$@ %2$@?"}}}
-        },
         "roundEnd.sticker.new.spoken": {
             "localizations": {
                 "de": {"stringUnit": {"state": "translated", "value": "Super gemacht! %@ gesammelt!"}}
@@ -106,8 +103,13 @@ class SentenceTests(unittest.TestCase):
         self.addCleanup(mock.patch.stopall)
 
     def test_fills_the_positional_placeholders_as_the_app_does(self) -> None:
-        self.assertEqual(sentences.species_text(AMSEL, "quiz.prompt.whereIs"), "Wo ist die Amsel?")
-        self.assertEqual(sentences.species_text(STAR, "quiz.prompt.whereIs"), "Wo ist der Star?")
+        """No sentence needs them since #220 took „Wo ist die Amsel?" away.
+
+        `String(format:)` still reorders by argument number, so a translation
+        that ever does keeps working — and this is where that stays true.
+        """
+        self.assertEqual(sentences.fill("Wo ist %1$@ %2$@?", "die", "Amsel"), "Wo ist die Amsel?")
+        self.assertEqual(sentences.fill("%2$@, %1$@", "die", "Amsel"), "Amsel, die")
 
     def test_fills_the_unpositional_one(self) -> None:
         self.assertEqual(
@@ -116,7 +118,11 @@ class SentenceTests(unittest.TestCase):
         )
 
     def test_says_the_bare_name_where_the_app_has_no_key(self) -> None:
-        """`collection.name` is Task 5's to add; until then the name is the sentence."""
+        """`collection.name` is no catalogue key: the sentence *is* the name.
+
+        The album says it when a sticker is tapped, and since #220 it is also
+        the question of game 1 — one clip per species for both.
+        """
         self.assertEqual(sentences.species_text(AMSEL, "collection.name"), "Amsel")
 
     def test_prefers_the_pronunciation_the_manifest_carries(self) -> None:
@@ -158,10 +164,19 @@ class SentenceTests(unittest.TestCase):
 
 
 class RealCatalogTests(unittest.TestCase):
-    """One assertion against the catalogue the app actually ships."""
+    """One assertion against the catalogue the app actually ships.
 
-    def test_the_question_of_game_one_reads_as_the_app_speaks_it(self) -> None:
-        self.assertEqual(sentences.species_text(AMSEL, "quiz.prompt.whereIs"), "Wo ist die Amsel?")
+    The question of game 1 was this assertion until issue #220 made that
+    question the bare name — `collection.name`, which is not a catalogue key
+    at all and therefore proves nothing about the catalogue. The praise is the
+    species sentence that is still filled from it.
+    """
+
+    def test_a_species_sentence_reads_as_the_app_speaks_it(self) -> None:
+        self.assertEqual(
+            sentences.species_text(AMSEL, "roundEnd.sticker.new.spoken"),
+            "Super gemacht! Amsel gesammelt!",
+        )
 
 
 class ProviderTests(unittest.TestCase):
@@ -392,7 +407,7 @@ class TargetTests(unittest.TestCase):
         target = clips.Target(directory=Path("/p"), path=Path("/p/manifest.json"), bird_id="amsel")
 
         self.assertEqual(
-            target.file("quiz.prompt.whereIs"), "speech/quiz.prompt.whereIs/amsel.m4a"
+            target.file("collection.name"), "speech/collection.name/amsel.m4a"
         )
         self.assertEqual(target.label, "amsel")
 
@@ -463,9 +478,9 @@ class RenderTests(SpeechTestCase):
         code, printed = self.render("--pack", "basis", "--species", "amsel")
 
         self.assertEqual(code, 0)
-        entry = self.clips_of("amsel")["quiz.prompt.whereIs"]
-        self.assertEqual(entry["file"], "speech/quiz.prompt.whereIs/amsel.m4a")
-        self.assertEqual(entry["text"], "Wo ist die Amsel?")
+        entry = self.clips_of("amsel")["collection.name"]
+        self.assertEqual(entry["file"], "speech/collection.name/amsel.m4a")
+        self.assertEqual(entry["text"], "Amsel")
         self.assertEqual(list(entry), list(manifest.SPEECH_KEYS))
 
         clip = self.pack / entry["file"]
@@ -703,18 +718,18 @@ class ImportTests(SpeechTestCase):
 
     def test_records_a_take_the_way_a_call_is_recorded(self) -> None:
         code, printed = self.run_import(
-            "--pack", "basis", "--species", "amsel", "--sentence", "quiz.prompt.whereIs"
+            "--pack", "basis", "--species", "amsel", "--sentence", "collection.name"
         )
 
         self.assertEqual(code, 0)
-        entry = self.clips_of("amsel")["quiz.prompt.whereIs"]
-        self.assertEqual(entry["text"], "Wo ist die Amsel?")
+        entry = self.clips_of("amsel")["collection.name"]
+        self.assertEqual(entry["text"], "Amsel")
         self.assertEqual(entry["sha256"], manifest.sha256_of(self.pack / entry["file"]))
         self.assertIn(f"{audio.TARGET:.1f} dBFS", printed)
 
     def test_credits_the_voice_the_command_names(self) -> None:
         self.run_import(
-            "--pack", "basis", "--species", "amsel", "--sentence", "quiz.prompt.whereIs"
+            "--pack", "basis", "--species", "amsel", "--sentence", "collection.name"
         )
 
         voice = self.document()["voice"]
@@ -733,7 +748,7 @@ class ImportTests(SpeechTestCase):
     def test_refuses_a_second_voice_in_one_manifest(self) -> None:
         """Thirty clips would otherwise carry the licence of the thirty-first."""
         self.run_import(
-            "--pack", "basis", "--species", "amsel", "--sentence", "quiz.prompt.whereIs"
+            "--pack", "basis", "--species", "amsel", "--sentence", "collection.name"
         )
 
         code, printed = self.run_import(
@@ -742,7 +757,7 @@ class ImportTests(SpeechTestCase):
             "--species",
             "star",
             "--sentence",
-            "quiz.prompt.whereIs",
+            "collection.name",
             attribution="Stimme: jemand anderes",
         )
 
@@ -752,7 +767,7 @@ class ImportTests(SpeechTestCase):
         self.assertEqual(self.document()["voice"]["attribution"], "Stimme: Johanna")
 
     def test_refuses_a_pack_without_a_species(self) -> None:
-        code, printed = self.run_import("--pack", "basis", "--sentence", "quiz.prompt.whereIs")
+        code, printed = self.run_import("--pack", "basis", "--sentence", "collection.name")
 
         self.assertEqual(code, 1)
         self.assertIn("--species", printed)

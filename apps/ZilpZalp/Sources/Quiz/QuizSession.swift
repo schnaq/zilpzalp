@@ -209,25 +209,15 @@ final class QuizSession {
 
     /// The question in writing, for the grown-up reading over the shoulder.
     ///
-    /// Game 1 writes the sentence it speaks, but always with the written name
-    /// and never with the phonetic override that only a speech synthesiser
-    /// should ever see. Game 2 writes its own title instead — "Wer singt da?" —
-    /// because there the name *is* the answer, and printing it would hand it to
-    /// everybody who can read. The title rather than a second catalog entry
-    /// saying the same words: it is what the tile promised, and what a grown-up
-    /// who tapped that tile expects at the top of the screen.
-    var writtenQuestion: String {
-        guard let answer else { return "" }
-        return switch game {
-        case .names:
-            String(
-                format: String(localized: "quiz.prompt.whereIs"),
-                answer.article,
-                answer.name,
-            )
-        case .calls:
-            game.title
-        }
+    /// Game 1 writes the name it speaks — the written one, never the phonetic
+    /// override that only a speech synthesiser should ever see. Game 2 writes
+    /// nothing at all: there the name *is* the answer, and printing it would
+    /// hand it to everybody who can read. It carried its own title until #220
+    /// moved that into the top bar, where both games now name themselves and
+    /// the question row is left with its play button.
+    var writtenQuestion: String? {
+        guard let answer, game == .names else { return nil }
+        return answer.name
     }
 
     /// What the round has come to, once it is over. Which bird of it is
@@ -302,7 +292,7 @@ final class QuizSession {
 
         switch game {
         case .names:
-            announcer.announce(.whereIs(answer))
+            announcer.announce(.name(answer))
         case .calls:
             // Never missing in a round of game 2 — only birds with a recording
             // are asked for. Silence if it ever were: saying the name instead

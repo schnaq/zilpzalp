@@ -12,8 +12,10 @@
 /// `project.yml` compiles it into both rather than have the run spell the two
 /// prefixes a second time — a rename here is then a compile error there.
 enum QuizIdentifier {
-    /// The question in writing, carrying the species it asks for — empty once
-    /// the round is over and there is nothing left to ask.
+    /// The sound button that puts the question again, carrying the species it
+    /// asks for — empty once the round is over and there is nothing left to
+    /// ask. On the button rather than on the written name because game 2 has
+    /// no written name (#220), and a run has to follow both games.
     static func question(_ species: String?) -> String {
         "quiz.question.\(species ?? "")"
     }
