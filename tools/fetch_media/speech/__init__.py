@@ -6,14 +6,17 @@ AAC clip beside the manifest, normalised to the loudness every other sound in
 the game sits at, and one entry in the manifest that names it.
 
 The core knows no vendor. `provider.py` is the whole interface, `fake.py` the
-adapter the tests use, and `elevenlabs.py` the one that speaks — decisions 1
-and 2 of docs/superpowers/plans/2026-09-08-recorded-speech.md.
+adapter the tests use, and `google.py` the one that speaks — issue #234, which
+picked Google Cloud Text-to-Speech over the ElevenLabs adapter of decision 2.
+`elevenlabs.py` stays as the alternative it produced and is not used: that
+account is on the free tier, which is non-commercial.
 """
 
 from __future__ import annotations
 
 from fetch_media.speech.elevenlabs import ElevenLabsProvider
 from fetch_media.speech.fake import FakeProvider
+from fetch_media.speech.google import GoogleProvider
 from fetch_media.speech.provider import RECORDING_DOC, RENDERED_FILE, Provider, Voice, VoiceOption
 
 # Every adapter this tool can be pointed at. `--provider` takes its choices
@@ -21,6 +24,7 @@ from fetch_media.speech.provider import RECORDING_DOC, RENDERED_FILE, Provider, 
 PROVIDERS: dict[str, type] = {
     FakeProvider.name: FakeProvider,
     ElevenLabsProvider.name: ElevenLabsProvider,
+    GoogleProvider.name: GoogleProvider,
 }
 
 # The licence a recording of our own carries. Decision 3 of the plan proposes

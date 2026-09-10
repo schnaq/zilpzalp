@@ -14,11 +14,18 @@ There are two ways a key ends up in a message, and `redact` closes both:
   straight to a formatter. Any value the environment holds under one of
   `NAMES` is therefore replaced wherever it appears.
 
-`ELEVENLABS_API_KEY` is what the speech provider reads
+`ELEVENLABS_API_KEY` is what the unused ElevenLabs adapter reads
 (docs/superpowers/plans/2026-09-08-recorded-speech.md, decision 2, and issue
 #221). It travels as the `xi-api-key` header rather than in a URL, which is
 exactly the second case above: an error body that echoes it would otherwise
 reach a CI log.
+
+`GOOGLE_TTS_SERVICE_ACCOUNT_JSON` is what the renderer this project actually
+uses reads (issue #234). It is not a key but a whole key *file*: the service
+account's JSON, in one variable. Blanking it here covers the blob; the private
+key inside it, the assertion signed with that key and the access token bought
+with the assertion are derived rather than held in the environment, so
+`speech/google.py` blanks those itself.
 """
 
 from __future__ import annotations
@@ -28,8 +35,9 @@ import re
 
 XENO_CANTO = "XENO_CANTO_API_KEY"
 ELEVENLABS = "ELEVENLABS_API_KEY"
+GOOGLE_TTS = "GOOGLE_TTS_SERVICE_ACCOUNT_JSON"
 
-NAMES = (XENO_CANTO, ELEVENLABS)
+NAMES = (XENO_CANTO, ELEVENLABS, GOOGLE_TTS)
 
 # `key=…` in a URL, up to the next separator.
 IN_A_URL = re.compile(r"(?i)(key=)[^&\s'\"]+")

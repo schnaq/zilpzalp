@@ -9,9 +9,9 @@ Three kinds of medium, and a human between every step:
     photos drop --pack deutschland --species amsel --file photos/amsel-2.heic
     calls candidates --pack deutschland [--species amsel …] [--limit 5] [--type song]
     calls pick --pack deutschland --species amsel --recording XC965144 [--start 12.5]
-    speech voices --provider elevenlabs
+    speech voices --provider google
     speech render --provider fake --pack deutschland [--species amsel …] [--sentence …]
-    speech render --provider elevenlabs --voice … --pack deutschland [--max-chars 30000]
+    speech render --provider google --voice … --pack deutschland [--max-chars 30000]
     speech render --provider fake --set fixed --sentence roundEnd.title
     speech import --pack deutschland --species amsel --sentence … --file take3.wav
                   --attribution "Stimme: …"
