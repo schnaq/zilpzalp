@@ -7,18 +7,23 @@ reworded in Xcode is rendered as it now reads instead of as it once did. What
 this module does spell out is *how* each sentence is filled, and that is
 tool knowledge: it mirrors the eight call sites the app speaks through.
 
-Three sentences are species-dependent and therefore one clip per species:
+Two sentences are species-dependent and therefore one clip per species:
 
 | Sentence key                  | German                     | Filled with          |
 |-------------------------------|----------------------------|----------------------|
-| `quiz.prompt.whereIs`         | „Wo ist %1$@ %2$@?"        | article, spoken name |
 | `roundEnd.sticker.new.spoken` | „Super gemacht! %@ …!"     | spoken name          |
 | `collection.name`             | „Amsel"                    | spoken name alone    |
 
-`collection.name` is the one key that is not in the catalog: `CollectionScreen`
-speaks `bird.pronunciation ?? bird.name` directly today, and Task 5 of the plan
-adds the key. Until then the sentence *is* the name, which is why this one
-needs no catalog entry to render.
+`collection.name` is the one key that is not in the catalog: the sentence *is*
+the name, so there is nothing to translate and nothing to fill. The album says
+it when a sticker is tapped, and since #220 it is also the question of game 1
+— one clip per species, heard in two places. `SpeechKey.speciesName` in
+`ZilpZalpData` is this key on the Swift side.
+
+There were three until #220. „Wo ist die Amsel?" — `quiz.prompt.whereIs` — was
+the question of game 1, and it is gone from the catalog with the sentence: the
+game asks with the bare name now, so the sentence has neither words to render
+nor a screen to say it.
 
 Every fixed sentence — „Super gemacht!", the eight rank ascents, the parental
 gate, the two profile screens — is whatever the catalog says under its key, and
@@ -42,7 +47,7 @@ CATALOG = REPO_ROOT / "apps" / "ZilpZalp" / "Resources" / "Localizable.xcstrings
 LANGUAGE = "de"
 
 # The species sentences, in the order `--sentence` lists and defaults to.
-SPECIES_SENTENCES = ("quiz.prompt.whereIs", "roundEnd.sticker.new.spoken", "collection.name")
+SPECIES_SENTENCES = ("roundEnd.sticker.new.spoken", "collection.name")
 
 # `%1$@`, `%2$@` and the unpositional `%@`, which is what Swift's
 # `String(format:)` is given at the call sites this mirrors.
@@ -123,8 +128,6 @@ def species_text(bird: dict, sentence: str) -> str:
     name = spoken_name(bird)
     if sentence == "collection.name":
         return name
-    if sentence == "quiz.prompt.whereIs":
-        return fill(german(sentence), str(bird["article"]), name)
     if sentence == "roundEnd.sticker.new.spoken":
         return fill(german(sentence), name)
 
