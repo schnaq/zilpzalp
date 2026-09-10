@@ -128,10 +128,10 @@ public struct TopBarTitle: View {
     ///
     /// A guard, not a target. SwiftUI shrinks only as far as it must, and on
     /// the narrowest supported screen it does not have to go nearly this
-    /// far: the longest title in the catalog, „Erkenne den Vogel", needs
-    /// 0.716 at 375 pt with both side slots filled — 20.0 pt, the floor for
-    /// anything a child reads. On a 440 pt phone it is 27.9 pt and on an
-    /// iPad the full step.
+    /// far: the longest titles in the catalog, "Deine Vogel-Leiter" and
+    /// „Erkenne den Vogel", need 0.715 at 375 pt with both side slots filled
+    /// — 20.0 pt, the floor for anything a child reads. On a 440 pt phone
+    /// that is 27.8 pt and on an iPad the full step.
     ///
     /// It shrinks for *width* alone since #229. A scale factor answers to
     /// the whole proposal, so the tight line box below — 28 pt against Baloo
@@ -354,7 +354,7 @@ private struct PreviewSlotButton: View {
 // preview is here to show.
 #Preview("Worst case — iPhone SE width") {
     VStack(spacing: 0) {
-        TopBar(title: "Erkenne den Vogel") {
+        TopBar(title: "Deine Vogel-Leiter") {
             PreviewSlotButton(icon: .chevronLeft)
         } trailing: {
             PreviewSlotButton(icon: .userRoundCog)

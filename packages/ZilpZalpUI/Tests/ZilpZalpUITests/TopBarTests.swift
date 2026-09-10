@@ -18,8 +18,8 @@ private let catalogTitles = [
     "Unser Schwarm",
     "Über ZilpZalp",
     "Wer spielt heute?",
-    "Deine Vogel-Leiter",
     "Erkenne den Vogel",
+    "Deine Vogel-Leiter",
 ]
 
 /// What a title gets on an iPhone SE with both side slots filled:
@@ -252,11 +252,11 @@ struct TopBarTests {
         try #require(BundledFonts.registered)
 
         // The scale factor is a guard, not a target: SwiftUI shrinks only as
-        // far as it must. The longest title today, „Erkenne den Vogel" (#229),
-        // lands on 20.0 pt — 167 ÷ 233.3 × 28 — which is ``ZType/Step/body``,
-        // the smallest size anything a child reads is allowed to take. A tenth
-        // title longer than that is a design decision, and this is where it
-        // reports itself.
+        // far as it must. The two longest titles land on 20.0 pt — „Deine
+        // Vogel-Leiter" on 167 ÷ 233.6 × 28 and „Erkenne den Vogel" (#229) a
+        // hundredth above it — which is ``ZType/Step/body``, the smallest size
+        // anything a child reads is allowed to take. A tenth title longer than
+        // that is a design decision, and this is where it reports itself.
         let natural = BundledFonts.width(
             of: title,
             postScriptName: "Baloo2-Bold",
