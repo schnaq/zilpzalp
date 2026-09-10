@@ -146,6 +146,12 @@ final class PackModel {
         available = .loading
         do {
             available = try await .ready(downloader.availablePacks())
+        } catch is CancellationError {
+            // A grown-up who left the screen while the list was on its way.
+            // SwiftUI cancels the `.task` that started this, and that is not a
+            // failed fetch — saying it was would leave "ließ sich nicht laden"
+            // standing behind a list that is simply not being waited for. The
+            // section asks again when it comes back.
         } catch {
             available = .failed
             let reason = String(describing: error)
