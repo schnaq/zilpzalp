@@ -9,7 +9,9 @@ Three kinds of medium, and a human between every step:
     photos drop --pack deutschland --species amsel --file photos/amsel-2.heic
     calls candidates --pack deutschland [--species amsel …] [--limit 5] [--type song]
     calls pick --pack deutschland --species amsel --recording XC965144 [--start 12.5]
+    speech voices --provider elevenlabs
     speech render --provider fake --pack deutschland [--species amsel …] [--sentence …]
+    speech render --provider elevenlabs --voice … --pack deutschland [--max-chars 30000]
     speech render --provider fake --set fixed --sentence roundEnd.title
     speech import --pack deutschland --species amsel --sentence … --file take3.wav
                   --attribution "Stimme: …"
@@ -78,6 +80,13 @@ DERIVED_TOOLS = ("sync_bundled_packs.py", "generate_credits.py")
 DERIVED_DATA = manifest.REPO_ROOT / "DerivedData"
 AUDIT_DIR = DERIVED_DATA / "audit"
 FRAME_PREVIEW_DIR = DERIVED_DATA / "frame-preview"
+
+# How much one `speech render` may cost at a paid provider's meter, in
+# characters. Everything the app says — 130 species names plus the fixed
+# sentences — is a few thousand, so this is a cap on a mistake rather than on a
+# plan: a `--species` that silently matched a whole pack, or a run started
+# twice. `--max-chars` raises it where a bigger run is meant.
+MAX_CHARS = 30000
 
 # What the audit writes and reads beside the previews.
 TILES_FILE = "tiles.json"
@@ -889,15 +898,47 @@ def speech_work(
     return document, work
 
 
+def command_speech_voices(args: argparse.Namespace) -> int:
+    """List the voices a provider offers, so that `--voice` can name one."""
+    provider = speech.provider(args.provider)
+    offered = provider.voices()
+    if not offered:
+        print(f"'{provider.name}' offers no choice of voice")
+        return 0
+
+    for option in offered:
+        print(f"{option.id}  {option.name}  {option.description}".rstrip())
+    print(f"\n{len(offered)} voice(s) — name one with --voice, by id or by name")
+    return 0
+
+
+def within_budget(work: list[tuple[clips.Target, str, str]], most: int) -> None:
+    """Say what this run will cost at the meter, and refuse a run that is too big.
+
+    A paid provider bills characters, so the count is the price. It is printed
+    on every run and checked before anything is spoken — a `--species` typo
+    that dealt a whole pack instead of one bird should cost a message, not an
+    invoice.
+    """
+    characters = sum(len(text) for _, _, text in work)
+    print(f"{characters} character(s) to render (limit {most})")
+    if characters > most:
+        raise ValueError(
+            f"{characters} characters is more than --max-chars {most}: "
+            "render fewer sentences, or raise the limit deliberately."
+        )
+
+
 def command_speech_render(args: argparse.Namespace) -> int:
     """Ask a provider for every sentence named, and record what comes back."""
     provider = speech.provider(args.provider)
     document, work = speech_work(args.pack, args.set, args.species, args.sentence)
+    within_budget(work, args.max_chars)
 
     # Before the first sentence is spoken, not after: a provider that is not
     # the one this manifest was produced with is refused here, where it has
     # cost nothing. `record_clip` asks again per clip and finds it agreed.
-    voice = provider.voice()
+    voice = provider.voice(args.voice)
     manifest.set_voice(document, voice_block(voice))
 
     print(f"{len(work)} clip(s) through '{provider.name}'")
@@ -1153,8 +1194,27 @@ def build_parser() -> argparse.ArgumentParser:
         choices=sorted(speech.PROVIDERS),
         help="which adapter speaks — 'fake' produces tones and reaches no vendor",
     )
-    render.add_argument("--voice", help="a voice the provider offers; default: its own")
+    render.add_argument(
+        "--voice",
+        help="a voice the provider offers, by id or by name — "
+        "required wherever there is a choice; see 'speech voices'",
+    )
+    render.add_argument(
+        "--max-chars",
+        type=int,
+        default=MAX_CHARS,
+        help=f"refuse a run longer than this many characters (default: {MAX_CHARS})",
+    )
     render.set_defaults(run=command_speech_render)
+
+    listing = spoken.add_parser("voices", help="the voices a provider offers")
+    listing.add_argument(
+        "--provider",
+        required=True,
+        choices=sorted(speech.PROVIDERS),
+        help="which adapter to ask",
+    )
+    listing.set_defaults(run=command_speech_voices)
 
     importing = spoken.add_parser("import", help="record one take somebody made")
     add_speech_place(importing)

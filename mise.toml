@@ -334,6 +334,7 @@ description = "Curate media: 'photos …', 'calls …', 'speech …', 'upload' �
 #   mise run fetch-media photos audit --pack deutschland [--add-verdicts -]
 #   mise run fetch-media speech import --pack deutschland --species amsel \
 #       --sentence quiz.prompt.whereIs --file take3.wav --attribution "Stimme: …"
+#   mise run fetch-media speech render --provider fake --pack deutschland
 #
 # `photos frame` is `photos pick` with the square computed around the bird
 # instead of around the middle of the photo: Apple Vision finds the bird, and
@@ -352,13 +353,18 @@ description = "Curate media: 'photos …', 'calls …', 'speech …', 'upload' �
 #   infisical run --env=dev --path=/ -- mise run fetch-media calls pick --pack deutschland \
 #       --species amsel --recording XC965144 --start 12.5
 #   infisical run --env=dev --path=/ -- mise run fetch-media upload --pack deutschland
+#   infisical run --env=dev --path=/ -- mise run fetch-media speech voices \
+#       --provider elevenlabs
 #   infisical run --env=dev --path=/ -- mise run fetch-media speech render \
-#       --pack deutschland --species amsel --provider …
+#       --provider elevenlabs --voice "<name>" --pack deutschland \
+#       [--species amsel] [--sentence collection.name] [--max-chars 30000]
 #
 # The xeno-canto API v3 refuses every request without `XENO_CANTO_API_KEY`, and
-# the upload needs the bucket keys; both read them from the environment. A
-# speech provider will read `SPEECH_API_KEY` the same way — `--provider fake`
-# reaches nobody and needs nothing.
+# the upload needs the bucket keys; both read them from the environment. The
+# ElevenLabs adapter reads `ELEVENLABS_API_KEY` the same way — `--provider
+# fake` reaches nobody and needs nothing. A render prints what it will cost in
+# characters and refuses to go over `--max-chars`, because that provider bills
+# by the character: docs/sprachaufnahmen.md.
 #
 # Deliberately not the other way round. Wrapping the task itself would make
 # every subcommand demand an Infisical login, and the two that need nothing

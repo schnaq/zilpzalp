@@ -14,7 +14,7 @@ import unittest
 from fetch_media import keys
 
 XENO_CANTO_KEY = "0123456789abcdef0123456789abcdef01234567"
-SPEECH_KEY = "sk-not-a-real-speech-key-0123456789"
+SPEECH_KEY = "sk-not-a-real-elevenlabs-key-0123456789"
 
 
 class RedactTests(unittest.TestCase):
@@ -42,22 +42,22 @@ class RedactTests(unittest.TestCase):
 
     def test_removes_a_key_that_is_not_in_a_url_at_all(self) -> None:
         """A provider that takes its key in a header can still echo it back."""
-        environment = {keys.SPEECH: SPEECH_KEY}
+        environment = {keys.ELEVENLABS: SPEECH_KEY}
 
         redacted = keys.redact(f"401: the voice API refused {SPEECH_KEY}", environment)
 
         self.assertNotIn(SPEECH_KEY, redacted)
         self.assertIn("the voice API refused", redacted)
 
-    def test_knows_the_speech_key_before_any_adapter_exists(self) -> None:
+    def test_knows_the_key_the_speech_adapter_reads(self) -> None:
         """The adapter must not be the thing that teaches this — by then it is logged."""
-        self.assertIn("SPEECH_API_KEY", keys.NAMES)
+        self.assertIn("ELEVENLABS_API_KEY", keys.NAMES)
 
     def test_leaves_a_value_too_short_to_be_a_key_alone(self) -> None:
         """Blanking every 'x' would make the message it appears in unreadable."""
         text = "expected x, got y"
 
-        self.assertEqual(keys.redact(text, {keys.SPEECH: "x"}), text)
+        self.assertEqual(keys.redact(text, {keys.ELEVENLABS: "x"}), text)
 
     def test_leaves_text_without_a_key_alone(self) -> None:
         self.assertEqual(keys.redact("no key here", {}), "no key here")
@@ -70,7 +70,7 @@ class ApiKeyTests(unittest.TestCase):
         )
 
     def test_names_the_variable_and_the_command_that_provides_it(self) -> None:
-        for name in (keys.XENO_CANTO, keys.SPEECH):
+        for name in (keys.XENO_CANTO, keys.ELEVENLABS):
             with self.subTest(name=name), self.assertRaises(RuntimeError) as error:
                 keys.api_key(name, {})
 

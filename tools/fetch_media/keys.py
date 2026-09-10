@@ -14,11 +14,11 @@ There are two ways a key ends up in a message, and `redact` closes both:
   straight to a formatter. Any value the environment holds under one of
   `NAMES` is therefore replaced wherever it appears.
 
-`SPEECH_API_KEY` is the name the first speech provider will read
-(docs/superpowers/plans/2026-09-08-recorded-speech.md, decision 2). It is
-listed here before any adapter exists, so that the adapter cannot be the thing
-that teaches the redaction about it — by then the first key would already have
-been logged.
+`ELEVENLABS_API_KEY` is what the speech provider reads
+(docs/superpowers/plans/2026-09-08-recorded-speech.md, decision 2, and issue
+#221). It travels as the `xi-api-key` header rather than in a URL, which is
+exactly the second case above: an error body that echoes it would otherwise
+reach a CI log.
 """
 
 from __future__ import annotations
@@ -27,9 +27,9 @@ import os
 import re
 
 XENO_CANTO = "XENO_CANTO_API_KEY"
-SPEECH = "SPEECH_API_KEY"
+ELEVENLABS = "ELEVENLABS_API_KEY"
 
-NAMES = (XENO_CANTO, SPEECH)
+NAMES = (XENO_CANTO, ELEVENLABS)
 
 # `key=…` in a URL, up to the next separator.
 IN_A_URL = re.compile(r"(?i)(key=)[^&\s'\"]+")

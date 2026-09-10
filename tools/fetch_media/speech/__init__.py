@@ -6,27 +6,29 @@ AAC clip beside the manifest, normalised to the loudness every other sound in
 the game sits at, and one entry in the manifest that names it.
 
 The core knows no vendor. `provider.py` is the whole interface, `fake.py` the
-adapter the tests use, and the first real one is a small module beside them
-once decisions 1 and 2 of the plan are answered
-(docs/superpowers/plans/2026-09-08-recorded-speech.md).
+adapter the tests use, and `elevenlabs.py` the one that speaks — decisions 1
+and 2 of docs/superpowers/plans/2026-09-08-recorded-speech.md.
 """
 
 from __future__ import annotations
 
+from fetch_media.speech.elevenlabs import ElevenLabsProvider
 from fetch_media.speech.fake import FakeProvider
-from fetch_media.speech.provider import RENDERED_FILE, Provider, Voice
+from fetch_media.speech.provider import RECORDING_DOC, RENDERED_FILE, Provider, Voice, VoiceOption
 
 # Every adapter this tool can be pointed at. `--provider` takes its choices
 # from here, so a new adapter is one entry and no change to the command line.
-PROVIDERS: dict[str, type] = {FakeProvider.name: FakeProvider}
+PROVIDERS: dict[str, type] = {
+    FakeProvider.name: FakeProvider,
+    ElevenLabsProvider.name: ElevenLabsProvider,
+}
 
-# The licence a recording of our own carries, and the document that has to be
-# behind the `sourceURL` every medium needs. Decision 3 of the plan proposes
+# The licence a recording of our own carries. Decision 3 of the plan proposes
 # CC BY 4.0 — the gate's `ALLOWED_LICENCES` takes it, and the attribution names
-# whose voice it is. A different answer to that decision changes these two
-# lines and nothing else.
+# whose voice it is. A different answer to that decision changes this line and
+# nothing else. The document behind the `sourceURL` lives in `provider.py`,
+# where the adapters can reach it without importing this module.
 IMPORT_LICENCE = "CC-BY-4.0"
-RECORDING_DOC = "https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md"
 
 __all__ = [
     "IMPORT_LICENCE",
@@ -35,6 +37,7 @@ __all__ = [
     "RENDERED_FILE",
     "Provider",
     "Voice",
+    "VoiceOption",
     "imported_voice",
     "provider",
 ]
