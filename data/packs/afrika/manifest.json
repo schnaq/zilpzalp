@@ -810,16 +810,16 @@
           "retrieved": "2026-09-09"
         },
         {
-          "file": "photos/rotschnabel-madenhacker-3.heic",
-          "sha256": "5093e3ce40accbff787fc82c4e32f092fe4777d7a8f0376aa145f4909db53b0e",
-          "license": "CC-BY-4.0",
-          "attribution": "gwar",
-          "sourceURL": "https://www.inaturalist.org/observations/254912140",
+          "file": "photos/rotschnabel-madenhacker-4.heic",
+          "sha256": "30c7984572979a0cc7f85f752f28f4e32268f041939f038717031e657540e8f8",
+          "license": "CC0-1.0",
+          "attribution": "Andra Waagmeester",
+          "sourceURL": "https://www.inaturalist.org/observations/218480428",
           "retrieved": "2026-09-10"
         },
         {
-          "file": "photos/rotschnabel-madenhacker-4.heic",
-          "sha256": "30c7984572979a0cc7f85f752f28f4e32268f041939f038717031e657540e8f8",
+          "file": "photos/rotschnabel-madenhacker-5.heic",
+          "sha256": "8a9ca2e59a285a618974a9679caf1275fc7a62ce96de213f1aa66e81078461a4",
           "license": "CC0-1.0",
           "attribution": "Andra Waagmeester",
           "sourceURL": "https://www.inaturalist.org/observations/218480428",
@@ -1062,10 +1062,10 @@
         },
         {
           "file": "photos/hagedasch-4.heic",
-          "sha256": "f2bfd0f3f471f0aebb8dddc4ee4ad7a0990d05fe1744854bbdabeca0bce97eef",
+          "sha256": "1c6db1a054b367012ae16cfc47ea223beff985d005bde5a283721ae1f8d291ad",
           "license": "CC-BY-4.0",
-          "attribution": "Timothy Whitehead",
-          "sourceURL": "https://www.inaturalist.org/observations/248995401",
+          "attribution": "stephen",
+          "sourceURL": "https://www.inaturalist.org/observations/39380393",
           "retrieved": "2026-09-10"
         }
       ],

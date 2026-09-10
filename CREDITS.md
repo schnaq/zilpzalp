@@ -105,6 +105,7 @@ the source declared.
 | Rosapelikan | Photo | Radu Teodoreanu | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/376121534> |
 | Hagedasch | Photo | Martin Gutewort | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/197640384> |
 | Hagedasch | Photo | Timothy Whitehead | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/248995401> |
+| Hagedasch | Photo | stephen | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/39380393> |
 | Hagedasch | Call | Frank shirima (XC1163454) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/1163454> |
 
 ### Vögel Deutschlands (`deutschland`)

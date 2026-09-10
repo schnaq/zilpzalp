@@ -915,6 +915,16 @@
       "packTitle": "Vögel Afrikas",
       "birdID": "hagedasch",
       "birdName": "Hagedasch",
+      "kind": "photo",
+      "attribution": "stephen",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/39380393"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "hagedasch",
+      "birdName": "Hagedasch",
       "kind": "call",
       "attribution": "Frank shirima (XC1163454)",
       "license": "CC-BY-SA-4.0",
