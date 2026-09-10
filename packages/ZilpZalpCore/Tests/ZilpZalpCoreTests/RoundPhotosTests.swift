@@ -93,3 +93,50 @@ func singlePhotoSpeciesConsumeNothing() throws {
     var untouched = SplitMix64(seed: 13)
     #expect(generator.next() == untouched.next())
 }
+
+// MARK: - What a round asks to be opened
+
+@Test("The dealt photos are exactly the ones the tiles show", arguments: [1, 5, 8] as [UInt64])
+func dealtPhotosAreWhatTheTilesShow(seed: UInt64) throws {
+    let round = try round(seed: seed)
+    let counts = Dictionary(uniqueKeysWithValues: distinctGenera(10).map { ($0.id, 3) })
+
+    var generator = SplitMix64(seed: seed)
+    let photos = RoundPhotos(round: round, photoCounts: counts, using: &generator)
+
+    var shown: [String: Set<Int>] = [:]
+    for tile in dealt(photos, in: round) {
+        shown[tile.species, default: []].insert(tile.photo)
+    }
+    // Every species offered is named, and with neither a photo the tiles skip
+    // nor one they show and nobody opened.
+    #expect(photos.dealtPhotos == shown)
+    #expect(Set(photos.dealtPhotos.keys) == Set(round.questions.flatMap(\.choices)))
+}
+
+@Test("A species with one photo asks for its portrait alone")
+func dealtPhotosNameSinglePhotoSpecies() throws {
+    let round = try round(seed: 4)
+    let counts = Dictionary(uniqueKeysWithValues: distinctGenera(10).map { ($0.id, 1) })
+
+    var generator = SplitMix64(seed: 4)
+    let photos = RoundPhotos(round: round, photoCounts: counts, using: &generator)
+
+    #expect(Set(photos.dealtPhotos.keys) == Set(round.questions.flatMap(\.choices)))
+    #expect(photos.dealtPhotos.values.allSatisfy { $0 == [0] })
+}
+
+@Test("A species the round leaves out asks for nothing")
+func dealtPhotosLeaveOutUnaskedSpecies() throws {
+    let species = distinctGenera(20)
+    var generator = SplitMix64(seed: 6)
+    let round = try Round.make(from: species, using: &generator)
+    let counts = Dictionary(uniqueKeysWithValues: species.map { ($0.id, 3) })
+
+    var dealing = SplitMix64(seed: 6)
+    let photos = RoundPhotos(round: round, photoCounts: counts, using: &dealing)
+
+    let asked = Set(round.questions.flatMap(\.choices))
+    #expect(asked.count < species.count)
+    #expect(photos.dealtPhotos.keys.allSatisfy { asked.contains($0) })
+}
