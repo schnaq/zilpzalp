@@ -116,7 +116,11 @@ class SentenceTests(unittest.TestCase):
         )
 
     def test_says_the_bare_name_where_the_app_has_no_key(self) -> None:
-        """`collection.name` is Task 5's to add; until then the name is the sentence."""
+        """`collection.name` is no catalogue key: the sentence *is* the name.
+
+        The album says it when a sticker is tapped, and since #220 it is also
+        the question of game 1 — one clip per species for both.
+        """
         self.assertEqual(sentences.species_text(AMSEL, "collection.name"), "Amsel")
 
     def test_prefers_the_pronunciation_the_manifest_carries(self) -> None:
@@ -158,10 +162,19 @@ class SentenceTests(unittest.TestCase):
 
 
 class RealCatalogTests(unittest.TestCase):
-    """One assertion against the catalogue the app actually ships."""
+    """One assertion against the catalogue the app actually ships.
 
-    def test_the_question_of_game_one_reads_as_the_app_speaks_it(self) -> None:
-        self.assertEqual(sentences.species_text(AMSEL, "quiz.prompt.whereIs"), "Wo ist die Amsel?")
+    The question of game 1 was this assertion until issue #220 made that
+    question the bare name — `collection.name`, which is not a catalogue key
+    at all and therefore proves nothing about the catalogue. The praise is the
+    species sentence that is still filled from it.
+    """
+
+    def test_a_species_sentence_reads_as_the_app_speaks_it(self) -> None:
+        self.assertEqual(
+            sentences.species_text(AMSEL, "roundEnd.sticker.new.spoken"),
+            "Super gemacht! Amsel gesammelt!",
+        )
 
 
 class ProviderTests(unittest.TestCase):

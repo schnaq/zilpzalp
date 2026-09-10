@@ -398,7 +398,7 @@
       }
     },
     "home.game.calls.title" : {
-      "comment" : "Tile on the home screen for game 2: a bird call plays, the child taps the bird",
+      "comment" : "The name of game 2: a bird call plays, the child taps the bird. On the tile on the home screen and in the top bar of the round it opens",
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
@@ -410,13 +410,13 @@
       }
     },
     "home.game.names.title" : {
-      "comment" : "Tile on the home screen for game 1: the bird's name is read out, the child taps the bird",
+      "comment" : "The name of game 1: the bird's name is read out, the child taps the bird. On the tile on the home screen and in the top bar of the round it opens",
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wer ist das?"
+            "value" : "Finde den Vogel"
           }
         }
       }
@@ -1081,18 +1081,6 @@
         }
       }
     },
-    "quiz.prompt.whereIs" : {
-      "comment" : "The question in game 1, spoken by the app and shown above the answers. %1$@ is the German article, %2$@ the bird's name",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Wo ist %1$@ %2$@?"
-          }
-        }
-      }
-    },
     "quiz.quit.continue" : {
       "comment" : "The safe answer to quiz.quit.question, and the primary one: back into the round, nothing lost",
       "extractionState" : "manual",
@@ -1129,14 +1117,26 @@
         }
       }
     },
-    "quiz.sound.accessibility" : {
-      "comment" : "VoiceOver label of the round button that reads the question out again. The button itself is wordless",
+    "quiz.sound.call.accessibility" : {
+      "comment" : "VoiceOver label of the round button in game 2, which plays the bird's call again. It never names the bird — that is the answer. The button itself is wordless",
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Frage noch einmal hören"
+            "value" : "Vogelstimme noch einmal hören"
+          }
+        }
+      }
+    },
+    "quiz.sound.name.accessibility" : {
+      "comment" : "VoiceOver label of the round button in game 1, which says the bird's name again. %@ is that name, and the name is the whole question there. The button itself is wordless",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ noch einmal hören"
           }
         }
       }

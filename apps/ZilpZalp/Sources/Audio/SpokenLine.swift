@@ -29,22 +29,6 @@ struct SpokenLine: Sendable {
     /// and with its placeholders already filled.
     let text: String
 
-    /// "Wo ist die Amsel?" — the question of game 1.
-    ///
-    /// Article and name are positional arguments so that a translation may
-    /// reorder them; the name is the spoken one — see ``spokenName(of:)``.
-    static func whereIs(_ bird: Bird) -> SpokenLine {
-        SpokenLine(
-            key: "quiz.prompt.whereIs",
-            bird: bird,
-            text: String(
-                format: String(localized: "quiz.prompt.whereIs"),
-                bird.article,
-                spokenName(of: bird),
-            ),
-        )
-    }
-
     /// "Super gemacht! Amsel gesammelt!" — the praise for a bird the child has
     /// just met for the first time.
     static func firstFind(_ bird: Bird) -> SpokenLine {
@@ -58,15 +42,23 @@ struct SpokenLine: Sendable {
         )
     }
 
-    /// "Amsel" — the bare name, said when a sticker in the album is tapped.
+    /// "Amsel" — the bare name. The question of game 1, and what a sticker in
+    /// the album says when it is tapped.
     ///
-    /// `collection.name` is the one sentence key that is not a String Catalog
-    /// key: the sentence *is* the name, so there is nothing to translate and
-    /// nothing to format. The manifests and the render tool spell the key the
-    /// same way, which is what lets a clip be found for it.
+    /// One line for both since #220: the game asked "Wo ist die Amsel?" and
+    /// now asks the name alone, which is the same words the album already
+    /// spoke and therefore the same recording. No article — the template put
+    /// one in front of the written name and produced "der Lachender Hans" —
+    /// and no sentence around it: a child who is four hears "Amsel" and looks
+    /// for the Amsel.
+    ///
+    /// ``SpeechKey/speciesName`` is the one sentence key that is not a String
+    /// Catalog key: the sentence *is* the name, so there is nothing to
+    /// translate and nothing to format. The manifests and the render tool
+    /// spell it the same way, which is what lets a clip be found for it.
     static func name(_ bird: Bird) -> SpokenLine {
         SpokenLine(
-            key: "collection.name",
+            key: SpeechKey.speciesName,
             bird: bird,
             text: spokenName(of: bird),
         )

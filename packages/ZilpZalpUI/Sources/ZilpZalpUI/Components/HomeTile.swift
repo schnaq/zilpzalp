@@ -141,11 +141,13 @@ public struct HomeTile: View {
     /// glyph.
     ///
     /// Below 193 pt the tile drops to `body` and stays there. That floor still
-    /// needs room: at 20 pt the two labels the app ships ask for a 134.3 pt
-    /// tile („Wer ist das?") and a 147.1 pt one („Wer singt da?"). The home
+    /// needs room: at 20 pt the two labels the app ships ask for a 174.4 pt
+    /// tile („Finde den Vogel") and a 147.1 pt one („Wer singt da?"). The home
     /// screen's narrowest tile is 159 pt since it took the phone gutter
-    /// (#145), so both fit whole; below 147.1 pt the label shrinks instead —
-    /// see ``HomeTileMetrics/labelScaleFloor``.
+    /// (#145), so the shorter one fits whole and the longer one shrinks —
+    /// 17.8 pt on a 375 pt phone, see ``HomeTileMetrics/labelScaleFloor``.
+    /// That is the first time the shrink is needed on a supported width, and
+    /// it is the price of calling game 1 what it asks the child to do (#220).
     var labelStep: ZType.Step {
         let available = size - 2 * ZSpacing.step4
         let steps: [ZType.Step] = [.headline, .label]
@@ -214,7 +216,11 @@ struct HomeTilePalette: Sendable, Hashable {
 
 /// The tile's geometry. The values without a token are the JSX's own literals
 /// and are named here rather than sprinkled through the view.
-private enum HomeTileMetrics {
+///
+/// Internal rather than private since #220, as ``TopBarMetrics`` already is:
+/// the label's scale floor is a promise the tests check, and a number a test
+/// spells out a second time is a number that can drift.
+enum HomeTileMetrics {
     /// `Math.round(size * 0.34)` — the glyph scales with the tile.
     static let iconRatio: CGFloat = 0.34
     /// How wide the widest label a tile is drawn with is per point of type
@@ -306,7 +312,7 @@ private struct HomeTileButtonStyle: ButtonStyle {
         HomeTile(title: "Wer singt da?", icon: .volume2, tone: .leaf, stars: 3)
         HomeTile(title: "Federn finden", icon: .feather, tone: .clay, stars: 1)
         HomeTile(title: "Sterne sammeln", icon: .star, tone: .sun, stars: 2)
-        HomeTile(title: "Wer ist das?", icon: .bird, tone: .hoopoe, stars: 2)
+        HomeTile(title: "Finde den Vogel", icon: .bird, tone: .hoopoe, stars: 2)
     }
     .padding(ZSpacing.step6)
     .background(ZColor.surfacePage)
@@ -327,7 +333,7 @@ private struct HomeTileButtonStyle: ButtonStyle {
         HomeTile(title: "Bald!", locked: true)
         HomeTile(title: "Bald!", icon: .music, tone: .sun, stars: 3, locked: true)
         // Nine stars is not a state; the tile clamps rather than complains.
-        HomeTile(title: "Wer ist das?", icon: .bird, tone: .hoopoe, stars: 9)
+        HomeTile(title: "Finde den Vogel", icon: .bird, tone: .hoopoe, stars: 9)
     }
     .padding(ZSpacing.step6)
     .background(ZColor.surfacePage)

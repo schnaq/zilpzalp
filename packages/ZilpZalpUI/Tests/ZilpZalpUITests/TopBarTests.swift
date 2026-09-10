@@ -4,14 +4,20 @@ import Testing
 
 /// The titles the German catalog holds today, longest last.
 ///
+/// The two game names joined them with #220: a round's bar carries the name of
+/// the game it is a round of, so „Finde den Vogel" and „Wer singt da?" are
+/// titles now and answer to the same two rules as the grown-up screens'.
+///
 /// File scope rather than a member of the suite: `@Test(arguments:)` reads
 /// them from outside the actor, which a `@MainActor` suite does not allow.
 private let catalogTitles = [
     "Fotos & Dank",
+    "Wer singt da?",
     "Wie heißt du?",
     "Einstellungen",
     "Unser Schwarm",
     "Über ZilpZalp",
+    "Finde den Vogel",
     "Wer spielt heute?",
     "Deine Vogel-Leiter",
 ]

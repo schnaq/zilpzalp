@@ -115,27 +115,23 @@ struct QuizScreen: View {
 
     private func round(_ session: QuizSession) -> some View {
         VStack(spacing: 0) {
-            TopBar {
+            TopBar(title: game.title) {
                 IconButton(
                     .chevronLeft,
                     label: String(localized: "nav.back.accessibility"),
                     diameter: ZSpacing.touchMinimum,
                 ) { leaving.ask(session) { dismiss() } }
-            } center: {
-                if !isCompact {
-                    progress(session)
-                }
             }
 
-            // Ten leaves do not fit an iPhone's top bar beside a 64 pt back
-            // button, so in a compact width the row moves out of the bar and
-            // under it, full width — the one place it still reads as a row
-            // rather than a smudge.
-            if isCompact {
-                progress(session)
-                    .padding(.vertical, ZSpacing.step2)
-                    .frame(maxWidth: .infinity)
-            }
+            // Under the bar rather than in it, on every width. The phone never
+            // had room for it up there — ten 44 pt leaves are 548 pt beside a
+            // 64 pt back button — and since #220 the iPad has none either: the
+            // centre carries the game's name, and a title beside ten leaves
+            // would shrink to fit an 11 inch iPad in portrait. One row in one
+            // place is also one arrangement fewer to think about.
+            progress(session)
+                .padding(.vertical, ZSpacing.step2)
+                .frame(maxWidth: .infinity)
 
             GeometryReader { area in
                 content(session, in: area.size)
@@ -160,7 +156,9 @@ struct QuizScreen: View {
             case .above:
                 HStack(spacing: ZSpacing.step4) {
                     soundButton(session, diameter: layout.soundDiameter)
-                    question(session, in: .above)
+                    if let name = session.writtenQuestion {
+                        question(name, in: .above)
+                    }
                 }
                 .frame(height: layout.soundDiameter + ZShadow.ledgeLargeOffset)
 
@@ -170,7 +168,9 @@ struct QuizScreen: View {
                 HStack(spacing: ZSpacing.step7) {
                     VStack(spacing: ZSpacing.step5) {
                         soundButton(session, diameter: layout.soundDiameter)
-                        question(session, in: .beside)
+                        if let name = session.writtenQuestion {
+                            question(name, in: .beside)
+                        }
                     }
                     .frame(width: QuizLayout.promptColumn)
 
@@ -249,37 +249,48 @@ struct QuizScreen: View {
     private func soundButton(_ session: QuizSession, diameter: CGFloat) -> some View {
         SoundButton(
             isPlaying: session.isCallPlaying,
-            // One label for both games: what the button repeats is the
-            // question, whether that question is a sentence or a bird.
-            label: String(localized: "quiz.sound.accessibility"),
+            label: soundLabel(session),
             diameter: diameter,
         ) { session.askQuestion() }
+            // On the button rather than on the written name, because game 2
+            // has no written name and the screenshot run has to find the
+            // question in both games. It is the one part of the question row
+            // that is on the screen whichever game is being played.
+            .accessibilityIdentifier(QuizIdentifier.question(session.answer?.id))
     }
 
-    /// The question in writing — for the grown-up over the shoulder, exactly
-    /// as on the design's screens. The child gets it spoken; the tiles stay
-    /// wordless.
+    /// What VoiceOver says the button will do, which is what it is about to
+    /// say or play. Game 1 names the bird — the name is the whole question,
+    /// and the button says it a second later anyway. Game 2 must not: there
+    /// the name is the answer, for the reason a tile's label is a position.
+    private func soundLabel(_ session: QuizSession) -> String {
+        guard let name = session.writtenQuestion else {
+            return String(localized: "quiz.sound.call.accessibility")
+        }
+        return String(format: String(localized: "quiz.sound.name.accessibility"), name)
+    }
+
+    /// The bird's name in writing — for the grown-up over the shoulder,
+    /// exactly as on the design's screens. The child gets it spoken; the tiles
+    /// stay wordless. Only game 1 has one, and only the name: the sentence
+    /// around it went with #220, together with the article that made it „der
+    /// Lachender Hans".
     ///
     /// It reads from the sound button: beside it in a row, under it in a
     /// column. So the arrangement settles the alignment, and nothing else
     /// has to be told about it.
-    private func question(
-        _ session: QuizSession,
-        in arrangement: QuizLayout.Arrangement,
-    ) -> some View {
+    private func question(_ name: String, in arrangement: QuizLayout.Arrangement) -> some View {
         let leading = arrangement == .above
-        return Text(verbatim: session.writtenQuestion)
+        return Text(verbatim: name)
             .typeStyle(isCompact ? .headline : .title, .display, weight: .extraBold)
             .foregroundStyle(ZColor.textStrong)
             .multilineTextAlignment(leading ? .leading : .center)
             .lineLimit(2)
-            // "Wo ist der Hausrotschwanz?" is the longest question the base
-            // pack asks, and on the narrowest supported screen it needs the
-            // room. The floor is the design's own: nothing a child might read
-            // goes below 20 pt.
+            // "Hausrotschwanz" is the longest name the base pack asks for, and
+            // on the narrowest supported screen it needs the room. The floor
+            // is the design's own: nothing a child might read goes below 20 pt.
             .minimumScaleFactor(ZType.Step.body.size / ZType.Step.headline.size)
             .frame(maxWidth: .infinity, alignment: leading ? .leading : .center)
-            .accessibilityIdentifier(QuizIdentifier.question(session.answer?.id))
     }
 
     /// The band the app says something back in, kept clear whether or not
