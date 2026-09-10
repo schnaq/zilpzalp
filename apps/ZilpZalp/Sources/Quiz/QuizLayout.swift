@@ -106,11 +106,12 @@ struct QuizLayout {
     /// band is measured now rather than assumed, and the retry sentence wraps
     /// to two lines at that width, which costs the tiles 23 pt.)
     ///
-    /// ``ChoiceTile`` has a floor of its own and clamps up to it, because
-    /// below that its credit strip loses the licence it is there to carry
-    /// (#104). Which is above what this measures on the shortest screens, so
-    /// what comes out here is not always what gets drawn. ``QuizTile`` is
-    /// where the two are reconciled, and its documentation says how.
+    /// ``ChoiceTile`` has a floor of its own and clamps up to it — the
+    /// design's hero touch target, below which the parts it draws at a fixed
+    /// size take the photo over. Which is above what this measures on the
+    /// shortest screens, so what comes out here is not always what gets
+    /// drawn. ``QuizTile`` is where the two are reconciled, and its
+    /// documentation says how.
     ///
     /// Nothing in that reconciling belongs here. This measures the room; how
     /// a component behaves in less room than it wants is the component's

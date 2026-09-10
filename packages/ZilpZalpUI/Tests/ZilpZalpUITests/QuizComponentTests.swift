@@ -87,15 +87,17 @@ struct QuizComponentTests {
     }
 
     @Test(
-        "A tile is never smaller than 168 pt, whatever it is asked for",
+        "A tile is never smaller than 160 pt, whatever it is asked for",
         arguments: [
-            (CGFloat(0), CGFloat(168)),
-            (-40, 168),
-            (64, 168),
-            (167, 168),
+            (CGFloat(0), CGFloat(160)),
+            (-40, 160),
+            (64, 160),
+            (159, 160),
             // What a phone measures, drawn as measured rather than scaled
-            // down from 220 (#104).
-            (168, 168),
+            // down from 220 (#104): 162 on an iPhone 17e, 169 on an
+            // iPhone 17.
+            (160, 160),
+            (162, 162),
             (169, 169),
             (220, 220),
             (260, 260),
@@ -105,22 +107,16 @@ struct QuizComponentTests {
         #expect(ChoiceTile(label: "Amsel", size: given).size == expected)
     }
 
-    @Test("The tile floor clears the touch minimum several times over")
-    func theTileFloorIsFarAboveTheTouchMinimum() {
+    @Test("The tile floor is the design's hero touch target")
+    func theTileFloorIsTheHeroTouchTarget() {
+        // 160 pt, the token the design set aside for answer tiles. Pinned to
+        // the token and to the number, because what the floor protects is
+        // fixed-size: the badge, its glyph, the border and the corner are
+        // drawn at one size whatever the square is.
+        #expect(ChoiceTile.minimumSize == ZSpacing.touchHero)
+        #expect(ChoiceTile.minimumSize == 160)
         #expect(ChoiceTile.minimumSize > 2 * ZSpacing.touchMinimum)
         #expect(ChoiceTile.defaultSize >= ChoiceTile.minimumSize)
-    }
-
-    @Test("The floor is where the credit strip stops fitting")
-    func theTileFloorFollowsTheCreditStrip() {
-        // The floor is derived from ``PhotoCreditMetrics``, so this pins both
-        // ends: the number it comes out at today, and the three values it is
-        // derived from. A credit that had to shrink or lose its licence to fit
-        // is the defect #104 set out to remove.
-        #expect(ChoiceTile.minimumSize == 168)
-        #expect(PhotoCreditMetrics.minimumColumn == 115.3)
-        #expect(PhotoCreditMetrics.size == 13)
-        #expect(PhotoCreditMetrics.lineLimit == 2)
     }
 
     @Test("A dimmed tile is faded, not switched off")

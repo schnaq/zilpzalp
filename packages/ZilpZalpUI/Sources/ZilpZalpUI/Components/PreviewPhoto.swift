@@ -4,8 +4,8 @@ import SwiftUI
 ///
 /// The package ships no photography — the app resolves the real `Image` and
 /// hands it to ``ChoiceTile`` or ``RewardSticker`` — so the previews mount a
-/// warm gradient where a photo will be. That is enough to see the square crop,
-/// the rounded clip and the credit strip sitting on top of it.
+/// warm gradient where a photo will be. That is enough to see the square crop
+/// and the rounded clip.
 ///
 /// It is `internal` rather than `private` only because two files' previews
 /// need it. Nothing outside a `#Preview` body calls it, so it is never on a
