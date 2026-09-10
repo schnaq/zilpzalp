@@ -124,6 +124,7 @@ private func swarmProfiles() -> [Profile] {
             .padding(ZSpacing.gutterScreen)
     }
     .background(ZColor.surfacePage)
+    .environment(\.speciesPhotos, SpeciesPhotos((try? .bundled()) ?? .empty))
     .environment(\.horizontalSizeClass, .regular)
 }
 

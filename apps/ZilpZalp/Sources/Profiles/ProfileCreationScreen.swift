@@ -2,7 +2,7 @@ import SwiftUI
 import ZilpZalpData
 import ZilpZalpUI
 
-/// "Wie heißt du?" — screen 1g: a name and one of eight avatars.
+/// "Wie heißt du?" — screen 1g: a name and one of ten birds.
 ///
 /// A name and an avatar, and that is the whole form. No age, no e-mail, no
 /// account: the app is in the Kids Category and collects nothing, and there is
@@ -25,13 +25,19 @@ struct ProfileCreationScreen: View {
     /// The wordmark that stands in for the back button on the first launch.
     private static let wordmarkSize: CGFloat = 52
 
-    /// One avatar in the grid. 1g draws 118 pt across four columns; 104 is
-    /// what lets the headline, the field, two rows of eight and "Los!" all
+    /// One bird in the grid. 1g draws 118 pt across four columns; 104 is
+    /// what lets the headline, the field, two rows of five and "Los!" all
     /// stand on a landscape iPad at once. A form a grown-up has to scroll to
     /// find the confirm button in is a form that looks broken, and 104 pt is
     /// still two thirds again the size of anything a child must hit.
     private static let discDiameter: CGFloat = 104
     private static let compactDiscDiameter: CGFloat = 76
+
+    /// The birds a child can pick from — the avatars are species of the pack
+    /// that ships inside the app (#205), and this is what puts a name to each
+    /// of them. Empty in a build whose pack did not open, which leaves the
+    /// grid wordless and silent rather than the screen broken.
+    let library: PackLibrary
 
     /// Whether there is anywhere to go back to. False when this screen is the
     /// app's root — the very first launch, no profile yet — because a back
@@ -49,6 +55,14 @@ struct ProfileCreationScreen: View {
     /// tap cannot make two children out of one.
     @State private var isSaving = false
 
+    /// Says a bird's name when its disc is tapped, so a child who cannot read
+    /// hears what it is picking. One announcer for the screen, and built on
+    /// the first tap rather than with the screen — it needs the packs the
+    /// recorded names lie in, and a `@State` default is evaluated again every
+    /// time the view struct is rebuilt. ``CollectionScreen`` and
+    /// ``CollectionPicker`` do it the same way.
+    @State private var announcer: SpeechAnnouncer?
+
     @FocusState private var nameFocused: Bool
 
     private var isCompact: Bool {
@@ -61,6 +75,19 @@ struct ProfileCreationScreen: View {
 
     private var canConfirm: Bool {
         !trimmedName.isEmpty && chosenAvatar != nil && !isSaving
+    }
+
+    /// The avatars to draw, each with the bird it names. `nil` for a bird no
+    /// open pack carries, which is a broken build rather than a state to
+    /// design for: the disc then shows the glyph and says nothing.
+    private var choices: [(id: String, bird: Bird?)] {
+        // Ten searches through the open packs rather than a dictionary of all
+        // of them: this is read on every keystroke in the name field, and
+        // building a map of seventy birds to ask it ten questions is the more
+        // expensive half of that.
+        Profile.avatarChoices.map { choice in
+            (choice, library.birds.first { $0.id == choice })
+        }
     }
 
     var body: some View {
@@ -101,6 +128,7 @@ struct ProfileCreationScreen: View {
         }
         .background(ZColor.surfacePage)
         .readAloudOnce(.fixed("profile.create.title"))
+        .onDisappear { announcer?.stop() }
     }
 
     /// The back button, or the brand where there is nothing to go back to.
@@ -156,9 +184,9 @@ struct ProfileCreationScreen: View {
             .overlay(Capsule().strokeBorder(ZColor.borderStrong, lineWidth: ZBorder.width))
     }
 
-    /// Exactly the eight choices the store knows about, in its order — the
-    /// grid follows `Profile.avatarChoices` rather than a second list here, so
-    /// a ninth choice appears without anyone remembering to add it twice.
+    /// Exactly the ten choices the store knows about, in its order — the grid
+    /// follows `Profile.avatarChoices` rather than a second list here, so an
+    /// eleventh choice appears without anyone remembering to add it twice.
     private var avatarGrid: some View {
         let diameter = isCompact ? Self.compactDiscDiameter : Self.discDiameter
 
@@ -168,34 +196,44 @@ struct ProfileCreationScreen: View {
             ],
             spacing: ZSpacing.gapTiles,
         ) {
-            ForEach(Profile.avatarChoices, id: \.self) { choice in
-                let style = AvatarStyle.avatar(choice)
-
+            ForEach(choices, id: \.id) { choice in
                 Button {
-                    chosenAvatar = choice
+                    chosenAvatar = choice.id
                     // The bird is the last thing a child picks; taking the
                     // keyboard away here is what makes the button below
                     // visible on an iPhone at the moment it turns on.
                     nameFocused = false
+                    // And it says which bird that was, because the child
+                    // picking it cannot read the name anywhere.
+                    if let bird = choice.bird {
+                        say(.name(bird))
+                    }
                 } label: {
                     AvatarDisc(
-                        style: style,
+                        style: .avatar(choice.id),
                         diameter: diameter,
-                        chosen: chosenAvatar == choice,
+                        chosen: chosenAvatar == choice.id,
                     )
                 }
                 .buttonStyle(.plain)
-                .accessibilityLabel(Text(style.name))
-                .accessibilityAddTraits(chosenAvatar == choice ? [.isSelected] : [])
+                // The bird's name from the manifest, not from the String
+                // Catalog: the pack is where a species is named, and the
+                // credits are generated from the same document. For the
+                // grown-up who cannot see — the child goes by the photo.
+                .accessibilityLabel(Text(verbatim: choice.bird?.name ?? choice.id))
+                .accessibilityAddTraits(chosenAvatar == choice.id ? [.isSelected] : [])
             }
         }
-        // Four across at the design's size, as in 1g: four discs plus the
-        // three gaps between them, and not a point more — an extra gap's worth
-        // of width here is what silently drops the grid to three columns and
-        // pushes "Los!" off the bottom of a landscape iPad. Narrower screens
-        // take fewer columns on their own. The ring around the chosen avatar
-        // needs the padding not to be clipped by the row above.
-        .frame(maxWidth: 4 * diameter + 3 * ZSpacing.gapTiles)
+        // Five across rather than the four of 1g, which drew eight avatars in
+        // two rows: ten birds across four columns is three rows, and the third
+        // one pushes "Los!" off the bottom of a landscape iPad — a form a
+        // grown-up has to scroll to find the confirm button in is a form that
+        // looks broken. Five discs plus the four gaps between them and not a
+        // point more (616 pt, inside the 864 the gutters leave an iPad in
+        // portrait). Narrower screens take fewer columns on their own. The ring
+        // around the chosen avatar needs the padding not to be clipped by the
+        // row above.
+        .frame(maxWidth: 5 * diameter + 4 * ZSpacing.gapTiles)
         .padding(.vertical, ZShadow.focusRingWidth)
     }
 
@@ -207,6 +245,15 @@ struct ProfileCreationScreen: View {
             action: confirm,
         )
         .disabled(!canConfirm)
+    }
+
+    /// Says one line, building the announcer the first time a bird is tapped
+    /// and keeping it afterwards, so the next name cuts the last one off
+    /// instead of talking over it.
+    private func say(_ line: SpokenLine) {
+        let voice = announcer ?? SpeechAnnouncer(library: library)
+        announcer = voice
+        voice.announce(line)
     }
 
     private func confirm() {
@@ -226,11 +273,23 @@ struct ProfileCreationScreen: View {
 // MARK: - Previews
 
 #Preview("iPad landscape", traits: .fixedLayout(width: 1194, height: 834)) {
-    ProfileCreationScreen(canGoBack: true, back: {}, create: { _, _ in })
-        .environment(\.horizontalSizeClass, .regular)
+    ProfileCreationScreen(
+        library: (try? .bundled()) ?? .empty,
+        canGoBack: true,
+        back: {},
+        create: { _, _ in },
+    )
+    .environment(\.horizontalSizeClass, .regular)
+    .environment(\.speciesPhotos, SpeciesPhotos((try? .bundled()) ?? .empty))
 }
 
 #Preview("iPhone portrait, first launch", traits: .fixedLayout(width: 390, height: 844)) {
-    ProfileCreationScreen(canGoBack: false, back: {}, create: { _, _ in })
-        .environment(\.horizontalSizeClass, .compact)
+    ProfileCreationScreen(
+        library: (try? .bundled()) ?? .empty,
+        canGoBack: false,
+        back: {},
+        create: { _, _ in },
+    )
+    .environment(\.horizontalSizeClass, .compact)
+    .environment(\.speciesPhotos, SpeciesPhotos((try? .bundled()) ?? .empty))
 }

@@ -937,110 +937,14 @@
         }
       }
     },
-    "profile.avatar.bird" : {
-      "comment" : "VoiceOver name of the bird avatar in the creation grid. A child picks it by sight",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vogel"
-          }
-        }
-      }
-    },
-    "profile.avatar.egg" : {
-      "comment" : "VoiceOver name of the egg avatar in the creation grid",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ei"
-          }
-        }
-      }
-    },
-    "profile.avatar.feather" : {
-      "comment" : "VoiceOver name of the feather avatar in the creation grid",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Feder"
-          }
-        }
-      }
-    },
-    "profile.avatar.house" : {
-      "comment" : "VoiceOver name of the house avatar in the creation grid",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Haus"
-          }
-        }
-      }
-    },
-    "profile.avatar.leaf" : {
-      "comment" : "VoiceOver name of the leaf avatar in the creation grid",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Blatt"
-          }
-        }
-      }
-    },
-    "profile.avatar.lightbulb" : {
-      "comment" : "VoiceOver name of the light avatar in the creation grid",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Licht"
-          }
-        }
-      }
-    },
-    "profile.avatar.sparkles" : {
-      "comment" : "VoiceOver name of the sparkles avatar in the creation grid",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Funkeln"
-          }
-        }
-      }
-    },
-    "profile.avatar.star" : {
-      "comment" : "VoiceOver name of the star avatar in the creation grid",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stern"
-          }
-        }
-      }
-    },
     "profile.create.avatar.title" : {
-      "comment" : "Subheading over the avatar grid on the profile creation screen",
+      "comment" : "Subheading over the bird grid on the profile creation screen",
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Such dir ein Bild aus"
+            "value" : "Such dir einen Vogel aus"
           }
         }
       }

@@ -7,26 +7,82 @@ import Foundation
 /// means anything outside this installation, and no field a child could not
 /// see for itself on the screen.
 public struct Profile: Codable, Sendable, Hashable, Identifiable {
-    /// The avatars a profile can be created with.
+    /// The avatars a profile can be created with: ten species of the pack that
+    /// ships inside the app, drawn as the photo disc the album gives a
+    /// collected bird (#205).
     ///
-    /// Raw values of `ZIcon` in `ZilpZalpUI`, spelled out as strings because
-    /// the data layer does not know the design system. When Johanna's
-    /// pictures arrive (#45) they take the same field: a picture's file name
-    /// is a string as well.
+    /// Birds rather than the Lucide glyphs this used to name, because a child
+    /// told us so — „Das sind keine Vögel" (#193), and „mit den auswählbaren
+    /// Profilbildern nicht zufrieden" (#205). The photos are licensed,
+    /// credited and already on the device, so an avatar costs no new asset.
+    ///
+    /// Ten of the seventy the bundled pack carries, chosen for being told
+    /// apart across a table: no two of them are the same bird in another
+    /// colour. Spelled out rather than taken from the manifest, so the grid a
+    /// child knows does not reshuffle itself when a pack gains a species —
+    /// `ProfileTests` is what keeps the list and the pack in step.
+    ///
+    /// Still plain strings, and still not an enum: a stored avatar may name a
+    /// bird this build has never heard of, and older files name a glyph. What
+    /// to draw for either is the app's business, not this module's.
     public static let avatarChoices = [
-        "bird",
-        "egg",
-        "feather",
-        "leaf",
+        "amsel",
+        "blaumeise",
+        "buntspecht",
+        "eisvogel",
+        "hausrotschwanz",
+        "kohlmeise",
+        "rotkehlchen",
         "star",
-        "sparkles",
-        "house",
-        "lightbulb",
+        "wiedehopf",
+        "zilpzalp",
     ]
+
+    /// **What a profile written before #205 keeps for a face.**
+    ///
+    /// The avatar was one of eight glyph names until a child said they were
+    /// not birds (#193, #205), and a profile on a TestFlight iPhone still
+    /// names one. Each of them gets the bird it was closest to — the house
+    /// becomes the Hausrotschwanz, the leaf the leaf-green Zilpzalp, the
+    /// feather the Wiedehopf and its crest.
+    ///
+    /// `star` is missing on purpose: the starling's species id *is* `star`,
+    /// so that profile resolves to a bird with no mapping at all.
+    private static let glyphBirds = [
+        "bird": "amsel",
+        "egg": "blaumeise",
+        "feather": "wiedehopf",
+        "house": "hausrotschwanz",
+        "leaf": "zilpzalp",
+        "lightbulb": "kohlmeise",
+        "sparkles": "eisvogel",
+    ]
+
+    /// The species a stored ``avatar`` means.
+    ///
+    /// Three kinds of string arrive here: one of ``avatarChoices``, one of the
+    /// eight glyph names an older build wrote, and a name this build has never
+    /// heard of — a file written by a newer version. The first and the last
+    /// are their own answer; only the middle one is translated, and every bird
+    /// it translates to is one of ``avatarChoices``, so a migrated child finds
+    /// its own avatar in the creation grid where it left it.
+    ///
+    /// Read only, and nothing rewrites the file: a child that picks a new bird
+    /// overwrites the old name itself, and until then the glyph name is what
+    /// an older build would still read. That is what makes this enough and a
+    /// schema bump unnecessary (#205).
+    ///
+    /// Whether any pack carries such a species is not asked here — that is a
+    /// question about what is installed, and the app answers it when it draws
+    /// the disc.
+    public static func species(forAvatar avatar: String) -> String {
+        glyphBirds[avatar] ?? avatar
+    }
 
     public var id: UUID
     public var name: String
-    /// One of ``avatarChoices``. Not an enum: see there.
+    /// One of ``avatarChoices`` — or, in a file an older build wrote, the
+    /// name of a glyph. Not an enum: see there.
     public var avatar: String
     public var totalStars: Int
     public var roundsPlayed: Int

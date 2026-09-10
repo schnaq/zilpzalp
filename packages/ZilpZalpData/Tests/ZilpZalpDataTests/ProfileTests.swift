@@ -175,19 +175,67 @@ struct ProfileTests {
         #expect(!text.contains("null"))
     }
 
-    @Test("the avatar choices are the eight the profile picker offers")
-    func offersEightAvatars() {
+    @Test("the avatar choices are the ten birds the creation screen offers")
+    func offersTenAvatars() {
         #expect(
             Profile.avatarChoices == [
-                "bird",
-                "egg",
-                "feather",
-                "leaf",
+                "amsel",
+                "blaumeise",
+                "buntspecht",
+                "eisvogel",
+                "hausrotschwanz",
+                "kohlmeise",
+                "rotkehlchen",
                 "star",
-                "sparkles",
-                "house",
-                "lightbulb",
+                "wiedehopf",
+                "zilpzalp",
             ],
         )
+    }
+
+    @Test("every glyph avatar from an older build keeps its face")
+    func migratesGlyphAvatars() {
+        // The eight names version 1 of the file could carry, each with the
+        // bird it now shows. Pinned pair by pair rather than only checked
+        // against ``Profile/avatarChoices``: the promise to a child on a
+        // TestFlight iPad is that its own card looks the same tomorrow, and a
+        // test that accepted any bird would let that change silently.
+        let migrated = [
+            "bird": "amsel",
+            "egg": "blaumeise",
+            "feather": "wiedehopf",
+            "house": "hausrotschwanz",
+            "leaf": "zilpzalp",
+            "lightbulb": "kohlmeise",
+            "sparkles": "eisvogel",
+            // The starling needs no mapping — it is called `star` itself.
+            "star": "star",
+        ]
+
+        for (glyph, bird) in migrated {
+            #expect(Profile.species(forAvatar: glyph) == bird)
+            // And every one of them is offered in the creation grid, so a
+            // migrated child finds its avatar where it left it.
+            #expect(Profile.avatarChoices.contains(bird), "\(bird) is not a choice")
+        }
+
+        // A species id, and a name from a build that does not exist yet, are
+        // both their own answer.
+        #expect(Profile.species(forAvatar: "rotkehlchen") == "rotkehlchen")
+        #expect(Profile
+            .species(forAvatar: "a bird from a later build") == "a bird from a later build")
+    }
+
+    /// The one test that stops an avatar from becoming an empty disc: the
+    /// choices are species ids typed out by hand, and the pack they name is a
+    /// manifest somebody may edit. A bird that leaves the pack has to be
+    /// noticed here rather than on a child's iPad (#205).
+    @Test("every avatar choice is a bird of the pack that ships with the app")
+    func offersOnlyBundledBirds() throws {
+        let bundled = try Set(PackCatalog.bundled().pack.birds.map(\.id))
+
+        for choice in Profile.avatarChoices {
+            #expect(bundled.contains(choice), "\(choice) is not in the bundled pack")
+        }
     }
 }

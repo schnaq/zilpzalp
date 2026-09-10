@@ -19,6 +19,9 @@ struct ProfileFlow: View {
     var body: some View {
         if model.profiles.isEmpty || isCreating {
             ProfileCreationScreen(
+                // The avatars are birds of the open packs, and the grid names
+                // and speaks each of them (#205).
+                library: model.packs.library,
                 canGoBack: !model.profiles.isEmpty,
                 back: { isCreating = false },
                 create: { name, avatar in

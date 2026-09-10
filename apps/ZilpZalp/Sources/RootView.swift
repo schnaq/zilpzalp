@@ -66,6 +66,11 @@ struct RootView: View {
                     }
                 }
         }
+        // Every avatar disc in the app draws its bird from here, wherever it
+        // sits — see ``AvatarDisc``. On the stack rather than per screen, and
+        // it follows the packs: a download while the app runs reaches the
+        // avatars the way it reaches the album.
+        .environment(\.speciesPhotos, model.packs.photos)
         .task { await model.load() }
     }
 
