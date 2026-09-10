@@ -293,7 +293,7 @@ Diese Fragen sind bewusst offen und blockieren den Start nicht:
 
 - Ein Kind kann ohne Lesefähigkeit und ohne Hilfe eine Runde spielen
 - Die App startet ohne Netzverbindung und ist mit dem gebundelten Basis-Paket vollständig spielbar. Nur das Laden zusätzlicher Pakete braucht einmalig Netz
-- Jedes angezeigte Medium nennt Urheber und Lizenz, automatisch aus dem Manifest erzeugt
+- Die Credits nennen für jedes Medium Urheber und Lizenz, automatisch aus dem Manifest erzeugt — auf dem Credits-Screen und nicht in den Fotos selbst (Entscheidung 2026-09-10, Issue #200)
 - Ein Fremder kann das Repo klonen, `mise run setup` ausführen und die App bauen
 - Das CI-Gate ist grün und schnell genug, dass niemand es umgehen will
 - Kein Byte verlässt das Gerät außer beim ausdrücklich angestoßenen Paket-Download

@@ -14,20 +14,14 @@ import SwiftUI
 /// Not a control. Like ``Badge``, it has no action and no press state; a
 /// screen that wants a tappable sticker wraps it in its own `Button`.
 ///
-/// **No credit inside the disc, and none missing.** No screen passes
-/// ``init(image:icon:credit:label:tone:locked:rotation:size:)`` a credit, and
-/// none should: the sticker clips to a `Circle`, where the inset a straight
-/// strip would need against the curve has no one right value — at the 200 pt
-/// the reward screen draws, the circle and its border stand 76 pt off the
-/// edge where the text sits, which is most of the strip. Attribution is
-/// discharged all the same, by the credits screen generated from the pack
-/// manifests (`AGENTS.md`, § Medien und Lizenzen); the strip inside a
-/// ``ChoiceTile`` is a courtesy on top of it, not the thing that makes the
-/// licence work. Should a credit ever be wanted here it needs a straight band
-/// *below* the circle rather than an overlay inside it — see #111.
+/// **No attribution on the photo, and none missing.** The disc shows the
+/// picture and nothing over it. Attribution is discharged by the credits
+/// screen generated from the pack manifests (`AGENTS.md`, § Medien und
+/// Lizenzen), which is where a licence is read and not on a sticker a child
+/// is being handed (#200).
 ///
 /// ```swift
-/// RewardSticker(image: photo, credit: "Foto: … (CC BY)", label: "Zilpzalp")
+/// RewardSticker(image: photo, label: "Zilpzalp")
 /// ```
 public struct RewardSticker: View {
     /// The four sticker tints from the JSX. `rare` is the berry one; keep it
@@ -77,7 +71,6 @@ public struct RewardSticker: View {
 
     private let image: Image?
     private let icon: ZIcon
-    private let credit: String?
     private let label: String?
     private let tone: Tone
     private let rotation: Angle
@@ -93,10 +86,6 @@ public struct RewardSticker: View {
     ///   - image: The bird photo, already resolved by the app. Without one the
     ///     sticker shows ``icon`` on its tone.
     ///   - icon: The glyph to show when there is no photo.
-    ///   - credit: Attribution, rendered inside the photo along its bottom
-    ///     edge — the same strip ``ChoiceTile`` uses. Leave it out: the strip
-    ///     is cut by the disc's own curve, and the licence is served by the
-    ///     generated credits screen either way. See the note above.
     ///   - label: The word under the sticker, usually the bird's name.
     ///     Optional, as in the JSX — but it is also the only text the sticker
     ///     has, and the glyph hides itself from accessibility. A captionless
@@ -117,7 +106,6 @@ public struct RewardSticker: View {
     public init(
         image: Image? = nil,
         icon: ZIcon = .star,
-        credit: String? = nil,
         label: String? = nil,
         tone: Tone = .sun,
         locked: Bool = false,
@@ -127,7 +115,6 @@ public struct RewardSticker: View {
     ) {
         self.image = image
         self.icon = icon
-        self.credit = credit
         self.label = label
         self.tone = tone
         self.locked = locked
@@ -210,19 +197,14 @@ public struct RewardSticker: View {
                     .foregroundStyle(palette.foreground)
                 }
             }
-            .overlay(alignment: .bottom) {
-                if let credit, showsImage {
-                    PhotoCredit(text: credit)
-                }
-            }
             .frame(width: size, height: size)
             .clipShape(Circle())
             // The shadow rides on a plain circle behind the disc, not on the
             // composed sticker: the silhouette is that circle either way, so
-            // shadowing the whole stack would only rasterise photo, credit and
-            // badge to derive it. It has to sit *after* the clip, too — a
-            // shadow drawn before `clipShape` is clipped away with everything
-            // else. A locked sticker lies flat on the page and casts none.
+            // shadowing the whole stack would only rasterise photo and badge
+            // to derive it. It has to sit *after* the clip, too — a shadow
+            // drawn before `clipShape` is clipped away with everything else.
+            // A locked sticker lies flat on the page and casts none.
             .background(
                 Circle()
                     .fill(palette.background)
@@ -338,23 +320,9 @@ enum RewardStickerMetrics {
 }
 
 #Preview("With a photo: collected and still to find") {
-    // The credit is cut off at both ends here, and that is the point: a circle
-    // takes far more off a straight strip than the corner ``PhotoCredit`` is
-    // inset for. No screen passes one — see the note on ``RewardSticker``.
     HStack(spacing: ZSpacing.step7) {
-        RewardSticker(
-            image: previewPhoto(),
-            credit: "Foto: A. Chudý (CC BY)",
-            label: "Zilpzalp gesammelt",
-            size: 200,
-        )
-        RewardSticker(
-            image: previewPhoto(),
-            credit: "Foto: A. Chudý (CC BY)",
-            label: "Wiedehopf",
-            locked: true,
-            size: 200,
-        )
+        RewardSticker(image: previewPhoto(), label: "Zilpzalp gesammelt", size: 200)
+        RewardSticker(image: previewPhoto(), label: "Wiedehopf", locked: true, size: 200)
     }
     .padding(ZSpacing.step7)
     .frame(maxWidth: .infinity, maxHeight: .infinity)

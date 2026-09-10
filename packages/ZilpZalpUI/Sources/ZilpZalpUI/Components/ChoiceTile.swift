@@ -3,9 +3,11 @@ import SwiftUI
 /// One wordless answer in a bird quiz: a big photo a four-year-old can hit.
 ///
 /// Ported from `design/components/quiz/ChoiceTile.jsx`. The tile knows nothing
-/// about birds, packs or licences. It is handed a finished `Image`, a
-/// finished credit line and a ``Phase``; which bird that is, whether the photo
-/// needs a credit and when the phase changes are all the screen's business.
+/// about birds, packs or licences. It is handed a finished `Image` and a
+/// ``Phase``; which bird that is and when the phase changes are the screen's
+/// business. The photo carries no attribution of its own — it reaches the
+/// child edge to edge, and every medium is credited on the credits screen
+/// generated from the pack manifests (#200).
 ///
 /// **Wordless by design.** The JSX can print a bird's name under the photo;
 /// this port cannot. Quiz tiles never carry the name of the bird they show —
@@ -21,7 +23,6 @@ import SwiftUI
 /// ChoiceTile(
 ///     image: photo,
 ///     label: "Amsel",
-///     credit: "Foto: Alexis Tinker-Tsavalas (CC BY)",
 ///     tone: .beeren,
 ///     phase: .idle,
 /// ) { answer(.amsel) }
@@ -141,37 +142,28 @@ public struct ChoiceTile: View {
     /// The smallest square this tile draws, and the smallest one it can draw
     /// honestly.
     ///
-    /// Issue #11 asked for 220 pt, taken from the design's iPad screens. No
-    /// phone has that much room — the quiz measures 169 pt on an iPhone 17 and
-    /// 162 pt on an iPhone 17e — so the screen used to draw a 220 pt tile and
-    /// shrink the whole thing with a transform. That shrank the credit strip
-    /// with it, and a CC BY attribution came out at about 10 pt instead of the
-    /// design's 13 (#104).
+    /// `--touch-hero`, the token the design set aside for exactly this control
+    /// — "answer tiles and the big play button", and one of the three touch
+    /// sizes spec § 3 fixes against Dynamic Type (64/96/160 pt). Issue #11
+    /// asked for the design's 220 pt tile, which no phone has room for: the
+    /// quiz measures 169 pt on an iPhone 17 and 162 pt on an iPhone 17e.
     ///
-    /// So the floor is what the *credit* needs, not what the photo would like:
-    /// the column ``PhotoCredit`` cannot go under, plus the two paddings it
-    /// spends before a glyph is drawn — one per side, each clearing the tile's
-    /// own corner and the border stroked inside it (#103, #111). That comes to
-    /// 167.3 pt, hence 168. Below it the licence itself would be truncated
-    /// away, which is the defect #104 set out to remove wearing different
-    /// clothes.
-    ///
-    /// Derived rather than written down, because the strip is what moves: when
-    /// #122 gives the credit a wider column — a gutter under the tile rather
-    /// than an overlay inside it — this floor follows it down on its own.
-    ///
-    /// Nothing else is under pressure here: the photo still fills the square,
-    /// the badge keeps its 56 pt circle and 30 pt glyph, and the touch target
-    /// clears ``ZSpacing/touchMinimum`` more than twice over.
+    /// Chosen rather than derived. Until #200 it was the width the attribution
+    /// strip needed inside the photo, 168 pt, and arithmetic settled it; with
+    /// the strip gone there is nothing left to measure. That a floor is wanted
+    /// at all is because a good deal of the tile is drawn at a fixed size —
+    /// the 56 pt badge, its 30 pt glyph, the 5 pt border, the 40 pt corner —
+    /// and a small enough square is more of those than photo. Where exactly
+    /// that starts is a judgement rather than a calculation, and the design
+    /// has made it.
     ///
     /// It does not fit every phone, and it cannot: a 375×667 pt screen leaves
-    /// the quiz room for about 81 pt a tile, and 13 pt of type over two lines
-    /// is simply wider than that. The clamp below is the wrong answer for a
-    /// caller in that position — it draws a tile the screen has no room for —
-    /// so a caller with less room than this should scale the tile rather than
-    /// hand the size over and hope. See `QuizTile` and #135.
-    public static let minimumSize: CGFloat = (PhotoCreditMetrics.minimumColumn
-        + 2 * PhotoCreditMetrics.horizontalPadding).rounded(.up)
+    /// the quiz room for about 81 pt a tile. The clamp below is the wrong
+    /// answer for a caller in that position — it draws a tile the screen has
+    /// no room for — so a caller with less room than this should scale the
+    /// tile as a whole rather than hand the size over and hope. See
+    /// `QuizTile`.
+    public static let minimumSize = ZSpacing.touchHero
 
     /// `ChoiceTile.jsx`'s own default, and a comfortable iPad grid cell.
     public static let defaultSize: CGFloat = 260
@@ -180,7 +172,6 @@ public struct ChoiceTile: View {
 
     private let image: Image?
     private let label: String
-    private let credit: String?
     private let tone: Tone
     private let dimmed: Bool
     private let action: () -> Void
@@ -197,9 +188,6 @@ public struct ChoiceTile: View {
     ///   - label: What VoiceOver announces, usually the bird's name. Required,
     ///     not optional: the tile shows no words at all, so without this it
     ///     would be an unnamed button.
-    ///   - credit: The attribution line, rendered inside the photo along the
-    ///     bottom edge. The caller decides when one is needed — a CC BY photo
-    ///     always needs one, and this package cannot tell.
     ///   - tone: The rubric tint. See ``Tone``.
     ///   - phase: See ``Phase``.
     ///   - dimmed: Fades a tile that is not the answer once the round is
@@ -210,7 +198,6 @@ public struct ChoiceTile: View {
     public init(
         image: Image? = nil,
         label: String,
-        credit: String? = nil,
         tone: Tone = .papier,
         phase: Phase = .idle,
         dimmed: Bool = false,
@@ -219,7 +206,6 @@ public struct ChoiceTile: View {
     ) {
         self.image = image
         self.label = label
-        self.credit = credit
         self.tone = tone
         self.phase = phase
         self.dimmed = dimmed
@@ -249,8 +235,7 @@ public struct ChoiceTile: View {
         .accessibilityLabel(label)
     }
 
-    /// The square itself: photo or placeholder, the credit inside it, and the
-    /// phase badge on top.
+    /// The square itself: photo or placeholder, and the phase badge on top.
     private var face: some View {
         Rectangle()
             .fill(tone.field)
@@ -269,14 +254,8 @@ public struct ChoiceTile: View {
                     .foregroundStyle(ZColor.bark500)
                 }
             }
-            .overlay(alignment: .bottom) {
-                if let credit {
-                    PhotoCredit(text: credit)
-                }
-            }
             .frame(width: size, height: size)
-            // Clips the overflowing photo and the credit strip to the tile's
-            // own rounded corners in one step.
+            // Clips the overflowing photo to the tile's own rounded corners.
             .clipShape(RoundedRectangle(cornerRadius: ZRadius.tile, style: .continuous))
             .overlay(alignment: .topTrailing) { badge }
     }
@@ -308,7 +287,6 @@ public struct ChoiceTile: View {
             ChoiceTile(
                 image: previewPhoto(),
                 label: "Amsel",
-                credit: "Foto: A. Tinker-Tsavalas (CC BY)",
                 tone: .beeren,
                 phase: phase,
                 size: ChoiceTile.minimumSize,
@@ -319,19 +297,18 @@ public struct ChoiceTile: View {
     .background(ZColor.surfacePage)
 }
 
-#Preview("The size set, and what the credit does across it") {
-    // The floor, the 220 pt #11 asked for, and the design's own tile, with the
-    // longest attribution the base pack produces. The row is about the credit
-    // rather than the photo: 13 pt at all three sizes, at most two lines at
-    // all three, and the licence legible at all three. That is what fixes
+#Preview("The size set, and what stays fixed across it") {
+    // The floor, the 220 pt #11 asked for, and the design's own tile. The row
+    // is about the parts that do not scale with the square — the badge, its
+    // glyph, the border and the corner — because they are what fixes
     // ``ChoiceTile/minimumSize`` where it is.
     HStack(alignment: .top, spacing: ZSpacing.gapTiles) {
         ForEach([ChoiceTile.minimumSize, 220, ChoiceTile.defaultSize], id: \.self) { size in
             ChoiceTile(
                 image: previewPhoto(),
                 label: "Amsel",
-                credit: "Foto: Alexis Tinker-Tsavalas (CC BY)",
                 tone: .beeren,
+                phase: .correct,
                 size: size,
             )
         }

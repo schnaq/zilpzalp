@@ -11,12 +11,10 @@ import ZilpZalpUI
 /// Under the name stand the progress markers, so the bird, its name and how
 /// far it has come arrive as one block (#177).
 ///
-/// The name and the credit are drawn here rather than passed into
-/// ``RewardSticker``, which would otherwise set both inside its disc: its
-/// caption is `--text-strong` and disappears into the forest ground, and its
-/// credit strip is clipped away at the left and right of the circle — where a
-/// CC BY photographer's name must not be. Both are the component's to fix
-/// (#11); until then the round end keeps its attribution whole and legible.
+/// The name is drawn here rather than passed into ``RewardSticker``, which
+/// would otherwise set it inside its disc: its caption is `--text-strong` and
+/// disappears into the forest ground. That is the component's to fix (#11);
+/// until then the round end keeps the name legible on its own.
 struct RoundEndReward: View {
     /// Where `zz-pop` starts the sticker: a little under full size rather than
     /// at nothing, so it lands instead of exploding.
@@ -73,10 +71,6 @@ struct RoundEndReward: View {
                         markerSize: isTight ? Self.compactMarker : Self.regularMarker,
                     )
                 }
-
-                Text(verbatim: sticker.credit)
-                    .typeStyle(.caption, .body, weight: .regular)
-                    .foregroundStyle(ZColor.textOnColor)
             }
         }
         .accessibilityElement(children: .combine)

@@ -25,9 +25,9 @@ struct RoundEndScreen: View {
     /// ``Route/roundEnd(_:)``; nothing here recomputes it.
     let result: RoundResult
 
-    /// The pack the round was drawn from, for the sticker's photo, name and
-    /// credit. Optional because ``RootView`` holds it optionally; without it
-    /// the sticker falls back to its star glyph rather than to a hole.
+    /// The pack the round was drawn from, for the sticker's photo and name.
+    /// Optional because ``RootView`` holds it optionally; without it the
+    /// sticker falls back to its star glyph rather than to a hole.
     let library: PackLibrary
 
     /// Books the round onto the playing child and answers with what it

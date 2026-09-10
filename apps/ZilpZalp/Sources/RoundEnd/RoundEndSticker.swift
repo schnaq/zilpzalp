@@ -6,9 +6,8 @@ import ZilpZalpData
 /// played, resolved from the pack once.
 ///
 /// Its own file because the screen it belongs to sits on SwiftLint's 400-line
-/// ceiling, and because this is a value with no view in it — the picture, the
-/// name and the attribution of one bird, and nothing about how they are laid
-/// out.
+/// ceiling, and because this is a value with no view in it — the picture and
+/// the name of one bird, and nothing about how they are laid out.
 struct RoundEndSticker {
     let name: String
 
@@ -22,7 +21,6 @@ struct RoundEndSticker {
     /// `nil` when the photo file is missing — ``RewardSticker`` then shows its
     /// glyph, which is still a sticker.
     let image: Image?
-    let credit: String
 
     /// - Returns: `nil` when there is no species, or no installed pack knows
     ///   the id.
@@ -39,6 +37,5 @@ struct RoundEndSticker {
         image = library.photoURL(for: bird)
             .flatMap { UIImage(contentsOfFile: $0.path(percentEncoded: false)) }
             .map { Image(uiImage: $0) }
-        credit = bird.creditLine
     }
 }
