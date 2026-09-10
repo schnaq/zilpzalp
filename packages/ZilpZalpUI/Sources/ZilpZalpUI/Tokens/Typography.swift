@@ -254,120 +254,13 @@ public extension View {
         tracking: CGFloat = ZType.Tracking.normalEm,
         singleLine: Bool = false,
     ) -> some View {
-        modifier(TypeStyle(
+        modifier(TypeStyle(spec: TypeSpec(
             step: step,
             family: family,
             weight: weight,
             trackingEm: tracking,
             singleLine: singleLine,
-        ))
-    }
-
-    /// Lets the type in this subtree follow the system's text size, capped at
-    /// ``ZType/dynamicTypeCap``.
-    ///
-    /// The grown-ups' surface and nothing else: the settings, the screen
-    /// about the app, the credits, the parental gate. Dynamic Type stays
-    /// fixed everywhere a child looks, because that geometry cannot scale —
-    /// 220 pt answer tiles, 64/96/160 pt touch targets, a scale whose floor
-    /// is already 20 pt (spec decision 2026-09-07). None of it is on these
-    /// four screens, which are prose and rows in a scroll view, read by the
-    /// people most likely to have turned the system text up (2026-09-11,
-    /// #239).
-    ///
-    /// Applied to a screen's content rather than to the whole screen, so the
-    /// ``TopBar`` above it keeps the fixed 60 pt bar #93 and #232 measured. A
-    /// title there answers to the width left by two 64 pt buttons and already
-    /// shrinks to fit it; scaling it would buy height and no legibility.
-    ///
-    /// It never shrinks. Below the system's default the metrics run down to
-    /// 0.82×, which would take the caption step under the 16 pt this file
-    /// calls its floor — so every size up to `.large` renders exactly as it
-    /// does today and this switch is purely additive.
-    func grownUpDynamicType() -> some View {
-        environment(\.scalesTypeWithDynamicType, true)
-            .dynamicTypeSize(...ZType.dynamicTypeCap)
-    }
-}
-
-public extension ZType {
-    /// How far the grown-ups' screens follow the system text size.
-    ///
-    /// AX3 is where their rows still lay out: at the cap a settings row on a
-    /// 440 pt phone is the stacked ``SettingRowLayout``, its title over two
-    /// lines and its hint over four — tall, but whole, and the screens
-    /// scroll. Above it the type keeps growing while the screen does not, so
-    /// the two larger sizes buy a little type for a lot of scrolling.
-    static let dynamicTypeCap: DynamicTypeSize = .accessibility3
-}
-
-extension EnvironmentValues {
-    /// Whether ``SwiftUI/View/typeStyle(_:_:weight:tracking:singleLine:)``
-    /// resolves its step against the system text size in this subtree.
-    ///
-    /// Off everywhere but under ``SwiftUI/View/grownUpDynamicType()``.
-    @Entry var scalesTypeWithDynamicType: Bool = false
-}
-
-/// One step of the scale, resolved against the system text size wherever the
-/// subtree asked for it.
-///
-/// A `ViewModifier` rather than the three modifiers applied inline, because
-/// `@ScaledMetric` is a property wrapper and needs somewhere to live. What it
-/// scales is the step's *size*; the resolved step then answers for the
-/// tracking, the line spacing and the single-line box, so those cannot
-/// disagree about the size they were computed at.
-private struct TypeStyle: ViewModifier {
-    let step: ZType.Step
-    let family: ZType.Family
-    let weight: ZType.Weight
-    let trackingEm: CGFloat
-    let singleLine: Bool
-
-    @Environment(\.scalesTypeWithDynamicType) private var scales
-    @ScaledMetric private var scaledSize: CGFloat
-
-    init(
-        step: ZType.Step,
-        family: ZType.Family,
-        weight: ZType.Weight,
-        trackingEm: CGFloat,
-        singleLine: Bool,
-    ) {
-        self.step = step
-        self.family = family
-        self.weight = weight
-        self.trackingEm = trackingEm
-        self.singleLine = singleLine
-        _scaledSize = ScaledMetric(wrappedValue: step.size, relativeTo: step.dynamicTypeAnchor)
-    }
-
-    /// The step as it reaches the screen: the design's own wherever scaling
-    /// is off, and never smaller than it — `max`, not the scaled value, is
-    /// what leaves every size up to `.large` as it is today.
-    private var resolved: ZType.Step {
-        guard scales else { return step }
-        return ZType.Step(
-            id: step.id,
-            size: max(step.size, scaledSize),
-            lineHeight: step.lineHeight,
-        )
-    }
-
-    func body(content: Content) -> some View {
-        let step = resolved
-        let styled = content
-            .font(step.font(family, weight: weight))
-            .tracking(step.tracking(trackingEm))
-            .lineSpacing(step.lineSpacing(for: family))
-
-        if singleLine {
-            styled
-                .lineLimit(1)
-                .frame(height: step.lineBoxHeight)
-        } else {
-            styled
-        }
+        )))
     }
 }
 

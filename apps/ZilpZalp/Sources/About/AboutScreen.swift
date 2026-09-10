@@ -64,9 +64,7 @@ struct AboutScreen: View {
                 ) { dismiss() }
             }
 
-            // Everything below the bar is a grown-up's to read, so it
-            // follows the system text size (#239). The bar itself does not —
-            // its title already shrinks to the width two buttons leave it.
+            // Content only, never the bar — see ``grownUpDynamicType()``.
             content
                 .grownUpDynamicType()
         }

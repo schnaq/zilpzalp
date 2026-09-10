@@ -7,22 +7,18 @@ import Testing
 private let sample = "Danach schlafen die Vögel"
 
 /// The width one line takes with nothing squeezing it — the only handle a
-/// headless render has on the size a `Text` was actually drawn at, the same
-/// one ``drawnSize(of:text:declaredAt:)`` uses.
-///
-/// Deliberately not ``renderedSize(_:width:)``: that puts a frame around the
-/// view, and a frame is what a wider line would be measured against instead
-/// of itself.
+/// headless render has on the size a `Text` was actually drawn at, and the
+/// reason it goes through ``looseSize(of:)`` rather than
+/// ``renderedSize(_:width:)``: a frame is what a wider line would be measured
+/// against instead of itself.
 @MainActor
 private func lineWidth(at typeSize: DynamicTypeSize, scaling: Bool) -> CGFloat {
-    let line = Text(verbatim: sample)
-        .typeStyle(.body, .body, weight: .bold)
-        .environment(\.scalesTypeWithDynamicType, scaling)
-        .dynamicTypeSize(typeSize)
-
-    var measured = CGSize.zero
-    ImageRenderer(content: line).render { size, _ in measured = size }
-    return measured.width
+    looseSize(
+        of: Text(verbatim: sample)
+            .typeStyle(.body, .body, weight: .bold)
+            .environment(\.scalesTypeWithDynamicType, scaling)
+            .dynamicTypeSize(typeSize),
+    ).width
 }
 
 /// Dynamic Type on the grown-ups' screens, and nowhere else (#239).
