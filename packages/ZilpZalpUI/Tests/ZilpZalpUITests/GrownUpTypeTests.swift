@@ -57,6 +57,28 @@ struct GrownUpTypeTests {
         )
     }
 
+    // MARK: - The clamp
+
+    @Test("A step takes the size the system asked for")
+    func aStepTakesTheSystemsSize() {
+        let scaled = ZType.Step.body.scaled(to: 47)
+
+        #expect(scaled.size == 47)
+        // Everything else the step answers for follows the new size.
+        #expect(scaled.lineHeight == ZType.Step.body.lineHeight)
+        #expect(scaled.lineBoxHeight == 47 * ZType.Step.body.lineHeight)
+        #expect(scaled.tracking(ZType.Tracking.looseEm) == 47 * ZType.Tracking.looseEm)
+    }
+
+    @Test("It never goes below the size the design drew", arguments: [
+        CGFloat(0), 8, 13, 15.9,
+    ])
+    func itNeverGoesBelowTheDesign(_ scaledSize: CGFloat) {
+        // The caption step is the one with something under it to lose: below
+        // the system default the metrics run to 0.82×.
+        #expect(ZType.Step.caption.scaled(to: scaledSize).size == ZType.Step.caption.size)
+    }
+
     // MARK: - Which style a step follows
 
     @Test("The display steps follow a display style, not the body")

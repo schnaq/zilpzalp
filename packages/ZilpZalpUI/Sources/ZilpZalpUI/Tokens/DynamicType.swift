@@ -54,6 +54,21 @@ extension EnvironmentValues {
     @Entry var scalesTypeWithDynamicType: Bool = false
 }
 
+extension ZType.Step {
+    /// This step at the size the system asked for — never below the design's
+    /// own.
+    ///
+    /// The `max` is what leaves every text size up to `.large` exactly as it
+    /// is today: below the default the metrics run down to 0.82×, which would
+    /// take the caption step under the 16 pt the scale calls its floor. The
+    /// arithmetic is here rather than inside ``ScaledTypeStyle`` so that it
+    /// can be tested without a `@ScaledMetric`, which does not scale under a
+    /// headless `swift test`.
+    func scaled(to scaledSize: CGFloat) -> Self {
+        Self(id: id, size: max(size, scaledSize), lineHeight: lineHeight)
+    }
+}
+
 /// What one call to `typeStyle` asked for, and how it reaches a view once the
 /// step is settled.
 ///
@@ -112,6 +127,12 @@ struct TypeStyle: ViewModifier {
 /// What is scaled is the step's *size*; the resolved step then answers for
 /// the tracking, the line spacing and the single-line box, so those cannot
 /// disagree about the size they were computed at.
+///
+/// The step reaches `@ScaledMetric` as its initial value, so a call site that
+/// handed the same tree position two different steps across a re-render would
+/// be relying on how that wrapper treats a second initialisation. No call
+/// site does — every `typeStyle` in the grown-ups' screens names a literal
+/// step — and one that wanted to would be the day to measure it.
 private struct ScaledTypeStyle: ViewModifier {
     let spec: TypeSpec
 
@@ -126,13 +147,6 @@ private struct ScaledTypeStyle: ViewModifier {
     }
 
     func body(content: Content) -> some View {
-        // Never smaller than the design's own: `max`, not the scaled value,
-        // is what leaves every size up to `.large` as it is today.
-        let resolved = ZType.Step(
-            id: spec.step.id,
-            size: max(spec.step.size, scaledSize),
-            lineHeight: spec.step.lineHeight,
-        )
-        return spec.applied(to: content, at: resolved)
+        spec.applied(to: content, at: spec.step.scaled(to: scaledSize))
     }
 }
