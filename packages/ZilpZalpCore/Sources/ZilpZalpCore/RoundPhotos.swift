@@ -5,6 +5,10 @@
 /// tile of a round draws one, under one rule: **a species does not show a
 /// photo twice in a round while it has one it has not shown yet.**
 ///
+/// The rule is about the photos a manifest declares, which is all this module
+/// can know: whoever opens the files deals with a declared photo that is not
+/// on disk, and shows the portrait in its place — see `QuizPhotos` in the app.
+///
 /// Dealt once for the whole round rather than asked per draw, because a tile is
 /// rebuilt on every layout pass and a photo that changed under a child's finger
 /// would be the most visible thing on the screen. Randomness comes solely from

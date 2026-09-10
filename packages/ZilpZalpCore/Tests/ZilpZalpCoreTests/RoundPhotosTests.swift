@@ -126,9 +126,32 @@ func dealtPhotosNameSinglePhotoSpecies() throws {
     #expect(photos.dealtPhotos.values.allSatisfy { $0 == [0] })
 }
 
+@Test("A round of one- and three-photo species asks for both")
+func dealtPhotosMixCounts() throws {
+    let species = distinctGenera(10)
+    var generator = SplitMix64(seed: 2)
+    let round = try Round.make(from: species, using: &generator)
+    // The shape of a real pack: some species carry the three #214 curates,
+    // others the one a thin pool of freely licensed photos allowed.
+    let counts = Dictionary(
+        uniqueKeysWithValues: species.enumerated().map { ($1.id, $0.isMultiple(of: 2) ? 3 : 1) },
+    )
+
+    var dealing = SplitMix64(seed: 2)
+    let photos = RoundPhotos(round: round, photoCounts: counts, using: &dealing)
+
+    var shown: [String: Set<Int>] = [:]
+    for tile in dealt(photos, in: round) {
+        shown[tile.species, default: []].insert(tile.photo)
+    }
+    #expect(photos.dealtPhotos == shown)
+    #expect(photos.dealtPhotos.contains { counts[$0.key] == 1 && $0.value == [0] })
+    #expect(photos.dealtPhotos.contains { counts[$0.key] == 3 && $0.value.count > 1 })
+}
+
 @Test("A species the round leaves out asks for nothing")
 func dealtPhotosLeaveOutUnaskedSpecies() throws {
-    let species = distinctGenera(20)
+    let species = distinctGenera(40)
     var generator = SplitMix64(seed: 6)
     let round = try Round.make(from: species, using: &generator)
     let counts = Dictionary(uniqueKeysWithValues: species.map { ($0.id, 3) })
@@ -136,6 +159,8 @@ func dealtPhotosLeaveOutUnaskedSpecies() throws {
     var dealing = SplitMix64(seed: 6)
     let photos = RoundPhotos(round: round, photoCounts: counts, using: &dealing)
 
+    // Forty species and at most forty tiles, so a round cannot ask for them
+    // all — and every species it does not ask for is one nobody opens.
     let asked = Set(round.questions.flatMap(\.choices))
     #expect(asked.count < species.count)
     #expect(photos.dealtPhotos.keys.allSatisfy { asked.contains($0) })

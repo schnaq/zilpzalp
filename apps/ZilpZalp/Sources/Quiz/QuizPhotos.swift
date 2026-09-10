@@ -24,13 +24,14 @@ struct QuizPhotos {
     /// The photos opened so far, by species and photo index — **only the ones
     /// that opened**.
     ///
-    /// Filled in ``deal(_:using:)`` and nowhere else: a tile is rebuilt on
-    /// every layout pass, so a lookup that could open a file would put file
-    /// I/O on the main thread of every frame. Opened eagerly for the whole
-    /// round rather than per question, because `UIImage` maps the file and
-    /// defers the decode to the first draw — so this costs one look-up per
-    /// tile, and in exchange no tile ever appears as the sand placeholder and
-    /// fills in a moment later.
+    /// Filled in ``init(library:round:using:)`` and ``deal(_:using:)``, never
+    /// in ``photo(_:question:)``: a tile is rebuilt on every layout pass, so a
+    /// lookup that could open a file would put file I/O into every frame.
+    ///
+    /// Eagerly for the whole round rather than per question, because `UIImage`
+    /// maps the file and defers the decode to the first draw — so this costs
+    /// one look-up per tile, and in exchange no tile ever appears as the sand
+    /// placeholder and fills in a moment later.
     ///
     /// **Only what the round asks for** (#214). Every installed species' whole
     /// set is hundreds of files once the packs carry three photos each, and a
@@ -75,7 +76,11 @@ struct QuizPhotos {
     ///
     /// The fallback to the portrait is for the species whose dealt file is not
     /// on disk although its manifest names it: a tile that shows the portrait
-    /// twice is better than a tile that shows nothing.
+    /// twice is better than a tile that shows nothing. It is one slot rather
+    /// than one per missing file, so such a species can show the portrait
+    /// twice in a round — the rule ``RoundPhotos`` states holds for the photos
+    /// that are there, and a pack whose files and manifest disagree is the
+    /// grown-ups' area's business.
     func photo(_ species: String, question: Int) -> Image? {
         guard let photos = images[species] else { return nil }
         return photos[dealt.photo(for: species, question: question)] ?? photos[0]
