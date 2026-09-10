@@ -1,8 +1,18 @@
 # The website in apps/web — the counterpart to ci.yml, which ignores exactly
 # this directory.
 #
-# On ubuntu-latest, not on the self-hosted macOS runner: a Next.js build needs
-# no Xcode, and the one macOS runner should stay free for the app.
+# Two jobs. `check` lints and builds on GitHub-hosted ubuntu-latest, for every
+# pull request: a Next.js build needs no Xcode, and the one macOS runner stays
+# free for the app. `deploy` runs only for a push to main, on the self-hosted
+# macOS runner — Christian's decision (2026-09-10), not a technical need of the
+# build itself: every push to main becomes the production deployment, built
+# here rather than by Vercel's own Git integration.
+#
+# That Git integration is still connected to the Vercel project (so it can
+# still show PR checks), but apps/web/vercel.json's `ignoreCommand` always
+# exits 0, which tells Vercel to skip every build it would otherwise trigger.
+# Disconnecting the Git integration in the Vercel project settings instead
+# would make that `ignoreCommand` dead code, safe to remove then.
 name: Web
 
 on:
@@ -12,12 +22,6 @@ on:
   pull_request:
     paths: ['apps/web/**', 'mise.toml', '.github/workflows/web.yml']
 
-# A new push to a pull request cancels the run still in flight for that ref —
-# the same rule as in ci.yml.
-concurrency:
-  group: web-${{ github.ref }}
-  cancel-in-progress: true
-
 permissions:
   contents: read
 
@@ -26,12 +30,19 @@ env:
   # promises parents that nothing talks to a third party unasked; its own build
   # holds to that.
   NEXT_TELEMETRY_DISABLED: '1'
+  # Pinned exactly, the same way mise.toml pins bun: `bun x vercel@latest`
+  # would let the CLI drift out from under the workflow unnoticed.
+  VERCEL_CLI_VERSION: '59.15.1'
 
 jobs:
   check:
     name: Lint and build
+    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    concurrency:
+      group: web-check-${{ github.ref }}
+      cancel-in-progress: true
     steps:
       - name: Check out code
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -55,3 +66,78 @@ jobs:
 
       - name: Build
         run: mise run web:build
+
+  deploy:
+    name: Deploy to Vercel
+    if: github.event_name == 'push'
+    runs-on: [self-hosted, macOS, ARM64]
+    timeout-minutes: 20
+    # Never abort a production deploy in flight, unlike `check` above, which
+    # cancels a stale run for the same PR. Keyed by a fixed name rather than
+    # the ref: only main ever reaches this job, and two pushes to it queue
+    # instead of racing.
+    concurrency:
+      group: web-deploy
+      cancel-in-progress: false
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+    steps:
+      - name: Check out code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      # Tooling is provisioned on the runner, never fetched per run — the same
+      # rule as in ci.yml, which runs on this same runner.
+      - name: Verify mise is installed
+        run: |
+          command -v mise || {
+            echo "::error::mise not found. Install it (https://mise.jdx.dev) or, if it is already installed, add its directory to the runner's service PATH — the Actions runner does not inherit an interactive shell's PATH."
+            exit 1
+          }
+
+      - name: Install pinned tooling
+        run: mise install
+
+      - name: Install dependencies
+        run: mise run web:install
+
+      - name: Lint
+        run: mise run web:lint
+
+      # `mise x --` puts bun on PATH for the command it runs: plain `mise
+      # install` only provisions the tools, it does not shim them onto PATH
+      # the way `jdx/mise-action` does for the ubuntu job above.
+      #
+      # `vercel pull` writes .vercel/project.json from the project's dashboard
+      # settings — that is the only place this workflow learns them from.
+      - name: Pull Vercel project settings
+        run: mise x -- bun x vercel@$VERCEL_CLI_VERSION pull --yes --environment=production --token=$VERCEL_TOKEN
+
+      # The one Vercel project setting this workflow cannot see any other way.
+      # Every command below assumes the project root is apps/web; if the
+      # dashboard disagrees, fail loudly here rather than deploy the wrong
+      # directory.
+      - name: Verify the Vercel project's Root Directory
+        run: |
+          command -v jq >/dev/null || {
+            echo "::error::jq not found on the runner. Install it (e.g. 'brew install jq') so this step can read .vercel/project.json."
+            exit 1
+          }
+
+          root_dir=$(jq -r '.settings.rootDirectory' .vercel/project.json)
+          if [ "$root_dir" != "apps/web" ]; then
+            echo "::error::The Vercel project's Root Directory is '${root_dir}', expected 'apps/web'. Set Root Directory to apps/web in the Vercel project settings (Project -> Settings -> General -> Root Directory), then re-run this workflow."
+            exit 1
+          fi
+          echo "Root Directory confirmed: apps/web"
+
+      - name: Build for Vercel
+        run: mise x -- bun x vercel@$VERCEL_CLI_VERSION build --prod --token=$VERCEL_TOKEN
+
+      # Deploy and summarize in one step: the URL never leaves this shell, so
+      # there is no output to interpolate back into a later `run:`.
+      - name: Deploy to Vercel
+        run: |
+          url=$(mise x -- bun x vercel@$VERCEL_CLI_VERSION deploy --prebuilt --prod --token=$VERCEL_TOKEN)
+          echo "Deployed to $url" >> "$GITHUB_STEP_SUMMARY"

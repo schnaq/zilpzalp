@@ -71,7 +71,9 @@ mise run web:build    Build the website — the build CI and Vercel run
 The website has its own workflow (`.github/workflows/web.yml`); `ci.yml` ignores
 `apps/web/**`, so a change to a legal page neither occupies the macOS runner nor
 ships a TestFlight build. The other way round, `mise run check` never touches
-`apps/web`.
+`apps/web`. A pull request only lints and builds the site; every push to `main`
+additionally deploys it to Vercel from that same workflow, on the self-hosted
+runner, using the Vercel CLI directly — not Vercel's own Git integration.
 
 Das `.xcodeproj` ist nicht eingecheckt. Vor dem Öffnen in Xcode `mise run generate`; ein von Hand in Xcode angelegtes Projekt kennt die Quelldateien nicht. Das Signing-Team (schnaq GmbH) steht in `project.yml` — im Signing-Tab von Xcode nichts umstellen, jedes Generieren stellt `project.yml` wieder her.
 
@@ -107,7 +109,9 @@ Wer eine Abhängigkeit hinzufügen will, prüft zuerst, ob sie Daten sammelt ode
 
 Niemals ein Secret ins Repo, auch nicht in eine Beispieldatei mit echtem Wert. Alles läuft über Infisical, siehe [docs/secrets.md](docs/secrets.md).
 
-In GitHub liegen ausschließlich `INFISICAL_CLIENT_ID`, `INFISICAL_CLIENT_SECRET` und `INFISICAL_API_URL`. Jeder aus Infisical geladene Wert wird in CI mit `::add-mask::` maskiert — GitHub tut das nicht von selbst.
+Für alles, was über Infisical läuft, liegen in GitHub ausschließlich `INFISICAL_CLIENT_ID`, `INFISICAL_CLIENT_SECRET` und `INFISICAL_API_URL`. Jeder aus Infisical geladene Wert wird in CI mit `::add-mask::` maskiert — GitHub tut das nicht von selbst.
+
+Der Vercel-Deploy ist die eine Ausnahme: `VERCEL_TOKEN` und `VERCEL_PROJECT_ID` liegen als Repository-Secret, `VERCEL_ORG_ID` als Organisations-Secret — direkt in GitHub, nicht in Infisical, weil ein reiner Token-Deploy die Infisical-Action nicht braucht. GitHub maskiert Werte aus `secrets.*` ohnehin automatisch im Log.
 
 ## Git
 
