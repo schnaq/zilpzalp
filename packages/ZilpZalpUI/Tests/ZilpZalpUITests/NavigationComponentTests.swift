@@ -88,8 +88,9 @@ struct NavigationComponentTests {
         "The label's step follows the tile's size",
         arguments: [
             (ZSpacing.touchMinimum, ZType.Step.body),
-            // Two tiles side by side on the shortest supported phone.
-            (127, .body),
+            // Two tiles side by side on the shortest supported phone, which
+            // the home screen's phone gutter makes 159 pt (#145).
+            (159, .body),
             (192, .body),
             (193, .label),
             (236, .label),
@@ -120,6 +121,28 @@ struct NavigationComponentTests {
         let width = BundledFonts.width(of: longest, postScriptName: "Baloo2-Bold", size: step.size)
 
         #expect(width <= size - 2 * ZSpacing.step4)
+    }
+
+    /// The two labels the app actually ships, on the smallest tile the home
+    /// screen ever draws them at: two side by side on a 375 pt phone with the
+    /// 16 pt phone gutter, so `(375 − 2 × 16 − 24) / 2 = 159` pt. On the
+    /// 48 pt iPad gutter it was 127 pt and „Wer singt da?" was cut off — the
+    /// bug #145 reports, and the number a screenshot found before a test did.
+    @Test("A phone's tile holds the game labels whole")
+    func aPhoneTileHoldsTheGameLabelsWhole() throws {
+        try #require(BundledFonts.registered)
+
+        let tile: CGFloat = 159
+        let step = HomeTile(title: "Wer singt da?", size: tile).labelStep
+
+        for label in ["Wer ist das?", "Wer singt da?"] {
+            let width = BundledFonts.width(
+                of: label,
+                postScriptName: "Baloo2-Bold",
+                size: step.size,
+            )
+            #expect(width <= tile - 2 * ZSpacing.step4)
+        }
     }
 
     /// The one number in `SettingRow` that a screenshot caught and no unit
