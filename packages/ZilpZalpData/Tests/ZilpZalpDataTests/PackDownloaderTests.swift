@@ -40,8 +40,9 @@ struct PackDownloaderTests {
     @Test("without a single download there is nothing installed and nothing to delete")
     func startsEmpty() async throws {
         try await withDownloader(routes: [:]) { downloader, _ in
-            let installed = try await downloader.installedPacks()
-            #expect(installed.isEmpty)
+            let installed = await downloader.installations()
+            #expect(installed.installed.isEmpty)
+            #expect(installed.failures.isEmpty)
 
             try await downloader.delete(packID: StubPack.id)
         }
@@ -94,8 +95,7 @@ struct PackDownloaderTests {
                 try await downloader.download(StubPack.entry(manifest: manifest))
             }
 
-            let installed = try await downloader.installedPacks()
-            #expect(installed.isEmpty)
+            #expect(await downloader.installations().installed.isEmpty)
             #expect(!exists(home, Self.installed))
             #expect(exists(home, Self.partial))
         }
@@ -117,7 +117,7 @@ struct PackDownloaderTests {
 
             #expect(StubBucket.requestCount(for: StubPack.key(for: StubPack.media[0].file)) == 1)
             #expect(StubBucket.requestCount(for: call) == 2)
-            let installed = try await downloader.installedPacks()
+            let installed = await downloader.installations().installed
             #expect(installed.map(\.id) == [StubPack.id])
         }
     }
@@ -145,8 +145,7 @@ struct PackDownloaderTests {
             await #expect(throws: CancellationError.self) { try await download.value }
             #expect(exists(home, Self.partial))
             #expect(!exists(home, Self.installed))
-            let installed = try await downloader.installedPacks()
-            #expect(installed.isEmpty)
+            #expect(await downloader.installations().installed.isEmpty)
         }
     }
 
@@ -163,8 +162,12 @@ struct PackDownloaderTests {
 
             #expect(exists(home, Self.installed + "/manifest.json"))
             #expect(!exists(home, Self.partial))
-            let installed = try await downloader.installedPacks()
+            let installed = await downloader.installations().installed
             #expect(installed.map(\.id) == [StubPack.id])
+            // What the grown-ups' area prints beside the pack and adds up
+            // under the card: every file of it, the manifest included, and
+            // none of them counted twice for the second download.
+            #expect(installed.first?.bytes == StubPack.downloadSize(of: manifest))
 
             let photo = home.appending(path: "\(Self.installed)/\(StubPack.media[0].file)")
             let written = try Data(contentsOf: photo)
@@ -187,8 +190,7 @@ struct PackDownloaderTests {
 
             #expect(!exists(home, Self.installed))
             #expect(!exists(home, Self.partial))
-            let installed = try await downloader.installedPacks()
-            #expect(installed.isEmpty)
+            #expect(await downloader.installations().installed.isEmpty)
             // Deleting what is no longer there is done, not failed.
             try await downloader.delete(packID: StubPack.id)
         }
@@ -203,7 +205,8 @@ struct PackDownloaderTests {
         try await withDownloader(routes: StubPack.routes(manifest: manifest)) { downloader, _ in
             try await downloader.download(StubPack.entry(manifest: manifest))
 
-            let catalog = try await downloader.catalog(for: StubPack.id)
+            let installed = try #require(await downloader.installations().installed.first)
+            let catalog = installed.catalog
             let bird = try #require(catalog.pack.birds.first)
             let photo = try #require(catalog.photoURL(for: bird))
             let clip = try #require(catalog.speechURL(for: bird, sentence: StubPack.sentence))

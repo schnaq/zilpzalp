@@ -11,13 +11,6 @@ struct RootView: View {
     @State private var model = AppModel()
     @State private var path: [Route] = []
 
-    /// Every species photo of the opened pack, read once at launch.
-    ///
-    /// The album draws a whole page of stickers, and a `View` is rebuilt on
-    /// every layout pass. Opening the files here means the screen is handed
-    /// pictures rather than a directory.
-    @State private var photos = SpeciesPhotos(nil)
-
     /// How often "Nochmal spielen" has taken a child back into the quiz.
     ///
     /// The pop is not what deals the next round — ``QuizScreen`` does that,
@@ -44,14 +37,14 @@ struct RootView: View {
                     // "Nochmal spielen" pops back to the quiz screen still
                     // under this one. What makes sure a fresh round is dealt
                     // there is `roundsAskedFor` — see there.
-                    // The catalog travels with the result: the round end
+                    // The library travels with the result: the round end
                     // draws a sticker of one of the round's species, and a
                     // `RoundResult` on a navigation path can carry the id but
                     // not the photo.
                     case let .roundEnd(result):
                         RoundEndScreen(
                             result: result,
-                            catalog: model.catalog,
+                            library: model.packs.library,
                             record: { await model.record($0) },
                             playAgain: playAnotherRound,
                             openCollection: { path.append(.collection) },
@@ -60,7 +53,8 @@ struct RootView: View {
                             // and that is not a way out of it (#175).
                             goHome: { path.removeAll() },
                         )
-                    case .parents: ParentsScreen(parental: model.parental)
+                    case .parents:
+                        ParentsScreen(parental: model.parental, packs: model.packs)
                     case .collection: collection
                     case .timeForTheNest:
                         // All the way home rather than back one: under this
@@ -71,10 +65,7 @@ struct RootView: View {
                     }
                 }
         }
-        .task {
-            photos = SpeciesPhotos(model.catalog)
-            await model.load()
-        }
+        .task { await model.load() }
     }
 
     /// The album belongs to a child, and every route to it starts on a screen
@@ -85,8 +76,8 @@ struct RootView: View {
         if let profile = model.activeProfile {
             CollectionScreen(
                 profile: profile,
-                catalog: model.catalog,
-                photos: photos,
+                library: model.packs.library,
+                photos: model.packs.photos,
                 profiles: model.profiles,
                 goBack: { path.removeLast() },
             )
@@ -95,16 +86,17 @@ struct RootView: View {
         }
     }
 
-    /// A game needs the pack the round is drawn from. The home screen is only
-    /// reachable with one open, so the failure branch is unreachable — and it
+    /// A game needs the species the round is drawn from. The home screen is
+    /// only reachable with a pack open, so the failure branch is unreachable —
+    /// and it
     /// is the same sentence rather than a `!`, because an unreachable crash on
     /// a child's iPad is still a crash.
     @ViewBuilder
     private func quiz(_ game: Game) -> some View {
-        if let catalog = model.catalog {
+        if !model.packs.library.isEmpty {
             QuizScreen(
                 game: game,
-                catalog: catalog,
+                library: model.packs.library,
                 askedFor: roundsAskedFor,
                 recognitions: { model.activeProfile?.recognitions ?? [:] },
                 onFinished: { path.append(.roundEnd($0)) },
@@ -120,7 +112,7 @@ struct RootView: View {
     /// none, the question who that should be.
     @ViewBuilder
     private var start: some View {
-        if model.catalog == nil {
+        if model.packs.library.isEmpty {
             CalmFailure(message: "app.pack.failed")
         } else if model.storeFailed {
             CalmFailure(message: "profile.store.failed")

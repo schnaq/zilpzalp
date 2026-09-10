@@ -35,10 +35,10 @@ struct CollectionScreen: View {
 
     /// The child whose album this is.
     let profile: Profile
-    /// Every species that can be collected — the bundled pack, and later the
-    /// downloaded ones. `nil` when no pack opened, which leaves the grid empty
+    /// Every species that can be collected — the bundled pack and every
+    /// downloaded one. Empty when no pack opened, which leaves the grid empty
     /// rather than the screen broken.
-    let catalog: PackCatalog?
+    let library: PackLibrary
     let photos: SpeciesPhotos
     /// Everybody who plays on this device, for "Unser Schwarm".
     let profiles: [Profile]
@@ -50,8 +50,8 @@ struct CollectionScreen: View {
     /// screen, so two quick taps cannot talk over each other.
     ///
     /// Built on the first tap rather than with the screen, because it needs
-    /// the pack the recorded names lie in: handing `@State` an initial value
-    /// that reads ``catalog`` would mean writing this screen's six-parameter
+    /// the packs the recorded names lie in: handing `@State` an initial value
+    /// that reads ``library`` would mean writing this screen's six-parameter
     /// initialiser out by hand, and the previews below use the synthesised
     /// one. ``RoundEndScreen`` builds its announcer the same way.
     @State private var announcer: SpeechAnnouncer?
@@ -61,7 +61,7 @@ struct CollectionScreen: View {
     }
 
     private var birds: [Bird] {
-        catalog?.pack.birds ?? []
+        library.birds
     }
 
     private var collected: [Bird] {
@@ -197,7 +197,7 @@ struct CollectionScreen: View {
     /// tapped. Kept afterwards, so the second tap cuts the first one off
     /// instead of talking over it.
     private func say(_ line: SpokenLine) {
-        let voice = announcer ?? SpeechAnnouncer(pack: catalog)
+        let voice = announcer ?? SpeechAnnouncer(library: library)
         announcer = voice
         voice.announce(line)
     }
@@ -220,8 +220,8 @@ private func albumProfile() -> Profile {
     NavigationStack {
         CollectionScreen(
             profile: albumProfile(),
-            catalog: try? .bundled(),
-            photos: SpeciesPhotos(try? .bundled()),
+            library: (try? .bundled()) ?? .empty,
+            photos: SpeciesPhotos((try? .bundled()) ?? .empty),
             profiles: [albumProfile()],
             goBack: {},
         )
@@ -233,8 +233,8 @@ private func albumProfile() -> Profile {
     NavigationStack {
         CollectionScreen(
             profile: Profile(id: UUID(), name: "Jonas", avatar: "bird"),
-            catalog: try? .bundled(),
-            photos: SpeciesPhotos(try? .bundled()),
+            library: (try? .bundled()) ?? .empty,
+            photos: SpeciesPhotos((try? .bundled()) ?? .empty),
             profiles: [],
             goBack: {},
         )

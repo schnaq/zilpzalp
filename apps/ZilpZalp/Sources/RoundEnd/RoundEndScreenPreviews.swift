@@ -51,7 +51,7 @@ private func previewOutcome(of species: String?, recognised: Int) -> RoundOutcom
                 recognising: ["amsel": 5, "kohlmeise": 5],
                 celebrating: "amsel",
             ),
-            catalog: try? PackCatalog.bundled(),
+            library: (try? PackLibrary.bundled()) ?? .empty,
             record: { _ in previewOutcome(of: "amsel", recognised: 4) },
             playAgain: {},
             openCollection: {},
@@ -68,7 +68,7 @@ private func previewOutcome(of species: String?, recognised: Int) -> RoundOutcom
                 recognising: ["rotkehlchen": 2, "amsel": 1],
                 celebrating: "rotkehlchen",
             ),
-            catalog: try? PackCatalog.bundled(),
+            library: (try? PackLibrary.bundled()) ?? .empty,
             record: { _ in previewOutcome(of: "rotkehlchen", recognised: 1) },
             playAgain: {},
             openCollection: {},
@@ -82,7 +82,7 @@ private func previewOutcome(of species: String?, recognised: Int) -> RoundOutcom
     NavigationStack {
         RoundEndScreen(
             result: previewResult(recognising: ["amsel": 7], celebrating: nil),
-            catalog: nil,
+            library: .empty,
             record: { _ in nil },
             playAgain: {},
             openCollection: {},

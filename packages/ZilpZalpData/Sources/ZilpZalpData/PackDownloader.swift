@@ -150,16 +150,19 @@ public actor PackDownloader {
 
     // MARK: - What is on disk
 
-    /// Every installed pack, by id.
+    /// Every pack installed below `Packs/`, opened and measured.
     ///
     /// The bundled base pack is a resource of this module and never lands
     /// below `Packs/`, so it appears neither here nor in `delete(packID:)` —
     /// the layout rules that out, no guard needed.
     ///
-    /// - Throws: `PackDownloadError.manifestInvalid` for an installed pack
-    ///   whose manifest does not decode, naming it so the caller can offer to
-    ///   delete it. A directory without a manifest is skipped instead.
-    public func installedPacks() throws -> [Pack] {
+    /// - Returns: the packs that opened, in directory order, and one error per
+    ///   pack that did not. **A pack that will not open costs its own species
+    ///   and nothing else**: the app keeps playing with the rest, and the
+    ///   grown-ups' area can name the broken one and offer to delete it. A
+    ///   directory without a manifest is a download that never finished and is
+    ///   skipped without a word.
+    public func installations() -> (installed: [PackInstallation], failures: [PackDownloadError]) {
         let contents: [URL]
         do {
             contents = try FileManager.default.contentsOfDirectory(
@@ -169,15 +172,16 @@ public actor PackDownloader {
         } catch CocoaError.fileReadNoSuchFile {
             // Nothing has ever been downloaded. That is the normal state of a
             // fresh install, not a failure.
-            return []
+            return ([], [])
         } catch {
-            throw PackDownloadError.diskFailure(
+            return ([], [.diskFailure(
                 path: packsDirectory.path(percentEncoded: false),
                 reason: error.localizedDescription,
-            )
+            )])
         }
 
-        var packs: [Pack] = []
+        var installed: [PackInstallation] = []
+        var failures: [PackDownloadError] = []
         for directory in contents.sorted(by: { $0.lastPathComponent < $1.lastPathComponent }) {
             let packID = directory.lastPathComponent
             guard !packID.hasSuffix(Self.partialSuffix),
@@ -185,27 +189,23 @@ public actor PackDownloader {
             else {
                 continue
             }
-            try packs.append(decodeManifest(data, expecting: packID))
-        }
-        return packs
-    }
 
-    /// Opens an installed pack, the way `PackCatalog.bundled()` opens the one
-    /// that ships with the app, so `photoURL(for:)`, `callURL(for:)` and
-    /// `speechURL(for:sentence:)` resolve its media too.
-    ///
-    /// The only way to a downloaded pack's files: this actor owns the layout
-    /// below `Packs/`, so no view ever assembles such a path itself.
-    public func catalog(for packID: String) throws -> PackCatalog {
-        guard Self.isSafeComponent(packID) else {
-            throw PackDownloadError.invalidPath(packID: packID, path: packID)
+            do {
+                try installed.append(PackInstallation(
+                    catalog: PackCatalog(
+                        pack: decodeManifest(data, expecting: packID),
+                        directory: directory,
+                    ),
+                    bytes: directory.directoryBytes(),
+                ))
+            } catch {
+                failures.append(
+                    error as? PackDownloadError
+                        ?? .manifestInvalid(packID: packID, reason: "\(error)"),
+                )
+            }
         }
-
-        let directory = packsDirectory.appending(path: packID)
-        guard let data = try? Data(contentsOf: directory.appending(path: Self.manifestName)) else {
-            throw PackDownloadError.notInstalled(packID: packID)
-        }
-        return try PackCatalog(pack: decodeManifest(data, expecting: packID), directory: directory)
+        return (installed, failures)
     }
 
     /// Removes a downloaded pack: the installed directory and a half

@@ -4,25 +4,31 @@ import os
 import ZilpZalpCore
 import ZilpZalpData
 
-/// What the shell knows: the species pack that ships inside the app, the
-/// profiles on this device, and which child is playing right now.
+/// What the shell knows: the species packs on this device, the profiles, and
+/// which child is playing right now.
 ///
-/// The pack is opened once at launch rather than when a game starts. A pack
-/// that cannot be read is a broken build, and a broken build should say so on
-/// a calm screen instead of dropping a child into a round with no birds in it.
-/// `try!` would turn the same mistake into a crash on a child's iPad, which is
-/// why the failure is a `nil` here and a sentence there. The profile store is
-/// treated the same way: a file that will not decode is a sentence for a
-/// grown-up, never a crash and never a silently emptied family.
+/// The packs are opened at launch rather than when a game starts, and a pack
+/// that cannot be read is a broken build — one that should say so on a calm
+/// screen instead of dropping a child into a round with no birds in it. `try!`
+/// would turn the same mistake into a crash on a child's iPad, which is why an
+/// empty ``PackLibrary`` reaches the shell and a sentence reaches the child.
+/// The profile store is treated the same way: a file that will not decode is a
+/// sentence for a grown-up, never a crash and never a silently emptied family.
 ///
 /// `@Observable` since #28 — the active profile changes while the app runs,
 /// and the whole shell hangs off which child it is.
 @MainActor
 @Observable
 final class AppModel {
-    /// `nil` only when `Bundle.module` carries no manifest, which
-    /// `mise run check` already guards through `tools/sync_bundled_packs.py`.
-    let catalog: PackCatalog?
+    /// The bundled pack, everything a grown-up has downloaded, and the one
+    /// component that talks to the network. See ``PackModel``.
+    ///
+    /// Here rather than inside the grown-ups' area for the same reason the
+    /// settings are: what a child plays with is read where no grown-up is
+    /// standing, and a download outlives the screen that started it.
+    let packs = PackModel(
+        directory: ScreenshotSeed.directory ?? .applicationSupportDirectory,
+    )
 
     /// What the grown-ups decided, for the whole device.
     ///
@@ -93,15 +99,15 @@ final class AppModel {
     ///
     /// Game 1 is always among them. Game 2 asks its question with a recorded
     /// call, so it is offered only where there are calls to ask with: at least
-    /// ``callsForGameTwo`` species of the open pack carrying one on disk.
+    /// ``callsForGameTwo`` species carrying one on disk, counted across every
+    /// installed pack.
     /// Below that the tile is absent rather than teased or locked, exactly as
     /// games 3 and 4 are (#31). Nothing else decides it — where the calls are,
     /// the game is (#138).
     ///
-    /// Computed rather than stored, as it was while a switch could change the
-    /// answer mid-run: the one pack is opened once at launch today, but packs
-    /// arrive and are deleted with #33, and a stored answer would then be one
-    /// the home screen could disagree with.
+    /// Computed rather than stored: packs arrive and are deleted in the
+    /// grown-ups' area while the app runs (#34), and a stored answer would be
+    /// one the home screen could disagree with.
     var games: [Game] {
         offersCalls ? [.names, .calls] : [.names]
     }
@@ -135,7 +141,7 @@ final class AppModel {
         Profile.dayKey(for: Date())
     }
 
-    /// How many species of a pack must carry a call before game 2 is worth
+    /// How many species must carry a call before game 2 is worth
     /// offering. Four is #31's line: below it a round would ask for the same
     /// two or three birds over and over, and a game like that teaches the
     /// tiles rather than the birds.
@@ -146,19 +152,10 @@ final class AppModel {
     /// question a child cannot answer, and ``PackCatalog/callURL(for:)`` is
     /// what the round itself will ask.
     private var offersCalls: Bool {
-        guard let catalog else { return false }
-        return catalog.pack.birds.count { catalog.callURL(for: $0) != nil } >= Self.callsForGameTwo
+        packs.speciesWithCalls >= Self.callsForGameTwo
     }
 
     init() {
-        do {
-            catalog = try PackCatalog.bundled()
-        } catch {
-            catalog = nil
-            let reason = String(describing: error)
-            Logger.packs.error("Bundled pack did not open: \(reason, privacy: .public)")
-        }
-
         do {
             store = try ProfileStore(
                 directory: ScreenshotSeed.directory ?? ProfileStore.applicationSupport(),
@@ -179,6 +176,9 @@ final class AppModel {
         // shell does not know yet is a limit that does not apply, and the
         // first tap on a game tile comes soon after this.
         await parental.load()
+        // And the packs: which games the home screen offers depends on what
+        // is installed, and the first tap comes soon after this.
+        await packs.load()
 
         guard let store else {
             isLoaded = true
@@ -307,15 +307,11 @@ final class AppModel {
 private extension Logger {
     /// The app's bundle identifier from `project.yml`.
     ///
-    /// `Logger.audio` in `Audio/AudioSession.swift` still spells it out for
-    /// itself. Pulling all three onto this constant is a one-line change to
-    /// that file, and `Audio/` belongs to another branch tonight — so the
-    /// merge is worth more than the tidiness, and this is the note that the
-    /// third copy has now arrived.
+    /// `Logger.audio` in `Audio/AudioSession.swift`, `Logger.parents` and
+    /// `Logger.packs` spell it out for themselves. Pulling them onto one
+    /// constant means editing files other branches are working in, so it waits
+    /// for a change that owns them.
     static let subsystem = "com.schnaq.zilpzalp"
-
-    /// Opening and reading species packs.
-    static let packs = Logger(subsystem: subsystem, category: "packs")
 
     /// Opening, reading and writing the profile store.
     static let profiles = Logger(subsystem: subsystem, category: "profiles")

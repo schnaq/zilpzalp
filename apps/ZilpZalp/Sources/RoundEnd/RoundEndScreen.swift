@@ -28,7 +28,7 @@ struct RoundEndScreen: View {
     /// The pack the round was drawn from, for the sticker's photo, name and
     /// credit. Optional because ``RootView`` holds it optionally; without it
     /// the sticker falls back to its star glyph rather than to a hole.
-    let catalog: PackCatalog?
+    let library: PackLibrary
 
     /// Books the round onto the playing child and answers with what it
     /// changed, `nil` when nothing was written. Idempotent; see
@@ -317,7 +317,7 @@ struct RoundEndScreen: View {
     /// The guards are what make each part happen once: this runs again every
     /// time the child comes back from the album.
     private func celebrate() async {
-        sticker = sticker ?? RoundEndSticker(species: result.celebratedSpecies, from: catalog)
+        sticker = sticker ?? RoundEndSticker(species: result.celebratedSpecies, from: library)
         outcome = await record(result)
         // Left while the round was being written down: the praise would
         // land over whatever replaced this screen.
@@ -325,7 +325,7 @@ struct RoundEndScreen: View {
         settled = true
 
         if announcer == nil {
-            let voice = SpeechAnnouncer(pack: catalog)
+            let voice = SpeechAnnouncer(library: library)
             announcer = voice
             voice.announce(spokenPraise)
         }

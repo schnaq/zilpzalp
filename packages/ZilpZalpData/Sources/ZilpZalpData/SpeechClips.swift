@@ -11,25 +11,27 @@ import Foundation
 ///
 /// Here rather than beside the announcer in the app target for one reason: the
 /// app has no tests that run without a simulator, and this is the branch that
-/// has to be right. Both catalogs are optional because both can be missing —
-/// a build whose bundled pack did not open, and a fixed set that is empty
-/// until the sentences have been recorded.
+/// has to be right. Both sides can be missing — a build whose bundled pack did
+/// not open leaves an empty library, and the fixed set stays `nil` until the
+/// sentences have been recorded.
 public struct SpeechClips: Sendable {
-    /// The pack the species sentences belong to. `nil` where a screen has no
-    /// pack at all, which is every screen that only says fixed sentences.
-    private let pack: PackCatalog?
+    /// The packs the species sentences belong to — every installed one, not
+    /// only the bundled pack: a downloaded species is asked for out loud like
+    /// any other. ``PackLibrary/empty`` where a screen has no pack at all,
+    /// which is every screen that only says fixed sentences.
+    private let library: PackLibrary
 
     /// The sentences that belong to no species, shipped inside the app.
     private let fixed: SpeechCatalog?
 
-    public init(pack: PackCatalog?, fixed: SpeechCatalog?) {
-        self.pack = pack
+    public init(library: PackLibrary, fixed: SpeechCatalog?) {
+        self.library = library
         self.fixed = fixed
     }
 
     /// The clip that says `sentence`, `nil` when no file on disk does.
     ///
-    /// One catalog is asked, never both: a sentence about a species is the
+    /// One catalog is asked, never both: a sentence about a species is its
     /// pack's — "Wo ist die Amsel?" is recorded once per bird and travels with
     /// the birds — and a sentence about none is the fixed set's. The two key
     /// sets are disjoint by construction (`tools/fetch_media/speech`), so a
@@ -42,6 +44,6 @@ public struct SpeechClips: Sendable {
     ///     belongs to none.
     public func url(for sentence: String, about bird: Bird?) -> URL? {
         guard let bird else { return fixed?.url(for: sentence) }
-        return pack?.speechURL(for: bird, sentence: sentence)
+        return library.speechURL(for: bird, sentence: sentence)
     }
 }
