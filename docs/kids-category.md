@@ -148,13 +148,15 @@ should be split:
   link-outs, purchases, and "other distractions" — it does not require
   gating a settings area, so this is an unobjectionable access-control
   choice either way.
-- **At the moment an external URL is about to open** (Credits screen
-  source/license links), add a task-based gate — a short math or
-  question-answer challenge, with a voiceover prompt, matching the
-  documented pattern exactly. Do not rely on `LAContext` alone to
-  satisfy 1.3 for this specific action; treat it as unverified against
-  App Review until tested, and design the cheap fallback (task gate) in
-  from the start rather than retrofitting it after a rejection.
+- **At the moment an external URL is about to open** (the public „Über
+  ZilpZalp" screen — privacy policy, website, support address — and the
+  credits it pushes, with their source and licence links), add a
+  task-based gate — a short math or question-answer challenge, with a
+  voiceover prompt, matching the documented pattern exactly. Do not
+  rely on `LAContext` alone to satisfy 1.3 for this specific action;
+  treat it as unverified against App Review until tested, and design
+  the cheap fallback (task gate) in from the start rather than
+  retrofitting it after a rejection.
 
 ---
 
