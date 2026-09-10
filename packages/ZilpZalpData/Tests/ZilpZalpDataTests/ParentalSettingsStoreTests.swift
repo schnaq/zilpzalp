@@ -26,7 +26,6 @@ struct ParentalSettingsStoreTests {
         try await withTemporaryStore { store, _ in
             let settings = try await store.load()
 
-            #expect(settings.showNames)
             #expect(settings.dailyLimitMinutes == nil)
         }
     }
@@ -43,7 +42,7 @@ struct ParentalSettingsStoreTests {
     @Test("what was saved comes back")
     func roundTripsEveryField() async throws {
         try await withTemporaryStore { store, _ in
-            let saved = ParentalSettings(showNames: false, dailyLimitMinutes: 30)
+            let saved = ParentalSettings(dailyLimitMinutes: 30)
             try await store.save(saved)
 
             #expect(try await store.load() == saved)
@@ -96,7 +95,7 @@ struct ParentalSettingsStoreTests {
             try await store.save(ParentalSettings(dailyLimitMinutes: 15))
 
             let written = try String(contentsOf: settingsFile(under: root), encoding: .utf8)
-            let positions = try ["dailyLimitMinutes", "schemaVersion", "showNames"]
+            let positions = try ["dailyLimitMinutes", "schemaVersion"]
                 .map { try #require(written.range(of: "\"\($0)\"")).lowerBound }
             #expect(positions == positions.sorted())
         }
@@ -115,10 +114,9 @@ struct ParentalSettingsStoreTests {
     func overwritesCleanly() async throws {
         try await withTemporaryStore { store, _ in
             try await store.save(ParentalSettings(dailyLimitMinutes: 45))
-            try await store.save(ParentalSettings(showNames: false))
+            try await store.save(ParentalSettings())
 
             let settings = try await store.load()
-            #expect(!settings.showNames)
             #expect(settings.dailyLimitMinutes == nil)
         }
     }
@@ -126,7 +124,7 @@ struct ParentalSettingsStoreTests {
     @Test("a file that is not this document is refused, not guessed at")
     func refusesACorruptFile() async throws {
         try await withTemporaryStore { store, root in
-            try write("{ \"schemaVersion\": 1, \"showNames\":", to: root)
+            try write("{ \"schemaVersion\": 1, \"dailyLimitMinutes\":", to: root)
 
             await #expect(throws: ParentalSettingsStoreError.self) {
                 try await store.load()
@@ -138,7 +136,7 @@ struct ParentalSettingsStoreTests {
     func refusesTheWrongTypes() async throws {
         try await withTemporaryStore { store, root in
             try write(
-                #"{"schemaVersion": 1, "showNames": "ja"}"#,
+                #"{"schemaVersion": 1, "dailyLimitMinutes": "dreißig"}"#,
                 to: root,
             )
 
@@ -154,7 +152,7 @@ struct ParentalSettingsStoreTests {
     func refusesAHigherSchemaVersion() async throws {
         try await withTemporaryStore { store, root in
             try write(
-                #"{"schemaVersion": 2, "showNames": false}"#,
+                #"{"schemaVersion": 2, "dailyLimitMinutes": 30}"#,
                 to: root,
             )
 
@@ -173,7 +171,7 @@ struct ParentalSettingsStoreTests {
     @Test("a file without a version is a broken file")
     func refusesAFileWithoutAVersion() async throws {
         try await withTemporaryStore { store, root in
-            try write(#"{"showNames": true}"#, to: root)
+            try write(#"{"dailyLimitMinutes": 30}"#, to: root)
 
             await #expect(throws: ParentalSettingsStoreError.self) {
                 try await store.load()
@@ -188,11 +186,27 @@ struct ParentalSettingsStoreTests {
     func ignoresTheDroppedCallsKey() async throws {
         try await withTemporaryStore { store, root in
             try write(
-                #"{"schemaVersion": 1, "callsEnabled": false, "showNames": false}"#,
+                #"{"schemaVersion": 1, "callsEnabled": false, "dailyLimitMinutes": 30}"#,
                 to: root,
             )
 
-            #expect(try await store.load() == ParentalSettings(showNames: false))
+            #expect(try await store.load() == ParentalSettings(dailyLimitMinutes: 30))
+        }
+    }
+
+    /// Every device that has been to the grown-ups' area before #208 has a
+    /// file naming `showNames`. The switch is gone and the version stayed at
+    /// 1: synthesised decoding skips a key it does not know, so that key has
+    /// to read as what it now is: nothing.
+    @Test("a file from before the names switch was dropped still reads")
+    func ignoresTheDroppedShowNamesKey() async throws {
+        try await withTemporaryStore { store, root in
+            try write(
+                #"{"schemaVersion": 1, "dailyLimitMinutes": 30, "showNames": false}"#,
+                to: root,
+            )
+
+            #expect(try await store.load() == ParentalSettings(dailyLimitMinutes: 30))
         }
     }
 

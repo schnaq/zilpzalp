@@ -577,30 +577,6 @@
         }
       }
     },
-    "parents.names.hint" : {
-      "comment" : "Under the name switch",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vogelnamen unter den Bildern einblenden"
-          }
-        }
-      }
-    },
-    "parents.names.title" : {
-      "comment" : "Switch in the grown-ups' area: whether the bird's name is printed under its picture",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Namen anzeigen"
-          }
-        }
-      }
-    },
     "parents.notice" : {
       "comment" : "Heading of the card in the grown-ups' area that states what the app does not do",
       "extractionState" : "manual",

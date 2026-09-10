@@ -22,33 +22,27 @@ public enum ParentalSettingsStoreError: Error, Sendable {
 /// limit (#36) is the one value that will grow a per-profile twin, which is
 /// why it sits here as a plain number and not as a type yet.
 public struct ParentalSettings: Codable, Sendable, Hashable {
-    /// Whether the bird's name is printed under its picture. Off by default it
-    /// is not — a grown-up reading along wants the word, and a child who
-    /// cannot read is not disturbed by it.
-    public var showNames: Bool
     /// Minutes of play per day, `nil` for no limit. Counted in `ZilpZalpCore`
     /// from values the shell passes in (#36); nothing here keeps a clock.
     public var dailyLimitMinutes: Int?
 
     /// The state a device that has never been to the grown-ups' area is in:
-    /// everything on, nothing limited.
+    /// nothing limited.
     public init(
-        showNames: Bool = true,
         dailyLimitMinutes: Int? = nil,
     ) {
-        self.showNames = showNames
         self.dailyLimitMinutes = dailyLimitMinutes
     }
 }
 
 /// Reads and writes `Settings/parental.json` under the directory it is given.
 ///
-/// An actor because the screen writes on every flipped switch while the games
-/// read: one file, one owner of it. The directory is a parameter rather than
+/// An actor because the screen writes on every change while the games read:
+/// one file, one owner of it. The directory is a parameter rather than
 /// `URL.applicationSupportDirectory` so the tests run against a temporary one
 /// and never touch the machine they run on.
 ///
-/// Nothing is cached. A settings file is two fields read at most once per
+/// Nothing is cached. A settings file is one field read at most once per
 /// screen, and a cache would be one more thing that can be stale.
 public actor ParentalSettingsStore {
     /// The shape this store writes. Raised only together with a migration
@@ -154,25 +148,23 @@ private struct SchemaProbe: Decodable {
 /// is ``SchemaProbe``'s job, and that works whatever order the file is in.
 private struct Document: Codable {
     let schemaVersion: Int
-    let showNames: Bool
     let dailyLimitMinutes: Int?
 
     /// Decoding is synthesised: for an `Int?` it already reads both spellings
     /// of "no limit", the explicit `null` this store writes and an absent key.
     ///
     /// It also passes over a key it does not know, and that is why dropping
-    /// `callsEnabled` (#138) left the version at 1: every file already on a
-    /// device names the setting, and every one of them still reads.
+    /// `callsEnabled` (#138) and `showNames` (#208) left the version at 1:
+    /// every file already on a device may still name one or both settings,
+    /// and every one of them still reads.
     var settings: ParentalSettings {
         ParentalSettings(
-            showNames: showNames,
             dailyLimitMinutes: dailyLimitMinutes,
         )
     }
 
     init(settings: ParentalSettings) {
         schemaVersion = ParentalSettingsStore.schemaVersion
-        showNames = settings.showNames
         dailyLimitMinutes = settings.dailyLimitMinutes
     }
 
@@ -182,7 +174,6 @@ private struct Document: Codable {
     func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(schemaVersion, forKey: .schemaVersion)
-        try container.encode(showNames, forKey: .showNames)
         if let dailyLimitMinutes {
             try container.encode(dailyLimitMinutes, forKey: .dailyLimitMinutes)
         } else {

@@ -57,9 +57,8 @@ final class ParentalSettingsModel {
     /// The screen is updated first and does not wait for the disk: a switch
     /// that lags behind the finger reads as a broken switch.
     ///
-    /// Generic over the field's type rather than one method per type: the
-    /// daily limit is an `Int?` and the switch is a `Bool`, and the ordering
-    /// above is what both of them need.
+    /// Generic over the field's type rather than one method per field: every
+    /// setting needs the same ordering above, whatever its type.
     func set<Value>(_ field: WritableKeyPath<ParentalSettings, Value>, to value: Value) {
         settings[keyPath: field] = value
 

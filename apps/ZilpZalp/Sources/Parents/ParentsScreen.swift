@@ -3,14 +3,15 @@ import ZilpZalpCore
 import ZilpZalpData
 import ZilpZalpUI
 
-/// The grown-ups' area: the one screen with small type, full sentences and a
-/// switch. After `design/ui_kits/ipad_app/GrownupsScreen.jsx`, minus the two
-/// rows v1 has nothing behind — "Musik" (there is none) and "Sprache" (German
-/// only until #46) — and minus "Vogelstimmen", the one row v1 does have
-/// something behind and deliberately does not offer: where there are calls,
-/// game 2 is there, and a grown-up who wants quiet turns the device down
-/// (#138). The design's "Pakete" row is a card of its own here, because packs
-/// are a list that changes rather than a setting — see ``PacksSection``.
+/// The grown-ups' area: the one screen with small type and full sentences.
+/// After `design/ui_kits/ipad_app/GrownupsScreen.jsx`, minus the rows v1 has
+/// nothing behind — "Musik" (there is none) and "Sprache" (German only until
+/// #46) — minus "Vogelstimmen", the one row v1 does have something behind and
+/// deliberately does not offer: where there are calls, game 2 is there, and a
+/// grown-up who wants quiet turns the device down (#138) — and minus "Namen
+/// anzeigen", which never had a name to show (#208). The design's "Pakete"
+/// row is a card of its own here, because packs are a list that changes
+/// rather than a setting — see ``PacksSection``.
 ///
 /// A door in front of it, and the door has two keys. The device lock
 /// (``ParentsLock``) is the normal one. On a device with neither a code nor a
@@ -230,12 +231,6 @@ struct ParentsScreen: View {
         ZCard(padding: 0) {
             VStack(spacing: 0) {
                 SettingRow(
-                    title: String(localized: "parents.names.title"),
-                    hint: String(localized: "parents.names.hint"),
-                    icon: .type,
-                    isOn: switchFor(\.showNames),
-                )
-                SettingRow(
                     title: String(localized: "parents.playtime.title"),
                     hint: String(localized: "parents.playtime.hint"),
                     icon: .clock,
@@ -350,16 +345,6 @@ struct ParentsScreen: View {
     private func label(forLimit minutes: Int?) -> String {
         guard let minutes else { return String(localized: "parents.playtime.none") }
         return String(format: String(localized: "parents.playtime.minutes"), minutes)
-    }
-
-    /// One switch, reading and writing through the store. Not a `@Bindable`
-    /// path into the model: an assignment has to reach the disk, and only a
-    /// setter can take it there.
-    private func switchFor(_ field: WritableKeyPath<ParentalSettings, Bool>) -> Binding<Bool> {
-        Binding(
-            get: { parental.settings[keyPath: field] },
-            set: { parental.set(field, to: $0) },
-        )
     }
 }
 
