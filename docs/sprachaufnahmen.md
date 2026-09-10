@@ -72,31 +72,70 @@ second voice in the same manifest is refused rather than merged.
 cannot hear whether a sentence is friendly, and nothing audible goes into this
 repository unheard.
 
-## Rendering with ElevenLabs
+## Rendering with Google Cloud Text-to-Speech
 
-The other way to produce a clip is to render it. ElevenLabs is the vendor
-decision 1 of the plan settled on, for one reason: it is the only one whose
-terms were read at the source and found to grant both commercial use and
-**ownership of the output** (EEA ToS §1(c) and §4(c)(ii)). Ownership is what
-lets this project publish a clip under CC BY 4.0 at all.
+The other way to produce a clip is to render it, and **Google Cloud
+Text-to-Speech is the renderer this project uses** (issue #234). Chirp 3 HD
+speaks native German at the current top tier, everything the app says is a few
+thousand characters a month against a free tier of a million, and the grant is
+the plainest of the three that were read at the source:
 
-Three conditions come with that grant, and none of them is code:
+> "You can use the audio data files you create using Cloud Text-to-Speech to
+> power your applications […]"
+> — <https://docs.cloud.google.com/text-to-speech/docs/basics>
 
-- the account is **schnaq GmbH's**, not a personal one;
-- the clips are rendered **while the paid subscription is active** — the free
-  tier is non-commercial, and content generated outside a paid period is not
-  covered. **Starter ($5–6 per month)** is enough: everything the app says is
-  a few thousand characters, which is one month;
-- the **Sound Effects** product is never used for a shipped asset (its
-  Prohibited Use Policy §9(c) forbids exactly the "isolated files" pattern
-  this pipeline is). Text to speech is unaffected.
+No attribution is owed and no disclosure — Azure would have required one, and
+that is part of why it did not win. What Google's terms do **not** say in
+writing is that the output is ours; section 2.1 of the plan records that no
+ownership clause could be read at the source, and no prohibition either.
+Publishing the clips under CC BY 4.0 is therefore a decision (#234), not a
+quotation. It changes nothing downstream: the gate, the credits screen and the
+`License` enum all take CC BY 4.0 as they stand.
+
+**ElevenLabs stays in the tree as `speech/elevenlabs.py` and is not used.** It
+was built first (#221, decision 1 of the plan) and its terms are the clearest
+of all — commercial use and ownership of the output on any paid tier — but the
+account is on the free tier, which is non-commercial and does not serve library
+voices through the API. If that ever changes, the adapter is `--provider
+elevenlabs` and needs no work; nothing else in the pipeline knows the
+difference.
+
+### Setting the project up, once
+
+This is Christian's, and it is done once:
+
+1. A **Google Cloud project** for it — `zilpzalp-speech` is a good name — with
+   **billing attached**. The free tier is a million characters a month for
+   Chirp 3 HD, but no project renders anything without a billing account.
+2. Enable **`texttospeech.googleapis.com`** (Cloud Text-to-Speech API) in that
+   project. This is the single commonest first-day failure, and it comes back
+   as a 403 that names the API.
+3. A **service account** in the same project — `zilpzalp-speech-render` — with
+   the narrowest role the picker offers for Text-to-Speech — **Cloud
+   Text-to-Speech User**, `roles/cloudtts.user` as this was written. Take the
+   name from the picker rather than from here; a wrong role shows up as a 403
+   at the first render and nowhere earlier. If the picker offers nothing for
+   Text-to-Speech at all, the API is not enabled yet (step 2). Nothing here
+   needs Editor or Owner.
+4. **Keys → Add key → Create new key → JSON.** Download it once; Google keeps
+   no copy. A newer organisation may refuse this with a policy error
+   (`iam.disableServiceAccountKeyCreation`) — the constraint has to be lifted
+   for that project before a key can be created at all.
 
 ### The key
 
-`ELEVENLABS_API_KEY`, in Infisical under environment `dev`, path `/` — beside
-`XENO_CANTO_API_KEY`. It never enters the repository and never a log; the tool
-takes its key in a header and removes it from every message it prints
-(`fetch_media.keys`). Every command below is wrapped:
+`GOOGLE_TTS_SERVICE_ACCOUNT_JSON`, in Infisical under environment `dev`, path
+`/` — beside `XENO_CANTO_API_KEY`. It holds the **whole downloaded JSON file**
+as one value, newlines in the private key and all; nothing is extracted from it
+by hand.
+
+The tool signs a JWT with the private key inside it, exchanges that at
+`https://oauth2.googleapis.com/token` for an access token good for an hour, and
+sends the token as a bearer. Four things therefore exist that must never reach a
+log — the JSON, the private key inside it, the assertion and the token — and the
+adapter removes all four from every message it prints (`fetch_media.keys` and
+`speech/google.py`). The key never enters the repository. Every command below is
+wrapped:
 
 ```
 infisical run --env=dev --path=/ -- mise run fetch-media speech …
@@ -105,19 +144,25 @@ infisical run --env=dev --path=/ -- mise run fetch-media speech …
 ### Choosing a voice
 
 There is no default voice, on purpose: which voice a child hears is a decision,
-not a fallback. List what the account offers, listen to them in the ElevenLabs
-dashboard, and pass one to `--voice` — by id or by name.
+not a fallback. List the German Chirp 3 HD voices, listen to them in the Google
+Cloud console's Text-to-Speech demo, and pass one to `--voice` — by its whole
+name or by the short one after the last dash.
 
 ```
 infisical run --env=dev --path=/ -- mise run fetch-media speech voices \
-    --provider elevenlabs
+    --provider google
 ```
 
-The chosen voice becomes the manifest's `voice` block: „Stimme: <name>
-(ElevenLabs)", CC BY 4.0, this document as the source. One manifest carries one
-voice, so rendering a pack a second time with a different `--voice` is refused
-rather than merged — a change of voice means re-rendering everything in that
-manifest (decision 7: the app does not mix voices).
+Each line is the voice's full name, its short name, its gender and its natural
+sample rate — `de-DE-Chirp3-HD-Aoede  Aoede  female, 24000 Hz`. Only de-DE
+Chirp 3 HD voices are listed; the endpoint answers with every family in every
+language, and a list nobody can read is not a list.
+
+The chosen voice becomes the manifest's `voice` block: „Stimme: <name> (Google
+Cloud Text-to-Speech)", CC BY 4.0, this document as the source. One manifest
+carries one voice, so rendering a pack a second time with a different `--voice`
+is refused rather than merged — a change of voice means re-rendering everything
+in that manifest (decision 7: the app does not mix voices).
 
 ### Rendering
 
@@ -125,7 +170,7 @@ One sentence for one bird:
 
 ```
 infisical run --env=dev --path=/ -- mise run fetch-media speech render \
-    --provider elevenlabs --voice "<name>" \
+    --provider google --voice de-DE-Chirp3-HD-Aoede \
     --pack deutschland --species amsel --sentence collection.name
 ```
 
@@ -133,7 +178,7 @@ Every species' name line of a pack — no `--species`, so every bird in it:
 
 ```
 infisical run --env=dev --path=/ -- mise run fetch-media speech render \
-    --provider elevenlabs --voice "<name>" \
+    --provider google --voice de-DE-Chirp3-HD-Aoede \
     --pack deutschland --sentence collection.name
 ```
 
@@ -141,19 +186,21 @@ Everything a pack says, all three species sentences, is the same command
 without `--sentence`; the fixed set is `--set fixed --sentence …`, which names
 its sentences explicitly. Every run prints the number of characters it is about
 to render before it renders them, and refuses to go over `--max-chars` (30000
-by default): a paid provider bills characters, so the count is the price, and
-the cap is there for the run that was meant to be one bird.
+by default): a provider bills characters, so the count is the price, and the cap
+is there for the run that was meant to be one bird.
 
-The model is `eleven_multilingual_v2` with a fixed seed and fixed voice
-settings. Determinism is best effort — ElevenLabs says so — so two renders of
-one sentence may differ slightly. Re-render one clip rather than a pack.
+The request is deterministic as far as the API allows — `speakingRate` 1.0,
+spelled out rather than defaulted. There is no seed, so two renders of one
+sentence may differ slightly. Re-render one clip rather than a pack. `pitch` is
+deliberately not sent: Chirp 3 HD documents no such field, and 0 would mean
+"unchanged" in any case.
 
 ### The audio
 
-`pcm_24000` is the best format the Starter tier serves: 44.1 kHz PCM needs Pro
-and 192 kbps MP3 needs Creator. It arrives as raw samples, the tool puts a WAV
-header on them, and from there a rendered clip goes through exactly the same
-trim, normalisation and AAC encoding as an imported take.
+`LINEAR16` at 24 kHz, which is what Chirp 3 HD reports as its natural rate. It
+arrives base64-encoded as a whole WAV; the tool unwraps it, and from there a
+rendered clip goes through exactly the same trim, normalisation and AAC
+encoding as an imported take.
 
 **Listen to every clip before you commit it**, exactly as with a take. A
 synthetic voice mispronounces bird names — `pronunciation` in the pack manifest
@@ -164,6 +211,6 @@ is how that is fixed, and the tool speaks it where it is set.
 A recording made for this project is published under **CC BY 4.0**, like the
 photos and the calls, and `--attribution` is how the credits screen names the
 voice. On a render the adapter names it instead of `--attribution` — „Stimme:
-<name> (ElevenLabs)" — under the same licence, which the vendor's terms leave
-ours to give. The gate accepts CC0, CC BY and CC BY-SA and nothing else — a
-voice that cannot be published under one of them cannot ship.
+<name> (Google Cloud Text-to-Speech)" — under the same licence. The gate accepts
+CC0, CC BY and CC BY-SA and nothing else — a voice that cannot be published
+under one of them cannot ship.

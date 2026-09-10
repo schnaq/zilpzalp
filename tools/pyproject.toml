@@ -20,6 +20,12 @@ description = "Curation tools for the ZilpZalp media pipeline"
 requires-python = ">=3.13,<3.14"
 dependencies = [
   "boto3>=1.40",
+  # RS256 for `speech --provider google`: a service-account key buys an access
+  # token by signing a JWT, and this is the one thing in that flow the standard
+  # library cannot do. Deliberately not `google-auth` and not `pyjwt` — the
+  # assertion is twenty lines in speech/google.py, and one dependency that only
+  # signs is a smaller surface than a client that also speaks HTTP.
+  "cryptography>=50.0.1",
   "httpx>=0.28",
   "pillow>=11.3",
   "pillow-heif>=1.7",

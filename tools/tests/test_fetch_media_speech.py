@@ -2,9 +2,11 @@
 
 Nothing here reaches a vendor, and nothing reaches the repository: every test
 works on a throwaway pack, a throwaway fixed set and a throwaway String
-Catalog. `fake` produces tones and reaches nobody, and the ElevenLabs adapter
-is driven through an `httpx.MockTransport` — the rule `tools/tests/` already
-follows for iNaturalist and xeno-canto.
+Catalog. `fake` produces tones and reaches nobody, and the two vendor
+adapters are driven through an `httpx.MockTransport` — the rule `tools/tests/`
+already follows for iNaturalist and xeno-canto. No key is ever real: the
+Google tests generate an RSA key pair at run time, so that nothing that looks
+like a credential is ever committed.
 
 Run from the repository root:
 uv run --locked --project tools python -m unittest discover -s tools/tests -t tools
@@ -13,6 +15,7 @@ uv run --locked --project tools python -m unittest discover -s tools/tests -t to
 from __future__ import annotations
 
 import array
+import base64
 import contextlib
 import io
 import json
@@ -21,15 +24,41 @@ import unittest
 import wave
 from pathlib import Path
 from unittest import mock
+from urllib.parse import parse_qs
 
 import httpx
+from cryptography.hazmat.primitives import hashes, serialization
+from cryptography.hazmat.primitives.asymmetric import padding, rsa
 
 from fetch_media import audio, cli, keys, manifest, speech
-from fetch_media.speech import clips, elevenlabs, fake, sentences
+from fetch_media.speech import clips, elevenlabs, fake, google, sentences
+from fetch_media.speech.provider import wav_bytes
 
 # Not a real key, and never a real one: it is here so that a test can assert
 # that it does not come out the other end of an error message.
 KEY = "sk-not-a-real-elevenlabs-key-0123456789"
+
+# Nor is this one: the token the fake endpoint grants, so that a test can
+# assert that it never reaches a message either.
+TOKEN = "ya29.not-a-real-google-access-token"
+
+TOKEN_URI = "https://oauth2.googleapis.com/token"
+
+# One de-DE Chirp 3 HD voice by each gender, plus the two kinds of entry the
+# filter has to drop: another family, and Chirp in another language.
+VOICE = "de-DE-Chirp3-HD-Aoede"
+GOOGLE_VOICES = {
+    "voices": [
+        {"name": VOICE, "languageCodes": ["de-DE"], "ssmlGender": "FEMALE",
+         "naturalSampleRateHertz": 24000},
+        {"name": "de-DE-Standard-A", "languageCodes": ["de-DE"], "ssmlGender": "FEMALE",
+         "naturalSampleRateHertz": 24000},
+        {"name": "de-DE-Chirp3-HD-Puck", "languageCodes": ["de-DE"], "ssmlGender": "MALE",
+         "naturalSampleRateHertz": 24000},
+        {"name": "en-US-Chirp3-HD-Aoede", "languageCodes": ["en-US"], "ssmlGender": "FEMALE",
+         "naturalSampleRateHertz": 24000},
+    ]
+}
 
 # Two voices as `GET /v1/voices` reports them, cut down to the fields the
 # adapter reads.
@@ -43,6 +72,20 @@ OFFERED = {
 # A quarter of a second of raw 16-bit little-endian samples, which is what
 # `pcm_24000` hands back: no header, no container, just the samples.
 SAMPLES = b"\x00\x01" * (elevenlabs.RATE // 4)
+
+# What Google's `audioContent` holds instead: LINEAR16 arrives as a whole WAV,
+# base64-encoded, so the fixture is the same samples with a header on them.
+SPOKEN = base64.b64encode(wav_bytes(SAMPLES, google.RATE)).decode()
+
+
+def padded(segment: str) -> bytes:
+    """One base64url segment of a JWT, back to bytes.
+
+    The padding a signer strips has to be put back before anything can decode
+    it — which is also the assertion that the adapter stripped it.
+    """
+    return base64.urlsafe_b64decode(segment + "=" * (-len(segment) % 4))
+
 
 # The three keys the base pack's species sentences use, as the app's own
 # catalogue spells them, plus the one that cannot become a clip.
@@ -181,8 +224,8 @@ class RealCatalogTests(unittest.TestCase):
 
 class ProviderTests(unittest.TestCase):
     def test_the_adapters_are_the_tones_and_the_vendor(self) -> None:
-        """Decisions 1 and 2: ElevenLabs speaks, `fake` reaches nobody."""
-        self.assertEqual(sorted(speech.PROVIDERS), ["elevenlabs", "fake"])
+        """#234: Google speaks, ElevenLabs stays unused, `fake` reaches nobody."""
+        self.assertEqual(sorted(speech.PROVIDERS), ["elevenlabs", "fake", "google"])
 
     def test_names_what_it_has_when_asked_for_something_else(self) -> None:
         with self.assertRaises(LookupError) as error:
@@ -389,6 +432,313 @@ class ElevenLabsTests(unittest.TestCase):
 
         with self.assertRaises(elevenlabs.ElevenLabsError):
             self.provider(refuse).voices()
+
+
+class GoogleTests(unittest.TestCase):
+    """The renderer #234 picked, driven through a transport that reaches nobody.
+
+    The service-account key is generated here rather than committed: it would
+    be a private key in a repository whatever its provenance, and generating
+    one costs a tenth of a second.
+    """
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.private = rsa.generate_private_key(public_exponent=65537, key_size=2048)
+        pem = cls.private.private_bytes(
+            encoding=serialization.Encoding.PEM,
+            format=serialization.PrivateFormat.PKCS8,
+            encryption_algorithm=serialization.NoEncryption(),
+        ).decode()
+        cls.account = {
+            "type": "service_account",
+            "project_id": "zilpzalp-speech",
+            "client_email": "speech@zilpzalp-speech.iam.gserviceaccount.com",
+            "private_key": pem,
+            "token_uri": TOKEN_URI,
+        }
+        cls.blob = json.dumps(cls.account)
+
+    def setUp(self) -> None:
+        self.requests: list[httpx.Request] = []
+        mock.patch.dict("os.environ", {keys.GOOGLE_TTS: self.blob}).start()
+        self.addCleanup(mock.patch.stopall)
+
+    def answer(self, request: httpx.Request) -> httpx.Response:
+        """What Google says when nothing is wrong."""
+        if request.url.host == "oauth2.googleapis.com":
+            return httpx.Response(200, json={"access_token": TOKEN, "expires_in": 3599})
+        if request.url.path.endswith("/voices"):
+            return httpx.Response(200, json=GOOGLE_VOICES)
+        return httpx.Response(200, json={"audioContent": SPOKEN})
+
+    def provider(self, answer=None) -> google.GoogleProvider:
+        """An adapter whose every request is answered by `answer`."""
+
+        def handle(request: httpx.Request) -> httpx.Response:
+            self.requests.append(request)
+            return (answer or self.answer)(request)
+
+        return google.GoogleProvider(transport=httpx.MockTransport(handle))
+
+    def granting(self, answer) -> google.GoogleProvider:
+        """An adapter whose token endpoint works and whose API answers `answer`."""
+
+        def handle(request: httpx.Request) -> httpx.Response:
+            if request.url.host == "oauth2.googleapis.com":
+                return self.answer(request)
+            return answer(request)
+
+        return self.provider(handle)
+
+    def synthesizing(self, answer) -> google.GoogleProvider:
+        """An adapter that resolves its voice normally and synthesises `answer`."""
+
+        def handle(request: httpx.Request) -> httpx.Response:
+            if request.url.path.endswith("text:synthesize"):
+                return answer(request)
+            return self.answer(request)
+
+        return self.provider(handle)
+
+    def refusing(self, status: int, payload: object) -> google.GoogleProvider:
+        """An adapter whose API refuses everything after a token was granted."""
+        return self.granting(lambda _: httpx.Response(status, json=payload))
+
+    def render(self, voice: str = VOICE) -> bytes:
+        return self.provider().render("Super gemacht! Amsel gesammelt!", voice)
+
+    def assertion(self) -> str:
+        """The JWT the last token request carried."""
+        for request in reversed(self.requests):
+            if request.url.host == "oauth2.googleapis.com":
+                return parse_qs(request.content.decode())["assertion"][0]
+        raise AssertionError("no token request was made")
+
+    def claims(self) -> dict:
+        return json.loads(padded(self.assertion().split(".")[1]))
+
+    def test_reads_its_key_from_the_environment_infisical_fills(self) -> None:
+        with mock.patch.dict("os.environ", {keys.GOOGLE_TTS: ""}), self.assertRaises(
+            RuntimeError
+        ) as error:
+            google.GoogleProvider()
+
+        self.assertIn(keys.GOOGLE_TTS, str(error.exception))
+        self.assertIn("infisical run", str(error.exception))
+
+    def test_refuses_a_value_that_is_not_a_service_account_key(self) -> None:
+        """An API key pasted into the variable is the likeliest mistake."""
+        for value in ("AIzaSyNotAServiceAccountKey", json.dumps({"type": "service_account"})):
+            with mock.patch.dict("os.environ", {keys.GOOGLE_TTS: value}):
+                with self.assertRaises(google.GoogleTTSError) as error:
+                    google.GoogleProvider()
+
+                self.assertIn(keys.GOOGLE_TTS, str(error.exception))
+                self.assertNotIn(value, str(error.exception))
+
+    def test_signs_an_assertion_the_token_endpoint_can_verify(self) -> None:
+        """RS256 over the real bytes, not a string that merely has two dots."""
+        self.render()
+        header, payload, signature = self.assertion().split(".")
+
+        self.assertEqual(json.loads(padded(header)), {"alg": "RS256", "typ": "JWT"})
+        self.private.public_key().verify(
+            padded(signature),
+            f"{header}.{payload}".encode(),
+            padding.PKCS1v15(),
+            hashes.SHA256(),
+        )
+
+    def test_asks_for_a_token_the_way_rfc_7523_does(self) -> None:
+        self.render()
+        asked = next(one for one in self.requests if one.url.host == "oauth2.googleapis.com")
+
+        self.assertEqual(asked.method, "POST")
+        self.assertEqual(str(asked.url), TOKEN_URI)
+        self.assertEqual(parse_qs(asked.content.decode())["grant_type"], [google.GRANT])
+
+    def test_claims_who_it_is_and_what_it_wants(self) -> None:
+        self.render()
+        claimed = self.claims()
+
+        self.assertEqual(claimed["iss"], self.account["client_email"])
+        self.assertEqual(claimed["scope"], "https://www.googleapis.com/auth/cloud-platform")
+        self.assertEqual(claimed["aud"], TOKEN_URI)
+        self.assertEqual(claimed["exp"] - claimed["iat"], google.TOKEN_LIFETIME)
+
+    def test_buys_one_token_for_a_whole_run(self) -> None:
+        """A token lasts an hour; a pack of 130 names must not buy 130."""
+        speaking = self.provider()
+        speaking.voice(VOICE)
+        speaking.render("Amsel", VOICE)
+        speaking.render("Star", VOICE)
+
+        bought = [one for one in self.requests if one.url.host == "oauth2.googleapis.com"]
+        self.assertEqual(len(bought), 1)
+
+    def test_carries_the_token_as_a_bearer_on_every_api_call(self) -> None:
+        self.render()
+        called = [one for one in self.requests if one.url.host != "oauth2.googleapis.com"]
+
+        self.assertTrue(called)
+        for request in called:
+            self.assertEqual(request.headers["Authorization"], f"Bearer {TOKEN}")
+
+    def test_asks_for_the_sentence_the_way_the_api_expects_it(self) -> None:
+        self.render()
+        spoken = self.requests[-1]
+
+        self.assertEqual(spoken.method, "POST")
+        self.assertEqual(spoken.url.path, "/v1/text:synthesize")
+
+        body = json.loads(spoken.content)
+        self.assertEqual(body["input"], {"text": "Super gemacht! Amsel gesammelt!"})
+        self.assertEqual(body["voice"], {"languageCode": "de-DE", "name": VOICE})
+        self.assertEqual(
+            body["audioConfig"],
+            {"audioEncoding": "LINEAR16", "sampleRateHertz": 24000, "speakingRate": 1.0},
+        )
+
+    def test_does_not_send_a_pitch(self) -> None:
+        """Chirp 3 HD documents no `pitch`, and 0 would mean nothing anyway."""
+        self.render()
+
+        self.assertNotIn("pitch", json.loads(self.requests[-1].content)["audioConfig"])
+
+    def test_unwraps_the_wav_the_api_answers_with(self) -> None:
+        """LINEAR16 arrives with a RIFF header; the samples come back once."""
+        with wave.open(io.BytesIO(self.render()), "rb") as handle:
+            self.assertEqual(handle.getnchannels(), 1)
+            self.assertEqual(handle.getsampwidth(), audio.SAMPLE_WIDTH)
+            self.assertEqual(handle.getframerate(), google.RATE)
+            self.assertEqual(handle.readframes(handle.getnframes()), SAMPLES)
+
+    def test_wraps_raw_samples_where_a_header_never_comes(self) -> None:
+        """Belt and braces: the same clip if the vendor ever serves them bare."""
+        raw = base64.b64encode(SAMPLES).decode()
+        speaking = self.synthesizing(lambda _: httpx.Response(200, json={"audioContent": raw}))
+
+        with wave.open(io.BytesIO(speaking.render("Amsel", VOICE)), "rb") as handle:
+            self.assertEqual(handle.getframerate(), google.RATE)
+            self.assertEqual(handle.readframes(handle.getnframes()), SAMPLES)
+
+    def test_says_so_when_no_audio_comes_back_at_all(self) -> None:
+        speaking = self.synthesizing(lambda _: httpx.Response(200, json={}))
+
+        with self.assertRaises(google.GoogleTTSError) as error:
+            speaking.render("Amsel", VOICE)
+
+        self.assertIn("audio", str(error.exception))
+
+    def test_lists_only_the_german_chirp_voices(self) -> None:
+        """The endpoint answers with every family; a person reads thirty names."""
+        offered = self.provider().voices()
+
+        self.assertEqual([option.id for option in offered], [VOICE, "de-DE-Chirp3-HD-Puck"])
+        self.assertEqual(offered[0].name, "Aoede")
+        self.assertEqual(offered[0].description, "female, 24000 Hz")
+        self.assertEqual(offered[1].description, "male, 24000 Hz")
+
+    def test_asks_which_voices_exist_only_once_per_run(self) -> None:
+        speaking = self.provider()
+        speaking.voice(VOICE)
+        speaking.render("Amsel", VOICE)
+
+        listings = [one for one in self.requests if one.url.path.endswith("/voices")]
+        self.assertEqual(len(listings), 1)
+
+    def test_takes_a_voice_by_its_short_name_as_well(self) -> None:
+        self.assertEqual(self.provider().chosen("Aoede").id, VOICE)
+        self.assertEqual(self.provider().chosen(VOICE).name, "Aoede")
+
+    def test_refuses_a_run_without_a_voice(self) -> None:
+        """No default: nobody chose it, and the pack would carry it for good."""
+        with self.assertRaises(ValueError) as error:
+            self.provider().render("Amsel")
+
+        self.assertIn("--voice", str(error.exception))
+
+    def test_names_the_voices_it_has_when_asked_for_another(self) -> None:
+        with self.assertRaises(LookupError) as error:
+            self.provider().chosen("Gisela")
+
+        self.assertIn(VOICE, str(error.exception))
+
+    def test_credits_the_voice_that_speaks_under_the_licence_we_chose(self) -> None:
+        voice = self.provider().voice(VOICE)
+
+        self.assertEqual(voice.license, "CC-BY-4.0")
+        self.assertEqual(voice.attribution, "Stimme: Aoede (Google Cloud Text-to-Speech)")
+        self.assertEqual(voice.source_url, speech.RECORDING_DOC)
+
+    def test_says_what_a_refusal_means(self) -> None:
+        expected = {
+            401: keys.GOOGLE_TTS,
+            403: "texttospeech.googleapis.com",
+            429: "wait and render again",
+            400: "speech voices --provider google",
+        }
+        for status, hint in expected.items():
+            with self.subTest(status=status):
+                speaking = self.refusing(status, {"error": {"message": "no", "status": "NO"}})
+
+                with self.assertRaises(google.GoogleTTSError) as error:
+                    speaking.render("Amsel", VOICE)
+
+                self.assertIn(str(status), str(error.exception))
+                self.assertIn(hint, str(error.exception))
+
+    def test_says_so_when_the_token_endpoint_refuses(self) -> None:
+        """The commonest first-day failure, and it is not the API's fault."""
+        refused = httpx.Response(
+            400, json={"error": "invalid_grant", "error_description": "Invalid JWT Signature."}
+        )
+
+        with self.assertRaises(google.GoogleTTSError) as error:
+            self.provider(lambda _: refused).voices()
+
+        self.assertIn("invalid_grant", str(error.exception))
+        self.assertIn("clock", str(error.exception))
+
+    def test_says_so_when_a_token_comes_back_empty(self) -> None:
+        with self.assertRaises(google.GoogleTTSError) as error:
+            self.provider(lambda _: httpx.Response(200, json={"expires_in": 3599})).voices()
+
+        self.assertIn("access token", str(error.exception))
+
+    def test_reads_a_body_that_is_not_json_at_all(self) -> None:
+        speaking = self.granting(lambda _: httpx.Response(502, content=b"<html>gateway</html>"))
+
+        with self.assertRaises(google.GoogleTTSError) as error:
+            speaking.voices()
+
+        self.assertIn("502", str(error.exception))
+
+    def test_reports_a_connection_that_never_answered(self) -> None:
+        def refuse(request: httpx.Request) -> httpx.Response:
+            raise httpx.ConnectError("nothing listening")
+
+        with self.assertRaises(google.GoogleTTSError):
+            self.provider(refuse).voices()
+
+    def test_never_repeats_a_secret_a_vendor_echoes_back(self) -> None:
+        """Four secrets, and only the first of them is in the environment."""
+
+        def echo(_: httpx.Request) -> httpx.Response:
+            # The token was bought before this call, so the assertion it
+            # carried is already in `self.requests` — the same one the adapter
+            # has to blank.
+            said = f"bad {self.blob} {self.account['private_key']} {self.assertion()} {TOKEN}"
+            return httpx.Response(401, json={"error": {"message": said}})
+
+        loud = self.synthesizing(echo)
+        with self.assertRaises(google.GoogleTTSError) as error:
+            loud.render("Amsel", VOICE)
+
+        told = str(error.exception)
+        for secret in (self.blob, self.account["private_key"], self.assertion(), TOKEN):
+            self.assertNotIn(secret, told)
 
 
 class StoreTests(unittest.TestCase):

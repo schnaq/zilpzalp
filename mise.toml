@@ -354,17 +354,23 @@ description = "Curate media: 'photos …', 'calls …', 'speech …', 'upload' �
 #       --species amsel --recording XC965144 --start 12.5
 #   infisical run --env=dev --path=/ -- mise run fetch-media upload --pack deutschland
 #   infisical run --env=dev --path=/ -- mise run fetch-media speech voices \
-#       --provider elevenlabs
+#       --provider google
 #   infisical run --env=dev --path=/ -- mise run fetch-media speech render \
-#       --provider elevenlabs --voice "<name>" --pack deutschland \
+#       --provider google --voice de-DE-Chirp3-HD-Aoede --pack deutschland \
 #       [--species amsel] [--sentence collection.name] [--max-chars 30000]
 #
 # The xeno-canto API v3 refuses every request without `XENO_CANTO_API_KEY`, and
-# the upload needs the bucket keys; both read them from the environment. The
-# ElevenLabs adapter reads `ELEVENLABS_API_KEY` the same way — `--provider
-# fake` reaches nobody and needs nothing. A render prints what it will cost in
-# characters and refuses to go over `--max-chars`, because that provider bills
-# by the character: docs/sprachaufnahmen.md.
+# the upload needs the bucket keys; both read them from the environment.
+#
+# The renderer is **Google Cloud Text-to-Speech** (Chirp 3 HD, de-DE), issue
+# #234. It reads `GOOGLE_TTS_SERVICE_ACCOUNT_JSON` — the whole downloaded
+# service-account key file in one variable, not a key string — signs a JWT with
+# it and exchanges that for an hour's access token. `--provider elevenlabs`
+# stays as the unused alternative #221 built, and `--provider fake` reaches
+# nobody and needs nothing. A render prints what it will cost in characters and
+# refuses to go over `--max-chars`, because a provider bills by the character.
+# The Google project, the API to enable and the service account are in
+# docs/sprachaufnahmen.md.
 #
 # Deliberately not the other way round. Wrapping the task itself would make
 # every subcommand demand an Infisical login, and the two that need nothing
