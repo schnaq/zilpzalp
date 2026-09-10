@@ -51,8 +51,8 @@ export function Screenshots() {
                 <Image
                   src={`/screenshots/${shot.file}`}
                   alt={shot.alt}
-                  width={1320}
-                  height={2868}
+                  width={560}
+                  height={1216}
                   unoptimized
                 />
               ) : (
