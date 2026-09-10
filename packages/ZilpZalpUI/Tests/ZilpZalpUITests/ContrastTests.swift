@@ -88,19 +88,30 @@ extension ContrastPair {
     static let all: [ContrastPair] = homeTile + pressables + glyphs + banners + badges + cards
         + surfaces
 
-    /// The one non-text pair worth pinning: `LedgePalette.clay`.
+    /// The two non-text pairs worth pinning, at the 3:1 SC 1.4.11 asks of a
+    /// graphic.
     ///
-    /// Issue #238 asked for a darker `clay500` because `textOnColor` on it is
-    /// 4.25:1. No text is ever set on that palette — `ZButton.Tone` has no
-    /// clay, so `IconButton` is its only user and a glyph is judged by SC
-    /// 1.4.11 at 3:1, which it clears. It is listed rather than left out so
-    /// that the reasoning is a test rather than a paragraph, and so that a
-    /// future clay button with a label meets a threshold that has moved.
+    /// `LedgePalette.clay` because issue #238 asked for a darker `clay500`,
+    /// reading `textOnColor` on it as text at 4.25:1. No text is ever set on
+    /// that palette — `ZButton.Tone` has no clay, so `IconButton` is its only
+    /// user and a glyph is not text. It is listed rather than left out so that
+    /// the reasoning is a test rather than a paragraph, and so that a future
+    /// clay button with a label meets a threshold that has moved.
+    ///
+    /// `RewardSticker.Tone.hoopoe` because the darker `orange700` lifted it
+    /// from 3.12:1 to 3.50:1, over a floor it had been under — a claim that
+    /// deserves the same guard as the text ones.
     static let glyphs: [ContrastPair] = [
         ContrastPair(
             name: "IconButton .clay glyph",
             foreground: ZColor.textOnColor,
             background: ZColor.info,
+            minimum: WCAG.largeText,
+        ),
+        ContrastPair(
+            name: "RewardSticker .hoopoe glyph",
+            foreground: ZColor.orange700,
+            background: ZColor.orange200,
             minimum: WCAG.largeText,
         ),
     ]

@@ -82,11 +82,15 @@ struct RoundEndReward: View {
         // is genuinely new. A bird already in the album is simply there, and
         // so is its arrival.
         //
-        // The closure form because ``popped`` is written twice: `outcome`
-        // arrives one frame before `settled`, so an earned sticker goes true,
-        // false, true. Only the rise into place is felt.
-        .sensoryFeedback(trigger: popped) { was, now in
-            was || !now || !earnedSticker ? nil : .success
+        // On ``settled`` and not on ``popped``, which looks like the thing
+        // that moves and is not: `celebrate()` writes `outcome` and `settled`
+        // back to back without an `await` between them, so SwiftUI coalesces
+        // both into one body pass and ``popped`` goes from `true` to `true`
+        // — a trigger that never changes and a haptic that never fires.
+        // `settled` turns over once, and `earnedSticker` is already answered
+        // by the time it does.
+        .sensoryFeedback(trigger: settled) { _, now in
+            now && earnedSticker ? .success : nil
         }
     }
 

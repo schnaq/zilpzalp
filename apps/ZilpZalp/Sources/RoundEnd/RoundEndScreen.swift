@@ -330,6 +330,8 @@ struct RoundEndScreen: View {
         let arriving = !settled
         settled = true
 
+        // Not `SpeechAnnouncer.isEnabled`: the grown-ups' switch and VoiceOver
+        // are different questions — see ``announceToVoiceOver()``.
         guard !voiceOverIsOn else {
             if arriving {
                 await announceToVoiceOver()
