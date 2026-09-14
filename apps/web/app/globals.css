@@ -374,8 +374,11 @@ section {
   margin-top: var(--s-6);
 }
 
-/* "Bald im App Store" — a pill, deliberately not an App Store badge: Apple's
-   badge artwork may only be used as a link to a published app. */
+/* The link to the App Store — a pill in the app's own language rather than
+   Apple's badge artwork, which may not be redrawn to fit a design. It sits on
+   a ledge like the buttons in the app: it lifts under the pointer and presses
+   flat onto the ledge when held. The colours are repeated on :hover because
+   the global `a:hover` rule outranks the plain `.pill` selector. */
 .pill {
   display: inline-flex;
   align-items: center;
@@ -388,6 +391,20 @@ section {
   padding: var(--s-3) var(--s-5);
   border-radius: var(--radius-pill);
   box-shadow: 0 var(--ledge) 0 var(--primary-ledge);
+  text-decoration: none;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.pill:hover {
+  color: var(--on-color);
+  transform: translateY(-2px);
+  box-shadow: 0 calc(var(--ledge) + 2px) 0 var(--primary-ledge);
+}
+
+.pill:active {
+  color: var(--on-color);
+  transform: translateY(var(--ledge));
+  box-shadow: 0 0 0 var(--primary-ledge);
 }
 
 .pill svg {

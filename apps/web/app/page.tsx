@@ -7,6 +7,10 @@ import { Screenshots } from './screenshots'
 // (scratchpad asc/metadata-de.json) and the specification behind them. Nothing
 // here promises a feature the app does not have.
 
+/// The published listing. The German storefront on purpose: the app and its
+/// App Store metadata are German.
+const APP_STORE_URL = 'https://apps.apple.com/de/app/zilpzalp/id6797092155'
+
 const FACTS = [
   {
     term: '70 Arten',
@@ -66,10 +70,10 @@ export default function Home() {
               Zwei Spiele, 70 heimische Arten, viele Sterne.
             </p>
             <div className="hero-actions rise rise-3">
-              <span className="pill">
+              <a className="pill" href={APP_STORE_URL}>
                 <StarIcon />
-                Bald im App Store
-              </span>
+                Im App Store laden
+              </a>
               <p className="hero-note">
                 Für iPhone und iPad. Kostenlos, ohne Konto, ohne Werbung.
               </p>
