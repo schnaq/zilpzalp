@@ -66,7 +66,7 @@ jobs:
       # very commit, and that is what gates this workflow.
 
       - name: Load signing secrets from Infisical
-        uses: Infisical/secrets-action@6cd3f7c0e4cc0d2395ee4ef414eb6eeb5d3e73db # v1.0.17
+        uses: Infisical/secrets-action@d2e351f16c6ca20d17c85e6c992e04bdeb64e87d # v1.0.18
         with:
           method: universal
           client-id: ${{ secrets.INFISICAL_CLIENT_ID }}
