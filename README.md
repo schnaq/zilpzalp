@@ -34,7 +34,7 @@ not fail on the code but on the material — see
 
 ## Building
 
-Requirements: macOS on Apple Silicon, Xcode 26.6 and
+Requirements: macOS on Apple Silicon, Xcode 27.0 and
 [mise](https://mise.jdx.dev). mise installs everything else.
 
 ```

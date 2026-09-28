@@ -7,7 +7,7 @@ pixel size of the device family it was taken for, and a PNG without an alpha
 channel.
 
 The alpha is dropped rather than only reported, the way the other checks in
-this directory heal what they find. On the Xcode pinned in mise.toml (26.6)
+this directory heal what they find. On Xcode 26.6
 `XCUIScreen.screenshot().pngRepresentation` already hands back 8-bit RGB, so
 today it never has to; the requirement belongs to App Store Connect and not to
 the simulator, and an Xcode that starts returning RGBA should be noticed here

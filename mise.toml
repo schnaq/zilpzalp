@@ -18,8 +18,8 @@ xcodegen    = "2.46.0" # generates apps/ZilpZalp/ZilpZalp.xcodeproj from project
 # Swift compiler that xcodebuild builds with. So Xcode is not installed but
 # verified — see the `xcode-version` task.
 #
-# On the language version: the spec says "Swift 6.2". Xcode 26.6 ships swiftc
-# 6.3.3. "Swift 6.2" therefore reads as the language and tools version
+# On the language version: the spec says "Swift 6.2". Xcode 27.0 ships swiftc
+# 6.4. "Swift 6.2" therefore reads as the language and tools version
 # (`// swift-tools-version: 6.2`, language mode v6), which the Package.swift
 # files pin. A second toolchain through mise would not be used by xcodebuild
 # anyway.
@@ -415,7 +415,7 @@ hide = true
 run = '''
 export DEVELOPER_DIR="${DEVELOPER_DIR:-/Applications/Xcode.app/Contents/Developer}"
 
-expected="26.6"
+expected="27.0"
 remedy="Remedy: install Xcode $expected and activate it with 'sudo xcode-select -s /path/to/Xcode.app' or DEVELOPER_DIR."
 
 # Catches both cases: xcodebuild missing entirely, or the active developer
