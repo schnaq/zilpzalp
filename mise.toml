@@ -198,17 +198,17 @@ bash .github/scripts/ios-signing-setup.sh
 key="$RUNNER_TEMP/asc-key.p8"
 (umask 077 && printf '%s' "$ASC_KEY_P8_BASE64" | base64 --decode >"$key")
 
-# A single call signs the archive and hands it to App Store Connect: the
-# ExportOptions.plist the setup script wrote asks for `destination: upload`.
-# That is why this pipeline needs neither fastlane nor Ruby. -exportPath still
-# receives the export log and the distribution summary.
-xcodebuild -exportArchive \
+# The export signs and writes the .ipa, altool uploads it (see the export
+# options in ios-signing-setup.sh for why not xcodebuild). /usr/bin first: the
+# export shells out to rsync and breaks ("Copy failed") with a Homebrew rsync.
+rm -rf "${RUNNER_TEMP:?}/export"
+PATH="/usr/bin:$PATH" xcodebuild -exportArchive \
   -archivePath "$RUNNER_TEMP/ZilpZalp.xcarchive" \
   -exportPath "$RUNNER_TEMP/export" \
-  -exportOptionsPlist "$RUNNER_TEMP/ExportOptions.plist" \
-  -authenticationKeyPath "$key" \
-  -authenticationKeyID "$ASC_KEY_ID" \
-  -authenticationKeyIssuerID "$ASC_ISSUER_ID"
+  -exportOptionsPlist "$RUNNER_TEMP/ExportOptions.plist"
+ipa=("$RUNNER_TEMP"/export/*.ipa)
+xcrun altool --upload-package "${ipa[0]}" -t ios \
+  --api-key "$ASC_KEY_ID" --api-issuer "$ASC_ISSUER_ID" --p8-file-path "$key"
 '''
 
 [tasks.screenshots]

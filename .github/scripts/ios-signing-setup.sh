@@ -55,7 +55,9 @@ kc_pw="$(openssl rand -base64 24)"
 security create-keychain -p "$kc_pw" "$kc"
 security set-keychain-settings -lut 21600 "$kc" # do not auto-lock mid-build
 security unlock-keychain -p "$kc_pw" "$kc"
-security default-keychain -d user | tr -d ' "' >"$RUNNER_TEMP/orig-default-keychain"
+# A runner service session may have no default keychain at all ("could not be
+# found"); then the marker stays empty and the teardown restores nothing.
+{ security default-keychain -d user 2>/dev/null || true; } | tr -d ' "' >"$RUNNER_TEMP/orig-default-keychain"
 
 # Rebuild the search list with the release keychain first, every previous entry
 # after it, and /Library/Keychains/System.keychain always present.
@@ -222,14 +224,23 @@ uuid="$(/usr/libexec/PlistBuddy -c 'Print :UUID' "$plist")"
 name="$(/usr/libexec/PlistBuddy -c 'Print :Name' "$plist")"
 app_id="$(/usr/libexec/PlistBuddy -c 'Print :Entitlements:application-identifier' "$plist")"
 bundle_id="${app_id#*.}" # strip the "TEAMID." prefix
-mkdir -p "$HOME/Library/MobileDevice/Provisioning Profiles"
-cp "$prof" "$HOME/Library/MobileDevice/Provisioning Profiles/$uuid.mobileprovision"
+# Xcode looks up profiles in the account's real home, not in $HOME: the runners
+# on gimli each get their own HOME (runner-homes/<name>). Older Xcode reads
+# MobileDevice, newer only Xcode/UserData: install into both.
+real_home="$(dscl . -read "/Users/$(id -un)" NFSHomeDirectory | awk '{print $2}')"
+for dir in "$real_home/Library/MobileDevice/Provisioning Profiles" \
+  "$real_home/Library/Developer/Xcode/UserData/Provisioning Profiles"; do
+  mkdir -p "$dir"
+  cp "$prof" "$dir/$uuid.mobileprovision"
+done
 printf '%s' "$uuid" >"$RUNNER_TEMP/profile_uuid"
 rm -f "$prof" "$plist"
 
-# Export options for -exportArchive. `destination: upload` makes that one call
-# sign the archive and hand the result to App Store Connect, which is why this
-# pipeline needs no fastlane and no Ruby. `manageAppVersionAndBuildNumber:
+# Export options for -exportArchive. The export signs and writes the .ipa;
+# `mise run upload` hands it to App Store Connect with altool, so this pipeline
+# needs no fastlane and no Ruby. (`destination: upload` would let xcodebuild
+# upload itself, but App Store Connect rejects the JWT it builds from the team
+# key: "Cannot verify client's JWT headers"; altool's passes.) `manageAppVersionAndBuildNumber:
 # false` keeps the build number the archive was built with — otherwise App Store
 # Connect renumbers it and the workflow run number stops matching the build.
 # `signingCertificate` takes the SHA-1 rather than "Apple Distribution", for the
@@ -240,7 +251,7 @@ cat >"$RUNNER_TEMP/ExportOptions.plist" <<PLIST
 <plist version="1.0">
   <dict>
     <key>method</key><string>app-store-connect</string>
-    <key>destination</key><string>upload</string>
+    <key>destination</key><string>export</string>
     <key>signingStyle</key><string>manual</string>
     <key>teamID</key><string>${team_id}</string>
     <key>signingCertificate</key><string>${identity_sha1}</string>
