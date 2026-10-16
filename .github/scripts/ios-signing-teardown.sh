@@ -14,8 +14,11 @@ set -uo pipefail
 : "${RUNNER_TEMP:?not set — run this through 'mise run upload', which defaults it}"
 
 uuid="$(cat "$RUNNER_TEMP/profile_uuid" 2>/dev/null || true)"
-if [ -n "$uuid" ]; then
-  rm -f "$HOME/Library/MobileDevice/Provisioning Profiles/$uuid.mobileprovision"
+# Same real home as the setup (not $HOME, which a runner may override).
+real_home="$(dscl . -read "/Users/$(id -un)" NFSHomeDirectory 2>/dev/null | awk '{print $2}')"
+if [ -n "$uuid" ] && [ -n "$real_home" ]; then
+  rm -f "$real_home/Library/MobileDevice/Provisioning Profiles/$uuid.mobileprovision" \
+    "$real_home/Library/Developer/Xcode/UserData/Provisioning Profiles/$uuid.mobileprovision"
 fi
 
 # Only when the marker is there, which is exactly when the setup script got far
