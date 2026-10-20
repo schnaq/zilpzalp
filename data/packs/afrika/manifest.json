@@ -1077,6 +1077,56 @@
         "sourceURL": "https://xeno-canto.org/1163454",
         "retrieved": "2026-09-09"
       }
+    },
+    {
+      "id": "kuhreiher",
+      "name": "Kuhreiher",
+      "scientificName": "Bubulcus ibis",
+      "taxonID": 411086,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "fleckenuhu",
+      "name": "Fleckenuhu",
+      "scientificName": "Bubo africanus",
+      "taxonID": 204470,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "ohrengeier",
+      "name": "Ohrengeier",
+      "scientificName": "Torgos tracheliotos",
+      "taxonID": 5401,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "goliathreiher",
+      "name": "Goliathreiher",
+      "scientificName": "Ardea goliath",
+      "taxonID": 4969,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "weissstirnspint",
+      "name": "Weißstirnspint",
+      "scientificName": "Merops bullockoides",
+      "taxonID": 2248,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
     }
   ]
 }
