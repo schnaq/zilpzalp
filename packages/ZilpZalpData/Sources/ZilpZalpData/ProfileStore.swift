@@ -125,6 +125,29 @@ public actor ProfileStore {
         try write(profiles)
     }
 
+    /// Gives the profile with `id` a new name and avatar, and touches nothing
+    /// else.
+    ///
+    /// Read from the file rather than handed a whole profile, so a copy the
+    /// app has held since before the last round cannot write its stars back
+    /// over the ones that round booked. The id stays, and with it everything
+    /// the child has collected.
+    ///
+    /// - Returns: the profile as it now stands.
+    /// - Throws: ``ProfileStoreError/unknownProfile(_:)`` when no profile
+    ///   carries `id`.
+    @discardableResult
+    public func edit(_ id: Profile.ID, name: String, avatar: String) throws -> Profile {
+        var profiles = try read()
+        guard let index = profiles.firstIndex(where: { $0.id == id }) else {
+            throw ProfileStoreError.unknownProfile(id)
+        }
+        profiles[index].name = name
+        profiles[index].avatar = avatar
+        try write(profiles)
+        return profiles[index]
+    }
+
     /// Deletes the profile with `id` and everything it collected.
     ///
     /// - Throws: ``ProfileStoreError/unknownProfile(_:)`` when no profile
