@@ -103,6 +103,18 @@ voice, which is a different mechanism and out of scope.
 
 ### 1.2 How many clips
 
+> **Amendment 2026-10-20 (Christian, #264).** One species sentence is left:
+> the bare name, `collection.name`. `quiz.prompt.whereIs` went with #220, and
+> `roundEnd.sticker.new.spoken` is no longer recorded either. For a sticker
+> just earned the round end plays the fixed `roundEnd.title` („Super
+> gemacht!") and, after a short pause, the bird's `collection.name` — two
+> clips in a row, each decided on its own, so either one can fall back to the
+> synthesiser and the speech switch silences both. The catalog keeps
+> „Super gemacht! %@ gesammelt!" as the VoiceOver announcement only. Every
+> count below is therefore one clip per species, not three, and
+> `SpokenLine.firstFind` in 4.1 does not exist. The tables are left as they
+> were planned.
+
 Three sentence kinds are species-dependent, so each needs one clip per species:
 
 ```
