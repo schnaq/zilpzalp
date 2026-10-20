@@ -202,8 +202,10 @@ class ElevenLabsProvider:
                 "'fetch-media speech voices --provider elevenlabs', or <id>=<name>."
             )
 
-        voice_id, _, name = voice.partition("=")
-        if voice_id and name:
+        voice_id, given, name = voice.partition("=")
+        if given:
+            if not (voice_id and name):
+                raise ValueError(f"--voice '{voice}': <id>=<name> needs both an id and a name")
             return VoiceOption(id=voice_id, name=name, description="")
 
         offered = self.voices()

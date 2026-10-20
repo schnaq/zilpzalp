@@ -375,6 +375,13 @@ class ElevenLabsTests(unittest.TestCase):
         paths = [request.url.path for request in self.requests]
         self.assertEqual(paths, ["/v1/text-to-speech/v-ava"])
 
+    def test_refuses_an_id_and_name_with_a_part_missing(self) -> None:
+        for half in ("v-ava=", "=Ava"):
+            with self.subTest(voice=half), self.assertRaises(ValueError):
+                self.provider().chosen(half)
+
+        self.assertEqual(self.requests, [])
+
     def test_refuses_a_run_without_a_voice(self) -> None:
         """No default: nobody chose it, and the pack would carry it for good."""
         with self.assertRaises(ValueError) as error:
