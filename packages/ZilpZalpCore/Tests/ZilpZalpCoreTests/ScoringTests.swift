@@ -17,12 +17,12 @@ func starsForFirstTryCorrect(firstTryCorrect: Int, expected: Int) {
     #expect(Scoring.stars(firstTryCorrect: firstTryCorrect) == expected)
 }
 
-@Test("A sticker takes five recognitions of the same bird")
-func recognitionsForSticker() {
-    // The number Christian and Johanna settled on in #177, in the one place
-    // it is written. A screen drawing the markers reads it from here, so a
-    // change to the rule cannot leave a row of five behind.
-    #expect(Scoring.recognitionsForSticker == 5)
+@Test("A sticker takes three or five recognitions of the same bird")
+func stickerThresholds() {
+    // Five is what Christian and Johanna settled on in #177; three is the
+    // choice a grown-up gets for a younger child (#260). The grown-ups' area
+    // offers exactly these, in this order.
+    #expect(Scoring.stickerThresholds == [3, 5])
 }
 
 @Test("No round earns more than the stars a screen draws places for")

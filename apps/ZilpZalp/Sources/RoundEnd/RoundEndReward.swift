@@ -33,16 +33,19 @@ struct RoundEndReward: View {
     /// rather than to a hole.
     let sticker: RoundEndSticker?
 
-    /// Whether the round earned this bird's sticker — its fifth recognition
-    /// (#177). Read off the profiles either side of the write, so it is
-    /// `false` until the screen has written the round down.
+    /// Whether the round earned this bird's sticker — the recognition that
+    /// reached the child's threshold (#177, #260). Read off the profiles
+    /// either side of the write, so it is `false` until the screen has
+    /// written the round down.
     let earnedSticker: Bool
 
     /// How often this bird has been recognised now that the round is booked,
-    /// for the markers under it. `nil` until then, and for a round that could
-    /// not be written down: the screen makes no claim it cannot back up, and a
-    /// row that filled in a moment later would be a second, quieter reward.
-    let progress: Int?
+    /// out of the child's threshold, for the markers under it — see
+    /// ``RoundOutcome/progress(of:)``. `nil` until then, and for a round that
+    /// could not be written down: the screen makes no claim it cannot back
+    /// up, and a row that filled in a moment later would be a second, quieter
+    /// reward.
+    let progress: (count: Int, threshold: Int)?
 
     /// A phone, or an iPad sharing its screen: the sticker and both lines
     /// under it drop a step there.
@@ -67,7 +70,8 @@ struct RoundEndReward: View {
 
                 if let progress {
                     StickerMarkers(
-                        count: progress,
+                        count: progress.count,
+                        threshold: progress.threshold,
                         markerSize: isTight ? Self.compactMarker : Self.regularMarker,
                     )
                 }

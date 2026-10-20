@@ -54,7 +54,14 @@ struct RootView: View {
                             goHome: { path.removeAll() },
                         )
                     case .parents:
-                        ParentsScreen(parental: model.parental, packs: model.packs)
+                        ParentsScreen(
+                            parental: model.parental,
+                            packs: model.packs,
+                            profiles: model.profiles,
+                            chooseStickerThreshold: { threshold, id in
+                                Task { await model.setStickerThreshold(threshold, for: id) }
+                            },
+                        )
                     case .about: AboutScreen()
                     case .collection: collection
                     case .timeForTheNest:
@@ -106,7 +113,7 @@ struct RootView: View {
                 game: game,
                 library: model.collection.library,
                 askedFor: roundsAskedFor,
-                recognitions: { model.activeProfile?.recognitions ?? [:] },
+                player: { model.activeProfile },
                 onFinished: { path.append(.roundEnd($0)) },
             )
         } else {

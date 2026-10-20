@@ -17,14 +17,16 @@ public enum Scoring {
     /// From this many first-try correct answers on, a round earns two stars.
     private static let firstTryCorrectForTwoStars = 6
 
-    /// How often one species has to be answered right at the first attempt
-    /// before its sticker belongs in the album (#177).
+    /// How often one species may have to be answered right at the first
+    /// attempt before its sticker belongs in the album: three or five, chosen
+    /// per child by a grown-up (#260). Five was the only number until then
+    /// (#177), and it is what a profile starts with.
     ///
-    /// Five, and the only place the number is written. A bird met once was
-    /// not learned; a bird known five times over is. The counting is per
-    /// species and per child, and lives on the profile — this module holds
-    /// the rule, not the tally.
-    public static let recognitionsForSticker = 5
+    /// The choice lives on the profile, and so does the tally — this module
+    /// holds the rule, and takes the threshold as an argument wherever it
+    /// matters. A bird met once was not learned; a bird known three times
+    /// over may be, for a younger child.
+    public static let stickerThresholds = [3, 5]
 
     /// The stars for a round with `firstTryCorrect` answers right on the first
     /// attempt: three from nine on, two from six on.

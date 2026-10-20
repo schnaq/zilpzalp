@@ -89,13 +89,38 @@ public struct Profile: Codable, Sendable, Hashable, Identifiable {
     /// How often each bird has been recognised — answered right at the first
     /// attempt — keyed by the bird id from the pack manifests.
     ///
-    /// The album is derived from this and stored nowhere: a bird's sticker is
-    /// in it once the counter reaches the five that `Scoring` in
-    /// `ZilpZalpCore` names (#177). The threshold is not repeated here,
-    /// because this module does not depend on that one and should not for one
-    /// number; the app target links both and answers the question in one
-    /// place.
-    public var recognitions: [String: Int]
+    /// A bird whose counter reaches ``stickerThreshold`` has its sticker in
+    /// ``stickers`` from that moment on — every change to this field files it
+    /// there.
+    public var recognitions: [String: Int] {
+        didSet { collectEarned() }
+    }
+
+    /// How many recognitions this child's stickers take: three or five, as a
+    /// grown-up chose in the parents' area (#260). Five until then, which is
+    /// what every profile before #260 played with.
+    ///
+    /// Lowering it hands over every sticker the counters already reach;
+    /// raising it takes nothing back — see ``stickers``. The values on offer
+    /// are `Scoring.stickerThresholds` in `ZilpZalpCore`; this module does not
+    /// depend on that one and does not check, so a number a newer build wrote
+    /// is simply compared against.
+    public var stickerThreshold: Int {
+        didSet { collectEarned() }
+    }
+
+    /// The birds whose sticker is in the album, sorted.
+    ///
+    /// Stored rather than derived from ``recognitions`` since #260: a sticker
+    /// earned at three stays when the threshold goes up to five. Nothing ever
+    /// removes one; ``recognitions`` and ``stickerThreshold`` only add.
+    /// An array rather than a `Set` so that the file stays byte-stable — a
+    /// set encodes in a different order on every launch.
+    public private(set) var stickers: [String]
+
+    /// The threshold a profile starts with, and the one a file written before
+    /// #260 played with.
+    public static let defaultStickerThreshold = 5
     /// Seconds played per calendar day, keyed as ``dayKey(for:calendar:)``
     /// spells it. ``ProfileStore`` keeps the last seven days and drops the
     /// rest — the daily limit needs today, the parents area needs the week,
@@ -115,7 +140,7 @@ public struct Profile: Codable, Sendable, Hashable, Identifiable {
     /// must not write, and downloading the pack again brings the choice back.
     ///
     /// Not the sticker album, which is `collection.*` in the String Catalog
-    /// and ``recognitions`` in this file.
+    /// and ``stickers`` in this file.
     public var collection: String?
     /// Stars earned per calendar day, keyed and pruned exactly as
     /// ``playtime`` is.
@@ -134,6 +159,7 @@ public struct Profile: Codable, Sendable, Hashable, Identifiable {
         totalStars: Int = 0,
         roundsPlayed: Int = 0,
         recognitions: [String: Int] = [:],
+        stickerThreshold: Int = Profile.defaultStickerThreshold,
         collection: String? = nil,
         playtime: [String: TimeInterval] = [:],
         dailyStars: [String: Int] = [:],
@@ -144,18 +170,39 @@ public struct Profile: Codable, Sendable, Hashable, Identifiable {
         self.totalStars = totalStars
         self.roundsPlayed = roundsPlayed
         self.recognitions = recognitions
+        self.stickerThreshold = stickerThreshold
+        stickers = []
         self.collection = collection
         self.playtime = playtime
         self.dailyStars = dailyStars
+        collectEarned()
+    }
+
+    /// Whether `species`' sticker is in this child's album.
+    public func hasSticker(for species: String) -> Bool {
+        stickers.contains(species)
+    }
+
+    /// Files every bird at or past the threshold into ``stickers``. Adds and
+    /// never removes, so it can run after every change without a second
+    /// thought — and rewrites the array only when something was added.
+    private mutating func collectEarned() {
+        let earned = recognitions.filter { $0.value >= stickerThreshold }.keys
+        let all = Set(stickers).union(earned)
+        if all.count != stickers.count {
+            stickers = all.sorted()
+        }
     }
 
     /// Written by hand for the keys that arrived after the file format did: a
     /// profile written before ``dailyStars`` is a profile with no days counted
     /// yet, one written before ``recognitions`` is a profile with nothing
-    /// counted yet, and one written before ``collection`` is a profile that
-    /// plays with every bird — none of them is a broken file. Everything else
-    /// decodes as it always has. The schema version stays 1, which is what
-    /// lets this build read every file written before it.
+    /// counted yet, one written before ``collection`` is a profile that
+    /// plays with every bird, and one written before ``stickers`` is a profile
+    /// at five whose album is what its counters say — none of them is a
+    /// broken file. Everything else decodes as it always has. The schema
+    /// version stays 1, which is what lets this build read every file written
+    /// before it.
     ///
     /// A file from before #177 also carries a `collectedSpecies` array, and it
     /// is deliberately ignored: those stickers were handed out for meeting a
@@ -179,9 +226,19 @@ public struct Profile: Codable, Sendable, Hashable, Identifiable {
         roundsPlayed = try container.decode(Int.self, forKey: .roundsPlayed)
         recognitions = try container.decodeIfPresent([String: Int].self, forKey: .recognitions)
             ?? [:]
+        // Zero or less would hand every bird ever counted its sticker; a file
+        // edited by hand gets the default instead.
+        let threshold = try container.decodeIfPresent(Int.self, forKey: .stickerThreshold)
+            ?? Self.defaultStickerThreshold
+        stickerThreshold = threshold > 0 ? threshold : Self.defaultStickerThreshold
+        stickers = try container.decodeIfPresent([String].self, forKey: .stickers) ?? []
         collection = try container.decodeIfPresent(String.self, forKey: .collection)
         playtime = try container.decode([String: TimeInterval].self, forKey: .playtime)
         dailyStars = try container.decodeIfPresent([String: Int].self, forKey: .dailyStars) ?? [:]
+        // A file from before #260 has neither key: it played at five, and its
+        // album is every counter at five or more — what was derived then is
+        // what is stored now.
+        collectEarned()
     }
 
     /// The ``playtime`` key of `date`: the Gregorian `YYYY-MM-DD` of the day
@@ -220,6 +277,8 @@ public struct Profile: Codable, Sendable, Hashable, Identifiable {
         case totalStars
         case roundsPlayed
         case recognitions
+        case stickerThreshold
+        case stickers
         case collection
         case playtime
         case dailyStars

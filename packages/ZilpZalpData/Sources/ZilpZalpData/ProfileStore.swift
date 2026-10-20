@@ -23,7 +23,8 @@ public struct PlayedRound: Sendable, Hashable {
     public var stars: Int
     /// How often the round recognised each species: answered right at the
     /// first attempt, and nothing else. Added onto the profile's counters,
-    /// where five of them earn the bird's sticker (#177).
+    /// where the profile's threshold of them earns the bird's sticker (#177,
+    /// #260).
     ///
     /// A bird the round merely asked about is not in here. Meeting a bird used
     /// to be enough to collect it; with four choices the right tile is always
@@ -162,8 +163,8 @@ public actor ProfileStore {
     }
 
     /// Books a finished round onto a profile: its stars, one more round, its
-    /// recognitions onto the counters the album is derived from, and its stars
-    /// and seconds onto `date`'s day.
+    /// recognitions onto the counters — and any sticker they now reach into
+    /// the album — and its stars and seconds onto `date`'s day.
     ///
     /// The only operation that knows what a round means. Whoever adds the
     /// stars by hand and calls ``update(_:)`` will sooner or later forget the

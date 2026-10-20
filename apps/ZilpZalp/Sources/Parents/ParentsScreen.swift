@@ -54,6 +54,13 @@ struct ParentsScreen: View {
     /// screen keeps running.
     let packs: PackModel
 
+    /// The children on this device, for the sticker card — see
+    /// ``StickersSection``.
+    let profiles: [Profile]
+
+    /// A grown-up chose a sticker threshold for one child (#260).
+    let chooseStickerThreshold: (_ threshold: Int, _ profile: Profile.ID) -> Void
+
     @Environment(\.dismiss) private var dismiss
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
@@ -220,6 +227,7 @@ struct ParentsScreen: View {
                     .foregroundStyle(ZColor.textBody)
 
                 rows
+                StickersSection(profiles: profiles, choose: chooseStickerThreshold)
                 PacksSection(packs: packs)
                 voiceNotice
                 notice
@@ -367,6 +375,8 @@ struct ParentsScreen: View {
         ParentsScreen(
             parental: ParentalSettingsModel(),
             packs: PackModel(directory: .temporaryDirectory),
+            profiles: [Profile(id: UUID(), name: "Mila", avatar: "amsel")],
+            chooseStickerThreshold: { _, _ in },
         )
     }
 }
@@ -376,6 +386,8 @@ struct ParentsScreen: View {
         ParentsScreen(
             parental: ParentalSettingsModel(),
             packs: PackModel(directory: .temporaryDirectory),
+            profiles: [Profile(id: UUID(), name: "Mila", avatar: "amsel")],
+            chooseStickerThreshold: { _, _ in },
         )
     }
 }

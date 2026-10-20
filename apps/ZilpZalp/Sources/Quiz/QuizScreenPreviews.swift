@@ -15,7 +15,7 @@ private func quizPreview(_ sizeClass: UserInterfaceSizeClass) -> some View {
                 game: .names,
                 library: library,
                 askedFor: 0,
-                recognitions: { [:] },
+                player: { nil },
                 onFinished: { _ in },
             )
         }

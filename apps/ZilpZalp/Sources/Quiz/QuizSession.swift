@@ -225,12 +225,19 @@ final class QuizSession {
     }
 
     /// What the round has come to, once it is over. Which bird of it is
-    /// celebrated is ``RoundPlay/celebratedSpecies(recognisedBefore:)``.
-    func result(recognisedBefore: [String: Int]) -> RoundResult {
+    /// celebrated is
+    /// ``RoundPlay/celebratedSpecies(recognisedBefore:collectedBefore:threshold:)``,
+    /// asked against `player` as it stood before this round — a fresh profile
+    /// when there is none, which only a preview plays without.
+    func result(playedBy player: Profile?) -> RoundResult {
         RoundResult(
             id: roundID,
             questionCount: play.round.questions.count,
-            celebratedSpecies: play.celebratedSpecies(recognisedBefore: recognisedBefore),
+            celebratedSpecies: play.celebratedSpecies(
+                recognisedBefore: player?.recognitions ?? [:],
+                collectedBefore: Set(player?.stickers ?? []),
+                threshold: player?.stickerThreshold ?? Profile.defaultStickerThreshold,
+            ),
             recognitions: play.recognitions,
             playtime: playtime,
         )

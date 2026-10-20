@@ -57,7 +57,7 @@ struct RoundResult: Hashable {
 
     /// The species the round end puts on its sticker; which one that is, and
     /// why a round without a single first try still names one, is
-    /// ``RoundPlay/celebratedSpecies(recognisedBefore:)``.
+    /// ``RoundPlay/celebratedSpecies(recognisedBefore:collectedBefore:threshold:)``.
     ///
     /// Settled where the round is played rather than where it is celebrated:
     /// a round hands over one value, not two, and the celebration would
@@ -66,8 +66,8 @@ struct RoundResult: Hashable {
     let celebratedSpecies: String?
 
     /// How often the round recognised each species — answered right at the
-    /// first attempt. What the profile's counters are raised by, and five of
-    /// them earn that bird's sticker (#177).
+    /// first attempt. What the profile's counters are raised by, and the
+    /// child's threshold of them earns that bird's sticker (#177, #260).
     ///
     /// A bird the round only asked about is not in here. The album says what
     /// a child knows, not what it has been shown.
