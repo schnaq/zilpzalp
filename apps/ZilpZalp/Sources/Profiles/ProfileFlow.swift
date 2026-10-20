@@ -1,4 +1,5 @@
 import SwiftUI
+import ZilpZalpData
 
 /// The two profile screens, and the one piece of state that decides which of
 /// them is on screen.
@@ -16,22 +17,39 @@ struct ProfileFlow: View {
 
     @State private var isCreating = false
 
+    /// The child whose pencil was tapped (#258). The same screen as creating
+    /// one, filled in, because a second form would drift from the first.
+    @State private var editing: Profile?
+
     var body: some View {
-        if model.profiles.isEmpty || isCreating {
+        if model.profiles.isEmpty || isCreating || editing != nil {
             ProfileCreationScreen(
                 // The avatars are birds of the open packs, and the grid names
                 // and speaks each of them (#205).
                 library: model.packs.library,
+                editing: editing,
                 canGoBack: !model.profiles.isEmpty,
-                back: { isCreating = false },
-                create: { name, avatar in
-                    await model.create(name: name, avatar: avatar)
+                back: {
+                    isCreating = false
+                    editing = nil
+                },
+                save: { name, avatar in
+                    if let editing {
+                        await model.edit(editing.id, name: name, avatar: avatar)
+                        self.editing = nil
+                    } else {
+                        await model.create(name: name, avatar: avatar)
+                    }
                 },
             )
+            // A fresh screen per child, so one child's name never stays in
+            // the field when the next one's pencil is tapped.
+            .id(editing?.id)
         } else {
             ProfilePickerScreen(
                 profiles: model.profiles,
                 choose: { model.select($0) },
+                edit: { editing = $0 },
                 createNew: { isCreating = true },
             )
         }

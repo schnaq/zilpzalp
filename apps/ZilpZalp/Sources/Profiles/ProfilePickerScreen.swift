@@ -40,6 +40,7 @@ struct ProfilePickerScreen: View {
 
     let profiles: [Profile]
     let choose: (Profile.ID) -> Void
+    let edit: (Profile) -> Void
     let createNew: () -> Void
 
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
@@ -97,6 +98,7 @@ struct ProfilePickerScreen: View {
                 ) {
                     choose(profile.id)
                 }
+                .overlay(alignment: .topTrailing) { pencil(for: profile) }
             }
 
             card(
@@ -107,6 +109,29 @@ struct ProfilePickerScreen: View {
                 action: createNew,
             )
         }
+    }
+
+    /// The way to a new name or a new bird (#258): a pencil on the card's
+    /// corner, always there, because a child who cannot read will not find a
+    /// long-press nobody showed them. No parental gate — it is the child's own
+    /// name and bird, and nothing it collected can be lost here.
+    ///
+    /// A sibling of the card's button rather than inside its label, so the
+    /// two taps never compete. Pushed out over the corner, into the gap
+    /// between the cards, so the pencil covers as little of the bird as
+    /// possible.
+    private func pencil(for profile: Profile) -> some View {
+        IconButton(
+            .pencil,
+            label: String(
+                format: String(localized: "profile.picker.edit.accessibility"),
+                profile.name,
+            ),
+            diameter: ZSpacing.touchMinimum,
+        ) {
+            edit(profile)
+        }
+        .offset(x: ZSpacing.step4, y: -ZSpacing.step4)
     }
 
     /// One card: a disc, a word, and the whole thing pressable.
@@ -166,13 +191,23 @@ private func previewProfiles() -> [Profile] {
 }
 
 #Preview("iPad landscape", traits: .fixedLayout(width: 1194, height: 834)) {
-    ProfilePickerScreen(profiles: previewProfiles(), choose: { _ in }, createNew: {})
-        .environment(\.horizontalSizeClass, .regular)
-        .environment(\.speciesPhotos, SpeciesPhotos((try? .bundled()) ?? .empty))
+    ProfilePickerScreen(
+        profiles: previewProfiles(),
+        choose: { _ in },
+        edit: { _ in },
+        createNew: {},
+    )
+    .environment(\.horizontalSizeClass, .regular)
+    .environment(\.speciesPhotos, SpeciesPhotos((try? .bundled()) ?? .empty))
 }
 
 #Preview("iPhone portrait", traits: .fixedLayout(width: 390, height: 844)) {
-    ProfilePickerScreen(profiles: previewProfiles(), choose: { _ in }, createNew: {})
-        .environment(\.horizontalSizeClass, .compact)
-        .environment(\.speciesPhotos, SpeciesPhotos((try? .bundled()) ?? .empty))
+    ProfilePickerScreen(
+        profiles: previewProfiles(),
+        choose: { _ in },
+        edit: { _ in },
+        createNew: {},
+    )
+    .environment(\.horizontalSizeClass, .compact)
+    .environment(\.speciesPhotos, SpeciesPhotos((try? .bundled()) ?? .empty))
 }
