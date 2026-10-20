@@ -15,10 +15,12 @@ Two groups of sentence, and they are produced separately:
 
 - **the fixed set** — „Super gemacht!", the eight rank ascents, the parental
   gate, the two profile screens. One clip each, valid for the whole app.
-- **a pack's species sentences** — „Super gemacht! Amsel gesammelt!" and the
-  bare name „Amsel", one clip per species per sentence. The bare name is what
-  game 1 asks with as well since #220, so it is recorded once and heard in two
-  places.
+- **a pack's species sentence** — the bare name „Amsel", one clip per
+  species. It is recorded once and heard in three places: the album says it
+  when a sticker is tapped, game 1 asks with it (#220), and the round end says
+  it right after „Super gemacht!" when a sticker was just earned (#264). That
+  praise is two clips played one after the other, never one recording per
+  bird.
 
 The exact wording never comes from memory. `fetch-media speech` takes it from
 the String Catalog and prints it before it records, and the manifest keeps it
@@ -182,8 +184,8 @@ infisical run --env=dev --path=/ -- mise run fetch-media speech render \
     --pack deutschland --sentence collection.name
 ```
 
-Everything a pack says, all three species sentences, is the same command
-without `--sentence`; the fixed set is `--set fixed --sentence …`, which names
+Everything a pack says is that same name line, so `--sentence` may be left
+out; the fixed set is `--set fixed --sentence …`, which names
 its sentences explicitly. Every run prints the number of characters it is about
 to render before it renders them, and refuses to go over `--max-chars` (30000
 by default): a provider bills characters, so the count is the price, and the cap
