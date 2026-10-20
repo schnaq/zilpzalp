@@ -128,7 +128,7 @@ def saliency_rect(image: Image.Image) -> Rect | None:
     small.save(buffer, format="PNG")
 
     data = NSData.dataWithBytes_length_(buffer.getvalue(), buffer.tell())
-    handler = Vision.VNImageRequestHandler.alloc().initWithData_options_(data, {})
+    handler = Vision.VNImageRequestHandler.alloc().initWithData_options_(data, None)
     request = Vision.VNGenerateObjectnessBasedSaliencyImageRequest.alloc().init()
 
     performed, error = handler.performRequests_error_([request], None)
