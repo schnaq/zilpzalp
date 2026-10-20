@@ -37,6 +37,7 @@ public enum ZIcon: String, CaseIterable, Sendable {
     case map
     case music
     case partyPopper = "party-popper"
+    case pencil
     case play
     case plus
     case rotateCcw = "rotate-ccw"
