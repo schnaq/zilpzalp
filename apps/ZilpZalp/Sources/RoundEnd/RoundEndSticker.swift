@@ -21,7 +21,9 @@ struct RoundEndSticker {
     /// "Super gemacht! Amsel gesammelt!" — what VoiceOver announces for a
     /// first find. Text only: since #264 no clip says it, and what is heard is
     /// „Super gemacht!" followed by ``spokenName``.
-    let praise: String
+    var praise: String {
+        String(format: String(localized: "roundEnd.sticker.new.spoken"), spokenName.text)
+    }
 
     /// `nil` when the photo file is missing — ``RewardSticker`` then shows its
     /// glyph, which is still a sticker.
@@ -39,7 +41,6 @@ struct RoundEndSticker {
 
         name = bird.name
         spokenName = .name(bird)
-        praise = String(format: String(localized: "roundEnd.sticker.new.spoken"), spokenName.text)
         image = library.photoURL(for: bird)
             .flatMap { UIImage(contentsOfFile: $0.path(percentEncoded: false)) }
             .map { Image(uiImage: $0) }

@@ -175,20 +175,13 @@ class SentenceTests(unittest.TestCase):
         self.assertEqual(sentences.species_text(odd, "collection.name"), "Zilp Zalp")
 
     def test_refuses_a_sentence_that_belongs_to_no_species(self) -> None:
-        with self.assertRaises(LookupError) as error:
-            sentences.species_text(AMSEL, "roundEnd.title")
-
-        self.assertIn("not a species sentence", str(error.exception))
-
-    def test_the_name_is_the_only_species_sentence(self) -> None:
-        """#264: the round end says „Super gemacht!" and then the name.
-
-        The praise with the name in it is still in the catalogue, for
-        VoiceOver, and must not be rendered once per species any more.
-        """
+        """Including the first-find praise: VoiceOver-only since #264."""
         self.assertEqual(sentences.SPECIES_SENTENCES, ("collection.name",))
-        with self.assertRaises(LookupError):
-            sentences.species_text(AMSEL, "roundEnd.sticker.new.spoken")
+        for key in ("roundEnd.title", "roundEnd.sticker.new.spoken"):
+            with self.subTest(key=key), self.assertRaises(LookupError) as error:
+                sentences.species_text(AMSEL, key)
+
+            self.assertIn("not a species sentence", str(error.exception))
 
     def test_reads_a_fixed_sentence_as_the_catalogue_has_it(self) -> None:
         self.assertEqual(sentences.fixed_text("roundEnd.title"), "Super gemacht!")

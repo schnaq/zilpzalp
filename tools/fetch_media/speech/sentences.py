@@ -17,13 +17,9 @@ is what the round end says right after „Super gemacht!" for a sticker just
 earned — one clip per species, heard in three places.
 `SpeechKey.speciesName` in `ZilpZalpData` is this key on the Swift side.
 
-There were three until #220. „Wo ist die Amsel?" — `quiz.prompt.whereIs` — was
-the question of game 1, and it is gone from the catalog with the sentence: the
-game asks with the bare name now. There were two until #264: „Super gemacht!
-Amsel gesammelt!" — `roundEnd.sticker.new.spoken` — was its own clip per
-species. The round end now plays the fixed „Super gemacht!" and the name one
-after the other, so the catalog keeps that sentence for VoiceOver only and
-nothing renders it.
+„Super gemacht! Amsel gesammelt!" — `roundEnd.sticker.new.spoken` — is still
+in the catalog, but for VoiceOver only: the round end plays the fixed praise
+and the name one after the other, so nothing renders it.
 
 Every fixed sentence — „Super gemacht!", the eight rank ascents, the parental
 gate, the two profile screens — is whatever the catalog says under its key, and
