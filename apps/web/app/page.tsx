@@ -28,7 +28,7 @@ const FACTS = [
   {
     term: 'Die Sammlung',
     detail:
-      'Wer einen Vogel fünfmal auf Anhieb erkennt, bekommt seinen Sticker in die Sammlung.',
+      'Wer einen Vogel drei- oder fünfmal auf Anhieb erkennt — das stellen Eltern ein —, bekommt seinen Sticker in die Sammlung.',
   },
   {
     term: 'Für mehrere Kinder',
