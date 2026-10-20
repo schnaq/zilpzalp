@@ -205,7 +205,7 @@ struct PackStateButton: View {
         case .bundled:
             EmptyView()
         case let .available(entry):
-            button("parents.packs.action.load", icon: .plus) { load(entry) }
+            button("parents.packs.action.load", icon: .plus, tone: .primary) { load(entry) }
         case let .running(share):
             ProgressRing(share: share)
         case let .failed(entry), let .outOfSpace(entry):

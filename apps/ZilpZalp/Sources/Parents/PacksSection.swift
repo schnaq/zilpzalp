@@ -68,20 +68,24 @@ struct PacksSection: View {
                 Button {
                     opened = card.id
                 } label: {
-                    HStack(spacing: ZSpacing.step4) {
-                        covers(card)
-                        VStack(alignment: .leading, spacing: ZSpacing.step1) {
-                            Text(verbatim: card.title)
-                                .typeStyle(.bodyLarge, .body, weight: .bold)
-                                .foregroundStyle(ZColor.textStrong)
-                            Text(verbatim: card.detail)
-                                .typeStyle(.caption, .body, weight: .semibold)
+                    // The stickers above the words rather than beside them:
+                    // beside them, „Vögel Deutschlands" broke inside the word
+                    // on a 402 pt phone at the default text size.
+                    VStack(alignment: .leading, spacing: ZSpacing.step3) {
+                        HStack {
+                            covers(card)
+                            Spacer()
+                            Icon(.chevronRight, size: .small)
                                 .foregroundStyle(ZColor.textMuted)
                         }
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        Icon(.chevronRight, size: .small)
+                        Text(verbatim: card.title)
+                            .typeStyle(.bodyLarge, .body, weight: .bold)
+                            .foregroundStyle(ZColor.textStrong)
+                        Text(verbatim: card.detail)
+                            .typeStyle(.caption, .body, weight: .semibold)
                             .foregroundStyle(ZColor.textMuted)
                     }
+                    .frame(maxWidth: .infinity, alignment: .leading)
                     .contentShape(Rectangle())
                 }
                 .buttonStyle(.plain)
@@ -96,7 +100,7 @@ struct PacksSection: View {
 
     /// Three of the pack's birds, overlapping like stickers on a page.
     private func covers(_ card: PackCard) -> some View {
-        let size: CGFloat = horizontalSizeClass == .compact ? 56 : 72
+        let size: CGFloat = horizontalSizeClass == .compact ? 72 : 96
         let tilts: [Angle] = [.degrees(-6), .degrees(3), .degrees(-2)]
         return HStack(spacing: -size / 3) {
             ForEach(Array(card.covers.enumerated()), id: \.element.id) { index, bird in
