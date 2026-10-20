@@ -24,6 +24,15 @@ struct RootView: View {
     /// itself, whatever the animation makes of it.
     @State private var roundsAskedFor = 0
 
+    /// The one-time line for grown-ups on the home screen, closed for good
+    /// (#262). Device-wide: it is about the device's grown-ups' area.
+    @AppStorage("packsHintDismissed") private var packsHintDismissed = false
+
+    /// How many birds the device held when a grown-up last followed the
+    /// "Neue Vögel" sparkle. It comes back only once the birds have changed —
+    /// a pack loaded or deleted — and the threshold is reached again.
+    @AppStorage("newBirdsSeenAt") private var newBirdsSeenAt = 0
+
     var body: some View {
         NavigationStack(path: $path) {
             start
@@ -58,6 +67,10 @@ struct RootView: View {
                             parental: model.parental,
                             packs: model.packs,
                             profiles: model.profiles,
+                            play: { packID in
+                                Task { await model.choose(collection: packID) }
+                                path.removeAll()
+                            },
                             chooseStickerThreshold: { threshold, id in
                                 Task { await model.setStickerThreshold(threshold, for: id) }
                             },
@@ -141,7 +154,7 @@ struct RootView: View {
                 avatar: profile.avatar,
                 games: model.games,
                 openGame: openGame(_:),
-                openParents: { path.append(.parents) },
+                openParents: openParents,
                 openAbout: { path.append(.about) },
                 openProfiles: { model.chooseAgain() },
                 collections: model.collectionEntries,
@@ -153,10 +166,33 @@ struct RootView: View {
                     Task { await model.choose(collection: collection) }
                 },
                 openCollection: { path.append(.collection) },
+                newBirds: showsNewBirds,
+                dismissPacksHint: showsPacksHint ? { packsHintDismissed = true } : nil,
             )
         } else {
             ProfileFlow(model: model)
         }
+    }
+
+    /// Neither hint in a screenshot run: the store pictures show the app as a
+    /// child sees it, not a note to its parents.
+    private var showsPacksHint: Bool {
+        ScreenshotSeed.directory == nil && !packsHintDismissed
+    }
+
+    private var showsNewBirds: Bool {
+        ScreenshotSeed.directory == nil && model.newBirdsDue
+            && newBirdsSeenAt != model.packs.library.birds.count
+    }
+
+    /// Into the grown-ups' area, from the door or from either hint. Going in
+    /// is what both hints asked for, so both are answered by it.
+    private func openParents() {
+        packsHintDismissed = true
+        if showsNewBirds {
+            newBirdsSeenAt = model.packs.library.birds.count
+        }
+        path.append(.parents)
     }
 
     /// A tapped game tile: the round, or the day's close when the budget is

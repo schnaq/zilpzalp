@@ -29,11 +29,16 @@ public struct PackLibrary: Sendable {
     /// manifest order.
     ///
     /// **A species id that turns up twice is kept once, and the first pack
-    /// wins.** Ids are unique across packs by curation rule, but a downloaded
-    /// manifest is a document somebody else wrote — and both ``SpeciesPhotos``
-    /// and the round builder key dictionaries by species id, which traps on a
-    /// duplicate. So this is a crash guard rather than a tidiness rule, and the
-    /// pack that ships with the app is the one that keeps its bird.
+    /// wins — unless only a later copy carries a call.** Since #262 a species
+    /// may sit in several packs on purpose — a regional pack and the one it
+    /// was cut from — and mixed play must never ask for it twice. A copy with
+    /// a call takes over a callless one, so game 2 does not lose the bird to
+    /// pack order; its place in the list stays where the first copy put it. Both ``SpeciesPhotos``
+    /// and the round builder key
+    /// dictionaries by species id, which traps on a duplicate, so this is also
+    /// a crash guard, and the pack that ships with the app is the one that
+    /// keeps its bird. A sticker belongs to the id, so it is one sticker
+    /// whichever pack the bird came from.
     public let birds: [Bird]
 
     /// The packs behind the species, in the same order — what the credits and
@@ -46,11 +51,18 @@ public struct PackLibrary: Sendable {
         self.catalogs = catalogs
 
         var owners: [String: Int] = [:]
+        var positions: [String: Int] = [:]
         var birds: [Bird] = []
         for (index, catalog) in catalogs.enumerated() {
-            for bird in catalog.pack.birds where owners[bird.id] == nil {
+            for bird in catalog.pack.birds {
+                if let position = positions[bird.id] {
+                    guard birds[position].call == nil, bird.call != nil else { continue }
+                    birds[position] = bird
+                } else {
+                    positions[bird.id] = birds.count
+                    birds.append(bird)
+                }
                 owners[bird.id] = index
-                birds.append(bird)
             }
         }
         self.owners = owners

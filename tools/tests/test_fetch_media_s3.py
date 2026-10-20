@@ -21,11 +21,20 @@ from unittest import mock
 import boto3
 from botocore.exceptions import ClientError
 from botocore.stub import ANY, Stubber
+from PIL import Image
 
 from fetch_media import cli, manifest, s3
 
+
+def _photo() -> bytes:
+    """A real, if plain, photo: an upload run cuts its preview from it (#262)."""
+    output = io.BytesIO()
+    Image.new("RGB", (64, 64), (120, 160, 90)).save(output, format="JPEG")
+    return output.getvalue()
+
+
 BUCKET = "zilpzalp-media"
-PHOTO = b"not really a photo, but it hashes just the same"
+PHOTO = _photo()
 PHOTO_SHA256 = hashlib.sha256(PHOTO).hexdigest()
 CLIP = b"not really a recording either"
 SENTENCE = "quiz.prompt.whereIs"

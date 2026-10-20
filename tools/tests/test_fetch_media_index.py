@@ -20,22 +20,34 @@ from pathlib import Path
 from unittest import mock
 
 import sync_bundled_packs
+from PIL import Image
 
-from fetch_media import cli, index, manifest, s3
+from fetch_media import cli, images, index, manifest, s3
 
 BUCKET = "zilpzalp-media"
-PHOTO = b"not really a photo, but it hashes just the same"
 CLIP = b"not really a recording either"
+# What the bucket answers for an object this tool put there.
+DIGEST = "0" * 64
 
 
-def never(key: str) -> bool:
+def tile(side: int = 300) -> bytes:
+    """A real, if plain, square photo — the previews are cut from it."""
+    output = io.BytesIO()
+    Image.new("RGB", (side, side), (120, 160, 90)).save(output, format="JPEG")
+    return output.getvalue()
+
+
+PHOTO = tile()
+
+
+def never(key: str) -> str | None:
     """A bucket that holds nothing."""
-    return False
+    return None
 
 
-def always(key: str) -> bool:
-    """A bucket that holds every pack already."""
-    return True
+def always(key: str) -> str | None:
+    """A bucket that holds every pack already, previews included."""
+    return DIGEST
 
 
 class PacksTestCase(unittest.TestCase):
@@ -135,8 +147,37 @@ class EntryTests(PacksTestCase):
                 # Both photos and the manifest — what a download really costs.
                 "downloadSize": 2 * len(PHOTO) + self.manifest_size("welt"),
                 "manifest": "packs/welt/manifest.json",
+                "manifestSha256": manifest.sha256_of(self.packs / "welt" / "manifest.json"),
+                "covers": ["amsel", "star"],
+                "species": [
+                    {
+                        "id": bird,
+                        "name": bird.capitalize(),
+                        "preview": f"packs/welt/previews/{bird}.jpg",
+                        "attribution": "Alexis Tinker-Tsavalas",
+                        "license": "CC-BY-4.0",
+                    }
+                    for bird in ("amsel", "star")
+                ],
             },
         )
+
+    def test_takes_the_manifest_digest_it_is_handed(self) -> None:
+        """The bucket's, for a pack this run does not upload."""
+        self.assertEqual(index.entry("welt", manifest_sha256=DIGEST)["manifestSha256"], DIGEST)
+
+    def test_leaves_out_covers_and_species_without_previews(self) -> None:
+        """The index never names a preview nobody can fetch."""
+        line = index.entry("welt", previews=False)
+
+        self.assertNotIn("covers", line)
+        self.assertNotIn("species", line)
+
+    def test_covers_are_the_first_three_birds(self) -> None:
+        """The curated order opens with the pack's best-known birds."""
+        self.write_pack("welt", "Vögel der Welt", ["a", "b", "c", "d"])
+
+        self.assertEqual(index.entry("welt")["covers"], ["a", "b", "c"])
 
     def test_counts_the_speech_clips_in_the_download_size(self) -> None:
         """#166: the size a parent is shown is what the download really costs,
@@ -170,7 +211,7 @@ class EntryTests(PacksTestCase):
 class BuildTests(PacksTestCase):
     def test_leaves_out_the_bundled_pack(self) -> None:
         """It ships inside the app and cannot be downloaded."""
-        document = index.build(uploading=None, in_bucket=always)
+        document = index.build(uploading=None, remote=always)
 
         self.assertEqual([entry["id"] for entry in document["packs"]], ["welt"])
 
@@ -182,32 +223,125 @@ class BuildTests(PacksTestCase):
         """The state the app shipped in first: one pack, and it is inside the app."""
         shutil.rmtree(self.packs / "welt")
 
-        self.assertEqual(index.build(uploading="deutschland", in_bucket=always), {"packs": []})
+        self.assertEqual(index.build(uploading="deutschland", remote=always), {"packs": []})
 
     def test_lists_the_pack_of_this_run_although_the_bucket_has_nothing(self) -> None:
         """It is uploaded moments before the index."""
-        document = index.build(uploading="welt", in_bucket=never)
+        document = index.build(uploading="welt", remote=never)
 
         self.assertEqual([entry["id"] for entry in document["packs"]], ["welt"])
 
     def test_leaves_out_a_pack_the_bucket_does_not_have(self) -> None:
         """The index must never name a manifest nobody can fetch."""
-        self.assertEqual(index.build(uploading="deutschland", in_bucket=never), {"packs": []})
+        self.assertEqual(index.build(uploading="deutschland", remote=never), {"packs": []})
 
     def test_asks_the_bucket_for_the_manifest_of_every_other_pack(self) -> None:
+        """And for its first preview, which says whether the previews are there."""
         asked = []
 
-        index.build(uploading=None, in_bucket=lambda key: asked.append(key) or True)
+        index.build(uploading=None, remote=lambda key: asked.append(key) or DIGEST)
 
-        self.assertEqual(asked, ["packs/welt/manifest.json"])
+        self.assertEqual(asked, ["packs/welt/manifest.json", "packs/welt/previews/amsel.jpg"])
+
+    def test_describes_another_pack_by_the_bucket_manifest_digest(self) -> None:
+        """#262: a local re-curation that was never uploaded is no update."""
+        document = index.build(uploading=None, remote=always)
+
+        self.assertEqual(document["packs"][0]["manifestSha256"], DIGEST)
+
+    def test_describes_the_pack_of_this_run_by_its_local_manifest(self) -> None:
+        document = index.build(uploading="welt", remote=never)
+
+        self.assertEqual(
+            document["packs"][0]["manifestSha256"],
+            manifest.sha256_of(self.packs / "welt" / "manifest.json"),
+        )
+
+    def test_leaves_out_the_species_of_a_pack_uploaded_without_previews(self) -> None:
+        """Uploaded before #262: the pack is listed, its previews are not."""
+        document = index.build(
+            uploading=None,
+            remote=lambda key: DIGEST if key.endswith("manifest.json") else None,
+        )
+
+        self.assertEqual([entry["id"] for entry in document["packs"]], ["welt"])
+        self.assertNotIn("species", document["packs"][0])
 
     def test_orders_the_packs_by_id(self) -> None:
         """A second run must produce the same bytes as the first."""
         self.write_pack("alpen", "Vögel der Alpen", ["star"])
 
-        document = index.build(uploading=None, in_bucket=always)
+        document = index.build(uploading=None, remote=always)
 
         self.assertEqual([entry["id"] for entry in document["packs"]], ["alpen", "welt"])
+
+
+class RetiredTests(PacksTestCase):
+    """#262: a pack dissolved into others."""
+
+    def retire(self, retired: dict[str, tuple[str, ...]]):
+        patched = mock.patch.object(index, "RETIRED", retired)
+        patched.start()
+        self.addCleanup(patched.stop)
+
+    def test_moves_a_retired_pack_out_of_the_packs(self) -> None:
+        self.write_pack("amerika", "Vögel Amerikas", ["amsel", "star"])
+        self.retire({"welt": ("amerika",)})
+
+        document = index.build(uploading=None, remote=always)
+
+        self.assertEqual([entry["id"] for entry in document["packs"]], ["amerika"])
+        self.assertEqual(document["retired"], [{"id": "welt", "successors": ["amerika"]}])
+
+    def test_refuses_a_retired_pack_whose_birds_no_successor_carries(self) -> None:
+        """Those stickers would leave every album."""
+        self.write_pack("amerika", "Vögel Amerikas", ["star"])
+        self.retire({"welt": ("amerika",)})
+
+        with self.assertRaises(ValueError) as error:
+            index.build(uploading=None, remote=always)
+
+        self.assertIn("amsel", str(error.exception))
+
+    def test_lists_no_retired_packs_while_there_are_none(self) -> None:
+        self.assertNotIn("retired", index.build(uploading=None, remote=always))
+
+
+class PreviewTests(PacksTestCase):
+    """The small pictures of the grown-ups' gallery (#262)."""
+
+    def staged(self) -> list[s3.Upload]:
+        directory = tempfile.TemporaryDirectory()
+        self.addCleanup(directory.cleanup)
+        return index.staged_previews("welt", Path(directory.name))
+
+    def test_stages_one_preview_per_bird_under_the_key_the_index_names(self) -> None:
+        uploads = self.staged()
+
+        self.assertEqual(
+            [upload.key for upload in uploads],
+            [species["preview"] for species in index.entry("welt")["species"]],
+        )
+        self.assertTrue(all(upload.content_type == "image/jpeg" for upload in uploads))
+
+    def test_shrinks_the_portrait_to_a_small_square(self) -> None:
+        with Image.open(self.staged()[0].path) as preview:
+            self.assertEqual(preview.size, (images.THUMBNAIL_SIDE, images.THUMBNAIL_SIDE))
+            self.assertEqual(preview.format, "JPEG")
+
+    def test_is_the_same_bytes_on_every_run(self) -> None:
+        """An unchanged preview must not be uploaded again."""
+        self.assertEqual(self.staged()[0].sha256, self.staged()[0].sha256)
+
+    def test_does_not_count_towards_the_download_size(self) -> None:
+        """A preview is looked at, not downloaded."""
+        self.assertEqual(
+            index.entry("welt")["downloadSize"],
+            sum(upload.size for upload in s3.plan("welt", self.packs / "welt")),
+        )
+        self.assertFalse(
+            any("/previews/" in upload.key for upload in s3.plan("welt", self.packs / "welt"))
+        )
 
 
 class StagedTests(PacksTestCase):
@@ -218,7 +352,7 @@ class StagedTests(PacksTestCase):
         return upload, upload.path.read_text(encoding="utf-8")
 
     def test_describes_the_index_as_the_object_it_becomes(self) -> None:
-        upload, written = self.staged(index.build(uploading="welt", in_bucket=never))
+        upload, written = self.staged(index.build(uploading="welt", remote=never))
 
         self.assertEqual(upload.key, "packs/index.json")
         self.assertEqual(upload.content_type, "application/json")
@@ -227,7 +361,7 @@ class StagedTests(PacksTestCase):
 
     def test_writes_the_document_as_the_repository_writes_json(self) -> None:
         """Two-space indent, a trailing newline, umlauts as themselves."""
-        _, written = self.staged(index.build(uploading="welt", in_bucket=never))
+        _, written = self.staged(index.build(uploading="welt", remote=never))
 
         self.assertIn('\n      "title": "Vögel der Welt",', written)
         self.assertTrue(written.endswith("}\n"))
@@ -244,9 +378,16 @@ class CommandTests(PacksTestCase):
             exit_code = cli.main(["upload", "--pack", "welt", *arguments])
         return exit_code, output.getvalue().splitlines()
 
+    def preview_size(self, bird: str) -> int:
+        """The bytes of the preview this run stages for `bird`."""
+        directory = tempfile.TemporaryDirectory()
+        self.addCleanup(directory.cleanup)
+        uploads = index.staged_previews("welt", Path(directory.name))
+        return next(upload.size for upload in uploads if upload.key.endswith(f"/{bird}.jpg"))
+
     def index_size(self) -> int:
         """The bytes the index of this run amounts to."""
-        document = index.build(uploading="welt", in_bucket=never)
+        document = index.build(uploading="welt", remote=never)
         return len(manifest.dump(document).encode("utf-8"))
 
     def staged_index(self):
@@ -271,12 +412,17 @@ class CommandTests(PacksTestCase):
 
         self.assertEqual(exit_code, 0)
         self.assertEqual(
-            lines[:4],
+            lines[:6],
             [
                 f" would upload  packs/welt/photos/amsel.jpg  {len(PHOTO)} bytes",
                 f" would upload  packs/welt/photos/star.jpg  {len(PHOTO)} bytes",
                 " would upload  packs/welt/manifest.json  "
                 f"{self.manifest_size('welt')} bytes",
+                # The previews after the pack and before the index (#262).
+                " would upload  packs/welt/previews/amsel.jpg  "
+                f"{self.preview_size('amsel')} bytes",
+                " would upload  packs/welt/previews/star.jpg  "
+                f"{self.preview_size('star')} bytes",
                 f" would upload  packs/index.json  {self.index_size()} bytes",
             ],
         )

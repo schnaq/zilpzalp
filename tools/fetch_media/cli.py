@@ -999,20 +999,24 @@ def command_upload(args: argparse.Namespace) -> int:
         print(f"::notice::{escape_data(f'{error} Listing the plan unchecked.')}")
         client, bucket = None, None
 
-    def present(key: str) -> bool:
-        """Whether the bucket holds that object — as this tool would have put it.
+    def remote(key: str) -> str | None:
+        """The digest the bucket holds for that object, as this tool put it.
 
         An object without the `sha256` metadata reads as absent, which is the
         safe direction: it would not have come from here.
         """
-        return client is not None and s3.remote_sha256(client, bucket, key) is not None
+        return None if client is None else s3.remote_sha256(client, bucket, key)
 
     # Appended, not uploaded separately: the index is the last object of the
     # run and so can never name one that is still missing. It is staged outside
     # the repository, because the licence gate and the credits generator read
     # every *.json below data/packs/ as a manifest.
     with tempfile.TemporaryDirectory() as scratch:
-        catalogue = index.build(uploading=args.pack, in_bucket=present)
+        # The previews of the gallery (#262) after the pack and before the
+        # index, so the index never names one that is still missing. Not part
+        # of `s3.plan`: they are not what a download costs.
+        uploads += index.staged_previews(args.pack, Path(scratch))
+        catalogue = index.build(uploading=args.pack, remote=remote)
         uploads.append(index.staged(catalogue, Path(scratch)))
 
         if client is None:

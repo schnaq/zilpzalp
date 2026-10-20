@@ -58,6 +58,9 @@ struct ParentsScreen: View {
     /// ``StickersSection``.
     let profiles: [Profile]
 
+    /// "Fertig – jetzt spielen" on a just loaded pack (#262).
+    var play: (String) -> Void = { _ in }
+
     /// A grown-up chose a sticker threshold for one child (#260).
     let chooseStickerThreshold: (_ threshold: Int, _ profile: Profile.ID) -> Void
 
@@ -226,9 +229,11 @@ struct ParentsScreen: View {
                     .typeStyle(.bodyLarge, .body, weight: .semibold)
                     .foregroundStyle(ZColor.textBody)
 
+                // The gallery first: more birds is what most grown-ups come
+                // here for, usually with a child asking for them (#262).
+                PacksSection(packs: packs, play: play)
                 rows
                 StickersSection(profiles: profiles, choose: chooseStickerThreshold)
-                PacksSection(packs: packs)
                 voiceNotice
                 notice
             }

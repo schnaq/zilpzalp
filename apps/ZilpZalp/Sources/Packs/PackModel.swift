@@ -1,6 +1,8 @@
-import Foundation
+import Network
 import Observation
 import os
+import SwiftUI
+import UIKit
 import ZilpZalpData
 
 /// Every species pack on the device, and the one way a new one gets there.
@@ -27,6 +29,8 @@ final class PackModel {
         /// next tap tries again — resuming, since the files that were verified
         /// are still there.
         case failed
+        /// The device ran full. Resumable as well, once there is room.
+        case outOfSpace
     }
 
     /// What the bucket offers, as far as the screen knows.
@@ -36,8 +40,13 @@ final class PackModel {
         /// It did not arrive. One calm sentence, and the way to try again;
         /// which of the many reasons it was makes no difference to a parent.
         case failed
-        case ready([PackIndex.Entry])
+        case ready(PackIndex)
     }
+
+    /// Whether the last index this device saw had nothing left to load. What
+    /// the home screen's "Neue Vögel" badge goes by, since the home screen
+    /// itself may never ask the network (#262).
+    private static let nothingLeftKey = "packsNothingLeft"
 
     /// Where the packs come from: the media bucket's public read endpoint.
     ///
@@ -73,6 +82,26 @@ final class PackModel {
     /// kept in step by hand would eventually disagree.
     private(set) var downloads: [String: Download] = [:]
 
+    /// Packs downloaded while the app runs. Their card says "Fertig – jetzt
+    /// spielen" rather than "Geladen" (#262).
+    private(set) var fresh: Set<String> = []
+
+    /// Previews of birds that are not on the device, by bucket key. Fetched
+    /// behind the lock, kept for as long as the app runs. Not observed: each
+    /// sticker holds its own, so one arriving does not redraw all the others.
+    @ObservationIgnored private var previews: [String: Image] = [:]
+
+    /// Whether the connection costs money or is to be spared: a cellular
+    /// network, a hotspot, Low Data Mode. Asked before a download (#262), and
+    /// only known while the gallery watches — see ``watchConnection()``.
+    private(set) var isCostly = false
+
+    /// Whether the last index seen had nothing left to load — what the home
+    /// screen's "Neue Vögel" sparkle goes by, since the home screen may never
+    /// ask the network itself (#262). `false` while no index was ever seen:
+    /// then there may well be something.
+    private(set) var nothingLeft = UserDefaults.standard.bool(forKey: PackModel.nothingLeftKey)
+
     /// What a child can choose between: every bird, or one pack's (#187).
     ///
     /// Built when the library changes rather than when it is asked for: the
@@ -84,6 +113,9 @@ final class PackModel {
 
     private let bundledCatalog: PackCatalog?
     private let downloader: PackDownloader
+    /// Reads the path's properties and sends nothing: no network traffic.
+    /// Only while the gallery is on screen.
+    @ObservationIgnored private var connection: NWPathMonitor?
 
     /// How often `Packs/` has been read. See ``readInstalled()``.
     private var reads = 0
@@ -113,6 +145,27 @@ final class PackModel {
         rebuild()
     }
 
+    /// Follows what the connection costs while the gallery is up. A monitor
+    /// cannot be started twice, so each appearance gets a new one.
+    func watchConnection() {
+        connection?.cancel()
+        // Costly until the path has said otherwise: a tap in the first
+        // moment asks once too often rather than once too few.
+        isCostly = true
+        let monitor = NWPathMonitor()
+        monitor.pathUpdateHandler = { [weak self] path in
+            let costly = path.isExpensive || path.isConstrained
+            Task { @MainActor in self?.isCostly = costly }
+        }
+        monitor.start(queue: .main)
+        connection = monitor
+    }
+
+    func stopWatchingConnection() {
+        connection?.cancel()
+        connection = nil
+    }
+
     /// The open packs, in the order they answer for a species: the one that
     /// ships inside the app, then what has been downloaded. Said once, because
     /// it is the rule the whole library rests on.
@@ -123,8 +176,21 @@ final class PackModel {
     /// What a parent has not got yet: everything the bucket offers minus what
     /// is already on the device.
     var downloadable: [PackIndex.Entry] {
-        guard case let .ready(entries) = available else { return [] }
-        return entries.filter { entry in !installed.contains { $0.id == entry.id } }
+        guard case let .ready(index) = available else { return [] }
+        return index.packs.filter { entry in !installed.contains { $0.id == entry.id } }
+    }
+
+    /// The index entry of a pack, installed or not; `nil` before the index
+    /// has arrived and for the bundled pack, which it does not list.
+    func entry(for packID: String) -> PackIndex.Entry? {
+        guard case let .ready(index) = available else { return nil }
+        return index.packs.first { $0.id == packID }
+    }
+
+    /// Retired packs on this device with successors to load (#262).
+    var migrations: [PackIndex.Migration] {
+        guard case let .ready(index) = available else { return [] }
+        return index.migrations(installed: Set(installed.map(\.id)))
     }
 
     /// What the downloaded packs take up altogether — the line under the card.
@@ -144,9 +210,20 @@ final class PackModel {
     /// lock**: the grown-ups' area asks for it when it opens, no child's
     /// screen ever does.
     func loadAvailable() async {
-        available = .loading
+        // A list already on screen stays while the next one is on its way, and
+        // when it does not come: a running download must not lose its card.
+        let shown: PackIndex? = if case let .ready(index) = available {
+            index
+        } else {
+            nil
+        }
+        if shown == nil {
+            available = .loading
+        }
         do {
-            available = try await .ready(downloader.availablePacks())
+            available = try await .ready(downloader.index())
+            rememberWhatIsLeft()
+            await finishMigrations()
         } catch is CancellationError {
             // A grown-up who left the screen while the list was on its way.
             // SwiftUI cancels the `.task` that started this, and that is not a
@@ -154,7 +231,7 @@ final class PackModel {
             // standing behind a list that is simply not being waited for. The
             // section asks again when it comes back.
         } catch {
-            available = .failed
+            available = shown.map(Available.ready) ?? .failed
             let reason = String(describing: error)
             Logger.packs.error("Pack index did not load: \(reason, privacy: .public)")
         }
@@ -166,7 +243,7 @@ final class PackModel {
     /// is running is ignored rather than starting a second fetch into the same
     /// directory.
     func download(_ entry: PackIndex.Entry) {
-        if case .running = downloads[entry.id] {
+        if downloads[entry.id].isRunning {
             return
         }
         downloads[entry.id] = .running(0)
@@ -185,7 +262,11 @@ final class PackModel {
                 // only once every file it names is there and verified, so what
                 // is left behind is a partial directory the next attempt
                 // resumes from.
-                downloads[entry.id] = .failed
+                if case .outOfSpace = error as? PackDownloadError {
+                    downloads[entry.id] = .outOfSpace
+                } else {
+                    downloads[entry.id] = .failed
+                }
                 let reason = String(describing: error)
                 Logger.packs.error("Pack did not download: \(reason, privacy: .public)")
                 return
@@ -195,8 +276,30 @@ final class PackModel {
             // the pack belongs to neither list, and the row would offer it for
             // download all over again.
             await readInstalled()
+            // A read that started before the move — a deletion's — may have
+            // been the one believed. Once more, so the card never falls back
+            // to "Laden" for a pack that is on disk.
+            if !installed.contains(where: { $0.id == entry.id }) {
+                await readInstalled()
+            }
             downloads[entry.id] = nil
+            fresh.insert(entry.id)
+            await finishMigrations()
         }
+    }
+
+    /// The preview behind `key`, fetched once. `nil` when it does not come,
+    /// which leaves its sticker the glyph; nothing else depends on it.
+    func preview(_ key: String) async -> Image? {
+        if let known = previews[key] {
+            return known
+        }
+        guard let data = try? await downloader.preview(key), let image = UIImage(data: data) else {
+            return nil
+        }
+        let preview = Image(uiImage: image)
+        previews[key] = preview
+        return preview
     }
 
     /// Removes a downloaded pack, its half downloaded copy included. Its
@@ -235,6 +338,22 @@ final class PackModel {
 
         installed = opened.installed
         rebuild()
+        rememberWhatIsLeft()
+    }
+
+    /// Deletes every retired pack whose successors are all installed. The
+    /// stickers stay: they belong to species ids, and the successors carry
+    /// the same ones.
+    private func finishMigrations() async {
+        for migration in migrations where migration.remaining.isEmpty {
+            await delete(migration.retired)
+        }
+    }
+
+    private func rememberWhatIsLeft() {
+        guard case .ready = available, nothingLeft != downloadable.isEmpty else { return }
+        nothingLeft = downloadable.isEmpty
+        UserDefaults.standard.set(nothingLeft, forKey: Self.nothingLeftKey)
     }
 
     /// Puts the open packs together again. The one place ``library``,
