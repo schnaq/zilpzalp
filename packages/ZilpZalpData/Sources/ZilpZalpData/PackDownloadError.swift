@@ -21,4 +21,6 @@ public enum PackDownloadError: Error, Sendable, Equatable {
     case notInstalled(packID: String)
     /// Creating, writing, moving or removing below `Packs/` failed.
     case diskFailure(path: String, reason: String)
+    /// A file did not fit on the device. The download stays resumable.
+    case outOfSpace(path: String)
 }

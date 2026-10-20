@@ -72,6 +72,30 @@ struct PackCollectionTests {
         }
     }
 
+    /// Species may sit in several packs by design since #262 — a regional
+    /// pack and the one it was cut from. Mixed play must never ask for one of
+    /// them twice, and its sticker is one sticker: the id is the same.
+    @Test("a species in several packs is one bird in every collection")
+    func countsASharedSpeciesOnce() throws {
+        try withPacks { home in
+            let packs = try ["basis", "afrika", "welt"].map { pack in
+                try PackFolder.write(
+                    pack: pack,
+                    species: Self.fourSpecies(pack) + [Species(id: "strauss", call: pack == "welt")],
+                    to: home,
+                )
+            }
+            let collections = PackCollections(PackLibrary(packs))
+
+            for collection in collections.entries {
+                let ids = collection.library.birds.map(\.id)
+                #expect(ids.count == Set(ids).count)
+                #expect(ids.contains("strauss"))
+            }
+            #expect(collections.everything.library.birds.count == 13)
+        }
+    }
+
     @Test("a pack that is not installed narrows to nothing")
     func narrowsToNothingWithoutThePack() throws {
         try withPacks { home in

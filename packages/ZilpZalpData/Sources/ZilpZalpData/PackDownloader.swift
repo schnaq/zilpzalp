@@ -49,14 +49,14 @@ public actor PackDownloader {
 
     // MARK: - The bucket
 
-    /// The packs the bucket offers.
+    /// The packs the bucket offers, and those it no longer does.
     ///
-    /// - Returns: the index entries, in the order the index lists them.
+    /// - Returns: the index, its entries in the order it lists them.
     /// - Throws: `PackDownloadError.indexUnreachable` for every failure —
     ///   no network, a 404, an error page instead of the index. The caller
     ///   acts on all of them the same way. `CancellationError` when the task
     ///   was cancelled.
-    public func availablePacks() async throws -> [PackIndex.Entry] {
+    public func index() async throws -> PackIndex {
         let data: Data
         do {
             data = try await fetch(baseURL.appending(path: Self.indexKey), named: Self.indexKey)
@@ -65,10 +65,27 @@ public actor PackDownloader {
         }
 
         do {
-            return try JSONDecoder().decode(PackIndex.self, from: data).packs
+            return try JSONDecoder().decode(PackIndex.self, from: data)
         } catch {
             throw PackDownloadError.indexUnreachable(reason: "\(error)")
         }
+    }
+
+    /// One preview of a bird that is not on the device yet (#262), the bytes
+    /// of a small JPEG.
+    ///
+    /// Through the same door as everything else: appended to `baseURL`,
+    /// refused when the key would leave it, no redirect followed. The shared
+    /// session's `URLCache` keeps what came, so a grown-up opening the same
+    /// pack twice does not fetch it twice.
+    ///
+    /// - Parameter key: ``PackIndex/Species/preview``.
+    /// - Throws: `PackDownloadError.invalidPath` or `.fileUnreachable`.
+    public func preview(_ key: String) async throws -> Data {
+        guard isSafeRelativePath(key) else {
+            throw PackDownloadError.invalidPath(packID: "", path: key)
+        }
+        return try await fetch(baseURL.appending(path: key), named: key)
     }
 
     /// Downloads one pack and installs it.
@@ -207,6 +224,7 @@ public actor PackDownloader {
                         directory: directory,
                     ),
                     bytes: directory.directoryBytes(),
+                    manifestSha256: Self.hexDigest(of: data),
                 ))
             } catch {
                 failures.append(
@@ -368,11 +386,24 @@ public actor PackDownloader {
             )
             try data.write(to: destination, options: .atomic)
         } catch {
-            throw PackDownloadError.diskFailure(
-                path: destination.path(percentEncoded: false),
-                reason: error.localizedDescription,
-            )
+            throw Self.diskError(error, writing: destination)
         }
+    }
+
+    /// What a failed write means to a grown-up: a full device, or anything
+    /// else that went wrong on disk.
+    ///
+    /// The full device is recognised from the write itself rather than asked
+    /// for beforehand, which keeps the app off the `DiskSpace` Required Reason
+    /// API (docs/kids-category.md). Nothing is lost by it: the files that were
+    /// verified stay in the partial directory, and the next attempt resumes.
+    static func diskError(_ error: any Error, writing destination: URL) -> PackDownloadError {
+        let path = destination.path(percentEncoded: false)
+        let nsError = error as NSError
+        let underlying = nsError.userInfo[NSUnderlyingErrorKey] as? NSError
+        let full = (error as? CocoaError)?.code == .fileWriteOutOfSpace
+            || [nsError, underlying].contains { $0?.domain == NSPOSIXErrorDomain && $0?.code == Int(ENOSPC) }
+        return full ? .outOfSpace(path: path) : .diskFailure(path: path, reason: error.localizedDescription)
     }
 
     /// Makes a fully verified partial directory the installed pack.
