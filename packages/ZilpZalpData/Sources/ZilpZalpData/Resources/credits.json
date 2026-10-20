@@ -1035,16 +1035,6 @@
       "packTitle": "Vögel Deutschlands",
       "birdID": "buntspecht",
       "birdName": "Buntspecht",
-      "kind": "photo",
-      "attribution": "Francesco Cecere",
-      "license": "CC0-1.0",
-      "sourceURL": "https://www.inaturalist.org/observations/2633975"
-    },
-    {
-      "packID": "deutschland",
-      "packTitle": "Vögel Deutschlands",
-      "birdID": "buntspecht",
-      "birdName": "Buntspecht",
       "kind": "call",
       "attribution": "Benoît Van Hecke (XC704068)",
       "license": "CC-BY-SA-4.0",
@@ -1736,16 +1726,6 @@
       "birdID": "rabenkraehe",
       "birdName": "Rabenkrähe",
       "kind": "photo",
-      "attribution": "Priya Sandhu",
-      "license": "CC-BY-4.0",
-      "sourceURL": "https://www.inaturalist.org/observations/263296471"
-    },
-    {
-      "packID": "deutschland",
-      "packTitle": "Vögel Deutschlands",
-      "birdID": "rabenkraehe",
-      "birdName": "Rabenkrähe",
-      "kind": "photo",
       "attribution": "Rhys",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/339187840"
@@ -2179,16 +2159,6 @@
       "attribution": "Дмитрий Кошелев",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/317740320"
-    },
-    {
-      "packID": "deutschland",
-      "packTitle": "Vögel Deutschlands",
-      "birdID": "moenchsgrasmuecke",
-      "birdName": "Mönchsgrasmücke",
-      "kind": "photo",
-      "attribution": "alcesevropsky",
-      "license": "CC-BY-SA-4.0",
-      "sourceURL": "https://www.inaturalist.org/observations/137250122"
     },
     {
       "packID": "deutschland",

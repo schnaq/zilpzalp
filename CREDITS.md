@@ -122,7 +122,6 @@ the source declared.
 | Blaumeise | Call | Benoît Van Hecke (XC539315) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/539315> |
 | Buntspecht | Photo | Вячеслав Юсупов | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/18530920> |
 | Buntspecht | Photo | Константин Селивёрстов | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/36065019> |
-| Buntspecht | Photo | Francesco Cecere | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/2633975> |
 | Buntspecht | Call | Benoît Van Hecke (XC704068) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/704068> |
 | Eisvogel | Photo | Alexis Lours | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/98375354> |
 | Eisvogel | Photo | SteveM4560 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/197233516> |
@@ -192,7 +191,6 @@ the source declared.
 | Eichelhäher | Photo | Rhys | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/343819178> |
 | Eichelhäher | Call | Sonothèque ADVL (XC1175981) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1175981> |
 | Rabenkrähe | Photo | Nasser Halaweh | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/18803996> |
-| Rabenkrähe | Photo | Priya Sandhu | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/263296471> |
 | Rabenkrähe | Photo | Rhys | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/339187840> |
 | Rabenkrähe | Call | Marie-Lan Taÿ Pamart (XC511943) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/511943> |
 | Dohle | Photo | Adam Jackson | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/193317621> |
@@ -237,7 +235,6 @@ the source declared.
 | Nachtigall | Call | Philippe_Grange (XC1099301) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1099301> |
 | Mönchsgrasmücke | Photo | tobijw | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/365842816> |
 | Mönchsgrasmücke | Photo | Дмитрий Кошелев | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/317740320> |
-| Mönchsgrasmücke | Photo | alcesevropsky | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/137250122> |
 | Mönchsgrasmücke | Call | Philippe_Grange (XC1099296) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1099296> |
 | Kleiber | Photo | Dr. Sven Gippner | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/148024354> |
 | Kleiber | Photo | Вячеслав Юсупов | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/18627217> |
