@@ -74,33 +74,110 @@ second voice in the same manifest is refused rather than merged.
 cannot hear whether a sentence is friendly, and nothing audible goes into this
 repository unheard.
 
-## Rendering with Google Cloud Text-to-Speech
+## Rendering with ElevenLabs
 
-The other way to produce a clip is to render it, and **Google Cloud
-Text-to-Speech is the renderer this project uses** (issue #234). Chirp 3 HD
-speaks native German at the current top tier, everything the app says is a few
-thousand characters a month against a free tier of a million, and the grant is
-the plainest of the three that were read at the source:
+The other way to produce a clip is to render it, and **ElevenLabs is the
+renderer this project uses** (Christian, 2026-10-20, issue #221). Two things
+decided it, and both were heard rather than read:
 
-> "You can use the audio data files you create using Cloud Text-to-Speech to
-> power your applications […]"
-> — <https://docs.cloud.google.com/text-to-speech/docs/basics>
+- **German pronunciation.** Since #265 most of what the app says is a bare bird
+  name, one word with no sentence around it. `eleven_multilingual_v2` guesses
+  the language from the text, and one word is too little: it said „Amsel" and
+  „Zilpzalp" in English. `eleven_v3` with `language_code` `de` says them in
+  German. `multilingual_v2` refuses `language_code` outright, so the model and
+  the field come together.
+- **The voice.** Ava — library voice `AnvlJBAqSLDzEevYr9Ap`, German, listed as
+  "Youthful, Authentic and Friendly" — is the one Christian chose after a
+  probe. The account is on the paid Starter tier (40,000 characters a month,
+  commercial use); the whole app is under a thousand.
 
-No attribution is owed and no disclosure — Azure would have required one, and
-that is part of why it did not win. What Google's terms do **not** say in
-writing is that the output is ours; section 2.1 of the plan records that no
-ownership clause could be read at the source, and no prohibition either.
-Publishing the clips under CC BY 4.0 is therefore a decision (#234), not a
-quotation. It changes nothing downstream: the gate, the credits screen and the
-`License` enum all take CC BY 4.0 as they stand.
+### The licence
 
-**ElevenLabs stays in the tree as `speech/elevenlabs.py` and is not used.** It
-was built first (#221, decision 1 of the plan) and its terms are the clearest
-of all — commercial use and ownership of the output on any paid tier — but the
-account is on the free tier, which is non-commercial and does not serve library
-voices through the API. If that ever changes, the adapter is `--provider
-elevenlabs` and needs no work; nothing else in the pipeline knows the
-difference.
+The grant is read at the source, in the EEA Terms of Service (Last Updated
+9 October 2026, <https://elevenlabs.io/terms-of-use-eu>). §1(c): a paid user
+*"may use the Services for commercial purposes"*, a free one only for
+non-commercial ones. §4(c): *"Except as expressly set forth herein, as between
+you and ElevenLabs, you retain all rights in and to your Output."* That is
+ownership, not a licence to use, so publishing the clips under CC BY 4.0 is a
+claim this project may make. No attribution is owed on a paid tier.
+
+Ava is a library voice, which brings in the Voice Library Addendum (Last
+Updated 6 March 2026, <https://elevenlabs.io/vla>). It asks nothing of the
+person using a shared voice: other users are *"discharged [of] any
+obligations present or future, to pay royalties"*, and output generated before
+a voice is withdrawn *"will continue to exist"* and *"remain available for use
+thereafter"*. Three conditions hold, and none of them is code: the account is
+**schnaq GmbH's**, the clips are rendered **while the subscription is active**,
+and the Sound Effects product is never used for a shipped asset.
+
+One thing the addendum does not cover for us: a withdrawn voice stays
+renderable through its notice period only *"to users that added that User
+Voice Model to their account prior to removal"*. Ava renders by id without
+being added. Adding her in the dashboard keeps a later re-render possible.
+
+### The key
+
+`ELEVENLABS_API_KEY`, in Infisical under environment `dev`, path `/`. It
+travels as the `xi-api-key` header, and the adapter removes it from every
+message it prints (`fetch_media.keys`).
+
+The key as issued has no `voices_read` permission, so `speech voices
+--provider elevenlabs` is refused with a 401 that says so. That is why
+`--voice` also takes the form `<id>=<name>`: the id is what speaks, the name is
+what the credits say, and nothing has to be looked up. A library voice the
+account has not added would not be in that listing anyway.
+
+### Rendering
+
+The fixed set, with every key the app speaks through `SpokenLine.fixed`:
+
+```
+infisical run --env=dev --path=/ -- mise run fetch-media speech render \
+    --provider elevenlabs --voice AnvlJBAqSLDzEevYr9Ap=Ava --set fixed \
+    --sentence roundEnd.title gate.spoken profile.picker.title \
+    profile.create.title quiz.quit.question home.collection.title \
+    home.collection.all
+```
+
+Every species' name of a pack, or one with `--species amsel`:
+
+```
+infisical run --env=dev --path=/ -- mise run fetch-media speech render \
+    --provider elevenlabs --voice AnvlJBAqSLDzEevYr9Ap=Ava \
+    --pack deutschland --sentence collection.name
+```
+
+Every run prints the number of characters it is about to render before it
+renders them, and refuses to go over `--max-chars` (30000 by default): the
+count is the price, and the cap is there for the run that was meant to be one
+bird.
+
+The voice becomes the manifest's `voice` block: „Stimme: Ava (ElevenLabs)",
+CC BY 4.0, this document as the source. One manifest carries one voice, so
+rendering it again with a different `--voice` is refused rather than merged — a
+change of voice means re-rendering everything in that manifest (decision 7:
+the app does not mix voices).
+
+The request is as deterministic as the API allows: a fixed `seed`, stability
+and similarity 0.8, style 0, speaker boost off. The seed is best effort, so two
+renders of one sentence may differ — re-render one clip rather than a pack.
+`speed` is not sent; v3 ignores it. The audio is `pcm_24000`, the best format
+Starter serves, and from there a rendered clip goes through the same trim,
+normalisation and AAC encoding as an imported take.
+
+**Listen to every clip before you commit it**, exactly as with a take. A
+synthetic voice mispronounces bird names — `pronunciation` in the pack manifest
+is how that is fixed, and the tool speaks it where it is set.
+
+## Google Cloud Text-to-Speech, not used
+
+`speech/google.py` was the renderer from #234 until 2026-10-20 and stays in
+the tree, unused. Its grant is plain — *"You can use the audio data files you
+create using Cloud Text-to-Speech to power your applications […]"*
+(<https://docs.cloud.google.com/text-to-speech/docs/basics>) — but no
+ownership clause could be read at the source (section 2.1 of the plan), and
+ElevenLabs won the listening. If it is ever needed again, it is `--provider
+google` and the setup below.
 
 ### Setting the project up, once
 
@@ -166,53 +243,11 @@ carries one voice, so rendering a pack a second time with a different `--voice`
 is refused rather than merged — a change of voice means re-rendering everything
 in that manifest (decision 7: the app does not mix voices).
 
-### Rendering
-
-One sentence for one bird:
-
-```
-infisical run --env=dev --path=/ -- mise run fetch-media speech render \
-    --provider google --voice de-DE-Chirp3-HD-Aoede \
-    --pack deutschland --species amsel --sentence collection.name
-```
-
-Every species' name line of a pack — no `--species`, so every bird in it:
-
-```
-infisical run --env=dev --path=/ -- mise run fetch-media speech render \
-    --provider google --voice de-DE-Chirp3-HD-Aoede \
-    --pack deutschland --sentence collection.name
-```
-
-Everything a pack says is that same name line, so `--sentence` may be left
-out; the fixed set is `--set fixed --sentence …`, which names
-its sentences explicitly. Every run prints the number of characters it is about
-to render before it renders them, and refuses to go over `--max-chars` (30000
-by default): a provider bills characters, so the count is the price, and the cap
-is there for the run that was meant to be one bird.
-
-The request is deterministic as far as the API allows — `speakingRate` 1.0,
-spelled out rather than defaulted. There is no seed, so two renders of one
-sentence may differ slightly. Re-render one clip rather than a pack. `pitch` is
-deliberately not sent: Chirp 3 HD documents no such field, and 0 would mean
-"unchanged" in any case.
-
-### The audio
-
-`LINEAR16` at 24 kHz, which is what Chirp 3 HD reports as its natural rate. It
-arrives base64-encoded as a whole WAV; the tool unwraps it, and from there a
-rendered clip goes through exactly the same trim, normalisation and AAC
-encoding as an imported take.
-
-**Listen to every clip before you commit it**, exactly as with a take. A
-synthetic voice mispronounces bird names — `pronunciation` in the pack manifest
-is how that is fixed, and the tool speaks it where it is set.
-
 ## The licence line
 
 A recording made for this project is published under **CC BY 4.0**, like the
 photos and the calls, and `--attribution` is how the credits screen names the
 voice. On a render the adapter names it instead of `--attribution` — „Stimme:
-<name> (Google Cloud Text-to-Speech)" — under the same licence. The gate accepts
+Ava (ElevenLabs)" — under the same licence. The gate accepts
 CC0, CC BY and CC BY-SA and nothing else — a voice that cannot be published
 under one of them cannot ship.

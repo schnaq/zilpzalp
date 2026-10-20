@@ -225,7 +225,7 @@ class RealCatalogTests(unittest.TestCase):
 
 class ProviderTests(unittest.TestCase):
     def test_the_adapters_are_the_tones_and_the_vendor(self) -> None:
-        """#234: Google speaks, ElevenLabs stays unused, `fake` reaches nobody."""
+        """#221: ElevenLabs speaks, Google stays unused, `fake` reaches nobody."""
         self.assertEqual(sorted(speech.PROVIDERS), ["elevenlabs", "fake", "google"])
 
     def test_names_what_it_has_when_asked_for_something_else(self) -> None:
@@ -319,15 +319,15 @@ class ElevenLabsTests(unittest.TestCase):
 
         body = json.loads(spoken.content)
         self.assertEqual(body["text"], "Wo ist die Amsel?")
-        self.assertEqual(body["model_id"], "eleven_multilingual_v2")
+        self.assertEqual(body["model_id"], "eleven_v3")
         self.assertEqual(body["seed"], elevenlabs.SEED)
         self.assertEqual(body["voice_settings"], elevenlabs.VOICE_SETTINGS)
 
-    def test_does_not_send_a_language_code(self) -> None:
-        """`eleven_multilingual_v2` rejects it; German comes from the words."""
+    def test_says_the_language_out_loud(self) -> None:
+        """One bare name is too little to guess German from — v3 is told."""
         self.render()
 
-        self.assertNotIn("language_code", json.loads(self.requests[-1].content))
+        self.assertEqual(json.loads(self.requests[-1].content)["language_code"], "de")
 
     def test_carries_the_key_in_the_header_and_not_in_the_url(self) -> None:
         self.render()
@@ -364,6 +364,16 @@ class ElevenLabsTests(unittest.TestCase):
     def test_takes_a_voice_by_id_as_well_as_by_name(self) -> None:
         self.assertEqual(self.provider().chosen("v-max").name, "Max")
         self.assertEqual(self.provider().chosen("Max").id, "v-max")
+
+    def test_takes_a_voice_the_account_does_not_list_as_id_and_name(self) -> None:
+        """A library voice: rendered by id, credited by name, no listing asked."""
+        provider = self.provider()
+        voice = provider.voice("v-ava=Ava")
+        provider.render("Amsel", "v-ava=Ava")
+
+        self.assertEqual(voice.attribution, "Stimme: Ava (ElevenLabs)")
+        paths = [request.url.path for request in self.requests]
+        self.assertEqual(paths, ["/v1/text-to-speech/v-ava"])
 
     def test_refuses_a_run_without_a_voice(self) -> None:
         """No default: nobody chose it, and the pack would carry it for good."""
