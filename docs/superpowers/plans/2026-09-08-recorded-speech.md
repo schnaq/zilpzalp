@@ -347,6 +347,18 @@ re-renders in a second. That is the whole trade.
 
 ### 2.3 Recommendation
 
+> **Amendment 2026-10-20 (Christian, #221).** Decision 1 is answered:
+> ElevenLabs renders, Google (#234) stays in the tree unused. The model is
+> `eleven_v3` with `language_code` `de`, not `eleven_multilingual_v2` as
+> priced above: since #265 most clips are one bare bird name, and v2 said
+> „Amsel" and „Zilpzalp" in English, while it refuses `language_code`
+> altogether. The voice is Ava, library voice `AnvlJBAqSLDzEevYr9Ap`; the
+> account is schnaq's, on Starter. The licence line of decision 3 holds as
+> written — §1(c) and §4(c) read the same in the ToS of 9 October 2026, and
+> the Voice Library Addendum adds no duty towards the voice's owner. The fixed
+> set is the seven keys the app speaks through `SpokenLine.fixed`; the eight
+> rank sentences no longer exist. docs/sprachaufnahmen.md has the details.
+
 **Primary: Johanna.** Best for the audience, unambiguously ours, no vendor
 terms, no disclosure duty, and it keeps the manifest inside the three CC
 licences the project already enforces. 44 clips is one evening.

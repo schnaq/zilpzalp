@@ -4731,7 +4731,20 @@
       "sourceURL": "https://www.inaturalist.org/observations/145164091"
     }
   ],
-  "voices": [],
+  "voices": [
+    {
+      "attribution": "Stimme: Ava (ElevenLabs)",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md",
+      "usedIn": "Vögel Deutschlands"
+    },
+    {
+      "attribution": "Stimme: Ava (ElevenLabs)",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md",
+      "usedIn": "Ansagen"
+    }
+  ],
   "fonts": [
     {
       "name": "Baloo 2",

@@ -1,4 +1,4 @@
-"""ElevenLabs, the vendor decision 1 of the plan settled on.
+"""ElevenLabs, the renderer this project uses (Christian, 2026-10-20, #221).
 
 Why this one, in one paragraph: it is the only vendor whose terms were read at
 the source and found to grant both commercial use and **ownership of the
@@ -10,12 +10,19 @@ the account is **schnaq GmbH's**, the clips are rendered **while the paid
 subscription is active** (the free tier is non-commercial), and the Sound
 Effects product is never used for a shipped asset.
 
-Four findings that would otherwise be rediscovered against a paid meter:
+Five findings that would otherwise be rediscovered against a paid meter:
 
-- **`language_code` is not supported by `eleven_multilingual_v2`.** The API
-  reference says so in as many words, and sending it anyway is an error rather
-  than a hint. German is enforced by the German text and by a German voice, so
-  nothing here sends it. Do not re-add it.
+- **A bare bird name needs `eleven_v3` with `language_code` "de".**
+  `eleven_multilingual_v2` guesses the language from the text, and one word is
+  too little to guess from: it said „Amsel" and „Zilpzalp" in English. It also
+  rejects `language_code`; v3 takes it and then speaks German. v3 accepted
+  every field of `VOICE_SETTINGS` and the `seed` as they stand (tried
+  2026-10-20); it ignores `speed`, which is why none is sent.
+- **A library voice is not in the account's `/voices`.** Ava, the voice
+  Christian chose, renders by id without being added to the account, but no
+  listing names her — and the schnaq key lacks `voices_read`, so the listing
+  is refused outright. `--voice <id>=<name>` therefore names both and asks
+  nobody: the id is what speaks, the name is what the credits say.
 - **`seed` is best effort.** *"Determinism is not guaranteed"* — two renders of
   one sentence may differ. That is why `--species` and `--sentence` exist: a
   re-render is aimed at one clip rather than at a pack.
@@ -29,9 +36,9 @@ Four findings that would otherwise be rediscovered against a paid meter:
   `keys.redact`: the key travels as a header, and an error body can echo it.
 
 There is deliberately **no default voice**. Which voice a child hears is a
-product decision (with Johanna, per the issue), and a voice id baked in here
-would be the one nobody chose. `speech voices --provider elevenlabs` lists what
-the account offers; `--voice` then names one, by id or by name.
+product decision, and a voice id baked in here would outlive it. The choice
+lives in docs/sprachaufnahmen.md; `--voice` names it on every run, by id, by
+name, or as `<id>=<name>` for a voice the account does not list.
 """
 
 from __future__ import annotations
@@ -42,13 +49,14 @@ import httpx
 
 from fetch_media import keys
 from fetch_media.speech.provider import RECORDING_DOC, Voice, VoiceOption, wav_bytes
+from fetch_media.speech.sentences import LANGUAGE
 
 API_ROOT = "https://api.elevenlabs.io/v1"
 
-# Multilingual v2 is the model the plan compared and priced. Flash and Turbo
-# are faster and cheaper and sound it; a clip is rendered once and heard for
-# years, so latency is worth nothing here and quality is worth everything.
-MODEL = "eleven_multilingual_v2"
+# v3, because it is the model that takes `language_code` — see the first
+# finding above. Flash and Turbo are faster and cheaper and sound it; a clip is
+# rendered once and heard for years, so latency is worth nothing here.
+MODEL = "eleven_v3"
 
 # 24 kHz signed 16-bit little-endian, the best the Starter tier serves. The
 # pipeline encodes to mono AAC afterwards, so anything above this would be
@@ -185,13 +193,20 @@ class ElevenLabsProvider:
 
         Refuses rather than picks: a run without `--voice` would otherwise
         record whichever voice the account happens to list first, and the pack
-        would carry it for good.
+        would carry it for good. `<id>=<name>` asks nobody — the way to a
+        library voice the account does not list.
         """
         if not voice:
             raise ValueError(
                 "--voice names the voice to speak with: an id or a name from "
-                "'fetch-media speech voices --provider elevenlabs'."
+                "'fetch-media speech voices --provider elevenlabs', or <id>=<name>."
             )
+
+        voice_id, given, name = voice.partition("=")
+        if given:
+            if not (voice_id and name):
+                raise ValueError(f"--voice '{voice}': <id>=<name> needs both an id and a name")
+            return VoiceOption(id=voice_id, name=name, description="")
 
         offered = self.voices()
         for option in offered:
@@ -219,6 +234,7 @@ class ElevenLabsProvider:
             json={
                 "text": text,
                 "model_id": MODEL,
+                "language_code": LANGUAGE,
                 "voice_settings": dict(VOICE_SETTINGS),
                 "seed": SEED,
             },
