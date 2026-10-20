@@ -41,9 +41,9 @@ struct HomeScreen: View {
 
     let openProfiles: () -> Void
 
-    /// What there is to choose between, „Alle Vögel" first — empty while one
-    /// pack alone is installed, and then the screen looks exactly as it did
-    /// before #187.
+    /// What there is to choose between, „Alle Vögel" first. With one pack
+    /// installed, that pack alone — the picker still opens for its "+"
+    /// (#262); empty only in the previews.
     let collections: [CollectionEntry]
 
     /// The collection being played with, resolved. See ``CollectionChip``.
@@ -154,7 +154,7 @@ struct HomeScreen: View {
         )
     }
 
-    /// The headline and, once there is more than one pack on the device, the
+    /// The headline and, below it, the pill with the
     /// collection this child plays with. Measured as one so the tiles below
     /// know what is left: the pill costs a phone tile height, an iPad nothing.
     private var intro: some View {

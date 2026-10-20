@@ -77,7 +77,8 @@ re-uploads `afrika` and `welt` once to publish previews and hashes.
   sticker threshold is set; the app counts `profile.hasSticker(for:)` over the
   deduplicated library.
 - Dedupe: `PackLibrary` already keeps a species id once, first pack wins, and
-  stickers are keyed by species id. Species may now be in several packs by
+  stickers are keyed by species id. A later copy with a call takes over a
+  callless one, so game 2 does not lose the bird. Species may now be in several packs by
   design, so tests pin it for "Alle Vögel", a narrowed pack and the
   collections.
 
@@ -108,16 +109,13 @@ re-uploads `afrika` and `welt` once to publish previews and hashes.
   "Neue Vögel" for VoiceOver, no text for the child) once the playing child
   holds 80 % of the installed species' stickers, unless the last index seen
   had nothing left to load. A one-time, dismissible line for grown-ups on Home
-  ("Mehr Vögel im Elternbereich") after a profile exists; dismissed for good by
+  ("Mehr Vögel in den Einstellungen", the area's own title) after a profile exists; dismissed for good by
   its close button or by opening the Elternbereich. Neither touches the
   network; both stay off in screenshot runs.
 
 ## Out of scope / open
 
-- The "+" tile only exists where the picker does, i.e. with two or more packs
-  installed — a fresh install relies on the first-start hint.
-- First pack wins can keep a species' callless copy while another pack has a
-  call, which costs game 2 that species. Preferring the copy with a call would
-  change which photo a sticker shows; left alone.
+- The chip and the picker show even with only the bundled pack, which then
+  stands alone for every bird, so the "+" is there on a fresh install too.
 - Successor packs of "Vögel der Welt" are still to be curated; `RETIRED` stays
   empty until they are in the bucket.

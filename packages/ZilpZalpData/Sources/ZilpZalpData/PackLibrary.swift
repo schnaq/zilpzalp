@@ -29,9 +29,12 @@ public struct PackLibrary: Sendable {
     /// manifest order.
     ///
     /// **A species id that turns up twice is kept once, and the first pack
-    /// wins.** Since #262 a species may sit in several packs on purpose — a
-    /// regional pack and the one it was cut from — and mixed play must never
-    /// ask for it twice. Both ``SpeciesPhotos`` and the round builder key
+    /// wins — unless only a later copy carries a call.** Since #262 a species
+    /// may sit in several packs on purpose — a regional pack and the one it
+    /// was cut from — and mixed play must never ask for it twice. A copy with
+    /// a call takes over a callless one, so game 2 does not lose the bird to
+    /// pack order; its place in the list stays where the first copy put it. Both ``SpeciesPhotos``
+    /// and the round builder key
     /// dictionaries by species id, which traps on a duplicate, so this is also
     /// a crash guard, and the pack that ships with the app is the one that
     /// keeps its bird. A sticker belongs to the id, so it is one sticker
@@ -48,11 +51,18 @@ public struct PackLibrary: Sendable {
         self.catalogs = catalogs
 
         var owners: [String: Int] = [:]
+        var positions: [String: Int] = [:]
         var birds: [Bird] = []
         for (index, catalog) in catalogs.enumerated() {
-            for bird in catalog.pack.birds where owners[bird.id] == nil {
+            for bird in catalog.pack.birds {
+                if let position = positions[bird.id] {
+                    guard birds[position].call == nil, bird.call != nil else { continue }
+                    birds[position] = bird
+                } else {
+                    positions[bird.id] = birds.count
+                    birds.append(bird)
+                }
                 owners[bird.id] = index
-                birds.append(bird)
             }
         }
         self.owners = owners

@@ -31,7 +31,8 @@ struct CollectionEntry {
     /// „Alle Vögel" is a String Catalog entry and takes its key, so a
     /// recording of it would be found the day one is made.
     var spoken: SpokenLine {
-        id == nil ? .fixed("home.collection.all") : .assembled(title)
+        title == String(localized: "home.collection.all") ? .fixed("home.collection.all") :
+            .assembled(title)
     }
 }
 
@@ -59,13 +60,21 @@ extension AppModel {
         )
     }
 
-    /// What the picker offers, or nothing at all.
+    /// What the picker offers — never nothing, because its "+" is how a child
+    /// asks for more birds (#262).
     ///
-    /// Empty while there is only one pack on the device: „Alle Vögel" and that
-    /// pack are then the same birds, and a picker that offers the same thing
-    /// twice would cost the home screen a row for nothing.
+    /// With one pack on the device „Alle Vögel" and that pack are the same
+    /// birds, so the one entry is the pack itself, standing for every bird:
+    /// offering both would be the same thing twice.
     var collectionEntries: [CollectionEntry] {
-        guard packs.collections.isChoice else { return [] }
+        guard packs.collections.isChoice else {
+            let pack = packs.library.packs.first
+            return [CollectionEntry(
+                id: nil,
+                title: pack?.title ?? String(localized: "home.collection.all"),
+                cover: pack?.birds.first.flatMap { packs.photos[$0.id] },
+            )]
+        }
 
         return packs.collections.entries.map { collection in
             CollectionEntry(

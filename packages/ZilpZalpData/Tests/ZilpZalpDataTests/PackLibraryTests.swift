@@ -93,7 +93,7 @@ struct PackLibraryTests {
             )
             let installed = try PackFolder.write(
                 pack: "deutschland",
-                species: [Species(id: "amsel", call: true), Species(id: "kranich")],
+                species: [Species(id: "amsel"), Species(id: "kranich")],
                 to: home,
             )
             let library = PackLibrary([bundled, installed])
@@ -103,8 +103,37 @@ struct PackLibraryTests {
             let amsel = try #require(library.birds.first { $0.id == "amsel" })
             let photo = try #require(library.photoURL(for: amsel))
             #expect(try Data(contentsOf: photo) == PackFolder.bytes("basis", "amsel", "photo"))
-            // The second pack's call does not reach the first pack's bird.
-            #expect(library.callURL(for: amsel) == nil)
+        }
+    }
+
+    /// #262: game 2 asks only for birds with a call, so a callless copy that
+    /// came first must not hide the one that has a call.
+    @Test("a later copy with a call takes over a callless one, in its place")
+    func prefersTheCopyWithACall() throws {
+        try withPacks { home in
+            let bundled = try PackFolder.write(
+                pack: "basis",
+                species: [Species(id: "amsel"), Species(id: "star")],
+                to: home,
+            )
+            let installed = try PackFolder.write(
+                pack: "welt",
+                species: [Species(id: "kranich"), Species(id: "amsel", call: true)],
+                to: home,
+            )
+            let library = PackLibrary([bundled, installed])
+
+            #expect(library.birds.map(\.id) == ["amsel", "star", "kranich"])
+
+            let amsel = try #require(library.birds.first { $0.id == "amsel" })
+            #expect(library.callURL(for: amsel) != nil)
+            // Photo and call come from the same copy, so the two cannot
+            // disagree about which bird this is.
+            let photo = try #require(library.photoURL(for: amsel))
+            #expect(try Data(contentsOf: photo) == PackFolder.bytes("welt", "amsel", "photo"))
+            // A narrowed collection of the first pack answers with that copy too.
+            let basis = try #require(library.narrowed(toPack: "basis"))
+            #expect(basis.callURL(for: amsel) != nil)
         }
     }
 
