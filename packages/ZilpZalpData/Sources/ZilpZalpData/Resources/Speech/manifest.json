@@ -1,5 +1,47 @@
 {
   "id": "speech",
   "title": "Ansagen",
-  "lines": {}
+  "voice": {
+    "license": "CC-BY-4.0",
+    "attribution": "Stimme: Ava (ElevenLabs)",
+    "sourceURL": "https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md",
+    "retrieved": "2026-10-20"
+  },
+  "lines": {
+    "roundEnd.title": {
+      "file": "roundEnd.title.m4a",
+      "sha256": "a131d051f364b7f4e4f68d47dc66dadfdf42ded8956937004602e542d99309d0",
+      "text": "Super gemacht!"
+    },
+    "gate.spoken": {
+      "file": "gate.spoken.m4a",
+      "sha256": "588d09d209f5dc261e93e5889f540c17d0358671ddf8b8f8bd66139c567e94a5",
+      "text": "Frag bitte einen Erwachsenen."
+    },
+    "profile.picker.title": {
+      "file": "profile.picker.title.m4a",
+      "sha256": "7b8441918be399168923e0db50d69ecd476e47bfa09b380dcdf4c26af7b6fd6c",
+      "text": "Wer spielt heute?"
+    },
+    "profile.create.title": {
+      "file": "profile.create.title.m4a",
+      "sha256": "6714b66b1e052f7664af7bc6c8387b49a69fce8b8753eb258b8169a1598ff9d0",
+      "text": "Wie heißt du?"
+    },
+    "quiz.quit.question": {
+      "file": "quiz.quit.question.m4a",
+      "sha256": "df476688d2fa04a384835fe613d984acb86d693797aaa2027f9b0d6bfbd74832",
+      "text": "Willst du aufhören?"
+    },
+    "home.collection.title": {
+      "file": "home.collection.title.m4a",
+      "sha256": "6102a6adae45bd84312e07078cbe065d978a3834877382b0758ec6415966e7e8",
+      "text": "Welche Vögel?"
+    },
+    "home.collection.all": {
+      "file": "home.collection.all.m4a",
+      "sha256": "c95eecf14bf6512e847c83f2bbdb908597ac14ecd2358aae10306cf0b42370e5",
+      "text": "Alle Vögel"
+    }
+  }
 }
