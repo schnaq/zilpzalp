@@ -87,12 +87,20 @@ final class PackModel {
     private(set) var fresh: Set<String> = []
 
     /// Previews of birds that are not on the device, by bucket key. Fetched
-    /// behind the lock, kept for as long as the app runs.
-    private(set) var previews: [String: Image] = [:]
+    /// behind the lock, kept for as long as the app runs. Not observed: each
+    /// sticker holds its own, so one arriving does not redraw all the others.
+    @ObservationIgnored private var previews: [String: Image] = [:]
 
     /// Whether the connection costs money or is to be spared: a cellular
-    /// network, a hotspot, Low Data Mode. Asked before a download (#262).
+    /// network, a hotspot, Low Data Mode. Asked before a download (#262), and
+    /// only known while the gallery watches — see ``watchConnection()``.
     private(set) var isCostly = false
+
+    /// Whether the last index seen had nothing left to load — what the home
+    /// screen's "Neue Vögel" sparkle goes by, since the home screen may never
+    /// ask the network itself (#262). `false` while no index was ever seen:
+    /// then there may well be something.
+    private(set) var nothingLeft = UserDefaults.standard.bool(forKey: PackModel.nothingLeftKey)
 
     /// What a child can choose between: every bird, or one pack's (#187).
     ///
@@ -106,7 +114,8 @@ final class PackModel {
     private let bundledCatalog: PackCatalog?
     private let downloader: PackDownloader
     /// Reads the path's properties and sends nothing: no network traffic.
-    private let path = NWPathMonitor()
+    /// Only while the gallery is on screen.
+    @ObservationIgnored private var connection: NWPathMonitor?
 
     /// How often `Packs/` has been read. See ``readInstalled()``.
     private var reads = 0
@@ -134,12 +143,24 @@ final class PackModel {
         }
         downloader = PackDownloader(baseURL: Self.bucket, directory: directory)
         rebuild()
+    }
 
-        path.pathUpdateHandler = { [weak self] path in
+    /// Follows what the connection costs while the gallery is up. A monitor
+    /// cannot be started twice, so each appearance gets a new one.
+    func watchConnection() {
+        connection?.cancel()
+        let monitor = NWPathMonitor()
+        monitor.pathUpdateHandler = { [weak self] path in
             let costly = path.isExpensive || path.isConstrained
             Task { @MainActor in self?.isCostly = costly }
         }
-        path.start(queue: .main)
+        monitor.start(queue: .main)
+        connection = monitor
+    }
+
+    func stopWatchingConnection() {
+        connection?.cancel()
+        connection = nil
     }
 
     /// The open packs, in the order they answer for a species: the one that
@@ -167,12 +188,6 @@ final class PackModel {
     var migrations: [PackIndex.Migration] {
         guard case let .ready(index) = available else { return [] }
         return index.migrations(installed: Set(installed.map(\.id)))
-    }
-
-    /// Whether the last index seen offered nothing new. `false` while no
-    /// index was ever seen: then there may well be something.
-    var nothingLeft: Bool {
-        UserDefaults.standard.bool(forKey: Self.nothingLeftKey)
     }
 
     /// What the downloaded packs take up altogether — the line under the card.
@@ -255,24 +270,18 @@ final class PackModel {
         }
     }
 
-    /// Loads every successor of a retired pack that is not there yet. The
-    /// retired pack goes once the last of them has arrived — see
-    /// ``finishMigrations()`` — and not a moment earlier, so no bird is
-    /// missing in between.
-    func migrate(_ migration: PackIndex.Migration) {
-        migration.remaining.forEach(download)
-    }
-
-    /// Fetches the preview behind `key` once. A preview that does not come
-    /// leaves its sticker the glyph; nothing else depends on it.
-    func loadPreview(_ key: String) async {
-        guard previews[key] == nil,
-              let data = try? await downloader.preview(key),
-              let image = UIImage(data: data)
-        else {
-            return
+    /// The preview behind `key`, fetched once. `nil` when it does not come,
+    /// which leaves its sticker the glyph; nothing else depends on it.
+    func preview(_ key: String) async -> Image? {
+        if let known = previews[key] {
+            return known
         }
-        previews[key] = Image(uiImage: image)
+        guard let data = try? await downloader.preview(key), let image = UIImage(data: data) else {
+            return nil
+        }
+        let preview = Image(uiImage: image)
+        previews[key] = preview
+        return preview
     }
 
     /// Removes a downloaded pack, its half downloaded copy included. Its
@@ -324,8 +333,9 @@ final class PackModel {
     }
 
     private func rememberWhatIsLeft() {
-        guard case .ready = available else { return }
-        UserDefaults.standard.set(downloadable.isEmpty, forKey: Self.nothingLeftKey)
+        guard case .ready = available, nothingLeft != downloadable.isEmpty else { return }
+        nothingLeft = downloadable.isEmpty
+        UserDefaults.standard.set(nothingLeft, forKey: Self.nothingLeftKey)
     }
 
     /// Puts the open packs together again. The one place ``library``,

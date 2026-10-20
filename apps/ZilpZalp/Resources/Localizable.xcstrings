@@ -770,13 +770,13 @@
       }
     },
     "parents.packs.costly.message" : {
-      "comment" : "Message of that question. %1$@ is the pack's title, %2$@ its size like \"17 MB\"",
+      "comment" : "Message of that question. %1$@ is the quoted pack title, or several joined with und, %2$@ their size together like 17 MB",
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "„%1$@“ ist %2$@ groß. Das Gerät ist gerade nicht im WLAN oder spart Daten."
+            "value" : "%1$@: %2$@. Das Gerät ist gerade nicht im WLAN oder spart Daten."
           }
         }
       }

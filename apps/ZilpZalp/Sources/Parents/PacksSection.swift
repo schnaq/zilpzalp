@@ -26,7 +26,10 @@ struct PacksSection: View {
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
     var body: some View {
-        VStack(alignment: .leading, spacing: ZSpacing.step4) {
+        // Once per pass: the grid and the sheet both read it.
+        let cards = packs.cards
+
+        return VStack(alignment: .leading, spacing: ZSpacing.step4) {
             VStack(alignment: .leading, spacing: ZSpacing.step1) {
                 Text("parents.packs.title")
                     .typeStyle(.bodyLarge, .body, weight: .bold)
@@ -37,9 +40,11 @@ struct PacksSection: View {
             }
 
             ForEach(packs.migrations) { migration in
-                MigrationCard(migration: migration, title: title(of: migration.retired)) {
-                    packs.migrate(migration)
-                }
+                MigrationCard(
+                    migration: migration,
+                    title: title(of: migration.retired),
+                    packs: packs,
+                )
             }
 
             // One column on a phone, two or three on an iPad, where a single
@@ -53,7 +58,7 @@ struct PacksSection: View {
                 alignment: .leading,
                 spacing: ZSpacing.step4,
             ) {
-                ForEach(packs.cards) { card in
+                ForEach(cards) { card in
                     cardView(card)
                 }
             }
@@ -62,12 +67,16 @@ struct PacksSection: View {
         }
         // The one place the app reaches for the network on its own, and it is
         // two doors in: the grown-ups' lock, and this section being on screen.
-        .task { await packs.loadAvailable() }
+        .task {
+            packs.watchConnection()
+            await packs.loadAvailable()
+        }
+        .onDisappear { packs.stopWatchingConnection() }
         // Here, inside the open door, rather than on the screen: when the door
         // shuts, this view goes and the sheet with it — nothing fed from the
         // network stays up behind a shut lock.
         .sheet(item: Binding(
-            get: { opened.flatMap { id in packs.cards.first { $0.id == id } } },
+            get: { opened.flatMap { id in cards.first { $0.id == id } } },
             set: { opened = $0?.id },
         )) { card in
             PackDetail(card: card, packs: packs, play: play) { opened = nil }
@@ -187,7 +196,9 @@ struct PacksSection: View {
 private struct MigrationCard: View {
     let migration: PackIndex.Migration
     let title: String
-    let load: () -> Void
+    let packs: PackModel
+
+    @State private var asking: [PackIndex.Entry]?
 
     var body: some View {
         ZCard(tone: .sun) {
@@ -202,8 +213,13 @@ private struct MigrationCard: View {
                     String(localized: "parents.packs.migration.load"),
                     size: .medium,
                     leadingIcon: .sparkles,
-                    action: load,
-                )
+                ) {
+                    // The retired pack goes once the last successor is
+                    // there — `PackModel.finishMigrations()` — and not a
+                    // moment earlier, so no bird is missing in between.
+                    asking = packs.load(migration.remaining)
+                }
+                .modifier(CostlyDownloadQuestion(asking: $asking, packs: packs))
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }

@@ -139,12 +139,6 @@ extension PackModel {
             isDeletable: false,
         )
     }
-
-    /// The photo a bird's sticker shows: its own when any pack on the device
-    /// carries the species — ids are shared across packs — else the preview.
-    func image(for bird: PackCard.Bird) -> Image? {
-        photos[bird.id] ?? bird.preview.flatMap { previews[$0] }
-    }
 }
 
 /// A bird of a pack as a sticker, fetching its preview the first time it is
@@ -155,48 +149,81 @@ struct PackSticker: View {
     var size: CGFloat
     var rotation: Angle = RewardSticker.defaultRotation
 
+    @State private var preview: Image?
+
     var body: some View {
-        RewardSticker(image: packs.image(for: bird), icon: .bird, rotation: rotation, size: size)
-            .task(id: bird.preview) {
-                guard packs.photos[bird.id] == nil, let key = bird.preview else { return }
-                await packs.loadPreview(key)
-            }
-            .accessibilityLabel(bird.name)
+        // The device's own photo when any pack here carries the species — ids
+        // are shared across packs — else the preview from the bucket.
+        RewardSticker(
+            image: packs.photos[bird.id] ?? preview,
+            icon: .bird,
+            rotation: rotation,
+            size: size,
+        )
+        .task(id: bird.preview) {
+            guard packs.photos[bird.id] == nil, let key = bird.preview else { return }
+            preview = await packs.preview(key)
+        }
+        .accessibilityLabel(bird.name)
     }
 }
 
-/// The one button a pack's card and its detail sheet carry. Asks before a
-/// download over a costly connection, so it brings its own dialog — the
-/// detail sheet could not present one from the screen underneath.
+extension PackModel {
+    /// Every download a grown-up starts goes through here (#262): at once, or
+    /// handed back to be asked about when the connection is costly.
+    ///
+    /// - Returns: the entries to ask about, `nil` when they are loading.
+    func load(_ entries: [PackIndex.Entry]) -> [PackIndex.Entry]? {
+        guard !isCostly else { return entries }
+        entries.forEach(download)
+        return nil
+    }
+}
+
+/// "Über mobile Daten laden?" for whatever ``PackModel/load(_:)`` handed back.
+/// A modifier on the view that asked, because the detail sheet cannot present
+/// a dialog from the screen underneath it.
+struct CostlyDownloadQuestion: ViewModifier {
+    @Binding var asking: [PackIndex.Entry]?
+    let packs: PackModel
+
+    func body(content: Content) -> some View {
+        content.confirmationDialog(
+            "parents.packs.costly.title",
+            isPresented: Binding(get: { asking != nil }, set: {
+                if !$0 {
+                    asking = nil
+                }
+            }),
+            titleVisibility: .visible,
+            presenting: asking,
+        ) { entries in
+            Button(String(localized: "parents.packs.costly.confirm")) {
+                entries.forEach(packs.download)
+            }
+            Button("parents.packs.costly.cancel", role: .cancel) {}
+        } message: { entries in
+            Text(String(
+                format: String(localized: "parents.packs.costly.message"),
+                entries.map { "„\($0.title)“" }.formatted(.list(type: .and)),
+                entries.reduce(0) { $0 + $1.downloadSize }.formatted(.byteCount(style: .file)),
+            ))
+        }
+    }
+}
+
+/// The one button a pack's card and its detail sheet carry.
 struct PackStateButton: View {
     let card: PackCard
     let packs: PackModel
     /// "Fertig – jetzt spielen": choose the pack and go home.
     let play: (String) -> Void
 
-    @State private var asking: PackIndex.Entry?
+    @State private var asking: [PackIndex.Entry]?
 
     var body: some View {
         content
-            .confirmationDialog(
-                "parents.packs.costly.title",
-                isPresented: Binding(get: { asking != nil }, set: {
-                    if !$0 {
-                        asking = nil
-                    }
-                }),
-                titleVisibility: .visible,
-                presenting: asking,
-            ) { entry in
-                Button(String(localized: "parents.packs.costly.confirm")) { packs.download(entry) }
-                Button("parents.packs.costly.cancel", role: .cancel) {}
-            } message: { entry in
-                Text(String(
-                    format: String(localized: "parents.packs.costly.message"),
-                    entry.title,
-                    entry.downloadSize.formatted(.byteCount(style: .file)),
-                ))
-            }
+            .modifier(CostlyDownloadQuestion(asking: $asking, packs: packs))
     }
 
     @ViewBuilder
@@ -241,11 +268,7 @@ struct PackStateButton: View {
     }
 
     private func load(_ entry: PackIndex.Entry) {
-        if packs.isCostly {
-            asking = entry
-        } else {
-            packs.download(entry)
-        }
+        asking = packs.load([entry])
     }
 }
 

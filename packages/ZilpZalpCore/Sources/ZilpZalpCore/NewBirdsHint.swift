@@ -6,12 +6,11 @@
 /// setting. What is shown is a badge without words; the child is told nothing.
 public enum NewBirdsHint {
     /// Four in five of the installed species.
-    public static let share = (collected: 4, of: 5)
-
+    ///
     /// - Parameters:
     ///   - collected: stickers the child holds of the installed species.
     ///   - total: installed species, each one counted once.
     public static func isDue(collected: Int, of total: Int) -> Bool {
-        total > 0 && collected * share.of >= total * share.collected
+        total > 0 && collected * 5 >= total * 4
     }
 }

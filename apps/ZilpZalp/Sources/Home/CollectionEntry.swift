@@ -52,8 +52,9 @@ extension AppModel {
     var newBirdsDue: Bool {
         guard let profile = activeProfile, !packs.nothingLeft else { return false }
         let birds = packs.library.birds
+        let held = Set(profile.stickers)
         return NewBirdsHint.isDue(
-            collected: birds.count { profile.hasSticker(for: $0.id) },
+            collected: birds.count { held.contains($0.id) },
             of: birds.count,
         )
     }
