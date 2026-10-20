@@ -2986,16 +2986,6 @@
       "birdID": "turmfalke",
       "birdName": "Turmfalke",
       "kind": "photo",
-      "attribution": "Luis Ferreira",
-      "license": "CC0-1.0",
-      "sourceURL": "https://www.inaturalist.org/observations/148613413"
-    },
-    {
-      "packID": "deutschland",
-      "packTitle": "Vögel Deutschlands",
-      "birdID": "turmfalke",
-      "birdName": "Turmfalke",
-      "kind": "photo",
       "attribution": "Thorsten Hackbarth",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/105032479"

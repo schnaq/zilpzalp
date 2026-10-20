@@ -2541,14 +2541,6 @@
           "retrieved": "2026-09-10"
         },
         {
-          "file": "photos/turmfalke.heic",
-          "sha256": "d0d786692e2ccd0f3c86c2d42b44e453d5da634bfceaacb7ee1c57890f3500b2",
-          "license": "CC0-1.0",
-          "attribution": "Luis Ferreira",
-          "sourceURL": "https://www.inaturalist.org/observations/148613413",
-          "retrieved": "2026-09-10"
-        },
-        {
           "file": "photos/turmfalke-2.heic",
           "sha256": "fc5bee254e4db34dd7c8bad1f3aef67b6e02a1fe6ce6930303d10b321becef5e",
           "license": "CC-BY-4.0",
