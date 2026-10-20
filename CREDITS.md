@@ -15,8 +15,8 @@ the source declared.
 | Bird | Kind | Author | Licence | Source |
 | --- | --- | --- | --- | --- |
 | Strauß | Photo | Tom Heijnen | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/231275074> |
-| Strauß | Photo | Andrew Allen | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/35215841> |
 | Strauß | Photo | Viktor | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/255497966> |
+| Strauß | Photo | Thom Doeleman | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/172388549> |
 | Rosaflamingo | Photo | Nicolás Tamargo | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/185812778> |
 | Rosaflamingo | Photo | SteveM4560 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/313297928> |
 | Rosaflamingo | Photo | SteveM4560 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/313298914> |
@@ -27,45 +27,44 @@ the source declared.
 | Schuhschnabel | Photo | Annika Lindqvist | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/31013216> |
 | Schuhschnabel | Photo | benjchristensen | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/145236156> |
 | Schuhschnabel | Photo | Peter Archdale | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/121474218> |
-| Marabu | Photo | avocat | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/310674150> |
 | Marabu | Photo | Manuel Schwarz | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/123066162> |
 | Marabu | Photo | Ben Keen | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/193007295> |
+| Marabu | Photo | Henggang Cui | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/186634145> |
+| Brillenpinguin | Photo | Leonardo Rapisarda | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/283875333> |
 | Brillenpinguin | Photo | Allan T. Souza | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/162713087> |
 | Brillenpinguin | Photo | Dan Harville | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/145200019> |
-| Brillenpinguin | Photo | Cullen Hanks | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/144090534> |
 | Graupapagei | Photo | avocat | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/363520111> |
 | Graupapagei | Photo | Rafael Würtemberger | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/222498643> |
 | Graupapagei | Photo | agujaceratops | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/267539814> |
-| Gabelracke | Photo | Timothy Whitehead | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/232759573> |
 | Gabelracke | Photo | Diogo Luiz | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/40336608> |
 | Gabelracke | Photo | Tom Kennedy | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/103099601> |
+| Gabelracke | Photo | Daniel S. Katz | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/68158204> |
 | Rotschnabeltoko | Photo | Jan Ebr & Ivana Ebrová | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/112720162> |
 | Rotschnabeltoko | Photo | Hydrocycler (Elizabeth Dougherty) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/35649717> |
 | Rotschnabeltoko | Photo | danpatrick | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/34489925> |
 | Südlicher Hornrabe | Photo | Wynand Uys | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/18058749> |
-| Südlicher Hornrabe | Photo | Steven Smethurst | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/67917402> |
 | Südlicher Hornrabe | Photo | Tom Field | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/284958816> |
-| Kronenkranich | Photo | M Rutherford | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/38301444> |
+| Südlicher Hornrabe | Photo | Darren Obbard | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/151059180> |
 | Kronenkranich | Photo | Dan Harville | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/135164739> |
 | Kronenkranich | Photo | anasacuta | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/78499746> |
+| Kronenkranich | Photo | Peter Archdale | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/251764150> |
 | Kronenkranich | Call | paulo kivuyo (XC627139) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/627139> |
 | Schreiseeadler | Photo | avocat | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/108635650> |
 | Schreiseeadler | Photo | Wynand Uys | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/14133040> |
 | Schreiseeadler | Photo | Paul Hoekman | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/173728397> |
+| Weißrückengeier | Photo | Lukas Zangl | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/392770971> |
 | Weißrückengeier | Photo | Tom Heijnen | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/231275237> |
-| Weißrückengeier | Photo | Christiaan Viljoen | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/204147427> |
 | Weißrückengeier | Photo | Claude Kolwelter | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/36198228> |
 | Nimmersatt | Photo | Timothy Whitehead | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/231594492> |
 | Nimmersatt | Photo | Wynand Uys | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/14133114> |
 | Nimmersatt | Photo | Eduardo Luis Beltrocco | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/261072131> |
-| Sattelstorch | Photo | Wynand Uys | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/10002585> |
+| Sattelstorch | Photo | Rosario Douglas | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/194551421> |
 | Sattelstorch | Photo | Tero Linjama | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/63888566> |
-| Sattelstorch | Photo | Haneef Tayob | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/195277868> |
+| Sattelstorch | Photo | Carrie Powers | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/122966911> |
 | Hammerkopf | Photo | avocat | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/108400859> |
 | Hammerkopf | Photo | scaup | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/151642991> |
 | Hammerkopf | Photo | Tom Riggle | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/150564216> |
 | Helmperlhuhn | Photo | Peter Archdale | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/104021490> |
-| Helmperlhuhn | Photo | Eugene Hahndiek | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/247285295> |
 | Helmperlhuhn | Photo | Mayela y Ramón | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/68830198> |
 | Helmperlhuhn | Call | Kileo Jumah (XC1149015) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1149015> |
 | Dorfweber | Photo | Tommy Andriollo | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/247506421> |
@@ -78,8 +77,8 @@ the source declared.
 | Malachitnektarvogel | Photo | bdhimes | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/325855545> |
 | Malachitnektarvogel | Photo | Cecile Roux | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/358556377> |
 | Graulärmvogel | Photo | Wolfgang Ahlmer | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/178051888> |
-| Graulärmvogel | Photo | Irene | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/333392081> |
 | Graulärmvogel | Photo | datadan | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/39246939> |
+| Graulärmvogel | Photo | Christiaan Viljoen | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/135157554> |
 | Guinea-Turako | Photo | Daniel S. Katz | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/151050465> |
 | Guinea-Turako | Photo | avocat | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/359689325> |
 | Guinea-Turako | Photo | Don Wellmann | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/143541464> |
@@ -88,9 +87,9 @@ the source declared.
 | Riesentrappe | Photo | Tristan Jobin | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/281119644> |
 | Riesentrappe | Photo | Henggang Cui | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/182467412> |
 | Riesentrappe | Photo | Donald Hampton | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/64891827> |
+| Nilgans | Photo | Joss Carr | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/204078302> |
 | Nilgans | Photo | Justin | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/4583478> |
 | Nilgans | Photo | cello caruso-turiello | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/284549464> |
-| Nilgans | Photo | Alex Press | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/270816937> |
 | Nilgans | Call | Sonothèque ADVL (XC918822) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/918822> |
 | Heiliger Ibis | Photo | gianluigi | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/69805359> |
 | Heiliger Ibis | Photo | Francesco Cecere | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/42938767> |
@@ -98,15 +97,18 @@ the source declared.
 | Dreifarben-Glanzstar | Photo | Pål A. Olsvik | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/145855897> |
 | Dreifarben-Glanzstar | Photo | William Stephens | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/52371414> |
 | Kampfadler | Photo | Mark Bolnik | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/99602493> |
-| Kampfadler | Photo | Noeleen du Toit | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/250103965> |
 | Kampfadler | Call | Kileo Jumah (XC1148983) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1148983> |
+| Rosapelikan | Photo | Sheelagh Halsey | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/34032559> |
 | Rosapelikan | Photo | marsyd | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/223582865> |
-| Rosapelikan | Photo | Viktor | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/255665193> |
 | Rosapelikan | Photo | Radu Teodoreanu | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/376121534> |
 | Hagedasch | Photo | Martin Gutewort | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/197640384> |
 | Hagedasch | Photo | Timothy Whitehead | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/248995401> |
 | Hagedasch | Photo | stephen | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/39380393> |
 | Hagedasch | Call | Frank shirima (XC1163454) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/1163454> |
+| Fleckenuhu | Photo | Svyatoslav Knyazev | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/265413423> |
+| Ohrengeier | Photo | martin ingemansson | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/265337825> |
+| Goliathreiher | Photo | Tom Field | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/294139151> |
+| Weißstirnspint | Photo | Matthew Fainman | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/55139983> |
 
 ### Vögel Deutschlands (`deutschland`)
 
@@ -498,6 +500,7 @@ the source declared.
 
 | Voice | Licence | Spoken for | Source |
 | --- | --- | --- | --- |
+| Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Vögel Afrikas | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
 | Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Vögel Deutschlands | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
 | Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Ansagen | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
 
