@@ -89,7 +89,8 @@ decided it, and both were heard rather than read:
 - **The voice.** Ava — library voice `AnvlJBAqSLDzEevYr9Ap`, German, listed as
   "Youthful, Authentic and Friendly" — is the one Christian chose after a
   probe. The account is on the paid Starter tier (40,000 characters a month,
-  commercial use); the whole app is under a thousand.
+  commercial use); every name of all three packs plus the fixed set is about
+  1,500.
 
 ### The licence
 
@@ -103,10 +104,11 @@ claim this project may make. No attribution is owed on a paid tier.
 
 Ava is a library voice, which brings in the Voice Library Addendum (Last
 Updated 6 March 2026, <https://elevenlabs.io/vla>). It asks nothing of the
-person using a shared voice: other users are *"discharged [of] any
+person using a shared voice: by sharing it, its owner agrees that
+*"ElevenLabs and all other users of the Services have discharged any
 obligations present or future, to pay royalties"*, and output generated before
-a voice is withdrawn *"will continue to exist"* and *"remain available for use
-thereafter"*. Three conditions hold, and none of them is code: the account is
+the end of a withdrawn voice's notice period *"will continue to exist and
+remain available for use thereafter"*. Three conditions hold, and none of them is code: the account is
 **schnaq GmbH's**, the clips are rendered **while the subscription is active**,
 and the Sound Effects product is never used for a shipped asset.
 
