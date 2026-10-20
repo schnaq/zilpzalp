@@ -132,6 +132,13 @@ struct PacksSection: View {
                     rotation: tilts[index % tilts.count],
                 )
             }
+            // An index from before the previews names no birds: three glyph
+            // stickers, so the card still reads as a pack of birds.
+            if card.covers.isEmpty {
+                ForEach(tilts.indices, id: \.self) { index in
+                    RewardSticker(icon: .bird, rotation: tilts[index], size: size)
+                }
+            }
         }
         .accessibilityHidden(true)
     }
