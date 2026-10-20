@@ -4,6 +4,11 @@ import ZilpZalpUI
 
 /// "Wie heißt du?" — screen 1g: a name and one of ten birds.
 ///
+/// Also the screen that changes them afterwards (#258): handed a profile, it
+/// opens with that child's name in the field and its bird ringed, and "Los!"
+/// writes both back onto the same profile. One form for both, so the
+/// validation, the limit and the spoken bird names cannot drift apart.
+///
 /// A name and an avatar, and that is the whole form. No age, no e-mail, no
 /// account: the app is in the Kids Category and collects nothing, and there is
 /// nothing here a family could later be asked to justify.
@@ -44,11 +49,11 @@ struct ProfileCreationScreen: View {
     /// button that leads nowhere is a button a child will press.
     let canGoBack: Bool
     let back: () -> Void
-    let create: (String, String) async -> Void
+    let save: (String, String) async -> Void
 
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
-    @State private var name = ""
+    @State private var name: String
     @State private var chosenAvatar: String?
 
     /// Shuts the confirm button while the store is being written, so a double
@@ -64,6 +69,25 @@ struct ProfileCreationScreen: View {
     @State private var announcer: SpeechAnnouncer?
 
     @FocusState private var nameFocused: Bool
+
+    /// - Parameter editing: the child being changed, or `nil` for a new one.
+    ///   Read once, when the screen is built.
+    init(
+        library: PackLibrary,
+        editing: Profile? = nil,
+        canGoBack: Bool,
+        back: @escaping () -> Void,
+        save: @escaping (String, String) async -> Void,
+    ) {
+        self.library = library
+        self.canGoBack = canGoBack
+        self.back = back
+        self.save = save
+        _name = State(initialValue: editing?.name ?? "")
+        // Through the old glyph names' birds, so a child from before #205
+        // finds its own bird ringed in the grid.
+        _chosenAvatar = State(initialValue: editing.map { Profile.species(forAvatar: $0.avatar) })
+    }
 
     private var isCompact: Bool {
         horizontalSizeClass == .compact
@@ -264,7 +288,7 @@ struct ProfileCreationScreen: View {
         let named = trimmedName
 
         Task {
-            await create(named, chosenAvatar)
+            await save(named, chosenAvatar)
             isSaving = false
         }
     }
@@ -277,7 +301,7 @@ struct ProfileCreationScreen: View {
         library: (try? .bundled()) ?? .empty,
         canGoBack: true,
         back: {},
-        create: { _, _ in },
+        save: { _, _ in },
     )
     .environment(\.horizontalSizeClass, .regular)
     .environment(\.speciesPhotos, SpeciesPhotos((try? .bundled()) ?? .empty))
@@ -288,7 +312,7 @@ struct ProfileCreationScreen: View {
         library: (try? .bundled()) ?? .empty,
         canGoBack: false,
         back: {},
-        create: { _, _ in },
+        save: { _, _ in },
     )
     .environment(\.horizontalSizeClass, .compact)
     .environment(\.speciesPhotos, SpeciesPhotos((try? .bundled()) ?? .empty))

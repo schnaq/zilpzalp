@@ -1057,6 +1057,18 @@
         }
       }
     },
+    "profile.picker.edit.accessibility" : {
+      "comment" : "VoiceOver label of the pencil on a child's card in the profile picker, which opens that child's name and bird for changing. %@ is the child's name. The button itself is wordless",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name und Vogel von %@ ändern"
+          }
+        }
+      }
+    },
     "profile.picker.new" : {
       "comment" : "Card on the profile picker that opens the creation screen. A new nest, not a new profile",
       "extractionState" : "manual",

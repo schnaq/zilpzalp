@@ -224,6 +224,28 @@ final class AppModel {
         }
     }
 
+    /// Gives a child a new name or a new bird, from the pencil on its card in
+    /// the picker (#258). Everything it collected stays: the store changes
+    /// those two fields and nothing else.
+    ///
+    /// Picks nobody: the picker is where this started, and it is where the
+    /// child should see its card with the new bird on it. Expects what
+    /// ``create(name:avatar:)`` expects, and fails the way it does.
+    func edit(_ id: Profile.ID, name: String, avatar: String) async {
+        guard let store else { return }
+
+        do {
+            let edited = try await store.edit(id, name: name, avatar: avatar)
+            if let index = profiles.firstIndex(where: { $0.id == id }) {
+                profiles[index] = edited
+            }
+        } catch {
+            storeFailed = true
+            let reason = String(describing: error)
+            Logger.profiles.error("Profile edit was not written: \(reason, privacy: .public)")
+        }
+    }
+
     /// A child chose which birds it wants to play with (#187).
     ///
     /// Kept in memory first and written after, so the home screen answers the

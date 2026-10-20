@@ -86,6 +86,42 @@ struct ProfileStoreTests {
         }
     }
 
+    @Test("editing changes name and avatar and keeps everything the child collected")
+    func editsNameAndAvatar() async throws {
+        try await withTemporaryDirectory { directory in
+            let store = ProfileStore(directory: directory)
+            let jonte = try await store.add(name: "Jonte", avatar: "egg")
+            var mila = try await store.add(name: "Mila", avatar: "feather")
+            mila.totalStars = 63
+            mila.roundsPlayed = 24
+            mila.recognitions = ["zilpzalp": 5, "amsel": 2]
+            mila.playtime = ["2026-09-08": 185.5]
+            mila.dailyStars = ["2026-09-08": 9]
+            mila.collection = "afrika"
+            try await store.update(mila)
+
+            let edited = try await store.edit(mila.id, name: "Mila Rosa", avatar: "eisvogel")
+
+            var expected = mila
+            expected.name = "Mila Rosa"
+            expected.avatar = "eisvogel"
+            #expect(edited == expected)
+            #expect(try await ProfileStore(directory: directory).profiles() == [jonte, expected])
+        }
+    }
+
+    @Test("editing a profile that is not in the file is an error")
+    func rejectsUnknownEdit() async throws {
+        try await withTemporaryDirectory { directory in
+            let store = ProfileStore(directory: directory)
+            let id = UUID()
+
+            await #expect(throws: ProfileStoreError.unknownProfile(id)) {
+                try await store.edit(id, name: "Niemand", avatar: "amsel")
+            }
+        }
+    }
+
     @Test("deleting removes only that profile")
     func deletesProfile() async throws {
         try await withTemporaryDirectory { directory in
