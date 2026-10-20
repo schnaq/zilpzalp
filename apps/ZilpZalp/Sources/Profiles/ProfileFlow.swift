@@ -13,30 +13,47 @@ import ZilpZalpData
 /// nothing to pick from, so the picker is skipped and there is nowhere to go
 /// back to.
 struct ProfileFlow: View {
+    /// What is on screen. Editing is the creation screen filled in with the
+    /// child whose pencil was tapped (#258): a second form would drift from
+    /// the first.
+    private enum Mode {
+        case picking
+        case creating
+        case editing(Profile)
+    }
+
     let model: AppModel
 
-    @State private var isCreating = false
+    @State private var mode = Mode.picking
 
-    /// The child whose pencil was tapped (#258). The same screen as creating
-    /// one, filled in, because a second form would drift from the first.
-    @State private var editing: Profile?
+    private var editing: Profile? {
+        if case let .editing(profile) = mode {
+            profile
+        } else {
+            nil
+        }
+    }
 
     var body: some View {
-        if model.profiles.isEmpty || isCreating || editing != nil {
+        if case .picking = mode, !model.profiles.isEmpty {
+            ProfilePickerScreen(
+                profiles: model.profiles,
+                choose: { model.select($0) },
+                edit: { mode = .editing($0) },
+                createNew: { mode = .creating },
+            )
+        } else {
             ProfileCreationScreen(
                 // The avatars are birds of the open packs, and the grid names
                 // and speaks each of them (#205).
                 library: model.packs.library,
                 editing: editing,
                 canGoBack: !model.profiles.isEmpty,
-                back: {
-                    isCreating = false
-                    editing = nil
-                },
-                save: { name, avatar in
+                back: { mode = .picking },
+                save: { [editing] name, avatar in
                     if let editing {
                         await model.edit(editing.id, name: name, avatar: avatar)
-                        self.editing = nil
+                        mode = .picking
                     } else {
                         await model.create(name: name, avatar: avatar)
                     }
@@ -45,13 +62,6 @@ struct ProfileFlow: View {
             // A fresh screen per child, so one child's name never stays in
             // the field when the next one's pencil is tapped.
             .id(editing?.id)
-        } else {
-            ProfilePickerScreen(
-                profiles: model.profiles,
-                choose: { model.select($0) },
-                edit: { editing = $0 },
-                createNew: { isCreating = true },
-            )
         }
     }
 }
