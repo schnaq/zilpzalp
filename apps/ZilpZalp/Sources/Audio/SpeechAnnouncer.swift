@@ -62,6 +62,12 @@ final class SpeechAnnouncer: NSObject {
     /// his device (#151).
     private static let downloadedRate = AVSpeechUtteranceDefaultSpeechRate * 0.95
 
+    /// The breath between two lines said one after the other — „Super
+    /// gemacht!", then „Amsel" (#264). The clips are trimmed to the voice, so
+    /// without it the name would run straight into the praise. Judgement, not
+    /// measurement: the knob to turn by ear.
+    private static let pauseBetweenLines = Duration.milliseconds(300)
+
     /// The sentences that belong to no pack, opened once per launch.
     ///
     /// Once, not per announcer, for the reason ``SpeechVoice`` chooses the
@@ -115,6 +121,14 @@ final class SpeechAnnouncer: NSObject {
     /// ``CallPlayer`` holds its recording.
     private var spokenClip: AVAudioPlayer?
 
+    /// The lines still to come after the one now sounding, said in order once
+    /// it has run its course. Empty for everything but the round end's praise
+    /// for a first find.
+    private var queuedLines: [SpokenLine] = []
+
+    /// The pause before the next queued line, cancelled with the queue.
+    private var pause: Task<Void, Never>?
+
     /// - Parameter library: The packs whose species sentences this announcer
     ///   may play. Empty on the screens that say nothing about a species —
     ///   the picker, the gate, "Zeit fürs Nest" — which is why it defaults to
@@ -141,6 +155,27 @@ final class SpeechAnnouncer: NSObject {
     /// question again re-reads it instead of queueing a second reading behind
     /// the first.
     func announce(_ line: SpokenLine) {
+        announce([line])
+    }
+
+    /// Says several lines one after the other with a short pause between
+    /// them — the round end's „Super gemacht!" and the bird's name (#264).
+    ///
+    /// Each line is decided as it starts, recorded or synthesised on its own,
+    /// so the switch and a call that began in the pause reach the second line
+    /// too. A line that stays silent, or is cut off rather than finished,
+    /// drops the rest: whoever cut it off wanted the speaker.
+    func announce(_ lines: [SpokenLine]) {
+        pause?.cancel()
+        pause = nil
+        queuedLines = lines
+        sayNextLine()
+    }
+
+    private func sayNextLine() {
+        guard !queuedLines.isEmpty else { return }
+        let line = queuedLines.removeFirst()
+
         // One sound at a time (#30). A call is what the child asked for by
         // tapping, and in game 2 it is the question itself; a sentence laid
         // over it would leave neither intelligible. Dropped rather than
@@ -148,6 +183,7 @@ final class SpeechAnnouncer: NSObject {
         // wanted to say something has usually moved on.
         guard AudioFocus.call?.isPlaying != true else {
             Logger.audio.debug("Staying silent, a call is playing")
+            queuedLines = []
             return
         }
 
@@ -163,6 +199,7 @@ final class SpeechAnnouncer: NSObject {
         )
         guard decision != .silent else {
             Logger.audio.debug("Staying silent, the announcements are switched off")
+            queuedLines = []
             return
         }
 
@@ -210,6 +247,9 @@ final class SpeechAnnouncer: NSObject {
     /// Stops the sentence, whichever of the two was saying it. Speaking again
     /// is a fresh ``announce(_:)``.
     func stop() {
+        queuedLines = []
+        pause?.cancel()
+        pause = nil
         _ = synthesizer.stopSpeaking(at: .immediate)
         spokenUtterance = nil
         spokenClip?.stop()
@@ -268,9 +308,26 @@ final class SpeechAnnouncer: NSObject {
     /// Clears the flag only for the utterance that is actually current. A
     /// `didCancel` caused by `announce(_:)` arrives after the next utterance
     /// has already been handed over, and must not clear that one.
-    private func utteranceEnded(_ ended: ObjectIdentifier) {
+    ///
+    /// Only a finished utterance goes on to the next queued line: a cancelled
+    /// one was cut off by whoever took the speaker.
+    private func utteranceEnded(_ ended: ObjectIdentifier, finished: Bool) {
         guard let spokenUtterance, ObjectIdentifier(spokenUtterance) == ended else { return }
         self.spokenUtterance = nil
+        if finished {
+            lineFinished()
+        }
+    }
+
+    /// Starts the next queued line after ``pauseBetweenLines``, if there is
+    /// one. Both voices end here, and only when the line ran its course.
+    private func lineFinished() {
+        guard !queuedLines.isEmpty else { return }
+        pause = Task {
+            try? await Task.sleep(for: Self.pauseBetweenLines)
+            guard !Task.isCancelled else { return }
+            sayNextLine()
+        }
     }
 
     /// Lets a clip that has run its course go, under the same identity guard
@@ -287,10 +344,13 @@ final class SpeechAnnouncer: NSObject {
     private func clipEnded(_ ended: ObjectIdentifier, successfully: Bool) {
         guard let spokenClip, ObjectIdentifier(spokenClip) == ended else { return }
 
-        if !successfully {
-            Logger.audio.error("Sentence stopped: the clip could not be decoded")
-        }
         self.spokenClip = nil
+        guard successfully else {
+            Logger.audio.error("Sentence stopped: the clip could not be decoded")
+            queuedLines = []
+            return
+        }
+        lineFinished()
     }
 }
 
@@ -303,7 +363,7 @@ extension SpeechAnnouncer: AVSpeechSynthesizerDelegate {
         didFinish utterance: AVSpeechUtterance,
     ) {
         let ended = ObjectIdentifier(utterance)
-        Task { @MainActor in self.utteranceEnded(ended) }
+        Task { @MainActor in self.utteranceEnded(ended, finished: true) }
     }
 
     nonisolated func speechSynthesizer(
@@ -311,7 +371,7 @@ extension SpeechAnnouncer: AVSpeechSynthesizerDelegate {
         didCancel utterance: AVSpeechUtterance,
     ) {
         let ended = ObjectIdentifier(utterance)
-        Task { @MainActor in self.utteranceEnded(ended) }
+        Task { @MainActor in self.utteranceEnded(ended, finished: false) }
     }
 }
 
