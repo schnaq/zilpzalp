@@ -17,6 +17,10 @@ public struct PackInstallation: Sendable, Identifiable {
     /// directory, the manifest included.
     public let bytes: Int
 
+    /// The SHA-256 of the installed manifest, which the index's
+    /// ``PackIndex/Entry/manifestSha256`` is compared with (#262).
+    public let manifestSha256: String
+
     public var pack: Pack {
         catalog.pack
     }
@@ -24,6 +28,13 @@ public struct PackInstallation: Sendable, Identifiable {
     /// The pack id, which is also the name of its directory.
     public var id: String {
         pack.id
+    }
+
+    /// Whether the bucket holds a different manifest than this one: the pack
+    /// was curated again since it was downloaded. Never for an index that
+    /// carries no digest, which every index before #262 is.
+    public func isOutdated(by entry: PackIndex.Entry) -> Bool {
+        entry.id == id && entry.manifestSha256.map { $0 != manifestSha256 } == true
     }
 }
 

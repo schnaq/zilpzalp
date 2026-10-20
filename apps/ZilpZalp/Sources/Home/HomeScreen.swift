@@ -41,9 +41,9 @@ struct HomeScreen: View {
 
     let openProfiles: () -> Void
 
-    /// What there is to choose between, „Alle Vögel" first — empty while one
-    /// pack alone is installed, and then the screen looks exactly as it did
-    /// before #187.
+    /// What there is to choose between, „Alle Vögel" first. With one pack
+    /// installed, that pack alone — the picker still opens for its "+"
+    /// (#262); empty only in the previews.
     let collections: [CollectionEntry]
 
     /// The collection being played with, resolved. See ``CollectionChip``.
@@ -56,6 +56,10 @@ struct HomeScreen: View {
     /// and screens 1a and 1b): a child who wants to look at its birds should
     /// not have to play a round to get to them.
     let openCollection: () -> Void
+
+    /// The door's sparkle and the one-time hint's close, `nil` without one (#262).
+    var newBirds = false
+    var dismissPacksHint: (() -> Void)?
 
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
@@ -92,13 +96,7 @@ struct HomeScreen: View {
                     .buttonStyle(.plain)
                     .accessibilityLabel(String(localized: "profile.switch.accessibility"))
 
-                    IconButton(
-                        .userRoundCog,
-                        label: String(localized: "parents.title"),
-                        tone: .clay,
-                        diameter: ZSpacing.touchMinimum,
-                        action: openParents,
-                    )
+                    GrownUpsButton(newBirds: newBirds, action: openParents)
                 }
             }
 
@@ -144,6 +142,7 @@ struct HomeScreen: View {
                     chosen: chosenCollection,
                     choose: chooseCollection,
                     close: { isPicking = false },
+                    addBirds: openParents,
                 )
             }
         }
@@ -155,11 +154,12 @@ struct HomeScreen: View {
         )
     }
 
-    /// The headline and, once there is more than one pack on the device, the
+    /// The headline and, below it, the pill with the
     /// collection this child plays with. Measured as one so the tiles below
     /// know what is left: the pill costs a phone tile height, an iPad nothing.
     private var intro: some View {
         VStack(spacing: ZSpacing.step4) {
+            dismissPacksHint.map { PacksHint(open: openParents, dismiss: $0) }
             headline
 
             if let chosen = collections.first(where: { $0.id == chosenCollection }) {

@@ -41,6 +41,11 @@ SUFFIX = "heic"
 # the corner is still recognisable.
 PREVIEW_SIDE = 512
 
+# The edge of a pack preview: the sticker the grown-ups' gallery draws before
+# a pack is downloaded. 96 pt at 3× is 288 px; 256 px is sharp enough for a
+# circle that small and keeps a thirty-bird pack's previews well under 1 MB.
+THUMBNAIL_SIDE = 256
+
 Box = tuple[int, int, int, int]
 
 
@@ -171,4 +176,22 @@ def square_photo(data: bytes, crop: Box | None = None) -> bytes:
         xmp=None,
         icc_profile=None,
     )
+    return output.getvalue()
+
+
+def thumbnail_jpeg(data: bytes, side: int = THUMBNAIL_SIDE) -> bytes:
+    """A square JPEG of at most `side` px from a pack's tile, for its preview.
+
+    JPEG rather than HEIC because it is the format every image decoder reads
+    and Pillow writes it byte for byte the same on every run, so an unchanged
+    preview is never uploaded twice. Nothing but the pixels is written: no
+    EXIF, no XMP, no colour profile — the tile is sRGB already.
+    """
+    image = oriented(data).convert("RGB")
+    x, y, width, height = centre_box(*image.size)
+    image = image.crop((x, y, x + width, y + height))
+    if width > side:
+        image = image.resize((side, side), Image.LANCZOS)
+    output = io.BytesIO()
+    image.save(output, format="JPEG", quality=80, optimize=True)
     return output.getvalue()

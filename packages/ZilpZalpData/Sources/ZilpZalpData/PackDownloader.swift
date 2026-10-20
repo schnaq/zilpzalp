@@ -30,7 +30,7 @@ public actor PackDownloader {
 
     private static let manifestName = "manifest.json"
 
-    private let baseURL: URL
+    let baseURL: URL
     private let packsDirectory: URL
     private let session: URLSession
 
@@ -49,14 +49,14 @@ public actor PackDownloader {
 
     // MARK: - The bucket
 
-    /// The packs the bucket offers.
+    /// The packs the bucket offers, and those it no longer does.
     ///
-    /// - Returns: the index entries, in the order the index lists them.
+    /// - Returns: the index, its entries in the order it lists them.
     /// - Throws: `PackDownloadError.indexUnreachable` for every failure —
     ///   no network, a 404, an error page instead of the index. The caller
     ///   acts on all of them the same way. `CancellationError` when the task
     ///   was cancelled.
-    public func availablePacks() async throws -> [PackIndex.Entry] {
+    public func index() async throws -> PackIndex {
         let data: Data
         do {
             data = try await fetch(baseURL.appending(path: Self.indexKey), named: Self.indexKey)
@@ -65,7 +65,7 @@ public actor PackDownloader {
         }
 
         do {
-            return try JSONDecoder().decode(PackIndex.self, from: data).packs
+            return try JSONDecoder().decode(PackIndex.self, from: data)
         } catch {
             throw PackDownloadError.indexUnreachable(reason: "\(error)")
         }
@@ -207,6 +207,7 @@ public actor PackDownloader {
                         directory: directory,
                     ),
                     bytes: directory.directoryBytes(),
+                    manifestSha256: Self.hexDigest(of: data),
                 ))
             } catch {
                 failures.append(
@@ -255,7 +256,7 @@ public actor PackDownloader {
     ///
     /// - Throws: `PackDownloadError.fileUnreachable` for every transport and
     ///   status failure, `CancellationError` when the task was cancelled.
-    private func fetch(_ url: URL, named name: String) async throws -> Data {
+    func fetch(_ url: URL, named name: String) async throws -> Data {
         let data: Data
         let response: URLResponse
         do {
@@ -339,10 +340,7 @@ public actor PackDownloader {
             }
             try manager.createDirectory(at: partial, withIntermediateDirectories: true)
         } catch {
-            throw PackDownloadError.diskFailure(
-                path: partial.path(percentEncoded: false),
-                reason: error.localizedDescription,
-            )
+            throw Self.diskError(error, writing: partial)
         }
         return partial
     }
@@ -368,10 +366,7 @@ public actor PackDownloader {
             )
             try data.write(to: destination, options: .atomic)
         } catch {
-            throw PackDownloadError.diskFailure(
-                path: destination.path(percentEncoded: false),
-                reason: error.localizedDescription,
-            )
+            throw Self.diskError(error, writing: destination)
         }
     }
 
@@ -391,10 +386,7 @@ public actor PackDownloader {
                 try manager.moveItem(at: partial, to: installed)
             }
         } catch {
-            throw PackDownloadError.diskFailure(
-                path: installed.path(percentEncoded: false),
-                reason: error.localizedDescription,
-            )
+            throw Self.diskError(error, writing: installed)
         }
     }
 }

@@ -7,7 +7,7 @@ import ZilpZalpUI
 /// that one: the component caps its label at the disc's width plus 40 pt and
 /// truncates, so "Rotkehlchen" came out as "Rotkehlc…" on a phone. A bird
 /// whose name a child cannot read in full is not collected, so here the name
-/// shrinks instead.
+/// takes a second line instead.
 ///
 /// The honest fix is a `minimumScaleFactor` inside `RewardSticker`, which is
 /// a change to a shared package with callers this pull request does not own —
@@ -29,10 +29,19 @@ struct StickerCaption<Sticker: View>: View {
         VStack(spacing: ZSpacing.step2) {
             sticker
 
+            // Two lines at the one size rather than one line shrunk: „Vögel
+            // Deutschlands" came out smaller than its neighbours, and
+            // truncated, in the collection picker (#262). The scale factor
+            // is the last resort for a single word wider than its column, as
+            // on `HomeTile`'s label, and `fixedSize` keeps it answering to
+            // the width alone (#229).
             Text(verbatim: caption)
-                .typeStyle(.body, .display, weight: .bold, singleLine: true)
+                .typeStyle(.body, .display, weight: .bold)
                 .foregroundStyle(earned ? ZColor.textStrong : ZColor.textMuted)
+                .lineLimit(2)
+                .multilineTextAlignment(.center)
                 .minimumScaleFactor(0.6)
+                .fixedSize(horizontal: false, vertical: true)
         }
     }
 }

@@ -28,6 +28,13 @@ struct CollectionPicker: View {
     /// grid, big enough to see across a table.
     private static let chosenScale: CGFloat = 1.06
 
+    /// How wide a column may get on a phone before another fits beside it.
+    /// Wider than the album's: a pack title's longest word, „Deutschlands",
+    /// is 118 pt at the 20 pt a child reads, and three columns leave 102 pt
+    /// — so it shrank below its neighbours (#262). Two columns keep every
+    /// title at one size, wrapped onto a second line where it needs one.
+    private static let compactColumn: CGFloat = 130
+
     /// What there is to choose between, „Alle Vögel" first.
     let entries: [CollectionEntry]
 
@@ -38,6 +45,11 @@ struct CollectionPicker: View {
 
     /// Back to the games. The pill and a tap beside the card both do this.
     let close: () -> Void
+
+    /// The "+" at the end: more birds, which only a grown-up can load — so it
+    /// opens the grown-ups' area, whose first section is the pack gallery
+    /// (#262). The lock stands in front of it as it always does.
+    let addBirds: () -> Void
 
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
@@ -117,17 +129,28 @@ struct CollectionPicker: View {
         .transition(.scale(scale: 0.92).combined(with: .opacity))
     }
 
-    /// The grid. It does not scroll: five collections fit the shortest phone,
-    /// and a card that scrolls hides what is in it from a child who cannot
-    /// read. Should the bucket ever offer more than eight packs, this is where
-    /// a scroll view has to be thought about.
-    ///
-    /// The album's grid, at the album's sizes — see ``StickerGrid``.
+    /// The grid, scrolling only once it no longer fits (#262): five
+    /// collections fit the shortest phone, and a card that scrolls hides what
+    /// is in it from a child who cannot read — but ten packs and the "+" do
+    /// not fit, and a grid that ran off the card would hide them all the same.
     private var collections: some View {
+        ViewThatFits(in: .vertical) {
+            grid
+            ScrollView {
+                grid
+            }
+            .scrollBounceBehavior(.basedOnSize)
+            .scrollIndicatorsFlash(onAppear: true)
+        }
+    }
+
+    /// The album's grid, at the album's sizes — see ``StickerGrid``.
+    private var grid: some View {
         LazyVGrid(
             columns: [
                 GridItem(
-                    .adaptive(minimum: StickerGrid.column(compact: isCompact)),
+                    .adaptive(minimum: isCompact ? Self.compactColumn : StickerGrid
+                        .column(compact: false)),
                     spacing: StickerGrid.spacing(compact: isCompact),
                     alignment: .top,
                 ),
@@ -137,8 +160,29 @@ struct CollectionPicker: View {
             ForEach(entries, id: \.id) { entry in
                 sticker(entry)
             }
+            more
         }
         .frame(maxWidth: .infinity)
+    }
+
+    /// A plus on a sticker, where the next collection would be. A picture and
+    /// a word like every entry, never a word alone.
+    private var more: some View {
+        Button {
+            close()
+            addBirds()
+        } label: {
+            StickerCaption(caption: String(localized: "home.collection.more"), earned: true) {
+                RewardSticker(
+                    icon: .plus,
+                    tone: .leaf,
+                    rotation: .zero,
+                    size: StickerGrid.size(compact: isCompact),
+                )
+            }
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(String(localized: "home.collection.more.accessibility"))
     }
 
     /// One collection: its bird, its name, and — while it is the chosen one —
@@ -196,6 +240,7 @@ private let previewEntries = [
         chosen: "afrika",
         choose: { _ in },
         close: {},
+        addBirds: {},
     )
     .environment(\.horizontalSizeClass, .compact)
 }
@@ -206,6 +251,7 @@ private let previewEntries = [
         chosen: nil,
         choose: { _ in },
         close: {},
+        addBirds: {},
     )
     .environment(\.horizontalSizeClass, .regular)
 }

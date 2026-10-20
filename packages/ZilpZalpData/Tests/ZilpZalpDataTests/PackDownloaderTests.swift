@@ -16,7 +16,7 @@ struct PackDownloaderTests {
     func decodesTheIndex() async throws {
         let manifest = StubPack.manifest()
         try await withDownloader(routes: StubPack.routes(manifest: manifest)) { downloader, _ in
-            let entry = try #require(await downloader.availablePacks().first)
+            let entry = try #require(await downloader.index().packs.first)
 
             #expect(entry.id == StubPack.id)
             #expect(entry.title == StubPack.title)
@@ -30,7 +30,7 @@ struct PackDownloaderTests {
     func reportsAnUnreachableIndex() async throws {
         try await withDownloader(routes: [:]) { downloader, _ in
             await #expect(throws: PackDownloadError.indexUnreachable(reason: "HTTP 404")) {
-                try await downloader.availablePacks()
+                try await downloader.index()
             }
         }
     }
@@ -53,7 +53,7 @@ struct PackDownloaderTests {
         let manifest = StubPack.manifest()
         try await withDownloader(routes: StubPack.routes(manifest: manifest)) { downloader, home in
             let reports = Mutex<[Int]>([])
-            let entry = try #require(await downloader.availablePacks().first)
+            let entry = try #require(await downloader.index().packs.first)
 
             try await downloader.download(entry) { done, total in
                 #expect(total == entry.downloadSize)
@@ -284,7 +284,7 @@ struct PackDownloaderTests {
 
         try await withDownloader(routes: routes) { downloader, _ in
             await #expect(throws: PackDownloadError.indexUnreachable(reason: "HTTP 302")) {
-                try await downloader.availablePacks()
+                try await downloader.index()
             }
 
             #expect(StubBucket.requests.allSatisfy { $0.host() == "bucket.invalid" })
