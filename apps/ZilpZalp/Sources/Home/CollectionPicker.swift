@@ -28,6 +28,13 @@ struct CollectionPicker: View {
     /// grid, big enough to see across a table.
     private static let chosenScale: CGFloat = 1.06
 
+    /// How wide a column may get on a phone before another fits beside it.
+    /// Wider than the album's: a pack title's longest word, „Deutschlands",
+    /// is 118 pt at the 20 pt a child reads, and three columns leave 102 pt
+    /// — so it shrank below its neighbours (#262). Two columns keep every
+    /// title at one size, wrapped onto a second line where it needs one.
+    private static let compactColumn: CGFloat = 130
+
     /// What there is to choose between, „Alle Vögel" first.
     let entries: [CollectionEntry]
 
@@ -142,7 +149,8 @@ struct CollectionPicker: View {
         LazyVGrid(
             columns: [
                 GridItem(
-                    .adaptive(minimum: StickerGrid.column(compact: isCompact)),
+                    .adaptive(minimum: isCompact ? Self.compactColumn : StickerGrid
+                        .column(compact: false)),
                     spacing: StickerGrid.spacing(compact: isCompact),
                     alignment: .top,
                 ),
