@@ -200,9 +200,9 @@ public struct Profile: Codable, Sendable, Hashable, Identifiable {
     /// counted yet, one written before ``collection`` is a profile that
     /// plays with every bird, and one written before ``stickers`` is a profile
     /// at five whose album is what its counters say — none of them is a
-    /// broken file. Everything else
-    /// decodes as it always has. The schema version stays 1, which is what
-    /// lets this build read every file written before it.
+    /// broken file. Everything else decodes as it always has. The schema
+    /// version stays 1, which is what lets this build read every file written
+    /// before it.
     ///
     /// A file from before #177 also carries a `collectedSpecies` array, and it
     /// is deliberately ignored: those stickers were handed out for meeting a
@@ -229,7 +229,8 @@ public struct Profile: Codable, Sendable, Hashable, Identifiable {
         // Zero or less would hand every bird ever counted its sticker; a file
         // edited by hand gets the default instead.
         let threshold = try container.decodeIfPresent(Int.self, forKey: .stickerThreshold)
-        stickerThreshold = threshold.flatMap { $0 > 0 ? $0 : nil } ?? Self.defaultStickerThreshold
+            ?? Self.defaultStickerThreshold
+        stickerThreshold = threshold > 0 ? threshold : Self.defaultStickerThreshold
         stickers = try container.decodeIfPresent([String].self, forKey: .stickers) ?? []
         collection = try container.decodeIfPresent(String.self, forKey: .collection)
         playtime = try container.decode([String: TimeInterval].self, forKey: .playtime)

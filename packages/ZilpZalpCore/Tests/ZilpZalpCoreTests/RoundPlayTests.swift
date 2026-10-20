@@ -252,8 +252,8 @@ private func twoRecognitions() throws -> RoundPlay {
 
 private extension RoundPlay {
     /// ``celebratedSpecies(recognisedBefore:collectedBefore:threshold:)`` at
-    /// the five every profile starts with, and with nothing in the album the
-    /// counter does not already account for — what most tests here ask.
+    /// the five every profile starts with, and with an empty album unless a
+    /// test says otherwise.
     func celebrated(
         _ recognisedBefore: [String: Int],
         collected: Set<String> = [],
@@ -325,10 +325,10 @@ func celebratedSpeciesPrefersAStickerStillToBeEarned() throws {
 
     // The first bird has been known for a while and has nothing left to show;
     // the second is on its way, and that row of markers is worth seeing.
-    #expect(play.celebrated([first: 9, second: 1]) == second)
+    #expect(play.celebrated([first: 9, second: 1], collected: [first]) == second)
     // With every bird of the round long since collected, the first one
     // recognised is celebrated — as it was before any of this.
-    #expect(play.celebrated([first: 6, second: 8]) == first)
+    #expect(play.celebrated([first: 6, second: 8], collected: [first, second]) == first)
 }
 
 @Test("A round nothing was won in still celebrates its first question")

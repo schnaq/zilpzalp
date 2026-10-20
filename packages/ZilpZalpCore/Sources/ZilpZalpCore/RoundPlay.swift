@@ -129,8 +129,7 @@ public struct RoundPlay: Hashable, Sendable {
     ///     and asking at the end is what keeps the answer from being one
     ///     round out of date.
     ///   - collectedBefore: the species whose sticker was in the album before
-    ///     this round. A bird already at `threshold` counts as collected
-    ///     whether or not it is in here.
+    ///     this round — the album's word, not the counter's.
     ///   - threshold: how many recognitions this child's sticker takes, one of
     ///     ``Scoring/stickerThresholds``.
     public func celebratedSpecies(
@@ -148,9 +147,7 @@ public struct RoundPlay: Hashable, Sendable {
             }
         }
 
-        let missing = recognised.filter { species in
-            !collectedBefore.contains(species) && (recognisedBefore[species] ?? 0) < threshold
-        }
+        let missing = recognised.filter { !collectedBefore.contains($0) }
         let completed = missing.first { total($0) >= threshold }
         let underway = missing.filter { total($0) < threshold }
         // The most recognitions among them, then the first bird that has that
