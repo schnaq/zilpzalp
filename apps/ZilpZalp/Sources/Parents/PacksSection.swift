@@ -42,8 +42,20 @@ struct PacksSection: View {
                 }
             }
 
-            ForEach(packs.cards) { card in
-                cardView(card)
+            // One column on a phone, two or three on an iPad, where a single
+            // card across 900 pt would be mostly air.
+            LazyVGrid(
+                columns: [GridItem(
+                    .adaptive(minimum: 320),
+                    spacing: ZSpacing.step4,
+                    alignment: .top,
+                )],
+                alignment: .leading,
+                spacing: ZSpacing.step4,
+            ) {
+                ForEach(packs.cards) { card in
+                    cardView(card)
+                }
             }
 
             footer
