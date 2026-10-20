@@ -29,21 +29,10 @@ struct SpokenLine: Sendable {
     /// and with its placeholders already filled.
     let text: String
 
-    /// "Super gemacht! Amsel gesammelt!" — the praise for a bird the child has
-    /// just met for the first time.
-    static func firstFind(_ bird: Bird) -> SpokenLine {
-        SpokenLine(
-            key: "roundEnd.sticker.new.spoken",
-            bird: bird,
-            text: String(
-                format: String(localized: "roundEnd.sticker.new.spoken"),
-                spokenName(of: bird),
-            ),
-        )
-    }
-
-    /// "Amsel" — the bare name. The question of game 1, and what a sticker in
-    /// the album says when it is tapped.
+    /// "Amsel" — the bare name. The question of game 1, what a sticker in
+    /// the album says when it is tapped, and what the round end says after
+    /// „Super gemacht!" for a sticker just earned (#264) — the only sentence
+    /// recorded per species.
     ///
     /// One line for both since #220: the game asked "Wo ist die Amsel?" and
     /// now asks the name alone, which is the same words the album already

@@ -1586,7 +1586,7 @@
       }
     },
     "roundEnd.sticker.new.spoken" : {
-      "comment" : "What the round end says out loud when the bird is a first find, in place of the plain praise. %@ is the bird's name",
+      "comment" : "The praise VoiceOver announces at the round end when the bird is a first find. Not spoken by the app itself: that says roundEnd.title and then the bird's name, two recordings. %@ is the bird's name",
       "extractionState" : "manual",
       "localizations" : {
         "de" : {

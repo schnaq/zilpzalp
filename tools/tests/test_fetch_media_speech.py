@@ -87,8 +87,9 @@ def padded(segment: str) -> bytes:
     return base64.urlsafe_b64decode(segment + "=" * (-len(segment) % 4))
 
 
-# The three keys the base pack's species sentences use, as the app's own
-# catalogue spells them, plus the one that cannot become a clip.
+# The catalogue keys these tests read, as the app's own catalogue spells
+# them: the praise that is VoiceOver-only since #264, the fixed praise, and
+# the one sentence that cannot become a clip.
 CATALOG = {
     "sourceLanguage": "de",
     "strings": {
@@ -156,7 +157,7 @@ class SentenceTests(unittest.TestCase):
 
     def test_fills_the_unpositional_one(self) -> None:
         self.assertEqual(
-            sentences.species_text(AMSEL, "roundEnd.sticker.new.spoken"),
+            sentences.fill("Super gemacht! %@ gesammelt!", "Amsel"),
             "Super gemacht! Amsel gesammelt!",
         )
 
@@ -174,10 +175,13 @@ class SentenceTests(unittest.TestCase):
         self.assertEqual(sentences.species_text(odd, "collection.name"), "Zilp Zalp")
 
     def test_refuses_a_sentence_that_belongs_to_no_species(self) -> None:
-        with self.assertRaises(LookupError) as error:
-            sentences.species_text(AMSEL, "roundEnd.title")
+        """Including the first-find praise: VoiceOver-only since #264."""
+        self.assertEqual(sentences.SPECIES_SENTENCES, ("collection.name",))
+        for key in ("roundEnd.title", "roundEnd.sticker.new.spoken"):
+            with self.subTest(key=key), self.assertRaises(LookupError) as error:
+                sentences.species_text(AMSEL, key)
 
-        self.assertIn("not a species sentence", str(error.exception))
+            self.assertIn("not a species sentence", str(error.exception))
 
     def test_reads_a_fixed_sentence_as_the_catalogue_has_it(self) -> None:
         self.assertEqual(sentences.fixed_text("roundEnd.title"), "Super gemacht!")
@@ -210,16 +214,13 @@ class RealCatalogTests(unittest.TestCase):
     """One assertion against the catalogue the app actually ships.
 
     The question of game 1 was this assertion until issue #220 made that
-    question the bare name — `collection.name`, which is not a catalogue key
-    at all and therefore proves nothing about the catalogue. The praise is the
-    species sentence that is still filled from it.
+    question the bare name, and the praise with a first find in it was until
+    #264 made that the fixed praise followed by the name. Neither name clip
+    proves anything about the catalogue; the praise in front of it does.
     """
 
-    def test_a_species_sentence_reads_as_the_app_speaks_it(self) -> None:
-        self.assertEqual(
-            sentences.species_text(AMSEL, "roundEnd.sticker.new.spoken"),
-            "Super gemacht! Amsel gesammelt!",
-        )
+    def test_the_praise_reads_as_the_app_speaks_it(self) -> None:
+        self.assertEqual(sentences.fixed_text("roundEnd.title"), "Super gemacht!")
 
 
 class ProviderTests(unittest.TestCase):

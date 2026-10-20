@@ -296,12 +296,13 @@ struct RoundEndScreen: View {
         outcome?.earnedSticker(for: result.celebratedSpecies) ?? false
     }
 
-    /// The one sentence this screen says out loud, for the child who cannot
-    /// read it. A sticker just earned gets its own, so the news is heard as
-    /// well as seen.
-    private var spokenPraise: SpokenLine {
-        guard earnedSticker, let sticker else { return .fixed("roundEnd.title") }
-        return sticker.praise
+    /// What this screen says out loud, for the child who cannot read it: the
+    /// praise, and for a sticker just earned the bird's name right after it,
+    /// so the news is heard as well as seen (#264).
+    private var spokenPraise: [SpokenLine] {
+        let praise = SpokenLine.fixed("roundEnd.title")
+        guard earnedSticker, let sticker else { return [praise] }
+        return [praise, sticker.spokenName]
     }
 
     private var starSize: CGFloat {
@@ -376,10 +377,11 @@ struct RoundEndScreen: View {
     private func announceToVoiceOver() async {
         try? await Task.sleep(for: .milliseconds(500))
         guard !Task.isCancelled else { return }
+        let firstFind = earnedSticker ? sticker?.praise : nil
         AccessibilityNotification.Announcement(
             String(
                 format: String(localized: "roundEnd.announcement"),
-                spokenPraise.text,
+                firstFind ?? String(localized: "roundEnd.title"),
                 starsEarned,
             ),
         ).post()

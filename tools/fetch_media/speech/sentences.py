@@ -7,23 +7,19 @@ reworded in Xcode is rendered as it now reads instead of as it once did. What
 this module does spell out is *how* each sentence is filled, and that is
 tool knowledge: it mirrors the eight call sites the app speaks through.
 
-Two sentences are species-dependent and therefore one clip per species:
+One sentence is species-dependent and therefore one clip per species:
+`collection.name`, „Amsel" — the spoken name alone.
 
-| Sentence key                  | German                     | Filled with          |
-|-------------------------------|----------------------------|----------------------|
-| `roundEnd.sticker.new.spoken` | „Super gemacht! %@ …!"     | spoken name          |
-| `collection.name`             | „Amsel"                    | spoken name alone    |
+It is the one key that is not in the catalog: the sentence *is* the name, so
+there is nothing to translate and nothing to fill. The album says it when a
+sticker is tapped, since #220 it is the question of game 1, and since #264 it
+is what the round end says right after „Super gemacht!" for a sticker just
+earned — one clip per species, heard in three places.
+`SpeechKey.speciesName` in `ZilpZalpData` is this key on the Swift side.
 
-`collection.name` is the one key that is not in the catalog: the sentence *is*
-the name, so there is nothing to translate and nothing to fill. The album says
-it when a sticker is tapped, and since #220 it is also the question of game 1
-— one clip per species, heard in two places. `SpeechKey.speciesName` in
-`ZilpZalpData` is this key on the Swift side.
-
-There were three until #220. „Wo ist die Amsel?" — `quiz.prompt.whereIs` — was
-the question of game 1, and it is gone from the catalog with the sentence: the
-game asks with the bare name now, so the sentence has neither words to render
-nor a screen to say it.
+„Super gemacht! Amsel gesammelt!" — `roundEnd.sticker.new.spoken` — is still
+in the catalog, but for VoiceOver only: the round end plays the fixed praise
+and the name one after the other, so nothing renders it.
 
 Every fixed sentence — „Super gemacht!", the eight rank ascents, the parental
 gate, the two profile screens — is whatever the catalog says under its key, and
@@ -47,7 +43,7 @@ CATALOG = REPO_ROOT / "apps" / "ZilpZalp" / "Resources" / "Localizable.xcstrings
 LANGUAGE = "de"
 
 # The species sentences, in the order `--sentence` lists and defaults to.
-SPECIES_SENTENCES = ("roundEnd.sticker.new.spoken", "collection.name")
+SPECIES_SENTENCES = ("collection.name",)
 
 # `%1$@`, `%2$@` and the unpositional `%@`, which is what Swift's
 # `String(format:)` is given at the call sites this mirrors.
@@ -116,20 +112,15 @@ def spoken_name(bird: dict) -> str:
 
     `pronunciation` overrides the name where a voice would mangle it — that is
     the field's whole purpose, and it belongs in the pack data rather than in
-    any code. `RoundEndScreen` passes the display name today where this passes
-    the spoken one; with every `pronunciation` in the base pack still null,
-    there is nothing between the two to hear.
+    any code. `SpokenLine.name` in the app is this rule on the other side.
     """
     return str(bird.get("pronunciation") or bird["name"])
 
 
 def species_text(bird: dict, sentence: str) -> str:
     """What one species sentence says for one bird."""
-    name = spoken_name(bird)
     if sentence == "collection.name":
-        return name
-    if sentence == "roundEnd.sticker.new.spoken":
-        return fill(german(sentence), name)
+        return spoken_name(bird)
 
     known = ", ".join(SPECIES_SENTENCES)
     raise LookupError(f"'{sentence}' is not a species sentence (expected one of {known})")

@@ -82,6 +82,22 @@ struct SpeechClipsTests {
         #expect(clips.url(for: "gate.spoken", about: nil) == nil)
     }
 
+    /// The round end's praise for a first find is two lines in a row — the
+    /// fixed „Super gemacht!" and the bird's name (#264) — and each falls back
+    /// on its own: a recorded praise does not wait for a name nobody recorded.
+    @Test("the praise and the name are decided one by one")
+    func decidesTheFirstFindLineByLine() throws {
+        let pack = try SpeechFixtures.speakingPack()
+        let clips = try SpeechClips(library: PackLibrary([pack]), fixed: SpeechFixtures.fixedSet())
+        let amsel = try #require(pack.pack.birds.first { $0.id == "amsel" })
+        let praise = try #require(clips.url(for: "roundEnd.title", about: nil))
+
+        let decisions = [("roundEnd.title", nil), (SpeechKey.speciesName, amsel)].map {
+            clips.decision(for: $0, about: $1, speechEnabled: true)
+        }
+        #expect(decisions == [.clip(praise), .synthesise])
+    }
+
     // MARK: - The switch (#231)
 
     /// The one thing the switch has to do: a recording that is right there on
