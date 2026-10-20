@@ -87,15 +87,16 @@ public struct PackIndex: Codable, Sendable, Hashable {
     /// The retired packs among `installed` that something can be done about:
     /// successors to load, or none left to load and the old pack to delete.
     ///
-    /// A retired pack none of whose successors the index lists yet is left
-    /// alone — deleting it then would take birds away and give none back.
+    /// A retired pack is left alone until the index lists **every** one of
+    /// its successors: deleting it while one is still to be published would
+    /// take that one's birds away until it is.
     ///
     /// - Parameter installed: the ids of the downloaded packs.
     public func migrations(installed: Set<String>) -> [Migration] {
         retired.compactMap { pack in
             guard installed.contains(pack.id) else { return nil }
             let offered = packs.filter { pack.successors.contains($0.id) }
-            guard !offered.isEmpty else { return nil }
+            guard !offered.isEmpty, offered.count == Set(pack.successors).count else { return nil }
             return Migration(
                 retired: pack.id,
                 remaining: offered.filter { !installed.contains($0.id) },

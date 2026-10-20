@@ -78,6 +78,18 @@ struct PackIndexTests {
         #expect(index.migrations(installed: ["welt", "amerika"]).first?.remaining == [])
     }
 
+    @Test("a retired pack whose successors are not all published yet is left alone")
+    func waitsForEverySuccessor() {
+        let index = PackIndex(
+            packs: [Self.entry("amerika")],
+            retired: [PackIndex.Retired(id: "welt", successors: ["amerika", "asien"])],
+        )
+
+        // With amerika installed, nothing would remain — and welt would go
+        // while asien's birds are nowhere yet.
+        #expect(index.migrations(installed: ["welt", "amerika"]).isEmpty)
+    }
+
     @Test("a retired pack that is not installed, or has no successor yet, is left alone")
     func leavesTheRestAlone() {
         let index = PackIndex(

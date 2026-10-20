@@ -340,10 +340,7 @@ public actor PackDownloader {
             }
             try manager.createDirectory(at: partial, withIntermediateDirectories: true)
         } catch {
-            throw PackDownloadError.diskFailure(
-                path: partial.path(percentEncoded: false),
-                reason: error.localizedDescription,
-            )
+            throw Self.diskError(error, writing: partial)
         }
         return partial
     }
@@ -389,10 +386,7 @@ public actor PackDownloader {
                 try manager.moveItem(at: partial, to: installed)
             }
         } catch {
-            throw PackDownloadError.diskFailure(
-                path: installed.path(percentEncoded: false),
-                reason: error.localizedDescription,
-            )
+            throw Self.diskError(error, writing: installed)
         }
     }
 }

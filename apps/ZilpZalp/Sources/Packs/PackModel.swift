@@ -149,6 +149,9 @@ final class PackModel {
     /// cannot be started twice, so each appearance gets a new one.
     func watchConnection() {
         connection?.cancel()
+        // Costly until the path has said otherwise: a tap in the first
+        // moment asks once too often rather than once too few.
+        isCostly = true
         let monitor = NWPathMonitor()
         monitor.pathUpdateHandler = { [weak self] path in
             let costly = path.isExpensive || path.isConstrained
@@ -207,7 +210,16 @@ final class PackModel {
     /// lock**: the grown-ups' area asks for it when it opens, no child's
     /// screen ever does.
     func loadAvailable() async {
-        available = .loading
+        // A list already on screen stays while the next one is on its way, and
+        // when it does not come: a running download must not lose its card.
+        let shown: PackIndex? = if case let .ready(index) = available {
+            index
+        } else {
+            nil
+        }
+        if shown == nil {
+            available = .loading
+        }
         do {
             available = try await .ready(downloader.index())
             rememberWhatIsLeft()
@@ -219,7 +231,7 @@ final class PackModel {
             // standing behind a list that is simply not being waited for. The
             // section asks again when it comes back.
         } catch {
-            available = .failed
+            available = shown.map(Available.ready) ?? .failed
             let reason = String(describing: error)
             Logger.packs.error("Pack index did not load: \(reason, privacy: .public)")
         }
@@ -264,6 +276,12 @@ final class PackModel {
             // the pack belongs to neither list, and the row would offer it for
             // download all over again.
             await readInstalled()
+            // A read that started before the move — a deletion's — may have
+            // been the one believed. Once more, so the card never falls back
+            // to "Laden" for a pack that is on disk.
+            if !installed.contains(where: { $0.id == entry.id }) {
+                await readInstalled()
+            }
             downloads[entry.id] = nil
             fresh.insert(entry.id)
             await finishMigrations()
