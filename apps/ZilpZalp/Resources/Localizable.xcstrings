@@ -877,6 +877,54 @@
         }
       }
     },
+    "parents.stickers.cancel" : {
+      "comment" : "Leaves the sticker threshold dialog without changing it",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abbrechen"
+          }
+        }
+      }
+    },
+    "parents.stickers.intro" : {
+      "comment" : "Line under the sticker heading, and the message of its dialog: what the threshold is, and that raising it takes no sticker away",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wie oft ein Kind einen Vogel auf Anhieb erkennen muss, bis sein Sticker ins Album kommt. Gesammelte Sticker bleiben, auch wenn Sie die Zahl später erhöhen."
+          }
+        }
+      }
+    },
+    "parents.stickers.title" : {
+      "comment" : "Heading of the sticker card in the grown-ups' area, where each child's sticker threshold is set (#260)",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sticker"
+          }
+        }
+      }
+    },
+    "parents.stickers.value" : {
+      "comment" : "One child's sticker threshold, in its row and as a choice in the dialog. %lld is three or five: how often a bird has to be recognised at the first attempt",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld-mal erkannt"
+          }
+        }
+      }
+    },
     "parents.title" : {
       "comment" : "The grown-ups' area: the VoiceOver label of its door in the top bar, and the title of the area itself",
       "extractionState" : "manual",

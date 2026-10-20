@@ -23,9 +23,10 @@ import ZilpZalpUI
 /// is the gap.
 ///
 /// **A bird on its way shows how far it has come.** Under a locked sticker
-/// stand five markers, filled as often as the child has recognised that bird
-/// (#177) — so the album says "nearly" as well as "not yet", which is the
-/// difference between a gap and a goal.
+/// stand as many markers as the child's sticker takes — three or five (#260)
+/// — filled as often as the child has recognised that bird (#177), so the
+/// album says "nearly" as well as "not yet", which is the difference between
+/// a gap and a goal.
 ///
 /// Tapping a bird already collected says its name out loud, because the child
 /// this album is for cannot read the word under it. A locked one says nothing
@@ -227,6 +228,7 @@ struct CollectionScreen: View {
 
                 StickerMarkers(
                     count: profile.recognitions[bird.id, default: 0],
+                    threshold: profile.stickerThreshold,
                     markerSize: isCompact ? Self.compactMarkerSize : Self.markerSize,
                 )
             }

@@ -88,7 +88,7 @@ public struct RoundPlay: Hashable, Sendable {
 
     /// How often each species was answered right at the first attempt in this
     /// round — what the round hands over to be added onto the child's
-    /// counters, five of which earn a sticker.
+    /// counters, three or five of which earn a sticker (#260).
     public var recognitions: [String: Int] {
         firstTryRecognitions.reduce(into: [:]) { counts, species in
             counts[species, default: 0] += 1
@@ -96,15 +96,16 @@ public struct RoundPlay: Hashable, Sendable {
     }
 
     /// The species the round end puts on its sticker, judged against what the
-    /// child had recognised before this round (#177).
+    /// child had recognised and collected before this round (#177, #260).
     ///
     /// In this order:
     ///
-    /// 1. a bird whose fifth recognition happened in this round — its sticker
-    ///    was just earned, and that is the news of the round
-    /// 2. otherwise the bird that came closest to its fifth without reaching
-    ///    it, among those recognised in this round: the one whose row of
-    ///    markers has the most to show
+    /// 1. a bird still missing from the album that reached `threshold` in this
+    ///    round — its sticker was just earned, and that is the news of the
+    ///    round
+    /// 2. otherwise the bird still missing from the album that came closest to
+    ///    `threshold` without reaching it, among those recognised in this
+    ///    round: the one whose row of markers has the most to show
     /// 3. otherwise the first bird recognised in this round, whose sticker was
     ///    in the album already
     /// 4. otherwise the first question's answer
@@ -117,12 +118,26 @@ public struct RoundPlay: Hashable, Sendable {
     /// ``firstTryRecognitions`` throughout, so the answer never depends on how
     /// a dictionary happens to iterate.
     ///
-    /// - Parameter recognisedBefore: how often the child had recognised each
-    ///   species before this round, as ``recognitions`` counts them. The play
-    ///   does not store it: a round is played by whoever is holding the iPad,
-    ///   and asking at the end is what keeps the answer from being one round
-    ///   out of date.
-    public func celebratedSpecies(recognisedBefore: [String: Int]) -> String? {
+    /// The album is asked beside the counter because the two can disagree: a
+    /// sticker earned at three stays when a grown-up raises the threshold to
+    /// five, and that bird, standing at four, is neither news nor on its way.
+    ///
+    /// - Parameters:
+    ///   - recognisedBefore: how often the child had recognised each species
+    ///     before this round, as ``recognitions`` counts them. The play does
+    ///     not store it: a round is played by whoever is holding the iPad,
+    ///     and asking at the end is what keeps the answer from being one
+    ///     round out of date.
+    ///   - collectedBefore: the species whose sticker was in the album before
+    ///     this round. A bird already at `threshold` counts as collected
+    ///     whether or not it is in here.
+    ///   - threshold: how many recognitions this child's sticker takes, one of
+    ///     ``Scoring/stickerThresholds``.
+    public func celebratedSpecies(
+        recognisedBefore: [String: Int],
+        collectedBefore: Set<String>,
+        threshold: Int,
+    ) -> String? {
         let inRound = recognitions
         let total = { (species: String) in
             (recognisedBefore[species] ?? 0) + (inRound[species] ?? 0)
@@ -133,11 +148,11 @@ public struct RoundPlay: Hashable, Sendable {
             }
         }
 
-        let completed = recognised.first { species in
-            (recognisedBefore[species] ?? 0) < Scoring.recognitionsForSticker
-                && total(species) >= Scoring.recognitionsForSticker
+        let missing = recognised.filter { species in
+            !collectedBefore.contains(species) && (recognisedBefore[species] ?? 0) < threshold
         }
-        let underway = recognised.filter { total($0) < Scoring.recognitionsForSticker }
+        let completed = missing.first { total($0) >= threshold }
+        let underway = missing.filter { total($0) < threshold }
         // The most recognitions among them, then the first bird that has that
         // many. Not `max(by:)`, which does not promise which of two equals it
         // answers with — and here that decides which bird a child sees.

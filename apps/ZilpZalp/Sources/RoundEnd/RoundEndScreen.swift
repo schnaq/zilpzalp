@@ -219,7 +219,7 @@ struct RoundEndScreen: View {
         RoundEndReward(
             sticker: sticker,
             earnedSticker: earnedSticker,
-            progress: outcome.map { $0.recognitions(of: result.celebratedSpecies) },
+            progress: outcome.map { $0.progress(of: result.celebratedSpecies) },
             isTight: isTight,
             settled: settled,
         )
@@ -289,7 +289,7 @@ struct RoundEndScreen: View {
         String(format: String(localized: "roundEnd.stars"), result.stars)
     }
 
-    /// Whether the round earned this bird's sticker — its fifth recognition.
+    /// Whether the round earned this bird's sticker.
     /// Read off the profiles either side of the write. `false` until then —
     /// one frame of silence beats a claim that was not checked.
     private var earnedSticker: Bool {

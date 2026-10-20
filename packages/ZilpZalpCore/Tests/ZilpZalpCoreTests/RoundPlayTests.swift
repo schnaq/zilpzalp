@@ -250,6 +250,47 @@ private func twoRecognitions() throws -> RoundPlay {
     return play
 }
 
+private extension RoundPlay {
+    /// ``celebratedSpecies(recognisedBefore:collectedBefore:threshold:)`` at
+    /// the five every profile starts with, and with nothing in the album the
+    /// counter does not already account for — what most tests here ask.
+    func celebrated(
+        _ recognisedBefore: [String: Int],
+        collected: Set<String> = [],
+        threshold: Int = 5,
+    ) -> String? {
+        celebratedSpecies(
+            recognisedBefore: recognisedBefore,
+            collectedBefore: collected,
+            threshold: threshold,
+        )
+    }
+}
+
+@Test("At a threshold of three, the third recognition completes the sticker")
+func celebratedSpeciesFollowsTheThreshold() throws {
+    let play = try twoRecognitions()
+    let first = play.round.questions[0].answer
+    let second = play.round.questions[1].answer
+
+    // Two plus one is a sticker at three and only the closest at five.
+    #expect(play.celebrated([first: 1, second: 2], threshold: 3) == second)
+    #expect(play.celebrated([first: 3, second: 2], threshold: 5) == first)
+}
+
+@Test("A sticker kept after the threshold was raised is neither news nor underway")
+func celebratedSpeciesSkipsAStickerAlreadyCollected() throws {
+    let play = try twoRecognitions()
+    let first = play.round.questions[0].answer
+    let second = play.round.questions[1].answer
+
+    // The first bird's sticker was earned at three; at five it now stands at
+    // four, and then at five. Neither is news, so the second bird — the one
+    // still collecting — is celebrated.
+    #expect(play.celebrated([first: 3, second: 0], collected: [first]) == second)
+    #expect(play.celebrated([first: 4, second: 0], collected: [first]) == second)
+}
+
 @Test("A sticker completed in this round is the news of it")
 func celebratedSpeciesIsTheCompletedSticker() throws {
     let play = try twoRecognitions()
@@ -259,7 +300,7 @@ func celebratedSpeciesIsTheCompletedSticker() throws {
     // The second bird reaches its fifth recognition here. The first is the
     // closer of the two to nothing, and stood first, and neither counts
     // against a sticker that has just been earned.
-    #expect(play.celebratedSpecies(recognisedBefore: [first: 3, second: 4]) == second)
+    #expect(play.celebrated([first: 3, second: 4]) == second)
 }
 
 @Test("Without a sticker earned, the bird closest to one is celebrated")
@@ -269,11 +310,11 @@ func celebratedSpeciesIsTheClosestToASticker() throws {
     let second = play.round.questions[1].answer
 
     // Three of five beats one of five, whichever came first in the round.
-    #expect(play.celebratedSpecies(recognisedBefore: [first: 0, second: 2]) == second)
-    #expect(play.celebratedSpecies(recognisedBefore: [first: 2, second: 0]) == first)
+    #expect(play.celebrated([first: 0, second: 2]) == second)
+    #expect(play.celebrated([first: 2, second: 0]) == first)
     // A tie goes to the bird recognised first, so the answer never depends on
     // how a dictionary happens to iterate.
-    #expect(play.celebratedSpecies(recognisedBefore: [:]) == first)
+    #expect(play.celebrated([:]) == first)
 }
 
 @Test("A bird already collected yields to one still collecting")
@@ -284,10 +325,10 @@ func celebratedSpeciesPrefersAStickerStillToBeEarned() throws {
 
     // The first bird has been known for a while and has nothing left to show;
     // the second is on its way, and that row of markers is worth seeing.
-    #expect(play.celebratedSpecies(recognisedBefore: [first: 9, second: 1]) == second)
+    #expect(play.celebrated([first: 9, second: 1]) == second)
     // With every bird of the round long since collected, the first one
     // recognised is celebrated — as it was before any of this.
-    #expect(play.celebratedSpecies(recognisedBefore: [first: 6, second: 8]) == first)
+    #expect(play.celebrated([first: 6, second: 8]) == first)
 }
 
 @Test("A round nothing was won in still celebrates its first question")
@@ -296,14 +337,14 @@ func celebratedSpeciesFallsBackToTheFirstQuestion() throws {
     let first = try answer(of: play)
     let wrong = try distractor(of: play)
 
-    #expect(play.celebratedSpecies(recognisedBefore: [:]) == first)
+    #expect(play.celebrated([:]) == first)
 
     #expect(play.tap(wrong) == .wrong)
     #expect(play.tap(first) == .correct(firstTry: false))
 
     // Found in the end is not recognised, so the round has nothing to go on
     // but the bird it began with.
-    #expect(play.celebratedSpecies(recognisedBefore: [first: 4]) == first)
+    #expect(play.celebrated([first: 4]) == first)
 }
 
 @Test("A round without questions is over before it starts")
@@ -312,7 +353,7 @@ func anEmptyRoundIsFinished() throws {
 
     #expect(play.isFinished)
     #expect(play.question == nil)
-    #expect(play.celebratedSpecies(recognisedBefore: [:]) == nil)
+    #expect(play.celebrated([:]) == nil)
     #expect(play.tap("species-0") == .ignored)
 
     play.advance()

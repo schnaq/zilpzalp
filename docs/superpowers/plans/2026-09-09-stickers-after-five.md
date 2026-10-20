@@ -5,6 +5,14 @@ die Ränge (Vogel-Leiter) abschaffen. Stattdessen bekommt man den Sticker vom
 Vogel in sein Stickeralbum (so wie jetzt auch schon in der Sammlung), aber erst,
 wenn man ihn 5 mal korrekt erkannt hat. Die Sterne dürfen bleiben."*
 
+**Amended by #260:** five is no longer fixed. Each profile carries its own
+threshold, three or five (`Profile.stickerThreshold`, default 5), which a
+grown-up sets in the parents' area. Earned stickers are now stored on the
+profile (`Profile.stickers`) instead of being derived, so a sticker earned at
+three stays when the threshold is raised later. A file written before #260
+backfills its stickers from `recognitions >= 5`. The bullets below say "five"
+where the rule now reads "the child's threshold".
+
 ## The rule
 
 - **Recognised** is a correct answer at the first attempt — `RoundPlay.Tap`'s
@@ -13,7 +21,8 @@ wenn man ihn 5 mal korrekt erkannt hat. Die Sterne dürfen bleiben."*
   recognition. Both games count; the bird was named or its call was known.
 - **Five recognitions of one species earn its sticker**, per profile.
   `Scoring.recognitionsForSticker = 5` in `ZilpZalpCore` is the only place the
-  number is written.
+  number is written. Since #260: `Scoring.stickerThresholds = [3, 5]` lists
+  the choices, and the profile holds the one in force.
 - Stars are untouched: three per round at most, `Scoring.stars(firstTryCorrect:)`
   as before, counted on the profile.
 - **The celebrated bird** of a round, `RoundPlay.celebratedSpecies(recognisedBefore:)`,
@@ -21,7 +30,10 @@ wenn man ihn 5 mal korrekt erkannt hat. Die Sterne dürfen bleiben."*
   species that came closest to five without reaching it, among those that made
   progress this round → else the first species recognised this round (its
   sticker was already there) → else the first question's answer, so a round with
-  nothing right still shows the bird it began with.
+  nothing right still shows the bird it began with. Since #260 the call is
+  `celebratedSpecies(recognisedBefore:collectedBefore:threshold:)`, and a bird
+  already in the album is neither "completed" nor "closest", whatever its
+  counter says.
 - One ordered record answers all of it: `RoundPlay.firstTryRecognitions: [String]`,
   the species in the order their first-try answers happened, repeats included —
   a short pack asks for the same bird twice in a round. Counts, the fallback and
@@ -100,6 +112,10 @@ of the deleted screens, and the prose that mentions any of it.
   `Profile` keeps the raw counters and the app target — which links both —
   derives `hasSticker(for:)` and `collectedSpecies` from
   `Scoring.recognitionsForSticker`. One source of truth, no new package edge.
+  Superseded by #260: the threshold and the earned stickers are now fields of
+  `Profile`, and `hasSticker(for:)` moved into `ZilpZalpData` with them. There
+  is still no package edge — Core lists the choices, Data stores and applies
+  the one a grown-up picked.
 - **The celebrated bird is settled where the round is played**, as before: the
   quiz asks the model for the counters at the moment the round finishes, through
   a closure rather than a stored snapshot, so a second round in the same sitting

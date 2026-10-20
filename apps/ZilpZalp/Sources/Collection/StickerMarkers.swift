@@ -1,5 +1,4 @@
 import SwiftUI
-import ZilpZalpCore
 import ZilpZalpUI
 
 /// The row of markers under a bird that says how far it has come towards its
@@ -7,16 +6,20 @@ import ZilpZalpUI
 ///
 /// The app's own view over ``StickerProgress``, because three things have to
 /// meet and each of them lives somewhere else: how many recognitions a sticker
-/// takes is `Scoring` in `ZilpZalpCore`, the sentence VoiceOver reads is in the
-/// String Catalog, and the drawing is a component that carries neither. Here
-/// rather than twice over, so the album and the round end cannot end up
-/// showing different rows.
+/// takes is the child's profile, the sentence VoiceOver reads is in the String
+/// Catalog, and the drawing is a component that carries neither. Here rather
+/// than twice over, so the album and the round end cannot end up showing
+/// different rows.
 struct StickerMarkers: View {
     /// How often the bird has been recognised, as the profile counts it. Past
-    /// five is a full row and a sentence that still says five — the one place
-    /// on this side of the design system where that is decided, so no screen
-    /// has to clamp before it asks.
+    /// the threshold is a full row and a sentence that still says the
+    /// threshold — the one place on this side of the design system where that
+    /// is decided, so no screen has to clamp before it asks.
     let count: Int
+
+    /// How many recognitions this child's sticker takes, and so how many
+    /// markers the row has: three or five (#260).
+    let threshold: Int
 
     /// Diameter of one marker, chosen by the screen from the sticker it sits
     /// under.
@@ -25,14 +28,14 @@ struct StickerMarkers: View {
     var body: some View {
         StickerProgress(
             count: count,
-            of: Scoring.recognitionsForSticker,
+            of: threshold,
             label: String(
                 format: String(localized: "sticker.progress"),
                 // The same range the markers are drawn in, so what is said
                 // and what is seen cannot disagree — a file edited by hand
                 // could hold anything.
-                min(max(count, 0), Scoring.recognitionsForSticker),
-                Scoring.recognitionsForSticker,
+                min(max(count, 0), threshold),
+                threshold,
             ),
             markerSize: markerSize,
         )
@@ -41,10 +44,11 @@ struct StickerMarkers: View {
 
 #Preview("Nothing, part of the way, and done") {
     VStack(spacing: ZSpacing.step5) {
-        StickerMarkers(count: 0)
-        StickerMarkers(count: 3)
-        StickerMarkers(count: 5)
-        StickerMarkers(count: 2, markerSize: 12)
+        StickerMarkers(count: 0, threshold: 5)
+        StickerMarkers(count: 3, threshold: 5)
+        StickerMarkers(count: 5, threshold: 5)
+        StickerMarkers(count: 2, threshold: 3)
+        StickerMarkers(count: 2, threshold: 5, markerSize: 12)
     }
     .padding(ZSpacing.step6)
     .frame(maxWidth: .infinity, maxHeight: .infinity)

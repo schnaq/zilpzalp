@@ -264,6 +264,29 @@ final class AppModel {
         }
     }
 
+    /// A grown-up chose how many recognitions `id`'s stickers take (#260).
+    ///
+    /// Kept in memory first and written after, as ``choose(collection:)`` is,
+    /// and for the same reasons a failed write is only logged. Lowering the
+    /// threshold puts every sticker the counters already reach into the album
+    /// in the same step — ``Profile/stickerThreshold`` does that itself.
+    func setStickerThreshold(_ threshold: Int, for id: Profile.ID) async {
+        guard let store, let index = profiles.firstIndex(where: { $0.id == id }),
+              profiles[index].stickerThreshold != threshold
+        else {
+            return
+        }
+
+        profiles[index].stickerThreshold = threshold
+
+        do {
+            try await store.update(profiles[index])
+        } catch {
+            let reason = String(describing: error)
+            Logger.profiles.error("Sticker threshold was not written: \(reason, privacy: .public)")
+        }
+    }
+
     /// Books a finished round onto the child who played it: its stars, its
     /// species into the album, its seconds onto today.
     ///

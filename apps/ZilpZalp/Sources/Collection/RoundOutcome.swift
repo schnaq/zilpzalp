@@ -17,21 +17,29 @@ struct RoundOutcome: Hashable {
     /// shows, this is the state a restart would find.
     let after: Profile
 
-    /// Whether this round earned `species`' sticker: the fifth recognition
-    /// happened in it.
+    /// Whether this round earned `species`' sticker: it was missing from the
+    /// album before and is in it now.
     ///
     /// Asked of both profiles, because that is the whole of the news. A bird
-    /// recognised for the sixth time is not a new sticker, and one that stands
-    /// at four is not one yet.
+    /// recognised once more after its sticker is not a new sticker, and one
+    /// short of the threshold is not one yet.
     func earnedSticker(for species: String?) -> Bool {
         guard let species else { return false }
         return !before.hasSticker(for: species) && after.hasSticker(for: species)
     }
 
-    /// How often `species` has been recognised now that the round is written
-    /// down, for the markers under it. Unclamped: ``StickerMarkers`` is what
-    /// turns a count into a row of five and into a sentence.
-    func recognitions(of species: String?) -> Int {
-        species.map { after.recognitions[$0, default: 0] } ?? 0
+    /// The markers under `species` now that the round is written down: how
+    /// often it has been recognised, out of the child's threshold.
+    ///
+    /// A bird whose sticker is in the album shows a full row whatever its
+    /// counter says — a sticker earned at three stays when the threshold goes
+    /// up to five (#260), and "4 von 5" under it would claim it is still to be
+    /// earned. Otherwise unclamped: ``StickerMarkers`` turns a count into a
+    /// row and a sentence.
+    func progress(of species: String?) -> (count: Int, threshold: Int) {
+        let threshold = after.stickerThreshold
+        guard let species else { return (0, threshold) }
+        let count = after.recognitions[species, default: 0]
+        return (after.hasSticker(for: species) ? max(count, threshold) : count, threshold)
     }
 }
