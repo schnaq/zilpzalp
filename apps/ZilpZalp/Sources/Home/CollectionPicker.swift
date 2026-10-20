@@ -39,6 +39,11 @@ struct CollectionPicker: View {
     /// Back to the games. The pill and a tap beside the card both do this.
     let close: () -> Void
 
+    /// The "+" at the end: more birds, which only a grown-up can load — so it
+    /// opens the grown-ups' area, whose first section is the pack gallery
+    /// (#262). The lock stands in front of it as it always does.
+    let addBirds: () -> Void
+
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
@@ -117,13 +122,23 @@ struct CollectionPicker: View {
         .transition(.scale(scale: 0.92).combined(with: .opacity))
     }
 
-    /// The grid. It does not scroll: five collections fit the shortest phone,
-    /// and a card that scrolls hides what is in it from a child who cannot
-    /// read. Should the bucket ever offer more than eight packs, this is where
-    /// a scroll view has to be thought about.
-    ///
-    /// The album's grid, at the album's sizes — see ``StickerGrid``.
+    /// The grid, scrolling only once it no longer fits (#262): five
+    /// collections fit the shortest phone, and a card that scrolls hides what
+    /// is in it from a child who cannot read — but ten packs and the "+" do
+    /// not fit, and a grid that ran off the card would hide them all the same.
     private var collections: some View {
+        ViewThatFits(in: .vertical) {
+            grid
+            ScrollView {
+                grid
+            }
+            .scrollBounceBehavior(.basedOnSize)
+            .scrollIndicatorsFlash(onAppear: true)
+        }
+    }
+
+    /// The album's grid, at the album's sizes — see ``StickerGrid``.
+    private var grid: some View {
         LazyVGrid(
             columns: [
                 GridItem(
@@ -137,8 +152,29 @@ struct CollectionPicker: View {
             ForEach(entries, id: \.id) { entry in
                 sticker(entry)
             }
+            more
         }
         .frame(maxWidth: .infinity)
+    }
+
+    /// A plus on a sticker, where the next collection would be. A picture and
+    /// a word like every entry, never a word alone.
+    private var more: some View {
+        Button {
+            close()
+            addBirds()
+        } label: {
+            StickerCaption(caption: String(localized: "home.collection.more"), earned: true) {
+                RewardSticker(
+                    icon: .plus,
+                    tone: .leaf,
+                    rotation: .zero,
+                    size: StickerGrid.size(compact: isCompact),
+                )
+            }
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(String(localized: "home.collection.more.accessibility"))
     }
 
     /// One collection: its bird, its name, and — while it is the chosen one —
@@ -196,6 +232,7 @@ private let previewEntries = [
         chosen: "afrika",
         choose: { _ in },
         close: {},
+        addBirds: {},
     )
     .environment(\.horizontalSizeClass, .compact)
 }
@@ -206,6 +243,7 @@ private let previewEntries = [
         chosen: nil,
         choose: { _ in },
         close: {},
+        addBirds: {},
     )
     .environment(\.horizontalSizeClass, .regular)
 }

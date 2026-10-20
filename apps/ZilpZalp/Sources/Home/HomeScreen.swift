@@ -57,6 +57,10 @@ struct HomeScreen: View {
     /// not have to play a round to get to them.
     let openCollection: () -> Void
 
+    /// The door's sparkle and the one-time hint's close, `nil` without one (#262).
+    var newBirds = false
+    var dismissPacksHint: (() -> Void)?
+
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
@@ -92,13 +96,7 @@ struct HomeScreen: View {
                     .buttonStyle(.plain)
                     .accessibilityLabel(String(localized: "profile.switch.accessibility"))
 
-                    IconButton(
-                        .userRoundCog,
-                        label: String(localized: "parents.title"),
-                        tone: .clay,
-                        diameter: ZSpacing.touchMinimum,
-                        action: openParents,
-                    )
+                    GrownUpsButton(newBirds: newBirds, action: openParents)
                 }
             }
 
@@ -144,6 +142,7 @@ struct HomeScreen: View {
                     chosen: chosenCollection,
                     choose: chooseCollection,
                     close: { isPicking = false },
+                    addBirds: openParents,
                 )
             }
         }
@@ -160,6 +159,7 @@ struct HomeScreen: View {
     /// know what is left: the pill costs a phone tile height, an iPad nothing.
     private var intro: some View {
         VStack(spacing: ZSpacing.step4) {
+            dismissPacksHint.map { PacksHint(open: openParents, dismiss: $0) }
             headline
 
             if let chosen = collections.first(where: { $0.id == chosenCollection }) {

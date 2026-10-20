@@ -104,9 +104,9 @@ public struct PackIndex: Codable, Sendable, Hashable {
     }
 }
 
-// The decoders live in extensions so the memberwise initialisers survive. Every
-// field #262 added is optional: today's bucket has none of them, and the 1.0.0
-// build reads the same index without knowing them.
+/// The decoders live in extensions so the memberwise initialisers survive. Every
+/// field #262 added is optional: today's bucket has none of them, and the 1.0.0
+/// build reads the same index without knowing them.
 public extension PackIndex {
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)

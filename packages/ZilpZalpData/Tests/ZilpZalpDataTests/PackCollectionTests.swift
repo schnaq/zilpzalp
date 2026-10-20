@@ -81,7 +81,10 @@ struct PackCollectionTests {
             let packs = try ["basis", "afrika", "welt"].map { pack in
                 try PackFolder.write(
                     pack: pack,
-                    species: Self.fourSpecies(pack) + [Species(id: "strauss", call: pack == "welt")],
+                    species: Self.fourSpecies(pack) + [Species(
+                        id: "strauss",
+                        call: pack == "welt",
+                    )],
                     to: home,
                 )
             }

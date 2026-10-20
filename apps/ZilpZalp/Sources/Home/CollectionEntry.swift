@@ -1,4 +1,5 @@
 import SwiftUI
+import ZilpZalpCore
 import ZilpZalpData
 
 /// One collection as the home screen draws it: which pack it is, what it is
@@ -43,6 +44,18 @@ extension AppModel {
     /// and without touching the profile.
     var collection: PackCollection {
         packs.collections.chosen(activeProfile?.collection)
+    }
+
+    /// Whether the playing child holds most of the stickers there are on the
+    /// device — and the last index seen had something left to load (#262).
+    /// Read off disk only: the home screen never asks the network.
+    var newBirdsDue: Bool {
+        guard let profile = activeProfile, !packs.nothingLeft else { return false }
+        let birds = packs.library.birds
+        return NewBirdsHint.isDue(
+            collected: birds.count { profile.hasSticker(for: $0.id) },
+            of: birds.count,
+        )
     }
 
     /// What the picker offers, or nothing at all.

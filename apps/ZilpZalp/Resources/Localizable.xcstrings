@@ -385,6 +385,30 @@
         }
       }
     },
+    "home.collection.more" : {
+      "comment" : "Under the plus sticker at the end of the collection picker: more birds, in the grown-ups' area",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mehr Vögel"
+          }
+        }
+      }
+    },
+    "home.collection.more.accessibility" : {
+      "comment" : "VoiceOver label of the plus sticker in the collection picker",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mehr Vögel, für Erwachsene"
+          }
+        }
+      }
+    },
     "home.collection.title" : {
       "comment" : "Asked — spoken and shown — over the collection picker: which birds the next round should be about",
       "extractionState" : "manual",
@@ -417,6 +441,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Erkenne den Vogel"
+          }
+        }
+      }
+    },
+    "home.packsHint" : {
+      "comment" : "One-time line for grown-ups on the home screen after the first profile: where more birds come from",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mehr Vögel im Elternbereich"
+          }
+        }
+      }
+    },
+    "home.packsHint.dismiss" : {
+      "comment" : "VoiceOver label of the button that closes that line for good",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hinweis schließen"
           }
         }
       }
@@ -577,6 +625,18 @@
         }
       }
     },
+    "parents.newBirds.accessibility" : {
+      "comment" : "VoiceOver label of the grown-ups' door while it wears the new-birds sparkle",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einstellungen, neue Vögel"
+          }
+        }
+      }
+    },
     "parents.notice" : {
       "comment" : "Heading of the card in the grown-ups' area that states what the app does not do",
       "extractionState" : "manual",
@@ -601,6 +661,66 @@
         }
       }
     },
+    "parents.packs.action.load" : {
+      "comment" : "The button on a pack's card that downloads it",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Laden"
+          }
+        }
+      }
+    },
+    "parents.packs.action.loaded" : {
+      "comment" : "On the card of a pack that is on the device and up to date",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geladen"
+          }
+        }
+      }
+    },
+    "parents.packs.action.play" : {
+      "comment" : "On the card of a pack loaded just now: makes it the playing child's collection and goes home",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fertig – jetzt spielen"
+          }
+        }
+      }
+    },
+    "parents.packs.action.resume" : {
+      "comment" : "The button on a pack whose download stopped; it resumes",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Weiterladen"
+          }
+        }
+      }
+    },
+    "parents.packs.action.update" : {
+      "comment" : "On the card of an installed pack the bucket holds a newer version of",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktualisieren"
+          }
+        }
+      }
+    },
     "parents.packs.alwaysThere" : {
       "comment" : "Second half of the base pack's row: it ships with the app and cannot be deleted",
       "extractionState" : "manual",
@@ -621,6 +741,66 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Alle Pakete sind schon auf dem Gerät."
+          }
+        }
+      }
+    },
+    "parents.packs.costly.cancel" : {
+      "comment" : "The way out of the costly-connection question",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Später im WLAN"
+          }
+        }
+      }
+    },
+    "parents.packs.costly.confirm" : {
+      "comment" : "Downloads over the costly connection anyway",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trotzdem laden"
+          }
+        }
+      }
+    },
+    "parents.packs.costly.message" : {
+      "comment" : "Message of that question. %1$@ is the pack's title, %2$@ its size like \"17 MB\"",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "„%1$@“ ist %2$@ groß. Das Gerät ist gerade nicht im WLAN oder spart Daten."
+          }
+        }
+      }
+    },
+    "parents.packs.costly.title" : {
+      "comment" : "Asked before a download over a cellular, hotspot or Low Data Mode connection",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Über mobile Daten laden?"
+          }
+        }
+      }
+    },
+    "parents.packs.credits" : {
+      "comment" : "Heading of the photo credits on a pack's detail page, for the previews shown before the download",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fotos"
           }
         }
       }
@@ -674,7 +854,7 @@
       }
     },
     "parents.packs.detail" : {
-      "comment" : "The second line of a pack's row: how many species, and then its size, its progress or why it is not there. %1$@ is the species count, %2$@ the rest",
+      "comment" : "The second line of a pack's card: how many birds, then its size. %1$@ is the bird count, %2$@ the size or \"immer dabei\"",
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
@@ -686,13 +866,13 @@
       }
     },
     "parents.packs.download.failed" : {
-      "comment" : "Under a pack whose download did not finish. A second tap resumes it",
+      "comment" : "Under a pack whose download did not finish. The button above resumes it",
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "nicht fertig geladen, noch einmal tippen"
+            "value" : "Nicht fertig geladen. „Weiterladen“ macht dort weiter, wo es aufgehört hat."
           }
         }
       }
@@ -733,6 +913,78 @@
         }
       }
     },
+    "parents.packs.migration.hint" : {
+      "comment" : "Under that heading: what happens, and that the stickers stay",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die Vögel ziehen in neue Pakete um. Sind die geladen, geht das alte Paket. Gesammelte Sticker bleiben."
+          }
+        }
+      }
+    },
+    "parents.packs.migration.load" : {
+      "comment" : "Loads every new pack the dissolved one's birds moved into",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neue Pakete laden"
+          }
+        }
+      }
+    },
+    "parents.packs.migration.title" : {
+      "comment" : "Heading of the card for a pack that was dissolved into new packs. %@ is its title",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "„%@“ wird aufgeteilt"
+          }
+        }
+      }
+    },
+    "parents.packs.open.accessibility" : {
+      "comment" : "VoiceOver hint on a pack's card: a tap shows every bird of the pack",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zeigt alle Vögel des Pakets"
+          }
+        }
+      }
+    },
+    "parents.packs.outOfSpace" : {
+      "comment" : "Under a pack whose download stopped because the device is full",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auf dem Gerät ist nicht genug Platz. Mach etwas frei, dann „Weiterladen“."
+          }
+        }
+      }
+    },
+    "parents.packs.progress.accessibility" : {
+      "comment" : "VoiceOver label of the ring that shows a download's progress",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wird geladen"
+          }
+        }
+      }
+    },
     "parents.packs.retry" : {
       "comment" : "Button under the failed pack list",
       "extractionState" : "manual",
@@ -746,7 +998,7 @@
       }
     },
     "parents.packs.species" : {
-      "comment" : "How many species a pack holds, in its row. %lld is the number",
+      "comment" : "How many birds a pack holds, on its card in the gallery. %lld is the number",
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
@@ -755,13 +1007,13 @@
               "one" : {
                 "stringUnit" : {
                   "state" : "translated",
-                  "value" : "%lld Art"
+                  "value" : "%lld Vogel"
                 }
               },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
-                  "value" : "%lld Arten"
+                  "value" : "%lld Vögel"
                 }
               }
             }

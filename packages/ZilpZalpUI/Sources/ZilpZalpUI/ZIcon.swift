@@ -54,4 +54,6 @@ public enum ZIcon: String, CaseIterable, Sendable {
     case type
     case userRoundCog = "user-round-cog"
     case volume2 = "volume-2"
+    /// Lucide's `x`, spelled out: a one-letter case is no name to read.
+    case close = "x"
 }
