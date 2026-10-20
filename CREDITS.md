@@ -498,6 +498,13 @@ the source declared.
 | Rosalöffler | Photo | kirk gardner | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/226336174> |
 | Rosalöffler | Photo | carbenoid | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/145164091> |
 
+## Voices
+
+| Voice | Licence | Spoken for | Source |
+| --- | --- | --- | --- |
+| Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Vögel Deutschlands | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
+| Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Ansagen | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
+
 ## Fonts
 
 | Font | Authors | Licence | Licence text |

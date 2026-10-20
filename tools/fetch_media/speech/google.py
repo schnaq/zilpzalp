@@ -1,4 +1,4 @@
-"""Google Cloud Text-to-Speech, the renderer issue #234 settled on.
+"""Google Cloud Text-to-Speech, the renderer #234 picked — no longer used.
 
 Why this one, in one paragraph: Chirp 3 HD speaks native German at the current
 top tier, the whole app is a few thousand characters a month against a free
@@ -6,9 +6,9 @@ tier of a million, and the grant is the plainest of the three that were read at
 the source — *"You can use the audio data files you create using Cloud
 Text-to-Speech to power your applications"*
 (<https://docs.cloud.google.com/text-to-speech/docs/basics>), with no
-attribution and no disclosure owed. ElevenLabs stays in the tree as
-`elevenlabs.py` and is not used: that account is on the free tier, which is
-non-commercial.
+attribution and no disclosure owed. Since 2026-10-20 the renderer is
+`elevenlabs.py` instead (#221): the account is on a paid tier now, and its
+German and its voice won the listening. This adapter stays, unused.
 
 **One honest difference to `elevenlabs.py`.** ElevenLabs hands us the output in
 writing (§4(c)(ii)), so `CC-BY-4.0` there is a claim about something we own.

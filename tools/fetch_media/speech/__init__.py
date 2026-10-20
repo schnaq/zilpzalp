@@ -6,10 +6,10 @@ AAC clip beside the manifest, normalised to the loudness every other sound in
 the game sits at, and one entry in the manifest that names it.
 
 The core knows no vendor. `provider.py` is the whole interface, `fake.py` the
-adapter the tests use, and `google.py` the one that speaks — issue #234, which
-picked Google Cloud Text-to-Speech over the ElevenLabs adapter of decision 2.
-`elevenlabs.py` stays as the alternative it produced and is not used: that
-account is on the free tier, which is non-commercial.
+adapter the tests use, and `elevenlabs.py` the one that speaks — since
+2026-10-20 (#221), when the schnaq account went on the paid Starter tier and
+`eleven_v3` turned out to say a bare German bird name in German. `google.py`
+(#234) stays as the alternative it replaced and is not used.
 """
 
 from __future__ import annotations
