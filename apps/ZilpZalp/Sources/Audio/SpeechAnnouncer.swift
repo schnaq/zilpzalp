@@ -232,6 +232,10 @@ final class SpeechAnnouncer: NSObject {
         // decision cannot make, because the file is opened here: it falls
         // through to the synthesiser, silently and per sentence.
         if case let .clip(clip) = decision, play(clip) {
+            // The counterpart of `spokenClip = nil` in `speak(_:)`: a finish
+            // still on its way for the utterance this replaced must not pass
+            // for this line's and start the next one under it.
+            spokenUtterance = nil
             let key = line.key ?? ""
             let file = clip.lastPathComponent
             Logger.audio.debug("Said \(key, privacy: .public) from \(file, privacy: .public)")
@@ -321,7 +325,8 @@ final class SpeechAnnouncer: NSObject {
     }
 
     /// Starts the next queued line after ``pauseBetweenLines``, if there is
-    /// one. Both voices end here, and only when the line ran its course.
+    /// one. Both voices end here, and only when the line ended on its own — a
+    /// clip that broke off undecodable counts, since nobody took the speaker.
     private func lineFinished() {
         guard !queuedLines.isEmpty else { return }
         let rest = queuedLines
