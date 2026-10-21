@@ -1,0 +1,554 @@
+{
+  "id": "suedamerika",
+  "title": "Südamerika & Regenwald",
+  "voice": {
+    "license": "CC-BY-4.0",
+    "attribution": "Stimme: Ava (ElevenLabs)",
+    "sourceURL": "https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md",
+    "retrieved": "2026-10-21"
+  },
+  "birds": [
+    {
+      "id": "riesentukan",
+      "name": "Riesentukan",
+      "scientificName": "Ramphastos toco",
+      "taxonID": 18793,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/riesentukan.heic",
+          "sha256": "e8c742c5bf9d92bc34da881b62a0b0b7dfc34cb5ee010c80a12f107e3e175c12",
+          "license": "CC-BY-4.0",
+          "attribution": "Gabriel Martínez",
+          "sourceURL": "https://www.inaturalist.org/observations/198099971",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/riesentukan-2.heic",
+          "sha256": "6afeba1aa1f5bd8612d9853be1f5c5d2e36d35ddae916cf80c8d9fc77bce1ae7",
+          "license": "CC-BY-4.0",
+          "attribution": "Diogo Luiz",
+          "sourceURL": "https://www.inaturalist.org/observations/59738495",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/riesentukan-3.heic",
+          "sha256": "f99dea97f28261071e81b99c55a8f242450eb8609f0cb2b157d507f9ac2aca0e",
+          "license": "CC0-1.0",
+          "attribution": "Paulo Mascaretti",
+          "sourceURL": "https://www.inaturalist.org/observations/143502779",
+          "retrieved": "2026-09-10"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/riesentukan.m4a",
+          "sha256": "9435a4ab7a78e9fab76bae58ccf53ac153a0e6fad2c8b4135c33b2525d46ba22",
+          "text": "Riesentukan"
+        }
+      }
+    },
+    {
+      "id": "humboldtpinguin",
+      "name": "Humboldtpinguin",
+      "scientificName": "Spheniscus humboldti",
+      "taxonID": 3814,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/humboldtpinguin.heic",
+          "sha256": "04b0e6346552c78c34b957b8823c147840a801ecdb2b6c05105dab7c1aac8896",
+          "license": "CC-BY-4.0",
+          "attribution": "DiegoH",
+          "sourceURL": "https://www.inaturalist.org/observations/141121355",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/humboldtpinguin.m4a",
+          "sha256": "133bc49d51feec60bc52a5a67ac130897b08de9eb38bf49ef0952ad35cbcd1df",
+          "text": "Humboldtpinguin"
+        }
+      }
+    },
+    {
+      "id": "tiefland-felsenhahn",
+      "name": "Tiefland-Felsenhahn",
+      "scientificName": "Rupicola rupicola",
+      "taxonID": 8882,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/tiefland-felsenhahn.heic",
+          "sha256": "c067e0c8de177d1e0ea85cfd1ff8e231d34faf8c79a9af62a14618d79c1cf252",
+          "license": "CC-BY-4.0",
+          "attribution": "Julien Renoult",
+          "sourceURL": "https://www.inaturalist.org/observations/4531616",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/tiefland-felsenhahn.m4a",
+          "sha256": "6479ee69b1b35b38e8dcf31691d8511660fc1b3ee88bd755204611532ff10ee5",
+          "text": "Tiefland-Felsenhahn"
+        }
+      }
+    },
+    {
+      "id": "siebenfarbentangare",
+      "name": "Siebenfarbentangare",
+      "scientificName": "Tangara chilensis",
+      "taxonID": 9593,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/siebenfarbentangare.heic",
+          "sha256": "7d13172e6dfedaddb496500bf849c59519ce32d8997f0cf3fae8bbec8e0ba6f9",
+          "license": "CC-BY-4.0",
+          "attribution": "Joao Quental",
+          "sourceURL": "https://www.inaturalist.org/observations/392514179",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": {
+        "file": "audio/siebenfarbentangare.m4a",
+        "sha256": "cbc6b19e61a27be6af57749a8452f7b9b90f01bda531b2cabf6d1a90d21eb488",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Niels Krabbe (XC251588)",
+        "sourceURL": "https://xeno-canto.org/251588",
+        "retrieved": "2026-10-21"
+      },
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/siebenfarbentangare.m4a",
+          "sha256": "fe8a94d808c7dd7c55510d2e70a0a6fc47a8b48d25fa8aeb3629379aa39a649e",
+          "text": "Siebenfarbentangare"
+        }
+      }
+    },
+    {
+      "id": "chileflamingo",
+      "name": "Chileflamingo",
+      "scientificName": "Phoenicopterus chilensis",
+      "taxonID": 4258,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/chileflamingo.heic",
+          "sha256": "b8066358b24c43d9f50a79469abefb5e25e084a254b23b8077a5578453959551",
+          "license": "CC-BY-4.0",
+          "attribution": "datadan",
+          "sourceURL": "https://www.inaturalist.org/observations/68240408",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/chileflamingo-2.heic",
+          "sha256": "61a3b90a1db3b19dabb3c2ce646a939854e7e8107123cfdad01b47f84e76c9ee",
+          "license": "CC-BY-4.0",
+          "attribution": "datadan",
+          "sourceURL": "https://www.inaturalist.org/observations/68240408",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/chileflamingo-3.heic",
+          "sha256": "fab3129131be224f0f4305568b99d25c0e4bbeeaff2e9db11a1cac7fbb5e2ad0",
+          "license": "CC-BY-4.0",
+          "attribution": "datadan",
+          "sourceURL": "https://www.inaturalist.org/observations/68240408",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/chileflamingo.m4a",
+          "sha256": "71248675c9e6b12d233804beca289eb3be89d6dbaf7d077235cfa7689070b092",
+          "text": "Chileflamingo"
+        }
+      }
+    },
+    {
+      "id": "fischertukan",
+      "name": "Fischertukan",
+      "scientificName": "Ramphastos sulfuratus",
+      "taxonID": 18796,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/fischertukan.heic",
+          "sha256": "c7b700245bd308408ea7f555ccc5935db4998a65f5abefc0059842f521e641ef",
+          "license": "CC-BY-4.0",
+          "attribution": "Anthony Batista",
+          "sourceURL": "https://www.inaturalist.org/observations/223465730",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/fischertukan.m4a",
+          "sha256": "3a6d0330913806dbe3f90542773d47c3e7410ad5ddb556442c8218d2be26a9e6",
+          "text": "Fischertukan"
+        }
+      }
+    },
+    {
+      "id": "koenigsgeier",
+      "name": "Königsgeier",
+      "scientificName": "Sarcoramphus papa",
+      "taxonID": 4763,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/koenigsgeier.heic",
+          "sha256": "492ec35386eedd12e2104084231d9d1c476c71e24d85b38fee36bfcce1971973",
+          "license": "CC0-1.0",
+          "attribution": "Paulo Mascaretti",
+          "sourceURL": "https://www.inaturalist.org/observations/168479025",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/koenigsgeier-2.heic",
+          "sha256": "9c8bbe28e1d29ba8293188877b1858351bf754a589ea1b4bcb7f5562e5232d62",
+          "license": "CC0-1.0",
+          "attribution": "Jean-Paul Boerekamps",
+          "sourceURL": "https://www.inaturalist.org/observations/74490210",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/koenigsgeier.m4a",
+          "sha256": "f667caafa9b0f5d7a46cd9d40607dbf28a68fef1d25a018632269933af6202c4",
+          "text": "Königsgeier"
+        }
+      }
+    },
+    {
+      "id": "rotstirn-blatthuehnchen",
+      "name": "Rotstirn-Blatthühnchen",
+      "scientificName": "Jacana jacana",
+      "taxonID": 4580,
+      "article": "das",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/rotstirn-blatthuehnchen.heic",
+          "sha256": "c587473d563acba1a3cfdcad76a2c382df14d69e42b852918a688a24d428ece2",
+          "license": "CC-BY-4.0",
+          "attribution": "Donald Davesne",
+          "sourceURL": "https://www.inaturalist.org/observations/351096968",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/rotstirn-blatthuehnchen-2.heic",
+          "sha256": "56fa19a5fc8d7613a76cc240673c495a63da7f2f7054c2fc094388ad103c75f5",
+          "license": "CC-BY-SA-4.0",
+          "attribution": "Thibaud Aronson",
+          "sourceURL": "https://www.inaturalist.org/observations/67707624",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/rotstirn-blatthuehnchen-3.heic",
+          "sha256": "df3799eb5cc349aadbdb44969aa28873604440f689739278f54ca709634ddb6f",
+          "license": "CC-BY-4.0",
+          "attribution": "Gonzalo Romero",
+          "sourceURL": "https://www.inaturalist.org/observations/336853948",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/rotstirn-blatthuehnchen.m4a",
+          "sha256": "38c8cdd247a2019c713d61b945527398288989a3940c4e3e6abc0e84a9da7d5d",
+          "text": "Rotstirn-Blatthühnchen"
+        }
+      }
+    },
+    {
+      "id": "halsband-wehrvogel",
+      "name": "Halsband-Wehrvogel",
+      "scientificName": "Chauna torquata",
+      "taxonID": 6910,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/halsband-wehrvogel.heic",
+          "sha256": "5d3513dadaa5f35cc3075f943fb1fbff4dee8301861e6405998e41064e1ebbef",
+          "license": "CC-BY-4.0",
+          "attribution": "Luciano Massa",
+          "sourceURL": "https://www.inaturalist.org/observations/235447508",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/halsband-wehrvogel-2.heic",
+          "sha256": "647c0d127f8e745194353acc5be59d65c2a115b8bc164866de4029c5030979f2",
+          "license": "CC0-1.0",
+          "attribution": "Dario Taraborelli",
+          "sourceURL": "https://www.inaturalist.org/observations/155794546",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/halsband-wehrvogel.m4a",
+          "sha256": "8489dd0ea7a6c918dd003b00c1f3f4622b3e8230ef73497ae4d7654a88471d18",
+          "text": "Halsband-Wehrvogel"
+        }
+      }
+    },
+    {
+      "id": "inkaseeschwalbe",
+      "name": "Inkaseeschwalbe",
+      "scientificName": "Larosterna inca",
+      "taxonID": 4551,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/inkaseeschwalbe.heic",
+          "sha256": "ad83a1e8b89c56f983c9caf0cc3d273a1d7ec813e44a56c234652b91faa12791",
+          "license": "CC-BY-4.0",
+          "attribution": "Zac Peterson",
+          "sourceURL": "https://www.inaturalist.org/observations/68709153",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/inkaseeschwalbe.m4a",
+          "sha256": "8701791c261970058a0ff89bda6e02f377c928ecba1108349c3335d7436cb28f",
+          "text": "Inkaseeschwalbe"
+        }
+      }
+    },
+    {
+      "id": "amazonasfischer",
+      "name": "Amazonasfischer",
+      "scientificName": "Chloroceryle amazona",
+      "taxonID": 2679,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/amazonasfischer.heic",
+          "sha256": "c372cf908bcb17a29072da01a81e48036b552f490c1625effb43020f2a4d813e",
+          "license": "CC0-1.0",
+          "attribution": "ferferrari",
+          "sourceURL": "https://www.inaturalist.org/observations/133831715",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/amazonasfischer.m4a",
+          "sha256": "d2f6c4f01d657d44495b293a383491b85b9ee422aa5b263c1d78a9f37f9ed7b5",
+          "text": "Amazonasfischer"
+        }
+      }
+    },
+    {
+      "id": "nandu",
+      "name": "Nandu",
+      "scientificName": "Rhea americana",
+      "taxonID": 20512,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/nandu.heic",
+          "sha256": "62d200b2ed43e9c783ebea86ba2a7783f0791dfc281577f545e3a711a8cdc2cd",
+          "license": "CC0-1.0",
+          "attribution": "Fernando Sessegolo",
+          "sourceURL": "https://www.inaturalist.org/observations/42772166",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/nandu-2.heic",
+          "sha256": "cda9b3c3b61f1fc39e0bbff02c1ac7b7891577c545d5a93c2f207eb981370c31",
+          "license": "CC-BY-4.0",
+          "attribution": "Christoph Moning",
+          "sourceURL": "https://www.inaturalist.org/observations/57113925",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/nandu.m4a",
+          "sha256": "539be949ccf5bbc83ed4ec736427943ec525fa0b82ff8360eb1994381d5bd299",
+          "text": "Nandu"
+        }
+      }
+    },
+    {
+      "id": "hellroter-ara",
+      "name": "Hellroter Ara",
+      "scientificName": "Ara macao",
+      "taxonID": 19022,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/hellroter-ara-3.heic",
+          "sha256": "83b86a0e8f52937ed8d3fd6db406b0578771ce9d4aca81589b6f2588c4d2617e",
+          "license": "CC-BY-4.0",
+          "attribution": "Luis G Restrepo",
+          "sourceURL": "https://www.inaturalist.org/observations/254918218",
+          "retrieved": "2026-09-10"
+        }
+      ],
+      "call": {
+        "file": "audio/hellroter-ara.m4a",
+        "sha256": "bb99055f129b4649261e6fa303b14bfb385c631d1b5bf7eb467fedfdba34d9a1",
+        "license": "CC-BY-4.0",
+        "attribution": "Richard Borrmann (XC1005554)",
+        "sourceURL": "https://xeno-canto.org/1005554",
+        "retrieved": "2026-09-10"
+      },
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/hellroter-ara.m4a",
+          "sha256": "690a97610663b7201a5bc1e1bfeed6cfac3669e2e6a4a2b44134321efd6dfab5",
+          "text": "Hellroter Ara"
+        }
+      }
+    },
+    {
+      "id": "roter-sichler",
+      "name": "Roter Sichler",
+      "scientificName": "Eudocimus ruber",
+      "taxonID": 3750,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/roter-sichler.heic",
+          "sha256": "b009289298c072e76326df5acbd8e8be3be901024f80fa43c16ae78512ff7a5f",
+          "license": "CC-BY-4.0",
+          "attribution": "Odebrecht, Clarisse",
+          "sourceURL": "https://www.inaturalist.org/observations/330283195",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/roter-sichler-2.heic",
+          "sha256": "5f2d6bef76699c312e9f3e0981ef4f58eb7ac94280ace58517ec40c8ad5b2bd3",
+          "license": "CC-BY-SA-4.0",
+          "attribution": "Miguel",
+          "sourceURL": "https://www.inaturalist.org/observations/230201814",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/roter-sichler.m4a",
+          "sha256": "fe5fa18c3b6da99be684e0e1fd5f34e5efd9cbf8f526ca0ce28d084c708d91ea",
+          "text": "Roter Sichler"
+        }
+      }
+    },
+    {
+      "id": "rosaloeffler",
+      "name": "Rosalöffler",
+      "scientificName": "Platalea ajaja",
+      "taxonID": 62529,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/rosaloeffler.heic",
+          "sha256": "37593c7cc5b70bd1f2f8a1c7804660fdac23082502813459d08facdeb7bc0560",
+          "license": "CC-BY-4.0",
+          "attribution": "Nigel Voaden",
+          "sourceURL": "https://www.inaturalist.org/observations/1707823",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/rosaloeffler-2.heic",
+          "sha256": "4908f87dce599be4be47978de96820953280253f2d3996961acdfeffb1069d3e",
+          "license": "CC-BY-4.0",
+          "attribution": "tcantrell52",
+          "sourceURL": "https://www.inaturalist.org/observations/204095333",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/rosaloeffler-3.heic",
+          "sha256": "a46d476a6ad6fd0afc66db9234e47d738b3dc9ac31a3e3819d40c4f05dfe239c",
+          "license": "CC0-1.0",
+          "attribution": "Leonel Richard",
+          "sourceURL": "https://www.inaturalist.org/observations/15309891",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/rosaloeffler.m4a",
+          "sha256": "e6f75c0cad7e9e7672cc24d92c6429bc62b7226b115c549db11b32042c7bb180",
+          "text": "Rosalöffler"
+        }
+      }
+    },
+    {
+      "id": "quetzal",
+      "name": "Quetzal",
+      "scientificName": "Pharomachrus mocinno",
+      "taxonID": 20856,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/quetzal.heic",
+          "sha256": "98eb080014cc66f441444cc2316ac28417518c45804d7c648a8e64168c90754f",
+          "license": "CC-BY-4.0",
+          "attribution": "er-birds",
+          "sourceURL": "https://www.inaturalist.org/observations/156023432",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/quetzal-2.heic",
+          "sha256": "fdeb96ccb1e9679a1d324a561e8270638476bcaaf6819fe308cbd837a7d0d56a",
+          "license": "CC-BY-4.0",
+          "attribution": "Morten Ross",
+          "sourceURL": "https://www.inaturalist.org/observations/68706945",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/quetzal-3.heic",
+          "sha256": "8b5f60a36943c9939c15a04577c8beefc4bb4422b1ffc81d48bb650f7f7e231c",
+          "license": "CC0-1.0",
+          "attribution": "James Adney Zehr",
+          "sourceURL": "https://www.inaturalist.org/observations/340657292",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/quetzal.m4a",
+          "sha256": "51e618af4ed2cd70dfdf4f4c5d69fad598b48d3d3b9c1ff395d13840e7821df4",
+          "text": "Quetzal"
+        }
+      }
+    }
+  ]
+}
