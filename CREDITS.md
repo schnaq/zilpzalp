@@ -618,6 +618,58 @@ the source declared.
 | Zimtente | Photo | Dan Vickers | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/259260199> |
 | Zimtente | Photo | Alberto Sánchez | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/158762689> |
 
+### Polar & Meer (`polar-meer`)
+
+| Bird | Kind | Author | Licence | Source |
+| --- | --- | --- | --- | --- |
+| Kaiserpinguin | Photo | Seig | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/31447153> |
+| Kaiserpinguin | Photo | Seig | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/31447155> |
+| Kaiserpinguin | Photo | mattward | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/146195342> |
+| Kaiserpinguin | Call | steve (XC877994) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/877994> |
+| Adeliepinguin | Photo | steve b | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/199466069> |
+| Adeliepinguin | Photo | Peter Shanks | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/244872535> |
+| Eselspinguin | Photo | Ingvild Riska | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/253310597> |
+| Eselspinguin | Call | steve (XC953123) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/953123> |
+| Zügelpinguin | Photo | Sterling Sheehy | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/194786> |
+| Zügelpinguin | Call | steve (XC953122) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/953122> |
+| Gelbaugenpinguin | Photo | William Harland | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/229180441> |
+| Gelbaugenpinguin | Photo | Colin Meurk | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/941206> |
+| Papageitaucher | Photo | Diego González Dopico | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/277865524> |
+| Papageitaucher | Photo | Julia Moning | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/114739787> |
+| Papageitaucher | Photo | Christoph Moning | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/115403062> |
+| Krabbentaucher | Photo | Owen Strickland | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/144263017> |
+| Krabbentaucher | Photo | Christoph Moning | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/63685914> |
+| Trottellumme | Photo | franciscodocampo | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/35832417> |
+| Trottellumme | Call | Sonothèque ADVL (XC1041354) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1041354> |
+| Wanderalbatros | Photo | eloise kerroux | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/281029033> |
+| Wanderalbatros | Photo | Peter Shanks | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/250080678> |
+| Wanderalbatros | Photo | Saryu Mae 前 朝琉 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/265575462> |
+| Schwarzbrauenalbatros | Photo | patrickc | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/10025783> |
+| Schwarzbrauenalbatros | Call | Kevin Guille (XC864005) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/864005> |
+| Dreizehenmöwe | Photo | Quinten Wiegersma | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/99626453> |
+| Dreizehenmöwe | Call | Sonothèque ADVL (XC1143440) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1143440> |
+| Küstenseeschwalbe | Photo | Dr. Sven Gippner | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/380760787> |
+| Küstenseeschwalbe | Call | Doug Hynes (XC564600) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/564600> |
+| Prachteiderente | Photo | Court Harding | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/342574245> |
+| Eiderente | Photo | Nigel Voaden | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/1186757> |
+| Eiderente | Call | Doug Hynes (XC1033167) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/1033167> |
+| Kragenente | Photo | Chrissy McClarren and Andy Reago | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/86911376> |
+| Schnee-Eule | Photo | Dustin Snider | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/195441759> |
+| Schnee-Eule | Photo | Matt Felperin | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/104681391> |
+| Schneeammer | Photo | Михаил Малышев | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/201274186> |
+| Schneeammer | Call | Sonothèque ADVL (XC950366) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/950366> |
+| Alpenschneehuhn | Photo | Cheryl McCleary-Catalano | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/6420202> |
+| Eistaucher | Photo | Christian Back | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/102565488> |
+| Eistaucher | Photo | Betsy Lambert | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/96321392> |
+| Eistaucher | Call | Doug Hynes (XC992792) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/992792> |
+| Blaufußtölpel | Photo | Anthony Batista | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/167987942> |
+| Blaufußtölpel | Photo | steve b | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/263834304> |
+| Blaufußtölpel | Photo | Sinaloa Silvestre | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/162095270> |
+| Prachtfregattvogel | Photo | Thibaud Aronson | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/112046587> |
+| Prachtfregattvogel | Photo | steve b | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/258500351> |
+| Prachtfregattvogel | Photo | steve b | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/262657239> |
+| Rotschnabel-Tropikvogel | Photo | William Stephens | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/199677737> |
+
 ### Südamerika & Regenwald (`suedamerika`)
 
 | Bird | Kind | Author | Licence | Source |
@@ -809,6 +861,7 @@ the source declared.
 | Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Feld, Wiese & Zugvögel | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
 | Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Greifvögel & Eulen | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
 | Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Nordamerika | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
+| Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Polar & Meer | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
 | Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Südamerika & Regenwald | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
 | Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Wasser & Küste | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
 | Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Ansagen | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
