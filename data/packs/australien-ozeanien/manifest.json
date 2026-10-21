@@ -1,0 +1,516 @@
+{
+  "id": "australien-ozeanien",
+  "title": "Australien & Ozeanien",
+  "voice": {
+    "license": "CC-BY-4.0",
+    "attribution": "Stimme: Ava (ElevenLabs)",
+    "sourceURL": "https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md",
+    "retrieved": "2026-10-21"
+  },
+  "birds": [
+    {
+      "id": "rosakakadu",
+      "name": "Rosakakadu",
+      "scientificName": "Eolophus roseicapilla",
+      "taxonID": 144560,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/rosakakadu.heic",
+          "sha256": "8d9c19991d0d4a43e534dba4d734f0587bdfce89b95fcc9bfbd1f6aa72b93eff",
+          "license": "CC-BY-4.0",
+          "attribution": "Thomas Mesaglio",
+          "sourceURL": "https://www.inaturalist.org/observations/59109759",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/rosakakadu.m4a",
+          "sha256": "6df92f9975e7efbe4acfac8fcf5bb180368a53414a3f59c612d16ca3aee3c02d",
+          "text": "Rosakakadu"
+        }
+      }
+    },
+    {
+      "id": "inkakakadu",
+      "name": "Inkakakadu",
+      "scientificName": "Cacatua leadbeateri",
+      "taxonID": 116835,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/inkakakadu.heic",
+          "sha256": "1913c3c7731293674ce89a83ca6b5c90438e1ceb1dd8575a4f9184a4c1121421",
+          "license": "CC-BY-SA-4.0",
+          "attribution": "Third Silence",
+          "sourceURL": "https://www.inaturalist.org/observations/332114246",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/inkakakadu.m4a",
+          "sha256": "0f3a092b9bc1a859217e4fa31e8f72a87b99619b0daf65f010a4bbdc80c26029",
+          "text": "Inkakakadu"
+        }
+      }
+    },
+    {
+      "id": "wellensittich",
+      "name": "Wellensittich",
+      "scientificName": "Melopsittacus undulatus",
+      "taxonID": 19339,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/wellensittich.heic",
+          "sha256": "f5e5ff582ffed13db2790f7345caf8eb001c7df265727e87ccbd8215d328c8cd",
+          "license": "CC-BY-4.0",
+          "attribution": "cappycollins",
+          "sourceURL": "https://www.inaturalist.org/observations/307179303",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/wellensittich-3.heic",
+          "sha256": "0ce1a31033978890a4bb0dc3e6a685b268fb8fc810d4068c7c10e14327ac5ee9",
+          "license": "CC-BY-SA-4.0",
+          "attribution": "Lachlan Copeland",
+          "sourceURL": "https://www.inaturalist.org/observations/268144312",
+          "retrieved": "2026-09-10"
+        }
+      ],
+      "call": {
+        "file": "audio/wellensittich.m4a",
+        "sha256": "fed352553671a613069daeab937efefa725a9422bc98533a8bb02f19497d4cd4",
+        "license": "CC0-1.0",
+        "attribution": "Sonothèque ADVL (XC707108)",
+        "sourceURL": "https://xeno-canto.org/707108",
+        "retrieved": "2026-09-10"
+      },
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/wellensittich.m4a",
+          "sha256": "c99e93391327274bcfa93dc2c5d015137ddcc17e29b4c4ad87f24cac83a923e6",
+          "text": "Wellensittich"
+        }
+      }
+    },
+    {
+      "id": "emu",
+      "name": "Emu",
+      "scientificName": "Dromaius novaehollandiae",
+      "taxonID": 20504,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/emu.heic",
+          "sha256": "9550f83781f18fc846cc6ca9d1bc391b5f9ea4cbd7d02f2366d757b3b00afc1c",
+          "license": "CC-BY-4.0",
+          "attribution": "Donald Davesne",
+          "sourceURL": "https://www.inaturalist.org/observations/327879005",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/emu-2.heic",
+          "sha256": "235a14e6da8bb4c161bbd3f6f2842fa06a74bbe81d90413577fa23bd91fb454f",
+          "license": "CC-BY-4.0",
+          "attribution": "patrickc",
+          "sourceURL": "https://www.inaturalist.org/observations/147212260",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/emu.m4a",
+          "sha256": "8f4c17117d7efda5f23c35613b679469fa329f398665eef1c54884a957b9e7d7",
+          "text": "Emu"
+        }
+      }
+    },
+    {
+      "id": "helmkasuar",
+      "name": "Helmkasuar",
+      "scientificName": "Casuarius casuarius",
+      "taxonID": 20500,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/helmkasuar-3.heic",
+          "sha256": "cc24eea3b72093729cd32a5a86f41bb8a8f0c8ec0b548f031cd84a9c66423934",
+          "license": "CC-BY-4.0",
+          "attribution": "Tim",
+          "sourceURL": "https://www.inaturalist.org/observations/98776913",
+          "retrieved": "2026-09-10"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/helmkasuar.m4a",
+          "sha256": "0c1bcce4013e80cada3d1a39d7a99a9027d110323c41340cf8ef921916aed7e9",
+          "text": "Helmkasuar"
+        }
+      }
+    },
+    {
+      "id": "lachender-hans",
+      "name": "Lachender Hans",
+      "scientificName": "Dacelo novaeguineae",
+      "taxonID": 2413,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/lachender-hans.heic",
+          "sha256": "059f7f710fecf20074989f85e05001d8e3dfa9b33205e4337812f96aa876c7ba",
+          "license": "CC-BY-4.0",
+          "attribution": "Sockrosma",
+          "sourceURL": "https://www.inaturalist.org/observations/200607101",
+          "retrieved": "2026-09-10"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/lachender-hans.m4a",
+          "sha256": "64cee5a152331177a8b03377058302c7f8f5391e18837f1d68094bedf3e4219b",
+          "text": "Lachender Hans"
+        }
+      }
+    },
+    {
+      "id": "regenbogenspint",
+      "name": "Regenbogenspint",
+      "scientificName": "Merops ornatus",
+      "taxonID": 2238,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/regenbogenspint.heic",
+          "sha256": "f84bd480fc5742a3d5f029a51327aef227f29cb5ac0d7b4578897ac0f68df377",
+          "license": "CC-BY-4.0",
+          "attribution": "Donald Hobern",
+          "sourceURL": "https://www.inaturalist.org/observations/243289600",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/regenbogenspint-2.heic",
+          "sha256": "25564cba559399bd7dd0c7ea40befe425a7e2eafad527e49f9ee0b16de99b6f3",
+          "license": "CC-BY-4.0",
+          "attribution": "Thomas Mesaglio",
+          "sourceURL": "https://www.inaturalist.org/observations/36576937",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/regenbogenspint.m4a",
+          "sha256": "c570625af768dba83e2f7a7abe0b363e63a14bb1886a01e2fa523139453eb056",
+          "text": "Regenbogenspint"
+        }
+      }
+    },
+    {
+      "id": "prachtstaffelschwanz",
+      "name": "Prachtstaffelschwanz",
+      "scientificName": "Malurus cyaneus",
+      "taxonID": 12065,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/prachtstaffelschwanz.heic",
+          "sha256": "95e7337bd024d670b3d1aaf8a0134a9d132e499edfdc1cece5cea9768b463107",
+          "license": "CC-BY-4.0",
+          "attribution": "Andrew Allen",
+          "sourceURL": "https://www.inaturalist.org/observations/130593635",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/prachtstaffelschwanz.m4a",
+          "sha256": "79c326b8a9f329b8b51dd932ba711458cdda208bd394e0e7c47b2e49f66dde8b",
+          "text": "Prachtstaffelschwanz"
+        }
+      }
+    },
+    {
+      "id": "neuseeland-faecherschwanz",
+      "name": "Neuseeland-Fächerschwanz",
+      "scientificName": "Rhipidura fuliginosa",
+      "taxonID": 244276,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/neuseeland-faecherschwanz.heic",
+          "sha256": "a955b13d020a99461ccaaff1bde6771acd3e8de5b95660dcb8682ae36a992b7b",
+          "license": "CC-BY-4.0",
+          "attribution": "Halema J",
+          "sourceURL": "https://www.inaturalist.org/observations/274426514",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/neuseeland-faecherschwanz.m4a",
+          "sha256": "65f45921671af1523fc1e1d152e2d0862ca57cce2ede87a32b94a850c402f79d",
+          "text": "Neuseeland-Fächerschwanz"
+        }
+      }
+    },
+    {
+      "id": "pukeko",
+      "name": "Pukeko",
+      "scientificName": "Porphyrio melanotus",
+      "taxonID": 418530,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/pukeko.heic",
+          "sha256": "7f4c08d20d3a837a453e3af7d9d683ce79407eaf9425bdc1d3284047ced4f710",
+          "license": "CC-BY-4.0",
+          "attribution": "Oscar Dove",
+          "sourceURL": "https://www.inaturalist.org/observations/133070938",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/pukeko.m4a",
+          "sha256": "188e86565bacb97678166440db853481e95b196cbef9ddb016fa9da76824763a",
+          "text": "Pukeko"
+        }
+      }
+    },
+    {
+      "id": "wekaralle",
+      "name": "Wekaralle",
+      "scientificName": "Gallirallus australis",
+      "taxonID": 436,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/wekaralle.heic",
+          "sha256": "c3e82111a1342705f6be9e560f11de1a579deff161eb77c80079f3c9dc472ab8",
+          "license": "CC-BY-4.0",
+          "attribution": "Austen Armstrong",
+          "sourceURL": "https://www.inaturalist.org/observations/257998764",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/wekaralle.m4a",
+          "sha256": "bfcefedf65d5f0fa7d395758d71d4aebe5d7d639b96f381634d1d2fa5cf9ab66",
+          "text": "Wekaralle"
+        }
+      }
+    },
+    {
+      "id": "maori-taube",
+      "name": "Maori-Fruchttaube",
+      "scientificName": "Hemiphaga novaeseelandiae",
+      "taxonID": 204520,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/maori-taube.heic",
+          "sha256": "b8471c9d092e7f096582367191b11c66a3ad773b5fca720cea5b70c166ad0fc8",
+          "license": "CC-BY-4.0",
+          "attribution": "John Barkla",
+          "sourceURL": "https://www.inaturalist.org/observations/313758884",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/maori-taube.m4a",
+          "sha256": "f8fd18b3a74855f481bafde0558927c4d6a1f9f369f746c44d4d12b897ea49d6",
+          "text": "Maori-Fruchttaube"
+        }
+      }
+    },
+    {
+      "id": "schwarzschwan",
+      "name": "Schwarzschwan",
+      "scientificName": "Cygnus atratus",
+      "taxonID": 6914,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/schwarzschwan.heic",
+          "sha256": "e86dede1839fff301dd3916d3dd96fb4366b1b368bb858fa3b9bd0233b6a3fe8",
+          "license": "CC0-1.0",
+          "attribution": "Nikolay Martyanov",
+          "sourceURL": "https://www.inaturalist.org/observations/91632451",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/schwarzschwan-4.heic",
+          "sha256": "695fe0d3b2203f1504a2d3fc65f92153b1cd416bd77e5bc59c99ba39802a04f7",
+          "license": "CC-BY-4.0",
+          "attribution": "Terra Occ",
+          "sourceURL": "https://www.inaturalist.org/observations/19869983",
+          "retrieved": "2026-09-10"
+        }
+      ],
+      "call": {
+        "file": "audio/schwarzschwan.m4a",
+        "sha256": "e7d3bab0789bff26393325942d232622cac90414ed2009fe4490889b28942948",
+        "license": "CC0-1.0",
+        "attribution": "Sonothèque ADVL (XC954553)",
+        "sourceURL": "https://xeno-canto.org/954553",
+        "retrieved": "2026-09-10"
+      },
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/schwarzschwan.m4a",
+          "sha256": "e4323cb39116f586a8712479636c0b84755c53750e36c04c4a11ab67c98c7616",
+          "text": "Schwarzschwan"
+        }
+      }
+    },
+    {
+      "id": "australischer-pelikan",
+      "name": "Brillenpelikan",
+      "scientificName": "Pelecanus conspicillatus",
+      "taxonID": 4326,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/australischer-pelikan.heic",
+          "sha256": "e0ead3fb404471536ffac46d244d4203e451338b7c06cae880817a60bffe7de1",
+          "license": "CC-BY-4.0",
+          "attribution": "Sean Frey",
+          "sourceURL": "https://www.inaturalist.org/observations/26231311",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/australischer-pelikan-2.heic",
+          "sha256": "f65ae937846fffc7a46b4aa39c13787eae1f02f66033706367aad0fe8dc3a57c",
+          "license": "CC-BY-SA-4.0",
+          "attribution": "James K. Douch",
+          "sourceURL": "https://www.inaturalist.org/observations/252340405",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/australischer-pelikan-3.heic",
+          "sha256": "dc089e4d2af32457ae5adbaaaf01ff05c5753b0cd0fc0b71808ca8f9aeec2e0f",
+          "license": "CC-BY-4.0",
+          "attribution": "Andrew Lai",
+          "sourceURL": "https://www.inaturalist.org/observations/187898062",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/australischer-pelikan.m4a",
+          "sha256": "98f513f134b8a5d86125e4b3efba8e99bbc5f4f43a61ce1bdf794ff381b16089",
+          "text": "Brillenpelikan"
+        }
+      }
+    },
+    {
+      "id": "strohhalsibis",
+      "name": "Stachelibis",
+      "scientificName": "Threskiornis spinicollis",
+      "taxonID": 3741,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/strohhalsibis.heic",
+          "sha256": "e650cdadabcd4a12c725949b9cf70813055306e1739e5570c8d10d40124be6fd",
+          "license": "CC0-1.0",
+          "attribution": "John Cull",
+          "sourceURL": "https://www.inaturalist.org/observations/168445885",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/strohhalsibis.m4a",
+          "sha256": "ec9edf22908f0d5a7c03cdbbf8568ac271077420dbfa46086e78890dc4501916",
+          "text": "Stachelibis"
+        }
+      }
+    },
+    {
+      "id": "gelbaugenpinguin",
+      "name": "Gelbaugenpinguin",
+      "scientificName": "Megadyptes antipodes",
+      "taxonID": 3831,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/gelbaugenpinguin.heic",
+          "sha256": "6dd96d6b0003db96c9a37b7f251629a57a790ef2e2e179b7c5bdfb5ba139dacd",
+          "license": "CC-BY-4.0",
+          "attribution": "William Harland",
+          "sourceURL": "https://www.inaturalist.org/observations/229180441",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/gelbaugenpinguin.m4a",
+          "sha256": "30afdd812c5a35ce650b9babe68fb958aa1872b6690853cdf044052b9ea03ba7",
+          "text": "Gelbaugenpinguin"
+        }
+      }
+    },
+    {
+      "id": "weissbauchseeadler",
+      "name": "Weißbauchseeadler",
+      "scientificName": "Icthyophaga leucogaster",
+      "taxonID": 1505653,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/weissbauchseeadler.heic",
+          "sha256": "e1e7a523955dcff728225b95a6eb3ca8f1d8c247a9c93e61b3fbdb68d78ecf09",
+          "license": "CC-BY-4.0",
+          "attribution": "Jeremy James",
+          "sourceURL": "https://www.inaturalist.org/observations/321370507",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/weissbauchseeadler.m4a",
+          "sha256": "8f159cdaa8ee31588ff40b6e09a422f46f93a5a1c22132088b5d2142c35da0ed",
+          "text": "Weißbauchseeadler"
+        }
+      }
+    }
+  ]
+}

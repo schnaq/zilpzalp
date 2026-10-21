@@ -951,6 +951,256 @@
       "sourceURL": "https://www.inaturalist.org/observations/55139983"
     },
     {
+      "packID": "australien-ozeanien",
+      "packTitle": "Australien & Ozeanien",
+      "birdID": "rosakakadu",
+      "birdName": "Rosakakadu",
+      "kind": "photo",
+      "attribution": "Thomas Mesaglio",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/59109759"
+    },
+    {
+      "packID": "australien-ozeanien",
+      "packTitle": "Australien & Ozeanien",
+      "birdID": "inkakakadu",
+      "birdName": "Inkakakadu",
+      "kind": "photo",
+      "attribution": "Third Silence",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/332114246"
+    },
+    {
+      "packID": "australien-ozeanien",
+      "packTitle": "Australien & Ozeanien",
+      "birdID": "wellensittich",
+      "birdName": "Wellensittich",
+      "kind": "photo",
+      "attribution": "cappycollins",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/307179303"
+    },
+    {
+      "packID": "australien-ozeanien",
+      "packTitle": "Australien & Ozeanien",
+      "birdID": "wellensittich",
+      "birdName": "Wellensittich",
+      "kind": "photo",
+      "attribution": "Lachlan Copeland",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/268144312"
+    },
+    {
+      "packID": "australien-ozeanien",
+      "packTitle": "Australien & Ozeanien",
+      "birdID": "wellensittich",
+      "birdName": "Wellensittich",
+      "kind": "call",
+      "attribution": "Sonothèque ADVL (XC707108)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/707108"
+    },
+    {
+      "packID": "australien-ozeanien",
+      "packTitle": "Australien & Ozeanien",
+      "birdID": "emu",
+      "birdName": "Emu",
+      "kind": "photo",
+      "attribution": "Donald Davesne",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/327879005"
+    },
+    {
+      "packID": "australien-ozeanien",
+      "packTitle": "Australien & Ozeanien",
+      "birdID": "emu",
+      "birdName": "Emu",
+      "kind": "photo",
+      "attribution": "patrickc",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/147212260"
+    },
+    {
+      "packID": "australien-ozeanien",
+      "packTitle": "Australien & Ozeanien",
+      "birdID": "helmkasuar",
+      "birdName": "Helmkasuar",
+      "kind": "photo",
+      "attribution": "Tim",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/98776913"
+    },
+    {
+      "packID": "australien-ozeanien",
+      "packTitle": "Australien & Ozeanien",
+      "birdID": "lachender-hans",
+      "birdName": "Lachender Hans",
+      "kind": "photo",
+      "attribution": "Sockrosma",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/200607101"
+    },
+    {
+      "packID": "australien-ozeanien",
+      "packTitle": "Australien & Ozeanien",
+      "birdID": "regenbogenspint",
+      "birdName": "Regenbogenspint",
+      "kind": "photo",
+      "attribution": "Donald Hobern",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/243289600"
+    },
+    {
+      "packID": "australien-ozeanien",
+      "packTitle": "Australien & Ozeanien",
+      "birdID": "regenbogenspint",
+      "birdName": "Regenbogenspint",
+      "kind": "photo",
+      "attribution": "Thomas Mesaglio",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/36576937"
+    },
+    {
+      "packID": "australien-ozeanien",
+      "packTitle": "Australien & Ozeanien",
+      "birdID": "prachtstaffelschwanz",
+      "birdName": "Prachtstaffelschwanz",
+      "kind": "photo",
+      "attribution": "Andrew Allen",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/130593635"
+    },
+    {
+      "packID": "australien-ozeanien",
+      "packTitle": "Australien & Ozeanien",
+      "birdID": "neuseeland-faecherschwanz",
+      "birdName": "Neuseeland-Fächerschwanz",
+      "kind": "photo",
+      "attribution": "Halema J",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/274426514"
+    },
+    {
+      "packID": "australien-ozeanien",
+      "packTitle": "Australien & Ozeanien",
+      "birdID": "pukeko",
+      "birdName": "Pukeko",
+      "kind": "photo",
+      "attribution": "Oscar Dove",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/133070938"
+    },
+    {
+      "packID": "australien-ozeanien",
+      "packTitle": "Australien & Ozeanien",
+      "birdID": "wekaralle",
+      "birdName": "Wekaralle",
+      "kind": "photo",
+      "attribution": "Austen Armstrong",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/257998764"
+    },
+    {
+      "packID": "australien-ozeanien",
+      "packTitle": "Australien & Ozeanien",
+      "birdID": "maori-taube",
+      "birdName": "Maori-Fruchttaube",
+      "kind": "photo",
+      "attribution": "John Barkla",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/313758884"
+    },
+    {
+      "packID": "australien-ozeanien",
+      "packTitle": "Australien & Ozeanien",
+      "birdID": "schwarzschwan",
+      "birdName": "Schwarzschwan",
+      "kind": "photo",
+      "attribution": "Nikolay Martyanov",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/91632451"
+    },
+    {
+      "packID": "australien-ozeanien",
+      "packTitle": "Australien & Ozeanien",
+      "birdID": "schwarzschwan",
+      "birdName": "Schwarzschwan",
+      "kind": "photo",
+      "attribution": "Terra Occ",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/19869983"
+    },
+    {
+      "packID": "australien-ozeanien",
+      "packTitle": "Australien & Ozeanien",
+      "birdID": "schwarzschwan",
+      "birdName": "Schwarzschwan",
+      "kind": "call",
+      "attribution": "Sonothèque ADVL (XC954553)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/954553"
+    },
+    {
+      "packID": "australien-ozeanien",
+      "packTitle": "Australien & Ozeanien",
+      "birdID": "australischer-pelikan",
+      "birdName": "Brillenpelikan",
+      "kind": "photo",
+      "attribution": "Sean Frey",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/26231311"
+    },
+    {
+      "packID": "australien-ozeanien",
+      "packTitle": "Australien & Ozeanien",
+      "birdID": "australischer-pelikan",
+      "birdName": "Brillenpelikan",
+      "kind": "photo",
+      "attribution": "James K. Douch",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/252340405"
+    },
+    {
+      "packID": "australien-ozeanien",
+      "packTitle": "Australien & Ozeanien",
+      "birdID": "australischer-pelikan",
+      "birdName": "Brillenpelikan",
+      "kind": "photo",
+      "attribution": "Andrew Lai",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/187898062"
+    },
+    {
+      "packID": "australien-ozeanien",
+      "packTitle": "Australien & Ozeanien",
+      "birdID": "strohhalsibis",
+      "birdName": "Stachelibis",
+      "kind": "photo",
+      "attribution": "John Cull",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/168445885"
+    },
+    {
+      "packID": "australien-ozeanien",
+      "packTitle": "Australien & Ozeanien",
+      "birdID": "gelbaugenpinguin",
+      "birdName": "Gelbaugenpinguin",
+      "kind": "photo",
+      "attribution": "William Harland",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/229180441"
+    },
+    {
+      "packID": "australien-ozeanien",
+      "packTitle": "Australien & Ozeanien",
+      "birdID": "weissbauchseeadler",
+      "birdName": "Weißbauchseeadler",
+      "kind": "photo",
+      "attribution": "Jeremy James",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/321370507"
+    },
+    {
       "packID": "berge-wald",
       "packTitle": "Berge & Wald",
       "birdID": "alpendohle",
@@ -5667,6 +5917,12 @@
       "license": "CC-BY-4.0",
       "sourceURL": "https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md",
       "usedIn": "Vögel Afrikas"
+    },
+    {
+      "attribution": "Stimme: Ava (ElevenLabs)",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md",
+      "usedIn": "Australien & Ozeanien"
     },
     {
       "attribution": "Stimme: Ava (ElevenLabs)",
