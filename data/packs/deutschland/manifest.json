@@ -129,6 +129,14 @@
           "attribution": "Вячеслав Юсупов",
           "sourceURL": "https://www.inaturalist.org/observations/18530920",
           "retrieved": "2026-07-31"
+        },
+        {
+          "file": "photos/buntspecht-3.heic",
+          "sha256": "49d825507d0969a1b80a514caeef07797df26ca570737b17fec1d2948ff0e019",
+          "license": "CC-BY-4.0",
+          "attribution": "Donald Davesne",
+          "sourceURL": "https://www.inaturalist.org/observations/263658763",
+          "retrieved": "2026-10-22"
         }
       ],
       "call": {
@@ -995,6 +1003,14 @@
           "attribution": "Rhys",
           "sourceURL": "https://www.inaturalist.org/observations/339187840",
           "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/rabenkraehe-4.heic",
+          "sha256": "33b6b4806401470e0bafc3a73069f67fc1d66cd9b17e180efface6b293e155b4",
+          "license": "CC-BY-4.0",
+          "attribution": "jamie-aa",
+          "sourceURL": "https://www.inaturalist.org/observations/265119071",
+          "retrieved": "2026-10-22"
         }
       ],
       "call": {
@@ -1526,6 +1542,14 @@
           "attribution": "Дмитрий Кошелев",
           "sourceURL": "https://www.inaturalist.org/observations/317740320",
           "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/moenchsgrasmuecke-3.heic",
+          "sha256": "5fc6da64f6bad02f97e87005bfd9e438397a21afc17d37e8a182f7b6a8487816",
+          "license": "CC-BY-4.0",
+          "attribution": "Diego González Dopico",
+          "sourceURL": "https://www.inaturalist.org/observations/258415254",
+          "retrieved": "2026-10-22"
         }
       ],
       "call": {
@@ -2547,6 +2571,14 @@
           "attribution": "Thorsten Hackbarth",
           "sourceURL": "https://www.inaturalist.org/observations/105032479",
           "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/turmfalke-5.heic",
+          "sha256": "1f80025c2313acc8f3e11b66224e060910e72fdfaa4aa3a81ae1335fbfdb5822",
+          "license": "CC-BY-4.0",
+          "attribution": "Donsky",
+          "sourceURL": "https://www.inaturalist.org/observations/270247957",
+          "retrieved": "2026-10-22"
         }
       ],
       "call": {
@@ -2678,6 +2710,14 @@
           "attribution": "Vladimir Kharuk",
           "sourceURL": "https://www.inaturalist.org/observations/40072653",
           "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/wanderfalke-7.heic",
+          "sha256": "c9d40f3ae23496b8f23eb02058175024127e50c44ac06c108d4c095f9637fd54",
+          "license": "CC-BY-4.0",
+          "attribution": "Andrew Bazdyrev",
+          "sourceURL": "https://www.inaturalist.org/observations/188895528",
+          "retrieved": "2026-10-22"
         }
       ],
       "call": {
@@ -2931,6 +2971,14 @@
           "sha256": "5107e1c11e00e082607ba19d8d4081a887bdd0148a77cbc5b0174972b2727b81",
           "text": "Mandarinente"
         }
+      },
+      "call": {
+        "file": "audio/mandarinente.m4a",
+        "sha256": "5d4840a3618b1120e1c9b5eb2dffc82dda1bc23548fa99808e3f040875b7feb3",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "teesdalebirder (XC1073953)",
+        "sourceURL": "https://xeno-canto.org/1073953",
+        "retrieved": "2026-10-22"
       }
     },
     {
