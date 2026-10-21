@@ -66,6 +66,7 @@ the source declared.
 | Hammerkopf | Photo | Tom Riggle | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/150564216> |
 | Helmperlhuhn | Photo | Peter Archdale | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/104021490> |
 | Helmperlhuhn | Photo | Mayela y Ramón | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/68830198> |
+| Helmperlhuhn | Photo | Karen Eichholz | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/243412838> |
 | Helmperlhuhn | Call | Kileo Jumah (XC1149015) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1149015> |
 | Dorfweber | Photo | Tommy Andriollo | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/247506421> |
 | Dorfweber | Photo | William Stephens | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/246517754> |
@@ -93,10 +94,13 @@ the source declared.
 | Nilgans | Call | Sonothèque ADVL (XC918822) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/918822> |
 | Heiliger Ibis | Photo | gianluigi | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/69805359> |
 | Heiliger Ibis | Photo | Francesco Cecere | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/42938767> |
+| Heiliger Ibis | Photo | 葉子 | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/75765062> |
 | Dreifarben-Glanzstar | Photo | Annika Lindqvist | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/32056150> |
 | Dreifarben-Glanzstar | Photo | Pål A. Olsvik | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/145855897> |
 | Dreifarben-Glanzstar | Photo | William Stephens | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/52371414> |
 | Kampfadler | Photo | Mark Bolnik | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/99602493> |
+| Kampfadler | Photo | Claude Kolwelter | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/94147280> |
+| Kampfadler | Photo | Todd Boland | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/10060504> |
 | Kampfadler | Call | Kileo Jumah (XC1148983) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1148983> |
 | Rosapelikan | Photo | Sheelagh Halsey | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/34032559> |
 | Rosapelikan | Photo | marsyd | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/223582865> |
@@ -106,9 +110,19 @@ the source declared.
 | Hagedasch | Photo | stephen | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/39380393> |
 | Hagedasch | Call | Frank shirima (XC1163454) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/1163454> |
 | Fleckenuhu | Photo | Svyatoslav Knyazev | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/265413423> |
+| Fleckenuhu | Photo | Thibaud Aronson | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/85602198> |
 | Ohrengeier | Photo | martin ingemansson | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/265337825> |
+| Ohrengeier | Photo | Michael Bakker Paiva | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/192943483> |
+| Ohrengeier | Photo | Paul Hoekman | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/288471943> |
 | Goliathreiher | Photo | Tom Field | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/294139151> |
+| Goliathreiher | Photo | Paul Hoekman | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/288992421> |
+| Goliathreiher | Photo | Codrin Bucur | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/331450972> |
 | Weißstirnspint | Photo | Matthew Fainman | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/55139983> |
+| Weißstirnspint | Photo | Manuel Schwarz | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/61848576> |
+| Weißstirnspint | Photo | agujaceratops | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/135160176> |
+| Kuhreiher | Photo | botanygirl | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/786501> |
+| Kuhreiher | Photo | Texas Bird Family | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/375841310> |
+| Kuhreiher | Call | Sonothèque ADVL (XC1088515) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1088515> |
 
 ### Asien (`asien`)
 

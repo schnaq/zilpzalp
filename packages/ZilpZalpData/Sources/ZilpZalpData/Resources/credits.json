@@ -525,6 +525,16 @@
       "packTitle": "Vögel Afrikas",
       "birdID": "helmperlhuhn",
       "birdName": "Helmperlhuhn",
+      "kind": "photo",
+      "attribution": "Karen Eichholz",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/243412838"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "helmperlhuhn",
+      "birdName": "Helmperlhuhn",
       "kind": "call",
       "attribution": "Kileo Jumah (XC1149015)",
       "license": "CC0-1.0",
@@ -793,6 +803,16 @@
     {
       "packID": "afrika",
       "packTitle": "Vögel Afrikas",
+      "birdID": "heiliger-ibis",
+      "birdName": "Heiliger Ibis",
+      "kind": "photo",
+      "attribution": "葉子",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/75765062"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
       "birdID": "dreifarben-glanzstar",
       "birdName": "Dreifarben-Glanzstar",
       "kind": "photo",
@@ -829,6 +849,26 @@
       "attribution": "Mark Bolnik",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/99602493"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "kampfadler",
+      "birdName": "Kampfadler",
+      "kind": "photo",
+      "attribution": "Claude Kolwelter",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/94147280"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "kampfadler",
+      "birdName": "Kampfadler",
+      "kind": "photo",
+      "attribution": "Todd Boland",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/10060504"
     },
     {
       "packID": "afrika",
@@ -923,12 +963,42 @@
     {
       "packID": "afrika",
       "packTitle": "Vögel Afrikas",
+      "birdID": "fleckenuhu",
+      "birdName": "Fleckenuhu",
+      "kind": "photo",
+      "attribution": "Thibaud Aronson",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/85602198"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
       "birdID": "ohrengeier",
       "birdName": "Ohrengeier",
       "kind": "photo",
       "attribution": "martin ingemansson",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/265337825"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "ohrengeier",
+      "birdName": "Ohrengeier",
+      "kind": "photo",
+      "attribution": "Michael Bakker Paiva",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/192943483"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "ohrengeier",
+      "birdName": "Ohrengeier",
+      "kind": "photo",
+      "attribution": "Paul Hoekman",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/288471943"
     },
     {
       "packID": "afrika",
@@ -943,12 +1013,82 @@
     {
       "packID": "afrika",
       "packTitle": "Vögel Afrikas",
+      "birdID": "goliathreiher",
+      "birdName": "Goliathreiher",
+      "kind": "photo",
+      "attribution": "Paul Hoekman",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/288992421"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "goliathreiher",
+      "birdName": "Goliathreiher",
+      "kind": "photo",
+      "attribution": "Codrin Bucur",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/331450972"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
       "birdID": "weissstirnspint",
       "birdName": "Weißstirnspint",
       "kind": "photo",
       "attribution": "Matthew Fainman",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/55139983"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "weissstirnspint",
+      "birdName": "Weißstirnspint",
+      "kind": "photo",
+      "attribution": "Manuel Schwarz",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/61848576"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "weissstirnspint",
+      "birdName": "Weißstirnspint",
+      "kind": "photo",
+      "attribution": "agujaceratops",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/135160176"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "kuhreiher",
+      "birdName": "Kuhreiher",
+      "kind": "photo",
+      "attribution": "botanygirl",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/786501"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "kuhreiher",
+      "birdName": "Kuhreiher",
+      "kind": "photo",
+      "attribution": "Texas Bird Family",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/375841310"
+    },
+    {
+      "packID": "afrika",
+      "packTitle": "Vögel Afrikas",
+      "birdID": "kuhreiher",
+      "birdName": "Kuhreiher",
+      "kind": "call",
+      "attribution": "Sonothèque ADVL (XC1088515)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/1088515"
     },
     {
       "packID": "asien",
