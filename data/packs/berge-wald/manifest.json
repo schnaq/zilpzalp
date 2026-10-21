@@ -35,6 +35,16 @@
       }
     },
     {
+      "id": "auerhuhn",
+      "name": "Auerhuhn",
+      "scientificName": "Tetrao urogallus",
+      "taxonID": 1026,
+      "article": "das",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
       "id": "mauerlaeufer",
       "name": "Mauerläufer",
       "scientificName": "Tichodroma muraria",
@@ -127,6 +137,16 @@
           "text": "Fichtenkreuzschnabel"
         }
       }
+    },
+    {
+      "id": "alpenschneehuhn",
+      "name": "Alpenschneehuhn",
+      "scientificName": "Lagopus muta",
+      "taxonID": 949,
+      "article": "das",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
     },
     {
       "id": "birkhuhn",
@@ -301,6 +321,16 @@
       }
     },
     {
+      "id": "wendehals",
+      "name": "Wendehals",
+      "scientificName": "Jynx torquilla",
+      "taxonID": 18448,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
       "id": "steinadler",
       "name": "Steinadler",
       "scientificName": "Aquila chrysaetos",
@@ -401,6 +431,16 @@
           "text": "Sperlingskauz"
         }
       }
+    },
+    {
+      "id": "raufusskauz",
+      "name": "Raufußkauz",
+      "scientificName": "Aegolius funereus",
+      "taxonID": 20359,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
     },
     {
       "id": "habichtskauz",
@@ -513,6 +553,26 @@
           "text": "Habicht"
         }
       }
+    },
+    {
+      "id": "gebirgsstelze",
+      "name": "Gebirgsstelze",
+      "scientificName": "Motacilla cinerea",
+      "taxonID": 13688,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "waldschnepfe",
+      "name": "Waldschnepfe",
+      "scientificName": "Scolopax rusticola",
+      "taxonID": 3931,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
     },
     {
       "id": "bergfink",
@@ -637,6 +697,16 @@
           "text": "Schwarzspecht"
         }
       }
+    },
+    {
+      "id": "kolkrabe",
+      "name": "Kolkrabe",
+      "scientificName": "Corvus corax",
+      "taxonID": 8010,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
     },
     {
       "id": "waldkauz",
