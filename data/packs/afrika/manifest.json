@@ -717,6 +717,14 @@
           "attribution": "Mayela y Ramón",
           "sourceURL": "https://www.inaturalist.org/observations/68830198",
           "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/helmperlhuhn-4.heic",
+          "sha256": "9ada46484393352dab14d368f2da3e073affcb9dba3f395951dd9923f9a26e22",
+          "license": "CC-BY-4.0",
+          "attribution": "Karen Eichholz",
+          "sourceURL": "https://www.inaturalist.org/observations/243412838",
+          "retrieved": "2026-10-22"
         }
       ],
       "call": {
@@ -1101,6 +1109,14 @@
           "attribution": "Francesco Cecere",
           "sourceURL": "https://www.inaturalist.org/observations/42938767",
           "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/heiliger-ibis-4.heic",
+          "sha256": "9ef256c244a43b753e610325c836a68e055bbb9f15f6fb17cb3f5deff28e3685",
+          "license": "CC0-1.0",
+          "attribution": "葉子",
+          "sourceURL": "https://www.inaturalist.org/observations/75765062",
+          "retrieved": "2026-10-22"
         }
       ],
       "call": null,
@@ -1169,6 +1185,22 @@
           "attribution": "Mark Bolnik",
           "sourceURL": "https://www.inaturalist.org/observations/99602493",
           "retrieved": "2026-09-09"
+        },
+        {
+          "file": "photos/kampfadler-2.heic",
+          "sha256": "0ec7b50ddc8b71248b427eb80c0c7346f5a24f01975af4ab2a8f3c10bffd7e1b",
+          "license": "CC-BY-4.0",
+          "attribution": "Claude Kolwelter",
+          "sourceURL": "https://www.inaturalist.org/observations/94147280",
+          "retrieved": "2026-10-22"
+        },
+        {
+          "file": "photos/kampfadler-3.heic",
+          "sha256": "44b96ccdecc861e00221a869c9246c214d9a6abb034ba93e462b6773f34dd33d",
+          "license": "CC-BY-4.0",
+          "attribution": "Todd Boland",
+          "sourceURL": "https://www.inaturalist.org/observations/10060504",
+          "retrieved": "2026-10-22"
         }
       ],
       "call": {
@@ -1293,6 +1325,14 @@
           "attribution": "Svyatoslav Knyazev",
           "sourceURL": "https://www.inaturalist.org/observations/265413423",
           "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/fleckenuhu-2.heic",
+          "sha256": "0985d80af79235040f6f7df1b33b713e921701519d9e15798a546bbe0578bb8f",
+          "license": "CC-BY-SA-4.0",
+          "attribution": "Thibaud Aronson",
+          "sourceURL": "https://www.inaturalist.org/observations/85602198",
+          "retrieved": "2026-10-22"
         }
       ],
       "call": null,
@@ -1319,6 +1359,22 @@
           "attribution": "martin ingemansson",
           "sourceURL": "https://www.inaturalist.org/observations/265337825",
           "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/ohrengeier-2.heic",
+          "sha256": "c6738190b02474433bd072f0a7cc8c09ffdd7fb475ed10bab408cf252e9682cf",
+          "license": "CC-BY-4.0",
+          "attribution": "Michael Bakker Paiva",
+          "sourceURL": "https://www.inaturalist.org/observations/192943483",
+          "retrieved": "2026-10-22"
+        },
+        {
+          "file": "photos/ohrengeier-3.heic",
+          "sha256": "0abcb1ff863650d75fc425eab1ade9c9c4e2388c6807f8a99a096de30464127d",
+          "license": "CC-BY-4.0",
+          "attribution": "Paul Hoekman",
+          "sourceURL": "https://www.inaturalist.org/observations/288471943",
+          "retrieved": "2026-10-22"
         }
       ],
       "call": null,
@@ -1345,6 +1401,22 @@
           "attribution": "Tom Field",
           "sourceURL": "https://www.inaturalist.org/observations/294139151",
           "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/goliathreiher-2.heic",
+          "sha256": "e0e5651f28aa33b6c6f2eff5da03b9fed3e64acf536b9281df92d1af1ad272e2",
+          "license": "CC-BY-4.0",
+          "attribution": "Paul Hoekman",
+          "sourceURL": "https://www.inaturalist.org/observations/288992421",
+          "retrieved": "2026-10-22"
+        },
+        {
+          "file": "photos/goliathreiher-3.heic",
+          "sha256": "cb3f80daf11b599a5cde65a729e2e90e933424db35f2bba98d5bc09c1fc32269",
+          "license": "CC-BY-4.0",
+          "attribution": "Codrin Bucur",
+          "sourceURL": "https://www.inaturalist.org/observations/331450972",
+          "retrieved": "2026-10-22"
         }
       ],
       "call": null,
@@ -1371,6 +1443,22 @@
           "attribution": "Matthew Fainman",
           "sourceURL": "https://www.inaturalist.org/observations/55139983",
           "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/weissstirnspint-2.heic",
+          "sha256": "1a34f59a47f1253bf0dfc330ae19436038ceae227ce007af6d517c5dd7b48701",
+          "license": "CC-BY-4.0",
+          "attribution": "Manuel Schwarz",
+          "sourceURL": "https://www.inaturalist.org/observations/61848576",
+          "retrieved": "2026-10-22"
+        },
+        {
+          "file": "photos/weissstirnspint-3.heic",
+          "sha256": "bcc956a947ae11e0b430bb3c3e24c2a2550ea864e68642cbc319a3374057ef98",
+          "license": "CC-BY-4.0",
+          "attribution": "agujaceratops",
+          "sourceURL": "https://www.inaturalist.org/observations/135160176",
+          "retrieved": "2026-10-22"
         }
       ],
       "call": null,
@@ -1379,6 +1467,47 @@
           "file": "speech/collection.name/weissstirnspint.m4a",
           "sha256": "6418545eaa4a308892df2b7b2f821d8acfdfdcbd546f9577954cf274d7e5d2af",
           "text": "Weißstirnspint"
+        }
+      }
+    },
+    {
+      "id": "kuhreiher",
+      "name": "Kuhreiher",
+      "scientificName": "Bubulcus ibis",
+      "taxonID": 411086,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/kuhreiher.heic",
+          "sha256": "38756caf71431e57091035a6b89da4cdd29c787be56ead4d0e7f20e12909fe2e",
+          "license": "CC-BY-4.0",
+          "attribution": "botanygirl",
+          "sourceURL": "https://www.inaturalist.org/observations/786501",
+          "retrieved": "2026-10-22"
+        },
+        {
+          "file": "photos/kuhreiher-2.heic",
+          "sha256": "4fd91964fa11248a0f4b5e78cd83ffae4d8a98229c51f0d81349df4c4cbe65cb",
+          "license": "CC-BY-4.0",
+          "attribution": "Texas Bird Family",
+          "sourceURL": "https://www.inaturalist.org/observations/375841310",
+          "retrieved": "2026-10-22"
+        }
+      ],
+      "call": {
+        "file": "audio/kuhreiher.m4a",
+        "sha256": "2282f0639c572528f5b29606530dffe4440bb4add725a5ecde8635e5275eaca8",
+        "license": "CC0-1.0",
+        "attribution": "Sonothèque ADVL (XC1088515)",
+        "sourceURL": "https://xeno-canto.org/1088515",
+        "retrieved": "2026-10-22"
+      },
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/kuhreiher.m4a",
+          "sha256": "33cba18290e94c2713f45473d981ea47ec257c417814100024cc415f749cd478",
+          "text": "Kuhreiher"
         }
       }
     }
