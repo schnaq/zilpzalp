@@ -62,8 +62,16 @@ class PacksTestCase(unittest.TestCase):
         patched.start()
         self.addCleanup(patched.stop)
 
+        # The real RETIRED names packs this throwaway directory does not have.
+        self.retire({})
+
         self.write_pack("deutschland", "Vögel Deutschlands", ["amsel"])
         self.write_pack("welt", "Vögel der Welt", ["amsel", "star"])
+
+    def retire(self, retired: dict[str, tuple[str, ...]]):
+        patched = mock.patch.object(index, "RETIRED", retired)
+        patched.start()
+        self.addCleanup(patched.stop)
 
     def write_pack(
         self,
@@ -279,11 +287,6 @@ class BuildTests(PacksTestCase):
 class RetiredTests(PacksTestCase):
     """#262: a pack dissolved into others."""
 
-    def retire(self, retired: dict[str, tuple[str, ...]]):
-        patched = mock.patch.object(index, "RETIRED", retired)
-        patched.start()
-        self.addCleanup(patched.stop)
-
     def test_moves_a_retired_pack_out_of_the_packs(self) -> None:
         self.write_pack("amerika", "Vögel Amerikas", ["amsel", "star"])
         self.retire({"welt": ("amerika",)})
@@ -305,6 +308,18 @@ class RetiredTests(PacksTestCase):
 
     def test_lists_no_retired_packs_while_there_are_none(self) -> None:
         self.assertNotIn("retired", index.build(uploading=None, remote=always))
+
+
+class RealRetiredTests(unittest.TestCase):
+    """`RETIRED` against the packs that are really in `data/packs`."""
+
+    def test_every_successor_is_a_downloadable_pack(self) -> None:
+        """A misspelt, bundled or retired successor never shows up in the
+        index's `packs`, and the app migrates only once all of them do.
+        Whether they are in the bucket is for the index after an upload."""
+        downloadable = set(index.packs()) - set(index.BUNDLED_PACKS) - set(index.RETIRED)
+        for successors in index.RETIRED.values():
+            self.assertLessEqual(set(successors), downloadable)
 
 
 class PreviewTests(PacksTestCase):

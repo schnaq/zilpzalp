@@ -28,7 +28,7 @@ One entry per downloadable pack:
           ]
         }
       ],
-      "retired": [{"id": "welt", "successors": ["nordamerika"]}]
+      "retired": [{"id": "welt", "successors": ["suedamerika", "nordamerika", …]}]
     }
 
 `manifest` is a bucket key, not a URL: the manifest's own media paths are
@@ -76,11 +76,24 @@ BUNDLED_PACKS = ("deutschland",)
 # over. A retired pack leaves `packs` and is listed under `retired`, so a
 # device that has it installed is offered the successors and then lets it go.
 # Every species of a retired pack must be in one of its successors — `build`
-# refuses otherwise — or a child would lose those stickers from the album.
+# refuses otherwise, as long as the retired manifest is still in data/packs —
+# or a child would lose those stickers from the album.
 #
-# "Vögel der Welt" (welt) is to be dissolved into regional packs; it moves in
-# here once those are in the bucket.
-RETIRED: dict[str, tuple[str, ...]] = {}
+# "Vögel der Welt" (welt) was dissolved into the regional packs (2026-10-22).
+# Its manifest is gone from data/packs, so `check_retired` no longer checks its
+# birds: every one but raggi-paradiesvogel, which never had a photo pass
+# review, is in one of these six. test_fetch_media_index.py checks that they
+# are packs, since the app migrates only once the index lists all of them.
+RETIRED: dict[str, tuple[str, ...]] = {
+    "welt": (
+        "suedamerika",
+        "nordamerika",
+        "australien-ozeanien",
+        "polar-meer",
+        "asien",
+        "greifvoegel-eulen",
+    ),
+}
 
 # How many birds stand for a pack on its card.
 COVER_COUNT = 3
