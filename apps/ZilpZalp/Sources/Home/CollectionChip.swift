@@ -23,8 +23,8 @@ struct CollectionChip: View {
     private static let discDiameter: CGFloat = 48
 
     /// How much of the disc before it each stacked disc leaves showing: a
-    /// third, enough to count them across a table.
-    private static let stackStep: CGFloat = discDiameter / 3
+    /// half, enough to count them across a table.
+    private static let stackStep: CGFloat = discDiameter / 2
 
     /// At most this many discs stand in the pile; the title says the rest.
     private static let stackLimit = 3
