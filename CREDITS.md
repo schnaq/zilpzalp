@@ -110,6 +110,36 @@ the source declared.
 | Goliathreiher | Photo | Tom Field | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/294139151> |
 | Weißstirnspint | Photo | Matthew Fainman | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/55139983> |
 
+### Australien & Ozeanien (`australien-ozeanien`)
+
+| Bird | Kind | Author | Licence | Source |
+| --- | --- | --- | --- | --- |
+| Rosakakadu | Photo | Thomas Mesaglio | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/59109759> |
+| Inkakakadu | Photo | Third Silence | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/332114246> |
+| Wellensittich | Photo | cappycollins | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/307179303> |
+| Wellensittich | Photo | Lachlan Copeland | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/268144312> |
+| Wellensittich | Call | Sonothèque ADVL (XC707108) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/707108> |
+| Emu | Photo | Donald Davesne | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/327879005> |
+| Emu | Photo | patrickc | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/147212260> |
+| Helmkasuar | Photo | Tim | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/98776913> |
+| Lachender Hans | Photo | Sockrosma | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/200607101> |
+| Regenbogenspint | Photo | Donald Hobern | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/243289600> |
+| Regenbogenspint | Photo | Thomas Mesaglio | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/36576937> |
+| Prachtstaffelschwanz | Photo | Andrew Allen | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/130593635> |
+| Neuseeland-Fächerschwanz | Photo | Halema J | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/274426514> |
+| Pukeko | Photo | Oscar Dove | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/133070938> |
+| Wekaralle | Photo | Austen Armstrong | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/257998764> |
+| Maori-Fruchttaube | Photo | John Barkla | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/313758884> |
+| Schwarzschwan | Photo | Nikolay Martyanov | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/91632451> |
+| Schwarzschwan | Photo | Terra Occ | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/19869983> |
+| Schwarzschwan | Call | Sonothèque ADVL (XC954553) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/954553> |
+| Brillenpelikan | Photo | Sean Frey | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/26231311> |
+| Brillenpelikan | Photo | James K. Douch | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/252340405> |
+| Brillenpelikan | Photo | Andrew Lai | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/187898062> |
+| Stachelibis | Photo | John Cull | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/168445885> |
+| Gelbaugenpinguin | Photo | William Harland | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/229180441> |
+| Weißbauchseeadler | Photo | Jeremy James | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/321370507> |
+
 ### Berge & Wald (`berge-wald`)
 
 | Bird | Kind | Author | Licence | Source |
@@ -606,6 +636,7 @@ the source declared.
 | Voice | Licence | Spoken for | Source |
 | --- | --- | --- | --- |
 | Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Vögel Afrikas | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
+| Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Australien & Ozeanien | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
 | Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Berge & Wald | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
 | Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Vögel Deutschlands | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
 | Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Greifvögel & Eulen | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
