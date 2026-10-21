@@ -36,8 +36,8 @@ final class SpeechAnnouncer: NSObject {
     ///
     /// ``ParentalSettingsModel`` sets it: once when the file is read at
     /// launch, and again on every change, which is what makes the choice
-    /// apply without a restart. Read per sentence, so a sentence already on
-    /// its way is not stopped — the next one simply does not start.
+    /// apply without a restart. Read per ``announce(_:unprompted:)``, so the
+    /// lines already on their way — the round end's praise and name — finish.
     ///
     /// Until that first read it stands where the settings stand — taken from
     /// the defaults rather than written out, so the two cannot say different
@@ -174,10 +174,12 @@ final class SpeechAnnouncer: NSObject {
     /// The queue is filled here and nowhere else, and only once the first line
     /// has actually started; ``stop()`` is the one other place that empties it.
     func announce(_ lines: [SpokenLine], unprompted: Bool) {
-        // Before anything is stopped: a line that is not to be said has no
-        // business cutting off one that is.
+        // A line that is not to be said still ends this announcer's last one:
+        // the next question must not arrive under the name of the one before,
+        // which a child may have tapped for a moment ago.
         guard Self.mode.speaks(unprompted: unprompted) else {
             Logger.audio.debug("Staying silent until a speaker is tapped")
+            stop()
             return
         }
         pause?.cancel()

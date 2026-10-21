@@ -85,18 +85,6 @@
         }
       }
     },
-    "about.voice" : {
-      "comment" : "Paragraph on the screen about the app: the voice a child hears is AI-generated (#306)",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Die Stimme in der App ist eine KI-Stimme (ElevenLabs, Stimme „Ava“)."
-          }
-        }
-      }
-    },
     "about.website.hint" : {
       "comment" : "Under the website row. The address itself, so a grown-up can see where the link leads before it opens",
       "extractionState" : "manual",
@@ -1178,13 +1166,13 @@
       }
     },
     "parents.speech.hint" : {
-      "comment" : "Under the speech row in the grown-ups' area: says plainly that the voice is AI-generated, and that the bird calls are not affected (#306)",
+      "comment" : "Under the speech row in the grown-ups' area, after the generated sentence that says the voice is an AI voice: the bird calls are not affected (#306)",
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Die Stimme ist eine KI-Stimme (ElevenLabs, Stimme „Ava“). Die Vogelrufe bleiben an."
+            "value" : "Die Vogelrufe bleiben an."
           }
         }
       }
@@ -1713,6 +1701,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vorlesen: %@"
+          }
+        }
+      }
+    },
+    "speech.voice.disclosure" : {
+      "comment" : "Says plainly that the voice is AI-generated, on the About screen and under the speech row (#306). %@ is the generated voice attribution from the credits, such as „KI-Stimme: Ava (ElevenLabs)“",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die Stimme ist eine %@."
           }
         }
       }

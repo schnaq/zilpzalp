@@ -124,7 +124,8 @@ struct CollectionPicker: View {
 
                     // Not a ``ReadAloudButton``: that brings an announcer of
                     // its own, and the question and the packs share this one.
-                    SpeakerButton(line: Self.question) { say(Self.question, unprompted: false) }
+                    SpeakerButton(text: Self.question.text) { say(Self.question, unprompted: false)
+                    }
                 }
 
                 collections

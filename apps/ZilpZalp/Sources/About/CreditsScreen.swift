@@ -39,6 +39,18 @@ struct CreditsScreen: View {
     /// it gets one calm line instead of an error screen.
     private static let credits = try? Credits.bundled()
 
+    /// „Die Stimme ist eine KI-Stimme: Ava (ElevenLabs)." — the generated
+    /// attribution in a sentence, for the screens that say plainly what the
+    /// voice is (#306): About and the speech setting. Never typed by hand, for
+    /// the reason this screen gives; `nil` while nothing is recorded.
+    static var voiceDisclosure: String? {
+        guard let voices = credits?.distinctVoices, !voices.isEmpty else { return nil }
+        return String(
+            format: String(localized: "speech.voice.disclosure"),
+            voices.map(\.attribution).formatted(.list(type: .and)),
+        )
+    }
+
     @Environment(\.dismiss) private var dismiss
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 

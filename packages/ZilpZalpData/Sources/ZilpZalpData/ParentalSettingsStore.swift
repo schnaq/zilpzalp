@@ -181,9 +181,11 @@ private struct SchemaProbe: Decodable {
 private struct Document: Codable {
     let schemaVersion: Int
     let dailyLimitMinutes: Int?
-    /// Optional, so that a file written before #306 decodes; ``settings``
-    /// fills the gap from ``speechEnabled``.
-    let speechMode: SpeechMode?
+    /// A raw string, so that a file written before #306 — no key — and one
+    /// from a later build — a mode this one does not know — both decode;
+    /// ``settings`` fills the gap from ``speechEnabled``. A strict enum here
+    /// would fail the whole document, the daily limit with it.
+    let speechMode: String?
     /// Read and never written: the switch #231 stored. A file that switched
     /// the announcements off asked for quiet, and the quietest choice left is
     /// ``SpeechMode/onTap``.
@@ -201,14 +203,15 @@ private struct Document: Codable {
     var settings: ParentalSettings {
         ParentalSettings(
             dailyLimitMinutes: dailyLimitMinutes,
-            speechMode: speechMode ?? (speechEnabled == false ? .onTap : .automatic),
+            speechMode: speechMode.flatMap(SpeechMode.init(rawValue:))
+                ?? (speechEnabled == false ? .onTap : .automatic),
         )
     }
 
     init(settings: ParentalSettings) {
         schemaVersion = ParentalSettingsStore.schemaVersion
         dailyLimitMinutes = settings.dailyLimitMinutes
-        speechMode = settings.speechMode
+        speechMode = settings.speechMode.rawValue
         speechEnabled = nil
     }
 
@@ -227,6 +230,6 @@ private struct Document: Codable {
         // somewhere, and a file that left the key out would read back as a
         // file from before the setting existed. The default is never used: a
         // document on its way to disk always came through `init(settings:)`.
-        try container.encode(speechMode ?? .automatic, forKey: .speechMode)
+        try container.encode(speechMode ?? SpeechMode.automatic.rawValue, forKey: .speechMode)
     }
 }

@@ -17,7 +17,8 @@ struct SpeechModeRow: View {
     var body: some View {
         SettingRow(
             title: String(localized: "parents.speech.title"),
-            hint: String(localized: "parents.speech.hint"),
+            hint: [CreditsScreen.voiceDisclosure, String(localized: "parents.speech.hint")]
+                .compactMap(\.self).joined(separator: " "),
             icon: .volume2,
             value: label(for: parental.settings.speechMode),
         ) {

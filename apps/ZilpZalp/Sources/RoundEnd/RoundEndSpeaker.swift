@@ -10,10 +10,17 @@ import ZilpZalpUI
 /// phone (#137), and a speaker beside it would shrink it further. Same size,
 /// same gutters as ``RoundEndHomeDoor``, so the two corners mirror each other.
 struct RoundEndSpeaker: View {
+    /// What a tap says — the praise, and the bird's name after a first find.
+    let lines: [SpokenLine]
     let say: () -> Void
 
+    init(_ lines: [SpokenLine], say: @escaping () -> Void) {
+        self.lines = lines
+        self.say = say
+    }
+
     var body: some View {
-        SpeakerButton(line: .fixed("roundEnd.title"), action: say)
+        SpeakerButton(text: lines.map(\.text).joined(separator: " "), action: say)
             .roundEndCorner()
     }
 }

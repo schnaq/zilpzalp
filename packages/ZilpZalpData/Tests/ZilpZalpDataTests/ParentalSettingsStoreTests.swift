@@ -240,6 +240,18 @@ struct ParentalSettingsStoreTests {
         }
     }
 
+    @Test("a mode this build does not know keeps the rest of the file")
+    func readsAnUnknownMode() async throws {
+        try await withTemporaryStore { store, root in
+            try write(
+                #"{"schemaVersion": 1, "dailyLimitMinutes": 30, "speechMode": "whisper"}"#,
+                to: root,
+            )
+
+            #expect(try await store.load() == ParentalSettings(dailyLimitMinutes: 30))
+        }
+    }
+
     @Test("the mode is written and the old switch is not")
     func writesTheModeOnly() async throws {
         try await withTemporaryStore { store, root in

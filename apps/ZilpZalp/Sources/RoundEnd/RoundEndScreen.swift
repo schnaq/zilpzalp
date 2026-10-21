@@ -133,12 +133,13 @@ struct RoundEndScreen: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(ZColor.surfaceForest)
             .overlay(alignment: .bottom) { signature }
-            // The way out, in the corner the centred celebration leaves empty
-            // — see ``RoundEndHomeDoor``. An overlay rather than a third
-            // button under the two: this screen does not scroll, and a third
-            // pill would be the one a 375 pt phone runs out of height for.
+            // The way out and the praise again, in the corners the centred
+            // celebration leaves empty — ``RoundEndHomeDoor``, ``RoundEndSpeaker``.
+            // Not more pills under the two: a 375 pt phone has no height left.
             .overlay(alignment: .topLeading) { RoundEndHomeDoor(isOpen: settled, goHome: goHome) }
-            .overlay(alignment: .topTrailing) { RoundEndSpeaker { sayPraise(unprompted: false) } }
+            .overlay(alignment: .topTrailing) {
+                RoundEndSpeaker(spokenPraise) { speak(unprompted: false) }
+            }
             // The praise is not cut short on the way home: nothing follows it
             // there that it could talk over, and `.onDisappear` below stops it
             // a pop later. "Nochmal spielen" is the exit that has to stop it
@@ -340,11 +341,11 @@ struct RoundEndScreen: View {
         }
 
         guard announcer == nil else { return }
-        sayPraise(unprompted: true)
+        speak(unprompted: true)
     }
 
     /// The praise, through the one announcer, built on first use — see above.
-    private func sayPraise(unprompted: Bool) {
+    private func speak(unprompted: Bool) {
         let voice = announcer ?? SpeechAnnouncer(library: library)
         announcer = voice
         voice.announce(spokenPraise, unprompted: unprompted)

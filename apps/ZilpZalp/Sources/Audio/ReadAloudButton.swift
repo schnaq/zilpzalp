@@ -28,7 +28,7 @@ struct ReadAloudButton: View {
     @State private var hasSpoken = false
 
     var body: some View {
-        SpeakerButton(line: line) { say(unprompted: false) }
+        SpeakerButton(text: line.text) { say(unprompted: false) }
             .onAppear {
                 guard !hasSpoken else { return }
                 hasSpoken = true
@@ -38,6 +38,8 @@ struct ReadAloudButton: View {
     }
 
     private func say(unprompted: Bool) {
+        // Not even an announcer for a line that is not to be said.
+        guard SpeechAnnouncer.mode.speaks(unprompted: unprompted) else { return }
         let voice = announcer ?? SpeechAnnouncer()
         announcer = voice
         voice.announce(line, unprompted: unprompted)
@@ -49,13 +51,13 @@ struct ReadAloudButton: View {
 /// One size, one tone and one label for every speaker a child looks for.
 struct SpeakerButton: View {
     /// What a tap says, named in the VoiceOver label.
-    let line: SpokenLine
+    let text: String
     let action: () -> Void
 
     var body: some View {
         IconButton(
             .volume2,
-            label: String(format: String(localized: "speech.readAloud.accessibility"), line.text),
+            label: String(format: String(localized: "speech.readAloud.accessibility"), text),
             tone: .accent,
             // The touch floor rather than the 96 pt mid-game size: beside a
             // headline the speaker must not outweigh the words.
