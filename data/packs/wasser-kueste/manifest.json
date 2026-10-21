@@ -15,8 +15,40 @@
       "taxonID": 204533,
       "article": "die",
       "pronunciation": null,
-      "photos": [],
-      "call": null
+      "photos": [
+        {
+          "file": "photos/silbermoewe.heic",
+          "sha256": "72736116482d684fe7d4ecd59e684ea2343cc4954aa57b6c46a10ced6bf173c5",
+          "license": "CC-BY-4.0",
+          "attribution": "Diego González Dopico",
+          "sourceURL": "https://www.inaturalist.org/observations/240409189",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/silbermoewe-2.heic",
+          "sha256": "5000b1e7c23f29b1eb17759d82b11971eff717615257fd54d81fc33bd9fc062f",
+          "license": "CC-BY-4.0",
+          "attribution": "Brenda Black",
+          "sourceURL": "https://www.inaturalist.org/observations/256101074",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/silbermoewe-3.heic",
+          "sha256": "1be10fef2dcf1d69d39622759279c6428d1c883013a87ea7af200e42db667819",
+          "license": "CC-BY-4.0",
+          "attribution": "Diego González Dopico",
+          "sourceURL": "https://www.inaturalist.org/observations/240409189",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/silbermoewe.m4a",
+          "sha256": "05b1690f94ceb757d6768133e8d97b292e2a6c01f2cde059faa761402105dbab",
+          "text": "Silbermöwe"
+        }
+      }
     },
     {
       "id": "dreizehenmoewe",
@@ -32,6 +64,14 @@
           "license": "CC-BY-4.0",
           "attribution": "Quinten Wiegersma",
           "sourceURL": "https://www.inaturalist.org/observations/99626453",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/dreizehenmoewe-2.heic",
+          "sha256": "276b70e1022a1bc38994e232b5f29663f7cdcf0f35a0321c7c2d5af26b5e4c8a",
+          "license": "CC-BY-4.0",
+          "attribution": "Алексей Логинов",
+          "sourceURL": "https://www.inaturalist.org/observations/169137079",
           "retrieved": "2026-10-21"
         }
       ],
@@ -93,6 +133,14 @@
           "attribution": "Roger Rittmaster",
           "sourceURL": "https://www.inaturalist.org/observations/32693782",
           "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/tordalk-3.heic",
+          "sha256": "fb875997e536934d8d40890a595a0a6f474c08ef8ba2ed9d7fb23351a94dc725",
+          "license": "CC0-1.0",
+          "attribution": "Jean-Paul Boerekamps",
+          "sourceURL": "https://www.inaturalist.org/observations/170678953",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": null,
@@ -111,8 +159,32 @@
       "taxonID": 3802,
       "article": "der",
       "pronunciation": null,
-      "photos": [],
-      "call": null
+      "photos": [
+        {
+          "file": "photos/basstoelpel.heic",
+          "sha256": "70d5fd84756fd4a53046bf29cbe8ccefb5b78328aa1cef24574c7dad2ba08580",
+          "license": "CC-BY-4.0",
+          "attribution": "Brooke J.",
+          "sourceURL": "https://www.inaturalist.org/observations/237827741",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/basstoelpel-2.heic",
+          "sha256": "d817ec2c6036cc6716769f9c1ccf286670731401e397f47488f95327cccde83e",
+          "license": "CC-BY-4.0",
+          "attribution": "Donald Davesne",
+          "sourceURL": "https://www.inaturalist.org/observations/164486687",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/basstoelpel.m4a",
+          "sha256": "34480c3468f734cac7bde07d704c0e0c0970d6546ea530bb784dc7f149156929",
+          "text": "Basstölpel"
+        }
+      }
     },
     {
       "id": "eissturmvogel",
@@ -121,8 +193,24 @@
       "taxonID": 4180,
       "article": "der",
       "pronunciation": null,
-      "photos": [],
-      "call": null
+      "photos": [
+        {
+          "file": "photos/eissturmvogel.heic",
+          "sha256": "7c4b34a2455f2a29c44e8d8f70839397122697ba7cf5b9a0c2f8ed04672856a7",
+          "license": "CC-BY-4.0",
+          "attribution": "alicia penney",
+          "sourceURL": "https://www.inaturalist.org/observations/8211660",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/eissturmvogel.m4a",
+          "sha256": "1584eafc212551b31fd68ffeba30c0a73a39ac31c6327a642e94bc1378a8563d",
+          "text": "Eissturmvogel"
+        }
+      }
     },
     {
       "id": "eiderente",
@@ -138,6 +226,14 @@
           "license": "CC-BY-4.0",
           "attribution": "Nigel Voaden",
           "sourceURL": "https://www.inaturalist.org/observations/1186757",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/eiderente-2.heic",
+          "sha256": "67e68ad92c9c067b7a5a129758f0670b955fcf20ca30daabc6a23821ebde44f1",
+          "license": "CC-BY-4.0",
+          "attribution": "Алексей Логинов",
+          "sourceURL": "https://www.inaturalist.org/observations/67791131",
           "retrieved": "2026-10-21"
         }
       ],
@@ -173,6 +269,14 @@
           "attribution": "Kostas Zontanos",
           "sourceURL": "https://www.inaturalist.org/observations/70546885",
           "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/brandgans-3.heic",
+          "sha256": "2d805565314f9513c3139270a07673c23c5a14b91f64f28df49cf2dce0c36437",
+          "license": "CC-BY-4.0",
+          "attribution": "Mikael Nyman",
+          "sourceURL": "https://www.inaturalist.org/observations/360291076",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": null,
@@ -198,6 +302,22 @@
           "license": "CC-BY-4.0",
           "attribution": "Bill Keim",
           "sourceURL": "https://www.inaturalist.org/observations/36646428",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/nonnengans-2.heic",
+          "sha256": "6fd90a4d2b025d1daf2a58d8292b24869fc625dab25b3ccff4898849cd2ec646",
+          "license": "CC-BY-4.0",
+          "attribution": "Morten Ross",
+          "sourceURL": "https://www.inaturalist.org/observations/83609226",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/nonnengans-3.heic",
+          "sha256": "f605c6c57e1e72aa7d18a6bff738534d1637ac3281b3eb2fef3e344d042ddd99",
+          "license": "CC-BY-4.0",
+          "attribution": "Diego González Dopico",
+          "sourceURL": "https://www.inaturalist.org/observations/208537085",
           "retrieved": "2026-10-21"
         }
       ],
@@ -225,6 +345,22 @@
           "attribution": "Christoph Moning",
           "sourceURL": "https://www.inaturalist.org/observations/75534963",
           "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/saebelschnaebler-2.heic",
+          "sha256": "533dbc9df87ceb7ca1411fa103cff011a19e11a27ef87436b36e0f63cb788f3a",
+          "license": "CC-BY-4.0",
+          "attribution": "dawn2022",
+          "sourceURL": "https://www.inaturalist.org/observations/295200105",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/saebelschnaebler-3.heic",
+          "sha256": "eb3051c072c651f90fd1f76b50ede7e32b98f1220edf89bb41bb679fef94f20e",
+          "license": "CC0-1.0",
+          "attribution": "Лариса Артемьева",
+          "sourceURL": "https://www.inaturalist.org/observations/63582525",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": null,
@@ -243,8 +379,32 @@
       "taxonID": 3879,
       "article": "der",
       "pronunciation": null,
-      "photos": [],
-      "call": null
+      "photos": [
+        {
+          "file": "photos/rotschenkel.heic",
+          "sha256": "7f0f6fd352ce879ab6ca0298a2cd1c80c4b8196c5765d0675073398362489ca9",
+          "license": "CC-BY-4.0",
+          "attribution": "Griha Hasanov",
+          "sourceURL": "https://www.inaturalist.org/observations/166383611",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/rotschenkel-2.heic",
+          "sha256": "8c8f5ed71514eedb850be0c73d9ca495c430c3c85df940d84edb074ed6ba6e43",
+          "license": "CC-BY-4.0",
+          "attribution": "Phil James",
+          "sourceURL": "https://www.inaturalist.org/observations/306236013",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/rotschenkel.m4a",
+          "sha256": "19a272fa131553742c205d09f7e904a5a5c02c27b394a43371e054a839c3a0e5",
+          "text": "Rotschenkel"
+        }
+      }
     },
     {
       "id": "alpenstrandlaeufer",
@@ -260,6 +420,22 @@
           "license": "CC-BY-4.0",
           "attribution": "Donald Davesne",
           "sourceURL": "https://www.inaturalist.org/observations/75721462",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/alpenstrandlaeufer-2.heic",
+          "sha256": "3104d0a8c9af81d4475e6fe9e55884cce69c156d8ef54ebf86246aef60ee7006",
+          "license": "CC-BY-4.0",
+          "attribution": "Mityakov DA",
+          "sourceURL": "https://www.inaturalist.org/observations/336837314",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/alpenstrandlaeufer-3.heic",
+          "sha256": "c373721ea7de4cb4117f7fca93744c6cc40c84ad40ce6148072f400c14d1c7c5",
+          "license": "CC0-1.0",
+          "attribution": "Evan Feusi",
+          "sourceURL": "https://www.inaturalist.org/observations/371338519",
           "retrieved": "2026-10-21"
         }
       ],
@@ -279,8 +455,32 @@
       "taxonID": 3938,
       "article": "der",
       "pronunciation": null,
-      "photos": [],
-      "call": null
+      "photos": [
+        {
+          "file": "photos/steinwaelzer.heic",
+          "sha256": "fda311299989d640ff807d2b7428bd5a666dfa9aa355391daa76bfb438c5b21c",
+          "license": "CC-BY-4.0",
+          "attribution": "Daniel Pineda Vera",
+          "sourceURL": "https://www.inaturalist.org/observations/117325635",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/steinwaelzer-2.heic",
+          "sha256": "e63bf76c9f09c5493863a57f7b482983e033d96c3984cb56b477a6942e7b6d98",
+          "license": "CC0-1.0",
+          "attribution": "Andra Waagmeester",
+          "sourceURL": "https://www.inaturalist.org/observations/31196970",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/steinwaelzer.m4a",
+          "sha256": "364c14c2d7d2f075ff9a3ade4b1df75e5a446578ccdc8a0dc1664559c75d6194",
+          "text": "Steinwälzer"
+        }
+      }
     },
     {
       "id": "kampflaeufer",
@@ -289,8 +489,24 @@
       "taxonID": 339593,
       "article": "der",
       "pronunciation": null,
-      "photos": [],
-      "call": null
+      "photos": [
+        {
+          "file": "photos/kampflaeufer.heic",
+          "sha256": "e1616afd8e82885dd13ec088a9795e14c746009ce90fa8e874235d594e609807",
+          "license": "CC-BY-4.0",
+          "attribution": "Laura Gaudette",
+          "sourceURL": "https://www.inaturalist.org/observations/5981564",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/kampflaeufer.m4a",
+          "sha256": "9cd664274f0b51d01abfc960079e78a306245d707824f2f7920a6df80e1b21a5",
+          "text": "Kampfläufer"
+        }
+      }
     },
     {
       "id": "sandregenpfeifer",
@@ -315,6 +531,14 @@
           "attribution": "Вячеслав Юсупов",
           "sourceURL": "https://www.inaturalist.org/observations/60962889",
           "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/sandregenpfeifer-3.heic",
+          "sha256": "cb783334373bec57ca8488591aa4e7ec1bf5c266ee17d2c21005298a2d014b92",
+          "license": "CC-BY-4.0",
+          "attribution": "Pål A. Olsvik",
+          "sourceURL": "https://www.inaturalist.org/observations/117504292",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": null,
@@ -333,8 +557,40 @@
       "taxonID": 3896,
       "article": "der",
       "pronunciation": null,
-      "photos": [],
-      "call": null
+      "photos": [
+        {
+          "file": "photos/grosser-brachvogel.heic",
+          "sha256": "a3619453da353528bb5bdea06d317c66ebc6d64816a17fbeec87656a033f5c78",
+          "license": "CC0-1.0",
+          "attribution": "Светлана Царахова",
+          "sourceURL": "https://www.inaturalist.org/observations/205273715",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/grosser-brachvogel-2.heic",
+          "sha256": "0c365f83232f1ab582a938bf15a578f91eef0dbf8c41ba4c096ec91d0fd951db",
+          "license": "CC-BY-4.0",
+          "attribution": "Thomas Ebner",
+          "sourceURL": "https://www.inaturalist.org/observations/42069589",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/grosser-brachvogel-3.heic",
+          "sha256": "0d3120f5751abbb524fa822b0b20ddf6353058af263ecf11c29e33058f8b87f2",
+          "license": "CC-BY-4.0",
+          "attribution": "Kerri-Lee Harris",
+          "sourceURL": "https://www.inaturalist.org/observations/68585447",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/grosser-brachvogel.m4a",
+          "sha256": "6c2283f18d2b14177a138185b0985930b62c254233bfe86c77b3e061aa975b20",
+          "text": "Großer Brachvogel"
+        }
+      }
     },
     {
       "id": "silberreiher",
@@ -343,8 +599,32 @@
       "taxonID": 144455,
       "article": "der",
       "pronunciation": null,
-      "photos": [],
-      "call": null
+      "photos": [
+        {
+          "file": "photos/silberreiher.heic",
+          "sha256": "d24ea8c581e8d3ba917ac700faa0434d19f46a9f2e804502ac424f323f3d033f",
+          "license": "CC-BY-4.0",
+          "attribution": "Lisa Wiencek Gerbec",
+          "sourceURL": "https://www.inaturalist.org/observations/79867813",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/silberreiher-2.heic",
+          "sha256": "0e6bb4305e96b1ebed39d39858f8a6dc5dcd3037a352ff62b2967d9b7c5c76d3",
+          "license": "CC-BY-4.0",
+          "attribution": "Дмитрий Кошелев",
+          "sourceURL": "https://www.inaturalist.org/observations/196754834",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/silberreiher.m4a",
+          "sha256": "fc9a86ea2bae61bc38e5f36ab5cca2d326bfe5bf243887249e1f443c185459eb",
+          "text": "Silberreiher"
+        }
+      }
     },
     {
       "id": "loeffler",
@@ -369,6 +649,14 @@
           "attribution": "Andrea Chemello",
           "sourceURL": "https://www.inaturalist.org/observations/36998601",
           "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/loeffler-3.heic",
+          "sha256": "196c9d1f3c874dd4cb797815bb9aa1ac59a0e45bc67db134fe8f43a9c56abbff",
+          "license": "CC-BY-4.0",
+          "attribution": "David F. Belmonte",
+          "sourceURL": "https://www.inaturalist.org/observations/168683901",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": null,
@@ -387,8 +675,32 @@
       "taxonID": 4951,
       "article": "der",
       "pronunciation": null,
-      "photos": [],
-      "call": null
+      "photos": [
+        {
+          "file": "photos/purpurreiher-3.heic",
+          "sha256": "fffeaf011d623a59443c8594c4fa737182de49ad699e4beee37a056fa19244e2",
+          "license": "CC-BY-4.0",
+          "attribution": "Edmundas Greimas",
+          "sourceURL": "https://www.inaturalist.org/observations/214334744",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/purpurreiher-2.heic",
+          "sha256": "a88f6ba49057af324a9a2d830243b4ef92624a8f02b3c70e909323d29544dfd1",
+          "license": "CC-BY-4.0",
+          "attribution": "Andrea Chemello",
+          "sourceURL": "https://www.inaturalist.org/observations/36998678",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/purpurreiher.m4a",
+          "sha256": "3d5888579b4d26eb7b02cd44ab34f08d725eedd8db14438ae55ce10e9d25df0b",
+          "text": "Purpurreiher"
+        }
+      }
     },
     {
       "id": "rohrdommel",
@@ -397,8 +709,32 @@
       "taxonID": 5033,
       "article": "die",
       "pronunciation": null,
-      "photos": [],
-      "call": null
+      "photos": [
+        {
+          "file": "photos/rohrdommel.heic",
+          "sha256": "8dc56baba8b5c2b5abe8a77221a97ad2951b13766b3b2e4f80bd266426d44c28",
+          "license": "CC-BY-4.0",
+          "attribution": "Thierry Arbault",
+          "sourceURL": "https://www.inaturalist.org/observations/250143131",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/rohrdommel-2.heic",
+          "sha256": "351213550be5151ad4135f8673ae736ce498a54bcd71dbf454f611f46c275a4b",
+          "license": "CC-BY-4.0",
+          "attribution": "Шальнов Кирилл",
+          "sourceURL": "https://www.inaturalist.org/observations/167361528",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/rohrdommel.m4a",
+          "sha256": "24ce0e5f858943ede7506653fc1156911f7df5f0412de92bf59d89644c80563c",
+          "text": "Rohrdommel"
+        }
+      }
     },
     {
       "id": "flussseeschwalbe",
@@ -422,6 +758,14 @@
           "license": "CC0-1.0",
           "attribution": "nikonbird007",
           "sourceURL": "https://www.inaturalist.org/observations/287598986",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/flussseeschwalbe-3.heic",
+          "sha256": "c0fbb51be97b8db9b68c94c4e00eb7d029880f5c788b9613748b51cc8d229ae9",
+          "license": "CC-BY-4.0",
+          "attribution": "Blake Ross",
+          "sourceURL": "https://www.inaturalist.org/observations/138342161",
           "retrieved": "2026-10-21"
         }
       ],
@@ -457,6 +801,14 @@
           "attribution": "Gergely Nigg",
           "sourceURL": "https://www.inaturalist.org/observations/73037567",
           "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/zwergtaucher-3.heic",
+          "sha256": "c7114af72da94a168f5d38bc565e61b568df6475201dd4ef7ec90651147056f6",
+          "license": "CC0-1.0",
+          "attribution": "bko",
+          "sourceURL": "https://www.inaturalist.org/observations/355074268",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": null,
@@ -490,6 +842,14 @@
           "license": "CC-BY-4.0",
           "attribution": "Tomas Broucek",
           "sourceURL": "https://www.inaturalist.org/observations/71162578",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/reiherente-3.heic",
+          "sha256": "f1d4abe8d0e871cb678a0cb1b223b7914cf726e83b7120e6588de1c743791971",
+          "license": "CC-BY-4.0",
+          "attribution": "Tim Worwood",
+          "sourceURL": "https://www.inaturalist.org/observations/150231435",
           "retrieved": "2026-10-21"
         }
       ],
@@ -559,6 +919,22 @@
           "attribution": "Dan Vickers",
           "sourceURL": "https://www.inaturalist.org/observations/262164450",
           "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/loeffelente-2.heic",
+          "sha256": "01d3bc7bf1d3942231ff713664bc782016623ea5e5d75711a683fedfd29c1e5b",
+          "license": "CC-BY-SA-4.0",
+          "attribution": "Ron Bondy",
+          "sourceURL": "https://www.inaturalist.org/observations/339385176",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/loeffelente-3.heic",
+          "sha256": "f4f1087a1ac3771914f312f7c7b6be7e5846a5dedf9cf1f4cefcdc822f3f9488",
+          "license": "CC-BY-4.0",
+          "attribution": "Chris O'Donoghue",
+          "sourceURL": "https://www.inaturalist.org/observations/285804136",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": null,
@@ -584,6 +960,14 @@
           "license": "CC-BY-4.0",
           "attribution": "Timothy McNitt",
           "sourceURL": "https://www.inaturalist.org/observations/336665348",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/schellente-2.heic",
+          "sha256": "8294b809b27ede65980a51e28105c87c002521ee504134bca28d13f09e0528be",
+          "license": "CC-BY-4.0",
+          "attribution": "Pam Hardy",
+          "sourceURL": "https://www.inaturalist.org/observations/360057985",
           "retrieved": "2026-10-21"
         }
       ],
@@ -611,6 +995,22 @@
           "attribution": "Christoph Moning",
           "sourceURL": "https://www.inaturalist.org/observations/77408655",
           "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/kolbenente-2.heic",
+          "sha256": "122f336c0217d201cf89a93c416f6c0ac017f4d75d22238c347fd0f75b7a075b",
+          "license": "CC-BY-4.0",
+          "attribution": "Donald Davesne",
+          "sourceURL": "https://www.inaturalist.org/observations/69923463",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/kolbenente-3.heic",
+          "sha256": "65659e5831a92946a6a0d0211375deb9791c67a5084517352c7e7187bb172dda",
+          "license": "CC-BY-4.0",
+          "attribution": "Andreas Stiller",
+          "sourceURL": "https://www.inaturalist.org/observations/364342183",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": null,
@@ -629,8 +1029,32 @@
       "taxonID": 7004,
       "article": "der",
       "pronunciation": null,
-      "photos": [],
-      "call": null
+      "photos": [
+        {
+          "file": "photos/gaensesaeger.heic",
+          "sha256": "cc0a5e2efafdc049949e3812b18ed7bd5455678cc77f88b5a7740b62e3565bc3",
+          "license": "CC-BY-4.0",
+          "attribution": "Sandy Wolkenberg",
+          "sourceURL": "https://www.inaturalist.org/observations/103918457",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/gaensesaeger-2.heic",
+          "sha256": "5c59a7500a3edade2831e64053e0b1da021bbf242a1d3f96be1ea100052275c2",
+          "license": "CC-BY-4.0",
+          "attribution": "Sandy Wolkenberg",
+          "sourceURL": "https://www.inaturalist.org/observations/103918457",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/gaensesaeger.m4a",
+          "sha256": "cb285557a04e2c71dbe2b0e336ef30c8c33a1437ce7e544029e3963eb22481d4",
+          "text": "Gänsesäger"
+        }
+      }
     },
     {
       "id": "zwergsaeger",
@@ -659,34 +1083,38 @@
       }
     },
     {
-      "id": "teichhuhn",
-      "name": "Teichhuhn",
-      "scientificName": "Gallinula chloropus",
-      "taxonID": 201282,
-      "article": "das",
-      "pronunciation": null,
-      "photos": [],
-      "call": null
-    },
-    {
-      "id": "singschwan",
-      "name": "Singschwan",
-      "scientificName": "Cygnus cygnus",
-      "taxonID": 6916,
-      "article": "der",
-      "pronunciation": null,
-      "photos": [],
-      "call": null
-    },
-    {
       "id": "fischadler",
       "name": "Fischadler",
       "scientificName": "Pandion haliaetus",
       "taxonID": 116999,
       "article": "der",
       "pronunciation": null,
-      "photos": [],
-      "call": null
+      "photos": [
+        {
+          "file": "photos/fischadler.heic",
+          "sha256": "326e7902b5ae0fbc10c868c0df0d7eb7ccfca8410c6fcc8dfed0eae832846530",
+          "license": "CC-BY-4.0",
+          "attribution": "Валерия Ковалева",
+          "sourceURL": "https://www.inaturalist.org/observations/123771921",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/fischadler-2.heic",
+          "sha256": "e2e289e0983be0933e5d3a11633dfcfeb62dbdbb9c5e0e1249ce8560783c1498",
+          "license": "CC-BY-4.0",
+          "attribution": "Diego Maldonado de la Torre",
+          "sourceURL": "https://www.inaturalist.org/observations/116753220",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/fischadler.m4a",
+          "sha256": "38a376426a87bcb9d004bbbb224b2fa0e0df5aaa1d41e427b61a90e5a0c7a0ae",
+          "text": "Fischadler"
+        }
+      }
     },
     {
       "id": "flussuferlaeufer",
@@ -702,6 +1130,14 @@
           "license": "CC-BY-4.0",
           "attribution": "Andrew Allen",
           "sourceURL": "https://www.inaturalist.org/observations/90369115",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/flussuferlaeufer-2.heic",
+          "sha256": "b294985f2fa992459b5d19694158b3c6fa784273fc159460152e26584fbc93a6",
+          "license": "CC-BY-4.0",
+          "attribution": "Alexis Lours",
+          "sourceURL": "https://www.inaturalist.org/observations/208965555",
           "retrieved": "2026-10-21"
         }
       ],
@@ -728,6 +1164,22 @@
           "license": "CC-BY-4.0",
           "attribution": "Вячеслав Юсупов",
           "sourceURL": "https://www.inaturalist.org/observations/268545695",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/bekassine-2.heic",
+          "sha256": "f51949ebf46d047097274da78e686752145015f2ee65970d95ae9f20d161c034",
+          "license": "CC-BY-4.0",
+          "attribution": "Gergely Nigg",
+          "sourceURL": "https://www.inaturalist.org/observations/74026323",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/bekassine-3.heic",
+          "sha256": "f91542bff79e653f0308273b744195f560dd2a21b3041d90b861b9d59bf44aad",
+          "license": "CC-BY-4.0",
+          "attribution": "Вячеслав Шуплецов",
+          "sourceURL": "https://www.inaturalist.org/observations/363643532",
           "retrieved": "2026-10-21"
         }
       ],
