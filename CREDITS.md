@@ -710,6 +710,7 @@ the source declared.
 | Kornweihe | Photo | Yann Geshors | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/147835470> |
 | Kornweihe | Photo | Mikhail Nevsky | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/41463182> |
 | Kornweihe | Photo | Nathan Mesnildrey | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/336101157> |
+| Kornweihe | Call | Benoît Van Hecke (XC558933) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/558933> |
 | Rohrweihe | Photo | Лариса Артемьева | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/268933386> |
 | Rohrweihe | Photo | Artem Kuznetsov | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/41978285> |
 | Rohrweihe | Photo | Nigel Voaden | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/5848713> |
