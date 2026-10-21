@@ -2,8 +2,9 @@
 
 The record below is recorded from the live API (XC965144, an Amsel) and then
 varied for the cases the real response does not conveniently contain: the
-CC BY-SA 3.0 that `lic:BY-SA` really does return, a licence we cannot ship,
-a record without a file, and the sounds a quiz cannot use. No test reaches the network.
+CC BY-SA 3.0 that `lic:BY-SA` really does return (and that we accept), a
+NonCommercial licence we cannot ship, a record without a file, and the sounds
+a quiz cannot use. No test reaches the network.
 
 The API key is the reason several of these exist. It travels as a query
 parameter, so every message that quotes a URL would carry it into a terminal

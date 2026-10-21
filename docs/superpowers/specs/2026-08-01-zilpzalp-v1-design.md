@@ -50,7 +50,7 @@ Spiel 3 (Federn zuordnen) und Spiel 4 (Lebensraum antippen). Beide sind nicht am
 | Persistenz | Codable-JSON hinter einem Actor | Wenige Daten; ohne SwiftData in reinen Unit-Tests prüfbar |
 | Store-Kategorie | Kids Category | Zielgruppe; Konsequenzen siehe Abschnitt 7 |
 | Lokalisierung | Nur Deutsch, aber i18n-fähig gebaut | Texte in String Catalogs, Englisch später ohne Refactoring |
-| Medienlizenzen | Nur CC0, CC BY, CC BY-SA (BY und BY-SA in 3.0 und 4.0) | NonCommercial ist bei App-Store-Verteilung angreifbar und nicht weitergebbar |
+| Medienlizenzen | Nur CC0, CC BY, CC BY-SA (BY and BY-SA in 3.0 and 4.0) | NonCommercial ist bei App-Store-Verteilung angreifbar und nicht weitergebbar |
 
 ---
 

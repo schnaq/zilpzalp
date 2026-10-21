@@ -89,6 +89,9 @@ struct CreditsScreen: View {
                         }
                     }
 
+                    section(String(localized: "credits.licenses.title")) {
+                        licenceRows(Self.licences(in: credits))
+                    }
                     section(String(localized: "credits.fonts.title")) {
                         vendoredRows(credits.fonts, icon: .type)
                     }
@@ -162,6 +165,22 @@ struct CreditsScreen: View {
         .accessibilityHint(Text("link.web.accessibility"))
     }
 
+    /// One row per media licence in use, opening its deed — the licence URI
+    /// CC BY 3.0 §4(a) asks to travel with every copy.
+    private func licenceRows(_ licences: [License]) -> some View {
+        ForEach(Array(licences.enumerated()), id: \.element) { index, licence in
+            SettingRow(
+                title: licence.shortName,
+                hint: licence.deedURL.absoluteString,
+                icon: .shieldCheck,
+                showsSeparator: index != licences.count - 1,
+            ) {
+                pendingLink = ExternalLink(url: licence.deedURL)
+            }
+            .accessibilityHint(Text("link.web.accessibility"))
+        }
+    }
+
     /// The font families and the icon sets, which sit in no manifest and come
     /// from the generator's own lists.
     private func vendoredRows(_ entries: [Credits.Vendored], icon: ZIcon) -> some View {
@@ -198,6 +217,12 @@ struct CreditsScreen: View {
         case .call: String(localized: "credits.call.by")
         }
         return String(format: format, entry.attribution, entry.license.shortName)
+    }
+
+    /// Every licence a photo, a call or a voice ships under, each once.
+    private static func licences(in credits: Credits) -> [License] {
+        let used = Set(credits.media.map(\.license) + credits.voices.map(\.license))
+        return used.sorted { $0.shortName < $1.shortName }
     }
 
     /// The media grouped by pack, in the order the generator wrote them —

@@ -34,6 +34,19 @@ public extension License {
         case .ccBySa3: "CC BY-SA 3.0"
         }
     }
+
+    /// The licence deed. CC 3.0 §4(a) wants the licence URI with every copy,
+    /// and 4.0 §3(a)(1)(C) a link to it, so the credits screen offers it.
+    var deedURL: URL {
+        let path = switch self {
+        case .cc0: "publicdomain/zero/1.0/"
+        case .ccBy: "licenses/by/4.0/"
+        case .ccBySa: "licenses/by-sa/4.0/"
+        case .ccBy3: "licenses/by/3.0/"
+        case .ccBySa3: "licenses/by-sa/3.0/"
+        }
+        return URL(string: "https://creativecommons.org/\(path)")!
+    }
 }
 
 /// One medium — a photo or a call — with everything the licence gate checks

@@ -164,6 +164,19 @@ struct PackManifestTests {
         #expect(photo.license.shortName == shortName)
     }
 
+    @Test(
+        "every licence links the deed of its own version",
+        arguments: [
+            (License.cc0, "publicdomain/zero/1.0/"),
+            (License.ccBySa, "licenses/by-sa/4.0/"),
+            (License.ccBy3, "licenses/by/3.0/"),
+            (License.ccBySa3, "licenses/by-sa/3.0/"),
+        ],
+    )
+    func deedURL(licence: License, path: String) {
+        #expect(licence.deedURL.absoluteString == "https://creativecommons.org/" + path)
+    }
+
     @Test("a retrieved value that is not a YYYY-MM-DD date fails")
     func failsOnMalformedDate() throws {
         let manifest = try Self.manifest(replacing: #""2026-08-01""#, with: #""01.08.2026""#)
