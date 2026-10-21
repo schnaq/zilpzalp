@@ -26,7 +26,7 @@ const FAQ = [
       <>
         Eine KI-Stimme: „Ava“ von ElevenLabs. Wir erzeugen die Aufnahmen, bevor
         die App erscheint; die App selbst spricht ElevenLabs nie an. Fehlt
-        einmal eine Aufnahme, liest die Stimme des Geräts.
+        für einen Satz keine Aufnahme, liest die Stimme des Geräts.
       </>
     ),
   },
@@ -90,8 +90,9 @@ const FAQ = [
       <>
         Beide Spiele brauchen Ton: Spiel 1 liest den Vogelnamen vor, Spiel 2
         spielt eine Aufnahme. Prüfe die Lautstärke; der Stummschalter des
-        iPhones muss nicht umgelegt werden, die App spielt auch dann. Hilft das
-        nicht, schließe die App vollständig und öffne sie erneut.
+        iPhones muss nicht umgelegt werden, die App spielt auch dann. Bleibt nur
+        das Vorlesen still, sieh im Elternbereich nach, ob es ausgeschaltet ist.
+        Hilft das nicht, schließe die App vollständig und öffne sie erneut.
       </>
     ),
   },

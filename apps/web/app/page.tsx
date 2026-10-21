@@ -20,7 +20,7 @@ const FACTS = [
   {
     term: 'Über 300 mit Paketen',
     detail:
-      'Afrika, Asien, Australien, Nord- und Südamerika, Polar & Meer, Berge & Wald, Feld & Wiese, Wasser & Küste, Greifvögel & Eulen. Kinder können mehrere Pakete zusammen spielen.',
+      'Pakete zum Laden: Afrika, Asien, Australien & Ozeanien, Nordamerika, Südamerika & Regenwald, Polar & Meer, Berge & Wald, Feld, Wiese & Zugvögel, Wasser & Küste, Greifvögel & Eulen. Kinder können mehrere Pakete zusammen spielen.',
   },
   {
     term: 'Ohne Lesen',
@@ -29,7 +29,7 @@ const FACTS = [
   {
     term: 'Eine KI-Stimme',
     detail:
-      'Namen und Aufgaben spricht eine KI-Stimme: „Ava“ von ElevenLabs.',
+      'Vogelnamen und Ansagen spricht eine KI-Stimme: „Ava“ von ElevenLabs.',
   },
   {
     term: 'Sterne und Sticker',

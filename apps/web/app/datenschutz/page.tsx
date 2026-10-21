@@ -69,14 +69,15 @@ export default function Datenschutz() {
       </p>
       <ul>
         <li>
-          Profile: der Vorname oder Spitzname, den Erwachsene eingeben, ein
-          ausgewählter Vogel-Avatar, gesammelte Sterne, eine kleine Statistik,
-          die schon erkannten Vogelarten und wie oft ein Vogel für seinen
-          Sticker erkannt werden muss
+          Profile: der Vorname oder Spitzname, den Kind oder Erwachsene
+          eingeben, ein ausgewählter Vogel-Avatar, gesammelte Sterne, eine
+          kleine Statistik, die schon erkannten Vogelarten, wie oft ein Vogel
+          für seinen Sticker erkannt werden muss, die gewählten Vögel und die
+          Spielzeit des Tages
         </li>
         <li>
-          Einstellungen des Elternbereichs: die tägliche Spielzeit und wie die
-          App vorliest
+          Einstellungen des Elternbereichs: die tägliche Spielzeit und ob und
+          wie die App vorliest
         </li>
         <li>Heruntergeladene Artenpakete, falls Erwachsene welche laden</li>
       </ul>
@@ -104,11 +105,12 @@ export default function Datenschutz() {
 
       <h3>2.4 Sprachausgabe</h3>
       <p>
-        Vogelnamen und Aufgaben spricht eine KI-Stimme („Ava“ von ElevenLabs).
-        Die Aufnahmen erzeugen wir vorab, wenn wir die Pakete vorbereiten; sie
-        liegen als Tondateien in der App oder im Paket. Die App selbst spricht
-        ElevenLabs nie an. Fehlt einmal eine Aufnahme, liest die Sprachausgabe
-        von iOS (<code>AVSpeechSynthesizer</code>) auf dem Gerät. Es wird nichts
+        Vogelnamen und die wichtigsten Ansagen spricht eine KI-Stimme („Ava“
+        von ElevenLabs). Die Aufnahmen erzeugen wir vorab, wenn wir die Pakete
+        vorbereiten; sie liegen als Tondateien in der App oder im Paket. Die App
+        selbst spricht ElevenLabs nie an. Was nicht aufgenommen ist, liest die
+        Sprachausgabe von iOS (<code>AVSpeechSynthesizer</code>) auf dem
+        Gerät. Es wird nichts
         an einen Sprachdienst gesendet, und es wird nichts aufgezeichnet: Die App
         fragt weder das Mikrofon noch die Kamera, den Standort oder die Kontakte
         ab.
@@ -201,8 +203,12 @@ export default function Datenschutz() {
           Angebot)
         </li>
         <li>
-          Auslieferung der Paketliste und eines Artenpakets im Elternbereich:
-          Art. 6 Abs. 1 lit. b DSGVO (Erfüllung der angefragten Leistung)
+          Paketliste im Elternbereich: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes
+          Interesse, Erwachsenen zu zeigen, was sich laden lässt)
+        </li>
+        <li>
+          Auslieferung eines Artenpakets, das Erwachsene selbst anstoßen: Art. 6
+          Abs. 1 lit. b DSGVO (Erfüllung der angefragten Leistung)
         </li>
         <li>E-Mail-Kontakt: Art. 6 Abs. 1 lit. f bzw. lit. b DSGVO</li>
       </ul>
