@@ -5731,6 +5731,466 @@
       "sourceURL": "https://www.inaturalist.org/observations/158762689"
     },
     {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "adeliepinguin",
+      "birdName": "Adeliepinguin",
+      "kind": "photo",
+      "attribution": "steve b",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/199466069"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "adeliepinguin",
+      "birdName": "Adeliepinguin",
+      "kind": "photo",
+      "attribution": "Peter Shanks",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/244872535"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "kaiserpinguin",
+      "birdName": "Kaiserpinguin",
+      "kind": "photo",
+      "attribution": "Seig",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/31447153"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "kaiserpinguin",
+      "birdName": "Kaiserpinguin",
+      "kind": "photo",
+      "attribution": "mattward",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/146195342"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "kaiserpinguin",
+      "birdName": "Kaiserpinguin",
+      "kind": "call",
+      "attribution": "steve (XC877994)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/877994"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "eselspinguin",
+      "birdName": "Eselspinguin",
+      "kind": "photo",
+      "attribution": "Ingvild Riska",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/253310597"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "eselspinguin",
+      "birdName": "Eselspinguin",
+      "kind": "call",
+      "attribution": "steve (XC953123)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/953123"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "zuegelpinguin",
+      "birdName": "Zügelpinguin",
+      "kind": "photo",
+      "attribution": "Sterling Sheehy",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/194786"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "zuegelpinguin",
+      "birdName": "Zügelpinguin",
+      "kind": "call",
+      "attribution": "steve (XC953122)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/953122"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "gelbaugenpinguin",
+      "birdName": "Gelbaugenpinguin",
+      "kind": "photo",
+      "attribution": "William Harland",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/229180441"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "gelbaugenpinguin",
+      "birdName": "Gelbaugenpinguin",
+      "kind": "photo",
+      "attribution": "Colin Meurk",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/941206"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "papageitaucher",
+      "birdName": "Papageitaucher",
+      "kind": "photo",
+      "attribution": "Diego González Dopico",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/277865524"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "papageitaucher",
+      "birdName": "Papageitaucher",
+      "kind": "photo",
+      "attribution": "Julia Moning",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/114739787"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "papageitaucher",
+      "birdName": "Papageitaucher",
+      "kind": "photo",
+      "attribution": "Christoph Moning",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/115403062"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "krabbentaucher",
+      "birdName": "Krabbentaucher",
+      "kind": "photo",
+      "attribution": "Owen Strickland",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/144263017"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "krabbentaucher",
+      "birdName": "Krabbentaucher",
+      "kind": "photo",
+      "attribution": "Christoph Moning",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/63685914"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "trottellumme",
+      "birdName": "Trottellumme",
+      "kind": "photo",
+      "attribution": "franciscodocampo",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/35832417"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "trottellumme",
+      "birdName": "Trottellumme",
+      "kind": "call",
+      "attribution": "Sonothèque ADVL (XC1041354)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/1041354"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "wanderalbatros",
+      "birdName": "Wanderalbatros",
+      "kind": "photo",
+      "attribution": "eloise kerroux",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/281029033"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "wanderalbatros",
+      "birdName": "Wanderalbatros",
+      "kind": "photo",
+      "attribution": "Peter Shanks",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/250080678"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "wanderalbatros",
+      "birdName": "Wanderalbatros",
+      "kind": "photo",
+      "attribution": "Saryu Mae 前 朝琉",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/265575462"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "schwarzbrauenalbatros",
+      "birdName": "Schwarzbrauenalbatros",
+      "kind": "photo",
+      "attribution": "patrickc",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/10025783"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "schwarzbrauenalbatros",
+      "birdName": "Schwarzbrauenalbatros",
+      "kind": "call",
+      "attribution": "Kevin Guille (XC864005)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/864005"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "dreizehenmoewe",
+      "birdName": "Dreizehenmöwe",
+      "kind": "photo",
+      "attribution": "Quinten Wiegersma",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/99626453"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "dreizehenmoewe",
+      "birdName": "Dreizehenmöwe",
+      "kind": "call",
+      "attribution": "Sonothèque ADVL (XC1143440)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/1143440"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "kuestenseeschwalbe",
+      "birdName": "Küstenseeschwalbe",
+      "kind": "photo",
+      "attribution": "Dr. Sven Gippner",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/380760787"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "kuestenseeschwalbe",
+      "birdName": "Küstenseeschwalbe",
+      "kind": "call",
+      "attribution": "Doug Hynes (XC564600)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/564600"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "prachteiderente",
+      "birdName": "Prachteiderente",
+      "kind": "photo",
+      "attribution": "Court Harding",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/342574245"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "eiderente",
+      "birdName": "Eiderente",
+      "kind": "photo",
+      "attribution": "Nigel Voaden",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/1186757"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "eiderente",
+      "birdName": "Eiderente",
+      "kind": "call",
+      "attribution": "Doug Hynes (XC1033167)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/1033167"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "kragenente",
+      "birdName": "Kragenente",
+      "kind": "photo",
+      "attribution": "Chrissy McClarren and Andy Reago",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/86911376"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "schnee-eule",
+      "birdName": "Schnee-Eule",
+      "kind": "photo",
+      "attribution": "Dustin Snider",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/195441759"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "schnee-eule",
+      "birdName": "Schnee-Eule",
+      "kind": "photo",
+      "attribution": "Matt Felperin",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/104681391"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "schneeammer",
+      "birdName": "Schneeammer",
+      "kind": "photo",
+      "attribution": "Михаил Малышев",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/201274186"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "schneeammer",
+      "birdName": "Schneeammer",
+      "kind": "call",
+      "attribution": "Sonothèque ADVL (XC950366)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/950366"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "alpenschneehuhn",
+      "birdName": "Alpenschneehuhn",
+      "kind": "photo",
+      "attribution": "Cheryl McCleary-Catalano",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/6420202"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "eistaucher",
+      "birdName": "Eistaucher",
+      "kind": "photo",
+      "attribution": "Christian Back",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/102565488"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "eistaucher",
+      "birdName": "Eistaucher",
+      "kind": "photo",
+      "attribution": "Betsy Lambert",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/96321392"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "eistaucher",
+      "birdName": "Eistaucher",
+      "kind": "call",
+      "attribution": "Doug Hynes (XC992792)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/992792"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "blaufusstoelpel",
+      "birdName": "Blaufußtölpel",
+      "kind": "photo",
+      "attribution": "Anthony Batista",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/167987942"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "blaufusstoelpel",
+      "birdName": "Blaufußtölpel",
+      "kind": "photo",
+      "attribution": "steve b",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/263834304"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "blaufusstoelpel",
+      "birdName": "Blaufußtölpel",
+      "kind": "photo",
+      "attribution": "Sinaloa Silvestre",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/162095270"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "prachtfregattvogel",
+      "birdName": "Prachtfregattvogel",
+      "kind": "photo",
+      "attribution": "Thibaud Aronson",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/112046587"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "prachtfregattvogel",
+      "birdName": "Prachtfregattvogel",
+      "kind": "photo",
+      "attribution": "steve b",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/258500351"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "prachtfregattvogel",
+      "birdName": "Prachtfregattvogel",
+      "kind": "photo",
+      "attribution": "steve b",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/262657239"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "rotschnabeltropikvogel",
+      "birdName": "Rotschnabel-Tropikvogel",
+      "kind": "photo",
+      "attribution": "William Stephens",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/199677737"
+    },
+    {
       "packID": "suedamerika",
       "packTitle": "Südamerika & Regenwald",
       "birdID": "riesentukan",
@@ -7423,6 +7883,12 @@
       "license": "CC-BY-4.0",
       "sourceURL": "https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md",
       "usedIn": "Nordamerika"
+    },
+    {
+      "attribution": "Stimme: Ava (ElevenLabs)",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md",
+      "usedIn": "Polar & Meer"
     },
     {
       "attribution": "Stimme: Ava (ElevenLabs)",
