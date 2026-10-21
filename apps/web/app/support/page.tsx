@@ -74,9 +74,10 @@ const FAQ = [
     q: 'Es kommt kein Ton',
     a: (
       <>
-        Prüf die Lautstärke; der Stummschalter stört nicht. Fehlt nur das
-        Vorlesen, ist es vielleicht im Elternbereich ausgeschaltet. Sonst die
-        App ganz schließen und neu öffnen.
+        Prüf die Lautstärke; der Stummschalter stört nicht. Spricht die App
+        nicht von selbst, steht Vorlesen im Elternbereich auf „Nur auf
+        Knopfdruck“ – dann auf den Lautsprecher tippen. Sonst die App ganz
+        schließen und neu öffnen.
       </>
     ),
   },
