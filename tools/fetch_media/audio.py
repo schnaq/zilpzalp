@@ -340,6 +340,15 @@ def write_wave(path: Path, samples: array.array, rate: int) -> None:
         sink.writeframes(samples.tobytes())
 
 
+def seconds(path: Path) -> float:
+    """How long an encoded clip lasts, counted in samples as `Clip.seconds` is."""
+    with tempfile.TemporaryDirectory(prefix="zilpzalp-audio-") as directory:
+        decoded = Path(directory) / "decoded.wav"
+        afconvert(["-f", "WAVE", "-d", "LEI16", str(path), str(decoded)])
+        samples, rate, channels = read_wave(decoded)
+        return len(samples) / channels / rate
+
+
 def trim(
     data: bytes, file_name: str, start: float = 0.0, duration: float | None = DURATION
 ) -> Clip:

@@ -96,5 +96,10 @@ class Provider(Protocol):
         adapter.
         """
 
-    def render(self, text: str, voice: str | None = None) -> bytes:
-        """Speak `text`, as WAV bytes. `voice` names one the provider offers."""
+    def render(self, text: str, voice: str | None = None, take: int = 0) -> bytes:
+        """Speak `text`, as WAV bytes. `voice` names one the provider offers.
+
+        `take` counts the attempts at one sentence: the command asks again with
+        the next one when a clip came back too short to be whole (#310). A
+        provider with a seed varies it by the take; one without ignores it.
+        """

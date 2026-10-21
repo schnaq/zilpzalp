@@ -34,6 +34,18 @@ PROVIDERS: dict[str, type] = {
 # where the adapters can reach it without importing this module.
 IMPORT_LICENCE = "CC-BY-4.0"
 
+# How long a clip has to last before `render` believes the sentence was said to
+# the end (#310). `eleven_v3` cuts short texts off — „Welche Vögel?" came back
+# as 0.64 s, „Uhu" as 0.4 s — and a cut clip is still a valid file at the right
+# loudness, so only its length gives it away. Calibrated on 2026-10-21 against
+# the 376 clips then in the repository: 0.05 s per character with a floor of
+# half a second flags both of those and the clips that sit exactly where „Welche
+# Vögel?" does (13 characters, 0.64 s); the next clip up, „Willst du
+# aufhören?", clears it by 10 ms. A heuristic, not a verdict: tune these two
+# numbers, not the code, when a clip proves it wrong.
+SECONDS_PER_CHARACTER = 0.05
+SHORTEST = 0.5
+
 __all__ = [
     "IMPORT_LICENCE",
     "PROVIDERS",
@@ -44,6 +56,7 @@ __all__ = [
     "VoiceOption",
     "imported_voice",
     "provider",
+    "shortest",
 ]
 
 
@@ -62,3 +75,8 @@ def imported_voice(attribution: str) -> Voice:
     beside the adapters' rather than in the command line that calls them.
     """
     return Voice(license=IMPORT_LICENCE, attribution=attribution, source_url=RECORDING_DOC)
+
+
+def shortest(text: str) -> float:
+    """The fewest seconds a clip of `text` may last without counting as cut off."""
+    return max(SHORTEST, SECONDS_PER_CHARACTER * len(text))

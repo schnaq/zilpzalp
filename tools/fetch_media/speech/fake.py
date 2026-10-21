@@ -3,9 +3,9 @@
 It exists so that the command line, the manifest write and the encoding can be
 run and tested without a vendor, a key or a network — the rule
 `tools/tests/` already follows for iNaturalist and xeno-canto. What comes out
-is a short tone per word: no speech, but the right shape — a rhythm, silence at
-both ends for the trim to find, and a level well below full scale for the
-normaliser to lift.
+is a short tone per word: no speech, but the right shape — a rhythm, a length
+that grows with the text the way speech does, silence at both ends for the trim
+to find, and a level well below full scale for the normaliser to lift.
 
 Deterministic on purpose: the same sentence produces the same samples, so a
 test can re-render a clip and ask whether anything changed. Nothing it produces
@@ -24,9 +24,12 @@ from fetch_media.speech.provider import Voice, VoiceOption, wav_bytes
 
 RATE = 22050
 
-# A word is a quarter of a second of tone, with a breath between two of them
-# and silence at either end that the silence trim has to find and drop.
-WORD = 0.24
+# A word is a tenth of a second of tone per letter, with a breath between two
+# of them and silence at either end that the silence trim has to find and drop.
+# Per letter rather than per word, so that the length check of `render` (#310)
+# passes a name the way it passes a spoken one — and fails „Uhu" the way it
+# failed the cut-off clip v3 delivered.
+LETTER = 0.1
 GAP = 0.06
 EDGE = 0.15
 
@@ -51,7 +54,7 @@ def samples(text: str) -> array.array:
     frames = array.array("h", [0] * int(EDGE * RATE))
 
     for word in text.split() or [text]:
-        length = int(WORD * RATE)
+        length = int(LETTER * len(word) * RATE)
         frequency = pitch(word)
         for index in range(length):
             # A raised cosine over the whole burst: the burst is short enough
@@ -86,6 +89,6 @@ class FakeProvider:
             ),
         )
 
-    def render(self, text: str, voice: str | None = None) -> bytes:
-        """The sentence as tones, in a WAV container. `voice` changes nothing."""
+    def render(self, text: str, voice: str | None = None, take: int = 0) -> bytes:
+        """The sentence as tones, in a WAV container. `voice` and `take` change nothing."""
         return wav_bytes(samples(text).tobytes(), RATE)

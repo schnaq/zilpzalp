@@ -395,8 +395,8 @@ class GoogleProvider:
             source_url=RECORDING_DOC,
         )
 
-    def render(self, text: str, voice: str | None = None) -> bytes:
-        """Speak one German sentence, as WAV bytes."""
+    def render(self, text: str, voice: str | None = None, take: int = 0) -> bytes:
+        """Speak one German sentence, as WAV bytes. There is no seed to vary by `take`."""
         option = self.chosen(voice)
         response = self._request(
             "POST",

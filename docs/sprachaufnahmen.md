@@ -171,6 +171,53 @@ normalisation and AAC encoding as an imported take.
 synthetic voice mispronounces bird names — `pronunciation` in the pack manifest
 is how that is fixed, and the tool speaks it where it is set.
 
+### Short texts come back cut off
+
+`eleven_v3` truncates short texts at the end (issue #310, tried by direct API
+calls on 2026-10-21). „Welche Vögel?" came back as 0.64 s, in PCM and in MP3
+alike, and several bare names lost their last sound — „Uhu" lasted 0.4 s.
+
+The adapter therefore sends every text as `[ruhig] <text> ...`: the v3 audio
+tag „ruhig" in front, an ellipsis behind. Christian listened to the variants
+and approved this one; „Welche Vögel?", „Amsel" and „Zilpzalp" came out whole
+and natural, where the plain text was cut. The tag alone or the ellipsis alone
+also saved the sentence, but the combination is what was approved, and it is
+used for every text. The wrapping stays inside `speech/elevenlabs.py`: the
+manifest's `text` is still the plain sentence the clip says. It costs twelve
+characters a clip that the count printed before a run does not include.
+
+„Uhu" needed more than the wrapping. Its `pronunciation` is „Der Uhu" in every
+pack that has the bird (deutschland, greifvoegel-eulen), so the clip is
+rendered as `[ruhig] Der Uhu ...`.
+
+Every render is checked for length afterwards. A clip has to last at least
+0.05 s per character of its text, and never less than 0.5 s
+(`SECONDS_PER_CHARACTER` and `SHORTEST` in `speech/__init__.py`). A clip below
+that is rendered once more with the next seed; if it is still short, nothing
+is recorded for that line, the clip it had stays, the run goes on with the
+other lines, and it ends with an `::error::` per line that failed and exit
+code 1.
+
+The threshold is a heuristic, calibrated against the 376 clips in the
+repository on 2026-10-21. It flags „Uhu" (0.40 s) and „Welche Vögel?" (0.64 s
+for 13 characters), and with them every other clip at that exact length:
+„Wie heißt du?", „Schwarzspecht" and „Bienenfresser" (twice). Length alone
+cannot tell those apart from the one known to be cut; whether they are cut is
+for a listener to say. The closest clip that passes, „Willst du aufhören?",
+clears it by 10 ms. The second Uhu (greifvoegel-eulen, 0.56 s) passes, and is
+re-rendered anyway because its pronunciation changed. Tune the two numbers,
+not the code, when a clip proves them wrong.
+
+`speech check` lists every recorded clip that fails the same test, measured
+against the text its manifest stored. Without `--pack` or `--set` it checks
+every manifest. It renders nothing, needs no key, and exits 1 if it finds
+anything:
+
+```
+mise run fetch-media speech check
+mise run fetch-media speech check --pack deutschland
+```
+
 ## Google Cloud Text-to-Speech, not used
 
 `speech/google.py` was the renderer from #234 until 2026-10-20 and stays in
