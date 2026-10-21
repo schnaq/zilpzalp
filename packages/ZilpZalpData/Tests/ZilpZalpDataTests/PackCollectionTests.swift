@@ -285,8 +285,10 @@ struct PackCollectionTests {
             #expect(collections.everything.offersCalls)
         }
     }
+}
 
-    /// #306: a child may choose several packs, and they are played together.
+/// #306: a child may choose several packs, and they are played together.
+extension PackCollectionTests {
     @Test("several packs play together, a shared species once and with its call")
     func mixesSeveralPacks() throws {
         try withPacks { home in

@@ -283,18 +283,20 @@ final class QuizSession {
             nextQuestion()
             return
         }
-        askQuestion()
+        askQuestion(unprompted: true)
     }
 
     /// Puts the question: game 1 reads the name out, game 2 plays the call. The
-    /// sound button calls this; so does every new question.
+    /// sound button calls this; so does every new question, `unprompted` —
+    /// which in „Nur auf Knopfdruck" keeps game 1 quiet until the button is
+    /// tapped (#306). A call is not speech and plays either way (#138).
     ///
     /// No guard against sounding over whatever is still running, because
     /// neither side needs one: ``SpeechAnnouncer/announce(_:)`` and
     /// ``CallPlayer/play(_:)`` both stop what they do and begin again, so two
     /// questions can never sound at once. Refusing the tap while a question
     /// runs would only make the one button a child reaches for feel broken.
-    func askQuestion() {
+    func askQuestion(unprompted: Bool = false) {
         guard let answer else { return }
         // Only the first one: the sound button asks again, and a round does not
         // start again because a child asked to hear it twice.
@@ -303,7 +305,7 @@ final class QuizSession {
 
         switch game {
         case .names:
-            announcer.announce(.name(answer))
+            announcer.announce(.name(answer), unprompted: unprompted)
         case .calls:
             // Never missing in a round of game 2 — only birds with a recording
             // are asked for. Silence if it ever were: saying the name instead
@@ -379,7 +381,7 @@ final class QuizSession {
             player.stop()
             return
         }
-        askQuestion()
+        askQuestion(unprompted: true)
     }
 }
 

@@ -1296,18 +1296,18 @@ the source declared.
 
 | Voice | Licence | Spoken for | Source |
 | --- | --- | --- | --- |
-| Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Vögel Afrikas | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
-| Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Asien | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
-| Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Australien & Ozeanien | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
-| Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Berge & Wald | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
-| Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Vögel Deutschlands | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
-| Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Feld, Wiese & Zugvögel | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
-| Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Greifvögel & Eulen | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
-| Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Nordamerika | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
-| Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Polar & Meer | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
-| Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Südamerika & Regenwald | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
-| Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Wasser & Küste | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
-| Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Ansagen | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
+| KI-Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Vögel Afrikas | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
+| KI-Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Asien | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
+| KI-Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Australien & Ozeanien | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
+| KI-Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Berge & Wald | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
+| KI-Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Vögel Deutschlands | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
+| KI-Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Feld, Wiese & Zugvögel | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
+| KI-Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Greifvögel & Eulen | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
+| KI-Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Nordamerika | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
+| KI-Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Polar & Meer | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
+| KI-Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Südamerika & Regenwald | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
+| KI-Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Wasser & Küste | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
+| KI-Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Ansagen | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
 
 ## Fonts
 

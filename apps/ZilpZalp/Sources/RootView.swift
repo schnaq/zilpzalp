@@ -68,7 +68,7 @@ struct RootView: View {
                             packs: model.packs,
                             profiles: model.profiles,
                             play: { packID in
-                                Task { await model.choose(collection: packID) }
+                                Task { await model.choose(collections: [packID]) }
                                 path.removeAll()
                             },
                             chooseStickerThreshold: { threshold, id in
@@ -159,12 +159,13 @@ struct RootView: View {
                 openProfiles: { model.chooseAgain() },
                 collections: model.collectionEntries,
                 // The resolved choice, not the stored one: a pack deleted
-                // while it was chosen shows „Alle Vögel" here, which is what
+                // while it was chosen is not shown as chosen, which is what
                 // the next round will ask about (#187).
-                chosenCollection: model.collection.id,
+                chosenCollections: model.collectionSelection,
                 chooseCollection: { collection in
-                    Task { await model.choose(collection: collection) }
+                    Task { await model.toggle(collection: collection) }
                 },
+                library: model.packs.library,
                 openCollection: { path.append(.collection) },
                 newBirds: showsNewBirds,
                 dismissPacksHint: showsPacksHint ? { packsHintDismissed = true } : nil,

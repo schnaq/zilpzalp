@@ -12,8 +12,8 @@ import ZilpZalpData
 /// The view's half of ``PackCollection``: the German „Alle Vögel" and the
 /// photo files are the app's business, and `ZilpZalpData` carries neither.
 struct CollectionEntry {
-    /// The pack, `nil` for every bird — the value ``Profile/collection``
-    /// stores.
+    /// The pack, `nil` for every bird — one of the values
+    /// ``Profile/collections`` stores.
     let id: String?
 
     /// The word under the picture: the pack's manifest title, or „Alle Vögel".
@@ -24,27 +24,43 @@ struct CollectionEntry {
     /// like.
     let cover: Image?
 
-    /// What the app says when this entry is tapped.
-    ///
-    /// A pack's title comes from its manifest, which records no clip of its own
-    /// name, so it is spoken by the synthesiser — ``SpokenLine/assembled(_:)``.
-    /// „Alle Vögel" is a String Catalog entry and takes its key, so a
-    /// recording of it would be found the day one is made.
-    var spoken: SpokenLine {
-        title == String(localized: "home.collection.all") ? .fixed("home.collection.all") :
-            .assembled(title)
+    /// What the app says when this entry is tapped: the pack's own recording
+    /// of its title where it has one (#306), the fixed set's „Alle Vögel" for
+    /// every bird — each read out by the synthesiser where nothing is
+    /// recorded.
+    let spoken: SpokenLine
+
+    /// Whether this entry is part of `selection` — see
+    /// ``AppModel/collectionSelection``. „Alle Vögel" is chosen exactly when
+    /// no pack is.
+    func isChosen(in selection: Set<String>) -> Bool {
+        id.map(selection.contains) ?? selection.isEmpty
+    }
+}
+
+extension CollectionEntry {
+    /// A photoless entry that says its own title — for the previews.
+    static func preview(_ id: String?, _ title: String) -> CollectionEntry {
+        CollectionEntry(id: id, title: title, cover: nil, spoken: .assembled(title))
     }
 }
 
 extension AppModel {
-    /// The collection the playing child's rounds ask about.
+    /// The collection the playing child's rounds ask about — every bird, one
+    /// pack, or several together (#306).
     ///
-    /// Resolved on every read rather than stored: a grown-up can delete the
+    /// Resolved on every read rather than stored: a grown-up can delete a
     /// pack a child chose while the app runs, and ``PackCollections/chosen(_:)``
-    /// answers with every bird for a pack that is no longer there — silently,
-    /// and without touching the profile.
+    /// leaves out a pack that is no longer there — silently, and without
+    /// touching the profile.
     var collection: PackCollection {
-        packs.collections.chosen(activeProfile?.collection)
+        packs.collections.chosen(activeProfile?.collections ?? [])
+    }
+
+    /// The packs the picker shows as chosen, resolved the same way; empty for
+    /// „Alle Vögel".
+    var collectionSelection: Set<String> {
+        packs.collections.selection(activeProfile?.collections ?? [])
     }
 
     /// Whether the playing child holds most of the stickers there are on the
@@ -73,14 +89,19 @@ extension AppModel {
                 id: nil,
                 title: pack?.title ?? String(localized: "home.collection.all"),
                 cover: pack?.birds.first.flatMap { packs.photos[$0.id] },
+                spoken: pack.map { .packTitle($0.id, title: $0.title) }
+                    ?? .fixed("home.collection.all"),
             )]
         }
 
         return packs.collections.entries.map { collection in
-            CollectionEntry(
+            let title = collection.title ?? String(localized: "home.collection.all")
+            return CollectionEntry(
                 id: collection.id,
-                title: collection.title ?? String(localized: "home.collection.all"),
+                title: title,
                 cover: collection.cover.flatMap { packs.photos[$0.id] },
+                spoken: collection.id.map { .packTitle($0, title: title) }
+                    ?? .fixed("home.collection.all"),
             )
         }
     }

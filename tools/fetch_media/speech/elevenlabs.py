@@ -92,7 +92,7 @@ class ElevenLabsError(RuntimeError):
 
 def attribution(name: str) -> str:
     """How the credits screen names the voice."""
-    return f"Stimme: {name} (ElevenLabs)"
+    return f"KI-Stimme: {name} (ElevenLabs)"
 
 
 def message(response: httpx.Response) -> str:

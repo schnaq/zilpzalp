@@ -183,6 +183,18 @@ class SentenceTests(unittest.TestCase):
 
             self.assertIn("not a species sentence", str(error.exception))
 
+    def test_says_a_pack_s_title_as_the_manifest_has_it(self) -> None:
+        """#306: the picker says a tapped pack's title, one clip per pack."""
+        self.assertEqual(sentences.PACK_SENTENCES, ("pack.title",))
+        self.assertEqual(
+            sentences.pack_text({"id": "afrika", "title": "Vögel Afrikas"}, "pack.title"),
+            "Vögel Afrikas",
+        )
+        with self.assertRaises(LookupError) as error:
+            sentences.pack_text({"title": "Vögel Afrikas"}, "collection.name")
+
+        self.assertIn("not a pack sentence", str(error.exception))
+
     def test_reads_a_fixed_sentence_as_the_catalogue_has_it(self) -> None:
         self.assertEqual(sentences.fixed_text("roundEnd.title"), "Super gemacht!")
 
@@ -371,7 +383,7 @@ class ElevenLabsTests(unittest.TestCase):
         voice = provider.voice("v-ava=Ava")
         provider.render("Amsel", "v-ava=Ava")
 
-        self.assertEqual(voice.attribution, "Stimme: Ava (ElevenLabs)")
+        self.assertEqual(voice.attribution, "KI-Stimme: Ava (ElevenLabs)")
         paths = [request.url.path for request in self.requests]
         self.assertEqual(paths, ["/v1/text-to-speech/v-ava"])
 
@@ -400,7 +412,7 @@ class ElevenLabsTests(unittest.TestCase):
         voice = self.provider().voice("Johanna")
 
         self.assertEqual(voice.license, "CC-BY-4.0")
-        self.assertEqual(voice.attribution, "Stimme: Johanna (ElevenLabs)")
+        self.assertEqual(voice.attribution, "KI-Stimme: Johanna (ElevenLabs)")
         self.assertEqual(voice.source_url, speech.RECORDING_DOC)
 
     def test_says_what_a_refusal_means(self) -> None:
@@ -687,7 +699,7 @@ class GoogleTests(unittest.TestCase):
         voice = self.provider().voice(VOICE)
 
         self.assertEqual(voice.license, "CC-BY-4.0")
-        self.assertEqual(voice.attribution, "Stimme: Aoede (Google Cloud Text-to-Speech)")
+        self.assertEqual(voice.attribution, "KI-Stimme: Aoede (Google Cloud Text-to-Speech)")
         self.assertEqual(voice.source_url, speech.RECORDING_DOC)
 
     def test_says_what_a_refusal_means(self) -> None:
@@ -785,6 +797,14 @@ class TargetTests(unittest.TestCase):
         self.assertEqual(target.file("roundEnd.title"), "roundEnd.title.m4a")
         self.assertEqual(target.label, "fixed")
 
+    def test_a_pack_sentence_lives_in_the_pack_s_speech_directory(self) -> None:
+        target = clips.Target(
+            directory=Path("/p"), path=Path("/p/manifest.json"), bird_id=None, pack_level=True
+        )
+
+        self.assertEqual(target.file("pack.title"), "speech/pack.title.m4a")
+        self.assertEqual(target.label, "pack")
+
 
 class SpeechTestCase(unittest.TestCase):
     """A throwaway two-bird pack and a throwaway fixed set."""
@@ -869,6 +889,25 @@ class RenderTests(SpeechTestCase):
         self.render("--pack", "basis", "--species", "amsel")
 
         self.assertEqual(list(self.clips_of("amsel")), list(sentences.SPECIES_SENTENCES))
+
+    def test_renders_the_pack_s_title_beside_its_birds(self) -> None:
+        """#306: one clip for the pack, under the manifest's own `speech`."""
+        code, _ = self.render("--pack", "basis", "--sentence", "pack.title")
+
+        self.assertEqual(code, 0)
+        entry = self.document()["speech"]["pack.title"]
+        self.assertEqual(entry["file"], "speech/pack.title.m4a")
+        self.assertEqual(entry["text"], "Unsere ersten Vögel")
+        self.assertEqual(entry["sha256"], manifest.sha256_of(self.pack / entry["file"]))
+        self.assertEqual(self.clips_of("amsel"), {})
+        self.assertIn(("speech/pack.title.m4a", entry["sha256"]), manifest.media_files(self.document()))
+
+    def test_renders_the_title_by_default_only_for_the_whole_pack(self) -> None:
+        self.render("--pack", "basis", "--species", "amsel")
+        self.assertNotIn("speech", self.document())
+
+        self.render("--pack", "basis")
+        self.assertEqual(list(self.document()["speech"]), ["pack.title"])
 
     def test_renders_one_sentence_when_one_is_named(self) -> None:
         self.render("--pack", "basis", "--sentence", "collection.name")
@@ -1049,7 +1088,7 @@ class VendorCommandTests(SpeechTestCase):
 
         self.assertEqual(code, 0)
         voice = self.document()["voice"]
-        self.assertEqual(voice["attribution"], "Stimme: Johanna (ElevenLabs)")
+        self.assertEqual(voice["attribution"], "KI-Stimme: Johanna (ElevenLabs)")
         self.assertEqual(voice["license"], "CC-BY-4.0")
         self.assertEqual(voice["sourceURL"], speech.RECORDING_DOC)
         self.assertEqual(list(self.clips_of("amsel")), ["collection.name"])

@@ -45,6 +45,12 @@ LANGUAGE = "de"
 # The species sentences, in the order `--sentence` lists and defaults to.
 SPECIES_SENTENCES = ("collection.name",)
 
+# The sentences about a pack itself, one clip per pack: `pack.title`, the
+# manifest's title spoken — what the collection picker says when a child taps
+# the pack (#306). `SpeechKey.packTitle` in `ZilpZalpData` is this key on the
+# Swift side. Not in the catalog either: the title is the pack's data.
+PACK_SENTENCES = ("pack.title",)
+
 # `%1$@`, `%2$@` and the unpositional `%@`, which is what Swift's
 # `String(format:)` is given at the call sites this mirrors.
 PLACEHOLDER = re.compile(r"%(?:(\d+)\$)?@")
@@ -124,6 +130,15 @@ def species_text(bird: dict, sentence: str) -> str:
 
     known = ", ".join(SPECIES_SENTENCES)
     raise LookupError(f"'{sentence}' is not a species sentence (expected one of {known})")
+
+
+def pack_text(document: dict, sentence: str) -> str:
+    """What one sentence about a pack says."""
+    if sentence == "pack.title":
+        return str(document["title"])
+
+    known = ", ".join(PACK_SENTENCES)
+    raise LookupError(f"'{sentence}' is not a pack sentence (expected one of {known})")
 
 
 def fixed_text(sentence: str) -> str:

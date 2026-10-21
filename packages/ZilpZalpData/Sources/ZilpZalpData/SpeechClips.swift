@@ -45,8 +45,12 @@ public struct SpeechClips: Sendable {
     ///   - pack: The pack the sentence is about — its title — when it is
     ///     about no species. `nil` for the fixed set.
     public func url(for sentence: String, about bird: Bird?, pack: String? = nil) -> URL? {
-        if let bird { return library.speechURL(for: bird, sentence: sentence) }
-        if let pack { return library.speechURL(forPack: pack, sentence: sentence) }
+        if let bird {
+            return library.speechURL(for: bird, sentence: sentence)
+        }
+        if let pack {
+            return library.speechURL(forPack: pack, sentence: sentence)
+        }
         return fixed?.url(for: sentence)
     }
 

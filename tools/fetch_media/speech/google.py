@@ -116,7 +116,7 @@ class GoogleTTSError(RuntimeError):
 
 def attribution(name: str) -> str:
     """How the credits screen names the voice."""
-    return f"Stimme: {name} (Google Cloud Text-to-Speech)"
+    return f"KI-Stimme: {name} (Google Cloud Text-to-Speech)"
 
 
 def account(raw: str) -> dict:

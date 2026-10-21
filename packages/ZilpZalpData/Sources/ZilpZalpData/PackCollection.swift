@@ -16,7 +16,8 @@ public struct PackCollection: Sendable {
 
     /// The pack's own title from its manifest — „Vögel Afrikas".
     ///
-    /// `nil` for every bird at once and for a mix of packs, whose name is product copy and therefore
+    /// `nil` for every bird at once and for a mix of packs, whose name is product copy and
+    /// therefore
     /// the app's business: this module carries no German a child reads.
     public let title: String?
 

@@ -212,11 +212,12 @@ def pack_media(document: dict, pack_id: str, pack_title: str) -> list[dict]:
 
 
 def pack_clips(document: dict) -> int:
-    """How many speech clips a pack's birds declare — one sentence key per clip."""
+    """How many speech clips a pack declares, its birds' and its own (#306)."""
+    holders = [document, *(document.get("birds") or [])]
     return sum(
-        len(bird["speech"])
-        for bird in document.get("birds") or []
-        if isinstance(bird, dict) and isinstance(bird.get("speech"), dict)
+        len(holder["speech"])
+        for holder in holders
+        if isinstance(holder, dict) and isinstance(holder.get("speech"), dict)
     )
 
 

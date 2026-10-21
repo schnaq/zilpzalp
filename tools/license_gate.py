@@ -265,6 +265,13 @@ def check_manifest(path: Path) -> tuple[list[str], int]:
             problems.extend(clip_problems)
             speech_count += clips
 
+    # The pack's own sentences — its title spoken (#306) — sit beside the
+    # birds in the same shape, and the same voice licenses them.
+    if document.get("speech") is not None:
+        clip_problems, clips = check_clips(document["speech"], "speech", path.parent)
+        problems.extend(clip_problems)
+        speech_count += clips
+
     problems.extend(check_voice(document, speech_count))
 
     return problems, media_count + speech_count

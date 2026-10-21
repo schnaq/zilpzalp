@@ -372,6 +372,30 @@ class SpeechInAPackTests(LicenseGateTestCase):
 
         self.assertFails("amsel / speech: is not an object")
 
+    def write_titled_pack(self, title: dict, with_voice: bool = True) -> Path:
+        """A one-bird pack whose own `speech` carries its title (#306)."""
+        self.write_photo()
+        self.write_clip()
+        document = {"id": "basis", "birds": [bird()], "speech": {"pack.title": title}}
+        if with_voice:
+            document["voice"] = voice()
+        return self.write_manifest(document)
+
+    def test_a_pack_s_own_clip_is_checked_and_counted(self):
+        self.write_titled_pack(clip())
+
+        self.assertIn("media assets checked: 2", self.assertPasses())
+
+    def test_a_pack_s_own_clip_whose_hash_is_wrong_fails(self):
+        self.write_titled_pack(clip(sha256="0" * 64))
+
+        self.assertFails("speech / pack.title", "sha256 does not match")
+
+    def test_a_pack_s_own_clip_needs_a_voice(self):
+        self.write_titled_pack(clip(), with_voice=False)
+
+        self.assertFails("basis.json", "carries no 'voice'")
+
     def test_a_pack_without_speech_needs_no_voice(self):
         # What every pack looks like today, and has to keep looking like.
         self.write_pack()

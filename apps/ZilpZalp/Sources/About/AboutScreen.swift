@@ -94,6 +94,12 @@ struct AboutScreen: View {
                     .typeStyle(.body, .body, weight: .semibold)
                     .foregroundStyle(ZColor.textBody)
 
+                // Said plainly, where anybody can read it (#306): the voice
+                // a child hears is generated. The credits name it as well.
+                Text("about.voice")
+                    .typeStyle(.body, .body, weight: .semibold)
+                    .foregroundStyle(ZColor.textBody)
+
                 signature
                 rows
             }

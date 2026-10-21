@@ -277,6 +277,17 @@ class VoicesAreCredited(CreditsTestCase):
 
         self.assertEqual(self.voices(), [])
 
+    def test_a_voice_that_spoke_only_the_pack_s_title_is_credited(self) -> None:
+        """#306: the title clip sits beside the birds and needs its voice named."""
+        self.write_pack("basis", [bird()], voice=voice())
+        manifest = self.packs_dir / "basis" / "manifest.json"
+        document = json.loads(manifest.read_text(encoding="utf-8"))
+        document["speech"] = {"pack.title": clip(file="speech/pack.title.m4a")}
+        manifest.write_text(json.dumps(document, ensure_ascii=False), encoding="utf-8")
+        self.run_main()
+
+        self.assertEqual([entry["usedIn"] for entry in self.voices()], ["Unsere ersten Vögel"])
+
     def test_without_voices_the_markdown_has_no_voices_section(self) -> None:
         self.write_pack("basis", [bird()])
         self.run_main()

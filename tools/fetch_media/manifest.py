@@ -244,11 +244,14 @@ def voice_block(licence: str, attribution: str, source_url: str, retrieved: str)
     }
 
 
-def set_speech(document: dict, bird_id: str | None, sentence: str, block: dict) -> str | None:
+def set_speech(
+    document: dict, bird_id: str | None, sentence: str, block: dict, *, pack_level: bool = False
+) -> str | None:
     """Replace one recorded sentence. Returns the file it pointed at before.
 
     `bird_id` names a bird's `speech`; `None` is the fixed set's `lines`, which
-    is the same map one level higher up and without a species. The caller uses
+    is the same map one level higher up and without a species — or, with
+    `pack_level`, a pack's own `speech` beside its birds (#306). The caller uses
     the returned name to delete the previous recording, exactly as `set_media`
     does — a clip nothing references any more would still be copied into the
     app bundle by tools/sync_bundled_packs.py.
@@ -257,7 +260,7 @@ def set_speech(document: dict, bird_id: str | None, sentence: str, block: dict) 
     # `"speech": null` the way a bird carries `"call": null` — declared and
     # empty — and `setdefault` would hand that null straight on.
     holder = document if bird_id is None else bird(document, bird_id)
-    kind = LINES_KIND if bird_id is None else SPEECH_KIND
+    kind = LINES_KIND if bird_id is None and not pack_level else SPEECH_KIND
     clips = holder.get(kind) or {}
     holder[kind] = clips
 
@@ -309,7 +312,8 @@ def set_voice(document: dict, block: dict) -> dict:
 def media_files(document: dict) -> list[tuple[str, str]]:
     """Every medium the manifest declares, as (relative path, SHA-256).
 
-    Photos, call and recorded sentences of every bird, in manifest order. What
+    Photos, call and recorded sentences of every bird, in manifest order, then
+    the pack's own sentences. What
     is not declared here is not uploaded — the bucket holds what the manifest
     promises, nothing that was left behind by an earlier curation round.
 
@@ -342,5 +346,11 @@ def media_files(document: dict) -> list[tuple[str, str]]:
         if isinstance(speech, dict):
             for clip in speech.values():
                 declare(clip)
+
+    # The pack's own sentences last, as `Pack.declaredFiles` lists them.
+    own = document.get(SPEECH_KIND)
+    if isinstance(own, dict):
+        for clip in own.values():
+            declare(clip)
 
     return files

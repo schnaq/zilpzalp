@@ -1,37 +1,33 @@
 import SwiftUI
 
-/// One line in the grown-ups area — either a navigation row with a value and
-/// a chevron, or a switch row.
+/// One line in the grown-ups area: a navigation row with a value and a
+/// chevron.
 ///
 /// Ported from `design/components/navigation/SettingRow.jsx`. This is the only
 /// component allowed the 16 pt caption step, and it uses it for the hint line
 /// alone: nobody but a grown-up ever reads a settings row, so the kid-facing
 /// 20 pt floor does not apply here.
 ///
-/// A navigation row is tappable across its full width. A switch row is a
-/// plain `Toggle`, so the system switch is the tap target and the system's
-/// own off-state grey shows through — an adult control on an adult screen,
-/// behaving exactly as Settings.app does, rather than a hand-drawn switch in
-/// sand and olive. Either way the row is at least 64 pt tall and reads as one
-/// VoiceOver element — which a switch row does not do on its own, see the
-/// comment in `body`.
+/// The row is tappable across its full width, at least 64 pt tall, and reads
+/// as one VoiceOver element.
+///
+/// **No switch row any more** (#306). It was a plain `Toggle`, and the
+/// system's off-state grey all but vanished on the cream card — under the 3:1
+/// WCAG 1.4.11 asks of a control. Its one user became a choice of two, asked
+/// the way the playtime row asks its question, so the variant went rather
+/// than being redrawn for nobody.
 ///
 /// The design's three columns are an iPad's; below the regular size class, and
 /// at an accessibility text size whatever the class, the row stacks instead —
 /// ``SettingRowStack`` says how.
 ///
-/// `.disabled(_:)` works as on any SwiftUI control: a navigation row dims to
-/// the system's one disabled opacity, a switch row lets `Toggle` grey itself.
+/// `.disabled(_:)` works as on any SwiftUI control: the row dims to the
+/// system's one disabled opacity.
 /// A row that exists before the screen behind it does — the time budget
 /// before #36 — is drawn this way rather than dimmed by its caller.
 ///
 /// Every visible string is a parameter. The package holds no product copy.
 public struct SettingRow: View {
-    private enum Kind {
-        case navigation(value: String?, action: () -> Void)
-        case toggle(isOn: Binding<Bool>)
-    }
-
     @Environment(\.isEnabled) private var isEnabled
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
@@ -39,11 +35,12 @@ public struct SettingRow: View {
     private let title: String
     private let hint: String?
     private let icon: ZIcon?
+    private let value: String?
     private let showsSeparator: Bool
-    private let kind: Kind
+    private let action: () -> Void
 
-    /// A navigation row: taps it to open something, with an optional current
-    /// value in front of the chevron.
+    /// A row a tap opens something from, with an optional current value in
+    /// front of the chevron.
     ///
     /// - Parameters:
     ///   - title: The setting's name.
@@ -63,118 +60,51 @@ public struct SettingRow: View {
         showsSeparator: Bool = true,
         action: @escaping () -> Void,
     ) {
-        self.init(
-            title: title,
-            hint: hint,
-            icon: icon,
-            showsSeparator: showsSeparator,
-            kind: .navigation(value: value, action: action),
-        )
-    }
-
-    /// A switch row: the whole row toggles the binding.
-    ///
-    /// - Parameters:
-    ///   - title: The setting's name.
-    ///   - hint: The explanatory line underneath, in the caption step.
-    ///   - icon: The glyph in front of the title.
-    ///   - isOn: The state the switch reads and writes.
-    ///   - showsSeparator: The line along the bottom edge. Turn it off for the
-    ///     last row of a card.
-    public init(
-        title: String,
-        hint: String? = nil,
-        icon: ZIcon? = nil,
-        isOn: Binding<Bool>,
-        showsSeparator: Bool = true,
-    ) {
-        self.init(
-            title: title,
-            hint: hint,
-            icon: icon,
-            showsSeparator: showsSeparator,
-            kind: .toggle(isOn: isOn),
-        )
-    }
-
-    private init(
-        title: String,
-        hint: String?,
-        icon: ZIcon?,
-        showsSeparator: Bool,
-        kind: Kind,
-    ) {
         self.title = title
         self.hint = hint
         self.icon = icon
+        self.value = value
         self.showsSeparator = showsSeparator
-        self.kind = kind
+        self.action = action
     }
 
     public var body: some View {
-        Group {
-            switch kind {
-            case let .navigation(value, action):
-                Button(action: action) {
-                    row {
-                        HStack(spacing: ZSpacing.step2) {
-                            if let value {
-                                Text(value)
-                            }
-                            Icon(.chevronRight, size: .small)
-                        }
-                        // Not `singleLine`: this sets the type for the value
-                        // and the chevron together, and the chevron carries
-                        // its own size.
-                        .typeStyle(.body, .body, weight: .semibold)
-                        .foregroundStyle(ZColor.textMuted)
-                        // The title beside it is greedy, so on a narrow phone
-                        // the value was offered a column two words wide and
-                        // broke "45 Min" across two lines — measured on an
-                        // iPhone 17 with the time budget (#36). This takes
-                        // the width the value needs and leaves the rest to
-                        // the title, which is the one this component already
-                        // calls the better thing to wrap.
-                        //
-                        // It states that a value never wraps, not that it
-                        // wraps last: a value long enough to want the whole
-                        // row would push past it rather than break. Every
-                        // value in this system is one short phrase — "Kein
-                        // Limit", "45 Min", "Deutsch" — which is what makes
-                        // that the cheaper promise. `layoutPriority(1)` is
-                        // the softer one if a long value ever turns up.
-                        .fixedSize(horizontal: true, vertical: false)
+        Button(action: action) {
+            row {
+                HStack(spacing: ZSpacing.step2) {
+                    if let value {
+                        Text(value)
                     }
-                    .contentShape(Rectangle())
+                    Icon(.chevronRight, size: .small)
                 }
-                .buttonStyle(.plain)
-                // A `.plain` button does not dim when it is disabled, so a row
-                // that is on the screen before it is live would still look
-                // tappable. The system has one disabled opacity and every
-                // pressable already uses it; this is the same one. Only the
-                // navigation row needs it — `Toggle` greys itself.
-                .opacity(isEnabled ? 1 : LedgeButtonStyle.disabledOpacity)
-
-            case let .toggle(isOn):
-                Toggle(isOn: isOn) {
-                    row { EmptyView() }
-                }
-                .toggleStyle(.switch)
-                .tint(ZColor.primary)
-                // A plain `Toggle` publishes two switches, not one: its own
-                // element, named after the row, and the system switch inside
-                // it, named after nothing. Standing in a bare `Toggle` for the
-                // whole row replaces the subtree rather than relabelling it,
-                // so exactly one switch is left — same trait, same on/off
-                // value, same activation, and now with a name. The hint goes
-                // where a hint belongs; an empty one is no hint, so a row
-                // without one is announced by its name alone.
-                .accessibilityRepresentation {
-                    Toggle(title, isOn: isOn)
-                        .accessibilityHint(hint ?? "")
-                }
+                // Not `singleLine`: this sets the type for the value and the
+                // chevron together, and the chevron carries its own size.
+                .typeStyle(.body, .body, weight: .semibold)
+                .foregroundStyle(ZColor.textMuted)
+                // The title beside it is greedy, so on a narrow phone the
+                // value was offered a column two words wide and broke "45 Min"
+                // across two lines — measured on an iPhone 17 with the time
+                // budget (#36). This takes the width the value needs and
+                // leaves the rest to the title, which is the one this
+                // component already calls the better thing to wrap.
+                //
+                // It states that a value never wraps, not that it wraps last:
+                // a value long enough to want the whole row would push past it
+                // rather than break. Every value in this system is one short
+                // phrase — "Kein Limit", "45 Min", "Nur auf Knopfdruck" —
+                // which is what makes that the cheaper promise.
+                // `layoutPriority(1)` is the softer one if a long value ever
+                // turns up.
+                .fixedSize(horizontal: true, vertical: false)
             }
+            .contentShape(Rectangle())
         }
+        .buttonStyle(.plain)
+        // A `.plain` button does not dim when it is disabled, so a row that is
+        // on the screen before it is live would still look tappable. The
+        // system has one disabled opacity and every pressable already uses
+        // it; this is the same one.
+        .opacity(isEnabled ? 1 : LedgeButtonStyle.disabledOpacity)
         .padding(.horizontal, ZSpacing.step5)
         .frame(minHeight: ZSpacing.touchMinimum)
         .background(ZColor.surfaceCard)
@@ -186,15 +116,10 @@ public struct SettingRow: View {
         }
     }
 
-    /// Icon, title and hint. The trailing slot differs per variant: the
-    /// navigation row fills it with value and chevron, the switch row leaves
-    /// it to `Toggle`, which places the switch itself.
+    /// Icon, title, hint, and value with chevron.
     ///
     /// ``SettingRowStack`` decides how the four sit: the design's three
-    /// columns on an iPad, stacked on a phone. A switch row hands it an empty
-    /// trailing slot and so never stacks one — the switch is `Toggle`'s to
-    /// place, on the middle of whatever the label turns out to be, exactly as
-    /// Settings.app does it.
+    /// columns on an iPad, stacked on a phone.
     private func row(@ViewBuilder trailing: () -> some View) -> some View {
         SettingRowStack(
             sizeClass: horizontalSizeClass,
@@ -237,9 +162,8 @@ public struct SettingRow: View {
             HStack(spacing: 0) { trailing() }
         }
         // Pins the row to the height its paragraphs need, so that no ancestor
-        // can compress it — a `Toggle` label in particular gets what the
-        // switch leaves over. Nothing observed today asks for less; this
-        // states what the row is entitled to.
+        // can compress it. Nothing observed today asks for less; this states
+        // what the row is entitled to.
         .fixedSize(horizontal: false, vertical: true)
         .padding(.vertical, ZSpacing.step4)
     }
@@ -273,58 +197,37 @@ enum SettingRowMetrics {
 
 // MARK: - Previews
 
-/// Preview only. It is a view rather than a plain `#Preview` body because the
-/// switches need `@State`, which a macro closure cannot hold; the German
-/// strings below are sample copy, exactly as in a `#Preview` block, and never
-/// reach a screen.
-private struct SettingRowPreviewCard: View {
-    @State private var calls = true
-    @State private var music = false
-    @State private var names = true
-
-    var body: some View {
-        VStack(spacing: 0) {
-            SettingRow(
-                title: "Vogelstimmen",
-                hint: "Echte Aufnahmen aus der Sammlung",
-                icon: .volume2,
-                isOn: $calls,
-            )
-            SettingRow(
-                title: "Hintergrundmusik",
-                hint: "Leise Waldgeräusche zwischen den Runden",
-                icon: .music,
-                isOn: $music,
-            )
-            SettingRow(title: "Namen anzeigen", icon: .type, isOn: $names)
-            SettingRow(
-                title: "Spielzeit pro Tag",
-                hint: "Danach schlafen die Vögel",
-                icon: .clock,
-                value: "20 Min",
-            ) {}
-            SettingRow(title: "Sprache", icon: .languages, value: "Deutsch") {}
-            SettingRow(
-                title: "Fotos & Dank",
-                icon: .camera,
-                value: "10 Fotos",
-                showsSeparator: false,
-            ) {}
-        }
-        .background(ZColor.surfaceCard)
-        .clipShape(RoundedRectangle(cornerRadius: ZRadius.card, style: .continuous))
-        .overlay {
-            RoundedRectangle(cornerRadius: ZRadius.card, style: .continuous)
-                .strokeBorder(ZColor.borderCard, lineWidth: ZBorder.width)
-        }
-        .padding(ZSpacing.step6)
-        .frame(maxWidth: ZSpacing.maxContent)
-        .background(ZColor.surfacePage)
-    }
-}
-
 #Preview("A card of rows") {
-    SettingRowPreviewCard()
+    VStack(spacing: 0) {
+        SettingRow(
+            title: "Vorlesen",
+            hint: "Die Vogelrufe bleiben an",
+            icon: .volume2,
+            value: "Automatisch vorlesen",
+        ) {}
+        SettingRow(
+            title: "Spielzeit pro Tag",
+            hint: "Danach schlafen die Vögel",
+            icon: .clock,
+            value: "20 Min",
+        ) {}
+        SettingRow(title: "Sprache", icon: .languages, value: "Deutsch") {}
+        SettingRow(
+            title: "Fotos & Dank",
+            icon: .camera,
+            value: "10 Fotos",
+            showsSeparator: false,
+        ) {}
+    }
+    .background(ZColor.surfaceCard)
+    .clipShape(RoundedRectangle(cornerRadius: ZRadius.card, style: .continuous))
+    .overlay {
+        RoundedRectangle(cornerRadius: ZRadius.card, style: .continuous)
+            .strokeBorder(ZColor.borderCard, lineWidth: ZBorder.width)
+    }
+    .padding(ZSpacing.step6)
+    .frame(maxWidth: ZSpacing.maxContent)
+    .background(ZColor.surfacePage)
 }
 
 // The case #142 was opened for, at the width of the smallest phone the app
@@ -339,11 +242,11 @@ private struct SettingRowPreviewCard: View {
     ZCard(padding: 0) {
         VStack(spacing: 0) {
             SettingRow(
-                title: "Namen anzeigen",
-                hint: "Vogelnamen unter den Bildern einblenden",
-                icon: .type,
-                isOn: .constant(true),
-            )
+                title: "Vorlesen",
+                hint: "Die Stimme ist eine KI-Stimme",
+                icon: .volume2,
+                value: "Nur auf Knopfdruck",
+            ) {}
             SettingRow(
                 title: "Spielzeit pro Tag",
                 hint: "Danach schlafen die Vögel",
@@ -359,10 +262,8 @@ private struct SettingRowPreviewCard: View {
     .background(ZColor.surfacePage)
 }
 
-#Preview("Both variants, bare") {
+#Preview("Bare") {
     VStack(spacing: 0) {
-        SettingRow(title: "Namen anzeigen", isOn: .constant(true))
-        SettingRow(title: "Namen anzeigen", hint: "Unter den Bildern", isOn: .constant(false))
         SettingRow(title: "Sprache", value: "Deutsch") {}
         SettingRow(title: "Sprache", icon: .languages, showsSeparator: false) {}
     }

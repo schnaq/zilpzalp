@@ -137,9 +137,8 @@ struct RoundEndScreen: View {
             // — see ``RoundEndHomeDoor``. An overlay rather than a third
             // button under the two: this screen does not scroll, and a third
             // pill would be the one a 375 pt phone runs out of height for.
-            .overlay(alignment: .topLeading) {
-                RoundEndHomeDoor(isOpen: settled, goHome: goHome)
-            }
+            .overlay(alignment: .topLeading) { RoundEndHomeDoor(isOpen: settled, goHome: goHome) }
+            .overlay(alignment: .topTrailing) { RoundEndSpeaker { sayPraise(unprompted: false) } }
             // The praise is not cut short on the way home: nothing follows it
             // there that it could talk over, and `.onDisappear` below stops it
             // a pop later. "Nochmal spielen" is the exit that has to stop it
@@ -331,8 +330,8 @@ struct RoundEndScreen: View {
         let arriving = !settled
         settled = true
 
-        // Not `SpeechAnnouncer.isEnabled`: the grown-ups' switch and VoiceOver
-        // are different questions — see ``announceToVoiceOver()``.
+        // Not `SpeechAnnouncer.mode`: the grown-ups' choice and VoiceOver are
+        // different questions — see ``announceToVoiceOver()``.
         guard !voiceOverIsOn else {
             if arriving {
                 await announceToVoiceOver()
@@ -340,11 +339,15 @@ struct RoundEndScreen: View {
             return
         }
 
-        if announcer == nil {
-            let voice = SpeechAnnouncer(library: library)
-            announcer = voice
-            voice.announce(spokenPraise)
-        }
+        guard announcer == nil else { return }
+        sayPraise(unprompted: true)
+    }
+
+    /// The praise, through the one announcer, built on first use — see above.
+    private func sayPraise(unprompted: Bool) {
+        let voice = announcer ?? SpeechAnnouncer(library: library)
+        announcer = voice
+        voice.announce(spokenPraise, unprompted: unprompted)
     }
 
     /// Tells VoiceOver what the screen is celebrating, because nothing here
@@ -362,8 +365,8 @@ struct RoundEndScreen: View {
     /// spoken sentence rather than joining it: two voices over each other are
     /// worse than either, and this one says more.
     ///
-    /// The grown-ups' "Ansagen vorlesen" switch does not reach it, and should
-    /// not: it turns off the voice *this app* adds, and VoiceOver is the one
+    /// The grown-ups' „Nur auf Knopfdruck" does not reach it, and should
+    /// not: it holds back the voice *this app* adds, and VoiceOver is the one
     /// the device already speaks every other screen with. Silencing it here
     /// would leave a round ending in nothing at all.
     ///

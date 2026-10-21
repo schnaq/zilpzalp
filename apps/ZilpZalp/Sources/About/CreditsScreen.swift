@@ -89,6 +89,13 @@ struct CreditsScreen: View {
                         }
                     }
 
+                    let voices = Self.voices(of: credits)
+                    if !voices.isEmpty {
+                        section(String(localized: "credits.voices.title")) {
+                            voiceRows(voices)
+                        }
+                    }
+
                     section(String(localized: "credits.fonts.title")) {
                         vendoredRows(credits.fonts, icon: .type)
                     }
@@ -162,6 +169,26 @@ struct CreditsScreen: View {
         .accessibilityHint(Text("link.web.accessibility"))
     }
 
+    /// Who speaks — „KI-Stimme: Ava (ElevenLabs)" (#306). The attribution is
+    /// the manifests' own, generated like every line here; it says that the
+    /// voice is an AI voice because the render tool writes it so.
+    private func voiceRows(_ voices: [Credits.Voice]) -> some View {
+        ForEach(Array(voices.enumerated()), id: \.element) { index, voice in
+            SettingRow(
+                title: voice.attribution,
+                hint: String(
+                    format: String(localized: "credits.voice.by"),
+                    voice.license.shortName,
+                ),
+                icon: .volume2,
+                showsSeparator: index != voices.count - 1,
+            ) {
+                pendingLink = ExternalLink(url: voice.sourceURL)
+            }
+            .accessibilityHint(Text("link.web.accessibility"))
+        }
+    }
+
     /// The font families and the icon sets, which sit in no manifest and come
     /// from the generator's own lists.
     private func vendoredRows(_ entries: [Credits.Vendored], icon: ZIcon) -> some View {
@@ -198,6 +225,14 @@ struct CreditsScreen: View {
         case .call: String(localized: "credits.call.by")
         }
         return String(format: format, entry.attribution, entry.license.shortName)
+    }
+
+    /// Each voice once. The generator credits a voice per manifest — every
+    /// pack and the fixed set — and one voice speaks all of them, so twelve
+    /// identical rows would say less than one.
+    private static func voices(of credits: Credits) -> [Credits.Voice] {
+        var seen: Set<String> = []
+        return credits.voices.filter { seen.insert($0.attribution).inserted }
     }
 
     /// The media grouped by pack, in the order the generator wrote them —

@@ -25,6 +25,10 @@ struct SpokenLine: Sendable {
     /// this is half of what a clip is looked up by.
     let bird: Bird?
 
+    /// The pack the sentence is about, for a sentence about a pack itself —
+    /// its title (#306). `nil` everywhere else.
+    var pack: String?
+
     /// What the synthesiser says when there is no clip: the German, localised
     /// and with its placeholders already filled.
     let text: String
@@ -85,6 +89,13 @@ struct SpokenLine: Sendable {
     /// reworded so that one clip could say it; until that is answered this line
     /// always lands on the synthesiser, which is exactly where it landed
     /// before.
+    /// A pack's title, „Vögel Afrikas" — what the collection picker says when
+    /// a child taps the pack (#306). Recorded once per pack under
+    /// ``ZilpZalpData/SpeechKey/packTitle`` and read out where nothing is.
+    static func packTitle(_ pack: String, title: String) -> SpokenLine {
+        SpokenLine(key: SpeechKey.packTitle, bird: nil, pack: pack, text: title)
+    }
+
     static func assembled(_ text: String) -> SpokenLine {
         SpokenLine(key: nil, bird: nil, text: text)
     }

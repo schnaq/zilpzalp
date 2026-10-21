@@ -266,17 +266,17 @@ final class AppModel {
     /// until then. Restoring it instead would mean `record` writing a field
     /// the round knows nothing about.
     ///
-    /// - Parameter collection: the pack's id, `nil` for every bird.
-    func choose(collection: String?) async {
+    /// - Parameter collections: the packs' ids, sorted; empty for every bird.
+    func choose(collections: [String]) async {
         guard let store, let index = profiles.firstIndex(where: { $0.id == activeProfileID })
         else {
             return
         }
-        // Tapping a collection that is already chosen is a child asking to
+        // „Alle Vögel" tapped while it is already chosen is a child asking to
         // hear its name again, not a change to write to disk.
-        guard profiles[index].collection != collection else { return }
+        guard profiles[index].collections != collections else { return }
 
-        profiles[index].collection = collection
+        profiles[index].collections = collections
 
         do {
             try await store.update(profiles[index])
@@ -286,9 +286,17 @@ final class AppModel {
         }
     }
 
+    /// A child tapped `collection` in the picker: a pack goes in or out, „Alle
+    /// Vögel" — `nil` — clears the packs (#306). See
+    /// ``PackCollections/toggled(_:in:)``.
+    func toggle(collection: String?) async {
+        guard let profile = activeProfile else { return }
+        await choose(collections: PackCollections.toggled(collection, in: profile.collections))
+    }
+
     /// A grown-up chose how many recognitions `id`'s stickers take (#260).
     ///
-    /// Kept in memory first and written after, as ``choose(collection:)`` is,
+    /// Kept in memory first and written after, as ``choose(collections:)`` is,
     /// and for the same reasons a failed write is only logged. Lowering the
     /// threshold puts every sticker the counters already reach into the album
     /// in the same step — ``Profile/stickerThreshold`` does that itself.

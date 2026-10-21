@@ -251,6 +251,7 @@ def record_clip(
         target.bird_id,
         sentence,
         manifest.speech_block(file=relative, sha256=digest, text=text),
+        pack_level=target.pack_level,
     )
     manifest.save(target.path, document)
     remove_orphan(target.directory, target.label, previous, relative)
@@ -890,11 +891,19 @@ def speech_work(
         return document, [(target, key, sentences.fixed_text(key)) for key in chosen]
 
     document = manifest.load(manifest.manifest_path(str(pack)))
-    keys_to_do = chosen or list(sentences.SPECIES_SENTENCES)
-    work = []
-    for bird in selected_birds(document, species):
+    # By default the whole pack — its own sentences too, unless only some
+    # species were named: re-rendering one bird must not re-render the title.
+    default = [*sentences.SPECIES_SENTENCES]
+    if not species:
+        default = [*sentences.PACK_SENTENCES, *default]
+    keys_to_do = chosen or default
+    # A pack sentence is said once for the pack, whichever species are named.
+    own = [key for key in keys_to_do if key in sentences.PACK_SENTENCES]
+    work = [(clips.for_pack(str(pack)), key, sentences.pack_text(document, key)) for key in own]
+    per_bird = [key for key in keys_to_do if key not in own]
+    for bird in selected_birds(document, species) if per_bird else []:
         target = clips.for_species(str(pack), str(bird["id"]))
-        work += [(target, key, sentences.species_text(bird, key)) for key in keys_to_do]
+        work += [(target, key, sentences.species_text(bird, key)) for key in per_bird]
     return document, work
 
 
@@ -1190,7 +1199,8 @@ def build_parser() -> argparse.ArgumentParser:
     render.add_argument(
         "--sentence",
         nargs="+",
-        help="String Catalog keys; default for a pack: " + ", ".join(sentences.SPECIES_SENTENCES),
+        help="String Catalog keys; default for a pack: "
+        + ", ".join((*sentences.PACK_SENTENCES, *sentences.SPECIES_SENTENCES)),
     )
     render.add_argument(
         "--provider",

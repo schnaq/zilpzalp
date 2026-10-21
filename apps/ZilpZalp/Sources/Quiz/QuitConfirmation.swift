@@ -11,8 +11,8 @@ import ZilpZalpUI
 ///
 /// Everything here is built for somebody who cannot read the card. The
 /// question is spoken as it appears, the way every screen in this app that
-/// asks something speaks it — see ``ReadAloudOnce``, whose other caller is
-/// the parental gate. Both answers are told apart by their icon, their colour
+/// asks something speaks it — see ``ReadAloudButton``, whose speaker sits
+/// beside the question. Both answers are told apart by their icon, their colour
 /// and their order rather than by their label: the olive one on top carries
 /// on, the quiet one below goes home. That is the pairing the round end
 /// already teaches with "Nochmal spielen" and "Meine Sammlung" (#119), where
@@ -22,7 +22,7 @@ import ZilpZalpUI
 /// answer, tapping beside it included: a child who did not mean to open this
 /// gets back into the round by tapping anywhere.
 struct QuitConfirmation: View {
-    /// The question, in one place. Shown and — through ``ReadAloudOnce`` —
+    /// The question, in one place. Shown and — through ``ReadAloudButton`` —
     /// said, so the two can never drift apart.
     private static var question: SpokenLine {
         .fixed("quiz.quit.question")
@@ -65,16 +65,19 @@ struct QuitConfirmation: View {
         // card inside it.
         .accessibilityElement(children: .contain)
         .accessibilityAddTraits(.isModal)
-        .readAloudOnce(Self.question)
     }
 
     private var card: some View {
         ZCard(padding: isCompact ? ZSpacing.step5 : ZSpacing.step6) {
             VStack(spacing: isCompact ? ZSpacing.step5 : ZSpacing.step6) {
-                Text(verbatim: Self.question.text)
-                    .typeStyle(isCompact ? .headline : .title, .display, weight: .extraBold)
-                    .foregroundStyle(ZColor.textStrong)
-                    .multilineTextAlignment(.center)
+                HStack(spacing: ZSpacing.step3) {
+                    Text(verbatim: Self.question.text)
+                        .typeStyle(isCompact ? .headline : .title, .display, weight: .extraBold)
+                        .foregroundStyle(ZColor.textStrong)
+                        .multilineTextAlignment(.center)
+
+                    ReadAloudButton(line: Self.question)
+                }
 
                 answers
             }
