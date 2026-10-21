@@ -358,6 +358,7 @@ the source declared.
 | Waldohreule | Call | Sonothèque ADVL (XC1107816) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1107816> |
 | Habicht | Photo | Andrey Gulivanov | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/36668130> |
 | Habicht | Photo | Andrey Bratushev | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/102599961> |
+| Habicht | Call | Benoît Van Hecke (XC545862) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/545862> |
 | Gebirgsstelze | Photo | Donald Davesne | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/348453903> |
 | Gebirgsstelze | Photo | Andrew Cunnington | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/216315113> |
 | Gebirgsstelze | Photo | R Clarke | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/212192178> |
