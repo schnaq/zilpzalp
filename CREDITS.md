@@ -757,32 +757,82 @@ the source declared.
 | Riesentukan | Photo | Diogo Luiz | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/59738495> |
 | Riesentukan | Photo | Paulo Mascaretti | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/143502779> |
 | Humboldtpinguin | Photo | DiegoH | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/141121355> |
+| Humboldtpinguin | Photo | Tim | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/192428188> |
+| Humboldtpinguin | Photo | Zac Peterson | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/68708922> |
 | Tiefland-Felsenhahn | Photo | Julien Renoult | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/4531616> |
+| Tiefland-Felsenhahn | Photo | Naturalist Tours | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/217331272> |
+| Tiefland-Felsenhahn | Photo | Max G.W. Verheij | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/99201132> |
 | Siebenfarbentangare | Photo | Joao Quental | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/392514179> |
+| Siebenfarbentangare | Photo | Lindolfo Souto | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/331138354> |
+| Siebenfarbentangare | Photo | Thibaud Aronson | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/59391717> |
 | Siebenfarbentangare | Call | Niels Krabbe (XC251588) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/251588> |
 | Chileflamingo | Photo | datadan | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/68240408> |
 | Fischertukan | Photo | Anthony Batista | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/223465730> |
+| Fischertukan | Photo | Mike Brady | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/331088258> |
+| Fischertukan | Photo | Rose Zappa | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/103582999> |
 | Königsgeier | Photo | Paulo Mascaretti | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/168479025> |
 | Königsgeier | Photo | Jean-Paul Boerekamps | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/74490210> |
+| Königsgeier | Photo | Gonzalo Martinez | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/246395680> |
 | Rotstirn-Blatthühnchen | Photo | Donald Davesne | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/351096968> |
 | Rotstirn-Blatthühnchen | Photo | Thibaud Aronson | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/67707624> |
 | Rotstirn-Blatthühnchen | Photo | Gonzalo Romero | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/336853948> |
 | Halsband-Wehrvogel | Photo | Luciano Massa | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/235447508> |
 | Halsband-Wehrvogel | Photo | Dario Taraborelli | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/155794546> |
+| Halsband-Wehrvogel | Photo | Millie Basden | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/31232473> |
 | Inkaseeschwalbe | Photo | Zac Peterson | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/68709153> |
+| Inkaseeschwalbe | Photo | Patrick Jackson | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/145849759> |
+| Inkaseeschwalbe | Photo | Dario Taraborelli | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/266860792> |
 | Amazonasfischer | Photo | ferferrari | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/133831715> |
+| Amazonasfischer | Photo | Anthony Batista | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/392497161> |
+| Amazonasfischer | Photo | Federico Figueroa Cabezas | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/148784358> |
 | Nandu | Photo | Fernando Sessegolo | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/42772166> |
 | Nandu | Photo | Christoph Moning | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/57113925> |
+| Nandu | Photo | Johannes S. | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/331548510> |
 | Hellroter Ara | Photo | Luis G Restrepo | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/254918218> |
 | Hellroter Ara | Call | Richard Borrmann (XC1005554) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://xeno-canto.org/1005554> |
 | Roter Sichler | Photo | Odebrecht, Clarisse | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/330283195> |
 | Roter Sichler | Photo | Miguel | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/230201814> |
+| Roter Sichler | Photo | Pedro Henrique Maloso Ramos | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/182386994> |
 | Rosalöffler | Photo | Nigel Voaden | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/1707823> |
 | Rosalöffler | Photo | tcantrell52 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/204095333> |
 | Rosalöffler | Photo | Leonel Richard | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/15309891> |
 | Quetzal | Photo | er-birds | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/156023432> |
 | Quetzal | Photo | Morten Ross | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/68706945> |
 | Quetzal | Photo | James Adney Zehr | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/340657292> |
+| Hyazinthara | Photo | Adrien Jailloux | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/145291564> |
+| Grünflügelara | Photo | Francisco V. Bezerra Neto | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/298630303> |
+| Hoatzin | Photo | Philipp Hoenle | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/191380473> |
+| Hoatzin | Call | Niels Krabbe (XC251282) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/251282> |
+| Schwertschnabelkolibri | Photo | scaup | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/337551294> |
+| Schwertschnabelkolibri | Photo | Frank Dietze | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/194946730> |
+| Schwertschnabelkolibri | Photo | Dario Taraborelli | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/144819130> |
+| Schwertschnabelkolibri | Call | Niels Krabbe (XC250817) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/250817> |
+| Veilchenohrkolibri | Photo | John G. Phillips | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/167274982> |
+| Veilchenohrkolibri | Photo | Thibaud Aronson | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/67964514> |
+| Veilchenohrkolibri | Call | Rosa Elena Albornoz (XC935029) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/935029> |
+| Schwefeltyrann | Photo | Donald Davesne | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/312939044> |
+| Schwefeltyrann | Photo | Mayela y Ramón | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/138739233> |
+| Schwefeltyrann | Call | Niels Krabbe (XC248805) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/248805> |
+| Jabiru | Photo | Russ Namitz | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/311810690> |
+| Jabiru | Photo | Leonel Roget | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/97614930> |
+| Sonnenralle | Photo | Forest Botial-Jarvis | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/200643614> |
+| Sonnenralle | Photo | Cole Wolf | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/316197871> |
+| Schopfkarakara | Photo | Francisco V. Bezerra Neto | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/279580484> |
+| Schopfkarakara | Photo | Luciano Silveira | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/292957411> |
+| Halsbandarassari | Photo | Dan Schofield | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/323544817> |
+| Schlangenhalsvogel | Photo | sudomir | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/195881436> |
+| Schlangenhalsvogel | Photo | Jonathan Layman | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/253655370> |
+| Purpurtyrann | Photo | Jorge Herreros de Lartundo | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/42546184> |
+| Purpurtyrann | Photo | Fyn Kynd | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/98660786> |
+| Purpurtyrann | Photo | David F. Belmonte | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/300803054> |
+| Purpurtangare | Photo | Vincent A. Vos | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/82101675> |
+| Purpurtangare | Photo | Francisco V. Bezerra Neto | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/354781715> |
+| Purpurtangare | Call | Niels Krabbe (XC243030) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/243030> |
+| Kappenblaurabe | Photo | Don Wellmann | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/289395989> |
+| Graukardinal | Photo | Nicolas Olejnik | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/16563244> |
+| Graukardinal | Photo | David F. Belmonte | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/249099964> |
+| Graukardinal | Photo | Daniel Dias | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/230000585> |
+| Graukardinal | Call | Pedro Sanetti (XC1090718) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1090718> |
 
 ### Wasser & Küste (`wasser-kueste`)
 

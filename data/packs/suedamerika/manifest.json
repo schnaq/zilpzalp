@@ -65,6 +65,22 @@
           "attribution": "DiegoH",
           "sourceURL": "https://www.inaturalist.org/observations/141121355",
           "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/humboldtpinguin-2.heic",
+          "sha256": "33422e7f0c7c8b9dcf31b273e7fdffbb8962a987e1f96084067bd09161c86e9f",
+          "license": "CC-BY-4.0",
+          "attribution": "Tim",
+          "sourceURL": "https://www.inaturalist.org/observations/192428188",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/humboldtpinguin-3.heic",
+          "sha256": "cb0e6aee26169825f4b8eccfa3be0e36d87a644e237d0507ff2aaaa61ccc924c",
+          "license": "CC-BY-4.0",
+          "attribution": "Zac Peterson",
+          "sourceURL": "https://www.inaturalist.org/observations/68708922",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": null,
@@ -91,6 +107,22 @@
           "attribution": "Julien Renoult",
           "sourceURL": "https://www.inaturalist.org/observations/4531616",
           "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/tiefland-felsenhahn-2.heic",
+          "sha256": "d42fadaadc0cce8203785c01e631d85af9485fdd18511ec50e361a187bcd120c",
+          "license": "CC0-1.0",
+          "attribution": "Naturalist Tours",
+          "sourceURL": "https://www.inaturalist.org/observations/217331272",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/tiefland-felsenhahn-3.heic",
+          "sha256": "0528d5aa32f40c0a0c5183039e0841e0d2049726f754aadc308920d264c7d70e",
+          "license": "CC0-1.0",
+          "attribution": "Max G.W. Verheij",
+          "sourceURL": "https://www.inaturalist.org/observations/99201132",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": null,
@@ -116,6 +148,22 @@
           "license": "CC-BY-4.0",
           "attribution": "Joao Quental",
           "sourceURL": "https://www.inaturalist.org/observations/392514179",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/siebenfarbentangare-2.heic",
+          "sha256": "2caa2766252dbe03be9c32a1088d35433cf1f6a797b85dcaa748353f396d89b1",
+          "license": "CC-BY-4.0",
+          "attribution": "Lindolfo Souto",
+          "sourceURL": "https://www.inaturalist.org/observations/331138354",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/siebenfarbentangare-3.heic",
+          "sha256": "7e6518751036fac1ed531a1983377f682f67d87b8951bc6c10999c7a672bddc5",
+          "license": "CC-BY-SA-4.0",
+          "attribution": "Thibaud Aronson",
+          "sourceURL": "https://www.inaturalist.org/observations/59391717",
           "retrieved": "2026-10-21"
         }
       ],
@@ -192,6 +240,22 @@
           "attribution": "Anthony Batista",
           "sourceURL": "https://www.inaturalist.org/observations/223465730",
           "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/fischertukan-2.heic",
+          "sha256": "b4c5b1145462b5950d45d95125f5734a1f1049e14327c78756411f504d3d148e",
+          "license": "CC-BY-4.0",
+          "attribution": "Mike Brady",
+          "sourceURL": "https://www.inaturalist.org/observations/331088258",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/fischertukan-3.heic",
+          "sha256": "70216e5846c413f150bfcd038b2bb047e508641420585420a25d59aca6433a4d",
+          "license": "CC-BY-4.0",
+          "attribution": "Rose Zappa",
+          "sourceURL": "https://www.inaturalist.org/observations/103582999",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": null,
@@ -225,6 +289,14 @@
           "license": "CC0-1.0",
           "attribution": "Jean-Paul Boerekamps",
           "sourceURL": "https://www.inaturalist.org/observations/74490210",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/koenigsgeier-3.heic",
+          "sha256": "227f36cf9d25ccf2d899fd313086c4e9179798a6b7ee03ef840f075fe392bfbe",
+          "license": "CC-BY-4.0",
+          "attribution": "Gonzalo Martinez",
+          "sourceURL": "https://www.inaturalist.org/observations/246395680",
           "retrieved": "2026-10-21"
         }
       ],
@@ -302,6 +374,14 @@
           "attribution": "Dario Taraborelli",
           "sourceURL": "https://www.inaturalist.org/observations/155794546",
           "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/halsband-wehrvogel-3.heic",
+          "sha256": "04be2d6c8c66aacf7a3d2d51d9fbf0b59ad4c7b47129c45cc3c6def33ee9295a",
+          "license": "CC-BY-4.0",
+          "attribution": "Millie Basden",
+          "sourceURL": "https://www.inaturalist.org/observations/31232473",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": null,
@@ -328,6 +408,22 @@
           "attribution": "Zac Peterson",
           "sourceURL": "https://www.inaturalist.org/observations/68709153",
           "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/inkaseeschwalbe-2.heic",
+          "sha256": "45f90f1aba38ed79a0fd2732949d060524ce6712861d177b9ce10a4a9319831d",
+          "license": "CC-BY-4.0",
+          "attribution": "Patrick Jackson",
+          "sourceURL": "https://www.inaturalist.org/observations/145849759",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/inkaseeschwalbe-3.heic",
+          "sha256": "bf76f1c4d17713b1f70976e8689cde201725c7d85fe9da50668fbfacf2bdf6a7",
+          "license": "CC0-1.0",
+          "attribution": "Dario Taraborelli",
+          "sourceURL": "https://www.inaturalist.org/observations/266860792",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": null,
@@ -353,6 +449,22 @@
           "license": "CC0-1.0",
           "attribution": "ferferrari",
           "sourceURL": "https://www.inaturalist.org/observations/133831715",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/amazonasfischer-2.heic",
+          "sha256": "a06c191f6d3508236a325d279b5693cd6f7a025d78598b236dff59e748bb62bd",
+          "license": "CC-BY-4.0",
+          "attribution": "Anthony Batista",
+          "sourceURL": "https://www.inaturalist.org/observations/392497161",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/amazonasfischer-3.heic",
+          "sha256": "c8e1845676af05e82c7183e2f17122e4e75e18954318478db03b2e59e87ba61c",
+          "license": "CC-BY-4.0",
+          "attribution": "Federico Figueroa Cabezas",
+          "sourceURL": "https://www.inaturalist.org/observations/148784358",
           "retrieved": "2026-10-21"
         }
       ],
@@ -387,6 +499,14 @@
           "license": "CC-BY-4.0",
           "attribution": "Christoph Moning",
           "sourceURL": "https://www.inaturalist.org/observations/57113925",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/nandu-3.heic",
+          "sha256": "f6de070ad472bd619c128b7e999f99480e2786adeddef352b877cf93640176a9",
+          "license": "CC-BY-4.0",
+          "attribution": "Johannes S.",
+          "sourceURL": "https://www.inaturalist.org/observations/331548510",
           "retrieved": "2026-10-21"
         }
       ],
@@ -454,6 +574,14 @@
           "license": "CC-BY-SA-4.0",
           "attribution": "Miguel",
           "sourceURL": "https://www.inaturalist.org/observations/230201814",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/roter-sichler-3.heic",
+          "sha256": "68f6abd55a48eeca41187a685b7dd23ff36569d1cbf20c6bb7b4749586755933",
+          "license": "CC-BY-4.0",
+          "attribution": "Pedro Henrique Maloso Ramos",
+          "sourceURL": "https://www.inaturalist.org/observations/182386994",
           "retrieved": "2026-10-21"
         }
       ],
@@ -547,6 +675,558 @@
           "file": "speech/collection.name/quetzal.m4a",
           "sha256": "51e618af4ed2cd70dfdf4f4c5d69fad598b48d3d3b9c1ff395d13840e7821df4",
           "text": "Quetzal"
+        }
+      }
+    },
+    {
+      "id": "hyazinthara",
+      "name": "Hyazinthara",
+      "scientificName": "Anodorhynchus hyacinthinus",
+      "taxonID": 18938,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/hyazinthara.heic",
+          "sha256": "ce386facaab6450232bb9c8006f9dee273d15beea5e1c37f76cf0f526bc62f6d",
+          "license": "CC-BY-4.0",
+          "attribution": "Adrien Jailloux",
+          "sourceURL": "https://www.inaturalist.org/observations/145291564",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/hyazinthara.m4a",
+          "sha256": "38953be36c8f8df1fbd6982986e8bc051d186de00dadd3c1b4d62342eb0e8727",
+          "text": "Hyazinthara"
+        }
+      }
+    },
+    {
+      "id": "gruenfluegelara",
+      "name": "Grünflügelara",
+      "scientificName": "Ara chloropterus",
+      "taxonID": 19016,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/gruenfluegelara.heic",
+          "sha256": "b3e11e0e6af7d37e6fff1808d5ba51e65f8f5169cfc136ab81f5f3fbcdb2b8bc",
+          "license": "CC-BY-SA-4.0",
+          "attribution": "Francisco V. Bezerra Neto",
+          "sourceURL": "https://www.inaturalist.org/observations/298630303",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/gruenfluegelara.m4a",
+          "sha256": "220379462e08e0d5d0c10612a37d46e60434a3f7107f4b36b162f1fa34777a3a",
+          "text": "Grünflügelara"
+        }
+      }
+    },
+    {
+      "id": "hoatzin",
+      "name": "Hoatzin",
+      "scientificName": "Opisthocomus hoazin",
+      "taxonID": 1626,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/hoatzin.heic",
+          "sha256": "3d55eba54e939052539f3f83bd3d32e87242fdf4e767b39d24c2ec452d633604",
+          "license": "CC0-1.0",
+          "attribution": "Philipp Hoenle",
+          "sourceURL": "https://www.inaturalist.org/observations/191380473",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": {
+        "file": "audio/hoatzin.m4a",
+        "sha256": "cbd12818ca66882a9707ba197d4d93262920d143df7e209d5730c805335c3d79",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Niels Krabbe (XC251282)",
+        "sourceURL": "https://xeno-canto.org/251282",
+        "retrieved": "2026-10-21"
+      },
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/hoatzin.m4a",
+          "sha256": "ae5c057ae9b9d251bbf7d7700c7e0ff08d6c13c4e44f5dfddcb87ece7de240e8",
+          "text": "Hoatzin"
+        }
+      }
+    },
+    {
+      "id": "schwertschnabelkolibri",
+      "name": "Schwertschnabelkolibri",
+      "scientificName": "Ensifera ensifera",
+      "taxonID": 6458,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/schwertschnabelkolibri.heic",
+          "sha256": "b3b7975025f577d5440bb75dc8ddb180b0f763be27f2bcb3005da070b58e0d6f",
+          "license": "CC-BY-4.0",
+          "attribution": "scaup",
+          "sourceURL": "https://www.inaturalist.org/observations/337551294",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/schwertschnabelkolibri-2.heic",
+          "sha256": "1660905ee79c5dc50adcd68e51aab79c3557d8ef4573eecd309e9f569db6b3f2",
+          "license": "CC-BY-4.0",
+          "attribution": "Frank Dietze",
+          "sourceURL": "https://www.inaturalist.org/observations/194946730",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/schwertschnabelkolibri-3.heic",
+          "sha256": "f825aa56bf5fc172d426ddc3ab459ea5877881906747b70a81d286e075d5b638",
+          "license": "CC0-1.0",
+          "attribution": "Dario Taraborelli",
+          "sourceURL": "https://www.inaturalist.org/observations/144819130",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": {
+        "file": "audio/schwertschnabelkolibri.m4a",
+        "sha256": "1bff8ddddd72a851d71bfd554eb4f0fe2d3092d3d0f53f376b683988c47636f0",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Niels Krabbe (XC250817)",
+        "sourceURL": "https://xeno-canto.org/250817",
+        "retrieved": "2026-10-21"
+      },
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/schwertschnabelkolibri.m4a",
+          "sha256": "32cc627336eea51269577fb3296af72504a6346344cb6b9ec53222ed531e2a39",
+          "text": "Schwertschnabelkolibri"
+        }
+      }
+    },
+    {
+      "id": "veilchenohrkolibri",
+      "name": "Veilchenohrkolibri",
+      "scientificName": "Colibri coruscans",
+      "taxonID": 6072,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/veilchenohrkolibri.heic",
+          "sha256": "104e25d1aa94415e0e0d6e7093d131a36ebb720604de49f5349d582f1d4ba78d",
+          "license": "CC-BY-4.0",
+          "attribution": "John G. Phillips",
+          "sourceURL": "https://www.inaturalist.org/observations/167274982",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/veilchenohrkolibri-2.heic",
+          "sha256": "740b9c00f2a9aa7fc9643c35d90e038fcf5a93b5b41068ca7f475ad8873154b3",
+          "license": "CC-BY-SA-4.0",
+          "attribution": "Thibaud Aronson",
+          "sourceURL": "https://www.inaturalist.org/observations/67964514",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": {
+        "file": "audio/veilchenohrkolibri.m4a",
+        "sha256": "91dc395e138bb9bd508970ce3c7ecb093ad6026d891b5b5c1d01854ee2b80628",
+        "license": "CC0-1.0",
+        "attribution": "Rosa Elena Albornoz (XC935029)",
+        "sourceURL": "https://xeno-canto.org/935029",
+        "retrieved": "2026-10-21"
+      },
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/veilchenohrkolibri.m4a",
+          "sha256": "422e6e740df732e51a66cca11a3d44e9fb6c233000b9a42f7168cd41c91cbd92",
+          "text": "Veilchenohrkolibri"
+        }
+      }
+    },
+    {
+      "id": "schwefeltyrann",
+      "name": "Schwefeltyrann",
+      "scientificName": "Pitangus sulphuratus",
+      "taxonID": 16956,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/schwefeltyrann.heic",
+          "sha256": "6e51c3ab3d56278934762ab1253abea1cd8364b85476738ad3b8536169e38816",
+          "license": "CC-BY-4.0",
+          "attribution": "Donald Davesne",
+          "sourceURL": "https://www.inaturalist.org/observations/312939044",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/schwefeltyrann-2.heic",
+          "sha256": "2e26e22bd26d7f276da637f01205bb4d96a3adc1d478f532e5ab3e907120f1f1",
+          "license": "CC-BY-SA-4.0",
+          "attribution": "Mayela y Ramón",
+          "sourceURL": "https://www.inaturalist.org/observations/138739233",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/schwefeltyrann-3.heic",
+          "sha256": "187d9aaa19d362b391ce7456332605aee125aade496cdffa7b4d4d7b10660797",
+          "license": "CC-BY-4.0",
+          "attribution": "Donald Davesne",
+          "sourceURL": "https://www.inaturalist.org/observations/312939044",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": {
+        "file": "audio/schwefeltyrann.m4a",
+        "sha256": "1a43d0148f650aa4cdb041d9af2433b0610b27bab3b6f7e6e4858241b20ef30d",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Niels Krabbe (XC248805)",
+        "sourceURL": "https://xeno-canto.org/248805",
+        "retrieved": "2026-10-21"
+      },
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/schwefeltyrann.m4a",
+          "sha256": "c39088325d39f6613df9d570eeb905eafb4cbb225774bd394d04f6454931375d",
+          "text": "Schwefeltyrann"
+        }
+      }
+    },
+    {
+      "id": "jabiru",
+      "name": "Jabiru",
+      "scientificName": "Jabiru mycteria",
+      "taxonID": 4773,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/jabiru.heic",
+          "sha256": "9281abc83252409875184ac91029feff86c52fe295476ecb654acaea3a0d3972",
+          "license": "CC0-1.0",
+          "attribution": "Russ Namitz",
+          "sourceURL": "https://www.inaturalist.org/observations/311810690",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/jabiru-2.heic",
+          "sha256": "13a20c99f03a883831f64d4f431d64ea1338168b1656a66b4d81669e1eec03e6",
+          "license": "CC-BY-4.0",
+          "attribution": "Leonel Roget",
+          "sourceURL": "https://www.inaturalist.org/observations/97614930",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/jabiru.m4a",
+          "sha256": "e8b1b69918340112f4bf6eeb86ec3fcb4750a60778a0284b7a51d375e9f340f0",
+          "text": "Jabiru"
+        }
+      }
+    },
+    {
+      "id": "sonnenralle",
+      "name": "Sonnenralle",
+      "scientificName": "Eurypyga helias",
+      "taxonID": 19,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/sonnenralle.heic",
+          "sha256": "6781578fbd50b7094c44b2cbc5c7e2900c46bea69d20149651c32a8858d0c159",
+          "license": "CC-BY-4.0",
+          "attribution": "Forest Botial-Jarvis",
+          "sourceURL": "https://www.inaturalist.org/observations/200643614",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/sonnenralle-2.heic",
+          "sha256": "5894767b086e8fd734a19c629e641b4984386e66e55c72744553bc16c8da9077",
+          "license": "CC-BY-4.0",
+          "attribution": "Cole Wolf",
+          "sourceURL": "https://www.inaturalist.org/observations/316197871",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/sonnenralle-3.heic",
+          "sha256": "0af50b7c17c594e4210957b2a3a3d1f674f8affd0ad6dd2feca6f1b7c05d0a14",
+          "license": "CC-BY-4.0",
+          "attribution": "Cole Wolf",
+          "sourceURL": "https://www.inaturalist.org/observations/316197871",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/sonnenralle.m4a",
+          "sha256": "977dce9a5a8cecb7efb86907eeac1e8cc0615c9f81e1d35ddff2be3aa583a080",
+          "text": "Sonnenralle"
+        }
+      }
+    },
+    {
+      "id": "schopfkarakara",
+      "name": "Schopfkarakara",
+      "scientificName": "Caracara plancus",
+      "taxonID": 4715,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/schopfkarakara.heic",
+          "sha256": "96f997f9d1fa70b8eb0ab3e030870883b8839564e596224c220525d00ab748b6",
+          "license": "CC-BY-SA-4.0",
+          "attribution": "Francisco V. Bezerra Neto",
+          "sourceURL": "https://www.inaturalist.org/observations/279580484",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/schopfkarakara-2.heic",
+          "sha256": "3daec6dc9c17835c13b93a9a56eebd7628de3f2dc9c99e415795947ab3463774",
+          "license": "CC-BY-SA-4.0",
+          "attribution": "Luciano Silveira",
+          "sourceURL": "https://www.inaturalist.org/observations/292957411",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/schopfkarakara.m4a",
+          "sha256": "448309a05b379afbfe63bd88ee4cdc2a53cdd34446cf84ca50458bfd2939abe4",
+          "text": "Schopfkarakara"
+        }
+      }
+    },
+    {
+      "id": "halsbandarassari",
+      "name": "Halsbandarassari",
+      "scientificName": "Pteroglossus torquatus",
+      "taxonID": 18584,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/halsbandarassari.heic",
+          "sha256": "8a2ad6bf849661a6eae6e00eec3e55ae11ccf231199d46b7a93e447a9991073e",
+          "license": "CC-BY-4.0",
+          "attribution": "Dan Schofield",
+          "sourceURL": "https://www.inaturalist.org/observations/323544817",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/halsbandarassari.m4a",
+          "sha256": "04a9566928c04c9f11444bd5756fcefab019ed68aba9affedebac9510e6472c7",
+          "text": "Halsbandarassari"
+        }
+      }
+    },
+    {
+      "id": "schlangenhalsvogel",
+      "name": "Schlangenhalsvogel",
+      "scientificName": "Anhinga anhinga",
+      "taxonID": 5063,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/schlangenhalsvogel.heic",
+          "sha256": "716127663855921f0842c0ecb4264c03e1477ece5b8d3cf45042985bb53144d9",
+          "license": "CC-BY-4.0",
+          "attribution": "sudomir",
+          "sourceURL": "https://www.inaturalist.org/observations/195881436",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/schlangenhalsvogel-2.heic",
+          "sha256": "468683910b28f3372181bbfecda83faf1c8fdb83f29d83917d6808b9f6876a8f",
+          "license": "CC-BY-4.0",
+          "attribution": "Jonathan Layman",
+          "sourceURL": "https://www.inaturalist.org/observations/253655370",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/schlangenhalsvogel.m4a",
+          "sha256": "aa3962d3fb75e77946eb7e6ee474ea8c7006c177b469a391c1f37c429b2cdf7d",
+          "text": "Schlangenhalsvogel"
+        }
+      }
+    },
+    {
+      "id": "purpurtyrann",
+      "name": "Purpurtyrann",
+      "scientificName": "Pyrocephalus rubinus",
+      "taxonID": 16447,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/purpurtyrann.heic",
+          "sha256": "b1b638548d941580cf21c77bd5d4854b4ae5a5571102255ad01cc972e70b7e10",
+          "license": "CC-BY-4.0",
+          "attribution": "Jorge Herreros de Lartundo",
+          "sourceURL": "https://www.inaturalist.org/observations/42546184",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/purpurtyrann-2.heic",
+          "sha256": "98a720d50f19d629ad31a32c3db4fac23c3549fbc4c49864d18beb2ddbe2be5a",
+          "license": "CC-BY-SA-4.0",
+          "attribution": "Fyn Kynd",
+          "sourceURL": "https://www.inaturalist.org/observations/98660786",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/purpurtyrann-3.heic",
+          "sha256": "5d28e5d967a00b31c310e793700f20e43fb1c6b585e73650396b99cb8e83bdf0",
+          "license": "CC-BY-4.0",
+          "attribution": "David F. Belmonte",
+          "sourceURL": "https://www.inaturalist.org/observations/300803054",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/purpurtyrann.m4a",
+          "sha256": "711fd5b02db0f21e6a63826d25d55284a6b287bbfef1af31851d6b4f035ec51f",
+          "text": "Purpurtyrann"
+        }
+      }
+    },
+    {
+      "id": "purpurtangare",
+      "name": "Purpurtangare",
+      "scientificName": "Ramphocelus carbo",
+      "taxonID": 10056,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/purpurtangare.heic",
+          "sha256": "9987739088dc764c1d8a21578afdec9d7c6921ccd1f325fcd109d2a839cb6b30",
+          "license": "CC-BY-4.0",
+          "attribution": "Vincent A. Vos",
+          "sourceURL": "https://www.inaturalist.org/observations/82101675",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/purpurtangare-2.heic",
+          "sha256": "020f6f42507879e289455619cd5d9910fdec4f7c984d0e8b359987f6e38e2dc9",
+          "license": "CC-BY-SA-4.0",
+          "attribution": "Francisco V. Bezerra Neto",
+          "sourceURL": "https://www.inaturalist.org/observations/354781715",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": {
+        "file": "audio/purpurtangare.m4a",
+        "sha256": "89443c6a3194d8234682958e008b2b62955d2ed7598dd76359bbf873f3a8cc35",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Niels Krabbe (XC243030)",
+        "sourceURL": "https://xeno-canto.org/243030",
+        "retrieved": "2026-10-21"
+      },
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/purpurtangare.m4a",
+          "sha256": "9450ad2e846b4bef47e7a1768a43b7e4f7853601edfb4d49f02c060421bb56be",
+          "text": "Purpurtangare"
+        }
+      }
+    },
+    {
+      "id": "kappenblaurabe",
+      "name": "Kappenblaurabe",
+      "scientificName": "Cyanocorax chrysops",
+      "taxonID": 8484,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/kappenblaurabe.heic",
+          "sha256": "10718f620ed812a97e179054f0182a192857ddfe3aab550b67f6353934a89397",
+          "license": "CC0-1.0",
+          "attribution": "Don Wellmann",
+          "sourceURL": "https://www.inaturalist.org/observations/289395989",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/kappenblaurabe.m4a",
+          "sha256": "07cf16f942a14d0260dbb32d6988c90b158689562a7ee832b50d65f8efd47e6b",
+          "text": "Kappenblaurabe"
+        }
+      }
+    },
+    {
+      "id": "graukardinal",
+      "name": "Graukardinal",
+      "scientificName": "Paroaria coronata",
+      "taxonID": 10254,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/graukardinal.heic",
+          "sha256": "18f71ce7b3e82efcc7850f77fae07065e61e0f737b2412ed03c118270f528648",
+          "license": "CC-BY-4.0",
+          "attribution": "Nicolas Olejnik",
+          "sourceURL": "https://www.inaturalist.org/observations/16563244",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/graukardinal-2.heic",
+          "sha256": "601d824abfb41b962a42be8cdb6688312e41708a8e279496ad3c85de4ccf713b",
+          "license": "CC-BY-4.0",
+          "attribution": "David F. Belmonte",
+          "sourceURL": "https://www.inaturalist.org/observations/249099964",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/graukardinal-3.heic",
+          "sha256": "750984f0dcbf813203f16f1dd770987f2d592d2d27c9228e92695ac8a65d83a3",
+          "license": "CC-BY-SA-4.0",
+          "attribution": "Daniel Dias",
+          "sourceURL": "https://www.inaturalist.org/observations/230000585",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": {
+        "file": "audio/graukardinal.m4a",
+        "sha256": "877c566bbdd5137cced0ce1064c71fd154cbc61b509293c28b3efdde6b5dd73d",
+        "license": "CC0-1.0",
+        "attribution": "Pedro Sanetti (XC1090718)",
+        "sourceURL": "https://xeno-canto.org/1090718",
+        "retrieved": "2026-10-21"
+      },
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/graukardinal.m4a",
+          "sha256": "ad213d843837f3e6a4c44488c79c45e2f03c087f90ca2b0824e337c4df2ac186",
+          "text": "Graukardinal"
         }
       }
     }
