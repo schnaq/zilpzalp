@@ -1,0 +1,646 @@
+{
+  "id": "wasser-kueste",
+  "title": "Wasser & Küste",
+  "voice": {
+    "license": "CC-BY-4.0",
+    "attribution": "Stimme: Ava (ElevenLabs)",
+    "sourceURL": "https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md",
+    "retrieved": "2026-10-21"
+  },
+  "birds": [
+    {
+      "id": "dreizehenmoewe",
+      "name": "Dreizehenmöwe",
+      "scientificName": "Rissa tridactyla",
+      "taxonID": 4494,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/dreizehenmoewe.heic",
+          "sha256": "641fc3fb213556ad3499738725c6f538f514429a3e5f351bc4b2106448718a9d",
+          "license": "CC-BY-4.0",
+          "attribution": "Quinten Wiegersma",
+          "sourceURL": "https://www.inaturalist.org/observations/99626453",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/dreizehenmoewe.m4a",
+          "sha256": "98252f34e15504de87c37d3b9d3bc9ab12ee8119c97e2ed9e4bb9cfbdcd3c1f6",
+          "text": "Dreizehenmöwe"
+        }
+      }
+    },
+    {
+      "id": "trottellumme",
+      "name": "Trottellumme",
+      "scientificName": "Uria aalge",
+      "taxonID": 4519,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/trottellumme.heic",
+          "sha256": "2371a416445f02ad26ef5aa16059744382da0209297c79c3c13ec5244c279b26",
+          "license": "CC-BY-4.0",
+          "attribution": "franciscodocampo",
+          "sourceURL": "https://www.inaturalist.org/observations/35832417",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/trottellumme.m4a",
+          "sha256": "a3c04a9c388937671df134a1b579bd7f304bd5878a10f743dcc450967020ca61",
+          "text": "Trottellumme"
+        }
+      }
+    },
+    {
+      "id": "tordalk",
+      "name": "Tordalk",
+      "scientificName": "Alca torda",
+      "taxonID": 4501,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/tordalk.heic",
+          "sha256": "36c01ca997a63e4c6d3e651fb5a9a8e4b168ad5a88ee6883d659a1408202b509",
+          "license": "CC-BY-4.0",
+          "attribution": "Ryan F. Mandelbaum",
+          "sourceURL": "https://www.inaturalist.org/observations/304543938",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/tordalk-2.heic",
+          "sha256": "a8d244256b3143cbf1a75e1519103435d41ae915185f25ea559414f1e7b8302f",
+          "license": "CC-BY-4.0",
+          "attribution": "Roger Rittmaster",
+          "sourceURL": "https://www.inaturalist.org/observations/32693782",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/tordalk.m4a",
+          "sha256": "25d11ce83c01da527f4e1890214cafc5ae4c62b7368e637cbe78ea2e7177f330",
+          "text": "Tordalk"
+        }
+      }
+    },
+    {
+      "id": "eiderente",
+      "name": "Eiderente",
+      "scientificName": "Somateria mollissima",
+      "taxonID": 7024,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/eiderente.heic",
+          "sha256": "1170276cd2f9ea67d818b0297c0189f939b2494980851da18ce2311e743c0428",
+          "license": "CC-BY-4.0",
+          "attribution": "Nigel Voaden",
+          "sourceURL": "https://www.inaturalist.org/observations/1186757",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/eiderente.m4a",
+          "sha256": "669ff237101aa15bd36c2da82c3e45ac8bb1ac0818e94399b3f2ac482806fbe5",
+          "text": "Eiderente"
+        }
+      }
+    },
+    {
+      "id": "brandgans",
+      "name": "Brandgans",
+      "scientificName": "Tadorna tadorna",
+      "taxonID": 7067,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/brandgans.heic",
+          "sha256": "12dafd5f30fd796044ca9b6e27b4ea7b36d5bfaed64d2336417bf46d3d64eddd",
+          "license": "CC-BY-4.0",
+          "attribution": "Антон Лабачоў",
+          "sourceURL": "https://www.inaturalist.org/observations/398773143",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/brandgans-2.heic",
+          "sha256": "b4df5b94a202b2c03166186521844a691379aa7cd12039aab98c73a725b79d2a",
+          "license": "CC-BY-4.0",
+          "attribution": "Kostas Zontanos",
+          "sourceURL": "https://www.inaturalist.org/observations/70546885",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/brandgans.m4a",
+          "sha256": "02d0c6b303e5f90e806d361f44df35b719946bd03438202f019da4ee537a3036",
+          "text": "Brandgans"
+        }
+      }
+    },
+    {
+      "id": "nonnengans",
+      "name": "Weißwangengans",
+      "scientificName": "Branta leucopsis",
+      "taxonID": 7101,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/nonnengans.heic",
+          "sha256": "5165f639737cd400016cad59d58971092ad6107c38083a23f4e26ce069fb1652",
+          "license": "CC-BY-4.0",
+          "attribution": "Bill Keim",
+          "sourceURL": "https://www.inaturalist.org/observations/36646428",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/nonnengans.m4a",
+          "sha256": "d4a8a702ccbcbe5583931dfc18f49c70d5ff303592ea3104b3e733d5a8481e8b",
+          "text": "Weißwangengans"
+        }
+      }
+    },
+    {
+      "id": "saebelschnaebler",
+      "name": "Säbelschnäbler",
+      "scientificName": "Recurvirostra avosetta",
+      "taxonID": 4883,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/saebelschnaebler.heic",
+          "sha256": "7e6289b8afc9a5528ab19e71206d14a19f06cd13d5eb56c1a572f54b07d13930",
+          "license": "CC-BY-4.0",
+          "attribution": "Christoph Moning",
+          "sourceURL": "https://www.inaturalist.org/observations/75534963",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/saebelschnaebler.m4a",
+          "sha256": "064497dc5e57f686da6d25d0dc112a07bf70d1c507ce8c0dae6f1d3c7557e693",
+          "text": "Säbelschnäbler"
+        }
+      }
+    },
+    {
+      "id": "alpenstrandlaeufer",
+      "name": "Alpenstrandläufer",
+      "scientificName": "Calidris alpina",
+      "taxonID": 3857,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/alpenstrandlaeufer.heic",
+          "sha256": "da354d528e34d7022680004e4e7aebe588c5c6f85ed49eee9b7bae83b3a3f04f",
+          "license": "CC-BY-4.0",
+          "attribution": "Donald Davesne",
+          "sourceURL": "https://www.inaturalist.org/observations/75721462",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/alpenstrandlaeufer.m4a",
+          "sha256": "9b6630a7a2d7fcd9c649882fb055cc8c8b54444de004a9a9188f027202d65e35",
+          "text": "Alpenstrandläufer"
+        }
+      }
+    },
+    {
+      "id": "sandregenpfeifer",
+      "name": "Sandregenpfeifer",
+      "scientificName": "Charadrius hiaticula",
+      "taxonID": 4801,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/sandregenpfeifer.heic",
+          "sha256": "ec328794dd97417c93214fa440c50303fe7e8be9f65da7bd21d9d97e3a9b2b4b",
+          "license": "CC-BY-4.0",
+          "attribution": "Ged Tranter",
+          "sourceURL": "https://www.inaturalist.org/observations/241437630",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/sandregenpfeifer-2.heic",
+          "sha256": "61240b559a581da36684ec29c29b10f9fb9d6042ced57980345a94c416968c85",
+          "license": "CC-BY-4.0",
+          "attribution": "Вячеслав Юсупов",
+          "sourceURL": "https://www.inaturalist.org/observations/60962889",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/sandregenpfeifer.m4a",
+          "sha256": "5c50ee2a02b9440567d8f404565805d5b6884cbfacca65141a44c8ea86901bbe",
+          "text": "Sandregenpfeifer"
+        }
+      }
+    },
+    {
+      "id": "loeffler",
+      "name": "Löffler",
+      "scientificName": "Platalea leucorodia",
+      "taxonID": 3731,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/loeffler.heic",
+          "sha256": "bc36160d1d01cabc916d3d52febe4ece76f45c6f5ffa4db59805154fb8540bbd",
+          "license": "CC-BY-4.0",
+          "attribution": "Diego González Dopico",
+          "sourceURL": "https://www.inaturalist.org/observations/369715703",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/loeffler-2.heic",
+          "sha256": "ee03fe933da67710a6b8726db967b18671fe03d2fb401f54da57e9b7455074f1",
+          "license": "CC-BY-4.0",
+          "attribution": "Andrea Chemello",
+          "sourceURL": "https://www.inaturalist.org/observations/36998601",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/loeffler.m4a",
+          "sha256": "988dbb1e9f13d3fe11d0ff05093759878f3df4d186fd49ad7de756ece490e29f",
+          "text": "Löffler"
+        }
+      }
+    },
+    {
+      "id": "flussseeschwalbe",
+      "name": "Flussseeschwalbe",
+      "scientificName": "Sterna hirundo",
+      "taxonID": 4450,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/flussseeschwalbe.heic",
+          "sha256": "32ad880dfa9860abfd239f93f39fadaf24ee120d5c97b1ec5256fb32c9b6eb96",
+          "license": "CC-BY-4.0",
+          "attribution": "Donald Davesne",
+          "sourceURL": "https://www.inaturalist.org/observations/270158340",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/flussseeschwalbe-2.heic",
+          "sha256": "8c5930df7b51683f6985ba1b34620d61d983f03cfee3459326de4a84bb01c8ef",
+          "license": "CC0-1.0",
+          "attribution": "nikonbird007",
+          "sourceURL": "https://www.inaturalist.org/observations/287598986",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/flussseeschwalbe.m4a",
+          "sha256": "f442ce9938c5a5bf79879678f66e02fa6ee731c5bc339bdd9e26565022e55c68",
+          "text": "Flussseeschwalbe"
+        }
+      }
+    },
+    {
+      "id": "zwergtaucher",
+      "name": "Zwergtaucher",
+      "scientificName": "Tachybaptus ruficollis",
+      "taxonID": 4237,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/zwergtaucher.heic",
+          "sha256": "847209de190295c462835426cdf0349ccc0230bb97576f10d825591400ceb6ba",
+          "license": "CC-BY-4.0",
+          "attribution": "Alexis Tinker-Tsavalas",
+          "sourceURL": "https://www.inaturalist.org/observations/55008155",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/zwergtaucher-2.heic",
+          "sha256": "c6e30b6dd612dce84212c3565fcdbb6b3ac342920ca4ec2a7ad686bfbd347311",
+          "license": "CC-BY-4.0",
+          "attribution": "Gergely Nigg",
+          "sourceURL": "https://www.inaturalist.org/observations/73037567",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/zwergtaucher.m4a",
+          "sha256": "782748b10bf7e8ccf08fc9aad89918b55ef9de1ad346939db50a194ebdab24b2",
+          "text": "Zwergtaucher"
+        }
+      }
+    },
+    {
+      "id": "reiherente",
+      "name": "Reiherente",
+      "scientificName": "Aythya fuligula",
+      "taxonID": 7046,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/reiherente.heic",
+          "sha256": "d79ae8cd60041d0b1dab5112e1015eba8ca1bcebd8ad4549ab5dea7c08e46f99",
+          "license": "CC-BY-4.0",
+          "attribution": "Donald Davesne",
+          "sourceURL": "https://www.inaturalist.org/observations/70050197",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/reiherente-2.heic",
+          "sha256": "82ddf1c2ba94daa5294ad78eef194bb6bc291d7dfc8148f8f204e8241fb8a30f",
+          "license": "CC-BY-4.0",
+          "attribution": "Tomas Broucek",
+          "sourceURL": "https://www.inaturalist.org/observations/71162578",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/reiherente.m4a",
+          "sha256": "cd428246651d35feb486fcf104f6dd5900dc52ef65d269f358997cfa9857bd09",
+          "text": "Reiherente"
+        }
+      }
+    },
+    {
+      "id": "krickente",
+      "name": "Krickente",
+      "scientificName": "Anas crecca",
+      "taxonID": 6937,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/krickente.heic",
+          "sha256": "f5e0b054c08d57f88597818d137ccdb191eea884e8f25800b6435892c4ea9dab",
+          "license": "CC-BY-4.0",
+          "attribution": "Don Loarie",
+          "sourceURL": "https://www.inaturalist.org/observations/333376478",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/krickente-2.heic",
+          "sha256": "8d853fb654cbd839610a862de8bae683b7acc9f4e0d4483ce94121611a6a3265",
+          "license": "CC-BY-4.0",
+          "attribution": "Kostas Zontanos",
+          "sourceURL": "https://www.inaturalist.org/observations/145279755",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/krickente-3.heic",
+          "sha256": "15e78a00f35a4fb2efc1fe8f0f40b7e8692edbfc341517e295c0ef5693a55df4",
+          "license": "CC-BY-4.0",
+          "attribution": "Laura Liedtke",
+          "sourceURL": "https://www.inaturalist.org/observations/148344723",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/krickente.m4a",
+          "sha256": "9c754508ab4c39076a03af73fe41b9159377f1431fe618986721e00f9fb548bf",
+          "text": "Krickente"
+        }
+      }
+    },
+    {
+      "id": "loeffelente",
+      "name": "Löffelente",
+      "scientificName": "Spatula clypeata",
+      "taxonID": 558438,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/loeffelente.heic",
+          "sha256": "55e32659f2254a1d139192bb3adad647c13544b776b9923c484f6b59e83dbcb8",
+          "license": "CC-BY-4.0",
+          "attribution": "Dan Vickers",
+          "sourceURL": "https://www.inaturalist.org/observations/262164450",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/loeffelente.m4a",
+          "sha256": "753f56888fdd41735c6ba2835780e91e138b1d9eda4361cbe5e94d2112fec33d",
+          "text": "Löffelente"
+        }
+      }
+    },
+    {
+      "id": "schellente",
+      "name": "Schellente",
+      "scientificName": "Bucephala clangula",
+      "taxonID": 6990,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/schellente.heic",
+          "sha256": "fb07dc95b0df052d36accbf2b9606277b329779e864e0385df696436f8347bce",
+          "license": "CC-BY-4.0",
+          "attribution": "Timothy McNitt",
+          "sourceURL": "https://www.inaturalist.org/observations/336665348",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/schellente.m4a",
+          "sha256": "1f909698054f890e1997fe0cc3688ed4f25564372c738343aa40485985a69de4",
+          "text": "Schellente"
+        }
+      }
+    },
+    {
+      "id": "kolbenente",
+      "name": "Kolbenente",
+      "scientificName": "Netta rufina",
+      "taxonID": 7122,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/kolbenente.heic",
+          "sha256": "fdb4ff9fd4de2b815b7f05ffcfd698249a48c180e800d0c65114bbe9a520ff1e",
+          "license": "CC-BY-4.0",
+          "attribution": "Christoph Moning",
+          "sourceURL": "https://www.inaturalist.org/observations/77408655",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/kolbenente.m4a",
+          "sha256": "1214811c50e4ad2ebfe8124e4bc80f35a0626f9cbcc5f32223e20d7c94b6974d",
+          "text": "Kolbenente"
+        }
+      }
+    },
+    {
+      "id": "zwergsaeger",
+      "name": "Zwergsäger",
+      "scientificName": "Mergellus albellus",
+      "taxonID": 7192,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/zwergsaeger.heic",
+          "sha256": "77869f9f6f855e3d935890b3d16979007495bfee1230b88d6aa75638d0623d30",
+          "license": "CC-BY-4.0",
+          "attribution": "Griha Hasanov",
+          "sourceURL": "https://www.inaturalist.org/observations/123802797",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/zwergsaeger.m4a",
+          "sha256": "d52629bd53cddb88b7f2989732168da73b1ea46efb95b56e2668aee1901a6576",
+          "text": "Zwergsäger"
+        }
+      }
+    },
+    {
+      "id": "flussuferlaeufer",
+      "name": "Flussuferläufer",
+      "scientificName": "Actitis hypoleucos",
+      "taxonID": 3978,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/flussuferlaeufer.heic",
+          "sha256": "92817a43fdc21ecb61635d29beab9dd04b2b756015e7c8271b59a7281d2cde2b",
+          "license": "CC-BY-4.0",
+          "attribution": "Andrew Allen",
+          "sourceURL": "https://www.inaturalist.org/observations/90369115",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/flussuferlaeufer.m4a",
+          "sha256": "b85098b57fd533dc628f5abfd82e5670dcf4bb961b0f9d485089714eaaae455f",
+          "text": "Flussuferläufer"
+        }
+      }
+    },
+    {
+      "id": "bekassine",
+      "name": "Bekassine",
+      "scientificName": "Gallinago gallinago",
+      "taxonID": 318836,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/bekassine.heic",
+          "sha256": "fe6badea6744edc88864f4f726a72390a43c6abe49cdd9d0c585241704550aa5",
+          "license": "CC-BY-4.0",
+          "attribution": "Вячеслав Юсупов",
+          "sourceURL": "https://www.inaturalist.org/observations/268545695",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/bekassine.m4a",
+          "sha256": "ab4266d4f63ff97ab1143dc6fb0c1384f7acd4fb9b8de8f16fd6a1a75f15d9c8",
+          "text": "Bekassine"
+        }
+      }
+    },
+    {
+      "id": "papageitaucher",
+      "name": "Papageitaucher",
+      "scientificName": "Fratercula arctica",
+      "taxonID": 4504,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/papageitaucher.heic",
+          "sha256": "440c6f6c8833c31d26dc1662ea366d552a41f9445165194967b922345374808f",
+          "license": "CC-BY-4.0",
+          "attribution": "Diego González Dopico",
+          "sourceURL": "https://www.inaturalist.org/observations/277865524",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/papageitaucher-2.heic",
+          "sha256": "44999bd1685aecfe21b214069d894a21653601c97bc753aadbbfc4dee42c0cfd",
+          "license": "CC-BY-4.0",
+          "attribution": "Julia Moning",
+          "sourceURL": "https://www.inaturalist.org/observations/114739787",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/papageitaucher-3.heic",
+          "sha256": "f8e43cd84bfaea054f8bff2093c58353f9f73e6935999e28bad6a91c85620d0d",
+          "license": "CC-BY-4.0",
+          "attribution": "Christoph Moning",
+          "sourceURL": "https://www.inaturalist.org/observations/115403062",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/papageitaucher.m4a",
+          "sha256": "f60ffc0de05ea546edcc7361907da0f5cbbb5c045e4b49af848dd6322c1be611",
+          "text": "Papageitaucher"
+        }
+      }
+    }
+  ]
+}
