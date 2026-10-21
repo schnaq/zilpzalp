@@ -2393,6 +2393,56 @@
     {
       "packID": "berge-wald",
       "packTitle": "Berge & Wald",
+      "birdID": "alpendohle",
+      "birdName": "Alpendohle",
+      "kind": "photo",
+      "attribution": "Bruno Peixoto",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/157149764"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
+      "birdID": "alpendohle",
+      "birdName": "Alpendohle",
+      "kind": "photo",
+      "attribution": "Subir B. Shakya",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/380991564"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
+      "birdID": "alpendohle",
+      "birdName": "Alpendohle",
+      "kind": "call",
+      "attribution": "Marie-Lan Taÿ Pamart (XC496698)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/496698"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
+      "birdID": "auerhuhn",
+      "birdName": "Auerhuhn",
+      "kind": "photo",
+      "attribution": "xulescu_g",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/208555744"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
+      "birdID": "auerhuhn",
+      "birdName": "Auerhuhn",
+      "kind": "photo",
+      "attribution": "wkee4ager",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/215227896"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
       "birdID": "mauerlaeufer",
       "birdName": "Mauerläufer",
       "kind": "photo",
@@ -2433,12 +2483,102 @@
     {
       "packID": "berge-wald",
       "packTitle": "Berge & Wald",
+      "birdID": "tannenhaeher",
+      "birdName": "Tannenhäher",
+      "kind": "photo",
+      "attribution": "Ксения Волянская",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/312633514"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
+      "birdID": "tannenhaeher",
+      "birdName": "Tannenhäher",
+      "kind": "photo",
+      "attribution": "Евгений Маринкин",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/313268048"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
+      "birdID": "tannenhaeher",
+      "birdName": "Tannenhäher",
+      "kind": "call",
+      "attribution": "Zdeněk Vermouzek (XC249299)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/249299"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
       "birdID": "fichtenkreuzschnabel",
       "birdName": "Fichtenkreuzschnabel",
       "kind": "photo",
       "attribution": "David Batchelor",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/51214120"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
+      "birdID": "fichtenkreuzschnabel",
+      "birdName": "Fichtenkreuzschnabel",
+      "kind": "photo",
+      "attribution": "Christoph Moning",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/57728230"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
+      "birdID": "fichtenkreuzschnabel",
+      "birdName": "Fichtenkreuzschnabel",
+      "kind": "photo",
+      "attribution": "brendanboyd",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/338743068"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
+      "birdID": "fichtenkreuzschnabel",
+      "birdName": "Fichtenkreuzschnabel",
+      "kind": "call",
+      "attribution": "Sonothèque ADVL (XC955857)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/955857"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
+      "birdID": "alpenschneehuhn",
+      "birdName": "Alpenschneehuhn",
+      "kind": "photo",
+      "attribution": "rappman",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/6402478"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
+      "birdID": "alpenschneehuhn",
+      "birdName": "Alpenschneehuhn",
+      "kind": "photo",
+      "attribution": "Karsten Rohweder",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/38039677"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
+      "birdID": "alpenschneehuhn",
+      "birdName": "Alpenschneehuhn",
+      "kind": "photo",
+      "attribution": "Christoph Moning",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/58235843"
     },
     {
       "packID": "berge-wald",
@@ -2463,6 +2603,16 @@
     {
       "packID": "berge-wald",
       "packTitle": "Berge & Wald",
+      "birdID": "birkhuhn",
+      "birdName": "Birkhuhn",
+      "kind": "photo",
+      "attribution": "Ксения Волянская",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/319781264"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
       "birdID": "haselhuhn",
       "birdName": "Haselhuhn",
       "kind": "photo",
@@ -2483,12 +2633,52 @@
     {
       "packID": "berge-wald",
       "packTitle": "Berge & Wald",
+      "birdID": "haselhuhn",
+      "birdName": "Haselhuhn",
+      "kind": "photo",
+      "attribution": "Евгений Маринкин",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/252606609"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
+      "birdID": "haselhuhn",
+      "birdName": "Haselhuhn",
+      "kind": "call",
+      "attribution": "Teet Sirotkin (XC1157221)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/1157221"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
       "birdID": "ringdrossel",
       "birdName": "Ringdrossel",
       "kind": "photo",
       "attribution": "Christoph Moning",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/65080496"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
+      "birdID": "ringdrossel",
+      "birdName": "Ringdrossel",
+      "kind": "photo",
+      "attribution": "Антон Лабачоў",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/217530356"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
+      "birdID": "ringdrossel",
+      "birdName": "Ringdrossel",
+      "kind": "call",
+      "attribution": "Lionel Triboulin (XC1186331)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/1186331"
     },
     {
       "packID": "berge-wald",
@@ -2503,12 +2693,62 @@
     {
       "packID": "berge-wald",
       "packTitle": "Berge & Wald",
+      "birdID": "tannenmeise",
+      "birdName": "Tannenmeise",
+      "kind": "photo",
+      "attribution": "Donsky",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/263781866"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
+      "birdID": "tannenmeise",
+      "birdName": "Tannenmeise",
+      "kind": "photo",
+      "attribution": "Ксения Волянская",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/330835361"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
+      "birdID": "tannenmeise",
+      "birdName": "Tannenmeise",
+      "kind": "call",
+      "attribution": "Grégoire Chauvot (XC815176)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/815176"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
       "birdID": "dreizehenspecht",
       "birdName": "Dreizehenspecht",
       "kind": "photo",
       "attribution": "Adam Śliż",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/107637674"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
+      "birdID": "dreizehenspecht",
+      "birdName": "Dreizehenspecht",
+      "kind": "photo",
+      "attribution": "Christoph Moning",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/226703619"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
+      "birdID": "dreizehenspecht",
+      "birdName": "Dreizehenspecht",
+      "kind": "photo",
+      "attribution": "Pål A. Olsvik",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/189247094"
     },
     {
       "packID": "berge-wald",
@@ -2523,12 +2763,102 @@
     {
       "packID": "berge-wald",
       "packTitle": "Berge & Wald",
+      "birdID": "schwarzstorch",
+      "birdName": "Schwarzstorch",
+      "kind": "photo",
+      "attribution": "Yehor Yatsiuk",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/48455903"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
+      "birdID": "schwarzstorch",
+      "birdName": "Schwarzstorch",
+      "kind": "photo",
+      "attribution": "u101125",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/271919486"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
+      "birdID": "wendehals",
+      "birdName": "Wendehals",
+      "kind": "photo",
+      "attribution": "Donald Davesne",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/241342213"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
+      "birdID": "wendehals",
+      "birdName": "Wendehals",
+      "kind": "photo",
+      "attribution": "Борис Георги",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/213398862"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
+      "birdID": "wendehals",
+      "birdName": "Wendehals",
+      "kind": "photo",
+      "attribution": "Константин Селивёрстов",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/37459136"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
+      "birdID": "wendehals",
+      "birdName": "Wendehals",
+      "kind": "call",
+      "attribution": "Jochem verweij (XC902938)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/902938"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
       "birdID": "steinadler",
       "birdName": "Steinadler",
       "kind": "photo",
       "attribution": "P Holroyd",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/315702535"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
+      "birdID": "steinadler",
+      "birdName": "Steinadler",
+      "kind": "photo",
+      "attribution": "Nils",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/205121160"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
+      "birdID": "steinadler",
+      "birdName": "Steinadler",
+      "kind": "photo",
+      "attribution": "Andrew Lai",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/320967000"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
+      "birdID": "steinadler",
+      "birdName": "Steinadler",
+      "kind": "call",
+      "attribution": "Pascal Christe (XC1145141)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/1145141"
     },
     {
       "packID": "berge-wald",
@@ -2549,6 +2879,26 @@
       "attribution": "Kudaibergen Amirekul",
       "license": "CC-BY-SA-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/107536421"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
+      "birdID": "bartgeier",
+      "birdName": "Bartgeier",
+      "kind": "photo",
+      "attribution": "Юлия Захаренко",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/297654547"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
+      "birdID": "bartgeier",
+      "birdName": "Bartgeier",
+      "kind": "call",
+      "attribution": "Thomas SIGNEAU (XC937971)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/937971"
     },
     {
       "packID": "berge-wald",
@@ -2583,6 +2933,36 @@
     {
       "packID": "berge-wald",
       "packTitle": "Berge & Wald",
+      "birdID": "sperlingskauz",
+      "birdName": "Sperlingskauz",
+      "kind": "call",
+      "attribution": "Max Karlsson (XC780439)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/780439"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
+      "birdID": "raufusskauz",
+      "birdName": "Raufußkauz",
+      "kind": "photo",
+      "attribution": "Dan Vickers",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/259094093"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
+      "birdID": "raufusskauz",
+      "birdName": "Raufußkauz",
+      "kind": "call",
+      "attribution": "Robert Petersen (XC986002)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/986002"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
       "birdID": "habichtskauz",
       "birdName": "Habichtskauz",
       "kind": "photo",
@@ -2593,12 +2973,62 @@
     {
       "packID": "berge-wald",
       "packTitle": "Berge & Wald",
+      "birdID": "habichtskauz",
+      "birdName": "Habichtskauz",
+      "kind": "photo",
+      "attribution": "Kirill Mikhailov",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/83606997"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
+      "birdID": "habichtskauz",
+      "birdName": "Habichtskauz",
+      "kind": "photo",
+      "attribution": "Рустам Сафаргалиев",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/201386848"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
+      "birdID": "habichtskauz",
+      "birdName": "Habichtskauz",
+      "kind": "call",
+      "attribution": "Robert Petersen (XC986007)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/986007"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
       "birdID": "gaensegeier",
       "birdName": "Gänsegeier",
       "kind": "photo",
       "attribution": "Diego González Dopico",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/317526057"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
+      "birdID": "gaensegeier",
+      "birdName": "Gänsegeier",
+      "kind": "photo",
+      "attribution": "Gianluca Congi🪶🦆🌲",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/147984922"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
+      "birdID": "gaensegeier",
+      "birdName": "Gänsegeier",
+      "kind": "photo",
+      "attribution": "Dario Taraborelli",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/175402466"
     },
     {
       "packID": "berge-wald",
@@ -2623,6 +3053,16 @@
     {
       "packID": "berge-wald",
       "packTitle": "Berge & Wald",
+      "birdID": "waldohreule",
+      "birdName": "Waldohreule",
+      "kind": "call",
+      "attribution": "Sonothèque ADVL (XC1107816)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/1107816"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
       "birdID": "habicht",
       "birdName": "Habicht",
       "kind": "photo",
@@ -2633,12 +3073,102 @@
     {
       "packID": "berge-wald",
       "packTitle": "Berge & Wald",
+      "birdID": "habicht",
+      "birdName": "Habicht",
+      "kind": "photo",
+      "attribution": "Andrey Bratushev",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/102599961"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
+      "birdID": "gebirgsstelze",
+      "birdName": "Gebirgsstelze",
+      "kind": "photo",
+      "attribution": "Donald Davesne",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/348453903"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
+      "birdID": "gebirgsstelze",
+      "birdName": "Gebirgsstelze",
+      "kind": "photo",
+      "attribution": "Andrew Cunnington",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/216315113"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
+      "birdID": "gebirgsstelze",
+      "birdName": "Gebirgsstelze",
+      "kind": "photo",
+      "attribution": "R Clarke",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/212192178"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
+      "birdID": "gebirgsstelze",
+      "birdName": "Gebirgsstelze",
+      "kind": "call",
+      "attribution": "Lionel Triboulin (XC1186551)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/1186551"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
+      "birdID": "waldschnepfe",
+      "birdName": "Waldschnepfe",
+      "kind": "photo",
+      "attribution": "Лариса Артемьева",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/91775307"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
+      "birdID": "waldschnepfe",
+      "birdName": "Waldschnepfe",
+      "kind": "call",
+      "attribution": "Kevin Guille (XC1105596)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/1105596"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
       "birdID": "bergfink",
       "birdName": "Bergfink",
       "kind": "photo",
       "attribution": "Paul Lewis",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/105785220"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
+      "birdID": "bergfink",
+      "birdName": "Bergfink",
+      "kind": "photo",
+      "attribution": "SteveM4560",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/198578619"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
+      "birdID": "bergfink",
+      "birdName": "Bergfink",
+      "kind": "call",
+      "attribution": "Lionel Triboulin (XC1186555)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/1186555"
     },
     {
       "packID": "berge-wald",
@@ -2719,6 +3249,36 @@
       "attribution": "Sonothèque ADVL (XC1107912)",
       "license": "CC0-1.0",
       "sourceURL": "https://xeno-canto.org/1107912"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
+      "birdID": "kolkrabe",
+      "birdName": "Kolkrabe",
+      "kind": "photo",
+      "attribution": "Jonathan Layman",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/103438707"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
+      "birdID": "kolkrabe",
+      "birdName": "Kolkrabe",
+      "kind": "photo",
+      "attribution": "Javier Sánchez Álvarez",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/175791462"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
+      "birdID": "kolkrabe",
+      "birdName": "Kolkrabe",
+      "kind": "call",
+      "attribution": "Doug Hynes (XC922424)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/922424"
     },
     {
       "packID": "berge-wald",
