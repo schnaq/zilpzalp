@@ -338,6 +338,7 @@ the source declared.
 | Gänsegeier | Photo | Diego González Dopico | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/317526057> |
 | Gänsegeier | Photo | Gianluca Congi🪶🦆🌲 | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/147984922> |
 | Gänsegeier | Photo | Dario Taraborelli | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/175402466> |
+| Gänsegeier | Call | Thomas SIGNEAU (XC917400) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/917400> |
 | Waldohreule | Photo | Charlotte Kirchner | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/320382484> |
 | Waldohreule | Photo | Dario Taraborelli | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/101991293> |
 | Waldohreule | Call | Sonothèque ADVL (XC1107816) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1107816> |
