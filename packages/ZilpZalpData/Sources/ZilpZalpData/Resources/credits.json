@@ -3293,6 +3293,16 @@
     {
       "packID": "berge-wald",
       "packTitle": "Berge & Wald",
+      "birdID": "habicht",
+      "birdName": "Habicht",
+      "kind": "call",
+      "attribution": "Benoît Van Hecke (XC545862)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/545862"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
       "birdID": "gebirgsstelze",
       "birdName": "Gebirgsstelze",
       "kind": "photo",
