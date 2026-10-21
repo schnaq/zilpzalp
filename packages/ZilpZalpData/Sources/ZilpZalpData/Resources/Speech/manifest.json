@@ -10,37 +10,37 @@
   "lines": {
     "roundEnd.title": {
       "file": "roundEnd.title.m4a",
-      "sha256": "a131d051f364b7f4e4f68d47dc66dadfdf42ded8956937004602e542d99309d0",
+      "sha256": "051412991cc349086196d97550781cbdc0a3e12d67faf0347969ac50e4352779",
       "text": "Super gemacht!"
     },
     "gate.spoken": {
       "file": "gate.spoken.m4a",
-      "sha256": "588d09d209f5dc261e93e5889f540c17d0358671ddf8b8f8bd66139c567e94a5",
+      "sha256": "b28c49f22033c1c6a0dfc8c05d59c6aee867d4118f5b6a5ea924dfb3521eabbd",
       "text": "Frag bitte einen Erwachsenen."
     },
     "profile.picker.title": {
       "file": "profile.picker.title.m4a",
-      "sha256": "7b8441918be399168923e0db50d69ecd476e47bfa09b380dcdf4c26af7b6fd6c",
+      "sha256": "215ebb0ddc1678b5e03b66d5c62219e5064e9d60dddccb35016d19e61ba7a5e7",
       "text": "Wer spielt heute?"
     },
     "profile.create.title": {
       "file": "profile.create.title.m4a",
-      "sha256": "6714b66b1e052f7664af7bc6c8387b49a69fce8b8753eb258b8169a1598ff9d0",
+      "sha256": "da67b4608f3d3d237951e33b1000e90bc6a6d706b55e021d8fe726ab603d7664",
       "text": "Wie heißt du?"
     },
     "quiz.quit.question": {
       "file": "quiz.quit.question.m4a",
-      "sha256": "df476688d2fa04a384835fe613d984acb86d693797aaa2027f9b0d6bfbd74832",
+      "sha256": "b28c0d0b60db56e90ecdf6a1a0042458d3f3eee3dc0bc71d43f2326751097a90",
       "text": "Willst du aufhören?"
     },
     "home.collection.title": {
       "file": "home.collection.title.m4a",
-      "sha256": "6102a6adae45bd84312e07078cbe065d978a3834877382b0758ec6415966e7e8",
+      "sha256": "10b7df943e17c282ccba3b21d45e2eabfaa39c2d12cb60e591c504c3b1984095",
       "text": "Welche Vögel?"
     },
     "home.collection.all": {
       "file": "home.collection.all.m4a",
-      "sha256": "c95eecf14bf6512e847c83f2bbdb908597ac14ecd2358aae10306cf0b42370e5",
+      "sha256": "7aef838a21e863155c35b9e8547da4ad9fa68eb9f85ac4045bd1145b4dc82842",
       "text": "Alle Vögel"
     }
   }
