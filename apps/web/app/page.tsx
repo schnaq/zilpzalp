@@ -22,7 +22,7 @@ const FACTS = [
   {
     term: 'Sterne und Sticker',
     detail:
-      'Jede Runde bringt bis zu drei Sterne. Wer einen Vogel oft genug erkennt, bekommt seinen Sticker.',
+      'Jede Runde bringt bis zu drei Sterne. Wer einen Vogel oft genug auf Anhieb erkennt, bekommt seinen Sticker.',
   },
   {
     term: 'Mehrere Kinder',
@@ -33,7 +33,7 @@ const FACTS = [
 
 const PARENTS_CAN = [
   'Pakete ansehen und neue Vögel laden.',
-  'Pro Kind wählen: Sticker nach drei oder fünf Treffern.',
+  'Pro Kind wählen: Sticker nach drei oder fünf Treffern auf Anhieb.',
   'Das Vorlesen ausschalten. Die Vogelrufe bleiben.',
   'Eine tägliche Spielzeit. Danach heißt es „Zeit fürs Nest“.',
 ]
@@ -86,7 +86,7 @@ export default function Home() {
           <div className="section-head">
             <h2>Zwei Spiele</h2>
             <p className="lead">
-              Eine KI-Stimme liest jede Aufgabe vor, geantwortet wird mit
+              Die Vogelnamen spricht eine KI-Stimme, geantwortet wird mit
               Fotos. Lesen muss niemand.
             </p>
           </div>
@@ -131,8 +131,7 @@ export default function Home() {
           <div className="section-head">
             <h2>Ein Blick in die App</h2>
             <p className="lead">
-              Große Knöpfe, kräftige Farben, keine Menüs. Gemacht für kleine
-              Finger.
+              Große Knöpfe, kräftige Farben, keine Menüs zum Verlaufen.
             </p>
           </div>
           <Screenshots />
@@ -144,14 +143,14 @@ export default function Home() {
           <div className="section-head">
             <h2>Für Eltern</h2>
             <p className="lead">
-              Der Elternbereich öffnet sich nur mit Face ID oder dem
-              Gerätecode.
+              Der Elternbereich ist mit Face ID, Touch ID oder dem Gerätecode
+              gesichert.
             </p>
           </div>
 
           <div className="columns">
             <div className="column">
-              <h3>Was Sie dort einstellen</h3>
+              <h3>Was Eltern einstellen</h3>
               <ul className="ticks">
                 {PARENTS_CAN.map((item) => (
                   <li key={item}>
@@ -188,7 +187,7 @@ export default function Home() {
           <p>
             Die Fotos kommen von iNaturalist, die Vogelrufe von xeno-canto,
             alle unter freier Lizenz (CC0, CC BY oder CC BY-SA). Wer sie
-            beigesteuert hat, steht in der App unter „Fotos &amp; Dank“. Der
+            beigesteuert hat, steht in der App unter „Über ZilpZalp“. Der
             Quellcode von ZilpZalp liegt offen auf{' '}
             <a href={SOURCE_URL}>GitHub</a>.
           </p>

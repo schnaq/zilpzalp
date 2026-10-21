@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const FAQ = [
   {
     q: 'Muss mein Kind lesen können?',
-    a: <>Nein. Alles wird vorgelesen, geantwortet wird mit Fotos.</>,
+    a: <>Nein. Die Vogelnamen werden vorgelesen, geantwortet wird mit Fotos.</>,
   },
   {
     q: 'Wer spricht in der App?',
@@ -56,8 +56,8 @@ const FAQ = [
     q: 'Braucht die App Internet?',
     a: (
       <>
-        Zum Spielen nicht. Ins Netz geht sie nur, wenn du im Elternbereich
-        Pakete ansiehst oder lädst.
+        Zum Spielen nicht. Ins Netz geht sie nur im Elternbereich: für die
+        Liste der Pakete und für die Pakete, die du lädst.
       </>
     ),
   },
@@ -84,7 +84,7 @@ const FAQ = [
     q: 'Warum fehlt „Wer singt da?“ auf der Startseite?',
     a: (
       <>
-        Das Spiel erscheint nur, wenn genug Vögel des Pakets eine Aufnahme
+        Das Spiel erscheint nur, wenn genug der gewählten Vögel eine Aufnahme
         haben. Lieber keine Kachel als eine, hinter der nichts klingt.
       </>
     ),
@@ -95,7 +95,7 @@ const FAQ = [
       <>
         Von iNaturalist und xeno-canto, alle unter freier Lizenz (CC0, CC BY
         oder CC BY-SA). Wer was beigesteuert hat, steht in der App unter
-        „Fotos &amp; Dank“.
+        „Über ZilpZalp“.
       </>
     ),
   },
@@ -136,7 +136,7 @@ export default function Support() {
         Schreib an <a href={`mailto:${SUPPORT_MAIL}`}>{SUPPORT_MAIL}</a>:
       </p>
       <ul>
-        <li>was passiert ist</li>
+        <li>was passiert ist und wie es dazu kam</li>
         <li>Gerät und iOS-Version</li>
         <li>wenn möglich ein Bildschirmfoto</li>
       </ul>
