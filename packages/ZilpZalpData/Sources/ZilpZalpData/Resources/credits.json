@@ -6983,6 +6983,26 @@
     {
       "packID": "suedamerika",
       "packTitle": "Südamerika & Regenwald",
+      "birdID": "humboldtpinguin",
+      "birdName": "Humboldtpinguin",
+      "kind": "photo",
+      "attribution": "Tim",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/192428188"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "humboldtpinguin",
+      "birdName": "Humboldtpinguin",
+      "kind": "photo",
+      "attribution": "Zac Peterson",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/68708922"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
       "birdID": "tiefland-felsenhahn",
       "birdName": "Tiefland-Felsenhahn",
       "kind": "photo",
@@ -6993,12 +7013,52 @@
     {
       "packID": "suedamerika",
       "packTitle": "Südamerika & Regenwald",
+      "birdID": "tiefland-felsenhahn",
+      "birdName": "Tiefland-Felsenhahn",
+      "kind": "photo",
+      "attribution": "Naturalist Tours",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/217331272"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "tiefland-felsenhahn",
+      "birdName": "Tiefland-Felsenhahn",
+      "kind": "photo",
+      "attribution": "Max G.W. Verheij",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/99201132"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
       "birdID": "siebenfarbentangare",
       "birdName": "Siebenfarbentangare",
       "kind": "photo",
       "attribution": "Joao Quental",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/392514179"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "siebenfarbentangare",
+      "birdName": "Siebenfarbentangare",
+      "kind": "photo",
+      "attribution": "Lindolfo Souto",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/331138354"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "siebenfarbentangare",
+      "birdName": "Siebenfarbentangare",
+      "kind": "photo",
+      "attribution": "Thibaud Aronson",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/59391717"
     },
     {
       "packID": "suedamerika",
@@ -7033,6 +7093,26 @@
     {
       "packID": "suedamerika",
       "packTitle": "Südamerika & Regenwald",
+      "birdID": "fischertukan",
+      "birdName": "Fischertukan",
+      "kind": "photo",
+      "attribution": "Mike Brady",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/331088258"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "fischertukan",
+      "birdName": "Fischertukan",
+      "kind": "photo",
+      "attribution": "Rose Zappa",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/103582999"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
       "birdID": "koenigsgeier",
       "birdName": "Königsgeier",
       "kind": "photo",
@@ -7049,6 +7129,16 @@
       "attribution": "Jean-Paul Boerekamps",
       "license": "CC0-1.0",
       "sourceURL": "https://www.inaturalist.org/observations/74490210"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "koenigsgeier",
+      "birdName": "Königsgeier",
+      "kind": "photo",
+      "attribution": "Gonzalo Martinez",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/246395680"
     },
     {
       "packID": "suedamerika",
@@ -7103,6 +7193,16 @@
     {
       "packID": "suedamerika",
       "packTitle": "Südamerika & Regenwald",
+      "birdID": "halsband-wehrvogel",
+      "birdName": "Halsband-Wehrvogel",
+      "kind": "photo",
+      "attribution": "Millie Basden",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/31232473"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
       "birdID": "inkaseeschwalbe",
       "birdName": "Inkaseeschwalbe",
       "kind": "photo",
@@ -7113,12 +7213,52 @@
     {
       "packID": "suedamerika",
       "packTitle": "Südamerika & Regenwald",
+      "birdID": "inkaseeschwalbe",
+      "birdName": "Inkaseeschwalbe",
+      "kind": "photo",
+      "attribution": "Patrick Jackson",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/145849759"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "inkaseeschwalbe",
+      "birdName": "Inkaseeschwalbe",
+      "kind": "photo",
+      "attribution": "Dario Taraborelli",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/266860792"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
       "birdID": "amazonasfischer",
       "birdName": "Amazonasfischer",
       "kind": "photo",
       "attribution": "ferferrari",
       "license": "CC0-1.0",
       "sourceURL": "https://www.inaturalist.org/observations/133831715"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "amazonasfischer",
+      "birdName": "Amazonasfischer",
+      "kind": "photo",
+      "attribution": "Anthony Batista",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/392497161"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "amazonasfischer",
+      "birdName": "Amazonasfischer",
+      "kind": "photo",
+      "attribution": "Federico Figueroa Cabezas",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/148784358"
     },
     {
       "packID": "suedamerika",
@@ -7139,6 +7279,16 @@
       "attribution": "Christoph Moning",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/57113925"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "nandu",
+      "birdName": "Nandu",
+      "kind": "photo",
+      "attribution": "Johannes S.",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/331548510"
     },
     {
       "packID": "suedamerika",
@@ -7179,6 +7329,16 @@
       "attribution": "Miguel",
       "license": "CC-BY-SA-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/230201814"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "roter-sichler",
+      "birdName": "Roter Sichler",
+      "kind": "photo",
+      "attribution": "Pedro Henrique Maloso Ramos",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/182386994"
     },
     {
       "packID": "suedamerika",
@@ -7239,6 +7399,346 @@
       "attribution": "James Adney Zehr",
       "license": "CC0-1.0",
       "sourceURL": "https://www.inaturalist.org/observations/340657292"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "hyazinthara",
+      "birdName": "Hyazinthara",
+      "kind": "photo",
+      "attribution": "Adrien Jailloux",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/145291564"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "gruenfluegelara",
+      "birdName": "Grünflügelara",
+      "kind": "photo",
+      "attribution": "Francisco V. Bezerra Neto",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/298630303"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "hoatzin",
+      "birdName": "Hoatzin",
+      "kind": "photo",
+      "attribution": "Philipp Hoenle",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/191380473"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "hoatzin",
+      "birdName": "Hoatzin",
+      "kind": "call",
+      "attribution": "Niels Krabbe (XC251282)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/251282"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "schwertschnabelkolibri",
+      "birdName": "Schwertschnabelkolibri",
+      "kind": "photo",
+      "attribution": "scaup",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/337551294"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "schwertschnabelkolibri",
+      "birdName": "Schwertschnabelkolibri",
+      "kind": "photo",
+      "attribution": "Frank Dietze",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/194946730"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "schwertschnabelkolibri",
+      "birdName": "Schwertschnabelkolibri",
+      "kind": "photo",
+      "attribution": "Dario Taraborelli",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/144819130"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "schwertschnabelkolibri",
+      "birdName": "Schwertschnabelkolibri",
+      "kind": "call",
+      "attribution": "Niels Krabbe (XC250817)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/250817"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "veilchenohrkolibri",
+      "birdName": "Veilchenohrkolibri",
+      "kind": "photo",
+      "attribution": "John G. Phillips",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/167274982"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "veilchenohrkolibri",
+      "birdName": "Veilchenohrkolibri",
+      "kind": "photo",
+      "attribution": "Thibaud Aronson",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/67964514"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "veilchenohrkolibri",
+      "birdName": "Veilchenohrkolibri",
+      "kind": "call",
+      "attribution": "Rosa Elena Albornoz (XC935029)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/935029"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "schwefeltyrann",
+      "birdName": "Schwefeltyrann",
+      "kind": "photo",
+      "attribution": "Donald Davesne",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/312939044"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "schwefeltyrann",
+      "birdName": "Schwefeltyrann",
+      "kind": "photo",
+      "attribution": "Mayela y Ramón",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/138739233"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "schwefeltyrann",
+      "birdName": "Schwefeltyrann",
+      "kind": "call",
+      "attribution": "Niels Krabbe (XC248805)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/248805"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "jabiru",
+      "birdName": "Jabiru",
+      "kind": "photo",
+      "attribution": "Russ Namitz",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/311810690"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "jabiru",
+      "birdName": "Jabiru",
+      "kind": "photo",
+      "attribution": "Leonel Roget",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/97614930"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "sonnenralle",
+      "birdName": "Sonnenralle",
+      "kind": "photo",
+      "attribution": "Forest Botial-Jarvis",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/200643614"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "sonnenralle",
+      "birdName": "Sonnenralle",
+      "kind": "photo",
+      "attribution": "Cole Wolf",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/316197871"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "schopfkarakara",
+      "birdName": "Schopfkarakara",
+      "kind": "photo",
+      "attribution": "Francisco V. Bezerra Neto",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/279580484"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "schopfkarakara",
+      "birdName": "Schopfkarakara",
+      "kind": "photo",
+      "attribution": "Luciano Silveira",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/292957411"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "halsbandarassari",
+      "birdName": "Halsbandarassari",
+      "kind": "photo",
+      "attribution": "Dan Schofield",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/323544817"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "schlangenhalsvogel",
+      "birdName": "Schlangenhalsvogel",
+      "kind": "photo",
+      "attribution": "sudomir",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/195881436"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "schlangenhalsvogel",
+      "birdName": "Schlangenhalsvogel",
+      "kind": "photo",
+      "attribution": "Jonathan Layman",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/253655370"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "purpurtyrann",
+      "birdName": "Purpurtyrann",
+      "kind": "photo",
+      "attribution": "Jorge Herreros de Lartundo",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/42546184"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "purpurtyrann",
+      "birdName": "Purpurtyrann",
+      "kind": "photo",
+      "attribution": "Fyn Kynd",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/98660786"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "purpurtyrann",
+      "birdName": "Purpurtyrann",
+      "kind": "photo",
+      "attribution": "David F. Belmonte",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/300803054"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "purpurtangare",
+      "birdName": "Purpurtangare",
+      "kind": "photo",
+      "attribution": "Vincent A. Vos",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/82101675"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "purpurtangare",
+      "birdName": "Purpurtangare",
+      "kind": "photo",
+      "attribution": "Francisco V. Bezerra Neto",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/354781715"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "purpurtangare",
+      "birdName": "Purpurtangare",
+      "kind": "call",
+      "attribution": "Niels Krabbe (XC243030)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/243030"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "kappenblaurabe",
+      "birdName": "Kappenblaurabe",
+      "kind": "photo",
+      "attribution": "Don Wellmann",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/289395989"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "graukardinal",
+      "birdName": "Graukardinal",
+      "kind": "photo",
+      "attribution": "Nicolas Olejnik",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/16563244"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "graukardinal",
+      "birdName": "Graukardinal",
+      "kind": "photo",
+      "attribution": "David F. Belmonte",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/249099964"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "graukardinal",
+      "birdName": "Graukardinal",
+      "kind": "photo",
+      "attribution": "Daniel Dias",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/230000585"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "graukardinal",
+      "birdName": "Graukardinal",
+      "kind": "call",
+      "attribution": "Pedro Sanetti (XC1090718)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/1090718"
     },
     {
       "packID": "wasser-kueste",
