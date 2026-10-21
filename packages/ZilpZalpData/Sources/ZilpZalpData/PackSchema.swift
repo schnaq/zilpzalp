@@ -16,9 +16,7 @@ public enum License: String, Codable, Sendable {
 public extension License {
     /// How a licence is named in a credit line: the short public name, not the
     /// SPDX identifier the manifest carries. "CC BY 4.0" is what the licence
-    /// deed itself asks to be called; "CC-BY-4.0" is a filing code. The
-    /// version is part of the name because 3.0 and 4.0 are different licences
-    /// and a credit has to say which one applies.
+    /// deed itself asks to be called; "CC-BY-4.0" is a filing code.
     ///
     /// Not product copy and therefore not in a String Catalog: these
     /// names are the same in every language, which is also why they may live

@@ -15,15 +15,10 @@ Three findings that cost a day when they are rediscovered
 - **`numRecordings` is a string**, as is a recording's `id`.
 
 Unlike iNaturalist, the server-side filter is not the last word: `lic:BY-SA`
-returns CC BY-SA 3.0 and 4.0 alike, and the version decides the identifier
-the manifest records. Both are permitted since 2026-10-21; a version or port
-outside `LICENCES`, such as `by-sa/3.0/de`, is not. Those recordings are
+returns every version, and only those in `LICENCES` may ship. The others are
 listed rather than dropped — a human should see that they exist and why they
 cannot be used — so `licence_id` returns `None` for them instead of raising,
 and `pick` refuses them.
-
-Some records come without a `file` — nothing to download. `recordings` drops
-them, and `pick` refuses them by name.
 """
 
 from __future__ import annotations
