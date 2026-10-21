@@ -562,14 +562,6 @@
       "pronunciation": null,
       "photos": [
         {
-          "file": "photos/harpyie.heic",
-          "sha256": "88103598b6185429ed787ea0f4da4a3ba800752525dcb518f52b8153e1eaf1cf",
-          "license": "CC-BY-4.0",
-          "attribution": "Luciano Massa",
-          "sourceURL": "https://www.inaturalist.org/observations/134352007",
-          "retrieved": "2026-09-10"
-        },
-        {
           "file": "photos/harpyie-3.heic",
           "sha256": "62454b590989fba47244c7c6e736a072d02ef23aa6d55ce7d359f96d5290d456",
           "license": "CC-BY-4.0",
