@@ -9,6 +9,16 @@
   },
   "birds": [
     {
+      "id": "silbermoewe",
+      "name": "Silbermöwe",
+      "scientificName": "Larus argentatus",
+      "taxonID": 204533,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
       "id": "dreizehenmoewe",
       "name": "Dreizehenmöwe",
       "scientificName": "Rissa tridactyla",
@@ -93,6 +103,26 @@
           "text": "Tordalk"
         }
       }
+    },
+    {
+      "id": "basstoelpel",
+      "name": "Basstölpel",
+      "scientificName": "Morus bassanus",
+      "taxonID": 3802,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "eissturmvogel",
+      "name": "Eissturmvogel",
+      "scientificName": "Fulmarus glacialis",
+      "taxonID": 4180,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
     },
     {
       "id": "eiderente",
@@ -207,6 +237,16 @@
       }
     },
     {
+      "id": "rotschenkel",
+      "name": "Rotschenkel",
+      "scientificName": "Tringa totanus",
+      "taxonID": 3879,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
       "id": "alpenstrandlaeufer",
       "name": "Alpenstrandläufer",
       "scientificName": "Calidris alpina",
@@ -231,6 +271,26 @@
           "text": "Alpenstrandläufer"
         }
       }
+    },
+    {
+      "id": "steinwaelzer",
+      "name": "Steinwälzer",
+      "scientificName": "Arenaria interpres",
+      "taxonID": 3938,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "kampflaeufer",
+      "name": "Kampfläufer",
+      "scientificName": "Calidris pugnax",
+      "taxonID": 339593,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
     },
     {
       "id": "sandregenpfeifer",
@@ -267,6 +327,26 @@
       }
     },
     {
+      "id": "grosser-brachvogel",
+      "name": "Großer Brachvogel",
+      "scientificName": "Numenius arquata",
+      "taxonID": 3896,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "silberreiher",
+      "name": "Silberreiher",
+      "scientificName": "Ardea alba",
+      "taxonID": 144455,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
       "id": "loeffler",
       "name": "Löffler",
       "scientificName": "Platalea leucorodia",
@@ -299,6 +379,26 @@
           "text": "Löffler"
         }
       }
+    },
+    {
+      "id": "purpurreiher",
+      "name": "Purpurreiher",
+      "scientificName": "Ardea purpurea",
+      "taxonID": 4951,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "rohrdommel",
+      "name": "Rohrdommel",
+      "scientificName": "Botaurus stellaris",
+      "taxonID": 5033,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
     },
     {
       "id": "flussseeschwalbe",
@@ -523,6 +623,16 @@
       }
     },
     {
+      "id": "gaensesaeger",
+      "name": "Gänsesäger",
+      "scientificName": "Mergus merganser",
+      "taxonID": 7004,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
       "id": "zwergsaeger",
       "name": "Zwergsäger",
       "scientificName": "Mergellus albellus",
@@ -547,6 +657,36 @@
           "text": "Zwergsäger"
         }
       }
+    },
+    {
+      "id": "teichhuhn",
+      "name": "Teichhuhn",
+      "scientificName": "Gallinula chloropus",
+      "taxonID": 201282,
+      "article": "das",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "singschwan",
+      "name": "Singschwan",
+      "scientificName": "Cygnus cygnus",
+      "taxonID": 6916,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "fischadler",
+      "name": "Fischadler",
+      "scientificName": "Pandion haliaetus",
+      "taxonID": 116999,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
     },
     {
       "id": "flussuferlaeufer",
