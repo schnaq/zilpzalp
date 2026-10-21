@@ -23,6 +23,22 @@
           "attribution": "Thomas Mesaglio",
           "sourceURL": "https://www.inaturalist.org/observations/59109759",
           "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/rosakakadu-2.heic",
+          "sha256": "f1f4abda863f81c4afedbb0bd7c61073ee4ca603d771a1db86411121ba15f5cf",
+          "license": "CC-BY-4.0",
+          "attribution": "Wairambar Rainforest",
+          "sourceURL": "https://www.inaturalist.org/observations/205454599",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/rosakakadu-3.heic",
+          "sha256": "6df7aef4db86c76f22a0ebbddee79a29fae0cdc6d8f9db7efbc3b8db0a7af6db",
+          "license": "CC-BY-SA-4.0",
+          "attribution": "Romain Boisseau",
+          "sourceURL": "https://www.inaturalist.org/observations/302043822",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": null,
@@ -31,6 +47,32 @@
           "file": "speech/collection.name/rosakakadu.m4a",
           "sha256": "6df92f9975e7efbe4acfac8fcf5bb180368a53414a3f59c612d16ca3aee3c02d",
           "text": "Rosakakadu"
+        }
+      }
+    },
+    {
+      "id": "gelbhaubenkakadu",
+      "name": "Gelbhaubenkakadu",
+      "scientificName": "Cacatua galerita",
+      "taxonID": 116834,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/gelbhaubenkakadu.heic",
+          "sha256": "28c20278aa991e94903a7b5f2ce9d11771653b52e6b539e821fe80803bc49bdd",
+          "license": "CC0-1.0",
+          "attribution": "John Cull",
+          "sourceURL": "https://www.inaturalist.org/observations/192010462",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/gelbhaubenkakadu.m4a",
+          "sha256": "b4dd624d46f3a17f695c3c7d27c0b63583916ffb59462b30a1ba474d540ce307",
+          "text": "Gelbhaubenkakadu"
         }
       }
     },
@@ -49,6 +91,14 @@
           "attribution": "Third Silence",
           "sourceURL": "https://www.inaturalist.org/observations/332114246",
           "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/inkakakadu-2.heic",
+          "sha256": "f7936c1cacff949f4a10696f8d79a78183ecbc8a86341afb7c967f4bc3142f30",
+          "license": "CC-BY-4.0",
+          "attribution": "Petra Holland",
+          "sourceURL": "https://www.inaturalist.org/observations/302809543",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": null,
@@ -57,6 +107,100 @@
           "file": "speech/collection.name/inkakakadu.m4a",
           "sha256": "0f3a092b9bc1a859217e4fa31e8f72a87b99619b0daf65f010a4bbdc80c26029",
           "text": "Inkakakadu"
+        }
+      }
+    },
+    {
+      "id": "regenbogenlori",
+      "name": "Regenbogenlori",
+      "scientificName": "Trichoglossus moluccanus",
+      "taxonID": 980095,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/regenbogenlori.heic",
+          "sha256": "30a5098f91853b7f5dc90137883b2386d5a6a73a665207f237109f995a7a3866",
+          "license": "CC-BY-4.0",
+          "attribution": "Austen Armstrong",
+          "sourceURL": "https://www.inaturalist.org/observations/263429748",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/regenbogenlori.m4a",
+          "sha256": "b3495bfc53018cbcceaca5aff9000df421206885f08c9a04bd8b2211fa918ccf",
+          "text": "Regenbogenlori"
+        }
+      }
+    },
+    {
+      "id": "koenigssittich",
+      "name": "Königssittich",
+      "scientificName": "Alisterus scapularis",
+      "taxonID": 19196,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/koenigssittich.heic",
+          "sha256": "aabb39c1241bae52ba9fbed4cc90a930f8e9e1f9469c44402f89cd766d77ec24",
+          "license": "CC0-1.0",
+          "attribution": "John Cull",
+          "sourceURL": "https://www.inaturalist.org/observations/190653097",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/koenigssittich.m4a",
+          "sha256": "8d395cce9f63a366e4de4bf48dbf6822d969fdc23bad98c24b8511d069455941",
+          "text": "Königssittich"
+        }
+      }
+    },
+    {
+      "id": "rosella",
+      "name": "Rosella",
+      "scientificName": "Platycercus eximius",
+      "taxonID": 18920,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/rosella.heic",
+          "sha256": "911fa8370e4835b90f118cdd09a8a0a2336307d79e58f86662b325ae7e0f52f0",
+          "license": "CC0-1.0",
+          "attribution": "John Cull",
+          "sourceURL": "https://www.inaturalist.org/observations/188341487",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/rosella-2.heic",
+          "sha256": "935e93df8c5c426335635b51ab5106f42849d59445910458a2ddef2484b96a62",
+          "license": "CC-BY-4.0",
+          "attribution": "Mike Bowie",
+          "sourceURL": "https://www.inaturalist.org/observations/305370289",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/rosella-3.heic",
+          "sha256": "98e92f3f2118bd1f3fbf3c3fe523983b00963693dad48245ad6504aefbf5b57b",
+          "license": "CC-BY-4.0",
+          "attribution": "Tim",
+          "sourceURL": "https://www.inaturalist.org/observations/53335524",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/rosella.m4a",
+          "sha256": "09dc8f2af69f26f891cf0a975ee9083b4254b3189bb48755343f90d34dcdedef",
+          "text": "Rosella"
         }
       }
     },
@@ -83,6 +227,14 @@
           "attribution": "Lachlan Copeland",
           "sourceURL": "https://www.inaturalist.org/observations/268144312",
           "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/wellensittich-4.heic",
+          "sha256": "97b768b55dd8f57e505c7092e84df2f4e3af5c5cc6a2ee1f249c6fff1df75162",
+          "license": "CC-BY-4.0",
+          "attribution": "Petra Holland",
+          "sourceURL": "https://www.inaturalist.org/observations/308138963",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": {
@@ -98,6 +250,48 @@
           "file": "speech/collection.name/wellensittich.m4a",
           "sha256": "c99e93391327274bcfa93dc2c5d015137ddcc17e29b4c4ad87f24cac83a923e6",
           "text": "Wellensittich"
+        }
+      }
+    },
+    {
+      "id": "kea",
+      "name": "Kea",
+      "scientificName": "Nestor notabilis",
+      "taxonID": 18941,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/kea.heic",
+          "sha256": "dbeea5a4460076f127c15de65a3dd1d96032552e26bc3bde5b3339afd5f96821",
+          "license": "CC-BY-SA-4.0",
+          "attribution": "Christopher Stephens",
+          "sourceURL": "https://www.inaturalist.org/observations/69407273",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/kea-2.heic",
+          "sha256": "1fa262665f69325bb323b3d85d7095c3965b5a5d2aa4d3a22e8bfe0877619491",
+          "license": "CC-BY-4.0",
+          "attribution": "John Barkla",
+          "sourceURL": "https://www.inaturalist.org/observations/34231306",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/kea-3.heic",
+          "sha256": "0f45b781a66f3ef636530c37ed5cd5983d8f1c82ea6621728f0085732d2c4f83",
+          "license": "CC-BY-4.0",
+          "attribution": "Katja Schulz",
+          "sourceURL": "https://www.inaturalist.org/observations/17367379",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/kea.m4a",
+          "sha256": "71a6d1530ad07519993f660291fd2c1dc114b0380156d487fe0c2184c45a8493",
+          "text": "Kea"
         }
       }
     },
@@ -123,6 +317,14 @@
           "license": "CC-BY-4.0",
           "attribution": "patrickc",
           "sourceURL": "https://www.inaturalist.org/observations/147212260",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/emu-3.heic",
+          "sha256": "cf7030b1b8eacb8235f0808e06bef6fa4fc96c7fb282e19c1f950ea678e91493",
+          "license": "CC-BY-4.0",
+          "attribution": "Lek Khauv",
+          "sourceURL": "https://www.inaturalist.org/observations/295041423",
           "retrieved": "2026-10-21"
         }
       ],
@@ -150,6 +352,22 @@
           "attribution": "Tim",
           "sourceURL": "https://www.inaturalist.org/observations/98776913",
           "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/helmkasuar-4.heic",
+          "sha256": "d62517f348d23c1851907d7c884fc485810f3de1b70e94bc36998641e9515c36",
+          "license": "CC-BY-4.0",
+          "attribution": "Donald Hobern",
+          "sourceURL": "https://www.inaturalist.org/observations/20345809",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/helmkasuar-5.heic",
+          "sha256": "b6c8ef4a47f881b7ad7ced5665129e4e0ceb21cdbdd2ea3d47ba10fb870cd106",
+          "license": "CC-BY-4.0",
+          "attribution": "David Thompson",
+          "sourceURL": "https://www.inaturalist.org/observations/265900204",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": null,
@@ -176,6 +394,22 @@
           "attribution": "Sockrosma",
           "sourceURL": "https://www.inaturalist.org/observations/200607101",
           "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/lachender-hans-2.heic",
+          "sha256": "b62c48fc128fd1e87eec93b39fa94888d9e8830bcc8037756daa0fc6bfef02c4",
+          "license": "CC-BY-4.0",
+          "attribution": "Nathan Ruser",
+          "sourceURL": "https://www.inaturalist.org/observations/162620203",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/lachender-hans-3.heic",
+          "sha256": "9a17c02fbd1e8e6fa34639fdaeb7d10a60944c42a8111118264d8721f2f4139c",
+          "license": "CC0-1.0",
+          "attribution": "John Cull",
+          "sourceURL": "https://www.inaturalist.org/observations/189189280",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": null,
@@ -210,6 +444,14 @@
           "attribution": "Thomas Mesaglio",
           "sourceURL": "https://www.inaturalist.org/observations/36576937",
           "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/regenbogenspint-3.heic",
+          "sha256": "9cabb30ab754097127a3603b87791005fe506c0f4163bdbd6a89bfb9db67b7c7",
+          "license": "CC-BY-4.0",
+          "attribution": "Donald Davesne",
+          "sourceURL": "https://www.inaturalist.org/observations/181540703",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": null,
@@ -218,6 +460,47 @@
           "file": "speech/collection.name/regenbogenspint.m4a",
           "sha256": "c570625af768dba83e2f7a7abe0b363e63a14bb1886a01e2fa523139453eb056",
           "text": "Regenbogenspint"
+        }
+      }
+    },
+    {
+      "id": "seidenlaubenvogel",
+      "name": "Seidenlaubenvogel",
+      "scientificName": "Ptilonorhynchus violaceus",
+      "taxonID": 14539,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/seidenlaubenvogel.heic",
+          "sha256": "9d31263a5b5e767d3f82352c5188ae72fb73294dd9f4b5d719655d04e88ed316",
+          "license": "CC0-1.0",
+          "attribution": "Claudia Schipp",
+          "sourceURL": "https://www.inaturalist.org/observations/49793851",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/seidenlaubenvogel-2.heic",
+          "sha256": "aef3a2b9c73e82eba2d532292d88a16026db18590c6e269890d7d39b2bdb5056",
+          "license": "CC0-1.0",
+          "attribution": "Emily Langdon-Lassagne",
+          "sourceURL": "https://www.inaturalist.org/observations/199316565",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": {
+        "file": "audio/seidenlaubenvogel.m4a",
+        "sha256": "4ddffb73a330a19c5038b85a97a423b412a9b11189027f64843389352941e961",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "James Ray (XC442747)",
+        "sourceURL": "https://xeno-canto.org/442747",
+        "retrieved": "2026-10-21"
+      },
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/seidenlaubenvogel.m4a",
+          "sha256": "eec1070c152ed8848e9b140e07b9715cce8faad4b599b400f447fb05d400e713",
+          "text": "Seidenlaubenvogel"
         }
       }
     },
@@ -236,6 +519,22 @@
           "attribution": "Andrew Allen",
           "sourceURL": "https://www.inaturalist.org/observations/130593635",
           "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/prachtstaffelschwanz-2.heic",
+          "sha256": "f8d476081e0334b7914252bf20020a98b29ce614b18427520d53462fc23edaf5",
+          "license": "CC-BY-4.0",
+          "attribution": "Nathan Ruser",
+          "sourceURL": "https://www.inaturalist.org/observations/145400350",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/prachtstaffelschwanz-3.heic",
+          "sha256": "55b71c576463288f909aaba0d48869d10a543bd037a3af803020257dfd2a2f26",
+          "license": "CC-BY-4.0",
+          "attribution": "Andrew Allen",
+          "sourceURL": "https://www.inaturalist.org/observations/97128747",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": null,
@@ -244,6 +543,88 @@
           "file": "speech/collection.name/prachtstaffelschwanz.m4a",
           "sha256": "79c326b8a9f329b8b51dd932ba711458cdda208bd394e0e7c47b2e49f66dde8b",
           "text": "Prachtstaffelschwanz"
+        }
+      }
+    },
+    {
+      "id": "floetenvogel",
+      "name": "Flötenvogel",
+      "scientificName": "Gymnorhina tibicen",
+      "taxonID": 8575,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/floetenvogel.heic",
+          "sha256": "82ae9789138148ca39b8dbd92178d01fafd1622546b0abed2c9155f98e2bf8e2",
+          "license": "CC-BY-4.0",
+          "attribution": "Terra Occ",
+          "sourceURL": "https://www.inaturalist.org/observations/20119333",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/floetenvogel-2.heic",
+          "sha256": "b57e1dc7d32d1dd57b157017045fffb80f5ed3f6599122d5ebc892e89a11ec83",
+          "license": "CC-BY-4.0",
+          "attribution": "grampianshiker",
+          "sourceURL": "https://www.inaturalist.org/observations/224186585",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/floetenvogel-3.heic",
+          "sha256": "3101ae6fc8cdf0179edda1963df05a6b919aee32e0247c1363c7b6a61f2344ed",
+          "license": "CC-BY-4.0",
+          "attribution": "Татьяна Максимова",
+          "sourceURL": "https://www.inaturalist.org/observations/149979298",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": {
+        "file": "audio/floetenvogel.m4a",
+        "sha256": "6e94fbaba6a65d0a44b75417a5a72b07ce97495a19167ade9cd99960de91dee9",
+        "license": "CC-BY-4.0",
+        "attribution": "craig wilson (XC1054235)",
+        "sourceURL": "https://xeno-canto.org/1054235",
+        "retrieved": "2026-10-21"
+      },
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/floetenvogel.m4a",
+          "sha256": "7755a830a24049174c5e7df923c1974e44fa7fa775c0977f60196b715100b019",
+          "text": "Flötenvogel"
+        }
+      }
+    },
+    {
+      "id": "tui",
+      "name": "Tui",
+      "scientificName": "Prosthemadera novaeseelandiae",
+      "taxonID": 12580,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/tui.heic",
+          "sha256": "96f681415732a26e789b62550be2b13db03ff4aa1159cfdbaafd734240979c30",
+          "license": "CC-BY-4.0",
+          "attribution": "Jean Jacques Godon",
+          "sourceURL": "https://www.inaturalist.org/observations/147348184",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": {
+        "file": "audio/tui.m4a",
+        "sha256": "d676f635be033d9e6c11651049a4c755e54eab395e37f0ca0532c759bc82db44",
+        "license": "CC-BY-4.0",
+        "attribution": "craig wilson (XC915121)",
+        "sourceURL": "https://xeno-canto.org/915121",
+        "retrieved": "2026-10-21"
+      },
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/tui.m4a",
+          "sha256": "a302b8b38c95f6a1dde4f411aab8fb24ddc9b181704a5e5b46bf5307b43f0fe7",
+          "text": "Tui"
         }
       }
     },
@@ -288,9 +669,32 @@
           "attribution": "Oscar Dove",
           "sourceURL": "https://www.inaturalist.org/observations/133070938",
           "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/pukeko-2.heic",
+          "sha256": "c497eaa567f20dcab50d5aad44bc24f224faa37ea226614d808aaeb86debe9f6",
+          "license": "CC-BY-4.0",
+          "attribution": "Terra Occ",
+          "sourceURL": "https://www.inaturalist.org/observations/20724264",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/pukeko-3.heic",
+          "sha256": "9d2bfeb06d84fe275c0c2d865b6c5edb981e75cf03ee5d43ad992f8e1f10014d",
+          "license": "CC-BY-4.0",
+          "attribution": "Terra Occ",
+          "sourceURL": "https://www.inaturalist.org/observations/20193446",
+          "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/pukeko.m4a",
+        "sha256": "2d0c598bf129e74806164e190afc3356c10b8d0fb6bc5af3678c7dba0c2a5a90",
+        "license": "CC-BY-4.0",
+        "attribution": "craig wilson (XC1054239)",
+        "sourceURL": "https://xeno-canto.org/1054239",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/pukeko.m4a",
@@ -314,9 +718,32 @@
           "attribution": "Austen Armstrong",
           "sourceURL": "https://www.inaturalist.org/observations/257998764",
           "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/wekaralle-2.heic",
+          "sha256": "06884b9d906cb2c4da7b0ab173020daed2caa30bfa2bb8d8918c12ee43a7f4b0",
+          "license": "CC-BY-4.0",
+          "attribution": "Ian Rainbow",
+          "sourceURL": "https://www.inaturalist.org/observations/256343609",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/wekaralle-3.heic",
+          "sha256": "61ea77f1e53b093054a0e13cffef523ee2ee63a2565a118f8fb326a502ace61b",
+          "license": "CC-BY-4.0",
+          "attribution": "Jon Sullivan",
+          "sourceURL": "https://www.inaturalist.org/observations/1378560",
+          "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/wekaralle.m4a",
+        "sha256": "796cce9469c68f2c0c3b6e9847a8aac4a0ac4abe9f8c4cd12b221ec2ce578eb8",
+        "license": "CC-BY-4.0",
+        "attribution": "craig wilson (XC600354)",
+        "sourceURL": "https://xeno-canto.org/600354",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/wekaralle.m4a",
@@ -339,6 +766,22 @@
           "license": "CC-BY-4.0",
           "attribution": "John Barkla",
           "sourceURL": "https://www.inaturalist.org/observations/313758884",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/maori-taube-2.heic",
+          "sha256": "91ed6ac6ad5856c43a60ab1714b1dcfd079bf50c19ebb9126f219777767d0813",
+          "license": "CC-BY-4.0",
+          "attribution": "Loralee Hyde",
+          "sourceURL": "https://www.inaturalist.org/observations/33411968",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/maori-taube-3.heic",
+          "sha256": "606afb2db42d69767a06783aa3519c7818de77bb229b34004540d1a01a7e63b9",
+          "license": "CC-BY-SA-4.0",
+          "attribution": "Thibaud Aronson",
+          "sourceURL": "https://www.inaturalist.org/observations/75343281",
           "retrieved": "2026-10-21"
         }
       ],
@@ -374,6 +817,14 @@
           "attribution": "Terra Occ",
           "sourceURL": "https://www.inaturalist.org/observations/19869983",
           "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/schwarzschwan-5.heic",
+          "sha256": "2783afab46ff2bb2b3c49581a9cc1ad372ae7004a2aad21939b18fbfab5d787b",
+          "license": "CC0-1.0",
+          "attribution": "John Cull",
+          "sourceURL": "https://www.inaturalist.org/observations/150801671",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": {
@@ -449,6 +900,22 @@
           "attribution": "John Cull",
           "sourceURL": "https://www.inaturalist.org/observations/168445885",
           "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/strohhalsibis-2.heic",
+          "sha256": "68ede15894ab8e26905c61e3297724f6953a3125bbd3fe46190b7853755a01da",
+          "license": "CC0-1.0",
+          "attribution": "Cowirrie",
+          "sourceURL": "https://www.inaturalist.org/observations/295959029",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/strohhalsibis-3.heic",
+          "sha256": "7f5fce3c28766e5535de4194e347923db031fad77178d4d8655eb366400af362",
+          "license": "CC-BY-4.0",
+          "attribution": "Max Campbell",
+          "sourceURL": "https://www.inaturalist.org/observations/79460457",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": null,
@@ -500,6 +967,22 @@
           "license": "CC-BY-4.0",
           "attribution": "Jeremy James",
           "sourceURL": "https://www.inaturalist.org/observations/321370507",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/weissbauchseeadler-2.heic",
+          "sha256": "d8d06f4bb7a31718d7ac925f786a77439aefafbc8cdf670cf274f5569ce66090",
+          "license": "CC-BY-4.0",
+          "attribution": "Rohit Naniwadekar",
+          "sourceURL": "https://www.inaturalist.org/observations/38792622",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/weissbauchseeadler-3.heic",
+          "sha256": "ccde7d613170fd18b403e20fe55167fbaeda99f853cd3729b415642f18c82b78",
+          "license": "CC-BY-4.0",
+          "attribution": "Jay Pruett",
+          "sourceURL": "https://www.inaturalist.org/observations/190965931",
           "retrieved": "2026-10-21"
         }
       ],
