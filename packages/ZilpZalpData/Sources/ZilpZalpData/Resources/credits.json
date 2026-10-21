@@ -5731,6 +5731,306 @@
       "sourceURL": "https://www.inaturalist.org/observations/158762689"
     },
     {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "humboldtpinguin",
+      "birdName": "Humboldtpinguin",
+      "kind": "photo",
+      "attribution": "DiegoH",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/141121355"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "tiefland-felsenhahn",
+      "birdName": "Tiefland-Felsenhahn",
+      "kind": "photo",
+      "attribution": "Julien Renoult",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/4531616"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "siebenfarbentangare",
+      "birdName": "Siebenfarbentangare",
+      "kind": "photo",
+      "attribution": "Joao Quental",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/392514179"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "siebenfarbentangare",
+      "birdName": "Siebenfarbentangare",
+      "kind": "call",
+      "attribution": "Niels Krabbe (XC251588)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/251588"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "chileflamingo",
+      "birdName": "Chileflamingo",
+      "kind": "photo",
+      "attribution": "datadan",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/68240408"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "fischertukan",
+      "birdName": "Fischertukan",
+      "kind": "photo",
+      "attribution": "Anthony Batista",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/223465730"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "koenigsgeier",
+      "birdName": "Königsgeier",
+      "kind": "photo",
+      "attribution": "Paulo Mascaretti",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/168479025"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "koenigsgeier",
+      "birdName": "Königsgeier",
+      "kind": "photo",
+      "attribution": "Jean-Paul Boerekamps",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/74490210"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "rotstirn-blatthuehnchen",
+      "birdName": "Rotstirn-Blatthühnchen",
+      "kind": "photo",
+      "attribution": "Donald Davesne",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/351096968"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "rotstirn-blatthuehnchen",
+      "birdName": "Rotstirn-Blatthühnchen",
+      "kind": "photo",
+      "attribution": "Thibaud Aronson",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/67707624"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "rotstirn-blatthuehnchen",
+      "birdName": "Rotstirn-Blatthühnchen",
+      "kind": "photo",
+      "attribution": "Gonzalo Romero",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/336853948"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "halsband-wehrvogel",
+      "birdName": "Halsband-Wehrvogel",
+      "kind": "photo",
+      "attribution": "Luciano Massa",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/235447508"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "halsband-wehrvogel",
+      "birdName": "Halsband-Wehrvogel",
+      "kind": "photo",
+      "attribution": "Dario Taraborelli",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/155794546"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "inkaseeschwalbe",
+      "birdName": "Inkaseeschwalbe",
+      "kind": "photo",
+      "attribution": "Zac Peterson",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/68709153"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "amazonasfischer",
+      "birdName": "Amazonasfischer",
+      "kind": "photo",
+      "attribution": "ferferrari",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/133831715"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "nandu",
+      "birdName": "Nandu",
+      "kind": "photo",
+      "attribution": "Fernando Sessegolo",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/42772166"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "nandu",
+      "birdName": "Nandu",
+      "kind": "photo",
+      "attribution": "Christoph Moning",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/57113925"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "riesentukan",
+      "birdName": "Riesentukan",
+      "kind": "photo",
+      "attribution": "Gabriel Martínez",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/198099971"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "riesentukan",
+      "birdName": "Riesentukan",
+      "kind": "photo",
+      "attribution": "Diogo Luiz",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/59738495"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "riesentukan",
+      "birdName": "Riesentukan",
+      "kind": "photo",
+      "attribution": "Paulo Mascaretti",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/143502779"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "hellroter-ara",
+      "birdName": "Hellroter Ara",
+      "kind": "photo",
+      "attribution": "Luis G Restrepo",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/254918218"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "hellroter-ara",
+      "birdName": "Hellroter Ara",
+      "kind": "call",
+      "attribution": "Richard Borrmann (XC1005554)",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://xeno-canto.org/1005554"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "roter-sichler",
+      "birdName": "Roter Sichler",
+      "kind": "photo",
+      "attribution": "Odebrecht, Clarisse",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/330283195"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "roter-sichler",
+      "birdName": "Roter Sichler",
+      "kind": "photo",
+      "attribution": "Miguel",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/230201814"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "rosaloeffler",
+      "birdName": "Rosalöffler",
+      "kind": "photo",
+      "attribution": "Nigel Voaden",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/1707823"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "rosaloeffler",
+      "birdName": "Rosalöffler",
+      "kind": "photo",
+      "attribution": "tcantrell52",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/204095333"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "rosaloeffler",
+      "birdName": "Rosalöffler",
+      "kind": "photo",
+      "attribution": "Leonel Richard",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/15309891"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "quetzal",
+      "birdName": "Quetzal",
+      "kind": "photo",
+      "attribution": "er-birds",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/156023432"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "quetzal",
+      "birdName": "Quetzal",
+      "kind": "photo",
+      "attribution": "Morten Ross",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/68706945"
+    },
+    {
+      "packID": "suedamerika",
+      "packTitle": "Südamerika & Regenwald",
+      "birdID": "quetzal",
+      "birdName": "Quetzal",
+      "kind": "photo",
+      "attribution": "James Adney Zehr",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/340657292"
+    },
+    {
       "packID": "wasser-kueste",
       "packTitle": "Wasser & Küste",
       "birdID": "dreizehenmoewe",
@@ -7123,6 +7423,12 @@
       "license": "CC-BY-4.0",
       "sourceURL": "https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md",
       "usedIn": "Nordamerika"
+    },
+    {
+      "attribution": "Stimme: Ava (ElevenLabs)",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md",
+      "usedIn": "Südamerika & Regenwald"
     },
     {
       "attribution": "Stimme: Ava (ElevenLabs)",
