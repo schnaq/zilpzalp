@@ -35,6 +35,26 @@
       }
     },
     {
+      "id": "wanderdrossel",
+      "name": "Wanderdrossel",
+      "scientificName": "Turdus migratorius",
+      "taxonID": 12727,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "schneegans",
+      "name": "Schneegans",
+      "scientificName": "Anser caerulescens",
+      "taxonID": 558426,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
       "id": "brautente",
       "name": "Brautente",
       "scientificName": "Aix sponsa",
@@ -67,6 +87,26 @@
           "text": "Brautente"
         }
       }
+    },
+    {
+      "id": "wegekuckuck",
+      "name": "Wegekuckuck",
+      "scientificName": "Geococcyx californianus",
+      "taxonID": 1986,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "rubinkehlkolibri",
+      "name": "Rubinkehlkolibri",
+      "scientificName": "Archilochus colubris",
+      "taxonID": 6432,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
     },
     {
       "id": "rotkardinal",
@@ -378,6 +418,16 @@
       }
     },
     {
+      "id": "rotschwanzbussard",
+      "name": "Rotschwanzbussard",
+      "scientificName": "Buteo jamaicensis",
+      "taxonID": 5212,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
       "id": "truthahngeier",
       "name": "Truthahngeier",
       "scientificName": "Cathartes aura",
@@ -404,6 +454,26 @@
       }
     },
     {
+      "id": "kanadagans",
+      "name": "Kanadagans",
+      "scientificName": "Branta canadensis",
+      "taxonID": 7089,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "waldstorch",
+      "name": "Waldstorch",
+      "scientificName": "Mycteria americana",
+      "taxonID": 4742,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
       "id": "rotkopfspecht",
       "name": "Rotkopfspecht",
       "scientificName": "Melanerpes erythrocephalus",
@@ -428,6 +498,26 @@
           "text": "Rotkopfspecht"
         }
       }
+    },
+    {
+      "id": "helmspecht",
+      "name": "Helmspecht",
+      "scientificName": "Dryocopus pileatus",
+      "taxonID": 17855,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "schopfmeise",
+      "name": "Schopfmeise",
+      "scientificName": "Baeolophus bicolor",
+      "taxonID": 13632,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
     },
     {
       "id": "indigofink",
@@ -560,6 +650,16 @@
       }
     },
     {
+      "id": "guertelfischer",
+      "name": "Gürtelfischer",
+      "scientificName": "Megaceryle alcyon",
+      "taxonID": 2548,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
       "id": "buntfalke",
       "name": "Buntfalke",
       "scientificName": "Falco sparverius",
@@ -584,6 +684,76 @@
           "text": "Buntfalke"
         }
       }
+    },
+    {
+      "id": "kanadakranich",
+      "name": "Kanadakranich",
+      "scientificName": "Antigone canadensis",
+      "taxonID": 508048,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "diademhaeher",
+      "name": "Diademhäher",
+      "scientificName": "Cyanocitta stelleri",
+      "taxonID": 8234,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "braunpelikan",
+      "name": "Braunpelikan",
+      "scientificName": "Pelecanus occidentalis",
+      "taxonID": 4328,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "blaureiher",
+      "name": "Blaureiher",
+      "scientificName": "Ardea herodias",
+      "taxonID": 4956,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "streifenkauz",
+      "name": "Streifenkauz",
+      "scientificName": "Strix varia",
+      "taxonID": 19893,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "sumpfohreule",
+      "name": "Sumpfohreule",
+      "scientificName": "Asio flammeus",
+      "taxonID": 20315,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "trompeterschwan",
+      "name": "Trompeterschwan",
+      "scientificName": "Cygnus buccinator",
+      "taxonID": 6915,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
     },
     {
       "id": "kragenente",
