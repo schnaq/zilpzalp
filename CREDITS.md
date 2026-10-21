@@ -665,11 +665,21 @@ the source declared.
 | Bird | Kind | Author | Licence | Source |
 | --- | --- | --- | --- | --- |
 | Rotkehl-Hüttensänger | Photo | Dan Vickers | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/265585684> |
+| Rotkehl-Hüttensänger | Photo | jeffcherry | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/255916177> |
+| Wanderdrossel | Photo | Paul | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/282290498> |
+| Schneegans | Photo | Andy Wilson | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/35890541> |
+| Schneegans | Photo | zr217 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/253345601> |
 | Brautente | Photo | Andrew Lai | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/329921472> |
 | Brautente | Photo | Wendy McCrady | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/196699867> |
+| Wegekuckuck | Photo | Jody Shugart | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/6925315> |
+| Wegekuckuck | Photo | Jonathan Eisen | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/238694891> |
+| Rubinkehlkolibri | Photo | Blake Ross | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/118738483> |
 | Rotkardinal | Photo | Bill Levine | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/104353677> |
+| Rotkardinal | Photo | Terry Woodward | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/349679447> |
+| Rotkardinal | Photo | Craig Hensley | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/152692384> |
 | Rotkardinal | Call | steve (XC797998) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/797998> |
 | Blauhäher | Photo | Texas Bird Family | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/339251426> |
+| Blauhäher | Photo | Caroline Quinn | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/162861508> |
 | Blauhäher | Call | Anonymous (XC924514) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/924514> |
 | Weißkopfseeadler | Photo | Justin Flint | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/335312498> |
 | Weißkopfseeadler | Photo | Marcel_Pepin | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/217347432> |
@@ -682,21 +692,57 @@ the source declared.
 | Eistaucher | Call | Doug Hynes (XC992792) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/992792> |
 | Schnee-Eule | Photo | Dustin Snider | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/195441759> |
 | Schnee-Eule | Photo | Matt Felperin | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/104681391> |
+| Schnee-Eule | Photo | scaup | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/101985440> |
 | Papageitaucher | Photo | Diego González Dopico | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/277865524> |
 | Papageitaucher | Photo | Julia Moning | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/114739787> |
 | Papageitaucher | Photo | Christoph Moning | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/115403062> |
 | Virginia-Uhu | Photo | Brooke J. | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/202251518> |
+| Virginia-Uhu | Photo | MarvalPhotography19 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/162035114> |
 | Truthahngeier | Photo | Andy Wilson | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/80827613> |
+| Truthahngeier | Photo | Millie Basden | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/136571262> |
+| Kanadagans | Photo | Bonnie Semmling | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/77125730> |
 | Rotkopfspecht | Photo | Kalvin Chan | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/214521630> |
+| Rotkopfspecht | Photo | Shawn Taylor | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/108046773> |
+| Helmspecht | Photo | Bill Keim | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/331208893> |
+| Helmspecht | Photo | Sean Frey | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/244135777> |
+| Schopfmeise | Photo | Kalvin Chan | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/257411883> |
+| Schopfmeise | Photo | syvwlch | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/37951815> |
+| Schopfmeise | Photo | Michael | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/338507047> |
 | Indigofink | Photo | Derek Spencer | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/365169268> |
+| Indigofink | Photo | Adam Jackson | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/193252002> |
+| Indigofink | Photo | Adam Jackson | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/193327326> |
 | Goldzeisig | Photo | Donald Davesne | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/281973047> |
+| Goldzeisig | Photo | mefisher | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/43390778> |
+| Goldzeisig | Photo | Andy Wilson | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/390144942> |
 | Baltimoretrupial | Photo | Chrissy McClarren and Andy Reago | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/88173051> |
+| Baltimoretrupial | Photo | Mike Duran | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/184586958> |
 | Rotschulterstärling | Photo | Mirko Schoenitz | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/20437532> |
+| Rotschulterstärling | Photo | Justin Flint | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/284907593> |
+| Rotschulterstärling | Photo | Steven Smethurst | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/69287109> |
 | Brillenstärling | Photo | Laurel Meredyk | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/28271836> |
+| Brillenstärling | Photo | Jonathan Eisen | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/25406352> |
+| Brillenstärling | Photo | John Krampl | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/118423958> |
+| Gürtelfischer | Photo | Hunter Hammil | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/161277465> |
 | Buntfalke | Photo | Jonathan Eisen | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/107143166> |
+| Buntfalke | Photo | Jonathan Eisen | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/124836781> |
+| Buntfalke | Photo | Adam Jackson | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/256643321> |
+| Kanadakranich | Photo | John Krampl | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/271142807> |
+| Diademhäher | Photo | Ren Gianforte | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/279288278> |
+| Braunpelikan | Photo | Thibaud Aronson | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/15577189> |
+| Blaureiher | Photo | Steven Smethurst | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/75402185> |
+| Blaureiher | Photo | Brighton Lee | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/403722823> |
+| Streifenkauz | Photo | Steven Smethurst | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/116656640> |
+| Sumpfohreule | Photo | Kalvin Chan | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/346844083> |
+| Sumpfohreule | Photo | Chrissy McClarren and Andy Reago | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/334454157> |
+| Sumpfohreule | Photo | Chrissy McClarren and Andy Reago | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/106536268> |
+| Trompeterschwan | Photo | Sean Frey | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/313047374> |
+| Trompeterschwan | Photo | elik03 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/261694018> |
 | Kragenente | Photo | Chrissy McClarren and Andy Reago | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/86911376> |
+| Kragenente | Photo | er-birds | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/195713239> |
+| Kragenente | Photo | Saryu Mae 前 朝琉 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/360498848> |
 | Zimtente | Photo | Dan Vickers | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/259260199> |
 | Zimtente | Photo | Alberto Sánchez | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/158762689> |
+| Zimtente | Photo | Jonathan Eisen | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/49023516> |
 
 ### Polar & Meer (`polar-meer`)
 
