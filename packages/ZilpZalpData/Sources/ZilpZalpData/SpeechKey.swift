@@ -23,4 +23,10 @@ public enum SpeechKey {
     /// `speech/collection.name/<species>.m4a` and every manifest declares it
     /// under this key (#221).
     public static let speciesName = "collection.name"
+
+    /// The clip that is a pack's title — „Vögel Afrikas" — said when a child
+    /// taps the pack in the collection picker (#306). Recorded once per pack
+    /// and declared under the manifest's own `speech`, beside `birds` rather
+    /// than in one of them.
+    public static let packTitle = "pack.title"
 }

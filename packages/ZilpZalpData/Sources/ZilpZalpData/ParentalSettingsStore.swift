@@ -26,26 +26,44 @@ public struct ParentalSettings: Codable, Sendable, Hashable {
     /// from values the shell passes in (#36); nothing here keeps a clock.
     public var dailyLimitMinutes: Int?
 
-    /// Whether the app says its sentences out loud: the bird's name in game 1,
-    /// the praise at the end of a round, the name of a sticker that is tapped,
-    /// every headline a screen reads to a child who cannot read it.
+    /// When the app says its sentences out loud: on its own — the bird's
+    /// name in game 1, the praise at the end of a round, every headline a
+    /// screen reads to a child who cannot read it — or only when the child
+    /// taps a speaker (#306).
     ///
-    /// On until a grown-up switches it off (#231). A child who cannot read is
-    /// told what to look for by the voice, so silence is something somebody
-    /// chooses rather than a state a device can drift into.
+    /// Automatic until a grown-up chooses otherwise. There is no silent
+    /// choice: a child who cannot read is told what to look for by the voice,
+    /// and „ganz stumm ist doof" (Christian, 2026-10-21).
     ///
     /// Not the bird calls: those are the recordings game 2 asks its question
     /// with, and where there are calls, that game is there (#138).
-    public var speechEnabled: Bool
+    public var speechMode: SpeechMode
 
     /// The state a device that has never been to the grown-ups' area is in:
-    /// nothing limited, and everything said out loud.
+    /// nothing limited, and everything said out loud on its own.
     public init(
         dailyLimitMinutes: Int? = nil,
-        speechEnabled: Bool = true,
+        speechMode: SpeechMode = .automatic,
     ) {
         self.dailyLimitMinutes = dailyLimitMinutes
-        self.speechEnabled = speechEnabled
+        self.speechMode = speechMode
+    }
+}
+
+/// When the app speaks — see ``ParentalSettings/speechMode``.
+public enum SpeechMode: String, Codable, Sendable, CaseIterable {
+    /// „Automatisch vorlesen": every line as it comes up, as before #306.
+    case automatic
+    /// „Nur auf Knopfdruck": nothing on its own, everything a child taps for.
+    case onTap
+
+    /// Whether a line is said.
+    ///
+    /// - Parameter unprompted: `true` for a line the app says on its own — a
+    ///   headline on arrival, a new question, the praise — and `false` for one
+    ///   a child tapped for: a speaker, a sticker, a pack.
+    public func speaks(unprompted: Bool) -> Bool {
+        !unprompted || self == .automatic
     }
 }
 
@@ -163,10 +181,12 @@ private struct SchemaProbe: Decodable {
 private struct Document: Codable {
     let schemaVersion: Int
     let dailyLimitMinutes: Int?
-    /// `Bool?` where the setting is a plain `Bool`, so that a file written
-    /// before #231 — which is every file on every device today — decodes
-    /// instead of throwing on a key it does not carry. ``settings`` fills the
-    /// gap with the default.
+    /// Optional, so that a file written before #306 decodes; ``settings``
+    /// fills the gap from ``speechEnabled``.
+    let speechMode: SpeechMode?
+    /// Read and never written: the switch #231 stored. A file that switched
+    /// the announcements off asked for quiet, and the quietest choice left is
+    /// ``SpeechMode/onTap``.
     let speechEnabled: Bool?
 
     /// Decoding is synthesised: for an `Int?` it already reads both spellings
@@ -181,14 +201,15 @@ private struct Document: Codable {
     var settings: ParentalSettings {
         ParentalSettings(
             dailyLimitMinutes: dailyLimitMinutes,
-            speechEnabled: speechEnabled ?? true,
+            speechMode: speechMode ?? (speechEnabled == false ? .onTap : .automatic),
         )
     }
 
     init(settings: ParentalSettings) {
         schemaVersion = ParentalSettingsStore.schemaVersion
         dailyLimitMinutes = settings.dailyLimitMinutes
-        speechEnabled = settings.speechEnabled
+        speechMode = settings.speechMode
+        speechEnabled = nil
     }
 
     /// The one half that cannot be synthesised: `encodeIfPresent` would leave
@@ -204,10 +225,8 @@ private struct Document: Codable {
         }
         // Stated too, and never `encodeIfPresent`: the setting always stands
         // somewhere, and a file that left the key out would read back as a
-        // file from before the setting existed. The default is the same one
-        // ``settings`` fills a missing key with, and it is written rather than
-        // forced because a document on its way to disk always came through
-        // `init(settings:)`, where the field is a plain `Bool`.
-        try container.encode(speechEnabled ?? true, forKey: .speechEnabled)
+        // file from before the setting existed. The default is never used: a
+        // document on its way to disk always came through `init(settings:)`.
+        try container.encode(speechMode ?? .automatic, forKey: .speechMode)
     }
 }

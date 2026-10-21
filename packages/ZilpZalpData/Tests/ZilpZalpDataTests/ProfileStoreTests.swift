@@ -97,7 +97,7 @@ struct ProfileStoreTests {
             mila.recognitions = ["zilpzalp": 5, "amsel": 2]
             mila.playtime = ["2026-09-08": 185.5]
             mila.dailyStars = ["2026-09-08": 9]
-            mila.collection = "afrika"
+            mila.collections = ["afrika"]
             try await store.update(mila)
 
             let edited = try await store.edit(mila.id, name: "Mila Rosa", avatar: "eisvogel")

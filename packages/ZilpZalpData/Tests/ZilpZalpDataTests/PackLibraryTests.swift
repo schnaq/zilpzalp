@@ -132,7 +132,7 @@ struct PackLibraryTests {
             let photo = try #require(library.photoURL(for: amsel))
             #expect(try Data(contentsOf: photo) == PackFolder.bytes("welt", "amsel", "photo"))
             // A narrowed collection of the first pack answers with that copy too.
-            let basis = try #require(library.narrowed(toPack: "basis"))
+            let basis = try #require(library.narrowed(toPacks: ["basis"]))
             #expect(basis.callURL(for: amsel) != nil)
         }
     }

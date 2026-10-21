@@ -30,7 +30,7 @@ struct PackCollectionTests {
             )
             let library = PackLibrary([bundled, installed])
 
-            let afrika = try #require(library.narrowed(toPack: "afrika"))
+            let afrika = try #require(library.narrowed(toPacks: ["afrika"]))
 
             #expect(afrika.birds.map(\.id) == ["afrika0", "afrika1", "afrika2", "afrika3"])
             #expect(afrika.packs.map(\.id) == ["afrika"])
@@ -63,7 +63,7 @@ struct PackCollectionTests {
             )
             let library = PackLibrary([bundled, installed])
 
-            let deutschland = try #require(library.narrowed(toPack: "deutschland"))
+            let deutschland = try #require(library.narrowed(toPacks: ["deutschland"]))
 
             #expect(deutschland.birds.map(\.id).contains("amsel"))
             let amsel = try #require(deutschland.birds.first { $0.id == "amsel" })
@@ -108,7 +108,7 @@ struct PackCollectionTests {
                 to: home,
             )
 
-            #expect(PackLibrary([bundled]).narrowed(toPack: "australien") == nil)
+            #expect(PackLibrary([bundled]).narrowed(toPacks: ["australien"]) == nil)
         }
     }
 
@@ -179,8 +179,8 @@ struct PackCollectionTests {
             )
             let collections = PackCollections(PackLibrary([bundled, installed]))
 
-            #expect(collections.chosen("basis").cover?.id == "amsel")
-            #expect(collections.chosen("deutschland").cover?.id == "haussperling")
+            #expect(collections.chosen(["basis"]).cover?.id == "amsel")
+            #expect(collections.chosen(["deutschland"]).cover?.id == "haussperling")
         }
     }
 
@@ -234,7 +234,7 @@ struct PackCollectionTests {
             // Its species are still in every round drawn from „Alle Vögel" —
             // they are just not a collection of their own.
             #expect(collections.everything.library.birds.count == 11)
-            #expect(collections.chosen("australien").id == nil)
+            #expect(collections.chosen(["australien"]).id == nil)
         }
     }
 
@@ -253,11 +253,11 @@ struct PackCollectionTests {
             )
             let collections = PackCollections(PackLibrary([bundled, welt]))
 
-            #expect(collections.chosen(nil).id == nil)
-            #expect(collections.chosen("welt").id == "welt")
+            #expect(collections.chosen([]).id == nil)
+            #expect(collections.chosen(["welt"]).id == "welt")
             // The pack a grown-up deleted while the choice stood.
-            #expect(collections.chosen("afrika").id == nil)
-            #expect(collections.chosen("afrika").library.birds.count == 8)
+            #expect(collections.chosen(["afrika"]).id == nil)
+            #expect(collections.chosen(["afrika"]).library.birds.count == 8)
         }
     }
 
@@ -278,11 +278,68 @@ struct PackCollectionTests {
             )
             let collections = PackCollections(PackLibrary([bundled, welt]))
 
-            #expect(collections.chosen("basis").offersCalls)
-            #expect(!collections.chosen("welt").offersCalls)
+            #expect(collections.chosen(["basis"]).offersCalls)
+            #expect(!collections.chosen(["welt"]).offersCalls)
             // Seven across the two packs, so the game is there for „alle" —
             // which is exactly what counting per collection is about.
             #expect(collections.everything.offersCalls)
         }
+    }
+
+    /// #306: a child may choose several packs, and they are played together.
+    @Test("several packs play together, a shared species once and with its call")
+    func mixesSeveralPacks() throws {
+        try withPacks { home in
+            let packs = try ["basis", "afrika", "asien", "welt"].map { pack in
+                try PackFolder.write(
+                    pack: pack,
+                    species: Self.fourSpecies(pack, calls: 2)
+                        + [Species(id: "strauss", call: pack == "asien")],
+                    to: home,
+                )
+            }
+            let collections = PackCollections(PackLibrary(packs))
+
+            let mix = collections.chosen(["asien", "afrika"])
+
+            #expect(mix.id == nil)
+            #expect(mix.library.packs.map(\.id) == ["afrika", "asien"])
+            let ids = mix.library.birds.map(\.id)
+            #expect(ids.count == Set(ids).count)
+            let expected = (Self.fourSpecies("afrika") + Self.fourSpecies("asien")).map(\.id)
+            #expect(Set(ids) == Set(expected + ["strauss"]))
+            // Afrika declares it first and without a call; the copy that has
+            // one is the one the mix plays with.
+            let strauss = try #require(mix.library.birds.first { $0.id == "strauss" })
+            #expect(mix.library.callURL(for: strauss) != nil)
+            // Two calls in each pack and the Strauß's: five, so game 2 is
+            // there for the mix though neither pack offers it alone.
+            #expect(mix.offersCalls)
+            #expect(!collections.chosen(["afrika"]).offersCalls)
+        }
+    }
+
+    @Test("a stored choice keeps only the packs on offer")
+    func selectsWhatIsOnOffer() throws {
+        try withPacks { home in
+            let packs = try ["basis", "welt"].map { pack in
+                try PackFolder.write(pack: pack, species: Self.fourSpecies(pack), to: home)
+            }
+            let collections = PackCollections(PackLibrary(packs))
+
+            #expect(collections.selection(["welt", "afrika"]) == ["welt"])
+            #expect(collections.chosen(["welt", "afrika"]).id == "welt")
+            #expect(collections.selection(["afrika"]).isEmpty)
+            #expect(collections.chosen(["afrika"]).library.birds.count == 8)
+        }
+    }
+
+    @Test("a pack toggles, „Alle Vögel“ clears, the last pack out is every bird")
+    func togglesTheChoice() {
+        #expect(PackCollections.toggled("welt", in: []) == ["welt"])
+        #expect(PackCollections.toggled("afrika", in: ["welt"]) == ["afrika", "welt"])
+        #expect(PackCollections.toggled("welt", in: ["afrika", "welt"]) == ["afrika"])
+        #expect(PackCollections.toggled("afrika", in: ["afrika"]).isEmpty)
+        #expect(PackCollections.toggled(nil, in: ["afrika", "welt"]).isEmpty)
     }
 }

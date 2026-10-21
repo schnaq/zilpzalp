@@ -98,4 +98,10 @@ public struct PackCatalog: Sendable {
     public func speechURL(for bird: Bird, sentence: String) -> URL? {
         bird.speech?[sentence].map(\.file).flatMap(directory.mediaFile)
     }
+
+    /// The recorded clip for `sentence` about the pack itself — its title
+    /// (#306) — `nil` when the pack declares none or the file is not there.
+    public func speechURL(sentence: String) -> URL? {
+        pack.speech?[sentence].map(\.file).flatMap(directory.mediaFile)
+    }
 }

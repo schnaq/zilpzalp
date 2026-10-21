@@ -26,8 +26,18 @@ struct DeclaredFilesTests {
 
     /// A manifest with two sentence keys, one of which points at the other's
     /// file, so both properties are exercised at once.
-    private static func pack(sharing: Bool) throws -> Pack {
+    /// With `titled`, the pack also carries a clip of its own title (#306).
+    private static func pack(sharing: Bool, titled: Bool = false) throws -> Pack {
         let shared = sharing ? "clips/silence.m4a" : "speech/collection.name/amsel.m4a"
+        let title = titled ? """
+          "speech": {
+            "pack.title": {
+              "file": "speech/pack.title.m4a",
+              "sha256": "\(String(repeating: "2", count: 64))",
+              "text": "Ein Paket, das spricht"
+            }
+          },
+        """ : ""
         return try PackManifest.decode(Data("""
         {
           "id": "spricht",
@@ -38,6 +48,7 @@ struct DeclaredFilesTests {
             "sourceURL": "https://example.org/docs/sprachaufnahmen.md",
             "retrieved": "2026-09-09"
           },
+          \(title)
           "birds": [
             {
               "id": "amsel",
@@ -94,6 +105,14 @@ struct DeclaredFilesTests {
             "photos/amsel-2.png",
             "clips/silence.m4a",
         ])
+    }
+
+    @Test("a pack's own clips follow its birds'")
+    func declaresThePacksOwnClips() throws {
+        let pack = try Self.pack(sharing: true, titled: true)
+
+        #expect(pack.declaredFiles.map(\.file).last == "speech/pack.title.m4a")
+        #expect(pack.hasSpeech)
     }
 }
 

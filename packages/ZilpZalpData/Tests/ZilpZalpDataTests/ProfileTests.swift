@@ -148,17 +148,17 @@ struct ProfileTests {
 
         let profile = try JSONDecoder().decode(Profile.self, from: older)
 
-        #expect(profile.collection == nil)
+        #expect(profile.collections.isEmpty)
         #expect(profile.recognitions == ["amsel": 5])
     }
 
-    @Test("a chosen collection is read back, and no choice is not written")
-    func decodesCollection() throws {
+    @Test("chosen collections are read back, sorted")
+    func decodesCollections() throws {
         let chosen = Profile(
             id: UUID(),
             name: "Mila",
             avatar: "feather",
-            collection: "afrika",
+            collections: ["welt", "afrika"],
         )
         let everything = Profile(id: UUID(), name: "Jonas", avatar: "bird")
 
@@ -166,13 +166,30 @@ struct ProfileTests {
         let read = try JSONDecoder().decode([Profile].self, from: written)
 
         #expect(read == [chosen, everything])
-        #expect(read.map(\.collection) == ["afrika", nil])
-        // A child who plays with every bird carries no key for it: the
-        // optional encodes as absent rather than as `null`, which is exactly
-        // what a file written before #187 looks like.
+        #expect(read.map(\.collections) == [["afrika", "welt"], []])
         let text = try #require(String(data: written, encoding: .utf8))
-        #expect(text.contains("\"collection\":\"afrika\""))
-        #expect(!text.contains("null"))
+        #expect(text.contains("\"collections\":[\"afrika\",\"welt\"]"))
+        // The single key #187 wrote is read, never written back.
+        #expect(!text.contains("\"collection\""))
+    }
+
+    @Test("a profile from before #306 keeps its one chosen pack")
+    func migratesTheSingleCollection() throws {
+        let older = Data(
+            """
+            {
+              "id": "6F9619FF-8B86-D011-B42D-00C04FC964FF",
+              "name": "Mila",
+              "avatar": "feather",
+              "totalStars": 24,
+              "roundsPlayed": 9,
+              "collection": "afrika",
+              "playtime": {}
+            }
+            """.utf8,
+        )
+
+        #expect(try JSONDecoder().decode(Profile.self, from: older).collections == ["afrika"])
     }
 
     @Test("the avatar choices are the ten birds the creation screen offers")
