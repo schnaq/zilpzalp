@@ -23,6 +23,14 @@
           "attribution": "Dan Vickers",
           "sourceURL": "https://www.inaturalist.org/observations/265585684",
           "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/rotkehl-huettensaenger-2.heic",
+          "sha256": "cec46048fcce088807323cf4f2d628c89f79358d63b9d2ca862afc120bb1f057",
+          "license": "CC0-1.0",
+          "attribution": "jeffcherry",
+          "sourceURL": "https://www.inaturalist.org/observations/255916177",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": null,
@@ -31,6 +39,74 @@
           "file": "speech/collection.name/rotkehl-huettensaenger.m4a",
           "sha256": "454549b22d76ff7e2720154850e9733ec00f3188df38a8c87d1daba5e3a14eda",
           "text": "Rotkehl-Hüttensänger"
+        }
+      }
+    },
+    {
+      "id": "wanderdrossel",
+      "name": "Wanderdrossel",
+      "scientificName": "Turdus migratorius",
+      "taxonID": 12727,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/wanderdrossel.heic",
+          "sha256": "8e18fd45446ed7d51ba32a82dc6cc3230a60e50d53663c72de03a3900412e7f2",
+          "license": "CC0-1.0",
+          "attribution": "Paul",
+          "sourceURL": "https://www.inaturalist.org/observations/282290498",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/wanderdrossel.m4a",
+          "sha256": "121346a2317438acf7cca1924531db799ccd5936e01f90fe25f46e54a5a517f5",
+          "text": "Wanderdrossel"
+        }
+      }
+    },
+    {
+      "id": "schneegans",
+      "name": "Schneegans",
+      "scientificName": "Anser caerulescens",
+      "taxonID": 558426,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/schneegans.heic",
+          "sha256": "bcf8f452c4196eb8d1ce8a51f3d64fb3fc017dfa9b0eb2ef3a65eb626df1bccd",
+          "license": "CC0-1.0",
+          "attribution": "Andy Wilson",
+          "sourceURL": "https://www.inaturalist.org/observations/35890541",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/schneegans-2.heic",
+          "sha256": "6611a32dbefac762840aa49c107783670013c019409f3e824cc1329753e10c38",
+          "license": "CC-BY-4.0",
+          "attribution": "zr217",
+          "sourceURL": "https://www.inaturalist.org/observations/253345601",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/schneegans-3.heic",
+          "sha256": "e3a2245073fa359a7aa6d13beb2cffb620bc48c5291700550bbb84a8f9d96b95",
+          "license": "CC0-1.0",
+          "attribution": "Andy Wilson",
+          "sourceURL": "https://www.inaturalist.org/observations/35890541",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/schneegans.m4a",
+          "sha256": "bb11c9a93d65787674556e7fd79cceaaa6b5e9780edcd0afb1235a25e7d745ea",
+          "text": "Schneegans"
         }
       }
     },
@@ -69,6 +145,66 @@
       }
     },
     {
+      "id": "wegekuckuck",
+      "name": "Wegekuckuck",
+      "scientificName": "Geococcyx californianus",
+      "taxonID": 1986,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/wegekuckuck.heic",
+          "sha256": "c48e074d9d4ff11d2ea9f521a88f89b7621b9713e7d6fb3b9186ae58d37a84b6",
+          "license": "CC-BY-4.0",
+          "attribution": "Jody Shugart",
+          "sourceURL": "https://www.inaturalist.org/observations/6925315",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/wegekuckuck-2.heic",
+          "sha256": "bf43d535f82bdf45bcbf82070c042d53695766d3b04776f6a6acdbc3cbb26d85",
+          "license": "CC-BY-4.0",
+          "attribution": "Jonathan Eisen",
+          "sourceURL": "https://www.inaturalist.org/observations/238694891",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/wegekuckuck.m4a",
+          "sha256": "2c134d61603639b7c70a720cb3c9074ed746acfafae66ce12f68770c0f2977d5",
+          "text": "Wegekuckuck"
+        }
+      }
+    },
+    {
+      "id": "rubinkehlkolibri",
+      "name": "Rubinkehlkolibri",
+      "scientificName": "Archilochus colubris",
+      "taxonID": 6432,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/rubinkehlkolibri.heic",
+          "sha256": "0df509d5ffe4604890e1cb482db9b13a95d7dc1a2d0205511b505a4d839c6caa",
+          "license": "CC-BY-4.0",
+          "attribution": "Blake Ross",
+          "sourceURL": "https://www.inaturalist.org/observations/118738483",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/rubinkehlkolibri.m4a",
+          "sha256": "39592c5655f8b7719c2cafd79f81c2dfd5c9ddcc7a2d8a971cee2a2a9bd3abfc",
+          "text": "Rubinkehlkolibri"
+        }
+      }
+    },
+    {
       "id": "rotkardinal",
       "name": "Rotkardinal",
       "scientificName": "Cardinalis cardinalis",
@@ -83,6 +219,22 @@
           "attribution": "Bill Levine",
           "sourceURL": "https://www.inaturalist.org/observations/104353677",
           "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/rotkardinal-4.heic",
+          "sha256": "8ec94c781c882dfaf32f3b38c4fca027205fa455dc825af9e17f6f833ad7f0dc",
+          "license": "CC-BY-4.0",
+          "attribution": "Terry Woodward",
+          "sourceURL": "https://www.inaturalist.org/observations/349679447",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/rotkardinal-5.heic",
+          "sha256": "6cf72bfd8ac66af4656c824e1267d034454e970407c06a7757fbfd2d85548119",
+          "license": "CC-BY-4.0",
+          "attribution": "Craig Hensley",
+          "sourceURL": "https://www.inaturalist.org/observations/152692384",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": {
@@ -116,6 +268,14 @@
           "attribution": "Texas Bird Family",
           "sourceURL": "https://www.inaturalist.org/observations/339251426",
           "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/blauhaeher-3.heic",
+          "sha256": "aadfeaf74d461fc19568454328467cd8af85a81115bc4957837d98a489a0eb2d",
+          "license": "CC-BY-4.0",
+          "attribution": "Caroline Quinn",
+          "sourceURL": "https://www.inaturalist.org/observations/162861508",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": {
@@ -298,6 +458,14 @@
           "attribution": "Matt Felperin",
           "sourceURL": "https://www.inaturalist.org/observations/104681391",
           "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/schnee-eule-3.heic",
+          "sha256": "eb903f8137a2ab076faa7a514808ff192541db54f7a5f2d3c97ee22ff6bcb47a",
+          "license": "CC-BY-4.0",
+          "attribution": "scaup",
+          "sourceURL": "https://www.inaturalist.org/observations/101985440",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": null,
@@ -366,6 +534,14 @@
           "attribution": "Brooke J.",
           "sourceURL": "https://www.inaturalist.org/observations/202251518",
           "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/virginia-uhu-2.heic",
+          "sha256": "7cfb16abd70413fceb087daa438341889964eb4388986279588e6d8d0ec31605",
+          "license": "CC-BY-4.0",
+          "attribution": "MarvalPhotography19",
+          "sourceURL": "https://www.inaturalist.org/observations/162035114",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": null,
@@ -392,6 +568,14 @@
           "attribution": "Andy Wilson",
           "sourceURL": "https://www.inaturalist.org/observations/80827613",
           "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/truthahngeier-2.heic",
+          "sha256": "0a33661154139d599da171dbde99040455e3269c345f755069c35a8635fb8443",
+          "license": "CC-BY-4.0",
+          "attribution": "Millie Basden",
+          "sourceURL": "https://www.inaturalist.org/observations/136571262",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": null,
@@ -400,6 +584,32 @@
           "file": "speech/collection.name/truthahngeier.m4a",
           "sha256": "f13408bb119ab7d22f02d7af64f57eeeef5027f6f5a87ad688eebd75de16e620",
           "text": "Truthahngeier"
+        }
+      }
+    },
+    {
+      "id": "kanadagans",
+      "name": "Kanadagans",
+      "scientificName": "Branta canadensis",
+      "taxonID": 7089,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/kanadagans.heic",
+          "sha256": "3a784a55b1e7ba182c8a094c6b1028a6d6ac0ce2d58a24aeb6b8d2198de7e7e7",
+          "license": "CC-BY-4.0",
+          "attribution": "Bonnie Semmling",
+          "sourceURL": "https://www.inaturalist.org/observations/77125730",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/kanadagans.m4a",
+          "sha256": "0691a0c3ba393f4c78b681fe5eab977adda5b8f85eb9635807338fe640119d5d",
+          "text": "Kanadagans"
         }
       }
     },
@@ -418,6 +628,14 @@
           "attribution": "Kalvin Chan",
           "sourceURL": "https://www.inaturalist.org/observations/214521630",
           "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/rotkopfspecht-2.heic",
+          "sha256": "0b306c9aeed719f1415b199b2f01ca6ae05555ba80e8ff51c4569dd2f064dcfc",
+          "license": "CC-BY-4.0",
+          "attribution": "Shawn Taylor",
+          "sourceURL": "https://www.inaturalist.org/observations/108046773",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": null,
@@ -426,6 +644,82 @@
           "file": "speech/collection.name/rotkopfspecht.m4a",
           "sha256": "9fe5b276332cc3da5660adb4b3236fd1a5dedd3fb7d3d0b0afa8072299f0a588",
           "text": "Rotkopfspecht"
+        }
+      }
+    },
+    {
+      "id": "helmspecht",
+      "name": "Helmspecht",
+      "scientificName": "Dryocopus pileatus",
+      "taxonID": 17855,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/helmspecht.heic",
+          "sha256": "586e59a0e8bfed02cfaf077b6c99cc0e818376fa9eb6a441d03fc303419f8922",
+          "license": "CC-BY-4.0",
+          "attribution": "Bill Keim",
+          "sourceURL": "https://www.inaturalist.org/observations/331208893",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/helmspecht-2.heic",
+          "sha256": "fe90be61f57174666201ab9a4d4a69b0d959773a3d65ec0dcc194e5b05f87565",
+          "license": "CC-BY-4.0",
+          "attribution": "Sean Frey",
+          "sourceURL": "https://www.inaturalist.org/observations/244135777",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/helmspecht.m4a",
+          "sha256": "fd0c9331a331c5652b3ebb38b67c3d017b0f83a5be365cc9d8da2e0455bb6d00",
+          "text": "Helmspecht"
+        }
+      }
+    },
+    {
+      "id": "schopfmeise",
+      "name": "Schopfmeise",
+      "scientificName": "Baeolophus bicolor",
+      "taxonID": 13632,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/schopfmeise.heic",
+          "sha256": "b123eed8adba28ed668c310f12b852a9642ffe6b680808297e48a84a183133ce",
+          "license": "CC-BY-4.0",
+          "attribution": "Kalvin Chan",
+          "sourceURL": "https://www.inaturalist.org/observations/257411883",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/schopfmeise-2.heic",
+          "sha256": "763e87e4a06585fff8974136a809b0265c75116d265c6782ec5d8e29ad0f3958",
+          "license": "CC-BY-4.0",
+          "attribution": "syvwlch",
+          "sourceURL": "https://www.inaturalist.org/observations/37951815",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/schopfmeise-3.heic",
+          "sha256": "80a8a9461f08666df36db631d07fcc0de4939eb52537f1c799b4f5ea17b0caf0",
+          "license": "CC-BY-4.0",
+          "attribution": "Michael",
+          "sourceURL": "https://www.inaturalist.org/observations/338507047",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/schopfmeise.m4a",
+          "sha256": "b8e75317d0be520acf40e7eb2615227a2269837f933766d4300dc1aa7bf64f38",
+          "text": "Schopfmeise"
         }
       }
     },
@@ -443,6 +737,22 @@
           "license": "CC-BY-4.0",
           "attribution": "Derek Spencer",
           "sourceURL": "https://www.inaturalist.org/observations/365169268",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/indigofink-2.heic",
+          "sha256": "e691f73270d4924c5891982165e25620cdbd195547fba6d82001d0dc5dc5e7ed",
+          "license": "CC0-1.0",
+          "attribution": "Adam Jackson",
+          "sourceURL": "https://www.inaturalist.org/observations/193252002",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/indigofink-3.heic",
+          "sha256": "6c5df51ceedcc4f7eb70e71ec8170890f8c262f8d558bbf598330db795ecc751",
+          "license": "CC0-1.0",
+          "attribution": "Adam Jackson",
+          "sourceURL": "https://www.inaturalist.org/observations/193327326",
           "retrieved": "2026-10-21"
         }
       ],
@@ -470,6 +780,22 @@
           "attribution": "Donald Davesne",
           "sourceURL": "https://www.inaturalist.org/observations/281973047",
           "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/goldzeisig-2.heic",
+          "sha256": "c2ef3e2b47f01cb2f1af8afa28cdd08507b40dac7ec1c8f4f89b1769bf644744",
+          "license": "CC0-1.0",
+          "attribution": "mefisher",
+          "sourceURL": "https://www.inaturalist.org/observations/43390778",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/goldzeisig-3.heic",
+          "sha256": "5436ea11b9197135c4808baa836f0617b949639deada68adac2ad1fe0ce69264",
+          "license": "CC0-1.0",
+          "attribution": "Andy Wilson",
+          "sourceURL": "https://www.inaturalist.org/observations/390144942",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": null,
@@ -495,6 +821,14 @@
           "license": "CC0-1.0",
           "attribution": "Chrissy McClarren and Andy Reago",
           "sourceURL": "https://www.inaturalist.org/observations/88173051",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/baltimoretrupial-2.heic",
+          "sha256": "7b2109c27c941bdeca19a39f725335b5670a1299c8e64e93d87d04ad2c64574c",
+          "license": "CC-BY-4.0",
+          "attribution": "Mike Duran",
+          "sourceURL": "https://www.inaturalist.org/observations/184586958",
           "retrieved": "2026-10-21"
         }
       ],
@@ -522,6 +856,22 @@
           "attribution": "Mirko Schoenitz",
           "sourceURL": "https://www.inaturalist.org/observations/20437532",
           "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/rotschulterstaerling-2.heic",
+          "sha256": "3e24431b2901a416c0c498864da81bdf17c8ce5416ea294f0f07b07391dc1018",
+          "license": "CC-BY-4.0",
+          "attribution": "Justin Flint",
+          "sourceURL": "https://www.inaturalist.org/observations/284907593",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/rotschulterstaerling-3.heic",
+          "sha256": "4b029e08b60da7598f87cdcaccd2a884827f39025cb09f9f746caa4806231f31",
+          "license": "CC0-1.0",
+          "attribution": "Steven Smethurst",
+          "sourceURL": "https://www.inaturalist.org/observations/69287109",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": null,
@@ -548,6 +898,22 @@
           "attribution": "Laurel Meredyk",
           "sourceURL": "https://www.inaturalist.org/observations/28271836",
           "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/brillenstaerling-2.heic",
+          "sha256": "faf68de78016c3ce9b71a034ada52c39a485425b33d9bebbc487b643db79e8f3",
+          "license": "CC-BY-4.0",
+          "attribution": "Jonathan Eisen",
+          "sourceURL": "https://www.inaturalist.org/observations/25406352",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/brillenstaerling-3.heic",
+          "sha256": "9fdb347a47b19ea8f77e71babfa52d124d220702e3c54dfad26322131a191819",
+          "license": "CC-BY-4.0",
+          "attribution": "John Krampl",
+          "sourceURL": "https://www.inaturalist.org/observations/118423958",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": null,
@@ -556,6 +922,32 @@
           "file": "speech/collection.name/brillenstaerling.m4a",
           "sha256": "d091fe792bb89ab824dbeb7f2a67713f229a77ea5eb416b3f06647c459d0db43",
           "text": "Brillenstärling"
+        }
+      }
+    },
+    {
+      "id": "guertelfischer",
+      "name": "Gürtelfischer",
+      "scientificName": "Megaceryle alcyon",
+      "taxonID": 2548,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/guertelfischer.heic",
+          "sha256": "e1c0992a93702192d6c7a2632445f4d6c38745fa6c3b7dc3fa60fbc28ad35cb2",
+          "license": "CC-BY-4.0",
+          "attribution": "Hunter Hammil",
+          "sourceURL": "https://www.inaturalist.org/observations/161277465",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/guertelfischer.m4a",
+          "sha256": "2ebb2e89d0663e626b82ab67bf93f85b2b22606c8da37290e864d8743459b709",
+          "text": "Gürtelfischer"
         }
       }
     },
@@ -574,6 +966,22 @@
           "attribution": "Jonathan Eisen",
           "sourceURL": "https://www.inaturalist.org/observations/107143166",
           "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/buntfalke-2.heic",
+          "sha256": "9f00192503b2ee9ebe5ae99f46e6d134427b14ec8dbe0c2b0c487b82b14516b6",
+          "license": "CC-BY-4.0",
+          "attribution": "Jonathan Eisen",
+          "sourceURL": "https://www.inaturalist.org/observations/124836781",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/buntfalke-3.heic",
+          "sha256": "daa09b93a7f34536698c5de77bb521e53c243b0d5ac7ddb5141c7dc02401e63b",
+          "license": "CC0-1.0",
+          "attribution": "Adam Jackson",
+          "sourceURL": "https://www.inaturalist.org/observations/256643321",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": null,
@@ -582,6 +990,228 @@
           "file": "speech/collection.name/buntfalke.m4a",
           "sha256": "cdfd6089866b1858e156bc636cf74cc1f1794f71663a1013159ce85ee1069ac4",
           "text": "Buntfalke"
+        }
+      }
+    },
+    {
+      "id": "kanadakranich",
+      "name": "Kanadakranich",
+      "scientificName": "Antigone canadensis",
+      "taxonID": 508048,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/kanadakranich.heic",
+          "sha256": "67cf7cfa4ba59bad8394b40dd816a5a7b17222e10573bd5511bc81fd03026971",
+          "license": "CC-BY-4.0",
+          "attribution": "John Krampl",
+          "sourceURL": "https://www.inaturalist.org/observations/271142807",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/kanadakranich.m4a",
+          "sha256": "95e3c1037bf3ae80eba7b6458def78471cf5a9fac8dbcc81323c6757bd9b5794",
+          "text": "Kanadakranich"
+        }
+      }
+    },
+    {
+      "id": "diademhaeher",
+      "name": "Diademhäher",
+      "scientificName": "Cyanocitta stelleri",
+      "taxonID": 8234,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/diademhaeher.heic",
+          "sha256": "00212cc893c5f1d0654f33f92fb6ddafda9b61cbe5a25a985e158194ce79cd42",
+          "license": "CC-BY-4.0",
+          "attribution": "Ren Gianforte",
+          "sourceURL": "https://www.inaturalist.org/observations/279288278",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/diademhaeher.m4a",
+          "sha256": "c1a28d850d93c42dc25d0bc63a6b2823603af58a051e3fff870ad3b07ef31245",
+          "text": "Diademhäher"
+        }
+      }
+    },
+    {
+      "id": "braunpelikan",
+      "name": "Braunpelikan",
+      "scientificName": "Pelecanus occidentalis",
+      "taxonID": 4328,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/braunpelikan.heic",
+          "sha256": "5c071bf90f6b1fe392bbd4cbdb9ddda203f33a8c0d1524df0f279f2568c482b8",
+          "license": "CC-BY-SA-4.0",
+          "attribution": "Thibaud Aronson",
+          "sourceURL": "https://www.inaturalist.org/observations/15577189",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/braunpelikan.m4a",
+          "sha256": "003518c007a278190503e066097126bee7d0bd82e101ee5a12376fb717064dc6",
+          "text": "Braunpelikan"
+        }
+      }
+    },
+    {
+      "id": "blaureiher",
+      "name": "Blaureiher",
+      "scientificName": "Ardea herodias",
+      "taxonID": 4956,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/blaureiher.heic",
+          "sha256": "03221811511dd77690d260b417a9740ed27e2392dcefdd15327e517985b208f6",
+          "license": "CC0-1.0",
+          "attribution": "Steven Smethurst",
+          "sourceURL": "https://www.inaturalist.org/observations/75402185",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/blaureiher-2.heic",
+          "sha256": "42a2a7e192854f1ab63499b10aaa26ecf2bdefbf0b08c30fcba030342180eb53",
+          "license": "CC0-1.0",
+          "attribution": "Brighton Lee",
+          "sourceURL": "https://www.inaturalist.org/observations/403722823",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/blaureiher.m4a",
+          "sha256": "27bbf68543346b10690874924587c5597e1636ce4f5b137796f3862756a3b098",
+          "text": "Blaureiher"
+        }
+      }
+    },
+    {
+      "id": "streifenkauz",
+      "name": "Streifenkauz",
+      "scientificName": "Strix varia",
+      "taxonID": 19893,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/streifenkauz.heic",
+          "sha256": "6b392abf63dc4128732d24f51e17febecdc7c8f498b0fac30dfa4fb588dfe100",
+          "license": "CC0-1.0",
+          "attribution": "Steven Smethurst",
+          "sourceURL": "https://www.inaturalist.org/observations/116656640",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/streifenkauz.m4a",
+          "sha256": "ecbab2b6b331c3ced55274a5f9f2c514a63262074d6a1bb391f61ca658788b4c",
+          "text": "Streifenkauz"
+        }
+      }
+    },
+    {
+      "id": "sumpfohreule",
+      "name": "Sumpfohreule",
+      "scientificName": "Asio flammeus",
+      "taxonID": 20315,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/sumpfohreule.heic",
+          "sha256": "19d7a70e3d30ced85059adc4d98b93773182a80c58b9796c25a109ac78dde92f",
+          "license": "CC-BY-4.0",
+          "attribution": "Kalvin Chan",
+          "sourceURL": "https://www.inaturalist.org/observations/346844083",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/sumpfohreule-2.heic",
+          "sha256": "f744c804262b72f67fcbedda13f66f8c72e1238734664a18052bc15253c38a37",
+          "license": "CC0-1.0",
+          "attribution": "Chrissy McClarren and Andy Reago",
+          "sourceURL": "https://www.inaturalist.org/observations/334454157",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/sumpfohreule-3.heic",
+          "sha256": "478ff5f912690a8e47657dff0d84671012082eae5d005c14175105d56a949e85",
+          "license": "CC0-1.0",
+          "attribution": "Chrissy McClarren and Andy Reago",
+          "sourceURL": "https://www.inaturalist.org/observations/106536268",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/sumpfohreule.m4a",
+          "sha256": "6739900146a497ca81004bd81c12bf45ea0a4ec9a0cf0f9c5cb7c326d6965c9d",
+          "text": "Sumpfohreule"
+        }
+      }
+    },
+    {
+      "id": "trompeterschwan",
+      "name": "Trompeterschwan",
+      "scientificName": "Cygnus buccinator",
+      "taxonID": 6915,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/trompeterschwan.heic",
+          "sha256": "ff01066ce2b73a09d7c1edca5e671d7707de48a8945234441a56aa683d97aa2e",
+          "license": "CC-BY-4.0",
+          "attribution": "Sean Frey",
+          "sourceURL": "https://www.inaturalist.org/observations/313047374",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/trompeterschwan-2.heic",
+          "sha256": "62043f1f238aa40817a99d2bba91f762b5b35b7c8275286e0d1f5c14f3c977c2",
+          "license": "CC-BY-4.0",
+          "attribution": "elik03",
+          "sourceURL": "https://www.inaturalist.org/observations/261694018",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/trompeterschwan-3.heic",
+          "sha256": "c9904fccc537273d10c6e725d1661ad6e952227bf6f0c6352b6a54ecee9fae29",
+          "license": "CC-BY-4.0",
+          "attribution": "Sean Frey",
+          "sourceURL": "https://www.inaturalist.org/observations/313047374",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/trompeterschwan.m4a",
+          "sha256": "45a1d3862eb1a7fc0cedb2ba815c011021d660d917affa1de39a46cb56b3f087",
+          "text": "Trompeterschwan"
         }
       }
     },
@@ -599,6 +1229,22 @@
           "license": "CC0-1.0",
           "attribution": "Chrissy McClarren and Andy Reago",
           "sourceURL": "https://www.inaturalist.org/observations/86911376",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/kragenente-2.heic",
+          "sha256": "2ead9c0f9ea910ac8c1b26d2a8eb39ba79fadb686ee4e5edb7db6877a5c26688",
+          "license": "CC-BY-4.0",
+          "attribution": "er-birds",
+          "sourceURL": "https://www.inaturalist.org/observations/195713239",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/kragenente-3.heic",
+          "sha256": "54966e45c90603ba32f9045ed4ec2fc741110274b6e3e11c2ee2b712d77b9718",
+          "license": "CC-BY-4.0",
+          "attribution": "Saryu Mae 前 朝琉",
+          "sourceURL": "https://www.inaturalist.org/observations/360498848",
           "retrieved": "2026-10-21"
         }
       ],
@@ -633,6 +1279,14 @@
           "license": "CC-BY-4.0",
           "attribution": "Alberto Sánchez",
           "sourceURL": "https://www.inaturalist.org/observations/158762689",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/zimtente-3.heic",
+          "sha256": "263369a9ece894076780aff47528f876714192d59852ee6885ef0376a306b376",
+          "license": "CC-BY-4.0",
+          "attribution": "Jonathan Eisen",
+          "sourceURL": "https://www.inaturalist.org/observations/49023516",
           "retrieved": "2026-10-21"
         }
       ],
