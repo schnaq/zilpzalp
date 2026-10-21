@@ -45,7 +45,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/rosakakadu.m4a",
-          "sha256": "6df92f9975e7efbe4acfac8fcf5bb180368a53414a3f59c612d16ca3aee3c02d",
+          "sha256": "f2e058459b1fff9f21e010dd39edc06e4a647084eb225c8974554ed97ca2c585",
           "text": "Rosakakadu"
         }
       }
@@ -71,7 +71,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/gelbhaubenkakadu.m4a",
-          "sha256": "b4dd624d46f3a17f695c3c7d27c0b63583916ffb59462b30a1ba474d540ce307",
+          "sha256": "f148d25281083bac3262432d1369d6d95200e98d223c8ff06eb7ec6b9d122bc9",
           "text": "Gelbhaubenkakadu"
         }
       }
@@ -105,7 +105,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/inkakakadu.m4a",
-          "sha256": "0f3a092b9bc1a859217e4fa31e8f72a87b99619b0daf65f010a4bbdc80c26029",
+          "sha256": "8049f5b85b2f92481b59c6df9541fb48c6193a25b02a9fbf4af4a3e316e43107",
           "text": "Inkakakadu"
         }
       }
@@ -131,7 +131,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/regenbogenlori.m4a",
-          "sha256": "b3495bfc53018cbcceaca5aff9000df421206885f08c9a04bd8b2211fa918ccf",
+          "sha256": "ea4d570b51fc027ae44b6e34ce09ef390a7d4276db52445b4e28923e22f47b45",
           "text": "Regenbogenlori"
         }
       }
@@ -157,7 +157,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/koenigssittich.m4a",
-          "sha256": "8d395cce9f63a366e4de4bf48dbf6822d969fdc23bad98c24b8511d069455941",
+          "sha256": "e2f79bdc90f334ccb46a872026bd9bf59940a80dc443ad5a0b08714d2e52035d",
           "text": "Königssittich"
         }
       }
@@ -199,7 +199,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/rosella.m4a",
-          "sha256": "09dc8f2af69f26f891cf0a975ee9083b4254b3189bb48755343f90d34dcdedef",
+          "sha256": "8bf0497015f36368f2083783baf4c6a980242a84b87fc88c7cb5d47b8f337e0b",
           "text": "Rosella"
         }
       }
@@ -248,7 +248,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/wellensittich.m4a",
-          "sha256": "c99e93391327274bcfa93dc2c5d015137ddcc17e29b4c4ad87f24cac83a923e6",
+          "sha256": "6c5e3eadf220fa2a655bbd1adb0499ddd73ffd091bd7b7ef6771c02a03c04c32",
           "text": "Wellensittich"
         }
       }
@@ -290,7 +290,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/kea.m4a",
-          "sha256": "71a6d1530ad07519993f660291fd2c1dc114b0380156d487fe0c2184c45a8493",
+          "sha256": "90cc47db40e3e009b110a4524e31f71f6cec42c61dfb38c95462143e73f0d81b",
           "text": "Kea"
         }
       }
@@ -332,7 +332,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/emu.m4a",
-          "sha256": "8f4c17117d7efda5f23c35613b679469fa329f398665eef1c54884a957b9e7d7",
+          "sha256": "c33a1909372e7fd03d2f3e09be52b4105955c48f7d7ac9b4df860eec16175a1b",
           "text": "Emu"
         }
       }
@@ -374,7 +374,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/helmkasuar.m4a",
-          "sha256": "0c1bcce4013e80cada3d1a39d7a99a9027d110323c41340cf8ef921916aed7e9",
+          "sha256": "dbdc02ac3a4ba99f94675de3f28b29a4d68e529051ae331764ebd85e8e244ac4",
           "text": "Helmkasuar"
         }
       }
@@ -416,7 +416,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/lachender-hans.m4a",
-          "sha256": "64cee5a152331177a8b03377058302c7f8f5391e18837f1d68094bedf3e4219b",
+          "sha256": "dc983fa1b7897554f78bc87659d6f03eedf8f1ae8946a665d20c6f7b0418a645",
           "text": "Lachender Hans"
         }
       }
@@ -458,7 +458,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/regenbogenspint.m4a",
-          "sha256": "c570625af768dba83e2f7a7abe0b363e63a14bb1886a01e2fa523139453eb056",
+          "sha256": "68dc66b2ee7bf2f39f4954f3bd5a6c0bb798e1ec2a58605d60f412e9b4ba0678",
           "text": "Regenbogenspint"
         }
       }
@@ -499,7 +499,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/seidenlaubenvogel.m4a",
-          "sha256": "eec1070c152ed8848e9b140e07b9715cce8faad4b599b400f447fb05d400e713",
+          "sha256": "c8146639a537dffafe44727681916ff718d259af0d654947dc331a9b0d13405e",
           "text": "Seidenlaubenvogel"
         }
       }
@@ -541,7 +541,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/prachtstaffelschwanz.m4a",
-          "sha256": "79c326b8a9f329b8b51dd932ba711458cdda208bd394e0e7c47b2e49f66dde8b",
+          "sha256": "45cac3dcd358d41b8971ca3e97b12717483117eb6f9db0cea70e44e752b04c83",
           "text": "Prachtstaffelschwanz"
         }
       }
@@ -590,7 +590,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/floetenvogel.m4a",
-          "sha256": "7755a830a24049174c5e7df923c1974e44fa7fa775c0977f60196b715100b019",
+          "sha256": "86e2ee63d4e647cb3f3d0b552c4477fd2bcd60eb3428002107ab74b76f53d4ef",
           "text": "Flötenvogel"
         }
       }
@@ -623,7 +623,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/tui.m4a",
-          "sha256": "a302b8b38c95f6a1dde4f411aab8fb24ddc9b181704a5e5b46bf5307b43f0fe7",
+          "sha256": "31ca5e10a4e66c4a0e1fcd97e7e4a56fa30feba897c0bb18b84ab580cf96580d",
           "text": "Tui"
         }
       }
@@ -649,7 +649,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/neuseeland-faecherschwanz.m4a",
-          "sha256": "65f45921671af1523fc1e1d152e2d0862ca57cce2ede87a32b94a850c402f79d",
+          "sha256": "dac40e495fce8326bcb252619a8cd960d004cead8908e199522f7b52be2a957a",
           "text": "Neuseeland-Fächerschwanz"
         }
       }
@@ -698,7 +698,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/pukeko.m4a",
-          "sha256": "188e86565bacb97678166440db853481e95b196cbef9ddb016fa9da76824763a",
+          "sha256": "6d5daed036779b245d81f1c9286af7941091bee64623427d638bc6e2c47682d4",
           "text": "Pukeko"
         }
       }
@@ -747,7 +747,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/wekaralle.m4a",
-          "sha256": "bfcefedf65d5f0fa7d395758d71d4aebe5d7d639b96f381634d1d2fa5cf9ab66",
+          "sha256": "e00ea5ae27b3e6f7deaa1e23bf83ee776ea5b2c7a75cd3f3a8aa962542ce9d13",
           "text": "Wekaralle"
         }
       }
@@ -789,7 +789,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/maori-taube.m4a",
-          "sha256": "f8fd18b3a74855f481bafde0558927c4d6a1f9f369f746c44d4d12b897ea49d6",
+          "sha256": "7380675e7dcd296eb445cde7a6da8a2c012e0df0253446c19846fb4cf342ec8f",
           "text": "Maori-Fruchttaube"
         }
       }
@@ -838,7 +838,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/schwarzschwan.m4a",
-          "sha256": "e4323cb39116f586a8712479636c0b84755c53750e36c04c4a11ab67c98c7616",
+          "sha256": "be676b63265449358dc805819c959f5d7b824baea4a2bbc44fba6ebb2c24220b",
           "text": "Schwarzschwan"
         }
       }
@@ -880,7 +880,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/australischer-pelikan.m4a",
-          "sha256": "98f513f134b8a5d86125e4b3efba8e99bbc5f4f43a61ce1bdf794ff381b16089",
+          "sha256": "9d86a5b5037d2b0947f07aacafc94e57b8dbc7873e68e72638cbd4f4a1f755c5",
           "text": "Brillenpelikan"
         }
       }
@@ -922,7 +922,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/strohhalsibis.m4a",
-          "sha256": "ec9edf22908f0d5a7c03cdbbf8568ac271077420dbfa46086e78890dc4501916",
+          "sha256": "f707b4f8721d36610871219aa6b551d99153a3f1a909ddf4d7df2b8b6a3a4d58",
           "text": "Stachelibis"
         }
       }
@@ -948,7 +948,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/gelbaugenpinguin.m4a",
-          "sha256": "30afdd812c5a35ce650b9babe68fb958aa1872b6690853cdf044052b9ea03ba7",
+          "sha256": "bf6d81349d0c006b37477802394135ca5369ae3867b4924b3793ab3079b1c1fa",
           "text": "Gelbaugenpinguin"
         }
       }
@@ -990,10 +990,17 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/weissbauchseeadler.m4a",
-          "sha256": "8f159cdaa8ee31588ff40b6e09a422f46f93a5a1c22132088b5d2142c35da0ed",
+          "sha256": "3585ddbe659fcc0feffcde080b4e139cf156ab4792ce036dd2de752f5dcc1107",
           "text": "Weißbauchseeadler"
         }
       }
     }
-  ]
+  ],
+  "speech": {
+    "pack.title": {
+      "file": "speech/pack.title.m4a",
+      "sha256": "2b1d53532950fbba9b05792b007eab27faa3b68116cc5effa8a3eaf8184341bd",
+      "text": "Australien & Ozeanien"
+    }
+  }
 }
