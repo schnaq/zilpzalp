@@ -1,0 +1,530 @@
+{
+  "id": "asien",
+  "title": "Asien",
+  "voice": {
+    "license": "CC-BY-4.0",
+    "attribution": "Stimme: Ava (ElevenLabs)",
+    "sourceURL": "https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md",
+    "retrieved": "2026-10-21"
+  },
+  "birds": [
+    {
+      "id": "pfau",
+      "name": "Pfau",
+      "scientificName": "Pavo cristatus",
+      "taxonID": 1204,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/pfau.heic",
+          "sha256": "f8ee23449549e7a2685e02717827d4c8f4bd46e81a6f75b4d4aebd06844e42ff",
+          "license": "CC-BY-4.0",
+          "attribution": "Jason Alexander",
+          "sourceURL": "https://www.inaturalist.org/observations/153415191",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/pfau-2.heic",
+          "sha256": "323723b8eb7de00c3f65d01be95f912d26cb2f48a1ec16c4f34209874ed2e43f",
+          "license": "CC-BY-4.0",
+          "attribution": "Parth Kansara",
+          "sourceURL": "https://www.inaturalist.org/observations/176588709",
+          "retrieved": "2026-09-10"
+        }
+      ],
+      "call": {
+        "file": "audio/pfau.m4a",
+        "sha256": "67a497a686338e73a901721ee39db83a26ca6632c2938bab2215d31ae7b25b08",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Manoj Karingamadathil (XC677383)",
+        "sourceURL": "https://xeno-canto.org/677383",
+        "retrieved": "2026-09-10"
+      },
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/pfau.m4a",
+          "sha256": "a8b5729de3bd7dbf21a4777746c04c53d3cb8c3c0a5285728c8be3e49c770609",
+          "text": "Pfau"
+        }
+      }
+    },
+    {
+      "id": "doppelhornvogel",
+      "name": "Doppelhornvogel",
+      "scientificName": "Buceros bicornis",
+      "taxonID": 5536,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/doppelhornvogel-4.heic",
+          "sha256": "92c270af884b6301efa8892684a20a8b6c0060f0699a52e7ef0c028af4389968",
+          "license": "CC-BY-4.0",
+          "attribution": "Rohit Naniwadekar",
+          "sourceURL": "https://www.inaturalist.org/observations/186513892",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/doppelhornvogel-3.heic",
+          "sha256": "75d594f0776126c62a307d232751eff62aee8bbc4b4d934106693d737d84c470",
+          "license": "CC-BY-4.0",
+          "attribution": "Aparna Krishnan",
+          "sourceURL": "https://www.inaturalist.org/observations/144356773",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/doppelhornvogel-5.heic",
+          "sha256": "c154ac2dfb528baf3745839fa7cf900535381f1c2112e773b1ca5bff1cb63875",
+          "license": "CC-BY-4.0",
+          "attribution": "Wang.QG",
+          "sourceURL": "https://www.inaturalist.org/observations/177510273",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/doppelhornvogel.m4a",
+          "sha256": "f23845a2a2a31da64985a14b20da1cb159ae4bdfc75373053d89bb4a14798fc6",
+          "text": "Doppelhornvogel"
+        }
+      }
+    },
+    {
+      "id": "mandschurenkranich",
+      "name": "Mandschurenkranich",
+      "scientificName": "Grus japonensis",
+      "taxonID": 39,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/mandschurenkranich.heic",
+          "sha256": "594a32399c237d3a2e5d634d4448444b863e20c860a09cb7e42f76dc6f075336",
+          "license": "CC-BY-4.0",
+          "attribution": "Christoph Moning",
+          "sourceURL": "https://www.inaturalist.org/observations/63813237",
+          "retrieved": "2026-09-10"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/mandschurenkranich.m4a",
+          "sha256": "517bdc6a0ad6a65f7021a9f2704f15ccb88f77477446cfa8a4c6b2f2ef817e61",
+          "text": "Mandschurenkranich"
+        }
+      }
+    },
+    {
+      "id": "jungfernkranich",
+      "name": "Jungfernkranich",
+      "scientificName": "Grus virgo",
+      "taxonID": 48,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/jungfernkranich.heic",
+          "sha256": "d11a0371da1c4c82e7ea04f517c95cf8316e8fc9f098385327d0d3b8d004c88e",
+          "license": "CC-BY-4.0",
+          "attribution": "Nigel Voaden",
+          "sourceURL": "https://www.inaturalist.org/observations/2807453",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": {
+        "file": "audio/jungfernkranich.m4a",
+        "sha256": "ea4470d3be903478017f886aafe37f2156b97e958a401a5e427521394343ac72",
+        "license": "CC0-1.0",
+        "attribution": "Sonothèque ADVL (XC817786)",
+        "sourceURL": "https://xeno-canto.org/817786",
+        "retrieved": "2026-10-21"
+      },
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/jungfernkranich.m4a",
+          "sha256": "9d18c59aaf71fdac2bab1520ed6ccc00d9d5025b94145dab61be81abb1a1d56f",
+          "text": "Jungfernkranich"
+        }
+      }
+    },
+    {
+      "id": "mandarinente",
+      "name": "Mandarinente",
+      "scientificName": "Aix galericulata",
+      "taxonID": 7106,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/mandarinente.heic",
+          "sha256": "9572843349a36851a47706bd571fb0eb504253c040fb2402f9ed27b072424764",
+          "license": "CC-BY-4.0",
+          "attribution": "Blake Ross",
+          "sourceURL": "https://www.inaturalist.org/observations/102309745",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/mandarinente-2.heic",
+          "sha256": "bfeb40a225516658e058d9138e6bad510864e35c9c645b6050de84cb87dc80c7",
+          "license": "CC-BY-4.0",
+          "attribution": "Diego González Dopico",
+          "sourceURL": "https://www.inaturalist.org/observations/204451732",
+          "retrieved": "2026-09-11"
+        },
+        {
+          "file": "photos/mandarinente-4.heic",
+          "sha256": "91e104306070f292728907b1c1cecf81a66bb726328dc8920271eaa9bc9e8fb2",
+          "license": "CC-BY-4.0",
+          "attribution": "Susan Marley",
+          "sourceURL": "https://www.inaturalist.org/observations/106805518",
+          "retrieved": "2026-09-11"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/mandarinente.m4a",
+          "sha256": "12308d81989da08a7ad9237377150ae07a0c94b3a729c1002305deeecbbdf1c6",
+          "text": "Mandarinente"
+        }
+      }
+    },
+    {
+      "id": "halsbandsittich",
+      "name": "Halsbandsittich",
+      "scientificName": "Psittacula krameri",
+      "taxonID": 18911,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/halsbandsittich.heic",
+          "sha256": "71a7bddb8a617309b5942b84397db7b23f25c3b7b8ef24699c00c4c0e0c2360a",
+          "license": "CC-BY-4.0",
+          "attribution": "Paul Lewis",
+          "sourceURL": "https://www.inaturalist.org/observations/340036074",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": {
+        "file": "audio/halsbandsittich.m4a",
+        "sha256": "8253556a254c47e90643f650f5796ffd0dcb158eeca5723790628be02629a162",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Marie-Lan Taÿ Pamart (XC510543)",
+        "sourceURL": "https://xeno-canto.org/510543",
+        "retrieved": "2026-10-21"
+      },
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/halsbandsittich.m4a",
+          "sha256": "a3030684d1e059d6ee5c63fd05d2976135498ff8466c0617d6c44fe3f4fe0003",
+          "text": "Halsbandsittich"
+        }
+      }
+    },
+    {
+      "id": "hirtenmaina",
+      "name": "Hirtenmaina",
+      "scientificName": "Acridotheres tristis",
+      "taxonID": 204454,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/hirtenmaina.heic",
+          "sha256": "84eda289a5d727f61cd6117e69644d22ec7af3fdf84bdd825b472e6ffab12f88",
+          "license": "CC-BY-4.0",
+          "attribution": "Roger Rittmaster",
+          "sourceURL": "https://www.inaturalist.org/observations/37135639",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": {
+        "file": "audio/hirtenmaina.m4a",
+        "sha256": "33e0571810be752417189a495b21df9856f3947ce91895091121a9b5e0af79a0",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Ujjal Kishor De (XC1003188)",
+        "sourceURL": "https://xeno-canto.org/1003188",
+        "retrieved": "2026-10-21"
+      },
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/hirtenmaina.m4a",
+          "sha256": "c72ded2fb4318f288779c2970361b83f3bea19062eff7a41f1478a84b963219e",
+          "text": "Hirtenmaina"
+        }
+      }
+    },
+    {
+      "id": "rostgans",
+      "name": "Rostgans",
+      "scientificName": "Tadorna ferruginea",
+      "taxonID": 7068,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/rostgans.heic",
+          "sha256": "6f7207c4fde88ba14ae9ab1b2c111d12c8c51875e7f65b5d0bf7fb32faf17435",
+          "license": "CC-BY-4.0",
+          "attribution": "Михаил Малышев",
+          "sourceURL": "https://www.inaturalist.org/observations/156270590",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/rostgans-2.heic",
+          "sha256": "2c511aeb598785ddf983d2d9d98a21a4db46e788b62dffb930d4088731108719",
+          "license": "CC-BY-4.0",
+          "attribution": "Donald Davesne",
+          "sourceURL": "https://www.inaturalist.org/observations/255322020",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": {
+        "file": "audio/rostgans.m4a",
+        "sha256": "a25bdb945663c909a3131be3ac60e95941664bcc8068866f696cb5df69602676",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Pascal Christe (XC799447)",
+        "sourceURL": "https://xeno-canto.org/799447",
+        "retrieved": "2026-10-21"
+      },
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/rostgans.m4a",
+          "sha256": "f7210d51ad9333735af06965922b241dba72a31e9bd140a01cd739b042326066",
+          "text": "Rostgans"
+        }
+      }
+    },
+    {
+      "id": "schwanengans",
+      "name": "Schwanengans",
+      "scientificName": "Anser cygnoides",
+      "taxonID": 7014,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/schwanengans.heic",
+          "sha256": "73c1b49c07d10b89c37cdb36721710b1179b9d088b5dafb363ca3d582010255e",
+          "license": "CC-BY-4.0",
+          "attribution": "許慶棠Ray",
+          "sourceURL": "https://www.inaturalist.org/observations/261963473",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/schwanengans-2.heic",
+          "sha256": "d113275e166504db547f993870719f2e9104e12c5eb5e59c523371d85de5d202",
+          "license": "CC-BY-4.0",
+          "attribution": "Yi CHEN",
+          "sourceURL": "https://www.inaturalist.org/observations/38633189",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/schwanengans.m4a",
+          "sha256": "a04a72c5c685736e7fa131ba5efd4e775d4a444177676cb4232b657205426af9",
+          "text": "Schwanengans"
+        }
+      }
+    },
+    {
+      "id": "streifengans",
+      "name": "Streifengans",
+      "scientificName": "Anser indicus",
+      "taxonID": 7008,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/streifengans.heic",
+          "sha256": "4c4e4eef7558dad5619d1cc405b98310ff1e7697d26dde5903ae905faa0ee660",
+          "license": "CC0-1.0",
+          "attribution": "Dario Taraborelli",
+          "sourceURL": "https://www.inaturalist.org/observations/332648814",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": {
+        "file": "audio/streifengans.m4a",
+        "sha256": "5d8576d381dd85e748b91b21db661eb42cb60171242c2dbc588faff126ab51a0",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Pascal Christe (XC723229)",
+        "sourceURL": "https://xeno-canto.org/723229",
+        "retrieved": "2026-10-21"
+      },
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/streifengans.m4a",
+          "sha256": "daf105408984025c002d1d827ac9c7d609e33be3e2720a807ac2f68eec8b5af1",
+          "text": "Streifengans"
+        }
+      }
+    },
+    {
+      "id": "brahminenweih",
+      "name": "Brahminenweih",
+      "scientificName": "Haliastur indus",
+      "taxonID": 5406,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/brahminenweih.heic",
+          "sha256": "1d832cab03ba2890b0af2c52bfdcc497502f07aca8959de968d23465cb525e09",
+          "license": "CC-BY-4.0",
+          "attribution": "James H",
+          "sourceURL": "https://www.inaturalist.org/observations/383796909",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/brahminenweih.m4a",
+          "sha256": "c3889b7164fa7dddb146433ebf62c92e431017e092f152fcb50463d475fb9a52",
+          "text": "Brahminenweih"
+        }
+      }
+    },
+    {
+      "id": "rubinkehlchen",
+      "name": "Rubinkehlchen",
+      "scientificName": "Calliope calliope",
+      "taxonID": 145064,
+      "article": "das",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/rubinkehlchen.heic",
+          "sha256": "369c49e8d57ab683bde94cc171935e8c58df84dc1a6dec5dcb12ce39fb9c0efd",
+          "license": "CC-BY-4.0",
+          "attribution": "Griha Hasanov",
+          "sourceURL": "https://www.inaturalist.org/observations/80866856",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/rubinkehlchen-2.heic",
+          "sha256": "aad595d675e978fec656b1a2a11e4f7fbb16bb1761cd035525116f8fec565be9",
+          "license": "CC0-1.0",
+          "attribution": "Лариса Артемьева",
+          "sourceURL": "https://www.inaturalist.org/observations/375885645",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": {
+        "file": "audio/rubinkehlchen.m4a",
+        "sha256": "841f3a6d963b8923eb6782883f5118a5e8f1a59e760ee2f446edc36cfaa7a832",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "steve (XC1153478)",
+        "sourceURL": "https://xeno-canto.org/1153478",
+        "retrieved": "2026-10-21"
+      },
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/rubinkehlchen.m4a",
+          "sha256": "9a20eedaa03a60e989fe1de6e35779e8ece5c7c916f5f45ce88a969d82155faf",
+          "text": "Rubinkehlchen"
+        }
+      }
+    },
+    {
+      "id": "glanzkaefertaube",
+      "name": "Glanzkäfertaube",
+      "scientificName": "Chalcophaps indica",
+      "taxonID": 508097,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/glanzkaefertaube.heic",
+          "sha256": "a9829b7212c36d754b75ce61ee8cde89754f3db2031b68890dc98a22ee992c9a",
+          "license": "CC-BY-4.0",
+          "attribution": "ian_mcallan",
+          "sourceURL": "https://www.inaturalist.org/observations/207697305",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/glanzkaefertaube.m4a",
+          "sha256": "b898c1905a108c26f3975e69b4e70f5eb487e15890063a50440498905bca1466",
+          "text": "Glanzkäfertaube"
+        }
+      }
+    },
+    {
+      "id": "buntstorch",
+      "name": "Buntstorch",
+      "scientificName": "Mycteria leucocephala",
+      "taxonID": 4743,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/buntstorch.heic",
+          "sha256": "6383b5ec3858eb36722a0575f1a771e43c2e9e41ae6cc0edd1b257079423b4cb",
+          "license": "CC-BY-4.0",
+          "attribution": "Donald Davesne",
+          "sourceURL": "https://www.inaturalist.org/observations/142526539",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/buntstorch-2.heic",
+          "sha256": "da1eb4ed1da7ed4a9d6ef5f8dcdc9f3fbb100b3a4512d609e9458a903c66c862",
+          "license": "CC-BY-4.0",
+          "attribution": "Rejoice Gassah",
+          "sourceURL": "https://www.inaturalist.org/observations/242033181",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/buntstorch.m4a",
+          "sha256": "2ce7d5b8a1ee6ca59b89a24ae226a9456ee1242b0fc461d3f55a387dc98aa943",
+          "text": "Buntstorch"
+        }
+      }
+    },
+    {
+      "id": "japanbrillenvogel",
+      "name": "Japanbrillenvogel",
+      "scientificName": "Zosterops japonicus",
+      "taxonID": 980262,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/japanbrillenvogel.heic",
+          "sha256": "6a3b1e7b5283dc3ad0d219aae617b884db1f2ee724a6cbc2b86c3f835c071347",
+          "license": "CC-BY-4.0",
+          "attribution": "Corey Farwell",
+          "sourceURL": "https://www.inaturalist.org/observations/339527516",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": {
+        "file": "audio/japanbrillenvogel.m4a",
+        "sha256": "839475517ea18af529626ff148adbee4b9bcd5b337747221810113e3ccbbd34c",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Peter Wilton (XC176944)",
+        "sourceURL": "https://xeno-canto.org/176944",
+        "retrieved": "2026-10-21"
+      },
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/japanbrillenvogel.m4a",
+          "sha256": "051fcc14524e23239b097f893b0e4bd8c7683b4d4124e83df574812c67c73dc9",
+          "text": "Japanbrillenvogel"
+        }
+      }
+    }
+  ]
+}
