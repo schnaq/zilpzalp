@@ -149,12 +149,23 @@ infisical run --env=dev --path=/ -- mise run fetch-media speech render \
     --pack deutschland --sentence collection.name
 ```
 
+A pack's own title, which the collection picker says when a child taps the
+pack (#306) — one clip per pack, `speech/pack.title.m4a` under the manifest's
+own `speech`, its text the manifest's `title`. A render of a whole pack
+without `--species` includes it:
+
+```
+infisical run --env=dev --path=/ -- mise run fetch-media speech render \
+    --provider elevenlabs --voice AnvlJBAqSLDzEevYr9Ap=Ava \
+    --pack deutschland --sentence pack.title
+```
+
 Every run prints the number of characters it is about to render before it
 renders them, and refuses to go over `--max-chars` (30000 by default): the
 count is the price, and the cap is there for the run that was meant to be one
 bird.
 
-The voice becomes the manifest's `voice` block: „Stimme: Ava (ElevenLabs)",
+The voice becomes the manifest's `voice` block: „KI-Stimme: Ava (ElevenLabs)",
 CC BY 4.0, this document as the source. One manifest carries one voice, so
 rendering it again with a different `--voice` is refused rather than merged — a
 change of voice means re-rendering everything in that manifest (decision 7:
@@ -290,7 +301,7 @@ sample rate — `de-DE-Chirp3-HD-Aoede  Aoede  female, 24000 Hz`. Only de-DE
 Chirp 3 HD voices are listed; the endpoint answers with every family in every
 language, and a list nobody can read is not a list.
 
-The chosen voice becomes the manifest's `voice` block: „Stimme: <name> (Google
+The chosen voice becomes the manifest's `voice` block: „KI-Stimme: <name> (Google
 Cloud Text-to-Speech)", CC BY 4.0, this document as the source. One manifest
 carries one voice, so rendering a pack a second time with a different `--voice`
 is refused rather than merged — a change of voice means re-rendering everything
@@ -300,7 +311,7 @@ in that manifest (decision 7: the app does not mix voices).
 
 A recording made for this project is published under **CC BY 4.0**, like the
 photos and the calls, and `--attribution` is how the credits screen names the
-voice. On a render the adapter names it instead of `--attribution` — „Stimme:
+voice. On a render the adapter names it instead of `--attribution` — „KI-Stimme:
 Ava (ElevenLabs)" — under the same licence. The gate accepts
 CC0, CC BY and CC BY-SA and nothing else — a voice that cannot be published
 under one of them cannot ship.

@@ -325,6 +325,30 @@
         }
       }
     },
+    "credits.voice.by" : {
+      "comment" : "Under the voice in the credits, whose title already says it is an AI voice. %@ is the short name of its licence such as CC BY (#306)",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alle Ansagen · %@"
+          }
+        }
+      }
+    },
+    "credits.voices.title" : {
+      "comment" : "Heading of the credits section that names the voice the app speaks with (#306)",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stimme"
+          }
+        }
+      }
+    },
     "gate.hint.wrong" : {
       "comment" : "Shown under the parental gate's task after a wrong answer. Never a reprimand and never a lockout — the numbers have already changed",
       "extractionState" : "manual",
@@ -374,7 +398,7 @@
       }
     },
     "home.collection.change.accessibility" : {
-      "comment" : "VoiceOver label of the button on the home screen that opens the collection picker. %@ is the collection a child plays with right now",
+      "comment" : "VoiceOver label of the button on the home screen that opens the collection picker. %@ is the collection a child plays with right now, or the chosen packs as a list (#306)",
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
@@ -417,6 +441,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mehr Vögel, für Erwachsene"
+          }
+        }
+      }
+    },
+    "home.collection.several" : {
+      "comment" : "Text in the collection pill on the home screen when several packs are chosen (#306). %1$@ is the first pack's title, %2$lld how many more are chosen",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ +%2$lld"
           }
         }
       }
@@ -1117,26 +1153,62 @@
         }
       }
     },
-    "parents.speech.hint" : {
-      "comment" : "Hint under the switch that turns the spoken announcements off",
+    "parents.speech.automatic" : {
+      "comment" : "Speech mode, in the row and in the dialog: the app reads names, praise and headlines out on its own. The default (#306)",
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vogelnamen und Lob werden vorgelesen. Die Vogelrufe bleiben an."
+            "value" : "Automatisch vorlesen"
+          }
+        }
+      }
+    },
+    "parents.speech.hint" : {
+      "comment" : "Under the speech row in the grown-ups' area, after the generated sentence that says the voice is an AI voice: the bird calls are not affected (#306)",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die Vogelrufe bleiben an."
+          }
+        }
+      }
+    },
+    "parents.speech.message" : {
+      "comment" : "Explanation in the dialog that chooses the speech mode (#306)",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bei „Nur auf Knopfdruck“ spricht die App erst, wenn das Kind auf einen Lautsprecher tippt."
+          }
+        }
+      }
+    },
+    "parents.speech.onTap" : {
+      "comment" : "Speech mode, in the row and in the dialog: the app speaks only when the child taps a speaker button (#306)",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nur auf Knopfdruck"
           }
         }
       }
     },
     "parents.speech.title" : {
-      "comment" : "Row in the grown-ups' area: the switch for the spoken announcements",
+      "comment" : "Row in the grown-ups' area: when the app reads its sentences out loud, and the title of the dialog that chooses it (#306)",
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ansagen vorlesen"
+            "value" : "Vorlesen"
           }
         }
       }
@@ -1617,6 +1689,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Super gemacht!"
+          }
+        }
+      }
+    },
+    "speech.readAloud.accessibility" : {
+      "comment" : "VoiceOver label of the round speaker beside a headline, which reads it out loud (#306). %@ is what it reads",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vorlesen: %@"
+          }
+        }
+      }
+    },
+    "speech.voice.disclosure" : {
+      "comment" : "Says plainly that the voice is AI-generated, on the About screen and under the speech row (#306). %@ is the generated voice attribution from the credits, such as „KI-Stimme: Ava (ElevenLabs)“",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die Stimme ist eine %@."
           }
         }
       }

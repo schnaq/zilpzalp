@@ -247,15 +247,7 @@ struct ParentsScreen: View {
     private var rows: some View {
         ZCard(padding: 0) {
             VStack(spacing: 0) {
-                SettingRow(
-                    title: String(localized: "parents.speech.title"),
-                    hint: String(localized: "parents.speech.hint"),
-                    icon: .volume2,
-                    isOn: Binding(
-                        get: { parental.settings.speechEnabled },
-                        set: { parental.set(\.speechEnabled, to: $0) },
-                    ),
-                )
+                SpeechModeRow(parental: parental)
 
                 SettingRow(
                     title: String(localized: "parents.playtime.title"),

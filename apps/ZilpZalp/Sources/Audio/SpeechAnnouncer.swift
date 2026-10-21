@@ -17,32 +17,32 @@ import ZilpZalpData
 /// finished — all of them speak, because a child who cannot read and hears
 /// nothing has no task at all.
 ///
-/// Everything said out loud is one switch in the grown-ups' area (#231), and
-/// ``isEnabled`` is where every announcer reads it. The recorded calls are not:
-/// where there are calls, game 2 is there, and its question is one of them
-/// (#138).
+/// When the app speaks is one choice in the grown-ups' area (#306), and
+/// ``mode`` is where every announcer reads it: a line the app says on its own
+/// is said only in ``ZilpZalpData/SpeechMode/automatic``, a line a child tapped
+/// for always. The recorded calls are not speech: where there are calls, game
+/// 2 is there, and its question is one of them (#138).
 @MainActor
 final class SpeechAnnouncer: NSObject {
-    /// Whether the app is allowed to say anything at all —
-    /// ``ZilpZalpData/ParentalSettings/speechEnabled``, mirrored here.
+    /// When the app speaks — ``ZilpZalpData/ParentalSettings/speechMode``,
+    /// mirrored here.
     ///
     /// A static, and mirrored rather than read from the settings, for the
     /// reason ``AudioFocus`` is one: half a dozen screens build an announcer
     /// of their own, several of them far from anything that has ever heard of
-    /// the grown-ups' area — ``ReadAloudOnce`` inside a view modifier,
+    /// the grown-ups' area — ``ReadAloudButton`` beside a headline,
     /// ``QuizSession`` inside a round. Threading the settings through all of
-    /// them would be six parameters to carry one `Bool`.
+    /// them would be six parameters to carry one value.
     ///
     /// ``ParentalSettingsModel`` sets it: once when the file is read at
-    /// launch, and again on every change, which is what makes the switch
-    /// apply without a restart. Read per sentence, so a sentence already on
-    /// its way is not stopped — the next one simply does not start.
+    /// launch, and again on every change, which is what makes the choice
+    /// apply without a restart. Read per ``announce(_:unprompted:)``, so the
+    /// lines already on their way — the round end's praise and name — finish.
     ///
     /// Until that first read it stands where the settings stand — taken from
-    /// the defaults rather than written out as `true`, so the two cannot say
-    /// different things about a device that has never been to the grown-ups'
-    /// area.
-    static var isEnabled = ParentalSettings().speechEnabled
+    /// the defaults rather than written out, so the two cannot say different
+    /// things about a device that has never been to the grown-ups' area.
+    static var mode = ParentalSettings().speechMode
 
     /// A notch below the system default of 0.5. The default rattles the
     /// question off faster than a child who is still learning the names can
@@ -154,8 +154,13 @@ final class SpeechAnnouncer: NSObject {
     /// Speaks immediately and drops whatever was still running, so tapping the
     /// question again re-reads it instead of queueing a second reading behind
     /// the first.
-    func announce(_ line: SpokenLine) {
-        announce([line])
+    ///
+    /// - Parameter unprompted: `true` for a line the app says on its own — a
+    ///   headline on arrival, a new question, the praise — which ``mode``
+    ///   may keep quiet. A line a child tapped for is always said. No
+    ///   default: every caller says which of the two it is.
+    func announce(_ line: SpokenLine, unprompted: Bool) {
+        announce([line], unprompted: unprompted)
     }
 
     /// Says several lines one after the other with a short pause between
@@ -168,7 +173,15 @@ final class SpeechAnnouncer: NSObject {
     ///
     /// The queue is filled here and nowhere else, and only once the first line
     /// has actually started; ``stop()`` is the one other place that empties it.
-    func announce(_ lines: [SpokenLine]) {
+    func announce(_ lines: [SpokenLine], unprompted: Bool) {
+        // A line that is not to be said still ends this announcer's last one:
+        // the next question must not arrive under the name of the one before,
+        // which a child may have tapped for a moment ago.
+        guard Self.mode.speaks(unprompted: unprompted) else {
+            Logger.audio.debug("Staying silent until a speaker is tapped")
+            stop()
+            return
+        }
         pause?.cancel()
         pause = nil
         queuedLines = []
@@ -188,23 +201,12 @@ final class SpeechAnnouncer: NSObject {
             return false
         }
 
-        // Recording, synthesiser or nothing — decided in `ZilpZalpData`,
-        // where it can be asserted without a simulator, and decided here
-        // before anything is stopped or claimed: an announcer that is about
-        // to say nothing has no business taking the speaker off the one that
-        // is still speaking.
-        let decision = clips.decision(
-            for: line.key,
-            about: line.bird,
-            speechEnabled: Self.isEnabled,
-        )
-        guard decision != .silent else {
-            Logger.audio.debug("Staying silent, the announcements are switched off")
-            return false
-        }
+        // Recording or synthesiser — decided in `ZilpZalpData`, where it can
+        // be asserted without a simulator.
+        let decision = clips.decision(for: line.key, about: line.bird, pack: line.pack)
 
         // One sentence at a time across announcers, not only inside one.
-        // Every screen builds its own (see ``ReadAloudOnce``), and the quiz
+        // Every screen builds its own (see ``ReadAloudButton``), and the quiz
         // screen now has two of them at once: the round's, and the one the
         // question about leaving is said with (#146). Stopping only this
         // announcer would let the next question start under a sentence that
@@ -333,7 +335,8 @@ final class SpeechAnnouncer: NSObject {
         pause = Task { [weak self] in
             try? await Task.sleep(for: Self.pauseBetweenLines)
             guard !Task.isCancelled else { return }
-            self?.announce(rest)
+            // Already let through: the queue only exists for a line that was.
+            self?.announce(rest, unprompted: false)
         }
     }
 

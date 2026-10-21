@@ -42,8 +42,8 @@ public struct PackLibrary: Sendable {
     public let birds: [Bird]
 
     /// The packs behind the species, in the same order — what the credits and
-    /// the grown-ups' area name. One pack in a library ``narrowed(toPack:)``
-    /// handed back.
+    /// the grown-ups' area name. The chosen packs in a library
+    /// ``narrowed(toPacks:)`` handed back.
     public let packs: [Pack]
 
     /// - Parameter catalogs: the opened packs, most authoritative first.
@@ -71,7 +71,7 @@ public struct PackLibrary: Sendable {
     }
 
     /// A library that names fewer birds than the packs behind it hold. See
-    /// ``narrowed(toPack:)``, the only caller.
+    /// ``narrowed(toPacks:)``, the only caller.
     private init(_ catalogs: [PackCatalog], owners: [String: Int], birds: [Bird], packs: [Pack]) {
         self.catalogs = catalogs
         self.owners = owners
@@ -87,30 +87,33 @@ public struct PackLibrary: Sendable {
         try PackLibrary([PackCatalog.bundled()])
     }
 
-    /// This library with only one pack's species in it — what a child that
-    /// asked for „die Vögel aus Afrika" plays with (#187).
+    /// This library with only some packs' species in it — what a child that
+    /// asked for „die Vögel aus Afrika" plays with (#187), or for Africa and
+    /// Asia together (#306).
     ///
-    /// **Narrowed rather than rebuilt.** `PackLibrary([thatCatalog])` would be
+    /// **Narrowed rather than rebuilt.** `PackLibrary(thoseCatalogs)` would be
     /// the obvious way and the wrong one: the merge above keeps a species that
-    /// two manifests declare in the first pack that declared it, and a library
-    /// built from one catalog alone would answer for such a bird with media
-    /// the album and the round end — which read the merged library — do not
-    /// use. So the packs and the ownership stay exactly as they are, and only
-    /// the list of birds gets shorter. A bird `id` names is therefore the copy
-    /// of it this library already had, whichever pack that came from.
+    /// two manifests declare once, in the copy ``birds`` describes, and a
+    /// library built from fewer catalogs would answer for such a bird with
+    /// media the album and the round end — which read the merged library — do
+    /// not use. So the packs and the ownership stay exactly as they are, and
+    /// only the list of birds gets shorter. A species two of the chosen packs
+    /// declare is therefore listed once, and it is the copy the whole library
+    /// keeps — the one with a call where any pack has one.
     ///
-    /// - Parameter id: the pack, as its manifest spells its `id`.
-    /// - Returns: the narrowed library, `nil` when no pack here carries that
-    ///   id — a pack a grown-up has deleted since a child chose it.
-    public func narrowed(toPack id: String) -> PackLibrary? {
-        guard let index = catalogs.firstIndex(where: { $0.pack.id == id }) else { return nil }
+    /// - Parameter ids: the packs, as their manifests spell their `id`.
+    /// - Returns: the narrowed library, `nil` when no pack here carries any of
+    ///   those ids — packs a grown-up has deleted since a child chose them.
+    public func narrowed(toPacks ids: Set<String>) -> PackLibrary? {
+        let chosen = catalogs.filter { ids.contains($0.pack.id) }.map(\.pack)
+        guard !chosen.isEmpty else { return nil }
 
-        let declared = Set(catalogs[index].pack.birds.map(\.id))
+        let declared = Set(chosen.flatMap { $0.birds.map(\.id) })
         return PackLibrary(
             catalogs,
             owners: owners,
             birds: birds.filter { declared.contains($0.id) },
-            packs: [catalogs[index].pack],
+            packs: chosen,
         )
     }
 
@@ -139,6 +142,12 @@ public struct PackLibrary: Sendable {
     /// sentence with `AVSpeechSynthesizer` (#151).
     public func speechURL(for bird: Bird, sentence: String) -> URL? {
         catalog(for: bird)?.speechURL(for: bird, sentence: sentence)
+    }
+
+    /// The recorded clip for `sentence` about the pack `id` itself, `nil` when
+    /// no pack here has that id or it declares no such clip.
+    public func speechURL(forPack id: String, sentence: String) -> URL? {
+        catalogs.first { $0.pack.id == id }?.speechURL(sentence: sentence)
     }
 
     /// The pack `bird` came from.

@@ -66,7 +66,6 @@ struct TimeForTheNestScreen: View {
         // No swipe either, said rather than inherited (#150).
         .toolbar(.hidden, for: .navigationBar)
         .swipesBack(.disabled)
-        .readAloudOnce(.assembled(spoken))
     }
 
     private var column: some View {
@@ -75,9 +74,13 @@ struct TimeForTheNestScreen: View {
                 .foregroundStyle(ZColor.sun300)
                 .accessibilityHidden(true)
 
-            Text("timeBudget.title")
-                .typeStyle(isTight ? .display2 : .hero, .display, weight: .extraBold)
-                .foregroundStyle(ZColor.white)
+            HStack(spacing: ZSpacing.step3) {
+                Text("timeBudget.title")
+                    .typeStyle(isTight ? .display2 : .hero, .display, weight: .extraBold)
+                    .foregroundStyle(ZColor.white)
+
+                ReadAloudButton(line: .assembled(spoken))
+            }
 
             Text("timeBudget.farewell")
                 .typeStyle(isTight ? .bodyLarge : .headline, .display, weight: .bold)

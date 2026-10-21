@@ -258,6 +258,7 @@ def record_clip(
         target.bird_id,
         sentence,
         manifest.speech_block(file=relative, sha256=digest, text=text),
+        pack_level=target.pack_level,
     )
     manifest.save(target.path, document)
     remove_orphan(target.directory, target.label, previous, relative)
@@ -899,11 +900,19 @@ def speech_work(
         return document, [(target, key, sentences.fixed_text(key)) for key in chosen]
 
     document = manifest.load(manifest.manifest_path(str(pack)))
-    keys_to_do = chosen or list(sentences.SPECIES_SENTENCES)
-    work = []
-    for bird in selected_birds(document, species):
+    # By default the whole pack — its own sentences too, unless only some
+    # species were named: re-rendering one bird must not re-render the title.
+    keys = chosen or [*([] if species else sentences.PACK_SENTENCES), *sentences.SPECIES_SENTENCES]
+    # A pack sentence is said once for the pack, whichever species are named.
+    own = [key for key in keys if key in sentences.PACK_SENTENCES]
+    per_bird = [key for key in keys if key not in own]
+    work = [(clips.for_pack(str(pack)), key, sentences.pack_text(document, key)) for key in own]
+    # Resolved even when only pack sentences are named, so a misspelt species
+    # is refused rather than ignored.
+    birds = selected_birds(document, species)
+    for bird in birds if per_bird else []:
         target = clips.for_species(str(pack), str(bird["id"]))
-        work += [(target, key, sentences.species_text(bird, key)) for key in keys_to_do]
+        work += [(target, key, sentences.species_text(bird, key)) for key in per_bird]
     return document, work
 
 
@@ -1003,6 +1012,9 @@ def stored_clips(document: dict) -> list[tuple[str, str, dict]]:
     """Every clip a manifest names, as (whose, sentence, entry)."""
     lines = document.get(manifest.LINES_KIND) or {}
     found = [("fixed", sentence, entry) for sentence, entry in lines.items()]
+    # The pack's own — its title (#306), the shortest line it has.
+    own = document.get(manifest.SPEECH_KIND) or {}
+    found += [("pack", sentence, entry) for sentence, entry in own.items()]
     for bird in document.get("birds") or []:
         found += [
             (str(bird["id"]), sentence, entry)
@@ -1045,7 +1057,7 @@ def command_speech_check(args: argparse.Namespace) -> int:
 
 def command_speech_import(args: argparse.Namespace) -> int:
     """Record one take somebody made, through the same encoder as a call."""
-    if args.pack and not args.species:
+    if args.pack and not args.species and args.sentence not in sentences.PACK_SENTENCES:
         raise ValueError("--species names the bird this take is for")
 
     document, work = speech_work(
@@ -1275,7 +1287,8 @@ def build_parser() -> argparse.ArgumentParser:
     render.add_argument(
         "--sentence",
         nargs="+",
-        help="String Catalog keys; default for a pack: " + ", ".join(sentences.SPECIES_SENTENCES),
+        help="String Catalog keys; default for a pack: "
+        + ", ".join((*sentences.PACK_SENTENCES, *sentences.SPECIES_SENTENCES)),
     )
     render.add_argument(
         "--provider",

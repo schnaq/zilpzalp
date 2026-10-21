@@ -39,6 +39,18 @@ struct CreditsScreen: View {
     /// it gets one calm line instead of an error screen.
     private static let credits = try? Credits.bundled()
 
+    /// „Die Stimme ist eine KI-Stimme: Ava (ElevenLabs)." — the generated
+    /// attribution in a sentence, for the screens that say plainly what the
+    /// voice is (#306): About and the speech setting. Never typed by hand, for
+    /// the reason this screen gives; `nil` while nothing is recorded.
+    static var voiceDisclosure: String? {
+        guard let voices = credits?.distinctVoices, !voices.isEmpty else { return nil }
+        return String(
+            format: String(localized: "speech.voice.disclosure"),
+            voices.map(\.attribution).formatted(.list(type: .and)),
+        )
+    }
+
     @Environment(\.dismiss) private var dismiss
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
@@ -86,6 +98,13 @@ struct CreditsScreen: View {
                             ForEach(Array(pack.media.enumerated()), id: \.element) { index, entry in
                                 mediaRow(entry, showsSeparator: index != pack.media.count - 1)
                             }
+                        }
+                    }
+
+                    let voices = credits.distinctVoices
+                    if !voices.isEmpty {
+                        section(String(localized: "credits.voices.title")) {
+                            voiceRows(voices)
                         }
                     }
 
@@ -163,6 +182,26 @@ struct CreditsScreen: View {
             pendingLink = ExternalLink(url: entry.sourceURL)
         }
         .accessibilityHint(Text("link.web.accessibility"))
+    }
+
+    /// Who speaks — „KI-Stimme: Ava (ElevenLabs)" (#306). The attribution is
+    /// the manifests' own, generated like every line here; it says that the
+    /// voice is an AI voice because the render tool writes it so.
+    private func voiceRows(_ voices: [Credits.Voice]) -> some View {
+        ForEach(Array(voices.enumerated()), id: \.element) { index, voice in
+            SettingRow(
+                title: voice.attribution,
+                hint: String(
+                    format: String(localized: "credits.voice.by"),
+                    voice.license.shortName,
+                ),
+                icon: .volume2,
+                showsSeparator: index != voices.count - 1,
+            ) {
+                pendingLink = ExternalLink(url: voice.sourceURL)
+            }
+            .accessibilityHint(Text("link.web.accessibility"))
+        }
     }
 
     /// One row per media licence in use, opening its deed — the licence URI

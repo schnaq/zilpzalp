@@ -1,4 +1,5 @@
 import SwiftUI
+import ZilpZalpData
 import ZilpZalpUI
 
 /// Where every session starts: the headline, and one tile per game.
@@ -46,10 +47,15 @@ struct HomeScreen: View {
     /// (#262); empty only in the previews.
     let collections: [CollectionEntry]
 
-    /// The collection being played with, resolved. See ``CollectionChip``.
-    let chosenCollection: String?
+    /// The packs being played with, resolved; empty for „Alle Vögel". See
+    /// ``CollectionChip``.
+    let chosenCollections: Set<String>
 
+    /// A tapped entry of the picker, which toggles it (#306).
     let chooseCollection: (String?) -> Void
+
+    /// Where the picker finds each pack's recorded title (#306).
+    var library: PackLibrary = .empty
 
     /// The sticker album. Its own door at the foot of the screen, where every
     /// variant of the design puts it (`design/ui_kits/ipad_app/HomeScreen.jsx`
@@ -139,7 +145,8 @@ struct HomeScreen: View {
             if isPicking {
                 CollectionPicker(
                     entries: collections,
-                    chosen: chosenCollection,
+                    selection: chosenCollections,
+                    library: library,
                     choose: chooseCollection,
                     close: { isPicking = false },
                     addBirds: openParents,
@@ -162,8 +169,9 @@ struct HomeScreen: View {
             dismissPacksHint.map { PacksHint(open: openParents, dismiss: $0) }
             headline
 
-            if let chosen = collections.first(where: { $0.id == chosenCollection }) {
-                CollectionChip(entry: chosen) { isPicking = true }
+            let chosen = collections.filter { $0.isChosen(in: chosenCollections) }
+            if !chosen.isEmpty {
+                CollectionChip(entries: chosen) { isPicking = true }
             }
         }
     }
@@ -316,85 +324,4 @@ struct HomeScreen: View {
         let fitting = min(HomeTile.defaultSize, across, down).rounded(.down)
         return max(ZSpacing.touchMinimum, fitting)
     }
-}
-
-// MARK: - Previews
-
-/// Three packs on the device, so there is something to choose between.
-private let previewCollections = [
-    CollectionEntry(id: nil, title: "Alle Vögel", cover: nil),
-    CollectionEntry(id: "deutschland", title: "Vögel Deutschlands", cover: nil),
-    CollectionEntry(id: "afrika", title: "Vögel Afrikas", cover: nil),
-]
-
-#Preview("iPad landscape", traits: .fixedLayout(width: 1194, height: 834)) {
-    HomeScreen(
-        avatar: "feather",
-        games: [.names, .calls],
-        openGame: { _ in },
-        openParents: {},
-        openAbout: {},
-        openProfiles: {},
-        collections: previewCollections,
-        chosenCollection: "afrika",
-        chooseCollection: { _ in },
-        openCollection: {},
-    )
-    .environment(\.speciesPhotos, SpeciesPhotos((try? .bundled()) ?? .empty))
-    .environment(\.horizontalSizeClass, .regular)
-}
-
-#Preview("iPhone portrait", traits: .fixedLayout(width: 390, height: 844)) {
-    HomeScreen(
-        avatar: "feather",
-        games: [.names, .calls],
-        openGame: { _ in },
-        openParents: {},
-        openAbout: {},
-        openProfiles: {},
-        collections: previewCollections,
-        chosenCollection: nil,
-        chooseCollection: { _ in },
-        openCollection: {},
-    )
-    .environment(\.speciesPhotos, SpeciesPhotos((try? .bundled()) ?? .empty))
-    .environment(\.horizontalSizeClass, .compact)
-}
-
-// The bundled pack alone: nothing to choose between, and the screen as it was
-// before #187 — headline and tiles, and the tiles get every point of it.
-#Preview("One pack, no collections", traits: .fixedLayout(width: 390, height: 844)) {
-    HomeScreen(
-        avatar: "feather",
-        games: [.names, .calls],
-        openGame: { _ in },
-        openParents: {},
-        openAbout: {},
-        openProfiles: {},
-        collections: [],
-        chosenCollection: nil,
-        chooseCollection: { _ in },
-        openCollection: {},
-    )
-    .environment(\.speciesPhotos, SpeciesPhotos((try? .bundled()) ?? .empty))
-    .environment(\.horizontalSizeClass, .compact)
-}
-
-// What every device shows while no pack carries a call and until #32 curates
-// them: game 1 alone, in the whole space the pair had.
-#Preview("Without the calls", traits: .fixedLayout(width: 1194, height: 834)) {
-    HomeScreen(
-        avatar: "feather",
-        games: [.names],
-        openGame: { _ in },
-        openParents: {},
-        openAbout: {},
-        openProfiles: {},
-        collections: [],
-        chosenCollection: nil,
-        chooseCollection: { _ in },
-        openCollection: {},
-    )
-    .environment(\.speciesPhotos, SpeciesPhotos((try? .bundled()) ?? .empty))
-    .environment(\.horizontalSizeClass, .regular)
 }

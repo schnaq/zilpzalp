@@ -42,39 +42,46 @@ public struct SpeechClips: Sendable {
     ///     manifest and in the String Catalog.
     ///   - bird: The species the sentence is about, `nil` for a sentence that
     ///     belongs to none.
-    public func url(for sentence: String, about bird: Bird?) -> URL? {
-        guard let bird else { return fixed?.url(for: sentence) }
-        return library.speechURL(for: bird, sentence: sentence)
+    ///   - pack: The pack the sentence is about — its title — when it is
+    ///     about no species. `nil` for the fixed set.
+    public func url(for sentence: String, about bird: Bird?, pack: String? = nil) -> URL? {
+        if let bird {
+            return library.speechURL(for: bird, sentence: sentence)
+        }
+        if let pack {
+            return library.speechURL(forPack: pack, sentence: sentence)
+        }
+        return fixed?.url(for: sentence)
     }
 
     /// What is to become of a line the app was asked to say.
     ///
     /// The whole of the announcer's decision, in one place that can be
     /// asserted without a simulator — the reason this type lives here at all.
-    /// The switch comes first: a grown-up who turned the announcements off
-    /// (#231) turned off the recordings too, not only the synthesiser.
+    /// Whether the line is said at all is ``SpeechMode``'s question, asked
+    /// before this one.
     ///
     /// - Parameters:
     ///   - sentence: The sentence key, `nil` for a line the app puts together
     ///     at runtime, which no single recording says.
     ///   - bird: The species the sentence is about, `nil` for a sentence that
     ///     belongs to none.
-    ///   - speechEnabled: ``ParentalSettings/speechEnabled``.
+    ///   - pack: See ``url(for:about:pack:)``.
     public func decision(
         for sentence: String?,
         about bird: Bird?,
-        speechEnabled: Bool,
+        pack: String? = nil,
     ) -> SpeechDecision {
-        guard speechEnabled else { return .silent }
-        guard let sentence, let clip = url(for: sentence, about: bird) else { return .synthesise }
+        guard let sentence, let clip = url(for: sentence, about: bird, pack: pack) else {
+            return .synthesise
+        }
         return .clip(clip)
     }
 }
 
-/// What the app does with one line: play the recording of it, read it out, or
-/// say nothing at all.
+/// What the app does with one line: play the recording of it, or read it out.
 ///
-/// ``SpeechClips/decision(for:about:speechEnabled:)`` is where it is made;
+/// ``SpeechClips/decision(for:about:pack:)`` is where it is made;
 /// the announcer in the app target only carries it out. `.synthesise` is the
 /// ordinary case for a sentence nobody has recorded yet, never a failure — and
 /// a recording that will not open falls back to it in the announcer, where the
@@ -84,6 +91,4 @@ public enum SpeechDecision: Sendable, Equatable {
     case clip(URL)
     /// No recording says it, so the device reads the words out.
     case synthesise
-    /// The grown-ups switched the announcements off. Nothing sounds.
-    case silent
 }

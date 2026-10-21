@@ -59,14 +59,18 @@ struct ProfilePickerScreen: View {
             // cards and a nest fill an iPad row, a sixth starts a second one.
             ScrollView {
                 VStack(spacing: ZSpacing.step7) {
-                    Text("profile.picker.title")
-                        .typeStyle(
-                            isCompact ? .headline : .display1,
-                            .display,
-                            weight: .extraBold,
-                        )
-                        .foregroundStyle(ZColor.textStrong)
-                        .multilineTextAlignment(.center)
+                    HStack(spacing: ZSpacing.step3) {
+                        Text("profile.picker.title")
+                            .typeStyle(
+                                isCompact ? .headline : .display1,
+                                .display,
+                                weight: .extraBold,
+                            )
+                            .foregroundStyle(ZColor.textStrong)
+                            .multilineTextAlignment(.center)
+
+                        ReadAloudButton(line: .fixed("profile.picker.title"))
+                    }
 
                     cards
                 }
@@ -77,7 +81,6 @@ struct ProfilePickerScreen: View {
             }
         }
         .background(ZColor.surfacePage)
-        .readAloudOnce(.fixed("profile.picker.title"))
     }
 
     private var cards: some View {

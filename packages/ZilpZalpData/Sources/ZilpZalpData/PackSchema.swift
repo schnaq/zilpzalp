@@ -231,9 +231,13 @@ public struct Pack: Codable, Sendable, Hashable, Identifiable {
     public let id: String
     /// Product text shown to parents when they pick a pack.
     public let title: String
-    /// Who spoke the pack's ``Bird/speech`` clips. `nil` while it has none —
-    /// there is then nobody to credit.
+    /// Who spoke the pack's ``Bird/speech`` clips and its own ``speech``.
+    /// `nil` while it has none — there is then nobody to credit.
     public let voice: Voice?
+    /// Sentences about the pack itself rather than about one of its birds —
+    /// ``SpeechKey/packTitle``, its title spoken (#306). `nil` or empty while
+    /// nothing has been recorded; the app then reads the title out.
+    public let speech: [String: MediaClip]?
     public let birds: [Bird]
 }
 
@@ -252,8 +256,17 @@ extension Pack {
     /// the later mention in orders of their own, so a file named twice has to
     /// carry the same digest both times; `tools/license_gate.py` is what says
     /// so, by checking every mention against the file on disk.
+    /// The pack's own ``speech`` comes after the birds, in sentence-key order.
     var declaredFiles: [(file: String, sha256: String)] {
         var seen: Set<String> = []
-        return birds.flatMap(\.declaredFiles).filter { seen.insert($0.file).inserted }
+        let own = (speech ?? [:]).sorted { $0.key < $1.key }
+            .map { (file: $0.value.file, sha256: $0.value.sha256) }
+        return (birds.flatMap(\.declaredFiles) + own).filter { seen.insert($0.file).inserted }
+    }
+
+    /// Whether anything in the pack is a recorded sentence — and so needs a
+    /// ``voice`` to credit.
+    var hasSpeech: Bool {
+        !(speech ?? [:]).isEmpty || birds.contains { !($0.speech ?? [:]).isEmpty }
     }
 }

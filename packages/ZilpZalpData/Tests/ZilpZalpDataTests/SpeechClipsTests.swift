@@ -93,61 +93,45 @@ struct SpeechClipsTests {
         let praise = try #require(clips.url(for: "roundEnd.title", about: nil))
 
         let decisions = [("roundEnd.title", nil), (SpeechKey.speciesName, amsel)].map {
-            clips.decision(for: $0, about: $1, speechEnabled: true)
+            clips.decision(for: $0, about: $1)
         }
         #expect(decisions == [.clip(praise), .synthesise])
     }
 
-    // MARK: - The switch (#231)
-
-    /// The one thing the switch has to do: a recording that is right there on
-    /// disk is not played either. Off means silence, not "the synthesiser
-    /// instead of the recording".
-    @Test("the switch silences a sentence that has a recording")
-    func silencesARecordedSentence() throws {
-        let pack = try SpeechFixtures.speakingPack()
-        let clips = try SpeechClips(library: PackLibrary([pack]), fixed: SpeechFixtures.fixedSet())
-        let amsel = try #require(pack.pack.birds.first { $0.id == "amsel" })
-
-        #expect(clips.url(for: "quiz.prompt.whereIs", about: amsel) != nil)
-        #expect(
-            clips.decision(for: "quiz.prompt.whereIs", about: amsel, speechEnabled: false)
-                == .silent,
-        )
-    }
-
-    /// And the sentences that would have gone to the synthesiser — which is
-    /// every sentence the app ships with today.
-    @Test("the switch silences a sentence nobody recorded")
-    func silencesAnUnrecordedSentence() {
-        let clips = SpeechClips(library: .empty, fixed: nil)
-
-        #expect(clips.decision(for: "gate.spoken", about: nil, speechEnabled: false) == .silent)
-        #expect(clips.decision(for: nil, about: nil, speechEnabled: false) == .silent)
-    }
-
-    @Test("switched on, a recorded sentence is its recording")
-    func playsTheClipWhileSwitchedOn() throws {
+    @Test("a recorded sentence is its recording")
+    func playsTheClip() throws {
         let pack = try SpeechFixtures.speakingPack()
         let clips = try SpeechClips(library: PackLibrary([pack]), fixed: SpeechFixtures.fixedSet())
         let amsel = try #require(pack.pack.birds.first { $0.id == "amsel" })
 
         let expected = try #require(clips.url(for: "quiz.prompt.whereIs", about: amsel))
-        #expect(
-            clips.decision(for: "quiz.prompt.whereIs", about: amsel, speechEnabled: true)
-                == .clip(expected),
-        )
+        #expect(clips.decision(for: "quiz.prompt.whereIs", about: amsel) == .clip(expected))
     }
 
     /// Both halves of "no recording": a sentence nobody has recorded, and the
     /// assembled line that carries no key at all.
-    @Test("switched on, everything else is read out")
-    func synthesisesTheRestWhileSwitchedOn() {
+    @Test("everything else is read out")
+    func synthesisesTheRest() {
         let clips = SpeechClips(library: .empty, fixed: nil)
 
+        #expect(clips.decision(for: "gate.spoken", about: nil) == .synthesise)
+        #expect(clips.decision(for: nil, about: nil) == .synthesise)
+    }
+
+    // MARK: - A pack's own sentences (#306)
+
+    @Test("a pack's title is its own recording, and nobody else's")
+    func resolvesThePackTitle() throws {
+        let pack = try SpeechFixtures.speakingPack()
+        let clips = try SpeechClips(library: PackLibrary([pack]), fixed: SpeechFixtures.fixedSet())
+
+        let url = try #require(clips.url(for: SpeechKey.packTitle, about: nil, pack: "spricht"))
+        #expect(try sha256(of: url) == pack.pack.speech?[SpeechKey.packTitle]?.sha256)
+        #expect(clips.decision(for: SpeechKey.packTitle, about: nil, pack: "spricht") == .clip(url))
+        // Neither the fixed set nor a pack that is not here answers for it.
+        #expect(clips.url(for: SpeechKey.packTitle, about: nil) == nil)
         #expect(
-            clips.decision(for: "gate.spoken", about: nil, speechEnabled: true) == .synthesise,
+            clips.decision(for: SpeechKey.packTitle, about: nil, pack: "afrika") == .synthesise,
         )
-        #expect(clips.decision(for: nil, about: nil, speechEnabled: true) == .synthesise)
     }
 }

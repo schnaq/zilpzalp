@@ -41,9 +41,8 @@ enum SettingRowLayout: Equatable {
     ///     a caller that does not scale its type need not mention it.
     ///   - textWidth: What is left of the row once the icon has had its column.
     ///   - titleWidth: The title on one line.
-    ///   - trailingWidth: The value and its chevron. Zero on a switch row,
-    ///     whose switch is placed by `Toggle` and never by this layout — so a
-    ///     row without a trailing slot never takes a line for one.
+    ///   - trailingWidth: The value and its chevron. A row without a trailing
+    ///     slot — zero — never takes a line for one.
     ///   - spacing: The gap between title and trailing slot.
     static func choose(
         sizeClass: UserInterfaceSizeClass?,

@@ -70,11 +70,10 @@ struct SettingRowLayoutTests {
         ) == .columns)
     }
 
-    @Test("A switch row stacks without ever taking a line for its switch")
-    func aSwitchRowNeverTakesATrailingLine() {
-        // The trailing slot of a switch row is empty: `Toggle` places the
-        // switch, on the middle of the label. Whatever the width, there is
-        // nothing here to move onto a line of its own.
+    @Test("A row without a trailing slot never takes a line for it")
+    func anEmptyTrailingSlotNeverTakesALine() {
+        // Whatever the width, there is nothing here to move onto a line of
+        // its own.
         for width in [CGFloat(40), 256, 1000] {
             #expect(SettingRowLayout.choose(
                 sizeClass: .compact,

@@ -3,7 +3,7 @@
 /// "Kein Vorlesen und Ruf gleichzeitig" (#30). Neither sound maker can enforce
 /// that on its own, because there is no single announcer to route everything
 /// through: every screen that reads its headline builds one of its own (see
-/// ``ReadAloudOnce``) and ``QuizSession`` builds another. So the two agree on
+/// ``ReadAloudButton``) and ``QuizSession`` builds another. So the two agree on
 /// one place rather than on one owner.
 ///
 /// A call wins. It is what the child asked for by tapping, in game 2 it *is*

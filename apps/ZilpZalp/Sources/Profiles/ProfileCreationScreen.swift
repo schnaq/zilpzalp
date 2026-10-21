@@ -120,14 +120,18 @@ struct ProfileCreationScreen: View {
 
             ScrollView {
                 VStack(spacing: ZSpacing.step5) {
-                    Text("profile.create.title")
-                        .typeStyle(
-                            isCompact ? .headline : .display2,
-                            .display,
-                            weight: .extraBold,
-                        )
-                        .foregroundStyle(ZColor.textStrong)
-                        .multilineTextAlignment(.center)
+                    HStack(spacing: ZSpacing.step3) {
+                        Text("profile.create.title")
+                            .typeStyle(
+                                isCompact ? .headline : .display2,
+                                .display,
+                                weight: .extraBold,
+                            )
+                            .foregroundStyle(ZColor.textStrong)
+                            .multilineTextAlignment(.center)
+
+                        ReadAloudButton(line: .fixed("profile.create.title"))
+                    }
 
                     nameField
 
@@ -151,7 +155,6 @@ struct ProfileCreationScreen: View {
             .scrollDismissesKeyboard(.interactively)
         }
         .background(ZColor.surfacePage)
-        .readAloudOnce(.fixed("profile.create.title"))
         .onDisappear { announcer?.stop() }
     }
 
@@ -277,7 +280,7 @@ struct ProfileCreationScreen: View {
     private func say(_ line: SpokenLine) {
         let voice = announcer ?? SpeechAnnouncer(library: library)
         announcer = voice
-        voice.announce(line)
+        voice.announce(line, unprompted: false)
     }
 
     private func confirm() {

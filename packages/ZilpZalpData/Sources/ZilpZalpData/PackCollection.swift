@@ -1,7 +1,8 @@
 import Foundation
 
 /// One collection a child can choose between on the home screen: every bird on
-/// the device, or the birds of one pack (#187).
+/// the device, the birds of one pack (#187), or of several packs together
+/// (#306).
 ///
 /// Not the sticker album — that is `CollectionScreen` in the app and
 /// ``Profile/recognitions`` in this module. This is Christian's *Kollektion*:
@@ -9,14 +10,15 @@ import Foundation
 /// auswählen kann. Also entweder möchte ich die Vögel aus Deutschland, oder
 /// der Welt, Afrika, Australien, alle auf einmal, …"
 public struct PackCollection: Sendable {
-    /// The pack this collection is, `nil` for the one that holds every bird.
-    /// The value ``Profile/collection`` stores.
+    /// The pack this collection is, `nil` for every bird and for several
+    /// packs together. One of the values ``Profile/collections`` stores.
     public let id: String?
 
     /// The pack's own title from its manifest — „Vögel Afrikas".
     ///
     /// `nil` for every bird at once, whose name is product copy and therefore
-    /// the app's business: this module carries no German a child reads.
+    /// the app's business — this module carries no German a child reads — and
+    /// for a mix of packs, which has no one name.
     public let title: String?
 
     /// What a round drawn from this collection plays with.
@@ -81,15 +83,61 @@ public struct PackCollections: Sendable {
         entries.count > 1
     }
 
+    /// Which species carry a recording on disk, asked once when the
+    /// collections are built — see ``PackCollection/offersCalls``. Kept so a
+    /// mix of packs is counted without a `fileExists` per species per layout
+    /// pass.
+    private let calling: Set<String>
+
+    /// The packs of a stored choice that are on offer here — empty for every
+    /// bird.
+    ///
+    /// - Parameter stored: what ``Profile/collections`` stored.
+    /// - Returns: those of them that are entries here. A pack a grown-up has
+    ///   deleted since, or one too small to play, drops out silently: a child
+    ///   who has lost a pack is answered with birds, not with a message about
+    ///   a pack, and nothing here writes the profile.
+    public func selection(_ stored: [String]) -> Set<String> {
+        Set(stored).intersection(entries.compactMap(\.id))
+    }
+
     /// The collection a child plays with.
     ///
-    /// - Parameter id: what ``Profile/collection`` stored.
-    /// - Returns: the collection of that pack, or every bird — for `nil`, for a
-    ///   pack a grown-up has deleted since, and for one too small to play.
-    ///   Silently: a child who has lost a pack is answered with birds, not with
-    ///   a message about a pack, and nothing here writes the profile.
-    public func chosen(_ id: String?) -> PackCollection {
-        entries.first { $0.id == id } ?? everything
+    /// - Parameter stored: what ``Profile/collections`` stored.
+    /// - Returns: every bird when ``selection(_:)`` is empty, the one pack's
+    ///   collection when it names one, and the birds of all of them — each
+    ///   species once — when it names several.
+    public func chosen(_ stored: [String]) -> PackCollection {
+        let ids = selection(stored)
+        if ids.count == 1, let one = entries.first(where: { $0.id == ids.first }) {
+            return one
+        }
+        guard let library = everything.library.narrowed(toPacks: ids) else { return everything }
+        return PackCollection(
+            id: nil,
+            title: nil,
+            library: library,
+            cover: nil,
+            offersCalls: Self.offersCalls(library.birds, calling: calling),
+        )
+    }
+
+    /// The choice after a child tapped `id` in the picker (#306).
+    ///
+    /// A pack toggles: in if it was out, out if it was in. „Alle Vögel" —
+    /// `nil` — is every bird, so it clears the packs; and taking the last pack
+    /// out leaves nothing chosen, which is every bird too. Works on what was
+    /// stored rather than on ``selection(_:)``, so a deleted pack's id stays
+    /// standing until „Alle Vögel" is tapped, as ``Profile/collections`` asks.
+    ///
+    /// - Returns: the new choice, sorted, as ``Profile/collections`` keeps it.
+    public static func toggled(_ id: String?, in stored: [String]) -> [String] {
+        guard let id else { return [] }
+        return Set(stored).symmetricDifference([id]).sorted()
+    }
+
+    private static func offersCalls(_ birds: [Bird], calling: Set<String>) -> Bool {
+        birds.count { calling.contains($0.id) } >= minimumSpecies
     }
 
     /// - Parameter library: every pack that opened, merged — ``PackLibrary``.
@@ -100,20 +148,18 @@ public struct PackCollections: Sendable {
         // own pack — so asking per collection would ask about each of them
         // twice over.
         let calling = Set(library.birds.filter { library.callURL(for: $0) != nil }.map(\.id))
-        func offersCalls(_ birds: [Bird]) -> Bool {
-            birds.count { calling.contains($0.id) } >= Self.minimumSpecies
-        }
+        self.calling = calling
 
         everything = PackCollection(
             id: nil,
             title: nil,
             library: library,
             cover: nil,
-            offersCalls: offersCalls(library.birds),
+            offersCalls: Self.offersCalls(library.birds, calling: calling),
         )
 
         let packs = library.packs.compactMap { pack -> PackCollection? in
-            guard let narrowed = library.narrowed(toPack: pack.id),
+            guard let narrowed = library.narrowed(toPacks: [pack.id]),
                   narrowed.birds.count >= Self.minimumSpecies
             else {
                 return nil
@@ -130,7 +176,7 @@ public struct PackCollections: Sendable {
                 title: pack.title,
                 library: narrowed,
                 cover: narrowed.birds.first { $0.id == opens },
-                offersCalls: offersCalls(narrowed.birds),
+                offersCalls: Self.offersCalls(narrowed.birds, calling: calling),
             )
         }
 

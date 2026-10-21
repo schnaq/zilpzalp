@@ -25,6 +25,10 @@ struct SpokenLine: Sendable {
     /// this is half of what a clip is looked up by.
     let bird: Bird?
 
+    /// The pack the sentence is about, for a sentence about a pack itself —
+    /// its title (#306). `nil` everywhere else.
+    var pack: String?
+
     /// What the synthesiser says when there is no clip: the German, localised
     /// and with its placeholders already filled.
     let text: String
@@ -70,21 +74,22 @@ struct SpokenLine: Sendable {
         )
     }
 
-    /// A line no clip can say, and the reason ``key`` is optional at all.
+    /// A pack's title, „Vögel Afrikas" — what the collection picker says when
+    /// a child taps the pack (#306). Recorded once per pack under
+    /// ``ZilpZalpData/SpeechKey/packTitle`` and read out where nothing is.
+    static func packTitle(_ pack: String, title: String) -> SpokenLine {
+        SpokenLine(key: SpeechKey.packTitle, bird: nil, pack: pack, text: title)
+    }
+
+    /// A line no clip can say, and the reason ``key`` is optional at all: one
+    /// the app puts together at runtime. "Zeit fürs Nest! Heute hast du 7
+    /// Sterne gesammelt." is two catalog entries and a number.
     ///
-    /// Two kinds of sentence end up here. One the app puts together at
-    /// runtime: "Zeit fürs Nest! Heute hast du 7 Sterne gesammelt." is two
-    /// catalog entries and a number. And a pack's own title — „Vögel Afrikas",
-    /// said when its picture is tapped in the collection picker (#187): a pack
-    /// records sentences about its species, never its own name, so the words
-    /// come from the manifest and the synthesiser says them.
-    ///
-    /// It carries no key —
-    /// the plan's `SpokenLine` has a plain `String` there and no such case.
-    /// Decision 4 of the recorded-speech plan is whether the sentence is
-    /// reworded so that one clip could say it; until that is answered this line
-    /// always lands on the synthesiser, which is exactly where it landed
-    /// before.
+    /// It carries no key — the plan's `SpokenLine` has a plain `String` there
+    /// and no such case. Decision 4 of the recorded-speech plan is whether the
+    /// sentence is reworded so that one clip could say it; until that is
+    /// answered this line always lands on the synthesiser, which is exactly
+    /// where it landed before.
     static func assembled(_ text: String) -> SpokenLine {
         SpokenLine(key: nil, bird: nil, text: text)
     }

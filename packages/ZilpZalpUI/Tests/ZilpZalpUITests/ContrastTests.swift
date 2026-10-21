@@ -114,6 +114,22 @@ extension ContrastPair {
             background: ZColor.orange200,
             minimum: WCAG.largeText,
         ),
+        // The speaker beside every headline a screen reads out (#306) — the
+        // one control a child must find where the app speaks only on a tap.
+        ContrastPair(
+            name: "IconButton .accent glyph",
+            foreground: ZColor.textOnColor,
+            background: ZColor.accent,
+            minimum: WCAG.largeText,
+        ),
+        // The settings row's glyph, now that a choice of two replaced the
+        // switch whose off state fell under 3:1 on the card (#306).
+        ContrastPair(
+            name: "SettingRow icon on a card",
+            foreground: ZColor.olive600,
+            background: ZColor.surfaceCard,
+            minimum: WCAG.largeText,
+        ),
     ]
 
     /// `HomeTile.Tone.palette` — foreground on background. The label follows
@@ -304,6 +320,13 @@ extension ContrastPair {
         ContrastPair(
             name: "RewardSticker caption on a card",
             foreground: ZColor.textStrong,
+            background: ZColor.surfaceCard,
+        ),
+        // `caption` 16 pt for the hint, `body` 20 pt for the value and its
+        // chevron: normal text either way.
+        ContrastPair(
+            name: "SettingRow hint, value and chevron (muted on a card)",
+            foreground: ZColor.textMuted,
             background: ZColor.surfaceCard,
         ),
         ContrastPair(

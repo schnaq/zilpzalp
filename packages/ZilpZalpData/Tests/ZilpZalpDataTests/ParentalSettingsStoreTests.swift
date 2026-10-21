@@ -27,9 +27,9 @@ struct ParentalSettingsStoreTests {
             let settings = try await store.load()
 
             #expect(settings.dailyLimitMinutes == nil)
-            // Spoken, not silent: without the voice a child who cannot read
+            // Spoken on its own: without the voice a child who cannot read
             // has no task in game 1 (#231).
-            #expect(settings.speechEnabled)
+            #expect(settings.speechMode == .automatic)
         }
     }
 
@@ -45,7 +45,7 @@ struct ParentalSettingsStoreTests {
     @Test("what was saved comes back")
     func roundTripsEveryField() async throws {
         try await withTemporaryStore { store, _ in
-            let saved = ParentalSettings(dailyLimitMinutes: 30, speechEnabled: false)
+            let saved = ParentalSettings(dailyLimitMinutes: 30, speechMode: .onTap)
             try await store.save(saved)
 
             #expect(try await store.load() == saved)
@@ -98,7 +98,7 @@ struct ParentalSettingsStoreTests {
             try await store.save(ParentalSettings(dailyLimitMinutes: 15))
 
             let written = try String(contentsOf: settingsFile(under: root), encoding: .utf8)
-            let positions = try ["dailyLimitMinutes", "schemaVersion", "speechEnabled"]
+            let positions = try ["dailyLimitMinutes", "schemaVersion", "speechMode"]
                 .map { try #require(written.range(of: "\"\($0)\"")).lowerBound }
             #expect(positions == positions.sorted())
         }
@@ -223,28 +223,64 @@ struct ParentalSettingsStoreTests {
             try write(#"{"schemaVersion": 1, "dailyLimitMinutes": 30}"#, to: root)
 
             #expect(try await store.load() == ParentalSettings(dailyLimitMinutes: 30))
-            #expect(try await store.load().speechEnabled)
+            #expect(try await store.load().speechMode == .automatic)
         }
     }
 
-    @Test("a file that switches the announcements off reads as off")
-    func readsTheSpeechSwitchOff() async throws {
+    /// #306 took the silent choice away. A grown-up who switched the voice off
+    /// asked for quiet, and the quietest choice left is a speaker to tap.
+    @Test("a file from before #306 keeps its switch as the nearest mode")
+    func migratesTheSpeechSwitch() async throws {
         try await withTemporaryStore { store, root in
             try write(#"{"schemaVersion": 1, "speechEnabled": false}"#, to: root)
+            #expect(try await store.load().speechMode == .onTap)
 
-            #expect(try await !store.load().speechEnabled)
+            try write(#"{"schemaVersion": 1, "speechEnabled": true}"#, to: root)
+            #expect(try await store.load().speechMode == .automatic)
         }
+    }
+
+    @Test("a mode this build does not know keeps the rest of the file")
+    func readsAnUnknownMode() async throws {
+        try await withTemporaryStore { store, root in
+            try write(
+                #"{"schemaVersion": 1, "dailyLimitMinutes": 30, "speechMode": "whisper"}"#,
+                to: root,
+            )
+
+            #expect(try await store.load() == ParentalSettings(dailyLimitMinutes: 30))
+        }
+    }
+
+    @Test("the mode is written and the old switch is not")
+    func writesTheModeOnly() async throws {
+        try await withTemporaryStore { store, root in
+            try write(#"{"schemaVersion": 1, "speechEnabled": false}"#, to: root)
+            try await store.save(store.load())
+
+            let written = try String(contentsOf: settingsFile(under: root), encoding: .utf8)
+            #expect(written.contains("\"speechMode\" : \"onTap\""))
+            #expect(!written.contains("speechEnabled"))
+        }
+    }
+
+    @Test("a tapped line always speaks, an unprompted one only in automatic mode")
+    func speaksByMode() {
+        #expect(SpeechMode.automatic.speaks(unprompted: true))
+        #expect(SpeechMode.automatic.speaks(unprompted: false))
+        #expect(!SpeechMode.onTap.speaks(unprompted: true))
+        #expect(SpeechMode.onTap.speaks(unprompted: false))
     }
 
     /// Stated in the file at its default too, for the same reason "no limit"
     /// is: a grown-up reading the file sees the setting and where it stands.
-    @Test("the speech switch is written even where it stands at its default")
+    @Test("the speech mode is written even where it stands at its default")
     func writesTheSpeechSwitchAtItsDefault() async throws {
         try await withTemporaryStore { store, root in
             try await store.save(ParentalSettings())
 
             let written = try String(contentsOf: settingsFile(under: root), encoding: .utf8)
-            #expect(written.contains("\"speechEnabled\" : true"))
+            #expect(written.contains("\"speechMode\" : \"automatic\""))
         }
     }
 

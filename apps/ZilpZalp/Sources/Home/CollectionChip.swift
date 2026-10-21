@@ -7,9 +7,11 @@ import ZilpZalpUI
 /// A picture and a word in a pill, 64 pt tall: the photo is what a child who
 /// cannot read recognises its collection by, the word is for the grown-up
 /// looking over the shoulder, and the chevron says that there is more behind
-/// it. It sits between the headline and the game tiles because the collection
-/// is what the games below ask about — not among the doors at the foot of the
-/// screen, which lead elsewhere.
+/// it. Several packs chosen (#306) are several photos, stacked like stickers
+/// on a pile, so the choice reads as "these" without a word. It sits between
+/// the headline and the game tiles because the collection is what the games
+/// below ask about — not among the doors at the foot of the screen, which
+/// lead elsewhere.
 ///
 /// **One pill rather than a row of collections.** Five collections need
 /// 480 pt at the 96 pt a disc wants; a 390 pt phone leaves 294 pt inside its
@@ -20,10 +22,17 @@ struct CollectionChip: View {
     /// The bird whose photo rides in the pill.
     private static let discDiameter: CGFloat = 48
 
-    /// The collection being played with right now — never the stored choice,
-    /// always the resolved one, so a deleted pack shows „Alle Vögel" here and
-    /// asks for „Alle Vögel" in the round.
-    let entry: CollectionEntry
+    /// How much of the disc before it each stacked disc leaves showing: a
+    /// half, enough to count them across a table.
+    private static let stackStep: CGFloat = discDiameter / 2
+
+    /// At most this many discs stand in the pile; the title says the rest.
+    private static let stackLimit = 3
+
+    /// The collections being played with right now, in picker order — never
+    /// the stored choice, always the resolved one, so a deleted pack is not
+    /// shown here and is not asked for in the round. Never empty.
+    let entries: [CollectionEntry]
 
     let openPicker: () -> Void
 
@@ -34,14 +43,19 @@ struct CollectionChip: View {
                 // tilt is what a sticker in an album wears, and this is a
                 // pill. Without a photo — „Alle Vögel" — it is the glyph on
                 // its sun disc, which is exactly what the picker shows.
-                RewardSticker(
-                    image: entry.cover,
-                    icon: .bird,
-                    rotation: .zero,
-                    size: Self.discDiameter,
-                )
+                ZStack(alignment: .leading) {
+                    ForEach(pile, id: \.offset) { index, entry in
+                        RewardSticker(
+                            image: entry.cover,
+                            icon: .bird,
+                            rotation: .zero,
+                            size: Self.discDiameter,
+                        )
+                        .padding(.leading, CGFloat(index) * Self.stackStep)
+                    }
+                }
 
-                Text(verbatim: entry.title)
+                Text(verbatim: title)
                     .typeStyle(.label, .display, weight: .bold, singleLine: true)
                     .foregroundStyle(ZColor.textStrong)
                     // „Vögel Deutschlands" is the longest title the packs
@@ -64,20 +78,39 @@ struct CollectionChip: View {
         .accessibilityLabel(
             String(
                 format: String(localized: "home.collection.change.accessibility"),
-                entry.title,
+                entries.map(\.title).formatted(.list(type: .and)),
             ),
+        )
+    }
+
+    /// The discs of the pile, the first at the bottom left.
+    private var pile: [(offset: Int, element: CollectionEntry)] {
+        Array(entries.prefix(Self.stackLimit).enumerated())
+    }
+
+    /// One title, or the first and how many more: „Vögel Afrikas +2". Every
+    /// title would not fit the pill, and the grown-up who reads it can open
+    /// the picker for the rest.
+    private var title: String {
+        guard entries.count > 1 else { return entries.first?.title ?? "" }
+        return String(
+            format: String(localized: "home.collection.several"),
+            entries[0].title,
+            entries.count - 1,
         )
     }
 }
 
-#Preview("With a photo and without one") {
+#Preview("Every bird, and several packs") {
     VStack(spacing: ZSpacing.step5) {
         CollectionChip(
-            entry: CollectionEntry(id: nil, title: "Alle Vögel", cover: nil),
+            entries: [.preview(nil, "Alle Vögel")],
             openPicker: {},
         )
         CollectionChip(
-            entry: CollectionEntry(id: "deutschland", title: "Vögel Deutschlands", cover: nil),
+            entries: ["Vögel Deutschlands", "Vögel Afrikas", "Asien", "Polar & Meer"].map {
+                .preview($0, $0)
+            },
             openPicker: {},
         )
     }

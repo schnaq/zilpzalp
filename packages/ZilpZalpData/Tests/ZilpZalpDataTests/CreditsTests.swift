@@ -100,6 +100,28 @@ struct CreditsTests {
         #expect(credits.voices.first?.usedIn == "Ansagen")
     }
 
+    /// One voice speaks every pack, and the screen names it once (#306).
+    @Test("a voice credited for several manifests is one distinct voice")
+    func namesEachVoiceOnce() throws {
+        func voice(_ attribution: String, _ usedIn: String) -> String {
+            """
+            {"attribution": "\(attribution)", "license": "CC-BY-4.0",
+             "sourceURL": "https://example.org/a.md", "usedIn": "\(usedIn)"}
+            """
+        }
+        let voices = [
+            voice("KI-Stimme: Ava", "Vögel Afrikas"),
+            voice("Stimme: Johanna", "Ansagen"),
+            voice("KI-Stimme: Ava", "Ansagen"),
+        ].joined(separator: ",")
+        let document = #"{"media": [], "voices": [\#(voices)], "fonts": [], "icons": []}"#
+
+        let credits = try JSONDecoder().decode(Credits.self, from: Data(document.utf8))
+
+        #expect(credits.distinctVoices.map(\.attribution) == ["KI-Stimme: Ava", "Stimme: Johanna"])
+        #expect(credits.distinctVoices.first?.usedIn == "Vögel Afrikas")
+    }
+
     /// The fonts and Lucide are in no manifest — they come from the static
     /// lists in the generator. An empty section means that wiring broke.
     ///

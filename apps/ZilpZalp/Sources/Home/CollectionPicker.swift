@@ -1,4 +1,5 @@
 import SwiftUI
+import ZilpZalpData
 import ZilpZalpUI
 
 /// „Welche Vögel?" — the collections, on a card over the dimmed home screen
@@ -11,8 +12,14 @@ import ZilpZalpUI
 /// ``QuitConfirmation`` gives: what the choice is *for* stays visible behind
 /// it, and a child who did not mean to open this gets out by tapping anywhere.
 /// Every entry is a round photo with the collection's name under it — the
-/// album's own shapes, at the album's own sizes — and the chosen one carries a
-/// ring **and** a check, never colour alone.
+/// album's own shapes, at the album's own sizes — and every chosen one carries
+/// a ring **and** a check, never colour alone.
+///
+/// **Several packs at once** (#306). A tap on a pack puts it in or takes it
+/// out, „Alle Vögel" clears the packs, and taking the last pack out leaves
+/// „Alle Vögel" chosen — see ``PackCollections/toggled(_:in:)``. A child who
+/// cannot read sees the choice as checks: one on every chosen sticker, and as
+/// many stacked stickers on the home screen's pill.
 ///
 /// **A tap chooses at once and leaves the card standing.** There is nothing to
 /// confirm and therefore no way to cancel: the choice is already made, so a
@@ -38,9 +45,13 @@ struct CollectionPicker: View {
     /// What there is to choose between, „Alle Vögel" first.
     let entries: [CollectionEntry]
 
-    /// The collection being played with, resolved — see ``CollectionChip``.
-    let chosen: String?
+    /// The packs being played with, resolved; empty for „Alle Vögel".
+    let selection: Set<String>
 
+    /// Where a tapped pack's recorded title is looked up (#306).
+    let library: PackLibrary
+
+    /// A tapped entry, which toggles it.
     let choose: (String?) -> Void
 
     /// Back to the games. The pill and a tap beside the card both do this.
@@ -58,7 +69,7 @@ struct CollectionPicker: View {
     /// two can never talk over each other — the second tap cuts the first one
     /// off, which is what `CollectionScreen` relies on too.
     ///
-    /// That is also why the question is not `readAloudOnce`: that modifier
+    /// That is also why the question has no ``ReadAloudButton``: that one
     /// brings an announcer of its own, and it would still be saying „Welche
     /// Vögel?" while this one says „Vögel Afrikas".
     ///
@@ -70,7 +81,7 @@ struct CollectionPicker: View {
     @State private var announcer: SpeechAnnouncer?
 
     /// `onAppear` can fire more than once for one arrival, so the flag is what
-    /// makes "once" true — the same guard `ReadAloudOnce` keeps.
+    /// makes "once" true — the same guard `ReadAloudButton` keeps.
     @State private var hasAsked = false
 
     private var isCompact: Bool {
@@ -97,7 +108,7 @@ struct CollectionPicker: View {
         .onAppear {
             guard !hasAsked else { return }
             hasAsked = true
-            say(.fixed("home.collection.title"))
+            say(Self.question, unprompted: true)
         }
         .onDisappear { announcer?.stop() }
     }
@@ -105,10 +116,17 @@ struct CollectionPicker: View {
     private var card: some View {
         ZCard(padding: isCompact ? ZSpacing.step5 : ZSpacing.step6) {
             VStack(spacing: isCompact ? ZSpacing.step5 : ZSpacing.step6) {
-                Text("home.collection.title")
-                    .typeStyle(isCompact ? .headline : .title, .display, weight: .extraBold)
-                    .foregroundStyle(ZColor.textStrong)
-                    .multilineTextAlignment(.center)
+                HStack(spacing: ZSpacing.step3) {
+                    Text("home.collection.title")
+                        .typeStyle(isCompact ? .headline : .title, .display, weight: .extraBold)
+                        .foregroundStyle(ZColor.textStrong)
+                        .multilineTextAlignment(.center)
+
+                    // Not a ``ReadAloudButton``: that brings an announcer of
+                    // its own, and the question and the packs share this one.
+                    SpeakerButton(text: Self.question.text) { say(Self.question, unprompted: false)
+                    }
+                }
 
                 collections
 
@@ -185,14 +203,14 @@ struct CollectionPicker: View {
         .accessibilityLabel(String(localized: "home.collection.more.accessibility"))
     }
 
-    /// One collection: its bird, its name, and — while it is the chosen one —
-    /// the rim, the check and a little more size than the others.
+    /// One collection: its bird, its name, and — while it is chosen — the
+    /// rim, the check and a little more size than the others.
     private func sticker(_ entry: CollectionEntry) -> some View {
-        let isChosen = entry.id == chosen
+        let isChosen = entry.isChosen(in: selection)
 
         return Button {
             choose(entry.id)
-            say(entry.spoken)
+            say(entry.spoken, unprompted: false)
         } label: {
             StickerCaption(caption: entry.title, earned: true) {
                 RewardSticker(
@@ -215,29 +233,34 @@ struct CollectionPicker: View {
         .accessibilityAddTraits(isChosen ? .isSelected : [])
     }
 
+    /// „Welche Vögel?", shown and said.
+    private static let question = SpokenLine.fixed("home.collection.title")
+
     /// Says one line, building the announcer the first time something speaks.
     /// Kept afterwards, so the next line cuts this one off instead of talking
-    /// over it — the album's ``CollectionScreen`` does it the same way.
-    private func say(_ line: SpokenLine) {
-        let voice = announcer ?? SpeechAnnouncer()
+    /// over it — the album's ``CollectionScreen`` does it the same way. With
+    /// the packs, so a pack's recorded title is found (#306).
+    private func say(_ line: SpokenLine, unprompted: Bool) {
+        let voice = announcer ?? SpeechAnnouncer(library: library)
         announcer = voice
-        voice.announce(line)
+        voice.announce(line, unprompted: unprompted)
     }
 }
 
 // MARK: - Previews
 
-private let previewEntries = [
-    CollectionEntry(id: nil, title: "Alle Vögel", cover: nil),
-    CollectionEntry(id: "deutschland", title: "Vögel Deutschlands", cover: nil),
-    CollectionEntry(id: "welt", title: "Vögel der Welt", cover: nil),
-    CollectionEntry(id: "afrika", title: "Vögel Afrikas", cover: nil),
+private let previewEntries: [CollectionEntry] = [
+    .preview(nil, "Alle Vögel"),
+    .preview("deutschland", "Vögel Deutschlands"),
+    .preview("welt", "Vögel der Welt"),
+    .preview("afrika", "Vögel Afrikas"),
 ]
 
 #Preview("iPhone portrait", traits: .fixedLayout(width: 390, height: 844)) {
     CollectionPicker(
         entries: previewEntries,
-        chosen: "afrika",
+        selection: ["afrika", "welt"],
+        library: .empty,
         choose: { _ in },
         close: {},
         addBirds: {},
@@ -248,7 +271,8 @@ private let previewEntries = [
 #Preview("iPad", traits: .fixedLayout(width: 1194, height: 834)) {
     CollectionPicker(
         entries: previewEntries,
-        chosen: nil,
+        selection: [],
+        library: .empty,
         choose: { _ in },
         close: {},
         addBirds: {},

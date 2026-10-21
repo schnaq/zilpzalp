@@ -260,6 +260,14 @@ class SetSpeechTests(unittest.TestCase):
 
         self.assertEqual(list(fixed["lines"]), ["roundEnd.title"])
 
+    def test_puts_a_pack_sentence_beside_the_birds(self) -> None:
+        pack = document()
+
+        manifest.set_speech(pack, None, "pack.title", self.clip(), pack_level=True)
+
+        self.assertEqual(list(pack["speech"]), ["pack.title"])
+        self.assertNotIn("lines", pack)
+
     def test_reports_the_recording_it_replaced(self) -> None:
         pack = document()
         manifest.set_speech(pack, "amsel", "collection.name", self.clip())

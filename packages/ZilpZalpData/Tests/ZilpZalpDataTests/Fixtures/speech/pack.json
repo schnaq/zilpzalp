@@ -7,6 +7,13 @@
     "sourceURL": "https://example.org/docs/sprachaufnahmen.md",
     "retrieved": "2026-09-09"
   },
+  "speech": {
+    "pack.title": {
+      "file": "clips/silence.m4a",
+      "sha256": "ea4ca100e771dd55182921eac8665571baeb22644fd18dab1f4a7612b7acaff3",
+      "text": "Ein Paket, das spricht"
+    }
+  },
   "birds": [
     {
       "id": "amsel",

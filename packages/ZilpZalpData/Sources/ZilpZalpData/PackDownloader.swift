@@ -289,7 +289,7 @@ public actor PackDownloader {
         } catch {
             throw PackDownloadError.manifestInvalid(packID: packID, reason: "\(error)")
         }
-        guard pack.voice != nil || pack.birds.allSatisfy({ $0.speech?.isEmpty ?? true }) else {
+        guard pack.voice != nil || !pack.hasSpeech else {
             // A photo and a call carry their licence in their own fields and
             // cannot decode without one; a clip's licence is the manifest's
             // voice. Without it the pack would install recordings nobody may

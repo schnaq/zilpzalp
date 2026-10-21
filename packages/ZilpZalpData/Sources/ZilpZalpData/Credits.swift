@@ -78,6 +78,18 @@ public struct Credits: Codable, Sendable, Hashable {
     /// Packs sorted by id, the fixed sentences last. Empty until something has
     /// been recorded.
     public let voices: [Voice]
+
+    /// Each voice once, in ``voices`` order — what a screen names (#306). The
+    /// generator credits a voice per manifest, and one voice speaks them all.
+    /// Keyed on who spoke, under which licence and from which source — never
+    /// on which pack, so every source a licence asks for keeps its row.
+    public var distinctVoices: [Voice] {
+        var seen: Set<[String]> = []
+        return voices.filter {
+            seen.insert([$0.attribution, $0.license.rawValue, $0.sourceURL.absoluteString]).inserted
+        }
+    }
+
     public let fonts: [Vendored]
     public let icons: [Vendored]
 
