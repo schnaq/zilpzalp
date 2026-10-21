@@ -1,0 +1,886 @@
+{
+  "id": "feld-wiese",
+  "title": "Feld, Wiese & Zugvögel",
+  "voice": {
+    "license": "CC-BY-4.0",
+    "attribution": "Stimme: Ava (ElevenLabs)",
+    "sourceURL": "https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md",
+    "retrieved": "2026-10-21"
+  },
+  "birds": [
+    {
+      "id": "rebhuhn",
+      "name": "Rebhuhn",
+      "scientificName": "Perdix perdix",
+      "taxonID": 831,
+      "article": "das",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/rebhuhn.heic",
+          "sha256": "f18f7e3af38a9a2ca63c26376b24ee044cacb7be219497fc4bca79f0e2b8e988",
+          "license": "CC-BY-4.0",
+          "attribution": "Вячеслав Юсупов",
+          "sourceURL": "https://www.inaturalist.org/observations/102817431",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/rebhuhn-2.heic",
+          "sha256": "77a8e52dbf610e819dca1ec55009c20d7b582dc4b0e084290341f1e821815453",
+          "license": "CC-BY-4.0",
+          "attribution": "Christoph Moning",
+          "sourceURL": "https://www.inaturalist.org/observations/194507479",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/rebhuhn.m4a",
+          "sha256": "52d276d9fbc117dafd1033dd8eed981fdc23cd9b6dbe1772e5137b50dc81ff5d",
+          "text": "Rebhuhn"
+        }
+      }
+    },
+    {
+      "id": "blaukehlchen",
+      "name": "Blaukehlchen",
+      "scientificName": "Luscinia svecica",
+      "taxonID": 13071,
+      "article": "das",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/blaukehlchen.heic",
+          "sha256": "ae8b65b43f10a5ce0c11ee78489ea6d10a3d28e5d43a0118ed4b3af3561788cc",
+          "license": "CC-BY-4.0",
+          "attribution": "Юлия",
+          "sourceURL": "https://www.inaturalist.org/observations/78230335",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/blaukehlchen.m4a",
+          "sha256": "8c5a2a3ae1b4f9fbfdf9e45b09465e02157ffbb1c6a24d6fc97b9a8050eba9e5",
+          "text": "Blaukehlchen"
+        }
+      }
+    },
+    {
+      "id": "schwarzkehlchen",
+      "name": "Schwarzkehlchen",
+      "scientificName": "Saxicola rubicola",
+      "taxonID": 201192,
+      "article": "das",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/schwarzkehlchen.heic",
+          "sha256": "ab209b6a21fb5aa83bfcdf5e74e78eddbfe11ee4c7db28646c292e865c959927",
+          "license": "CC-BY-4.0",
+          "attribution": "Donald Davesne",
+          "sourceURL": "https://www.inaturalist.org/observations/357856938",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/schwarzkehlchen.m4a",
+          "sha256": "77f7a39994036bb62cdc97ef4e551f365e6dc99a4e9cff926d841a26ba8052eb",
+          "text": "Schwarzkehlchen"
+        }
+      }
+    },
+    {
+      "id": "steinschmaetzer",
+      "name": "Steinschmätzer",
+      "scientificName": "Oenanthe oenanthe",
+      "taxonID": 12822,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/steinschmaetzer.heic",
+          "sha256": "9e07cd65e6099a01b9ceb7cf7ca25f3d98d30db98cc6ee726cd1e22fa4f5434a",
+          "license": "CC-BY-4.0",
+          "attribution": "Griha Hasanov",
+          "sourceURL": "https://www.inaturalist.org/observations/72888331",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/steinschmaetzer.m4a",
+          "sha256": "f1b32e6ba309ac6dde02bdc55b28f6adc63dae11d24b2c9afca0b14b1fc95f75",
+          "text": "Steinschmätzer"
+        }
+      }
+    },
+    {
+      "id": "schafstelze",
+      "name": "Schafstelze",
+      "scientificName": "Motacilla flava",
+      "taxonID": 204545,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/schafstelze.heic",
+          "sha256": "444c8e945df8dfdeb6c9adbb2f43aa28cf1dc5ed63f79d02542881feade874d1",
+          "license": "CC-BY-4.0",
+          "attribution": "Phil James",
+          "sourceURL": "https://www.inaturalist.org/observations/182056825",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/schafstelze.m4a",
+          "sha256": "0047fd98fdc2e39208afd29e6766ab1d92cee0a8d9086a7a9872eae682f87f67",
+          "text": "Schafstelze"
+        }
+      }
+    },
+    {
+      "id": "girlitz",
+      "name": "Girlitz",
+      "scientificName": "Serinus serinus",
+      "taxonID": 9236,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/girlitz.heic",
+          "sha256": "eb6666752ab40b316cf3088aeebcaa18f3447edcbd440de57f30ed3a56f1ec66",
+          "license": "CC-BY-4.0",
+          "attribution": "Mikael Nyman",
+          "sourceURL": "https://www.inaturalist.org/observations/349283588",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/girlitz.m4a",
+          "sha256": "18a7048bbbe1238474901d7200b1412c611929ba7dbf8f049b7fc60d95422c0d",
+          "text": "Girlitz"
+        }
+      }
+    },
+    {
+      "id": "turteltaube",
+      "name": "Turteltaube",
+      "scientificName": "Streptopelia turtur",
+      "taxonID": 2938,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/turteltaube.heic",
+          "sha256": "1361aa7a9abd74f8dd831516613c48b2c9eaa4bae9f675ea4a41b16d886188c0",
+          "license": "CC-BY-4.0",
+          "attribution": "Paolo Zucca",
+          "sourceURL": "https://www.inaturalist.org/observations/28225971",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/turteltaube.m4a",
+          "sha256": "17e011b4726abf0acf74108cf7dfe88ef9a0c866bc832766cea9d90977ee3b73",
+          "text": "Turteltaube"
+        }
+      }
+    },
+    {
+      "id": "singschwan",
+      "name": "Singschwan",
+      "scientificName": "Cygnus cygnus",
+      "taxonID": 6916,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/singschwan.heic",
+          "sha256": "c2ffcd0bfae21e9b2269534afa86369705fc5d00049f042a69662e758c4553e2",
+          "license": "CC-BY-4.0",
+          "attribution": "Kevin Krebs",
+          "sourceURL": "https://www.inaturalist.org/observations/118870886",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/singschwan.m4a",
+          "sha256": "c4e1991afb79a16af913dd58e648d6417018b600804f1fd545c597005f80a9d3",
+          "text": "Singschwan"
+        }
+      }
+    },
+    {
+      "id": "blaessgans",
+      "name": "Blässgans",
+      "scientificName": "Anser albifrons",
+      "taxonID": 7019,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/blaessgans.heic",
+          "sha256": "231c2839f1482e0e1bd1c611bbe54e96ce4aadd59de752202073b08870c52fdc",
+          "license": "CC-BY-4.0",
+          "attribution": "Вячеслав Юсупов",
+          "sourceURL": "https://www.inaturalist.org/observations/18629878",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/blaessgans.m4a",
+          "sha256": "0bb92649e467564d001c3d76d8f5db9d0a4c57f21580ed6aaa009d86886b8c86",
+          "text": "Blässgans"
+        }
+      }
+    },
+    {
+      "id": "rohrweihe",
+      "name": "Rohrweihe",
+      "scientificName": "Circus aeruginosus",
+      "taxonID": 5173,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/rohrweihe.heic",
+          "sha256": "f43da039177f73cb60e4740a37756f89f95fd20488326da8125190b5bf7eac38",
+          "license": "CC0-1.0",
+          "attribution": "Лариса Артемьева",
+          "sourceURL": "https://www.inaturalist.org/observations/268933386",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/rohrweihe.m4a",
+          "sha256": "27a3476769124a16ddd7c0a6cd581e472a0727c8f3e2498f3232d1594235b02b",
+          "text": "Rohrweihe"
+        }
+      }
+    },
+    {
+      "id": "schwarzstorch",
+      "name": "Schwarzstorch",
+      "scientificName": "Ciconia nigra",
+      "taxonID": 4736,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/schwarzstorch.heic",
+          "sha256": "f0244d507c10ceef9de07a2da01f1e2c9ec9ae1eeb302b267f0605fc7d8b3dda",
+          "license": "CC0-1.0",
+          "attribution": "Dave Brown",
+          "sourceURL": "https://www.inaturalist.org/observations/332569359",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/schwarzstorch.m4a",
+          "sha256": "d8a63b464087f9950da8e1950ee02261f9996300ac3add4ad0c2d2a0d6ca30f7",
+          "text": "Schwarzstorch"
+        }
+      }
+    },
+    {
+      "id": "grosser-brachvogel",
+      "name": "Großer Brachvogel",
+      "scientificName": "Numenius arquata",
+      "taxonID": 3896,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/grosser-brachvogel.heic",
+          "sha256": "c5fa2d3b8968b636cc1f6405ef77dbf6387631ca02a967d42663a1976f044dfa",
+          "license": "CC-BY-4.0",
+          "attribution": "Daniel Seth Jackson",
+          "sourceURL": "https://www.inaturalist.org/observations/251436528",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/grosser-brachvogel.m4a",
+          "sha256": "41f9710992bd1fb349a222088ab7d1367248e32a01bf492c94d54aa6e76e8b46",
+          "text": "Großer Brachvogel"
+        }
+      }
+    },
+    {
+      "id": "uferschnepfe",
+      "name": "Uferschnepfe",
+      "scientificName": "Limosa limosa",
+      "taxonID": 3947,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/uferschnepfe.heic",
+          "sha256": "7f6b02ae635cfd034e453a2052a270f872f32f6504637bbbaa8598a27421d9ee",
+          "license": "CC-BY-4.0",
+          "attribution": "Ian Dugdale",
+          "sourceURL": "https://www.inaturalist.org/observations/303337383",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/uferschnepfe.m4a",
+          "sha256": "454c7e3fcc8a08167888f2c44859009bf2fb33a9e106d1d5c8ed63f2828b5a45",
+          "text": "Uferschnepfe"
+        }
+      }
+    },
+    {
+      "id": "bekassine",
+      "name": "Bekassine",
+      "scientificName": "Gallinago gallinago",
+      "taxonID": 318836,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/bekassine.heic",
+          "sha256": "fe6badea6744edc88864f4f726a72390a43c6abe49cdd9d0c585241704550aa5",
+          "license": "CC-BY-4.0",
+          "attribution": "Вячеслав Юсупов",
+          "sourceURL": "https://www.inaturalist.org/observations/268545695",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/bekassine.m4a",
+          "sha256": "ff01b18061d3f9037757612a6f07f1bb9bc6f15425842f21660aae05ac596e05",
+          "text": "Bekassine"
+        }
+      }
+    },
+    {
+      "id": "bergfink",
+      "name": "Bergfink",
+      "scientificName": "Fringilla montifringilla",
+      "taxonID": 10069,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/bergfink.heic",
+          "sha256": "ea75fda3570a06696cd85e3ee568d747039977406427a331d49a220d5bbc761c",
+          "license": "CC-BY-4.0",
+          "attribution": "Paul Lewis",
+          "sourceURL": "https://www.inaturalist.org/observations/105785220",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/bergfink.m4a",
+          "sha256": "61e20a82c3dc4796114a5ab15ce6e62f4c9890a6321ff7d85f0a44a321646be0",
+          "text": "Bergfink"
+        }
+      }
+    },
+    {
+      "id": "loeffler",
+      "name": "Löffler",
+      "scientificName": "Platalea leucorodia",
+      "taxonID": 3731,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/loeffler.heic",
+          "sha256": "bc36160d1d01cabc916d3d52febe4ece76f45c6f5ffa4db59805154fb8540bbd",
+          "license": "CC-BY-4.0",
+          "attribution": "Diego González Dopico",
+          "sourceURL": "https://www.inaturalist.org/observations/369715703",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/loeffler-2.heic",
+          "sha256": "ee03fe933da67710a6b8726db967b18671fe03d2fb401f54da57e9b7455074f1",
+          "license": "CC-BY-4.0",
+          "attribution": "Andrea Chemello",
+          "sourceURL": "https://www.inaturalist.org/observations/36998601",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/loeffler.m4a",
+          "sha256": "0c5edf8665f3159fc58fbe180b84fc19de1eb39bbbb4c39f3fdefc2ee04cc290",
+          "text": "Löffler"
+        }
+      }
+    },
+    {
+      "id": "kuckuck",
+      "name": "Kuckuck",
+      "scientificName": "Cuculus canorus",
+      "taxonID": 1907,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/kuckuck-4.heic",
+          "sha256": "b889b33499e791d5197a1939fbc14fab31a6f9cfe95c161af9c93eba36d3cb24",
+          "license": "CC-BY-4.0",
+          "attribution": "Шальнов Кирилл",
+          "sourceURL": "https://www.inaturalist.org/observations/160646921",
+          "retrieved": "2026-10-20"
+        },
+        {
+          "file": "photos/kuckuck-5.heic",
+          "sha256": "568d30de9cd0974b418b42d483a29acbffa9fad6f18e502767d89ecba77b5621",
+          "license": "CC-BY-4.0",
+          "attribution": "Вячеслав Юсупов",
+          "sourceURL": "https://www.inaturalist.org/observations/46645572",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": {
+        "file": "audio/kuckuck.m4a",
+        "sha256": "7473c8fe9c8750565ccd4b94c6f3deeeb5bec5945e389c23dd611c92075ea829",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Tanguy Loïs (XC1143461)",
+        "sourceURL": "https://xeno-canto.org/1143461",
+        "retrieved": "2026-09-10"
+      },
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/kuckuck.m4a",
+          "sha256": "5b8be00b235fe5a1ccda59e0f27ada2b9d8b28a0ebd3e0ae347f57d95df6693e",
+          "text": "Kuckuck"
+        }
+      }
+    },
+    {
+      "id": "rauchschwalbe",
+      "name": "Rauchschwalbe",
+      "scientificName": "Hirundo rustica",
+      "taxonID": 11901,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/rauchschwalbe.heic",
+          "sha256": "439eed5ab9a6642ba0f01c11fe3b8c10424e0c7a5cd68b1652431e5d0ee5a228",
+          "license": "CC0-1.0",
+          "attribution": "Robbie Hannawacker",
+          "sourceURL": "https://www.inaturalist.org/observations/6487004",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/rauchschwalbe-4.heic",
+          "sha256": "5165c02c0a573d37f0f13e20b454adc7e9ad9d5f5eaf87f3bf88bd13d46b8cd5",
+          "license": "CC0-1.0",
+          "attribution": "Rob Wadsworth",
+          "sourceURL": "https://www.inaturalist.org/observations/206750369",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": {
+        "file": "audio/rauchschwalbe.m4a",
+        "sha256": "7643c47302535c006469872877f6ef014b4731ac25b142c2b4e6d1337fcbad7c",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Marie-Lan Taÿ Pamart (XC492100)",
+        "sourceURL": "https://xeno-canto.org/492100",
+        "retrieved": "2026-09-10"
+      },
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/rauchschwalbe.m4a",
+          "sha256": "1eef80704a486a42f531526f4a24a5a092c634955bf59d1720a143f0b9247ccb",
+          "text": "Rauchschwalbe"
+        }
+      }
+    },
+    {
+      "id": "weissstorch",
+      "name": "Weißstorch",
+      "scientificName": "Ciconia ciconia",
+      "taxonID": 4733,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/weissstorch.heic",
+          "sha256": "df88276ca2c467a095ea3851ed46c11f2d97079c7a115c49b8cdca8de6a2dc5d",
+          "license": "CC-BY-4.0",
+          "attribution": "SteveM4560",
+          "sourceURL": "https://www.inaturalist.org/observations/152829548",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/weissstorch-2.heic",
+          "sha256": "d99c33d29c20cc1c301d19e632ca56d10a0550bee055fc354eddacd27b26b646",
+          "license": "CC-BY-4.0",
+          "attribution": "SteveM4560",
+          "sourceURL": "https://www.inaturalist.org/observations/202678318",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/weissstorch-3.heic",
+          "sha256": "17de6a5662b04c9d7241b8e0b9268ea40840aefab2434a2641b10847aa659834",
+          "license": "CC-BY-4.0",
+          "attribution": "SteveM4560",
+          "sourceURL": "https://www.inaturalist.org/observations/156429936",
+          "retrieved": "2026-09-10"
+        }
+      ],
+      "call": {
+        "file": "audio/weissstorch.m4a",
+        "sha256": "c66529c66a954a90bdf80f93a2d60cf560abcf941cf2955329a900b0c6474ac3",
+        "license": "CC0-1.0",
+        "attribution": "Sonothèque ADVL (XC1143178)",
+        "sourceURL": "https://xeno-canto.org/1143178",
+        "retrieved": "2026-09-10"
+      },
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/weissstorch.m4a",
+          "sha256": "ea458fcf885dd16c7ffded03b79813cd57bceee608e3ad16534665bcc8b01f70",
+          "text": "Weißstorch"
+        }
+      }
+    },
+    {
+      "id": "kranich",
+      "name": "Kranich",
+      "scientificName": "Grus grus",
+      "taxonID": 41,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/kranich.heic",
+          "sha256": "40f5418addd70e446ac9a05ac9eff1b5be27e5f1cc672f27a5a354b550bd9248",
+          "license": "CC-BY-4.0",
+          "attribution": "Parth Kansara",
+          "sourceURL": "https://www.inaturalist.org/observations/141518478",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/kranich-3.heic",
+          "sha256": "ee1ef34a641d28a9e3b4cf550f9ac5b0ec65355282cd845c626068c3052f390c",
+          "license": "CC-BY-4.0",
+          "attribution": "Donald Davesne",
+          "sourceURL": "https://www.inaturalist.org/observations/262191857",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/kranich-4.heic",
+          "sha256": "5a82649215cd2b5455227e922c5154fc50e40748eb21ca70aa97df2212e4f2ea",
+          "license": "CC-BY-4.0",
+          "attribution": "Donald Davesne",
+          "sourceURL": "https://www.inaturalist.org/observations/101649379",
+          "retrieved": "2026-09-10"
+        }
+      ],
+      "call": {
+        "file": "audio/kranich.m4a",
+        "sha256": "cd4badb7e82f93acdfe11c30499b062f3eb5e0f0158a6dfa1c99510215dcb889",
+        "license": "CC0-1.0",
+        "attribution": "Grégoire Chauvot (XC803895)",
+        "sourceURL": "https://xeno-canto.org/803895",
+        "retrieved": "2026-09-10"
+      },
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/kranich.m4a",
+          "sha256": "3c760754683ba16b36dc6e91b5d179757c44268c23c509e03e256530c80054ce",
+          "text": "Kranich"
+        }
+      }
+    },
+    {
+      "id": "kiebitz",
+      "name": "Kiebitz",
+      "scientificName": "Vanellus vanellus",
+      "taxonID": 4857,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/kiebitz.heic",
+          "sha256": "378e5d7bba4dc6665157e70140a2bb0ba49ff9b662e03b015f02a78f01e155a7",
+          "license": "CC-BY-4.0",
+          "attribution": "雲一百香果",
+          "sourceURL": "https://www.inaturalist.org/observations/143935728",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/kiebitz-2.heic",
+          "sha256": "40fc8d4246eec0421ad127a1a14a05a21d03dacfb6d4b1ece8a11f174946cf0c",
+          "license": "CC-BY-4.0",
+          "attribution": "Marco Mussita",
+          "sourceURL": "https://www.inaturalist.org/observations/68098192",
+          "retrieved": "2026-09-11"
+        },
+        {
+          "file": "photos/kiebitz-3.heic",
+          "sha256": "1b19b924b0142352e398564ba3f46f2f62de8d4fed37482d3f0d5859bfdaad0c",
+          "license": "CC-BY-4.0",
+          "attribution": "Christoph Moning",
+          "sourceURL": "https://www.inaturalist.org/observations/272460517",
+          "retrieved": "2026-09-11"
+        }
+      ],
+      "call": {
+        "file": "audio/kiebitz.m4a",
+        "sha256": "4488e672e31b366da6ff80d1dbfaf07c0b49713e15fb9e7fc3b4408d6c78ce3f",
+        "license": "CC0-1.0",
+        "attribution": "Sonothèque ADVL (XC919264)",
+        "sourceURL": "https://xeno-canto.org/919264",
+        "retrieved": "2026-09-10"
+      },
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/kiebitz.m4a",
+          "sha256": "0043bd58e7d34c53a70b07eca3b2dbe5fdf2693ed255ed63d750ddaf338ab237",
+          "text": "Kiebitz"
+        }
+      }
+    },
+    {
+      "id": "feldlerche",
+      "name": "Feldlerche",
+      "scientificName": "Alauda arvensis",
+      "taxonID": 7347,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/feldlerche.heic",
+          "sha256": "f4a3ce719c0399b33ad3c5b2949e61b4539893f42e9640c9598798d06be07681",
+          "license": "CC-BY-4.0",
+          "attribution": "Phil James",
+          "sourceURL": "https://www.inaturalist.org/observations/214550657",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/feldlerche-2.heic",
+          "sha256": "d40814bffcb45819e27e1a0e27c86d8d7386bd23e92e24d451774a165c741bad",
+          "license": "CC-BY-4.0",
+          "attribution": "Donald Davesne",
+          "sourceURL": "https://www.inaturalist.org/observations/111957295",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/feldlerche-4.heic",
+          "sha256": "89f1bbf67f7a5512da77fdfcb4dc25fa8ec785bdf31e5b236ae02cdb8c3e8e95",
+          "license": "CC-BY-4.0",
+          "attribution": "Paul Lewis",
+          "sourceURL": "https://www.inaturalist.org/observations/286738397",
+          "retrieved": "2026-10-20"
+        }
+      ],
+      "call": {
+        "file": "audio/feldlerche.m4a",
+        "sha256": "d3506028915aec11aeace922be6d3435f47c4305bd55e855dd04bdfba256b8d8",
+        "license": "CC-BY-4.0",
+        "attribution": "Camille Vacher (XC722292)",
+        "sourceURL": "https://xeno-canto.org/722292",
+        "retrieved": "2026-09-10"
+      },
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/feldlerche.m4a",
+          "sha256": "cce74aa87838a0c1ae06c3ee90fcda84f91c1b366837d70a30bbe0e347bc91cb",
+          "text": "Feldlerche"
+        }
+      }
+    },
+    {
+      "id": "wiedehopf",
+      "name": "Wiedehopf",
+      "scientificName": "Upupa epops",
+      "taxonID": 20969,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/wiedehopf.heic",
+          "sha256": "ca4ad8b446edf9829cd6bbacf4b696815f7c64819da61daa42bee4409bc311f3",
+          "license": "CC-BY-4.0",
+          "attribution": "Dmitry Ivanov",
+          "sourceURL": "https://www.inaturalist.org/observations/299928082",
+          "retrieved": "2026-07-31"
+        }
+      ],
+      "call": {
+        "file": "audio/wiedehopf.m4a",
+        "sha256": "2ac4d62c4fc97a9a7bcecfba1dc2374416b99de8413d035a0d923d9be4f50972",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Tanguy Loïs (XC1143457)",
+        "sourceURL": "https://xeno-canto.org/1143457",
+        "retrieved": "2026-09-08"
+      },
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/wiedehopf.m4a",
+          "sha256": "330ba349d6b2999946fe9a7441c9f0de360a4bd48194509f785bd03d3dca33c7",
+          "text": "Wiedehopf"
+        }
+      }
+    },
+    {
+      "id": "bienenfresser",
+      "name": "Bienenfresser",
+      "scientificName": "Merops apiaster",
+      "taxonID": 2191,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/bienenfresser.heic",
+          "sha256": "536a296375358fd12770295f7888e4bef3242e6182508ad0b941470c14e21ca2",
+          "license": "CC-BY-4.0",
+          "attribution": "Tomas Broucek",
+          "sourceURL": "https://www.inaturalist.org/observations/219995225",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/bienenfresser-3.heic",
+          "sha256": "945240f1d758eabf90e2975be6a89310e0f2b1cb26974b92853c54885460546f",
+          "license": "CC-BY-4.0",
+          "attribution": "SteveM4560",
+          "sourceURL": "https://www.inaturalist.org/observations/392040916",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/bienenfresser-4.heic",
+          "sha256": "ceea8a20c988cb328af8ee596d1b4136948ae4d0490a2bf68ffe3e05c9f1bf9d",
+          "license": "CC-BY-4.0",
+          "attribution": "SteveM4560",
+          "sourceURL": "https://www.inaturalist.org/observations/162639271",
+          "retrieved": "2026-10-20"
+        }
+      ],
+      "call": {
+        "file": "audio/bienenfresser.m4a",
+        "sha256": "0802b29a59f5fc031f3b9e4dc122a3566c102030ac67627dc6277d90f82ca7d3",
+        "license": "CC0-1.0",
+        "attribution": "wilmet sebastien (XC811551)",
+        "sourceURL": "https://xeno-canto.org/811551",
+        "retrieved": "2026-09-10"
+      },
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/bienenfresser.m4a",
+          "sha256": "5046bec9059b45de817ea261e394dacfb83d3b5c537a2a68111786c76d603bb0",
+          "text": "Bienenfresser"
+        }
+      }
+    },
+    {
+      "id": "pirol",
+      "name": "Pirol",
+      "scientificName": "Oriolus oriolus",
+      "taxonID": 204556,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/pirol.heic",
+          "sha256": "de1aec47874fb2595840c80826a59796c7e2ed5d800fd00d53d487a84810d2a5",
+          "license": "CC-BY-4.0",
+          "attribution": "Donsky",
+          "sourceURL": "https://www.inaturalist.org/observations/375588305",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/pirol-3.heic",
+          "sha256": "1f896628bba9851796afec83cd099d4b060e0423e0542f487c6a45e044a110b7",
+          "license": "CC-BY-4.0",
+          "attribution": "euqirneto",
+          "sourceURL": "https://www.inaturalist.org/observations/280780303",
+          "retrieved": "2026-09-10"
+        }
+      ],
+      "call": {
+        "file": "audio/pirol.m4a",
+        "sha256": "adf9a9ce094dad7b645ed666a4bd9b7f1d0d29898581890cfd881de33e04db3b",
+        "license": "CC0-1.0",
+        "attribution": "Christian Kahle (XC1009022)",
+        "sourceURL": "https://xeno-canto.org/1009022",
+        "retrieved": "2026-09-10"
+      },
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/pirol.m4a",
+          "sha256": "97dcadc8fbefc5cdf00fae043ebb757db7d1cddd6a09232be08fe89746f5d0b1",
+          "text": "Pirol"
+        }
+      }
+    },
+    {
+      "id": "neuntoeter",
+      "name": "Neuntöter",
+      "scientificName": "Lanius collurio",
+      "taxonID": 12038,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/neuntoeter-4.heic",
+          "sha256": "467707a543dee6aa1b857372044122e19381f7b407011a34860027f533e1c9c9",
+          "license": "CC-BY-4.0",
+          "attribution": "SteveM4560",
+          "sourceURL": "https://www.inaturalist.org/observations/160891875",
+          "retrieved": "2026-10-20"
+        },
+        {
+          "file": "photos/neuntoeter-5.heic",
+          "sha256": "fabd8e8f1ce530716f475ebd466f78af79c721a29b7f06e67ad7a68b53e3daa0",
+          "license": "CC-BY-4.0",
+          "attribution": "SteveM4560",
+          "sourceURL": "https://www.inaturalist.org/observations/279955416",
+          "retrieved": "2026-10-20"
+        }
+      ],
+      "call": {
+        "file": "audio/neuntoeter.m4a",
+        "sha256": "e94b8a6c17df9abfab030ed04e9590aa097790d05489882f76edcd980162ab8b",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Jochem verweij (XC902159)",
+        "sourceURL": "https://xeno-canto.org/902159",
+        "retrieved": "2026-09-10"
+      },
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/neuntoeter.m4a",
+          "sha256": "60c53ec6fd380245b65d651950e7e5d0132a6274660920564a7587598c2e47ba",
+          "text": "Neuntöter"
+        }
+      }
+    }
+  ]
+}

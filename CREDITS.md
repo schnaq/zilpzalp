@@ -428,6 +428,63 @@ the source declared.
 | Fasan | Photo | Daughter Dad | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/342178415> |
 | Fasan | Call | Sonothèque ADVL (XC705907) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/705907> |
 
+### Feld, Wiese & Zugvögel (`feld-wiese`)
+
+| Bird | Kind | Author | Licence | Source |
+| --- | --- | --- | --- | --- |
+| Rebhuhn | Photo | Вячеслав Юсупов | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/102817431> |
+| Rebhuhn | Photo | Christoph Moning | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/194507479> |
+| Blaukehlchen | Photo | Юлия | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/78230335> |
+| Schwarzkehlchen | Photo | Donald Davesne | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/357856938> |
+| Steinschmätzer | Photo | Griha Hasanov | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/72888331> |
+| Schafstelze | Photo | Phil James | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/182056825> |
+| Girlitz | Photo | Mikael Nyman | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/349283588> |
+| Turteltaube | Photo | Paolo Zucca | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/28225971> |
+| Singschwan | Photo | Kevin Krebs | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/118870886> |
+| Blässgans | Photo | Вячеслав Юсупов | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/18629878> |
+| Rohrweihe | Photo | Лариса Артемьева | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/268933386> |
+| Schwarzstorch | Photo | Dave Brown | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/332569359> |
+| Großer Brachvogel | Photo | Daniel Seth Jackson | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/251436528> |
+| Uferschnepfe | Photo | Ian Dugdale | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/303337383> |
+| Bekassine | Photo | Вячеслав Юсупов | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/268545695> |
+| Bergfink | Photo | Paul Lewis | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/105785220> |
+| Löffler | Photo | Diego González Dopico | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/369715703> |
+| Löffler | Photo | Andrea Chemello | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/36998601> |
+| Kuckuck | Photo | Шальнов Кирилл | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/160646921> |
+| Kuckuck | Photo | Вячеслав Юсупов | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/46645572> |
+| Kuckuck | Call | Tanguy Loïs (XC1143461) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/1143461> |
+| Rauchschwalbe | Photo | Robbie Hannawacker | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/6487004> |
+| Rauchschwalbe | Photo | Rob Wadsworth | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/206750369> |
+| Rauchschwalbe | Call | Marie-Lan Taÿ Pamart (XC492100) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/492100> |
+| Weißstorch | Photo | SteveM4560 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/152829548> |
+| Weißstorch | Photo | SteveM4560 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/202678318> |
+| Weißstorch | Photo | SteveM4560 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/156429936> |
+| Weißstorch | Call | Sonothèque ADVL (XC1143178) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1143178> |
+| Kranich | Photo | Parth Kansara | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/141518478> |
+| Kranich | Photo | Donald Davesne | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/262191857> |
+| Kranich | Photo | Donald Davesne | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/101649379> |
+| Kranich | Call | Grégoire Chauvot (XC803895) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/803895> |
+| Kiebitz | Photo | 雲一百香果 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/143935728> |
+| Kiebitz | Photo | Marco Mussita | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/68098192> |
+| Kiebitz | Photo | Christoph Moning | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/272460517> |
+| Kiebitz | Call | Sonothèque ADVL (XC919264) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/919264> |
+| Feldlerche | Photo | Phil James | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/214550657> |
+| Feldlerche | Photo | Donald Davesne | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/111957295> |
+| Feldlerche | Photo | Paul Lewis | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/286738397> |
+| Feldlerche | Call | Camille Vacher (XC722292) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://xeno-canto.org/722292> |
+| Wiedehopf | Photo | Dmitry Ivanov | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/299928082> |
+| Wiedehopf | Call | Tanguy Loïs (XC1143457) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/1143457> |
+| Bienenfresser | Photo | Tomas Broucek | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/219995225> |
+| Bienenfresser | Photo | SteveM4560 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/392040916> |
+| Bienenfresser | Photo | SteveM4560 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/162639271> |
+| Bienenfresser | Call | wilmet sebastien (XC811551) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/811551> |
+| Pirol | Photo | Donsky | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/375588305> |
+| Pirol | Photo | euqirneto | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/280780303> |
+| Pirol | Call | Christian Kahle (XC1009022) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1009022> |
+| Neuntöter | Photo | SteveM4560 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/160891875> |
+| Neuntöter | Photo | SteveM4560 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/279955416> |
+| Neuntöter | Call | Jochem verweij (XC902159) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/902159> |
+
 ### Greifvögel & Eulen (`greifvoegel-eulen`)
 
 | Bird | Kind | Author | Licence | Source |
@@ -608,6 +665,7 @@ the source declared.
 | Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Vögel Afrikas | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
 | Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Berge & Wald | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
 | Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Vögel Deutschlands | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
+| Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Feld, Wiese & Zugvögel | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
 | Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Greifvögel & Eulen | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
 | Stimme: Ava (ElevenLabs) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Ansagen | <https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md> |
 

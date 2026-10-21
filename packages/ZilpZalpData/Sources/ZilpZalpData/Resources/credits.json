@@ -4031,6 +4031,526 @@
       "sourceURL": "https://xeno-canto.org/705907"
     },
     {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "rebhuhn",
+      "birdName": "Rebhuhn",
+      "kind": "photo",
+      "attribution": "Вячеслав Юсупов",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/102817431"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "rebhuhn",
+      "birdName": "Rebhuhn",
+      "kind": "photo",
+      "attribution": "Christoph Moning",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/194507479"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "blaukehlchen",
+      "birdName": "Blaukehlchen",
+      "kind": "photo",
+      "attribution": "Юлия",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/78230335"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "schwarzkehlchen",
+      "birdName": "Schwarzkehlchen",
+      "kind": "photo",
+      "attribution": "Donald Davesne",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/357856938"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "steinschmaetzer",
+      "birdName": "Steinschmätzer",
+      "kind": "photo",
+      "attribution": "Griha Hasanov",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/72888331"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "schafstelze",
+      "birdName": "Schafstelze",
+      "kind": "photo",
+      "attribution": "Phil James",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/182056825"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "girlitz",
+      "birdName": "Girlitz",
+      "kind": "photo",
+      "attribution": "Mikael Nyman",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/349283588"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "turteltaube",
+      "birdName": "Turteltaube",
+      "kind": "photo",
+      "attribution": "Paolo Zucca",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/28225971"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "singschwan",
+      "birdName": "Singschwan",
+      "kind": "photo",
+      "attribution": "Kevin Krebs",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/118870886"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "blaessgans",
+      "birdName": "Blässgans",
+      "kind": "photo",
+      "attribution": "Вячеслав Юсупов",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/18629878"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "rohrweihe",
+      "birdName": "Rohrweihe",
+      "kind": "photo",
+      "attribution": "Лариса Артемьева",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/268933386"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "schwarzstorch",
+      "birdName": "Schwarzstorch",
+      "kind": "photo",
+      "attribution": "Dave Brown",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/332569359"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "grosser-brachvogel",
+      "birdName": "Großer Brachvogel",
+      "kind": "photo",
+      "attribution": "Daniel Seth Jackson",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/251436528"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "uferschnepfe",
+      "birdName": "Uferschnepfe",
+      "kind": "photo",
+      "attribution": "Ian Dugdale",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/303337383"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "bekassine",
+      "birdName": "Bekassine",
+      "kind": "photo",
+      "attribution": "Вячеслав Юсупов",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/268545695"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "bergfink",
+      "birdName": "Bergfink",
+      "kind": "photo",
+      "attribution": "Paul Lewis",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/105785220"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "loeffler",
+      "birdName": "Löffler",
+      "kind": "photo",
+      "attribution": "Diego González Dopico",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/369715703"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "loeffler",
+      "birdName": "Löffler",
+      "kind": "photo",
+      "attribution": "Andrea Chemello",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/36998601"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "kuckuck",
+      "birdName": "Kuckuck",
+      "kind": "photo",
+      "attribution": "Шальнов Кирилл",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/160646921"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "kuckuck",
+      "birdName": "Kuckuck",
+      "kind": "photo",
+      "attribution": "Вячеслав Юсупов",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/46645572"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "kuckuck",
+      "birdName": "Kuckuck",
+      "kind": "call",
+      "attribution": "Tanguy Loïs (XC1143461)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/1143461"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "rauchschwalbe",
+      "birdName": "Rauchschwalbe",
+      "kind": "photo",
+      "attribution": "Robbie Hannawacker",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/6487004"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "rauchschwalbe",
+      "birdName": "Rauchschwalbe",
+      "kind": "photo",
+      "attribution": "Rob Wadsworth",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/206750369"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "rauchschwalbe",
+      "birdName": "Rauchschwalbe",
+      "kind": "call",
+      "attribution": "Marie-Lan Taÿ Pamart (XC492100)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/492100"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "weissstorch",
+      "birdName": "Weißstorch",
+      "kind": "photo",
+      "attribution": "SteveM4560",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/152829548"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "weissstorch",
+      "birdName": "Weißstorch",
+      "kind": "photo",
+      "attribution": "SteveM4560",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/202678318"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "weissstorch",
+      "birdName": "Weißstorch",
+      "kind": "photo",
+      "attribution": "SteveM4560",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/156429936"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "weissstorch",
+      "birdName": "Weißstorch",
+      "kind": "call",
+      "attribution": "Sonothèque ADVL (XC1143178)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/1143178"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "kranich",
+      "birdName": "Kranich",
+      "kind": "photo",
+      "attribution": "Parth Kansara",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/141518478"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "kranich",
+      "birdName": "Kranich",
+      "kind": "photo",
+      "attribution": "Donald Davesne",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/262191857"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "kranich",
+      "birdName": "Kranich",
+      "kind": "photo",
+      "attribution": "Donald Davesne",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/101649379"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "kranich",
+      "birdName": "Kranich",
+      "kind": "call",
+      "attribution": "Grégoire Chauvot (XC803895)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/803895"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "kiebitz",
+      "birdName": "Kiebitz",
+      "kind": "photo",
+      "attribution": "雲一百香果",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/143935728"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "kiebitz",
+      "birdName": "Kiebitz",
+      "kind": "photo",
+      "attribution": "Marco Mussita",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/68098192"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "kiebitz",
+      "birdName": "Kiebitz",
+      "kind": "photo",
+      "attribution": "Christoph Moning",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/272460517"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "kiebitz",
+      "birdName": "Kiebitz",
+      "kind": "call",
+      "attribution": "Sonothèque ADVL (XC919264)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/919264"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "feldlerche",
+      "birdName": "Feldlerche",
+      "kind": "photo",
+      "attribution": "Phil James",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/214550657"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "feldlerche",
+      "birdName": "Feldlerche",
+      "kind": "photo",
+      "attribution": "Donald Davesne",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/111957295"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "feldlerche",
+      "birdName": "Feldlerche",
+      "kind": "photo",
+      "attribution": "Paul Lewis",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/286738397"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "feldlerche",
+      "birdName": "Feldlerche",
+      "kind": "call",
+      "attribution": "Camille Vacher (XC722292)",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://xeno-canto.org/722292"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "wiedehopf",
+      "birdName": "Wiedehopf",
+      "kind": "photo",
+      "attribution": "Dmitry Ivanov",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/299928082"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "wiedehopf",
+      "birdName": "Wiedehopf",
+      "kind": "call",
+      "attribution": "Tanguy Loïs (XC1143457)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/1143457"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "bienenfresser",
+      "birdName": "Bienenfresser",
+      "kind": "photo",
+      "attribution": "Tomas Broucek",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/219995225"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "bienenfresser",
+      "birdName": "Bienenfresser",
+      "kind": "photo",
+      "attribution": "SteveM4560",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/392040916"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "bienenfresser",
+      "birdName": "Bienenfresser",
+      "kind": "photo",
+      "attribution": "SteveM4560",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/162639271"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "bienenfresser",
+      "birdName": "Bienenfresser",
+      "kind": "call",
+      "attribution": "wilmet sebastien (XC811551)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/811551"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "pirol",
+      "birdName": "Pirol",
+      "kind": "photo",
+      "attribution": "Donsky",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/375588305"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "pirol",
+      "birdName": "Pirol",
+      "kind": "photo",
+      "attribution": "euqirneto",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/280780303"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "pirol",
+      "birdName": "Pirol",
+      "kind": "call",
+      "attribution": "Christian Kahle (XC1009022)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/1009022"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "neuntoeter",
+      "birdName": "Neuntöter",
+      "kind": "photo",
+      "attribution": "SteveM4560",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/160891875"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "neuntoeter",
+      "birdName": "Neuntöter",
+      "kind": "photo",
+      "attribution": "SteveM4560",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/279955416"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "neuntoeter",
+      "birdName": "Neuntöter",
+      "kind": "call",
+      "attribution": "Jochem verweij (XC902159)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/902159"
+    },
+    {
       "packID": "greifvoegel-eulen",
       "packTitle": "Greifvögel & Eulen",
       "birdID": "uhu",
@@ -5679,6 +6199,12 @@
       "license": "CC-BY-4.0",
       "sourceURL": "https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md",
       "usedIn": "Vögel Deutschlands"
+    },
+    {
+      "attribution": "Stimme: Ava (ElevenLabs)",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md",
+      "usedIn": "Feld, Wiese & Zugvögel"
     },
     {
       "attribution": "Stimme: Ava (ElevenLabs)",
