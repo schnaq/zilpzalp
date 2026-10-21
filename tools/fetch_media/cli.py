@@ -837,6 +837,8 @@ def command_call_pick(args: argparse.Namespace) -> int:
                 f"XC{args.recording} is under {xenocanto.licence_label(record.get('lic'))}, "
                 f"which is not one of {xenocanto.PERMITTED}"
             )
+        if not record.get("file"):
+            raise LookupError(f"XC{args.recording} has no file to download on xeno-canto")
 
         name = record.get("file-name") or ""
         print(

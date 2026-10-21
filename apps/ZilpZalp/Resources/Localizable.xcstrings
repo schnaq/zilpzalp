@@ -206,7 +206,7 @@
       }
     },
     "credits.call.by" : {
-      "comment" : "Under a bird's name in the credits, for a recording. %1$@ is the recordist, %2$@ the licence's short name such as CC BY",
+      "comment" : "Under a bird's name in the credits, for a recording. %1$@ is the recordist, %2$@ the licence's short name such as CC BY 4.0",
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
@@ -265,8 +265,20 @@
         }
       }
     },
+    "credits.licenses.title" : {
+      "comment" : "Heading of the credits section that lists the media licences, each linking to its licence deed",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lizenzen"
+          }
+        }
+      }
+    },
     "credits.photo.by" : {
-      "comment" : "Under a bird's name in the credits, for a photo. %1$@ is the photographer, %2$@ the licence's short name such as CC BY",
+      "comment" : "Under a bird's name in the credits, for a photo. %1$@ is the photographer, %2$@ the licence's short name such as CC BY 4.0",
       "extractionState" : "manual",
       "localizations" : {
         "de" : {

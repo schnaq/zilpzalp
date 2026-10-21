@@ -201,7 +201,14 @@ class ValidManifestTests(LicenseGateTestCase):
 
 class LicenceRuleTests(LicenseGateTestCase):
     def test_disallowed_licences_fail(self):
-        for licence in ("CC-BY-NC-4.0", "CC-BY-ND-4.0", "CC-BY-NC-SA-4.0", "CC-BY"):
+        for licence in (
+            "CC-BY-NC-4.0",
+            "CC-BY-ND-4.0",
+            "CC-BY-NC-SA-4.0",
+            "CC-BY-NC-SA-3.0",
+            "CC-BY-SA-2.5",
+            "CC-BY",
+        ):
             with self.subTest(licence=licence):
                 self.write_pack(license=licence)
 
