@@ -63,12 +63,15 @@ class PacksTestCase(unittest.TestCase):
         self.addCleanup(patched.stop)
 
         # The real RETIRED names packs this throwaway directory does not have.
-        patched = mock.patch.object(index, "RETIRED", {})
-        patched.start()
-        self.addCleanup(patched.stop)
+        self.retire({})
 
         self.write_pack("deutschland", "Vögel Deutschlands", ["amsel"])
         self.write_pack("welt", "Vögel der Welt", ["amsel", "star"])
+
+    def retire(self, retired: dict[str, tuple[str, ...]]):
+        patched = mock.patch.object(index, "RETIRED", retired)
+        patched.start()
+        self.addCleanup(patched.stop)
 
     def write_pack(
         self,
@@ -284,11 +287,6 @@ class BuildTests(PacksTestCase):
 class RetiredTests(PacksTestCase):
     """#262: a pack dissolved into others."""
 
-    def retire(self, retired: dict[str, tuple[str, ...]]):
-        patched = mock.patch.object(index, "RETIRED", retired)
-        patched.start()
-        self.addCleanup(patched.stop)
-
     def test_moves_a_retired_pack_out_of_the_packs(self) -> None:
         self.write_pack("amerika", "Vögel Amerikas", ["amsel", "star"])
         self.retire({"welt": ("amerika",)})
@@ -310,6 +308,15 @@ class RetiredTests(PacksTestCase):
 
     def test_lists_no_retired_packs_while_there_are_none(self) -> None:
         self.assertNotIn("retired", index.build(uploading=None, remote=always))
+
+
+class RealRetiredTests(unittest.TestCase):
+    """`RETIRED` against the packs that are really in `data/packs`."""
+
+    def test_every_successor_is_a_pack(self) -> None:
+        """A misspelt successor would quietly stop the app's migration."""
+        for successors in index.RETIRED.values():
+            self.assertLessEqual(set(successors), set(index.packs()))
 
 
 class PreviewTests(PacksTestCase):

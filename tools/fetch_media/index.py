@@ -79,9 +79,10 @@ BUNDLED_PACKS = ("deutschland",)
 # refuses otherwise — or a child would lose those stickers from the album.
 #
 # "Vögel der Welt" (welt) was dissolved into the regional packs (2026-10-22).
-# Its manifest is gone from data/packs, so `check_retired` no longer guards it:
-# every bird but raggi-paradiesvogel, which never had a photo pass review, is
-# in one of these six.
+# Its manifest is gone from data/packs, so `check_retired` no longer checks its
+# birds: every one but raggi-paradiesvogel, which never had a photo pass
+# review, is in one of these six. test_fetch_media_index.py checks that they
+# are packs, since the app migrates only once the index lists all of them.
 RETIRED: dict[str, tuple[str, ...]] = {
     "welt": (
         "suedamerika",
