@@ -9513,6 +9513,16 @@
     {
       "packID": "wasser-kueste",
       "packTitle": "Wasser & Küste",
+      "birdID": "silbermoewe",
+      "birdName": "Silbermöwe",
+      "kind": "call",
+      "attribution": "Lionel Triboulin (XC1186334)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/1186334"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
       "birdID": "dreizehenmoewe",
       "birdName": "Dreizehenmöwe",
       "kind": "photo",
@@ -9533,12 +9543,32 @@
     {
       "packID": "wasser-kueste",
       "packTitle": "Wasser & Küste",
+      "birdID": "dreizehenmoewe",
+      "birdName": "Dreizehenmöwe",
+      "kind": "call",
+      "attribution": "steve (XC916045)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/916045"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
       "birdID": "trottellumme",
       "birdName": "Trottellumme",
       "kind": "photo",
       "attribution": "franciscodocampo",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/35832417"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "trottellumme",
+      "birdName": "Trottellumme",
+      "kind": "call",
+      "attribution": "Sonothèque ADVL (XC1041354)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/1041354"
     },
     {
       "packID": "wasser-kueste",
@@ -9573,6 +9603,16 @@
     {
       "packID": "wasser-kueste",
       "packTitle": "Wasser & Küste",
+      "birdID": "tordalk",
+      "birdName": "Tordalk",
+      "kind": "call",
+      "attribution": "Sonothèque ADVL (XC1143437)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/1143437"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
       "birdID": "basstoelpel",
       "birdName": "Basstölpel",
       "kind": "photo",
@@ -9589,6 +9629,16 @@
       "attribution": "Donald Davesne",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/164486687"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "basstoelpel",
+      "birdName": "Basstölpel",
+      "kind": "call",
+      "attribution": "Sonothèque ADVL (XC1041168)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/1041168"
     },
     {
       "packID": "wasser-kueste",
@@ -9623,6 +9673,16 @@
     {
       "packID": "wasser-kueste",
       "packTitle": "Wasser & Küste",
+      "birdID": "eiderente",
+      "birdName": "Eiderente",
+      "kind": "call",
+      "attribution": "Doug Hynes (XC1033167)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/1033167"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
       "birdID": "brandgans",
       "birdName": "Brandgans",
       "kind": "photo",
@@ -9649,6 +9709,16 @@
       "attribution": "Mikael Nyman",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/360291076"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "brandgans",
+      "birdName": "Brandgans",
+      "kind": "call",
+      "attribution": "Sonothèque ADVL (XC705889)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/705889"
     },
     {
       "packID": "wasser-kueste",
@@ -9683,6 +9753,16 @@
     {
       "packID": "wasser-kueste",
       "packTitle": "Wasser & Küste",
+      "birdID": "nonnengans",
+      "birdName": "Weißwangengans",
+      "kind": "call",
+      "attribution": "Joost van Bruggen (XC432932)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/432932"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
       "birdID": "saebelschnaebler",
       "birdName": "Säbelschnäbler",
       "kind": "photo",
@@ -9713,6 +9793,16 @@
     {
       "packID": "wasser-kueste",
       "packTitle": "Wasser & Küste",
+      "birdID": "saebelschnaebler",
+      "birdName": "Säbelschnäbler",
+      "kind": "call",
+      "attribution": "Noé Ferrari (XC1089313)",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://xeno-canto.org/1089313"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
       "birdID": "rotschenkel",
       "birdName": "Rotschenkel",
       "kind": "photo",
@@ -9729,6 +9819,16 @@
       "attribution": "Phil James",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/306236013"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "rotschenkel",
+      "birdName": "Rotschenkel",
+      "kind": "call",
+      "attribution": "Teet Sirotkin (XC1157250)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/1157250"
     },
     {
       "packID": "wasser-kueste",
@@ -9763,6 +9863,16 @@
     {
       "packID": "wasser-kueste",
       "packTitle": "Wasser & Küste",
+      "birdID": "alpenstrandlaeufer",
+      "birdName": "Alpenstrandläufer",
+      "kind": "call",
+      "attribution": "Doug Hynes (XC566009)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/566009"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
       "birdID": "steinwaelzer",
       "birdName": "Steinwälzer",
       "kind": "photo",
@@ -9783,12 +9893,32 @@
     {
       "packID": "wasser-kueste",
       "packTitle": "Wasser & Küste",
+      "birdID": "steinwaelzer",
+      "birdName": "Steinwälzer",
+      "kind": "call",
+      "attribution": "Sonothèque ADVL (XC815490)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/815490"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
       "birdID": "kampflaeufer",
       "birdName": "Kampfläufer",
       "kind": "photo",
       "attribution": "Laura Gaudette",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/5981564"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "kampflaeufer",
+      "birdName": "Kampfläufer",
+      "kind": "call",
+      "attribution": "Teet Sirotkin (XC1157164)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/1157164"
     },
     {
       "packID": "wasser-kueste",
@@ -9823,6 +9953,16 @@
     {
       "packID": "wasser-kueste",
       "packTitle": "Wasser & Küste",
+      "birdID": "sandregenpfeifer",
+      "birdName": "Sandregenpfeifer",
+      "kind": "call",
+      "attribution": "Jochem verweij (XC897533)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/897533"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
       "birdID": "grosser-brachvogel",
       "birdName": "Großer Brachvogel",
       "kind": "photo",
@@ -9853,6 +9993,16 @@
     {
       "packID": "wasser-kueste",
       "packTitle": "Wasser & Küste",
+      "birdID": "grosser-brachvogel",
+      "birdName": "Großer Brachvogel",
+      "kind": "call",
+      "attribution": "Sonothèque ADVL (XC730787)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/730787"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
       "birdID": "silberreiher",
       "birdName": "Silberreiher",
       "kind": "photo",
@@ -9869,6 +10019,16 @@
       "attribution": "Дмитрий Кошелев",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/196754834"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "silberreiher",
+      "birdName": "Silberreiher",
+      "kind": "call",
+      "attribution": "Sonothèque ADVL (XC705918)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/705918"
     },
     {
       "packID": "wasser-kueste",
@@ -9923,6 +10083,16 @@
     {
       "packID": "wasser-kueste",
       "packTitle": "Wasser & Küste",
+      "birdID": "purpurreiher",
+      "birdName": "Purpurreiher",
+      "kind": "call",
+      "attribution": "Sonothèque ADVL (XC1088483)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/1088483"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
       "birdID": "rohrdommel",
       "birdName": "Rohrdommel",
       "kind": "photo",
@@ -9939,6 +10109,16 @@
       "attribution": "Шальнов Кирилл",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/167361528"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "rohrdommel",
+      "birdName": "Rohrdommel",
+      "kind": "call",
+      "attribution": "Miro Demko (XC362697)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/362697"
     },
     {
       "packID": "wasser-kueste",
@@ -9973,6 +10153,16 @@
     {
       "packID": "wasser-kueste",
       "packTitle": "Wasser & Küste",
+      "birdID": "flussseeschwalbe",
+      "birdName": "Flussseeschwalbe",
+      "kind": "call",
+      "attribution": "Sonothèque ADVL (XC731701)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/731701"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
       "birdID": "zwergtaucher",
       "birdName": "Zwergtaucher",
       "kind": "photo",
@@ -9999,6 +10189,16 @@
       "attribution": "bko",
       "license": "CC0-1.0",
       "sourceURL": "https://www.inaturalist.org/observations/355074268"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "zwergtaucher",
+      "birdName": "Zwergtaucher",
+      "kind": "call",
+      "attribution": "Sonothèque ADVL (XC919416)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/919416"
     },
     {
       "packID": "wasser-kueste",
@@ -10033,6 +10233,16 @@
     {
       "packID": "wasser-kueste",
       "packTitle": "Wasser & Küste",
+      "birdID": "reiherente",
+      "birdName": "Reiherente",
+      "kind": "call",
+      "attribution": "Sonothèque ADVL (XC1107805)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/1107805"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
       "birdID": "krickente",
       "birdName": "Krickente",
       "kind": "photo",
@@ -10063,6 +10273,16 @@
     {
       "packID": "wasser-kueste",
       "packTitle": "Wasser & Küste",
+      "birdID": "krickente",
+      "birdName": "Krickente",
+      "kind": "call",
+      "attribution": "Sonothèque ADVL (XC1088486)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/1088486"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
       "birdID": "loeffelente",
       "birdName": "Löffelente",
       "kind": "photo",
@@ -10089,6 +10309,16 @@
       "attribution": "Chris O'Donoghue",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/285804136"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "loeffelente",
+      "birdName": "Löffelente",
+      "kind": "call",
+      "attribution": "Sonothèque ADVL (XC1041165)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/1041165"
     },
     {
       "packID": "wasser-kueste",
@@ -10143,12 +10373,32 @@
     {
       "packID": "wasser-kueste",
       "packTitle": "Wasser & Küste",
+      "birdID": "kolbenente",
+      "birdName": "Kolbenente",
+      "kind": "call",
+      "attribution": "Philippe_Grange (XC1134262)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/1134262"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
       "birdID": "gaensesaeger",
       "birdName": "Gänsesäger",
       "kind": "photo",
       "attribution": "Sandy Wolkenberg",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/103918457"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "gaensesaeger",
+      "birdName": "Gänsesäger",
+      "kind": "call",
+      "attribution": "Pascal Christe (XC513502)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/513502"
     },
     {
       "packID": "wasser-kueste",
@@ -10183,6 +10433,16 @@
     {
       "packID": "wasser-kueste",
       "packTitle": "Wasser & Küste",
+      "birdID": "fischadler",
+      "birdName": "Fischadler",
+      "kind": "call",
+      "attribution": "Doug Hynes (XC671347)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/671347"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
       "birdID": "flussuferlaeufer",
       "birdName": "Flussuferläufer",
       "kind": "photo",
@@ -10199,6 +10459,16 @@
       "attribution": "Alexis Lours",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/208965555"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "flussuferlaeufer",
+      "birdName": "Flussuferläufer",
+      "kind": "call",
+      "attribution": "Jochem verweij (XC901773)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/901773"
     },
     {
       "packID": "wasser-kueste",
@@ -10229,6 +10499,16 @@
       "attribution": "Вячеслав Шуплецов",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/363643532"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "bekassine",
+      "birdName": "Bekassine",
+      "kind": "call",
+      "attribution": "Petr Holecek (XC1142892)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/1142892"
     },
     {
       "packID": "wasser-kueste",

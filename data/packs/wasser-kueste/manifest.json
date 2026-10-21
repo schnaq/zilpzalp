@@ -41,7 +41,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/silbermoewe.m4a",
+        "sha256": "b659b0bf422054c69883fd3576cdee30a3c8c1d21500e5fc4829d81cb2feb2dd",
+        "license": "CC0-1.0",
+        "attribution": "Lionel Triboulin (XC1186334)",
+        "sourceURL": "https://xeno-canto.org/1186334",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/silbermoewe.m4a",
@@ -75,7 +82,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/dreizehenmoewe.m4a",
+        "sha256": "bba84aaf86e257301af8b1fe45d7487f523913f31725c7e77af554a063e86f1d",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "steve (XC916045)",
+        "sourceURL": "https://xeno-canto.org/916045",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/dreizehenmoewe.m4a",
@@ -101,7 +115,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/trottellumme.m4a",
+        "sha256": "9ac91dcb0fd9ef044c7ad91ee41112bb4d7ff8cd7cd6f1d4be0d8782c70416e5",
+        "license": "CC0-1.0",
+        "attribution": "Sonothèque ADVL (XC1041354)",
+        "sourceURL": "https://xeno-canto.org/1041354",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/trottellumme.m4a",
@@ -143,7 +164,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/tordalk.m4a",
+        "sha256": "6fb70160edf6451f4f93ca1c038e1739330a1902967900ff76aec618874a856a",
+        "license": "CC0-1.0",
+        "attribution": "Sonothèque ADVL (XC1143437)",
+        "sourceURL": "https://xeno-canto.org/1143437",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/tordalk.m4a",
@@ -177,7 +205,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/basstoelpel.m4a",
+        "sha256": "452bf7a2f471dd6af30966ed119df3f414973550f9ab57c7db1a132f6d8bce85",
+        "license": "CC0-1.0",
+        "attribution": "Sonothèque ADVL (XC1041168)",
+        "sourceURL": "https://xeno-canto.org/1041168",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/basstoelpel.m4a",
@@ -237,7 +272,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/eiderente.m4a",
+        "sha256": "a93ae49db30ba6fe65de2d21f5b37035f329962fd26f6093dc89655d581f2eaa",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Doug Hynes (XC1033167)",
+        "sourceURL": "https://xeno-canto.org/1033167",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/eiderente.m4a",
@@ -279,7 +321,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/brandgans.m4a",
+        "sha256": "87618617b970d49a5b79a27850fa3a7d3f6573a25338365a0b76b100ad87eaba",
+        "license": "CC0-1.0",
+        "attribution": "Sonothèque ADVL (XC705889)",
+        "sourceURL": "https://xeno-canto.org/705889",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/brandgans.m4a",
@@ -321,7 +370,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/nonnengans.m4a",
+        "sha256": "b16b29534b6b3613720d7d5722fa8de46649059845822da649b5adb96c818155",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Joost van Bruggen (XC432932)",
+        "sourceURL": "https://xeno-canto.org/432932",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/nonnengans.m4a",
@@ -363,7 +419,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/saebelschnaebler.m4a",
+        "sha256": "118f8f2f5c9742c29e2913c43902222f229f41f8543fe89f2aa276e5464f228f",
+        "license": "CC-BY-4.0",
+        "attribution": "Noé Ferrari (XC1089313)",
+        "sourceURL": "https://xeno-canto.org/1089313",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/saebelschnaebler.m4a",
@@ -397,7 +460,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/rotschenkel.m4a",
+        "sha256": "b8e2cdbdd91d1a61ebb5f49e045d446595696135be298d2a296b0620de490037",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Teet Sirotkin (XC1157250)",
+        "sourceURL": "https://xeno-canto.org/1157250",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/rotschenkel.m4a",
@@ -439,7 +509,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/alpenstrandlaeufer.m4a",
+        "sha256": "e8cd95f63cc9a3dfe0197b689863bbd47e7be73b4531f79daf3c649acc21cab5",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Doug Hynes (XC566009)",
+        "sourceURL": "https://xeno-canto.org/566009",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/alpenstrandlaeufer.m4a",
@@ -473,7 +550,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/steinwaelzer.m4a",
+        "sha256": "f1d5037c55d712cb4fdcd719fb2c77850abd8f59ceabad540c0d1396e32ca0c1",
+        "license": "CC0-1.0",
+        "attribution": "Sonothèque ADVL (XC815490)",
+        "sourceURL": "https://xeno-canto.org/815490",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/steinwaelzer.m4a",
@@ -499,7 +583,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/kampflaeufer.m4a",
+        "sha256": "d575082ff51b5f3943e62d94525de6a08b9783fc4252f0f70c4a198a81216868",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Teet Sirotkin (XC1157164)",
+        "sourceURL": "https://xeno-canto.org/1157164",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/kampflaeufer.m4a",
@@ -541,7 +632,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/sandregenpfeifer.m4a",
+        "sha256": "14a17af0aac2b31f1c178ddea8787efa9269c996eb5bac6d95d981c1033d9c5e",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Jochem verweij (XC897533)",
+        "sourceURL": "https://xeno-canto.org/897533",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/sandregenpfeifer.m4a",
@@ -583,7 +681,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/grosser-brachvogel.m4a",
+        "sha256": "c1b5220467a8ca236f107b20046b620d56f629a25120f798d9738fb926887f00",
+        "license": "CC0-1.0",
+        "attribution": "Sonothèque ADVL (XC730787)",
+        "sourceURL": "https://xeno-canto.org/730787",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/grosser-brachvogel.m4a",
@@ -617,7 +722,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/silberreiher.m4a",
+        "sha256": "6d3369c7035b66d0ce5739e87ad127a7d0014981fefce89e8c0e6a38284e4704",
+        "license": "CC0-1.0",
+        "attribution": "Sonothèque ADVL (XC705918)",
+        "sourceURL": "https://xeno-canto.org/705918",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/silberreiher.m4a",
@@ -693,7 +805,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/purpurreiher.m4a",
+        "sha256": "9e382a8fbe04a45e608756e2d0affbb3551d73572bfa28abd0ce8c1ddc771061",
+        "license": "CC0-1.0",
+        "attribution": "Sonothèque ADVL (XC1088483)",
+        "sourceURL": "https://xeno-canto.org/1088483",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/purpurreiher.m4a",
@@ -727,7 +846,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/rohrdommel.m4a",
+        "sha256": "074a624ec8b44965e59932d148d7b52c0f230654ff73e8994e05a0b3ec85356b",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Miro Demko (XC362697)",
+        "sourceURL": "https://xeno-canto.org/362697",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/rohrdommel.m4a",
@@ -769,7 +895,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/flussseeschwalbe.m4a",
+        "sha256": "f0bca61dcf32e0530e5c94bfc3ad72d04909568ce31edc58213d162b886324c4",
+        "license": "CC0-1.0",
+        "attribution": "Sonothèque ADVL (XC731701)",
+        "sourceURL": "https://xeno-canto.org/731701",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/flussseeschwalbe.m4a",
@@ -811,7 +944,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/zwergtaucher.m4a",
+        "sha256": "fe783d5dac75801a29e6de148d7ca7c0e1dc82a7c65ff2eab682ce206257acc3",
+        "license": "CC0-1.0",
+        "attribution": "Sonothèque ADVL (XC919416)",
+        "sourceURL": "https://xeno-canto.org/919416",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/zwergtaucher.m4a",
@@ -853,7 +993,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/reiherente.m4a",
+        "sha256": "7e7d8121d799bffcd4b3e4fc7dfe5b2f0ff542e658e29e740cbfa9bfd47d529d",
+        "license": "CC0-1.0",
+        "attribution": "Sonothèque ADVL (XC1107805)",
+        "sourceURL": "https://xeno-canto.org/1107805",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/reiherente.m4a",
@@ -895,7 +1042,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/krickente.m4a",
+        "sha256": "d7a4e9983fc9a9e85766e33357a2bb9765b79fbc1b0eb0a0fa843d0dd0bf6f5b",
+        "license": "CC0-1.0",
+        "attribution": "Sonothèque ADVL (XC1088486)",
+        "sourceURL": "https://xeno-canto.org/1088486",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/krickente.m4a",
@@ -937,7 +1091,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/loeffelente.m4a",
+        "sha256": "5fc10d12e96ca45b66877d033d78cf20684b7307934001dbae0b48267be33d7e",
+        "license": "CC0-1.0",
+        "attribution": "Sonothèque ADVL (XC1041165)",
+        "sourceURL": "https://xeno-canto.org/1041165",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/loeffelente.m4a",
@@ -1013,7 +1174,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/kolbenente.m4a",
+        "sha256": "742ef67651f812a13f4518a41f9d55997a9828651924d650a2135bb683e665fb",
+        "license": "CC0-1.0",
+        "attribution": "Philippe_Grange (XC1134262)",
+        "sourceURL": "https://xeno-canto.org/1134262",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/kolbenente.m4a",
@@ -1047,7 +1215,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/gaensesaeger.m4a",
+        "sha256": "dd3359eba42829a0d8524d772adf21b76cd08cdc7f1bb5f4ee77697ce5f5dc1f",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Pascal Christe (XC513502)",
+        "sourceURL": "https://xeno-canto.org/513502",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/gaensesaeger.m4a",
@@ -1107,7 +1282,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/fischadler.m4a",
+        "sha256": "59c46a1e2b83ffbdfba82ec059ae436e059ebaaf565584068d59cfd23b02f3a9",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Doug Hynes (XC671347)",
+        "sourceURL": "https://xeno-canto.org/671347",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/fischadler.m4a",
@@ -1141,7 +1323,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/flussuferlaeufer.m4a",
+        "sha256": "4466b020aef72318b8bb4c93b507a4eac2edacb57b8cf1f2efb2eb3d32b3f3b4",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Jochem verweij (XC901773)",
+        "sourceURL": "https://xeno-canto.org/901773",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/flussuferlaeufer.m4a",
@@ -1183,7 +1372,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/bekassine.m4a",
+        "sha256": "50900202f819ff8351bd1a0e589afc4d366c8e9c01fc7b976b37d18ce3fe81a1",
+        "license": "CC0-1.0",
+        "attribution": "Petr Holecek (XC1142892)",
+        "sourceURL": "https://xeno-canto.org/1142892",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/bekassine.m4a",
