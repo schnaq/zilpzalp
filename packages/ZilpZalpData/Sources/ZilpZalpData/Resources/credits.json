@@ -3093,6 +3093,16 @@
     {
       "packID": "berge-wald",
       "packTitle": "Berge & Wald",
+      "birdID": "gaensegeier",
+      "birdName": "Gänsegeier",
+      "kind": "call",
+      "attribution": "Thomas SIGNEAU (XC917400)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/917400"
+    },
+    {
+      "packID": "berge-wald",
+      "packTitle": "Berge & Wald",
       "birdID": "waldohreule",
       "birdName": "Waldohreule",
       "kind": "photo",
