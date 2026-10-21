@@ -12,21 +12,14 @@ export const metadata: Metadata = {
 const FAQ = [
   {
     q: 'Muss mein Kind lesen können?',
-    a: (
-      <>
-        Nein. Jede Aufgabe wird vorgelesen, und auf den Antwortkacheln steht
-        kein Name. Ein Kind, das noch kein Wort erkennt, kommt durch die ganze
-        App.
-      </>
-    ),
+    a: <>Nein. Alles wird vorgelesen, geantwortet wird mit Fotos.</>,
   },
   {
     q: 'Wer spricht in der App?',
     a: (
       <>
-        Eine KI-Stimme: „Ava“ von ElevenLabs. Wir erzeugen die Aufnahmen, bevor
-        die App erscheint; die App selbst spricht ElevenLabs nie an. Gibt es
-        für einen Satz keine Aufnahme, liest die Stimme des Geräts.
+        Eine KI-Stimme, vorab aufgenommen. Fehlt für einen Satz die Aufnahme,
+        liest die Stimme des Geräts.
       </>
     ),
   },
@@ -34,11 +27,10 @@ const FAQ = [
     q: 'Wie öffne ich den Elternbereich?',
     a: (
       <>
-        Auf der Startseite oben rechts, neben dem Avatar des Kindes: der runde
-        Knopf mit der Figur und dem Zahnrad. Er fragt Face ID, Touch ID oder
-        den Gerätecode ab — je nachdem, was das Gerät kann. Ist
-        auf dem Gerät kein Code eingerichtet, stellt die App stattdessen eine
-        kleine Rechenaufgabe, die ein Kind nicht löst.
+        Mit dem runden Knopf oben rechts auf der Startseite, dem mit Figur und
+        Zahnrad. Er fragt Face ID, Touch ID oder den Gerätecode ab. Ist kein
+        Gerätecode eingerichtet, kommt stattdessen eine Rechenaufgabe für
+        Erwachsene.
       </>
     ),
   },
@@ -46,10 +38,8 @@ const FAQ = [
     q: 'Wie begrenze ich die Spielzeit?',
     a: (
       <>
-        Im Elternbereich lässt sich eine tägliche Spielzeit in Minuten
-        einstellen. Eine laufende Runde wird immer noch zu Ende gespielt, danach
-        sagt die App „Zeit fürs Nest“ und zeigt, wie viele Sterne der Tag
-        gebracht hat. Die Einstellung gilt für alle Profile auf dem Gerät.
+        Im Elternbereich, in Minuten pro Tag und für alle Profile. Die laufende
+        Runde wird noch zu Ende gespielt, dann heißt es „Zeit fürs Nest“.
       </>
     ),
   },
@@ -57,9 +47,8 @@ const FAQ = [
     q: 'Können mehrere Kinder auf einem Gerät spielen?',
     a: (
       <>
-        Ja. Jedes Kind bekommt ein Profil mit Namen und Vogel-Avatar, und jedes
-        sammelt für sich. Ein Vorname oder Spitzname genügt; alles bleibt auf
-        dem Gerät.
+        Ja. Jedes Kind bekommt ein eigenes Profil und sammelt für sich. Ein
+        Vorname genügt, alles bleibt auf dem Gerät.
       </>
     ),
   },
@@ -67,10 +56,8 @@ const FAQ = [
     q: 'Braucht die App Internet?',
     a: (
       <>
-        Zum Spielen nicht. Die 70 Vogelarten aus Deutschland stecken in der App,
-        geladene Pakete bleiben auf dem Gerät. Ins Netz geht die App nur im
-        Elternbereich: für die Liste der Pakete und für die Pakete, die
-        Erwachsene dort laden.
+        Zum Spielen nicht. Ins Netz geht sie nur, wenn du im Elternbereich
+        Pakete ansiehst oder lädst.
       </>
     ),
   },
@@ -78,9 +65,8 @@ const FAQ = [
     q: 'Welche Geräte werden unterstützt?',
     a: (
       <>
-        iPhone und iPad ab iOS beziehungsweise iPadOS 18. Auf Macs mit
-        Apple Silicon läuft ZilpZalp über „Designed for iPad“ mit, ohne eigenes
-        Mac-Layout.
+        iPhone und iPad ab iOS bzw. iPadOS 18. Auf Macs mit Apple Silicon läuft
+        die iPad-Version.
       </>
     ),
   },
@@ -88,11 +74,9 @@ const FAQ = [
     q: 'Es kommt kein Ton',
     a: (
       <>
-        Beide Spiele brauchen Ton: Spiel 1 liest den Vogelnamen vor, Spiel 2
-        spielt eine Aufnahme. Prüfe die Lautstärke; der Stummschalter des
-        iPhones muss nicht umgelegt werden, die App spielt auch dann. Bleibt nur
-        das Vorlesen still, sieh im Elternbereich nach, ob es ausgeschaltet ist.
-        Hilft das nicht, schließe die App vollständig und öffne sie erneut.
+        Prüf die Lautstärke; der Stummschalter stört nicht. Fehlt nur das
+        Vorlesen, ist es vielleicht im Elternbereich ausgeschaltet. Sonst die
+        App ganz schließen und neu öffnen.
       </>
     ),
   },
@@ -100,18 +84,17 @@ const FAQ = [
     q: 'Warum fehlt „Wer singt da?“ auf der Startseite?',
     a: (
       <>
-        Spiel 2 erscheint nur, wenn genug Arten des geladenen Pakets eine
-        Aufnahme haben. Lieber keine Kachel als eine, hinter der nichts klingt.
+        Das Spiel erscheint nur, wenn genug Vögel des Pakets eine Aufnahme
+        haben. Lieber keine Kachel als eine, hinter der nichts klingt.
       </>
     ),
   },
   {
-    q: 'Woher kommen die Fotos und die Vogelstimmen?',
+    q: 'Woher kommen die Fotos und die Vogelrufe?',
     a: (
       <>
-        Die Fotos von Naturbeobachtungen auf iNaturalist, die Stimmen von
-        Aufnahmen auf xeno-canto — jedes Medium unter einer freien Lizenz (CC0,
-        CC BY oder CC BY-SA). Wer was beigesteuert hat, steht in der App unter
+        Von iNaturalist und xeno-canto, alle unter freier Lizenz (CC0, CC BY
+        oder CC BY-SA). Wer was beigesteuert hat, steht in der App unter
         „Fotos &amp; Dank“.
       </>
     ),
@@ -120,8 +103,7 @@ const FAQ = [
     q: 'Welche Daten erhebt die App?',
     a: (
       <>
-        Keine. Es gibt kein Konto, keine Anmeldung, keine Werbung und kein
-        Analysewerkzeug. Ausführlich steht das in der{' '}
+        Keine. Kein Konto, keine Werbung, kein Tracking. Mehr dazu in der{' '}
         <Link href="/datenschutz">Datenschutzerklärung</Link>.
       </>
     ),
@@ -132,16 +114,13 @@ export default function Support() {
   return (
     <LegalPage title="Hilfe und Support">
       <h2>Kontakt</h2>
-      <p>
-        Bei Fragen, Problemen oder Rückmeldungen zu ZilpZalp schreib uns eine
-        E-Mail:
-      </p>
+      <p>Fragen, Probleme oder Rückmeldungen? Schreib uns:</p>
       <address>
         <a href={`mailto:${SUPPORT_MAIL}`}>{SUPPORT_MAIL}</a>
       </address>
       <p className="fine-print">
-        Rechtliche Anfragen und alles, was die schnaq GmbH als Anbieter betrifft,
-        gehen an die Adresse im <Link href="/impressum">Impressum</Link>.
+        Rechtliches an die schnaq GmbH, Adresse im{' '}
+        <Link href="/impressum">Impressum</Link>.
       </p>
 
       <h2>Häufige Fragen</h2>
@@ -154,18 +133,16 @@ export default function Support() {
 
       <h2>Einen Fehler melden</h2>
       <p>
-        Wenn etwas nicht funktioniert, hilft uns eine E-Mail an{' '}
-        <a href={`mailto:${SUPPORT_MAIL}`}>{SUPPORT_MAIL}</a> mit:
+        Schreib an <a href={`mailto:${SUPPORT_MAIL}`}>{SUPPORT_MAIL}</a>:
       </p>
       <ul>
-        <li>was passiert ist und was du erwartet hättest</li>
+        <li>was passiert ist</li>
         <li>Gerät und iOS-Version</li>
-        <li>welche Schritte dahin geführt haben</li>
         <li>wenn möglich ein Bildschirmfoto</li>
       </ul>
       <p>
-        Weil die App keine Daten sendet, sehen wir von einem Problem nichts,
-        solange niemand es uns erzählt. Jede Meldung hilft also wirklich.
+        Die App sendet uns keine Daten. Ohne deine Nachricht erfahren wir von
+        einem Fehler nichts.
       </p>
     </LegalPage>
   )
