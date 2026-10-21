@@ -937,13 +937,15 @@ def within_budget(work: list[tuple[clips.Target, str, str]], most: int) -> None:
 
 
 def rendered(
-    provider: speech.Provider, label: str, text: str, voice: str | None
+    provider: speech.Provider, label: str, text: str, voice: str | None, accept_short: bool
 ) -> audio.Clip | None:
     """One sentence from the provider, or `None` when every take came back cut off.
 
     A cut clip is a valid file at the right loudness, so its length is the one
     thing that gives it away (#310). The second take asks for another seed:
-    `seed` is best effort at the vendor, and so is the cut.
+    `seed` is best effort at the vendor, and so is the cut. `accept_short` keeps
+    the last take anyway — for a line a listener heard whole, where the
+    heuristic is what is wrong.
     """
     least = speech.shortest(text)
     for take in range(TAKES):
@@ -954,7 +956,7 @@ def rendered(
             f'{label}: "{text}" lasts {clip.seconds:.2f} s, less than the {least:.2f} s '
             f"it takes to say — take {take + 1} of {TAKES}"
         )
-    return None
+    return clip if accept_short else None
 
 
 def command_speech_render(args: argparse.Namespace) -> int:
@@ -973,24 +975,25 @@ def command_speech_render(args: argparse.Namespace) -> int:
     # A cut-off line is skipped rather than fatal: in a run over a whole pack
     # the other sentences are already paid for, and the clip a skipped line
     # had before stays where it is.
-    cut = []
+    # Said at once rather than at the end, so that a run a later line aborts
+    # has still named every line it skipped.
+    cut = 0
     for target, sentence, text in work:
         label = f"{target.label} / {sentence}"
-        clip = rendered(provider, label, text, args.voice)
+        clip = rendered(provider, label, text, args.voice, args.accept_short)
         if clip is None:
-            cut.append(label)
+            cut += 1
+            message = (
+                f"{label}: every take came back too short to be whole, so nothing was "
+                "recorded and the previous clip stays. Listen to it: a name may need a "
+                "`pronunciation`, and a line heard whole takes --accept-short."
+            )
+            print(f"::error::{escape_data(message)}")
             continue
         record_clip(target, document, sentence, clip, text, voice)
 
     regenerate_derived()
     print("\nListen to every clip before you commit it — nothing else has heard it yet.")
-    for label in cut:
-        message = (
-            f"{label}: every take came back too short to be whole, so nothing was recorded "
-            "and the previous clip stays. Listen to the clip; a name may need a "
-            "`pronunciation` in the pack data."
-        )
-        print(f"::error::{escape_data(message)}")
     return 1 if cut else 0
 
 
@@ -1282,6 +1285,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--voice",
         help="a voice the provider offers, by id or by name — "
         "required wherever there is a choice; see 'speech voices'",
+    )
+    render.add_argument(
+        "--accept-short",
+        action="store_true",
+        help="record a clip even when every take is shorter than its text takes to say",
     )
     render.add_argument(
         "--max-chars",

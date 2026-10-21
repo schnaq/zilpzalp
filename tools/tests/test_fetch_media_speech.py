@@ -1055,6 +1055,14 @@ class RenderTests(SpeechTestCase):
         self.assertEqual(list(self.clips_of("amsel")), [])
         self.assertEqual(list(self.clips_of("star")), ["collection.name"])
 
+    def test_records_a_short_line_a_listener_accepted(self) -> None:
+        self.pronounce_amsel("Uhu")
+
+        code, _ = self.render("--pack", "basis", "--species", "amsel", "--accept-short")
+
+        self.assertEqual(code, 0)
+        self.assertEqual(self.clips_of("amsel")["collection.name"]["text"], "Uhu")
+
     def test_records_a_second_take_that_came_back_whole(self) -> None:
         short = fake.FakeProvider().render("Uhu")
         whole = fake.FakeProvider().render("Amsel")

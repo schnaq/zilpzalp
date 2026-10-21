@@ -187,16 +187,20 @@ manifest's `text` is still the plain sentence the clip says. It costs twelve
 characters a clip that the count printed before a run does not include.
 
 „Uhu" needed more than the wrapping. Its `pronunciation` is „Der Uhu" in every
-pack that has the bird (deutschland, greifvoegel-eulen), so the clip is
-rendered as `[ruhig] Der Uhu ...`.
+pack that has the bird (deutschland, greifvoegel-eulen), so its next render
+sends `[ruhig] Der Uhu ...`. Until then the clips still say the cut „Uhu", and
+the app's device voice and VoiceOver already say „Der Uhu", which is the
+field's purpose.
 
 Every render is checked for length afterwards. A clip has to last at least
 0.05 s per character of its text, and never less than 0.5 s
 (`SECONDS_PER_CHARACTER` and `SHORTEST` in `speech/__init__.py`). A clip below
 that is rendered once more with the next seed; if it is still short, nothing
 is recorded for that line, the clip it had stays, the run goes on with the
-other lines, and it ends with an `::error::` per line that failed and exit
-code 1.
+other lines, and each line that failed gets an `::error::` and the run exit
+code 1. A line a listener has heard whole and the check still refuses is
+recorded with `--accept-short`, aimed at that one line with `--species` and
+`--sentence`.
 
 The threshold is a heuristic, calibrated against the 376 clips in the
 repository on 2026-10-21. It flags „Uhu" (0.40 s) and „Welche Vögel?" (0.64 s
