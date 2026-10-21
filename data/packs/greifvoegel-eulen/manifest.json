@@ -241,6 +241,16 @@
       }
     },
     {
+      "id": "zwergohreule",
+      "name": "Zwergohreule",
+      "scientificName": "Otus scops",
+      "taxonID": 20244,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
       "id": "schnee-eule",
       "name": "Schnee-Eule",
       "scientificName": "Bubo scandiacus",
@@ -554,6 +564,16 @@
       }
     },
     {
+      "id": "fischadler",
+      "name": "Fischadler",
+      "scientificName": "Pandion haliaetus",
+      "taxonID": 116999,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
       "id": "harpyie",
       "name": "Harpyie",
       "scientificName": "Harpia harpyja",
@@ -635,6 +655,36 @@
           "text": "Mäusebussard"
         }
       }
+    },
+    {
+      "id": "rotschwanzbussard",
+      "name": "Rotschwanzbussard",
+      "scientificName": "Buteo jamaicensis",
+      "taxonID": 5212,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "wuestenbussard",
+      "name": "Wüstenbussard",
+      "scientificName": "Parabuteo unicinctus",
+      "taxonID": 5355,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "schopfkarakara",
+      "name": "Schopfkarakara",
+      "scientificName": "Caracara plancus",
+      "taxonID": 4715,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
     },
     {
       "id": "sekretaer",
