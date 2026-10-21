@@ -15,6 +15,7 @@ from pathlib import Path
 from unittest import mock
 
 import generate_credits
+import license_gate
 
 
 def media(**overrides) -> dict:
@@ -220,6 +221,19 @@ class EveryAssetIsCredited(CreditsTestCase):
 
         self.assertIn("[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)", text)
         self.assertIn("[CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)", text)
+
+    def test_a_3_0_licence_names_its_version_and_links_its_deed(self) -> None:
+        self.write_pack("drei", [bird(photos=[media(license="CC-BY-SA-3.0")])])
+
+        self.run_main()
+
+        self.assertIn(
+            "[CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/)",
+            self.markdown.read_text(encoding="utf-8"),
+        )
+
+    def test_every_licence_the_gate_permits_has_a_name_and_a_deed(self) -> None:
+        self.assertEqual(set(generate_credits.LICENCES), set(license_gate.ALLOWED_LICENCES))
 
     def test_a_licence_the_gate_forbids_is_rendered_raw_rather_than_crashing(self) -> None:
         # This tool runs before the licence gate, so it must not be the thing

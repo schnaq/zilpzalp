@@ -170,7 +170,7 @@ struct CreditsScreen: View {
                 title: entry.name,
                 // `entry.license` is an SPDX identifier and is shown as one.
                 // The app maps exactly one thing, ``License/shortName``, and
-                // that enum holds only the three media licences; OFL, ISC and
+                // that enum holds only the media licences; OFL, ISC and
                 // MIT are not among them. Their public names live in the
                 // generator's own table, next to the licence texts and the
                 // deed URLs — one table, in the place that already has to
@@ -189,7 +189,7 @@ struct CreditsScreen: View {
         }
     }
 
-    /// "Foto von Alexis Tinker-Tsavalas · CC BY". Two formats rather than one
+    /// "Foto von Alexis Tinker-Tsavalas · CC BY 4.0". Two formats rather than one
     /// with a third argument, so a translation can put the kind where its own
     /// grammar wants it.
     private func credit(for entry: Credits.Media) -> String {

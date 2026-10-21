@@ -148,6 +148,22 @@ struct PackManifestTests {
         #expect(context.codingPath.last?.stringValue == "license")
     }
 
+    @Test(
+        "the 3.0 licences decode and name their version",
+        arguments: [
+            ("CC-BY-3.0", License.ccBy3, "CC BY 3.0"),
+            ("CC-BY-SA-3.0", License.ccBySa3, "CC BY-SA 3.0"),
+        ],
+    )
+    func decodesVersion3Licences(raw: String, expected: License, shortName: String) throws {
+        let manifest = try Self.manifest(replacing: #""CC-BY-4.0""#, with: "\"\(raw)\"")
+
+        let photo = try #require(PackManifest.decode(manifest).birds.first?.photos.first)
+
+        #expect(photo.license == expected)
+        #expect(photo.license.shortName == shortName)
+    }
+
     @Test("a retrieved value that is not a YYYY-MM-DD date fails")
     func failsOnMalformedDate() throws {
         let manifest = try Self.manifest(replacing: #""2026-08-01""#, with: #""01.08.2026""#)

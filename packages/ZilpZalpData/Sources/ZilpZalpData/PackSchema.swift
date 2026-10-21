@@ -9,14 +9,18 @@ public enum License: String, Codable, Sendable {
     case cc0 = "CC0-1.0"
     case ccBy = "CC-BY-4.0"
     case ccBySa = "CC-BY-SA-4.0"
+    case ccBy3 = "CC-BY-3.0"
+    case ccBySa3 = "CC-BY-SA-3.0"
 }
 
 public extension License {
     /// How a licence is named in a credit line: the short public name, not the
-    /// SPDX identifier the manifest carries. "CC BY" is what the licence deed
-    /// itself asks to be called; "CC-BY-4.0" is a filing code.
+    /// SPDX identifier the manifest carries. "CC BY 4.0" is what the licence
+    /// deed itself asks to be called; "CC-BY-4.0" is a filing code. The
+    /// version is part of the name because 3.0 and 4.0 are different licences
+    /// and a credit has to say which one applies.
     ///
-    /// Not product copy and therefore not in a String Catalog: these three
+    /// Not product copy and therefore not in a String Catalog: these
     /// names are the same in every language, which is also why they may live
     /// in a package at all.
     ///
@@ -25,9 +29,11 @@ public extension License {
     /// caller (#105).
     var shortName: String {
         switch self {
-        case .cc0: "CC0"
-        case .ccBy: "CC BY"
-        case .ccBySa: "CC BY-SA"
+        case .cc0: "CC0 1.0"
+        case .ccBy: "CC BY 4.0"
+        case .ccBySa: "CC BY-SA 4.0"
+        case .ccBy3: "CC BY 3.0"
+        case .ccBySa3: "CC BY-SA 3.0"
         }
     }
 }

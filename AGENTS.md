@@ -81,7 +81,7 @@ Xcode-Version ist in `mise.toml` gepinnt. Wenn ein Build lokal geht und in CI ni
 
 ## Medien und Lizenzen
 
-**Harte Regel: nur CC0, CC BY und CC BY-SA.** Kein NonCommercial, kein NoDerivatives. Das CI-Gate bricht den Build ab, wenn ein Asset ohne gültige Lizenz oder ohne Attribution im Manifest steht.
+**Harte Regel: nur CC0, CC BY und CC BY-SA.** Kein NonCommercial, kein NoDerivatives. CC BY and CC BY-SA are accepted in versions 3.0 and 4.0 (decision of 2026-10-21); older versions and jurisdiction ports are not. Das CI-Gate bricht den Build ab, wenn ein Asset ohne gültige Lizenz oder ohne Attribution im Manifest steht.
 
 Jedes Medium wird über `data/packs/*.json` deklariert — mit Quelle, Urheber, Lizenz und SHA-256. Der Credits-Screen wird daraus **generiert**. Nie Attribution von Hand in eine View schreiben; sie würde von den Assets abdriften.
 

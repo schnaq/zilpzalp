@@ -2,8 +2,8 @@
 
 The record below is recorded from the live API (XC965144, an Amsel) and then
 varied for the cases the real response does not conveniently contain: the
-CC BY-SA 3.0 that `lic:BY-SA` really does return, and the sounds a quiz cannot
-use. No test reaches the network.
+CC BY-SA 3.0 that `lic:BY-SA` really does return, a licence we cannot ship,
+a record without a file, and the sounds a quiz cannot use. No test reaches the network.
 
 The API key is the reason several of these exist. It travels as a query
 parameter, so every message that quotes a URL would carry it into a terminal
@@ -23,6 +23,7 @@ from unittest import mock
 
 import httpx
 
+import license_gate
 from fetch_media import audio, cli, manifest, xenocanto
 from tests.test_fetch_media_audio import tone
 from tests.test_fetch_media_cli import PackTestCase
@@ -30,7 +31,10 @@ from tests.test_fetch_media_cli import PackTestCase
 KEY = "0123456789abcdef0123456789abcdef01234567"
 
 BY_SA_4 = "https://creativecommons.org/licenses/by-sa/4.0/"
-BY_SA_3 = "https://creativecommons.org/licenses/by-sa/3.0/"
+# Protocol-relative, as xeno-canto serves some of its licence URLs.
+BY_SA_3 = "//creativecommons.org/licenses/by-sa/3.0/"
+# A Creative Commons licence outside the permitted set.
+BY_NC_SA = "https://creativecommons.org/licenses/by-nc-sa/4.0/"
 
 # Recorded from GET /api/3/recordings?query=sp:"Turdus merula" lic:BY-SA q:">C"
 RECORDED = {
@@ -71,7 +75,7 @@ def answer(records: list[dict], pages: int = 1) -> httpx.Response:
 
 
 class LicenceTests(unittest.TestCase):
-    def test_maps_the_three_permitted_urls(self) -> None:
+    def test_maps_the_permitted_urls(self) -> None:
         self.assertEqual(
             xenocanto.licence_id("https://creativecommons.org/publicdomain/zero/1.0/"), "CC0-1.0"
         )
@@ -79,10 +83,16 @@ class LicenceTests(unittest.TestCase):
             xenocanto.licence_id("https://creativecommons.org/licenses/by/4.0/"), "CC-BY-4.0"
         )
         self.assertEqual(xenocanto.licence_id(BY_SA_4), "CC-BY-SA-4.0")
+        self.assertEqual(
+            xenocanto.licence_id("https://creativecommons.org/licenses/by/3.0/"), "CC-BY-3.0"
+        )
 
-    def test_rejects_share_alike_3_0(self) -> None:
+    def test_maps_share_alike_3_0_to_its_own_identifier(self) -> None:
         """`lic:BY-SA` really returns it, and 3.0 is not the 4.0 raw value."""
-        self.assertIsNone(xenocanto.licence_id(BY_SA_3))
+        self.assertEqual(xenocanto.licence_id(BY_SA_3), "CC-BY-SA-3.0")
+
+    def test_rejects_a_jurisdiction_port(self) -> None:
+        self.assertIsNone(xenocanto.licence_id("//creativecommons.org/licenses/by-sa/3.0/de/"))
 
     def test_rejects_the_public_domain_mark_and_the_noncommercial_variants(self) -> None:
         for url in (
@@ -101,14 +111,13 @@ class LicenceTests(unittest.TestCase):
         )
 
     def test_labels_a_licence_we_cannot_use_by_its_name(self) -> None:
-        self.assertEqual(xenocanto.licence_label(BY_SA_3), "by-sa/3.0")
+        self.assertEqual(xenocanto.licence_label(BY_NC_SA), "by-nc-sa/4.0")
         self.assertEqual(xenocanto.licence_label(BY_SA_4), "CC-BY-SA-4.0")
         self.assertEqual(xenocanto.licence_label(""), "no licence")
 
     def test_the_manifest_identifiers_are_the_ones_the_gate_accepts(self) -> None:
-        self.assertEqual(
-            sorted(set(xenocanto.LICENCES.values())),
-            ["CC-BY-4.0", "CC-BY-SA-4.0", "CC0-1.0"],
+        self.assertLessEqual(
+            set(xenocanto.LICENCES.values()), set(license_gate.ALLOWED_LICENCES)
         )
 
 
@@ -186,7 +195,7 @@ class CandidateTests(unittest.TestCase):
         self.assertEqual(self.candidates(records), ["3", "2", "1"])
 
     def test_sorts_a_licence_we_cannot_use_last_but_keeps_it(self) -> None:
-        records = [record(id="1", lic=BY_SA_3, type="song"), record(id="2", type="call")]
+        records = [record(id="1", lic=BY_NC_SA, type="song"), record(id="2", type="call")]
 
         self.assertEqual(self.candidates(records), ["2", "1"])
 
@@ -367,14 +376,14 @@ class CandidatesTests(CallsTestCase):
         self.assertEqual(len(self.candidate_file()["candidates"]), 3)
 
     def test_marks_a_licence_the_project_may_not_ship(self) -> None:
-        table = self.run_candidates([record(lic=BY_SA_3)])
+        table = self.run_candidates([record(lic=BY_NC_SA)])
 
-        self.assertIn("by-sa/3.0 !", table)
+        self.assertIn("by-nc-sa/4.0 !", table)
         self.assertIn("cannot ship", table)
 
     def test_counts_the_free_stock_per_species(self) -> None:
         """The number issue #32 asks for: how much is usable, in which quality."""
-        table = self.run_candidates([record(id="1", q="B"), record(id="2", q="B", lic=BY_SA_3)])
+        table = self.run_candidates([record(id="1", q="B"), record(id="2", q="B", lic=BY_NC_SA)])
 
         self.assertIn("amsel", table)
         self.assertIn("3 usable (0 in A, 3 in B), 3 unusable", table)
@@ -396,9 +405,17 @@ class CandidatesTests(CallsTestCase):
         self.assertIn("::warning::3 search(es) had more than one page", printed)
 
     def test_warns_about_a_species_without_a_usable_recording(self) -> None:
-        table = self.run_candidates([record(lic=BY_SA_3)])
+        table = self.run_candidates([record(lic=BY_NC_SA)])
 
         self.assertIn("::warning::amsel: no freely licensed recording found", table)
+
+    def test_leaves_out_a_recording_without_a_file(self) -> None:
+        """XC509295 and others come back with `file: null` — nothing to pick."""
+        table = self.run_candidates([record(id="1"), record(id="2", file=None)])
+
+        self.assertNotIn("XC2", table)
+        ids = {entry["recording_id"] for entry in self.candidate_file()["candidates"]}
+        self.assertEqual(ids, {"1"})
 
     def test_limits_the_table_but_not_the_candidate_file(self) -> None:
         table = self.run_candidates([record(id="1"), record(id="2")], ["--limit", "1"])
@@ -469,11 +486,26 @@ class PickTests(CallsTestCase):
         self.assertIn("Cyanistes caeruleus", printed)
         self.assertIsNone(self.call_entry())
 
-    def test_refuses_share_alike_3_0(self) -> None:
-        code, printed = self.run_pick(record(lic=BY_SA_3))
+    def test_records_share_alike_3_0_as_3_0(self) -> None:
+        code, _ = self.run_pick(record(lic=BY_SA_3, **{"file-name": "XC965144-amsel.wav"}))
+
+        self.assertEqual(code, 0)
+        self.assertEqual(self.call_entry()["license"], "CC-BY-SA-3.0")
+
+    def test_refuses_a_licence_outside_the_permitted_set(self) -> None:
+        code, printed = self.run_pick(record(lic=BY_NC_SA))
 
         self.assertEqual(code, 1)
-        self.assertIn("by-sa/3.0", printed)
+        self.assertIn("by-nc-sa/4.0", printed)
+        self.assertIsNone(self.call_entry())
+
+    def test_refuses_a_recording_without_a_file_in_one_line(self) -> None:
+        code, printed = self.run_pick(record(file=None))
+
+        self.assertEqual(code, 1)
+        self.assertEqual(printed.count("::error::"), 1)
+        self.assertIn("XC965144 has no file", printed)
+        self.assertNotIn("Traceback", printed)
         self.assertIsNone(self.call_entry())
 
 

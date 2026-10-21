@@ -15,11 +15,15 @@ Three findings that cost a day when they are rediscovered
 - **`numRecordings` is a string**, as is a recording's `id`.
 
 Unlike iNaturalist, the server-side filter is not the last word: `lic:BY-SA`
-also returns CC BY-SA **3.0**, which is not one of the three identifiers the
-manifest, the licence gate and the Swift `License` enum share. Those
-recordings are listed rather than dropped — a human should see that they
-exist and why they cannot be used — so `licence_id` returns `None` for them
-instead of raising, and `pick` refuses them.
+returns CC BY-SA 3.0 and 4.0 alike, and the version decides the identifier
+the manifest records. Both are permitted since 2026-10-21; a version or port
+outside `LICENCES`, such as `by-sa/3.0/de`, is not. Those recordings are
+listed rather than dropped — a human should see that they exist and why they
+cannot be used — so `licence_id` returns `None` for them instead of raising,
+and `pick` refuses them.
+
+Some records come without a `file` — nothing to download. `recordings` drops
+them, and `pick` refuses them by name.
 """
 
 from __future__ import annotations
@@ -55,14 +59,16 @@ LICENCE_FILTERS = ("BY-SA", "BY", "PD")
 # all. Asking for both in one request keeps it at one request per licence.
 QUALITY_FILTER = 'q:">C"'
 
-# The `lic` field is a Creative Commons URL, and only these three name a
-# licence the project may ship. CC BY-SA 3.0 is deliberately absent: recording
-# it as `CC-BY-SA-4.0` would be a false attribution, and the licence gate and
-# the Swift enum accept nothing else. Keys are normalised by `licence_key`.
+# The `lic` field is a Creative Commons URL, and only these name a licence the
+# project may ship. Each version maps to its own identifier: recording 3.0 as
+# `CC-BY-SA-4.0` would be a false attribution. Jurisdiction ports such as
+# `by-sa/3.0/de` are deliberately absent. Keys are normalised by `licence_key`.
 LICENCES = {
     "creativecommons.org/publicdomain/zero/1.0": "CC0-1.0",
     "creativecommons.org/licenses/by/4.0": "CC-BY-4.0",
     "creativecommons.org/licenses/by-sa/4.0": "CC-BY-SA-4.0",
+    "creativecommons.org/licenses/by/3.0": "CC-BY-3.0",
+    "creativecommons.org/licenses/by-sa/3.0": "CC-BY-SA-3.0",
 }
 
 # For the messages that have to name what is allowed. Derived, so it cannot
@@ -127,8 +133,8 @@ def licence_id(url: object) -> str | None:
     """The manifest identifier for a `lic` URL, `None` when we may not use it.
 
     `None` rather than an exception because the listing shows the unusable
-    recordings: a species whose free stock is all CC BY-SA 3.0 is a finding
-    for a human, not a silently shorter table.
+    recordings: a species whose free stock is all under a licence we cannot
+    ship is a finding for a human, not a silently shorter table.
     """
     return LICENCES.get(licence_key(url))
 
@@ -137,8 +143,8 @@ def licence_label(url: object) -> str:
     """What to print in a listing: the identifier, or why the licence is out.
 
     A recording we may not use is shown by its licence rather than hidden, so
-    "all of this species is CC BY-SA 3.0" is visible instead of looking like an
-    empty result.
+    "all of this species is `by-sa/3.0/de`" is visible instead of looking like
+    an empty result.
     """
     mapped = licence_id(url)
     if mapped is not None:
@@ -369,11 +375,12 @@ class Client:
         """Every freely licensed A or B recording of one species.
 
         One request per licence, because the API takes a single `lic:` value.
+        A record without a `file` has nothing to download and is left out.
         """
         found = []
         for licence in LICENCE_FILTERS:
             found += self.search(f'sp:"{scientific_name}" lic:{licence} {QUALITY_FILTER}')
-        return found
+        return [record for record in found if record.get("file")]
 
     def recording(self, recording_id: str) -> dict:
         """One recording by its XC number, re-read at pick time.

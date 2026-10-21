@@ -60,9 +60,9 @@ class Voice:
     """Who speaks, under which licence — the manifest's `voice` without its date.
 
     One voice per manifest, so this is what every clip in a pack shares. The
-    licence has to be one the gate allows (`CC0-1.0`, `CC-BY-4.0`,
-    `CC-BY-SA-4.0`); a provider whose terms fit none of them cannot be used
-    here, whatever it sounds like.
+    licence has to be one the gate allows (`ALLOWED_LICENCES` in
+    `tools/license_gate.py`); a provider whose terms fit none of them cannot
+    be used here, whatever it sounds like.
     """
 
     license: str
