@@ -5401,6 +5401,336 @@
       "sourceURL": "https://www.inaturalist.org/observations/74490210"
     },
     {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
+      "birdID": "rotkehl-huettensaenger",
+      "birdName": "Rotkehl-Hüttensänger",
+      "kind": "photo",
+      "attribution": "Dan Vickers",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/265585684"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
+      "birdID": "brautente",
+      "birdName": "Brautente",
+      "kind": "photo",
+      "attribution": "Andrew Lai",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/329921472"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
+      "birdID": "brautente",
+      "birdName": "Brautente",
+      "kind": "photo",
+      "attribution": "Wendy McCrady",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/196699867"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
+      "birdID": "rotkardinal",
+      "birdName": "Rotkardinal",
+      "kind": "photo",
+      "attribution": "Bill Levine",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/104353677"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
+      "birdID": "rotkardinal",
+      "birdName": "Rotkardinal",
+      "kind": "call",
+      "attribution": "steve (XC797998)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/797998"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
+      "birdID": "blauhaeher",
+      "birdName": "Blauhäher",
+      "kind": "photo",
+      "attribution": "Texas Bird Family",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/339251426"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
+      "birdID": "blauhaeher",
+      "birdName": "Blauhäher",
+      "kind": "call",
+      "attribution": "Anonymous (XC924514)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/924514"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
+      "birdID": "weisskopfseeadler",
+      "birdName": "Weißkopfseeadler",
+      "kind": "photo",
+      "attribution": "Justin Flint",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/335312498"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
+      "birdID": "weisskopfseeadler",
+      "birdName": "Weißkopfseeadler",
+      "kind": "photo",
+      "attribution": "Marcel_Pepin",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/217347432"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
+      "birdID": "weisskopfseeadler",
+      "birdName": "Weißkopfseeadler",
+      "kind": "photo",
+      "attribution": "Judy Gallagher",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/340586345"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
+      "birdID": "weisskopfseeadler",
+      "birdName": "Weißkopfseeadler",
+      "kind": "call",
+      "attribution": "Rachel Thurman (XC1163370)",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://xeno-canto.org/1163370"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
+      "birdID": "truthahn",
+      "birdName": "Truthahn",
+      "kind": "photo",
+      "attribution": "kirk gardner",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/153184238"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
+      "birdID": "truthahn",
+      "birdName": "Truthahn",
+      "kind": "call",
+      "attribution": "Jonathon Jongsma (XC320490)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/320490"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
+      "birdID": "annakolibri",
+      "birdName": "Annakolibri",
+      "kind": "photo",
+      "attribution": "William Walker",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/250218495"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
+      "birdID": "eistaucher",
+      "birdName": "Eistaucher",
+      "kind": "photo",
+      "attribution": "Christian Back",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/102565488"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
+      "birdID": "eistaucher",
+      "birdName": "Eistaucher",
+      "kind": "call",
+      "attribution": "Doug Hynes (XC992792)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/992792"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
+      "birdID": "schnee-eule",
+      "birdName": "Schnee-Eule",
+      "kind": "photo",
+      "attribution": "Dustin Snider",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/195441759"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
+      "birdID": "schnee-eule",
+      "birdName": "Schnee-Eule",
+      "kind": "photo",
+      "attribution": "Matt Felperin",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/104681391"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
+      "birdID": "papageitaucher",
+      "birdName": "Papageitaucher",
+      "kind": "photo",
+      "attribution": "Diego González Dopico",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/277865524"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
+      "birdID": "papageitaucher",
+      "birdName": "Papageitaucher",
+      "kind": "photo",
+      "attribution": "Julia Moning",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/114739787"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
+      "birdID": "papageitaucher",
+      "birdName": "Papageitaucher",
+      "kind": "photo",
+      "attribution": "Christoph Moning",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/115403062"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
+      "birdID": "virginia-uhu",
+      "birdName": "Virginia-Uhu",
+      "kind": "photo",
+      "attribution": "Brooke J.",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/202251518"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
+      "birdID": "truthahngeier",
+      "birdName": "Truthahngeier",
+      "kind": "photo",
+      "attribution": "Andy Wilson",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/80827613"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
+      "birdID": "rotkopfspecht",
+      "birdName": "Rotkopfspecht",
+      "kind": "photo",
+      "attribution": "Kalvin Chan",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/214521630"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
+      "birdID": "indigofink",
+      "birdName": "Indigofink",
+      "kind": "photo",
+      "attribution": "Derek Spencer",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/365169268"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
+      "birdID": "goldzeisig",
+      "birdName": "Goldzeisig",
+      "kind": "photo",
+      "attribution": "Donald Davesne",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/281973047"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
+      "birdID": "baltimoretrupial",
+      "birdName": "Baltimoretrupial",
+      "kind": "photo",
+      "attribution": "Chrissy McClarren and Andy Reago",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/88173051"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
+      "birdID": "rotschulterstaerling",
+      "birdName": "Rotschulterstärling",
+      "kind": "photo",
+      "attribution": "Mirko Schoenitz",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/20437532"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
+      "birdID": "brillenstaerling",
+      "birdName": "Brillenstärling",
+      "kind": "photo",
+      "attribution": "Laurel Meredyk",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/28271836"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
+      "birdID": "buntfalke",
+      "birdName": "Buntfalke",
+      "kind": "photo",
+      "attribution": "Jonathan Eisen",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/107143166"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
+      "birdID": "kragenente",
+      "birdName": "Kragenente",
+      "kind": "photo",
+      "attribution": "Chrissy McClarren and Andy Reago",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/86911376"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
+      "birdID": "zimtente",
+      "birdName": "Zimtente",
+      "kind": "photo",
+      "attribution": "Dan Vickers",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/259260199"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
+      "birdID": "zimtente",
+      "birdName": "Zimtente",
+      "kind": "photo",
+      "attribution": "Alberto Sánchez",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/158762689"
+    },
+    {
       "packID": "wasser-kueste",
       "packTitle": "Wasser & Küste",
       "birdID": "dreizehenmoewe",
@@ -6787,6 +7117,12 @@
       "license": "CC-BY-4.0",
       "sourceURL": "https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md",
       "usedIn": "Greifvögel & Eulen"
+    },
+    {
+      "attribution": "Stimme: Ava (ElevenLabs)",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md",
+      "usedIn": "Nordamerika"
     },
     {
       "attribution": "Stimme: Ava (ElevenLabs)",

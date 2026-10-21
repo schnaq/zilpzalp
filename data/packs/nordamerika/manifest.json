@@ -1,0 +1,649 @@
+{
+  "id": "nordamerika",
+  "title": "Nordamerika",
+  "voice": {
+    "license": "CC-BY-4.0",
+    "attribution": "Stimme: Ava (ElevenLabs)",
+    "sourceURL": "https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md",
+    "retrieved": "2026-10-21"
+  },
+  "birds": [
+    {
+      "id": "rotkehl-huettensaenger",
+      "name": "Rotkehl-Hüttensänger",
+      "scientificName": "Sialia sialis",
+      "taxonID": 12942,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/rotkehl-huettensaenger.heic",
+          "sha256": "c43bab44a3532b66bed0b43d113f0dae8a747a0c8871acd9eddad33a5e7d7b8a",
+          "license": "CC-BY-4.0",
+          "attribution": "Dan Vickers",
+          "sourceURL": "https://www.inaturalist.org/observations/265585684",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/rotkehl-huettensaenger.m4a",
+          "sha256": "454549b22d76ff7e2720154850e9733ec00f3188df38a8c87d1daba5e3a14eda",
+          "text": "Rotkehl-Hüttensänger"
+        }
+      }
+    },
+    {
+      "id": "brautente",
+      "name": "Brautente",
+      "scientificName": "Aix sponsa",
+      "taxonID": 7107,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/brautente.heic",
+          "sha256": "adc0745bf8e7850b69d94ba5c5e1c00c3d5219c8bac8b91151b6ba27b5300a7f",
+          "license": "CC-BY-4.0",
+          "attribution": "Andrew Lai",
+          "sourceURL": "https://www.inaturalist.org/observations/329921472",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/brautente-2.heic",
+          "sha256": "4382c85acb91a5a3b693395db99ccec1ff53fa38c26c447ec8184a00de1cb803",
+          "license": "CC-BY-4.0",
+          "attribution": "Wendy McCrady",
+          "sourceURL": "https://www.inaturalist.org/observations/196699867",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/brautente.m4a",
+          "sha256": "56bdf2fdf5ccc8073f2de6945da73726df0d8e301d7f4685a9fbfe2866747dc1",
+          "text": "Brautente"
+        }
+      }
+    },
+    {
+      "id": "rotkardinal",
+      "name": "Rotkardinal",
+      "scientificName": "Cardinalis cardinalis",
+      "taxonID": 9083,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/rotkardinal-3.heic",
+          "sha256": "f52eeeba12eb7a329829bd47b43e29cbd8d4c4624a720587ed25ab07c1768379",
+          "license": "CC-BY-4.0",
+          "attribution": "Bill Levine",
+          "sourceURL": "https://www.inaturalist.org/observations/104353677",
+          "retrieved": "2026-09-10"
+        }
+      ],
+      "call": {
+        "file": "audio/rotkardinal.m4a",
+        "sha256": "a2703432bc0693a0892f9c0a7ca0474887df2ed575df3f0035ba4ddec3371eba",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "steve (XC797998)",
+        "sourceURL": "https://xeno-canto.org/797998",
+        "retrieved": "2026-09-10"
+      },
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/rotkardinal.m4a",
+          "sha256": "95fa28f0f6b5cb58d4ff32edbf1ffe6f21aff57452469001db5ca05dcba6df3f",
+          "text": "Rotkardinal"
+        }
+      }
+    },
+    {
+      "id": "blauhaeher",
+      "name": "Blauhäher",
+      "scientificName": "Cyanocitta cristata",
+      "taxonID": 8229,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/blauhaeher-2.heic",
+          "sha256": "85ea13a3ffaaeee362d6065ea1fed69322ee50a853c48700f26dd866d766e7e7",
+          "license": "CC-BY-4.0",
+          "attribution": "Texas Bird Family",
+          "sourceURL": "https://www.inaturalist.org/observations/339251426",
+          "retrieved": "2026-09-10"
+        }
+      ],
+      "call": {
+        "file": "audio/blauhaeher.m4a",
+        "sha256": "09c7849844be6634fe2059fb0b92e8102545435ac9bed0f17d6b5ccdc89e248c",
+        "license": "CC0-1.0",
+        "attribution": "Anonymous (XC924514)",
+        "sourceURL": "https://xeno-canto.org/924514",
+        "retrieved": "2026-09-10"
+      },
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/blauhaeher.m4a",
+          "sha256": "c816f63929f91f32d2f65bd90d263acd24b0617d4011f74434365a25363ff982",
+          "text": "Blauhäher"
+        }
+      }
+    },
+    {
+      "id": "weisskopfseeadler",
+      "name": "Weißkopfseeadler",
+      "scientificName": "Haliaeetus leucocephalus",
+      "taxonID": 5305,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/weisskopfseeadler.heic",
+          "sha256": "dce25a10a72e31b21059e1117fcc14fd409d395277bab1b04102fbed7c7b716a",
+          "license": "CC-BY-4.0",
+          "attribution": "Justin Flint",
+          "sourceURL": "https://www.inaturalist.org/observations/335312498",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/weisskopfseeadler-2.heic",
+          "sha256": "65574a96fe194ccf17bf7dbc2f57d6f9b0bb5a376ef86439c3ea9aff7e834436",
+          "license": "CC-BY-4.0",
+          "attribution": "Marcel_Pepin",
+          "sourceURL": "https://www.inaturalist.org/observations/217347432",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/weisskopfseeadler-3.heic",
+          "sha256": "2e3ee41daccf5b91ed3b26deab46e4044c9b8269bedcf70907497f6166676d97",
+          "license": "CC-BY-SA-4.0",
+          "attribution": "Judy Gallagher",
+          "sourceURL": "https://www.inaturalist.org/observations/340586345",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": {
+        "file": "audio/weisskopfseeadler.m4a",
+        "sha256": "eb6068b9d3ad6b5c9bbab54596619451dbaa901bbb94316dec61f5ffb272d8a2",
+        "license": "CC-BY-4.0",
+        "attribution": "Rachel Thurman (XC1163370)",
+        "sourceURL": "https://xeno-canto.org/1163370",
+        "retrieved": "2026-09-10"
+      },
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/weisskopfseeadler.m4a",
+          "sha256": "238ec7a023cd287a2d0d5784e84cb742f5b66fd36a2eccb1a6a72405e53bc168",
+          "text": "Weißkopfseeadler"
+        }
+      }
+    },
+    {
+      "id": "truthahn",
+      "name": "Truthahn",
+      "scientificName": "Meleagris gallopavo",
+      "taxonID": 906,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/truthahn.heic",
+          "sha256": "ebac7ec92f6af1d38fc228306e7a436b50e827b47f03c46a74d92b950e50c561",
+          "license": "CC-BY-4.0",
+          "attribution": "kirk gardner",
+          "sourceURL": "https://www.inaturalist.org/observations/153184238",
+          "retrieved": "2026-09-10"
+        }
+      ],
+      "call": {
+        "file": "audio/truthahn.m4a",
+        "sha256": "ff61686a137c365db7f95a8a3434ad713c6505643ce4e88b6f1f4b3910581c1d",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Jonathon Jongsma (XC320490)",
+        "sourceURL": "https://xeno-canto.org/320490",
+        "retrieved": "2026-09-10"
+      },
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/truthahn.m4a",
+          "sha256": "4ce4ef3596dff80c290434a4c3efb14016e799babf7c8807918c6cd8f49f7760",
+          "text": "Truthahn"
+        }
+      }
+    },
+    {
+      "id": "annakolibri",
+      "name": "Annakolibri",
+      "scientificName": "Calypte anna",
+      "taxonID": 6317,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/annakolibri.heic",
+          "sha256": "dd9bb0cd3aaac742855e4192441a047cf42128eb378d33bea54c2dfb6dbee88b",
+          "license": "CC-BY-4.0",
+          "attribution": "William Walker",
+          "sourceURL": "https://www.inaturalist.org/observations/250218495",
+          "retrieved": "2026-09-10"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/annakolibri.m4a",
+          "sha256": "8a62b1e91e4c2432b21c179b05359950ae2bec01f2023b0e6e14dd4120868c97",
+          "text": "Annakolibri"
+        }
+      }
+    },
+    {
+      "id": "eistaucher",
+      "name": "Eistaucher",
+      "scientificName": "Gavia immer",
+      "taxonID": 4626,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/eistaucher.heic",
+          "sha256": "10b53c17996785f651e44e4df095a8683f66d317f8d1b1f77677b4725faef0c4",
+          "license": "CC-BY-4.0",
+          "attribution": "Christian Back",
+          "sourceURL": "https://www.inaturalist.org/observations/102565488",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": {
+        "file": "audio/eistaucher.m4a",
+        "sha256": "355e4d25848ad01eeaa7555e7f4a96c92dbd1243162c60d91066d2ba23ef6ea5",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Doug Hynes (XC992792)",
+        "sourceURL": "https://xeno-canto.org/992792",
+        "retrieved": "2026-09-10"
+      },
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/eistaucher.m4a",
+          "sha256": "4e3112dbd5149ab1f71d613c0384a07a20e5a77300b40619c0b74b5e2fa545a5",
+          "text": "Eistaucher"
+        }
+      }
+    },
+    {
+      "id": "schnee-eule",
+      "name": "Schnee-Eule",
+      "scientificName": "Bubo scandiacus",
+      "taxonID": 144594,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/schnee-eule.heic",
+          "sha256": "3a46e5d649201cd2fcacc10a232cb50577810adab5c6b04c305bf00e17b1c9d6",
+          "license": "CC-BY-4.0",
+          "attribution": "Dustin Snider",
+          "sourceURL": "https://www.inaturalist.org/observations/195441759",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/schnee-eule-2.heic",
+          "sha256": "1cda500c073089ae1185589ac2a139b43495d7d76c72ba759fb848b456c56248",
+          "license": "CC-BY-4.0",
+          "attribution": "Matt Felperin",
+          "sourceURL": "https://www.inaturalist.org/observations/104681391",
+          "retrieved": "2026-09-10"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/schnee-eule.m4a",
+          "sha256": "bb0a647ab0955c40347547234afc6597c049eebe197291b2c4a332b1a53336a8",
+          "text": "Schnee-Eule"
+        }
+      }
+    },
+    {
+      "id": "papageitaucher",
+      "name": "Papageitaucher",
+      "scientificName": "Fratercula arctica",
+      "taxonID": 4504,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/papageitaucher.heic",
+          "sha256": "440c6f6c8833c31d26dc1662ea366d552a41f9445165194967b922345374808f",
+          "license": "CC-BY-4.0",
+          "attribution": "Diego González Dopico",
+          "sourceURL": "https://www.inaturalist.org/observations/277865524",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/papageitaucher-2.heic",
+          "sha256": "44999bd1685aecfe21b214069d894a21653601c97bc753aadbbfc4dee42c0cfd",
+          "license": "CC-BY-4.0",
+          "attribution": "Julia Moning",
+          "sourceURL": "https://www.inaturalist.org/observations/114739787",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/papageitaucher-3.heic",
+          "sha256": "f8e43cd84bfaea054f8bff2093c58353f9f73e6935999e28bad6a91c85620d0d",
+          "license": "CC-BY-4.0",
+          "attribution": "Christoph Moning",
+          "sourceURL": "https://www.inaturalist.org/observations/115403062",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/papageitaucher.m4a",
+          "sha256": "bfddd959fdd2a2c8315094f22a9ccdafe3df8bb197b255405307be9a7134107b",
+          "text": "Papageitaucher"
+        }
+      }
+    },
+    {
+      "id": "virginia-uhu",
+      "name": "Virginia-Uhu",
+      "scientificName": "Bubo virginianus",
+      "taxonID": 20044,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/virginia-uhu.heic",
+          "sha256": "f43ab034824b0699c78fa16af2c9f0f3078fd7abbae8982c7d938a5552c540ce",
+          "license": "CC-BY-4.0",
+          "attribution": "Brooke J.",
+          "sourceURL": "https://www.inaturalist.org/observations/202251518",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/virginia-uhu.m4a",
+          "sha256": "643756185274380578083800c65340ec25b595f80b87ed089cb232ce920567db",
+          "text": "Virginia-Uhu"
+        }
+      }
+    },
+    {
+      "id": "truthahngeier",
+      "name": "Truthahngeier",
+      "scientificName": "Cathartes aura",
+      "taxonID": 4756,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/truthahngeier.heic",
+          "sha256": "8fcc7ee384fa650d2317def51e311eced62a1633bd8c720e5c1a564eda4f6b28",
+          "license": "CC0-1.0",
+          "attribution": "Andy Wilson",
+          "sourceURL": "https://www.inaturalist.org/observations/80827613",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/truthahngeier.m4a",
+          "sha256": "f13408bb119ab7d22f02d7af64f57eeeef5027f6f5a87ad688eebd75de16e620",
+          "text": "Truthahngeier"
+        }
+      }
+    },
+    {
+      "id": "rotkopfspecht",
+      "name": "Rotkopfspecht",
+      "scientificName": "Melanerpes erythrocephalus",
+      "taxonID": 18204,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/rotkopfspecht.heic",
+          "sha256": "7e41db1477b16dd46c446ed1ef2a3a0e2fa795cd4dde2a89211528e3bcf4d194",
+          "license": "CC-BY-4.0",
+          "attribution": "Kalvin Chan",
+          "sourceURL": "https://www.inaturalist.org/observations/214521630",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/rotkopfspecht.m4a",
+          "sha256": "9fe5b276332cc3da5660adb4b3236fd1a5dedd3fb7d3d0b0afa8072299f0a588",
+          "text": "Rotkopfspecht"
+        }
+      }
+    },
+    {
+      "id": "indigofink",
+      "name": "Indigofink",
+      "scientificName": "Passerina cyanea",
+      "taxonID": 10227,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/indigofink.heic",
+          "sha256": "15edddfa7c1233b3324b3c241ad29fb2592692a5b751ea46bce776949a54554c",
+          "license": "CC-BY-4.0",
+          "attribution": "Derek Spencer",
+          "sourceURL": "https://www.inaturalist.org/observations/365169268",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/indigofink.m4a",
+          "sha256": "684ecc677214023405e14ce703df0f5d20d50556e87f98ebf622cdad805c0842",
+          "text": "Indigofink"
+        }
+      }
+    },
+    {
+      "id": "goldzeisig",
+      "name": "Goldzeisig",
+      "scientificName": "Spinus tristis",
+      "taxonID": 145310,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/goldzeisig.heic",
+          "sha256": "e10d68ef8d17fe36ea2fdbee3b83b649e4d4c810f72a3ce88da4845ce4339c43",
+          "license": "CC-BY-4.0",
+          "attribution": "Donald Davesne",
+          "sourceURL": "https://www.inaturalist.org/observations/281973047",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/goldzeisig.m4a",
+          "sha256": "04533a389cc76c8c152e8f5940305cf804513cc3e6f942a652b9ff03de5bc2f3",
+          "text": "Goldzeisig"
+        }
+      }
+    },
+    {
+      "id": "baltimoretrupial",
+      "name": "Baltimoretrupial",
+      "scientificName": "Icterus galbula",
+      "taxonID": 9346,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/baltimoretrupial.heic",
+          "sha256": "dad0f077f2ed5e47e6c9e43c297ee76b81ce411a31413b699a921ae9876930c9",
+          "license": "CC0-1.0",
+          "attribution": "Chrissy McClarren and Andy Reago",
+          "sourceURL": "https://www.inaturalist.org/observations/88173051",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/baltimoretrupial.m4a",
+          "sha256": "f8545713ac23997d711a582bb2fc48d8441b00f987e638f9f0990ccb0417884f",
+          "text": "Baltimoretrupial"
+        }
+      }
+    },
+    {
+      "id": "rotschulterstaerling",
+      "name": "Rotschulterstärling",
+      "scientificName": "Agelaius phoeniceus",
+      "taxonID": 9744,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/rotschulterstaerling.heic",
+          "sha256": "a48df3006396ecc7ecc30abc1f5e51b04bda677263be5e5c21e018133e5cae17",
+          "license": "CC0-1.0",
+          "attribution": "Mirko Schoenitz",
+          "sourceURL": "https://www.inaturalist.org/observations/20437532",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/rotschulterstaerling.m4a",
+          "sha256": "761f81b88708a88f9764e21dda10a28d46295de12663d73664bbb2aac094394b",
+          "text": "Rotschulterstärling"
+        }
+      }
+    },
+    {
+      "id": "brillenstaerling",
+      "name": "Brillenstärling",
+      "scientificName": "Xanthocephalus xanthocephalus",
+      "taxonID": 10470,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/brillenstaerling.heic",
+          "sha256": "875b67bd6704a1f7ef72c716ea3a651abaf5eb85bdcf9991cbe5993be9675782",
+          "license": "CC-BY-4.0",
+          "attribution": "Laurel Meredyk",
+          "sourceURL": "https://www.inaturalist.org/observations/28271836",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/brillenstaerling.m4a",
+          "sha256": "d091fe792bb89ab824dbeb7f2a67713f229a77ea5eb416b3f06647c459d0db43",
+          "text": "Brillenstärling"
+        }
+      }
+    },
+    {
+      "id": "buntfalke",
+      "name": "Buntfalke",
+      "scientificName": "Falco sparverius",
+      "taxonID": 4665,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/buntfalke.heic",
+          "sha256": "4c66cb91eb8ca1dd549c745a892e4d52ca78a48dc7a92e44eb517168b597fbd6",
+          "license": "CC-BY-4.0",
+          "attribution": "Jonathan Eisen",
+          "sourceURL": "https://www.inaturalist.org/observations/107143166",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/buntfalke.m4a",
+          "sha256": "cdfd6089866b1858e156bc636cf74cc1f1794f71663a1013159ce85ee1069ac4",
+          "text": "Buntfalke"
+        }
+      }
+    },
+    {
+      "id": "kragenente",
+      "name": "Kragenente",
+      "scientificName": "Histrionicus histrionicus",
+      "taxonID": 7111,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/kragenente.heic",
+          "sha256": "514426bb7e64440fcd87b455f95134da37d2f635627987a373759c97451871c1",
+          "license": "CC0-1.0",
+          "attribution": "Chrissy McClarren and Andy Reago",
+          "sourceURL": "https://www.inaturalist.org/observations/86911376",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/kragenente.m4a",
+          "sha256": "8e64ff30a733fe05af7840040b365d72a7815a9251aab8797ffbaa7ce7b69c3f",
+          "text": "Kragenente"
+        }
+      }
+    },
+    {
+      "id": "zimtente",
+      "name": "Zimtente",
+      "scientificName": "Spatula cyanoptera",
+      "taxonID": 558434,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/zimtente.heic",
+          "sha256": "35138777d930a528f627b324541db200e1a2872b2333df90b669089fac859a42",
+          "license": "CC-BY-4.0",
+          "attribution": "Dan Vickers",
+          "sourceURL": "https://www.inaturalist.org/observations/259260199",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/zimtente-2.heic",
+          "sha256": "00936147b1ad6e98623dd9ffa81429495f2c539a7a044ff6f2e4a4444707adec",
+          "license": "CC-BY-4.0",
+          "attribution": "Alberto Sánchez",
+          "sourceURL": "https://www.inaturalist.org/observations/158762689",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/zimtente.m4a",
+          "sha256": "94a634801b71fce074ce887d9f21eb5f313a62b5f22a20e466febf4c50566d7d",
+          "text": "Zimtente"
+        }
+      }
+    }
+  ]
+}
