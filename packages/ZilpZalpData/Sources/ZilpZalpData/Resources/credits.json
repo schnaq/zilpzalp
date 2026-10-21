@@ -3615,6 +3615,16 @@
       "packTitle": "Vögel Deutschlands",
       "birdID": "buntspecht",
       "birdName": "Buntspecht",
+      "kind": "photo",
+      "attribution": "Donald Davesne",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/263658763"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "buntspecht",
+      "birdName": "Buntspecht",
       "kind": "call",
       "attribution": "Benoît Van Hecke (XC704068)",
       "license": "CC-BY-SA-4.0",
@@ -4315,6 +4325,16 @@
       "packTitle": "Vögel Deutschlands",
       "birdID": "rabenkraehe",
       "birdName": "Rabenkrähe",
+      "kind": "photo",
+      "attribution": "jamie-aa",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/265119071"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "rabenkraehe",
+      "birdName": "Rabenkrähe",
       "kind": "call",
       "attribution": "Marie-Lan Taÿ Pamart (XC511943)",
       "license": "CC-BY-SA-4.0",
@@ -4739,6 +4759,16 @@
       "attribution": "Дмитрий Кошелев",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/317740320"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "moenchsgrasmuecke",
+      "birdName": "Mönchsgrasmücke",
+      "kind": "photo",
+      "attribution": "Diego González Dopico",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/258415254"
     },
     {
       "packID": "deutschland",
@@ -5575,6 +5605,16 @@
       "packTitle": "Vögel Deutschlands",
       "birdID": "turmfalke",
       "birdName": "Turmfalke",
+      "kind": "photo",
+      "attribution": "Donsky",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/270247957"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "turmfalke",
+      "birdName": "Turmfalke",
       "kind": "call",
       "attribution": "Sonothèque ADVL (XC705934)",
       "license": "CC0-1.0",
@@ -5669,6 +5709,16 @@
       "attribution": "Vladimir Kharuk",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/40072653"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "wanderfalke",
+      "birdName": "Wanderfalke",
+      "kind": "photo",
+      "attribution": "Andrew Bazdyrev",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/188895528"
     },
     {
       "packID": "deutschland",
@@ -5869,6 +5919,16 @@
       "attribution": "Susan Marley",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/106805518"
+    },
+    {
+      "packID": "deutschland",
+      "packTitle": "Vögel Deutschlands",
+      "birdID": "mandarinente",
+      "birdName": "Mandarinente",
+      "kind": "call",
+      "attribution": "teesdalebirder (XC1073953)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/1073953"
     },
     {
       "packID": "deutschland",
