@@ -25,7 +25,7 @@ const FAQ = [
     a: (
       <>
         Eine KI-Stimme: „Ava“ von ElevenLabs. Wir erzeugen die Aufnahmen, bevor
-        die App erscheint; die App selbst spricht ElevenLabs nie an. Fehlt
+        die App erscheint; die App selbst spricht ElevenLabs nie an. Gibt es
         für einen Satz keine Aufnahme, liest die Stimme des Geräts.
       </>
     ),
