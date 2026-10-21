@@ -34,7 +34,7 @@ const FACTS = [
 const PARENTS_CAN = [
   'Pakete ansehen und neue Vögel laden.',
   'Pro Kind wählen: Sticker nach drei oder fünf Treffern auf Anhieb.',
-  'Das Vorlesen ausschalten. Die Vogelrufe bleiben.',
+  'Vorlesen von selbst oder erst auf Antippen.',
   'Eine tägliche Spielzeit. Danach heißt es „Zeit fürs Nest“.',
 ]
 
