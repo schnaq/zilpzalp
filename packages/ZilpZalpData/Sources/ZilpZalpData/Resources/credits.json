@@ -3671,6 +3671,606 @@
       "sourceURL": "https://xeno-canto.org/705907"
     },
     {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "uhu",
+      "birdName": "Uhu",
+      "kind": "photo",
+      "attribution": "Susan Marley",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/90584037"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "uhu",
+      "birdName": "Uhu",
+      "kind": "photo",
+      "attribution": "Artemy Savko",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/232657564"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "uhu",
+      "birdName": "Uhu",
+      "kind": "call",
+      "attribution": "Lionel Triboulin (XC1070276)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/1070276"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "schleiereule",
+      "birdName": "Schleiereule",
+      "kind": "photo",
+      "attribution": "Frank Sengpiel",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/103487807"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "schleiereule",
+      "birdName": "Schleiereule",
+      "kind": "call",
+      "attribution": "Sonothèque ADVL (XC707104)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/707104"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "waldkauz",
+      "birdName": "Waldkauz",
+      "kind": "photo",
+      "attribution": "Christoph Moning",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/73835627"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "waldkauz",
+      "birdName": "Waldkauz",
+      "kind": "call",
+      "attribution": "Benoît Van Hecke (XC696425)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/696425"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "steinkauz",
+      "birdName": "Steinkauz",
+      "kind": "photo",
+      "attribution": "SteveM4560",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/151025147"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "steinkauz",
+      "birdName": "Steinkauz",
+      "kind": "photo",
+      "attribution": "SteveM4560",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/151119696"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "steinkauz",
+      "birdName": "Steinkauz",
+      "kind": "photo",
+      "attribution": "SteveM4560",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/151025269"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "steinkauz",
+      "birdName": "Steinkauz",
+      "kind": "call",
+      "attribution": "Sonothèque ADVL (XC1079674)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/1079674"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "waldohreule",
+      "birdName": "Waldohreule",
+      "kind": "photo",
+      "attribution": "Charlotte Kirchner",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/320382484"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "waldohreule",
+      "birdName": "Waldohreule",
+      "kind": "photo",
+      "attribution": "Dario Taraborelli",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/101991293"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "sperlingskauz",
+      "birdName": "Sperlingskauz",
+      "kind": "photo",
+      "attribution": "Mikhail Nevsky",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/68878980"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "sperlingskauz",
+      "birdName": "Sperlingskauz",
+      "kind": "photo",
+      "attribution": "egorbirder",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/143736237"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "sperlingskauz",
+      "birdName": "Sperlingskauz",
+      "kind": "photo",
+      "attribution": "Roland Godon",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/95674496"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "schnee-eule",
+      "birdName": "Schnee-Eule",
+      "kind": "photo",
+      "attribution": "Dustin Snider",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/195441759"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "schnee-eule",
+      "birdName": "Schnee-Eule",
+      "kind": "photo",
+      "attribution": "Matt Felperin",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/104681391"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "bartkauz",
+      "birdName": "Bartkauz",
+      "kind": "photo",
+      "attribution": "Nigel Voaden",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/2488687"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "bartkauz",
+      "birdName": "Bartkauz",
+      "kind": "photo",
+      "attribution": "Vladimir Kharuk",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/105664403"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "bartkauz",
+      "birdName": "Bartkauz",
+      "kind": "photo",
+      "attribution": "Александр Краснов",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/193584871"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "kaninchenkauz",
+      "birdName": "Kaninchenkauz",
+      "kind": "photo",
+      "attribution": "Curtis Meyers",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/270339696"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "kaninchenkauz",
+      "birdName": "Kaninchenkauz",
+      "kind": "photo",
+      "attribution": "Scott Clark",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/107450615"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "virginia-uhu",
+      "birdName": "Virginia-Uhu",
+      "kind": "photo",
+      "attribution": "Brooke J.",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/202251518"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "steinadler",
+      "birdName": "Steinadler",
+      "kind": "photo",
+      "attribution": "P Holroyd",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/315702535"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "seeadler",
+      "birdName": "Seeadler",
+      "kind": "photo",
+      "attribution": "София Хохлачёва",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/246152980"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "seeadler",
+      "birdName": "Seeadler",
+      "kind": "photo",
+      "attribution": "Валерия Ковалева",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/195372888"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "weisskopfseeadler",
+      "birdName": "Weißkopfseeadler",
+      "kind": "photo",
+      "attribution": "Justin Flint",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/335312498"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "weisskopfseeadler",
+      "birdName": "Weißkopfseeadler",
+      "kind": "photo",
+      "attribution": "Marcel_Pepin",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/217347432"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "weisskopfseeadler",
+      "birdName": "Weißkopfseeadler",
+      "kind": "photo",
+      "attribution": "Judy Gallagher",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/340586345"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "weisskopfseeadler",
+      "birdName": "Weißkopfseeadler",
+      "kind": "call",
+      "attribution": "Rachel Thurman (XC1163370)",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://xeno-canto.org/1163370"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "riesenseeadler",
+      "birdName": "Riesenseeadler",
+      "kind": "photo",
+      "attribution": "Damien Mullin",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/143304746"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "schreiseeadler",
+      "birdName": "Schreiseeadler",
+      "kind": "photo",
+      "attribution": "avocat",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/108635650"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "schreiseeadler",
+      "birdName": "Schreiseeadler",
+      "kind": "photo",
+      "attribution": "Paul Hoekman",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/173728397"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "schreiseeadler",
+      "birdName": "Schreiseeadler",
+      "kind": "photo",
+      "attribution": "Dylan Leonard",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/221877739"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "harpyie",
+      "birdName": "Harpyie",
+      "kind": "photo",
+      "attribution": "Christoph Moning",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/250038602"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "harpyie",
+      "birdName": "Harpyie",
+      "kind": "photo",
+      "attribution": "Laura Gaudette",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/37017086"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "maeusebussard",
+      "birdName": "Mäusebussard",
+      "kind": "photo",
+      "attribution": "Andrew Deacon",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/195355285"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "maeusebussard",
+      "birdName": "Mäusebussard",
+      "kind": "photo",
+      "attribution": "Christoph Moning",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/192097624"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "maeusebussard",
+      "birdName": "Mäusebussard",
+      "kind": "photo",
+      "attribution": "Alexis Tinker-Tsavalas",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/25390413"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "maeusebussard",
+      "birdName": "Mäusebussard",
+      "kind": "call",
+      "attribution": "Fiete Nörenberg (XC1036868)",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://xeno-canto.org/1036868"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "sekretaer",
+      "birdName": "Sekretär",
+      "kind": "photo",
+      "attribution": "Jan Ebr & Ivana Ebrová",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/71507882"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "sekretaer",
+      "birdName": "Sekretär",
+      "kind": "photo",
+      "attribution": "Tristan Jobin",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/285308541"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "rotmilan",
+      "birdName": "Rotmilan",
+      "kind": "photo",
+      "attribution": "Sara Navarro",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/69828854"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "rotmilan",
+      "birdName": "Rotmilan",
+      "kind": "call",
+      "attribution": "Pascal Christe (XC518958)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/518958"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "turmfalke",
+      "birdName": "Turmfalke",
+      "kind": "photo",
+      "attribution": "Donsky",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/269108640"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "turmfalke",
+      "birdName": "Turmfalke",
+      "kind": "photo",
+      "attribution": "Thorsten Hackbarth",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/105032479"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "turmfalke",
+      "birdName": "Turmfalke",
+      "kind": "photo",
+      "attribution": "Donsky",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/375588312"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "turmfalke",
+      "birdName": "Turmfalke",
+      "kind": "call",
+      "attribution": "Sonothèque ADVL (XC705934)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/705934"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "wanderfalke",
+      "birdName": "Wanderfalke",
+      "kind": "photo",
+      "attribution": "Shirley Zundell",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/12075369"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "wanderfalke",
+      "birdName": "Wanderfalke",
+      "kind": "call",
+      "attribution": "Sonothèque ADVL (XC705937)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/705937"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "andenkondor",
+      "birdName": "Andenkondor",
+      "kind": "photo",
+      "attribution": "Luis Enrique Calderón Franco",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/48609433"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "andenkondor",
+      "birdName": "Andenkondor",
+      "kind": "photo",
+      "attribution": "Viktor",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/331849161"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "andenkondor",
+      "birdName": "Andenkondor",
+      "kind": "photo",
+      "attribution": "Frank Dietze",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/42508091"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "bartgeier",
+      "birdName": "Bartgeier",
+      "kind": "photo",
+      "attribution": "Justine",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/245209067"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "bartgeier",
+      "birdName": "Bartgeier",
+      "kind": "photo",
+      "attribution": "Kudaibergen Amirekul",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/107536421"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "gaensegeier",
+      "birdName": "Gänsegeier",
+      "kind": "photo",
+      "attribution": "Diego González Dopico",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/317526057"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "truthahngeier",
+      "birdName": "Truthahngeier",
+      "kind": "photo",
+      "attribution": "Andy Wilson",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/80827613"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "koenigsgeier",
+      "birdName": "Königsgeier",
+      "kind": "photo",
+      "attribution": "Paulo Mascaretti",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/168479025"
+    },
+    {
+      "packID": "greifvoegel-eulen",
+      "packTitle": "Greifvögel & Eulen",
+      "birdID": "koenigsgeier",
+      "birdName": "Königsgeier",
+      "kind": "photo",
+      "attribution": "Jean-Paul Boerekamps",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/74490210"
+    },
+    {
       "packID": "welt",
       "packTitle": "Vögel der Welt",
       "birdID": "kaiserpinguin",
@@ -4713,6 +5313,12 @@
       "license": "CC-BY-4.0",
       "sourceURL": "https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md",
       "usedIn": "Vögel Deutschlands"
+    },
+    {
+      "attribution": "Stimme: Ava (ElevenLabs)",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md",
+      "usedIn": "Greifvögel & Eulen"
     },
     {
       "attribution": "Stimme: Ava (ElevenLabs)",
