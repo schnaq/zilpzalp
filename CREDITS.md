@@ -892,6 +892,7 @@ the source declared.
 | Wegekuckuck | Photo | Jody Shugart | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/6925315> |
 | Wegekuckuck | Photo | Jonathan Eisen | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/238694891> |
 | Rubinkehlkolibri | Photo | Blake Ross | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/118738483> |
+| Rubinkehlkolibri | Call | Jonathon Jongsma (XC109598) | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) | <https://xeno-canto.org/109598> |
 | Rotkardinal | Photo | Bill Levine | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/104353677> |
 | Rotkardinal | Photo | Terry Woodward | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/349679447> |
 | Rotkardinal | Photo | Craig Hensley | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/152692384> |
@@ -906,6 +907,7 @@ the source declared.
 | Truthahn | Photo | kirk gardner | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/153184238> |
 | Truthahn | Call | Jonathon Jongsma (XC320490) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/320490> |
 | Annakolibri | Photo | William Walker | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/250218495> |
+| Annakolibri | Call | Bushman (XC157666) | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) | <https://xeno-canto.org/157666> |
 | Eistaucher | Photo | Christian Back | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/102565488> |
 | Eistaucher | Call | Doug Hynes (XC992792) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/992792> |
 | Schnee-Eule | Photo | Dustin Snider | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/195441759> |

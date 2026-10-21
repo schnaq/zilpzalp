@@ -8433,6 +8433,16 @@
     {
       "packID": "nordamerika",
       "packTitle": "Nordamerika",
+      "birdID": "rubinkehlkolibri",
+      "birdName": "Rubinkehlkolibri",
+      "kind": "call",
+      "attribution": "Jonathon Jongsma (XC109598)",
+      "license": "CC-BY-SA-3.0",
+      "sourceURL": "https://xeno-canto.org/109598"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
       "birdID": "rotkardinal",
       "birdName": "Rotkardinal",
       "kind": "photo",
@@ -8569,6 +8579,16 @@
       "attribution": "William Walker",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/250218495"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
+      "birdID": "annakolibri",
+      "birdName": "Annakolibri",
+      "kind": "call",
+      "attribution": "Bushman (XC157666)",
+      "license": "CC-BY-SA-3.0",
+      "sourceURL": "https://xeno-canto.org/157666"
     },
     {
       "packID": "nordamerika",
