@@ -7163,12 +7163,32 @@
     {
       "packID": "nordamerika",
       "packTitle": "Nordamerika",
+      "birdID": "rotkehl-huettensaenger",
+      "birdName": "Rotkehl-Hüttensänger",
+      "kind": "call",
+      "attribution": "Jonathon Jongsma (XC179669)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/179669"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
       "birdID": "wanderdrossel",
       "birdName": "Wanderdrossel",
       "kind": "photo",
       "attribution": "Paul",
       "license": "CC0-1.0",
       "sourceURL": "https://www.inaturalist.org/observations/282290498"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
+      "birdID": "wanderdrossel",
+      "birdName": "Wanderdrossel",
+      "kind": "call",
+      "attribution": "Doug Hynes (XC570791)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/570791"
     },
     {
       "packID": "nordamerika",
@@ -7209,6 +7229,16 @@
       "attribution": "Wendy McCrady",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/196699867"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
+      "birdID": "brautente",
+      "birdName": "Brautente",
+      "kind": "call",
+      "attribution": "Jonathon Jongsma (XC177728)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/177728"
     },
     {
       "packID": "nordamerika",
@@ -7483,6 +7513,16 @@
     {
       "packID": "nordamerika",
       "packTitle": "Nordamerika",
+      "birdID": "virginia-uhu",
+      "birdName": "Virginia-Uhu",
+      "kind": "call",
+      "attribution": "Michael & Katie LaTour (XC450919)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/450919"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
       "birdID": "truthahngeier",
       "birdName": "Truthahngeier",
       "kind": "photo",
@@ -7513,6 +7553,16 @@
     {
       "packID": "nordamerika",
       "packTitle": "Nordamerika",
+      "birdID": "kanadagans",
+      "birdName": "Kanadagans",
+      "kind": "call",
+      "attribution": "Doug Hynes (XC934272)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/934272"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
       "birdID": "rotkopfspecht",
       "birdName": "Rotkopfspecht",
       "kind": "photo",
@@ -7533,6 +7583,16 @@
     {
       "packID": "nordamerika",
       "packTitle": "Nordamerika",
+      "birdID": "rotkopfspecht",
+      "birdName": "Rotkopfspecht",
+      "kind": "call",
+      "attribution": "Jonathon Jongsma (XC254603)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/254603"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
       "birdID": "helmspecht",
       "birdName": "Helmspecht",
       "kind": "photo",
@@ -7549,6 +7609,16 @@
       "attribution": "Sean Frey",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/244135777"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
+      "birdID": "helmspecht",
+      "birdName": "Helmspecht",
+      "kind": "call",
+      "attribution": "Jonathon Jongsma (XC241106)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/241106"
     },
     {
       "packID": "nordamerika",
@@ -7583,6 +7653,16 @@
     {
       "packID": "nordamerika",
       "packTitle": "Nordamerika",
+      "birdID": "schopfmeise",
+      "birdName": "Schopfmeise",
+      "kind": "call",
+      "attribution": "The Vermont Birder Guy (XC789382)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/789382"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
       "birdID": "indigofink",
       "birdName": "Indigofink",
       "kind": "photo",
@@ -7609,6 +7689,16 @@
       "attribution": "Adam Jackson",
       "license": "CC0-1.0",
       "sourceURL": "https://www.inaturalist.org/observations/193327326"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
+      "birdID": "indigofink",
+      "birdName": "Indigofink",
+      "kind": "call",
+      "attribution": "Matthias Sirch (XC384607)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/384607"
     },
     {
       "packID": "nordamerika",
@@ -7643,6 +7733,16 @@
     {
       "packID": "nordamerika",
       "packTitle": "Nordamerika",
+      "birdID": "goldzeisig",
+      "birdName": "Goldzeisig",
+      "kind": "call",
+      "attribution": "Jonathon Jongsma (XC428425)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/428425"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
       "birdID": "baltimoretrupial",
       "birdName": "Baltimoretrupial",
       "kind": "photo",
@@ -7659,6 +7759,16 @@
       "attribution": "Mike Duran",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/184586958"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
+      "birdID": "baltimoretrupial",
+      "birdName": "Baltimoretrupial",
+      "kind": "call",
+      "attribution": "Jonathon Jongsma (XC178046)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/178046"
     },
     {
       "packID": "nordamerika",
@@ -7693,6 +7803,16 @@
     {
       "packID": "nordamerika",
       "packTitle": "Nordamerika",
+      "birdID": "rotschulterstaerling",
+      "birdName": "Rotschulterstärling",
+      "kind": "call",
+      "attribution": "steve (XC1184072)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/1184072"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
       "birdID": "brillenstaerling",
       "birdName": "Brillenstärling",
       "kind": "photo",
@@ -7723,12 +7843,32 @@
     {
       "packID": "nordamerika",
       "packTitle": "Nordamerika",
+      "birdID": "brillenstaerling",
+      "birdName": "Brillenstärling",
+      "kind": "call",
+      "attribution": "Justin Watts (XC361454)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/361454"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
       "birdID": "guertelfischer",
       "birdName": "Gürtelfischer",
       "kind": "photo",
       "attribution": "Hunter Hammil",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/161277465"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
+      "birdID": "guertelfischer",
+      "birdName": "Gürtelfischer",
+      "kind": "call",
+      "attribution": "Doug Hynes (XC1008797)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/1008797"
     },
     {
       "packID": "nordamerika",
@@ -7763,6 +7903,16 @@
     {
       "packID": "nordamerika",
       "packTitle": "Nordamerika",
+      "birdID": "buntfalke",
+      "birdName": "Buntfalke",
+      "kind": "call",
+      "attribution": "Jonathon Jongsma (XC254589)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/254589"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
       "birdID": "kanadakranich",
       "birdName": "Kanadakranich",
       "kind": "photo",
@@ -7773,12 +7923,32 @@
     {
       "packID": "nordamerika",
       "packTitle": "Nordamerika",
+      "birdID": "kanadakranich",
+      "birdName": "Kanadakranich",
+      "kind": "call",
+      "attribution": "Doug Hynes (XC991765)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/991765"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
       "birdID": "diademhaeher",
       "birdName": "Diademhäher",
       "kind": "photo",
       "attribution": "Ren Gianforte",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/279288278"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
+      "birdID": "diademhaeher",
+      "birdName": "Diademhäher",
+      "kind": "call",
+      "attribution": "Ryan Douglas (XC1005237)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/1005237"
     },
     {
       "packID": "nordamerika",
@@ -7813,12 +7983,32 @@
     {
       "packID": "nordamerika",
       "packTitle": "Nordamerika",
+      "birdID": "blaureiher",
+      "birdName": "Blaureiher",
+      "kind": "call",
+      "attribution": "Doug Hynes (XC991513)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/991513"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
       "birdID": "streifenkauz",
       "birdName": "Streifenkauz",
       "kind": "photo",
       "attribution": "Steven Smethurst",
       "license": "CC0-1.0",
       "sourceURL": "https://www.inaturalist.org/observations/116656640"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
+      "birdID": "streifenkauz",
+      "birdName": "Streifenkauz",
+      "kind": "call",
+      "attribution": "Doug Hynes (XC715195)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/715195"
     },
     {
       "packID": "nordamerika",
@@ -7853,6 +8043,16 @@
     {
       "packID": "nordamerika",
       "packTitle": "Nordamerika",
+      "birdID": "sumpfohreule",
+      "birdName": "Sumpfohreule",
+      "kind": "call",
+      "attribution": "Kevin Guille (XC1105612)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/1105612"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
       "birdID": "trompeterschwan",
       "birdName": "Trompeterschwan",
       "kind": "photo",
@@ -7869,6 +8069,16 @@
       "attribution": "elik03",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/261694018"
+    },
+    {
+      "packID": "nordamerika",
+      "packTitle": "Nordamerika",
+      "birdID": "trompeterschwan",
+      "birdName": "Trompeterschwan",
+      "kind": "call",
+      "attribution": "Jonathon Jongsma (XC413784)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/413784"
     },
     {
       "packID": "nordamerika",
