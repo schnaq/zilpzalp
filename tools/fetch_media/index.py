@@ -76,7 +76,8 @@ BUNDLED_PACKS = ("deutschland",)
 # over. A retired pack leaves `packs` and is listed under `retired`, so a
 # device that has it installed is offered the successors and then lets it go.
 # Every species of a retired pack must be in one of its successors — `build`
-# refuses otherwise — or a child would lose those stickers from the album.
+# refuses otherwise, as long as the retired manifest is still in data/packs —
+# or a child would lose those stickers from the album.
 #
 # "Vögel der Welt" (welt) was dissolved into the regional packs (2026-10-22).
 # Its manifest is gone from data/packs, so `check_retired` no longer checks its

@@ -313,10 +313,13 @@ class RetiredTests(PacksTestCase):
 class RealRetiredTests(unittest.TestCase):
     """`RETIRED` against the packs that are really in `data/packs`."""
 
-    def test_every_successor_is_a_pack(self) -> None:
-        """A misspelt successor would quietly stop the app's migration."""
+    def test_every_successor_is_a_downloadable_pack(self) -> None:
+        """A misspelt, bundled or retired successor never shows up in the
+        index's `packs`, and the app migrates only once all of them do.
+        Whether they are in the bucket is for the index after an upload."""
+        downloadable = set(index.packs()) - set(index.BUNDLED_PACKS) - set(index.RETIRED)
         for successors in index.RETIRED.values():
-            self.assertLessEqual(set(successors), set(index.packs()))
+            self.assertLessEqual(set(successors), downloadable)
 
 
 class PreviewTests(PacksTestCase):
