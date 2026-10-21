@@ -525,6 +525,116 @@
           "text": "Japanbrillenvogel"
         }
       }
+    },
+    {
+      "id": "saruskranich",
+      "name": "Saruskranich",
+      "scientificName": "Antigone antigone",
+      "taxonID": 508056,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "bankivahuhn",
+      "name": "Bankivahuhn",
+      "scientificName": "Gallus gallus",
+      "taxonID": 882,
+      "article": "das",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "rotohrbuelbuel",
+      "name": "Rotohrbülbül",
+      "scientificName": "Pycnonotus jocosus",
+      "taxonID": 14591,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "braunliest",
+      "name": "Braunliest",
+      "scientificName": "Halcyon smyrnensis",
+      "taxonID": 204519,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "gruenspint",
+      "name": "Grünspint",
+      "scientificName": "Merops orientalis",
+      "taxonID": 2229,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "blauelster",
+      "name": "Blauelster",
+      "scientificName": "Cyanopica cyanus",
+      "taxonID": 72785,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "glanzkraehe",
+      "name": "Glanzkrähe",
+      "scientificName": "Corvus splendens",
+      "taxonID": 8031,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "dajaldrossel",
+      "name": "Dajaldrossel",
+      "scientificName": "Copsychus saularis",
+      "taxonID": 204491,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "paradiesschnaepper",
+      "name": "Paradiesschnäpper",
+      "scientificName": "Terpsiphone paradisi",
+      "taxonID": 549464,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "spiegelrotschwanz",
+      "name": "Spiegelrotschwanz",
+      "scientificName": "Phoenicurus auroreus",
+      "taxonID": 12993,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "perlhalstaube",
+      "name": "Perlhalstaube",
+      "scientificName": "Spilopelia chinensis",
+      "taxonID": 1455918,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
     }
   ]
 }
