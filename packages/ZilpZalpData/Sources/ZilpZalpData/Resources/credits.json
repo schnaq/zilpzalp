@@ -6713,6 +6713,16 @@
     {
       "packID": "feld-wiese",
       "packTitle": "Feld, Wiese & Zugvögel",
+      "birdID": "kornweihe",
+      "birdName": "Kornweihe",
+      "kind": "call",
+      "attribution": "Benoît Van Hecke (XC558933)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/558933"
+    },
+    {
+      "packID": "feld-wiese",
+      "packTitle": "Feld, Wiese & Zugvögel",
       "birdID": "rohrweihe",
       "birdName": "Rohrweihe",
       "kind": "photo",
