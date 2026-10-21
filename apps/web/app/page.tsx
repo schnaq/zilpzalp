@@ -29,12 +29,12 @@ const FACTS = [
   {
     term: 'Eine KI-Stimme',
     detail:
-      'Namen und Aufgaben spricht eine KI-Stimme: „Ava“ von ElevenLabs. Sie liest von selbst vor oder erst, wenn das Kind tippt.',
+      'Namen und Aufgaben spricht eine KI-Stimme: „Ava“ von ElevenLabs.',
   },
   {
     term: 'Sterne und Sticker',
     detail:
-      'Jede Runde bringt bis zu drei Sterne. Wer einen Vogel drei- oder fünfmal auf Anhieb erkennt, bekommt seinen Sticker in die Sammlung.',
+      'Jede Runde bringt bis zu drei Sterne. Wer einen Vogel oft genug auf Anhieb erkennt, bekommt seinen Sticker in die Sammlung.',
   },
   {
     term: 'Für mehrere Kinder',
