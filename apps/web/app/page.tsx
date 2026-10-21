@@ -11,52 +11,37 @@ import { Screenshots } from './screenshots'
 /// App Store metadata are German.
 const APP_STORE_URL = 'https://apps.apple.com/de/app/zilpzalp/id6797092155'
 
+const SOURCE_URL = 'https://github.com/schnaq/zilpzalp'
+
 const FACTS = [
   {
-    term: '70 Arten dabei',
+    term: 'Über 300 Vögel',
     detail:
-      'Amsel, Blaumeise, Rotkehlchen und der Zilpzalp — bis hin zu Eisvogel, Uhu, Kranich und Weißstorch. Alle stecken in der App, zum Spielen braucht sie kein Netz.',
-  },
-  {
-    term: 'Über 300 mit Paketen',
-    detail:
-      'Pakete zum Laden: Afrika, Asien, Australien & Ozeanien, Nordamerika, Südamerika & Regenwald, Polar & Meer, Berge & Wald, Feld, Wiese & Zugvögel, Wasser & Küste, Greifvögel & Eulen. Kinder können mehrere Pakete zusammen spielen.',
-  },
-  {
-    term: 'Ohne Lesen',
-    detail: 'Jede Aufgabe wird gesprochen, und zur Antwort stehen vier Fotos ohne Namen.',
-  },
-  {
-    term: 'Eine KI-Stimme',
-    detail:
-      'Vogelnamen und Ansagen spricht eine KI-Stimme: „Ava“ von ElevenLabs.',
+      '70 aus Deutschland sind schon dabei. Mehr gibt es in Paketen aus aller Welt, und mehrere Pakete lassen sich zusammen spielen.',
   },
   {
     term: 'Sterne und Sticker',
     detail:
-      'Jede Runde bringt bis zu drei Sterne. Wer einen Vogel oft genug auf Anhieb erkennt, bekommt seinen Sticker in die Sammlung.',
+      'Jede Runde bringt bis zu drei Sterne. Wer einen Vogel oft genug auf Anhieb erkennt, bekommt seinen Sticker.',
   },
   {
-    term: 'Für mehrere Kinder',
+    term: 'Mehrere Kinder',
     detail:
-      'Jedes Kind hat ein Profil mit Namen und Vogel-Avatar und kann beides selbst ändern. Alles bleibt auf dem Gerät.',
+      'Jedes hat ein eigenes Profil mit Namen und Vogel-Avatar und darf beides selbst ändern.',
   },
 ]
 
 const PARENTS_CAN = [
-  'Der Elternbereich öffnet sich mit Face ID oder dem Gerätecode — und ohne eingerichteten Code mit einer Rechenaufgabe für Erwachsene.',
-  'Neue Vögel gibt es nur hier: Pakete in einer Übersicht mit Fotos ansehen und laden.',
-  'Für jedes Kind festlegen, ob der Sticker nach drei oder fünf Treffern kommt.',
-  'Wählen, ob die App von selbst vorliest oder erst auf Antippen.',
-  'Die tägliche Spielzeit lässt sich begrenzen. Ist sie aufgebraucht, sagt die App freundlich „Zeit fürs Nest“.',
-  'Links, die aus der App hinausführen, öffnen sich erst nach einer Rechenaufgabe für Erwachsene.',
+  'Pakete ansehen und neue Vögel laden.',
+  'Pro Kind wählen: Sticker nach drei oder fünf Treffern auf Anhieb.',
+  'Das Vorlesen ausschalten. Die Vogelrufe bleiben.',
+  'Eine tägliche Spielzeit. Danach heißt es „Zeit fürs Nest“.',
 ]
 
 const APP_DOES_NOT = [
-  'Keine Datenerhebung. Kein Konto, keine Anmeldung, kein Login mit irgendetwas.',
-  'Keine Werbung und keine In-App-Käufe.',
-  'Kein Analyse- oder Absturzmelde-Werkzeug von Dritten.',
-  'Kein Tracking und keine Weitergabe an Dritte.',
+  'Kein Konto und keine Datenerhebung.',
+  'Keine Werbung, keine In-App-Käufe, kein Tracking.',
+  'Kein Internet zum Spielen nötig.',
 ]
 
 // Static on purpose. The screenshot section reads the file system while the
@@ -72,18 +57,15 @@ export default function Home() {
           <div>
             <h1 className="rise">Vögel kennenlernen, bevor man lesen kann.</h1>
             <p className="lead rise rise-2">
-              ZilpZalp bringt Kindern die Vögel vor der eigenen Haustür nahe —
-              und auf Wunsch die aus aller Welt. Zwei Spiele, über 300 Arten,
-              viele Sterne.
+              ZilpZalp zeigt Kindern die Vögel vor der Haustür — und auf Wunsch
+              die aus aller Welt.
             </p>
             <div className="hero-actions rise rise-3">
               <a className="pill" href={APP_STORE_URL}>
                 <StarIcon />
                 Im App Store laden
               </a>
-              <p className="hero-note">
-                Für iPhone und iPad. Kostenlos, ohne Konto, ohne Werbung.
-              </p>
+              <p className="hero-note">Kostenlos für iPhone und iPad.</p>
             </div>
           </div>
           <div className="hero-art rise rise-2">
@@ -102,10 +84,10 @@ export default function Home() {
       <section id="inhalt">
         <div className="wrap">
           <div className="section-head">
-            <h2>Zwei Spiele, eine Frage</h2>
+            <h2>Zwei Spiele</h2>
             <p className="lead">
-              Beide Spiele fragen dasselbe auf zwei Arten — und beide kommen ohne
-              ein geschriebenes Wort aus.
+              Die Vogelnamen spricht eine KI-Stimme, geantwortet wird mit
+              Fotos. Lesen muss niemand.
             </p>
           </div>
 
@@ -116,10 +98,9 @@ export default function Home() {
               </span>
               <h3>Erkenne den Vogel</h3>
               <p>
-                Ein Vogelname wird vorgelesen, vier Fotos liegen auf dem Tisch.
-                Das Kind tippt den richtigen Vogel an. Beim zweiten Versuch
-                klappt es fast immer — und falsch ist nie rot, sondern
-                sonnengelb mit „Versuchs nochmal“.
+                Die Stimme nennt einen Vogel, das Kind tippt auf das passende
+                von vier Fotos. Daneben? Dann heißt es freundlich „Versuchs
+                nochmal“.
               </p>
             </article>
             <article className="game">
@@ -128,9 +109,8 @@ export default function Home() {
               </span>
               <h3>Wer singt da?</h3>
               <p>
-                Eine echte Vogelstimme erklingt. Welcher der vier Vögel war das?
-                Ein Tipp auf den Lautsprecher spielt die Stimme noch einmal, so
-                oft das Kind mag.
+                Ein echter Vogelruf erklingt. Welcher der vier Vögel war das?
+                Anhören geht so oft, wie das Kind mag.
               </p>
             </article>
           </div>
@@ -151,8 +131,7 @@ export default function Home() {
           <div className="section-head">
             <h2>Ein Blick in die App</h2>
             <p className="lead">
-              Große Flächen, kräftige Farben, keine Menüs zum Verlaufen: alles
-              ist für Finger gebaut, die noch nicht sicher zielen.
+              Große Knöpfe, kräftige Farben, keine Menüs zum Verlaufen.
             </p>
           </div>
           <Screenshots />
@@ -162,16 +141,16 @@ export default function Home() {
       <section>
         <div className="wrap">
           <div className="section-head">
-            <h2>Für Erwachsene</h2>
+            <h2>Für Eltern</h2>
             <p className="lead">
-              ZilpZalp ist eine App für die Kids Category des App Store. Was das
-              bedeutet, steht hier — und nicht im Kleingedruckten.
+              Der Elternbereich ist mit Face ID, Touch ID oder dem Gerätecode
+              gesichert.
             </p>
           </div>
 
           <div className="columns">
             <div className="column">
-              <h3>Was Erwachsene einstellen</h3>
+              <h3>Was Eltern einstellen</h3>
               <ul className="ticks">
                 {PARENTS_CAN.map((item) => (
                   <li key={item}>
@@ -182,7 +161,7 @@ export default function Home() {
               </ul>
             </div>
             <div className="column">
-              <h3>Was die App nicht tut</h3>
+              <h3>Was es nicht gibt</h3>
               <ul className="ticks ticks--none">
                 {APP_DOES_NOT.map((item) => (
                   <li key={item}>
@@ -192,7 +171,7 @@ export default function Home() {
                 ))}
               </ul>
               <p>
-                Ausführlich steht das in der{' '}
+                Mehr dazu in der{' '}
                 <Link href="/datenschutz">Datenschutzerklärung</Link>.
               </p>
             </div>
@@ -203,25 +182,15 @@ export default function Home() {
       <section>
         <div className="wrap">
           <div className="section-head section-head--tight">
-            <h2>Echte Vögel, freie Medien</h2>
+            <h2>Freie Fotos, offener Code</h2>
           </div>
           <p>
-            Die Fotos stammen von Naturbeobachterinnen und Naturbeobachtern auf
-            iNaturalist, die Stimmen von Aufnahmen auf xeno-canto — jedes Bild
-            und jede Aufnahme unter einer freien Lizenz (CC0, CC BY oder
-            CC BY-SA), keine Ausnahme. Wer was beigesteuert hat, steht offen
-            einsehbar in der App unter „Über ZilpZalp“ → „Fotos &amp; Dank“,
-            und diese Liste wird aus denselben Daten erzeugt wie die Dateien
-            selbst. Sie kann also gar nicht veralten.
+            Die Fotos kommen von iNaturalist, die Vogelrufe von xeno-canto,
+            alle unter freier Lizenz (CC0, CC BY oder CC BY-SA). Wer sie
+            beigesteuert hat, steht in der App unter „Über ZilpZalp“. Der
+            Quellcode von ZilpZalp liegt offen auf{' '}
+            <a href={SOURCE_URL}>GitHub</a>.
           </p>
-        </div>
-      </section>
-
-      <section>
-        <div className="wrap">
-          <div className="section-head section-head--tight">
-            <h2>Ein Spiel von Johanna Hillebrand und Christian Meter</h2>
-          </div>
         </div>
       </section>
     </main>
