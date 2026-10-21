@@ -884,35 +884,80 @@ the source declared.
 
 | Bird | Kind | Author | Licence | Source |
 | --- | --- | --- | --- | --- |
+| Silbermöwe | Photo | Diego González Dopico | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/240409189> |
+| Silbermöwe | Photo | Brenda Black | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/256101074> |
 | Dreizehenmöwe | Photo | Quinten Wiegersma | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/99626453> |
+| Dreizehenmöwe | Photo | Алексей Логинов | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/169137079> |
 | Trottellumme | Photo | franciscodocampo | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/35832417> |
 | Tordalk | Photo | Ryan F. Mandelbaum | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/304543938> |
 | Tordalk | Photo | Roger Rittmaster | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/32693782> |
+| Tordalk | Photo | Jean-Paul Boerekamps | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/170678953> |
+| Basstölpel | Photo | Brooke J. | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/237827741> |
+| Basstölpel | Photo | Donald Davesne | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/164486687> |
+| Eissturmvogel | Photo | alicia penney | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/8211660> |
 | Eiderente | Photo | Nigel Voaden | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/1186757> |
+| Eiderente | Photo | Алексей Логинов | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/67791131> |
 | Brandgans | Photo | Антон Лабачоў | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/398773143> |
 | Brandgans | Photo | Kostas Zontanos | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/70546885> |
+| Brandgans | Photo | Mikael Nyman | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/360291076> |
 | Weißwangengans | Photo | Bill Keim | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/36646428> |
+| Weißwangengans | Photo | Morten Ross | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/83609226> |
+| Weißwangengans | Photo | Diego González Dopico | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/208537085> |
 | Säbelschnäbler | Photo | Christoph Moning | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/75534963> |
+| Säbelschnäbler | Photo | dawn2022 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/295200105> |
+| Säbelschnäbler | Photo | Лариса Артемьева | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/63582525> |
+| Rotschenkel | Photo | Griha Hasanov | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/166383611> |
+| Rotschenkel | Photo | Phil James | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/306236013> |
 | Alpenstrandläufer | Photo | Donald Davesne | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/75721462> |
+| Alpenstrandläufer | Photo | Mityakov DA | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/336837314> |
+| Alpenstrandläufer | Photo | Evan Feusi | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/371338519> |
+| Steinwälzer | Photo | Daniel Pineda Vera | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/117325635> |
+| Steinwälzer | Photo | Andra Waagmeester | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/31196970> |
+| Kampfläufer | Photo | Laura Gaudette | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/5981564> |
 | Sandregenpfeifer | Photo | Ged Tranter | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/241437630> |
 | Sandregenpfeifer | Photo | Вячеслав Юсупов | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/60962889> |
+| Sandregenpfeifer | Photo | Pål A. Olsvik | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/117504292> |
+| Großer Brachvogel | Photo | Светлана Царахова | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/205273715> |
+| Großer Brachvogel | Photo | Thomas Ebner | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/42069589> |
+| Großer Brachvogel | Photo | Kerri-Lee Harris | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/68585447> |
+| Silberreiher | Photo | Lisa Wiencek Gerbec | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/79867813> |
+| Silberreiher | Photo | Дмитрий Кошелев | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/196754834> |
 | Löffler | Photo | Diego González Dopico | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/369715703> |
 | Löffler | Photo | Andrea Chemello | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/36998601> |
+| Löffler | Photo | David F. Belmonte | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/168683901> |
+| Purpurreiher | Photo | Edmundas Greimas | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/214334744> |
+| Purpurreiher | Photo | Andrea Chemello | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/36998678> |
+| Rohrdommel | Photo | Thierry Arbault | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/250143131> |
+| Rohrdommel | Photo | Шальнов Кирилл | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/167361528> |
 | Flussseeschwalbe | Photo | Donald Davesne | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/270158340> |
 | Flussseeschwalbe | Photo | nikonbird007 | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/287598986> |
+| Flussseeschwalbe | Photo | Blake Ross | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/138342161> |
 | Zwergtaucher | Photo | Alexis Tinker-Tsavalas | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/55008155> |
 | Zwergtaucher | Photo | Gergely Nigg | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/73037567> |
+| Zwergtaucher | Photo | bko | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/355074268> |
 | Reiherente | Photo | Donald Davesne | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/70050197> |
 | Reiherente | Photo | Tomas Broucek | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/71162578> |
+| Reiherente | Photo | Tim Worwood | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/150231435> |
 | Krickente | Photo | Don Loarie | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/333376478> |
 | Krickente | Photo | Kostas Zontanos | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/145279755> |
 | Krickente | Photo | Laura Liedtke | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/148344723> |
 | Löffelente | Photo | Dan Vickers | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/262164450> |
+| Löffelente | Photo | Ron Bondy | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/339385176> |
+| Löffelente | Photo | Chris O'Donoghue | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/285804136> |
 | Schellente | Photo | Timothy McNitt | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/336665348> |
+| Schellente | Photo | Pam Hardy | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/360057985> |
 | Kolbenente | Photo | Christoph Moning | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/77408655> |
+| Kolbenente | Photo | Donald Davesne | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/69923463> |
+| Kolbenente | Photo | Andreas Stiller | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/364342183> |
+| Gänsesäger | Photo | Sandy Wolkenberg | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/103918457> |
 | Zwergsäger | Photo | Griha Hasanov | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/123802797> |
+| Fischadler | Photo | Валерия Ковалева | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/123771921> |
+| Fischadler | Photo | Diego Maldonado de la Torre | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/116753220> |
 | Flussuferläufer | Photo | Andrew Allen | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/90369115> |
+| Flussuferläufer | Photo | Alexis Lours | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/208965555> |
 | Bekassine | Photo | Вячеслав Юсупов | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/268545695> |
+| Bekassine | Photo | Gergely Nigg | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/74026323> |
+| Bekassine | Photo | Вячеслав Шуплецов | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/363643532> |
 | Papageitaucher | Photo | Diego González Dopico | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/277865524> |
 | Papageitaucher | Photo | Julia Moning | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/114739787> |
 | Papageitaucher | Photo | Christoph Moning | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/115403062> |

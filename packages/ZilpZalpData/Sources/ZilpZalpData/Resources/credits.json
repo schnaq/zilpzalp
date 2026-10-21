@@ -8203,12 +8203,42 @@
     {
       "packID": "wasser-kueste",
       "packTitle": "Wasser & Küste",
+      "birdID": "silbermoewe",
+      "birdName": "Silbermöwe",
+      "kind": "photo",
+      "attribution": "Diego González Dopico",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/240409189"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "silbermoewe",
+      "birdName": "Silbermöwe",
+      "kind": "photo",
+      "attribution": "Brenda Black",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/256101074"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
       "birdID": "dreizehenmoewe",
       "birdName": "Dreizehenmöwe",
       "kind": "photo",
       "attribution": "Quinten Wiegersma",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/99626453"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "dreizehenmoewe",
+      "birdName": "Dreizehenmöwe",
+      "kind": "photo",
+      "attribution": "Алексей Логинов",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/169137079"
     },
     {
       "packID": "wasser-kueste",
@@ -8243,12 +8273,62 @@
     {
       "packID": "wasser-kueste",
       "packTitle": "Wasser & Küste",
+      "birdID": "tordalk",
+      "birdName": "Tordalk",
+      "kind": "photo",
+      "attribution": "Jean-Paul Boerekamps",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/170678953"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "basstoelpel",
+      "birdName": "Basstölpel",
+      "kind": "photo",
+      "attribution": "Brooke J.",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/237827741"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "basstoelpel",
+      "birdName": "Basstölpel",
+      "kind": "photo",
+      "attribution": "Donald Davesne",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/164486687"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "eissturmvogel",
+      "birdName": "Eissturmvogel",
+      "kind": "photo",
+      "attribution": "alicia penney",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/8211660"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
       "birdID": "eiderente",
       "birdName": "Eiderente",
       "kind": "photo",
       "attribution": "Nigel Voaden",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/1186757"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "eiderente",
+      "birdName": "Eiderente",
+      "kind": "photo",
+      "attribution": "Алексей Логинов",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/67791131"
     },
     {
       "packID": "wasser-kueste",
@@ -8273,12 +8353,42 @@
     {
       "packID": "wasser-kueste",
       "packTitle": "Wasser & Küste",
+      "birdID": "brandgans",
+      "birdName": "Brandgans",
+      "kind": "photo",
+      "attribution": "Mikael Nyman",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/360291076"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
       "birdID": "nonnengans",
       "birdName": "Weißwangengans",
       "kind": "photo",
       "attribution": "Bill Keim",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/36646428"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "nonnengans",
+      "birdName": "Weißwangengans",
+      "kind": "photo",
+      "attribution": "Morten Ross",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/83609226"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "nonnengans",
+      "birdName": "Weißwangengans",
+      "kind": "photo",
+      "attribution": "Diego González Dopico",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/208537085"
     },
     {
       "packID": "wasser-kueste",
@@ -8293,12 +8403,102 @@
     {
       "packID": "wasser-kueste",
       "packTitle": "Wasser & Küste",
+      "birdID": "saebelschnaebler",
+      "birdName": "Säbelschnäbler",
+      "kind": "photo",
+      "attribution": "dawn2022",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/295200105"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "saebelschnaebler",
+      "birdName": "Säbelschnäbler",
+      "kind": "photo",
+      "attribution": "Лариса Артемьева",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/63582525"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "rotschenkel",
+      "birdName": "Rotschenkel",
+      "kind": "photo",
+      "attribution": "Griha Hasanov",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/166383611"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "rotschenkel",
+      "birdName": "Rotschenkel",
+      "kind": "photo",
+      "attribution": "Phil James",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/306236013"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
       "birdID": "alpenstrandlaeufer",
       "birdName": "Alpenstrandläufer",
       "kind": "photo",
       "attribution": "Donald Davesne",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/75721462"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "alpenstrandlaeufer",
+      "birdName": "Alpenstrandläufer",
+      "kind": "photo",
+      "attribution": "Mityakov DA",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/336837314"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "alpenstrandlaeufer",
+      "birdName": "Alpenstrandläufer",
+      "kind": "photo",
+      "attribution": "Evan Feusi",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/371338519"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "steinwaelzer",
+      "birdName": "Steinwälzer",
+      "kind": "photo",
+      "attribution": "Daniel Pineda Vera",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/117325635"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "steinwaelzer",
+      "birdName": "Steinwälzer",
+      "kind": "photo",
+      "attribution": "Andra Waagmeester",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/31196970"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "kampflaeufer",
+      "birdName": "Kampfläufer",
+      "kind": "photo",
+      "attribution": "Laura Gaudette",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/5981564"
     },
     {
       "packID": "wasser-kueste",
@@ -8323,6 +8523,66 @@
     {
       "packID": "wasser-kueste",
       "packTitle": "Wasser & Küste",
+      "birdID": "sandregenpfeifer",
+      "birdName": "Sandregenpfeifer",
+      "kind": "photo",
+      "attribution": "Pål A. Olsvik",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/117504292"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "grosser-brachvogel",
+      "birdName": "Großer Brachvogel",
+      "kind": "photo",
+      "attribution": "Светлана Царахова",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/205273715"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "grosser-brachvogel",
+      "birdName": "Großer Brachvogel",
+      "kind": "photo",
+      "attribution": "Thomas Ebner",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/42069589"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "grosser-brachvogel",
+      "birdName": "Großer Brachvogel",
+      "kind": "photo",
+      "attribution": "Kerri-Lee Harris",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/68585447"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "silberreiher",
+      "birdName": "Silberreiher",
+      "kind": "photo",
+      "attribution": "Lisa Wiencek Gerbec",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/79867813"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "silberreiher",
+      "birdName": "Silberreiher",
+      "kind": "photo",
+      "attribution": "Дмитрий Кошелев",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/196754834"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
       "birdID": "loeffler",
       "birdName": "Löffler",
       "kind": "photo",
@@ -8339,6 +8599,56 @@
       "attribution": "Andrea Chemello",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/36998601"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "loeffler",
+      "birdName": "Löffler",
+      "kind": "photo",
+      "attribution": "David F. Belmonte",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/168683901"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "purpurreiher",
+      "birdName": "Purpurreiher",
+      "kind": "photo",
+      "attribution": "Edmundas Greimas",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/214334744"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "purpurreiher",
+      "birdName": "Purpurreiher",
+      "kind": "photo",
+      "attribution": "Andrea Chemello",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/36998678"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "rohrdommel",
+      "birdName": "Rohrdommel",
+      "kind": "photo",
+      "attribution": "Thierry Arbault",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/250143131"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "rohrdommel",
+      "birdName": "Rohrdommel",
+      "kind": "photo",
+      "attribution": "Шальнов Кирилл",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/167361528"
     },
     {
       "packID": "wasser-kueste",
@@ -8363,6 +8673,16 @@
     {
       "packID": "wasser-kueste",
       "packTitle": "Wasser & Küste",
+      "birdID": "flussseeschwalbe",
+      "birdName": "Flussseeschwalbe",
+      "kind": "photo",
+      "attribution": "Blake Ross",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/138342161"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
       "birdID": "zwergtaucher",
       "birdName": "Zwergtaucher",
       "kind": "photo",
@@ -8383,6 +8703,16 @@
     {
       "packID": "wasser-kueste",
       "packTitle": "Wasser & Küste",
+      "birdID": "zwergtaucher",
+      "birdName": "Zwergtaucher",
+      "kind": "photo",
+      "attribution": "bko",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/355074268"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
       "birdID": "reiherente",
       "birdName": "Reiherente",
       "kind": "photo",
@@ -8399,6 +8729,16 @@
       "attribution": "Tomas Broucek",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/71162578"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "reiherente",
+      "birdName": "Reiherente",
+      "kind": "photo",
+      "attribution": "Tim Worwood",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/150231435"
     },
     {
       "packID": "wasser-kueste",
@@ -8443,12 +8783,42 @@
     {
       "packID": "wasser-kueste",
       "packTitle": "Wasser & Küste",
+      "birdID": "loeffelente",
+      "birdName": "Löffelente",
+      "kind": "photo",
+      "attribution": "Ron Bondy",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/339385176"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "loeffelente",
+      "birdName": "Löffelente",
+      "kind": "photo",
+      "attribution": "Chris O'Donoghue",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/285804136"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
       "birdID": "schellente",
       "birdName": "Schellente",
       "kind": "photo",
       "attribution": "Timothy McNitt",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/336665348"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "schellente",
+      "birdName": "Schellente",
+      "kind": "photo",
+      "attribution": "Pam Hardy",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/360057985"
     },
     {
       "packID": "wasser-kueste",
@@ -8463,12 +8833,62 @@
     {
       "packID": "wasser-kueste",
       "packTitle": "Wasser & Küste",
+      "birdID": "kolbenente",
+      "birdName": "Kolbenente",
+      "kind": "photo",
+      "attribution": "Donald Davesne",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/69923463"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "kolbenente",
+      "birdName": "Kolbenente",
+      "kind": "photo",
+      "attribution": "Andreas Stiller",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/364342183"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "gaensesaeger",
+      "birdName": "Gänsesäger",
+      "kind": "photo",
+      "attribution": "Sandy Wolkenberg",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/103918457"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
       "birdID": "zwergsaeger",
       "birdName": "Zwergsäger",
       "kind": "photo",
       "attribution": "Griha Hasanov",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/123802797"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "fischadler",
+      "birdName": "Fischadler",
+      "kind": "photo",
+      "attribution": "Валерия Ковалева",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/123771921"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "fischadler",
+      "birdName": "Fischadler",
+      "kind": "photo",
+      "attribution": "Diego Maldonado de la Torre",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/116753220"
     },
     {
       "packID": "wasser-kueste",
@@ -8483,12 +8903,42 @@
     {
       "packID": "wasser-kueste",
       "packTitle": "Wasser & Küste",
+      "birdID": "flussuferlaeufer",
+      "birdName": "Flussuferläufer",
+      "kind": "photo",
+      "attribution": "Alexis Lours",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/208965555"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
       "birdID": "bekassine",
       "birdName": "Bekassine",
       "kind": "photo",
       "attribution": "Вячеслав Юсупов",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/268545695"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "bekassine",
+      "birdName": "Bekassine",
+      "kind": "photo",
+      "attribution": "Gergely Nigg",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/74026323"
+    },
+    {
+      "packID": "wasser-kueste",
+      "packTitle": "Wasser & Küste",
+      "birdID": "bekassine",
+      "birdName": "Bekassine",
+      "kind": "photo",
+      "attribution": "Вячеслав Шуплецов",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/363643532"
     },
     {
       "packID": "wasser-kueste",
