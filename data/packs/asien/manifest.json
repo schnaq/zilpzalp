@@ -44,7 +44,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/pfau.m4a",
-          "sha256": "a8b5729de3bd7dbf21a4777746c04c53d3cb8c3c0a5285728c8be3e49c770609",
+          "sha256": "d06fc6223076cb3135cebfa4486da0ecb35e182ccadcf83074c5ac1010f14877",
           "text": "Pfau"
         }
       }
@@ -86,7 +86,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/doppelhornvogel.m4a",
-          "sha256": "f23845a2a2a31da64985a14b20da1cb159ae4bdfc75373053d89bb4a14798fc6",
+          "sha256": "d355c83247d3f23eca6d687398f24865e1d28890c4a3e03fb8c7d133cdc060e1",
           "text": "Doppelhornvogel"
         }
       }
@@ -128,7 +128,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/mandschurenkranich.m4a",
-          "sha256": "517bdc6a0ad6a65f7021a9f2704f15ccb88f77477446cfa8a4c6b2f2ef817e61",
+          "sha256": "8a061c085ca09b7de1417983a78d44be647f96a82531ba77b37c1f012815f7aa",
           "text": "Mandschurenkranich"
         }
       }
@@ -177,7 +177,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/jungfernkranich.m4a",
-          "sha256": "9d18c59aaf71fdac2bab1520ed6ccc00d9d5025b94145dab61be81abb1a1d56f",
+          "sha256": "6c348c5c914e3757b910f9cc0568642ecaf86d60052f3801caeda542c6d0c687",
           "text": "Jungfernkranich"
         }
       }
@@ -226,7 +226,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/mandarinente.m4a",
-          "sha256": "12308d81989da08a7ad9237377150ae07a0c94b3a729c1002305deeecbbdf1c6",
+          "sha256": "8a38817f75187e5c4119b25a958934561552c269e8b43c4febe578b376e8f2e5",
           "text": "Mandarinente"
         }
       }
@@ -267,7 +267,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/halsbandsittich.m4a",
-          "sha256": "a3030684d1e059d6ee5c63fd05d2976135498ff8466c0617d6c44fe3f4fe0003",
+          "sha256": "2351ef56570d1b9879ed4d5ebae803da060341c456c8a78fa8c9b550f0a0e133",
           "text": "Halsbandsittich"
         }
       }
@@ -316,7 +316,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/hirtenmaina.m4a",
-          "sha256": "c72ded2fb4318f288779c2970361b83f3bea19062eff7a41f1478a84b963219e",
+          "sha256": "fca801bea6bc4d4fbe2612e5b26044b1357fa8212b9c9692224c02ff3c7cc248",
           "text": "Hirtenmaina"
         }
       }
@@ -365,7 +365,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/rostgans.m4a",
-          "sha256": "f7210d51ad9333735af06965922b241dba72a31e9bd140a01cd739b042326066",
+          "sha256": "256ddc8f8bac9417f77e130536040281fdc69e1914dbf16cc623ada69729c9b1",
           "text": "Rostgans"
         }
       }
@@ -407,7 +407,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/schwanengans.m4a",
-          "sha256": "a04a72c5c685736e7fa131ba5efd4e775d4a444177676cb4232b657205426af9",
+          "sha256": "4934657b91ee0def7296087a79b7410af23e42c37e3d8aa2bcc593193e4eef73",
           "text": "Schwanengans"
         }
       }
@@ -456,7 +456,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/streifengans.m4a",
-          "sha256": "daf105408984025c002d1d827ac9c7d609e33be3e2720a807ac2f68eec8b5af1",
+          "sha256": "dc07baac35a1d490e5413752af07e52adce39eacaaaf2cba600cfead984d77e6",
           "text": "Streifengans"
         }
       }
@@ -498,7 +498,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/brahminenweih.m4a",
-          "sha256": "c3889b7164fa7dddb146433ebf62c92e431017e092f152fcb50463d475fb9a52",
+          "sha256": "c5ebf0f915f20aaa522a772d5cc8acde838dec659ab603bb58bc14e05bb3bc67",
           "text": "Brahminenweih"
         }
       }
@@ -547,7 +547,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/rubinkehlchen.m4a",
-          "sha256": "9a20eedaa03a60e989fe1de6e35779e8ece5c7c916f5f45ce88a969d82155faf",
+          "sha256": "e0551e8a403dfd169102f1c226a1f75a0e620f1b0d8f66e1bbc90d9b59e56b1e",
           "text": "Rubinkehlchen"
         }
       }
@@ -581,7 +581,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/glanzkaefertaube.m4a",
-          "sha256": "b898c1905a108c26f3975e69b4e70f5eb487e15890063a50440498905bca1466",
+          "sha256": "ba90acd6052e041141f2130c78db3a49d88b11bb3ec0a32220b2d52617fa54df",
           "text": "Glanzkäfertaube"
         }
       }
@@ -623,7 +623,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/buntstorch.m4a",
-          "sha256": "2ce7d5b8a1ee6ca59b89a24ae226a9456ee1242b0fc461d3f55a387dc98aa943",
+          "sha256": "85178bde81b8a0f871260d94241ed8573f4e6c246f110dbb010afac9a63b6ab3",
           "text": "Buntstorch"
         }
       }
@@ -672,7 +672,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/japanbrillenvogel.m4a",
-          "sha256": "051fcc14524e23239b097f893b0e4bd8c7683b4d4124e83df574812c67c73dc9",
+          "sha256": "775e7a687803176672a02e0b85b8368db561e117188c6c60c7d7aaa5ee93f167",
           "text": "Japanbrillenvogel"
         }
       }
@@ -698,7 +698,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/saruskranich.m4a",
-          "sha256": "75d2770299b4520db2ada584dd83f7bbb2faf973725f5148dc2d8d88b5a266a8",
+          "sha256": "0f3dfbd098f817814d20ed4f462542bdee76d0a7c964e307512aa13a040c9864",
           "text": "Saruskranich"
         }
       }
@@ -740,7 +740,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/bankivahuhn.m4a",
-          "sha256": "ee56a27547e4058153cce2dc2e2923e43ee494eafc45a77bb24423ff98934778",
+          "sha256": "8969d1503cf2b7459c1d776efa77ac0696c22fa8b84c522392d6f6f597a99352",
           "text": "Bankivahuhn"
         }
       }
@@ -789,7 +789,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/rotohrbuelbuel.m4a",
-          "sha256": "78ee1fbc11122ba5409031f5966350631b56ffcb81536a6db9dfaffe2d33c89d",
+          "sha256": "ac78deebc1a7df5ad3d393822d45373211d28cb513c4f7664283328c1cee5d35",
           "text": "Rotohrbülbül"
         }
       }
@@ -830,7 +830,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/braunliest.m4a",
-          "sha256": "65f02c48af133c6e389a3da9ad761228955b91b33074a34d5b4ac0743eb9fd55",
+          "sha256": "79b831e5bd76898095b2bebde1ca5b05bc6689eac9f471f4de5eea7f7c3bf7e5",
           "text": "Braunliest"
         }
       }
@@ -871,7 +871,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/smaragdspint.m4a",
-          "sha256": "5b4c4a2252468f1ab9096ffd57d38aab0a07a27e282976ea44e5aaf71be75f28",
+          "sha256": "7c84c99dc5f1f8eea8970af5d7e7acd9eb5168a73ddccbcd09f93eaaf4f018f5",
           "text": "Smaragdspint"
         }
       }
@@ -897,7 +897,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/azurelster.m4a",
-          "sha256": "0c952a62939fcddcdad8776bb86bf9a694964bc5813a627629223ac9316a7eb1",
+          "sha256": "3da9ca9eea693cc0819fab336b593c260b196c0f4743bb9a32a994806faa9106",
           "text": "Azurelster"
         }
       }
@@ -938,7 +938,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/glanzkraehe.m4a",
-          "sha256": "8914fd3836774eaf67f3f45aef4170ab6cdc9a840e17b326c91acb86ca7b7c69",
+          "sha256": "20a840ee36c48ac19e2fc00fff0e1a2da0fec06409cf16823c8d351542a83d17",
           "text": "Glanzkrähe"
         }
       }
@@ -980,7 +980,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/dajaldrossel.m4a",
-          "sha256": "b4f288d7b5344336041ed2fd6cb218a8df0f35827aa1886620d5c6f174380d69",
+          "sha256": "027e5c44ba0198a593df15cae49bb94e2123bebc28a9ac5bfad1738da3b989dd",
           "text": "Dajaldrossel"
         }
       }
@@ -1022,7 +1022,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/hainparadiesschnaepper.m4a",
-          "sha256": "f5de24312dec94bf0e7410e4539e2dbdadc7d9409e57eb7629d9f6c8f1332db9",
+          "sha256": "040090c03c5a05eb61a907dbbe0ea7af2b86068855442c805f3952aa416830e4",
           "text": "Hainparadiesschnäpper"
         }
       }
@@ -1064,7 +1064,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/spiegelrotschwanz.m4a",
-          "sha256": "9290f11742fdb8553747a5278a608062956424e0287dea0c4642744ca2649391",
+          "sha256": "af4b5fb4a33aec1ea988d9994bf3072e6a3f0e3ffe217aeeff0caf964aedb409",
           "text": "Spiegelrotschwanz"
         }
       }
@@ -1105,10 +1105,17 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/perlhalstaube.m4a",
-          "sha256": "67f5904efda2587071ae44700a090b691f2bd38a192ae363d240d62d8b78ac30",
+          "sha256": "9e62c4ad2a5e3602805826f36e372ab68bf72abf47dd00107c5ef69e93bd572a",
           "text": "Perlhalstaube"
         }
       }
     }
-  ]
+  ],
+  "speech": {
+    "pack.title": {
+      "file": "speech/pack.title.m4a",
+      "sha256": "c0536162ca2fc96f3c99186aa4828f88ef29cada70b3ae275cfd454fd820486b",
+      "text": "Asien"
+    }
+  }
 }
