@@ -33,7 +33,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/rotkehl-huettensaenger.m4a",
+        "sha256": "8b9af0c331ecef41afea461a5aa641c1d2a53b009e44d51038c0386c672c0d94",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Jonathon Jongsma (XC179669)",
+        "sourceURL": "https://xeno-canto.org/179669",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/rotkehl-huettensaenger.m4a",
@@ -59,7 +66,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/wanderdrossel.m4a",
+        "sha256": "255c736efe6078dd77f68b9a35d4d5e12cfa5a5faa3c8608f42fb13f2e0afb3f",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Doug Hynes (XC570791)",
+        "sourceURL": "https://xeno-canto.org/570791",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/wanderdrossel.m4a",
@@ -135,7 +149,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/brautente.m4a",
+        "sha256": "79dd86d292305052218f6bf96d3d56e6a1a9fe8a0390fe4354a0d150df254860",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Jonathon Jongsma (XC177728)",
+        "sourceURL": "https://xeno-canto.org/177728",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/brautente.m4a",
@@ -544,7 +565,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/virginia-uhu.m4a",
+        "sha256": "9a6b30e35b77a13b0445055e4dd703fb1b566d4ba6575f84909db5a0eb433145",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Michael & Katie LaTour (XC450919)",
+        "sourceURL": "https://xeno-canto.org/450919",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/virginia-uhu.m4a",
@@ -604,7 +632,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/kanadagans.m4a",
+        "sha256": "ca119dc597a3f541eb54f71c16a06cf65aed14e05b42631cda3d6cc678db30d5",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Doug Hynes (XC934272)",
+        "sourceURL": "https://xeno-canto.org/934272",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/kanadagans.m4a",
@@ -638,7 +673,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/rotkopfspecht.m4a",
+        "sha256": "ec23141b14b7e8980638eefba29491b2aef29465c7042274a842fd28ae587504",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Jonathon Jongsma (XC254603)",
+        "sourceURL": "https://xeno-canto.org/254603",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/rotkopfspecht.m4a",
@@ -672,7 +714,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/helmspecht.m4a",
+        "sha256": "88e5f6359a188e6942c30a5e23838393f593a5293ea23ed3b9bce3e9f5229aca",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Jonathon Jongsma (XC241106)",
+        "sourceURL": "https://xeno-canto.org/241106",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/helmspecht.m4a",
@@ -714,7 +763,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/schopfmeise.m4a",
+        "sha256": "d1fb83b639cc130033a86ef6d8c66c5ac853db65658ac596ccde561810b96674",
+        "license": "CC0-1.0",
+        "attribution": "The Vermont Birder Guy (XC789382)",
+        "sourceURL": "https://xeno-canto.org/789382",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/schopfmeise.m4a",
@@ -756,7 +812,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/indigofink.m4a",
+        "sha256": "1e8a1fbb6ed4968663eb70b77776033435adf154adec804c8a1270fd7ceef490",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Matthias Sirch (XC384607)",
+        "sourceURL": "https://xeno-canto.org/384607",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/indigofink.m4a",
@@ -798,7 +861,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/goldzeisig.m4a",
+        "sha256": "b91cca15abd0d783ed220a673972b086777dfe5865b1613fe78ee0ab907e11db",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Jonathon Jongsma (XC428425)",
+        "sourceURL": "https://xeno-canto.org/428425",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/goldzeisig.m4a",
@@ -832,7 +902,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/baltimoretrupial.m4a",
+        "sha256": "3589ec9fd037a12bfb243a7ea626f500187cec7e178286ceec0673810ee12c0f",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Jonathon Jongsma (XC178046)",
+        "sourceURL": "https://xeno-canto.org/178046",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/baltimoretrupial.m4a",
@@ -874,7 +951,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/rotschulterstaerling.m4a",
+        "sha256": "27bccca1ea9292a5ef6438783b19b4016bfb7b50abccf64aa967f8a9643bd19b",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "steve (XC1184072)",
+        "sourceURL": "https://xeno-canto.org/1184072",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/rotschulterstaerling.m4a",
@@ -916,7 +1000,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/brillenstaerling.m4a",
+        "sha256": "8dfb2cb7a8c44dd4cd96d3b801fea96fd7cf41b05bab897890e7ce4c454ee0c2",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Justin Watts (XC361454)",
+        "sourceURL": "https://xeno-canto.org/361454",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/brillenstaerling.m4a",
@@ -942,7 +1033,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/guertelfischer.m4a",
+        "sha256": "7b2a9e4e1b077d91a4e753f78facda3d9b358ddfc5d8592775d858b0ded79470",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Doug Hynes (XC1008797)",
+        "sourceURL": "https://xeno-canto.org/1008797",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/guertelfischer.m4a",
@@ -984,7 +1082,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/buntfalke.m4a",
+        "sha256": "100c4836c8c6220d005e1bf7ee561fed10d05ba3723ec7ad33980562bbe246a4",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Jonathon Jongsma (XC254589)",
+        "sourceURL": "https://xeno-canto.org/254589",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/buntfalke.m4a",
@@ -1010,7 +1115,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/kanadakranich.m4a",
+        "sha256": "492663c535312be684c8611720f6fdee2914767453c535913f36e4dfe4eb2bd9",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Doug Hynes (XC991765)",
+        "sourceURL": "https://xeno-canto.org/991765",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/kanadakranich.m4a",
@@ -1036,7 +1148,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/diademhaeher.m4a",
+        "sha256": "f775a028bea198148ee50ca98d03c056d1134b9403d05ecf680358190ee8bda6",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Ryan Douglas (XC1005237)",
+        "sourceURL": "https://xeno-canto.org/1005237",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/diademhaeher.m4a",
@@ -1096,7 +1215,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/blaureiher.m4a",
+        "sha256": "2f042e643a68e8e0974b1f7cfedb088e4c0568d68c525d00d6eddde8574f60e3",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Doug Hynes (XC991513)",
+        "sourceURL": "https://xeno-canto.org/991513",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/blaureiher.m4a",
@@ -1122,7 +1248,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/streifenkauz.m4a",
+        "sha256": "0d64f2e06d26efc504ca3730d9bc4c83d1b760d53324e53d8ca07a7cc0808acf",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Doug Hynes (XC715195)",
+        "sourceURL": "https://xeno-canto.org/715195",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/streifenkauz.m4a",
@@ -1164,7 +1297,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/sumpfohreule.m4a",
+        "sha256": "cd74438c4baa1802bcb8a52b5c7aeeafee9e2de06476933ad4d5b91d24176df1",
+        "license": "CC0-1.0",
+        "attribution": "Kevin Guille (XC1105612)",
+        "sourceURL": "https://xeno-canto.org/1105612",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/sumpfohreule.m4a",
@@ -1206,7 +1346,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/trompeterschwan.m4a",
+        "sha256": "04865b38fdbc2d0cb303a98f5da541c9b0dbb1b28d488ba336877d1b424aba82",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Jonathon Jongsma (XC413784)",
+        "sourceURL": "https://xeno-canto.org/413784",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/trompeterschwan.m4a",
