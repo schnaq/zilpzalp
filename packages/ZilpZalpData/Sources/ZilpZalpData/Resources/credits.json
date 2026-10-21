@@ -951,6 +951,326 @@
       "sourceURL": "https://www.inaturalist.org/observations/55139983"
     },
     {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "pfau",
+      "birdName": "Pfau",
+      "kind": "photo",
+      "attribution": "Jason Alexander",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/153415191"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "pfau",
+      "birdName": "Pfau",
+      "kind": "photo",
+      "attribution": "Parth Kansara",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/176588709"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "pfau",
+      "birdName": "Pfau",
+      "kind": "call",
+      "attribution": "Manoj Karingamadathil (XC677383)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/677383"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "doppelhornvogel",
+      "birdName": "Doppelhornvogel",
+      "kind": "photo",
+      "attribution": "Rohit Naniwadekar",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/186513892"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "doppelhornvogel",
+      "birdName": "Doppelhornvogel",
+      "kind": "photo",
+      "attribution": "Aparna Krishnan",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/144356773"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "doppelhornvogel",
+      "birdName": "Doppelhornvogel",
+      "kind": "photo",
+      "attribution": "Wang.QG",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/177510273"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "mandschurenkranich",
+      "birdName": "Mandschurenkranich",
+      "kind": "photo",
+      "attribution": "Christoph Moning",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/63813237"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "jungfernkranich",
+      "birdName": "Jungfernkranich",
+      "kind": "photo",
+      "attribution": "Nigel Voaden",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/2807453"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "jungfernkranich",
+      "birdName": "Jungfernkranich",
+      "kind": "call",
+      "attribution": "Sonothèque ADVL (XC817786)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/817786"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "mandarinente",
+      "birdName": "Mandarinente",
+      "kind": "photo",
+      "attribution": "Blake Ross",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/102309745"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "mandarinente",
+      "birdName": "Mandarinente",
+      "kind": "photo",
+      "attribution": "Diego González Dopico",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/204451732"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "mandarinente",
+      "birdName": "Mandarinente",
+      "kind": "photo",
+      "attribution": "Susan Marley",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/106805518"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "halsbandsittich",
+      "birdName": "Halsbandsittich",
+      "kind": "photo",
+      "attribution": "Paul Lewis",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/340036074"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "halsbandsittich",
+      "birdName": "Halsbandsittich",
+      "kind": "call",
+      "attribution": "Marie-Lan Taÿ Pamart (XC510543)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/510543"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "hirtenmaina",
+      "birdName": "Hirtenmaina",
+      "kind": "photo",
+      "attribution": "Roger Rittmaster",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/37135639"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "hirtenmaina",
+      "birdName": "Hirtenmaina",
+      "kind": "call",
+      "attribution": "Ujjal Kishor De (XC1003188)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/1003188"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "rostgans",
+      "birdName": "Rostgans",
+      "kind": "photo",
+      "attribution": "Михаил Малышев",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/156270590"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "rostgans",
+      "birdName": "Rostgans",
+      "kind": "photo",
+      "attribution": "Donald Davesne",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/255322020"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "rostgans",
+      "birdName": "Rostgans",
+      "kind": "call",
+      "attribution": "Pascal Christe (XC799447)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/799447"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "schwanengans",
+      "birdName": "Schwanengans",
+      "kind": "photo",
+      "attribution": "許慶棠Ray",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/261963473"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "schwanengans",
+      "birdName": "Schwanengans",
+      "kind": "photo",
+      "attribution": "Yi CHEN",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/38633189"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "streifengans",
+      "birdName": "Streifengans",
+      "kind": "photo",
+      "attribution": "Dario Taraborelli",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/332648814"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "streifengans",
+      "birdName": "Streifengans",
+      "kind": "call",
+      "attribution": "Pascal Christe (XC723229)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/723229"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "brahminenweih",
+      "birdName": "Brahminenweih",
+      "kind": "photo",
+      "attribution": "James H",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/383796909"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "rubinkehlchen",
+      "birdName": "Rubinkehlchen",
+      "kind": "photo",
+      "attribution": "Griha Hasanov",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/80866856"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "rubinkehlchen",
+      "birdName": "Rubinkehlchen",
+      "kind": "photo",
+      "attribution": "Лариса Артемьева",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/375885645"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "rubinkehlchen",
+      "birdName": "Rubinkehlchen",
+      "kind": "call",
+      "attribution": "steve (XC1153478)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/1153478"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "glanzkaefertaube",
+      "birdName": "Glanzkäfertaube",
+      "kind": "photo",
+      "attribution": "ian_mcallan",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/207697305"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "buntstorch",
+      "birdName": "Buntstorch",
+      "kind": "photo",
+      "attribution": "Donald Davesne",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/142526539"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "buntstorch",
+      "birdName": "Buntstorch",
+      "kind": "photo",
+      "attribution": "Rejoice Gassah",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/242033181"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "japanbrillenvogel",
+      "birdName": "Japanbrillenvogel",
+      "kind": "photo",
+      "attribution": "Corey Farwell",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/339527516"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "japanbrillenvogel",
+      "birdName": "Japanbrillenvogel",
+      "kind": "call",
+      "attribution": "Peter Wilton (XC176944)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/176944"
+    },
+    {
       "packID": "australien-ozeanien",
       "packTitle": "Australien & Ozeanien",
       "birdID": "rosakakadu",
@@ -7847,6 +8167,12 @@
       "license": "CC-BY-4.0",
       "sourceURL": "https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md",
       "usedIn": "Vögel Afrikas"
+    },
+    {
+      "attribution": "Stimme: Ava (ElevenLabs)",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md",
+      "usedIn": "Asien"
     },
     {
       "attribution": "Stimme: Ava (ElevenLabs)",
