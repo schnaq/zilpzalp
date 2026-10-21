@@ -69,9 +69,10 @@ OFFERED = {
     ]
 }
 
-# A quarter of a second of raw 16-bit little-endian samples, which is what
-# `pcm_24000` hands back: no header, no container, just the samples.
-SAMPLES = b"\x00\x01" * (elevenlabs.RATE // 4)
+# A second of raw 16-bit little-endian samples, which is what `pcm_24000`
+# hands back: no header, no container, just the samples. A whole second, so
+# that a sentence rendered from it passes the length check (#310).
+SAMPLES = b"\x00\x01" * elevenlabs.RATE
 
 # What Google's `audioContent` holds instead: LINEAR16 arrives as a whole WAV,
 # base64-encoded, so the fixture is the same samples with a header on them.
@@ -235,6 +236,23 @@ class RealCatalogTests(unittest.TestCase):
         self.assertEqual(sentences.fixed_text("roundEnd.title"), "Super gemacht!")
 
 
+class ShortestTests(unittest.TestCase):
+    """The length check of #310, against the clips it was calibrated on."""
+
+    def test_flags_the_sentence_v3_cut_off(self) -> None:
+        self.assertLess(0.64, speech.shortest("Welche Vögel?"))
+
+    def test_flags_the_name_v3_cut_off(self) -> None:
+        """Three letters fall under the floor, not under the rate."""
+        self.assertEqual(speech.shortest("Uhu"), speech.SHORTEST)
+        self.assertLess(0.40, speech.shortest("Uhu"))
+
+    def test_passes_the_sentences_that_were_said_to_the_end(self) -> None:
+        self.assertGreaterEqual(0.96, speech.shortest("Willst du aufhören?"))
+        self.assertGreaterEqual(1.68, speech.shortest("Frag bitte einen Erwachsenen."))
+        self.assertGreaterEqual(0.56, speech.shortest("Amsel"))
+
+
 class ProviderTests(unittest.TestCase):
     def test_the_adapters_are_the_tones_and_the_vendor(self) -> None:
         """#221: ElevenLabs speaks, Google stays unused, `fake` reaches nobody."""
@@ -330,7 +348,7 @@ class ElevenLabsTests(unittest.TestCase):
         self.assertEqual(spoken.url.params["output_format"], elevenlabs.OUTPUT_FORMAT)
 
         body = json.loads(spoken.content)
-        self.assertEqual(body["text"], "Wo ist die Amsel?")
+        self.assertEqual(body["text"], "[ruhig] Wo ist die Amsel? ...")
         self.assertEqual(body["model_id"], "eleven_v3")
         self.assertEqual(body["seed"], elevenlabs.SEED)
         self.assertEqual(body["voice_settings"], elevenlabs.VOICE_SETTINGS)
@@ -355,6 +373,15 @@ class ElevenLabsTests(unittest.TestCase):
             self.assertEqual(handle.getsampwidth(), audio.SAMPLE_WIDTH)
             self.assertEqual(handle.getframerate(), elevenlabs.RATE)
             self.assertEqual(handle.readframes(handle.getnframes()), SAMPLES)
+
+    def test_asks_for_another_seed_on_another_take(self) -> None:
+        """#310: a cut clip is asked for again, and the same seed would cut it again."""
+        provider = self.provider()
+        provider.render("Uhu", "Johanna")
+        provider.render("Uhu", "Johanna", take=1)
+
+        seeds = [json.loads(request.content)["seed"] for request in self.requests[-2:]]
+        self.assertEqual(seeds, [elevenlabs.SEED, elevenlabs.SEED + 1])
 
     def test_lists_the_voices_the_account_offers(self) -> None:
         offered = self.provider().voices()
@@ -1046,6 +1073,83 @@ class RenderTests(SpeechTestCase):
         self.assertEqual(code, 1)
         self.assertIn("--sentence", printed)
 
+    def pronounce_amsel(self, spoken: str) -> None:
+        document = self.document()
+        manifest.bird(document, "amsel")["pronunciation"] = spoken
+        manifest.save(self.pack / "manifest.json", document)
+
+    def test_skips_a_line_that_comes_back_cut_off_twice(self) -> None:
+        """#310: the tones for „Uhu" are as short as the clip v3 cut off."""
+        self.pronounce_amsel("Uhu")
+
+        with mock.patch.object(
+            fake.FakeProvider, "render", autospec=True, side_effect=fake.FakeProvider.render
+        ) as rendered:
+            code, printed = self.render("--pack", "basis", "--sentence", "collection.name")
+
+        self.assertEqual(code, 1)
+        self.assertEqual([call.args[3] for call in rendered.call_args_list[:2]], [0, 1])
+        self.assertIn("take 2 of 2", printed)
+        self.assertIn("::error::amsel / collection.name", printed)
+        self.assertEqual(list(self.clips_of("amsel")), [])
+        self.assertEqual(list(self.clips_of("star")), ["collection.name"])
+
+    def test_records_a_short_line_a_listener_accepted(self) -> None:
+        self.pronounce_amsel("Uhu")
+
+        code, _ = self.render("--pack", "basis", "--species", "amsel", "--accept-short")
+
+        self.assertEqual(code, 0)
+        self.assertEqual(self.clips_of("amsel")["collection.name"]["text"], "Uhu")
+
+    def test_records_a_second_take_that_came_back_whole(self) -> None:
+        short = fake.FakeProvider().render("Uhu")
+        whole = fake.FakeProvider().render("Amsel")
+        with mock.patch.object(fake.FakeProvider, "render", side_effect=[short, whole]):
+            code, printed = self.render("--pack", "basis", "--species", "amsel")
+
+        self.assertEqual(code, 0)
+        self.assertIn("take 1 of 2", printed)
+        self.assertEqual(list(self.clips_of("amsel")), ["collection.name"])
+
+
+class CheckTests(SpeechTestCase):
+    def check(self, *arguments: str) -> tuple[int, str]:
+        return self.run_command(["speech", "check", *arguments])
+
+    def test_passes_clips_that_last_as_long_as_their_text(self) -> None:
+        self.run_command(["speech", "render", "--provider", "fake", "--pack", "basis"])
+
+        code, printed = self.check("--pack", "basis")
+
+        self.assertEqual(code, 0)
+        self.assertIn("0 of 2 clip(s)", printed)
+
+    def test_lists_a_clip_shorter_than_its_stored_text(self) -> None:
+        """The stored text is what the file claims to say, so that is what it is held to."""
+        self.run_command(["speech", "render", "--provider", "fake", "--pack", "basis"])
+        document = self.document()
+        manifest.bird(document, "star")["speech"]["collection.name"]["text"] = "Wo ist der Star?"
+        manifest.save(self.pack / "manifest.json", document)
+
+        code, printed = self.check("--pack", "basis")
+
+        self.assertEqual(code, 1)
+        self.assertIn('basis  star  collection.name  "Wo ist der Star?"', printed)
+        self.assertNotIn("amsel", printed)
+        self.assertIn("1 of 2 clip(s)", printed)
+
+    def test_checks_every_manifest_when_none_is_named(self) -> None:
+        self.run_command(["speech", "render", "--provider", "fake", "--pack", "basis"])
+        self.run_command(
+            ["speech", "render", "--provider", "fake", "--set", "fixed", "--sentence", "roundEnd.title"]
+        )
+
+        code, printed = self.check()
+
+        self.assertEqual(code, 0)
+        self.assertIn("0 of 3 clip(s)", printed)
+
 
 class VendorCommandTests(SpeechTestCase):
     """The command line with a vendor behind it, and no network under it."""
@@ -1093,6 +1197,32 @@ class VendorCommandTests(SpeechTestCase):
         self.assertEqual(voice["sourceURL"], speech.RECORDING_DOC)
         self.assertEqual(list(self.clips_of("amsel")), ["collection.name"])
         self.assertIn("5 character(s)", printed)
+
+    def test_wraps_the_text_for_the_vendor_and_stores_it_plain(self) -> None:
+        """#310: the wrapping is how v3 says a short text whole, not what the clip says."""
+        sent: list[str] = []
+
+        def answer(request: httpx.Request) -> httpx.Response:
+            if request.url.path.endswith("/voices"):
+                return httpx.Response(200, json=OFFERED)
+            sent.append(json.loads(request.content)["text"])
+            return httpx.Response(200, content=SAMPLES)
+
+        transport = httpx.MockTransport(answer)
+        with mock.patch.dict(
+            cli.speech.PROVIDERS,
+            {"elevenlabs": lambda: elevenlabs.ElevenLabsProvider(transport=transport)},
+        ):
+            code, _ = self.run_command(
+                [
+                    "speech", "render", "--provider", "elevenlabs", "--voice", "v-ava=Ava",
+                    "--pack", "basis", "--species", "amsel",
+                ]
+            )
+
+        self.assertEqual(code, 0)
+        self.assertEqual(sent, ["[ruhig] Amsel ..."])
+        self.assertEqual(self.clips_of("amsel")["collection.name"]["text"], "Amsel")
 
     def test_refuses_a_vendor_run_without_a_voice_before_it_writes(self) -> None:
         code, printed = self.run_command(

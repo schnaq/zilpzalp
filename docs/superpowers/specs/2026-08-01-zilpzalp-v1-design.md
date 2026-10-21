@@ -50,7 +50,7 @@ Spiel 3 (Federn zuordnen) und Spiel 4 (Lebensraum antippen). Beide sind nicht am
 | Persistenz | Codable-JSON hinter einem Actor | Wenige Daten; ohne SwiftData in reinen Unit-Tests prüfbar |
 | Store-Kategorie | Kids Category | Zielgruppe; Konsequenzen siehe Abschnitt 7 |
 | Lokalisierung | Nur Deutsch, aber i18n-fähig gebaut | Texte in String Catalogs, Englisch später ohne Refactoring |
-| Medienlizenzen | Nur CC0, CC BY, CC BY-SA | NonCommercial ist bei App-Store-Verteilung angreifbar und nicht weitergebbar |
+| Medienlizenzen | Nur CC0, CC BY, CC BY-SA (BY and BY-SA in 3.0 and 4.0) | NonCommercial ist bei App-Store-Verteilung angreifbar und nicht weitergebbar |
 
 ---
 
@@ -115,7 +115,7 @@ struct Bird: Codable, Identifiable {
 struct MediaAsset: Codable {
     let file: String            // "photos/amsel.png"
     let sha256: String
-    let license: License        // .cc0 | .ccBy | .ccBySa — Rohwerte "CC0-1.0" | "CC-BY-4.0" | "CC-BY-SA-4.0"
+    let license: License        // .cc0 | .ccBy | .ccBySa | .ccBy3 | .ccBySa3 — Rohwerte "CC0-1.0" | "CC-BY-4.0" | "CC-BY-SA-4.0" | "CC-BY-3.0" | "CC-BY-SA-3.0"
     let attribution: String     // "Alexis Tinker-Tsavalas"
     let sourceURL: URL          // Beobachtung bzw. Aufnahme
     let retrieved: Date         // Tag der Kuration, Beleg für den Lizenzstand
@@ -291,7 +291,7 @@ Die Recherche zu den App-Review-Guidelines liegt bewusst schon in M2 und nicht e
 
 Diese Fragen sind bewusst offen und blockieren den Start nicht:
 
-1. **CC BY-SA bei zugeschnittenen Audios.** Schneiden wir eine BY-SA-Aufnahme auf wenige Sekunden zu, entsteht ein Bearbeitungswerk, das unter derselben Lizenz stehen muss. Für die Audiodateien ist das unproblematisch — sie bleiben BY-SA, der Code bleibt MIT. Ob das Zusammenspiel mit den App-Store-Bedingungen und deren technischen Schutzmaßnahmen sauber ist, muss ein Mensch beurteilen. Ausweg, falls nötig: nur CC0- und CC-BY-Aufnahmen verwenden. Weiterhin offen; blockiert M3 nicht, weil das Basis-Paket nur CC-BY-Fotos und keine Rufe enthält
+1. **CC BY-SA bei zugeschnittenen Audios.** Schneiden wir eine BY-SA-Aufnahme auf wenige Sekunden zu, entsteht ein Bearbeitungswerk, das unter derselben Lizenz stehen muss. Für die Audiodateien ist das unproblematisch — sie bleiben BY-SA, der Code bleibt MIT. Ob das Zusammenspiel mit den App-Store-Bedingungen und deren technischen Schutzmaßnahmen sauber ist, muss ein Mensch beurteilen. Ausweg, falls nötig: nur CC0- und CC-BY-Aufnahmen verwenden. Weiterhin offen; blockiert M3 nicht, weil das Basis-Paket nur CC-BY-Fotos und keine Rufe enthält. Since 2026-10-21 CC BY 3.0 and CC BY-SA 3.0 are admitted too (decision on the version, not on this point); their §4(a) has the same clause, so this point covers them as well
 2. **Qualität der Vogelrufe.** Die Verfügbarkeit ist belegt — alle vierzig geprüften Arten haben frei lizenzierte Aufnahmen. Offen ist die inhaltliche Eignung: viele Aufnahmen sind Flügelschläge, Bettelrufe oder nächtliche Flugrufe statt des typischen Gesangs. Jede Aufnahme muss vor Aufnahme ins Paket angehört werden. Wartet auf `tools/fetch-media` für Rufe (#16) und das manuelle Anhören (#32). Entscheidung 2026-09-08 (Christian, #32): Für die zehn Rufe des Basis-Pakets tritt das Anhören im Spiel an die Stelle des Anhörens vorab. Ausgewählt wurden sie nach den xeno-canto-Metadaten und einer einmaligen Messung des Signalverlaufs im PR — nicht durch `fetch-media`, das nichts misst. Eine Aufnahme, die im Spiel durchfällt, wird per `fetch-media calls pick` ausgetauscht
 3. **Habitat-Zuordnung für Spiel 4** muss selbst erarbeitet und belegt werden. Ein systematisches Übernehmen der Kategorisierung von NABU oder LBV berührt das Datenbankrecht nach §87a UrhG. Unverändert, erst in M8 relevant
 4. ~~**Wortlaut der App-Review-Guidelines** zu Kids Category und Altersfreigabe ist gegen die aktuelle Fassung zu verifizieren~~ — erledigt, siehe `docs/kids-category.md` (#19). Offen bleiben die technischen Umsetzungen: das Aufgaben-Gate für externe Links (#37) und die Altersfreigabe-Einstellungen in App Store Connect (#41)

@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Check every media asset declared in the pack manifests against the licence rules.
 
-Only CC0, CC BY and CC BY-SA are permitted (see docs/medien-und-lizenzen.md).
+Only CC0, CC BY and CC BY-SA are permitted, CC BY and CC BY-SA in versions 3.0
+and 4.0 (see docs/medien-und-lizenzen.md).
 Every NonCommercial and NoDerivatives variant fails the gate, as does a
 missing attribution or a missing source URL. Licence compliance is thereby a
 property of the build rather than a matter of care.
@@ -54,7 +55,7 @@ import json
 import sys
 from pathlib import Path
 
-ALLOWED_LICENCES = ("CC0-1.0", "CC-BY-4.0", "CC-BY-SA-4.0")
+ALLOWED_LICENCES = ("CC0-1.0", "CC-BY-4.0", "CC-BY-SA-4.0", "CC-BY-3.0", "CC-BY-SA-3.0")
 
 # Anchored on the repository, not on the working directory, so the gate finds
 # the manifests no matter where it is called from.

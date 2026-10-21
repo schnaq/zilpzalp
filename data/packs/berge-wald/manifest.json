@@ -849,7 +849,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/gaensegeier.m4a",
+        "sha256": "a4302aeca1321e57bc18c9473ce3839fb457a59785faae07ba2474443f623599",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Thomas SIGNEAU (XC917400)",
+        "sourceURL": "https://xeno-canto.org/917400",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/gaensegeier.m4a",

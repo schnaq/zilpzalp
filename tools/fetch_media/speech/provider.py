@@ -60,9 +60,9 @@ class Voice:
     """Who speaks, under which licence — the manifest's `voice` without its date.
 
     One voice per manifest, so this is what every clip in a pack shares. The
-    licence has to be one the gate allows (`CC0-1.0`, `CC-BY-4.0`,
-    `CC-BY-SA-4.0`); a provider whose terms fit none of them cannot be used
-    here, whatever it sounds like.
+    licence has to be one the gate allows (`ALLOWED_LICENCES` in
+    `tools/license_gate.py`); a provider whose terms fit none of them cannot
+    be used here, whatever it sounds like.
     """
 
     license: str
@@ -96,5 +96,10 @@ class Provider(Protocol):
         adapter.
         """
 
-    def render(self, text: str, voice: str | None = None) -> bytes:
-        """Speak `text`, as WAV bytes. `voice` names one the provider offers."""
+    def render(self, text: str, voice: str | None = None, take: int = 0) -> bytes:
+        """Speak `text`, as WAV bytes. `voice` names one the provider offers.
+
+        `take` counts the attempts at one sentence: the command asks again with
+        the next one when a clip came back too short to be whole (#310). A
+        provider with a seed varies it by the take; one without ignores it.
+        """

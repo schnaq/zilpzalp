@@ -10,7 +10,7 @@ the account is **schnaq GmbH's**, the clips are rendered **while the paid
 subscription is active** (the free tier is non-commercial), and the Sound
 Effects product is never used for a shipped asset.
 
-Five findings that would otherwise be rediscovered against a paid meter:
+Six findings that would otherwise be rediscovered against a paid meter:
 
 - **A bare bird name needs `eleven_v3` with `language_code` "de".**
   `eleven_multilingual_v2` guesses the language from the text, and one word is
@@ -18,6 +18,17 @@ Five findings that would otherwise be rediscovered against a paid meter:
   rejects `language_code`; v3 takes it and then speaks German. v3 accepted
   every field of `VOICE_SETTINGS` and the `seed` as they stand (tried
   2026-10-20); it ignores `speed`, which is why none is sent.
+- **v3 cuts a short text off at the end** (#310, tried 2026-10-21): „Welche
+  Vögel?" came back as 0.64 s, in PCM and in MP3 alike, and several bare
+  names lost their last sound — „Uhu" lasted 0.4 s. Every text is therefore
+  sent as `[ruhig] <text> ...`: an audio tag in front, an ellipsis behind.
+  Christian listened to the variants and chose this one — „Welche Vögel?",
+  „Amsel" and „Zilpzalp" came out whole and calm. The tag alone or the
+  ellipsis alone also saved the sentence; both together are what was heard
+  and approved, for every text. The wrapping is this adapter's business: the
+  manifest's `text` stays the plain sentence the clip says, and the length
+  check in `cli.py` still catches a clip that comes back cut. „Uhu" needed
+  more than the wrapping — its `pronunciation` „Der Uhu" in the pack data.
 - **A library voice is not in the account's `/voices`.** Ava, the voice
   Christian chose, renders by id without being added to the account, but no
   listing names her — and the schnaq key lacks `voices_read`, so the listing
@@ -76,6 +87,10 @@ VOICE_SETTINGS = {
     "style": 0.0,
     "use_speaker_boost": False,
 }
+
+# What every text is wrapped in — see the finding on cut-off texts above.
+PREFIX = "[ruhig] "
+SUFFIX = " ..."
 
 # What a sentence costs at the meter is what a sentence is worth waiting for.
 TIMEOUT = 120.0
@@ -224,19 +239,19 @@ class ElevenLabsProvider:
             source_url=RECORDING_DOC,
         )
 
-    def render(self, text: str, voice: str | None = None) -> bytes:
-        """Speak one German sentence, as WAV bytes."""
+    def render(self, text: str, voice: str | None = None, take: int = 0) -> bytes:
+        """Speak one German sentence, as WAV bytes. A later `take` gets the next seed."""
         option = self.chosen(voice)
         response = self._request(
             "POST",
             f"/text-to-speech/{option.id}",
             params={"output_format": OUTPUT_FORMAT},
             json={
-                "text": text,
+                "text": f"{PREFIX}{text}{SUFFIX}",
                 "model_id": MODEL,
                 "language_code": LANGUAGE,
                 "voice_settings": dict(VOICE_SETTINGS),
-                "seed": SEED,
+                "seed": SEED + take,
             },
         )
         return wav_bytes(response.content, RATE)

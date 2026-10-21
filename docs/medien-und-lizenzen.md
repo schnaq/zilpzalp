@@ -12,6 +12,8 @@ Die App ist quelloffen, kostenlos und ohne Gewinnabsicht — wird aber über den
 
 **Zugelassen sind ausschließlich CC0, CC BY und CC BY-SA.**
 
+CC BY and CC BY-SA count in versions 3.0 and 4.0 (Christian's decision of 2026-10-21). Each version keeps its own identifier — `CC-BY-3.0`, `CC-BY-SA-3.0`, `CC-BY-4.0`, `CC-BY-SA-4.0` — and the credits name the version and link its deed. Older versions and jurisdiction ports (`by-sa/3.0/de`) are not accepted.
+
 NonCommercial (`BY-NC`, `BY-NC-SA`, `BY-NC-ND`) ist ausgeschlossen. Zwei Gründe: die Verteilung über einen kommerziellen Store ist angreifbar genug, dass sich der Streit nicht lohnt, und die NC-Erlaubnis ließe sich nicht an Leute weitergeben, die das Repository forken. Eine MIT-lizenzierte Codebasis, die NC-Medien mitliefert, macht ihren Nutzern ein Versprechen, das sie nicht halten kann.
 
 NoDerivatives (`BY-ND`) ist ebenfalls ausgeschlossen, weil schon das Zuschneiden eines Fotos auf ein Quadrat eine Bearbeitung ist.
@@ -153,6 +155,8 @@ Die Nutzungsbedingungen nennen drei Lizenzfamilien, aus denen Aufnehmende wähle
 
 Nach unserer Grundregel bleibt davon **allein BY-SA** übrig. Beide NC-Varianten scheiden aus.
 
+`lic:BY-SA` returns CC BY-SA 3.0 and 4.0 alike. Both are accepted since 2026-10-21, and `tools/fetch-media` records each under its own identifier. Some records come back without a `file` URL (XC509295, for instance); `calls candidates` leaves them out and `calls pick` refuses them.
+
 Attribution ist Pflicht und umfasst Aufnehmer:in, Lizenz und XC-Katalognummer — genau die Angaben, die xeno-canto auch selbst bei jeder Aufnahme zeigt.
 
 Zum automatisierten Zugriff:
@@ -187,7 +191,7 @@ Sollte der Vorrat bei einer Art doch nicht reichen, gibt es drei Auswege in dies
 
 Rohaufnahmen sind oft minutenlang. Für das Spiel brauchen wir wenige Sekunden. Ein Zuschnitt ist eine Bearbeitung und muss unter CC BY-SA bleiben. Das ist unproblematisch: die Audiodateien bleiben BY-SA, der Programmcode bleibt MIT — beides steht nebeneinander, ohne sich anzustecken.
 
-Ob die technischen Schutzmaßnahmen des App Store mit der entsprechenden Klausel von CC BY-SA kollidieren, ist eine Frage, die ein Mensch beurteilen sollte. Sie ist in Abschnitt 10 des Specs als offener Punkt vermerkt. Falls die Antwort ungünstig ausfällt, weichen wir auf CC0- und CC-BY-Aufnahmen aus.
+Ob die technischen Schutzmaßnahmen des App Store mit der entsprechenden Klausel von CC BY-SA kollidieren, ist eine Frage, die ein Mensch beurteilen sollte. Sie ist in Abschnitt 10 des Specs als offener Punkt vermerkt. Falls die Antwort ungünstig ausfällt, weichen wir auf CC0- und CC-BY-Aufnahmen aus. The 3.0 licences carry the same clause (§4(a)), so the open point covers them too.
 
 ---
 

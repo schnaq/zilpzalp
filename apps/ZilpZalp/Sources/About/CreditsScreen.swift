@@ -96,6 +96,9 @@ struct CreditsScreen: View {
                         }
                     }
 
+                    section(String(localized: "credits.licenses.title")) {
+                        licenceRows(Self.licences(in: credits))
+                    }
                     section(String(localized: "credits.fonts.title")) {
                         vendoredRows(credits.fonts, icon: .type)
                     }
@@ -189,6 +192,22 @@ struct CreditsScreen: View {
         }
     }
 
+    /// One row per media licence in use, opening its deed — the licence URI
+    /// CC BY 3.0 §4(a) asks to travel with every copy.
+    private func licenceRows(_ licences: [License]) -> some View {
+        ForEach(Array(licences.enumerated()), id: \.element) { index, licence in
+            SettingRow(
+                title: licence.shortName,
+                hint: licence.deedURL.absoluteString,
+                icon: .shieldCheck,
+                showsSeparator: index != licences.count - 1,
+            ) {
+                pendingLink = ExternalLink(url: licence.deedURL)
+            }
+            .accessibilityHint(Text("link.web.accessibility"))
+        }
+    }
+
     /// The font families and the icon sets, which sit in no manifest and come
     /// from the generator's own lists.
     private func vendoredRows(_ entries: [Credits.Vendored], icon: ZIcon) -> some View {
@@ -197,7 +216,7 @@ struct CreditsScreen: View {
                 title: entry.name,
                 // `entry.license` is an SPDX identifier and is shown as one.
                 // The app maps exactly one thing, ``License/shortName``, and
-                // that enum holds only the three media licences; OFL, ISC and
+                // that enum holds only the media licences; OFL, ISC and
                 // MIT are not among them. Their public names live in the
                 // generator's own table, next to the licence texts and the
                 // deed URLs — one table, in the place that already has to
@@ -216,7 +235,7 @@ struct CreditsScreen: View {
         }
     }
 
-    /// "Foto von Alexis Tinker-Tsavalas · CC BY". Two formats rather than one
+    /// "Foto von Alexis Tinker-Tsavalas · CC BY 4.0". Two formats rather than one
     /// with a third argument, so a translation can put the kind where its own
     /// grammar wants it.
     private func credit(for entry: Credits.Media) -> String {
@@ -225,6 +244,12 @@ struct CreditsScreen: View {
         case .call: String(localized: "credits.call.by")
         }
         return String(format: format, entry.attribution, entry.license.shortName)
+    }
+
+    /// Every licence a photo, a call or a voice ships under, each once.
+    private static func licences(in credits: Credits) -> [License] {
+        let used = Set(credits.media.map(\.license) + credits.voices.map(\.license))
+        return used.sorted { $0.shortName < $1.shortName }
     }
 
     /// The media grouped by pack, in the order the generator wrote them —
