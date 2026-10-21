@@ -9,55 +9,6 @@
   },
   "birds": [
     {
-      "id": "kaiserpinguin",
-      "name": "Kaiserpinguin",
-      "scientificName": "Aptenodytes forsteri",
-      "taxonID": 3820,
-      "article": "der",
-      "pronunciation": null,
-      "photos": [
-        {
-          "file": "photos/kaiserpinguin-3.heic",
-          "sha256": "1befba9fcd111d09eb643dc6f5457a6c8097988d8cdff4e83ebbabacd2df1c2b",
-          "license": "CC-BY-4.0",
-          "attribution": "Seig",
-          "sourceURL": "https://www.inaturalist.org/observations/31447153",
-          "retrieved": "2026-10-21"
-        },
-        {
-          "file": "photos/kaiserpinguin.heic",
-          "sha256": "c616cc5784963ea50d67f8291fcc7a5f60530381e12561920db89b5ad3cbb6bd",
-          "license": "CC-BY-4.0",
-          "attribution": "Seig",
-          "sourceURL": "https://www.inaturalist.org/observations/31447155",
-          "retrieved": "2026-09-10"
-        },
-        {
-          "file": "photos/kaiserpinguin-2.heic",
-          "sha256": "315bdeda7bc320d61ab0b937e4ac0967a0cf69ed957cc515bc5f376a2c7a6dab",
-          "license": "CC-BY-SA-4.0",
-          "attribution": "mattward",
-          "sourceURL": "https://www.inaturalist.org/observations/146195342",
-          "retrieved": "2026-09-10"
-        }
-      ],
-      "call": {
-        "file": "audio/kaiserpinguin.m4a",
-        "sha256": "213b7dc89008b63fcc72c614d2247a1d5deb1da5106a555431d3cd1b5bdbd2c0",
-        "license": "CC-BY-SA-4.0",
-        "attribution": "steve (XC877994)",
-        "sourceURL": "https://xeno-canto.org/877994",
-        "retrieved": "2026-09-10"
-      },
-      "speech": {
-        "collection.name": {
-          "file": "speech/collection.name/kaiserpinguin.m4a",
-          "sha256": "06a4c7fb63608f54fa37e3a27d337b55deb1039e88e1c477a0d0115b789cb457",
-          "text": "Kaiserpinguin"
-        }
-      }
-    },
-    {
       "id": "adeliepinguin",
       "name": "Adeliepinguin",
       "scientificName": "Pygoscelis adeliae",
@@ -88,6 +39,47 @@
           "file": "speech/collection.name/adeliepinguin.m4a",
           "sha256": "6c18caa953e62951b8b4f8e48d9e61f9049552d6e33aeddc0bc060fd73b6e98e",
           "text": "Adeliepinguin"
+        }
+      }
+    },
+    {
+      "id": "kaiserpinguin",
+      "name": "Kaiserpinguin",
+      "scientificName": "Aptenodytes forsteri",
+      "taxonID": 3820,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/kaiserpinguin-3.heic",
+          "sha256": "1befba9fcd111d09eb643dc6f5457a6c8097988d8cdff4e83ebbabacd2df1c2b",
+          "license": "CC-BY-4.0",
+          "attribution": "Seig",
+          "sourceURL": "https://www.inaturalist.org/observations/31447153",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/kaiserpinguin-2.heic",
+          "sha256": "315bdeda7bc320d61ab0b937e4ac0967a0cf69ed957cc515bc5f376a2c7a6dab",
+          "license": "CC-BY-SA-4.0",
+          "attribution": "mattward",
+          "sourceURL": "https://www.inaturalist.org/observations/146195342",
+          "retrieved": "2026-09-10"
+        }
+      ],
+      "call": {
+        "file": "audio/kaiserpinguin.m4a",
+        "sha256": "213b7dc89008b63fcc72c614d2247a1d5deb1da5106a555431d3cd1b5bdbd2c0",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "steve (XC877994)",
+        "sourceURL": "https://xeno-canto.org/877994",
+        "retrieved": "2026-09-10"
+      },
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/kaiserpinguin.m4a",
+          "sha256": "06a4c7fb63608f54fa37e3a27d337b55deb1039e88e1c477a0d0115b789cb457",
+          "text": "Kaiserpinguin"
         }
       }
     },

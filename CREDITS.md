@@ -622,12 +622,11 @@ the source declared.
 
 | Bird | Kind | Author | Licence | Source |
 | --- | --- | --- | --- | --- |
-| Kaiserpinguin | Photo | Seig | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/31447153> |
-| Kaiserpinguin | Photo | Seig | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/31447155> |
-| Kaiserpinguin | Photo | mattward | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/146195342> |
-| Kaiserpinguin | Call | steve (XC877994) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/877994> |
 | Adeliepinguin | Photo | steve b | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/199466069> |
 | Adeliepinguin | Photo | Peter Shanks | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/244872535> |
+| Kaiserpinguin | Photo | Seig | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/31447153> |
+| Kaiserpinguin | Photo | mattward | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/146195342> |
+| Kaiserpinguin | Call | steve (XC877994) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/877994> |
 | Eselspinguin | Photo | Ingvild Riska | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/253310597> |
 | Eselspinguin | Call | steve (XC953123) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/953123> |
 | Zügelpinguin | Photo | Sterling Sheehy | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/194786> |

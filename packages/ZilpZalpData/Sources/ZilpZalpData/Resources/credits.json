@@ -5733,12 +5733,22 @@
     {
       "packID": "polar-meer",
       "packTitle": "Polar & Meer",
-      "birdID": "kaiserpinguin",
-      "birdName": "Kaiserpinguin",
+      "birdID": "adeliepinguin",
+      "birdName": "Adeliepinguin",
       "kind": "photo",
-      "attribution": "Seig",
-      "license": "CC-BY-4.0",
-      "sourceURL": "https://www.inaturalist.org/observations/31447153"
+      "attribution": "steve b",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/199466069"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "adeliepinguin",
+      "birdName": "Adeliepinguin",
+      "kind": "photo",
+      "attribution": "Peter Shanks",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/244872535"
     },
     {
       "packID": "polar-meer",
@@ -5748,7 +5758,7 @@
       "kind": "photo",
       "attribution": "Seig",
       "license": "CC-BY-4.0",
-      "sourceURL": "https://www.inaturalist.org/observations/31447155"
+      "sourceURL": "https://www.inaturalist.org/observations/31447153"
     },
     {
       "packID": "polar-meer",
@@ -5769,26 +5779,6 @@
       "attribution": "steve (XC877994)",
       "license": "CC-BY-SA-4.0",
       "sourceURL": "https://xeno-canto.org/877994"
-    },
-    {
-      "packID": "polar-meer",
-      "packTitle": "Polar & Meer",
-      "birdID": "adeliepinguin",
-      "birdName": "Adeliepinguin",
-      "kind": "photo",
-      "attribution": "steve b",
-      "license": "CC0-1.0",
-      "sourceURL": "https://www.inaturalist.org/observations/199466069"
-    },
-    {
-      "packID": "polar-meer",
-      "packTitle": "Polar & Meer",
-      "birdID": "adeliepinguin",
-      "birdName": "Adeliepinguin",
-      "kind": "photo",
-      "attribution": "Peter Shanks",
-      "license": "CC0-1.0",
-      "sourceURL": "https://www.inaturalist.org/observations/244872535"
     },
     {
       "packID": "polar-meer",
