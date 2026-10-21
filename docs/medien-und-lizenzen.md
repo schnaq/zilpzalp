@@ -271,10 +271,10 @@ Drei Eigenschaften sind wichtig:
 **Der Zuschnitt folgt dem Vogel, nicht der Bildmitte.** Ein zentriertes Quadrat ist für Vogelfotos die falsche Regel: Fotografen komponieren für das Bild, nicht für eine 220-pt-Kachel. Der erste Playtest fand deshalb einen Weißstorch mit angeschnittenem Kopf, einen Brillenpinguin ohne Scheitel, eine Straße statt eines Lachenden Hans und ein Denkmal bei Nacht statt einer Schnee-Eule (#195).
 
 ```
-mise run fetch-media photos frame --pack welt --species schnee-eule \
+mise run fetch-media photos frame --pack nordamerika --species schnee-eule \
     --observation 195441759 --photo 343832881 [--box x0,y0,x1,y1] [--dry-run]
-mise run fetch-media photos audit --pack welt [--add-verdicts -]
-mise run fetch-media photos drop --pack welt --species schnee-eule \
+mise run fetch-media photos audit --pack nordamerika [--add-verdicts -]
+mise run fetch-media photos drop --pack nordamerika --species schnee-eule \
     --file photos/schnee-eule-2.heic
 ```
 

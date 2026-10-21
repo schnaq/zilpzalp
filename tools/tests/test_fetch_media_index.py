@@ -62,6 +62,11 @@ class PacksTestCase(unittest.TestCase):
         patched.start()
         self.addCleanup(patched.stop)
 
+        # The real RETIRED names packs this throwaway directory does not have.
+        patched = mock.patch.object(index, "RETIRED", {})
+        patched.start()
+        self.addCleanup(patched.stop)
+
         self.write_pack("deutschland", "Vögel Deutschlands", ["amsel"])
         self.write_pack("welt", "Vögel der Welt", ["amsel", "star"])
 

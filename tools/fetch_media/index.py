@@ -28,7 +28,7 @@ One entry per downloadable pack:
           ]
         }
       ],
-      "retired": [{"id": "welt", "successors": ["nordamerika"]}]
+      "retired": [{"id": "welt", "successors": ["suedamerika", "nordamerika", …]}]
     }
 
 `manifest` is a bucket key, not a URL: the manifest's own media paths are
@@ -78,9 +78,20 @@ BUNDLED_PACKS = ("deutschland",)
 # Every species of a retired pack must be in one of its successors — `build`
 # refuses otherwise — or a child would lose those stickers from the album.
 #
-# "Vögel der Welt" (welt) is to be dissolved into regional packs; it moves in
-# here once those are in the bucket.
-RETIRED: dict[str, tuple[str, ...]] = {}
+# "Vögel der Welt" (welt) was dissolved into the regional packs (2026-10-22).
+# Its manifest is gone from data/packs, so `check_retired` no longer guards it:
+# every bird but raggi-paradiesvogel, which never had a photo pass review, is
+# in one of these six.
+RETIRED: dict[str, tuple[str, ...]] = {
+    "welt": (
+        "suedamerika",
+        "nordamerika",
+        "australien-ozeanien",
+        "polar-meer",
+        "asien",
+        "greifvoegel-eulen",
+    ),
+}
 
 # How many birds stand for a pack on its card.
 COVER_COUNT = 3
