@@ -549,6 +549,176 @@
           "text": "Quetzal"
         }
       }
+    },
+    {
+      "id": "gelbbrustara",
+      "name": "Gelbbrustara",
+      "scientificName": "Ara ararauna",
+      "taxonID": 19018,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "hyazinthara",
+      "name": "Hyazinthara",
+      "scientificName": "Anodorhynchus hyacinthinus",
+      "taxonID": 18938,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "gruenfluegelara",
+      "name": "Grünflügelara",
+      "scientificName": "Ara chloropterus",
+      "taxonID": 19016,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "hoatzin",
+      "name": "Hoatzin",
+      "scientificName": "Opisthocomus hoazin",
+      "taxonID": 1626,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "magellanpinguin",
+      "name": "Magellanpinguin",
+      "scientificName": "Spheniscus magellanicus",
+      "taxonID": 3812,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "schwertschnabelkolibri",
+      "name": "Schwertschnabelkolibri",
+      "scientificName": "Ensifera ensifera",
+      "taxonID": 6458,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "violettohrkolibri",
+      "name": "Violettohrkolibri",
+      "scientificName": "Colibri coruscans",
+      "taxonID": 6072,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "schwefeltyrann",
+      "name": "Schwefeltyrann",
+      "scientificName": "Pitangus sulphuratus",
+      "taxonID": 16956,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "jabiru",
+      "name": "Jabiru",
+      "scientificName": "Jabiru mycteria",
+      "taxonID": 4773,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "sonnenralle",
+      "name": "Sonnenralle",
+      "scientificName": "Eurypyga helias",
+      "taxonID": 19,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "schopfkarakara",
+      "name": "Schopfkarakara",
+      "scientificName": "Caracara plancus",
+      "taxonID": 4715,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "halsbandarassari",
+      "name": "Halsbandarassari",
+      "scientificName": "Pteroglossus torquatus",
+      "taxonID": 18584,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "schlangenhalsvogel",
+      "name": "Schlangenhalsvogel",
+      "scientificName": "Anhinga anhinga",
+      "taxonID": 5063,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "purpurtyrann",
+      "name": "Purpurtyrann",
+      "scientificName": "Pyrocephalus rubinus",
+      "taxonID": 16447,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "silberschnabeltangare",
+      "name": "Silberschnabeltangare",
+      "scientificName": "Ramphocelus carbo",
+      "taxonID": 10056,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "plueschhaeher",
+      "name": "Plüschhäher",
+      "scientificName": "Cyanocorax chrysops",
+      "taxonID": 8484,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
+    },
+    {
+      "id": "graukardinal",
+      "name": "Graukardinal",
+      "scientificName": "Paroaria coronata",
+      "taxonID": 10254,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [],
+      "call": null
     }
   ]
 }
