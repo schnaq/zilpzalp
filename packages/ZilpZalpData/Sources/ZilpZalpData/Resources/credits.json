@@ -1113,6 +1113,16 @@
     {
       "packID": "asien",
       "packTitle": "Asien",
+      "birdID": "mandarinente",
+      "birdName": "Mandarinente",
+      "kind": "call",
+      "attribution": "teesdalebirder (XC1073953)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/1073953"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
       "birdID": "halsbandsittich",
       "birdName": "Halsbandsittich",
       "kind": "photo",
@@ -1523,6 +1533,16 @@
     {
       "packID": "asien",
       "packTitle": "Asien",
+      "birdID": "rotohrbuelbuel",
+      "birdName": "Rotohrbülbül",
+      "kind": "call",
+      "attribution": "Ujjal Kishor De (XC1051835)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/1051835"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
       "birdID": "braunliest",
       "birdName": "Braunliest",
       "kind": "photo",
@@ -1543,6 +1563,16 @@
     {
       "packID": "asien",
       "packTitle": "Asien",
+      "birdID": "braunliest",
+      "birdName": "Braunliest",
+      "kind": "call",
+      "attribution": "Sathyan Meppayur (XC603361)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/603361"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
       "birdID": "smaragdspint",
       "birdName": "Smaragdspint",
       "kind": "photo",
@@ -1559,6 +1589,16 @@
       "attribution": "sunnyjosef",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/66516988"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "smaragdspint",
+      "birdName": "Smaragdspint",
+      "kind": "call",
+      "attribution": "Jairam Vijayan (XC1043295)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/1043295"
     },
     {
       "packID": "asien",
@@ -1589,6 +1629,16 @@
       "attribution": "Miguel",
       "license": "CC-BY-SA-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/316626068"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "glanzkraehe",
+      "birdName": "Glanzkrähe",
+      "kind": "call",
+      "attribution": "Vihansith Kulatunga (XC681127)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/681127"
     },
     {
       "packID": "asien",
@@ -1699,6 +1749,16 @@
       "attribution": "Terra Occ",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/20192869"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "perlhalstaube",
+      "birdName": "Perlhalstaube",
+      "kind": "call",
+      "attribution": "Untung Sarmawi (XC1174159)",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://xeno-canto.org/1174159"
     },
     {
       "packID": "australien-ozeanien",

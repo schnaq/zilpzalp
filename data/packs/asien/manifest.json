@@ -215,7 +215,14 @@
           "retrieved": "2026-09-11"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/mandarinente.m4a",
+        "sha256": "bfcb1c075f5a16c3eab62029a6b33bcb33c5405708f94606d720eb08e4618bca",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "teesdalebirder (XC1073953)",
+        "sourceURL": "https://xeno-canto.org/1073953",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/mandarinente.m4a",
@@ -771,7 +778,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/rotohrbuelbuel.m4a",
+        "sha256": "be1285772acb0cc72b47191b8b056914f0eeb3a69c553199448b509205f5a656",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Ujjal Kishor De (XC1051835)",
+        "sourceURL": "https://xeno-canto.org/1051835",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/rotohrbuelbuel.m4a",
@@ -805,7 +819,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/braunliest.m4a",
+        "sha256": "343a65efa341f8eb3c3a9385a0ddecf261b16c50256240fa1b4e500038d4f8f9",
+        "license": "CC0-1.0",
+        "attribution": "Sathyan Meppayur (XC603361)",
+        "sourceURL": "https://xeno-canto.org/603361",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/braunliest.m4a",
@@ -839,7 +860,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/smaragdspint.m4a",
+        "sha256": "2d82921ab54e7493180a1ddd46b06995d9c433a51b273bc95f129f1b835335ef",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Jairam Vijayan (XC1043295)",
+        "sourceURL": "https://xeno-canto.org/1043295",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/smaragdspint.m4a",
@@ -899,7 +927,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/glanzkraehe.m4a",
+        "sha256": "fe88f2627c3f1c9071cf9efc8f2c74572868741c681c66900ee94cb39169d8ee",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Vihansith Kulatunga (XC681127)",
+        "sourceURL": "https://xeno-canto.org/681127",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/glanzkraehe.m4a",
@@ -1059,7 +1094,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/perlhalstaube.m4a",
+        "sha256": "e7d83f55f5ab254c7f8807902e6a3e36df505ca98cf280809ab90cb64e098189",
+        "license": "CC-BY-4.0",
+        "attribution": "Untung Sarmawi (XC1174159)",
+        "sourceURL": "https://xeno-canto.org/1174159",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/perlhalstaube.m4a",
