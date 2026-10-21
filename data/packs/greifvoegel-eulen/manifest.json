@@ -31,6 +31,14 @@
           "attribution": "Artemy Savko",
           "sourceURL": "https://www.inaturalist.org/observations/232657564",
           "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/uhu-6.heic",
+          "sha256": "edf10d0076957acf3217b38563d36c098f670d80d398dd5b4c1e92341f8c64db",
+          "license": "CC-BY-4.0",
+          "attribution": "Rafael Würtemberger",
+          "sourceURL": "https://www.inaturalist.org/observations/224975895",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": {
@@ -63,6 +71,14 @@
           "license": "CC-BY-4.0",
           "attribution": "Frank Sengpiel",
           "sourceURL": "https://www.inaturalist.org/observations/103487807",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/schleiereule-6.heic",
+          "sha256": "f9028fc9a3a7a4f8e9d97f956aedd84ffb47c5bba60bbec8bfdb38771fb9a2b3",
+          "license": "CC-BY-4.0",
+          "attribution": "Paul Lewis",
+          "sourceURL": "https://www.inaturalist.org/observations/181256084",
           "retrieved": "2026-10-21"
         }
       ],
@@ -97,6 +113,14 @@
           "attribution": "Christoph Moning",
           "sourceURL": "https://www.inaturalist.org/observations/73835627",
           "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/waldkauz-2.heic",
+          "sha256": "93ac04cff4e3fef14dbf25908d5f5d8e1a02cab4606abc29313338b8e40236fe",
+          "license": "CC-BY-4.0",
+          "attribution": "Вячеслав Юсупов",
+          "sourceURL": "https://www.inaturalist.org/observations/100319778",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": {
@@ -189,7 +213,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/waldohreule.m4a",
+        "sha256": "cb5c7279d7088259efffa79ba0b1dae947d28d4b29154c55008bee21838b341c",
+        "license": "CC0-1.0",
+        "attribution": "Sonothèque ADVL (XC1107816)",
+        "sourceURL": "https://xeno-canto.org/1107816",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/waldohreule.m4a",
@@ -231,12 +262,60 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/sperlingskauz.m4a",
+        "sha256": "55aace19b9efac1a1117df71c2447a2e0a48e1d920951ef008f552488bc798cb",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Max Karlsson (XC780439)",
+        "sourceURL": "https://xeno-canto.org/780439",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/sperlingskauz.m4a",
           "sha256": "5afcdd4d26e0271776e6927c346487361234e98f6efe4191cc489389ec2bccd2",
           "text": "Sperlingskauz"
+        }
+      }
+    },
+    {
+      "id": "zwergohreule",
+      "name": "Zwergohreule",
+      "scientificName": "Otus scops",
+      "taxonID": 20244,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/zwergohreule.heic",
+          "sha256": "8bea7f0a52ba3c7c2518888d1e76d24d91a26e0bc23a78ad54456157017a9cef",
+          "license": "CC-BY-4.0",
+          "attribution": "Алина Урусова",
+          "sourceURL": "https://www.inaturalist.org/observations/36374510",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/zwergohreule-2.heic",
+          "sha256": "163b3df3c658b7c5cd211eeb367d36f8607b024b5f80f88c8a2e17145a08960b",
+          "license": "CC-BY-4.0",
+          "attribution": "Julien Renoult",
+          "sourceURL": "https://www.inaturalist.org/observations/111966118",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": {
+        "file": "audio/zwergohreule.m4a",
+        "sha256": "9ff9fac8126bf85fcb797501b8c4a48dcc35d3e50703ebb632273cb0165d016e",
+        "license": "CC0-1.0",
+        "attribution": "Lionel Triboulin (XC1151477)",
+        "sourceURL": "https://xeno-canto.org/1151477",
+        "retrieved": "2026-10-21"
+      },
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/zwergohreule.m4a",
+          "sha256": "9e75cdf78ca14312a712c544ad4d5370c5d0d8b12bcf4d11724bd7f360bf0d39",
+          "text": "Zwergohreule"
         }
       }
     },
@@ -263,6 +342,14 @@
           "attribution": "Matt Felperin",
           "sourceURL": "https://www.inaturalist.org/observations/104681391",
           "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/schnee-eule-3.heic",
+          "sha256": "eb1aa803ed8cdf63fde581992652be7967820192507ef4c3b20fbc0ee6d9384b",
+          "license": "CC-BY-4.0",
+          "attribution": "Константин Селивёрстов",
+          "sourceURL": "https://www.inaturalist.org/observations/190983875",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": null,
@@ -307,7 +394,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/bartkauz.m4a",
+        "sha256": "4b057231b9282a6994ef79c96fe32781396b99ef8cfd2cf9b31fa0a8fbeb3be1",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Robert Petersen (XC986000)",
+        "sourceURL": "https://xeno-canto.org/986000",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/bartkauz.m4a",
@@ -339,9 +433,24 @@
           "attribution": "Scott Clark",
           "sourceURL": "https://www.inaturalist.org/observations/107450615",
           "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/kaninchenkauz-3.heic",
+          "sha256": "67db5e84c1510db508614d2fe5a06afca14b7bce7baa73ced475f710118c7642",
+          "license": "CC-BY-4.0",
+          "attribution": "Donald Davesne",
+          "sourceURL": "https://www.inaturalist.org/observations/312939040",
+          "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/kaninchenkauz.m4a",
+        "sha256": "9d7323c2e8d30c3beaceb75024da2e4ab0f3b2bc22029be2f11639788e001ed1",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Pichard Olivier (XC909267)",
+        "sourceURL": "https://xeno-canto.org/909267",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/kaninchenkauz.m4a",
@@ -365,9 +474,24 @@
           "attribution": "Brooke J.",
           "sourceURL": "https://www.inaturalist.org/observations/202251518",
           "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/virginia-uhu-2.heic",
+          "sha256": "cc70f5656e6b0c5590669fd125ad12b7cfa1f618b58883dc43e41e756dd3e14e",
+          "license": "CC-BY-4.0",
+          "attribution": "Spencer Hurt",
+          "sourceURL": "https://www.inaturalist.org/observations/240248124",
+          "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/virginia-uhu.m4a",
+        "sha256": "b9f888822b7faef6003d12b69b946d71a66b03d2bae554924054b52f09fe6673",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Michael & Katie LaTour (XC450919)",
+        "sourceURL": "https://xeno-canto.org/450919",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/virginia-uhu.m4a",
@@ -393,7 +517,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/steinadler.m4a",
+        "sha256": "685975029a746e89166ac135dc9618eebc6881ea6034ea1ddefa3f3461c3c228",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Pascal Christe (XC1145141)",
+        "sourceURL": "https://xeno-canto.org/1145141",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/steinadler.m4a",
@@ -424,6 +555,14 @@
           "license": "CC-BY-4.0",
           "attribution": "Валерия Ковалева",
           "sourceURL": "https://www.inaturalist.org/observations/195372888",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/seeadler-7.heic",
+          "sha256": "d8037ee8d5ce869651a3d2f4b9901109bbe4b09bf3f5433b3a280ad86c86cb0e",
+          "license": "CC-BY-4.0",
+          "attribution": "Вячеслав Юсупов",
+          "sourceURL": "https://www.inaturalist.org/observations/190839786",
           "retrieved": "2026-10-21"
         }
       ],
@@ -500,6 +639,14 @@
           "attribution": "Damien Mullin",
           "sourceURL": "https://www.inaturalist.org/observations/143304746",
           "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/riesenseeadler-2.heic",
+          "sha256": "6b59acc453cdb674baafcd3dbc68adc07de8378a33053cb58ce304f404c9ce2c",
+          "license": "CC-BY-4.0",
+          "attribution": "Christoph Moning",
+          "sourceURL": "https://www.inaturalist.org/observations/63814295",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": null,
@@ -554,6 +701,47 @@
       }
     },
     {
+      "id": "fischadler",
+      "name": "Fischadler",
+      "scientificName": "Pandion haliaetus",
+      "taxonID": 116999,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/fischadler.heic",
+          "sha256": "92a9ba22a6674446e2aac051c1859c2f644d118016fe42aeef96ab1198c970b3",
+          "license": "CC-BY-4.0",
+          "attribution": "Richard Stovall",
+          "sourceURL": "https://www.inaturalist.org/observations/180352700",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/fischadler-2.heic",
+          "sha256": "f14761b8be674a8143f483b1cf8fd4898058f8de93a793157eeb6565e410d4f1",
+          "license": "CC-BY-4.0",
+          "attribution": "Richard Stovall",
+          "sourceURL": "https://www.inaturalist.org/observations/180352700",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": {
+        "file": "audio/fischadler.m4a",
+        "sha256": "3af9d20a686e45ed0e964f5a118148eccf53a5a76b09a91bb5860650e75d18b5",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Doug Hynes (XC671347)",
+        "sourceURL": "https://xeno-canto.org/671347",
+        "retrieved": "2026-10-21"
+      },
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/fischadler.m4a",
+          "sha256": "5d2ce4c2fcd811af358eede39057eac4915dbb45898effb7a8c8ce548abffbae",
+          "text": "Fischadler"
+        }
+      }
+    },
+    {
       "id": "harpyie",
       "name": "Harpyie",
       "scientificName": "Harpia harpyja",
@@ -575,6 +763,14 @@
           "license": "CC-BY-4.0",
           "attribution": "Laura Gaudette",
           "sourceURL": "https://www.inaturalist.org/observations/37017086",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/harpyie-5.heic",
+          "sha256": "74a4c17c44d3d3aae9e4e44b1ddc7a3bcbfedbab12c761d04db6b4617b7ecef4",
+          "license": "CC-BY-4.0",
+          "attribution": "Agustín Zarco",
+          "sourceURL": "https://www.inaturalist.org/observations/183365865",
           "retrieved": "2026-10-21"
         }
       ],
@@ -637,6 +833,114 @@
       }
     },
     {
+      "id": "rotschwanzbussard",
+      "name": "Rotschwanzbussard",
+      "scientificName": "Buteo jamaicensis",
+      "taxonID": 5212,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/rotschwanzbussard.heic",
+          "sha256": "808319d2c381c20256475bd418bc66b52744de852dc4699f64ea18c759d4ddff",
+          "license": "CC-BY-4.0",
+          "attribution": "Bailey Duncan",
+          "sourceURL": "https://www.inaturalist.org/observations/320479980",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/rotschwanzbussard-2.heic",
+          "sha256": "c5131dcf40a393f8edbfa9d35bfb6a041528b09f37fdec33dd3e38265d4a3bb5",
+          "license": "CC-BY-4.0",
+          "attribution": "Jonathan Eisen",
+          "sourceURL": "https://www.inaturalist.org/observations/84179264",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": {
+        "file": "audio/rotschwanzbussard.m4a",
+        "sha256": "85396532a804ca42521a5fb6abb7471d0ce5ed3e87ae922db1a45a5fe39121ae",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Jonas Katona (XC625524)",
+        "sourceURL": "https://xeno-canto.org/625524",
+        "retrieved": "2026-10-21"
+      },
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/rotschwanzbussard.m4a",
+          "sha256": "7c00ba0bb67daf7ba5d84bccc31e3fde1605d1eb1d6fc53448ca55592e0d76f6",
+          "text": "Rotschwanzbussard"
+        }
+      }
+    },
+    {
+      "id": "wuestenbussard",
+      "name": "Wüstenbussard",
+      "scientificName": "Parabuteo unicinctus",
+      "taxonID": 5355,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/wuestenbussard.heic",
+          "sha256": "b64b259f9d84dfd196851120edb2386075f91ae058d13f460d49c87a2d967f19",
+          "license": "CC-BY-4.0",
+          "attribution": "Daniel Patterson",
+          "sourceURL": "https://www.inaturalist.org/observations/147659768",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": {
+        "file": "audio/wuestenbussard.m4a",
+        "sha256": "7f867723be587d55b920be36fe586837c93260689b42e01643028a486e918eec",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Gabriele Magurno (XC202066)",
+        "sourceURL": "https://xeno-canto.org/202066",
+        "retrieved": "2026-10-21"
+      },
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/wuestenbussard.m4a",
+          "sha256": "f5d5ae05a8c464b3a6f14bda6016a4e77687145c85b93b15985062e8347a7cda",
+          "text": "Wüstenbussard"
+        }
+      }
+    },
+    {
+      "id": "schopfkarakara",
+      "name": "Schopfkarakara",
+      "scientificName": "Caracara plancus",
+      "taxonID": 4715,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/schopfkarakara.heic",
+          "sha256": "695dcacbe37af3689c74d7ec8c19234ca17c8738fa39ed60398b8ac3ea0041c9",
+          "license": "CC0-1.0",
+          "attribution": "Don Wellmann",
+          "sourceURL": "https://www.inaturalist.org/observations/256340142",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/schopfkarakara-2.heic",
+          "sha256": "b1f6c2342e85edbb2ca9dd8bce95081d6006e0721fa91da7a1f6338b19bd7d08",
+          "license": "CC-BY-4.0",
+          "attribution": "Leonel Roget",
+          "sourceURL": "https://www.inaturalist.org/observations/97614931",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/schopfkarakara.m4a",
+          "sha256": "62c9c9ff048d3057d3f3882d83eb7f330b3af6d5065851c59f688b4096d6787f",
+          "text": "Schopfkarakara"
+        }
+      }
+    },
+    {
       "id": "sekretaer",
       "name": "Sekretär",
       "scientificName": "Sagittarius serpentarius",
@@ -659,6 +963,14 @@
           "attribution": "Tristan Jobin",
           "sourceURL": "https://www.inaturalist.org/observations/285308541",
           "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/sekretaer-4.heic",
+          "sha256": "eb7d172164526bea44d68ee88f3eb1042775130d7c32991e51c10f47cc45645b",
+          "license": "CC-BY-4.0",
+          "attribution": "Christiaan Viljoen",
+          "sourceURL": "https://www.inaturalist.org/observations/336851993",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": null,
@@ -684,6 +996,14 @@
           "license": "CC-BY-4.0",
           "attribution": "Sara Navarro",
           "sourceURL": "https://www.inaturalist.org/observations/69828854",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/rotmilan-5.heic",
+          "sha256": "15dbd28be72470de244a42fdcd4cf2b738d49a79d60a4d0241c459c76202ed6e",
+          "license": "CC-BY-4.0",
+          "attribution": "Sara Navarro",
+          "sourceURL": "https://www.inaturalist.org/observations/70059037",
           "retrieved": "2026-10-21"
         }
       ],
@@ -767,6 +1087,14 @@
           "attribution": "Shirley Zundell",
           "sourceURL": "https://www.inaturalist.org/observations/12075369",
           "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/wanderfalke-2.heic",
+          "sha256": "7ef751e0722aca301a2ccc51f131e9412354011b219ace5eb92dc2463a48a89f",
+          "license": "CC-BY-4.0",
+          "attribution": "Brooke J.",
+          "sourceURL": "https://www.inaturalist.org/observations/345609021",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": {
@@ -850,9 +1178,24 @@
           "attribution": "Kudaibergen Amirekul",
           "sourceURL": "https://www.inaturalist.org/observations/107536421",
           "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/bartgeier-3.heic",
+          "sha256": "a71af17450e69f9564383470af60ebe99ee0bea72d42a131081b9b5a85f3e846",
+          "license": "CC-BY-4.0",
+          "attribution": "Ani Sarkisyan",
+          "sourceURL": "https://www.inaturalist.org/observations/1743950",
+          "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/bartgeier.m4a",
+        "sha256": "f85b87cc41fd8c207ef8014c659971bcb64d027da1c5babff7510164c3618f43",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Thomas SIGNEAU (XC937971)",
+        "sourceURL": "https://xeno-canto.org/937971",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/bartgeier.m4a",
@@ -875,6 +1218,14 @@
           "license": "CC-BY-4.0",
           "attribution": "Diego González Dopico",
           "sourceURL": "https://www.inaturalist.org/observations/317526057",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/gaensegeier-2.heic",
+          "sha256": "6a311b1224b344331ec0fed0678b1738ab8abea6f6ccc0f122fd6d2cc763323e",
+          "license": "CC-BY-4.0",
+          "attribution": "Juan Rodríguez",
+          "sourceURL": "https://www.inaturalist.org/observations/326987696",
           "retrieved": "2026-10-21"
         }
       ],
@@ -935,6 +1286,14 @@
           "license": "CC0-1.0",
           "attribution": "Jean-Paul Boerekamps",
           "sourceURL": "https://www.inaturalist.org/observations/74490210",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/koenigsgeier-3.heic",
+          "sha256": "c975cd6efdcafd7676c759c3564f9b0f4fa85e75c3a1044a5d5a92720e9f5f4e",
+          "license": "CC-BY-SA-4.0",
+          "attribution": "Miguel",
+          "sourceURL": "https://www.inaturalist.org/observations/396825713",
           "retrieved": "2026-10-21"
         }
       ],
