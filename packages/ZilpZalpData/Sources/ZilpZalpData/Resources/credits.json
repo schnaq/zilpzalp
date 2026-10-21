@@ -1023,12 +1023,52 @@
     {
       "packID": "asien",
       "packTitle": "Asien",
+      "birdID": "mandschurenkranich",
+      "birdName": "Mandschurenkranich",
+      "kind": "photo",
+      "attribution": "Marco Mussita",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/15283694"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "mandschurenkranich",
+      "birdName": "Mandschurenkranich",
+      "kind": "photo",
+      "attribution": "Mathieu Soetens",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/252492573"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
       "birdID": "jungfernkranich",
       "birdName": "Jungfernkranich",
       "kind": "photo",
       "attribution": "Nigel Voaden",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/2807453"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "jungfernkranich",
+      "birdName": "Jungfernkranich",
+      "kind": "photo",
+      "attribution": "Jan Ebr & Ivana Ebrová",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/216858624"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "jungfernkranich",
+      "birdName": "Jungfernkranich",
+      "kind": "photo",
+      "attribution": "Kudaibergen Amirekul",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/221345133"
     },
     {
       "packID": "asien",
@@ -1085,6 +1125,16 @@
       "packTitle": "Asien",
       "birdID": "halsbandsittich",
       "birdName": "Halsbandsittich",
+      "kind": "photo",
+      "attribution": "zebedeugalinha",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/405276066"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "halsbandsittich",
+      "birdName": "Halsbandsittich",
       "kind": "call",
       "attribution": "Marie-Lan Taÿ Pamart (XC510543)",
       "license": "CC-BY-SA-4.0",
@@ -1099,6 +1149,26 @@
       "attribution": "Roger Rittmaster",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/37135639"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "hirtenmaina",
+      "birdName": "Hirtenmaina",
+      "kind": "photo",
+      "attribution": "Brodie Cass Talbott",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/236437397"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "hirtenmaina",
+      "birdName": "Hirtenmaina",
+      "kind": "photo",
+      "attribution": "Rejoice Gassah",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/302563423"
     },
     {
       "packID": "asien",
@@ -1135,6 +1205,16 @@
       "packTitle": "Asien",
       "birdID": "rostgans",
       "birdName": "Rostgans",
+      "kind": "photo",
+      "attribution": "Nicolás Tamargo",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/80234608"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "rostgans",
+      "birdName": "Rostgans",
       "kind": "call",
       "attribution": "Pascal Christe (XC799447)",
       "license": "CC-BY-SA-4.0",
@@ -1163,12 +1243,42 @@
     {
       "packID": "asien",
       "packTitle": "Asien",
+      "birdID": "schwanengans",
+      "birdName": "Schwanengans",
+      "kind": "photo",
+      "attribution": "Aalbert Rebergen",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/403763740"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
       "birdID": "streifengans",
       "birdName": "Streifengans",
       "kind": "photo",
       "attribution": "Dario Taraborelli",
       "license": "CC0-1.0",
       "sourceURL": "https://www.inaturalist.org/observations/332648814"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "streifengans",
+      "birdName": "Streifengans",
+      "kind": "photo",
+      "attribution": "Mikael Nyman",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/161243484"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "streifengans",
+      "birdName": "Streifengans",
+      "kind": "photo",
+      "attribution": "Kai Löhr",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/24220922"
     },
     {
       "packID": "asien",
@@ -1189,6 +1299,26 @@
       "attribution": "James H",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/383796909"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "brahminenweih",
+      "birdName": "Brahminenweih",
+      "kind": "photo",
+      "attribution": "dhfischer",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/337615157"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "brahminenweih",
+      "birdName": "Brahminenweih",
+      "kind": "photo",
+      "attribution": "Afsar Nayakkan",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/338727579"
     },
     {
       "packID": "asien",
@@ -1215,6 +1345,16 @@
       "packTitle": "Asien",
       "birdID": "rubinkehlchen",
       "birdName": "Rubinkehlchen",
+      "kind": "photo",
+      "attribution": "Константин Шатилов",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/375251402"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "rubinkehlchen",
+      "birdName": "Rubinkehlchen",
       "kind": "call",
       "attribution": "steve (XC1153478)",
       "license": "CC-BY-SA-4.0",
@@ -1229,6 +1369,16 @@
       "attribution": "ian_mcallan",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/207697305"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "glanzkaefertaube",
+      "birdName": "Glanzkäfertaube",
+      "kind": "photo",
+      "attribution": "Toby Y",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/75524025"
     },
     {
       "packID": "asien",
@@ -1253,6 +1403,16 @@
     {
       "packID": "asien",
       "packTitle": "Asien",
+      "birdID": "buntstorch",
+      "birdName": "Buntstorch",
+      "kind": "photo",
+      "attribution": "Renjith Jacob Mathews",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/198228796"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
       "birdID": "japanbrillenvogel",
       "birdName": "Japanbrillenvogel",
       "kind": "photo",
@@ -1265,10 +1425,280 @@
       "packTitle": "Asien",
       "birdID": "japanbrillenvogel",
       "birdName": "Japanbrillenvogel",
+      "kind": "photo",
+      "attribution": "renshuchu",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/197039457"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "japanbrillenvogel",
+      "birdName": "Japanbrillenvogel",
+      "kind": "photo",
+      "attribution": "Timur Kalininsky",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/259313934"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "japanbrillenvogel",
+      "birdName": "Japanbrillenvogel",
       "kind": "call",
       "attribution": "Peter Wilton (XC176944)",
       "license": "CC-BY-SA-4.0",
       "sourceURL": "https://xeno-canto.org/176944"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "saruskranich",
+      "birdName": "Saruskranich",
+      "kind": "photo",
+      "attribution": "Paul Whitington",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/133735615"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "bankivahuhn",
+      "birdName": "Bankivahuhn",
+      "kind": "photo",
+      "attribution": "Mathieu Soetens",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/263975336"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "bankivahuhn",
+      "birdName": "Bankivahuhn",
+      "kind": "photo",
+      "attribution": "CaracalShan",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/361483980"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "bankivahuhn",
+      "birdName": "Bankivahuhn",
+      "kind": "photo",
+      "attribution": "Hannah Stitt",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/211300866"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "rotohrbuelbuel",
+      "birdName": "Rotohrbülbül",
+      "kind": "photo",
+      "attribution": "Tom Field",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/227291001"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "rotohrbuelbuel",
+      "birdName": "Rotohrbülbül",
+      "kind": "photo",
+      "attribution": "Kat B",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/206199261"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "rotohrbuelbuel",
+      "birdName": "Rotohrbülbül",
+      "kind": "photo",
+      "attribution": "Dan Killam",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/34039177"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "braunliest",
+      "birdName": "Braunliest",
+      "kind": "photo",
+      "attribution": "Rejoice Gassah",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/70385545"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "braunliest",
+      "birdName": "Braunliest",
+      "kind": "photo",
+      "attribution": "Christoph Moning",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/58318265"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "smaragdspint",
+      "birdName": "Smaragdspint",
+      "kind": "photo",
+      "attribution": "Afsar Nayakkan",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/238798275"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "smaragdspint",
+      "birdName": "Smaragdspint",
+      "kind": "photo",
+      "attribution": "sunnyjosef",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/66516988"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "azurelster",
+      "birdName": "Azurelster",
+      "kind": "photo",
+      "attribution": "Настя Бухвалова",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/285058965"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "glanzkraehe",
+      "birdName": "Glanzkrähe",
+      "kind": "photo",
+      "attribution": "Miguel",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/317633922"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "glanzkraehe",
+      "birdName": "Glanzkrähe",
+      "kind": "photo",
+      "attribution": "Miguel",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/316626068"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "dajaldrossel",
+      "birdName": "Dajaldrossel",
+      "kind": "photo",
+      "attribution": "Andrew Lai",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/249713147"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "dajaldrossel",
+      "birdName": "Dajaldrossel",
+      "kind": "photo",
+      "attribution": "William Stephens",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/39243498"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "dajaldrossel",
+      "birdName": "Dajaldrossel",
+      "kind": "photo",
+      "attribution": "Donald Davesne",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/397780225"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "hainparadiesschnaepper",
+      "birdName": "Hainparadiesschnäpper",
+      "kind": "photo",
+      "attribution": "sunnyjosef",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/48517282"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "hainparadiesschnaepper",
+      "birdName": "Hainparadiesschnäpper",
+      "kind": "photo",
+      "attribution": "Кирилл",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/288113968"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "hainparadiesschnaepper",
+      "birdName": "Hainparadiesschnäpper",
+      "kind": "photo",
+      "attribution": "Mathieu Soetens",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/352169971"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "spiegelrotschwanz",
+      "birdName": "Spiegelrotschwanz",
+      "kind": "photo",
+      "attribution": "Zinogre",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/95646327"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "spiegelrotschwanz",
+      "birdName": "Spiegelrotschwanz",
+      "kind": "photo",
+      "attribution": "Marco Mussita",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/26109381"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "spiegelrotschwanz",
+      "birdName": "Spiegelrotschwanz",
+      "kind": "photo",
+      "attribution": "Marco Mussita",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/25847590"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "perlhalstaube",
+      "birdName": "Perlhalstaube",
+      "kind": "photo",
+      "attribution": "Adam Jackson",
+      "license": "CC0-1.0",
+      "sourceURL": "https://www.inaturalist.org/observations/261693879"
+    },
+    {
+      "packID": "asien",
+      "packTitle": "Asien",
+      "birdID": "perlhalstaube",
+      "birdName": "Perlhalstaube",
+      "kind": "photo",
+      "attribution": "Terra Occ",
+      "license": "CC-BY-4.0",
+      "sourceURL": "https://www.inaturalist.org/observations/20192869"
     },
     {
       "packID": "australien-ozeanien",

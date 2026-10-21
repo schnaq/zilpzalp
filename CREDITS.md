@@ -121,31 +121,74 @@ the source declared.
 | Doppelhornvogel | Photo | Aparna Krishnan | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/144356773> |
 | Doppelhornvogel | Photo | Wang.QG | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/177510273> |
 | Mandschurenkranich | Photo | Christoph Moning | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/63813237> |
+| Mandschurenkranich | Photo | Marco Mussita | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/15283694> |
+| Mandschurenkranich | Photo | Mathieu Soetens | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/252492573> |
 | Jungfernkranich | Photo | Nigel Voaden | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/2807453> |
+| Jungfernkranich | Photo | Jan Ebr & Ivana Ebrová | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/216858624> |
+| Jungfernkranich | Photo | Kudaibergen Amirekul | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/221345133> |
 | Jungfernkranich | Call | Sonothèque ADVL (XC817786) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/817786> |
 | Mandarinente | Photo | Blake Ross | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/102309745> |
 | Mandarinente | Photo | Diego González Dopico | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/204451732> |
 | Mandarinente | Photo | Susan Marley | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/106805518> |
 | Halsbandsittich | Photo | Paul Lewis | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/340036074> |
+| Halsbandsittich | Photo | zebedeugalinha | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/405276066> |
 | Halsbandsittich | Call | Marie-Lan Taÿ Pamart (XC510543) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/510543> |
 | Hirtenmaina | Photo | Roger Rittmaster | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/37135639> |
+| Hirtenmaina | Photo | Brodie Cass Talbott | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/236437397> |
+| Hirtenmaina | Photo | Rejoice Gassah | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/302563423> |
 | Hirtenmaina | Call | Ujjal Kishor De (XC1003188) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/1003188> |
 | Rostgans | Photo | Михаил Малышев | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/156270590> |
 | Rostgans | Photo | Donald Davesne | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/255322020> |
+| Rostgans | Photo | Nicolás Tamargo | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/80234608> |
 | Rostgans | Call | Pascal Christe (XC799447) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/799447> |
 | Schwanengans | Photo | 許慶棠Ray | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/261963473> |
 | Schwanengans | Photo | Yi CHEN | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/38633189> |
+| Schwanengans | Photo | Aalbert Rebergen | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/403763740> |
 | Streifengans | Photo | Dario Taraborelli | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/332648814> |
+| Streifengans | Photo | Mikael Nyman | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/161243484> |
+| Streifengans | Photo | Kai Löhr | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/24220922> |
 | Streifengans | Call | Pascal Christe (XC723229) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/723229> |
 | Brahminenweih | Photo | James H | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/383796909> |
+| Brahminenweih | Photo | dhfischer | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/337615157> |
+| Brahminenweih | Photo | Afsar Nayakkan | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/338727579> |
 | Rubinkehlchen | Photo | Griha Hasanov | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/80866856> |
 | Rubinkehlchen | Photo | Лариса Артемьева | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/375885645> |
+| Rubinkehlchen | Photo | Константин Шатилов | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/375251402> |
 | Rubinkehlchen | Call | steve (XC1153478) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/1153478> |
 | Glanzkäfertaube | Photo | ian_mcallan | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/207697305> |
+| Glanzkäfertaube | Photo | Toby Y | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/75524025> |
 | Buntstorch | Photo | Donald Davesne | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/142526539> |
 | Buntstorch | Photo | Rejoice Gassah | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/242033181> |
+| Buntstorch | Photo | Renjith Jacob Mathews | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/198228796> |
 | Japanbrillenvogel | Photo | Corey Farwell | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/339527516> |
+| Japanbrillenvogel | Photo | renshuchu | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/197039457> |
+| Japanbrillenvogel | Photo | Timur Kalininsky | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/259313934> |
 | Japanbrillenvogel | Call | Peter Wilton (XC176944) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/176944> |
+| Saruskranich | Photo | Paul Whitington | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/133735615> |
+| Bankivahuhn | Photo | Mathieu Soetens | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/263975336> |
+| Bankivahuhn | Photo | CaracalShan | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/361483980> |
+| Bankivahuhn | Photo | Hannah Stitt | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/211300866> |
+| Rotohrbülbül | Photo | Tom Field | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/227291001> |
+| Rotohrbülbül | Photo | Kat B | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/206199261> |
+| Rotohrbülbül | Photo | Dan Killam | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/34039177> |
+| Braunliest | Photo | Rejoice Gassah | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/70385545> |
+| Braunliest | Photo | Christoph Moning | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/58318265> |
+| Smaragdspint | Photo | Afsar Nayakkan | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/238798275> |
+| Smaragdspint | Photo | sunnyjosef | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/66516988> |
+| Azurelster | Photo | Настя Бухвалова | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/285058965> |
+| Glanzkrähe | Photo | Miguel | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/317633922> |
+| Glanzkrähe | Photo | Miguel | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/316626068> |
+| Dajaldrossel | Photo | Andrew Lai | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/249713147> |
+| Dajaldrossel | Photo | William Stephens | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/39243498> |
+| Dajaldrossel | Photo | Donald Davesne | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/397780225> |
+| Hainparadiesschnäpper | Photo | sunnyjosef | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/48517282> |
+| Hainparadiesschnäpper | Photo | Кирилл | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/288113968> |
+| Hainparadiesschnäpper | Photo | Mathieu Soetens | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/352169971> |
+| Spiegelrotschwanz | Photo | Zinogre | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/95646327> |
+| Spiegelrotschwanz | Photo | Marco Mussita | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/26109381> |
+| Spiegelrotschwanz | Photo | Marco Mussita | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/25847590> |
+| Perlhalstaube | Photo | Adam Jackson | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/261693879> |
+| Perlhalstaube | Photo | Terra Occ | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/20192869> |
 
 ### Australien & Ozeanien (`australien-ozeanien`)
 
