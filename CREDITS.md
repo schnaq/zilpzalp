@@ -622,6 +622,9 @@ the source declared.
 
 | Bird | Kind | Author | Licence | Source |
 | --- | --- | --- | --- | --- |
+| Riesentukan | Photo | Gabriel Martínez | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/198099971> |
+| Riesentukan | Photo | Diogo Luiz | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/59738495> |
+| Riesentukan | Photo | Paulo Mascaretti | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/143502779> |
 | Humboldtpinguin | Photo | DiegoH | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/141121355> |
 | Tiefland-Felsenhahn | Photo | Julien Renoult | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/4531616> |
 | Siebenfarbentangare | Photo | Joao Quental | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/392514179> |
@@ -639,9 +642,6 @@ the source declared.
 | Amazonasfischer | Photo | ferferrari | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/133831715> |
 | Nandu | Photo | Fernando Sessegolo | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/42772166> |
 | Nandu | Photo | Christoph Moning | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/57113925> |
-| Riesentukan | Photo | Gabriel Martínez | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/198099971> |
-| Riesentukan | Photo | Diogo Luiz | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/59738495> |
-| Riesentukan | Photo | Paulo Mascaretti | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/143502779> |
 | Hellroter Ara | Photo | Luis G Restrepo | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/254918218> |
 | Hellroter Ara | Call | Richard Borrmann (XC1005554) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://xeno-canto.org/1005554> |
 | Roter Sichler | Photo | Odebrecht, Clarisse | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/330283195> |

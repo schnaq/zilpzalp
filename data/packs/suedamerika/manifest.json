@@ -9,6 +9,48 @@
   },
   "birds": [
     {
+      "id": "riesentukan",
+      "name": "Riesentukan",
+      "scientificName": "Ramphastos toco",
+      "taxonID": 18793,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/riesentukan.heic",
+          "sha256": "e8c742c5bf9d92bc34da881b62a0b0b7dfc34cb5ee010c80a12f107e3e175c12",
+          "license": "CC-BY-4.0",
+          "attribution": "Gabriel Martínez",
+          "sourceURL": "https://www.inaturalist.org/observations/198099971",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/riesentukan-2.heic",
+          "sha256": "6afeba1aa1f5bd8612d9853be1f5c5d2e36d35ddae916cf80c8d9fc77bce1ae7",
+          "license": "CC-BY-4.0",
+          "attribution": "Diogo Luiz",
+          "sourceURL": "https://www.inaturalist.org/observations/59738495",
+          "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/riesentukan-3.heic",
+          "sha256": "f99dea97f28261071e81b99c55a8f242450eb8609f0cb2b157d507f9ac2aca0e",
+          "license": "CC0-1.0",
+          "attribution": "Paulo Mascaretti",
+          "sourceURL": "https://www.inaturalist.org/observations/143502779",
+          "retrieved": "2026-09-10"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/riesentukan.m4a",
+          "sha256": "9435a4ab7a78e9fab76bae58ccf53ac153a0e6fad2c8b4135c33b2525d46ba22",
+          "text": "Riesentukan"
+        }
+      }
+    },
+    {
       "id": "humboldtpinguin",
       "name": "Humboldtpinguin",
       "scientificName": "Spheniscus humboldti",
@@ -354,48 +396,6 @@
           "file": "speech/collection.name/nandu.m4a",
           "sha256": "539be949ccf5bbc83ed4ec736427943ec525fa0b82ff8360eb1994381d5bd299",
           "text": "Nandu"
-        }
-      }
-    },
-    {
-      "id": "riesentukan",
-      "name": "Riesentukan",
-      "scientificName": "Ramphastos toco",
-      "taxonID": 18793,
-      "article": "der",
-      "pronunciation": null,
-      "photos": [
-        {
-          "file": "photos/riesentukan.heic",
-          "sha256": "e8c742c5bf9d92bc34da881b62a0b0b7dfc34cb5ee010c80a12f107e3e175c12",
-          "license": "CC-BY-4.0",
-          "attribution": "Gabriel Martínez",
-          "sourceURL": "https://www.inaturalist.org/observations/198099971",
-          "retrieved": "2026-09-10"
-        },
-        {
-          "file": "photos/riesentukan-2.heic",
-          "sha256": "6afeba1aa1f5bd8612d9853be1f5c5d2e36d35ddae916cf80c8d9fc77bce1ae7",
-          "license": "CC-BY-4.0",
-          "attribution": "Diogo Luiz",
-          "sourceURL": "https://www.inaturalist.org/observations/59738495",
-          "retrieved": "2026-09-10"
-        },
-        {
-          "file": "photos/riesentukan-3.heic",
-          "sha256": "f99dea97f28261071e81b99c55a8f242450eb8609f0cb2b157d507f9ac2aca0e",
-          "license": "CC0-1.0",
-          "attribution": "Paulo Mascaretti",
-          "sourceURL": "https://www.inaturalist.org/observations/143502779",
-          "retrieved": "2026-09-10"
-        }
-      ],
-      "call": null,
-      "speech": {
-        "collection.name": {
-          "file": "speech/collection.name/riesentukan.m4a",
-          "sha256": "9435a4ab7a78e9fab76bae58ccf53ac153a0e6fad2c8b4135c33b2525d46ba22",
-          "text": "Riesentukan"
         }
       }
     },
