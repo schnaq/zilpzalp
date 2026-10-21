@@ -793,12 +793,18 @@ the source declared.
 | --- | --- | --- | --- | --- |
 | Adeliepinguin | Photo | steve b | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/199466069> |
 | Adeliepinguin | Photo | Peter Shanks | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/244872535> |
+| Adeliepinguin | Photo | Sarka Masova | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/45839370> |
 | Kaiserpinguin | Photo | Seig | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/31447153> |
 | Kaiserpinguin | Photo | mattward | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/146195342> |
+| Kaiserpinguin | Photo | Julien Renoult | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/203033006> |
 | Kaiserpinguin | Call | steve (XC877994) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/877994> |
 | Eselspinguin | Photo | Ingvild Riska | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/253310597> |
+| Eselspinguin | Photo | Tim | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/290946104> |
+| Eselspinguin | Photo | Ryan F. Mandelbaum | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/260543034> |
 | Eselspinguin | Call | steve (XC953123) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/953123> |
 | Zügelpinguin | Photo | Sterling Sheehy | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/194786> |
+| Zügelpinguin | Photo | Ellen Rykers | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/16953620> |
+| Zügelpinguin | Photo | Tim | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/294290387> |
 | Zügelpinguin | Call | steve (XC953122) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/953122> |
 | Gelbaugenpinguin | Photo | William Harland | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/229180441> |
 | Gelbaugenpinguin | Photo | Colin Meurk | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/941206> |
@@ -807,6 +813,7 @@ the source declared.
 | Papageitaucher | Photo | Christoph Moning | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/115403062> |
 | Krabbentaucher | Photo | Owen Strickland | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/144263017> |
 | Krabbentaucher | Photo | Christoph Moning | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/63685914> |
+| Krabbentaucher | Photo | Christoph Moning | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/57106584> |
 | Trottellumme | Photo | franciscodocampo | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/35832417> |
 | Trottellumme | Call | Sonothèque ADVL (XC1041354) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1041354> |
 | Wanderalbatros | Photo | eloise kerroux | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/281029033> |
@@ -817,18 +824,30 @@ the source declared.
 | Dreizehenmöwe | Photo | Quinten Wiegersma | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/99626453> |
 | Dreizehenmöwe | Call | Sonothèque ADVL (XC1143440) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1143440> |
 | Küstenseeschwalbe | Photo | Dr. Sven Gippner | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/380760787> |
+| Küstenseeschwalbe | Photo | Attila Oláh | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/136487492> |
+| Küstenseeschwalbe | Photo | er-birds | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/216956527> |
 | Küstenseeschwalbe | Call | Doug Hynes (XC564600) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/564600> |
 | Prachteiderente | Photo | Court Harding | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/342574245> |
+| Prachteiderente | Photo | Dan Vickers | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/256038743> |
+| Prachteiderente | Photo | Christoph Moning | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/114594074> |
 | Eiderente | Photo | Nigel Voaden | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/1186757> |
+| Eiderente | Photo | Donald Davesne | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/222805081> |
 | Eiderente | Call | Doug Hynes (XC1033167) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/1033167> |
 | Kragenente | Photo | Chrissy McClarren and Andy Reago | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/86911376> |
+| Kragenente | Photo | Court Harding | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/260286918> |
 | Schnee-Eule | Photo | Dustin Snider | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/195441759> |
 | Schnee-Eule | Photo | Matt Felperin | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/104681391> |
+| Schnee-Eule | Photo | Rajan Rao | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/166848088> |
 | Schneeammer | Photo | Михаил Малышев | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/201274186> |
+| Schneeammer | Photo | Christoph Moning | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/63380128> |
+| Schneeammer | Photo | Олеся | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/317313148> |
 | Schneeammer | Call | Sonothèque ADVL (XC950366) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/950366> |
 | Alpenschneehuhn | Photo | Cheryl McCleary-Catalano | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/6420202> |
+| Alpenschneehuhn | Photo | Christoph Moning | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/38083544> |
+| Alpenschneehuhn | Photo | Christoph Moning | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/38083545> |
 | Eistaucher | Photo | Christian Back | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/102565488> |
 | Eistaucher | Photo | Betsy Lambert | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/96321392> |
+| Eistaucher | Photo | Farren Dell Rossman | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/41658000> |
 | Eistaucher | Call | Doug Hynes (XC992792) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/992792> |
 | Blaufußtölpel | Photo | Anthony Batista | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/167987942> |
 | Blaufußtölpel | Photo | steve b | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/263834304> |
@@ -837,6 +856,17 @@ the source declared.
 | Prachtfregattvogel | Photo | steve b | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/258500351> |
 | Prachtfregattvogel | Photo | steve b | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/262657239> |
 | Rotschnabel-Tropikvogel | Photo | William Stephens | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/199677737> |
+| Rotschnabel-Tropikvogel | Photo | William Stephens | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/199677738> |
+| Königspinguin | Photo | eloise kerroux | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/191574809> |
+| Zwergpinguin | Photo | Matt B | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/142648014> |
+| Basstölpel | Photo | Brooke J. | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/383038853> |
+| Eissturmvogel | Photo | Rudyard | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/359407363> |
+| Südpolarskua | Photo | Christopher Stephens | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/39345760> |
+| Südpolarskua | Photo | Bob Walker | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/145912956> |
+| Südpolarskua | Photo | er-birds | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/242293600> |
+| Eisente | Photo | Christoph Moning | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/115072852> |
+| Eisente | Photo | Валерия Ковалева | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/145729831> |
+| Rotfußtölpel | Photo | sudomir | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/198621669> |
 
 ### Südamerika & Regenwald (`suedamerika`)
 

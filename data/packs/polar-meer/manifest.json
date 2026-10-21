@@ -31,6 +31,14 @@
           "attribution": "Peter Shanks",
           "sourceURL": "https://www.inaturalist.org/observations/244872535",
           "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/adeliepinguin-3.heic",
+          "sha256": "cba7debafea0f8b92c3dea31c74954a55f7697b202fa1a760c7b1372531c5557",
+          "license": "CC-BY-4.0",
+          "attribution": "Sarka Masova",
+          "sourceURL": "https://www.inaturalist.org/observations/45839370",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": null,
@@ -65,6 +73,14 @@
           "attribution": "mattward",
           "sourceURL": "https://www.inaturalist.org/observations/146195342",
           "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/kaiserpinguin-4.heic",
+          "sha256": "adf566d16e2fa4f2227dc602464b33c94ab1ff57fc0bf375f49f96fc6dd04506",
+          "license": "CC-BY-4.0",
+          "attribution": "Julien Renoult",
+          "sourceURL": "https://www.inaturalist.org/observations/203033006",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": {
@@ -98,6 +114,22 @@
           "attribution": "Ingvild Riska",
           "sourceURL": "https://www.inaturalist.org/observations/253310597",
           "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/eselspinguin-2.heic",
+          "sha256": "b449af9aacbca6a29aa85287d08f19ec57ea666ec4e9311fc8ef02e711e92ceb",
+          "license": "CC-BY-4.0",
+          "attribution": "Tim",
+          "sourceURL": "https://www.inaturalist.org/observations/290946104",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/eselspinguin-3.heic",
+          "sha256": "fba36d6ec28664a9bd501765eda98bc59217bad97c9512134a6031628ffdb581",
+          "license": "CC-BY-4.0",
+          "attribution": "Ryan F. Mandelbaum",
+          "sourceURL": "https://www.inaturalist.org/observations/260543034",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": {
@@ -130,6 +162,22 @@
           "license": "CC-BY-4.0",
           "attribution": "Sterling Sheehy",
           "sourceURL": "https://www.inaturalist.org/observations/194786",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/zuegelpinguin-2.heic",
+          "sha256": "94dc2d4b839d2ce36d187d56af4569a21d103ac72525643c6c0ab42c2c88ad9e",
+          "license": "CC-BY-4.0",
+          "attribution": "Ellen Rykers",
+          "sourceURL": "https://www.inaturalist.org/observations/16953620",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/zuegelpinguin-3.heic",
+          "sha256": "c0ff50e50e01e2a9869bb442b03a0fb9ea3594a6ef83443185d5f03bdb2e026e",
+          "license": "CC-BY-4.0",
+          "attribution": "Tim",
+          "sourceURL": "https://www.inaturalist.org/observations/294290387",
           "retrieved": "2026-10-21"
         }
       ],
@@ -247,6 +295,14 @@
           "license": "CC-BY-4.0",
           "attribution": "Christoph Moning",
           "sourceURL": "https://www.inaturalist.org/observations/63685914",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/krabbentaucher-3.heic",
+          "sha256": "a5a0c50b10a404447927946d8b08b5d4dca9b310947ea2a8383725e8fd1106b8",
+          "license": "CC-BY-4.0",
+          "attribution": "Christoph Moning",
+          "sourceURL": "https://www.inaturalist.org/observations/57106584",
           "retrieved": "2026-10-21"
         }
       ],
@@ -415,6 +471,22 @@
           "attribution": "Dr. Sven Gippner",
           "sourceURL": "https://www.inaturalist.org/observations/380760787",
           "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/kuestenseeschwalbe-2.heic",
+          "sha256": "7bc64873dc3e47a137336c910835b1064424e5a4c4f04d544da5dca834b602d6",
+          "license": "CC-BY-4.0",
+          "attribution": "Attila Oláh",
+          "sourceURL": "https://www.inaturalist.org/observations/136487492",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/kuestenseeschwalbe-3.heic",
+          "sha256": "6a548bca694e444f621b57450cb0ad9dd1d20671ce788b19f9488436cecd6dcf",
+          "license": "CC-BY-4.0",
+          "attribution": "er-birds",
+          "sourceURL": "https://www.inaturalist.org/observations/216956527",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": {
@@ -448,6 +520,22 @@
           "attribution": "Court Harding",
           "sourceURL": "https://www.inaturalist.org/observations/342574245",
           "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/prachteiderente-2.heic",
+          "sha256": "4683f1cccf5d5dc79f94b30b1fe510d8a5e9493befc0aa4ae3a423c473ad3c18",
+          "license": "CC-BY-4.0",
+          "attribution": "Dan Vickers",
+          "sourceURL": "https://www.inaturalist.org/observations/256038743",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/prachteiderente-3.heic",
+          "sha256": "32c129f3b6e6f6f971f6417484d07804dd1c34746edabd08e8094dd75274c555",
+          "license": "CC-BY-4.0",
+          "attribution": "Christoph Moning",
+          "sourceURL": "https://www.inaturalist.org/observations/114594074",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": null,
@@ -473,6 +561,14 @@
           "license": "CC-BY-4.0",
           "attribution": "Nigel Voaden",
           "sourceURL": "https://www.inaturalist.org/observations/1186757",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/eiderente-2.heic",
+          "sha256": "13b940fa6e7f0646d10b4585b191e42947af770e8e41fb7ecfded320f83d3adf",
+          "license": "CC-BY-4.0",
+          "attribution": "Donald Davesne",
+          "sourceURL": "https://www.inaturalist.org/observations/222805081",
           "retrieved": "2026-10-21"
         }
       ],
@@ -506,6 +602,22 @@
           "license": "CC0-1.0",
           "attribution": "Chrissy McClarren and Andy Reago",
           "sourceURL": "https://www.inaturalist.org/observations/86911376",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/kragenente-2.heic",
+          "sha256": "4f3724a1c553de21575deda55a93b66335275ff3ed90d8763a342b24b1875921",
+          "license": "CC-BY-4.0",
+          "attribution": "Court Harding",
+          "sourceURL": "https://www.inaturalist.org/observations/260286918",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/kragenente-3.heic",
+          "sha256": "9d7ba4c5a5cd180f50c3f37dac903c843bf286f58f67286fa024653fd32544d9",
+          "license": "CC-BY-4.0",
+          "attribution": "Court Harding",
+          "sourceURL": "https://www.inaturalist.org/observations/260286918",
           "retrieved": "2026-10-21"
         }
       ],
@@ -541,6 +653,14 @@
           "attribution": "Matt Felperin",
           "sourceURL": "https://www.inaturalist.org/observations/104681391",
           "retrieved": "2026-09-10"
+        },
+        {
+          "file": "photos/schnee-eule-3.heic",
+          "sha256": "a96387fdee732ac13d7e2304cb97fb682ad71cd055517dc1f1313f2065c633e2",
+          "license": "CC-BY-4.0",
+          "attribution": "Rajan Rao",
+          "sourceURL": "https://www.inaturalist.org/observations/166848088",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": null,
@@ -566,6 +686,22 @@
           "license": "CC-BY-4.0",
           "attribution": "Михаил Малышев",
           "sourceURL": "https://www.inaturalist.org/observations/201274186",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/schneeammer-2.heic",
+          "sha256": "c49b70ecb0ce8a3574eff0c2a8ada87e458b07770df67388663b726803842d29",
+          "license": "CC-BY-4.0",
+          "attribution": "Christoph Moning",
+          "sourceURL": "https://www.inaturalist.org/observations/63380128",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/schneeammer-3.heic",
+          "sha256": "c87b515121ae66d34ce9c1ae8b8e4c961621c0e8e88f51c4359f2fbabadb80f9",
+          "license": "CC-BY-4.0",
+          "attribution": "Олеся",
+          "sourceURL": "https://www.inaturalist.org/observations/317313148",
           "retrieved": "2026-10-21"
         }
       ],
@@ -600,6 +736,22 @@
           "attribution": "Cheryl McCleary-Catalano",
           "sourceURL": "https://www.inaturalist.org/observations/6420202",
           "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/alpenschneehuhn-2.heic",
+          "sha256": "9e62f1aa78900cd67e9774ff7ff05e58b777d86c8fb726be652ef52994db6f0a",
+          "license": "CC-BY-4.0",
+          "attribution": "Christoph Moning",
+          "sourceURL": "https://www.inaturalist.org/observations/38083544",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/alpenschneehuhn-3.heic",
+          "sha256": "3dc4230ae313236c7a0a92d4145ae18df09ce8b8c7caae02a3929b8e4c1efd16",
+          "license": "CC-BY-4.0",
+          "attribution": "Christoph Moning",
+          "sourceURL": "https://www.inaturalist.org/observations/38083545",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": null,
@@ -633,6 +785,14 @@
           "license": "CC-BY-4.0",
           "attribution": "Betsy Lambert",
           "sourceURL": "https://www.inaturalist.org/observations/96321392",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/eistaucher-3.heic",
+          "sha256": "a055a682735ae8f96fd1c30793dbc43e72b44fc1a22e4484001fbc649361e5b6",
+          "license": "CC-BY-4.0",
+          "attribution": "Farren Dell Rossman",
+          "sourceURL": "https://www.inaturalist.org/observations/41658000",
           "retrieved": "2026-10-21"
         }
       ],
@@ -759,6 +919,14 @@
           "attribution": "William Stephens",
           "sourceURL": "https://www.inaturalist.org/observations/199677737",
           "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/rotschnabeltropikvogel-3.heic",
+          "sha256": "5291e3c4d7869777cb8fb7301096cd1f35bde454fc0d9f8c57eb0889c41b2aa0",
+          "license": "CC-BY-4.0",
+          "attribution": "William Stephens",
+          "sourceURL": "https://www.inaturalist.org/observations/199677738",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": null,
@@ -767,6 +935,212 @@
           "file": "speech/collection.name/rotschnabeltropikvogel.m4a",
           "sha256": "6a06048eab95931b9f5a6954293ecb3c7a97c506b402ee5fba1d66a99bd2336f",
           "text": "Rotschnabel-Tropikvogel"
+        }
+      }
+    },
+    {
+      "id": "koenigspinguin",
+      "name": "Königspinguin",
+      "scientificName": "Aptenodytes patagonicus",
+      "taxonID": 3821,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/koenigspinguin.heic",
+          "sha256": "26ba64ac813a090024c8cfa265fd0e3342a8e15ada0e4e18b4085e7fe26f3469",
+          "license": "CC-BY-4.0",
+          "attribution": "eloise kerroux",
+          "sourceURL": "https://www.inaturalist.org/observations/191574809",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/koenigspinguin.m4a",
+          "sha256": "f58c4f4c139254d8be0fde846e41a4aae52babcd6ec101ba7aa21cad403df0e9",
+          "text": "Königspinguin"
+        }
+      }
+    },
+    {
+      "id": "zwergpinguin",
+      "name": "Zwergpinguin",
+      "scientificName": "Eudyptula minor",
+      "taxonID": 3817,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/zwergpinguin.heic",
+          "sha256": "d801056426476c53864d68e46074e5ebb09822981fe51de51933c18e7ea70346",
+          "license": "CC-BY-4.0",
+          "attribution": "Matt B",
+          "sourceURL": "https://www.inaturalist.org/observations/142648014",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/zwergpinguin.m4a",
+          "sha256": "e5a7e411bf294f821f939a6b5490c6603ab0000c2fc20cc49c5d6c5aa3d26f06",
+          "text": "Zwergpinguin"
+        }
+      }
+    },
+    {
+      "id": "basstoelpel",
+      "name": "Basstölpel",
+      "scientificName": "Morus bassanus",
+      "taxonID": 3802,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/basstoelpel.heic",
+          "sha256": "62c6c06ab4588bb72bf2667b96b936c9f456d52c41acfa9bf6b2e01081a6f385",
+          "license": "CC-BY-4.0",
+          "attribution": "Brooke J.",
+          "sourceURL": "https://www.inaturalist.org/observations/383038853",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/basstoelpel.m4a",
+          "sha256": "aaf1916862c43614a7169cee0cda563f33da164db68789a93b0df89d4f0b0d1e",
+          "text": "Basstölpel"
+        }
+      }
+    },
+    {
+      "id": "eissturmvogel",
+      "name": "Eissturmvogel",
+      "scientificName": "Fulmarus glacialis",
+      "taxonID": 4180,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/eissturmvogel.heic",
+          "sha256": "37a4546747e8b2ae188e0bb78718afa10acbdb0deb9db56c07ccb573c1d7db51",
+          "license": "CC-BY-4.0",
+          "attribution": "Rudyard",
+          "sourceURL": "https://www.inaturalist.org/observations/359407363",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/eissturmvogel.m4a",
+          "sha256": "edb300be4826561edbea3eb3746b5d9bb4c6b9d8126557c6f9275fbe5b5153f3",
+          "text": "Eissturmvogel"
+        }
+      }
+    },
+    {
+      "id": "suedpolarskua",
+      "name": "Südpolarskua",
+      "scientificName": "Stercorarius maccormicki",
+      "taxonID": 144296,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/suedpolarskua.heic",
+          "sha256": "5de5f659164f6cccc471e2b447231e98fdc120b37676f4fc08ec4e36c9692b98",
+          "license": "CC-BY-SA-4.0",
+          "attribution": "Christopher Stephens",
+          "sourceURL": "https://www.inaturalist.org/observations/39345760",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/suedpolarskua-2.heic",
+          "sha256": "6460bb84fd4d002609d46834b347dd5eff005ed5f415ab027342795adf0b58cb",
+          "license": "CC-BY-4.0",
+          "attribution": "Bob Walker",
+          "sourceURL": "https://www.inaturalist.org/observations/145912956",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/suedpolarskua-3.heic",
+          "sha256": "4a0937c60b0b94cd9c79ad01bf5ad3b6ca412e1207aad2dfbc432f987aefd7a1",
+          "license": "CC-BY-4.0",
+          "attribution": "er-birds",
+          "sourceURL": "https://www.inaturalist.org/observations/242293600",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/suedpolarskua.m4a",
+          "sha256": "6754ac425aa3e42ccd01ed07e04f9ac095522c82b1094b4c5a3e50be07079027",
+          "text": "Südpolarskua"
+        }
+      }
+    },
+    {
+      "id": "eisente",
+      "name": "Eisente",
+      "scientificName": "Clangula hyemalis",
+      "taxonID": 7170,
+      "article": "die",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/eisente.heic",
+          "sha256": "7b5b30919c8dc8f6bed3f8ccbb2cef8207b931cf9681e99a16d96e5ba4f26763",
+          "license": "CC-BY-4.0",
+          "attribution": "Christoph Moning",
+          "sourceURL": "https://www.inaturalist.org/observations/115072852",
+          "retrieved": "2026-10-21"
+        },
+        {
+          "file": "photos/eisente-2.heic",
+          "sha256": "229ea61f782b1780f02b2588f99ce687fafbe6b61dabb856be7494d42f034642",
+          "license": "CC-BY-4.0",
+          "attribution": "Валерия Ковалева",
+          "sourceURL": "https://www.inaturalist.org/observations/145729831",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/eisente.m4a",
+          "sha256": "957b4512cac6bef412eeb9d60f4cdb956b4aa66864664ce2784a14ccbe70e5fd",
+          "text": "Eisente"
+        }
+      }
+    },
+    {
+      "id": "rotfusstoelpel",
+      "name": "Rotfußtölpel",
+      "scientificName": "Sula sula",
+      "taxonID": 3793,
+      "article": "der",
+      "pronunciation": null,
+      "photos": [
+        {
+          "file": "photos/rotfusstoelpel.heic",
+          "sha256": "120f2a7b8faf758d8399fbc39784cbce9b28893c6fa2dc6b120c3386a41de59d",
+          "license": "CC-BY-4.0",
+          "attribution": "sudomir",
+          "sourceURL": "https://www.inaturalist.org/observations/198621669",
+          "retrieved": "2026-10-21"
+        }
+      ],
+      "call": null,
+      "speech": {
+        "collection.name": {
+          "file": "speech/collection.name/rotfusstoelpel.m4a",
+          "sha256": "ce16b6367cb4ee96eaeccbb279570640eba0ccd68e22c1519878c9eb8ffac3c0",
+          "text": "Rotfußtölpel"
         }
       }
     }
