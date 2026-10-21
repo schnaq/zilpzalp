@@ -340,6 +340,19 @@ def write_wave(path: Path, samples: array.array, rate: int) -> None:
         sink.writeframes(samples.tobytes())
 
 
+def decode(source: Path, decoded: Path) -> tuple[array.array, int, int]:
+    """Any recording afconvert reads, as the samples, rate and channels of a PCM WAV."""
+    afconvert(["-f", "WAVE", "-d", "LEI16", str(source), str(decoded)])
+    return read_wave(decoded)
+
+
+def seconds(path: Path) -> float:
+    """How long an encoded clip lasts, counted in samples as `Clip.seconds` is."""
+    with tempfile.TemporaryDirectory(prefix="zilpzalp-audio-") as directory:
+        samples, rate, channels = decode(path, Path(directory) / "decoded.wav")
+        return len(samples) / channels / rate
+
+
 def trim(
     data: bytes, file_name: str, start: float = 0.0, duration: float | None = DURATION
 ) -> Clip:
@@ -369,9 +382,7 @@ def trim(
         encoded = workspace / f"call{EXTENSION}"
 
         source.write_bytes(data)
-        afconvert(["-f", "WAVE", "-d", "LEI16", str(source), str(decoded)])
-
-        samples, rate, channels = read_wave(decoded)
+        samples, rate, channels = decode(source, decoded)
         kept = strip_silence(to_mono(window(samples, rate, start, duration, channels), channels), rate)
         level = normalise(kept, rate)
         write_wave(cut, fade(kept, rate), rate)

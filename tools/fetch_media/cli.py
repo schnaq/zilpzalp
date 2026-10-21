@@ -13,6 +13,7 @@ Three kinds of medium, and a human between every step:
     speech render --provider fake --pack deutschland [--species amsel …] [--sentence …]
     speech render --provider google --voice … --pack deutschland [--max-chars 30000]
     speech render --provider fake --set fixed --sentence roundEnd.title
+    speech check [--pack deutschland | --set fixed]
     speech import --pack deutschland --species amsel --sentence … --file take3.wav
                   --attribution "Stimme: …"
     upload --pack deutschland [--dry-run]
@@ -25,7 +26,8 @@ square computed from where the bird actually is instead of from the middle of
 the photo, and `audit` exports the tiles a pack ships so that they can be
 judged and takes the verdicts back. `speech` produces the sentences the app
 says out loud — `render` asks a provider, `import` takes a recording somebody
-made — and records them the same way. `upload` puts the pack in the bucket
+made — and records them the same way; `check` lists the clips too short to be
+whole. `upload` puts the pack in the bucket
 and, last, the index of the packs that can be downloaded from there.
 
 Credentials come from the environment, where `infisical run --env=dev --path=/
@@ -87,6 +89,11 @@ FRAME_PREVIEW_DIR = DERIVED_DATA / "frame-preview"
 # plan: a `--species` that silently matched a whole pack, or a run started
 # twice. `--max-chars` raises it where a bigger run is meant.
 MAX_CHARS = 30000
+
+# How often `speech render` asks for one sentence before it gives that line up
+# as cut off (#310): the first seed, and one other. The budget above counts one
+# take per line; a retry is the exception it does not plan for.
+TAKES = 2
 
 # What the audit writes and reads beside the previews.
 TILES_FILE = "tiles.json"
@@ -931,6 +938,29 @@ def within_budget(work: list[tuple[clips.Target, str, str]], most: int) -> None:
         )
 
 
+def rendered(
+    provider: speech.Provider, label: str, text: str, voice: str | None, accept_short: bool
+) -> audio.Clip | None:
+    """One sentence from the provider, or `None` when every take came back cut off.
+
+    A cut clip is a valid file at the right loudness, so its length is the one
+    thing that gives it away (#310). The second take asks for another seed:
+    `seed` is best effort at the vendor, and so is the cut. `accept_short` keeps
+    the last take anyway — for a line a listener heard whole, where the
+    heuristic is what is wrong.
+    """
+    least = speech.shortest(text)
+    for take in range(TAKES):
+        clip = audio.trim(provider.render(text, voice, take), speech.RENDERED_FILE, duration=None)
+        if clip.seconds >= least:
+            return clip
+        print(
+            f'{label}: "{text}" lasts {clip.seconds:.2f} s, less than the {least:.2f} s '
+            f"it takes to say — take {take + 1} of {TAKES}"
+        )
+    return clip if accept_short else None
+
+
 def command_speech_render(args: argparse.Namespace) -> int:
     """Ask a provider for every sentence named, and record what comes back."""
     provider = speech.provider(args.provider)
@@ -944,20 +974,73 @@ def command_speech_render(args: argparse.Namespace) -> int:
     manifest.set_voice(document, voice_block(voice))
 
     print(f"{len(work)} clip(s) through '{provider.name}'")
+    # A cut-off line is skipped rather than fatal: in a run over a whole pack
+    # the other sentences are already paid for, and the clip a skipped line
+    # had before stays where it is.
+    # Said at once rather than at the end, so that a run a later line aborts
+    # has still named every line it skipped.
+    cut = 0
     for target, sentence, text in work:
-        spoken = provider.render(text, args.voice)
-        record_clip(
-            target,
-            document,
-            sentence,
-            audio.trim(spoken, speech.RENDERED_FILE, duration=None),
-            text,
-            voice,
-        )
+        label = f"{target.label} / {sentence}"
+        clip = rendered(provider, label, text, args.voice, args.accept_short)
+        if clip is None:
+            cut += 1
+            message = (
+                f"{label}: every take came back too short to be whole, so nothing was "
+                "recorded and the previous clip stays. Listen to it: a name may need a "
+                "`pronunciation`, and a line heard whole takes --accept-short."
+            )
+            print(f"::error::{escape_data(message)}")
+            continue
+        record_clip(target, document, sentence, clip, text, voice)
 
     regenerate_derived()
     print("\nListen to every clip before you commit it — nothing else has heard it yet.")
-    return 0
+    return 1 if cut else 0
+
+
+def stored_clips(document: dict) -> list[tuple[str, str, dict]]:
+    """Every clip a manifest names, as (whose, sentence, entry)."""
+    lines = document.get(manifest.LINES_KIND) or {}
+    found = [("fixed", sentence, entry) for sentence, entry in lines.items()]
+    for bird in document.get("birds") or []:
+        found += [
+            (str(bird["id"]), sentence, entry)
+            for sentence, entry in (bird.get(manifest.SPEECH_KIND) or {}).items()
+        ]
+    return found
+
+
+def command_speech_check(args: argparse.Namespace) -> int:
+    """List every recorded clip shorter than its text takes to say.
+
+    The text the manifest stored, not the one `render` would now produce: the
+    question is whether this file says that sentence to the end. Without
+    `--pack` or `--set`, every manifest — the list the next re-render targets.
+    """
+    if args.set:
+        paths = [manifest.speech_manifest_path()]
+    elif args.pack:
+        paths = [manifest.manifest_path(args.pack)]
+    else:
+        paths = [manifest.speech_manifest_path()] + [manifest.manifest_path(p) for p in index.packs()]
+
+    checked, short = 0, 0
+    for path in paths:
+        document = manifest.load(path)
+        for whose, sentence, entry in stored_clips(document):
+            checked += 1
+            lasts = audio.seconds(path.parent / entry["file"])
+            least = speech.shortest(entry["text"])
+            if lasts < least:
+                short += 1
+                print(
+                    f'{document.get("id")}  {whose}  {sentence}  "{entry["text"]}"  '
+                    f"{lasts:.2f} s < {least:.2f} s"
+                )
+
+    print(f"\n{short} of {checked} clip(s) shorter than their text takes to say")
+    return 1 if short else 0
 
 
 def command_speech_import(args: argparse.Namespace) -> int:
@@ -1033,13 +1116,13 @@ def command_upload(args: argparse.Namespace) -> int:
     return 0
 
 
-def add_speech_place(parser: argparse.ArgumentParser) -> None:
+def add_speech_place(parser: argparse.ArgumentParser, required: bool = True) -> None:
     """Which manifest a `speech` step works on — a pack, or the fixed set.
 
     Exclusive and required: a species sentence belongs to a pack, and „Super
     gemacht!" belongs to no pack at all (data/speech/, section 3.1 of the plan).
     """
-    place = parser.add_mutually_exclusive_group(required=True)
+    place = parser.add_mutually_exclusive_group(required=required)
     place.add_argument("--pack", help="pack id, for instance 'deutschland' — its species sentences")
     place.add_argument(
         "--set",
@@ -1206,12 +1289,23 @@ def build_parser() -> argparse.ArgumentParser:
         "required wherever there is a choice; see 'speech voices'",
     )
     render.add_argument(
+        "--accept-short",
+        action="store_true",
+        help="record a clip even when every take is shorter than its text takes to say",
+    )
+    render.add_argument(
         "--max-chars",
         type=int,
         default=MAX_CHARS,
         help=f"refuse a run longer than this many characters (default: {MAX_CHARS})",
     )
     render.set_defaults(run=command_speech_render)
+
+    checking = spoken.add_parser(
+        "check", help="list the clips too short to be whole; default: every manifest"
+    )
+    add_speech_place(checking, required=False)
+    checking.set_defaults(run=command_speech_check)
 
     listing = spoken.add_parser("voices", help="the voices a provider offers")
     listing.add_argument(
