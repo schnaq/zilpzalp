@@ -996,7 +996,8 @@ def command_speech_render(args: argparse.Namespace) -> int:
 
 def stored_clips(document: dict) -> list[tuple[str, str, dict]]:
     """Every clip a manifest names, as (whose, sentence, entry)."""
-    found = [("fixed", sentence, entry) for sentence, entry in (document.get("lines") or {}).items()]
+    lines = document.get(manifest.LINES_KIND) or {}
+    found = [("fixed", sentence, entry) for sentence, entry in lines.items()]
     for bird in document.get("birds") or []:
         found += [
             (str(bird["id"]), sentence, entry)

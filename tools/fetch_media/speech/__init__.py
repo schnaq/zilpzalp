@@ -35,14 +35,10 @@ PROVIDERS: dict[str, type] = {
 IMPORT_LICENCE = "CC-BY-4.0"
 
 # How long a clip has to last before `render` believes the sentence was said to
-# the end (#310). `eleven_v3` cuts short texts off — „Welche Vögel?" came back
-# as 0.64 s, „Uhu" as 0.4 s — and a cut clip is still a valid file at the right
-# loudness, so only its length gives it away. Calibrated on 2026-10-21 against
-# the 376 clips then in the repository: 0.05 s per character with a floor of
-# half a second flags both of those and the clips that sit exactly where „Welche
-# Vögel?" does (13 characters, 0.64 s); the next clip up, „Willst du
-# aufhören?", clears it by 10 ms. A heuristic, not a verdict: tune these two
-# numbers, not the code, when a clip proves it wrong.
+# the end (#310): a cut clip is a valid file at the right loudness, so only its
+# length gives it away. A heuristic, calibrated against every clip in the
+# repository — the numbers and what they flag are in docs/sprachaufnahmen.md,
+# "Short texts come back cut off". Tune these two, not the code.
 SECONDS_PER_CHARACTER = 0.05
 SHORTEST = 0.5
 
