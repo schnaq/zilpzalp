@@ -877,6 +877,7 @@ the source declared.
 | Adeliepinguin | Photo | steve b | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/199466069> |
 | Adeliepinguin | Photo | Peter Shanks | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/244872535> |
 | Adeliepinguin | Photo | Sarka Masova | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/45839370> |
+| Adeliepinguin | Call | Stella Zhang (XC1091471) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/1091471> |
 | Kaiserpinguin | Photo | Seig | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/31447153> |
 | Kaiserpinguin | Photo | mattward | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/146195342> |
 | Kaiserpinguin | Photo | Julien Renoult | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/203033006> |
@@ -941,12 +942,15 @@ the source declared.
 | Rotschnabel-Tropikvogel | Photo | William Stephens | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/199677737> |
 | Rotschnabel-Tropikvogel | Photo | William Stephens | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/199677738> |
 | Königspinguin | Photo | eloise kerroux | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/191574809> |
+| Königspinguin | Call | steve (XC879318) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/879318> |
 | Zwergpinguin | Photo | Matt B | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/142648014> |
 | Basstölpel | Photo | Brooke J. | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/383038853> |
+| Basstölpel | Call | Sonothèque ADVL (XC1143445) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1143445> |
 | Eissturmvogel | Photo | Rudyard | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/359407363> |
 | Südpolarskua | Photo | Christopher Stephens | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://www.inaturalist.org/observations/39345760> |
 | Südpolarskua | Photo | Bob Walker | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/145912956> |
 | Südpolarskua | Photo | er-birds | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/242293600> |
+| Südpolarskua | Call | steve (XC953124) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | <https://xeno-canto.org/953124> |
 | Eisente | Photo | Christoph Moning | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/115072852> |
 | Eisente | Photo | Валерия Ковалева | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/145729831> |
 | Rotfußtölpel | Photo | sudomir | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/198621669> |
