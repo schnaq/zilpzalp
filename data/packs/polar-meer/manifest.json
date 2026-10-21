@@ -52,7 +52,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/adeliepinguin.m4a",
-          "sha256": "6c18caa953e62951b8b4f8e48d9e61f9049552d6e33aeddc0bc060fd73b6e98e",
+          "sha256": "6e7a317029c6a617d12f60ee6537ed755cfc040455fbd81c4b4be2c214fd8d5c",
           "text": "Adeliepinguin"
         }
       }
@@ -101,7 +101,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/kaiserpinguin.m4a",
-          "sha256": "06a4c7fb63608f54fa37e3a27d337b55deb1039e88e1c477a0d0115b789cb457",
+          "sha256": "47d4d9559a45f55c92d2443028b64d57697df2fdf83af10e2fed990a551977bd",
           "text": "Kaiserpinguin"
         }
       }
@@ -150,7 +150,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/eselspinguin.m4a",
-          "sha256": "31e0ee506bf3dac861133f624aac70bb73f620547f2be7ba8e1bfe9536e66a1f",
+          "sha256": "98e2f12682f436e7f30c6a18b9e2b9433e12da81da87840a091ecf2772e41d7a",
           "text": "Eselspinguin"
         }
       }
@@ -199,7 +199,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/zuegelpinguin.m4a",
-          "sha256": "9cc8c688f5c630f2bec72aafa6bfe8717aae41241c12120384c2ea783a01f283",
+          "sha256": "dbe29b037598680e361846f27d96334ced3b4d2256938179c7bfaaa04a620d15",
           "text": "Zügelpinguin"
         }
       }
@@ -233,7 +233,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/gelbaugenpinguin.m4a",
-          "sha256": "784c4450429d1a91c8890ad9f914d842fbcaefc44bf79fde40ad7777ba060832",
+          "sha256": "758e73f9e561df1acfd67f65c3a732a0c24205267ce2ddccde4e56109a6551aa",
           "text": "Gelbaugenpinguin"
         }
       }
@@ -275,7 +275,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/papageitaucher.m4a",
-          "sha256": "3715480ea70dcfab8e9ca6de435b14a629601848d089f0585543ba35ca8cdf70",
+          "sha256": "1629f21347c48eb6e0bc1fd68b7124534c418d071a8ca0094227273ae8a15c4b",
           "text": "Papageitaucher"
         }
       }
@@ -317,7 +317,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/krabbentaucher.m4a",
-          "sha256": "6d3e43dfc0f0d229f6d274e4f4b934165f23399842662eaba96df42139030115",
+          "sha256": "6de855b253b523cafe63ea82c46a1b50fd4fd9530387856bbe3b63c63d4ecab6",
           "text": "Krabbentaucher"
         }
       }
@@ -350,7 +350,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/trottellumme.m4a",
-          "sha256": "ff31f062952fd1128382110446e4f2430d50a528cee55640f733b87b9a0338d4",
+          "sha256": "72cce27bd24a37b682303d1210660db2f6c71d45b11ec710f85ad634582fc618",
           "text": "Trottellumme"
         }
       }
@@ -392,7 +392,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/wanderalbatros.m4a",
-          "sha256": "22345477a896083efe4cc2bb3ef8ea904be284374b2ea2d6bf446fdd0f342bb7",
+          "sha256": "c55e14e27dbbcbc7996ed2e420ed70fd36aa0463640109b23c88b367225c0991",
           "text": "Wanderalbatros"
         }
       }
@@ -425,7 +425,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/schwarzbrauenalbatros.m4a",
-          "sha256": "c7ae4a9af41b8aaba0e4bf202ae230d9f8e3042ceade28cafb2dedf719d2d008",
+          "sha256": "58bab67f020f0b2266f7ddcccb6cccc5aea748e4719431e5959e37cba89756a4",
           "text": "Schwarzbrauenalbatros"
         }
       }
@@ -458,7 +458,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/dreizehenmoewe.m4a",
-          "sha256": "c169ade296ea2903cad7b16a21277478683b03335ccf545b7572fe61677b3897",
+          "sha256": "5c888ad1b2528c1792a0199027dbcc5d6f80957188996dfd4a428d6666917b88",
           "text": "Dreizehenmöwe"
         }
       }
@@ -507,7 +507,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/kuestenseeschwalbe.m4a",
-          "sha256": "6eb69fb42893a92f55898f6ee2e544f3f096cc83ba130451fce2f7f6a5f56cb8",
+          "sha256": "a3a85123d7cfa7cbfc5b562ba3055f2c9b72a1ea297ce44e9652f96217ab24c3",
           "text": "Küstenseeschwalbe"
         }
       }
@@ -549,7 +549,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/prachteiderente.m4a",
-          "sha256": "2d4c71883d388e9b31a172bef1a8e283337f697b565937b34c713cca5642806d",
+          "sha256": "9320bddc46d07182cc28f05b2fd748335df8ac0530d559c9ee41a4cbab40ebad",
           "text": "Prachteiderente"
         }
       }
@@ -590,7 +590,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/eiderente.m4a",
-          "sha256": "7de014c02d55cc8a17258494a8e57cccbe7df56594d169f37492045179c18063",
+          "sha256": "5898efe90dc99edeca54041155bace3b227760d82e0853692712820b843f23a7",
           "text": "Eiderente"
         }
       }
@@ -632,7 +632,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/kragenente.m4a",
-          "sha256": "66667bfd483248a8e551f3b19dc37fb68b7f2b7cdc7f890046b9620f3666b48a",
+          "sha256": "6beec99d37ccdc3a3f58b0d8e0df5c9d590ac6059c0424c35696d29ff25ef7f6",
           "text": "Kragenente"
         }
       }
@@ -674,7 +674,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/schnee-eule.m4a",
-          "sha256": "9abfe2f5589fb7fa64d11b737b8335d3219305e4ae64a0464b05790ccb6d027c",
+          "sha256": "7df23fca49f30371511b352a4edce4cf0affc16823ffb900a1d3351aa98893ac",
           "text": "Schnee-Eule"
         }
       }
@@ -723,7 +723,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/schneeammer.m4a",
-          "sha256": "8031cd29e942377aeb7228f42c8f823dc149da9d2f848df2586ee76529057401",
+          "sha256": "4836df69fa0642066da1cbd9e7c8b43c303be153a4efe44cd3c067a226ea8fd9",
           "text": "Schneeammer"
         }
       }
@@ -765,7 +765,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/alpenschneehuhn.m4a",
-          "sha256": "8fdf45cdeed7bca07599b6f6d1b51caece71d12a7791b2bed4ad462189fd87e8",
+          "sha256": "01c1f2da90c0bd51704c893a1fcc52e7771a7ce61e61cfc02c6c3385f48cba83",
           "text": "Alpenschneehuhn"
         }
       }
@@ -814,7 +814,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/eistaucher.m4a",
-          "sha256": "c8bc2dd61af383889c42ab579f35754ea6f89dc0c364e23f60f9b7ab6de6360f",
+          "sha256": "ce84721e0f4da6456fa2cb88be13beaac4e5847ad6fd64a210ef1831735a6d0c",
           "text": "Eistaucher"
         }
       }
@@ -856,7 +856,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/blaufusstoelpel.m4a",
-          "sha256": "b48a0a72db0fed2ace81d01de73253e3b0ef369ce063a39f37ff30c7943bf401",
+          "sha256": "06ef6733311cd0a6c13144e7a5a775c0d1f08b3f0447f682372a40eefd2783eb",
           "text": "Blaufußtölpel"
         }
       }
@@ -898,7 +898,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/prachtfregattvogel.m4a",
-          "sha256": "1e44ecbc538378a6acd3c228c4dbedb06c4f612cddcb24699b6d631c64856e53",
+          "sha256": "1fc932615ad07520edd56b245cbfcc2532ff8b11af905928d029d32b2ddeab9c",
           "text": "Prachtfregattvogel"
         }
       }
@@ -940,7 +940,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/rotschnabeltropikvogel.m4a",
-          "sha256": "6a06048eab95931b9f5a6954293ecb3c7a97c506b402ee5fba1d66a99bd2336f",
+          "sha256": "04108dda37bfa69bf9fff7c143508b0b3b2c93b721b38c74cb3dd2dd66926e7d",
           "text": "Rotschnabel-Tropikvogel"
         }
       }
@@ -973,7 +973,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/koenigspinguin.m4a",
-          "sha256": "f58c4f4c139254d8be0fde846e41a4aae52babcd6ec101ba7aa21cad403df0e9",
+          "sha256": "1a001c59f53257d93526f206c8032ec5fb0a73deec1e661bac1c462911a6c133",
           "text": "Königspinguin"
         }
       }
@@ -999,7 +999,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/zwergpinguin.m4a",
-          "sha256": "e5a7e411bf294f821f939a6b5490c6603ab0000c2fc20cc49c5d6c5aa3d26f06",
+          "sha256": "d15dbe10b5249c0cfe6b8cab075b5f1c0a2c35d27fabedf22c3d5f89b6584233",
           "text": "Zwergpinguin"
         }
       }
@@ -1032,7 +1032,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/basstoelpel.m4a",
-          "sha256": "aaf1916862c43614a7169cee0cda563f33da164db68789a93b0df89d4f0b0d1e",
+          "sha256": "cb9c7df93ade615966651b4df2e64f0fe561cc05b273aad5850b43eab1987805",
           "text": "Basstölpel"
         }
       }
@@ -1058,7 +1058,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/eissturmvogel.m4a",
-          "sha256": "edb300be4826561edbea3eb3746b5d9bb4c6b9d8126557c6f9275fbe5b5153f3",
+          "sha256": "1c5fbe702a9d0a77e32bb635a8652d1241bfdb790f2fb629ac61f61ac6557720",
           "text": "Eissturmvogel"
         }
       }
@@ -1107,7 +1107,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/suedpolarskua.m4a",
-          "sha256": "6754ac425aa3e42ccd01ed07e04f9ac095522c82b1094b4c5a3e50be07079027",
+          "sha256": "860fffcc80f7f0f2022c91e9d727c0cdade2046d0562f317c99a38e674ab4bf7",
           "text": "Südpolarskua"
         }
       }
@@ -1141,7 +1141,7 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/eisente.m4a",
-          "sha256": "957b4512cac6bef412eeb9d60f4cdb956b4aa66864664ce2784a14ccbe70e5fd",
+          "sha256": "d0523d3c64a6b6a5fc906cd349df389358749fe78f788300a407352f4460cdf9",
           "text": "Eisente"
         }
       }
@@ -1167,10 +1167,17 @@
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/rotfusstoelpel.m4a",
-          "sha256": "ce16b6367cb4ee96eaeccbb279570640eba0ccd68e22c1519878c9eb8ffac3c0",
+          "sha256": "f9611a8557241713b347437036f2b36a4d368ef7c80a5ff76f855a24f4913afb",
           "text": "Rotfußtölpel"
         }
       }
     }
-  ]
+  ],
+  "speech": {
+    "pack.title": {
+      "file": "speech/pack.title.m4a",
+      "sha256": "4126680a958fb49a6ecdba01aac2a509e1a4b808615922a02e5d6c862ffdc482",
+      "text": "Polar & Meer"
+    }
+  }
 }
