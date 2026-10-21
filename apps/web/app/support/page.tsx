@@ -21,6 +21,16 @@ const FAQ = [
     ),
   },
   {
+    q: 'Wer spricht in der App?',
+    a: (
+      <>
+        Eine KI-Stimme: „Ava“ von ElevenLabs. Wir erzeugen die Aufnahmen, bevor
+        die App erscheint; die App selbst spricht ElevenLabs nie an. Fehlt
+        einmal eine Aufnahme, liest die Stimme des Geräts.
+      </>
+    ),
+  },
+  {
     q: 'Wie öffne ich den Elternbereich?',
     a: (
       <>
@@ -57,9 +67,10 @@ const FAQ = [
     q: 'Braucht die App Internet?',
     a: (
       <>
-        Zum Spielen nicht. Alle 70 Vogelarten stecken in der App. Eine
-        Verbindung entsteht nur, wenn Erwachsene im Elternbereich ausdrücklich
-        ein weiteres Artenpaket laden.
+        Zum Spielen nicht. Die 70 Vogelarten aus Deutschland stecken in der App,
+        geladene Pakete bleiben auf dem Gerät. Ins Netz geht die App nur im
+        Elternbereich: für die Liste der Pakete und für die Pakete, die
+        Erwachsene dort laden.
       </>
     ),
   },

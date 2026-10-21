@@ -13,37 +13,43 @@ const APP_STORE_URL = 'https://apps.apple.com/de/app/zilpzalp/id6797092155'
 
 const FACTS = [
   {
-    term: '70 Arten',
+    term: '70 Arten dabei',
     detail:
-      'Amsel, Blaumeise, Rotkehlchen und der Zilpzalp — bis hin zu Eisvogel, Uhu, Kranich und Weißstorch.',
+      'Amsel, Blaumeise, Rotkehlchen und der Zilpzalp — bis hin zu Eisvogel, Uhu, Kranich und Weißstorch. Alle stecken in der App, zum Spielen braucht sie kein Netz.',
+  },
+  {
+    term: 'Über 300 mit Paketen',
+    detail:
+      'Afrika, Asien, Australien, Nord- und Südamerika, Polar & Meer, Berge & Wald, Feld & Wiese, Wasser & Küste, Greifvögel & Eulen. Kinder können mehrere Pakete zusammen spielen.',
   },
   {
     term: 'Ohne Lesen',
     detail: 'Jede Aufgabe wird gesprochen, und zur Antwort stehen vier Fotos ohne Namen.',
   },
   {
-    term: 'Sterne',
-    detail: 'Jede Runde bringt bis zu drei Sterne — je nachdem, wie viel auf Anhieb sitzt.',
+    term: 'Eine KI-Stimme',
+    detail:
+      'Namen und Aufgaben spricht eine KI-Stimme: „Ava“ von ElevenLabs. Sie liest von selbst vor oder erst, wenn das Kind tippt.',
   },
   {
-    term: 'Die Sammlung',
+    term: 'Sterne und Sticker',
     detail:
-      'Wer einen Vogel drei- oder fünfmal auf Anhieb erkennt — das stellen Eltern ein —, bekommt seinen Sticker in die Sammlung.',
+      'Jede Runde bringt bis zu drei Sterne. Wer einen Vogel drei- oder fünfmal auf Anhieb erkennt, bekommt seinen Sticker in die Sammlung.',
   },
   {
     term: 'Für mehrere Kinder',
-    detail: 'Jedes Kind bekommt ein Profil mit Namen und Vogel-Avatar. Alles bleibt auf dem Gerät.',
-  },
-  {
-    term: 'Offline',
-    detail: 'Alle 70 Vögel sind in der App. Zum Spielen braucht sie kein Netz.',
+    detail:
+      'Jedes Kind hat ein Profil mit Namen und Vogel-Avatar und kann beides selbst ändern. Alles bleibt auf dem Gerät.',
   },
 ]
 
 const PARENTS_CAN = [
   'Der Elternbereich öffnet sich mit Face ID oder dem Gerätecode — und ohne eingerichteten Code mit einer Rechenaufgabe für Erwachsene.',
+  'Neue Vögel gibt es nur hier: Pakete in einer Übersicht mit Fotos ansehen und laden.',
+  'Für jedes Kind festlegen, ob der Sticker nach drei oder fünf Treffern kommt.',
+  'Wählen, ob die App von selbst vorliest oder erst auf Antippen.',
   'Die tägliche Spielzeit lässt sich begrenzen. Ist sie aufgebraucht, sagt die App freundlich „Zeit fürs Nest“.',
-  'Links, die aus der App hinausführen, öffnen sich erst nach derselben Rechenaufgabe.',
+  'Links, die aus der App hinausführen, öffnen sich erst nach einer Rechenaufgabe für Erwachsene.',
 ]
 
 const APP_DOES_NOT = [
@@ -66,8 +72,9 @@ export default function Home() {
           <div>
             <h1 className="rise">Vögel kennenlernen, bevor man lesen kann.</h1>
             <p className="lead rise rise-2">
-              ZilpZalp bringt Kindern die Vögel vor der eigenen Haustür nahe.
-              Zwei Spiele, 70 heimische Arten, viele Sterne.
+              ZilpZalp bringt Kindern die Vögel vor der eigenen Haustür nahe —
+              und auf Wunsch die aus aller Welt. Zwei Spiele, über 300 Arten,
+              viele Sterne.
             </p>
             <div className="hero-actions rise rise-3">
               <a className="pill" href={APP_STORE_URL}>

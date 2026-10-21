@@ -12,8 +12,10 @@ export const metadata: Metadata = {
 // Every statement about the app is checked against the repository:
 // apps/ZilpZalp/Resources/PrivacyInfo.xcprivacy (no tracking, no collected data
 // types), ProfileStore and ParentalSettingsStore (JSON in Application Support),
-// ParentsLock (LocalAuthentication), SpeechAnnouncer (AVSpeechSynthesizer on the
-// device), PackDownloader (downloads a grown-up starts). A grep for MetricKit
+// ParentsLock (LocalAuthentication), SpeechAnnouncer (recorded clips, the
+// device's AVSpeechSynthesizer as fallback; ElevenLabs only in tools/),
+// PacksSection (fetches the pack index and previews once the grown-ups' area is
+// open), PackDownloader (downloads a grown-up starts). A grep for MetricKit
 // over apps and packages finds nothing, so no diagnostics claim appears here.
 export default function Datenschutz() {
   return (
@@ -68,12 +70,13 @@ export default function Datenschutz() {
       <ul>
         <li>
           Profile: der Vorname oder Spitzname, den Erwachsene eingeben, ein
-          ausgewählter Vogel-Avatar, gesammelte Sterne, eine kleine Statistik und
-          die schon erkannten Vogelarten
+          ausgewählter Vogel-Avatar, gesammelte Sterne, eine kleine Statistik,
+          die schon erkannten Vogelarten und wie oft ein Vogel für seinen
+          Sticker erkannt werden muss
         </li>
         <li>
-          Einstellungen des Elternbereichs: die tägliche Spielzeit und ob der
-          Vogelname unter dem Foto angezeigt wird
+          Einstellungen des Elternbereichs: die tägliche Spielzeit und wie die
+          App vorliest
         </li>
         <li>Heruntergeladene Artenpakete, falls Erwachsene welche laden</li>
       </ul>
@@ -101,20 +104,25 @@ export default function Datenschutz() {
 
       <h3>2.4 Sprachausgabe</h3>
       <p>
-        Die gesprochenen Aufgaben erzeugt die Sprachausgabe von iOS
-        (<code>AVSpeechSynthesizer</code>) auf dem Gerät. Es wird nichts an einen
-        Sprachdienst gesendet, und es wird nichts aufgezeichnet: Die App fragt
-        weder das Mikrofon noch die Kamera, den Standort oder die Kontakte ab.
+        Vogelnamen und Aufgaben spricht eine KI-Stimme („Ava“ von ElevenLabs).
+        Die Aufnahmen erzeugen wir vorab, wenn wir die Pakete vorbereiten; sie
+        liegen als Tondateien in der App oder im Paket. Die App selbst spricht
+        ElevenLabs nie an. Fehlt einmal eine Aufnahme, liest die Sprachausgabe
+        von iOS (<code>AVSpeechSynthesizer</code>) auf dem Gerät. Es wird nichts
+        an einen Sprachdienst gesendet, und es wird nichts aufgezeichnet: Die App
+        fragt weder das Mikrofon noch die Kamera, den Standort oder die Kontakte
+        ab.
       </p>
 
       <h3>2.5 Wann die App überhaupt ins Netz geht</h3>
       <p>
         Zum Spielen braucht ZilpZalp kein Internet. Alle 70 Arten der
-        Grundausstattung stecken in der App. Eine Verbindung entsteht nur, wenn
-        eine erwachsene Person im Elternbereich ausdrücklich ein zusätzliches
-        Artenpaket lädt. Dann holt die App die Dateien von unserem Medienserver;
-        technisch bedingt sieht dessen Betreiber dabei die IP-Adresse des Geräts
-        und die angefragten Dateien.
+        Grundausstattung stecken in der App. Ins Netz geht sie nur im
+        Elternbereich: Ist er geöffnet, lädt sie die Liste der Artenpakete mit
+        Vorschaufotos, und ein Paket selbst erst, wenn eine erwachsene Person es
+        ausdrücklich lädt. Beides kommt von unserem Medienserver; technisch
+        bedingt sieht dessen Betreiber dabei die IP-Adresse des Geräts und die
+        angefragten Dateien.
       </p>
       <p>
         Der Medienserver ist ein Object-Storage-Bereich bei der Scaleway SAS
@@ -125,10 +133,10 @@ export default function Datenschutz() {
         Scaleway 30 Tage auf.
       </p>
       <p>
-        Die Dienste, aus denen die Fotos und Tonaufnahmen stammen — iNaturalist
-        und xeno-canto — spricht die App nie an. Beide werden nur bei der
-        Vorbereitung der Pakete abgefragt, lange bevor die App ausgeliefert
-        wird.
+        Die Dienste, aus denen die Fotos, Tonaufnahmen und gesprochenen Namen
+        stammen — iNaturalist, xeno-canto und ElevenLabs — spricht die App nie
+        an. Sie werden nur bei der Vorbereitung der Pakete genutzt, lange bevor
+        die App ausgeliefert wird.
       </p>
 
       <h3>2.6 Keine Analyse, kein Absturzmelder, keine Werbung</h3>
@@ -193,8 +201,8 @@ export default function Datenschutz() {
           Angebot)
         </li>
         <li>
-          Auslieferung eines Artenpakets, das Erwachsene selbst anstoßen: Art. 6
-          Abs. 1 lit. b DSGVO (Erfüllung der angefragten Leistung)
+          Auslieferung der Paketliste und eines Artenpakets im Elternbereich:
+          Art. 6 Abs. 1 lit. b DSGVO (Erfüllung der angefragten Leistung)
         </li>
         <li>E-Mail-Kontakt: Art. 6 Abs. 1 lit. f bzw. lit. b DSGVO</li>
       </ul>
