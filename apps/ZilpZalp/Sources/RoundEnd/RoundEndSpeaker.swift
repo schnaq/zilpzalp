@@ -12,20 +12,8 @@ import ZilpZalpUI
 struct RoundEndSpeaker: View {
     let say: () -> Void
 
-    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
-
     var body: some View {
-        IconButton(
-            .volume2,
-            label: String(localized: "roundEnd.readAloud.accessibility"),
-            tone: .accent,
-            diameter: ZSpacing.touchMinimum,
-            action: say,
-        )
-        .padding(
-            .horizontal,
-            horizontalSizeClass == .compact ? ZSpacing.step4 : ZSpacing.gutterScreen,
-        )
-        .padding(.vertical, ZSpacing.step4)
+        SpeakerButton(line: .fixed("roundEnd.title"), action: say)
+            .roundEndCorner()
     }
 }

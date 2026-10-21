@@ -34,16 +34,6 @@ struct RoundEndHomeDoor: View {
     /// Home — the whole stack, not one screen back.
     let goHome: () -> Void
 
-    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
-
-    /// Where a ``TopBar``'s leading button would stand, measured the way the
-    /// bar measures it: the screen gutter to the side, `--space-4` above, and
-    /// the narrow phone gutter where 48 pt would eat a quarter of the width
-    /// (#93).
-    private var gutter: CGFloat {
-        horizontalSizeClass == .compact ? ZSpacing.step4 : ZSpacing.gutterScreen
-    }
-
     var body: some View {
         IconButton(
             .house,
@@ -52,8 +42,31 @@ struct RoundEndHomeDoor: View {
             action: goHome,
         )
         .disabled(!isOpen)
-        .padding(.horizontal, gutter)
-        .padding(.vertical, ZSpacing.step4)
+        .roundEndCorner()
+    }
+}
+
+/// Where a ``TopBar``'s button would stand, measured the way the bar measures
+/// it: the screen gutter to the side, `--space-4` above, and the narrow phone
+/// gutter where 48 pt would eat a quarter of the width (#93). The house and
+/// ``RoundEndSpeaker`` both stand there, so the two corners mirror each other.
+private struct RoundEndCorner: ViewModifier {
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+
+    func body(content: Content) -> some View {
+        content
+            .padding(
+                .horizontal,
+                horizontalSizeClass == .compact ? ZSpacing.step4 : ZSpacing.gutterScreen,
+            )
+            .padding(.vertical, ZSpacing.step4)
+    }
+}
+
+extension View {
+    /// See ``RoundEndCorner``.
+    func roundEndCorner() -> some View {
+        modifier(RoundEndCorner())
     }
 }
 

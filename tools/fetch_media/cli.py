@@ -893,17 +893,15 @@ def speech_work(
     document = manifest.load(manifest.manifest_path(str(pack)))
     # By default the whole pack — its own sentences too, unless only some
     # species were named: re-rendering one bird must not re-render the title.
-    default = [*sentences.SPECIES_SENTENCES]
-    if not species:
-        default = [*sentences.PACK_SENTENCES, *default]
-    keys_to_do = chosen or default
+    keys = chosen or [*([] if species else sentences.PACK_SENTENCES), *sentences.SPECIES_SENTENCES]
     # A pack sentence is said once for the pack, whichever species are named.
-    own = [key for key in keys_to_do if key in sentences.PACK_SENTENCES]
+    own = [key for key in keys if key in sentences.PACK_SENTENCES]
+    per_bird = [key for key in keys if key not in own]
     work = [(clips.for_pack(str(pack)), key, sentences.pack_text(document, key)) for key in own]
-    per_bird = [key for key in keys_to_do if key not in own]
-    for bird in selected_birds(document, species) if per_bird else []:
-        target = clips.for_species(str(pack), str(bird["id"]))
-        work += [(target, key, sentences.species_text(bird, key)) for key in per_bird]
+    if per_bird:
+        for bird in selected_birds(document, species):
+            target = clips.for_species(str(pack), str(bird["id"]))
+            work += [(target, key, sentences.species_text(bird, key)) for key in per_bird]
     return document, work
 
 

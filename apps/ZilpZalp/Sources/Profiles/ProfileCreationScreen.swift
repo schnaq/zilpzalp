@@ -280,7 +280,7 @@ struct ProfileCreationScreen: View {
     private func say(_ line: SpokenLine) {
         let voice = announcer ?? SpeechAnnouncer(library: library)
         announcer = voice
-        voice.announce(line)
+        voice.announce(line, unprompted: false)
     }
 
     private func confirm() {

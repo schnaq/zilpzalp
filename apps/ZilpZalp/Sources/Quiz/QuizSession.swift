@@ -296,7 +296,7 @@ final class QuizSession {
     /// ``CallPlayer/play(_:)`` both stop what they do and begin again, so two
     /// questions can never sound at once. Refusing the tap while a question
     /// runs would only make the one button a child reaches for feel broken.
-    func askQuestion(unprompted: Bool = false) {
+    func askQuestion(unprompted: Bool) {
         guard let answer else { return }
         // Only the first one: the sound button asks again, and a round does not
         // start again because a child asked to hear it twice.

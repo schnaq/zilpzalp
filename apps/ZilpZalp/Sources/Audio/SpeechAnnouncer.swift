@@ -157,8 +157,9 @@ final class SpeechAnnouncer: NSObject {
     ///
     /// - Parameter unprompted: `true` for a line the app says on its own — a
     ///   headline on arrival, a new question, the praise — which ``mode``
-    ///   may keep quiet. A line a child tapped for is always said.
-    func announce(_ line: SpokenLine, unprompted: Bool = false) {
+    ///   may keep quiet. A line a child tapped for is always said. No
+    ///   default: every caller says which of the two it is.
+    func announce(_ line: SpokenLine, unprompted: Bool) {
         announce([line], unprompted: unprompted)
     }
 
@@ -172,7 +173,7 @@ final class SpeechAnnouncer: NSObject {
     ///
     /// The queue is filled here and nowhere else, and only once the first line
     /// has actually started; ``stop()`` is the one other place that empties it.
-    func announce(_ lines: [SpokenLine], unprompted: Bool = false) {
+    func announce(_ lines: [SpokenLine], unprompted: Bool) {
         // Before anything is stopped: a line that is not to be said has no
         // business cutting off one that is.
         guard Self.mode.speaks(unprompted: unprompted) else {
@@ -333,7 +334,7 @@ final class SpeechAnnouncer: NSObject {
             try? await Task.sleep(for: Self.pauseBetweenLines)
             guard !Task.isCancelled else { return }
             // Already let through: the queue only exists for a line that was.
-            self?.announce(rest)
+            self?.announce(rest, unprompted: false)
         }
     }
 

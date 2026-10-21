@@ -28,6 +28,31 @@ struct ReadAloudButton: View {
     @State private var hasSpoken = false
 
     var body: some View {
+        SpeakerButton(line: line) { say(unprompted: false) }
+            .onAppear {
+                guard !hasSpoken else { return }
+                hasSpoken = true
+                say(unprompted: true)
+            }
+            .onDisappear { announcer?.stop() }
+    }
+
+    private func say(unprompted: Bool) {
+        let voice = announcer ?? SpeechAnnouncer()
+        announcer = voice
+        voice.announce(line, unprompted: unprompted)
+    }
+}
+
+/// The speaker itself, for a screen that speaks through an announcer of its
+/// own — the collection picker, the round end — and for ``ReadAloudButton``.
+/// One size, one tone and one label for every speaker a child looks for.
+struct SpeakerButton: View {
+    /// What a tap says, named in the VoiceOver label.
+    let line: SpokenLine
+    let action: () -> Void
+
+    var body: some View {
         IconButton(
             .volume2,
             label: String(format: String(localized: "speech.readAloud.accessibility"), line.text),
@@ -35,20 +60,7 @@ struct ReadAloudButton: View {
             // The touch floor rather than the 96 pt mid-game size: beside a
             // headline the speaker must not outweigh the words.
             diameter: ZSpacing.touchMinimum,
-        ) {
-            say(unprompted: false)
-        }
-        .onAppear {
-            guard !hasSpoken else { return }
-            hasSpoken = true
-            say(unprompted: true)
-        }
-        .onDisappear { announcer?.stop() }
-    }
-
-    private func say(unprompted: Bool) {
-        let voice = announcer ?? SpeechAnnouncer()
-        announcer = voice
-        voice.announce(line, unprompted: unprompted)
+            action: action,
+        )
     }
 }

@@ -1633,18 +1633,6 @@
         }
       }
     },
-    "roundEnd.readAloud.accessibility" : {
-      "comment" : "VoiceOver label of the round speaker in the round end's top-right corner, which says the praise again (#306)",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lob noch einmal hören"
-          }
-        }
-      }
-    },
     "roundEnd.stars" : {
       "comment" : "Line under the headline of the round end screen. %lld is the stars the round earned, one to three",
       "extractionState" : "manual",

@@ -124,17 +124,7 @@ struct CollectionPicker: View {
 
                     // Not a ``ReadAloudButton``: that brings an announcer of
                     // its own, and the question and the packs share this one.
-                    IconButton(
-                        .volume2,
-                        label: String(
-                            format: String(localized: "speech.readAloud.accessibility"),
-                            Self.question.text,
-                        ),
-                        tone: .accent,
-                        diameter: ZSpacing.touchMinimum,
-                    ) {
-                        say(Self.question)
-                    }
+                    SpeakerButton(line: Self.question) { say(Self.question, unprompted: false) }
                 }
 
                 collections
@@ -219,7 +209,7 @@ struct CollectionPicker: View {
 
         return Button {
             choose(entry.id)
-            say(entry.spoken)
+            say(entry.spoken, unprompted: false)
         } label: {
             StickerCaption(caption: entry.title, earned: true) {
                 RewardSticker(
@@ -249,7 +239,7 @@ struct CollectionPicker: View {
     /// Kept afterwards, so the next line cuts this one off instead of talking
     /// over it — the album's ``CollectionScreen`` does it the same way. With
     /// the packs, so a pack's recorded title is found (#306).
-    private func say(_ line: SpokenLine, unprompted: Bool = false) {
+    private func say(_ line: SpokenLine, unprompted: Bool) {
         let voice = announcer ?? SpeechAnnouncer(library: library)
         announcer = voice
         voice.announce(line, unprompted: unprompted)

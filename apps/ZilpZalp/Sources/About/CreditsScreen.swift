@@ -89,7 +89,7 @@ struct CreditsScreen: View {
                         }
                     }
 
-                    let voices = Self.voices(of: credits)
+                    let voices = credits.distinctVoices
                     if !voices.isEmpty {
                         section(String(localized: "credits.voices.title")) {
                             voiceRows(voices)
@@ -225,14 +225,6 @@ struct CreditsScreen: View {
         case .call: String(localized: "credits.call.by")
         }
         return String(format: format, entry.attribution, entry.license.shortName)
-    }
-
-    /// Each voice once. The generator credits a voice per manifest — every
-    /// pack and the fixed set — and one voice speaks all of them, so twelve
-    /// identical rows would say less than one.
-    private static func voices(of credits: Credits) -> [Credits.Voice] {
-        var seen: Set<String> = []
-        return credits.voices.filter { seen.insert($0.attribution).inserted }
     }
 
     /// The media grouped by pack, in the order the generator wrote them —

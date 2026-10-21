@@ -8,10 +8,10 @@ import ZilpZalpUI
 /// cannot read recognises its collection by, the word is for the grown-up
 /// looking over the shoulder, and the chevron says that there is more behind
 /// it. Several packs chosen (#306) are several photos, stacked like stickers
-/// on a pile, so the choice reads as "these" without a word. It sits between the headline and the
-/// game tiles because the collection
-/// is what the games below ask about — not among the doors at the foot of the
-/// screen, which lead elsewhere.
+/// on a pile, so the choice reads as "these" without a word. It sits between
+/// the headline and the game tiles because the collection is what the games
+/// below ask about — not among the doors at the foot of the screen, which
+/// lead elsewhere.
 ///
 /// **One pill rather than a row of collections.** Five collections need
 /// 480 pt at the 96 pt a disc wants; a 390 pt phone leaves 294 pt inside its
@@ -92,12 +92,10 @@ struct CollectionChip: View {
     /// title would not fit the pill, and the grown-up who reads it can open
     /// the picker for the rest.
     private var title: String {
-        guard let first = entries.first, entries.count > 1 else {
-            return entries.first?.title ?? ""
-        }
+        guard entries.count > 1 else { return entries.first?.title ?? "" }
         return String(
             format: String(localized: "home.collection.several"),
-            first.title,
+            entries[0].title,
             entries.count - 1,
         )
     }

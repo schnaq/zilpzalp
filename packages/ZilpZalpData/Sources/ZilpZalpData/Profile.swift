@@ -239,9 +239,9 @@ public struct Profile: Codable, Sendable, Hashable, Identifiable {
         // A file from before #306 names one pack under `collection`; it is a
         // selection of that one pack. Neither key is every bird.
         let legacy = try decoder.container(keyedBy: LegacyKeys.self)
-        collections = try container.decodeIfPresent([String].self, forKey: .collections)
+        collections = try (container.decodeIfPresent([String].self, forKey: .collections)
             ?? legacy.decodeIfPresent(String.self, forKey: .collection).map { [$0] }
-            ?? []
+            ?? []).sorted()
         playtime = try container.decode([String: TimeInterval].self, forKey: .playtime)
         dailyStars = try container.decodeIfPresent([String: Int].self, forKey: .dailyStars) ?? [:]
         // A file from before #260 has neither key: it played at five, and its

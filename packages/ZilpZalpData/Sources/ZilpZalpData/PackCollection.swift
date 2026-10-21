@@ -16,9 +16,9 @@ public struct PackCollection: Sendable {
 
     /// The pack's own title from its manifest — „Vögel Afrikas".
     ///
-    /// `nil` for every bird at once and for a mix of packs, whose name is product copy and
-    /// therefore
-    /// the app's business: this module carries no German a child reads.
+    /// `nil` for every bird at once, whose name is product copy and therefore
+    /// the app's business — this module carries no German a child reads — and
+    /// for a mix of packs, which has no one name.
     public let title: String?
 
     /// What a round drawn from this collection plays with.
@@ -149,16 +149,13 @@ public struct PackCollections: Sendable {
         // twice over.
         let calling = Set(library.birds.filter { library.callURL(for: $0) != nil }.map(\.id))
         self.calling = calling
-        func offersCalls(_ birds: [Bird]) -> Bool {
-            Self.offersCalls(birds, calling: calling)
-        }
 
         everything = PackCollection(
             id: nil,
             title: nil,
             library: library,
             cover: nil,
-            offersCalls: offersCalls(library.birds),
+            offersCalls: Self.offersCalls(library.birds, calling: calling),
         )
 
         let packs = library.packs.compactMap { pack -> PackCollection? in
@@ -179,7 +176,7 @@ public struct PackCollections: Sendable {
                 title: pack.title,
                 library: narrowed,
                 cover: narrowed.birds.first { $0.id == opens },
-                offersCalls: offersCalls(narrowed.birds),
+                offersCalls: Self.offersCalls(narrowed.birds, calling: calling),
             )
         }
 

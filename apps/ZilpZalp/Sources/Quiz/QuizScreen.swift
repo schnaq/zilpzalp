@@ -258,7 +258,7 @@ struct QuizScreen: View {
             isPlaying: session.isCallPlaying,
             label: soundLabel(session),
             diameter: diameter,
-        ) { session.askQuestion() }
+        ) { session.askQuestion(unprompted: false) }
             // On the button, not on the written name: game 2 has none, and
             // this is the one part of the row both games draw (#220).
             .accessibilityIdentifier(QuizIdentifier.question(session.answer?.id))
