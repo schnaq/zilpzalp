@@ -8,7 +8,8 @@ Alle Secrets liegen in der selbst gehosteten Infisical-Instanz unter `https://se
 | ------------ | -------------------------------------- |
 | Instanz      | `https://secrets.schnaq.com`           |
 | Projekt      | ZilpZalp                               |
-| Projekt-ID   | `9820fa11-518f-4760-a64f-7f832e6c2e8a` |
+| Projekt-ID   | `351de5ad-8d35-458a-8c2d-792f8463339b` |
+| Projekt-Slug | `zilp-zalp-y-tg-1` (GitHub-Variable `INFISICAL_PROJECT_SLUG`) |
 | Environments | `dev`, `prod`                          |
 
 Die CLI erwartet die Domain **mit** `/api`, die GitHub Action **ohne**. Das ist keine Inkonsistenz im Repo, sondern eine Eigenheit der beiden Werkzeuge — im unlock-Repo hat genau das schon einmal Zeit gekostet.
