@@ -41,7 +41,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/adeliepinguin.m4a",
+        "sha256": "33458f7e98c6a63e81f81ac0c01d45a821a77f53bc5603c602f4a18bdd773df1",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "Stella Zhang (XC1091471)",
+        "sourceURL": "https://xeno-canto.org/1091471",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/adeliepinguin.m4a",
@@ -955,7 +962,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/koenigspinguin.m4a",
+        "sha256": "f36e7f421bfaa37f18c94fb333cee8b23d6a24c8c4e21726e3e7f65571a354af",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "steve (XC879318)",
+        "sourceURL": "https://xeno-canto.org/879318",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/koenigspinguin.m4a",
@@ -1007,7 +1021,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/basstoelpel.m4a",
+        "sha256": "a62c237712ab08dfc2d7e508cfc42488b91ac9b0ba2f81494469a144f85fc2b1",
+        "license": "CC0-1.0",
+        "attribution": "Sonothèque ADVL (XC1143445)",
+        "sourceURL": "https://xeno-canto.org/1143445",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/basstoelpel.m4a",
@@ -1075,7 +1096,14 @@
           "retrieved": "2026-10-21"
         }
       ],
-      "call": null,
+      "call": {
+        "file": "audio/suedpolarskua.m4a",
+        "sha256": "34de84b181e5ef1b79a56cd1234a5f99b8d8e95eaaa56a222b3c7ccd9ef488e8",
+        "license": "CC-BY-SA-4.0",
+        "attribution": "steve (XC953124)",
+        "sourceURL": "https://xeno-canto.org/953124",
+        "retrieved": "2026-10-21"
+      },
       "speech": {
         "collection.name": {
           "file": "speech/collection.name/suedpolarskua.m4a",

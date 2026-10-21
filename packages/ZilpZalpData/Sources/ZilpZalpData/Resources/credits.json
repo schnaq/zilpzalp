@@ -8233,6 +8233,16 @@
     {
       "packID": "polar-meer",
       "packTitle": "Polar & Meer",
+      "birdID": "adeliepinguin",
+      "birdName": "Adeliepinguin",
+      "kind": "call",
+      "attribution": "Stella Zhang (XC1091471)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/1091471"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
       "birdID": "kaiserpinguin",
       "birdName": "Kaiserpinguin",
       "kind": "photo",
@@ -8873,6 +8883,16 @@
     {
       "packID": "polar-meer",
       "packTitle": "Polar & Meer",
+      "birdID": "koenigspinguin",
+      "birdName": "Königspinguin",
+      "kind": "call",
+      "attribution": "steve (XC879318)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/879318"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
       "birdID": "zwergpinguin",
       "birdName": "Zwergpinguin",
       "kind": "photo",
@@ -8889,6 +8909,16 @@
       "attribution": "Brooke J.",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/383038853"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "basstoelpel",
+      "birdName": "Basstölpel",
+      "kind": "call",
+      "attribution": "Sonothèque ADVL (XC1143445)",
+      "license": "CC0-1.0",
+      "sourceURL": "https://xeno-canto.org/1143445"
     },
     {
       "packID": "polar-meer",
@@ -8929,6 +8959,16 @@
       "attribution": "er-birds",
       "license": "CC-BY-4.0",
       "sourceURL": "https://www.inaturalist.org/observations/242293600"
+    },
+    {
+      "packID": "polar-meer",
+      "packTitle": "Polar & Meer",
+      "birdID": "suedpolarskua",
+      "birdName": "Südpolarskua",
+      "kind": "call",
+      "attribution": "steve (XC953124)",
+      "license": "CC-BY-SA-4.0",
+      "sourceURL": "https://xeno-canto.org/953124"
     },
     {
       "packID": "polar-meer",
