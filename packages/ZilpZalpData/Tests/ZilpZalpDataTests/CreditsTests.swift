@@ -110,15 +110,15 @@ struct CreditsTests {
             """
         }
         let voices = [
-            voice("KI-Stimme: Ava", "Vögel Afrikas"),
+            voice("KI-Stimme", "Vögel Afrikas"),
             voice("Stimme: Johanna", "Ansagen"),
-            voice("KI-Stimme: Ava", "Ansagen"),
+            voice("KI-Stimme", "Ansagen"),
         ].joined(separator: ",")
         let document = #"{"media": [], "voices": [\#(voices)], "fonts": [], "icons": []}"#
 
         let credits = try JSONDecoder().decode(Credits.self, from: Data(document.utf8))
 
-        #expect(credits.distinctVoices.map(\.attribution) == ["KI-Stimme: Ava", "Stimme: Johanna"])
+        #expect(credits.distinctVoices.map(\.attribution) == ["KI-Stimme", "Stimme: Johanna"])
         #expect(credits.distinctVoices.first?.usedIn == "Vögel Afrikas")
     }
 

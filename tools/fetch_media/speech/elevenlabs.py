@@ -33,7 +33,8 @@ Six findings that would otherwise be rediscovered against a paid meter:
   Christian chose, renders by id without being added to the account, but no
   listing names her — and the schnaq key lacks `voices_read`, so the listing
   is refused outright. `--voice <id>=<name>` therefore names both and asks
-  nobody: the id is what speaks, the name is what the credits say.
+  nobody: the id is what speaks, the name is for the humans running it — the
+  credits say only `AI_VOICE` (#338).
 - **`seed` is best effort.** *"Determinism is not guaranteed"* — two renders of
   one sentence may differ. That is why `--species` and `--sentence` exist: a
   re-render is aimed at one clip rather than at a pack.
@@ -59,7 +60,7 @@ import json
 import httpx
 
 from fetch_media import keys
-from fetch_media.speech.provider import RECORDING_DOC, Voice, VoiceOption, wav_bytes
+from fetch_media.speech.provider import AI_VOICE, RECORDING_DOC, Voice, VoiceOption, wav_bytes
 from fetch_media.speech.sentences import LANGUAGE
 
 API_ROOT = "https://api.elevenlabs.io/v1"
@@ -103,11 +104,6 @@ LICENCE = "CC-BY-4.0"
 
 class ElevenLabsError(RuntimeError):
     """A refused request, with the API key removed from the message."""
-
-
-def attribution(name: str) -> str:
-    """How the credits screen names the voice."""
-    return f"KI-Stimme: {name} (ElevenLabs)"
 
 
 def message(response: httpx.Response) -> str:
@@ -233,11 +229,8 @@ class ElevenLabsProvider:
 
     def voice(self, voice: str | None = None) -> Voice:
         """Who is heard, and under which licence the clips are published."""
-        return Voice(
-            license=LICENCE,
-            attribution=attribution(self.chosen(voice).name),
-            source_url=RECORDING_DOC,
-        )
+        self.chosen(voice)  # refuses a run that names no voice, or an unknown one
+        return Voice(license=LICENCE, attribution=AI_VOICE, source_url=RECORDING_DOC)
 
     def render(self, text: str, voice: str | None = None, take: int = 0) -> bytes:
         """Speak one German sentence, as WAV bytes. A later `take` gets the next seed."""
