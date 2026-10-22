@@ -264,6 +264,8 @@ Drei Eigenschaften sind wichtig:
 
 **Der eigene S3-Bucket ist die stabile Quelle.** Er entkoppelt Builds von der Verfügbarkeit fremder Dienste und erlaubt es, neue Pakete ohne App-Update auszuliefern.
 
+**Jedes Objekt im Bucket trägt `Cache-Control: no-cache`** (#336). Kein Schlüssel ist inhaltsadressiert — ein neuer Index bleibt `packs/index.json`, ein ersetztes Foto behält seinen Pfad —, also darf ein Client eine Kopie behalten, muss sie aber vor Gebrauch prüfen lassen (ein billiges `304` über das `ETag`). Ohne den Header hat `URLCache` eine Frische aus `Last-Modified` geschätzt und tagelang einen alten Index gezeigt. `fetch-media upload` setzt den Header und schreibt jedes Objekt des hochgeladenen Pakets neu, dem er fehlt; die App schickt zusätzlich jede Anfrage mit `.reloadRevalidatingCacheData` und hängt deshalb nicht von ihm ab.
+
 **Der Credits-Screen wird erzeugt, nicht geschrieben.** Attribution stammt aus demselben Manifest wie die Assets und kann deshalb nicht von ihnen abdriften. Das ist die wichtigste einzelne Entscheidung in diesem Dokument: sie macht Lizenztreue zu einer Eigenschaft des Build-Prozesses statt zu einer Frage von Sorgfalt.
 
 ### Zuschnitt und Prüfung der Fotos

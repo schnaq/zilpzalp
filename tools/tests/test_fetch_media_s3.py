@@ -235,7 +235,9 @@ class SyncTests(PackTestCase):
         self.stubber.activate()
         self.addCleanup(self.stubber.deactivate)
 
-    def expect_head(self, upload: s3.Upload, sha256: str | None) -> None:
+    def expect_head(
+        self, upload: s3.Upload, sha256: str | None, cache_control: str | None = s3.CACHE_CONTROL
+    ) -> None:
         """Answer the next head_object: `None` means the bucket has no such key."""
         if sha256 is None:
             self.stubber.add_client_error(
@@ -245,11 +247,10 @@ class SyncTests(PackTestCase):
                 expected_params={"Bucket": BUCKET, "Key": upload.key},
             )
         else:
-            self.stubber.add_response(
-                "head_object",
-                {"Metadata": {"sha256": sha256}},
-                {"Bucket": BUCKET, "Key": upload.key},
-            )
+            answer = {"Metadata": {"sha256": sha256}}
+            if cache_control is not None:
+                answer["CacheControl"] = cache_control
+            self.stubber.add_response("head_object", answer, {"Bucket": BUCKET, "Key": upload.key})
 
     def expect_put(self, upload: s3.Upload) -> None:
         self.stubber.add_response(
@@ -260,6 +261,7 @@ class SyncTests(PackTestCase):
                 "Key": upload.key,
                 "Body": ANY,
                 "ContentType": upload.content_type,
+                "CacheControl": "no-cache",
                 "Metadata": {"sha256": upload.sha256},
             },
         )
@@ -294,6 +296,17 @@ class SyncTests(PackTestCase):
         self.stubber.assert_no_pending_responses()
         self.assertIn("upload", report[0])
         self.assertIn("skip", report[1])
+
+    def test_rewrites_an_object_put_without_cache_control(self) -> None:
+        """An object from before #336 is put again, so it gains the header."""
+        for upload in self.uploads:
+            self.expect_head(upload, upload.sha256, cache_control=None)
+            self.expect_put(upload)
+
+        report = s3.sync(self.client, BUCKET, self.uploads)
+
+        self.stubber.assert_no_pending_responses()
+        self.assertTrue(all(line.startswith("       upload") for line in report))
 
     def test_uploads_nothing_on_a_dry_run(self) -> None:
         for upload in self.uploads:

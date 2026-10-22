@@ -34,6 +34,12 @@ REQUIRED_ENV = ("SCW_ACCESS_KEY", "SCW_SECRET_KEY", "S3_BUCKET", "S3_REGION", "S
 # both stable and the thing the app verifies after a download.
 SHA256_METADATA = "sha256"
 
+# On every object (#336). No key is content-addressed — a replaced photo keeps
+# `packs/<id>/photos/<bird>.jpg`, a new index keeps `packs/index.json` — so a
+# client may keep a copy but has to ask before it uses one. Without the header
+# URLCache guessed a freshness from Last-Modified and served a days-old index.
+CACHE_CONTROL = "no-cache"
+
 CONTENT_TYPES = {
     ".heic": "image/heic",
     ".jpg": "image/jpeg",
@@ -134,15 +140,19 @@ def plan(pack_id: str, pack_dir: Path) -> list[Upload]:
     return uploads
 
 
-def remote_sha256(client, bucket: str, key: str) -> str | None:
-    """The digest the bucket holds for that key, `None` when it holds nothing."""
+def head(client, bucket: str, key: str) -> dict:
+    """What the bucket holds about that key, `{}` when it holds nothing."""
     try:
-        head = client.head_object(Bucket=bucket, Key=key)
+        return client.head_object(Bucket=bucket, Key=key)
     except ClientError as error:
         if error.response.get("ResponseMetadata", {}).get("HTTPStatusCode") == 404:
-            return None
+            return {}
         raise
-    return head.get("Metadata", {}).get(SHA256_METADATA)
+
+
+def remote_sha256(client, bucket: str, key: str) -> str | None:
+    """The digest the bucket holds for that key, `None` when it holds nothing."""
+    return head(client, bucket, key).get("Metadata", {}).get(SHA256_METADATA)
 
 
 def put(client, bucket: str, upload: Upload) -> None:
@@ -153,6 +163,7 @@ def put(client, bucket: str, upload: Upload) -> None:
             Key=upload.key,
             Body=stream,
             ContentType=upload.content_type,
+            CacheControl=CACHE_CONTROL,
             Metadata={SHA256_METADATA: upload.sha256},
         )
 
@@ -167,11 +178,19 @@ def report_line(verb: str, upload: Upload) -> str:
 
 
 def sync(client, bucket: str, uploads: list[Upload], dry_run: bool = False) -> list[str]:
-    """Upload what has changed. Returns one report line per object."""
+    """Upload what has changed. Returns one report line per object.
+
+    An object put before #336 lacks `CACHE_CONTROL` and counts as changed, so
+    the next upload of its pack rewrites it with the header.
+    """
     report = []
 
     for upload in uploads:
-        unchanged = remote_sha256(client, bucket, upload.key) == upload.sha256
+        remote = head(client, bucket, upload.key)
+        unchanged = (
+            remote.get("Metadata", {}).get(SHA256_METADATA) == upload.sha256
+            and remote.get("CacheControl") == CACHE_CONTROL
+        )
         verb = "skip" if unchanged else ("would upload" if dry_run else "upload")
         report.append(report_line(verb, upload))
 

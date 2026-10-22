@@ -22,6 +22,22 @@ extension PackDownloaderTests {
         }
     }
 
+    @Test("the index, the manifest, every medium and a preview revalidate with the bucket")
+    func revalidatesEveryRequest() async throws {
+        let key = "packs/\(StubPack.id)/previews/amsel.jpg"
+        var routes = StubPack.routes()
+        routes[key] = StubBucket.Route(body: Data("jpeg".utf8))
+
+        try await withDownloader(routes: routes) { downloader, _ in
+            _ = try await downloader.index()
+            try await downloader.download(StubPack.entry())
+            _ = try await downloader.preview(key)
+            // The index, the manifest, every medium and the preview.
+            #expect(StubBucket.cachePolicies.count == StubPack.media.count + 3)
+            #expect(StubBucket.cachePolicies.allSatisfy { $0 == .reloadRevalidatingCacheData })
+        }
+    }
+
     @Test("an installed pack carries its manifest's digest, and knows a newer one")
     func comparesTheManifestDigest() async throws {
         let manifest = StubPack.manifest()

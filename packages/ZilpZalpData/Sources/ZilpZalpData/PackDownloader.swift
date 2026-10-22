@@ -254,13 +254,21 @@ public actor PackDownloader {
     /// what keeps the app on the single host it may talk to. `name` is the
     /// path an error names.
     ///
+    /// **Every request revalidates (#336):** without `Cache-Control` on an
+    /// object, `URLCache` guesses a freshness from `Last-Modified` and served
+    /// a days-old index. No key is content-addressed, so this covers all of
+    /// them; a `304` costs next to nothing (checked on a logging server).
+    ///
     /// - Throws: `PackDownloadError.fileUnreachable` for every transport and
     ///   status failure, `CancellationError` when the task was cancelled.
     func fetch(_ url: URL, named name: String) async throws -> Data {
         let data: Data
         let response: URLResponse
         do {
-            (data, response) = try await session.data(from: url, delegate: NoRedirects.shared)
+            (data, response) = try await session.data(
+                for: URLRequest(url: url, cachePolicy: .reloadRevalidatingCacheData),
+                delegate: NoRedirects.shared,
+            )
         } catch {
             // A cancelled task arrives here as `URLError.cancelled`. It is the
             // caller's decision, not a failed download, and must not be
