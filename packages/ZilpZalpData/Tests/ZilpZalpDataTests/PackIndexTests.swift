@@ -10,13 +10,14 @@ struct PackIndexTests {
         try JSONDecoder().decode(PackIndex.self, from: Data(json.utf8))
     }
 
-    private static func entry(_ id: String) -> PackIndex.Entry {
+    private static func entry(_ id: String, sha256: String? = nil) -> PackIndex.Entry {
         PackIndex.Entry(
             id: id,
             title: id,
             speciesCount: 10,
             downloadSize: 1,
             manifest: "packs/\(id)/manifest.json",
+            manifestSha256: sha256,
         )
     }
 
@@ -117,12 +118,6 @@ struct PackIndexTests {
             bytes: 0,
             manifestSha256: sha256,
         )
-    }
-
-    private static func entry(_ id: String, sha256: String) -> PackIndex.Entry {
-        var entry = entry(id)
-        entry.manifestSha256 = sha256
-        return entry
     }
 
     @Test("a pack not seen yet wears the dot until the gallery has shown it")
