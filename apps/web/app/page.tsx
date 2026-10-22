@@ -3,9 +3,8 @@ import Link from 'next/link'
 import { CallIcon, CheckIcon, NoneIcon, SpeechIcon, StarIcon } from './icons'
 import { Screenshots } from './screenshots'
 
-// The claims on this page are the ones App Store Connect already carries
-// (scratchpad asc/metadata-de.json) and the specification behind them. Nothing
-// here promises a feature the app does not have.
+// Every feature claim on this page is checked against the app on main.
+// Nothing here promises a feature the app does not have.
 
 /// The published listing. The German storefront on purpose: the app and its
 /// App Store metadata are German.
@@ -55,8 +54,8 @@ export default function Home() {
           <div>
             <h1 className="rise">Vögel kennenlernen, bevor man lesen kann.</h1>
             <p className="lead rise rise-2">
-              Gemacht für Kinder, die noch nicht lesen. Aber wer erkennt schon
-              über 300 Vögel? Erwachsene lernen hier genauso gern.
+              Gemacht für Kinder. Aber wer erkennt schon über 300 Vögel? Da
+              lernen Erwachsene gern mit.
             </p>
             <div className="hero-actions rise rise-3">
               <a className="pill" href={APP_STORE_URL}>
@@ -81,11 +80,8 @@ export default function Home() {
 
       <section id="inhalt">
         <div className="wrap">
-          <div className="section-head">
+          <div className="section-head section-head--tight">
             <h2>Zwei Spiele</h2>
-            <p className="lead">
-              Eine KI-Stimme sagt die Namen, geantwortet wird mit Fotos.
-            </p>
           </div>
 
           <div className="games">
@@ -94,7 +90,7 @@ export default function Home() {
                 <SpeechIcon />
               </span>
               <h3>Erkenne den Vogel</h3>
-              <p>Ein Name erklingt. Welches der vier Fotos passt?</p>
+              <p>Eine KI-Stimme nennt einen Vogel. Welches der vier Fotos passt?</p>
             </article>
             <article className="game">
               <span className="game-mark">
@@ -158,12 +154,23 @@ export default function Home() {
                 ))}
               </ul>
               <p>
-                Fotos und Rufe stehen unter freier Lizenz (CC), der Code liegt
-                offen auf <a href={SOURCE_URL}>GitHub</a>. Mehr in der{' '}
+                Mehr in der{' '}
                 <Link href="/datenschutz">Datenschutzerklärung</Link>.
               </p>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section>
+        <div className="wrap">
+          <div className="section-head section-head--tight">
+            <h2>Freie Fotos, offener Code</h2>
+          </div>
+          <p>
+            Fotos und Vogelrufe stehen unter freier Lizenz (CC). Der Code liegt
+            offen auf <a href={SOURCE_URL}>GitHub</a>.
+          </p>
         </div>
       </section>
     </main>

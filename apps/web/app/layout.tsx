@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     template: '%s — ZilpZalp',
   },
   description:
-    'Vögel kennenlernen, ohne lesen zu können: zwei Spiele, über 300 Arten, für Kinder und alle Großen, die mitlernen wollen. Kein Konto, keine Werbung, kein Tracking.',
+    'Vögel kennenlernen mit zwei Spielen und über 300 Arten. Für Kinder, die noch nicht lesen, und für Große, die mitlernen. Kein Konto, keine Werbung, kein Tracking.',
   openGraph: {
     type: 'website',
     locale: 'de_DE',
