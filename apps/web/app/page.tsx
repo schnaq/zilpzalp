@@ -3,9 +3,8 @@ import Link from 'next/link'
 import { CallIcon, CheckIcon, NoneIcon, SpeechIcon, StarIcon } from './icons'
 import { Screenshots } from './screenshots'
 
-// The claims on this page are the ones App Store Connect already carries
-// (scratchpad asc/metadata-de.json) and the specification behind them. Nothing
-// here promises a feature the app does not have.
+// Every claim on this page must hold for the app on main. Nothing here
+// promises a feature the app does not have.
 
 /// The published listing. The German storefront on purpose: the app and its
 /// App Store metadata are German.
@@ -17,30 +16,28 @@ const FACTS = [
   {
     term: 'Über 300 Vögel',
     detail:
-      '70 aus Deutschland sind schon dabei. Mehr gibt es in Paketen aus aller Welt, und mehrere Pakete lassen sich zusammen spielen.',
+      '70 aus Deutschland sind dabei. Mehr gibt es in Paketen aus aller Welt, die sich mischen lassen.',
   },
   {
-    term: 'Sterne und Sticker',
-    detail:
-      'Jede Runde bringt bis zu drei Sterne. Wer einen Vogel oft genug auf Anhieb erkennt, bekommt seinen Sticker.',
+    term: 'Sticker',
+    detail: 'Wer einen Vogel oft genug auf Anhieb erkennt, bekommt seinen Sticker.',
   },
   {
     term: 'Mehrere Kinder',
-    detail:
-      'Jedes hat ein eigenes Profil mit Namen und Vogel-Avatar und darf beides selbst ändern.',
+    detail: 'Jedes hat ein eigenes Profil mit Vogel-Avatar und eigener Sammlung.',
   },
 ]
 
 const PARENTS_CAN = [
-  'Pakete ansehen und neue Vögel laden.',
-  'Pro Kind wählen: Sticker nach drei oder fünf Treffern auf Anhieb.',
-  'Vorlesen von selbst oder erst auf Antippen.',
-  'Eine tägliche Spielzeit. Danach heißt es „Zeit fürs Nest“.',
+  'Pakete laden.',
+  'Pro Kind: Sticker nach drei oder fünf Treffern auf Anhieb.',
+  'Vorlesen von selbst oder auf Antippen.',
+  'Eine tägliche Spielzeit.',
 ]
 
 const APP_DOES_NOT = [
-  'Kein Konto und keine Datenerhebung.',
-  'Keine Werbung, keine In-App-Käufe, kein Tracking.',
+  'Kein Konto, keine Werbung, keine Käufe.',
+  'Keine Datenerhebung, kein Tracking.',
   'Kein Internet zum Spielen nötig.',
 ]
 
@@ -57,8 +54,8 @@ export default function Home() {
           <div>
             <h1 className="rise">Vögel kennenlernen, bevor man lesen kann.</h1>
             <p className="lead rise rise-2">
-              ZilpZalp zeigt Kindern die Vögel vor der Haustür — und auf Wunsch
-              die aus aller Welt.
+              Gemacht für Kinder. Aber wer erkennt schon über 300 Vögel? Da
+              lernen Erwachsene gern mit.
             </p>
             <div className="hero-actions rise rise-3">
               <a className="pill" href={APP_STORE_URL}>
@@ -83,12 +80,8 @@ export default function Home() {
 
       <section id="inhalt">
         <div className="wrap">
-          <div className="section-head">
+          <div className="section-head section-head--tight">
             <h2>Zwei Spiele</h2>
-            <p className="lead">
-              Die Vogelnamen spricht eine KI-Stimme, geantwortet wird mit
-              Fotos. Lesen muss niemand.
-            </p>
           </div>
 
           <div className="games">
@@ -97,21 +90,14 @@ export default function Home() {
                 <SpeechIcon />
               </span>
               <h3>Erkenne den Vogel</h3>
-              <p>
-                Die Stimme nennt einen Vogel, das Kind tippt auf das passende
-                von vier Fotos. Daneben? Dann heißt es freundlich „Versuchs
-                nochmal“.
-              </p>
+              <p>Eine KI-Stimme nennt einen Vogel. Welches der vier Fotos passt?</p>
             </article>
             <article className="game">
               <span className="game-mark">
                 <CallIcon />
               </span>
               <h3>Wer singt da?</h3>
-              <p>
-                Ein echter Vogelruf erklingt. Welcher der vier Vögel war das?
-                Anhören geht so oft, wie das Kind mag.
-              </p>
+              <p>Ein echter Vogelruf erklingt. Welcher Vogel war das?</p>
             </article>
           </div>
 
@@ -128,11 +114,8 @@ export default function Home() {
 
       <section>
         <div className="wrap">
-          <div className="section-head">
+          <div className="section-head section-head--tight">
             <h2>Ein Blick in die App</h2>
-            <p className="lead">
-              Große Knöpfe, kräftige Farben, keine Menüs zum Verlaufen.
-            </p>
           </div>
           <Screenshots />
         </div>
@@ -150,7 +133,7 @@ export default function Home() {
 
           <div className="columns">
             <div className="column">
-              <h3>Was Eltern einstellen</h3>
+              <h3>Im Elternbereich</h3>
               <ul className="ticks">
                 {PARENTS_CAN.map((item) => (
                   <li key={item}>
@@ -161,7 +144,7 @@ export default function Home() {
               </ul>
             </div>
             <div className="column">
-              <h3>Was es nicht gibt</h3>
+              <h3>Gibt es nicht</h3>
               <ul className="ticks ticks--none">
                 {APP_DOES_NOT.map((item) => (
                   <li key={item}>
@@ -171,7 +154,7 @@ export default function Home() {
                 ))}
               </ul>
               <p>
-                Mehr dazu in der{' '}
+                Mehr in der{' '}
                 <Link href="/datenschutz">Datenschutzerklärung</Link>.
               </p>
             </div>
@@ -185,10 +168,8 @@ export default function Home() {
             <h2>Freie Fotos, offener Code</h2>
           </div>
           <p>
-            Die Fotos kommen von iNaturalist, die Vogelrufe von xeno-canto,
-            alle unter freier Lizenz (CC0, CC BY oder CC BY-SA). Wer sie
-            beigesteuert hat, steht in der App unter „Über ZilpZalp“. Der
-            Quellcode von ZilpZalp liegt offen auf{' '}
+            Fotos und Vogelrufe stehen unter CC0, CC BY oder CC BY-SA, die
+            Urheber nennt die App. Der Code liegt offen auf{' '}
             <a href={SOURCE_URL}>GitHub</a>.
           </p>
         </div>
