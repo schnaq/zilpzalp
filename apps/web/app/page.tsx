@@ -3,7 +3,8 @@ import Link from 'next/link'
 import { CallIcon, CheckIcon, NoneIcon, SpeechIcon, StarIcon } from './icons'
 import { Screenshots } from './screenshots'
 
-// Every feature claim on this page is checked against the app on main.
+// Every claim on this page must hold for the app on main. Nothing here
+// promises a feature the app does not have.
 
 /// The published listing. The German storefront on purpose: the app and its
 /// App Store metadata are German.
@@ -22,20 +23,21 @@ const FACTS = [
     detail: 'Wer einen Vogel oft genug auf Anhieb erkennt, bekommt seinen Sticker.',
   },
   {
-    term: 'Profile',
-    detail: 'Jedes Kind spielt mit eigenem Namen und eigener Sammlung.',
+    term: 'Mehrere Kinder',
+    detail: 'Jedes hat ein eigenes Profil mit Vogel-Avatar und eigener Sammlung.',
   },
 ]
 
 const PARENTS_CAN = [
-  'Neue Pakete laden.',
-  'Sticker nach drei oder fünf Treffern.',
+  'Pakete laden.',
+  'Pro Kind: Sticker nach drei oder fünf Treffern auf Anhieb.',
   'Vorlesen von selbst oder auf Antippen.',
   'Eine tägliche Spielzeit.',
 ]
 
 const APP_DOES_NOT = [
-  'Kein Konto, keine Werbung, keine Käufe, kein Tracking.',
+  'Kein Konto, keine Werbung, keine Käufe.',
+  'Keine Datenerhebung, kein Tracking.',
   'Kein Internet zum Spielen nötig.',
 ]
 
@@ -131,7 +133,7 @@ export default function Home() {
 
           <div className="columns">
             <div className="column">
-              <h3>Einstellbar</h3>
+              <h3>Im Elternbereich</h3>
               <ul className="ticks">
                 {PARENTS_CAN.map((item) => (
                   <li key={item}>
@@ -166,8 +168,9 @@ export default function Home() {
             <h2>Freie Fotos, offener Code</h2>
           </div>
           <p>
-            Fotos und Vogelrufe stehen unter freier Lizenz (CC). Der Code liegt
-            offen auf <a href={SOURCE_URL}>GitHub</a>.
+            Fotos und Vogelrufe stehen unter CC0, CC BY oder CC BY-SA, die
+            Urheber nennt die App. Der Code liegt offen auf{' '}
+            <a href={SOURCE_URL}>GitHub</a>.
           </p>
         </div>
       </section>
