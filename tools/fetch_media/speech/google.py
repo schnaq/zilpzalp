@@ -62,7 +62,7 @@ from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import padding
 
 from fetch_media import keys
-from fetch_media.speech.provider import RECORDING_DOC, Voice, VoiceOption, wav_bytes
+from fetch_media.speech.provider import AI_VOICE, RECORDING_DOC, Voice, VoiceOption, wav_bytes
 
 API_ROOT = "https://texttospeech.googleapis.com/v1"
 
@@ -112,11 +112,6 @@ REQUIRED = ("client_email", "private_key", "token_uri")
 
 class GoogleTTSError(RuntimeError):
     """A refused request, with every secret removed from the message."""
-
-
-def attribution(name: str) -> str:
-    """How the credits screen names the voice."""
-    return f"KI-Stimme: {name} (Google Cloud Text-to-Speech)"
 
 
 def account(raw: str) -> dict:
@@ -389,11 +384,8 @@ class GoogleProvider:
 
     def voice(self, voice: str | None = None) -> Voice:
         """Who is heard, and under which licence the clips are published."""
-        return Voice(
-            license=LICENCE,
-            attribution=attribution(self.chosen(voice).name),
-            source_url=RECORDING_DOC,
-        )
+        self.chosen(voice)  # refuses a run that names no voice, or an unknown one
+        return Voice(license=LICENCE, attribution=AI_VOICE, source_url=RECORDING_DOC)
 
     def render(self, text: str, voice: str | None = None, take: int = 0) -> bytes:
         """Speak one German sentence, as WAV bytes. There is no seed to vary by `take`."""

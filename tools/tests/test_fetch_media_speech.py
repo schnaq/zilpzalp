@@ -405,12 +405,12 @@ class ElevenLabsTests(unittest.TestCase):
         self.assertEqual(self.provider().chosen("Max").id, "v-max")
 
     def test_takes_a_voice_the_account_does_not_list_as_id_and_name(self) -> None:
-        """A library voice: rendered by id, credited by name, no listing asked."""
+        """A library voice: rendered by id, credited as AI voice, no listing asked."""
         provider = self.provider()
         voice = provider.voice("v-ava=Ava")
         provider.render("Amsel", "v-ava=Ava")
 
-        self.assertEqual(voice.attribution, "KI-Stimme: Ava (ElevenLabs)")
+        self.assertEqual(voice.attribution, "KI-Stimme")
         paths = [request.url.path for request in self.requests]
         self.assertEqual(paths, ["/v1/text-to-speech/v-ava"])
 
@@ -439,8 +439,19 @@ class ElevenLabsTests(unittest.TestCase):
         voice = self.provider().voice("Johanna")
 
         self.assertEqual(voice.license, "CC-BY-4.0")
-        self.assertEqual(voice.attribution, "KI-Stimme: Johanna (ElevenLabs)")
+        self.assertEqual(voice.attribution, "KI-Stimme")
         self.assertEqual(voice.source_url, speech.RECORDING_DOC)
+
+    def test_a_re_render_is_taken_by_every_rendered_manifest(self) -> None:
+        """#338: the voice the tool writes is the voice the manifests carry."""
+        block = cli.voice_block(self.provider().voice("v-ava=Ava"))
+        paths = [manifest.speech_manifest_path(), *manifest.PACKS_DIR.glob("*/manifest.json")]
+        rendered = [document for document in map(manifest.load, paths) if document.get("voice")]
+
+        self.assertTrue(rendered)
+        for document in rendered:
+            with self.subTest(manifest=document["id"]):
+                manifest.set_voice(document, block)
 
     def test_says_what_a_refusal_means(self) -> None:
         expected = {
@@ -726,7 +737,7 @@ class GoogleTests(unittest.TestCase):
         voice = self.provider().voice(VOICE)
 
         self.assertEqual(voice.license, "CC-BY-4.0")
-        self.assertEqual(voice.attribution, "KI-Stimme: Aoede (Google Cloud Text-to-Speech)")
+        self.assertEqual(voice.attribution, "KI-Stimme")
         self.assertEqual(voice.source_url, speech.RECORDING_DOC)
 
     def test_says_what_a_refusal_means(self) -> None:
@@ -1219,7 +1230,7 @@ class VendorCommandTests(SpeechTestCase):
 
         self.assertEqual(code, 0)
         voice = self.document()["voice"]
-        self.assertEqual(voice["attribution"], "KI-Stimme: Johanna (ElevenLabs)")
+        self.assertEqual(voice["attribution"], "KI-Stimme")
         self.assertEqual(voice["license"], "CC-BY-4.0")
         self.assertEqual(voice["sourceURL"], speech.RECORDING_DOC)
         self.assertEqual(list(self.clips_of("amsel")), ["collection.name"])

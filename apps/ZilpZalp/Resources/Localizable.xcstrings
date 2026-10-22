@@ -1718,7 +1718,7 @@
       }
     },
     "speech.voice.disclosure" : {
-      "comment" : "Says plainly that the voice is AI-generated, on the About screen and under the speech row (#306). %@ is the generated voice attribution from the credits, such as „KI-Stimme: Ava (ElevenLabs)“",
+      "comment" : "Says plainly that the voice is AI-generated, on the About screen and under the speech row (#306). %@ is the generated voice attribution from the credits, such as „KI-Stimme“, never a vendor or voice name (#338)",
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
