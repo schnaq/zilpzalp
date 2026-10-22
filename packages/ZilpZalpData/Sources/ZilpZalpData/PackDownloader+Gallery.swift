@@ -9,8 +9,8 @@ public extension PackDownloader {
     /// Through the same door as everything else: appended to `baseURL`,
     /// refused when the key would leave it, no redirect followed. The shared
     /// session's `URLCache` keeps what came, and `fetch` revalidates it: a
-    /// grown-up opening the same pack twice costs a `304`, and a photo
-    /// replaced under the same key shows up at once.
+    /// second fetch of the same preview costs a `304`, and a photo replaced
+    /// under the same key arrives on the next fetch.
     ///
     /// - Parameter key: ``PackIndex/Species/preview``.
     /// - Throws: `PackDownloadError.invalidPath` or `.fileUnreachable`.
