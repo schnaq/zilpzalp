@@ -134,4 +134,17 @@ struct SpeechClipsTests {
             clips.decision(for: SpeechKey.packTitle, about: nil, pack: "afrika") == .synthesise,
         )
     }
+
+    /// What the picker says for its first two entries (#333): the pack that
+    /// ships inside the app carries its title clip like any downloaded one,
+    /// and „Alle Vögel" is the fixed set's.
+    @Test("the bundled pack's title and „Alle Vögel\" are recordings")
+    func resolvesThePickersOwnLines() throws {
+        let clips = try SpeechClips(library: .bundled(), fixed: SpeechCatalog.bundled())
+
+        let title = clips.url(for: SpeechKey.packTitle, about: nil, pack: "deutschland")
+        #expect(title?.lastPathComponent == "pack.title.m4a")
+        let all = clips.url(for: "home.collection.all", about: nil)
+        #expect(all?.lastPathComponent == "home.collection.all.m4a")
+    }
 }
