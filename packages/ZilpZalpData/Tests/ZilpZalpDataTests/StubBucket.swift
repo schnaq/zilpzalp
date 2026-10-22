@@ -31,7 +31,7 @@ class StubBucket: URLProtocol {
 
     private struct Contents {
         var routes: [String: Route] = [:]
-        var requests: [URL] = []
+        var requests: [URLRequest] = []
     }
 
     private static let contents = Mutex(Contents())
@@ -64,7 +64,13 @@ class StubBucket: URLProtocol {
 
     /// Every URL that was requested, in order.
     static var requests: [URL] {
-        contents.withLock { $0.requests }
+        contents.withLock { $0.requests.compactMap(\.url) }
+    }
+
+    /// The cache policy of every request, in order — what shows that the
+    /// downloader never takes `URLCache`'s word for an object (#336).
+    static var cachePolicies: [URLRequest.CachePolicy] {
+        contents.withLock { $0.requests.map(\.cachePolicy) }
     }
 
     /// How often one bucket key was requested.
@@ -85,7 +91,7 @@ class StubBucket: URLProtocol {
     override func startLoading() {
         guard let url = request.url else { return }
         let route = Self.contents.withLock { contents -> Route? in
-            contents.requests.append(url)
+            contents.requests.append(request)
             return contents.routes[String(url.path(percentEncoded: false).dropFirst())]
         }
 

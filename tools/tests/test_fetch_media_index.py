@@ -420,7 +420,7 @@ class CommandTests(PacksTestCase):
             s3, "client_from_env", return_value=(mock.sentinel.client, BUCKET)
         )
         # The bucket holds nothing yet, neither the pack nor the index.
-        empty_bucket = mock.patch.object(s3, "remote_sha256", return_value=None)
+        empty_bucket = mock.patch.object(s3, "head", return_value={})
 
         with credentials, empty_bucket:
             exit_code, lines = self.upload("--dry-run")
@@ -448,7 +448,9 @@ class CommandTests(PacksTestCase):
         credentials = mock.patch.object(
             s3, "client_from_env", return_value=(mock.sentinel.client, BUCKET)
         )
-        holds_everything = mock.patch.object(s3, "remote_sha256", return_value="0" * 64)
+        holds_everything = mock.patch.object(
+            s3, "head", return_value={"Metadata": {"sha256": "0" * 64}}
+        )
 
         with credentials, holds_everything, self.staged_index() as staged:
             exit_code, _ = self.upload("--dry-run")
