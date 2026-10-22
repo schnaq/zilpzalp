@@ -405,7 +405,7 @@ class ElevenLabsTests(unittest.TestCase):
         self.assertEqual(self.provider().chosen("Max").id, "v-max")
 
     def test_takes_a_voice_the_account_does_not_list_as_id_and_name(self) -> None:
-        """A library voice: rendered by id, credited by name, no listing asked."""
+        """A library voice: rendered by id, credited as AI voice, no listing asked."""
         provider = self.provider()
         voice = provider.voice("v-ava=Ava")
         provider.render("Amsel", "v-ava=Ava")
@@ -445,13 +445,13 @@ class ElevenLabsTests(unittest.TestCase):
     def test_a_re_render_is_taken_by_every_rendered_manifest(self) -> None:
         """#338: the voice the tool writes is the voice the manifests carry."""
         block = cli.voice_block(self.provider().voice("v-ava=Ava"))
-        paths = [manifest.SPEECH_DIR / "manifest.json", *manifest.PACKS_DIR.glob("*/manifest.json")]
-        rendered = [path for path in paths if json.loads(path.read_text()).get("voice")]
+        paths = [manifest.speech_manifest_path(), *manifest.PACKS_DIR.glob("*/manifest.json")]
+        rendered = [document for document in map(manifest.load, paths) if document.get("voice")]
 
         self.assertTrue(rendered)
-        for path in rendered:
-            with self.subTest(manifest=path.parent.name):
-                manifest.set_voice(json.loads(path.read_text()), block)
+        for document in rendered:
+            with self.subTest(manifest=document["id"]):
+                manifest.set_voice(document, block)
 
     def test_says_what_a_refusal_means(self) -> None:
         expected = {

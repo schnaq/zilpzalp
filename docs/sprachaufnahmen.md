@@ -126,7 +126,7 @@ message it prints (`fetch_media.keys`).
 The key as issued has no `voices_read` permission, so `speech voices
 --provider elevenlabs` is refused with a 401 that says so. That is why
 `--voice` also takes the form `<id>=<name>`: the id is what speaks, the name is
-what the credits say, and nothing has to be looked up. A library voice the
+for us (the credits say only „KI-Stimme"), and nothing has to be looked up. A library voice the
 account has not added would not be in that listing anyway.
 
 ### Rendering
@@ -165,11 +165,13 @@ renders them, and refuses to go over `--max-chars` (30000 by default): the
 count is the price, and the cap is there for the run that was meant to be one
 bird.
 
-The voice becomes the manifest's `voice` block: „KI-Stimme: Ava (ElevenLabs)",
-CC BY 4.0, this document as the source. One manifest carries one voice, so
-rendering it again with a different `--voice` is refused rather than merged — a
-change of voice means re-rendering everything in that manifest (decision 7:
-the app does not mix voices).
+The voice becomes the manifest's `voice` block: „KI-Stimme", CC BY 4.0, this
+document as the source. What is owed to the listener is that the voice is an AI
+voice; vendor and voice are not named anywhere a user sees (Christian,
+2026-10-22, #338). One manifest carries one voice (decision 7: the app does not
+mix voices), so a change of voice means re-rendering everything in that
+manifest. Since every rendered voice is credited the same, the tool can no
+longer refuse a second AI voice on its own: render with the `--voice` above.
 
 The request is as deterministic as the API allows: a fixed `seed`, stability
 and similarity 0.8, style 0, speaker boost off. The seed is best effort, so two
@@ -301,17 +303,15 @@ sample rate — `de-DE-Chirp3-HD-Aoede  Aoede  female, 24000 Hz`. Only de-DE
 Chirp 3 HD voices are listed; the endpoint answers with every family in every
 language, and a list nobody can read is not a list.
 
-The chosen voice becomes the manifest's `voice` block: „KI-Stimme: <name> (Google
-Cloud Text-to-Speech)", CC BY 4.0, this document as the source. One manifest
-carries one voice, so rendering a pack a second time with a different `--voice`
-is refused rather than merged — a change of voice means re-rendering everything
-in that manifest (decision 7: the app does not mix voices).
+The chosen voice becomes the manifest's `voice` block: „KI-Stimme", CC BY 4.0,
+this document as the source — the same block as above, whichever provider
+rendered it.
 
 ## The licence line
 
 A recording made for this project is published under **CC BY 4.0**, like the
 photos and the calls, and `--attribution` is how the credits screen names the
-voice. On a render the adapter names it instead of `--attribution` — „KI-Stimme:
-Ava (ElevenLabs)" — under the same licence. The gate accepts
+voice. On a render the adapter names it instead of `--attribution` — „KI-Stimme"
+— under the same licence. The gate accepts
 CC0, CC BY and CC BY-SA and nothing else — a voice that cannot be published
 under one of them cannot ship.
