@@ -4,7 +4,6 @@ import { CallIcon, CheckIcon, NoneIcon, SpeechIcon, StarIcon } from './icons'
 import { Screenshots } from './screenshots'
 
 // Every feature claim on this page is checked against the app on main.
-// Nothing here promises a feature the app does not have.
 
 /// The published listing. The German storefront on purpose: the app and its
 /// App Store metadata are German.
@@ -16,7 +15,7 @@ const FACTS = [
   {
     term: 'Über 300 Vögel',
     detail:
-      '70 aus Deutschland sind dabei, mehr gibt es in Paketen aus aller Welt. Pakete lassen sich mischen.',
+      '70 aus Deutschland sind dabei. Mehr gibt es in Paketen aus aller Welt, die sich mischen lassen.',
   },
   {
     term: 'Sticker',
@@ -36,8 +35,7 @@ const PARENTS_CAN = [
 ]
 
 const APP_DOES_NOT = [
-  'Kein Konto, keine Werbung, keine Käufe.',
-  'Kein Tracking, keine Datenerhebung.',
+  'Kein Konto, keine Werbung, keine Käufe, kein Tracking.',
   'Kein Internet zum Spielen nötig.',
 ]
 
