@@ -85,7 +85,7 @@ Xcode-Version ist in `mise.toml` gepinnt. Wenn ein Build lokal geht und in CI ni
 
 Jedes Medium wird über `data/packs/*.json` deklariert — mit Quelle, Urheber, Lizenz und SHA-256. Der Credits-Screen wird daraus **generiert**. Nie Attribution von Hand in eine View schreiben; sie würde von den Assets abdriften.
 
-Die App spricht zur Laufzeit **niemals** mit iNaturalist oder xeno-canto. Diese APIs werden ausschließlich von `tools/fetch-media` zur Kurationszeit genutzt. Zur Laufzeit spricht die App nur mit dem eigenen S3-Bucket, und auch das nur, wenn Eltern ausdrücklich ein Paket laden.
+Die App spricht zur Laufzeit **niemals** mit iNaturalist oder xeno-canto. Diese APIs werden ausschließlich von `tools/fetch-media` zur Kurationszeit genutzt. Zur Laufzeit spricht die App nur mit dem eigenen S3-Bucket: beim Start (und höchstens alle paar Stunden) holt sie `packs/index.json` für den Punkt am Elternbereich-Knopf, Pakete selbst nur, wenn Eltern sie ausdrücklich laden (Entscheidung 2026-10-22, #334).
 
 Zwei Befunde, die man sonst teuer wieder entdeckt:
 

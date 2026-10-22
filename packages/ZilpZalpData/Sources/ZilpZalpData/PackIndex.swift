@@ -84,6 +84,24 @@ public struct PackIndex: Codable, Sendable, Hashable {
     /// index written before #262.
     public var retired: [Retired] = []
 
+    /// Whether the home screen's grown-ups' button wears its dot (#334): an
+    /// installed pack the bucket holds a newer manifest of, or a pack the
+    /// grown-ups have not seen in the gallery yet.
+    ///
+    /// An outdated pack keeps the dot until it is updated, however often the
+    /// gallery is opened; a new one loses it once the gallery has shown it.
+    ///
+    /// - Parameters:
+    ///   - installed: the downloaded packs. The bundled one is never in the
+    ///     index, so it is never outdated.
+    ///   - seen: the ids of every pack the gallery has shown.
+    public func hasNews(installed: [PackInstallation], seen: Set<String>) -> Bool {
+        packs.contains { entry in
+            installed.first { $0.id == entry.id }.map { $0.isOutdated(by: entry) }
+                ?? !seen.contains(entry.id)
+        }
+    }
+
     /// The retired packs among `installed` that something can be done about:
     /// successors to load, or none left to load and the old pack to delete.
     ///

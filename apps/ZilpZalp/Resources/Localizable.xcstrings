@@ -709,6 +709,18 @@
         }
       }
     },
+    "parents.packNews.accessibility" : {
+      "comment" : "VoiceOver label of the grown-ups' door while it wears the dot for a new or updated pack",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einstellungen, Neues bei den Vogelpaketen"
+          }
+        }
+      }
+    },
     "parents.packs.action.load" : {
       "comment" : "The button on a pack's card that downloads it",
       "extractionState" : "manual",

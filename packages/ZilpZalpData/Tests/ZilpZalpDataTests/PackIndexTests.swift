@@ -10,13 +10,14 @@ struct PackIndexTests {
         try JSONDecoder().decode(PackIndex.self, from: Data(json.utf8))
     }
 
-    private static func entry(_ id: String) -> PackIndex.Entry {
+    private static func entry(_ id: String, sha256: String? = nil) -> PackIndex.Entry {
         PackIndex.Entry(
             id: id,
             title: id,
             speciesCount: 10,
             downloadSize: 1,
             manifest: "packs/\(id)/manifest.json",
+            manifestSha256: sha256,
         )
     }
 
@@ -102,5 +103,49 @@ struct PackIndexTests {
 
         #expect(index.migrations(installed: ["amerika"]).isEmpty)
         #expect(index.migrations(installed: ["alt"]).isEmpty)
+    }
+
+    // MARK: - The grown-ups' dot (#334)
+
+    /// A downloaded pack whose manifest has the digest `sha256`.
+    private static func installed(_ id: String, sha256: String) throws -> PackInstallation {
+        let pack = try JSONDecoder().decode(
+            Pack.self,
+            from: Data(#"{"id": "\#(id)", "title": "\#(id)", "birds": []}"#.utf8),
+        )
+        return PackInstallation(
+            catalog: PackCatalog(pack: pack, directory: URL(filePath: "/nowhere")),
+            bytes: 0,
+            manifestSha256: sha256,
+        )
+    }
+
+    @Test("a pack not seen yet wears the dot until the gallery has shown it")
+    func flagsANewPack() {
+        let index = PackIndex(packs: [Self.entry("afrika"), Self.entry("asien")])
+
+        #expect(index.hasNews(installed: [], seen: ["afrika"]))
+        #expect(!index.hasNews(installed: [], seen: ["afrika", "asien"]))
+    }
+
+    @Test("an outdated pack wears the dot until it is updated, seen or not")
+    func flagsAnOutdatedPack() throws {
+        let index = PackIndex(packs: [Self.entry("afrika", sha256: "neu")])
+
+        #expect(try index.hasNews(
+            installed: [Self.installed("afrika", sha256: "alt")],
+            seen: ["afrika"],
+        ))
+        #expect(try !index.hasNews(installed: [Self.installed("afrika", sha256: "neu")], seen: []))
+    }
+
+    @Test("nothing new and nothing outdated is no dot")
+    func staysQuiet() throws {
+        // An index from before #262 names no digest, so nothing is outdated;
+        // and an installed pack counts as seen.
+        let index = PackIndex(packs: [Self.entry("afrika")])
+
+        #expect(try !index.hasNews(installed: [Self.installed("afrika", sha256: "alt")], seen: []))
+        #expect(!PackIndex(packs: []).hasNews(installed: [], seen: []))
     }
 }
