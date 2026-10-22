@@ -14,8 +14,10 @@ export const metadata: Metadata = {
 // types), ProfileStore and ParentalSettingsStore (JSON in Application Support),
 // ParentsLock (LocalAuthentication), SpeechAnnouncer (recorded clips, the
 // device's AVSpeechSynthesizer as fallback; ElevenLabs only in tools/),
-// PacksSection (fetches the pack index and previews once the grown-ups' area is
-// open), PackDownloader (downloads a grown-up starts). A grep for MetricKit
+// PackModel.checkForNews (fetches the pack index at launch, at most every few
+// hours, for the dot on the grown-ups' button), PacksSection (the index and
+// previews once the grown-ups' area is open), PackDownloader (downloads a
+// grown-up starts). A grep for MetricKit
 // over apps and packages finds nothing, so no diagnostics claim appears here.
 export default function Datenschutz() {
   return (
@@ -119,12 +121,15 @@ export default function Datenschutz() {
       <h3>2.5 Wann die App überhaupt ins Netz geht</h3>
       <p>
         Zum Spielen braucht ZilpZalp kein Internet. Alle 70 Arten der
-        Grundausstattung stecken in der App. Ins Netz geht sie nur im
-        Elternbereich: Ist er geöffnet, lädt sie die Liste der Artenpakete mit
-        Vorschaufotos, und ein Paket selbst erst, wenn eine erwachsene Person es
-        ausdrücklich lädt. Beides kommt von unserem Medienserver; technisch
-        bedingt sieht dessen Betreiber dabei die IP-Adresse des Geräts und die
-        angefragten Dateien.
+        Grundausstattung stecken in der App. Beim Start, und solange sie läuft
+        höchstens alle paar Stunden, lädt sie die Liste der Artenpakete, um am
+        Knopf zum Elternbereich einen Punkt zu zeigen, wenn es ein neues Paket
+        oder ein Update gibt. Dabei schickt sie nichts über das Gerät oder die
+        Kinder mit und erfährt nur, welche Pakete es gibt. Ist der Elternbereich
+        geöffnet, lädt sie dieselbe Liste mit Vorschaufotos, und ein Paket selbst
+        erst, wenn eine erwachsene Person es ausdrücklich lädt. Alles kommt von
+        unserem Medienserver; technisch bedingt sieht dessen Betreiber dabei die
+        IP-Adresse des Geräts und die angefragten Dateien.
       </p>
       <p>
         Der Medienserver ist ein Object-Storage-Bereich bei der Scaleway SAS

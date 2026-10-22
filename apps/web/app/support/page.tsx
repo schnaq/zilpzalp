@@ -56,8 +56,9 @@ const FAQ = [
     q: 'Braucht die App Internet?',
     a: (
       <>
-        Zum Spielen nicht. Ins Netz geht sie nur im Elternbereich: für die
-        Liste der Pakete und für die Pakete, die du lädst.
+        Zum Spielen nicht. Ins Netz geht sie nur für die Liste der Pakete —
+        beim Start, damit der Knopf zum Elternbereich neue Pakete zeigen kann,
+        und im Elternbereich — und für die Pakete, die du lädst.
       </>
     ),
   },

@@ -12,8 +12,10 @@ import ZilpZalpData
 /// is the only screen that may: ``load()`` opens what is already on disk,
 /// ``loadAvailable()`` fetches the catalogue over the network, and both
 /// ``download(_:)`` and ``delete(_:)`` happen behind the lock. **A child's
-/// screen never reaches any of them**, which is what keeps the app's one
-/// network call in the Kids Category's clear (spec §3).
+/// screen never reaches any of them.** The one exception is
+/// ``checkForNews()``, which the shell runs at launch: it fetches the same
+/// catalogue from the same bucket, sends nothing about the device, and only
+/// decides whether the grown-ups' door wears a dot (spec §3, #334).
 ///
 /// Owned by ``AppModel`` rather than by the grown-ups' screen, for two
 /// reasons: the games need the library long before anybody opens the settings,
@@ -44,8 +46,7 @@ final class PackModel {
     }
 
     /// Whether the last index this device saw had nothing left to load. What
-    /// the home screen's "Neue Vögel" badge goes by, since the home screen
-    /// itself may never ask the network (#262).
+    /// the home screen's "Neue Vögel" badge goes by (#262).
     private static let nothingLeftKey = "packsNothingLeft"
 
     /// Where the packs come from: the media bucket's public read endpoint.
@@ -97,10 +98,15 @@ final class PackModel {
     private(set) var isCostly = false
 
     /// Whether the last index seen had nothing left to load — what the home
-    /// screen's "Neue Vögel" sparkle goes by, since the home screen may never
-    /// ask the network itself (#262). `false` while no index was ever seen:
-    /// then there may well be something.
+    /// screen's "Neue Vögel" sparkle goes by, so that it does not hang on a
+    /// fetch this launch (#262). `false` while no index was ever seen: then
+    /// there may well be something.
     private(set) var nothingLeft = UserDefaults.standard.bool(forKey: PackModel.nothingLeftKey)
+
+    /// The packs the gallery has shown, and when ``checkForNews()`` last got
+    /// a catalogue. Written only by `PackModel+News.swift` (#334).
+    var seen = Set(UserDefaults.standard.stringArray(forKey: PackModel.seenKey) ?? [])
+    @ObservationIgnored var lastNewsCheck: ContinuousClock.Instant?
 
     /// What a child can choose between: every bird, or one pack's (#187).
     ///
@@ -206,9 +212,8 @@ final class PackModel {
 
     /// Fetches the catalogue from the bucket.
     ///
-    /// **The app's only unprompted network call, and it happens behind the
-    /// lock**: the grown-ups' area asks for it when it opens, no child's
-    /// screen ever does.
+    /// The gallery asks for it when it opens behind the lock, and
+    /// ``checkForNews()`` at launch; no child's screen ever does.
     func loadAvailable() async {
         // A list already on screen stays while the next one is on its way, and
         // when it does not come: a running download must not lose its card.

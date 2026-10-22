@@ -65,11 +65,13 @@ struct PacksSection: View {
 
             footer
         }
-        // The one place the app reaches for the network on its own, and it is
-        // two doors in: the grown-ups' lock, and this section being on screen.
+        // Two doors in: the grown-ups' lock, and this section being on screen.
+        // Whatever the catalogue lists has now been shown, which is what
+        // takes the dot for a new pack off the home screen's door (#334).
         .task {
             packs.watchConnection()
             await packs.loadAvailable()
+            packs.markSeen()
         }
         .onDisappear { packs.stopWatchingConnection() }
         // Here, inside the open door, rather than on the screen: when the door

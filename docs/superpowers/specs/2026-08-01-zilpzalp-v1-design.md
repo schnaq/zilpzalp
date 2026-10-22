@@ -155,7 +155,7 @@ Ein CI-Gate bricht den Build ab, sobald ein Asset eine Lizenz außerhalb von CC0
 
 Der Bucket `zilpzalp-media` liegt bei Scaleway Object Storage in `fr-par`, Endpunkt `s3.fr-par.scw.cloud`, Inhalte öffentlich lesbar. Schreibzugriff hat nur `tools/fetch-media` mit Zugangsdaten aus Infisical. Öffentlich lesbar ist die richtige Wahl, weil es ausschließlich CC-lizenzierte Dateien sind — signierte URLs würden entweder einen Schlüssel in der App oder einen eigenen Dienst erzwingen, und beides ist für eine App ohne Backend der falsche Weg.
 
-Die App holt beim Start des Elternbereichs einen Katalog (`packs/index.json`) aus S3 und zeigt verfügbare Pakete mit Größe an. Ein Download läuft über `URLSession` mit Fortschrittsanzeige, prüft jede Datei gegen ihren SHA-256 und legt sie unter Application Support ab, ausgenommen vom iCloud-Backup. Pakete sind einzeln löschbar. Das gebundelte Basis-Paket lässt sich nicht entfernen, damit die App nie inhaltsleer wird.
+Die App holt beim Start des Elternbereichs einen Katalog (`packs/index.json`) aus S3 und zeigt verfügbare Pakete mit Größe an. Denselben Katalog holt sie seit Issue #334 auch beim App-Start und danach höchstens alle drei Stunden, wenn sie wieder in den Vordergrund kommt (Entscheidung 2026-10-22, Christian): Gibt es ein Paket, das die Eltern in der Galerie noch nicht gesehen haben, oder ist ein installiertes Paket veraltet (SHA-256 des Manifests), trägt der Knopf zum Elternbereich einen Punkt ohne Text. Neue Pakete gelten als gesehen, sobald die Galerie sie gezeigt hat; ein veraltetes Paket behält den Punkt bis zum Update. Offline oder bei einem Fehler gibt es keinen Punkt und keine Meldung, in Screenshot-Läufen keinen Abruf. Der Glitzer-Badge für 80 % der Sticker sitzt an derselben Stelle und hat Vorrang; es gibt nie zwei Badges. Ein Download läuft über `URLSession` mit Fortschrittsanzeige, prüft jede Datei gegen ihren SHA-256 und legt sie unter Application Support ab, ausgenommen vom iCloud-Backup. Pakete sind einzeln löschbar. Das gebundelte Basis-Paket lässt sich nicht entfernen, damit die App nie inhaltsleer wird.
 
 Neue Pakete können dadurch ohne App-Update und ohne Review ausgeliefert werden — der Grund, warum wir nicht Apples On-Demand Resources nehmen.
 
@@ -202,7 +202,7 @@ Der Bereich hinter dem Schloss heißt in der Oberfläche „Einstellungen" statt
 
 ## 5. Datenhaltung und Datenschutz
 
-Alles liegt lokal. Kein Netzwerkverkehr außer den ausdrücklich von Eltern angestoßenen Paket-Downloads aus dem eigenen S3-Bucket. Keine Analytics, kein Crash-Reporting durch Dritte, keine Werbe-SDKs, keine Accounts.
+Alles liegt lokal. Kein Netzwerkverkehr außer dem Paketkatalog und den ausdrücklich von Eltern angestoßenen Paket-Downloads, beides aus dem eigenen S3-Bucket (§3; der Katalog auch beim App-Start, seit 2026-10-22). Keine Analytics, kein Crash-Reporting durch Dritte, keine Werbe-SDKs, keine Accounts.
 
 Profile liegen als JSON in Application Support:
 

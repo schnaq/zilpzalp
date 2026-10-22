@@ -65,6 +65,8 @@ struct HomeScreen: View {
 
     /// The door's sparkle and the one-time hint's close, `nil` without one (#262).
     var newBirds = false
+    /// The door's dot: a new pack or an update in the bucket (#334).
+    var packNews = false
     var dismissPacksHint: (() -> Void)?
 
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
@@ -102,7 +104,7 @@ struct HomeScreen: View {
                     .buttonStyle(.plain)
                     .accessibilityLabel(String(localized: "profile.switch.accessibility"))
 
-                    GrownUpsButton(newBirds: newBirds, action: openParents)
+                    GrownUpsButton(newBirds: newBirds, packNews: packNews, action: openParents)
                 }
             }
 

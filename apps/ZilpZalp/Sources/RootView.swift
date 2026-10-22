@@ -33,6 +33,8 @@ struct RootView: View {
     /// a pack loaded or deleted — and the threshold is reached again.
     @AppStorage("newBirdsSeenAt") private var newBirdsSeenAt = 0
 
+    @Environment(\.scenePhase) private var scenePhase
+
     var body: some View {
         NavigationStack(path: $path) {
             start
@@ -92,6 +94,13 @@ struct RootView: View {
         // avatars the way it reaches the album.
         .environment(\.speciesPhotos, model.packs.photos)
         .task { await model.load() }
+        // At launch and on every return to the front, at most every few
+        // hours: the catalogue behind the door's dot (#334). Never in a
+        // screenshot run, which shows no network and no dot.
+        .task(id: scenePhase) {
+            guard scenePhase == .active, ScreenshotSeed.directory == nil else { return }
+            await model.packs.checkForNews()
+        }
     }
 
     /// The album belongs to a child, and every route to it starts on a screen
@@ -168,6 +177,7 @@ struct RootView: View {
                 library: model.packs.library,
                 openCollection: { path.append(.collection) },
                 newBirds: showsNewBirds,
+                packNews: model.packs.hasNews,
                 dismissPacksHint: showsPacksHint ? { packsHintDismissed = true } : nil,
             )
         } else {
