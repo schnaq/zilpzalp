@@ -56,7 +56,14 @@ targets:
         # changes, this is the one line to change. CI builds unsigned.
         DEVELOPMENT_TEAM: L99L6DPKC7
         PRODUCT_NAME: ZilpZalp
-        MARKETING_VERSION: "1.1.2"
+        # iCloud key-value storage, which backs up and syncs the profiles and
+        # the grown-ups' settings. The archive is built unsigned, so this file
+        # alone does not reach the App Store build: `mise run archive` signs
+        # the archived app ad hoc with it, `mise run upload` checks the
+        # exported .ipa still carries it. Without the entitlement the store
+        # does nothing and says nothing.
+        CODE_SIGN_ENTITLEMENTS: ZilpZalp.entitlements
+        MARKETING_VERSION: "1.2.0"
         CURRENT_PROJECT_VERSION: 1
         # 1 = iPhone, 2 = iPad
         TARGETED_DEVICE_FAMILY: "1,2"

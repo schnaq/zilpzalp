@@ -43,5 +43,6 @@ rm -rf "$RUNNER_TEMP/dist.p12" "$RUNNER_TEMP/chain.pem" \
   "$RUNNER_TEMP/asc-key.p8" \
   "$RUNNER_TEMP/leaf.pem" \
   "$RUNNER_TEMP/ZilpZalp.xcarchive" "$RUNNER_TEMP/export" \
+  "$RUNNER_TEMP/ZilpZalp.entitlements" "$RUNNER_TEMP/ipa-check" \
   "$RUNNER_TEMP/ExportOptions.plist" \
   "$RUNNER_TEMP/profile_uuid" "$RUNNER_TEMP/orig-default-keychain"

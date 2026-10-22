@@ -49,7 +49,10 @@ struct ProfileStoreTests {
             mila.roundsPlayed = 24
             mila.recognitions = ["zilpzalp": 5, "amsel": 2]
             mila.playtime = ["2026-09-08": 185.5]
-            try await store.update(mila)
+            // The store stamps the change; the copy compared against carries
+            // the same stamp.
+            mila.modifiedAt = Date(timeIntervalSince1970: 1)
+            try await store.update(mila, now: mila.modifiedAt)
 
             let reopened = try await ProfileStore(directory: directory).profiles()
 
@@ -100,11 +103,18 @@ struct ProfileStoreTests {
             mila.collections = ["afrika"]
             try await store.update(mila)
 
-            let edited = try await store.edit(mila.id, name: "Mila Rosa", avatar: "eisvogel")
+            let now = Date(timeIntervalSince1970: 1)
+            let edited = try await store.edit(
+                mila.id,
+                name: "Mila Rosa",
+                avatar: "eisvogel",
+                now: now,
+            )
 
             var expected = mila
             expected.name = "Mila Rosa"
             expected.avatar = "eisvogel"
+            expected.modifiedAt = now
             #expect(edited == expected)
             #expect(try await ProfileStore(directory: directory).profiles() == [jonte, expected])
         }

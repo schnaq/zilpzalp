@@ -48,7 +48,17 @@ const FAQ = [
     a: (
       <>
         Ja. Jedes Kind bekommt ein eigenes Profil und sammelt für sich. Ein
-        Vorname genügt, alles bleibt auf dem Gerät.
+        Vorname genügt.
+      </>
+    ),
+  },
+  {
+    q: 'Was passiert, wenn ich die App lösche?',
+    a: (
+      <>
+        Ist iCloud an, kommen Profile, Sterne und Sticker zurück, sobald du die
+        App mit derselben Apple-ID wieder installierst – auch auf einem anderen
+        iPhone oder iPad. Geladene Pakete holst du im Elternbereich neu.
       </>
     ),
   },
@@ -58,7 +68,8 @@ const FAQ = [
       <>
         Zum Spielen nicht. Ins Netz geht sie nur für die Liste der Pakete —
         beim Start, damit der Knopf zum Elternbereich neue Pakete zeigen kann,
-        und im Elternbereich — und für die Pakete, die du lädst.
+        und im Elternbereich — und für die Pakete, die du lädst. Die
+        Spielstände sichert iOS in deiner iCloud.
       </>
     ),
   },

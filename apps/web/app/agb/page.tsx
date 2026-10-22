@@ -33,7 +33,7 @@ export default function AGB() {
       <ul>
         <li>zwei Spiele, in denen ein vorgelesener Name oder eine Vogelstimme dem richtigen von vier Fotos zugeordnet wird</li>
         <li>70 heimische Vogelarten, die mit der App ausgeliefert werden</li>
-        <li>mehrere lokale Profile mit Namen und Vogel-Avatar</li>
+        <li>mehrere Profile mit Namen und Vogel-Avatar</li>
         <li>Sterne pro Runde und eine Sammlung, in die ein Vogel als Sticker wandert, sobald ein Kind ihn drei- oder fünfmal auf Anhieb erkannt hat — wie oft, legen Eltern je Kind in den Einstellungen fest</li>
         <li>einen Elternbereich hinter der Geräteauthentifizierung mit einer einstellbaren täglichen Spielzeit</li>
         <li>die Möglichkeit, weitere Artenpakete zu laden</li>
@@ -46,7 +46,8 @@ export default function AGB() {
       <h2>3. Kein Konto, keine Registrierung</h2>
       <p>
         Die Nutzung der App erfordert weder eine Registrierung noch ein Konto
-        bei uns oder bei Dritten. Profile werden lokal auf dem Gerät angelegt.
+        bei uns oder bei Dritten. Profile werden auf dem Gerät angelegt und,
+        wenn es bei iCloud angemeldet ist, in der eigenen iCloud gesichert.
         Was dabei gespeichert wird, steht in der{' '}
         <Link href="/datenschutz">Datenschutzerklärung</Link>.
       </p>

@@ -167,6 +167,19 @@ xcodebuild archive \
   CODE_SIGNING_ALLOWED=NO \
   CODE_SIGNING_REQUIRED=NO \
   | xcbeautify
+
+# An unsigned app has no signature to carry entitlements, and the export keeps
+# only the entitlements it finds in one: archived unsigned, the App Store build
+# lost iCloud key-value storage without a word. So the archived app is signed
+# ad hoc with apps/ZilpZalp/ZilpZalp.entitlements, its build variables spelled
+# out — codesign does not expand them — and the export re-signs it with the
+# distribution identity and keeps them. `mise run upload` checks the result.
+app="$out/ZilpZalp.xcarchive/Products/Applications/ZilpZalp.app"
+bundle_id="$(/usr/libexec/PlistBuddy -c 'Print :CFBundleIdentifier' "$app/Info.plist")"
+# The team project.yml pins for DEVELOPMENT_TEAM.
+sed -e 's/$(TeamIdentifierPrefix)/L99L6DPKC7./g' -e "s/\$(CFBundleIdentifier)/$bundle_id/g" \
+  apps/ZilpZalp/ZilpZalp.entitlements >"$out/ZilpZalp.entitlements"
+codesign --force --sign - --entitlements "$out/ZilpZalp.entitlements" "$app"
 '''
 
 [tasks.upload]
@@ -207,6 +220,24 @@ PATH="/usr/bin:$PATH" xcodebuild -exportArchive \
   -exportPath "$RUNNER_TEMP/export" \
   -exportOptionsPlist "$RUNNER_TEMP/ExportOptions.plist"
 ipa=("$RUNNER_TEMP"/export/*.ipa)
+
+# iCloud key-value storage without its entitlement does nothing and reports
+# nothing, so a build that lost it would ship profiles that are never backed
+# up. Compared exactly: the profile itself carries the wildcard L99L6DPKC7.*,
+# and a build signed with that is just as silent.
+rm -rf "${RUNNER_TEMP:?}/ipa-check"
+unzip -q "${ipa[0]}" -d "$RUNNER_TEMP/ipa-check"
+codesign -d --entitlements - --xml "$RUNNER_TEMP/ipa-check/Payload/ZilpZalp.app" \
+  >"$RUNNER_TEMP/ipa-check/entitlements.plist"
+kvstore="$(/usr/libexec/PlistBuddy -c 'Print :com.apple.developer.ubiquity-kvstore-identifier' \
+  "$RUNNER_TEMP/ipa-check/entitlements.plist" 2>/dev/null || true)"
+echo "Entitlements of the exported app:"
+plutil -p "$RUNNER_TEMP/ipa-check/entitlements.plist"
+if [ "$kvstore" != "L99L6DPKC7.com.schnaq.zilpzalp" ]; then
+  echo "::error::The exported app does not carry com.apple.developer.ubiquity-kvstore-identifier"
+  echo "::error::= L99L6DPKC7.com.schnaq.zilpzalp, so iCloud would silently not sync. Not uploaded."
+  exit 1
+fi
 xcrun altool --upload-package "${ipa[0]}" -t ios \
   --api-key "$ASC_KEY_ID" --api-issuer "$ASC_ISSUER_ID" --p8-file-path "$key"
 '''

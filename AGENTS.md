@@ -4,7 +4,7 @@ Leitfaden für KI-Coding-Agenten in diesem Repository (Claude Code, Copilot, Cur
 
 ## Was ZilpZalp ist
 
-Eine quelloffene Lern-App, mit der Kinder heimische Vögel kennenlernen. Vier Spielarten, lokale Profile, kein Account, keine Werbung, keine Datenerhebung. iPhone und iPad nativ, auf Apple-Silicon-Macs über „Designed for iPad" lauffähig.
+Eine quelloffene Lern-App, mit der Kinder heimische Vögel kennenlernen. Vier Spielarten, Profile ohne Account und gesichert in der eigenen iCloud der Familie, keine Werbung, keine Datenerhebung. iPhone und iPad nativ, auf Apple-Silicon-Macs über „Designed for iPad" lauffähig.
 
 Die verbindliche Spezifikation liegt in [docs/superpowers/specs/2026-08-01-zilpzalp-v1-design.md](docs/superpowers/specs/2026-08-01-zilpzalp-v1-design.md). Bei Widersprüchen zwischen dieser Datei und dem Spec gewinnt der Spec.
 
@@ -85,7 +85,7 @@ Xcode-Version ist in `mise.toml` gepinnt. Wenn ein Build lokal geht und in CI ni
 
 Jedes Medium wird über `data/packs/*.json` deklariert — mit Quelle, Urheber, Lizenz und SHA-256. Der Credits-Screen wird daraus **generiert**. Nie Attribution von Hand in eine View schreiben; sie würde von den Assets abdriften.
 
-Die App spricht zur Laufzeit **niemals** mit iNaturalist oder xeno-canto. Diese APIs werden ausschließlich von `tools/fetch-media` zur Kurationszeit genutzt. Zur Laufzeit spricht die App nur mit dem eigenen S3-Bucket: beim Start (und höchstens alle paar Stunden) holt sie `packs/index.json` für den Punkt am Elternbereich-Knopf, Pakete selbst nur, wenn Eltern sie ausdrücklich laden (Entscheidung 2026-10-22, #334).
+Die App spricht zur Laufzeit **niemals** mit iNaturalist oder xeno-canto. Diese APIs werden ausschließlich von `tools/fetch-media` zur Kurationszeit genutzt. Zur Laufzeit spricht die App nur mit dem eigenen S3-Bucket: beim Start (und höchstens alle paar Stunden) holt sie `packs/index.json` für den Punkt am Elternbereich-Knopf, Pakete selbst nur, wenn Eltern sie ausdrücklich laden (Entscheidung 2026-10-22, #334). Die Spielstände sichert iOS über iCloud-Schlüssel-Wert-Speicher — das ist kein Server von uns.
 
 Zwei Befunde, die man sonst teuer wieder entdeckt:
 

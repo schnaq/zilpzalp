@@ -3,9 +3,10 @@ import Foundation
 /// One child's profile: the name it picked, the avatar it picked and
 /// everything the app remembers between rounds.
 ///
-/// Nothing here leaves the device. There is no account, no identifier that
-/// means anything outside this installation, and no field a child could not
-/// see for itself on the screen.
+/// Nothing here reaches us. The profile is backed up to the family's own
+/// iCloud (``ProfileStore``), and there is no account of ours, no identifier
+/// that means anything outside the family's devices, and no field a child
+/// could not see for itself on the screen.
 public struct Profile: Codable, Sendable, Hashable, Identifiable {
     /// The avatars a profile can be created with: ten species of the pack that
     /// ships inside the app, drawn as the photo disc the album gives a
@@ -116,7 +117,9 @@ public struct Profile: Codable, Sendable, Hashable, Identifiable {
     /// removes one; ``recognitions`` and ``stickerThreshold`` only add.
     /// An array rather than a `Set` so that the file stays byte-stable — a
     /// set encodes in a different order on every launch.
-    public private(set) var stickers: [String]
+    /// Set from outside this type only by a merge with another device's copy
+    /// (``merged(with:)``), which unions and never drops one.
+    public internal(set) var stickers: [String]
 
     /// The threshold a profile starts with, and the one a file written before
     /// #260 played with.
@@ -155,6 +158,15 @@ public struct Profile: Codable, Sendable, Hashable, Identifiable {
     /// would tell that child it had collected nothing today.
     public var dailyStars: [String: Int]
 
+    /// When the profile was created, for keeping profiles from several
+    /// devices in one order. `distantPast` for a profile from before iCloud.
+    public var createdAt: Date
+    /// When the profile's name, avatar, collections or sticker threshold last
+    /// changed — the fields a merge takes from the newer copy. A round does
+    /// not count: its counters merge by maximum. `distantPast` for a profile
+    /// from before iCloud.
+    public var modifiedAt: Date
+
     public init(
         id: UUID,
         name: String,
@@ -166,6 +178,8 @@ public struct Profile: Codable, Sendable, Hashable, Identifiable {
         collections: [String] = [],
         playtime: [String: TimeInterval] = [:],
         dailyStars: [String: Int] = [:],
+        createdAt: Date = .distantPast,
+        modifiedAt: Date = .distantPast,
     ) {
         self.id = id
         self.name = name
@@ -178,7 +192,33 @@ public struct Profile: Codable, Sendable, Hashable, Identifiable {
         self.collections = collections.sorted()
         self.playtime = playtime
         self.dailyStars = dailyStars
+        self.createdAt = createdAt
+        self.modifiedAt = modifiedAt
         collectEarned()
+    }
+
+    /// This profile and another device's copy of it, as one.
+    ///
+    /// Whatever only ever grows takes the larger value — stars, rounds, every
+    /// counter, every day — and the album is the union of both: no sticker
+    /// is ever lost to a sync. What a child or a grown-up chose — name,
+    /// avatar, collections, threshold — comes from the copy changed last.
+    ///
+    /// ponytail: maxima, not sums. A child playing on two devices on the same
+    /// day before they sync keeps the larger of the two days, not both;
+    /// per-device counters would fix that and are not worth it for v1.
+    public func merged(with other: Profile) -> Profile {
+        var merged = other.modifiedAt > modifiedAt ? other : self
+        merged.createdAt = min(createdAt, other.createdAt)
+        merged.totalStars = max(totalStars, other.totalStars)
+        merged.roundsPlayed = max(roundsPlayed, other.roundsPlayed)
+        merged.playtime = playtime.merging(other.playtime, uniquingKeysWith: max)
+        merged.dailyStars = dailyStars.merging(other.dailyStars, uniquingKeysWith: max)
+        merged.stickers = Set(stickers).union(other.stickers).sorted()
+        // Last, because setting it files whatever the merged counters now
+        // reach into the merged album.
+        merged.recognitions = recognitions.merging(other.recognitions, uniquingKeysWith: max)
+        return merged
     }
 
     /// Whether `species`' sticker is in this child's album.
@@ -244,6 +284,10 @@ public struct Profile: Codable, Sendable, Hashable, Identifiable {
             ?? []).sorted()
         playtime = try container.decode([String: TimeInterval].self, forKey: .playtime)
         dailyStars = try container.decodeIfPresent([String: Int].self, forKey: .dailyStars) ?? [:]
+        // A profile from before iCloud: older than anything a device writes
+        // now, so a merge takes the newer copy's fields and keeps its place.
+        createdAt = try container.decodeIfPresent(Date.self, forKey: .createdAt) ?? .distantPast
+        modifiedAt = try container.decodeIfPresent(Date.self, forKey: .modifiedAt) ?? .distantPast
         // A file from before #260 has neither key: it played at five, and its
         // album is every counter at five or more — what was derived then is
         // what is stored now.
@@ -291,6 +335,8 @@ public struct Profile: Codable, Sendable, Hashable, Identifiable {
         case collections
         case playtime
         case dailyStars
+        case createdAt
+        case modifiedAt
     }
 
     /// Keys this type reads and no longer writes.
