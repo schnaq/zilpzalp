@@ -27,21 +27,31 @@ final class ParentalSettingsModel {
     /// all of them rather than racing a save that has not landed yet.
     private var lastWrite: Task<Void, Never>?
 
-    /// - Parameter directory: Where `Settings/parental.json` lives underneath.
-    ///   Application Support, except in a preview.
-    init(directory: URL = .applicationSupportDirectory) {
-        store = ParentalSettingsStore(directory: directory)
+    /// - Parameters:
+    ///   - directory: Where `Settings/parental.json` lives underneath.
+    ///     Application Support, except in a preview.
+    ///   - cloud: Where the settings are backed up, `nil` in a preview.
+    init(
+        directory: URL = .applicationSupportDirectory,
+        cloud: (any CloudKeyValueStore)? = nil,
+    ) {
+        store = ParentalSettingsStore(directory: directory, cloud: cloud)
     }
 
-    /// Reads the file. A device that has never been here gets the defaults
-    /// without an error; a file that cannot be read gets them with one in the
-    /// log, because a grown-up cannot act on it and the settings standing at
-    /// their defaults is the calm answer.
+    /// Reads the file, merged with what another device saved last — at
+    /// launch and whenever another device changed it. A device that has never
+    /// been here gets the defaults without an error; a file that cannot be
+    /// read gets them with one in the log, because a grown-up cannot act on it
+    /// and the settings standing at their defaults is the calm answer.
     func load() async {
         await lastWrite?.value
+        let pending = lastWrite
 
         do {
-            settings = try await store.load()
+            let loaded = try await store.sync()
+            // A change made while this read was out is newer than its answer.
+            guard lastWrite == pending else { return }
+            settings = loaded
         } catch {
             settings = ParentalSettings()
             // The error names a file format, never a setting — `DecodingError`

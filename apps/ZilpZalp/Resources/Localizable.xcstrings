@@ -697,6 +697,30 @@
         }
       }
     },
+    "parents.notice.cloud.off" : {
+      "comment" : "Third line of the same card, on a device without iCloud: nothing is backed up",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ohne iCloud bleiben Spielstände nur auf diesem Gerät."
+          }
+        }
+      }
+    },
+    "parents.notice.cloud.on" : {
+      "comment" : "Third line of the same card, on a device signed in to iCloud: the profiles and settings are backed up there",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spielstände werden in iCloud gesichert."
+          }
+        }
+      }
+    },
     "parents.notice.hint" : {
       "comment" : "The second line of the same card",
       "extractionState" : "manual",

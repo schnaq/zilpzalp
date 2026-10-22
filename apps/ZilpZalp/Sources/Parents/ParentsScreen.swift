@@ -353,6 +353,16 @@ struct ParentsScreen: View {
                     Text("parents.notice.hint")
                         .typeStyle(.caption, .body, weight: .semibold)
                         .foregroundStyle(ZColor.textMuted)
+                    // Whether this device is signed in to iCloud, asked each
+                    // time the card is drawn: the profiles are mirrored
+                    // there either way, and reach it only then.
+                    Text(
+                        FileManager.default.ubiquityIdentityToken == nil
+                            ? "parents.notice.cloud.off" as LocalizedStringKey
+                            : "parents.notice.cloud.on",
+                    )
+                    .typeStyle(.caption, .body, weight: .semibold)
+                    .foregroundStyle(ZColor.textMuted)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
             }

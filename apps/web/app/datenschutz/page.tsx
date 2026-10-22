@@ -11,7 +11,9 @@ export const metadata: Metadata = {
 
 // Every statement about the app is checked against the repository:
 // apps/ZilpZalp/Resources/PrivacyInfo.xcprivacy (no tracking, no collected data
-// types), ProfileStore and ParentalSettingsStore (JSON in Application Support),
+// types), ProfileStore and ParentalSettingsStore (JSON in Application Support,
+// mirrored to iCloud key-value storage — NSUbiquitousKeyValueStore — when the
+// device is signed in),
 // ParentsLock (LocalAuthentication), SpeechAnnouncer (recorded clips, the
 // device's AVSpeechSynthesizer as fallback; ElevenLabs only in tools/),
 // PackModel.checkForNews (fetches the pack index at launch, at most every few
@@ -26,7 +28,8 @@ export default function Datenschutz() {
       <p>
         Die App ZilpZalp erhebt keine personenbezogenen Daten. Es gibt kein
         Konto, keine Anmeldung, keine Werbung, kein Tracking und kein
-        Analysewerkzeug. Was ein Kind in der App anlegt, bleibt auf dem Gerät.
+        Analysewerkzeug. Was ein Kind in der App anlegt, bleibt auf dem Gerät
+        und in Ihrer eigenen iCloud.
         Diese Website setzt keine Cookies, bindet nichts von fremden Servern ein
         und misst nichts.
       </p>
@@ -64,7 +67,7 @@ export default function Datenschutz() {
         keine Tracking-Domains.
       </p>
 
-      <h3>2.2 Was auf dem Gerät bleibt</h3>
+      <h3>2.2 Was die App speichert</h3>
       <p>
         Damit ein Kind sein Profil wiederfindet, legt die App Daten lokal im
         Bereich „Application Support“ der App ab:
@@ -84,9 +87,10 @@ export default function Datenschutz() {
         <li>Heruntergeladene Artenpakete, falls Erwachsene welche laden</li>
       </ul>
       <p>
-        Diese Daten verlassen das Gerät nicht. Sie werden nicht an uns und nicht
-        an Dritte übertragen, und wir haben keinen Zugriff darauf. Wer sie
-        loswerden will, löscht das Profil in der App oder die App selbst.
+        Profile und Einstellungen sichert die App außerdem in Ihrer iCloud
+        (2.3). Darüber hinaus verlassen diese Daten das Gerät nicht. Sie werden
+        nicht an uns und nicht an Dritte übertragen, und wir haben keinen
+        Zugriff darauf.
       </p>
       <p>
         Ein Hinweis für Erwachsene: Der Name eines Profils erscheint in der App
@@ -94,7 +98,20 @@ export default function Datenschutz() {
         ein Spitzname genügt.
       </p>
 
-      <h3>2.3 Elternbereich, Face ID und Gerätecode</h3>
+      <h3>2.3 Sicherung in iCloud</h3>
+      <p>
+        Ist das Gerät mit einer Apple-ID bei iCloud angemeldet, legt die App
+        Profile und Einstellungen zusätzlich im iCloud-Speicher dieser Apple-ID
+        ab (iCloud-Schlüssel-Wert-Speicher). So kommen die Spielstände auf
+        andere Geräte mit derselben Apple-ID und nach einer Neuinstallation
+        zurück. Die Daten liegen bei Apple in Ihrem iCloud-Konto, nicht bei uns,
+        und wir können sie nicht sehen. Wer das nicht möchte, schaltet iCloud
+        für ZilpZalp in den iCloud-Einstellungen des Geräts ab; dann bleiben die
+        Spielstände nur auf diesem Gerät. Für iCloud gilt die
+        Datenschutzrichtlinie von Apple.
+      </p>
+
+      <h3>2.4 Elternbereich, Face ID und Gerätecode</h3>
       <p>
         Der Elternbereich ist mit der Geräteauthentifizierung von iOS geschützt
         (<code>LocalAuthentication</code>, Richtlinie{' '}
@@ -105,7 +122,7 @@ export default function Datenschutz() {
         nicht zugänglich.
       </p>
 
-      <h3>2.4 Sprachausgabe</h3>
+      <h3>2.5 Sprachausgabe</h3>
       <p>
         Vogelnamen und die wichtigsten Ansagen spricht eine KI-Stimme. Die
         Aufnahmen erzeugen wir vorab mit einem KI-Sprachdienst, wenn wir die
@@ -117,7 +134,7 @@ export default function Datenschutz() {
         den Standort oder die Kontakte ab.
       </p>
 
-      <h3>2.5 Wann die App überhaupt ins Netz geht</h3>
+      <h3>2.6 Wann die App überhaupt ins Netz geht</h3>
       <p>
         Zum Spielen braucht ZilpZalp kein Internet. Alle 70 Arten der
         Grundausstattung stecken in der App. Beim Start, und solange sie läuft
@@ -145,14 +162,14 @@ export default function Datenschutz() {
         lange bevor die App ausgeliefert wird.
       </p>
 
-      <h3>2.6 Keine Analyse, kein Absturzmelder, keine Werbung</h3>
+      <h3>2.7 Keine Analyse, kein Absturzmelder, keine Werbung</h3>
       <p>
         Die App enthält kein Analysewerkzeug, keinen Absturzmelder eines
         Drittanbieters, keine Werbe-Bibliothek und keine In-App-Käufe. Es gibt
         keine Werbe-Kennung (IDFA) und keine Profilbildung.
       </p>
 
-      <h3>2.7 Kinder</h3>
+      <h3>2.8 Kinder</h3>
       <p>
         ZilpZalp erscheint in der Kids Category des App Store und ist für Kinder
         gebaut, die noch nicht lesen können. Deshalb: keine Daten von Kindern,
@@ -224,8 +241,9 @@ export default function Datenschutz() {
       <h2>5. Speicherdauer</h2>
       <ul>
         <li>
-          Daten in der App: bleiben auf dem Gerät, bis das Profil oder die App
-          gelöscht wird
+          Daten in der App: bleiben auf dem Gerät, bis die App gelöscht wird,
+          und in Ihrer iCloud, solange Sie sie dort nicht abschalten oder
+          entfernen
         </li>
         <li>Server-Logs dieser Website: 24 Stunden</li>
         <li>Zugriffsprotokolle des Medienservers: 30 Tage</li>

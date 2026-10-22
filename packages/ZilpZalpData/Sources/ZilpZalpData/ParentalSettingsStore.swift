@@ -76,6 +76,10 @@ public enum SpeechMode: String, Codable, Sendable, CaseIterable {
 ///
 /// Nothing is cached. A settings file is one field read at most once per
 /// screen, and a cache would be one more thing that can be stale.
+///
+/// Backed up to iCloud when the app hands over a ``CloudKeyValueStore``: the
+/// file's own bytes under one key, the copy saved last winning — see
+/// ``sync()``.
 public actor ParentalSettingsStore {
     /// The shape this store writes. Raised only together with a migration
     /// step; a file that names a higher one is refused rather than guessed at.
@@ -83,16 +87,21 @@ public actor ParentalSettingsStore {
 
     private static let directoryName = "Settings"
     private static let fileName = "parental.json"
+    private static let cloudKey = "settings.parental"
 
     private let directory: URL
     private let file: URL
+    private let cloud: (any CloudKeyValueStore)?
 
-    /// - Parameter directory: Where `Settings/parental.json` lives underneath.
-    ///   The app passes Application Support; the tests pass a temporary
-    ///   directory. Neither has to exist yet.
-    public init(directory: URL) {
+    /// - Parameters:
+    ///   - directory: Where `Settings/parental.json` lives underneath. The app
+    ///     passes Application Support; the tests pass a temporary directory.
+    ///     Neither has to exist yet.
+    ///   - cloud: where the settings are backed up, `nil` for nowhere.
+    public init(directory: URL, cloud: (any CloudKeyValueStore)? = nil) {
         self.directory = directory.appending(path: Self.directoryName)
         file = self.directory.appending(path: Self.fileName)
+        self.cloud = cloud
     }
 
     /// The settings on disk, or the defaults when there is no file yet.
@@ -100,6 +109,34 @@ public actor ParentalSettingsStore {
     /// - Throws: ``ParentalSettingsStoreError`` when a file exists but cannot
     ///   be read as version ``schemaVersion``.
     public func load() throws -> ParentalSettings {
+        try stored()?.settings ?? ParentalSettings()
+    }
+
+    /// The settings saved last on any of the family's devices: the cloud's
+    /// copy when it is newer than the file — then it is written to the file —
+    /// and the file's otherwise, which is then mirrored to the cloud.
+    ///
+    /// A file that cannot be read throws as in ``load()`` and is never
+    /// overwritten; a cloud copy that cannot be read is passed over.
+    public func sync() throws -> ParentalSettings {
+        let local = try stored()
+        guard let cloud else { return local?.settings ?? ParentalSettings() }
+
+        if let data = cloud.data(forKey: Self.cloudKey),
+           let remote = try? Self.document(from: data),
+           local.map({ remote.savedAt > $0.savedAt }) ?? true
+        {
+            try write(data)
+            return remote.settings
+        }
+        if let local {
+            try cloud.mirror(Self.encoded(local), forKey: Self.cloudKey)
+        }
+        return local?.settings ?? ParentalSettings()
+    }
+
+    /// The document in the file, `nil` when there is none.
+    private func stored() throws -> Document? {
         let data: Data
         do {
             data = try Data(contentsOf: file)
@@ -107,11 +144,14 @@ public actor ParentalSettingsStore {
             // A device that has never been to the grown-ups' area. Not a
             // failure, and writing the defaults out here would only turn a
             // read into a write.
-            return ParentalSettings()
+            return nil
         } catch {
             throw ParentalSettingsStoreError.unreadable(error)
         }
+        return try Self.document(from: data)
+    }
 
+    private static func document(from data: Data) throws -> Document {
         let decoder = JSONDecoder()
         let version: Int
         do {
@@ -123,30 +163,43 @@ public actor ParentalSettingsStore {
             throw ParentalSettingsStoreError.unreadable(error)
         }
 
-        guard version <= Self.schemaVersion else {
+        guard version <= schemaVersion else {
             throw ParentalSettingsStoreError.unsupportedSchemaVersion(
                 found: version,
-                supported: Self.schemaVersion,
+                supported: schemaVersion,
             )
         }
 
         do {
-            return try decoder.decode(Document.self, from: data).settings
+            return try decoder.decode(Document.self, from: data)
         } catch {
             throw ParentalSettingsStoreError.unreadable(error)
         }
     }
 
-    /// Writes the settings out, replacing whatever was there.
+    /// Writes the settings out, replacing whatever was there, and mirrors
+    /// them to the cloud.
     ///
     /// Atomic: the file a child's iPad finds after a battery death is either
     /// the old one or the new one, never half of each.
-    public func save(_ settings: ParentalSettings) throws {
+    ///
+    /// - Parameter now: when they were saved, which is what decides between
+    ///   two devices.
+    public func save(_ settings: ParentalSettings, now: Date = Date()) throws {
+        let data = try Self.encoded(Document(settings: settings, savedAt: now))
+        try write(data)
+        cloud?.mirror(data, forKey: Self.cloudKey)
+    }
+
+    private func write(_ data: Data) throws {
         try FileManager.default.createDirectory(
             at: directory,
             withIntermediateDirectories: true,
         )
+        try data.write(to: file, options: .atomic)
+    }
 
+    private static func encoded(_ document: Document) throws -> Data {
         let encoder = JSONEncoder()
         // Readable on purpose — this is a file a grown-up may well open — and
         // sorted because the alternative is not "the order they were encoded
@@ -157,7 +210,7 @@ public actor ParentalSettingsStore {
         // the same bytes twice, which is what makes a diff of this file mean
         // something.
         encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
-        try encoder.encode(Document(settings: settings)).write(to: file, options: .atomic)
+        return try encoder.encode(document)
     }
 }
 
@@ -190,6 +243,13 @@ private struct Document: Codable {
     /// the announcements off asked for quiet, and the quietest choice left is
     /// ``SpeechMode/onTap``.
     let speechEnabled: Bool?
+    /// When the settings were saved, `nil` in a file from before iCloud —
+    /// older than any copy a device saves now.
+    let modifiedAt: Date?
+
+    var savedAt: Date {
+        modifiedAt ?? .distantPast
+    }
 
     /// Decoding is synthesised: for an `Int?` it already reads both spellings
     /// of "no limit", the explicit `null` this store writes and an absent key,
@@ -208,11 +268,12 @@ private struct Document: Codable {
         )
     }
 
-    init(settings: ParentalSettings) {
+    init(settings: ParentalSettings, savedAt: Date) {
         schemaVersion = ParentalSettingsStore.schemaVersion
         dailyLimitMinutes = settings.dailyLimitMinutes
         speechMode = settings.speechMode.rawValue
         speechEnabled = nil
+        modifiedAt = savedAt
     }
 
     /// The one half that cannot be synthesised: `encodeIfPresent` would leave
@@ -231,5 +292,6 @@ private struct Document: Codable {
         // file from before the setting existed. The default is never used: a
         // document on its way to disk always came through `init(settings:)`.
         try container.encode(speechMode ?? SpeechMode.automatic.rawValue, forKey: .speechMode)
+        try container.encodeIfPresent(modifiedAt, forKey: .modifiedAt)
     }
 }

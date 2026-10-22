@@ -41,6 +41,7 @@ final class AppModel {
     /// the pictures would otherwise send the run to "Zeit fürs Nest".
     let parental = ParentalSettingsModel(
         directory: ScreenshotSeed.directory ?? .applicationSupportDirectory,
+        cloud: AppModel.cloud,
     )
 
     /// The profiles as they are on disk, in the order the store keeps them.
@@ -113,39 +114,11 @@ final class AppModel {
         collection.offersCalls ? [.names, .calls] : [.names]
     }
 
-    /// The playing child's day against the limit the grown-ups set.
-    ///
-    /// Computed on every read, never stored, and that is the whole of the
-    /// day-rollover handling: today's key is formed from `Date()` each time,
-    /// so an app left open past midnight asks about the new day the next time
-    /// anybody asks at all. Nothing has to notice the day turning over.
-    ///
-    /// Without a chosen child there is nothing to count, and the answer is a
-    /// budget nobody has spent — never an exhausted one, which would strand
-    /// the profile picker behind "Zeit fürs Nest".
-    var timeBudget: TimeBudget {
-        TimeBudget(
-            limitMinutes: parental.settings.dailyLimitMinutes,
-            playedToday: activeProfile?.playtime[Self.today] ?? 0,
-        )
-    }
-
-    /// Stars the playing child has collected today, across every round and
-    /// every launch of the app — what "Zeit fürs Nest" tells it about its day.
-    var starsToday: Int {
-        activeProfile?.dailyStars[Self.today] ?? 0
-    }
-
-    /// Today's key into ``Profile/playtime`` and ``Profile/dailyStars``, in
-    /// the device's own calendar and time zone.
-    private static var today: String {
-        Profile.dayKey(for: Date())
-    }
-
     init() {
         do {
             store = try ProfileStore(
                 directory: ScreenshotSeed.directory ?? ProfileStore.applicationSupport(),
+                cloud: Self.cloud,
             )
         } catch {
             store = nil
@@ -159,6 +132,8 @@ final class AppModel {
     ///
     /// Awaited once from the root view. Everything after it is a tap.
     func load() async {
+        startCloudSync()
+
         // Before the profiles, and whatever happens to them: a limit the
         // shell does not know yet is a limit that does not apply, and the
         // first tap on a game tile comes soon after this.
@@ -174,7 +149,10 @@ final class AppModel {
 
         do {
             try await ScreenshotSeed.populate(store)
-            let stored = try await store.profiles()
+            // Merged with the cloud before the first screen: a reinstalled
+            // app whose children are already there shows them rather than
+            // asking for a new one.
+            let stored = try await store.sync()
             profiles = stored
             activeProfileID = ProfileChoice.atLaunch(
                 among: stored,
@@ -187,6 +165,26 @@ final class AppModel {
         }
 
         isLoaded = true
+    }
+
+    /// Another device wrote, or the first download after a reinstall arrived
+    /// — see ``startCloudSync()``.
+    ///
+    /// A failure is only logged, as in ``record(_:)``: the profiles on screen
+    /// are still this device's, and a sync that did not happen is no reason
+    /// to swap a child's screen for a grown-up's sentence. A child deleted on
+    /// another device simply has no ``activeProfile`` any more, which is the
+    /// picker.
+    func cloudChanged() async {
+        await parental.load()
+        guard let store else { return }
+
+        do {
+            profiles = try await store.sync()
+        } catch {
+            let reason = String(describing: error)
+            Logger.profiles.error("Cloud changes were not merged: \(reason, privacy: .public)")
+        }
     }
 
     /// A child tapped their own card.

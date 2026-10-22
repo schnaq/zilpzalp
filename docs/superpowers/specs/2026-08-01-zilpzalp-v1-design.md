@@ -8,7 +8,7 @@
 
 ## 1. Was gebaut wird
 
-Eine quelloffene Lern-App, mit der Kinder heimische Vögel kennenlernen. Kein Account, keine Werbung, keine Käufe, keine Datenerhebung. Alles bleibt auf dem Gerät.
+Eine quelloffene Lern-App, mit der Kinder heimische Vögel kennenlernen. Kein Account, keine Werbung, keine Käufe, keine Datenerhebung. Alles bleibt auf dem Gerät und in der eigenen iCloud der Familie.
 
 **Plattformen:** iPhone und iPad nativ, zusätzlich lauffähig auf Apple-Silicon-Macs über „Designed for iPad" — dort ohne eigene Optimierung.
 
@@ -18,7 +18,7 @@ Eine quelloffene Lern-App, mit der Kinder heimische Vögel kennenlernen. Kein Ac
 |---|---|
 | Spiel 1 | Vogelname wird vorgelesen, aus vier Fotos das richtige antippen |
 | Spiel 2 | Vogelruf wird abgespielt, aus vier Fotos das richtige antippen |
-| Profile | Mehrere lokale Profile mit Namen und Avatar, ohne Account; beides nachträglich in der Profilwahl änderbar |
+| Profile | Mehrere Profile mit Namen und Avatar, ohne Account; beides nachträglich in der Profilwahl änderbar; seit 1.2.0 in der iCloud der Familie gesichert (§5) |
 | Fortschritt | Sterne, Sticker nach drei oder fünf Wiedererkennungen (je Kind einstellbar), Sammlung, lokales Leaderboard |
 | Artenpakete | „Vögel Deutschlands" (70 Arten) fest gebundelt, weitere Pakete als Download aus S3 |
 | Elternbereich | Per FaceID/Code geschützt: Zeitbudget, Sticker-Schwelle je Kind, Paketverwaltung, Einstellungen |
@@ -202,7 +202,7 @@ Der Bereich hinter dem Schloss heißt in der Oberfläche „Einstellungen" statt
 
 ## 5. Datenhaltung und Datenschutz
 
-Alles liegt lokal. Kein Netzwerkverkehr außer dem Paketkatalog und den ausdrücklich von Eltern angestoßenen Paket-Downloads, beides aus dem eigenen S3-Bucket (§3; der Katalog auch beim App-Start, seit 2026-10-22). Keine Analytics, kein Crash-Reporting durch Dritte, keine Werbe-SDKs, keine Accounts.
+Alles liegt auf dem Gerät und, seit 1.2.0, gesichert in der iCloud der Familie (unten). Kein Netzwerkverkehr der App außer dem Paketkatalog und den ausdrücklich von Eltern angestoßenen Paket-Downloads, beides aus dem eigenen S3-Bucket (§3; der Katalog auch beim App-Start, seit 2026-10-22). Keine Analytics, kein Crash-Reporting durch Dritte, keine Werbe-SDKs, keine Accounts.
 
 Profile liegen als JSON in Application Support:
 
@@ -211,6 +211,8 @@ Profiles/profiles.json      Name, Avatar, Sterne, Statistik, Wiedererkennungen j
 Packs/<pack-id>/            Heruntergeladene Pakete
 Settings/parental.json      Zeitbudget, Sprachausgabe an/aus, ob FaceID aktiv ist
 ```
+
+**Sicherung in iCloud.** Profile und Elterneinstellungen werden zusätzlich im iCloud-Schlüssel-Wert-Speicher (`NSUbiquitousKeyValueStore`) gesichert und zwischen Geräten derselben Apple-ID abgeglichen; bis 1.1 war mit dem Löschen der App alles weg. Die Dateien bleiben, was die App liest. Jeder Schreibvorgang führt zuerst zusammen, was die Cloud hält, und spiegelt das Ergebnis zurück — ein Schlüssel `profile.<uuid>` je Profil, `profiles.deleted` für gelöschte Profile, `settings.parental` für die Einstellungen —, und beim Start (nach `synchronize()`, vor dem ersten Screen) sowie bei `didChangeExternallyNotification` wird ebenso zusammengeführt. Zähler (Sterne, Runden, jede Wiedererkennung, Spielzeit und Sterne je Tag) nehmen das Maximum, Sticker die Vereinigung — kein Sticker geht verloren —, Name, Avatar, Kollektionen und Sticker-Schwelle kommen vom zuletzt geänderten Exemplar (`modifiedAt`, fehlend = `distantPast`, Schema bleibt 1), die Einstellungen als Ganzes vom zuletzt gespeicherten. Ein gelöschtes Profil bleibt 90 Tage als Grabstein stehen, damit ein anderes Gerät es nicht zurückbringt; die Reihenfolge ist die der Anlage (`createdAt`). Eine Neuinstallation zeigt vorhandene Profile vor „Neues Nest", sobald iCloud sie geliefert hat; kommen sie später, erscheinen sie dazu. Einen Schalter gibt es nicht; der Elternbereich sagt in einer Zeile, ob gesichert wird. Pakete werden nicht abgeglichen, sondern neu geladen; Sticker einer nicht installierten Art bleiben gespeichert und erscheinen mit dem Paket wieder. Die Daten liegen im iCloud-Konto der Familie bei Apple, nicht bei uns, und das Datenschutz-Label bleibt „keine Daten erhoben". Ohne Entitlement tut der Speicher nichts und meldet nichts: Weil das Archiv unsigniert gebaut wird und der Export nur Entitlements aus einer vorhandenen Signatur übernimmt, signiert `mise run archive` die App ad hoc mit `ZilpZalp.entitlements`, und `mise run upload` bricht vor dem Upload ab, wenn das exportierte `.ipa` nicht genau `com.apple.developer.ubiquity-kvstore-identifier = L99L6DPKC7.com.schnaq.zilpzalp` trägt (Entscheidung 2026-10-22, Christian).
 
 Kein Passwort im Klartext. Der Elternbereich nutzt `LAContext` mit `deviceOwnerAuthentication`, was automatisch auf den Geräte-Code zurückfällt, wenn keine Biometrie vorhanden ist — dieses Schloss schützt nur den Zugang zum Elternbereich selbst; externe Links bekommen ein eigenes Gate, siehe Abschnitt 7. Auf „Designed for iPad"-Macs muss dieser Fallback geprüft werden.
 
@@ -307,4 +309,4 @@ Diese Fragen sind bewusst offen und blockieren den Start nicht:
 - Die Credits nennen für jedes Medium Urheber und Lizenz, automatisch aus dem Manifest erzeugt — auf dem Credits-Screen und nicht in den Fotos selbst (Entscheidung 2026-09-10, Issue #200)
 - Ein Fremder kann das Repo klonen, `mise run setup` ausführen und die App bauen
 - Das CI-Gate ist grün und schnell genug, dass niemand es umgehen will
-- Kein Byte verlässt das Gerät außer beim ausdrücklich angestoßenen Paket-Download
+- Kein Byte geht an uns oder Dritte außer beim Paketkatalog und beim ausdrücklich angestoßenen Paket-Download; Spielstände gehen nur in die eigene iCloud der Familie
