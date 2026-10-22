@@ -65,10 +65,6 @@ public actor ProfileStore {
     /// migration from an older version hooks in where that check stands.
     private static let schemaVersion = 1
 
-    /// How many days of ``Profile/playtime`` and ``Profile/dailyStars`` the
-    /// file keeps, today included.
-    private static let retainedDays = 7
-
     /// One encoder for every write. Sorted, so that a file only changes when
     /// a value in it changes; pretty-printed, so that a parent — or a
     /// developer chasing a bug report — can read it.
@@ -261,35 +257,9 @@ public actor ProfileStore {
         profiles[index].playtime[today, default: 0] += round.playtime
         profiles[index].dailyStars[today, default: 0] += round.stars
 
-        // Every profile, not only the one that played: a child who stopped
-        // playing a fortnight ago should not keep a fortnight of days in the
-        // file just because nobody touched its profile.
-        let oldest = Self.oldestRetainedDay(on: date, calendar: calendar)
-        for position in profiles.indices {
-            // The keys are zero-padded `YYYY-MM-DD`, so comparing them as
-            // strings compares them as dates. Days in the future — a clock
-            // that was set back — are kept.
-            profiles[position].playtime = profiles[position].playtime.filter { $0.key >= oldest }
-            profiles[position].dailyStars = profiles[position].dailyStars
-                .filter { $0.key >= oldest }
-        }
-
         stored.profiles = profiles
-        try write(stored, now: date)
-        return profiles[index]
-    }
-
-    /// The oldest ``Profile/playtime`` and ``Profile/dailyStars`` key a write
-    /// keeps: `date`'s day and the six before it.
-    private static func oldestRetainedDay(on date: Date, calendar: Calendar) -> String {
-        // The same calendar the keys are formed in, so that counting days
-        // back and spelling them out cannot disagree.
-        let days = Profile.days(in: calendar)
-        let today = days.startOfDay(for: date)
-        // Subtracting days from a midnight has no failing case; falling back
-        // on the day itself would merely keep one day instead of seven.
-        let oldest = days.date(byAdding: .day, value: -(retainedDays - 1), to: today) ?? today
-        return Profile.dayKey(for: oldest, calendar: calendar)
+        let written = try write(stored, now: date, pruningDaysIn: calendar)
+        return written.profiles.first { $0.id == id } ?? profiles[index]
     }
 
     /// What the file holds: the profiles, and — keyed by `UUID` string, with
@@ -348,15 +318,28 @@ public actor ProfileStore {
     }
 
     /// Writes `contents` — merged with the cloud first, when there is one, and
-    /// mirrored back to it after.
-    private func write(_ contents: Contents, now: Date) throws {
-        guard let cloud else {
-            try writeFile(contents)
-            return
+    /// mirrored back to it after — and returns what was written.
+    ///
+    /// - Parameter calendar: prunes the days by it, after the merge: the
+    ///   cloud still holds the days this device dropped last time.
+    @discardableResult
+    private func write(
+        _ contents: Contents,
+        now: Date,
+        pruningDaysIn calendar: Calendar? = nil,
+    ) throws -> Contents {
+        var written = contents
+        if let cloud {
+            written = Self.merged(contents, Self.contents(of: cloud), now: now)
         }
-        let merged = Self.merged(contents, Self.contents(of: cloud), now: now)
-        try writeFile(merged)
-        mirror(merged, to: cloud)
+        if let calendar {
+            written.profiles = Self.pruned(written.profiles, on: now, calendar: calendar)
+        }
+        try writeFile(written)
+        if let cloud {
+            mirror(written, to: cloud)
+        }
+        return written
     }
 
     private func writeFile(_ contents: Contents) throws {

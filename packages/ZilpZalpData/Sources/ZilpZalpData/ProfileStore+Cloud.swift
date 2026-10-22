@@ -77,7 +77,9 @@ extension ProfileStore {
         for id in contents.deleted.keys where cloud.data(forKey: Self.cloudPrefix + id) != nil {
             cloud.removeObject(forKey: Self.cloudPrefix + id)
         }
-        if let data = try? Self.cloudEncoder.encode(contents.deleted) {
+        // Not while there is nothing to say: a reinstall's empty list would
+        // overwrite the cloud's before the first download arrived.
+        if !contents.deleted.isEmpty, let data = try? Self.cloudEncoder.encode(contents.deleted) {
             cloud.mirror(data, forKey: Self.deletedKey)
         }
     }

@@ -177,6 +177,28 @@ struct CloudSyncTests {
         }
     }
 
+    @Test("a day dropped after a round is not brought back from the cloud")
+    func pruningSurvivesTheMerge() async throws {
+        try await withTwoDevices { first, second, cloud in
+            let ipad = ProfileStore(directory: first, cloud: cloud)
+            var mia = try await ipad.add(name: "Mia", avatar: "amsel")
+            mia.playtime = ["2026-10-01": 60]
+            try await ipad.update(mia)
+
+            let round = PlayedRound(stars: 1, recognitions: [:], playtime: 30)
+            try await ipad.record(
+                round: round,
+                for: mia.id,
+                on: noon(2026, 10, 22),
+                calendar: testCalendar,
+            )
+
+            #expect(try await ipad.profiles().first?.playtime.keys.sorted() == ["2026-10-22"])
+            let iphone = try await ProfileStore(directory: second, cloud: cloud).sync()
+            #expect(iphone.first?.playtime.keys.sorted() == ["2026-10-22"])
+        }
+    }
+
     @Test("a reinstall finds every profile from before iCloud, in the order it had")
     func reinstallKeepsOrder() async throws {
         try await withTwoDevices { first, second, cloud in

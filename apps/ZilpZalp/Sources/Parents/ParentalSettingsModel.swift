@@ -45,9 +45,13 @@ final class ParentalSettingsModel {
     /// and the settings standing at their defaults is the calm answer.
     func load() async {
         await lastWrite?.value
+        let pending = lastWrite
 
         do {
-            settings = try await store.sync()
+            let loaded = try await store.sync()
+            // A change made while this read was out is newer than its answer.
+            guard lastWrite == pending else { return }
+            settings = loaded
         } catch {
             settings = ParentalSettings()
             // The error names a file format, never a setting — `DecodingError`
