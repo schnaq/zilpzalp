@@ -126,8 +126,8 @@ message it prints (`fetch_media.keys`).
 The key as issued has no `voices_read` permission, so `speech voices
 --provider elevenlabs` is refused with a 401 that says so. That is why
 `--voice` also takes the form `<id>=<name>`: the id is what speaks, the name is
-for us (the credits say only „KI-Stimme"), and nothing has to be looked up. A library voice the
-account has not added would not be in that listing anyway.
+for us (the credits say only „KI-Stimme"), and nothing has to be looked up. A
+library voice the account has not added would not be in that listing anyway.
 
 ### Rendering
 

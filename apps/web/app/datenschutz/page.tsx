@@ -112,10 +112,9 @@ export default function Datenschutz() {
         Pakete vorbereiten; sie liegen als Tondateien in der App oder im Paket.
         Die App selbst spricht diesen Dienst nie an. Was nicht aufgenommen ist,
         liest die Sprachausgabe von iOS (<code>AVSpeechSynthesizer</code>) auf
-        dem Gerät. Es wird nichts
-        an einen Sprachdienst gesendet, und es wird nichts aufgezeichnet: Die App
-        fragt weder das Mikrofon noch die Kamera, den Standort oder die Kontakte
-        ab.
+        dem Gerät. Es wird nichts an einen Sprachdienst gesendet, und es wird
+        nichts aufgezeichnet: Die App fragt weder das Mikrofon noch die Kamera,
+        den Standort oder die Kontakte ab.
       </p>
 
       <h3>2.5 Wann die App überhaupt ins Netz geht</h3>
@@ -142,8 +141,8 @@ export default function Datenschutz() {
       <p>
         Die Dienste, aus denen die Fotos, Tonaufnahmen und gesprochenen Namen
         stammen — iNaturalist, xeno-canto und der KI-Sprachdienst — spricht die
-        App nie an. Sie werden nur bei der Vorbereitung der Pakete genutzt, lange bevor
-        die App ausgeliefert wird.
+        App nie an. Sie werden nur bei der Vorbereitung der Pakete genutzt,
+        lange bevor die App ausgeliefert wird.
       </p>
 
       <h3>2.6 Keine Analyse, kein Absturzmelder, keine Werbung</h3>
