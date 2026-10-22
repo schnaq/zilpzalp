@@ -16,24 +16,22 @@ extension PackModel {
     /// session does not need to hear of it within the hour.
     private static let newsInterval = Duration.seconds(3 * 60 * 60)
 
-    /// Whether the door wears its dot. `false` without a catalogue — offline,
-    /// or the fetch failed — and never an error.
+    /// Whether the door wears its dot. `false` while no catalogue has come —
+    /// offline, or the fetch failed — and never an error.
     var hasNews: Bool {
         guard case let .ready(index) = available else { return false }
         return index.hasNews(installed: installed, seen: seen)
     }
 
     /// ``loadAvailable()`` from the shell, at most once per ``newsInterval``:
-    /// at launch and whenever the app comes back to the front. A fetch that
-    /// failed is tried again on the next return.
+    /// after launch and whenever the app comes back to the front. Counted
+    /// per attempt, so a bucket that fails is not asked on every return.
     func checkForNews() async {
         if let last = lastNewsCheck, last.duration(to: .now) < Self.newsInterval {
             return
         }
-        await loadAvailable()
-        if case .ready = available {
-            lastNewsCheck = .now
-        }
+        lastNewsCheck = .now
+        await loadAvailable(migrating: false)
     }
 
     /// Every pack in the catalogue counts as seen from now on: the gallery has

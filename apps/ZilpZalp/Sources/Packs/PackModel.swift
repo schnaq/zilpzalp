@@ -213,8 +213,9 @@ final class PackModel {
     /// Fetches the catalogue from the bucket.
     ///
     /// The gallery asks for it when it opens behind the lock, and
-    /// ``checkForNews()`` at launch; no child's screen ever does.
-    func loadAvailable() async {
+    /// ``checkForNews()`` at launch without `migrating`: deleting a retired
+    /// pack is the gallery's business, never a child's screen's.
+    func loadAvailable(migrating: Bool = true) async {
         // A list already on screen stays while the next one is on its way, and
         // when it does not come: a running download must not lose its card.
         let shown: PackIndex? = if case let .ready(index) = available {
@@ -228,7 +229,9 @@ final class PackModel {
         do {
             available = try await .ready(downloader.index())
             rememberWhatIsLeft()
-            await finishMigrations()
+            if migrating {
+                await finishMigrations()
+            }
         } catch is CancellationError {
             // A grown-up who left the screen while the list was on its way.
             // SwiftUI cancels the `.task` that started this, and that is not a

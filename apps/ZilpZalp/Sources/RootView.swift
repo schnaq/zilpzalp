@@ -93,14 +93,24 @@ struct RootView: View {
         // it follows the packs: a download while the app runs reaches the
         // avatars the way it reaches the album.
         .environment(\.speciesPhotos, model.packs.photos)
-        .task { await model.load() }
-        // At launch and on every return to the front, at most every few
-        // hours: the catalogue behind the door's dot (#334). Never in a
-        // screenshot run, which shows no network and no dot.
-        .task(id: scenePhase) {
-            guard scenePhase == .active, ScreenshotSeed.directory == nil else { return }
-            await model.packs.checkForNews()
+        // After the packs on disk are read, and on every return to the front,
+        // at most every few hours: the catalogue behind the door's dot (#334).
+        // An unstructured task on return, so a passing `.inactive` — the
+        // lock's own prompt — does not cancel it halfway.
+        .task {
+            await model.load()
+            await checkForNews()
         }
+        .onChange(of: scenePhase) { _, phase in
+            guard phase == .active else { return }
+            Task { await checkForNews() }
+        }
+    }
+
+    /// Never in a screenshot run, which shows no network and no dot.
+    private func checkForNews() async {
+        guard ScreenshotSeed.directory == nil else { return }
+        await model.packs.checkForNews()
     }
 
     /// The album belongs to a child, and every route to it starts on a screen
