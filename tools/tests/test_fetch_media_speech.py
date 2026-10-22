@@ -410,7 +410,7 @@ class ElevenLabsTests(unittest.TestCase):
         voice = provider.voice("v-ava=Ava")
         provider.render("Amsel", "v-ava=Ava")
 
-        self.assertEqual(voice.attribution, "KI-Stimme: Ava (ElevenLabs)")
+        self.assertEqual(voice.attribution, "KI-Stimme")
         paths = [request.url.path for request in self.requests]
         self.assertEqual(paths, ["/v1/text-to-speech/v-ava"])
 
@@ -439,8 +439,19 @@ class ElevenLabsTests(unittest.TestCase):
         voice = self.provider().voice("Johanna")
 
         self.assertEqual(voice.license, "CC-BY-4.0")
-        self.assertEqual(voice.attribution, "KI-Stimme: Johanna (ElevenLabs)")
+        self.assertEqual(voice.attribution, "KI-Stimme")
         self.assertEqual(voice.source_url, speech.RECORDING_DOC)
+
+    def test_a_re_render_is_taken_by_every_rendered_manifest(self) -> None:
+        """#338: the voice the tool writes is the voice the manifests carry."""
+        block = cli.voice_block(self.provider().voice("v-ava=Ava"))
+        paths = [manifest.SPEECH_DIR / "manifest.json", *manifest.PACKS_DIR.glob("*/manifest.json")]
+        rendered = [path for path in paths if json.loads(path.read_text()).get("voice")]
+
+        self.assertTrue(rendered)
+        for path in rendered:
+            with self.subTest(manifest=path.parent.name):
+                manifest.set_voice(json.loads(path.read_text()), block)
 
     def test_says_what_a_refusal_means(self) -> None:
         expected = {
@@ -726,7 +737,7 @@ class GoogleTests(unittest.TestCase):
         voice = self.provider().voice(VOICE)
 
         self.assertEqual(voice.license, "CC-BY-4.0")
-        self.assertEqual(voice.attribution, "KI-Stimme: Aoede (Google Cloud Text-to-Speech)")
+        self.assertEqual(voice.attribution, "KI-Stimme")
         self.assertEqual(voice.source_url, speech.RECORDING_DOC)
 
     def test_says_what_a_refusal_means(self) -> None:
@@ -1219,7 +1230,7 @@ class VendorCommandTests(SpeechTestCase):
 
         self.assertEqual(code, 0)
         voice = self.document()["voice"]
-        self.assertEqual(voice["attribution"], "KI-Stimme: Johanna (ElevenLabs)")
+        self.assertEqual(voice["attribution"], "KI-Stimme")
         self.assertEqual(voice["license"], "CC-BY-4.0")
         self.assertEqual(voice["sourceURL"], speech.RECORDING_DOC)
         self.assertEqual(list(self.clips_of("amsel")), ["collection.name"])

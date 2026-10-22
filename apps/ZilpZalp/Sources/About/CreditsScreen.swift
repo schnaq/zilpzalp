@@ -39,7 +39,7 @@ struct CreditsScreen: View {
     /// it gets one calm line instead of an error screen.
     private static let credits = try? Credits.bundled()
 
-    /// „Die Stimme ist eine KI-Stimme: Ava (ElevenLabs)." — the generated
+    /// „Die Stimme ist eine KI-Stimme." — the generated
     /// attribution in a sentence, for the screens that say plainly what the
     /// voice is (#306): About and the speech setting. Never typed by hand, for
     /// the reason this screen gives; `nil` while nothing is recorded.
@@ -184,7 +184,7 @@ struct CreditsScreen: View {
         .accessibilityHint(Text("link.web.accessibility"))
     }
 
-    /// Who speaks — „KI-Stimme: Ava (ElevenLabs)" (#306). The attribution is
+    /// Who speaks — „KI-Stimme" (#306, #338). The attribution is
     /// the manifests' own, generated like every line here; it says that the
     /// voice is an AI voice because the render tool writes it so.
     private func voiceRows(_ voices: [Credits.Voice]) -> some View {

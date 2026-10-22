@@ -37,6 +37,14 @@ RENDERED_FILE = "speech.wav"
 # it and the `__init__` imports the adapters.
 RECORDING_DOC = "https://github.com/schnaq/zilpzalp/blob/main/docs/sprachaufnahmen.md"
 
+# How the credits name a rendered voice, whichever provider rendered it: that
+# the voice is an AI voice is owed to the listener, which vendor and which of
+# its voices is our business (Christian, 2026-10-22, #338). Every rendered
+# manifest carries exactly this, so `manifest.set_voice` takes a re-render.
+# ponytail: the identity check can then no longer tell two AI voices apart; a
+# `--voice` other than the one docs/sprachaufnahmen.md names is not refused.
+AI_VOICE = "KI-Stimme"
+
 
 def wav_bytes(samples: bytes, rate: int) -> bytes:
     """Mono 16-bit PCM as the WAV container every adapter owes `audio.trim`.
