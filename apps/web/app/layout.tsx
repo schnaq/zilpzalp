@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     template: '%s — ZilpZalp',
   },
   description:
-    'ZilpZalp bringt Kindern die Vögel vor der eigenen Haustür nahe. Zwei Spiele, 70 heimische Arten und über 300 mit Paketen, ohne Lesen, ohne Konto, ohne Werbung, ohne Datenerhebung.',
+    'Vögel kennenlernen, ohne lesen zu können: zwei Spiele, über 300 Arten, für Kinder und alle Großen, die mitlernen wollen. Kein Konto, keine Werbung, kein Tracking.',
   openGraph: {
     type: 'website',
     locale: 'de_DE',
