@@ -195,5 +195,13 @@ class MainTests(LookalikeGateTestCase):
         self.assertIn("::error::Pack directory not found", output)
 
 
+class CuratedPacksTests(unittest.TestCase):
+    """The real manifests, so a curation mistake fails the tests as well as
+    the gate step."""
+
+    def test_the_curated_packs_pass(self):
+        self.assertEqual(lookalike_gate.check(lookalike_gate.DEFAULT_PACKS_DIR), [])
+
+
 if __name__ == "__main__":
     unittest.main()

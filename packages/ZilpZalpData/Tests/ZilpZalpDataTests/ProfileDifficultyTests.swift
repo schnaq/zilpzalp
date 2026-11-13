@@ -89,4 +89,27 @@ struct ProfileDifficultyTests {
             }
         }
     }
+
+    /// The pictures promise something: Leicht four birds nothing alike,
+    /// Mittel one look-alike pair in front, Schwer three alike in front. A
+    /// recuration of the manifests must not quietly break that promise.
+    @Test("each level's picture shows what that level deals")
+    func samplesShowTheirLevel() throws {
+        let groups = try Dictionary(
+            uniqueKeysWithValues: PackCatalog.bundled().pack.birds.map { ($0.id, $0.lookalike) },
+        )
+        func group(_ level: String) -> [String?] {
+            (Profile.difficultySamples[level] ?? []).map { groups[$0] ?? nil }
+        }
+
+        let easy = group("easy")
+        let medium = group("medium")
+        let hard = group("hard")
+
+        #expect(Set(easy).count == 4)
+        #expect(medium[0] != nil && medium[0] == medium[1])
+        #expect(Set(medium).count == 3)
+        #expect(hard[0] != nil && Set(hard.prefix(3)).count == 1)
+        #expect(hard[3] != hard[0])
+    }
 }
