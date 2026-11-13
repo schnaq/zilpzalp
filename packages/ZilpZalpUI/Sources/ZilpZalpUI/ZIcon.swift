@@ -18,6 +18,7 @@
 public enum ZIcon: String, CaseIterable, Sendable {
     case album
     case arrowRight = "arrow-right"
+    case binoculars
     case bird
     case camera
     case check
