@@ -34,6 +34,18 @@ struct DifficultyPicker: View {
     /// 96 pt on a 390 pt iPhone.
     private static let maximumTile: CGFloat = 200
 
+    /// From this edge up a rung is drawn as the iPad's tile — `PhotoQuartet`'s
+    /// own threshold, which the Klassisch row's check follows too. Also the
+    /// rung a card too short for 200 pt falls back to before it scrolls: the
+    /// smallest that keeps the iPad's tile.
+    private static let largeTile: CGFloat = 160
+
+    /// Room inside the scrolling fallback for what hangs off the levels — the
+    /// stickers above the top row, the check past the Klassisch row — so the
+    /// scroll view's edge never cuts them.
+    private static let scrollHeadroom = ZSpacing.step6
+    private static let scrollMargin = ZSpacing.step3
+
     /// How far one binoculars sticker overlaps the one beside it.
     private static let stickerOverlap: CGFloat = 0.2
 
@@ -61,9 +73,9 @@ struct DifficultyPicker: View {
     /// `onAppear` can fire more than once for one arrival.
     @State private var hasAsked = false
 
-    /// The width the ramp has to fill, measured: the rungs are sized against
-    /// it. It depends on the card and never on the rungs, so it settles after
-    /// one extra layout pass.
+    /// The width the levels have to fill, measured: the rungs are sized
+    /// against it. It depends on the card and never on the rungs or on which
+    /// fallback is showing, so it settles after one extra layout pass.
     @State private var rampWidth: CGFloat = 0
 
     private var isCompact: Bool {
@@ -109,14 +121,7 @@ struct DifficultyPicker: View {
                     }
                 }
 
-                VStack(spacing: isCompact ? ZSpacing.step4 : ZSpacing.step5) {
-                    ramp
-                    hint
-                }
-
-                if let classic = levels.first(where: { $0.difficulty == .classic }) {
-                    classicRow(classic)
-                }
+                fittingChoices
 
                 ZButton(
                     String(localized: "home.collection.done"),
@@ -132,21 +137,55 @@ struct DifficultyPicker: View {
         .transition(.scale(scale: 0.92).combined(with: .opacity))
     }
 
-    /// Leicht, Mittel, Schwer in one row, as big as the card allows up to
-    /// ``maximumTile`` — never below the touch floor.
-    private var ramp: some View {
-        let gap = isCompact ? ZSpacing.step3 : ZSpacing.step5
-        let fitting = min(Self.maximumTile, (rampWidth - 2 * gap) / 3).rounded(.down)
-        let edge = max(ZSpacing.touchMinimum, fitting)
-
-        return HStack(alignment: .top, spacing: gap) {
-            ForEach(levels.filter { $0.difficulty != .classic }) { level in
-                rung(level, edge: edge)
+    /// The levels at the biggest size the card's height allows: 200 pt rungs,
+    /// then 160 pt ones, and only where even those do not fit — an iPad mini
+    /// on its side, a short Stage Manager window — the 160 pt levels
+    /// scrolling, so Klassisch and „Los!" are never cut off.
+    private var fittingChoices: some View {
+        ViewThatFits(in: .vertical) {
+            choices(maximumTile: Self.maximumTile, width: rampWidth)
+            choices(maximumTile: Self.largeTile, width: rampWidth)
+            ScrollView {
+                choices(maximumTile: Self.largeTile, width: rampWidth - 2 * Self.scrollMargin)
+                    .padding(.horizontal, Self.scrollMargin)
+                    .padding(.top, Self.scrollHeadroom)
+                    .padding(.bottom, Self.scrollMargin)
             }
+            .scrollBounceBehavior(.basedOnSize)
         }
+        // Measured here rather than on a ramp, so the width is the same
+        // whichever of the three is showing.
         .frame(maxWidth: .infinity)
         .onGeometryChange(for: CGFloat.self) { $0.size.width } action: {
             rampWidth = $0
+        }
+    }
+
+    /// The ramp, the grown-ups' line under it and the Klassisch row, with
+    /// rungs as big as `width` allows up to `maximumTile` — never below the
+    /// touch floor.
+    private func choices(maximumTile: CGFloat, width: CGFloat) -> some View {
+        let gap = isCompact ? ZSpacing.step3 : ZSpacing.step5
+        let fitting = min(maximumTile, (width - 2 * gap) / 3).rounded(.down)
+        let edge = max(ZSpacing.touchMinimum, fitting)
+
+        return VStack(spacing: isCompact ? ZSpacing.step5 : ZSpacing.step6) {
+            VStack(spacing: isCompact ? ZSpacing.step4 : ZSpacing.step5) {
+                HStack(alignment: .top, spacing: gap) {
+                    ForEach(levels.filter { $0.difficulty != .classic }) { level in
+                        rung(level, edge: edge)
+                    }
+                }
+                .frame(maxWidth: .infinity)
+
+                hint
+            }
+
+            if let classic = levels.first(where: { $0.difficulty == .classic }) {
+                // The rungs' check size, by the rungs' own rule, so the row
+                // and the tiles above it never wear two different checks.
+                classicRow(classic, largeCheck: edge >= Self.largeTile)
+            }
         }
     }
 
@@ -223,10 +262,14 @@ struct DifficultyPicker: View {
     /// Klassisch: the portrait, the name and „Bunt gemischt", on the same
     /// papier tone as the rungs and chosen the same way — but not grown,
     /// because a full-width row that grew would leave the card.
-    private func classicRow(_ level: DifficultyLevel) -> some View {
+    ///
+    /// The photo sits inside the rim with sand around it, as the tiles' photos
+    /// do, and the row is as tall as that makes it: 82 pt on a phone, 102 on
+    /// an iPad.
+    private func classicRow(_ level: DifficultyLevel, largeCheck: Bool) -> some View {
         let isChosen = level.difficulty == chosen
-        let height: CGFloat = isCompact ? 72 : 96
         let photo: CGFloat = isCompact ? 60 : 72
+        let inset = ZBorder.widthThick + (isCompact ? 6 : 10)
         let shape = RoundedRectangle(cornerRadius: ZRadius.large, style: .continuous)
 
         return Button {
@@ -242,10 +285,10 @@ struct DifficultyPicker: View {
                         .foregroundStyle(ZColor.textBody)
                 }
             }
-            // The photo sits as far in from the left as from the top.
-            .padding(.leading, (height - photo) / 2)
+            // As far in from the left as from the top and the bottom.
+            .padding(.leading, inset)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .frame(height: height)
+            .frame(height: photo + 2 * inset)
             .background(shape.fill(ZColor.sand200))
             .overlay {
                 shape.strokeBorder(
@@ -260,13 +303,15 @@ struct DifficultyPicker: View {
             )
             .overlay(alignment: .bottomTrailing) {
                 if isChosen {
-                    ChosenCheck(compact: isCompact)
+                    ChosenCheck(compact: !largeCheck)
                 }
             }
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
         .accessibilityLabel(level.title)
+        // The rungs show what their level means; this row says it.
+        .accessibilityHint(String(localized: "home.difficulty.classic.hint"))
         .accessibilityAddTraits(isChosen ? .isSelected : [])
     }
 

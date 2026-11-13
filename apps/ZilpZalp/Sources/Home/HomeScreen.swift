@@ -206,16 +206,32 @@ struct HomeScreen: View {
             let chosen = collections.filter { $0.isChosen(in: chosenCollections) }
             let level = difficultyLevels.first { $0.difficulty == difficulty }
             if !chosen.isEmpty || level != nil {
-                HStack(spacing: isCompact ? ZSpacing.step3 : ZSpacing.step4) {
-                    if !chosen.isEmpty {
-                        CollectionChip(entries: chosen) { isPicking = true }
+                // Side by side only while the collection's title fits at its
+                // full size — `ViewThatFits` measures ideal widths — and
+                // stacked otherwise: to share the row, a long title would
+                // shrink below the 20 pt no text on a child's screen goes under.
+                ViewThatFits(in: .horizontal) {
+                    HStack(spacing: isCompact ? ZSpacing.step3 : ZSpacing.step4) {
+                        pills(chosen, level)
                     }
-                    if let level {
-                        DifficultyChip(level: level, showsTitle: !isCompact) {
-                            isPickingDifficulty = true
-                        }
+                    VStack(spacing: ZSpacing.step3) {
+                        pills(chosen, level)
                     }
                 }
+            }
+        }
+    }
+
+    /// The collection pill, where there is a collection, and the level pill,
+    /// where there are levels — the latter without its name on a phone.
+    @ViewBuilder
+    private func pills(_ chosen: [CollectionEntry], _ level: DifficultyLevel?) -> some View {
+        if !chosen.isEmpty {
+            CollectionChip(entries: chosen) { isPicking = true }
+        }
+        if let level {
+            DifficultyChip(level: level, showsTitle: !isCompact) {
+                isPickingDifficulty = true
             }
         }
     }
