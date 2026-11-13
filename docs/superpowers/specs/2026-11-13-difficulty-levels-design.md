@@ -84,12 +84,18 @@ of the child, stored per profile (`Profile.difficulty`, a raw string, default
   outer radius 20, no frame — and, on an iPad, the level's name. On a phone
   the name is dropped rather than wrapping the pills onto two rows: a row
   costs tile height, a word does not. Gap between the pills 12 pt on a phone
-  (the pair fits the 343 pt of a 375 pt iPhone), 16 on an iPad.
+  (with „Alle Vögel" the pair fits the 343 pt of a 375 pt iPhone), 16 on an
+  iPad. Only where the collection's own title would not fit beside the level
+  pill at full size — „Vögel Deutschlands" on a phone — do the two pills
+  stack: shrinking that title under the 20 pt floor of a kid screen is not an
+  option, a few points of tile are.
 - **Picker:** tapping the pill opens „Wie schwer?" as a card over the dimmed
   home screen, the same shape as „Welche Vögel?" (max width 720, padding 32 on
   iPad and 24 on a phone): a speaker button for the question, a tap chooses at
   once and says the level's name, „Los!" or a tap beside the card closes it.
-  Single choice.
+  Single choice. Where the height runs short — an iPad mini in landscape, a
+  short Stage Manager window — the rungs shrink from 200 to 160 pt first and
+  the levels scroll only after that, as „Welche Vögel?" does.
 - **The ramp:** Leicht, Mittel and Schwer stand as three square tiles in **one
   row** on every device, so the order reads left to right as easy to hard.
   **Klassisch is not a rung:** it is a full-width row underneath (photo, name,
