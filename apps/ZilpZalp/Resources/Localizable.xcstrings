@@ -1705,6 +1705,30 @@
         }
       }
     },
+    "quiz.tricky" : {
+      "comment" : "Spoken in game 1 before the bird's name when the question is a tricky one, on the levels that have them — the look-alikes are among the photos. Not shown anywhere and never said in game 2, where the call is the question",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schau genau hin!"
+          }
+        }
+      }
+    },
+    "quiz.tricky.accessibility" : {
+      "comment" : "Appended to the VoiceOver label of the round button while the question is a tricky one, because the binoculars badge on it is not read out. Says only that the question is hard, never which photo is right",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Knifflige Frage"
+          }
+        }
+      }
+    },
     "quiz.unavailable" : {
       "comment" : "Shown instead of a round when the pack holds fewer than four species. Read by a grown-up, so a full sentence",
       "extractionState" : "manual",

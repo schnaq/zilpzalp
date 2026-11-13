@@ -1,5 +1,6 @@
 import os
 import SwiftUI
+import ZilpZalpCore
 import ZilpZalpData
 import ZilpZalpUI
 
@@ -34,6 +35,8 @@ struct QuizScreen: View {
     private static let tones: [ChoiceTile.Tone] = [.wald, .beeren, .rufe, .sumpf]
 
     let game: Game
+    /// The level the round is dealt at; see ``QuizSession/init(library:game:difficulty:)``.
+    let difficulty: Difficulty
     let library: PackLibrary
     /// How often "Nochmal spielen" has sent a child back here; see
     /// ``RootView/roundsAskedFor``. Only ever compared with itself: what the
@@ -247,31 +250,9 @@ struct QuizScreen: View {
             .accessibilityIdentifier(QuizIdentifier.tile(bird.id))
     }
 
-    /// The question, put again on demand — read out in game 1, played in game 2.
-    ///
-    /// The rings are the call's. In game 1 `isPlaying` stays false throughout:
-    /// nothing there comes out of a file, and whether the synthesiser is still
-    /// speaking is not observable, so rings driven by it would never switch
-    /// off again.
+    /// The question, put again on demand — see ``QuizSoundButton``.
     private func soundButton(_ session: QuizSession, diameter: CGFloat) -> some View {
-        SoundButton(
-            isPlaying: session.isCallPlaying,
-            label: soundLabel(session),
-            diameter: diameter,
-        ) { session.askQuestion(unprompted: false) }
-            // On the button, not on the written name: game 2 has none, and
-            // this is the one part of the row both games draw (#220).
-            .accessibilityIdentifier(QuizIdentifier.question(session.answer?.id))
-    }
-
-    /// What VoiceOver says the button will do, which is what it is about to
-    /// say or play. Game 1 names the bird — the name is the whole question,
-    /// and the button says it anyway. Game 2 must not: there it is the answer.
-    private func soundLabel(_ session: QuizSession) -> String {
-        guard let name = session.writtenQuestion else {
-            return String(localized: "quiz.sound.call.accessibility")
-        }
-        return String(format: String(localized: "quiz.sound.name.accessibility"), name)
+        QuizSoundButton(session: session, diameter: diameter, isCompact: isCompact)
     }
 
     /// The bird's name in writing — for the grown-up over the shoulder, as on
@@ -388,7 +369,7 @@ struct QuizScreen: View {
     private func open() {
         if session == nil {
             do {
-                session = try QuizSession(library: library, game: game)
+                session = try QuizSession(library: library, game: game, difficulty: difficulty)
             } catch {
                 let reason = String(describing: error)
                 Logger.quiz.error("No round for \(game.title): \(reason, privacy: .public)")

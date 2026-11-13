@@ -143,6 +143,7 @@ struct RootView: View {
         if !model.packs.library.isEmpty {
             QuizScreen(
                 game: game,
+                difficulty: model.difficulty,
                 library: model.collection.library,
                 askedFor: roundsAskedFor,
                 player: { model.activeProfile },

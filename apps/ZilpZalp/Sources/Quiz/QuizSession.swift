@@ -31,6 +31,10 @@ final class QuizSession {
     /// Which question this sitting asks: the spoken name, or the call.
     private let game: Game
 
+    /// The level every round of this sitting is dealt at, "Nochmal spielen"
+    /// included.
+    private let difficulty: Difficulty
+
     /// The pack this round is drawn from, by species id — the only way back
     /// from a ``Round``'s identifiers to a bird with a name and a photo.
     private let birds: [String: Bird]
@@ -94,14 +98,16 @@ final class QuizSession {
     ///   - library: The packs that opened. Every species in them is a possible
     ///     distractor; which of them a question can ask for depends on the game.
     ///   - game: Whether the question is the spoken name or the recorded call.
+    ///   - difficulty: How alike the photos of a question may look.
     /// - Throws: `RoundError.insufficientSpecies` when there are fewer than
     ///   four species and a question therefore cannot be filled, or
     ///   `RoundError.noSpeciesToAskFor` when game 2 is opened where nothing
     ///   carries a call. Neither is reachable from the home screen: the
     ///   bundled pack has ten species, and ``AppModel/games`` offers game 2 only
     ///   where there are calls to ask with.
-    init(library: PackLibrary, game: Game) throws {
+    init(library: PackLibrary, game: Game, difficulty: Difficulty = .standard) throws {
         self.game = game
+        self.difficulty = difficulty
         let everySpecies = library.birds
         birds = Dictionary(uniqueKeysWithValues: everySpecies.map { ($0.id, $0) })
         let recordings = Dictionary(
@@ -112,27 +118,12 @@ final class QuizSession {
         calls = recordings
         announcer = SpeechAnnouncer(library: library)
 
-        // The genus is the first word of the scientific name, and Core needs
-        // nothing else of a bird: "Turdus merula" is a `Turdus`, and two of
-        // those beside each other would make the question a coin toss.
-        //
-        // Game 2 puts its question with the recording, so a bird without one
-        // cannot be the answer there — its photo stays in as a distractor
-        // (#31). The local `recordings` rather than the property: a closure in
-        // an initialiser may not reach for `self` yet.
-        species = everySpecies.map { bird in
-            let genus = bird.scientificName.split(separator: " ").first
-            return QuizSpecies(
-                id: bird.id,
-                genus: String(genus ?? ""),
-                canBeAsked: game == .names || recordings[bird.id] != nil,
-            )
-        }
+        species = QuizSpecies.pool(of: everySpecies, game: game, calls: recordings)
 
         // Built here rather than on the first appearance so that a pack too
         // small to play is refused before a screen is drawn for it.
         var generator = SystemRandomNumberGenerator()
-        let round = try Round.make(from: species, using: &generator)
+        let round = try Round.make(from: species, difficulty: difficulty, using: &generator)
         play = RoundPlay(round: round)
         photos = QuizPhotos(library: library, round: round, using: &generator)
     }
@@ -172,6 +163,12 @@ final class QuizSession {
     /// The bird the current question asks for, `nil` once the round is over.
     var answer: Bird? {
         play.question.flatMap { birds[$0.answer] }
+    }
+
+    /// Whether the current question stands among look-alikes: the screen
+    /// badges the sound button for it, and game 1 says so before the name.
+    var isTricky: Bool {
+        play.question?.isTricky ?? false
     }
 
     /// The four birds on offer, in the order the round put them.
@@ -269,7 +266,8 @@ final class QuizSession {
             // reason `make` can throw has come back. The fallback deals the
             // finished round's questions again, which is a duller round and
             // not a broken one.
-            let dealt = (try? Round.make(from: species, using: &generator)) ?? play.round
+            let fresh = try? Round.make(from: species, difficulty: difficulty, using: &generator)
+            let dealt = fresh ?? play.round
             play = RoundPlay(round: dealt)
             photos.deal(dealt, using: &generator)
             roundID = UUID()
@@ -305,7 +303,15 @@ final class QuizSession {
 
         switch game {
         case .names:
-            announcer.announce(.name(answer), unprompted: unprompted)
+            // The warning only when the app asks on its own: a child who taps
+            // for the name wants the name again. Game 2 stays silent about it,
+            // since speech laid over the call would leave neither
+            // intelligible (#30) — the badge alone says it there.
+            var lines = [SpokenLine.name(answer)]
+            if unprompted, isTricky {
+                lines.insert(.fixed("quiz.tricky"), at: 0)
+            }
+            announcer.announce(lines, unprompted: unprompted)
         case .calls:
             // Never missing in a round of game 2 — only birds with a recording
             // are asked for. Silence if it ever were: saying the name instead
@@ -383,15 +389,4 @@ final class QuizSession {
         }
         askQuestion(unprompted: true)
     }
-}
-
-extension Logger {
-    /// Playing a round.
-    ///
-    /// The third copy of the bundle identifier in this target, after
-    /// `Logger.packs` and `Logger.audio`. `AppModel.swift` asks the third one
-    /// to pull all three into a single constant; that means editing `Audio/`,
-    /// which this pull request has no other business in, so it is left as a
-    /// follow-up rather than smuggled in here.
-    static let quiz = Logger(subsystem: "com.schnaq.zilpzalp", category: "quiz")
 }
