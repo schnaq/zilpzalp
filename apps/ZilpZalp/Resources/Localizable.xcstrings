@@ -469,6 +469,102 @@
         }
       }
     },
+    "home.difficulty.change.accessibility" : {
+      "comment" : "VoiceOver label of the button on the home screen that opens the level picker. %@ is the level a child plays right now",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schwierigkeit: %@. Ändern"
+          }
+        }
+      }
+    },
+    "home.difficulty.classic" : {
+      "comment" : "The game as it always was, in the row under the three level tiles and on the home screen's level pill. Spoken when tapped. Every profile starts here",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Klassisch"
+          }
+        }
+      }
+    },
+    "home.difficulty.classic.hint" : {
+      "comment" : "Under „Klassisch“ in the level picker: birds of every kind mixed, as the game always was",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bunt gemischt"
+          }
+        }
+      }
+    },
+    "home.difficulty.easy" : {
+      "comment" : "The easiest level, under its tile in the level picker and on the home screen's level pill. Spoken when tapped. The other birds of a question never look like the answer",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Leicht"
+          }
+        }
+      }
+    },
+    "home.difficulty.hard" : {
+      "comment" : "The hardest level, under its tile in the level picker and on the home screen's level pill. Spoken when tapped. Often two birds look like the answer",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schwer"
+          }
+        }
+      }
+    },
+    "home.difficulty.hint" : {
+      "comment" : "One line for the grown-up under the three level tiles: the harder the level, the more alike the birds of a question look",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Je schwerer, desto ähnlicher die Vögel"
+          }
+        }
+      }
+    },
+    "home.difficulty.medium" : {
+      "comment" : "The middle level, under its tile in the level picker and on the home screen's level pill. Spoken when tapped. Now and then one bird looks like the answer",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mittel"
+          }
+        }
+      }
+    },
+    "home.difficulty.title" : {
+      "comment" : "Asked — spoken and shown — over the level picker: how alike the birds of the next rounds' questions may look",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wie schwer?"
+          }
+        }
+      }
+    },
     "home.game.calls.title" : {
       "comment" : "The name of game 2: a bird call plays, the child taps the bird. On the tile on the home screen and in the top bar of the round it opens",
       "extractionState" : "manual",

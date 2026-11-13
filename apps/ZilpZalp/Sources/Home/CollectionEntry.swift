@@ -57,6 +57,28 @@ extension AppModel {
         packs.collections.chosen(activeProfile?.collections ?? [])
     }
 
+    /// The games the home screen offers, in the order it draws their tiles.
+    ///
+    /// Game 1 is always among them. Game 2 asks its question with a recorded
+    /// call, so it is offered only where there are calls to ask with — four
+    /// species carrying one on disk, counted inside the collection the child
+    /// chose rather than across every installed pack (#187).
+    /// Below that the tile is absent rather than teased or locked, exactly as
+    /// games 3 and 4 are (#31). Nothing else decides it — where the calls are,
+    /// the game is (#138).
+    ///
+    /// Computed rather than stored: packs arrive and are deleted in the
+    /// grown-ups' area while the app runs (#34), a child can change its
+    /// collection between two rounds, and a stored answer would be one the
+    /// home screen could disagree with.
+    ///
+    /// Beside ``collection`` rather than in `AppModel.swift`, which sits on
+    /// SwiftLint's 400-line ceiling: everything here reads the model, nothing
+    /// here needs its private store.
+    var games: [Game] {
+        collection.offersCalls ? [.names, .calls] : [.names]
+    }
+
     /// The packs the picker shows as chosen, resolved the same way; empty for
     /// „Alle Vögel".
     var collectionSelection: Set<String> {

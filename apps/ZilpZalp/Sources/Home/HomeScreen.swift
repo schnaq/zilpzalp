@@ -1,4 +1,5 @@
 import SwiftUI
+import ZilpZalpCore
 import ZilpZalpData
 import ZilpZalpUI
 
@@ -16,6 +17,14 @@ import ZilpZalpUI
 /// the doors around them was opened — the grown-ups' room, the album, the
 /// screen about the app, the question who is playing; where those lead is
 /// ``RootView``'s business.
+///
+/// **A second pill for the level.** How hard the questions are is a taste of
+/// the child like its collection, chosen before a game, so it sits beside the
+/// collection pill and opens a card of its own rather than hiding in the
+/// grown-ups' room. On a phone it drops the level's name: the two pills then
+/// share one row on a 375 pt iPhone, and a second row would cost the tiles
+/// height where a word costs nothing a child who cannot read would miss — it
+/// finds its level by the mosaic.
 struct HomeScreen: View {
     /// The wordmark's size in the top bar, from `HomeScreen.jsx`. In a compact
     /// width it drops to the wordmark's own floor.
@@ -57,6 +66,16 @@ struct HomeScreen: View {
     /// Where the picker finds each pack's recorded title (#306).
     var library: PackLibrary = .empty
 
+    /// How hard the playing child's rounds are. See ``DifficultyChip``.
+    var difficulty: Difficulty = .standard
+
+    /// What the level picker offers, in its order. Empty draws no level pill —
+    /// the previews of the screens without one.
+    var difficultyLevels: [DifficultyLevel] = []
+
+    /// A tapped level of the picker.
+    var chooseDifficulty: (Difficulty) -> Void = { _ in }
+
     /// The sticker album. Its own door at the foot of the screen, where every
     /// variant of the design puts it (`design/ui_kits/ipad_app/HomeScreen.jsx`
     /// and screens 1a and 1b): a child who wants to look at its birds should
@@ -80,6 +99,9 @@ struct HomeScreen: View {
 
     /// Whether the collections are up. See ``CollectionPicker``.
     @State private var isPicking = false
+
+    /// Whether the levels are up. See ``DifficultyPicker``.
+    @State private var isPickingDifficulty = false
 
     /// Whether the screen is in a compact width — a phone in portrait, or an
     /// iPad sharing its screen. It settles the two type sizes only; where the
@@ -155,25 +177,45 @@ struct HomeScreen: View {
                 )
             }
         }
+        .overlay {
+            if isPickingDifficulty {
+                DifficultyPicker(
+                    levels: difficultyLevels,
+                    chosen: difficulty,
+                    choose: chooseDifficulty,
+                    close: { isPickingDifficulty = false },
+                )
+            }
+        }
         // Nothing at all where the system asks for less motion, as the quit
-        // question does it.
+        // question does it. One curve for both cards.
         .animation(
             reduceMotion ? nil : ZMotion.easeOut.animation(duration: ZMotion.fast),
-            value: isPicking,
+            value: [isPicking, isPickingDifficulty],
         )
     }
 
-    /// The headline and, below it, the pill with the
-    /// collection this child plays with. Measured as one so the tiles below
-    /// know what is left: the pill costs a phone tile height, an iPad nothing.
+    /// The headline and, below it, the pills with the collection this child
+    /// plays with and how hard. Measured as one so the tiles below know what
+    /// is left: the pills cost a phone tile height, an iPad nothing.
     private var intro: some View {
         VStack(spacing: ZSpacing.step4) {
             dismissPacksHint.map { PacksHint(open: openParents, dismiss: $0) }
             headline
 
             let chosen = collections.filter { $0.isChosen(in: chosenCollections) }
-            if !chosen.isEmpty {
-                CollectionChip(entries: chosen) { isPicking = true }
+            let level = difficultyLevels.first { $0.difficulty == difficulty }
+            if !chosen.isEmpty || level != nil {
+                HStack(spacing: isCompact ? ZSpacing.step3 : ZSpacing.step4) {
+                    if !chosen.isEmpty {
+                        CollectionChip(entries: chosen) { isPicking = true }
+                    }
+                    if let level {
+                        DifficultyChip(level: level, showsTitle: !isCompact) {
+                            isPickingDifficulty = true
+                        }
+                    }
+                }
             }
         }
     }

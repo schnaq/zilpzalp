@@ -1,4 +1,5 @@
 import SwiftUI
+import ZilpZalpCore
 import ZilpZalpData
 
 // The previews of ``HomeScreen``, in their own file, exactly as
@@ -23,6 +24,8 @@ private let previewCollections: [CollectionEntry] = [
         collections: previewCollections,
         chosenCollections: ["afrika"],
         chooseCollection: { _ in },
+        difficulty: .medium,
+        difficultyLevels: DifficultyLevel.previews,
         openCollection: {},
     )
     .environment(\.speciesPhotos, SpeciesPhotos((try? .bundled()) ?? .empty))
@@ -40,6 +43,8 @@ private let previewCollections: [CollectionEntry] = [
         collections: previewCollections,
         chosenCollections: [],
         chooseCollection: { _ in },
+        difficulty: .classic,
+        difficultyLevels: DifficultyLevel.previews,
         openCollection: {},
     )
     .environment(\.speciesPhotos, SpeciesPhotos((try? .bundled()) ?? .empty))

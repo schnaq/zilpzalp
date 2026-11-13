@@ -96,24 +96,6 @@ final class AppModel {
         profiles.first { $0.id == activeProfileID }
     }
 
-    /// The games the home screen offers, in the order it draws their tiles.
-    ///
-    /// Game 1 is always among them. Game 2 asks its question with a recorded
-    /// call, so it is offered only where there are calls to ask with — four
-    /// species carrying one on disk, counted inside the collection the child
-    /// chose rather than across every installed pack (#187).
-    /// Below that the tile is absent rather than teased or locked, exactly as
-    /// games 3 and 4 are (#31). Nothing else decides it — where the calls are,
-    /// the game is (#138).
-    ///
-    /// Computed rather than stored: packs arrive and are deleted in the
-    /// grown-ups' area while the app runs (#34), a child can change its
-    /// collection between two rounds, and a stored answer would be one the
-    /// home screen could disagree with.
-    var games: [Game] {
-        collection.offersCalls ? [.names, .calls] : [.names]
-    }
-
     init() {
         do {
             store = try ProfileStore(
@@ -290,6 +272,27 @@ final class AppModel {
     func toggle(collection: String?) async {
         guard let profile = activeProfile else { return }
         await choose(collections: PackCollections.toggled(collection, in: profile.collections))
+    }
+
+    /// A child chose how hard its rounds are. Kept in memory first and written
+    /// after, exactly as ``choose(collections:)`` keeps the collection, and a
+    /// failed write is only logged, for the same reasons. The level already
+    /// chosen, tapped again, is a child asking to hear its name: no write.
+    func choose(difficulty: Difficulty) async {
+        guard let store, let index = profiles.firstIndex(where: { $0.id == activeProfileID }),
+              profiles[index].difficulty != difficulty.rawValue
+        else {
+            return
+        }
+
+        profiles[index].difficulty = difficulty.rawValue
+
+        do {
+            try await store.update(profiles[index])
+        } catch {
+            let reason = String(describing: error)
+            Logger.profiles.error("Difficulty was not written: \(reason, privacy: .public)")
+        }
     }
 
     /// A grown-up chose how many recognitions `id`'s stickers take (#260).

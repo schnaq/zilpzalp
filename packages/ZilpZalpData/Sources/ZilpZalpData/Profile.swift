@@ -140,9 +140,9 @@ public struct Profile: Codable, Sendable, Hashable, Identifiable {
     /// Zilpzalp alone. Checked against the bundled pack by the tests, as
     /// ``avatarChoices`` is.
     public static let difficultySamples: [String: [String]] = [
-        "easy": ["waldkauz", "weissstorch", "eisvogel", "stockente"],
-        "medium": ["amsel", "star", "eisvogel", "weissstorch"],
-        "hard": ["kohlmeise", "blaumeise", "haubenmeise", "rotkehlchen"],
+        "easy": ["steinkauz", "stockente", "eisvogel", "buntspecht"],
+        "medium": ["amsel", "star", "hoeckerschwan", "gimpel"],
+        "hard": ["kohlmeise", "blaumeise", "kleiber", "rotkehlchen"],
         "classic": ["zilpzalp"],
     ]
 

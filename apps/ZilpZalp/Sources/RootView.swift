@@ -185,6 +185,11 @@ struct RootView: View {
                     Task { await model.toggle(collection: collection) }
                 },
                 library: model.packs.library,
+                difficulty: model.difficulty,
+                difficultyLevels: model.difficultyLevels,
+                chooseDifficulty: { level in
+                    Task { await model.choose(difficulty: level) }
+                },
                 openCollection: { path.append(.collection) },
                 newBirds: showsNewBirds,
                 packNews: model.packs.hasNews,
