@@ -27,6 +27,12 @@ public enum Difficulty: String, CaseIterable, Sendable {
         }
     }
 
+    /// Whether a plain question keeps look-alikes out — Leicht's one rule.
+    /// Every other level deals its plain questions by Klassisch's genus rule.
+    var keepsLookalikesOut: Bool {
+        self == .easy
+    }
+
     /// How many look-alikes stand beside the answer in a tricky question.
     var lookalikesPerTrickyQuestion: Int {
         switch self {

@@ -86,7 +86,7 @@ public struct Round: Hashable, Sendable {
                 for: answer,
                 from: species,
                 count: choiceCount - 1,
-                rule: rule(for: difficulty, isTricky: isTricky),
+                rule: Rule(difficulty, isTricky: isTricky),
                 using: &generator,
             )
             choices.append(answer)
@@ -121,27 +121,19 @@ public struct Round: Hashable, Sendable {
         return answers
     }
 
-    /// How one question picks its distractors: what counts as alike, and how
-    /// many of the alike ones it wants.
+    /// How one question picks its distractors: alike by look or only by
+    /// genus, and how many look-alikes it wants beside the answer. A tricky
+    /// question wants the level's look-alikes; a plain one wants none and is
+    /// judged by look only on Leicht, which keeps look-alikes out — every
+    /// other level deals it by Klassisch's genus rule.
     private struct Rule {
-        let isAlike: (QuizSpecies, QuizSpecies) -> Bool
+        let byLook: Bool
         let lookalikes: Int
-    }
 
-    /// Klassisch's genus rule for every plain question, so that Mittel and
-    /// Schwer are Klassisch plus their tricky questions; Leicht's look-alike
-    /// rule with none wanted; a tricky question's look-alikes on purpose.
-    private static func rule(for difficulty: Difficulty, isTricky: Bool) -> Rule {
-        if isTricky {
-            return Rule(
-                isAlike: { $0.looksLike($1) },
-                lookalikes: difficulty.lookalikesPerTrickyQuestion,
-            )
+        init(_ difficulty: Difficulty, isTricky: Bool) {
+            byLook = isTricky || difficulty.keepsLookalikesOut
+            lookalikes = isTricky ? difficulty.lookalikesPerTrickyQuestion : 0
         }
-        if difficulty == .easy {
-            return Rule(isAlike: { $0.looksLike($1) }, lookalikes: 0)
-        }
-        return Rule(isAlike: { $0.genus == $1.genus }, lookalikes: 0)
     }
 
     /// Which questions are dealt tricky: never the first, only one whose
@@ -173,9 +165,12 @@ public struct Round: Hashable, Sendable {
         rule: Rule,
         using generator: inout some RandomNumberGenerator,
     ) -> [QuizSpecies] {
+        let isAlike: (QuizSpecies) -> Bool = rule.byLook
+            ? { answer.looksLike($0) }
+            : { $0.genus == answer.genus }
         let candidates = species.filter { $0 != answer }
-        let unlike = candidates.filter { !rule.isAlike(answer, $0) }.shuffled(using: &generator)
-        let alike = candidates.filter { rule.isAlike(answer, $0) }.shuffled(using: &generator)
+        let unlike = candidates.filter { !isAlike($0) }.shuffled(using: &generator)
+        let alike = candidates.filter(isAlike).shuffled(using: &generator)
         let wanted = alike.prefix(min(rule.lookalikes, count))
         let rest = unlike + alike.dropFirst(wanted.count)
         return Array(wanted) + rest.prefix(count - wanted.count)

@@ -25,15 +25,9 @@ private func lookalikes(in question: Round.Question, pool: [String: QuizSpecies]
     return question.choices.filter { $0 != question.answer && answer.looksLike(pool[$0]!) }.count
 }
 
+/// A round of ten questions with four choices each, the app's shape.
 private func expectWellFormed(_ round: Round, pool: [QuizSpecies]) {
-    let identifiers = Set(pool.map(\.id))
-    #expect(round.questions.count == 10)
-    for question in round.questions {
-        #expect(question.choices.count == 4)
-        #expect(Set(question.choices).count == 4)
-        #expect(question.choices.filter { $0 == question.answer }.count == 1)
-        #expect(Set(question.choices).isSubset(of: identifiers))
-    }
+    expectWellFormed(round, questionCount: 10, choiceCount: 4, pool: pool)
 }
 
 // MARK: - Similarity
@@ -53,15 +47,9 @@ func looksLike() {
     #expect(!waldkauz.looksLike(waldkauz))
 }
 
-@Test("The stored names of the levels never change", arguments: zip(
-    Difficulty.allCases, ["easy", "medium", "hard", "classic"],
-))
-func rawValuesAreStable(level: Difficulty, raw: String) {
-    #expect(level.rawValue == raw)
-}
-
-@Test("Klassisch is the standard level")
-func classicIsStandard() {
+@Test("The stored names of the levels never change, and Klassisch is the standard")
+func rawValuesAreStable() {
+    #expect(Difficulty.allCases.map(\.rawValue) == ["easy", "medium", "hard", "classic"])
     #expect(Difficulty.standard == .classic)
 }
 
@@ -111,17 +99,6 @@ func easyAvoidsLookalikes(seed: UInt64) throws {
         #expect(lookalikes(in: question, pool: byIdentifier(pool)) == 0)
         #expect(!question.isTricky)
     }
-}
-
-@Test("Leicht fills up with look-alikes only when nothing else is left")
-func easyFallsBack() throws {
-    // Four owls and nothing else: every question is four owls.
-    let pool = (0 ..< 4).map { QuizSpecies(id: "owl-\($0)", genus: "g\($0)", lookalike: "owl") }
-    var generator = SplitMix64(seed: 7)
-
-    let round = try Round.make(from: pool, difficulty: .easy, using: &generator)
-
-    expectWellFormed(round, pool: pool)
 }
 
 // MARK: - Mittel and Schwer
@@ -206,6 +183,8 @@ func hardWithOneLookalike() throws {
     }
 }
 
+/// Two pairs: every question needs one of the answer's look-alikes to fill
+/// its four choices, so this is also where Leicht has to fall back.
 @Test("Every level works on the smallest pool", arguments: Difficulty.allCases)
 func smallestPool(level: Difficulty) throws {
     let pool = (0 ..< 4).map { QuizSpecies(

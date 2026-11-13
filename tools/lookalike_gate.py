@@ -28,9 +28,12 @@ all problems before it exits.
 from __future__ import annotations
 
 import argparse
-import json
 import sys
 from pathlib import Path
+
+# The licence gate walks the same manifests: its path anchoring, manifest
+# reading and annotation escaping are reused rather than copied.
+from license_gate import DEFAULT_PACKS_DIR, escape_data, load_document
 
 # The vocabulary: slug → what belongs in it. The descriptions are part of the
 # documentation; the keys are what manifests may name.
@@ -64,35 +67,13 @@ GROUPS = {
     "cuckoo": "cuckoos, roadrunners, turacos, hoatzin",
 }
 
-# Anchored on the repository, not on the working directory, so the gate finds
-# the manifests no matter where it is called from.
-REPO_ROOT = Path(__file__).resolve().parent.parent
-DEFAULT_PACKS_DIR = REPO_ROOT / "data" / "packs"
-
-
-def escape_data(message: str) -> str:
-    """Escape data for a GitHub workflow command — % first, then the line breaks."""
-    return message.replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
-
-
-def load_document(path: Path) -> tuple[object, str]:
-    """Read one manifest. Returns the document, or the reason it is unusable."""
-    try:
-        return json.loads(path.read_text(encoding="utf-8")), ""
-    except (OSError, UnicodeDecodeError, json.JSONDecodeError) as error:
-        return None, f"cannot be read: {error}"
-
-
-def check_group(entry: dict, label: str) -> tuple[str, list[str]]:
-    """Return the group of one bird and its problems. The group is "" if unusable."""
-    group = entry.get("lookalike")
+def group_problem(group: object, label: str) -> str | None:
+    """Return what is wrong with one bird's group, or None when it is fine."""
     if group is None or (isinstance(group, str) and not group.strip()):
-        return "", [f"{label}: field 'lookalike' is missing or empty"]
-
+        return f"{label}: field 'lookalike' is missing or empty"
     if not isinstance(group, str) or group not in GROUPS:
-        return "", [f"{label}: 'lookalike' '{group}' is not a known group"]
-
-    return group, []
+        return f"{label}: 'lookalike' '{group}' is not a known group"
+    return None
 
 
 def check(packs_dir: Path) -> list[str]:
@@ -106,9 +87,9 @@ def check(packs_dir: Path) -> list[str]:
     # rglob, not glob: a pack may grow its own directory, as license_gate allows.
     for path in sorted(packs_dir.rglob("*.json")):
         pack = path.relative_to(packs_dir).as_posix()
-        document, error = load_document(path)
-        if error:
-            problems.append(f"{pack}: {error}")
+        document, errors = load_document(path)
+        if errors:
+            problems.extend(f"{pack}: {error}" for error in errors)
             continue
 
         # A manifest without birds is the licence gate's to report, not ours.
@@ -127,9 +108,10 @@ def check(packs_dir: Path) -> list[str]:
             else:
                 name = f"bird #{index}"
 
-            group, group_problems = check_group(entry, f"{pack} / {name}")
-            if group_problems:
-                problems.extend(group_problems)
+            group = entry.get("lookalike")
+            problem = group_problem(group, f"{pack} / {name}")
+            if problem:
+                problems.append(problem)
                 continue
 
             # Without an id there is nothing to match the bird against elsewhere.

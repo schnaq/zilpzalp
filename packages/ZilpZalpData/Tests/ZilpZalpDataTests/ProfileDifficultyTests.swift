@@ -20,33 +20,23 @@ struct ProfileDifficultyTests {
         return try JSONDecoder().decode(Profile.self, from: Data(json.utf8))
     }
 
-    @Test("a profile written before levels existed plays Klassisch")
+    @Test("an old profile and a new one both play Klassisch")
     func defaultsToClassic() throws {
-        #expect(try Self.profile().difficulty == "classic")
         #expect(Profile.defaultDifficulty == "classic")
-    }
-
-    @Test("a new profile starts at Klassisch")
-    func startsAtClassic() {
+        #expect(try Self.profile().difficulty == "classic")
         #expect(Profile(id: UUID(), name: "Mila", avatar: "amsel").difficulty == "classic")
     }
 
-    @Test("a chosen level round-trips through encoding")
-    func roundTrips() throws {
-        let hard = Profile(id: UUID(), name: "Mila", avatar: "amsel", difficulty: "hard")
+    /// "nightmare" is a level a newer build might write: it is kept as
+    /// written, for the app to map, rather than rejected here.
+    @Test("a level round-trips as written", arguments: ["hard", "nightmare"])
+    func roundTrips(level: String) throws {
+        let profile = try Self.profile(extra: #", "difficulty": "\#(level)""#)
 
-        let written = try JSONEncoder().encode(hard)
-
-        #expect(try JSONDecoder().decode(Profile.self, from: written).difficulty == "hard")
-    }
-
-    @Test("a level this build does not know is kept as written")
-    func keepsUnknownLevel() throws {
-        let profile = try Self.profile(extra: #", "difficulty": "nightmare""#)
-
-        #expect(profile.difficulty == "nightmare")
         let written = try JSONEncoder().encode(profile)
-        #expect(try JSONDecoder().decode(Profile.self, from: written).difficulty == "nightmare")
+
+        #expect(profile.difficulty == level)
+        #expect(try JSONDecoder().decode(Profile.self, from: written).difficulty == level)
     }
 
     @Test("a changed level is persisted by the store")
