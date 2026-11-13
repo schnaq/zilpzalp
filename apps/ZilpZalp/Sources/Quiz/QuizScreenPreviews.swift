@@ -4,7 +4,7 @@ import ZilpZalpData
 
 // The previews of ``QuizScreen``, in their own file, exactly as
 // ``RoundEndScreen``'s are: the screen itself sits on SwiftLint's 400-line
-// ceiling, and three fixed layouts of the same fixture are the part of it that
+// ceiling, and the fixed layouts of the same fixture are the part of it that
 // no child ever sees.
 
 @MainActor

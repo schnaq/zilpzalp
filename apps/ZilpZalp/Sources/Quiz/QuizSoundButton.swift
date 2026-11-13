@@ -46,6 +46,11 @@ struct QuizSoundButton: View {
                 GlyphBadge(.binoculars, diameter: max(44, diameter * 0.35))
                     .offset(x: isCompact ? 6 : 8, y: -4)
                     .allowsHitTesting(false)
+                    .accessibilityHidden(true)
+                    // A fresh badge per question, so two tricky questions in
+                    // a row each pop in instead of the second one sitting
+                    // there already.
+                    .id(session.index)
                     .transition(.scale.combined(with: .opacity))
             }
         }
