@@ -124,6 +124,28 @@ public struct Profile: Codable, Sendable, Hashable, Identifiable {
     /// The threshold a profile starts with, and the one a file written before
     /// #260 played with.
     public static let defaultStickerThreshold = 5
+
+    /// How alike the birds of this child's questions may look: the raw value
+    /// of `Difficulty` in `ZilpZalpCore` — `"easy"`, `"medium"`, `"hard"` or
+    /// `"classic"`. A taste of the child like ``collections``, chosen on the
+    /// home screen. Stored as written; a value a newer build wrote is the
+    /// app's to map, not this module's to reject.
+    public var difficulty: String
+
+    /// Klassisch: the game as it was before levels existed.
+    public static let defaultDifficulty = "classic"
+
+    /// The bundled species each level's picture shows, keyed by level: four
+    /// birds that look like that level's questions, and for Klassisch the
+    /// Zilpzalp alone. Checked against the bundled pack by the tests, as
+    /// ``avatarChoices`` is.
+    public static let difficultySamples: [String: [String]] = [
+        "easy": ["waldkauz", "weissstorch", "eisvogel", "stockente"],
+        "medium": ["amsel", "star", "eisvogel", "weissstorch"],
+        "hard": ["kohlmeise", "blaumeise", "haubenmeise", "rotkehlchen"],
+        "classic": ["zilpzalp"],
+    ]
+
     /// Seconds played per calendar day, keyed as ``dayKey(for:calendar:)``
     /// spells it. ``ProfileStore`` keeps the last seven days and drops the
     /// rest — the daily limit needs today, the parents area needs the week,
@@ -161,10 +183,10 @@ public struct Profile: Codable, Sendable, Hashable, Identifiable {
     /// When the profile was created, for keeping profiles from several
     /// devices in one order. `distantPast` for a profile from before iCloud.
     public var createdAt: Date
-    /// When the profile's name, avatar, collections or sticker threshold last
-    /// changed — the fields a merge takes from the newer copy. A round does
-    /// not count: its counters merge by maximum. `distantPast` for a profile
-    /// from before iCloud.
+    /// When the profile's name, avatar, collections, sticker threshold or
+    /// difficulty last changed — the fields a merge takes from the newer
+    /// copy. A round does not count: its counters merge by maximum.
+    /// `distantPast` for a profile from before iCloud.
     public var modifiedAt: Date
 
     public init(
@@ -175,6 +197,7 @@ public struct Profile: Codable, Sendable, Hashable, Identifiable {
         roundsPlayed: Int = 0,
         recognitions: [String: Int] = [:],
         stickerThreshold: Int = Profile.defaultStickerThreshold,
+        difficulty: String = Profile.defaultDifficulty,
         collections: [String] = [],
         playtime: [String: TimeInterval] = [:],
         dailyStars: [String: Int] = [:],
@@ -188,6 +211,7 @@ public struct Profile: Codable, Sendable, Hashable, Identifiable {
         self.roundsPlayed = roundsPlayed
         self.recognitions = recognitions
         self.stickerThreshold = stickerThreshold
+        self.difficulty = difficulty
         stickers = []
         self.collections = collections.sorted()
         self.playtime = playtime
@@ -202,7 +226,8 @@ public struct Profile: Codable, Sendable, Hashable, Identifiable {
     /// Whatever only ever grows takes the larger value — stars, rounds, every
     /// counter, every day — and the album is the union of both: no sticker
     /// is ever lost to a sync. What a child or a grown-up chose — name,
-    /// avatar, collections, threshold — comes from the copy changed last.
+    /// avatar, collections, threshold, difficulty — comes from the copy
+    /// changed last.
     ///
     /// ponytail: maxima, not sums. A child playing on two devices on the same
     /// day before they sync keeps the larger of the two days, not both;
@@ -276,6 +301,8 @@ public struct Profile: Codable, Sendable, Hashable, Identifiable {
             ?? Self.defaultStickerThreshold
         stickerThreshold = threshold > 0 ? threshold : Self.defaultStickerThreshold
         stickers = try container.decodeIfPresent([String].self, forKey: .stickers) ?? []
+        difficulty = try container.decodeIfPresent(String.self, forKey: .difficulty)
+            ?? Self.defaultDifficulty
         // A file from before #306 names one pack under `collection`; it is a
         // selection of that one pack. Neither key is every bird.
         let legacy = try decoder.container(keyedBy: LegacyKeys.self)
@@ -332,6 +359,7 @@ public struct Profile: Codable, Sendable, Hashable, Identifiable {
         case recognitions
         case stickerThreshold
         case stickers
+        case difficulty
         case collections
         case playtime
         case dailyStars

@@ -138,6 +138,11 @@ public struct Bird: Codable, Sendable, Hashable, Identifiable {
     /// decode. `nil`, or a key that is missing, means the app speaks the
     /// sentence with `AVSpeechSynthesizer` instead (#151) — never silence.
     public let speech: [String: MediaClip]?
+    /// The look-alike group a child would confuse this species with —
+    /// `"owl"`, `"tit"`; the vocabulary lives in `tools/lookalike_gate.py`.
+    /// `nil` in a pack curated before groups existed: the round engine then
+    /// falls back to the genus.
+    public let lookalike: String?
 }
 
 public extension Bird {
@@ -146,7 +151,7 @@ public extension Bird {
     /// only the shape the manifests have now.
     private enum CodingKeys: String, CodingKey {
         case id, name, scientificName, taxonID, article, pronunciation
-        case photos, call, speech
+        case photos, call, speech, lookalike
     }
 
     /// The key a manifest wrote a single photo under before #194.
@@ -183,6 +188,7 @@ public extension Bird {
         pronunciation = try container.decodeIfPresent(String.self, forKey: .pronunciation)
         call = try container.decodeIfPresent(MediaAsset.self, forKey: .call)
         speech = try container.decodeIfPresent([String: MediaClip].self, forKey: .speech)
+        lookalike = try container.decodeIfPresent(String.self, forKey: .lookalike)
 
         if let photos = try container.decodeIfPresent([MediaAsset].self, forKey: .photos) {
             self.photos = photos
