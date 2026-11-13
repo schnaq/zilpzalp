@@ -1,9 +1,12 @@
 /// A species as the round engine sees it.
 ///
-/// Core owns no data model — the app maps its birds onto this type. `genus` is
-/// the only measure of similarity the engine has: two species of the same
-/// genus look so alike that three of them beside the answer would turn the
-/// question into a coin toss.
+/// Core owns no data model — the app maps its birds onto this type. `genus`
+/// is the fallback measure of similarity: two species of the same genus look
+/// so alike that three of them beside the answer would turn the question into
+/// a coin toss.
+///
+/// Where a pack curates look-alike groups, ``lookalike`` names the group and
+/// refines that measure: owls look alike across genera.
 public struct QuizSpecies: Hashable, Sendable {
     /// Identifier of the species, unique within a pool.
     public let id: String
@@ -22,9 +25,26 @@ public struct QuizSpecies: Hashable, Sendable {
     /// which is why this defaults to true.
     public let canBeAsked: Bool
 
-    public init(id: String, genus: String, canBeAsked: Bool = true) {
+    /// The look-alike group the pack curates for this species — `"owl"`,
+    /// `"tit"` — or `nil` for a pack from before groups existed. Two species
+    /// of one group are what a child confuses at a glance.
+    public let lookalike: String?
+
+    public init(id: String, genus: String, lookalike: String? = nil, canBeAsked: Bool = true) {
         self.id = id
         self.genus = genus
+        self.lookalike = lookalike
         self.canBeAsked = canBeAsked
+    }
+
+    /// Whether a child could take `other` for this species at a glance: the
+    /// same look-alike group, or — where a pack names none — the same genus.
+    /// Never true of the species itself.
+    public func looksLike(_ other: QuizSpecies) -> Bool {
+        guard other.id != id else { return false }
+        if let lookalike, lookalike == other.lookalike {
+            return true
+        }
+        return genus == other.genus
     }
 }
