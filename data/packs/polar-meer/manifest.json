@@ -14,6 +14,7 @@
       "scientificName": "Pygoscelis adeliae",
       "taxonID": 3810,
       "article": "der",
+      "lookalike": "penguin",
       "pronunciation": null,
       "photos": [
         {
@@ -63,6 +64,7 @@
       "scientificName": "Aptenodytes forsteri",
       "taxonID": 3820,
       "article": "der",
+      "lookalike": "penguin",
       "pronunciation": null,
       "photos": [
         {
@@ -112,6 +114,7 @@
       "scientificName": "Pygoscelis papua",
       "taxonID": 3808,
       "article": "der",
+      "lookalike": "penguin",
       "pronunciation": null,
       "photos": [
         {
@@ -161,6 +164,7 @@
       "scientificName": "Pygoscelis antarcticus",
       "taxonID": 54549,
       "article": "der",
+      "lookalike": "penguin",
       "pronunciation": null,
       "photos": [
         {
@@ -210,6 +214,7 @@
       "scientificName": "Megadyptes antipodes",
       "taxonID": 3831,
       "article": "der",
+      "lookalike": "penguin",
       "pronunciation": null,
       "photos": [
         {
@@ -244,6 +249,7 @@
       "scientificName": "Fratercula arctica",
       "taxonID": 4504,
       "article": "der",
+      "lookalike": "diver",
       "pronunciation": null,
       "photos": [
         {
@@ -286,6 +292,7 @@
       "scientificName": "Alle alle",
       "taxonID": 4524,
       "article": "der",
+      "lookalike": "diver",
       "pronunciation": null,
       "photos": [
         {
@@ -328,6 +335,7 @@
       "scientificName": "Uria aalge",
       "taxonID": 4519,
       "article": "die",
+      "lookalike": "diver",
       "pronunciation": null,
       "photos": [
         {
@@ -361,6 +369,7 @@
       "scientificName": "Diomedea exulans",
       "taxonID": 4117,
       "article": "der",
+      "lookalike": "seabird",
       "pronunciation": null,
       "photos": [
         {
@@ -403,6 +412,7 @@
       "scientificName": "Thalassarche melanophris",
       "taxonID": 144433,
       "article": "der",
+      "lookalike": "seabird",
       "pronunciation": null,
       "photos": [
         {
@@ -436,6 +446,7 @@
       "scientificName": "Rissa tridactyla",
       "taxonID": 4494,
       "article": "die",
+      "lookalike": "gull",
       "pronunciation": null,
       "photos": [
         {
@@ -469,6 +480,7 @@
       "scientificName": "Sterna paradisaea",
       "taxonID": 4449,
       "article": "die",
+      "lookalike": "gull",
       "pronunciation": null,
       "photos": [
         {
@@ -518,6 +530,7 @@
       "scientificName": "Somateria spectabilis",
       "taxonID": 7030,
       "article": "die",
+      "lookalike": "duck",
       "pronunciation": null,
       "photos": [
         {
@@ -560,6 +573,7 @@
       "scientificName": "Somateria mollissima",
       "taxonID": 7024,
       "article": "die",
+      "lookalike": "duck",
       "pronunciation": null,
       "photos": [
         {
@@ -601,6 +615,7 @@
       "scientificName": "Histrionicus histrionicus",
       "taxonID": 7111,
       "article": "die",
+      "lookalike": "duck",
       "pronunciation": null,
       "photos": [
         {
@@ -643,6 +658,7 @@
       "scientificName": "Bubo scandiacus",
       "taxonID": 144594,
       "article": "die",
+      "lookalike": "owl",
       "pronunciation": null,
       "photos": [
         {
@@ -685,6 +701,7 @@
       "scientificName": "Plectrophenax nivalis",
       "taxonID": 117059,
       "article": "die",
+      "lookalike": "finch",
       "pronunciation": null,
       "photos": [
         {
@@ -734,6 +751,7 @@
       "scientificName": "Lagopus muta",
       "taxonID": 949,
       "article": "das",
+      "lookalike": "gamebird",
       "pronunciation": null,
       "photos": [
         {
@@ -776,6 +794,7 @@
       "scientificName": "Gavia immer",
       "taxonID": 4626,
       "article": "der",
+      "lookalike": "diver",
       "pronunciation": null,
       "photos": [
         {
@@ -825,6 +844,7 @@
       "scientificName": "Sula nebouxii",
       "taxonID": 3786,
       "article": "der",
+      "lookalike": "seabird",
       "pronunciation": null,
       "photos": [
         {
@@ -867,6 +887,7 @@
       "scientificName": "Fregata magnificens",
       "taxonID": 4631,
       "article": "der",
+      "lookalike": "seabird",
       "pronunciation": null,
       "photos": [
         {
@@ -909,6 +930,7 @@
       "scientificName": "Phaethon aethereus",
       "taxonID": 4317,
       "article": "der",
+      "lookalike": "seabird",
       "pronunciation": null,
       "photos": [
         {
@@ -951,6 +973,7 @@
       "scientificName": "Aptenodytes patagonicus",
       "taxonID": 3821,
       "article": "der",
+      "lookalike": "penguin",
       "pronunciation": null,
       "photos": [
         {
@@ -984,6 +1007,7 @@
       "scientificName": "Eudyptula minor",
       "taxonID": 3817,
       "article": "der",
+      "lookalike": "penguin",
       "pronunciation": null,
       "photos": [
         {
@@ -1010,6 +1034,7 @@
       "scientificName": "Morus bassanus",
       "taxonID": 3802,
       "article": "der",
+      "lookalike": "seabird",
       "pronunciation": null,
       "photos": [
         {
@@ -1043,6 +1068,7 @@
       "scientificName": "Fulmarus glacialis",
       "taxonID": 4180,
       "article": "der",
+      "lookalike": "seabird",
       "pronunciation": null,
       "photos": [
         {
@@ -1069,6 +1095,7 @@
       "scientificName": "Stercorarius maccormicki",
       "taxonID": 144296,
       "article": "die",
+      "lookalike": "gull",
       "pronunciation": null,
       "photos": [
         {
@@ -1118,6 +1145,7 @@
       "scientificName": "Clangula hyemalis",
       "taxonID": 7170,
       "article": "die",
+      "lookalike": "duck",
       "pronunciation": null,
       "photos": [
         {
@@ -1152,6 +1180,7 @@
       "scientificName": "Sula sula",
       "taxonID": 3793,
       "article": "der",
+      "lookalike": "seabird",
       "pronunciation": null,
       "photos": [
         {

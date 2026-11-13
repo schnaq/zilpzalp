@@ -14,6 +14,7 @@
       "scientificName": "Passer montanus",
       "taxonID": 13851,
       "article": "der",
+      "lookalike": "finch",
       "pronunciation": null,
       "photos": [
         {
@@ -55,6 +56,7 @@
       "scientificName": "Perdix perdix",
       "taxonID": 831,
       "article": "das",
+      "lookalike": "gamebird",
       "pronunciation": null,
       "photos": [
         {
@@ -104,6 +106,7 @@
       "scientificName": "Delichon urbicum",
       "taxonID": 64705,
       "article": "die",
+      "lookalike": "swallow",
       "pronunciation": null,
       "photos": [
         {
@@ -137,6 +140,7 @@
       "scientificName": "Luscinia svecica",
       "taxonID": 13071,
       "article": "das",
+      "lookalike": "thrush",
       "pronunciation": null,
       "photos": [
         {
@@ -186,6 +190,7 @@
       "scientificName": "Saxicola rubicola",
       "taxonID": 201192,
       "article": "das",
+      "lookalike": "thrush",
       "pronunciation": null,
       "photos": [
         {
@@ -235,6 +240,7 @@
       "scientificName": "Oenanthe oenanthe",
       "taxonID": 12822,
       "article": "der",
+      "lookalike": "thrush",
       "pronunciation": null,
       "photos": [
         {
@@ -276,6 +282,7 @@
       "scientificName": "Motacilla flava",
       "taxonID": 204545,
       "article": "die",
+      "lookalike": "warbler",
       "pronunciation": null,
       "photos": [
         {
@@ -325,6 +332,7 @@
       "scientificName": "Serinus serinus",
       "taxonID": 9236,
       "article": "der",
+      "lookalike": "finch",
       "pronunciation": null,
       "photos": [
         {
@@ -366,6 +374,7 @@
       "scientificName": "Streptopelia turtur",
       "taxonID": 2938,
       "article": "die",
+      "lookalike": "pigeon",
       "pronunciation": null,
       "photos": [
         {
@@ -407,6 +416,7 @@
       "scientificName": "Cygnus cygnus",
       "taxonID": 6916,
       "article": "der",
+      "lookalike": "goose",
       "pronunciation": null,
       "photos": [
         {
@@ -456,6 +466,7 @@
       "scientificName": "Anser albifrons",
       "taxonID": 7019,
       "article": "die",
+      "lookalike": "goose",
       "pronunciation": null,
       "photos": [
         {
@@ -489,6 +500,7 @@
       "scientificName": "Branta leucopsis",
       "taxonID": 7101,
       "article": "die",
+      "lookalike": "goose",
       "pronunciation": null,
       "photos": [
         {
@@ -522,6 +534,7 @@
       "scientificName": "Circus cyaneus",
       "taxonID": 559064,
       "article": "die",
+      "lookalike": "raptor",
       "pronunciation": null,
       "photos": [
         {
@@ -571,6 +584,7 @@
       "scientificName": "Circus aeruginosus",
       "taxonID": 5173,
       "article": "die",
+      "lookalike": "raptor",
       "pronunciation": null,
       "photos": [
         {
@@ -620,6 +634,7 @@
       "scientificName": "Ciconia nigra",
       "taxonID": 4736,
       "article": "der",
+      "lookalike": "heron",
       "pronunciation": null,
       "photos": [
         {
@@ -654,6 +669,7 @@
       "scientificName": "Numenius arquata",
       "taxonID": 3896,
       "article": "der",
+      "lookalike": "shorebird",
       "pronunciation": null,
       "photos": [
         {
@@ -695,6 +711,7 @@
       "scientificName": "Limosa limosa",
       "taxonID": 3947,
       "article": "die",
+      "lookalike": "shorebird",
       "pronunciation": null,
       "photos": [
         {
@@ -744,6 +761,7 @@
       "scientificName": "Gallinago gallinago",
       "taxonID": 318836,
       "article": "die",
+      "lookalike": "shorebird",
       "pronunciation": null,
       "photos": [
         {
@@ -785,6 +803,7 @@
       "scientificName": "Fringilla montifringilla",
       "taxonID": 10069,
       "article": "der",
+      "lookalike": "finch",
       "pronunciation": null,
       "photos": [
         {
@@ -826,6 +845,7 @@
       "scientificName": "Ardea alba",
       "taxonID": 144455,
       "article": "der",
+      "lookalike": "heron",
       "pronunciation": null,
       "photos": [
         {
@@ -875,6 +895,7 @@
       "scientificName": "Platalea leucorodia",
       "taxonID": 3731,
       "article": "der",
+      "lookalike": "heron",
       "pronunciation": null,
       "photos": [
         {
@@ -917,6 +938,7 @@
       "scientificName": "Cuculus canorus",
       "taxonID": 1907,
       "article": "der",
+      "lookalike": "cuckoo",
       "pronunciation": null,
       "photos": [
         {
@@ -966,6 +988,7 @@
       "scientificName": "Hirundo rustica",
       "taxonID": 11901,
       "article": "die",
+      "lookalike": "swallow",
       "pronunciation": null,
       "photos": [
         {
@@ -1007,6 +1030,7 @@
       "scientificName": "Ciconia ciconia",
       "taxonID": 4733,
       "article": "der",
+      "lookalike": "heron",
       "pronunciation": null,
       "photos": [
         {
@@ -1056,6 +1080,7 @@
       "scientificName": "Grus grus",
       "taxonID": 41,
       "article": "der",
+      "lookalike": "heron",
       "pronunciation": null,
       "photos": [
         {
@@ -1105,6 +1130,7 @@
       "scientificName": "Vanellus vanellus",
       "taxonID": 4857,
       "article": "der",
+      "lookalike": "shorebird",
       "pronunciation": null,
       "photos": [
         {
@@ -1154,6 +1180,7 @@
       "scientificName": "Alauda arvensis",
       "taxonID": 7347,
       "article": "die",
+      "lookalike": "finch",
       "pronunciation": null,
       "photos": [
         {
@@ -1203,6 +1230,7 @@
       "scientificName": "Upupa epops",
       "taxonID": 20969,
       "article": "der",
+      "lookalike": "kingfisher",
       "pronunciation": null,
       "photos": [
         {
@@ -1244,6 +1272,7 @@
       "scientificName": "Merops apiaster",
       "taxonID": 2191,
       "article": "der",
+      "lookalike": "kingfisher",
       "pronunciation": null,
       "photos": [
         {
@@ -1293,6 +1322,7 @@
       "scientificName": "Oriolus oriolus",
       "taxonID": 204556,
       "article": "der",
+      "lookalike": "thrush",
       "pronunciation": null,
       "photos": [
         {
@@ -1342,6 +1372,7 @@
       "scientificName": "Lanius collurio",
       "taxonID": 12038,
       "article": "der",
+      "lookalike": "warbler",
       "pronunciation": null,
       "photos": [
         {

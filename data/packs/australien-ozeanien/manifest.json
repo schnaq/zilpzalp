@@ -14,6 +14,7 @@
       "scientificName": "Eolophus roseicapilla",
       "taxonID": 144560,
       "article": "der",
+      "lookalike": "parrot",
       "pronunciation": null,
       "photos": [
         {
@@ -56,6 +57,7 @@
       "scientificName": "Cacatua galerita",
       "taxonID": 116834,
       "article": "der",
+      "lookalike": "parrot",
       "pronunciation": null,
       "photos": [
         {
@@ -82,6 +84,7 @@
       "scientificName": "Cacatua leadbeateri",
       "taxonID": 116835,
       "article": "der",
+      "lookalike": "parrot",
       "pronunciation": null,
       "photos": [
         {
@@ -116,6 +119,7 @@
       "scientificName": "Trichoglossus moluccanus",
       "taxonID": 980095,
       "article": "der",
+      "lookalike": "parrot",
       "pronunciation": null,
       "photos": [
         {
@@ -142,6 +146,7 @@
       "scientificName": "Alisterus scapularis",
       "taxonID": 19196,
       "article": "der",
+      "lookalike": "parrot",
       "pronunciation": null,
       "photos": [
         {
@@ -168,6 +173,7 @@
       "scientificName": "Platycercus eximius",
       "taxonID": 18920,
       "article": "die",
+      "lookalike": "parrot",
       "pronunciation": null,
       "photos": [
         {
@@ -210,6 +216,7 @@
       "scientificName": "Melopsittacus undulatus",
       "taxonID": 19339,
       "article": "der",
+      "lookalike": "parrot",
       "pronunciation": null,
       "photos": [
         {
@@ -259,6 +266,7 @@
       "scientificName": "Nestor notabilis",
       "taxonID": 18941,
       "article": "der",
+      "lookalike": "parrot",
       "pronunciation": null,
       "photos": [
         {
@@ -301,6 +309,7 @@
       "scientificName": "Dromaius novaehollandiae",
       "taxonID": 20504,
       "article": "der",
+      "lookalike": "ratite",
       "pronunciation": null,
       "photos": [
         {
@@ -343,6 +352,7 @@
       "scientificName": "Casuarius casuarius",
       "taxonID": 20500,
       "article": "der",
+      "lookalike": "ratite",
       "pronunciation": null,
       "photos": [
         {
@@ -385,6 +395,7 @@
       "scientificName": "Dacelo novaeguineae",
       "taxonID": 2413,
       "article": "der",
+      "lookalike": "kingfisher",
       "pronunciation": null,
       "photos": [
         {
@@ -427,6 +438,7 @@
       "scientificName": "Merops ornatus",
       "taxonID": 2238,
       "article": "der",
+      "lookalike": "kingfisher",
       "pronunciation": null,
       "photos": [
         {
@@ -469,6 +481,7 @@
       "scientificName": "Ptilonorhynchus violaceus",
       "taxonID": 14539,
       "article": "der",
+      "lookalike": "thrush",
       "pronunciation": null,
       "photos": [
         {
@@ -510,6 +523,7 @@
       "scientificName": "Malurus cyaneus",
       "taxonID": 12065,
       "article": "der",
+      "lookalike": "warbler",
       "pronunciation": null,
       "photos": [
         {
@@ -552,6 +566,7 @@
       "scientificName": "Gymnorhina tibicen",
       "taxonID": 8575,
       "article": "der",
+      "lookalike": "corvid",
       "pronunciation": null,
       "photos": [
         {
@@ -601,6 +616,7 @@
       "scientificName": "Prosthemadera novaeseelandiae",
       "taxonID": 12580,
       "article": "der",
+      "lookalike": "thrush",
       "pronunciation": null,
       "photos": [
         {
@@ -634,6 +650,7 @@
       "scientificName": "Rhipidura fuliginosa",
       "taxonID": 244276,
       "article": "der",
+      "lookalike": "warbler",
       "pronunciation": null,
       "photos": [
         {
@@ -660,6 +677,7 @@
       "scientificName": "Porphyrio melanotus",
       "taxonID": 418530,
       "article": "der",
+      "lookalike": "rail",
       "pronunciation": null,
       "photos": [
         {
@@ -709,6 +727,7 @@
       "scientificName": "Gallirallus australis",
       "taxonID": 436,
       "article": "die",
+      "lookalike": "rail",
       "pronunciation": null,
       "photos": [
         {
@@ -758,6 +777,7 @@
       "scientificName": "Hemiphaga novaeseelandiae",
       "taxonID": 204520,
       "article": "die",
+      "lookalike": "pigeon",
       "pronunciation": null,
       "photos": [
         {
@@ -800,6 +820,7 @@
       "scientificName": "Cygnus atratus",
       "taxonID": 6914,
       "article": "der",
+      "lookalike": "goose",
       "pronunciation": null,
       "photos": [
         {
@@ -849,6 +870,7 @@
       "scientificName": "Pelecanus conspicillatus",
       "taxonID": 4326,
       "article": "der",
+      "lookalike": "seabird",
       "pronunciation": null,
       "photos": [
         {
@@ -891,6 +913,7 @@
       "scientificName": "Threskiornis spinicollis",
       "taxonID": 3741,
       "article": "der",
+      "lookalike": "heron",
       "pronunciation": null,
       "photos": [
         {
@@ -933,6 +956,7 @@
       "scientificName": "Megadyptes antipodes",
       "taxonID": 3831,
       "article": "der",
+      "lookalike": "penguin",
       "pronunciation": null,
       "photos": [
         {
@@ -959,6 +983,7 @@
       "scientificName": "Icthyophaga leucogaster",
       "taxonID": 1505653,
       "article": "der",
+      "lookalike": "raptor",
       "pronunciation": null,
       "photos": [
         {

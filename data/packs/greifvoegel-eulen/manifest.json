@@ -14,6 +14,7 @@
       "scientificName": "Bubo bubo",
       "taxonID": 20059,
       "article": "der",
+      "lookalike": "owl",
       "pronunciation": "Der Uhu",
       "photos": [
         {
@@ -63,6 +64,7 @@
       "scientificName": "Tyto alba",
       "taxonID": 20445,
       "article": "die",
+      "lookalike": "owl",
       "pronunciation": null,
       "photos": [
         {
@@ -104,6 +106,7 @@
       "scientificName": "Strix aluco",
       "taxonID": 19898,
       "article": "der",
+      "lookalike": "owl",
       "pronunciation": null,
       "photos": [
         {
@@ -145,6 +148,7 @@
       "scientificName": "Athene noctua",
       "taxonID": 19998,
       "article": "der",
+      "lookalike": "owl",
       "pronunciation": null,
       "photos": [
         {
@@ -194,6 +198,7 @@
       "scientificName": "Asio otus",
       "taxonID": 20307,
       "article": "die",
+      "lookalike": "owl",
       "pronunciation": null,
       "photos": [
         {
@@ -235,6 +240,7 @@
       "scientificName": "Glaucidium passerinum",
       "taxonID": 19848,
       "article": "der",
+      "lookalike": "owl",
       "pronunciation": null,
       "photos": [
         {
@@ -284,6 +290,7 @@
       "scientificName": "Otus scops",
       "taxonID": 20244,
       "article": "die",
+      "lookalike": "owl",
       "pronunciation": null,
       "photos": [
         {
@@ -325,6 +332,7 @@
       "scientificName": "Bubo scandiacus",
       "taxonID": 144594,
       "article": "die",
+      "lookalike": "owl",
       "pronunciation": null,
       "photos": [
         {
@@ -367,6 +375,7 @@
       "scientificName": "Strix nebulosa",
       "taxonID": 19890,
       "article": "der",
+      "lookalike": "owl",
       "pronunciation": null,
       "photos": [
         {
@@ -416,6 +425,7 @@
       "scientificName": "Athene cunicularia",
       "taxonID": 19975,
       "article": "der",
+      "lookalike": "owl",
       "pronunciation": null,
       "photos": [
         {
@@ -465,6 +475,7 @@
       "scientificName": "Bubo virginianus",
       "taxonID": 20044,
       "article": "der",
+      "lookalike": "owl",
       "pronunciation": null,
       "photos": [
         {
@@ -506,6 +517,7 @@
       "scientificName": "Aquila chrysaetos",
       "taxonID": 5074,
       "article": "der",
+      "lookalike": "raptor",
       "pronunciation": null,
       "photos": [
         {
@@ -539,6 +551,7 @@
       "scientificName": "Haliaeetus albicilla",
       "taxonID": 5309,
       "article": "der",
+      "lookalike": "raptor",
       "pronunciation": null,
       "photos": [
         {
@@ -581,6 +594,7 @@
       "scientificName": "Haliaeetus leucocephalus",
       "taxonID": 5305,
       "article": "der",
+      "lookalike": "raptor",
       "pronunciation": null,
       "photos": [
         {
@@ -630,6 +644,7 @@
       "scientificName": "Haliaeetus pelagicus",
       "taxonID": 5304,
       "article": "der",
+      "lookalike": "raptor",
       "pronunciation": null,
       "photos": [
         {
@@ -664,6 +679,7 @@
       "scientificName": "Icthyophaga vocifer",
       "taxonID": 1505670,
       "article": "der",
+      "lookalike": "raptor",
       "pronunciation": null,
       "photos": [
         {
@@ -706,6 +722,7 @@
       "scientificName": "Pandion haliaetus",
       "taxonID": 116999,
       "article": "der",
+      "lookalike": "raptor",
       "pronunciation": null,
       "photos": [
         {
@@ -747,6 +764,7 @@
       "scientificName": "Harpia harpyja",
       "taxonID": 5321,
       "article": "die",
+      "lookalike": "raptor",
       "pronunciation": null,
       "photos": [
         {
@@ -789,6 +807,7 @@
       "scientificName": "Buteo buteo",
       "taxonID": 204472,
       "article": "der",
+      "lookalike": "raptor",
       "pronunciation": null,
       "photos": [
         {
@@ -838,6 +857,7 @@
       "scientificName": "Buteo jamaicensis",
       "taxonID": 5212,
       "article": "der",
+      "lookalike": "raptor",
       "pronunciation": null,
       "photos": [
         {
@@ -879,6 +899,7 @@
       "scientificName": "Parabuteo unicinctus",
       "taxonID": 5355,
       "article": "der",
+      "lookalike": "raptor",
       "pronunciation": null,
       "photos": [
         {
@@ -912,6 +933,7 @@
       "scientificName": "Caracara plancus",
       "taxonID": 4715,
       "article": "der",
+      "lookalike": "raptor",
       "pronunciation": null,
       "photos": [
         {
@@ -946,6 +968,7 @@
       "scientificName": "Sagittarius serpentarius",
       "taxonID": 117214,
       "article": "der",
+      "lookalike": "raptor",
       "pronunciation": null,
       "photos": [
         {
@@ -988,6 +1011,7 @@
       "scientificName": "Milvus milvus",
       "taxonID": 5267,
       "article": "der",
+      "lookalike": "raptor",
       "pronunciation": null,
       "photos": [
         {
@@ -1029,6 +1053,7 @@
       "scientificName": "Falco tinnunculus",
       "taxonID": 472766,
       "article": "der",
+      "lookalike": "raptor",
       "pronunciation": null,
       "photos": [
         {
@@ -1078,6 +1103,7 @@
       "scientificName": "Falco peregrinus",
       "taxonID": 4647,
       "article": "der",
+      "lookalike": "raptor",
       "pronunciation": null,
       "photos": [
         {
@@ -1119,6 +1145,7 @@
       "scientificName": "Vultur gryphus",
       "taxonID": 4747,
       "article": "der",
+      "lookalike": "vulture",
       "pronunciation": null,
       "photos": [
         {
@@ -1161,6 +1188,7 @@
       "scientificName": "Gypaetus barbatus",
       "taxonID": 5379,
       "article": "der",
+      "lookalike": "vulture",
       "pronunciation": null,
       "photos": [
         {
@@ -1210,6 +1238,7 @@
       "scientificName": "Gyps fulvus",
       "taxonID": 5366,
       "article": "der",
+      "lookalike": "vulture",
       "pronunciation": null,
       "photos": [
         {
@@ -1244,6 +1273,7 @@
       "scientificName": "Cathartes aura",
       "taxonID": 4756,
       "article": "der",
+      "lookalike": "vulture",
       "pronunciation": null,
       "photos": [
         {
@@ -1270,6 +1300,7 @@
       "scientificName": "Sarcoramphus papa",
       "taxonID": 4763,
       "article": "der",
+      "lookalike": "vulture",
       "pronunciation": null,
       "photos": [
         {

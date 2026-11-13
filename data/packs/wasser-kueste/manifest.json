@@ -14,6 +14,7 @@
       "scientificName": "Larus argentatus",
       "taxonID": 204533,
       "article": "die",
+      "lookalike": "gull",
       "pronunciation": null,
       "photos": [
         {
@@ -63,6 +64,7 @@
       "scientificName": "Rissa tridactyla",
       "taxonID": 4494,
       "article": "die",
+      "lookalike": "gull",
       "pronunciation": null,
       "photos": [
         {
@@ -104,6 +106,7 @@
       "scientificName": "Uria aalge",
       "taxonID": 4519,
       "article": "die",
+      "lookalike": "diver",
       "pronunciation": null,
       "photos": [
         {
@@ -137,6 +140,7 @@
       "scientificName": "Alca torda",
       "taxonID": 4501,
       "article": "der",
+      "lookalike": "diver",
       "pronunciation": null,
       "photos": [
         {
@@ -186,6 +190,7 @@
       "scientificName": "Morus bassanus",
       "taxonID": 3802,
       "article": "der",
+      "lookalike": "seabird",
       "pronunciation": null,
       "photos": [
         {
@@ -227,6 +232,7 @@
       "scientificName": "Fulmarus glacialis",
       "taxonID": 4180,
       "article": "der",
+      "lookalike": "seabird",
       "pronunciation": null,
       "photos": [
         {
@@ -253,6 +259,7 @@
       "scientificName": "Somateria mollissima",
       "taxonID": 7024,
       "article": "die",
+      "lookalike": "duck",
       "pronunciation": null,
       "photos": [
         {
@@ -294,6 +301,7 @@
       "scientificName": "Tadorna tadorna",
       "taxonID": 7067,
       "article": "die",
+      "lookalike": "duck",
       "pronunciation": null,
       "photos": [
         {
@@ -343,6 +351,7 @@
       "scientificName": "Branta leucopsis",
       "taxonID": 7101,
       "article": "die",
+      "lookalike": "goose",
       "pronunciation": null,
       "photos": [
         {
@@ -392,6 +401,7 @@
       "scientificName": "Recurvirostra avosetta",
       "taxonID": 4883,
       "article": "der",
+      "lookalike": "shorebird",
       "pronunciation": null,
       "photos": [
         {
@@ -441,6 +451,7 @@
       "scientificName": "Tringa totanus",
       "taxonID": 3879,
       "article": "der",
+      "lookalike": "shorebird",
       "pronunciation": null,
       "photos": [
         {
@@ -482,6 +493,7 @@
       "scientificName": "Calidris alpina",
       "taxonID": 3857,
       "article": "der",
+      "lookalike": "shorebird",
       "pronunciation": null,
       "photos": [
         {
@@ -531,6 +543,7 @@
       "scientificName": "Arenaria interpres",
       "taxonID": 3938,
       "article": "der",
+      "lookalike": "shorebird",
       "pronunciation": null,
       "photos": [
         {
@@ -572,6 +585,7 @@
       "scientificName": "Calidris pugnax",
       "taxonID": 339593,
       "article": "der",
+      "lookalike": "shorebird",
       "pronunciation": null,
       "photos": [
         {
@@ -605,6 +619,7 @@
       "scientificName": "Charadrius hiaticula",
       "taxonID": 4801,
       "article": "der",
+      "lookalike": "shorebird",
       "pronunciation": null,
       "photos": [
         {
@@ -654,6 +669,7 @@
       "scientificName": "Numenius arquata",
       "taxonID": 3896,
       "article": "der",
+      "lookalike": "shorebird",
       "pronunciation": null,
       "photos": [
         {
@@ -703,6 +719,7 @@
       "scientificName": "Ardea alba",
       "taxonID": 144455,
       "article": "der",
+      "lookalike": "heron",
       "pronunciation": null,
       "photos": [
         {
@@ -744,6 +761,7 @@
       "scientificName": "Platalea leucorodia",
       "taxonID": 3731,
       "article": "der",
+      "lookalike": "heron",
       "pronunciation": null,
       "photos": [
         {
@@ -786,6 +804,7 @@
       "scientificName": "Ardea purpurea",
       "taxonID": 4951,
       "article": "der",
+      "lookalike": "heron",
       "pronunciation": null,
       "photos": [
         {
@@ -827,6 +846,7 @@
       "scientificName": "Botaurus stellaris",
       "taxonID": 5033,
       "article": "die",
+      "lookalike": "heron",
       "pronunciation": null,
       "photos": [
         {
@@ -868,6 +888,7 @@
       "scientificName": "Sterna hirundo",
       "taxonID": 4450,
       "article": "die",
+      "lookalike": "gull",
       "pronunciation": null,
       "photos": [
         {
@@ -917,6 +938,7 @@
       "scientificName": "Tachybaptus ruficollis",
       "taxonID": 4237,
       "article": "der",
+      "lookalike": "diver",
       "pronunciation": null,
       "photos": [
         {
@@ -966,6 +988,7 @@
       "scientificName": "Aythya fuligula",
       "taxonID": 7046,
       "article": "die",
+      "lookalike": "duck",
       "pronunciation": null,
       "photos": [
         {
@@ -1015,6 +1038,7 @@
       "scientificName": "Anas crecca",
       "taxonID": 6937,
       "article": "die",
+      "lookalike": "duck",
       "pronunciation": null,
       "photos": [
         {
@@ -1064,6 +1088,7 @@
       "scientificName": "Spatula clypeata",
       "taxonID": 558438,
       "article": "die",
+      "lookalike": "duck",
       "pronunciation": null,
       "photos": [
         {
@@ -1113,6 +1138,7 @@
       "scientificName": "Bucephala clangula",
       "taxonID": 6990,
       "article": "die",
+      "lookalike": "duck",
       "pronunciation": null,
       "photos": [
         {
@@ -1147,6 +1173,7 @@
       "scientificName": "Netta rufina",
       "taxonID": 7122,
       "article": "die",
+      "lookalike": "duck",
       "pronunciation": null,
       "photos": [
         {
@@ -1196,6 +1223,7 @@
       "scientificName": "Mergus merganser",
       "taxonID": 7004,
       "article": "der",
+      "lookalike": "duck",
       "pronunciation": null,
       "photos": [
         {
@@ -1237,6 +1265,7 @@
       "scientificName": "Mergellus albellus",
       "taxonID": 7192,
       "article": "der",
+      "lookalike": "duck",
       "pronunciation": null,
       "photos": [
         {
@@ -1263,6 +1292,7 @@
       "scientificName": "Pandion haliaetus",
       "taxonID": 116999,
       "article": "der",
+      "lookalike": "raptor",
       "pronunciation": null,
       "photos": [
         {
@@ -1304,6 +1334,7 @@
       "scientificName": "Actitis hypoleucos",
       "taxonID": 3978,
       "article": "der",
+      "lookalike": "shorebird",
       "pronunciation": null,
       "photos": [
         {
@@ -1345,6 +1376,7 @@
       "scientificName": "Gallinago gallinago",
       "taxonID": 318836,
       "article": "die",
+      "lookalike": "shorebird",
       "pronunciation": null,
       "photos": [
         {
@@ -1394,6 +1426,7 @@
       "scientificName": "Fratercula arctica",
       "taxonID": 4504,
       "article": "der",
+      "lookalike": "diver",
       "pronunciation": null,
       "photos": [
         {

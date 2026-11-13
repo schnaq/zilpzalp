@@ -14,6 +14,7 @@
       "scientificName": "Sialia sialis",
       "taxonID": 12942,
       "article": "der",
+      "lookalike": "thrush",
       "pronunciation": null,
       "photos": [
         {
@@ -55,6 +56,7 @@
       "scientificName": "Turdus migratorius",
       "taxonID": 12727,
       "article": "die",
+      "lookalike": "thrush",
       "pronunciation": null,
       "photos": [
         {
@@ -88,6 +90,7 @@
       "scientificName": "Anser caerulescens",
       "taxonID": 558426,
       "article": "die",
+      "lookalike": "goose",
       "pronunciation": null,
       "photos": [
         {
@@ -130,6 +133,7 @@
       "scientificName": "Aix sponsa",
       "taxonID": 7107,
       "article": "die",
+      "lookalike": "duck",
       "pronunciation": null,
       "photos": [
         {
@@ -171,6 +175,7 @@
       "scientificName": "Geococcyx californianus",
       "taxonID": 1986,
       "article": "der",
+      "lookalike": "cuckoo",
       "pronunciation": null,
       "photos": [
         {
@@ -205,6 +210,7 @@
       "scientificName": "Archilochus colubris",
       "taxonID": 6432,
       "article": "der",
+      "lookalike": "hummingbird",
       "pronunciation": null,
       "photos": [
         {
@@ -238,6 +244,7 @@
       "scientificName": "Cardinalis cardinalis",
       "taxonID": 9083,
       "article": "der",
+      "lookalike": "finch",
       "pronunciation": null,
       "photos": [
         {
@@ -287,6 +294,7 @@
       "scientificName": "Cyanocitta cristata",
       "taxonID": 8229,
       "article": "der",
+      "lookalike": "corvid",
       "pronunciation": null,
       "photos": [
         {
@@ -328,6 +336,7 @@
       "scientificName": "Haliaeetus leucocephalus",
       "taxonID": 5305,
       "article": "der",
+      "lookalike": "raptor",
       "pronunciation": null,
       "photos": [
         {
@@ -377,6 +386,7 @@
       "scientificName": "Meleagris gallopavo",
       "taxonID": 906,
       "article": "der",
+      "lookalike": "gamebird",
       "pronunciation": null,
       "photos": [
         {
@@ -410,6 +420,7 @@
       "scientificName": "Calypte anna",
       "taxonID": 6317,
       "article": "der",
+      "lookalike": "hummingbird",
       "pronunciation": null,
       "photos": [
         {
@@ -443,6 +454,7 @@
       "scientificName": "Gavia immer",
       "taxonID": 4626,
       "article": "der",
+      "lookalike": "diver",
       "pronunciation": null,
       "photos": [
         {
@@ -476,6 +488,7 @@
       "scientificName": "Bubo scandiacus",
       "taxonID": 144594,
       "article": "die",
+      "lookalike": "owl",
       "pronunciation": null,
       "photos": [
         {
@@ -518,6 +531,7 @@
       "scientificName": "Fratercula arctica",
       "taxonID": 4504,
       "article": "der",
+      "lookalike": "diver",
       "pronunciation": null,
       "photos": [
         {
@@ -560,6 +574,7 @@
       "scientificName": "Bubo virginianus",
       "taxonID": 20044,
       "article": "der",
+      "lookalike": "owl",
       "pronunciation": null,
       "photos": [
         {
@@ -601,6 +616,7 @@
       "scientificName": "Cathartes aura",
       "taxonID": 4756,
       "article": "der",
+      "lookalike": "vulture",
       "pronunciation": null,
       "photos": [
         {
@@ -635,6 +651,7 @@
       "scientificName": "Branta canadensis",
       "taxonID": 7089,
       "article": "die",
+      "lookalike": "goose",
       "pronunciation": null,
       "photos": [
         {
@@ -668,6 +685,7 @@
       "scientificName": "Melanerpes erythrocephalus",
       "taxonID": 18204,
       "article": "der",
+      "lookalike": "woodpecker",
       "pronunciation": null,
       "photos": [
         {
@@ -709,6 +727,7 @@
       "scientificName": "Dryocopus pileatus",
       "taxonID": 17855,
       "article": "der",
+      "lookalike": "woodpecker",
       "pronunciation": null,
       "photos": [
         {
@@ -750,6 +769,7 @@
       "scientificName": "Baeolophus bicolor",
       "taxonID": 13632,
       "article": "die",
+      "lookalike": "tit",
       "pronunciation": null,
       "photos": [
         {
@@ -799,6 +819,7 @@
       "scientificName": "Passerina cyanea",
       "taxonID": 10227,
       "article": "der",
+      "lookalike": "finch",
       "pronunciation": null,
       "photos": [
         {
@@ -848,6 +869,7 @@
       "scientificName": "Spinus tristis",
       "taxonID": 145310,
       "article": "der",
+      "lookalike": "finch",
       "pronunciation": null,
       "photos": [
         {
@@ -897,6 +919,7 @@
       "scientificName": "Icterus galbula",
       "taxonID": 9346,
       "article": "der",
+      "lookalike": "thrush",
       "pronunciation": null,
       "photos": [
         {
@@ -938,6 +961,7 @@
       "scientificName": "Agelaius phoeniceus",
       "taxonID": 9744,
       "article": "der",
+      "lookalike": "thrush",
       "pronunciation": null,
       "photos": [
         {
@@ -987,6 +1011,7 @@
       "scientificName": "Xanthocephalus xanthocephalus",
       "taxonID": 10470,
       "article": "der",
+      "lookalike": "thrush",
       "pronunciation": null,
       "photos": [
         {
@@ -1036,6 +1061,7 @@
       "scientificName": "Megaceryle alcyon",
       "taxonID": 2548,
       "article": "der",
+      "lookalike": "kingfisher",
       "pronunciation": null,
       "photos": [
         {
@@ -1069,6 +1095,7 @@
       "scientificName": "Falco sparverius",
       "taxonID": 4665,
       "article": "der",
+      "lookalike": "raptor",
       "pronunciation": null,
       "photos": [
         {
@@ -1118,6 +1145,7 @@
       "scientificName": "Antigone canadensis",
       "taxonID": 508048,
       "article": "der",
+      "lookalike": "heron",
       "pronunciation": null,
       "photos": [
         {
@@ -1151,6 +1179,7 @@
       "scientificName": "Cyanocitta stelleri",
       "taxonID": 8234,
       "article": "der",
+      "lookalike": "corvid",
       "pronunciation": null,
       "photos": [
         {
@@ -1184,6 +1213,7 @@
       "scientificName": "Pelecanus occidentalis",
       "taxonID": 4328,
       "article": "der",
+      "lookalike": "seabird",
       "pronunciation": null,
       "photos": [
         {
@@ -1210,6 +1240,7 @@
       "scientificName": "Ardea herodias",
       "taxonID": 4956,
       "article": "der",
+      "lookalike": "heron",
       "pronunciation": null,
       "photos": [
         {
@@ -1251,6 +1282,7 @@
       "scientificName": "Strix varia",
       "taxonID": 19893,
       "article": "der",
+      "lookalike": "owl",
       "pronunciation": null,
       "photos": [
         {
@@ -1284,6 +1316,7 @@
       "scientificName": "Asio flammeus",
       "taxonID": 20315,
       "article": "die",
+      "lookalike": "owl",
       "pronunciation": null,
       "photos": [
         {
@@ -1333,6 +1366,7 @@
       "scientificName": "Cygnus buccinator",
       "taxonID": 6915,
       "article": "der",
+      "lookalike": "goose",
       "pronunciation": null,
       "photos": [
         {
@@ -1382,6 +1416,7 @@
       "scientificName": "Histrionicus histrionicus",
       "taxonID": 7111,
       "article": "die",
+      "lookalike": "duck",
       "pronunciation": null,
       "photos": [
         {
@@ -1424,6 +1459,7 @@
       "scientificName": "Spatula cyanoptera",
       "taxonID": 558434,
       "article": "die",
+      "lookalike": "duck",
       "pronunciation": null,
       "photos": [
         {
