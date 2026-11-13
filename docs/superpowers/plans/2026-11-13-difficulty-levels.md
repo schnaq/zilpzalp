@@ -4,6 +4,14 @@
 
 Status: approved 2026-11-13. Spec: [../specs/2026-11-13-difficulty-levels-design.md](../specs/2026-11-13-difficulty-levels-design.md).
 
+**Amended 2026-11-13 after the visual review of the mockup.** The spec's
+"Who chooses, and where" and "The cue in a round" now govern Tasks 5–7 where
+they differ from the text below: no per-level tones (neutral papier tiles),
+Klassisch as a row under a one-row ramp, binoculars stickers counting the
+look-alikes, one grown-up line instead of four hints, other sample species,
+and the cue as a sticker without a ledge. `PhotoQuartet` and `GlyphBadge` are
+reworked in Task 6 accordingly.
+
 **Goal:** A child picks Leicht, Mittel, Schwer or Klassisch on the home screen; Mittel and Schwer now and then deal a *tricky* question with look-alike birds, marked by a binoculars badge.
 
 **Architecture:** `ZilpZalpCore` gets `Difficulty` and the distractor rules inside `Round.make` (Klassisch stays byte-identical). `ZilpZalpData` stores plain strings: `Bird.lookalike` from the manifests and `Profile.difficulty`. A Python gate keeps the curated look-alike groups consistent. `ZilpZalpUI` gets two picture-only components; the app target wires profile → level → round and draws the pill, the picker and the cue.

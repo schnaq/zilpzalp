@@ -80,24 +80,43 @@ of the child, stored per profile (`Profile.difficulty`, a raw string, default
 `"classic"`). Siblings on one iPad keep their own level.
 
 - **Home screen:** a second 64 pt pill beside the collection pill. It shows the
-  level's *quartet* (below) and, where the width allows, its name. On a phone
-  the name is dropped rather than wrapping the pills onto two rows — a row
-  costs tile height, a word does not.
+  level's *mosaic* — the quartet below as a bare 48 pt square, 2 pt gutters,
+  outer radius 20, no frame — and, on an iPad, the level's name. On a phone
+  the name is dropped rather than wrapping the pills onto two rows: a row
+  costs tile height, a word does not. Gap between the pills 12 pt on a phone
+  (the pair fits the 343 pt of a 375 pt iPhone), 16 on an iPad.
 - **Picker:** tapping the pill opens „Wie schwer?" as a card over the dimmed
-  home screen, the same shape as „Welche Vögel?": a speaker button for the
-  question, one card per level, a tap chooses at once and says the level's
-  name, the chosen card carries the olive rim **and** the check and grows to
-  1.06, „Los!" or a tap beside the card closes it. Single choice.
-- **The quartet** is each level's picture: a 2×2 of real photos from the bundled
-  Deutschland pack showing what that level's questions look like. Leicht shows
-  four birds nothing alike, Mittel one look-alike pair, Schwer three tits and one
-  other. Klassisch shows a single photo of the Zilpzalp — the app's namesake,
-  "the game as always" — so it reads as the usual rather than as another rung.
-  Level tones: sun (Leicht), clay (Mittel), bark (Schwer), sand (Klassisch);
-  olive stays reserved for "chosen", berry for "rare".
-- Under each level name, one short line for the grown-up looking over the
-  shoulder: „Ganz verschiedene Vögel", „Ab und zu ähnliche", „Oft sehr
-  ähnliche", „Wie immer".
+  home screen, the same shape as „Welche Vögel?" (max width 720, padding 32 on
+  iPad and 24 on a phone): a speaker button for the question, a tap chooses at
+  once and says the level's name, „Los!" or a tap beside the card closes it.
+  Single choice.
+- **The ramp:** Leicht, Mittel and Schwer stand as three square tiles in **one
+  row** on every device, so the order reads left to right as easy to hard.
+  **Klassisch is not a rung:** it is a full-width row underneath (photo, name,
+  „Bunt gemischt"), so it never reads as "harder than Schwer".
+- **The quartet** is each rung's picture: a 2×2 of real photos from the bundled
+  Deutschland pack showing what that level's questions look like, the
+  look-alikes side by side in the top row. Leicht: Steinkauz, Stockente,
+  Eisvogel, Buntspecht (nothing alike). Mittel: Amsel next to Star, then
+  Höckerschwan and Gimpel. Schwer: Kohlmeise next to Blaumeise, then Kleiber
+  and Rotkehlchen. Klassisch: the Zilpzalp alone — the app's namesake. No
+  species appears twice; every photo is the species' curated portrait, so the
+  picture comes from the same cache as every other one.
+- **Binoculars stickers count the look-alikes:** none on Leicht, one on
+  Mittel, two (overlapping, the second tilted +6°) on Schwer, on the tile's top
+  edge near the right corner and never over a bird. A child who cannot read
+  can count them, and meets the quiz's badge before it appears in a round.
+- **Neutral tiles:** every tile and the Klassisch row use `ChoiceTile`'s
+  papier tone — sand-200 field, 5 pt sand-400 rim and ledge (10 pt on iPad,
+  6 on a phone), radius 40 on iPad and 28 on a phone. Sun means reward and
+  "try again", clay is info, bark is a rubric, so none of them may mean a level;
+  olive stays the one colour signal, and it means "chosen".
+- **Chosen** is `RewardSticker`'s chosen state: the rim turns olive-500 at the
+  same 5 pt (nothing shifts), the ledge olive-700, a check badge sits on the
+  bottom-right corner, and the whole cell — tile and name — grows to 1.06.
+- **Words:** level names in Baloo 800, 28 pt on iPad, 22 on a phone. One line
+  for the grown-up under the ramp, „Je schwerer, desto ähnlicher die Vögel",
+  Nunito 600, 20 pt, ink-700.
 - New profiles start at Klassisch; profile creation stays name and avatar.
 
 The iCloud merge needs no new rule: like name, avatar, collections and sticker
@@ -107,10 +126,16 @@ threshold, the level comes from the copy changed last (`modifiedAt`).
 
 A tricky question announces itself, playfully, never as a warning:
 
-- A sun-coloured **binoculars badge** sits on the sound button for as long as
+- A **binoculars sticker** sits on the sound button's top-right for as long as
   the question is tricky (Lucide 1.28.0 `binoculars`, vendored like every other
-  glyph). It pops in with the bounce curve; nothing where the system asks for
-  reduced motion.
+  glyph): sun-300 disc, sun-600 edge, a cream cut-out ring, the medium shadow,
+  tilted −8°, glyph in bark-700 at 60 % (RewardSticker's own sun pair) — a
+  sticker, not a button: no ledge, because a ledge says "press me", and not
+  black on yellow, which is the hazard-sign palette. 56 pt on the iPad's
+  160 pt button, 44 pt on the phone's 120 pt one, overhanging by 8 pt at most;
+  taps pass through to the button. It pops in with the bounce curve when the
+  question appears and does nothing after — the sound button's rings already
+  move; nothing at all where the system asks for reduced motion.
 - **Game 1** says „Schau genau hin!" before the bird's name when it asks the
   question by itself. A tap on the sound button repeats the name only.
 - **Game 2** shows the badge only: there the call *is* the question and nothing
@@ -122,7 +147,8 @@ A tricky question announces itself, playfully, never as a warning:
 |---|---|
 | `home.difficulty.title` | Wie schwer? |
 | `home.difficulty.easy` / `.medium` / `.hard` / `.classic` | Leicht / Mittel / Schwer / Klassisch |
-| `home.difficulty.easy.hint` … `.classic.hint` | Ganz verschiedene Vögel / Ab und zu ähnliche / Oft sehr ähnliche / Wie immer |
+| `home.difficulty.hint` | Je schwerer, desto ähnlicher die Vögel |
+| `home.difficulty.classic.hint` | Bunt gemischt |
 | `home.difficulty.change.accessibility` | Schwierigkeit: %@. Ändern |
 | `quiz.tricky` | Schau genau hin! |
 | `quiz.tricky.accessibility` | Knifflige Frage |
