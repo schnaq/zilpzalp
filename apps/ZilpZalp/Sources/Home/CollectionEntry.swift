@@ -72,9 +72,7 @@ extension AppModel {
     /// collection between two rounds, and a stored answer would be one the
     /// home screen could disagree with.
     ///
-    /// Beside ``collection`` rather than in `AppModel.swift`, which sits on
-    /// SwiftLint's 400-line ceiling: everything here reads the model, nothing
-    /// here needs its private store.
+    /// Beside ``collection``, because that is all it reads.
     var games: [Game] {
         collection.offersCalls ? [.names, .calls] : [.names]
     }

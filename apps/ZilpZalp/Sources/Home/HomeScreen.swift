@@ -26,6 +26,12 @@ import ZilpZalpUI
 /// height where a word costs nothing a child who cannot read would miss — it
 /// finds its level by the mosaic.
 struct HomeScreen: View {
+    /// The two cards that open over the games.
+    private enum PickerCard {
+        case collection
+        case difficulty
+    }
+
     /// The wordmark's size in the top bar, from `HomeScreen.jsx`. In a compact
     /// width it drops to the wordmark's own floor.
     private static let wordmarkSize: CGFloat = 44
@@ -97,11 +103,9 @@ struct HomeScreen: View {
     /// layout pass and it settles.
     @State private var introHeight: CGFloat = 0
 
-    /// Whether the collections are up. See ``CollectionPicker``.
-    @State private var isPicking = false
-
-    /// Whether the levels are up. See ``DifficultyPicker``.
-    @State private var isPickingDifficulty = false
+    /// Which card is up over the games, if any: the collections — see
+    /// ``CollectionPicker`` — or the levels, ``DifficultyPicker``.
+    @State private var picker: PickerCard?
 
     /// Whether the screen is in a compact width — a phone in portrait, or an
     /// iPad sharing its screen. It settles the two type sizes only; where the
@@ -166,24 +170,24 @@ struct HomeScreen: View {
         }
         .background(ZColor.surfacePage)
         .overlay {
-            if isPicking {
+            if picker == .collection {
                 CollectionPicker(
                     entries: collections,
                     selection: chosenCollections,
                     library: library,
                     choose: chooseCollection,
-                    close: { isPicking = false },
+                    close: { picker = nil },
                     addBirds: openParents,
                 )
             }
         }
         .overlay {
-            if isPickingDifficulty {
+            if picker == .difficulty {
                 DifficultyPicker(
                     levels: difficultyLevels,
                     chosen: difficulty,
                     choose: chooseDifficulty,
-                    close: { isPickingDifficulty = false },
+                    close: { picker = nil },
                 )
             }
         }
@@ -191,7 +195,7 @@ struct HomeScreen: View {
         // question does it. One curve for both cards.
         .animation(
             reduceMotion ? nil : ZMotion.easeOut.animation(duration: ZMotion.fast),
-            value: [isPicking, isPickingDifficulty],
+            value: picker,
         )
     }
 
@@ -227,12 +231,10 @@ struct HomeScreen: View {
     @ViewBuilder
     private func pills(_ chosen: [CollectionEntry], _ level: DifficultyLevel?) -> some View {
         if !chosen.isEmpty {
-            CollectionChip(entries: chosen) { isPicking = true }
+            CollectionChip(entries: chosen) { picker = .collection }
         }
         if let level {
-            DifficultyChip(level: level, showsTitle: !isCompact) {
-                isPickingDifficulty = true
-            }
+            DifficultyChip(level: level, showsTitle: !isCompact) { picker = .difficulty }
         }
     }
 

@@ -11,29 +11,32 @@ import ZilpZalpData
 struct DifficultyLevel: Identifiable {
     let difficulty: Difficulty
 
-    /// The word under the picture: „Leicht", „Mittel", „Schwer", „Klassisch".
-    let title: String
-
     /// The level's quartet — ``ZilpZalpData/Profile/difficultySamples``,
     /// look-alikes first — or the Zilpzalp alone for Klassisch. A `nil` keeps
     /// the cell's bird glyph, which is what a photo that would not open looks
     /// like.
     let photos: [Image?]
 
-    /// How many binoculars stickers the level's tile carries: one per
-    /// look-alike a tricky question puts beside the answer. A child who cannot
-    /// read can count them, and meets the badge of a tricky question before a
-    /// round shows it.
-    ///
-    /// Presentation, not the engine's number: Core keeps its count internal,
-    /// and the stickers only promise "none, one, two".
-    let lookalikes: Int
-
     /// What the app says when this level is tapped: its name.
     let spoken: SpokenLine
 
     var id: Difficulty {
         difficulty
+    }
+
+    /// The word under the picture: „Leicht", „Mittel", „Schwer", „Klassisch".
+    /// The text the spoken name falls back on, so the word on the screen and
+    /// the word said cannot be two different words.
+    var title: String {
+        spoken.text
+    }
+
+    /// How many binoculars stickers the level's tile carries: one per
+    /// look-alike a tricky question puts beside the answer. A child who cannot
+    /// read can count them, and meets the badge of a tricky question before a
+    /// round shows it.
+    var lookalikes: Int {
+        difficulty.lookalikesPerTrickyQuestion
     }
 }
 
@@ -42,36 +45,21 @@ extension DifficultyLevel {
     /// hard, then Klassisch — which is not a rung, and stands underneath.
     static let order: [Difficulty] = [.easy, .medium, .hard, .classic]
 
-    /// A level with its words and its stickers, and `photos` for its picture.
-    ///
-    /// The title is the text the spoken name falls back on, so the word on the
-    /// screen and the word said cannot be two different words.
-    init(_ difficulty: Difficulty, photos: [Image?]) {
-        let spoken = SpokenLine.fixed("home.difficulty.\(difficulty.rawValue)")
-        let lookalikes = switch difficulty {
-        case .medium: 1
-        case .hard: 2
-        case .easy, .classic: 0
+    /// Every level in ``order``, each sample species' photo looked up by
+    /// `photo`.
+    static func all(photo: (String) -> Image?) -> [DifficultyLevel] {
+        order.map { level in
+            DifficultyLevel(
+                difficulty: level,
+                photos: Profile.difficultySamples[level.rawValue, default: []].map(photo),
+                spoken: .fixed("home.difficulty.\(level.rawValue)"),
+            )
         }
-
-        self.init(
-            difficulty: difficulty,
-            title: spoken.text,
-            photos: photos,
-            lookalikes: lookalikes,
-            spoken: spoken,
-        )
     }
 
     /// Every level with a glyph in place of each photo — for the previews.
     static var previews: [DifficultyLevel] {
-        order.map { level in
-            DifficultyLevel(
-                level,
-                photos: Profile.difficultySamples[level.rawValue, default: []]
-                    .map { _ -> Image? in nil },
-            )
-        }
+        all { _ in nil }
     }
 }
 
@@ -91,12 +79,6 @@ extension AppModel {
     /// same cache the album and the collection pill draw from, so the picker
     /// opens no file of its own.
     var difficultyLevels: [DifficultyLevel] {
-        DifficultyLevel.order.map { level in
-            DifficultyLevel(
-                level,
-                photos: Profile.difficultySamples[level.rawValue, default: []]
-                    .map { packs.photos[$0] },
-            )
-        }
+        DifficultyLevel.all { packs.photos[$0] }
     }
 }

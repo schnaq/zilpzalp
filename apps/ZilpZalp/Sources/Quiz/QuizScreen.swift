@@ -160,7 +160,7 @@ struct QuizScreen: View {
             switch layout.arrangement {
             case .above:
                 HStack(spacing: ZSpacing.step4) {
-                    soundButton(session, diameter: layout.soundDiameter)
+                    QuizSoundButton(session: session, diameter: layout.soundDiameter)
                     if let name = session.writtenQuestion {
                         question(name, in: .above)
                     }
@@ -177,7 +177,7 @@ struct QuizScreen: View {
             case .beside:
                 HStack(spacing: ZSpacing.step7) {
                     VStack(spacing: ZSpacing.step5) {
-                        soundButton(session, diameter: layout.soundDiameter)
+                        QuizSoundButton(session: session, diameter: layout.soundDiameter)
                         if let name = session.writtenQuestion {
                             question(name, in: .beside)
                         }
@@ -248,11 +248,6 @@ struct QuizScreen: View {
             edge: edge,
         ) { session.choose(bird) }
             .accessibilityIdentifier(QuizIdentifier.tile(bird.id))
-    }
-
-    /// The question, put again on demand — see ``QuizSoundButton``.
-    private func soundButton(_ session: QuizSession, diameter: CGFloat) -> some View {
-        QuizSoundButton(session: session, diameter: diameter, isCompact: isCompact)
     }
 
     /// The bird's name in writing — for the grown-up over the shoulder, as on

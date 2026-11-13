@@ -248,21 +248,12 @@ final class AppModel {
     ///
     /// - Parameter collections: the packs' ids, sorted; empty for every bird.
     func choose(collections: [String]) async {
-        guard let store, let index = profiles.firstIndex(where: { $0.id == activeProfileID })
-        else {
-            return
-        }
-        // „Alle Vögel" tapped while it is already chosen is a child asking to
-        // hear its name again, not a change to write to disk.
-        guard profiles[index].collections != collections else { return }
-
-        profiles[index].collections = collections
-
-        do {
-            try await store.update(profiles[index])
-        } catch {
-            let reason = String(describing: error)
-            Logger.profiles.error("Collection was not written: \(reason, privacy: .public)")
+        await updateProfile(activeProfileID, "Collection") { profile in
+            // „Alle Vögel" tapped while it is already chosen is a child asking
+            // to hear its name again, not a change to write to disk.
+            guard profile.collections != collections else { return false }
+            profile.collections = collections
+            return true
         }
     }
 
@@ -279,19 +270,10 @@ final class AppModel {
     /// failed write is only logged, for the same reasons. The level already
     /// chosen, tapped again, is a child asking to hear its name: no write.
     func choose(difficulty: Difficulty) async {
-        guard let store, let index = profiles.firstIndex(where: { $0.id == activeProfileID }),
-              profiles[index].difficulty != difficulty.rawValue
-        else {
-            return
-        }
-
-        profiles[index].difficulty = difficulty.rawValue
-
-        do {
-            try await store.update(profiles[index])
-        } catch {
-            let reason = String(describing: error)
-            Logger.profiles.error("Difficulty was not written: \(reason, privacy: .public)")
+        await updateProfile(activeProfileID, "Difficulty") { profile in
+            guard profile.difficulty != difficulty.rawValue else { return false }
+            profile.difficulty = difficulty.rawValue
+            return true
         }
     }
 
@@ -302,19 +284,35 @@ final class AppModel {
     /// threshold puts every sticker the counters already reach into the album
     /// in the same step — ``Profile/stickerThreshold`` does that itself.
     func setStickerThreshold(_ threshold: Int, for id: Profile.ID) async {
-        guard let store, let index = profiles.firstIndex(where: { $0.id == id }),
-              profiles[index].stickerThreshold != threshold
-        else {
-            return
+        await updateProfile(id, "Sticker threshold") { profile in
+            guard profile.stickerThreshold != threshold else { return false }
+            profile.stickerThreshold = threshold
+            return true
         }
+    }
 
-        profiles[index].stickerThreshold = threshold
+    /// The one way a choice above reaches the store: `change` edits a copy of
+    /// `id`'s profile and says whether it changed anything — an unchanged
+    /// profile is nothing to write. A changed one goes into ``profiles``
+    /// first, so the screen answers in the same frame however slow the disk
+    /// is, and is written after; a failed write is only logged, as `what`.
+    private func updateProfile(
+        _ id: Profile.ID?,
+        _ what: String,
+        _ change: (inout Profile) -> Bool,
+    ) async {
+        guard let store, let index = profiles.firstIndex(where: { $0.id == id }) else { return }
+        var profile = profiles[index]
+        guard change(&profile) else { return }
+        profiles[index] = profile
 
         do {
-            try await store.update(profiles[index])
+            try await store.update(profile)
         } catch {
             let reason = String(describing: error)
-            Logger.profiles.error("Sticker threshold was not written: \(reason, privacy: .public)")
+            Logger.profiles.error(
+                "\(what, privacy: .public) was not written: \(reason, privacy: .public)",
+            )
         }
     }
 

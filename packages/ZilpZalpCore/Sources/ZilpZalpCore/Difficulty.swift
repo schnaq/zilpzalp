@@ -34,7 +34,10 @@ public enum Difficulty: String, CaseIterable, Sendable {
     }
 
     /// How many look-alikes stand beside the answer in a tricky question.
-    var lookalikesPerTrickyQuestion: Int {
+    ///
+    /// Public because the level picker draws one binoculars sticker per
+    /// look-alike, and a second table in the app could drift from this one.
+    public var lookalikesPerTrickyQuestion: Int {
         switch self {
         case .medium: 1
         case .hard: 2

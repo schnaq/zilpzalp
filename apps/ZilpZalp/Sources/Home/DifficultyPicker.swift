@@ -15,12 +15,6 @@ import ZilpZalpUI
 /// the game as it always was and sits *between* Leicht and Mittel in what it
 /// asks of a child; as a fourth rung it would read as "harder than Schwer", so
 /// it is a full-width row underneath instead.
-///
-/// Every tile shows what its questions look like — four real birds, the
-/// look-alikes side by side in the top row — and carries one binoculars
-/// sticker per look-alike, so a child who cannot read can count how tricky a
-/// level is. The chosen level is olive with a check, never colour alone, and
-/// a chosen rung grows a little as well.
 struct DifficultyPicker: View {
     /// ``CollectionPicker``'s width, so the two cards are one shape.
     private static let maximumWidth: CGFloat = 720
@@ -33,12 +27,6 @@ struct DifficultyPicker: View {
     /// widest card. A phone's rung is a third of what its card leaves, about
     /// 96 pt on a 390 pt iPhone.
     private static let maximumTile: CGFloat = 200
-
-    /// From this edge up a rung is drawn as the iPad's tile — `PhotoQuartet`'s
-    /// own threshold, which the Klassisch row's check follows too. Also the
-    /// rung a card too short for 200 pt falls back to before it scrolls: the
-    /// smallest that keeps the iPad's tile.
-    private static let largeTile: CGFloat = 160
 
     /// Room inside the scrolling fallback for what hangs off the levels — the
     /// stickers above the top row, the check past the Klassisch row — so the
@@ -78,8 +66,8 @@ struct DifficultyPicker: View {
     /// fallback is showing, so it settles after one extra layout pass.
     @State private var rampWidth: CGFloat = 0
 
-    private var isCompact: Bool {
-        horizontalSizeClass == .compact
+    private var metrics: Metrics {
+        horizontalSizeClass == .compact ? .phone : .pad
     }
 
     var body: some View {
@@ -106,11 +94,11 @@ struct DifficultyPicker: View {
     }
 
     private var card: some View {
-        ZCard(padding: isCompact ? ZSpacing.step5 : ZSpacing.step6) {
-            VStack(spacing: isCompact ? ZSpacing.step5 : ZSpacing.step6) {
+        ZCard(padding: metrics.section) {
+            VStack(spacing: metrics.section) {
                 HStack(spacing: ZSpacing.step3) {
                     Text("home.difficulty.title")
-                        .typeStyle(isCompact ? .headline : .title, .display, weight: .extraBold)
+                        .typeStyle(metrics.title, .display, weight: .extraBold)
                         .foregroundStyle(ZColor.textStrong)
                         .multilineTextAlignment(.center)
 
@@ -138,18 +126,27 @@ struct DifficultyPicker: View {
     }
 
     /// The levels at the biggest size the card's height allows: 200 pt rungs,
-    /// then 160 pt ones, and only where even those do not fit — an iPad mini
-    /// on its side, a short Stage Manager window — the 160 pt levels
-    /// scrolling, so Klassisch and „Los!" are never cut off.
+    /// then ``PhotoQuartet/largeTile`` ones, the smallest that keep the iPad's
+    /// tile. Only where even those do not fit — an iPad mini on its side, a
+    /// short Stage Manager window — do they scroll, so Klassisch and „Los!"
+    /// are never cut off.
     private var fittingChoices: some View {
-        ViewThatFits(in: .vertical) {
-            choices(maximumTile: Self.maximumTile, width: rampWidth)
-            choices(maximumTile: Self.largeTile, width: rampWidth)
+        let ramp = levels.filter { $0.difficulty != .classic }
+        let classic = levels.first { $0.difficulty == .classic }
+
+        return ViewThatFits(in: .vertical) {
+            choices(ramp, classic, maximumTile: Self.maximumTile, width: rampWidth)
+            choices(ramp, classic, maximumTile: PhotoQuartet.largeTile, width: rampWidth)
             ScrollView {
-                choices(maximumTile: Self.largeTile, width: rampWidth - 2 * Self.scrollMargin)
-                    .padding(.horizontal, Self.scrollMargin)
-                    .padding(.top, Self.scrollHeadroom)
-                    .padding(.bottom, Self.scrollMargin)
+                choices(
+                    ramp,
+                    classic,
+                    maximumTile: PhotoQuartet.largeTile,
+                    width: rampWidth - 2 * Self.scrollMargin,
+                )
+                .padding(.horizontal, Self.scrollMargin)
+                .padding(.top, Self.scrollHeadroom)
+                .padding(.bottom, Self.scrollMargin)
             }
             .scrollBounceBehavior(.basedOnSize)
         }
@@ -164,15 +161,20 @@ struct DifficultyPicker: View {
     /// The ramp, the grown-ups' line under it and the Klassisch row, with
     /// rungs as big as `width` allows up to `maximumTile` — never below the
     /// touch floor.
-    private func choices(maximumTile: CGFloat, width: CGFloat) -> some View {
-        let gap = isCompact ? ZSpacing.step3 : ZSpacing.step5
+    private func choices(
+        _ ramp: [DifficultyLevel],
+        _ classic: DifficultyLevel?,
+        maximumTile: CGFloat,
+        width: CGFloat,
+    ) -> some View {
+        let gap = metrics.rungGap
         let fitting = min(maximumTile, (width - 2 * gap) / 3).rounded(.down)
         let edge = max(ZSpacing.touchMinimum, fitting)
 
-        return VStack(spacing: isCompact ? ZSpacing.step5 : ZSpacing.step6) {
-            VStack(spacing: isCompact ? ZSpacing.step4 : ZSpacing.step5) {
+        return VStack(spacing: metrics.section) {
+            VStack(spacing: metrics.hintGap) {
                 HStack(alignment: .top, spacing: gap) {
-                    ForEach(levels.filter { $0.difficulty != .classic }) { level in
+                    ForEach(ramp) { level in
                         rung(level, edge: edge)
                     }
                 }
@@ -181,10 +183,8 @@ struct DifficultyPicker: View {
                 hint
             }
 
-            if let classic = levels.first(where: { $0.difficulty == .classic }) {
-                // The rungs' check size, by the rungs' own rule, so the row
-                // and the tiles above it never wear two different checks.
-                classicRow(classic, largeCheck: edge >= Self.largeTile)
+            if let classic {
+                classicRow(classic, rungEdge: edge)
             }
         }
     }
@@ -202,12 +202,8 @@ struct DifficultyPicker: View {
     /// One rung: the level's tile with its stickers, and its name — the
     /// whole cell a little bigger while it is the chosen one.
     private func rung(_ level: DifficultyLevel, edge: CGFloat) -> some View {
-        let isChosen = level.difficulty == chosen
-
-        return Button {
-            pick(level)
-        } label: {
-            VStack(spacing: isCompact ? ZSpacing.step2 : ZSpacing.step3) {
+        levelButton(level) { isChosen in
+            VStack(spacing: metrics.nameGap) {
                 PhotoQuartet(photos: level.photos, size: edge, chosen: isChosen)
                     .overlay(alignment: .topTrailing) { stickers(level.lookalikes) }
 
@@ -223,59 +219,41 @@ struct DifficultyPicker: View {
                 value: isChosen,
             )
         }
-        .buttonStyle(.plain)
-        .accessibilityLabel(level.title)
-        .accessibilityAddTraits(isChosen ? .isSelected : [])
     }
 
     /// One binoculars sticker per look-alike, on the tile's top edge near its
     /// right corner: half of it above the tile, so no more than the top strip
-    /// of a photo is under it and never the bird. The first sits at the
-    /// corner, a second overlaps it from the left, tilted the other way and
-    /// stuck on top of it.
-    ///
-    /// The mockup's offsets — 24 pt up and 14 pt in on an iPad, 17 up and 4 in
-    /// on a phone — count from inside the tile's 5 pt rim; this overlay counts
-    /// from its outer edge, hence the rim in the sums.
+    /// of a photo is under it and never the bird. A second one overlaps the
+    /// first from the left, tilted the other way and stuck on top of it.
     private func stickers(_ count: Int) -> some View {
-        let diameter: CGFloat = isCompact ? 30 : 44
+        let diameter = metrics.sticker
+        // This overlay counts from the tile's outer edge, past the rim.
         let rim = ZBorder.widthThick
 
         return HStack(spacing: -diameter * Self.stickerOverlap) {
             ForEach((0 ..< count).reversed(), id: \.self) { index in
-                Group {
-                    if index == 0 {
-                        GlyphBadge(.binoculars, diameter: diameter)
-                    } else {
-                        GlyphBadge(.binoculars, diameter: diameter, rotation: .degrees(6))
-                    }
-                }
-                .zIndex(Double(index))
+                GlyphBadge(.binoculars, diameter: diameter, rotation: .degrees(index == 0 ? -8 : 6))
+                    .zIndex(Double(index))
             }
         }
-        .offset(
-            x: -((isCompact ? 4 : 14) + rim),
-            y: rim - (isCompact ? 17 : 24),
-        )
+        .offset(x: -(metrics.stickerIn + rim), y: rim - metrics.stickerUp)
     }
 
     /// Klassisch: the portrait, the name and „Bunt gemischt", on the same
     /// papier tone as the rungs and chosen the same way — but not grown,
-    /// because a full-width row that grew would leave the card.
+    /// because a full-width row that grew would leave the card. It wears the
+    /// check of rungs `rungEdge` wide, so the row and the tiles above it never
+    /// wear two different checks.
     ///
     /// The photo sits inside the rim with sand around it, as the tiles' photos
     /// do, and the row is as tall as that makes it: 82 pt on a phone, 102 on
     /// an iPad.
-    private func classicRow(_ level: DifficultyLevel, largeCheck: Bool) -> some View {
-        let isChosen = level.difficulty == chosen
-        let photo: CGFloat = isCompact ? 60 : 72
-        let inset = ZBorder.widthThick + (isCompact ? 6 : 10)
-        let shape = RoundedRectangle(cornerRadius: ZRadius.large, style: .continuous)
+    private func classicRow(_ level: DifficultyLevel, rungEdge: CGFloat) -> some View {
+        let photo = metrics.classicPhoto
+        let inset = ZBorder.widthThick + metrics.classicSand
 
-        return Button {
-            pick(level)
-        } label: {
-            HStack(spacing: isCompact ? ZSpacing.step3 : ZSpacing.step4) {
+        return levelButton(level) { isChosen in
+            HStack(spacing: metrics.classicGap) {
                 PhotoQuartet(photos: level.photos, size: photo, style: .mosaic)
 
                 VStack(alignment: .leading, spacing: 0) {
@@ -289,41 +267,45 @@ struct DifficultyPicker: View {
             .padding(.leading, inset)
             .frame(maxWidth: .infinity, alignment: .leading)
             .frame(height: photo + 2 * inset)
-            .background(shape.fill(ZColor.sand200))
-            .overlay {
-                shape.strokeBorder(
-                    isChosen ? ZColor.primary : ZColor.sand400,
-                    lineWidth: ZBorder.widthThick,
-                )
-            }
-            .background(
-                shape
-                    .fill(isChosen ? ZColor.primaryShadow : ZColor.sand400)
-                    .offset(y: ZShadow.ledgeOffset),
+            .papierSurface(
+                RoundedRectangle(cornerRadius: ZRadius.large, style: .continuous),
+                chosen: isChosen,
+                ledge: ZShadow.ledgeOffset,
             )
             .overlay(alignment: .bottomTrailing) {
                 if isChosen {
-                    ChosenCheck(compact: !largeCheck)
+                    ChosenCheck(tileSize: rungEdge)
                 }
             }
             .contentShape(Rectangle())
         }
-        .buttonStyle(.plain)
-        .accessibilityLabel(level.title)
         // The rungs show what their level means; this row says it.
         .accessibilityHint(String(localized: "home.difficulty.classic.hint"))
+    }
+
+    /// A level as a button, rung or row: a tap picks it, VoiceOver reads its
+    /// name, and it is selected while it is the one being played — which
+    /// `label` is handed too.
+    private func levelButton(
+        _ level: DifficultyLevel,
+        @ViewBuilder label: (_ isChosen: Bool) -> some View,
+    ) -> some View {
+        let isChosen = level.difficulty == chosen
+
+        return Button {
+            pick(level)
+        } label: {
+            label(isChosen)
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(level.title)
         .accessibilityAddTraits(isChosen ? .isSelected : [])
     }
 
     /// A level's name, under its tile or in the Klassisch row.
     private func name(_ title: String) -> some View {
         Text(verbatim: title)
-            .typeStyle(
-                isCompact ? .label : .headline,
-                .display,
-                weight: .extraBold,
-                singleLine: true,
-            )
+            .typeStyle(metrics.name, .display, weight: .extraBold, singleLine: true)
             .foregroundStyle(ZColor.textStrong)
     }
 
@@ -342,6 +324,50 @@ struct DifficultyPicker: View {
         let voice = announcer ?? SpeechAnnouncer()
         announcer = voice
         voice.announce(line, unprompted: unprompted)
+    }
+
+    /// The picker's numbers on a phone and on an iPad, so the size class is
+    /// asked in one place. The values without a token are the reviewed
+    /// mockup's.
+    private struct Metrics {
+        static let phone = Metrics(compact: true)
+        static let pad = Metrics(compact: false)
+
+        /// The card's padding, and the gap between what it stacks.
+        let section: CGFloat
+        let title: ZType.Step
+        let rungGap: CGFloat
+        /// Between the rungs and the grown-ups' line under them.
+        let hintGap: CGFloat
+        /// Between a rung's tile and its name.
+        let nameGap: CGFloat
+        let name: ZType.Step
+        /// A binoculars sticker's diameter, and how far in from the tile's
+        /// right corner and up from its top edge it sits — counted, as the
+        /// mockup counts, from inside the rim.
+        let sticker: CGFloat
+        let stickerIn: CGFloat
+        let stickerUp: CGFloat
+        /// The Klassisch row's photo, the sand between it and the rim, and
+        /// the gap to the words beside it.
+        let classicPhoto: CGFloat
+        let classicSand: CGFloat
+        let classicGap: CGFloat
+
+        private init(compact: Bool) {
+            section = compact ? ZSpacing.step5 : ZSpacing.step6
+            title = compact ? .headline : .title
+            rungGap = compact ? ZSpacing.step3 : ZSpacing.step5
+            hintGap = compact ? ZSpacing.step4 : ZSpacing.step5
+            nameGap = compact ? ZSpacing.step2 : ZSpacing.step3
+            name = compact ? .label : .headline
+            sticker = compact ? 30 : 44
+            stickerIn = compact ? 4 : 14
+            stickerUp = compact ? 17 : 24
+            classicPhoto = compact ? 60 : 72
+            classicSand = compact ? 6 : 10
+            classicGap = compact ? ZSpacing.step3 : ZSpacing.step4
+        }
     }
 }
 

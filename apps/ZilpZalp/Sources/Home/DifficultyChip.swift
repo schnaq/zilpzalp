@@ -2,12 +2,8 @@ import SwiftUI
 import ZilpZalpUI
 
 /// How hard this child's rounds are, on the home screen, and the way to change
-/// it.
-///
-/// The second pill beside ``CollectionChip`` and built exactly like it — 64 pt
-/// tall, a picture, a word, a chevron — because the level is the same kind of
-/// thing: a taste of the child, chosen before a game, and opened into a card
-/// of its own, ``DifficultyPicker``.
+/// it: ``DifficultyPicker``. Built exactly like ``CollectionChip``, so the two
+/// pills read as one kind of thing.
 ///
 /// The picture is the level's quartet as a bare mosaic, so a child who cannot
 /// read finds on the pill the very birds it tapped in the picker. No

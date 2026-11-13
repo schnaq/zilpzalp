@@ -105,7 +105,7 @@ final class QuizSession {
     ///   carries a call. Neither is reachable from the home screen: the
     ///   bundled pack has ten species, and ``AppModel/games`` offers game 2 only
     ///   where there are calls to ask with.
-    init(library: PackLibrary, game: Game, difficulty: Difficulty = .standard) throws {
+    init(library: PackLibrary, game: Game, difficulty: Difficulty) throws {
         self.game = game
         self.difficulty = difficulty
         let everySpecies = library.birds
@@ -307,10 +307,9 @@ final class QuizSession {
             // for the name wants the name again. Game 2 stays silent about it,
             // since speech laid over the call would leave neither
             // intelligible (#30) — the badge alone says it there.
-            var lines = [SpokenLine.name(answer)]
-            if unprompted, isTricky {
-                lines.insert(.fixed("quiz.tricky"), at: 0)
-            }
+            let lines: [SpokenLine] = unprompted && isTricky
+                ? [.fixed("quiz.tricky"), .name(answer)]
+                : [.name(answer)]
             announcer.announce(lines, unprompted: unprompted)
         case .calls:
             // Never missing in a round of game 2 — only birds with a recording
