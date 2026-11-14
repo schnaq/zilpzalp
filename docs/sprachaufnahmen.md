@@ -152,6 +152,9 @@ infisical run --env=dev --path=/ -- mise run fetch-media speech render \
     --sentence timeBudget.starsToday.spoken.{0..30}
 ```
 
+`{0..30}` is bash and zsh brace expansion; in fish, write
+`timeBudget.starsToday.spoken.(seq 0 30)` instead.
+
 Every species' name of a pack, or one with `--species amsel`:
 
 ```

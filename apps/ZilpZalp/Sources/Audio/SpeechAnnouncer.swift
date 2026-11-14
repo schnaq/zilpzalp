@@ -122,8 +122,8 @@ final class SpeechAnnouncer: NSObject {
     private var spokenClip: AVAudioPlayer?
 
     /// The lines still to come after the one now sounding, said in order once
-    /// it has run its course. Empty for everything but the round end's praise
-    /// for a first find.
+    /// it has run its course. Empty but for the round end's praise for a
+    /// first find and „Zeit fürs Nest", which says three lines in a row.
     private var queuedLines: [SpokenLine] = []
 
     /// The pause before the next queued line, cancelled with the queue.

@@ -18,7 +18,7 @@ import ZilpZalpData
 /// stand: see ``name(_:)``, ``packTitle(_:title:)``, ``counted(_:_:)`` and
 /// ``assembled(_:)``.
 struct SpokenLine: Sendable {
-    /// The sentence key, `nil` for the one line no single clip can say.
+    /// The sentence key, `nil` for words no clip can say — see ``assembled(_:)``.
     let key: String?
 
     /// The species the sentence is about, `nil` where it belongs to none. A

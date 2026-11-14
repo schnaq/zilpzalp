@@ -125,6 +125,28 @@ CATALOG = {
             }
         },
         "collection.birds": {"localizations": {}},
+        # A plural with an explicit `zero`, and a key that varies by device.
+        "zero.counted": {
+            "localizations": {
+                "de": {
+                    "variations": {
+                        "plural": {
+                            "zero": {"stringUnit": {"state": "translated", "value": "Noch keiner."}},
+                            "other": {"stringUnit": {"state": "translated", "value": "%lld Stück."}},
+                        }
+                    }
+                }
+            }
+        },
+        "device.only": {
+            "localizations": {
+                "de": {
+                    "variations": {
+                        "device": {"iphone": {"stringUnit": {"state": "translated", "value": "Tippe"}}}
+                    }
+                }
+            }
+        },
     },
 }
 
@@ -234,6 +256,22 @@ class SentenceTests(unittest.TestCase):
     def test_still_refuses_a_key_that_is_not_there_with_a_number(self) -> None:
         with self.assertRaises(LookupError):
             sentences.fixed_text("nonsense.key.3")
+
+    def test_prefers_an_explicit_zero_form_for_zero(self) -> None:
+        """The app's plural rule uses a `zero` form for 0 where there is one."""
+        self.assertEqual(sentences.fixed_text("zero.counted.0"), "Noch keiner.")
+        self.assertEqual(sentences.fixed_text("zero.counted.3"), "3 Stück.")
+
+    def test_refuses_a_count_with_a_leading_zero(self) -> None:
+        """`….07` is a key the app never forms, so a clip under it is never heard."""
+        with self.assertRaises(LookupError):
+            sentences.fixed_text("timeBudget.starsToday.spoken.07")
+
+    def test_refuses_a_variation_that_is_not_a_count(self) -> None:
+        with self.assertRaises(ValueError) as error:
+            sentences.fixed_text("device.only")
+
+        self.assertIn("other than a count", str(error.exception))
 
     def test_refuses_a_key_the_catalogue_does_not_have(self) -> None:
         for key in ("nonsense.key", "collection.birds"):

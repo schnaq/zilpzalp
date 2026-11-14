@@ -58,7 +58,7 @@ PACK_SENTENCES = ("pack.title",)
 PLACEHOLDER = re.compile(r"%(?:(\d+)\$)?@")
 
 # `<plural key>.<count>`: one clip per count of a sentence that varies by one.
-COUNTED = re.compile(r"(?P<key>.+)\.(?P<count>\d+)")
+COUNTED = re.compile(r"(?P<key>.+)\.(?P<count>0|[1-9][0-9]*)")
 
 
 def german(key: str, count: int | None = None) -> str:
@@ -75,7 +75,10 @@ def german(key: str, count: int | None = None) -> str:
         raise LookupError(f"'{key}' is not a key in {CATALOG.name}")
 
     localised = (entry.get("localizations") or {}).get(LANGUAGE) or {}
-    plural = (localised.get("variations") or {}).get("plural")
+    variations = localised.get("variations") or {}
+    plural = variations.get("plural")
+    if variations and plural is None:
+        raise ValueError(f"'{key}' varies by something other than a count: {', '.join(variations)}")
     if plural is None and count is not None:
         raise ValueError(f"'{key}' does not vary by a count, so '{key}.{count}' says nothing")
     if plural is not None:
@@ -85,8 +88,10 @@ def german(key: str, count: int | None = None) -> str:
                 f"Name the count — '{key}.7' — to record one clip per count."
             )
         # German's integer rule: `one` for 1 and nothing else, `other` for every
-        # other count, 0 included — what `String(format:)` picks for `%lld`.
-        localised = plural.get("one" if count == 1 else "other") or plural.get("other") or {}
+        # other count — what `String(format:)` picks for `%lld`. An explicit
+        # `zero` wins for 0, as it does in the app.
+        category = "zero" if count == 0 and "zero" in plural else "one" if count == 1 else "other"
+        localised = plural.get(category) or plural.get("other") or {}
 
     value = (localised.get("stringUnit") or {}).get("value")
     if not value:
