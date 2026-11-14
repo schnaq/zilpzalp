@@ -137,6 +137,32 @@ struct PackLibraryTests {
         }
     }
 
+    /// A feedback report names the pack whose file the tile showed, so it is
+    /// the copy photos and calls come from — not the first pack that declares
+    /// the species, nor the pack a child narrowed play to.
+    @Test("names the pack the shown copy came from")
+    func namesThePackTheShownCopyCameFrom() throws {
+        try withPacks { home in
+            let bundled = try PackFolder.write(
+                pack: "basis",
+                species: [Species(id: "amsel"), Species(id: "star")],
+                to: home,
+            )
+            let installed = try PackFolder.write(
+                pack: "welt",
+                species: [Species(id: "kranich"), Species(id: "amsel", call: true)],
+                to: home,
+            )
+            let library = PackLibrary([bundled, installed])
+            let amsel = try #require(library.birds.first { $0.id == "amsel" })
+            let star = try #require(library.birds.first { $0.id == "star" })
+
+            #expect(library.packID(for: amsel) == "welt")
+            #expect(library.packID(for: star) == "basis")
+            #expect(library.narrowed(toPacks: ["basis"])?.packID(for: amsel) == "welt")
+        }
+    }
+
     /// A build whose bundled pack did not open. The shell draws its calm
     /// sentence for it, and nothing here may trap on the way there.
     @Test("a library without packs is empty and answers nothing")

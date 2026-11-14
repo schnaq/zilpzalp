@@ -137,6 +137,12 @@ public struct PackLibrary: Sendable {
         catalog(for: bird)?.callURL(for: bird)
     }
 
+    /// The id of the pack `bird`'s photos and call come from — what a
+    /// feedback report names, so we fix the file the child actually saw.
+    public func packID(for bird: Bird) -> String? {
+        catalog(for: bird)?.pack.id
+    }
+
     /// The recorded clip for `sentence` about `bird`, `nil` when the pack
     /// declares none or the file is not there — the app then speaks the
     /// sentence with `AVSpeechSynthesizer` (#151).
