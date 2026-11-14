@@ -361,6 +361,30 @@
         }
       }
     },
+    "feedback.gate.reason" : {
+      "comment" : "Why the parental gate is shown: feedback on a tile from inside a round",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hier können Sie uns ein Problem mit einem Bild oder Ruf melden."
+          }
+        }
+      }
+    },
+    "feedback.hint" : {
+      "comment" : "Quiet hint at the top of a round after a system screenshot; opens the parental gate",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feedback zu diesem Bild?"
+          }
+        }
+      }
+    },
     "gate.hint.wrong" : {
       "comment" : "Shown under the parental gate's task after a wrong answer. Never a reprimand and never a lockout — the numbers have already changed",
       "extractionState" : "manual",
