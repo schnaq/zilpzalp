@@ -16,6 +16,7 @@
       "article": "der",
       "lookalike": "thrush",
       "pronunciation": null,
+      "fact": "Beim Rotkehl-Hüttensänger ist der Papa himmelblau mit oranger Brust.",
       "photos": [
         {
           "file": "photos/rotkehl-huettensaenger.heic",
@@ -47,6 +48,11 @@
           "file": "speech/collection.name/rotkehl-huettensaenger.m4a",
           "sha256": "7eb2f68e33be8aeaf149456825a0d7cf1f6ba8d3d39d6ce6c4f106984e839cb3",
           "text": "Rotkehl-Hüttensänger"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/rotkehl-huettensaenger.m4a",
+          "sha256": "f9b849bb2e688f258f75b7b597cbf376df70fe22b6d710949defb9e02e195c0f",
+          "text": "Beim Rotkehl-Hüttensänger ist der Papa himmelblau mit oranger Brust."
         }
       }
     },
@@ -58,6 +64,7 @@
       "article": "die",
       "lookalike": "thrush",
       "pronunciation": null,
+      "fact": "Die Wanderdrossel hat eine orange Brust und zieht Würmer aus dem Rasen.",
       "photos": [
         {
           "file": "photos/wanderdrossel.heic",
@@ -81,6 +88,11 @@
           "file": "speech/collection.name/wanderdrossel.m4a",
           "sha256": "c737328ee9935cc0ebfa43531be8d84f40ba6e612f4666451676707fbeca9a15",
           "text": "Wanderdrossel"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/wanderdrossel.m4a",
+          "sha256": "5368912300501644997b821cc7c0a4524fed5c377d263b8271317cc822141575",
+          "text": "Die Wanderdrossel hat eine orange Brust und zieht Würmer aus dem Rasen."
         }
       }
     },
@@ -92,6 +104,7 @@
       "article": "die",
       "lookalike": "goose",
       "pronunciation": null,
+      "fact": "Die Schneegans ist schneeweiß und hat schwarze Spitzen an den Flügeln.",
       "photos": [
         {
           "file": "photos/schneegans.heic",
@@ -124,6 +137,11 @@
           "file": "speech/collection.name/schneegans.m4a",
           "sha256": "f85d980accdbca6f4210531ca1a615b5a2e1f8645d1335b1cdf4733219f37d9b",
           "text": "Schneegans"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/schneegans.m4a",
+          "sha256": "29b0314088e5c5df9f5ae6dbc7cc77ccf4c0582b37b1aaca8f5835824993ad14",
+          "text": "Die Schneegans ist schneeweiß und hat schwarze Spitzen an den Flügeln."
         }
       }
     },
@@ -135,6 +153,7 @@
       "article": "die",
       "lookalike": "duck",
       "pronunciation": null,
+      "fact": "Bei der Brautente springen die Küken aus einer hohen Baumhöhle.",
       "photos": [
         {
           "file": "photos/brautente.heic",
@@ -166,6 +185,11 @@
           "file": "speech/collection.name/brautente.m4a",
           "sha256": "2cb6be72ca2e70378fbe982975c3b9ca7a34f4e7306885b90e733bc6b15aa2cd",
           "text": "Brautente"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/brautente.m4a",
+          "sha256": "ba6df4a2659a9976a0bb908304099d6c08f3a61238a1be6c0b6d5e4b6717b265",
+          "text": "Bei der Brautente springen die Küken aus einer hohen Baumhöhle."
         }
       }
     },
@@ -177,6 +201,7 @@
       "article": "der",
       "lookalike": "cuckoo",
       "pronunciation": null,
+      "fact": "Der Wegekuckuck flitzt zu Fuß durch die Wüste und fliegt nur selten.",
       "photos": [
         {
           "file": "photos/wegekuckuck.heic",
@@ -201,6 +226,11 @@
           "file": "speech/collection.name/wegekuckuck.m4a",
           "sha256": "3a69e483a9333de75bea6903d87cd4891ebe0b5b48c3470d0f9b7584e5d525df",
           "text": "Wegekuckuck"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/wegekuckuck.m4a",
+          "sha256": "65c92347c3f18e11aff85795213d073fb42653b6eb486fc66a22894340617c69",
+          "text": "Der Wegekuckuck flitzt zu Fuß durch die Wüste und fliegt nur selten."
         }
       }
     },
@@ -212,6 +242,7 @@
       "article": "der",
       "lookalike": "hummingbird",
       "pronunciation": null,
+      "fact": "Der Rubinkehlkolibri ist winzig, fliegt aber ohne Pause übers Meer.",
       "photos": [
         {
           "file": "photos/rubinkehlkolibri.heic",
@@ -235,6 +266,11 @@
           "file": "speech/collection.name/rubinkehlkolibri.m4a",
           "sha256": "ec1bcb30dcac9142141ef7e7ab638ee4eb60de7ea46f029ca39145e736ef31f7",
           "text": "Rubinkehlkolibri"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/rubinkehlkolibri.m4a",
+          "sha256": "df065ed0e8a9fcdb8b8a87a26544685864342003b5e9e279e648350776d1934e",
+          "text": "Der Rubinkehlkolibri ist winzig, fliegt aber ohne Pause übers Meer."
         }
       }
     },
@@ -246,6 +282,7 @@
       "article": "der",
       "lookalike": "finch",
       "pronunciation": null,
+      "fact": "Der Rotkardinal hat eine Federhaube, und der Papa ist leuchtend rot.",
       "photos": [
         {
           "file": "photos/rotkardinal-3.heic",
@@ -285,6 +322,11 @@
           "file": "speech/collection.name/rotkardinal.m4a",
           "sha256": "b667b3d27d7316af3a3af9efa85e3b8ee5dd9fec5ca815e2803efecfad917f22",
           "text": "Rotkardinal"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/rotkardinal.m4a",
+          "sha256": "777fd4ca4812e7290cf22f87bd16b92090f62081c3bcd657b49961c80a246653",
+          "text": "Der Rotkardinal hat eine Federhaube, und der Papa ist leuchtend rot."
         }
       }
     },
@@ -296,6 +338,7 @@
       "article": "der",
       "lookalike": "corvid",
       "pronunciation": null,
+      "fact": "Der Blauhäher trägt eine Haube und macht Rufe von Bussarden nach.",
       "photos": [
         {
           "file": "photos/blauhaeher-2.heic",
@@ -327,6 +370,11 @@
           "file": "speech/collection.name/blauhaeher.m4a",
           "sha256": "4c926352fc071078710fcc834960cf87afe1fe43773702653b0761c530edeef6",
           "text": "Blauhäher"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/blauhaeher.m4a",
+          "sha256": "da688b3de34b241acebee82b176e55fb78a39636973b022b6dbf42704746454f",
+          "text": "Der Blauhäher trägt eine Haube und macht Rufe von Bussarden nach."
         }
       }
     },
@@ -338,6 +386,7 @@
       "article": "der",
       "lookalike": "raptor",
       "pronunciation": null,
+      "fact": "Der Weißkopfseeadler hat einen weißen Kopf und baut riesige Nester.",
       "photos": [
         {
           "file": "photos/weisskopfseeadler.heic",
@@ -377,6 +426,11 @@
           "file": "speech/collection.name/weisskopfseeadler.m4a",
           "sha256": "16aef30c2c7dcca1ddf05f9df2eea2ac2713902a482bdbff6fd0f38a75e86945",
           "text": "Weißkopfseeadler"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/weisskopfseeadler.m4a",
+          "sha256": "b7c9493b86b820009179160897efc2a74445452050896ef8fd63e9714e906b6d",
+          "text": "Der Weißkopfseeadler hat einen weißen Kopf und baut riesige Nester."
         }
       }
     },
@@ -388,6 +442,7 @@
       "article": "der",
       "lookalike": "gamebird",
       "pronunciation": null,
+      "fact": "Beim Truthahn plustert sich der Papa mächtig auf und kollert laut.",
       "photos": [
         {
           "file": "photos/truthahn.heic",
@@ -411,6 +466,11 @@
           "file": "speech/collection.name/truthahn.m4a",
           "sha256": "cf6f945fe0a9f92ec3dd5bd2613546e7df8fd35bda29f830155d4fc27e31e8a2",
           "text": "Truthahn"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/truthahn.m4a",
+          "sha256": "73927da9eb5221e0e3ed989dbdfc72785c09930a6df2496f286088c06cde6562",
+          "text": "Beim Truthahn plustert sich der Papa mächtig auf und kollert laut."
         }
       }
     },
@@ -422,6 +482,7 @@
       "article": "der",
       "lookalike": "hummingbird",
       "pronunciation": null,
+      "fact": "Beim Annakolibri stürzt der Papa herab und pfeift mit dem Schwanz.",
       "photos": [
         {
           "file": "photos/annakolibri.heic",
@@ -445,6 +506,11 @@
           "file": "speech/collection.name/annakolibri.m4a",
           "sha256": "cbbd52dbd5bbde890fae04785d2fc005dc7e5337e17c8c5297abcec4ace36f7a",
           "text": "Annakolibri"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/annakolibri.m4a",
+          "sha256": "d7bfc0cff3950b58433766f77043d8618a8b978a6b34fbcfaee9d779449357c0",
+          "text": "Beim Annakolibri stürzt der Papa herab und pfeift mit dem Schwanz."
         }
       }
     },
@@ -456,6 +522,7 @@
       "article": "der",
       "lookalike": "diver",
       "pronunciation": null,
+      "fact": "Der Eistaucher heult über den See wie ein Wolf.",
       "photos": [
         {
           "file": "photos/eistaucher.heic",
@@ -479,6 +546,11 @@
           "file": "speech/collection.name/eistaucher.m4a",
           "sha256": "e1372142c3568c627ee6ea2665b5501b5fa2eaab99930cc7059af33e57b8ea0a",
           "text": "Eistaucher"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/eistaucher.m4a",
+          "sha256": "6dac707abf112e1d32dcc69dece5bfb13488c98743beba04348257d473dc11e0",
+          "text": "Der Eistaucher heult über den See wie ein Wolf."
         }
       }
     },
@@ -490,6 +562,7 @@
       "article": "die",
       "lookalike": "owl",
       "pronunciation": null,
+      "fact": "Die Schnee-Eule wohnt im eisigen Norden, der Papa ist weiß wie Schnee.",
       "photos": [
         {
           "file": "photos/schnee-eule.heic",
@@ -522,6 +595,11 @@
           "file": "speech/collection.name/schnee-eule.m4a",
           "sha256": "32a0f9f3757c5ce9a7b682d1bfaf4e8c7aa68f3d109c084c713b5fceddbc07e9",
           "text": "Schnee-Eule"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/schnee-eule.m4a",
+          "sha256": "fa789bf43260b610da3c580de7eaf7a0cdb8d0cfebd0270766041c2717bbc24d",
+          "text": "Die Schnee-Eule wohnt im eisigen Norden, der Papa ist weiß wie Schnee."
         }
       }
     },
@@ -533,6 +611,7 @@
       "article": "der",
       "lookalike": "diver",
       "pronunciation": null,
+      "fact": "Der Papageitaucher trägt viele Fische auf einmal im bunten Schnabel.",
       "photos": [
         {
           "file": "photos/papageitaucher.heic",
@@ -565,6 +644,11 @@
           "file": "speech/collection.name/papageitaucher.m4a",
           "sha256": "e7028c1c4abe1b16eba0e9521269c3a74d5595ab9f75c6d88f633ec9f51ec48f",
           "text": "Papageitaucher"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/papageitaucher.m4a",
+          "sha256": "f8d77a692f0ca527f16529cdde54baab0631c0a3b921b55a0a0da1199e8939f5",
+          "text": "Der Papageitaucher trägt viele Fische auf einmal im bunten Schnabel."
         }
       }
     },
@@ -576,6 +660,7 @@
       "article": "der",
       "lookalike": "owl",
       "pronunciation": null,
+      "fact": "Der Virginia-Uhu hat gelbe Augen und einen weißen Fleck am Hals.",
       "photos": [
         {
           "file": "photos/virginia-uhu.heic",
@@ -607,6 +692,11 @@
           "file": "speech/collection.name/virginia-uhu.m4a",
           "sha256": "6412c86f83f1451e348d5455daafaaccf664632c8dbac3e68551012c786fa5c1",
           "text": "Virginia-Uhu"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/virginia-uhu.m4a",
+          "sha256": "e5b357ac1c238048ec3116b988bd5a9f925bbb3e57d66c86d62b71e8a40f0aa4",
+          "text": "Der Virginia-Uhu hat gelbe Augen und einen weißen Fleck am Hals."
         }
       }
     },
@@ -618,6 +708,7 @@
       "article": "der",
       "lookalike": "vulture",
       "pronunciation": null,
+      "fact": "Der Truthahngeier hat einen roten Kopf und riecht sein Futter.",
       "photos": [
         {
           "file": "photos/truthahngeier.heic",
@@ -642,6 +733,11 @@
           "file": "speech/collection.name/truthahngeier.m4a",
           "sha256": "9513fd3e3ccfc1e26bd19e4c38117268a186d84192bb4e2e2206ffebab6c2754",
           "text": "Truthahngeier"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/truthahngeier.m4a",
+          "sha256": "620bf897c4ff09b974ed4c59a132ad0f984f021b212dfce6acbb0a035fad4afe",
+          "text": "Der Truthahngeier hat einen roten Kopf und riecht sein Futter."
         }
       }
     },
@@ -653,6 +749,7 @@
       "article": "die",
       "lookalike": "goose",
       "pronunciation": null,
+      "fact": "Die Kanadagans hat einen schwarzen Hals und ein weißes Kinnband.",
       "photos": [
         {
           "file": "photos/kanadagans.heic",
@@ -676,6 +773,11 @@
           "file": "speech/collection.name/kanadagans.m4a",
           "sha256": "3be39aa8655ca0e3cb683a5f6b4f82599285263b647c756159ed6bf31c96adb3",
           "text": "Kanadagans"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/kanadagans.m4a",
+          "sha256": "debd947398ad1d68264bebc3955e9b31edff012f30f6b9f559eb4fd27d2f129c",
+          "text": "Die Kanadagans hat einen schwarzen Hals und ein weißes Kinnband."
         }
       }
     },
@@ -687,6 +789,7 @@
       "article": "der",
       "lookalike": "woodpecker",
       "pronunciation": null,
+      "fact": "Der Rotkopfspecht hat einen ganz roten Kopf.",
       "photos": [
         {
           "file": "photos/rotkopfspecht.heic",
@@ -718,6 +821,11 @@
           "file": "speech/collection.name/rotkopfspecht.m4a",
           "sha256": "51d62b7e14cc08d1b8d7d3efe9de66d87ddbdf035611eee1a332fef09f610f0e",
           "text": "Rotkopfspecht"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/rotkopfspecht.m4a",
+          "sha256": "aa25f7f283741451aef136af3fcc0d34d971120cfaf9714ecdadbf4216ac183c",
+          "text": "Der Rotkopfspecht hat einen ganz roten Kopf."
         }
       }
     },
@@ -729,6 +837,7 @@
       "article": "der",
       "lookalike": "woodpecker",
       "pronunciation": null,
+      "fact": "Der Helmspecht ist so groß wie eine Krähe und hackt eckige Löcher.",
       "photos": [
         {
           "file": "photos/helmspecht.heic",
@@ -760,6 +869,11 @@
           "file": "speech/collection.name/helmspecht.m4a",
           "sha256": "02c0addce59dd924da772ca854548ebfdc7c4a22e2e6cafea9cac19408b2ed86",
           "text": "Helmspecht"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/helmspecht.m4a",
+          "sha256": "00da4fff41cf219a531fb14b303f29a561ac79cbae52b1b92b983aa59fe33e88",
+          "text": "Der Helmspecht ist so groß wie eine Krähe und hackt eckige Löcher."
         }
       }
     },
@@ -771,6 +885,7 @@
       "article": "die",
       "lookalike": "tit",
       "pronunciation": null,
+      "fact": "Die Schopfmeise ist grau und hat eine spitze Haube.",
       "photos": [
         {
           "file": "photos/schopfmeise.heic",
@@ -810,6 +925,11 @@
           "file": "speech/collection.name/schopfmeise.m4a",
           "sha256": "280c260cba76e9256d87c833da4c90064778cdec7a05394d4f40cec6ec525d09",
           "text": "Schopfmeise"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/schopfmeise.m4a",
+          "sha256": "22845e4f0e2f0b2a7662b585102eb1e606dbd463521092584bb087f39cb01eac",
+          "text": "Die Schopfmeise ist grau und hat eine spitze Haube."
         }
       }
     },
@@ -821,6 +941,7 @@
       "article": "der",
       "lookalike": "finch",
       "pronunciation": null,
+      "fact": "Beim Indigofink ist der Papa ganz blau und fliegt nach den Sternen.",
       "photos": [
         {
           "file": "photos/indigofink.heic",
@@ -860,6 +981,11 @@
           "file": "speech/collection.name/indigofink.m4a",
           "sha256": "19d28488f7892bbe70ea8ad03f5f0dae194ab5210c61764092f87b72262bfe8b",
           "text": "Indigofink"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/indigofink.m4a",
+          "sha256": "3338afd44f8b68e2ca75393b39fe7dd6dd2d819f2a46215ce95b3cd0d86d391a",
+          "text": "Beim Indigofink ist der Papa ganz blau und fliegt nach den Sternen."
         }
       }
     },
@@ -871,6 +997,7 @@
       "article": "der",
       "lookalike": "finch",
       "pronunciation": null,
+      "fact": "Beim Goldzeisig ist der Papa im Sommer zitronengelb.",
       "photos": [
         {
           "file": "photos/goldzeisig.heic",
@@ -910,6 +1037,11 @@
           "file": "speech/collection.name/goldzeisig.m4a",
           "sha256": "2fd7695d878f4760725e5d1bb0d778b47d2a8922b58221fa758ff45d3680c799",
           "text": "Goldzeisig"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/goldzeisig.m4a",
+          "sha256": "44866ffaf23a6be2e7fad59a1ef83be0cfa8e3d7d98762e052f3b6de683772b5",
+          "text": "Beim Goldzeisig ist der Papa im Sommer zitronengelb."
         }
       }
     },
@@ -921,6 +1053,7 @@
       "article": "der",
       "lookalike": "thrush",
       "pronunciation": null,
+      "fact": "Beim Baltimoretrupial ist der Papa orange und nascht gern Orangen.",
       "photos": [
         {
           "file": "photos/baltimoretrupial.heic",
@@ -952,6 +1085,11 @@
           "file": "speech/collection.name/baltimoretrupial.m4a",
           "sha256": "46d0a57ae50a3b5afdd44822deb064d0b8108b70e5277f7b792001f5bf7ffc12",
           "text": "Baltimoretrupial"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/baltimoretrupial.m4a",
+          "sha256": "26c66e12b8c773d431777efa5282a46501b05f1b6e0628ad86a62bcc4782e09b",
+          "text": "Beim Baltimoretrupial ist der Papa orange und nascht gern Orangen."
         }
       }
     },
@@ -963,6 +1101,7 @@
       "article": "der",
       "lookalike": "thrush",
       "pronunciation": null,
+      "fact": "Beim Rotschulterstärling hat der Papa rote Flecken auf den Schultern.",
       "photos": [
         {
           "file": "photos/rotschulterstaerling.heic",
@@ -1002,6 +1141,11 @@
           "file": "speech/collection.name/rotschulterstaerling.m4a",
           "sha256": "891bd657b0efbe39f7dac35960db4a35866ba4ce4953161d3b5f3f31eee90d37",
           "text": "Rotschulterstärling"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/rotschulterstaerling.m4a",
+          "sha256": "985054b5e39c486d2b9e26e60c518130bf19d312e6c39b8a05fa1d02e6dab14e",
+          "text": "Beim Rotschulterstärling hat der Papa rote Flecken auf den Schultern."
         }
       }
     },
@@ -1013,6 +1157,7 @@
       "article": "der",
       "lookalike": "thrush",
       "pronunciation": null,
+      "fact": "Beim Brillenstärling hat der Papa einen gelben Kopf.",
       "photos": [
         {
           "file": "photos/brillenstaerling.heic",
@@ -1052,6 +1197,11 @@
           "file": "speech/collection.name/brillenstaerling.m4a",
           "sha256": "ba3f09a7a5e27c6843c239e8ea08026684f37647961ff0f3bfe599ca57d9f334",
           "text": "Brillenstärling"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/brillenstaerling.m4a",
+          "sha256": "078d664a261bffa6d14a877c0e3e72055c46d656957996f02997dbce7a470072",
+          "text": "Beim Brillenstärling hat der Papa einen gelben Kopf."
         }
       }
     },
@@ -1063,6 +1213,7 @@
       "article": "der",
       "lookalike": "kingfisher",
       "pronunciation": null,
+      "fact": "Beim Gürtelfischer trägt die Mama einen rostroten Gürtel.",
       "photos": [
         {
           "file": "photos/guertelfischer.heic",
@@ -1086,6 +1237,11 @@
           "file": "speech/collection.name/guertelfischer.m4a",
           "sha256": "8c89138dd496209c55f8f3c1fd476a61701e9a3f4453c94a5c724ce570b2bf1e",
           "text": "Gürtelfischer"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/guertelfischer.m4a",
+          "sha256": "dba3cf0bbd176dd4ef288af52c17f94389cff650254a679bd2e2a5f593c4fa6c",
+          "text": "Beim Gürtelfischer trägt die Mama einen rostroten Gürtel."
         }
       }
     },
@@ -1097,6 +1253,7 @@
       "article": "der",
       "lookalike": "raptor",
       "pronunciation": null,
+      "fact": "Der Buntfalke ist bunt und hat zwei schwarze Streifen im Gesicht.",
       "photos": [
         {
           "file": "photos/buntfalke.heic",
@@ -1136,6 +1293,11 @@
           "file": "speech/collection.name/buntfalke.m4a",
           "sha256": "49df5e1b0cc3a9eaaaf70a63005195927664201f09912430524fefd9a3399ed3",
           "text": "Buntfalke"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/buntfalke.m4a",
+          "sha256": "0f513e9880cab2c88c69273a31faec3c9992bbf0608fc0b498b5a65fdc069237",
+          "text": "Der Buntfalke ist bunt und hat zwei schwarze Streifen im Gesicht."
         }
       }
     },
@@ -1147,6 +1309,7 @@
       "article": "der",
       "lookalike": "heron",
       "pronunciation": null,
+      "fact": "Der Kanadakranich färbt seine grauen Federn mit Schlamm braun.",
       "photos": [
         {
           "file": "photos/kanadakranich.heic",
@@ -1170,6 +1333,11 @@
           "file": "speech/collection.name/kanadakranich.m4a",
           "sha256": "f0659a1e578a292261919a9045c15bf3d60a18e0f2fe86e7ba177f393395aa9b",
           "text": "Kanadakranich"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/kanadakranich.m4a",
+          "sha256": "b280067a93a5c80b7e6c31d6113f07240372e23a8d9669919f53f82f29c2ee68",
+          "text": "Der Kanadakranich färbt seine grauen Federn mit Schlamm braun."
         }
       }
     },
@@ -1181,6 +1349,7 @@
       "article": "der",
       "lookalike": "corvid",
       "pronunciation": null,
+      "fact": "Der Diademhäher hat einen schwarzen Kopf mit hoher Haube.",
       "photos": [
         {
           "file": "photos/diademhaeher.heic",
@@ -1204,6 +1373,11 @@
           "file": "speech/collection.name/diademhaeher.m4a",
           "sha256": "cc8960d6eb844196defe82c8b94ae8c7ce499e0544e6d19df64a7b693b4360e9",
           "text": "Diademhäher"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/diademhaeher.m4a",
+          "sha256": "cb18b09b81d08670de537800745b707c1dadfa7e6a5fc2f62da987c9cb9dcd2d",
+          "text": "Der Diademhäher hat einen schwarzen Kopf mit hoher Haube."
         }
       }
     },
@@ -1215,6 +1389,7 @@
       "article": "der",
       "lookalike": "seabird",
       "pronunciation": null,
+      "fact": "Der Braunpelikan stürzt sich kopfüber aus der Luft ins Meer.",
       "photos": [
         {
           "file": "photos/braunpelikan.heic",
@@ -1231,6 +1406,11 @@
           "file": "speech/collection.name/braunpelikan.m4a",
           "sha256": "9fb7f52049214d71d61dcdcca7979210acf9fcae9baab646f761b1c7cf646804",
           "text": "Braunpelikan"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/braunpelikan.m4a",
+          "sha256": "21a3f77cd5755f931099f56272d1d2e5bdd63a8cd4cf380b62337a93b5120cb1",
+          "text": "Der Braunpelikan stürzt sich kopfüber aus der Luft ins Meer."
         }
       }
     },
@@ -1242,6 +1422,7 @@
       "article": "der",
       "lookalike": "heron",
       "pronunciation": null,
+      "fact": "Der Blaureiher ist der größte Reiher Nordamerikas.",
       "photos": [
         {
           "file": "photos/blaureiher.heic",
@@ -1273,6 +1454,11 @@
           "file": "speech/collection.name/blaureiher.m4a",
           "sha256": "4def1258088b14b919bc93bea77e09e8cc602b736a9efa9b4f441a02e1a4f0e0",
           "text": "Blaureiher"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/blaureiher.m4a",
+          "sha256": "eb223c610d955a0ec5e4b5e01e188c8cabd30343597d9f58182e52d1fa006adf",
+          "text": "Der Blaureiher ist der größte Reiher Nordamerikas."
         }
       }
     },
@@ -1284,6 +1470,7 @@
       "article": "der",
       "lookalike": "owl",
       "pronunciation": null,
+      "fact": "Der Streifenkauz hat dunkle Augen und lange braune Streifen am Bauch.",
       "photos": [
         {
           "file": "photos/streifenkauz.heic",
@@ -1307,6 +1494,11 @@
           "file": "speech/collection.name/streifenkauz.m4a",
           "sha256": "5470c1c2ea3f2b610fc25abe10b95fdbee4f2cd94ce17ccef78884f6f68cb665",
           "text": "Streifenkauz"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/streifenkauz.m4a",
+          "sha256": "9cb72094020d457b9428fac204b406a7db5c6de42484f4c78944f11fbf32933e",
+          "text": "Der Streifenkauz hat dunkle Augen und lange braune Streifen am Bauch."
         }
       }
     },
@@ -1318,6 +1510,7 @@
       "article": "die",
       "lookalike": "owl",
       "pronunciation": null,
+      "fact": "Die Sumpfohreule jagt auch am Tag tief über Wiesen und Moore.",
       "photos": [
         {
           "file": "photos/sumpfohreule.heic",
@@ -1357,6 +1550,11 @@
           "file": "speech/collection.name/sumpfohreule.m4a",
           "sha256": "5f080f16957aa369926724f91a4cb0bf70c3fd3fe974e17967bb500b5a6d8e55",
           "text": "Sumpfohreule"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/sumpfohreule.m4a",
+          "sha256": "a51f23e7b1ae3d4e92b50e8a70d91b74d385a70c19dcd471474e2b9bf262ed46",
+          "text": "Die Sumpfohreule jagt auch am Tag tief über Wiesen und Moore."
         }
       }
     },
@@ -1368,6 +1566,7 @@
       "article": "der",
       "lookalike": "goose",
       "pronunciation": null,
+      "fact": "Der Trompeterschwan ist der größte Wasservogel Nordamerikas.",
       "photos": [
         {
           "file": "photos/trompeterschwan.heic",
@@ -1407,6 +1606,11 @@
           "file": "speech/collection.name/trompeterschwan.m4a",
           "sha256": "634a85881239a064e94b89423349322cfb366ec64cdd57da5c1f4a527ae5dc69",
           "text": "Trompeterschwan"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/trompeterschwan.m4a",
+          "sha256": "82bfe2fa7c99bf2349c50bb4171cd0b0d4880afc6a424e0bc16f08d386c91fbf",
+          "text": "Der Trompeterschwan ist der größte Wasservogel Nordamerikas."
         }
       }
     },
@@ -1418,6 +1622,7 @@
       "article": "die",
       "lookalike": "duck",
       "pronunciation": null,
+      "fact": "Die Kragenente mag wilde Flüsse, und der Papa ist bunt wie ein Clown.",
       "photos": [
         {
           "file": "photos/kragenente.heic",
@@ -1450,6 +1655,11 @@
           "file": "speech/collection.name/kragenente.m4a",
           "sha256": "391d59cf3d9025bf5517afda676035b7461b5365081a99f5378abf5a9bb78f33",
           "text": "Kragenente"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/kragenente.m4a",
+          "sha256": "e9a1c9d946e0b3a5e3f0c3f1987fcffb282123f359b3f8f3458b559008647221",
+          "text": "Die Kragenente mag wilde Flüsse, und der Papa ist bunt wie ein Clown."
         }
       }
     },
@@ -1461,6 +1671,7 @@
       "article": "die",
       "lookalike": "duck",
       "pronunciation": null,
+      "fact": "Bei der Zimtente ist der Papa zimtrot und hat rote Augen.",
       "photos": [
         {
           "file": "photos/zimtente.heic",
@@ -1493,6 +1704,11 @@
           "file": "speech/collection.name/zimtente.m4a",
           "sha256": "5f78fa5038f5b72c97dbc3376b3bfcaa71e27278de8e40cf8e4f8937449a847a",
           "text": "Zimtente"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/zimtente.m4a",
+          "sha256": "df8e2d6f20298b8f78e43d9358f928931c07cd746eecad97e9defa2fb145798f",
+          "text": "Bei der Zimtente ist der Papa zimtrot und hat rote Augen."
         }
       }
     }

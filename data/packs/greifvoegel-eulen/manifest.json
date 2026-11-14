@@ -16,6 +16,7 @@
       "article": "der",
       "lookalike": "owl",
       "pronunciation": "Der Uhu",
+      "fact": "Der Uhu ist eine riesige Eule mit Federohren und großen orangen Augen.",
       "photos": [
         {
           "file": "photos/uhu.heic",
@@ -55,6 +56,11 @@
           "file": "speech/collection.name/uhu.m4a",
           "sha256": "48cd91a67d57f0a7acb624fcdcd315352456765890f1c91e813e15ee7497be1c",
           "text": "Der Uhu"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/uhu.m4a",
+          "sha256": "1d12e47d2afde76d795a72abaee9ded648a36462513f7bf51767530498e4f677",
+          "text": "Der Uhu ist eine riesige Eule mit Federohren und großen orangen Augen."
         }
       }
     },
@@ -66,6 +72,7 @@
       "article": "die",
       "lookalike": "owl",
       "pronunciation": null,
+      "fact": "Die Schleiereule hat ein weißes Gesicht in Herzform.",
       "photos": [
         {
           "file": "photos/schleiereule-5.heic",
@@ -97,6 +104,11 @@
           "file": "speech/collection.name/schleiereule.m4a",
           "sha256": "a08a166993cd6f8e4e6eec2da5a41236f6dc78ed856a5ba583bea97de1b3b29d",
           "text": "Schleiereule"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/schleiereule.m4a",
+          "sha256": "2e050384ff58a3162f5da8b0cfcbd699603d019d6e82a439aef80a4091ab2247",
+          "text": "Die Schleiereule hat ein weißes Gesicht in Herzform."
         }
       }
     },
@@ -108,6 +120,7 @@
       "article": "der",
       "lookalike": "owl",
       "pronunciation": null,
+      "fact": "Nachts ruft der Waldkauz im Wald sein langes „Huuu-hu-huuu“.",
       "photos": [
         {
           "file": "photos/waldkauz.heic",
@@ -139,6 +152,11 @@
           "file": "speech/collection.name/waldkauz.m4a",
           "sha256": "12cd33fd92b9dc0b68f8d5ff0d822267b42d3d31586f37cf141abc4a142399dd",
           "text": "Waldkauz"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/waldkauz.m4a",
+          "sha256": "00a3991a5e5424ccd8d7acee8a03bdea9083d70a36c178ca6400ebd031332b8a",
+          "text": "Nachts ruft der Waldkauz im Wald sein langes „Huuu-hu-huuu“."
         }
       }
     },
@@ -150,6 +168,7 @@
       "article": "der",
       "lookalike": "owl",
       "pronunciation": null,
+      "fact": "Der Steinkauz ist eine kleine Eule und wohnt gern in alten Obstbäumen.",
       "photos": [
         {
           "file": "photos/steinkauz.heic",
@@ -189,6 +208,11 @@
           "file": "speech/collection.name/steinkauz.m4a",
           "sha256": "5f12db7753a30297e988d66b8b51618138916e4134f8b7d74e809c6b82b325b0",
           "text": "Steinkauz"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/steinkauz.m4a",
+          "sha256": "cd8839a522368bff6d49e41537cad6ce7903d44cf6954577ed0b4a49b89fb635",
+          "text": "Der Steinkauz ist eine kleine Eule und wohnt gern in alten Obstbäumen."
         }
       }
     },
@@ -200,6 +224,7 @@
       "article": "die",
       "lookalike": "owl",
       "pronunciation": null,
+      "fact": "Die Waldohreule hat lange Federohren und schläft im Winter in Gruppen.",
       "photos": [
         {
           "file": "photos/waldohreule.heic",
@@ -231,6 +256,11 @@
           "file": "speech/collection.name/waldohreule.m4a",
           "sha256": "b76881ac36318c5f726b75d7ae3bf2020a2a91d5db6088772828400cbec8906b",
           "text": "Waldohreule"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/waldohreule.m4a",
+          "sha256": "ea9ad59b2ef574ce4ac97106345032bd78bd1b490cd99d9f09f24a1628c60eea",
+          "text": "Die Waldohreule hat lange Federohren und schläft im Winter in Gruppen."
         }
       }
     },
@@ -242,6 +272,7 @@
       "article": "der",
       "lookalike": "owl",
       "pronunciation": null,
+      "fact": "Der Sperlingskauz ist die kleinste Eule bei uns, so groß wie ein Star.",
       "photos": [
         {
           "file": "photos/sperlingskauz.heic",
@@ -281,6 +312,11 @@
           "file": "speech/collection.name/sperlingskauz.m4a",
           "sha256": "48e3e17bb79a63ac787cb32c8b5f0503939aa7196f999bb851767f968a15eda7",
           "text": "Sperlingskauz"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/sperlingskauz.m4a",
+          "sha256": "2e0d6ef91fef7367168e2e5191049b8580fc1efaea553d1549b67414e5d84e19",
+          "text": "Der Sperlingskauz ist die kleinste Eule bei uns, so groß wie ein Star."
         }
       }
     },
@@ -292,6 +328,7 @@
       "article": "die",
       "lookalike": "owl",
       "pronunciation": null,
+      "fact": "Die Zwergohreule ist winzig und pfeift nachts immer wieder „djü, djü“.",
       "photos": [
         {
           "file": "photos/zwergohreule.heic",
@@ -323,6 +360,11 @@
           "file": "speech/collection.name/zwergohreule.m4a",
           "sha256": "d011159dd02daf4c2d737a19cdf67a448412c49ba4b781ac02425a9a8d1265a2",
           "text": "Zwergohreule"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/zwergohreule.m4a",
+          "sha256": "9197aa547180700a3fa1af34d414b84657a7539214ad58b593bfda6dac155c69",
+          "text": "Die Zwergohreule ist winzig und pfeift nachts immer wieder „djü, djü“."
         }
       }
     },
@@ -334,6 +376,7 @@
       "article": "die",
       "lookalike": "owl",
       "pronunciation": null,
+      "fact": "Die Schnee-Eule wohnt im eisigen Norden, der Papa ist weiß wie Schnee.",
       "photos": [
         {
           "file": "photos/schnee-eule.heic",
@@ -366,6 +409,11 @@
           "file": "speech/collection.name/schnee-eule.m4a",
           "sha256": "15e3482355c3887e9e718345ba79e10783ef5176b4d3c0ae910e0ebff312cff2",
           "text": "Schnee-Eule"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/schnee-eule.m4a",
+          "sha256": "da86aa9dd5a398c9d755cf971b5fc110e2a33f184bbbc0cb73fc582691c4756f",
+          "text": "Die Schnee-Eule wohnt im eisigen Norden, der Papa ist weiß wie Schnee."
         }
       }
     },
@@ -377,6 +425,7 @@
       "article": "der",
       "lookalike": "owl",
       "pronunciation": null,
+      "fact": "Der Bartkauz hat einen schwarzen Bart und hört Mäuse unter Schnee.",
       "photos": [
         {
           "file": "photos/bartkauz.heic",
@@ -416,6 +465,11 @@
           "file": "speech/collection.name/bartkauz.m4a",
           "sha256": "090497829331d580e34c95058de6dd0b6dfce37ce8de9cd2078f352321d86b0a",
           "text": "Bartkauz"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/bartkauz.m4a",
+          "sha256": "5bf1f0f61e69193b21b08e16eb6f554c107d2b11b29d8da54cd8aa5117ec7c43",
+          "text": "Der Bartkauz hat einen schwarzen Bart und hört Mäuse unter Schnee."
         }
       }
     },
@@ -427,6 +481,7 @@
       "article": "der",
       "lookalike": "owl",
       "pronunciation": null,
+      "fact": "Der Kaninchenkauz hat lange Beine und wohnt in Erdhöhlen im Boden.",
       "photos": [
         {
           "file": "photos/kaninchenkauz.heic",
@@ -466,6 +521,11 @@
           "file": "speech/collection.name/kaninchenkauz.m4a",
           "sha256": "f118b67651b10a34044fd56d8db8d41e2b3367b40688a1dcb886cf54aeb918be",
           "text": "Kaninchenkauz"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/kaninchenkauz.m4a",
+          "sha256": "cf18468c4bab1a11bcdec6688d535502dc912b41d4e6be64ec6ff7624c60d532",
+          "text": "Der Kaninchenkauz hat lange Beine und wohnt in Erdhöhlen im Boden."
         }
       }
     },
@@ -477,6 +537,7 @@
       "article": "der",
       "lookalike": "owl",
       "pronunciation": null,
+      "fact": "Der Virginia-Uhu hat gelbe Augen und einen weißen Fleck am Hals.",
       "photos": [
         {
           "file": "photos/virginia-uhu.heic",
@@ -508,6 +569,11 @@
           "file": "speech/collection.name/virginia-uhu.m4a",
           "sha256": "d1fd429e7aba8358cc358de948cc22e76e11b670ee987810f7685f0df4c2f7d0",
           "text": "Virginia-Uhu"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/virginia-uhu.m4a",
+          "sha256": "2f3e43f3d586fef82f782ee3d965cf68c3b4ff293bb64777d05b26b8e71931c4",
+          "text": "Der Virginia-Uhu hat gelbe Augen und einen weißen Fleck am Hals."
         }
       }
     },
@@ -519,6 +585,7 @@
       "article": "der",
       "lookalike": "raptor",
       "pronunciation": null,
+      "fact": "Der Steinadler hat goldene Nackenfedern und brütet oft an Felswänden.",
       "photos": [
         {
           "file": "photos/steinadler.heic",
@@ -542,6 +609,11 @@
           "file": "speech/collection.name/steinadler.m4a",
           "sha256": "c066bfb8ded2d25b324189753bb046c054da0bd85a25d3924193912f101be31d",
           "text": "Steinadler"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/steinadler.m4a",
+          "sha256": "a7b55ab67ca03a9d0e7a8535717a9846284047aefcef50d6db5cf9a334afaff4",
+          "text": "Der Steinadler hat goldene Nackenfedern und brütet oft an Felswänden."
         }
       }
     },
@@ -553,6 +625,7 @@
       "article": "der",
       "lookalike": "raptor",
       "pronunciation": null,
+      "fact": "Der Seeadler ist riesig, hat einen weißen Schwanz und fängt Fische.",
       "photos": [
         {
           "file": "photos/seeadler-5.heic",
@@ -585,6 +658,11 @@
           "file": "speech/collection.name/seeadler.m4a",
           "sha256": "38561160389c71ebedffb10d50eabbfc5118ca18a4e964ea05564dd94c98ea2f",
           "text": "Seeadler"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/seeadler.m4a",
+          "sha256": "1caddc76a2bfbc3296c3f4ae4f8522f29a5ee29d1eaf59b420eb5dc6c155111f",
+          "text": "Der Seeadler ist riesig, hat einen weißen Schwanz und fängt Fische."
         }
       }
     },
@@ -596,6 +674,7 @@
       "article": "der",
       "lookalike": "raptor",
       "pronunciation": null,
+      "fact": "Der Weißkopfseeadler hat einen weißen Kopf und baut riesige Nester.",
       "photos": [
         {
           "file": "photos/weisskopfseeadler.heic",
@@ -635,6 +714,11 @@
           "file": "speech/collection.name/weisskopfseeadler.m4a",
           "sha256": "31ce787cac5b20f138b43324d6bb3a286e8e6f975e2a35c161c457a991430ed1",
           "text": "Weißkopfseeadler"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/weisskopfseeadler.m4a",
+          "sha256": "2ff421092903a7458d91d9f0fc9e4e8e5cca39fc5fde432b6633e1d68153ee61",
+          "text": "Der Weißkopfseeadler hat einen weißen Kopf und baut riesige Nester."
         }
       }
     },
@@ -646,6 +730,7 @@
       "article": "der",
       "lookalike": "raptor",
       "pronunciation": null,
+      "fact": "Der Riesenseeadler hat einen riesigen gelben Schnabel.",
       "photos": [
         {
           "file": "photos/riesenseeadler.heic",
@@ -670,6 +755,11 @@
           "file": "speech/collection.name/riesenseeadler.m4a",
           "sha256": "05315d6aacaa2d69aa013db5df61c7cd4d31ded5256d2e3f5478cc9505f12248",
           "text": "Riesenseeadler"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/riesenseeadler.m4a",
+          "sha256": "000a75911e5e0ff5e95e6ee06d9f849c98cebe32ac0c1e0e8090cdf1cdde03b6",
+          "text": "Der Riesenseeadler hat einen riesigen gelben Schnabel."
         }
       }
     },
@@ -681,6 +771,7 @@
       "article": "der",
       "lookalike": "raptor",
       "pronunciation": null,
+      "fact": "Laut rufend wirft der Schreiseeadler den Kopf weit nach hinten.",
       "photos": [
         {
           "file": "photos/schreiseeadler.heic",
@@ -713,6 +804,11 @@
           "file": "speech/collection.name/schreiseeadler.m4a",
           "sha256": "f7793ac2641ea8db3c6618e3d0ea8f3908fa2b6746cec4fd93a46faa09f0729c",
           "text": "Schreiseeadler"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/schreiseeadler.m4a",
+          "sha256": "b8e8181807f2974afb5dbd592be25f4e8d89872cfbf92db0ed178115721e4651",
+          "text": "Laut rufend wirft der Schreiseeadler den Kopf weit nach hinten."
         }
       }
     },
@@ -724,6 +820,7 @@
       "article": "der",
       "lookalike": "raptor",
       "pronunciation": null,
+      "fact": "Mit den Füßen voran stürzt sich der Fischadler ins Wasser.",
       "photos": [
         {
           "file": "photos/fischadler.heic",
@@ -755,6 +852,11 @@
           "file": "speech/collection.name/fischadler.m4a",
           "sha256": "bffbc507c14d258ba157faff4ccf3e073d8f155b41ba1d193a059ab9d990b730",
           "text": "Fischadler"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/fischadler.m4a",
+          "sha256": "1956614871b1c6cc716b9397a6ed09b3b1a8ef14f50e537ed586c50180f5e0ad",
+          "text": "Mit den Füßen voran stürzt sich der Fischadler ins Wasser."
         }
       }
     },
@@ -766,6 +868,7 @@
       "article": "die",
       "lookalike": "raptor",
       "pronunciation": null,
+      "fact": "Die Harpyie ist ein riesiger Adler mit einer Federkrone.",
       "photos": [
         {
           "file": "photos/harpyie-3.heic",
@@ -798,6 +901,11 @@
           "file": "speech/collection.name/harpyie.m4a",
           "sha256": "2b2656bf58373198014d3f1a5b34bb29ff4a824bbf418518c1f88d6b4706fd56",
           "text": "Harpyie"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/harpyie.m4a",
+          "sha256": "066328410e8f0b8ef776447e060822aacf1ea7383d15403c49eb0fe29a5dd212",
+          "text": "Die Harpyie ist ein riesiger Adler mit einer Federkrone."
         }
       }
     },
@@ -809,6 +917,7 @@
       "article": "der",
       "lookalike": "raptor",
       "pronunciation": null,
+      "fact": "Der Mäusebussard sitzt gern auf Zaunpfählen und ruft wie eine Katze.",
       "photos": [
         {
           "file": "photos/maeusebussard.heic",
@@ -848,6 +957,11 @@
           "file": "speech/collection.name/maeusebussard.m4a",
           "sha256": "ca80ee7306bbd3bde647b118044e34544308f87465d0dfdbef9710ea5116dcc5",
           "text": "Mäusebussard"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/maeusebussard.m4a",
+          "sha256": "cd849b1230f1a45a3ec6a9401d188713e6e6851676bffc2c6a2f693d74c03723",
+          "text": "Der Mäusebussard sitzt gern auf Zaunpfählen und ruft wie eine Katze."
         }
       }
     },
@@ -859,6 +973,7 @@
       "article": "der",
       "lookalike": "raptor",
       "pronunciation": null,
+      "fact": "Im Kino klingen Adler oft wie der Rotschwanzbussard.",
       "photos": [
         {
           "file": "photos/rotschwanzbussard.heic",
@@ -890,6 +1005,11 @@
           "file": "speech/collection.name/rotschwanzbussard.m4a",
           "sha256": "bbe946ab30b2647706dd980ae42d582eba064f8759349327b0acf29737202156",
           "text": "Rotschwanzbussard"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/rotschwanzbussard.m4a",
+          "sha256": "ad3b7651b710075c87eae5e5f8c02c2fad39bc779d97576e007774a73eeb44b6",
+          "text": "Im Kino klingen Adler oft wie der Rotschwanzbussard."
         }
       }
     },
@@ -901,6 +1021,7 @@
       "article": "der",
       "lookalike": "raptor",
       "pronunciation": null,
+      "fact": "Der Wüstenbussard jagt im Team mit seiner Familie.",
       "photos": [
         {
           "file": "photos/wuestenbussard.heic",
@@ -924,6 +1045,11 @@
           "file": "speech/collection.name/wuestenbussard.m4a",
           "sha256": "607a69a43d47e2639644a14dc02d1f3e02d0f3540c179f397a171dd72ad5c5de",
           "text": "Wüstenbussard"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/wuestenbussard.m4a",
+          "sha256": "8f970e3948d03777eecb998792471a216492f5c580f9eca0d9a88e7648199244",
+          "text": "Der Wüstenbussard jagt im Team mit seiner Familie."
         }
       }
     },
@@ -935,6 +1061,7 @@
       "article": "der",
       "lookalike": "raptor",
       "pronunciation": null,
+      "fact": "Der Schopfkarakara hat eine schwarze Kappe und ein oranges Gesicht.",
       "photos": [
         {
           "file": "photos/schopfkarakara.heic",
@@ -959,6 +1086,11 @@
           "file": "speech/collection.name/schopfkarakara.m4a",
           "sha256": "6aed6ac42b052cf777ba40f8b835fd121dacf9eaa15bf8e88285781d62c74856",
           "text": "Schopfkarakara"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/schopfkarakara.m4a",
+          "sha256": "68fdf822d3e396c1bf4679e612b713eacfd67e77fce7be4de4aa06680095ce39",
+          "text": "Der Schopfkarakara hat eine schwarze Kappe und ein oranges Gesicht."
         }
       }
     },
@@ -970,6 +1102,7 @@
       "article": "der",
       "lookalike": "raptor",
       "pronunciation": null,
+      "fact": "Der Sekretär hat Beine wie ein Storch und geht zu Fuß auf die Jagd.",
       "photos": [
         {
           "file": "photos/sekretaer.heic",
@@ -1002,6 +1135,11 @@
           "file": "speech/collection.name/sekretaer.m4a",
           "sha256": "c74276508f95ad5c2f36ea313905fcedd68404a78febb1540c37838f698c3719",
           "text": "Sekretär"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/sekretaer.m4a",
+          "sha256": "950e7872991abd97dcd5428c12625ed04da9896361096683a235156c2e2c8d5a",
+          "text": "Der Sekretär hat Beine wie ein Storch und geht zu Fuß auf die Jagd."
         }
       }
     },
@@ -1013,6 +1151,7 @@
       "article": "der",
       "lookalike": "raptor",
       "pronunciation": null,
+      "fact": "Der Rotmilan hat einen rotbraunen Schwanz mit zwei Spitzen.",
       "photos": [
         {
           "file": "photos/rotmilan-4.heic",
@@ -1044,6 +1183,11 @@
           "file": "speech/collection.name/rotmilan.m4a",
           "sha256": "35bf5d2a4a28a13942e6e3131aa832846874b738e61faf15e2b99ef9c40e94ba",
           "text": "Rotmilan"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/rotmilan.m4a",
+          "sha256": "cec912a9ccdcbe2aee99b028dd83b1c9b5ea018e6662e9b2b534823c0389079e",
+          "text": "Der Rotmilan hat einen rotbraunen Schwanz mit zwei Spitzen."
         }
       }
     },
@@ -1055,6 +1199,7 @@
       "article": "der",
       "lookalike": "raptor",
       "pronunciation": null,
+      "fact": "Der Turmfalke kann in der Luft auf der Stelle flattern.",
       "photos": [
         {
           "file": "photos/turmfalke-4.heic",
@@ -1094,6 +1239,11 @@
           "file": "speech/collection.name/turmfalke.m4a",
           "sha256": "156e7e557386d68b71f2b1cdc8aabddf39480dfbcea92730a15ebfa3a047461e",
           "text": "Turmfalke"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/turmfalke.m4a",
+          "sha256": "4c211c1bc4dfc6b798ab88b5e67b62b0b04be965bb34b5695635d929917cd9db",
+          "text": "Der Turmfalke kann in der Luft auf der Stelle flattern."
         }
       }
     },
@@ -1105,6 +1255,7 @@
       "article": "der",
       "lookalike": "raptor",
       "pronunciation": null,
+      "fact": "Im Sturzflug ist der Wanderfalke schneller als ein Auto.",
       "photos": [
         {
           "file": "photos/wanderfalke.heic",
@@ -1136,6 +1287,11 @@
           "file": "speech/collection.name/wanderfalke.m4a",
           "sha256": "57753330717046f746dc97cfb3213385a4921d8f2e74674ea21b800a724701cc",
           "text": "Wanderfalke"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/wanderfalke.m4a",
+          "sha256": "b25506a3029db53f8c611a4facecaf83627759c59b2a35481f270eec7091b506",
+          "text": "Im Sturzflug ist der Wanderfalke schneller als ein Auto."
         }
       }
     },
@@ -1147,6 +1303,7 @@
       "article": "der",
       "lookalike": "vulture",
       "pronunciation": null,
+      "fact": "Der Andenkondor hat riesige Flügel und segelt stundenlang.",
       "photos": [
         {
           "file": "photos/andenkondor.heic",
@@ -1179,6 +1336,11 @@
           "file": "speech/collection.name/andenkondor.m4a",
           "sha256": "25dbbeae3b7fff9fd140a5fdbb2d1668cd8fd0611b8c6326d81d3e99817b27b5",
           "text": "Andenkondor"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/andenkondor.m4a",
+          "sha256": "cb157c01d46919cf2460956d59b3097da95c990fac1dd5b23857426216c11950",
+          "text": "Der Andenkondor hat riesige Flügel und segelt stundenlang."
         }
       }
     },
@@ -1190,6 +1352,7 @@
       "article": "der",
       "lookalike": "vulture",
       "pronunciation": null,
+      "fact": "Der Bartgeier badet in roter Erde und färbt so seine Brust orange.",
       "photos": [
         {
           "file": "photos/bartgeier.heic",
@@ -1229,6 +1392,11 @@
           "file": "speech/collection.name/bartgeier.m4a",
           "sha256": "ad42b58c6706cf9126098d55c28e51c2db1efd31a207481aa343cd23c84ca486",
           "text": "Bartgeier"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/bartgeier.m4a",
+          "sha256": "99fe725fd68505ab4a4d3a04a9d40c70635a3397d3c83ef231ebb61f13dfaa34",
+          "text": "Der Bartgeier badet in roter Erde und färbt so seine Brust orange."
         }
       }
     },
@@ -1240,6 +1408,7 @@
       "article": "der",
       "lookalike": "vulture",
       "pronunciation": null,
+      "fact": "Der Gänsegeier trägt einen weißen Kragen und lebt in Gruppen.",
       "photos": [
         {
           "file": "photos/gaensegeier.heic",
@@ -1264,6 +1433,11 @@
           "file": "speech/collection.name/gaensegeier.m4a",
           "sha256": "dd2a8a3c06341e6286edf8ba81ff4508f65e193cb726fc42aba6d49ce4b8d4fe",
           "text": "Gänsegeier"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/gaensegeier.m4a",
+          "sha256": "28c34426e6cc1a404cc539ce71cfb0e304a643dbd4577cd7299a4d81a8f48000",
+          "text": "Der Gänsegeier trägt einen weißen Kragen und lebt in Gruppen."
         }
       }
     },
@@ -1275,6 +1449,7 @@
       "article": "der",
       "lookalike": "vulture",
       "pronunciation": null,
+      "fact": "Der Truthahngeier hat einen roten Kopf und riecht sein Futter.",
       "photos": [
         {
           "file": "photos/truthahngeier.heic",
@@ -1291,6 +1466,11 @@
           "file": "speech/collection.name/truthahngeier.m4a",
           "sha256": "830c5fe349177705c62c44f40943a516e41223c18abf67c3233f6f90ad5741ba",
           "text": "Truthahngeier"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/truthahngeier.m4a",
+          "sha256": "86a5f15e25e1efe465990a470213d8f72955a42a8eac127fb79a45a2e3ca2536",
+          "text": "Der Truthahngeier hat einen roten Kopf und riecht sein Futter."
         }
       }
     },
@@ -1302,6 +1482,7 @@
       "article": "der",
       "lookalike": "vulture",
       "pronunciation": null,
+      "fact": "Der Königsgeier hat einen kunterbunten Kopf in Orange, Rot und Lila.",
       "photos": [
         {
           "file": "photos/koenigsgeier.heic",
@@ -1334,6 +1515,11 @@
           "file": "speech/collection.name/koenigsgeier.m4a",
           "sha256": "004f0ee733ecd6f993132e4944a35328e4f3bd39016ecdcce851bba7bea30c44",
           "text": "Königsgeier"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/koenigsgeier.m4a",
+          "sha256": "dba500ab0a972af35a43875cac7e45fc09a80f7cb1641423b37e781a85a1d2a8",
+          "text": "Der Königsgeier hat einen kunterbunten Kopf in Orange, Rot und Lila."
         }
       }
     }

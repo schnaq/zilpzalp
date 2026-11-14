@@ -16,6 +16,7 @@
       "article": "der",
       "lookalike": "ratite",
       "pronunciation": null,
+      "fact": "Der Strauß ist der größte Vogel der Welt und legt riesige Eier.",
       "photos": [
         {
           "file": "photos/strauss.heic",
@@ -48,6 +49,11 @@
           "file": "speech/collection.name/strauss.m4a",
           "sha256": "ef21e7a50a104c61b512cfa53495f40f17a0ab0c40bcf4ec7073ef8ecbcb0b99",
           "text": "Strauß"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/strauss.m4a",
+          "sha256": "7b9dc85d1e40f273418732438f1d003f1622c9945da2cfa8892331fbfea80c1e",
+          "text": "Der Strauß ist der größte Vogel der Welt und legt riesige Eier."
         }
       }
     },
@@ -59,6 +65,7 @@
       "article": "der",
       "lookalike": "heron",
       "pronunciation": null,
+      "fact": "Vom Futter wird der Rosaflamingo rosa und steht oft auf einem Bein.",
       "photos": [
         {
           "file": "photos/rosaflamingo-3.heic",
@@ -98,6 +105,11 @@
           "file": "speech/collection.name/rosaflamingo.m4a",
           "sha256": "d21b5c0c64e3768a0df0ccb68648f532da3216d36cced4fb8f45fbd578d95283",
           "text": "Rosaflamingo"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/rosaflamingo.m4a",
+          "sha256": "104b230689028e07a283db4b21ce2dea72ddad3ec7e37ed7663cd6e4a0e9245b",
+          "text": "Vom Futter wird der Rosaflamingo rosa und steht oft auf einem Bein."
         }
       }
     },
@@ -109,6 +121,7 @@
       "article": "der",
       "lookalike": "raptor",
       "pronunciation": null,
+      "fact": "Der Sekretär hat Beine wie ein Storch und geht zu Fuß auf die Jagd.",
       "photos": [
         {
           "file": "photos/sekretaer.heic",
@@ -141,6 +154,11 @@
           "file": "speech/collection.name/sekretaer.m4a",
           "sha256": "56c65c8f16c407021c3c86a96662e87c0be79714a39d4d15b1eb042f64685c57",
           "text": "Sekretär"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/sekretaer.m4a",
+          "sha256": "f214936e2fbb9b98d06d5826d8e53f98151c2a99c24202c9bca9e51b60143366",
+          "text": "Der Sekretär hat Beine wie ein Storch und geht zu Fuß auf die Jagd."
         }
       }
     },
@@ -152,6 +170,7 @@
       "article": "der",
       "lookalike": "heron",
       "pronunciation": null,
+      "fact": "Der Schuhschnabel hat einen riesigen Schnabel wie ein Holzschuh.",
       "photos": [
         {
           "file": "photos/schuhschnabel.heic",
@@ -184,6 +203,11 @@
           "file": "speech/collection.name/schuhschnabel.m4a",
           "sha256": "5a5bb0f94d50095f29460930f5091deee9dc64716ed0768c118c568dae52a1ce",
           "text": "Schuhschnabel"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/schuhschnabel.m4a",
+          "sha256": "e43f022a2d92a30162acd365559e1b0c3ff4e2ff24e35a961e6d2514bc421bbf",
+          "text": "Der Schuhschnabel hat einen riesigen Schnabel wie ein Holzschuh."
         }
       }
     },
@@ -195,6 +219,7 @@
       "article": "der",
       "lookalike": "heron",
       "pronunciation": null,
+      "fact": "Der Marabu ist ein Storch mit kahlem Kopf und einem Sack am Hals.",
       "photos": [
         {
           "file": "photos/marabu-2.heic",
@@ -227,6 +252,11 @@
           "file": "speech/collection.name/marabu.m4a",
           "sha256": "249f7fec2d7c3adb97dfba47dcecd7df2e4f770014d59cd45aea94413f38fc50",
           "text": "Marabu"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/marabu.m4a",
+          "sha256": "0bde7e69491aa30b9c544faf83c0e63beb3b28b8301290a609fffc0162f0c43e",
+          "text": "Der Marabu ist ein Storch mit kahlem Kopf und einem Sack am Hals."
         }
       }
     },
@@ -238,6 +268,7 @@
       "article": "der",
       "lookalike": "penguin",
       "pronunciation": null,
+      "fact": "Der Brillenpinguin lebt in Afrika und ruft laut wie ein Esel.",
       "photos": [
         {
           "file": "photos/brillenpinguin-5.heic",
@@ -270,6 +301,11 @@
           "file": "speech/collection.name/brillenpinguin.m4a",
           "sha256": "704836c4b5b095b020c3383cbbbad28ca09f0659fa8c799ecc8b75f82c284fb0",
           "text": "Brillenpinguin"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/brillenpinguin.m4a",
+          "sha256": "8b4889b3a14486891d24b514925e5311708f98c32270c06bcc01c9b3d30f3a45",
+          "text": "Der Brillenpinguin lebt in Afrika und ruft laut wie ein Esel."
         }
       }
     },
@@ -281,6 +317,7 @@
       "article": "der",
       "lookalike": "parrot",
       "pronunciation": null,
+      "fact": "Der Graupapagei hat einen roten Schwanz und spricht Wörter nach.",
       "photos": [
         {
           "file": "photos/graupapagei.heic",
@@ -313,6 +350,11 @@
           "file": "speech/collection.name/graupapagei.m4a",
           "sha256": "45a3b8a099736c39e1953416c2c65e77424e07b323c915ece1f8c050553f8a46",
           "text": "Graupapagei"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/graupapagei.m4a",
+          "sha256": "0aeba8f1c3f0c5979090c993b7d5a34c3b0ed6d6ac5ed82f8cf72ac06c8ab853",
+          "text": "Der Graupapagei hat einen roten Schwanz und spricht Wörter nach."
         }
       }
     },
@@ -324,6 +366,7 @@
       "article": "die",
       "lookalike": "kingfisher",
       "pronunciation": null,
+      "fact": "Die Gabelracke schillert lila und türkis und hat lange Schwanzspitzen.",
       "photos": [
         {
           "file": "photos/gabelracke-4.heic",
@@ -356,6 +399,11 @@
           "file": "speech/collection.name/gabelracke.m4a",
           "sha256": "9a4f9817dc515a2e51ee521bfc76a118855f6970ad7c9ced5fced92c65450655",
           "text": "Gabelracke"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/gabelracke.m4a",
+          "sha256": "74a8e5e751866a1f50844dc8be490966cd71181dd868524cd3698c89d2ced7c9",
+          "text": "Die Gabelracke schillert lila und türkis und hat lange Schwanzspitzen."
         }
       }
     },
@@ -367,6 +415,7 @@
       "article": "der",
       "lookalike": "hornbill",
       "pronunciation": null,
+      "fact": "Der Rotschnabeltoko hat einen langen, leicht gebogenen roten Schnabel.",
       "photos": [
         {
           "file": "photos/rotschnabeltoko.heic",
@@ -399,6 +448,11 @@
           "file": "speech/collection.name/rotschnabeltoko.m4a",
           "sha256": "92690db1d0ba38b92484d80a4bfbdbbe3bf02b973b52ac8897ad283250f63a9a",
           "text": "Rotschnabeltoko"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/rotschnabeltoko.m4a",
+          "sha256": "e044c256dde45e0deab619269676c16308d0e5af7b2761eef0931727db8b090e",
+          "text": "Der Rotschnabeltoko hat einen langen, leicht gebogenen roten Schnabel."
         }
       }
     },
@@ -410,6 +464,7 @@
       "article": "der",
       "lookalike": "hornbill",
       "pronunciation": null,
+      "fact": "Der Südliche Hornrabe ist schwarz und hat ein rotes Gesicht.",
       "photos": [
         {
           "file": "photos/suedlicher-hornrabe.heic",
@@ -442,6 +497,11 @@
           "file": "speech/collection.name/suedlicher-hornrabe.m4a",
           "sha256": "406f31495ea0a96d900de915317f9d9b24921c917deef4e891abb795412f3bf7",
           "text": "Südlicher Hornrabe"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/suedlicher-hornrabe.m4a",
+          "sha256": "13ebe409e9732941315da0d9d23dd5f785fe05eb71a88455635d03138d7198ac",
+          "text": "Der Südliche Hornrabe ist schwarz und hat ein rotes Gesicht."
         }
       }
     },
@@ -453,6 +513,7 @@
       "article": "der",
       "lookalike": "heron",
       "pronunciation": null,
+      "fact": "Der Kronenkranich trägt eine goldene Federkrone auf dem Kopf.",
       "photos": [
         {
           "file": "photos/kronenkranich-2.heic",
@@ -492,6 +553,11 @@
           "file": "speech/collection.name/kronenkranich.m4a",
           "sha256": "c467b8dd6bc24be06b320ae9494bae94bd3294e43fc3f7a4a59f3726db642235",
           "text": "Kronenkranich"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/kronenkranich.m4a",
+          "sha256": "c0877c85d094bbe24c3f68eefbb05e6948e5e9587308375a647b868a2219c614",
+          "text": "Der Kronenkranich trägt eine goldene Federkrone auf dem Kopf."
         }
       }
     },
@@ -503,6 +569,7 @@
       "article": "der",
       "lookalike": "raptor",
       "pronunciation": null,
+      "fact": "Laut rufend wirft der Schreiseeadler den Kopf weit nach hinten.",
       "photos": [
         {
           "file": "photos/schreiseeadler.heic",
@@ -535,6 +602,11 @@
           "file": "speech/collection.name/schreiseeadler.m4a",
           "sha256": "8d8b68029da4071ad5690494c1542ca1513063e833aa018b800814aa9b81a667",
           "text": "Schreiseeadler"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/schreiseeadler.m4a",
+          "sha256": "08e0a3e729920d8b847a604c64db66892dfa22eca87818465af2c739474d48aa",
+          "text": "Laut rufend wirft der Schreiseeadler den Kopf weit nach hinten."
         }
       }
     },
@@ -546,6 +618,7 @@
       "article": "der",
       "lookalike": "vulture",
       "pronunciation": null,
+      "fact": "Der Weißrückengeier kreist hoch am Himmel und hat einen weißen Rücken.",
       "photos": [
         {
           "file": "photos/weissrueckengeier-4.heic",
@@ -578,6 +651,11 @@
           "file": "speech/collection.name/weissrueckengeier.m4a",
           "sha256": "0a92e8f8789b7449d086a4151ec79dbb96648cf11dc9e23e721a7fb3a5945026",
           "text": "Weißrückengeier"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/weissrueckengeier.m4a",
+          "sha256": "7b7b8a726ff5f96f052145efb6d923e355c1f1ea930a7a1e8d212bd2b1cbe877",
+          "text": "Der Weißrückengeier kreist hoch am Himmel und hat einen weißen Rücken."
         }
       }
     },
@@ -589,6 +667,7 @@
       "article": "der",
       "lookalike": "heron",
       "pronunciation": null,
+      "fact": "Der Nimmersatt hat einen gelben Schnabel und ein rotes Gesicht.",
       "photos": [
         {
           "file": "photos/nimmersatt.heic",
@@ -621,6 +700,11 @@
           "file": "speech/collection.name/nimmersatt.m4a",
           "sha256": "df7100544d0b6b19765f81cdde2fc3445ed01580e492349851115c5c52b8365a",
           "text": "Nimmersatt"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/nimmersatt.m4a",
+          "sha256": "7792b6d1e52ba5f665eafa4026fad33dcf89c04af82a993c125d72d13c98c2af",
+          "text": "Der Nimmersatt hat einen gelben Schnabel und ein rotes Gesicht."
         }
       }
     },
@@ -632,6 +716,7 @@
       "article": "der",
       "lookalike": "heron",
       "pronunciation": null,
+      "fact": "Der Sattelstorch hat einen rot-schwarzen Schnabel mit gelbem Sattel.",
       "photos": [
         {
           "file": "photos/sattelstorch-5.heic",
@@ -664,6 +749,11 @@
           "file": "speech/collection.name/sattelstorch.m4a",
           "sha256": "2aac4c39b1464e561598f172eaa959fa4ab842e837c8c720908bb4ca9c0c0f62",
           "text": "Sattelstorch"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/sattelstorch.m4a",
+          "sha256": "0ee494d595419fc0a94e35365a7c76ef5f7f732d5f712274c298cc30fc8e39a6",
+          "text": "Der Sattelstorch hat einen rot-schwarzen Schnabel mit gelbem Sattel."
         }
       }
     },
@@ -675,6 +765,7 @@
       "article": "der",
       "lookalike": "heron",
       "pronunciation": null,
+      "fact": "Der Hammerkopf hat einen Kopf wie ein Hammer und baut ein Riesennest.",
       "photos": [
         {
           "file": "photos/hammerkopf.heic",
@@ -707,6 +798,11 @@
           "file": "speech/collection.name/hammerkopf.m4a",
           "sha256": "14fc3ced119b5b1fe7b2a1924b41a9a50f961e693b32ad4d05dfb1826e997554",
           "text": "Hammerkopf"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/hammerkopf.m4a",
+          "sha256": "ae1ffa2b585c7c74fa45c0c13539b78998cd7275c17b31d4f820074b77f54699",
+          "text": "Der Hammerkopf hat einen Kopf wie ein Hammer und baut ein Riesennest."
         }
       }
     },
@@ -718,6 +814,7 @@
       "article": "das",
       "lookalike": "gamebird",
       "pronunciation": null,
+      "fact": "Das Helmperlhuhn hat graue Federn mit weißen Punkten wie Perlen.",
       "photos": [
         {
           "file": "photos/helmperlhuhn.heic",
@@ -757,6 +854,11 @@
           "file": "speech/collection.name/helmperlhuhn.m4a",
           "sha256": "136048ba54ebb432e7c859c7863e14133dadc6f58881f186482c17b025a84f4c",
           "text": "Helmperlhuhn"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/helmperlhuhn.m4a",
+          "sha256": "5b6b3a8839bf25ec4d369ce8e8ea66d4832d661cef85480d6f49256b5b283ad1",
+          "text": "Das Helmperlhuhn hat graue Federn mit weißen Punkten wie Perlen."
         }
       }
     },
@@ -768,6 +870,7 @@
       "article": "der",
       "lookalike": "finch",
       "pronunciation": null,
+      "fact": "Beim Dorfweber webt der Papa ein rundes Nest aus Grashalmen.",
       "photos": [
         {
           "file": "photos/dorfweber.heic",
@@ -800,6 +903,11 @@
           "file": "speech/collection.name/dorfweber.m4a",
           "sha256": "b25295b3d91df098705ed03457cfa1f79e723b0f1eb9a8dcc4624ed58ffa6e6d",
           "text": "Dorfweber"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/dorfweber.m4a",
+          "sha256": "7fac3f27f243f10011e580f27d86ba3ae8e0924faeb221449a81fc4ac35cbb54",
+          "text": "Beim Dorfweber webt der Papa ein rundes Nest aus Grashalmen."
         }
       }
     },
@@ -811,6 +919,7 @@
       "article": "der",
       "lookalike": "kingfisher",
       "pronunciation": null,
+      "fact": "Der Karminspint ist knallrot und reitet manchmal auf großen Vögeln.",
       "photos": [
         {
           "file": "photos/karminspint.heic",
@@ -843,6 +952,11 @@
           "file": "speech/collection.name/karminspint.m4a",
           "sha256": "2df44175472711185aec4912fcca1d755debc25b1aa0f5a92d444ad2699efa6a",
           "text": "Karminspint"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/karminspint.m4a",
+          "sha256": "9c90b518d78191d0fa69eb0f3ee954d80f5f693c29f1d3e2211870e1941a8abf",
+          "text": "Der Karminspint ist knallrot und reitet manchmal auf großen Vögeln."
         }
       }
     },
@@ -854,6 +968,7 @@
       "article": "der",
       "lookalike": "hummingbird",
       "pronunciation": null,
+      "fact": "Der Malachitnektarvogel trinkt Blütensaft, und der Papa glänzt grün.",
       "photos": [
         {
           "file": "photos/malachitnektarvogel.heic",
@@ -886,6 +1001,11 @@
           "file": "speech/collection.name/malachitnektarvogel.m4a",
           "sha256": "f6ecc78c2be56a3f48612357f9526c43283378faf883fdb338936569700947ef",
           "text": "Malachitnektarvogel"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/malachitnektarvogel.m4a",
+          "sha256": "d3a9443031a09a18d9bbca0c200e59e2924d4c26e2e2419f5f96a871841466fe",
+          "text": "Der Malachitnektarvogel trinkt Blütensaft, und der Papa glänzt grün."
         }
       }
     },
@@ -897,6 +1017,7 @@
       "article": "der",
       "lookalike": "cuckoo",
       "pronunciation": null,
+      "fact": "Der Graulärmvogel ist grau, hat eine Haube und ruft laut „geh weg“.",
       "photos": [
         {
           "file": "photos/graulaermvogel.heic",
@@ -929,6 +1050,11 @@
           "file": "speech/collection.name/graulaermvogel.m4a",
           "sha256": "cae14994aa7f58fd65daa743a1f9f688da12a646365f55df540f910797e69f95",
           "text": "Graulärmvogel"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/graulaermvogel.m4a",
+          "sha256": "309654c638a03333865a4e1dd2793dd27bd6f4b18bdb2ade4f1b242c2a8b8aa5",
+          "text": "Der Graulärmvogel ist grau, hat eine Haube und ruft laut „geh weg“."
         }
       }
     },
@@ -940,6 +1066,7 @@
       "article": "der",
       "lookalike": "cuckoo",
       "pronunciation": null,
+      "fact": "Der Guinea-Turako ist grün und zeigt beim Fliegen rote Flügel.",
       "photos": [
         {
           "file": "photos/guinea-turako.heic",
@@ -972,6 +1099,11 @@
           "file": "speech/collection.name/guinea-turako.m4a",
           "sha256": "9c0fa4e3b59e969e659d9f66e1bbdaa21badcfd98eb1d03a4d7ee5154104c3af",
           "text": "Guinea-Turako"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/guinea-turako.m4a",
+          "sha256": "1fdaf7e931193c3480cbde02c059cb1c4316246517810d810ab90efc8a85806e",
+          "text": "Der Guinea-Turako ist grün und zeigt beim Fliegen rote Flügel."
         }
       }
     },
@@ -983,6 +1115,7 @@
       "article": "der",
       "lookalike": "thrush",
       "pronunciation": null,
+      "fact": "Der Rotschnabel-Madenhacker pickt Zebras die Zecken aus dem Fell.",
       "photos": [
         {
           "file": "photos/rotschnabel-madenhacker.heic",
@@ -1015,6 +1148,11 @@
           "file": "speech/collection.name/rotschnabel-madenhacker.m4a",
           "sha256": "aed3b00bdaba233a7f98001183525b43c0c31504aec8d6755b031c6976ef732e",
           "text": "Rotschnabel-Madenhacker"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/rotschnabel-madenhacker.m4a",
+          "sha256": "636fba7c4d3aa82fc716bede52765b1f075e4dc84a96394f8f5396a5b9642bd9",
+          "text": "Der Rotschnabel-Madenhacker pickt Zebras die Zecken aus dem Fell."
         }
       }
     },
@@ -1026,6 +1164,7 @@
       "article": "die",
       "lookalike": "gamebird",
       "pronunciation": null,
+      "fact": "Die Riesentrappe gehört zu den schwersten Vögeln, die fliegen können.",
       "photos": [
         {
           "file": "photos/riesentrappe.heic",
@@ -1058,6 +1197,11 @@
           "file": "speech/collection.name/riesentrappe.m4a",
           "sha256": "5f1e5c901c44758779aa7fb5248177a93afb8316a59ff2d7c4b89b9ebde6b85c",
           "text": "Riesentrappe"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/riesentrappe.m4a",
+          "sha256": "a3c816ff50060cec09928b19a0cb806ef60a1c5ffdceae031d5f5d5551e6873d",
+          "text": "Die Riesentrappe gehört zu den schwersten Vögeln, die fliegen können."
         }
       }
     },
@@ -1069,6 +1213,7 @@
       "article": "die",
       "lookalike": "goose",
       "pronunciation": null,
+      "fact": "Die Nilgans hat braune Augenflecken und lebt jetzt auch bei uns.",
       "photos": [
         {
           "file": "photos/nilgans-4.heic",
@@ -1108,6 +1253,11 @@
           "file": "speech/collection.name/nilgans.m4a",
           "sha256": "1eb4bfbe954c9c1b0b5aa1eb789b226242b2202be712df98b86f2edd032b3fe8",
           "text": "Nilgans"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/nilgans.m4a",
+          "sha256": "864b888448f9741cca2cdad2c95433cf2343c7856c425985113f27eec69bdb9d",
+          "text": "Die Nilgans hat braune Augenflecken und lebt jetzt auch bei uns."
         }
       }
     },
@@ -1119,6 +1269,7 @@
       "article": "der",
       "lookalike": "heron",
       "pronunciation": null,
+      "fact": "Der Heilige Ibis ist weiß mit schwarzem Kopf und krummem Schnabel.",
       "photos": [
         {
           "file": "photos/heiliger-ibis.heic",
@@ -1151,6 +1302,11 @@
           "file": "speech/collection.name/heiliger-ibis.m4a",
           "sha256": "e7408fd1af6b9e676511f5cc3f132df8502de422775ff7db223d215fafcee90e",
           "text": "Heiliger Ibis"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/heiliger-ibis.m4a",
+          "sha256": "d2d3983e1aea3ba430b12bdb1b96246fb6cb2be310b153f17ad0986b1efcf31b",
+          "text": "Der Heilige Ibis ist weiß mit schwarzem Kopf und krummem Schnabel."
         }
       }
     },
@@ -1162,6 +1318,7 @@
       "article": "der",
       "lookalike": "thrush",
       "pronunciation": null,
+      "fact": "Der Dreifarben-Glanzstar glänzt blau-grün und hat einen orangen Bauch.",
       "photos": [
         {
           "file": "photos/dreifarben-glanzstar.heic",
@@ -1194,6 +1351,11 @@
           "file": "speech/collection.name/dreifarben-glanzstar.m4a",
           "sha256": "bc9ea4a66b938f0023f28501323d4aa4d493113ee8c57c75ab6dd2e411434d32",
           "text": "Dreifarben-Glanzstar"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/dreifarben-glanzstar.m4a",
+          "sha256": "43e9033875ab31d84c5d2d4a25997ec782ef00559adec4efede3a5ecac5bf290",
+          "text": "Der Dreifarben-Glanzstar glänzt blau-grün und hat einen orangen Bauch."
         }
       }
     },
@@ -1205,6 +1367,7 @@
       "article": "der",
       "lookalike": "raptor",
       "pronunciation": null,
+      "fact": "Der Kampfadler ist der größte Adler Afrikas und hat Punkte am Bauch.",
       "photos": [
         {
           "file": "photos/kampfadler.heic",
@@ -1244,6 +1407,11 @@
           "file": "speech/collection.name/kampfadler.m4a",
           "sha256": "99a1ff742ef74ee0edaedb5e62db9ba835b093912794d4465c5fcd6b87fb0e09",
           "text": "Kampfadler"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/kampfadler.m4a",
+          "sha256": "498ab626b5db429b1ba082f9d6ce5208af3ba311738289dc951a2007bd8f96c6",
+          "text": "Der Kampfadler ist der größte Adler Afrikas und hat Punkte am Bauch."
         }
       }
     },
@@ -1255,6 +1423,7 @@
       "article": "der",
       "lookalike": "seabird",
       "pronunciation": null,
+      "fact": "Der Rosapelikan geht mit anderen Pelikanen zusammen fischen.",
       "photos": [
         {
           "file": "photos/rosapelikan-4.heic",
@@ -1287,6 +1456,11 @@
           "file": "speech/collection.name/rosapelikan.m4a",
           "sha256": "a6eebc62cae326e4c7f0ca4975e1dacbd383f6476f5b236a6fb4e4e6956f28b0",
           "text": "Rosapelikan"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/rosapelikan.m4a",
+          "sha256": "78470818573e35a05a145ed76ac70a961c45a2bdd3bf430354e785afa8af7381",
+          "text": "Der Rosapelikan geht mit anderen Pelikanen zusammen fischen."
         }
       }
     },
@@ -1298,6 +1472,7 @@
       "article": "der",
       "lookalike": "heron",
       "pronunciation": null,
+      "fact": "„Ha-ha-hadeda“ ruft der Hagedasch, ein dunkler Ibis.",
       "photos": [
         {
           "file": "photos/hagedasch.heic",
@@ -1337,6 +1512,11 @@
           "file": "speech/collection.name/hagedasch.m4a",
           "sha256": "483ef316a650a46ac265e37541efc3f9c1a95c1536f34faf9be8931ad04bdbc1",
           "text": "Hagedasch"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/hagedasch.m4a",
+          "sha256": "6c645b92c1ac18b57df3d4e83d514e8299be752f0c19512b202abb256d8019b5",
+          "text": "„Ha-ha-hadeda“ ruft der Hagedasch, ein dunkler Ibis."
         }
       }
     },
@@ -1348,6 +1528,7 @@
       "article": "der",
       "lookalike": "owl",
       "pronunciation": null,
+      "fact": "Der Fleckenuhu ist viel kleiner als unser Uhu und hat gelbe Augen.",
       "photos": [
         {
           "file": "photos/fleckenuhu.heic",
@@ -1372,6 +1553,11 @@
           "file": "speech/collection.name/fleckenuhu.m4a",
           "sha256": "65ddf73d1766b8719de6fd9c3592270ea156ecde0502fd92ea520e40be6e4d36",
           "text": "Fleckenuhu"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/fleckenuhu.m4a",
+          "sha256": "52ac35815c2cf26febc7dc6ce4f421a8055672c664d0121ed4546d9a14993bc3",
+          "text": "Der Fleckenuhu ist viel kleiner als unser Uhu und hat gelbe Augen."
         }
       }
     },
@@ -1383,6 +1569,7 @@
       "article": "der",
       "lookalike": "vulture",
       "pronunciation": null,
+      "fact": "Der Ohrengeier hat einen kahlen, roten Kopf mit Hautfalten wie Ohren.",
       "photos": [
         {
           "file": "photos/ohrengeier.heic",
@@ -1415,6 +1602,11 @@
           "file": "speech/collection.name/ohrengeier.m4a",
           "sha256": "973e37d45d1b5de6b4c9218b2125ec139358ff851813a2d1237bb173a459b8fc",
           "text": "Ohrengeier"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/ohrengeier.m4a",
+          "sha256": "6af10bacbc46c266558d5c960fbe54ab143aaebd8d88261a1b8e3a60eab68a1d",
+          "text": "Der Ohrengeier hat einen kahlen, roten Kopf mit Hautfalten wie Ohren."
         }
       }
     },
@@ -1426,6 +1618,7 @@
       "article": "der",
       "lookalike": "heron",
       "pronunciation": null,
+      "fact": "Der Goliathreiher ist der größte Reiher der Welt, mit rotbraunem Hals.",
       "photos": [
         {
           "file": "photos/goliathreiher.heic",
@@ -1458,6 +1651,11 @@
           "file": "speech/collection.name/goliathreiher.m4a",
           "sha256": "026216c8dbe544e0e6239375cd3763eb2c981f305ce280edc661b48d5782861e",
           "text": "Goliathreiher"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/goliathreiher.m4a",
+          "sha256": "807e8e18dd0ef67988cf3c7fec97868b7643997e1e2c9428b37f0fec91761775",
+          "text": "Der Goliathreiher ist der größte Reiher der Welt, mit rotbraunem Hals."
         }
       }
     },
@@ -1469,6 +1667,7 @@
       "article": "der",
       "lookalike": "kingfisher",
       "pronunciation": null,
+      "fact": "Der Weißstirnspint hat eine weiße Stirn und eine rote Kehle.",
       "photos": [
         {
           "file": "photos/weissstirnspint.heic",
@@ -1501,6 +1700,11 @@
           "file": "speech/collection.name/weissstirnspint.m4a",
           "sha256": "476f9faa2015acc13601b5c3e7e293f0263e59c22aeffc88825e9fc94f786366",
           "text": "Weißstirnspint"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/weissstirnspint.m4a",
+          "sha256": "cf014025fd5be90ee37afcf3d6318cac216f7384e4a837775de5fa2c24b69780",
+          "text": "Der Weißstirnspint hat eine weiße Stirn und eine rote Kehle."
         }
       }
     },
@@ -1512,6 +1716,7 @@
       "article": "der",
       "lookalike": "heron",
       "pronunciation": null,
+      "fact": "Neben Kühen läuft der Kuhreiher her und schnappt die Insekten.",
       "photos": [
         {
           "file": "photos/kuhreiher.heic",
@@ -1543,6 +1748,11 @@
           "file": "speech/collection.name/kuhreiher.m4a",
           "sha256": "d81f949235adba8e66c0d439aa31f65eddd7d38f2ed59ba30fdb1eedf2d0ee2a",
           "text": "Kuhreiher"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/kuhreiher.m4a",
+          "sha256": "29ace05ef8a5c3db4e8dbc8f5f40bc8b8748c5882305f83ac4ef49aa653a526f",
+          "text": "Neben Kühen läuft der Kuhreiher her und schnappt die Insekten."
         }
       }
     }
