@@ -16,6 +16,7 @@
       "article": "die",
       "lookalike": "thrush",
       "pronunciation": null,
+      "fact": "Bei der Amsel ist der Papa ganz schwarz und hat einen gelben Schnabel.",
       "photos": [
         {
           "file": "photos/amsel.heic",
@@ -66,6 +67,7 @@
       "article": "die",
       "lookalike": "tit",
       "pronunciation": null,
+      "fact": "Die Blaumeise trägt ein blaues Käppchen und hat einen gelben Bauch.",
       "photos": [
         {
           "file": "photos/blaumeise-4.heic",
@@ -116,6 +118,7 @@
       "article": "der",
       "lookalike": "woodpecker",
       "pronunciation": null,
+      "fact": "Der Buntspecht ist schwarz-weiß und trommelt laut gegen Baumstämme.",
       "photos": [
         {
           "file": "photos/buntspecht-2.heic",
@@ -166,6 +169,7 @@
       "article": "der",
       "lookalike": "kingfisher",
       "pronunciation": null,
+      "fact": "Der Eisvogel schillert blau und taucht kopfüber nach Fischen.",
       "photos": [
         {
           "file": "photos/eisvogel.heic",
@@ -216,6 +220,7 @@
       "article": "der",
       "lookalike": "thrush",
       "pronunciation": null,
+      "fact": "Der Hausrotschwanz zittert oben auf dem Dach mit seinem roten Schwanz.",
       "photos": [
         {
           "file": "photos/hausrotschwanz-4.heic",
@@ -266,6 +271,7 @@
       "article": "die",
       "lookalike": "tit",
       "pronunciation": null,
+      "fact": "Die Kohlmeise trägt eine schwarze Krawatte auf ihrem gelben Bauch.",
       "photos": [
         {
           "file": "photos/kohlmeise-2.heic",
@@ -316,6 +322,7 @@
       "article": "das",
       "lookalike": "thrush",
       "pronunciation": null,
+      "fact": "Das Rotkehlchen hat eine orange Brust und kommt beim Umgraben ganz nah heran.",
       "photos": [
         {
           "file": "photos/rotkehlchen-3.heic",
@@ -366,6 +373,7 @@
       "article": "der",
       "lookalike": "thrush",
       "pronunciation": null,
+      "fact": "Der Star kann andere Vögel ganz echt nachmachen.",
       "photos": [
         {
           "file": "photos/star.heic",
@@ -416,6 +424,7 @@
       "article": "der",
       "lookalike": "kingfisher",
       "pronunciation": null,
+      "fact": "Der Wiedehopf ruft „up up up“ und hat eine Federkrone wie ein Fächer.",
       "photos": [
         {
           "file": "photos/wiedehopf.heic",
@@ -466,6 +475,7 @@
       "article": "der",
       "lookalike": "warbler",
       "pronunciation": null,
+      "fact": "Der Zilpzalp singt seinen eigenen Namen: zilp, zalp, zilp, zalp.",
       "photos": [
         {
           "file": "photos/zilpzalp-4.heic",
@@ -516,6 +526,7 @@
       "article": "der",
       "lookalike": "finch",
       "pronunciation": null,
+      "fact": "Der Haussperling heißt auch Spatz und badet gern im Staub.",
       "photos": [
         {
           "file": "photos/haussperling.heic",
@@ -566,6 +577,7 @@
       "article": "der",
       "lookalike": "finch",
       "pronunciation": null,
+      "fact": "Der Grünfink ist grün und hat gelbe Streifen an Flügeln und Schwanz.",
       "photos": [
         {
           "file": "photos/gruenfink.heic",
@@ -616,6 +628,7 @@
       "article": "der",
       "lookalike": "finch",
       "pronunciation": null,
+      "fact": "Der Buchfink hat weiße Flügelstreifen und schmettert sein Lied.",
       "photos": [
         {
           "file": "photos/buchfink.heic",
@@ -666,6 +679,7 @@
       "article": "der",
       "lookalike": "finch",
       "pronunciation": null,
+      "fact": "Der Stieglitz hat ein rotes Gesicht und pickt Samen aus Disteln.",
       "photos": [
         {
           "file": "photos/stieglitz.heic",
@@ -716,6 +730,7 @@
       "article": "der",
       "lookalike": "finch",
       "pronunciation": null,
+      "fact": "Der Gimpel hat eine schwarze Kappe, der Papa eine rote Brust.",
       "photos": [
         {
           "file": "photos/gimpel.heic",
@@ -766,6 +781,7 @@
       "article": "der",
       "lookalike": "finch",
       "pronunciation": null,
+      "fact": "Der Kernbeißer knackt mit seinem dicken Schnabel sogar Kirschkerne.",
       "photos": [
         {
           "file": "photos/kernbeisser.heic",
@@ -808,6 +824,7 @@
       "article": "der",
       "lookalike": "finch",
       "pronunciation": null,
+      "fact": "Beim Bluthänfling hat der Papa im Frühling eine rote Brust.",
       "photos": [
         {
           "file": "photos/bluthaenfling.heic",
@@ -858,6 +875,7 @@
       "article": "die",
       "lookalike": "finch",
       "pronunciation": null,
+      "fact": "Die Goldammer ist gelb und singt: „Wie, wie, wie hab ich dich lieb.“",
       "photos": [
         {
           "file": "photos/goldammer.heic",
@@ -908,6 +926,7 @@
       "article": "die",
       "lookalike": "corvid",
       "pronunciation": null,
+      "fact": "Die Elster ist schwarz-weiß und hat einen langen Schwanz.",
       "photos": [
         {
           "file": "photos/elster.heic",
@@ -958,6 +977,7 @@
       "article": "der",
       "lookalike": "corvid",
       "pronunciation": null,
+      "fact": "Der Eichelhäher vergräbt Eicheln, und aus vergessenen wachsen Bäume.",
       "photos": [
         {
           "file": "photos/eichelhaeher.heic",
@@ -1008,6 +1028,7 @@
       "article": "die",
       "lookalike": "corvid",
       "pronunciation": null,
+      "fact": "Die Rabenkrähe ist ganz schwarz und ruft laut „krah, krah“.",
       "photos": [
         {
           "file": "photos/rabenkraehe.heic",
@@ -1058,6 +1079,7 @@
       "article": "die",
       "lookalike": "corvid",
       "pronunciation": null,
+      "fact": "Die Dohle hat helle, silbrige Augen und wohnt gern in Kirchtürmen.",
       "photos": [
         {
           "file": "photos/dohle.heic",
@@ -1108,6 +1130,7 @@
       "article": "der",
       "lookalike": "corvid",
       "pronunciation": null,
+      "fact": "Der Kolkrabe ist viel größer als eine Krähe und ruft ganz tief.",
       "photos": [
         {
           "file": "photos/kolkrabe.heic",
@@ -1158,6 +1181,7 @@
       "article": "die",
       "lookalike": "pigeon",
       "pronunciation": null,
+      "fact": "Die Ringeltaube ist eine große Taube mit einem weißen Fleck am Hals.",
       "photos": [
         {
           "file": "photos/ringeltaube.heic",
@@ -1208,6 +1232,7 @@
       "article": "die",
       "lookalike": "pigeon",
       "pronunciation": null,
+      "fact": "Die Türkentaube ist sandfarben und hat ein schwarzes Band im Nacken.",
       "photos": [
         {
           "file": "photos/tuerkentaube-4.heic",
@@ -1258,6 +1283,7 @@
       "article": "der",
       "lookalike": "swallow",
       "pronunciation": null,
+      "fact": "Der Mauersegler landet fast nie und kann sogar im Flug schlafen.",
       "photos": [
         {
           "file": "photos/mauersegler-4.heic",
@@ -1308,6 +1334,7 @@
       "article": "die",
       "lookalike": "swallow",
       "pronunciation": null,
+      "fact": "Die Rauchschwalbe hat eine rote Kehle und brütet gern im Kuhstall.",
       "photos": [
         {
           "file": "photos/rauchschwalbe.heic",
@@ -1358,6 +1385,7 @@
       "article": "die",
       "lookalike": "warbler",
       "pronunciation": null,
+      "fact": "Die Bachstelze wippt dauernd mit ihrem langen Schwanz.",
       "photos": [
         {
           "file": "photos/bachstelze-2.heic",
@@ -1408,6 +1436,7 @@
       "article": "der",
       "lookalike": "warbler",
       "pronunciation": null,
+      "fact": "Der Zaunkönig ist winzig, reckt den Schwanz hoch und singt sehr laut.",
       "photos": [
         {
           "file": "photos/zaunkoenig.heic",
@@ -1458,6 +1487,7 @@
       "article": "die",
       "lookalike": "thrush",
       "pronunciation": null,
+      "fact": "Die Singdrossel knackt Schneckenhäuser auf einem Stein.",
       "photos": [
         {
           "file": "photos/singdrossel.heic",
@@ -1508,6 +1538,7 @@
       "article": "die",
       "lookalike": "thrush",
       "pronunciation": null,
+      "fact": "Die Nachtigall ist schlicht braun und singt sogar mitten in der Nacht.",
       "photos": [
         {
           "file": "photos/nachtigall-4.heic",
@@ -1558,6 +1589,7 @@
       "article": "die",
       "lookalike": "warbler",
       "pronunciation": null,
+      "fact": "Die Mönchsgrasmücke hat eine Mütze: der Papa schwarz, die Mama braun.",
       "photos": [
         {
           "file": "photos/moenchsgrasmuecke.heic",
@@ -1608,6 +1640,7 @@
       "article": "der",
       "lookalike": "tit",
       "pronunciation": null,
+      "fact": "Der Kleiber kann kopfüber den Baumstamm hinunterlaufen.",
       "photos": [
         {
           "file": "photos/kleiber.heic",
@@ -1658,6 +1691,7 @@
       "article": "der",
       "lookalike": "tit",
       "pronunciation": null,
+      "fact": "Der Gartenbaumläufer huscht wie eine kleine Maus den Baumstamm hinauf.",
       "photos": [
         {
           "file": "photos/gartenbaumlaeufer.heic",
@@ -1708,6 +1742,7 @@
       "article": "die",
       "lookalike": "tit",
       "pronunciation": null,
+      "fact": "Die Schwanzmeise ist eine kleine Federkugel mit einem langen Schwanz.",
       "photos": [
         {
           "file": "photos/schwanzmeise-3.heic",
@@ -1758,6 +1793,7 @@
       "article": "die",
       "lookalike": "tit",
       "pronunciation": null,
+      "fact": "Die Haubenmeise hat eine spitze Federhaube und lebt im Nadelwald.",
       "photos": [
         {
           "file": "photos/haubenmeise-3.heic",
@@ -1808,6 +1844,7 @@
       "article": "das",
       "lookalike": "warbler",
       "pronunciation": null,
+      "fact": "Das Wintergoldhähnchen ist winzig und hat einen goldenen Kopfstreifen.",
       "photos": [
         {
           "file": "photos/wintergoldhaehnchen-2.heic",
@@ -1858,6 +1895,7 @@
       "article": "der",
       "lookalike": "thrush",
       "pronunciation": null,
+      "fact": "Der Papa vom Gartenrotschwanz hat eine leuchtend orange Brust.",
       "photos": [
         {
           "file": "photos/gartenrotschwanz.heic",
@@ -1908,6 +1946,7 @@
       "article": "die",
       "lookalike": "finch",
       "pronunciation": null,
+      "fact": "Die Feldlerche steigt singend hoch in den Himmel über dem Feld.",
       "photos": [
         {
           "file": "photos/feldlerche.heic",
@@ -1958,6 +1997,7 @@
       "article": "der",
       "lookalike": "warbler",
       "pronunciation": null,
+      "fact": "Der Neuntöter trägt eine schwarze Augenmaske und jagt Käfer.",
       "photos": [
         {
           "file": "photos/neuntoeter-4.heic",
@@ -2008,6 +2048,7 @@
       "article": "der",
       "lookalike": "thrush",
       "pronunciation": null,
+      "fact": "Der Pirol flötet hoch oben in den Bäumen, und der Papa ist knallgelb.",
       "photos": [
         {
           "file": "photos/pirol.heic",
@@ -2058,6 +2099,7 @@
       "article": "der",
       "lookalike": "warbler",
       "pronunciation": null,
+      "fact": "In manchen Wintern kommt der Seidenschwanz aus dem Norden zu uns.",
       "photos": [
         {
           "file": "photos/seidenschwanz-3.heic",
@@ -2108,6 +2150,7 @@
       "article": "die",
       "lookalike": "warbler",
       "pronunciation": null,
+      "fact": "Die Wasseramsel kann sogar unter Wasser am Bachgrund laufen.",
       "photos": [
         {
           "file": "photos/wasseramsel-2.heic",
@@ -2158,6 +2201,7 @@
       "article": "der",
       "lookalike": "cuckoo",
       "pronunciation": null,
+      "fact": "Der Kuckuck ruft seinen Namen und legt seine Eier in fremde Nester.",
       "photos": [
         {
           "file": "photos/kuckuck-4.heic",
@@ -2208,6 +2252,7 @@
       "article": "der",
       "lookalike": "woodpecker",
       "pronunciation": null,
+      "fact": "Der Grünspecht frisst gern Ameisen und ruft laut wie ein Lachen.",
       "photos": [
         {
           "file": "photos/gruenspecht.heic",
@@ -2258,6 +2303,7 @@
       "article": "der",
       "lookalike": "woodpecker",
       "pronunciation": null,
+      "fact": "Der Schwarzspecht ist ganz schwarz und trägt Rot auf dem Kopf.",
       "photos": [
         {
           "file": "photos/schwarzspecht.heic",
@@ -2308,6 +2354,7 @@
       "article": "der",
       "lookalike": "kingfisher",
       "pronunciation": null,
+      "fact": "Der Bienenfresser ist bunt wie ein Regenbogen und fängt Bienen.",
       "photos": [
         {
           "file": "photos/bienenfresser.heic",
@@ -2358,6 +2405,7 @@
       "article": "der",
       "lookalike": "owl",
       "pronunciation": null,
+      "fact": "Nachts ruft der Waldkauz im Wald sein langes „Huuu-hu-huuu“.",
       "photos": [
         {
           "file": "photos/waldkauz.heic",
@@ -2408,6 +2456,7 @@
       "article": "der",
       "lookalike": "owl",
       "pronunciation": "Der Uhu",
+      "fact": "Der Uhu ist eine riesige Eule mit Federohren und großen orangen Augen.",
       "photos": [
         {
           "file": "photos/uhu.heic",
@@ -2458,6 +2507,7 @@
       "article": "die",
       "lookalike": "owl",
       "pronunciation": null,
+      "fact": "Die Schleiereule hat ein weißes Gesicht in Herzform.",
       "photos": [
         {
           "file": "photos/schleiereule-5.heic",
@@ -2508,6 +2558,7 @@
       "article": "der",
       "lookalike": "owl",
       "pronunciation": null,
+      "fact": "Der Steinkauz ist eine kleine Eule und wohnt gern in alten Obstbäumen.",
       "photos": [
         {
           "file": "photos/steinkauz.heic",
@@ -2558,6 +2609,7 @@
       "article": "der",
       "lookalike": "raptor",
       "pronunciation": null,
+      "fact": "Der Mäusebussard sitzt gern auf Zaunpfählen und ruft wie eine Katze.",
       "photos": [
         {
           "file": "photos/maeusebussard.heic",
@@ -2608,6 +2660,7 @@
       "article": "der",
       "lookalike": "raptor",
       "pronunciation": null,
+      "fact": "Der Turmfalke kann in der Luft auf der Stelle flattern.",
       "photos": [
         {
           "file": "photos/turmfalke-4.heic",
@@ -2658,6 +2711,7 @@
       "article": "der",
       "lookalike": "raptor",
       "pronunciation": null,
+      "fact": "Der Rotmilan hat einen rotbraunen Schwanz mit zwei Spitzen.",
       "photos": [
         {
           "file": "photos/rotmilan-4.heic",
@@ -2708,6 +2762,7 @@
       "article": "der",
       "lookalike": "raptor",
       "pronunciation": null,
+      "fact": "Der Seeadler ist riesig, hat einen weißen Schwanz und fängt Fische.",
       "photos": [
         {
           "file": "photos/seeadler-5.heic",
@@ -2750,6 +2805,7 @@
       "article": "der",
       "lookalike": "raptor",
       "pronunciation": null,
+      "fact": "Im Sturzflug ist der Wanderfalke schneller als ein Auto.",
       "photos": [
         {
           "file": "photos/wanderfalke.heic",
@@ -2800,6 +2856,7 @@
       "article": "der",
       "lookalike": "heron",
       "pronunciation": null,
+      "fact": "Der Weißstorch wohnt auf Dächern und klappert laut mit dem Schnabel.",
       "photos": [
         {
           "file": "photos/weissstorch.heic",
@@ -2850,6 +2907,7 @@
       "article": "der",
       "lookalike": "heron",
       "pronunciation": null,
+      "fact": "Der Graureiher steht ganz still am Wasser und wartet auf Fische.",
       "photos": [
         {
           "file": "photos/graureiher-2.heic",
@@ -2900,6 +2958,7 @@
       "article": "der",
       "lookalike": "heron",
       "pronunciation": null,
+      "fact": "Der Kranich tanzt im Frühling und ruft laut wie eine Trompete.",
       "photos": [
         {
           "file": "photos/kranich.heic",
@@ -2950,6 +3009,7 @@
       "article": "die",
       "lookalike": "duck",
       "pronunciation": null,
+      "fact": "Bei der Stockente quakt die Mama laut, der Papa hat einen grünen Kopf.",
       "photos": [
         {
           "file": "photos/stockente.heic",
@@ -3000,6 +3060,7 @@
       "article": "die",
       "lookalike": "duck",
       "pronunciation": null,
+      "fact": "Die Mandarinente brütet in hohlen Bäumen, und der Papa ist kunterbunt.",
       "photos": [
         {
           "file": "photos/mandarinente.heic",
@@ -3050,6 +3111,7 @@
       "article": "der",
       "lookalike": "goose",
       "pronunciation": null,
+      "fact": "Der Höckerschwan hat einen orangen Schnabel mit schwarzem Höcker.",
       "photos": [
         {
           "file": "photos/hoeckerschwan.heic",
@@ -3100,6 +3162,7 @@
       "article": "die",
       "lookalike": "goose",
       "pronunciation": null,
+      "fact": "Die Graugans fliegt mit anderen Gänsen in einem großen V.",
       "photos": [
         {
           "file": "photos/graugans.heic",
@@ -3150,6 +3213,7 @@
       "article": "das",
       "lookalike": "rail",
       "pronunciation": null,
+      "fact": "Das Blässhuhn ist schwarz und hat einen weißen Fleck auf der Stirn.",
       "photos": [
         {
           "file": "photos/blaesshuhn.heic",
@@ -3200,6 +3264,7 @@
       "article": "der",
       "lookalike": "diver",
       "pronunciation": null,
+      "fact": "Der Haubentaucher trägt seine Küken auf dem Rücken herum.",
       "photos": [
         {
           "file": "photos/haubentaucher-3.heic",
@@ -3250,6 +3315,7 @@
       "article": "der",
       "lookalike": "seabird",
       "pronunciation": null,
+      "fact": "Der Kormoran hängt nach dem Tauchen seine Flügel zum Trocknen aus.",
       "photos": [
         {
           "file": "photos/kormoran.heic",
@@ -3300,6 +3366,7 @@
       "article": "die",
       "lookalike": "gull",
       "pronunciation": null,
+      "fact": "Die Lachmöwe hat im Sommer einen schokobraunen Kopf.",
       "photos": [
         {
           "file": "photos/lachmoewe-2.heic",
@@ -3350,6 +3417,7 @@
       "article": "der",
       "lookalike": "shorebird",
       "pronunciation": null,
+      "fact": "Der Austernfischer hat einen langen roten Schnabel und ruft „kliep“.",
       "photos": [
         {
           "file": "photos/austernfischer-6.heic",
@@ -3400,6 +3468,7 @@
       "article": "der",
       "lookalike": "shorebird",
       "pronunciation": null,
+      "fact": "Der Kiebitz trägt eine lange Federlocke am Kopf und ruft „kiwitt“.",
       "photos": [
         {
           "file": "photos/kiebitz.heic",
@@ -3450,6 +3519,7 @@
       "article": "der",
       "lookalike": "gamebird",
       "pronunciation": null,
+      "fact": "Beim Fasan hat der Hahn ein rotes Gesicht und einen langen Schwanz.",
       "photos": [
         {
           "file": "photos/fasan-6.heic",
