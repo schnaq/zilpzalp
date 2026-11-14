@@ -139,7 +139,10 @@ infisical run --env=dev --path=/ -- mise run fetch-media speech render \
     --sentence roundEnd.title gate.spoken profile.picker.title \
     profile.create.title quiz.quit.question home.collection.title \
     home.collection.all home.title profile.create.avatar.title \
-    profile.picker.new collection.locked timeBudget.title timeBudget.farewell
+    profile.picker.new collection.locked timeBudget.title timeBudget.farewell \
+    quiz.feedback.correct quiz.feedback.correct.right \
+    quiz.feedback.correct.excellent quiz.feedback.correct.great \
+    quiz.feedback.retry leaderboard.title leaderboard.motto
 ```
 
 The star count on „Zeit fürs Nest" is one clip per count, `<key>.<n>`, its

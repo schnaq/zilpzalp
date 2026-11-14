@@ -1609,6 +1609,42 @@
         }
       }
     },
+    "quiz.feedback.correct.excellent" : {
+      "comment" : "Another praise for the right bird, said and shown instead of quiz.feedback.correct now and then. Short and warm; never the round end's „Super gemacht!“",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prima!"
+          }
+        }
+      }
+    },
+    "quiz.feedback.correct.great" : {
+      "comment" : "Another praise for the right bird, said and shown instead of quiz.feedback.correct now and then. Short and warm; never the round end's „Super gemacht!“",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toll!"
+          }
+        }
+      }
+    },
+    "quiz.feedback.correct.right" : {
+      "comment" : "Another praise for the right bird, said and shown instead of quiz.feedback.correct now and then. Short and warm; never the round end's „Super gemacht!“",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Richtig!"
+          }
+        }
+      }
+    },
     "quiz.feedback.retry" : {
       "comment" : "Banner under the answers after a wrong tap. Never a failure: the child may keep tapping, and nothing is blocked",
       "extractionState" : "manual",

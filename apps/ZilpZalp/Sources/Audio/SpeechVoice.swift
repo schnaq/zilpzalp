@@ -32,6 +32,35 @@ enum SpeechVoice {
     /// before the first thing is said.
     static let forUtterance: AVSpeechSynthesisVoice? = resolve()
 
+    /// The rate that suits ``forUtterance``, decided once with it: the voice
+    /// cannot change while the app runs.
+    ///
+    /// `.default` covers both the compact voice and the case where there was
+    /// no voice to look at: today's rate is what the app has always used, and
+    /// nothing about an unknown voice argues for changing it.
+    static let rate: Float = switch forUtterance?.quality {
+    case .enhanced, .premium: downloadedRate
+    default: compactRate
+    }
+
+    /// A notch below the system default of 0.5. The default rattles the
+    /// question off faster than a child who is still learning the names can
+    /// follow it, and a compact voice is the one that rattles hardest: it
+    /// clips the pauses between words as it speeds up.
+    private static let compactRate = AVSpeechUtteranceDefaultSpeechRate * 0.9
+
+    /// Barely slower than the system default, for a downloaded voice.
+    ///
+    /// An enhanced or premium voice already stretches its own vowels and holds
+    /// its own pauses, so the same 0.9 that saves a compact voice makes this
+    /// one drag. Half the correction is enough.
+    ///
+    /// Judgement, not measurement: the simulator has compact voices only, so
+    /// this could not be listened to here. It is the value Christian should
+    /// turn first if a downloaded voice still reads too fast or too slowly on
+    /// his device (#151).
+    private static let downloadedRate = AVSpeechUtteranceDefaultSpeechRate * 0.95
+
     /// Every voice on the device, in Core's terms.
     private static func installed() -> [SpeechVoiceDescription] {
         AVSpeechSynthesisVoice.speechVoices().map { voice in
