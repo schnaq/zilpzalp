@@ -157,9 +157,10 @@ def species_text(bird: dict, sentence: str) -> str:
     if sentence == "collection.name":
         return spoken_name(bird)
     if sentence == "species.fact":
-        if not bird.get("fact"):
+        fact = bird.get("fact")
+        if not fact:
             raise LookupError(f"'{bird['id']}' has no `fact` in its manifest to say")
-        return str(bird["fact"])
+        return str(fact)
 
     known = ", ".join(SPECIES_SENTENCES)
     raise LookupError(f"'{sentence}' is not a species sentence (expected one of {known})")
