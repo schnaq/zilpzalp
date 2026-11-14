@@ -901,7 +901,10 @@ def speech_work(
     document = manifest.load(manifest.manifest_path(str(pack)))
     # By default the whole pack — its own sentences too, unless only some
     # species were named: re-rendering one bird must not re-render the title.
-    keys = chosen or [*([] if species else sentences.PACK_SENTENCES), *sentences.SPECIES_SENTENCES]
+    keys = chosen or [
+        *([] if species else sentences.PACK_SENTENCES),
+        *sentences.DEFAULT_SPECIES_SENTENCES,
+    ]
     # A pack sentence is said once for the pack, whichever species are named.
     own = [key for key in keys if key in sentences.PACK_SENTENCES]
     per_bird = [key for key in keys if key not in own]
@@ -1286,8 +1289,10 @@ def build_parser() -> argparse.ArgumentParser:
     render.add_argument(
         "--sentence",
         nargs="+",
-        help="String Catalog keys; default for a pack: "
-        + ", ".join((*sentences.PACK_SENTENCES, *sentences.SPECIES_SENTENCES)),
+        help="String Catalog keys, or "
+        + ", ".join((*sentences.PACK_SENTENCES, *sentences.SPECIES_SENTENCES))
+        + "; default for a pack: "
+        + ", ".join((*sentences.PACK_SENTENCES, *sentences.DEFAULT_SPECIES_SENTENCES)),
     )
     render.add_argument(
         "--provider",

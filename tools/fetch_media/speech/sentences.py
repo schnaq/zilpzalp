@@ -7,15 +7,22 @@ reworded in Xcode is rendered as it now reads instead of as it once did. What
 this module does spell out is *how* each sentence is filled, and that is
 tool knowledge: it mirrors the eight call sites the app speaks through.
 
-One sentence is species-dependent and therefore one clip per species:
-`collection.name`, „Amsel" — the spoken name alone.
+Two sentences are species-dependent and therefore one clip per species:
+`collection.name`, „Amsel" — the spoken name alone — and `species.fact`, the
+one short sentence the manifest's `fact` holds about the bird.
 
-It is the one key that is not in the catalog: the sentence *is* the name, so
-there is nothing to translate and nothing to fill. The album says it when a
+Neither is in the catalog. `collection.name` is not: the sentence *is* the
+name, so there is nothing to translate and nothing to fill. The album says it when a
 sticker is tapped, since #220 it is the question of game 1, and since #264 it
 is what the round end says right after „Super gemacht!" for a sticker just
 earned — one clip per species, heard in three places.
 `SpeechKey.speciesName` in `ZilpZalpData` is this key on the Swift side.
+
+`species.fact` is not either, because the fact is species content written per
+pack, like the name, and not screen copy. It is named like `pack.title` —
+whose data it is, then the manifest field it is read from — rather than after
+a screen, so the key stays true wherever the app ends up saying it. A bird
+without a `fact` has no such sentence, and naming it for one is refused.
 
 „Super gemacht! Amsel gesammelt!" — `roundEnd.sticker.new.spoken` — is still
 in the catalog, but for VoiceOver only: the round end plays the fixed praise
@@ -44,8 +51,13 @@ CATALOG = REPO_ROOT / "apps" / "ZilpZalp" / "Resources" / "Localizable.xcstrings
 # recording of one language, and this is that language.
 LANGUAGE = "de"
 
-# The species sentences, in the order `--sentence` lists and defaults to.
-SPECIES_SENTENCES = ("collection.name",)
+# The species sentences, in the order `--sentence` lists them.
+SPECIES_SENTENCES = ("collection.name", "species.fact")
+
+# What a pack render produces per bird when no `--sentence` is named: the name
+# alone. A fact is rendered only on request, so a run meant for the facts never
+# pays for every name again, and a run meant for the names never for the facts.
+DEFAULT_SPECIES_SENTENCES = ("collection.name",)
 
 # The sentences about a pack itself, one clip per pack: `pack.title`, the
 # manifest's title spoken — what the collection picker says when a child taps
@@ -144,6 +156,10 @@ def species_text(bird: dict, sentence: str) -> str:
     """What one species sentence says for one bird."""
     if sentence == "collection.name":
         return spoken_name(bird)
+    if sentence == "species.fact":
+        if not bird.get("fact"):
+            raise LookupError(f"'{bird['id']}' has no `fact` in its manifest to say")
+        return str(bird["fact"])
 
     known = ", ".join(SPECIES_SENTENCES)
     raise LookupError(f"'{sentence}' is not a species sentence (expected one of {known})")
