@@ -114,6 +114,28 @@ struct PackManifestTests {
         #expect(try Self.bird("testvogel", in: untagged).lookalike == nil)
     }
 
+    @Test("a species decodes its fact, or has none")
+    func decodesFact() throws {
+        let told = try PackManifest.decode(
+            Self.species(declaring: #""fact": "Er singt seinen Namen.", "photo": "# + Self.photo),
+        )
+        #expect(try Self.bird("testvogel", in: told).fact == "Er singt seinen Namen.")
+
+        let untold = try PackManifest.decode(Self.species(declaring: #""photo": "# + Self.photo))
+        #expect(try Self.bird("testvogel", in: untold).fact == nil)
+    }
+
+    /// What lets an app from before `fact` open a pack that carries one: a
+    /// key the schema does not ask for is skipped, not refused. Asserted with
+    /// a key no version knows, which is the position every older app is in.
+    @Test("a species carrying a key this app does not know still decodes")
+    func ignoresUnknownKeys() throws {
+        let pack = try PackManifest.decode(
+            Self.species(declaring: #""habitat": "garden", "photo": "# + Self.photo),
+        )
+        #expect(try Self.bird("testvogel", in: pack).photos.count == 1)
+    }
+
     @Test(
         "a species that declares no photo at all fails",
         arguments: [#""photos": []"#, #""call": null"#],

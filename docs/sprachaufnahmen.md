@@ -163,6 +163,18 @@ infisical run --env=dev --path=/ -- mise run fetch-media speech render \
     --pack deutschland --sentence collection.name
 ```
 
+Every species' fact, which the lightbulb on a collected sticker in the album
+says — one clip per species, `speech/species.fact/<bird>.m4a`, its text the
+manifest's `fact`. A render without `--sentence` leaves the facts out, so name
+them explicitly; a bird without a `fact` is refused, so name the species of a
+pack that has facts for only some of them:
+
+```
+infisical run --env=dev --path=/ -- mise run fetch-media speech render \
+    --provider elevenlabs --voice AnvlJBAqSLDzEevYr9Ap=Ava \
+    --pack deutschland --sentence species.fact
+```
+
 A pack's own title, which the collection picker says when a child taps the
 pack (#306) — one clip per pack, `speech/pack.title.m4a` under the manifest's
 own `speech`, its text the manifest's `title`. A render of a whole pack

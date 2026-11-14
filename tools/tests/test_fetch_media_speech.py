@@ -203,9 +203,24 @@ class SentenceTests(unittest.TestCase):
 
         self.assertEqual(sentences.species_text(odd, "collection.name"), "Zilp Zalp")
 
+    def test_says_the_fact_the_manifest_carries(self) -> None:
+        told = {**AMSEL, "fact": "Bei der Amsel ist der Papa ganz schwarz."}
+
+        self.assertEqual(
+            sentences.species_text(told, "species.fact"), "Bei der Amsel ist der Papa ganz schwarz."
+        )
+
+    def test_refuses_the_fact_of_a_bird_without_one(self) -> None:
+        """Rather than a clip of nothing: a missing fact is no sentence."""
+        for bird in (AMSEL, {**AMSEL, "fact": ""}):
+            with self.subTest(bird=bird), self.assertRaises(LookupError) as error:
+                sentences.species_text(bird, "species.fact")
+
+            self.assertIn("'amsel' has no `fact`", str(error.exception))
+
     def test_refuses_a_sentence_that_belongs_to_no_species(self) -> None:
         """Including the first-find praise: VoiceOver-only since #264."""
-        self.assertEqual(sentences.SPECIES_SENTENCES, ("collection.name",))
+        self.assertEqual(sentences.SPECIES_SENTENCES, ("collection.name", "species.fact"))
         for key in ("roundEnd.title", "roundEnd.sticker.new.spoken"):
             with self.subTest(key=key), self.assertRaises(LookupError) as error:
                 sentences.species_text(AMSEL, key)
@@ -1000,10 +1015,44 @@ class RenderTests(SpeechTestCase):
 
         self.assertEqual(list(self.document()), ["id", "title", "voice", "birds"])
 
-    def test_renders_every_species_sentence_by_default(self) -> None:
+    def test_renders_the_name_alone_by_default(self) -> None:
+        """A fact only on request: a default run must not pay for the facts."""
+        self.tell_facts()
         self.render("--pack", "basis", "--species", "amsel")
 
-        self.assertEqual(list(self.clips_of("amsel")), list(sentences.SPECIES_SENTENCES))
+        self.assertEqual(list(self.clips_of("amsel")), ["collection.name"])
+
+    def test_renders_the_fact_without_touching_the_name(self) -> None:
+        self.tell_facts()
+        self.render("--pack", "basis", "--sentence", "collection.name")
+        name = self.clips_of("amsel")["collection.name"]
+
+        code, _ = self.render("--pack", "basis", "--sentence", "species.fact")
+
+        self.assertEqual(code, 0)
+        entry = self.clips_of("amsel")["species.fact"]
+        self.assertEqual(entry["file"], "speech/species.fact/amsel.m4a")
+        self.assertEqual(entry["text"], "Amsel singt.")
+        self.assertEqual(entry["sha256"], manifest.sha256_of(self.pack / entry["file"]))
+        self.assertEqual(self.clips_of("amsel")["collection.name"], name)
+
+    def test_refuses_a_fact_run_over_a_bird_without_one_before_any_clip(self) -> None:
+        document = self.document()
+        document["birds"][0]["fact"] = "Die Amsel singt."
+        manifest.save(self.pack / "manifest.json", document)
+
+        code, _ = self.render("--pack", "basis", "--sentence", "species.fact")
+
+        self.assertEqual(code, 1)
+        self.assertEqual(self.clips_of("amsel"), {})
+        self.assertEqual(list(self.pack.rglob("*.m4a")), [])
+
+    def tell_facts(self) -> None:
+        """Give both birds of the throwaway pack a fact."""
+        document = self.document()
+        for bird in document["birds"]:
+            bird["fact"] = f"{bird['name']} singt."
+        manifest.save(self.pack / "manifest.json", document)
 
     def test_renders_the_pack_s_title_beside_its_birds(self) -> None:
         """#306: one clip for the pack, under the manifest's own `speech`."""

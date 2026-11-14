@@ -118,6 +118,17 @@ public struct Bird: Codable, Sendable, Hashable, Identifiable {
     /// Phonetic spelling for `AVSpeechSynthesizer`, `nil` when the written
     /// name is spoken correctly.
     public let pronunciation: String?
+    /// One short sentence about the species for a child who cannot read —
+    /// „Bei der Amsel ist der Papa ganz schwarz und hat einen gelben
+    /// Schnabel." Species content like ``name``, so it lives in the pack and
+    /// not in the String Catalog, and `tools/fetch_media/speech` records it as
+    /// the species sentence `species.fact`. `nil` for a species nobody has
+    /// written one for yet.
+    ///
+    /// Optional, and an app from before the field ignores it: a keyed
+    /// decoder skips keys it does not ask for, so an older installed app
+    /// still opens a pack that carries it.
+    public let fact: String?
     /// Every photo of the species, at least one, **the curated portrait
     /// first**. A child that meets the same picture in every round learns the
     /// picture and not the bird (#194), so a quiz tile shows one of them at a
@@ -150,7 +161,7 @@ public extension Bird {
     /// below has to stay out of them, so that what this type writes carries
     /// only the shape the manifests have now.
     private enum CodingKeys: String, CodingKey {
-        case id, name, scientificName, taxonID, article, pronunciation
+        case id, name, scientificName, taxonID, article, pronunciation, fact
         case photos, call, speech, lookalike
     }
 
@@ -186,6 +197,7 @@ public extension Bird {
         taxonID = try container.decode(Int.self, forKey: .taxonID)
         article = try container.decode(String.self, forKey: .article)
         pronunciation = try container.decodeIfPresent(String.self, forKey: .pronunciation)
+        fact = try container.decodeIfPresent(String.self, forKey: .fact)
         call = try container.decodeIfPresent(MediaAsset.self, forKey: .call)
         speech = try container.decodeIfPresent([String: MediaClip].self, forKey: .speech)
         lookalike = try container.decodeIfPresent(String.self, forKey: .lookalike)

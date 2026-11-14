@@ -157,6 +157,18 @@
         }
       }
     },
+    "collection.fact.accessibility" : {
+      "comment" : "VoiceOver label of the small lightbulb on a collected sticker in the album, which says one short sentence about the bird. %@ is the bird's name. The button itself is wordless",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Steckbrief: %@"
+          }
+        }
+      }
+    },
     "collection.locked" : {
       "comment" : "Caption under a sticker of a species not yet found. The sticker keeps its photo; only the name is still a secret",
       "extractionState" : "manual",
