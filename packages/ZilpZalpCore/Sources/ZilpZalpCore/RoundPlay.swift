@@ -56,7 +56,8 @@ public struct RoundPlay: Hashable, Sendable {
     /// Every species answered right at the first attempt, in the order those
     /// answers happened. A species the round asks for twice and the child
     /// knows twice stands in here twice — a pack with few species to ask for
-    /// repeats them late in the round, see ``Round/make(from:questionCount:choiceCount:using:)``.
+    /// repeats them late in the round, see
+    /// ``Round/make(from:questionCount:choiceCount:difficulty:using:)``.
     ///
     /// The one record behind everything the round has to say about
     /// recognition: how many stars it earned, how often each bird was known,

@@ -14,6 +14,7 @@
       "scientificName": "Turdus merula",
       "taxonID": 12716,
       "article": "die",
+      "lookalike": "thrush",
       "pronunciation": null,
       "photos": [
         {
@@ -63,6 +64,7 @@
       "scientificName": "Cyanistes caeruleus",
       "taxonID": 144849,
       "article": "die",
+      "lookalike": "tit",
       "pronunciation": null,
       "photos": [
         {
@@ -112,6 +114,7 @@
       "scientificName": "Dendrocopos major",
       "taxonID": 17871,
       "article": "der",
+      "lookalike": "woodpecker",
       "pronunciation": null,
       "photos": [
         {
@@ -161,6 +164,7 @@
       "scientificName": "Alcedo atthis",
       "taxonID": 2599,
       "article": "der",
+      "lookalike": "kingfisher",
       "pronunciation": null,
       "photos": [
         {
@@ -210,6 +214,7 @@
       "scientificName": "Phoenicurus ochruros",
       "taxonID": 13000,
       "article": "der",
+      "lookalike": "thrush",
       "pronunciation": null,
       "photos": [
         {
@@ -259,6 +264,7 @@
       "scientificName": "Parus major",
       "taxonID": 203153,
       "article": "die",
+      "lookalike": "tit",
       "pronunciation": null,
       "photos": [
         {
@@ -308,6 +314,7 @@
       "scientificName": "Erithacus rubecula",
       "taxonID": 13094,
       "article": "das",
+      "lookalike": "thrush",
       "pronunciation": null,
       "photos": [
         {
@@ -357,6 +364,7 @@
       "scientificName": "Sturnus vulgaris",
       "taxonID": 14850,
       "article": "der",
+      "lookalike": "thrush",
       "pronunciation": null,
       "photos": [
         {
@@ -406,6 +414,7 @@
       "scientificName": "Upupa epops",
       "taxonID": 20969,
       "article": "der",
+      "lookalike": "kingfisher",
       "pronunciation": null,
       "photos": [
         {
@@ -455,6 +464,7 @@
       "scientificName": "Phylloscopus collybita",
       "taxonID": 117016,
       "article": "der",
+      "lookalike": "warbler",
       "pronunciation": null,
       "photos": [
         {
@@ -504,6 +514,7 @@
       "scientificName": "Passer domesticus",
       "taxonID": 13858,
       "article": "der",
+      "lookalike": "finch",
       "pronunciation": null,
       "photos": [
         {
@@ -553,6 +564,7 @@
       "scientificName": "Chloris chloris",
       "taxonID": 145360,
       "article": "der",
+      "lookalike": "finch",
       "pronunciation": null,
       "photos": [
         {
@@ -602,6 +614,7 @@
       "scientificName": "Fringilla coelebs",
       "taxonID": 10070,
       "article": "der",
+      "lookalike": "finch",
       "pronunciation": null,
       "photos": [
         {
@@ -651,6 +664,7 @@
       "scientificName": "Carduelis carduelis",
       "taxonID": 9398,
       "article": "der",
+      "lookalike": "finch",
       "pronunciation": null,
       "photos": [
         {
@@ -700,6 +714,7 @@
       "scientificName": "Pyrrhula pyrrhula",
       "taxonID": 9462,
       "article": "der",
+      "lookalike": "finch",
       "pronunciation": null,
       "photos": [
         {
@@ -749,6 +764,7 @@
       "scientificName": "Coccothraustes coccothraustes",
       "taxonID": 9801,
       "article": "der",
+      "lookalike": "finch",
       "pronunciation": null,
       "photos": [
         {
@@ -790,6 +806,7 @@
       "scientificName": "Linaria cannabina",
       "taxonID": 558634,
       "article": "der",
+      "lookalike": "finch",
       "pronunciation": null,
       "photos": [
         {
@@ -839,6 +856,7 @@
       "scientificName": "Emberiza citrinella",
       "taxonID": 9195,
       "article": "die",
+      "lookalike": "finch",
       "pronunciation": null,
       "photos": [
         {
@@ -888,6 +906,7 @@
       "scientificName": "Pica pica",
       "taxonID": 891696,
       "article": "die",
+      "lookalike": "corvid",
       "pronunciation": null,
       "photos": [
         {
@@ -937,6 +956,7 @@
       "scientificName": "Garrulus glandarius",
       "taxonID": 8088,
       "article": "der",
+      "lookalike": "corvid",
       "pronunciation": null,
       "photos": [
         {
@@ -986,6 +1006,7 @@
       "scientificName": "Corvus corone",
       "taxonID": 204496,
       "article": "die",
+      "lookalike": "corvid",
       "pronunciation": null,
       "photos": [
         {
@@ -1035,6 +1056,7 @@
       "scientificName": "Coloeus monedula",
       "taxonID": 336399,
       "article": "die",
+      "lookalike": "corvid",
       "pronunciation": null,
       "photos": [
         {
@@ -1084,6 +1106,7 @@
       "scientificName": "Corvus corax",
       "taxonID": 8010,
       "article": "der",
+      "lookalike": "corvid",
       "pronunciation": null,
       "photos": [
         {
@@ -1133,6 +1156,7 @@
       "scientificName": "Columba palumbus",
       "taxonID": 3048,
       "article": "die",
+      "lookalike": "pigeon",
       "pronunciation": null,
       "photos": [
         {
@@ -1182,6 +1206,7 @@
       "scientificName": "Streptopelia decaocto",
       "taxonID": 2969,
       "article": "die",
+      "lookalike": "pigeon",
       "pronunciation": null,
       "photos": [
         {
@@ -1231,6 +1256,7 @@
       "scientificName": "Apus apus",
       "taxonID": 6638,
       "article": "der",
+      "lookalike": "swallow",
       "pronunciation": null,
       "photos": [
         {
@@ -1280,6 +1306,7 @@
       "scientificName": "Hirundo rustica",
       "taxonID": 11901,
       "article": "die",
+      "lookalike": "swallow",
       "pronunciation": null,
       "photos": [
         {
@@ -1329,6 +1356,7 @@
       "scientificName": "Motacilla alba",
       "taxonID": 13695,
       "article": "die",
+      "lookalike": "warbler",
       "pronunciation": null,
       "photos": [
         {
@@ -1378,6 +1406,7 @@
       "scientificName": "Troglodytes troglodytes",
       "taxonID": 145363,
       "article": "der",
+      "lookalike": "warbler",
       "pronunciation": null,
       "photos": [
         {
@@ -1427,6 +1456,7 @@
       "scientificName": "Turdus philomelos",
       "taxonID": 12748,
       "article": "die",
+      "lookalike": "thrush",
       "pronunciation": null,
       "photos": [
         {
@@ -1476,6 +1506,7 @@
       "scientificName": "Luscinia megarhynchos",
       "taxonID": 13079,
       "article": "die",
+      "lookalike": "thrush",
       "pronunciation": null,
       "photos": [
         {
@@ -1525,6 +1556,7 @@
       "scientificName": "Sylvia atricapilla",
       "taxonID": 15282,
       "article": "die",
+      "lookalike": "warbler",
       "pronunciation": null,
       "photos": [
         {
@@ -1574,6 +1606,7 @@
       "scientificName": "Sitta europaea",
       "taxonID": 14824,
       "article": "der",
+      "lookalike": "tit",
       "pronunciation": null,
       "photos": [
         {
@@ -1623,6 +1656,7 @@
       "scientificName": "Certhia brachydactyla",
       "taxonID": 7462,
       "article": "der",
+      "lookalike": "tit",
       "pronunciation": null,
       "photos": [
         {
@@ -1672,6 +1706,7 @@
       "scientificName": "Aegithalos caudatus",
       "taxonID": 7278,
       "article": "die",
+      "lookalike": "tit",
       "pronunciation": null,
       "photos": [
         {
@@ -1721,6 +1756,7 @@
       "scientificName": "Lophophanes cristatus",
       "taxonID": 144830,
       "article": "die",
+      "lookalike": "tit",
       "pronunciation": null,
       "photos": [
         {
@@ -1770,6 +1806,7 @@
       "scientificName": "Regulus regulus",
       "taxonID": 793469,
       "article": "das",
+      "lookalike": "warbler",
       "pronunciation": null,
       "photos": [
         {
@@ -1819,6 +1856,7 @@
       "scientificName": "Phoenicurus phoenicurus",
       "taxonID": 12992,
       "article": "der",
+      "lookalike": "thrush",
       "pronunciation": null,
       "photos": [
         {
@@ -1868,6 +1906,7 @@
       "scientificName": "Alauda arvensis",
       "taxonID": 7347,
       "article": "die",
+      "lookalike": "finch",
       "pronunciation": null,
       "photos": [
         {
@@ -1917,6 +1956,7 @@
       "scientificName": "Lanius collurio",
       "taxonID": 12038,
       "article": "der",
+      "lookalike": "warbler",
       "pronunciation": null,
       "photos": [
         {
@@ -1966,6 +2006,7 @@
       "scientificName": "Oriolus oriolus",
       "taxonID": 204556,
       "article": "der",
+      "lookalike": "thrush",
       "pronunciation": null,
       "photos": [
         {
@@ -2015,6 +2056,7 @@
       "scientificName": "Bombycilla garrulus",
       "taxonID": 7429,
       "article": "der",
+      "lookalike": "warbler",
       "pronunciation": null,
       "photos": [
         {
@@ -2064,6 +2106,7 @@
       "scientificName": "Cinclus cinclus",
       "taxonID": 7647,
       "article": "die",
+      "lookalike": "warbler",
       "pronunciation": null,
       "photos": [
         {
@@ -2113,6 +2156,7 @@
       "scientificName": "Cuculus canorus",
       "taxonID": 1907,
       "article": "der",
+      "lookalike": "cuckoo",
       "pronunciation": null,
       "photos": [
         {
@@ -2162,6 +2206,7 @@
       "scientificName": "Picus viridis",
       "taxonID": 144243,
       "article": "der",
+      "lookalike": "woodpecker",
       "pronunciation": null,
       "photos": [
         {
@@ -2211,6 +2256,7 @@
       "scientificName": "Dryocopus martius",
       "taxonID": 17835,
       "article": "der",
+      "lookalike": "woodpecker",
       "pronunciation": null,
       "photos": [
         {
@@ -2260,6 +2306,7 @@
       "scientificName": "Merops apiaster",
       "taxonID": 2191,
       "article": "der",
+      "lookalike": "kingfisher",
       "pronunciation": null,
       "photos": [
         {
@@ -2309,6 +2356,7 @@
       "scientificName": "Strix aluco",
       "taxonID": 19898,
       "article": "der",
+      "lookalike": "owl",
       "pronunciation": null,
       "photos": [
         {
@@ -2358,6 +2406,7 @@
       "scientificName": "Bubo bubo",
       "taxonID": 20059,
       "article": "der",
+      "lookalike": "owl",
       "pronunciation": "Der Uhu",
       "photos": [
         {
@@ -2407,6 +2456,7 @@
       "scientificName": "Tyto alba",
       "taxonID": 20445,
       "article": "die",
+      "lookalike": "owl",
       "pronunciation": null,
       "photos": [
         {
@@ -2456,6 +2506,7 @@
       "scientificName": "Athene noctua",
       "taxonID": 19998,
       "article": "der",
+      "lookalike": "owl",
       "pronunciation": null,
       "photos": [
         {
@@ -2505,6 +2556,7 @@
       "scientificName": "Buteo buteo",
       "taxonID": 204472,
       "article": "der",
+      "lookalike": "raptor",
       "pronunciation": null,
       "photos": [
         {
@@ -2554,6 +2606,7 @@
       "scientificName": "Falco tinnunculus",
       "taxonID": 472766,
       "article": "der",
+      "lookalike": "raptor",
       "pronunciation": null,
       "photos": [
         {
@@ -2603,6 +2656,7 @@
       "scientificName": "Milvus milvus",
       "taxonID": 5267,
       "article": "der",
+      "lookalike": "raptor",
       "pronunciation": null,
       "photos": [
         {
@@ -2652,6 +2706,7 @@
       "scientificName": "Haliaeetus albicilla",
       "taxonID": 5309,
       "article": "der",
+      "lookalike": "raptor",
       "pronunciation": null,
       "photos": [
         {
@@ -2693,6 +2748,7 @@
       "scientificName": "Falco peregrinus",
       "taxonID": 4647,
       "article": "der",
+      "lookalike": "raptor",
       "pronunciation": null,
       "photos": [
         {
@@ -2742,6 +2798,7 @@
       "scientificName": "Ciconia ciconia",
       "taxonID": 4733,
       "article": "der",
+      "lookalike": "heron",
       "pronunciation": null,
       "photos": [
         {
@@ -2791,6 +2848,7 @@
       "scientificName": "Ardea cinerea",
       "taxonID": 4954,
       "article": "der",
+      "lookalike": "heron",
       "pronunciation": null,
       "photos": [
         {
@@ -2840,6 +2898,7 @@
       "scientificName": "Grus grus",
       "taxonID": 41,
       "article": "der",
+      "lookalike": "heron",
       "pronunciation": null,
       "photos": [
         {
@@ -2889,6 +2948,7 @@
       "scientificName": "Anas platyrhynchos",
       "taxonID": 6930,
       "article": "die",
+      "lookalike": "duck",
       "pronunciation": null,
       "photos": [
         {
@@ -2938,6 +2998,7 @@
       "scientificName": "Aix galericulata",
       "taxonID": 7106,
       "article": "die",
+      "lookalike": "duck",
       "pronunciation": null,
       "photos": [
         {
@@ -2987,6 +3048,7 @@
       "scientificName": "Cygnus olor",
       "taxonID": 6921,
       "article": "der",
+      "lookalike": "goose",
       "pronunciation": null,
       "photos": [
         {
@@ -3036,6 +3098,7 @@
       "scientificName": "Anser anser",
       "taxonID": 7018,
       "article": "die",
+      "lookalike": "goose",
       "pronunciation": null,
       "photos": [
         {
@@ -3085,6 +3148,7 @@
       "scientificName": "Fulica atra",
       "taxonID": 482,
       "article": "das",
+      "lookalike": "rail",
       "pronunciation": null,
       "photos": [
         {
@@ -3134,6 +3198,7 @@
       "scientificName": "Podiceps cristatus",
       "taxonID": 4208,
       "article": "der",
+      "lookalike": "diver",
       "pronunciation": null,
       "photos": [
         {
@@ -3183,6 +3248,7 @@
       "scientificName": "Phalacrocorax carbo",
       "taxonID": 4270,
       "article": "der",
+      "lookalike": "seabird",
       "pronunciation": null,
       "photos": [
         {
@@ -3232,6 +3298,7 @@
       "scientificName": "Chroicocephalus ridibundus",
       "taxonID": 144510,
       "article": "die",
+      "lookalike": "gull",
       "pronunciation": null,
       "photos": [
         {
@@ -3281,6 +3348,7 @@
       "scientificName": "Haematopus ostralegus",
       "taxonID": 4843,
       "article": "der",
+      "lookalike": "shorebird",
       "pronunciation": null,
       "photos": [
         {
@@ -3330,6 +3398,7 @@
       "scientificName": "Vanellus vanellus",
       "taxonID": 4857,
       "article": "der",
+      "lookalike": "shorebird",
       "pronunciation": null,
       "photos": [
         {
@@ -3379,6 +3448,7 @@
       "scientificName": "Phasianus colchicus",
       "taxonID": 981,
       "article": "der",
+      "lookalike": "gamebird",
       "pronunciation": null,
       "photos": [
         {

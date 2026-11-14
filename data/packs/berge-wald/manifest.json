@@ -14,6 +14,7 @@
       "scientificName": "Pyrrhocorax graculus",
       "taxonID": 8350,
       "article": "die",
+      "lookalike": "corvid",
       "pronunciation": null,
       "photos": [
         {
@@ -63,6 +64,7 @@
       "scientificName": "Tetrao urogallus",
       "taxonID": 1026,
       "article": "das",
+      "lookalike": "gamebird",
       "pronunciation": null,
       "photos": [
         {
@@ -97,6 +99,7 @@
       "scientificName": "Tichodroma muraria",
       "taxonID": 14840,
       "article": "der",
+      "lookalike": "tit",
       "pronunciation": null,
       "photos": [
         {
@@ -139,6 +142,7 @@
       "scientificName": "Nucifraga caryocatactes",
       "taxonID": 204552,
       "article": "der",
+      "lookalike": "corvid",
       "pronunciation": null,
       "photos": [
         {
@@ -188,6 +192,7 @@
       "scientificName": "Loxia curvirostra",
       "taxonID": 10411,
       "article": "der",
+      "lookalike": "finch",
       "pronunciation": null,
       "photos": [
         {
@@ -237,6 +242,7 @@
       "scientificName": "Lagopus muta",
       "taxonID": 949,
       "article": "das",
+      "lookalike": "gamebird",
       "pronunciation": null,
       "photos": [
         {
@@ -279,6 +285,7 @@
       "scientificName": "Lyrurus tetrix",
       "taxonID": 1289697,
       "article": "das",
+      "lookalike": "gamebird",
       "pronunciation": null,
       "photos": [
         {
@@ -321,6 +328,7 @@
       "scientificName": "Tetrastes bonasia",
       "taxonID": 558443,
       "article": "das",
+      "lookalike": "gamebird",
       "pronunciation": null,
       "photos": [
         {
@@ -370,6 +378,7 @@
       "scientificName": "Turdus torquatus",
       "taxonID": 12740,
       "article": "die",
+      "lookalike": "thrush",
       "pronunciation": null,
       "photos": [
         {
@@ -411,6 +420,7 @@
       "scientificName": "Periparus ater",
       "taxonID": 144823,
       "article": "die",
+      "lookalike": "tit",
       "pronunciation": null,
       "photos": [
         {
@@ -460,6 +470,7 @@
       "scientificName": "Picoides tridactylus",
       "taxonID": 17669,
       "article": "der",
+      "lookalike": "woodpecker",
       "pronunciation": null,
       "photos": [
         {
@@ -502,6 +513,7 @@
       "scientificName": "Ciconia nigra",
       "taxonID": 4736,
       "article": "der",
+      "lookalike": "heron",
       "pronunciation": null,
       "photos": [
         {
@@ -544,6 +556,7 @@
       "scientificName": "Jynx torquilla",
       "taxonID": 18448,
       "article": "der",
+      "lookalike": "woodpecker",
       "pronunciation": null,
       "photos": [
         {
@@ -593,6 +606,7 @@
       "scientificName": "Aquila chrysaetos",
       "taxonID": 5074,
       "article": "der",
+      "lookalike": "raptor",
       "pronunciation": null,
       "photos": [
         {
@@ -642,6 +656,7 @@
       "scientificName": "Gypaetus barbatus",
       "taxonID": 5379,
       "article": "der",
+      "lookalike": "vulture",
       "pronunciation": null,
       "photos": [
         {
@@ -691,6 +706,7 @@
       "scientificName": "Glaucidium passerinum",
       "taxonID": 19848,
       "article": "der",
+      "lookalike": "owl",
       "pronunciation": null,
       "photos": [
         {
@@ -740,6 +756,7 @@
       "scientificName": "Aegolius funereus",
       "taxonID": 20359,
       "article": "der",
+      "lookalike": "owl",
       "pronunciation": null,
       "photos": [
         {
@@ -773,6 +790,7 @@
       "scientificName": "Strix uralensis",
       "taxonID": 19910,
       "article": "der",
+      "lookalike": "owl",
       "pronunciation": null,
       "photos": [
         {
@@ -822,6 +840,7 @@
       "scientificName": "Gyps fulvus",
       "taxonID": 5366,
       "article": "der",
+      "lookalike": "vulture",
       "pronunciation": null,
       "photos": [
         {
@@ -871,6 +890,7 @@
       "scientificName": "Asio otus",
       "taxonID": 20307,
       "article": "die",
+      "lookalike": "owl",
       "pronunciation": null,
       "photos": [
         {
@@ -912,6 +932,7 @@
       "scientificName": "Astur gentilis",
       "taxonID": 1579015,
       "article": "der",
+      "lookalike": "raptor",
       "pronunciation": null,
       "photos": [
         {
@@ -953,6 +974,7 @@
       "scientificName": "Motacilla cinerea",
       "taxonID": 13688,
       "article": "die",
+      "lookalike": "warbler",
       "pronunciation": null,
       "photos": [
         {
@@ -1002,6 +1024,7 @@
       "scientificName": "Scolopax rusticola",
       "taxonID": 3931,
       "article": "die",
+      "lookalike": "shorebird",
       "pronunciation": null,
       "photos": [
         {
@@ -1035,6 +1058,7 @@
       "scientificName": "Fringilla montifringilla",
       "taxonID": 10069,
       "article": "der",
+      "lookalike": "finch",
       "pronunciation": null,
       "photos": [
         {
@@ -1076,6 +1100,7 @@
       "scientificName": "Pyrrhula pyrrhula",
       "taxonID": 9462,
       "article": "der",
+      "lookalike": "finch",
       "pronunciation": null,
       "photos": [
         {
@@ -1125,6 +1150,7 @@
       "scientificName": "Dryocopus martius",
       "taxonID": 17835,
       "article": "der",
+      "lookalike": "woodpecker",
       "pronunciation": null,
       "photos": [
         {
@@ -1174,6 +1200,7 @@
       "scientificName": "Corvus corax",
       "taxonID": 8010,
       "article": "der",
+      "lookalike": "corvid",
       "pronunciation": null,
       "photos": [
         {
@@ -1215,6 +1242,7 @@
       "scientificName": "Strix aluco",
       "taxonID": 19898,
       "article": "der",
+      "lookalike": "owl",
       "pronunciation": null,
       "photos": [
         {

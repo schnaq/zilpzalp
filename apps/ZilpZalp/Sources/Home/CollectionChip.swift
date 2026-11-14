@@ -34,6 +34,11 @@ struct CollectionChip: View {
     /// shown here and is not asked for in the round. Never empty.
     let entries: [CollectionEntry]
 
+    /// Whether the title rides in the pill. Beside the level pill on a phone
+    /// it does not: the photos are what a child finds its collection by, and
+    /// VoiceOver still reads every title from the label.
+    var showsTitle = true
+
     let openPicker: () -> Void
 
     var body: some View {
@@ -55,13 +60,15 @@ struct CollectionChip: View {
                     }
                 }
 
-                Text(verbatim: title)
-                    .typeStyle(.label, .display, weight: .bold, singleLine: true)
-                    .foregroundStyle(ZColor.textStrong)
-                    // „Vögel Deutschlands" is the longest title the packs
-                    // carry; on the narrowest phone it shrinks rather than
-                    // ending in an ellipsis.
-                    .minimumScaleFactor(0.6)
+                if showsTitle {
+                    Text(verbatim: title)
+                        .typeStyle(.label, .display, weight: .bold, singleLine: true)
+                        .foregroundStyle(ZColor.textStrong)
+                        // „Vögel Deutschlands" is the longest title the packs
+                        // carry; on the narrowest phone it shrinks rather than
+                        // ending in an ellipsis.
+                        .minimumScaleFactor(0.6)
+                }
 
                 Icon(.chevronRight, size: .small)
                     .foregroundStyle(ZColor.textMuted)

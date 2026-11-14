@@ -9,6 +9,10 @@ public struct Round: Hashable, Sendable {
         /// Identifiers of every species offered, in the order they are shown.
         /// Contains `answer` exactly once and no species twice.
         public let choices: [String]
+
+        /// Whether the question was dealt with look-alikes on purpose — the
+        /// app marks it.
+        public let isTricky: Bool
     }
 
     /// The questions in the order they are asked.
@@ -26,8 +30,10 @@ public struct Round: Hashable, Sendable {
     ///   species has been asked for. Fewer askable species than `questionCount`
     ///   therefore still yield `questionCount` questions, with the repeats as
     ///   late in the round as possible.
-    /// - Distractors come from a genus other than the answer's. Only when the
-    ///   pool holds too few of those does the answer's own genus fill up.
+    /// - Distractors follow the `difficulty`. Klassisch takes them from a
+    ///   genus other than the answer's, and only when the pool holds too few
+    ///   of those does the answer's own genus fill up; the other levels are
+    ///   described in ``Difficulty``.
     ///
     /// Randomness comes solely from `generator`, so the same pool in the same
     /// order with the same seed yields the same round.
@@ -37,6 +43,7 @@ public struct Round: Hashable, Sendable {
     ///   - questionCount: How many questions the round has.
     ///   - choiceCount: How many choices each question offers, the answer
     ///     included.
+    ///   - difficulty: How alike the choices of a question may look.
     ///   - generator: The source of randomness.
     /// - Throws: ``RoundError/insufficientSpecies(required:available:)`` when
     ///   the pool cannot fill a single question's choices, and
@@ -45,6 +52,7 @@ public struct Round: Hashable, Sendable {
         from species: [QuizSpecies],
         questionCount: Int = 10,
         choiceCount: Int = 4,
+        difficulty: Difficulty = .classic,
         using generator: inout some RandomNumberGenerator,
     ) throws -> Round {
         guard species.count >= choiceCount else {
@@ -62,13 +70,23 @@ public struct Round: Hashable, Sendable {
             throw RoundError.noSpeciesToAskFor
         }
 
+        let asked = answers(from: askable, questionCount: questionCount, using: &generator)
+        let tricky = trickyQuestions(
+            among: asked,
+            in: species,
+            difficulty: difficulty,
+            using: &generator,
+        )
+
         var questions: [Question] = []
         questions.reserveCapacity(questionCount)
-        for answer in answers(from: askable, questionCount: questionCount, using: &generator) {
+        for (index, answer) in asked.enumerated() {
+            let isTricky = tricky.contains(index)
             var choices = distractors(
                 for: answer,
                 from: species,
                 count: choiceCount - 1,
+                rule: Rule(difficulty, isTricky: isTricky),
                 using: &generator,
             )
             choices.append(answer)
@@ -76,6 +94,7 @@ public struct Round: Hashable, Sendable {
                 Question(
                     answer: answer.id,
                     choices: choices.shuffled(using: &generator).map(\.id),
+                    isTricky: isTricky,
                 ),
             )
         }
@@ -102,21 +121,59 @@ public struct Round: Hashable, Sendable {
         return answers
     }
 
+    /// How one question picks its distractors: alike by look or only by
+    /// genus, and how many look-alikes it wants beside the answer. A tricky
+    /// question wants the level's look-alikes; a plain one wants none and is
+    /// judged by look only on Leicht, which keeps look-alikes out — every
+    /// other level deals it by Klassisch's genus rule.
+    private struct Rule {
+        let byLook: Bool
+        let lookalikes: Int
+
+        init(_ difficulty: Difficulty, isTricky: Bool) {
+            byLook = isTricky || difficulty.keepsLookalikesOut
+            lookalikes = isTricky ? difficulty.lookalikesPerTrickyQuestion : 0
+        }
+    }
+
+    /// Which questions are dealt tricky: never the first, only one whose
+    /// answer has a look-alike in the pool, and at most as many as the level
+    /// asks for. Klassisch and Leicht draw nothing here, which is what keeps
+    /// a Klassisch round the round the same seed always dealt.
+    private static func trickyQuestions(
+        among answers: [QuizSpecies],
+        in species: [QuizSpecies],
+        difficulty: Difficulty,
+        using generator: inout some RandomNumberGenerator,
+    ) -> Set<Int> {
+        guard difficulty.trickyQuestions > 0 else { return [] }
+        let eligible = answers.indices.dropFirst().filter { index in
+            species.contains { answers[index].looksLike($0) }
+        }
+        return Set(eligible.shuffled(using: &generator).prefix(difficulty.trickyQuestions))
+    }
+
     /// Picks the distractors for one answer from the whole pool, askable or
-    /// not: species of another genus first, species of the answer's own genus
-    /// only to fill up. The answer itself is never among them, and no species
-    /// twice.
+    /// not: the look-alikes the rule wants first, then unlike species, then —
+    /// only to fill up — the remaining alike ones. The answer itself is never
+    /// among them, and no species twice. With no look-alikes wanted this is
+    /// exactly the genus rule the engine always had, draw for draw.
     private static func distractors(
         for answer: QuizSpecies,
         from species: [QuizSpecies],
         count: Int,
+        rule: Rule,
         using generator: inout some RandomNumberGenerator,
     ) -> [QuizSpecies] {
+        let isAlike: (QuizSpecies) -> Bool = rule.byLook
+            ? { answer.looksLike($0) }
+            : { $0.genus == answer.genus }
         let candidates = species.filter { $0 != answer }
-        let otherGenus = candidates.filter { $0.genus != answer.genus }
-        let sameGenus = candidates.filter { $0.genus == answer.genus }
-        let ranked = otherGenus.shuffled(using: &generator) + sameGenus.shuffled(using: &generator)
-        return Array(ranked.prefix(count))
+        let unlike = candidates.filter { !isAlike($0) }.shuffled(using: &generator)
+        let alike = candidates.filter(isAlike).shuffled(using: &generator)
+        let wanted = alike.prefix(min(rule.lookalikes, count))
+        let rest = unlike + alike.dropFirst(wanted.count)
+        return Array(wanted) + rest.prefix(count - wanted.count)
     }
 }
 

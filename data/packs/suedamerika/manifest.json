@@ -14,6 +14,7 @@
       "scientificName": "Ramphastos toco",
       "taxonID": 18793,
       "article": "der",
+      "lookalike": "hornbill",
       "pronunciation": null,
       "photos": [
         {
@@ -56,6 +57,7 @@
       "scientificName": "Spheniscus humboldti",
       "taxonID": 3814,
       "article": "der",
+      "lookalike": "penguin",
       "pronunciation": null,
       "photos": [
         {
@@ -98,6 +100,7 @@
       "scientificName": "Rupicola rupicola",
       "taxonID": 8882,
       "article": "der",
+      "lookalike": "finch",
       "pronunciation": null,
       "photos": [
         {
@@ -140,6 +143,7 @@
       "scientificName": "Tangara chilensis",
       "taxonID": 9593,
       "article": "die",
+      "lookalike": "finch",
       "pronunciation": null,
       "photos": [
         {
@@ -189,6 +193,7 @@
       "scientificName": "Phoenicopterus chilensis",
       "taxonID": 4258,
       "article": "der",
+      "lookalike": "heron",
       "pronunciation": null,
       "photos": [
         {
@@ -231,6 +236,7 @@
       "scientificName": "Ramphastos sulfuratus",
       "taxonID": 18796,
       "article": "der",
+      "lookalike": "hornbill",
       "pronunciation": null,
       "photos": [
         {
@@ -273,6 +279,7 @@
       "scientificName": "Sarcoramphus papa",
       "taxonID": 4763,
       "article": "der",
+      "lookalike": "vulture",
       "pronunciation": null,
       "photos": [
         {
@@ -315,6 +322,7 @@
       "scientificName": "Jacana jacana",
       "taxonID": 4580,
       "article": "das",
+      "lookalike": "shorebird",
       "pronunciation": null,
       "photos": [
         {
@@ -357,6 +365,7 @@
       "scientificName": "Chauna torquata",
       "taxonID": 6910,
       "article": "der",
+      "lookalike": "goose",
       "pronunciation": null,
       "photos": [
         {
@@ -399,6 +408,7 @@
       "scientificName": "Larosterna inca",
       "taxonID": 4551,
       "article": "die",
+      "lookalike": "gull",
       "pronunciation": null,
       "photos": [
         {
@@ -441,6 +451,7 @@
       "scientificName": "Chloroceryle amazona",
       "taxonID": 2679,
       "article": "der",
+      "lookalike": "kingfisher",
       "pronunciation": null,
       "photos": [
         {
@@ -483,6 +494,7 @@
       "scientificName": "Rhea americana",
       "taxonID": 20512,
       "article": "der",
+      "lookalike": "ratite",
       "pronunciation": null,
       "photos": [
         {
@@ -525,6 +537,7 @@
       "scientificName": "Ara macao",
       "taxonID": 19022,
       "article": "der",
+      "lookalike": "parrot",
       "pronunciation": null,
       "photos": [
         {
@@ -558,6 +571,7 @@
       "scientificName": "Eudocimus ruber",
       "taxonID": 3750,
       "article": "der",
+      "lookalike": "heron",
       "pronunciation": null,
       "photos": [
         {
@@ -600,6 +614,7 @@
       "scientificName": "Platalea ajaja",
       "taxonID": 62529,
       "article": "der",
+      "lookalike": "heron",
       "pronunciation": null,
       "photos": [
         {
@@ -642,6 +657,7 @@
       "scientificName": "Pharomachrus mocinno",
       "taxonID": 20856,
       "article": "der",
+      "lookalike": "parrot",
       "pronunciation": null,
       "photos": [
         {
@@ -684,6 +700,7 @@
       "scientificName": "Anodorhynchus hyacinthinus",
       "taxonID": 18938,
       "article": "der",
+      "lookalike": "parrot",
       "pronunciation": null,
       "photos": [
         {
@@ -710,6 +727,7 @@
       "scientificName": "Ara chloropterus",
       "taxonID": 19016,
       "article": "der",
+      "lookalike": "parrot",
       "pronunciation": null,
       "photos": [
         {
@@ -736,6 +754,7 @@
       "scientificName": "Opisthocomus hoazin",
       "taxonID": 1626,
       "article": "der",
+      "lookalike": "cuckoo",
       "pronunciation": null,
       "photos": [
         {
@@ -769,6 +788,7 @@
       "scientificName": "Ensifera ensifera",
       "taxonID": 6458,
       "article": "der",
+      "lookalike": "hummingbird",
       "pronunciation": null,
       "photos": [
         {
@@ -818,6 +838,7 @@
       "scientificName": "Colibri coruscans",
       "taxonID": 6072,
       "article": "der",
+      "lookalike": "hummingbird",
       "pronunciation": null,
       "photos": [
         {
@@ -859,6 +880,7 @@
       "scientificName": "Pitangus sulphuratus",
       "taxonID": 16956,
       "article": "der",
+      "lookalike": "warbler",
       "pronunciation": null,
       "photos": [
         {
@@ -908,6 +930,7 @@
       "scientificName": "Jabiru mycteria",
       "taxonID": 4773,
       "article": "der",
+      "lookalike": "heron",
       "pronunciation": null,
       "photos": [
         {
@@ -942,6 +965,7 @@
       "scientificName": "Eurypyga helias",
       "taxonID": 19,
       "article": "die",
+      "lookalike": "heron",
       "pronunciation": null,
       "photos": [
         {
@@ -984,6 +1008,7 @@
       "scientificName": "Caracara plancus",
       "taxonID": 4715,
       "article": "der",
+      "lookalike": "raptor",
       "pronunciation": null,
       "photos": [
         {
@@ -1018,6 +1043,7 @@
       "scientificName": "Pteroglossus torquatus",
       "taxonID": 18584,
       "article": "der",
+      "lookalike": "hornbill",
       "pronunciation": null,
       "photos": [
         {
@@ -1044,6 +1070,7 @@
       "scientificName": "Anhinga anhinga",
       "taxonID": 5063,
       "article": "der",
+      "lookalike": "seabird",
       "pronunciation": null,
       "photos": [
         {
@@ -1078,6 +1105,7 @@
       "scientificName": "Pyrocephalus rubinus",
       "taxonID": 16447,
       "article": "der",
+      "lookalike": "warbler",
       "pronunciation": null,
       "photos": [
         {
@@ -1120,6 +1148,7 @@
       "scientificName": "Ramphocelus carbo",
       "taxonID": 10056,
       "article": "die",
+      "lookalike": "finch",
       "pronunciation": null,
       "photos": [
         {
@@ -1161,6 +1190,7 @@
       "scientificName": "Cyanocorax chrysops",
       "taxonID": 8484,
       "article": "der",
+      "lookalike": "corvid",
       "pronunciation": null,
       "photos": [
         {
@@ -1187,6 +1217,7 @@
       "scientificName": "Paroaria coronata",
       "taxonID": 10254,
       "article": "der",
+      "lookalike": "finch",
       "pronunciation": null,
       "photos": [
         {

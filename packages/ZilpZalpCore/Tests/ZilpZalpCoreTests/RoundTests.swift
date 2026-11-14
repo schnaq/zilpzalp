@@ -22,7 +22,8 @@ private func genusByIdentifier(_ pool: [QuizSpecies]) -> [String: String] {
 }
 
 /// The invariants that hold for every round, whatever the pool looks like.
-private func expectWellFormed(
+/// Shared with the difficulty tests, which deal on every level.
+func expectWellFormed(
     _ round: Round,
     questionCount: Int,
     choiceCount: Int,

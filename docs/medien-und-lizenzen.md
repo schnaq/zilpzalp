@@ -310,6 +310,7 @@ liegen, die noch ein anderer Eintrag nennt.
   "scientificName": "Turdus merula",
   "taxonID": 12716,
   "article": "die",
+  "lookalike": "thrush",
   "photos": [
     {
       "file": "photos/amsel.heic",
@@ -336,6 +337,13 @@ schon vor #194 herunterladbar, und ein Pflichtfeld `photos` hätte jede dieser
 Installationen zu einem Paket gemacht, das der Elternbereich als defekt
 meldet. Das Lizenz-Gate ist strenger und verlangt `photos` — es läuft zur
 Kurationszeit, und die Manifeste im Repository sind alle migriert.
+
+Every bird also carries `lookalike`, the hand-curated group of birds a child
+confuses with it at a glance; the difficulty levels draw their tricky questions
+from it. The vocabulary and its rules live in `tools/lookalike_gate.py`, which
+`mise run check` runs: a new bird without a group, or with a group another pack
+spells differently for the same species, fails the build. See
+[the difficulty spec](superpowers/specs/2026-11-13-difficulty-levels-design.md).
 
 ---
 

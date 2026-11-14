@@ -103,6 +103,17 @@ struct PackManifestTests {
         #expect(testvogel.photos.first?.file == "photos/testvogel.png")
     }
 
+    @Test("a species decodes its look-alike group, or has none")
+    func decodesLookalike() throws {
+        let tagged = try PackManifest.decode(
+            Self.species(declaring: #""lookalike": "owl", "photo": "# + Self.photo),
+        )
+        #expect(try Self.bird("testvogel", in: tagged).lookalike == "owl")
+
+        let untagged = try PackManifest.decode(Self.species(declaring: #""photo": "# + Self.photo))
+        #expect(try Self.bird("testvogel", in: untagged).lookalike == nil)
+    }
+
     @Test(
         "a species that declares no photo at all fails",
         arguments: [#""photos": []"#, #""call": null"#],

@@ -14,6 +14,7 @@
       "scientificName": "Struthio camelus",
       "taxonID": 20526,
       "article": "der",
+      "lookalike": "ratite",
       "pronunciation": null,
       "photos": [
         {
@@ -56,6 +57,7 @@
       "scientificName": "Phoenicopterus roseus",
       "taxonID": 73222,
       "article": "der",
+      "lookalike": "heron",
       "pronunciation": null,
       "photos": [
         {
@@ -105,6 +107,7 @@
       "scientificName": "Sagittarius serpentarius",
       "taxonID": 117214,
       "article": "der",
+      "lookalike": "raptor",
       "pronunciation": null,
       "photos": [
         {
@@ -147,6 +150,7 @@
       "scientificName": "Balaeniceps rex",
       "taxonID": 4338,
       "article": "der",
+      "lookalike": "heron",
       "pronunciation": null,
       "photos": [
         {
@@ -189,6 +193,7 @@
       "scientificName": "Leptoptilos crumenifer",
       "taxonID": 201031,
       "article": "der",
+      "lookalike": "heron",
       "pronunciation": null,
       "photos": [
         {
@@ -231,6 +236,7 @@
       "scientificName": "Spheniscus demersus",
       "taxonID": 3813,
       "article": "der",
+      "lookalike": "penguin",
       "pronunciation": null,
       "photos": [
         {
@@ -273,6 +279,7 @@
       "scientificName": "Psittacus erithacus",
       "taxonID": 19269,
       "article": "der",
+      "lookalike": "parrot",
       "pronunciation": null,
       "photos": [
         {
@@ -315,6 +322,7 @@
       "scientificName": "Coracias caudatus",
       "taxonID": 2269,
       "article": "die",
+      "lookalike": "kingfisher",
       "pronunciation": null,
       "photos": [
         {
@@ -357,6 +365,7 @@
       "scientificName": "Tockus erythrorhynchus",
       "taxonID": 203820,
       "article": "der",
+      "lookalike": "hornbill",
       "pronunciation": null,
       "photos": [
         {
@@ -399,6 +408,7 @@
       "scientificName": "Bucorvus leadbeateri",
       "taxonID": 144281,
       "article": "der",
+      "lookalike": "hornbill",
       "pronunciation": null,
       "photos": [
         {
@@ -441,6 +451,7 @@
       "scientificName": "Balearica regulorum",
       "taxonID": 53,
       "article": "der",
+      "lookalike": "heron",
       "pronunciation": null,
       "photos": [
         {
@@ -490,6 +501,7 @@
       "scientificName": "Icthyophaga vocifer",
       "taxonID": 1505670,
       "article": "der",
+      "lookalike": "raptor",
       "pronunciation": null,
       "photos": [
         {
@@ -532,6 +544,7 @@
       "scientificName": "Gyps africanus",
       "taxonID": 5363,
       "article": "der",
+      "lookalike": "vulture",
       "pronunciation": null,
       "photos": [
         {
@@ -574,6 +587,7 @@
       "scientificName": "Mycteria ibis",
       "taxonID": 4744,
       "article": "der",
+      "lookalike": "heron",
       "pronunciation": null,
       "photos": [
         {
@@ -616,6 +630,7 @@
       "scientificName": "Ephippiorhynchus senegalensis",
       "taxonID": 4754,
       "article": "der",
+      "lookalike": "heron",
       "pronunciation": null,
       "photos": [
         {
@@ -658,6 +673,7 @@
       "scientificName": "Scopus umbretta",
       "taxonID": 3834,
       "article": "der",
+      "lookalike": "heron",
       "pronunciation": null,
       "photos": [
         {
@@ -700,6 +716,7 @@
       "scientificName": "Numida meleagris",
       "taxonID": 1428,
       "article": "das",
+      "lookalike": "gamebird",
       "pronunciation": null,
       "photos": [
         {
@@ -749,6 +766,7 @@
       "scientificName": "Ploceus cucullatus",
       "taxonID": 13796,
       "article": "der",
+      "lookalike": "finch",
       "pronunciation": null,
       "photos": [
         {
@@ -791,6 +809,7 @@
       "scientificName": "Merops nubicus",
       "taxonID": 2220,
       "article": "der",
+      "lookalike": "kingfisher",
       "pronunciation": null,
       "photos": [
         {
@@ -833,6 +852,7 @@
       "scientificName": "Nectarinia famosa",
       "taxonID": 13300,
       "article": "der",
+      "lookalike": "hummingbird",
       "pronunciation": null,
       "photos": [
         {
@@ -875,6 +895,7 @@
       "scientificName": "Crinifer concolor",
       "taxonID": 1506034,
       "article": "der",
+      "lookalike": "cuckoo",
       "pronunciation": null,
       "photos": [
         {
@@ -917,6 +938,7 @@
       "scientificName": "Tauraco persa",
       "taxonID": 7200,
       "article": "der",
+      "lookalike": "cuckoo",
       "pronunciation": null,
       "photos": [
         {
@@ -959,6 +981,7 @@
       "scientificName": "Buphagus erythroryncha",
       "taxonID": 1584479,
       "article": "der",
+      "lookalike": "thrush",
       "pronunciation": null,
       "photos": [
         {
@@ -1001,6 +1024,7 @@
       "scientificName": "Ardeotis kori",
       "taxonID": 115,
       "article": "die",
+      "lookalike": "gamebird",
       "pronunciation": null,
       "photos": [
         {
@@ -1043,6 +1067,7 @@
       "scientificName": "Alopochen aegyptiaca",
       "taxonID": 72486,
       "article": "die",
+      "lookalike": "goose",
       "pronunciation": null,
       "photos": [
         {
@@ -1092,6 +1117,7 @@
       "scientificName": "Threskiornis aethiopicus",
       "taxonID": 3739,
       "article": "der",
+      "lookalike": "heron",
       "pronunciation": null,
       "photos": [
         {
@@ -1134,6 +1160,7 @@
       "scientificName": "Lamprotornis superbus",
       "taxonID": 14939,
       "article": "der",
+      "lookalike": "thrush",
       "pronunciation": null,
       "photos": [
         {
@@ -1176,6 +1203,7 @@
       "scientificName": "Polemaetus bellicosus",
       "taxonID": 5344,
       "article": "der",
+      "lookalike": "raptor",
       "pronunciation": null,
       "photos": [
         {
@@ -1225,6 +1253,7 @@
       "scientificName": "Pelecanus onocrotalus",
       "taxonID": 4327,
       "article": "der",
+      "lookalike": "seabird",
       "pronunciation": null,
       "photos": [
         {
@@ -1267,6 +1296,7 @@
       "scientificName": "Bostrychia hagedash",
       "taxonID": 3743,
       "article": "der",
+      "lookalike": "heron",
       "pronunciation": null,
       "photos": [
         {
@@ -1316,6 +1346,7 @@
       "scientificName": "Bubo africanus",
       "taxonID": 204470,
       "article": "der",
+      "lookalike": "owl",
       "pronunciation": null,
       "photos": [
         {
@@ -1350,6 +1381,7 @@
       "scientificName": "Torgos tracheliotos",
       "taxonID": 5401,
       "article": "der",
+      "lookalike": "vulture",
       "pronunciation": null,
       "photos": [
         {
@@ -1392,6 +1424,7 @@
       "scientificName": "Ardea goliath",
       "taxonID": 4969,
       "article": "der",
+      "lookalike": "heron",
       "pronunciation": null,
       "photos": [
         {
@@ -1434,6 +1467,7 @@
       "scientificName": "Merops bullockoides",
       "taxonID": 2248,
       "article": "der",
+      "lookalike": "kingfisher",
       "pronunciation": null,
       "photos": [
         {
@@ -1476,6 +1510,7 @@
       "scientificName": "Bubulcus ibis",
       "taxonID": 411086,
       "article": "der",
+      "lookalike": "heron",
       "pronunciation": null,
       "photos": [
         {

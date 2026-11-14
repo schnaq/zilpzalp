@@ -52,6 +52,7 @@ mise run sync-packs
 # gate then judges the manifests themselves.
 mise run generate-credits
 mise run license-gate
+mise run lookalike-gate
 
 # --lint does not correct, it reports: unformatted code should break the build
 # rather than be rewritten silently. To correct it, run mise run format.
@@ -331,6 +332,16 @@ set -euo pipefail
 # happens to carry. The gate uses the standard library only, so there is
 # nothing else to install. Its tests run in `mise run test`.
 python tools/license_gate.py
+'''
+
+[tasks.lookalike-gate]
+description = "Check that every bird carries a known look-alike group"
+run = '''
+set -euo pipefail
+
+# Same interpreter and the same standard-library-only rule as the licence
+# gate. Its tests run in `mise run test`.
+python tools/lookalike_gate.py
 '''
 
 [tasks.sync-packs]

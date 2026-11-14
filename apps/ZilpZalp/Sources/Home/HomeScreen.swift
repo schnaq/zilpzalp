@@ -1,4 +1,5 @@
 import SwiftUI
+import ZilpZalpCore
 import ZilpZalpData
 import ZilpZalpUI
 
@@ -16,7 +17,22 @@ import ZilpZalpUI
 /// the doors around them was opened — the grown-ups' room, the album, the
 /// screen about the app, the question who is playing; where those lead is
 /// ``RootView``'s business.
+///
+/// **A second pill for the level.** How hard the questions are is a taste of
+/// the child like its collection, chosen before a game, so it sits beside the
+/// collection pill and opens a card of its own rather than hiding in the
+/// grown-ups' room. On a phone it drops the level's name, and the collection
+/// pill drops its title too wherever that title would not fit beside it: a
+/// second row would cost the tiles about 76 pt of height on a phone, where a
+/// word costs nothing a child who cannot read would miss — it finds its
+/// collection by the photos and its level by the mosaic.
 struct HomeScreen: View {
+    /// The two cards that open over the games.
+    private enum PickerCard {
+        case collection
+        case difficulty
+    }
+
     /// The wordmark's size in the top bar, from `HomeScreen.jsx`. In a compact
     /// width it drops to the wordmark's own floor.
     private static let wordmarkSize: CGFloat = 44
@@ -57,6 +73,16 @@ struct HomeScreen: View {
     /// Where the picker finds each pack's recorded title (#306).
     var library: PackLibrary = .empty
 
+    /// How hard the playing child's rounds are. See ``DifficultyChip``.
+    var difficulty: Difficulty = .standard
+
+    /// What the level picker offers, in its order. Empty draws no level pill —
+    /// the previews of the screens without one.
+    var difficultyLevels: [DifficultyLevel] = []
+
+    /// A tapped level of the picker.
+    var chooseDifficulty: (Difficulty) -> Void = { _ in }
+
     /// The sticker album. Its own door at the foot of the screen, where every
     /// variant of the design puts it (`design/ui_kits/ipad_app/HomeScreen.jsx`
     /// and screens 1a and 1b): a child who wants to look at its birds should
@@ -78,8 +104,9 @@ struct HomeScreen: View {
     /// layout pass and it settles.
     @State private var introHeight: CGFloat = 0
 
-    /// Whether the collections are up. See ``CollectionPicker``.
-    @State private var isPicking = false
+    /// Which card is up over the games, if any: the collections — see
+    /// ``CollectionPicker`` — or the levels, ``DifficultyPicker``.
+    @State private var picker: PickerCard?
 
     /// Whether the screen is in a compact width — a phone in portrait, or an
     /// iPad sharing its screen. It settles the two type sizes only; where the
@@ -144,36 +171,76 @@ struct HomeScreen: View {
         }
         .background(ZColor.surfacePage)
         .overlay {
-            if isPicking {
+            if picker == .collection {
                 CollectionPicker(
                     entries: collections,
                     selection: chosenCollections,
                     library: library,
                     choose: chooseCollection,
-                    close: { isPicking = false },
+                    close: { picker = nil },
                     addBirds: openParents,
                 )
             }
         }
+        .overlay {
+            if picker == .difficulty {
+                DifficultyPicker(
+                    levels: difficultyLevels,
+                    chosen: difficulty,
+                    choose: chooseDifficulty,
+                    close: { picker = nil },
+                )
+            }
+        }
         // Nothing at all where the system asks for less motion, as the quit
-        // question does it.
+        // question does it. One curve for both cards.
         .animation(
             reduceMotion ? nil : ZMotion.easeOut.animation(duration: ZMotion.fast),
-            value: isPicking,
+            value: picker,
         )
     }
 
-    /// The headline and, below it, the pill with the
-    /// collection this child plays with. Measured as one so the tiles below
-    /// know what is left: the pill costs a phone tile height, an iPad nothing.
+    /// The headline and, below it, the pills with the collection this child
+    /// plays with and how hard. Measured as one so the tiles below know what
+    /// is left: the pills cost a phone tile height, an iPad nothing.
     private var intro: some View {
         VStack(spacing: ZSpacing.step4) {
             dismissPacksHint.map { PacksHint(open: openParents, dismiss: $0) }
             headline
 
             let chosen = collections.filter { $0.isChosen(in: chosenCollections) }
-            if !chosen.isEmpty {
-                CollectionChip(entries: chosen) { isPicking = true }
+            let level = difficultyLevels.first { $0.difficulty == difficulty }
+            if !chosen.isEmpty || level != nil {
+                // One row with the words while they fit at full size —
+                // `ViewThatFits` measures ideal widths — then one row of
+                // pictures only, and two rows only where not even that fits.
+                ViewThatFits(in: .horizontal) {
+                    HStack(spacing: pillGap) { pills(chosen, level, titles: true) }
+                    HStack(spacing: pillGap) { pills(chosen, level, titles: false) }
+                    VStack(spacing: ZSpacing.step3) { pills(chosen, level, titles: true) }
+                }
+            }
+        }
+    }
+
+    private var pillGap: CGFloat {
+        isCompact ? ZSpacing.step3 : ZSpacing.step4
+    }
+
+    /// The collection pill, where there is a collection, and the level pill,
+    /// where there are levels — the latter never with its name on a phone.
+    @ViewBuilder
+    private func pills(
+        _ chosen: [CollectionEntry],
+        _ level: DifficultyLevel?,
+        titles: Bool,
+    ) -> some View {
+        if !chosen.isEmpty {
+            CollectionChip(entries: chosen, showsTitle: titles) { picker = .collection }
+        }
+        if let level {
+            DifficultyChip(level: level, showsTitle: titles && !isCompact) {
+                picker = .difficulty
             }
         }
     }

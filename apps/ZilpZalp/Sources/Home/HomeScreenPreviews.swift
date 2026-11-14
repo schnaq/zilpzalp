@@ -1,4 +1,5 @@
 import SwiftUI
+import ZilpZalpCore
 import ZilpZalpData
 
 // The previews of ``HomeScreen``, in their own file, exactly as
@@ -23,6 +24,8 @@ private let previewCollections: [CollectionEntry] = [
         collections: previewCollections,
         chosenCollections: ["afrika"],
         chooseCollection: { _ in },
+        difficulty: .medium,
+        difficultyLevels: DifficultyLevel.previews,
         openCollection: {},
     )
     .environment(\.speciesPhotos, SpeciesPhotos((try? .bundled()) ?? .empty))
@@ -40,15 +43,18 @@ private let previewCollections: [CollectionEntry] = [
         collections: previewCollections,
         chosenCollections: [],
         chooseCollection: { _ in },
+        difficulty: .classic,
+        difficultyLevels: DifficultyLevel.previews,
         openCollection: {},
     )
     .environment(\.speciesPhotos, SpeciesPhotos((try? .bundled()) ?? .empty))
     .environment(\.horizontalSizeClass, .compact)
 }
 
-// The bundled pack alone: nothing to choose between, and the screen as it was
-// before #187 — headline and tiles, and the tiles get every point of it.
-#Preview("One pack, no collections", traits: .fixedLayout(width: 390, height: 844)) {
+// The bundled pack alone: its one entry stands for every bird and carries the
+// pack's title (#262). The longest title the packs have does not fit beside
+// the level pill at full size on a phone, so both pills show pictures only.
+#Preview("One pack, pictures only", traits: .fixedLayout(width: 390, height: 844)) {
     HomeScreen(
         avatar: "feather",
         games: [.names, .calls],
@@ -56,9 +62,10 @@ private let previewCollections: [CollectionEntry] = [
         openParents: {},
         openAbout: {},
         openProfiles: {},
-        collections: [],
+        collections: [.preview(nil, "Vögel Deutschlands")],
         chosenCollections: [],
         chooseCollection: { _ in },
+        difficultyLevels: DifficultyLevel.previews,
         openCollection: {},
     )
     .environment(\.speciesPhotos, SpeciesPhotos((try? .bundled()) ?? .empty))
