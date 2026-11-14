@@ -56,6 +56,11 @@
           "file": "speech/collection.name/amsel.m4a",
           "sha256": "c450f36bb3901c6706209b2dc6ed31ef81a59346df4777078a3dee9ade2c0058",
           "text": "Amsel"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/amsel.m4a",
+          "sha256": "ff010caa54afc723710931d64c198655a1a757ae26dfb2b12289904a3352f5d6",
+          "text": "Bei der Amsel ist der Papa ganz schwarz und hat einen gelben Schnabel."
         }
       }
     },
@@ -107,6 +112,11 @@
           "file": "speech/collection.name/blaumeise.m4a",
           "sha256": "bdef0130289c0ce76a15983c1b5c8e1913bf5fc047fdbecd75f9346311aa3b7b",
           "text": "Blaumeise"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/blaumeise.m4a",
+          "sha256": "a25df3a6cf2830412ce3f66a6aa345d9ca76cd2b13c08aa03f8d139b88b7a9b8",
+          "text": "Die Blaumeise trägt ein blaues Käppchen und hat einen gelben Bauch."
         }
       }
     },
@@ -158,6 +168,11 @@
           "file": "speech/collection.name/buntspecht.m4a",
           "sha256": "6849858c490fa548fc0006c88db1df66e071eb754b4ef16880c7674c4b5b6572",
           "text": "Buntspecht"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/buntspecht.m4a",
+          "sha256": "108ddca35ffed7a3ad20a7d2b0e1cc27bc6c72e8381e51ea468bea55996e33e8",
+          "text": "Der Buntspecht ist schwarz-weiß und trommelt laut gegen Baumstämme."
         }
       }
     },
@@ -209,6 +224,11 @@
           "file": "speech/collection.name/eisvogel.m4a",
           "sha256": "c26161ef7e7652eb34b3d95702f5bab2ce66c4e2db3c5ae273be261c74ef6722",
           "text": "Eisvogel"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/eisvogel.m4a",
+          "sha256": "10c7f0c1680f4c0c056fe244860cee08675913108036ebf2706032cc633475d2",
+          "text": "Der Eisvogel schillert blau und taucht kopfüber nach Fischen."
         }
       }
     },
@@ -260,6 +280,11 @@
           "file": "speech/collection.name/hausrotschwanz.m4a",
           "sha256": "ea80e29164aaeda95839cb24939319aae6b1cb2e667c9297497ef151d06a06d2",
           "text": "Hausrotschwanz"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/hausrotschwanz.m4a",
+          "sha256": "b2c283e6ad4af7f52507272de50fba07cb83b4c203588961e6983d3593622ce1",
+          "text": "Der Hausrotschwanz zittert oben auf dem Dach mit seinem roten Schwanz."
         }
       }
     },
@@ -311,6 +336,11 @@
           "file": "speech/collection.name/kohlmeise.m4a",
           "sha256": "056bd2809d93d7fd7ee255aaa1ad2bc1f77d77ee63925b8fadbe08863bf838f3",
           "text": "Kohlmeise"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/kohlmeise.m4a",
+          "sha256": "2dca475533d19e4c2bbb6bd1b862c33aadf5e95a3ddcc304fb543f88f1db94e3",
+          "text": "Die Kohlmeise trägt eine schwarze Krawatte auf ihrem gelben Bauch."
         }
       }
     },
@@ -362,6 +392,11 @@
           "file": "speech/collection.name/rotkehlchen.m4a",
           "sha256": "39ee8040339179a1fc013054803fe3eabf422ac408b37c7bf9eb3b5b7966fc30",
           "text": "Rotkehlchen"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/rotkehlchen.m4a",
+          "sha256": "83aa874131c076059556de591e5a71c9fc0c305e6b53d41b325f0b0468681827",
+          "text": "Das Rotkehlchen hat eine orange Brust und kommt beim Umgraben ganz nah heran."
         }
       }
     },
@@ -413,6 +448,11 @@
           "file": "speech/collection.name/star.m4a",
           "sha256": "a3c97995e72df13f8c5ca53d34efa28537d1cb017a9a5b60a81ddd1407953f78",
           "text": "Star"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/star.m4a",
+          "sha256": "4e50e6d6cff44f8fe11b907c5d0c62d86055ddbe283091b33bb671a9b4277d58",
+          "text": "Der Star kann andere Vögel ganz echt nachmachen."
         }
       }
     },
@@ -464,6 +504,11 @@
           "file": "speech/collection.name/wiedehopf.m4a",
           "sha256": "b0e3aefbcff00c6526f843bb531d993af45227dcc801b790763823cc5a42db78",
           "text": "Wiedehopf"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/wiedehopf.m4a",
+          "sha256": "cd6d56364909894e10fb413c48860c0811f2545ba2a9d02175b1e9e0dae63d01",
+          "text": "Der Wiedehopf ruft „up up up“ und hat eine Federkrone wie ein Fächer."
         }
       }
     },
@@ -515,6 +560,11 @@
           "file": "speech/collection.name/zilpzalp.m4a",
           "sha256": "d355671db9aac519fa2c7bd7c7cbbc8b71e40a492a64d877dd9306e27e474862",
           "text": "Zilpzalp"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/zilpzalp.m4a",
+          "sha256": "936cd74fc09b012ffc8ea1c587999f9a2ebe336d9d1ec0a42f618fcc91a9723d",
+          "text": "Der Zilpzalp singt seinen eigenen Namen: zilp, zalp, zilp, zalp."
         }
       }
     },
@@ -566,6 +616,11 @@
           "file": "speech/collection.name/haussperling.m4a",
           "sha256": "9cf0fbb9435f786b048fbb5f77a4f37f02fec6cf81e95034a41ed530efd8f9c4",
           "text": "Haussperling"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/haussperling.m4a",
+          "sha256": "f8c589eb5fc0957f227379d7522d53aeececc36ca972aef13e62c927e2a519cb",
+          "text": "Der Haussperling heißt auch Spatz und badet gern im Staub."
         }
       }
     },
@@ -617,6 +672,11 @@
           "file": "speech/collection.name/gruenfink.m4a",
           "sha256": "73ba20582650dece9e3a270d5d28295a45d1fc9df6261a6da0a50f3258bbc0bd",
           "text": "Grünfink"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/gruenfink.m4a",
+          "sha256": "d8a677831387a7c10e50be687d8e97d4e2a3144a1cf42494b208c4aa4ff3617d",
+          "text": "Der Grünfink ist grün und hat gelbe Streifen an Flügeln und Schwanz."
         }
       }
     },
@@ -668,6 +728,11 @@
           "file": "speech/collection.name/buchfink.m4a",
           "sha256": "ff60ef84813435b73ece8d7867344ae0356c9a391ff4041abf6f49b801fff76e",
           "text": "Buchfink"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/buchfink.m4a",
+          "sha256": "6a9763e5bb6b2abd9753d197c96ff91f26406d7d15da9481d9bcdd9b528c4a31",
+          "text": "Der Buchfink hat weiße Flügelstreifen und schmettert sein Lied."
         }
       }
     },
@@ -719,6 +784,11 @@
           "file": "speech/collection.name/stieglitz.m4a",
           "sha256": "052fffde8f105a6ee1825c3461d1595181953bdfcd86542b6752457d8f13179e",
           "text": "Stieglitz"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/stieglitz.m4a",
+          "sha256": "723a8db5f0fe2ec5fcdcb02ccf18dd23b6168e3740a4040ece461c57d31d43a2",
+          "text": "Der Stieglitz hat ein rotes Gesicht und pickt Samen aus Disteln."
         }
       }
     },
@@ -770,6 +840,11 @@
           "file": "speech/collection.name/gimpel.m4a",
           "sha256": "c284c6be71b31a32d4e5f2850098400225f725f90945f00948997688fee1a7e0",
           "text": "Gimpel"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/gimpel.m4a",
+          "sha256": "fb22ea0f6fc7acd33f527607a432f56464d6184730b3068dcc708c587925f441",
+          "text": "Der Gimpel hat eine schwarze Kappe, der Papa eine rote Brust."
         }
       }
     },
@@ -813,6 +888,11 @@
           "file": "speech/collection.name/kernbeisser.m4a",
           "sha256": "68bab6f498060a7aef6a518fb1022912bdec1b6b8396b7d87a17e04e121f9c39",
           "text": "Kernbeißer"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/kernbeisser.m4a",
+          "sha256": "2b36e5476bf0f20a81c22076dc1c44303816a9b4ca438665bac9ab281750f152",
+          "text": "Der Kernbeißer knackt mit seinem dicken Schnabel sogar Kirschkerne."
         }
       }
     },
@@ -864,6 +944,11 @@
           "file": "speech/collection.name/bluthaenfling.m4a",
           "sha256": "38b92976a67a10e5414e47a9f3d1816d210962d65db3425ff83a2419688d8c83",
           "text": "Bluthänfling"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/bluthaenfling.m4a",
+          "sha256": "920f68421e25044b76d9b7213d8f0bdcadb5f6a785381cfe39d894c7163326e6",
+          "text": "Beim Bluthänfling hat der Papa im Frühling eine rote Brust."
         }
       }
     },
@@ -915,6 +1000,11 @@
           "file": "speech/collection.name/goldammer.m4a",
           "sha256": "ecfaa4351197044118cc0d1ac736df2bc2d778a15db073240cab406a4a689cb0",
           "text": "Goldammer"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/goldammer.m4a",
+          "sha256": "6890bdaca271392677a91ebc51d9c3b8f077b1ebc9eb4c738842cc5b3cf39129",
+          "text": "Die Goldammer ist gelb und singt: „Wie, wie, wie hab ich dich lieb.“"
         }
       }
     },
@@ -966,6 +1056,11 @@
           "file": "speech/collection.name/elster.m4a",
           "sha256": "89bb881727c1c0f3d6381ffdd5ac80692681869cbc5b3bcd1a643084ce03f56e",
           "text": "Elster"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/elster.m4a",
+          "sha256": "916fa2a862cea0bb0fe2bb0311bb262887b6251bc675bb40df1068da57389e58",
+          "text": "Die Elster ist schwarz-weiß und hat einen langen Schwanz."
         }
       }
     },
@@ -1017,6 +1112,11 @@
           "file": "speech/collection.name/eichelhaeher.m4a",
           "sha256": "9f2b9a9d74db6e6f157200d7f054021e0173904fe74658630771930e55a2fa7a",
           "text": "Eichelhäher"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/eichelhaeher.m4a",
+          "sha256": "266b9583b28cf7ebb05249462ab0d85803db3f908ccaf1a7c1707f6e1d9dba69",
+          "text": "Der Eichelhäher vergräbt Eicheln, und aus vergessenen wachsen Bäume."
         }
       }
     },
@@ -1068,6 +1168,11 @@
           "file": "speech/collection.name/rabenkraehe.m4a",
           "sha256": "1a8ecb1219942a05df4dd40cf6bf34569bdd53e097e21bf519d73424e7e269d4",
           "text": "Rabenkrähe"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/rabenkraehe.m4a",
+          "sha256": "0dc4a67afe9342a54d291902fa9db02406e6db5cd51e6249d40a0cc425b91215",
+          "text": "Die Rabenkrähe ist ganz schwarz und ruft laut „krah, krah“."
         }
       }
     },
@@ -1119,6 +1224,11 @@
           "file": "speech/collection.name/dohle.m4a",
           "sha256": "dcb421460632f125983970ef51fe010bc593ac1aada77b24a8dd139d8539eaf4",
           "text": "Dohle"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/dohle.m4a",
+          "sha256": "26197b96744e6a34d51d60fedfbade3912103b72cc457e600d90cdb010f1790c",
+          "text": "Die Dohle hat helle, silbrige Augen und wohnt gern in Kirchtürmen."
         }
       }
     },
@@ -1170,6 +1280,11 @@
           "file": "speech/collection.name/kolkrabe.m4a",
           "sha256": "90d2a7b6a9014eacd1fa2b10661837625c473bd67a4a7fbbd89ced9c3166b33c",
           "text": "Kolkrabe"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/kolkrabe.m4a",
+          "sha256": "62755c46d7d64e58547b892df01c6395cdd57fb0b8ed556f3186f4c00a12c3f0",
+          "text": "Der Kolkrabe ist viel größer als eine Krähe und ruft ganz tief."
         }
       }
     },
@@ -1221,6 +1336,11 @@
           "file": "speech/collection.name/ringeltaube.m4a",
           "sha256": "88034d7e9515c592a1b6263cd1f76a0ac081c8573380c336d0cb41994df8a715",
           "text": "Ringeltaube"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/ringeltaube.m4a",
+          "sha256": "e2611478f3036025c91a5c1bed3f627d98604114e07c1527cead1cbee08275ec",
+          "text": "Die Ringeltaube ist eine große Taube mit einem weißen Fleck am Hals."
         }
       }
     },
@@ -1272,6 +1392,11 @@
           "file": "speech/collection.name/tuerkentaube.m4a",
           "sha256": "3437201e59190d9ca6b8a469c2869948511d1873031ff41eb9d6c02c2f6b847b",
           "text": "Türkentaube"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/tuerkentaube.m4a",
+          "sha256": "49a696c4d380aa343507c4b2cd6a0508591768c038d32f36eaa87b44ff85b58a",
+          "text": "Die Türkentaube ist sandfarben und hat ein schwarzes Band im Nacken."
         }
       }
     },
@@ -1323,6 +1448,11 @@
           "file": "speech/collection.name/mauersegler.m4a",
           "sha256": "2812dbb6c90c40fa4af7f92ca1ccc6ec7c69641936ce401e628611560f3c1050",
           "text": "Mauersegler"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/mauersegler.m4a",
+          "sha256": "32a16a11db39613317b235e51d4a7333519a250c7b15e07e29ff3d6407924ed1",
+          "text": "Der Mauersegler landet fast nie und kann sogar im Flug schlafen."
         }
       }
     },
@@ -1374,6 +1504,11 @@
           "file": "speech/collection.name/rauchschwalbe.m4a",
           "sha256": "25843ca1fd33adf2d671977e4a5b50a7f67e9eb8681dfdd34a935d348700a04b",
           "text": "Rauchschwalbe"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/rauchschwalbe.m4a",
+          "sha256": "3534833d524153561c8cacfa7b23a873d66126aa6b9af620af63f7f158e82d70",
+          "text": "Die Rauchschwalbe hat eine rote Kehle und brütet gern im Kuhstall."
         }
       }
     },
@@ -1425,6 +1560,11 @@
           "file": "speech/collection.name/bachstelze.m4a",
           "sha256": "9ee04be6c325a533a6d8828631a5d07193b2193c9708f16dbd3502af9e6aae9e",
           "text": "Bachstelze"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/bachstelze.m4a",
+          "sha256": "5ffe6248d639866302b195e2d17224469b22a5cb3bdda7e501023eb6e65693d7",
+          "text": "Die Bachstelze wippt dauernd mit ihrem langen Schwanz."
         }
       }
     },
@@ -1476,6 +1616,11 @@
           "file": "speech/collection.name/zaunkoenig.m4a",
           "sha256": "bc26b5084fe57c935d91d8b70243f01b8a6a55a4a5bc28230ac5d671d4c132ba",
           "text": "Zaunkönig"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/zaunkoenig.m4a",
+          "sha256": "4bb1f196478166dc04b3fcdc335bcc62bd990a56aed6ec03b0ba1a2588ef48c0",
+          "text": "Der Zaunkönig ist winzig, reckt den Schwanz hoch und singt sehr laut."
         }
       }
     },
@@ -1527,6 +1672,11 @@
           "file": "speech/collection.name/singdrossel.m4a",
           "sha256": "4027e67495d93147445671eadfa8268fe04fae5a92110c83c92e10839be724a7",
           "text": "Singdrossel"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/singdrossel.m4a",
+          "sha256": "dfc788d8e1c35c140556143358217f32592666d0fc441c95c1452b313e0a8c80",
+          "text": "Die Singdrossel knackt Schneckenhäuser auf einem Stein."
         }
       }
     },
@@ -1578,6 +1728,11 @@
           "file": "speech/collection.name/nachtigall.m4a",
           "sha256": "9b0c4c449f5d438176217a378fb46a1e4c57cac90718058b7c0978187fbf31ec",
           "text": "Nachtigall"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/nachtigall.m4a",
+          "sha256": "b9a6abd527aeca4714082979334ec6a2262cd7d98525c66355f8a8b913ae88f7",
+          "text": "Die Nachtigall ist schlicht braun und singt sogar mitten in der Nacht."
         }
       }
     },
@@ -1629,6 +1784,11 @@
           "file": "speech/collection.name/moenchsgrasmuecke.m4a",
           "sha256": "45888c4f226136376ce3101c3fe721b8fa3e039cb1defdcb664e035d7942d645",
           "text": "Mönchsgrasmücke"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/moenchsgrasmuecke.m4a",
+          "sha256": "76a64b0626e8478257b270404afbe21e772fc368ed55e5a6bc0396755f2a40d9",
+          "text": "Die Mönchsgrasmücke hat eine Mütze: der Papa schwarz, die Mama braun."
         }
       }
     },
@@ -1680,6 +1840,11 @@
           "file": "speech/collection.name/kleiber.m4a",
           "sha256": "d72bc6d772edb276f6c738b8f904e8d1adab3f34b8e5bfcec3478952faccd314",
           "text": "Kleiber"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/kleiber.m4a",
+          "sha256": "95009c7d7b319aa6ddfe0b8c1969cdda3dc06265d3ab11e94731df6dab702742",
+          "text": "Der Kleiber kann kopfüber den Baumstamm hinunterlaufen."
         }
       }
     },
@@ -1731,6 +1896,11 @@
           "file": "speech/collection.name/gartenbaumlaeufer.m4a",
           "sha256": "a2b402ef509dec1d21bf336f3f57da7595c9b3d7f7b010ccc6410f9c792ed4a9",
           "text": "Gartenbaumläufer"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/gartenbaumlaeufer.m4a",
+          "sha256": "523965bae5354900d95ec397b5a1bc67f926d711f133d41c6ecf7f56d5f51bbd",
+          "text": "Der Gartenbaumläufer huscht wie eine kleine Maus den Baumstamm hinauf."
         }
       }
     },
@@ -1782,6 +1952,11 @@
           "file": "speech/collection.name/schwanzmeise.m4a",
           "sha256": "5d6fd6fc615a0b29db3fc96e48f87b8695e44a79141e8c4c56b2856c2289b3e1",
           "text": "Schwanzmeise"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/schwanzmeise.m4a",
+          "sha256": "99994388b383bc949d116937bdef818530534b3d18f0645f65929a60175bfdc5",
+          "text": "Die Schwanzmeise ist eine kleine Federkugel mit einem langen Schwanz."
         }
       }
     },
@@ -1833,6 +2008,11 @@
           "file": "speech/collection.name/haubenmeise.m4a",
           "sha256": "9c0f39cb68915004f7091933c18d7a7a7631554683f50b335a1ae096c4b54603",
           "text": "Haubenmeise"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/haubenmeise.m4a",
+          "sha256": "88f0fd4a9d41920970893519cdf8dcdac4098327dd2bb4a271373ef273a8b45e",
+          "text": "Die Haubenmeise hat eine spitze Federhaube und lebt im Nadelwald."
         }
       }
     },
@@ -1884,6 +2064,11 @@
           "file": "speech/collection.name/wintergoldhaehnchen.m4a",
           "sha256": "740766645c012b1dba117091d63f821ddf4977a99694da42dd1afacaa5b1e3ba",
           "text": "Wintergoldhähnchen"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/wintergoldhaehnchen.m4a",
+          "sha256": "a4d507df705f9a6aa6161fca0e73d7d2deb6b01a509ee74239f66285a7e3e6b8",
+          "text": "Das Wintergoldhähnchen ist winzig und hat einen goldenen Kopfstreifen."
         }
       }
     },
@@ -1935,6 +2120,11 @@
           "file": "speech/collection.name/gartenrotschwanz.m4a",
           "sha256": "7064118526bcd9fbb339ef79390bc897e08a908b941186b8fd7ada8615398ad1",
           "text": "Gartenrotschwanz"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/gartenrotschwanz.m4a",
+          "sha256": "d9b46edfc78ef9f1645dca1e79f93449be9bccaa718449a7672615cfc1ea76fa",
+          "text": "Der Papa vom Gartenrotschwanz hat eine leuchtend orange Brust."
         }
       }
     },
@@ -1986,6 +2176,11 @@
           "file": "speech/collection.name/feldlerche.m4a",
           "sha256": "d922fec03c39dc06015c277fb394a039b2546b091f45edb1a847e0c27b7f157f",
           "text": "Feldlerche"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/feldlerche.m4a",
+          "sha256": "147b916ec810d87d23a158608e22c8e1cee065a47d0df700508c1eaff21503a8",
+          "text": "Die Feldlerche steigt singend hoch in den Himmel über dem Feld."
         }
       }
     },
@@ -2037,6 +2232,11 @@
           "file": "speech/collection.name/neuntoeter.m4a",
           "sha256": "fa2e443a48c9f2fd5b382f50ba62453d9e97c4962d5b015de126b248db5b926a",
           "text": "Neuntöter"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/neuntoeter.m4a",
+          "sha256": "de8615c81d199883bbe7c9b443a76e6f232e9f0decacbec1f31ccad862ce7b15",
+          "text": "Der Neuntöter trägt eine schwarze Augenmaske und jagt Käfer."
         }
       }
     },
@@ -2088,6 +2288,11 @@
           "file": "speech/collection.name/pirol.m4a",
           "sha256": "fed0f1c6dbb0a0c1f0dfd16f493c44df741cce1d21e10b88f01fbfff065c43bc",
           "text": "Pirol"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/pirol.m4a",
+          "sha256": "6b08f11bed4150ffbf8624122af64749b8af4ce11b1dc168d28a061b1e43ad48",
+          "text": "Der Pirol flötet hoch oben in den Bäumen, und der Papa ist knallgelb."
         }
       }
     },
@@ -2139,6 +2344,11 @@
           "file": "speech/collection.name/seidenschwanz.m4a",
           "sha256": "82fc62d2ad42d139d1c159839bc1299c999e02fedd1394e5f3f1c36453ab2d19",
           "text": "Seidenschwanz"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/seidenschwanz.m4a",
+          "sha256": "2c111eeff868019d91bedd90322e7f22c993341ac67b71417ae1be9346c8ee02",
+          "text": "In manchen Wintern kommt der Seidenschwanz aus dem Norden zu uns."
         }
       }
     },
@@ -2190,6 +2400,11 @@
           "file": "speech/collection.name/wasseramsel.m4a",
           "sha256": "cacdee0884398dcca62164074fa228b988f7bcc5a566b589192ead64dbe28b05",
           "text": "Wasseramsel"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/wasseramsel.m4a",
+          "sha256": "838815d1d36cb9d3682dacb73d3c38e604da610daf413b891b67a932ccb2d0db",
+          "text": "Die Wasseramsel kann sogar unter Wasser am Bachgrund laufen."
         }
       }
     },
@@ -2241,6 +2456,11 @@
           "file": "speech/collection.name/kuckuck.m4a",
           "sha256": "4a35f082535662281ce32286199c27c87867ba32a382d49959fa847426027215",
           "text": "Kuckuck"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/kuckuck.m4a",
+          "sha256": "7cf9b9d48116a03e35054ae7ee8e622206cfd46cee8cd3b47638d7ada815179b",
+          "text": "Der Kuckuck ruft seinen Namen und legt seine Eier in fremde Nester."
         }
       }
     },
@@ -2292,6 +2512,11 @@
           "file": "speech/collection.name/gruenspecht.m4a",
           "sha256": "b4879570c00e8ce27de82f368864a3c34128ca5512e415e1f6883939492403fe",
           "text": "Grünspecht"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/gruenspecht.m4a",
+          "sha256": "bcf620f33a2f72211903b39f49b7c4423cfdd407726bce1e1eac66cdf3bc9a2e",
+          "text": "Der Grünspecht frisst gern Ameisen und ruft laut wie ein Lachen."
         }
       }
     },
@@ -2343,6 +2568,11 @@
           "file": "speech/collection.name/schwarzspecht.m4a",
           "sha256": "b9846528aa5c32bfd03977ff436f9142d27d26aa899710a7ade47786a82e0bce",
           "text": "Schwarzspecht"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/schwarzspecht.m4a",
+          "sha256": "8f96ea53530b0c9f6cdc17d25ef96f585984b69b86a1039da1f6c187b60d4219",
+          "text": "Der Schwarzspecht ist ganz schwarz und trägt Rot auf dem Kopf."
         }
       }
     },
@@ -2394,6 +2624,11 @@
           "file": "speech/collection.name/bienenfresser.m4a",
           "sha256": "ef6ba6086def03f230c072d2263d4ecb2deaecdd2c888c28f73743db853120c6",
           "text": "Bienenfresser"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/bienenfresser.m4a",
+          "sha256": "5872d8080f29a3b84392dc35e86007956846c08023e99ee754fd911c06b6916d",
+          "text": "Der Bienenfresser ist bunt wie ein Regenbogen und fängt Bienen."
         }
       }
     },
@@ -2445,6 +2680,11 @@
           "file": "speech/collection.name/waldkauz.m4a",
           "sha256": "e0eb0458d2493993e95d85d18821cc29e6a61053815ebb8e1ac08cae5382b6dd",
           "text": "Waldkauz"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/waldkauz.m4a",
+          "sha256": "dd06b8af4e8b9dabcc3024b8a2003bb2abbe6916d94a443cb330eb6d787935dc",
+          "text": "Nachts ruft der Waldkauz im Wald sein langes „Huuu-hu-huuu“."
         }
       }
     },
@@ -2496,6 +2736,11 @@
           "file": "speech/collection.name/uhu.m4a",
           "sha256": "48d6fe61a87ba99325ebb636623b513480e1809e96f5437699848bdc9b3fe3ab",
           "text": "Der Uhu"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/uhu.m4a",
+          "sha256": "64c7c6446210528f47e15f0248159a635dfc44d2dba4ddfa07a6d904fbab2ad8",
+          "text": "Der Uhu ist eine riesige Eule mit Federohren und großen orangen Augen."
         }
       }
     },
@@ -2547,6 +2792,11 @@
           "file": "speech/collection.name/schleiereule.m4a",
           "sha256": "cfd55a8b11a0f6fbd44972704189f48b998e45680bdfd2d1e1045694009de9b7",
           "text": "Schleiereule"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/schleiereule.m4a",
+          "sha256": "f2a82f50d67c35a2bef80c2aad6d1c17f194cd56d455508df06f624e11ffa436",
+          "text": "Die Schleiereule hat ein weißes Gesicht in Herzform."
         }
       }
     },
@@ -2598,6 +2848,11 @@
           "file": "speech/collection.name/steinkauz.m4a",
           "sha256": "9b74ae00d79fcd612c3b1fe0c43a9fc05513aadc1de361acc33713d0aea3d89c",
           "text": "Steinkauz"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/steinkauz.m4a",
+          "sha256": "0a40da50c5d600cad6083c3e53be22438368df8e0e2e3608604ba7cd655965e2",
+          "text": "Der Steinkauz ist eine kleine Eule und wohnt gern in alten Obstbäumen."
         }
       }
     },
@@ -2649,6 +2904,11 @@
           "file": "speech/collection.name/maeusebussard.m4a",
           "sha256": "d926d018976d542c26b3e743f7ab976104b5842b9272153549b692eef7b263e5",
           "text": "Mäusebussard"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/maeusebussard.m4a",
+          "sha256": "2021f297ba8c30a66f9c85d1e1ccc88426d95ef8e1229f3b1fe4d23d58d2d855",
+          "text": "Der Mäusebussard sitzt gern auf Zaunpfählen und ruft wie eine Katze."
         }
       }
     },
@@ -2700,6 +2960,11 @@
           "file": "speech/collection.name/turmfalke.m4a",
           "sha256": "10510b10ed8267222440a31d4a9173108108eb4210baa352b8f6ed1c0b686ff2",
           "text": "Turmfalke"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/turmfalke.m4a",
+          "sha256": "964ab05bd358792b95be3ccc244d8ef804dde7d6fcb72454200d14f42367d9fd",
+          "text": "Der Turmfalke kann in der Luft auf der Stelle flattern."
         }
       }
     },
@@ -2751,6 +3016,11 @@
           "file": "speech/collection.name/rotmilan.m4a",
           "sha256": "e4861c2ded30c105e644f5d1b9ff4476443bb6c51c173c557a025b9cb6f5a48f",
           "text": "Rotmilan"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/rotmilan.m4a",
+          "sha256": "9d96a788547a893f435ee19233364f36c21de263680f7307ebe27cd0352bd69c",
+          "text": "Der Rotmilan hat einen rotbraunen Schwanz mit zwei Spitzen."
         }
       }
     },
@@ -2794,6 +3064,11 @@
           "file": "speech/collection.name/seeadler.m4a",
           "sha256": "3274465d89f3e253a2c0d6049ea96024c30eff66b96637f93a89a266aad21b44",
           "text": "Seeadler"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/seeadler.m4a",
+          "sha256": "ab75b8615c10d6498444c1a3b7dd91ed05781d56738e1302d13fceffa40c7aa7",
+          "text": "Der Seeadler ist riesig, hat einen weißen Schwanz und fängt Fische."
         }
       }
     },
@@ -2845,6 +3120,11 @@
           "file": "speech/collection.name/wanderfalke.m4a",
           "sha256": "09278b7f0db6319e37a47e3cf130a0021a9e6aa02087294f9d12b0ca9f224262",
           "text": "Wanderfalke"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/wanderfalke.m4a",
+          "sha256": "30a0488337cef85835adc41fef731d95d07a5f17114e404ed3032e713c468e27",
+          "text": "Im Sturzflug ist der Wanderfalke schneller als ein Auto."
         }
       }
     },
@@ -2896,6 +3176,11 @@
           "file": "speech/collection.name/weissstorch.m4a",
           "sha256": "9932d4b6e8e5a08f6703110659e30a8caa5cfe182bdef4b58df60897331d073a",
           "text": "Weißstorch"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/weissstorch.m4a",
+          "sha256": "028152c93af4ea462cf4452e45cb0887e9b3c5bd351592c72e85205fcf62bb23",
+          "text": "Der Weißstorch wohnt auf Dächern und klappert laut mit dem Schnabel."
         }
       }
     },
@@ -2947,6 +3232,11 @@
           "file": "speech/collection.name/graureiher.m4a",
           "sha256": "65257002415f30e4d8857473555b8ffdb1c5f2b9b42e72afaf2453230939d1e6",
           "text": "Graureiher"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/graureiher.m4a",
+          "sha256": "d9e2827880520c9a43a5a654584344d8be7b48f212bf4fe9b0ea0954b1a4ce25",
+          "text": "Der Graureiher steht ganz still am Wasser und wartet auf Fische."
         }
       }
     },
@@ -2998,6 +3288,11 @@
           "file": "speech/collection.name/kranich.m4a",
           "sha256": "9a21a835fbbe4ad6831c457e55df1043cebfdf3d662bffecbf953aa49d34efd8",
           "text": "Kranich"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/kranich.m4a",
+          "sha256": "a7761d0a6e88cd7bda426c6e2c292f8b8c775a892c76393507243d1b2226c41b",
+          "text": "Der Kranich tanzt im Frühling und ruft laut wie eine Trompete."
         }
       }
     },
@@ -3049,6 +3344,11 @@
           "file": "speech/collection.name/stockente.m4a",
           "sha256": "add5c57eca1ff6b2c5a8b83d02fd785a08793cfd78c0e388b5e32b4a8acce384",
           "text": "Stockente"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/stockente.m4a",
+          "sha256": "df9eacb937a6df9d2ececcd22c2ae8c71c146fada8d775d65fe4f2e8d6249c95",
+          "text": "Bei der Stockente quakt die Mama laut, der Papa hat einen grünen Kopf."
         }
       }
     },
@@ -3092,6 +3392,11 @@
           "file": "speech/collection.name/mandarinente.m4a",
           "sha256": "d44b60e6f29c0642e0252632d2da89d651acf363c8623556f525971f267e59a4",
           "text": "Mandarinente"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/mandarinente.m4a",
+          "sha256": "4c66a429cba8f6de7029df1b8edca91d43cda527f138fc499a0cc2a165ecb2b9",
+          "text": "Die Mandarinente brütet in hohlen Bäumen, und der Papa ist kunterbunt."
         }
       },
       "call": {
@@ -3151,6 +3456,11 @@
           "file": "speech/collection.name/hoeckerschwan.m4a",
           "sha256": "c7d5103f47f62acfb96233145b52e0b8b421f99c2929f4e916e6f82c5e121b41",
           "text": "Höckerschwan"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/hoeckerschwan.m4a",
+          "sha256": "6539a0e8e89226c5f5e2b08c67b1d0eb8fefc0e45e1f4795deabe437ad83de41",
+          "text": "Der Höckerschwan hat einen orangen Schnabel mit schwarzem Höcker."
         }
       }
     },
@@ -3202,6 +3512,11 @@
           "file": "speech/collection.name/graugans.m4a",
           "sha256": "aebe69b2dc9f86a7bdce4e7f72fc883b7d84642f9857f7214d6bd6035fec8fbe",
           "text": "Graugans"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/graugans.m4a",
+          "sha256": "a93a9596003b711f77ec3ba61f740e1007d8599f9e22094e0996795d04b6599b",
+          "text": "Die Graugans fliegt mit anderen Gänsen in einem großen V."
         }
       }
     },
@@ -3253,6 +3568,11 @@
           "file": "speech/collection.name/blaesshuhn.m4a",
           "sha256": "f4577e68cdd45d22647720763389c8dd0e3873ce9087c0820694b128bb0b2483",
           "text": "Blässhuhn"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/blaesshuhn.m4a",
+          "sha256": "23aee2acecb5a6674bcf9922156f195210674d02eb33f5fcaa35df946305fd43",
+          "text": "Das Blässhuhn ist schwarz und hat einen weißen Fleck auf der Stirn."
         }
       }
     },
@@ -3304,6 +3624,11 @@
           "file": "speech/collection.name/haubentaucher.m4a",
           "sha256": "d827fd8987e0acf78a8081040fb4d57731fa2670e0ef821e3018f7746cdd5ffb",
           "text": "Haubentaucher"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/haubentaucher.m4a",
+          "sha256": "5bf59fa5ff0ba2e9088f0b13184a63908254a65daeb55d5945ab29e41dc352f0",
+          "text": "Der Haubentaucher trägt seine Küken auf dem Rücken herum."
         }
       }
     },
@@ -3355,6 +3680,11 @@
           "file": "speech/collection.name/kormoran.m4a",
           "sha256": "235e6bd2b78545ebc2a3e7f499979b1e5096f285f45c2280516d29a1b09bafe2",
           "text": "Kormoran"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/kormoran.m4a",
+          "sha256": "584209466820fa314cf3e20db9eb82c3950d36df19ab7368a43c8ecd840ac5e0",
+          "text": "Der Kormoran hängt nach dem Tauchen seine Flügel zum Trocknen aus."
         }
       }
     },
@@ -3406,6 +3736,11 @@
           "file": "speech/collection.name/lachmoewe.m4a",
           "sha256": "4d44d779f92efb0a68223859d70f67bc94e92c02f5645b9f6d9723c7c0b88549",
           "text": "Lachmöwe"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/lachmoewe.m4a",
+          "sha256": "1f36031574d020d92b31c4474583a115bae3c0423cc91ebdc16faa5fe6e5f09e",
+          "text": "Die Lachmöwe hat im Sommer einen schokobraunen Kopf."
         }
       }
     },
@@ -3457,6 +3792,11 @@
           "file": "speech/collection.name/austernfischer.m4a",
           "sha256": "a3e0ef4f466c8d7dff1586036404c4f76390501a858053f6360bbf89ac39ce66",
           "text": "Austernfischer"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/austernfischer.m4a",
+          "sha256": "322cd2319dd4d8a7b0eeabfdff48df924586a436ee98bcd1b0079b930e40e7fa",
+          "text": "Der Austernfischer hat einen langen roten Schnabel und ruft „kliep“."
         }
       }
     },
@@ -3508,6 +3848,11 @@
           "file": "speech/collection.name/kiebitz.m4a",
           "sha256": "3d8231c97297b0bab7c103b3e4b2ec6a51d8226c8a1bad00e89d8556d4b78db1",
           "text": "Kiebitz"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/kiebitz.m4a",
+          "sha256": "f2dae076f11717add8fa275050774103e98a7529786eaa45b0321186825d4cba",
+          "text": "Der Kiebitz trägt eine lange Federlocke am Kopf und ruft „kiwitt“."
         }
       }
     },
@@ -3559,6 +3904,11 @@
           "file": "speech/collection.name/fasan.m4a",
           "sha256": "ad59f47688b360a92c98bd415afc9f7ec2c89171581d0dafb4a0c9b29d59b2f6",
           "text": "Fasan"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/fasan.m4a",
+          "sha256": "fd18def61b7736f8e8ea3aff6feeace3db0e67bd673e28050d6d0a62eb265686",
+          "text": "Beim Fasan hat der Hahn ein rotes Gesicht und einen langen Schwanz."
         }
       }
     }
