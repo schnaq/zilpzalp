@@ -15,8 +15,8 @@ import ZilpZalpData
 /// catalog's, verbatim, and they are also the keys a manifest carries under
 /// `speech` — `tools/fetch_media/speech/sentences.py` renders exactly these
 /// sentences, filled exactly this way. A few are not catalog keys as they
-/// stand: see ``name(_:)``, ``packTitle(_:title:)``, ``counted(_:_:)`` and
-/// ``assembled(_:)``.
+/// stand: see ``name(_:)``, ``fact(_:)``, ``packTitle(_:title:)``,
+/// ``counted(_:_:)`` and ``assembled(_:)``.
 struct SpokenLine: Sendable {
     /// The sentence key, `nil` for words no clip can say — see ``assembled(_:)``.
     let key: String?
@@ -36,8 +36,8 @@ struct SpokenLine: Sendable {
 
     /// "Amsel" — the bare name. The question of game 1, what a sticker in
     /// the album says when it is tapped, and what the round end says after
-    /// „Super gemacht!" for a sticker just earned (#264) — the only sentence
-    /// recorded per species.
+    /// „Super gemacht!" for a sticker just earned (#264) — one of the two
+    /// sentences recorded per species, beside ``fact(_:)``.
     ///
     /// One line for both since #220: the game asked "Wo ist die Amsel?" and
     /// now asks the name alone, which is the same words the album already
@@ -56,6 +56,15 @@ struct SpokenLine: Sendable {
             bird: bird,
             text: spokenName(of: bird),
         )
+    }
+
+    /// The bird's one short fact, from the manifest's ``Bird/fact`` — what the
+    /// lightbulb on a collected sticker says. `nil` for a bird nobody has
+    /// written one for, so the album draws no lightbulb rather than one that
+    /// says nothing.
+    static func fact(_ bird: Bird) -> SpokenLine? {
+        guard let fact = bird.fact, !fact.isEmpty else { return nil }
+        return SpokenLine(key: SpeechKey.speciesFact, bird: bird, text: fact)
     }
 
     /// A sentence that belongs to no species: the praise, the eight rank

@@ -121,6 +121,11 @@ voice, which is a different mechanism and out of scope.
 > `SpokenLine.firstFind` in 4.1 does not exist. The tables are left as they
 > were planned.
 
+> **Amendment 2026-11-14 (Christian).** A second species sentence came back:
+> `species.fact`, one short sentence per bird from the manifest's `fact`,
+> said by a lightbulb on a collected sticker in the album. Rendered only on
+> request, never by a default pack render.
+
 Three sentence kinds are species-dependent, so each needs one clip per species:
 
 ```

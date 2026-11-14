@@ -29,14 +29,27 @@ import ZilpZalpUI
 /// a gap and a goal.
 ///
 /// Tapping a bird already collected says its name out loud, because the child
-/// this album is for cannot read the word under it. A locked one says nothing
-/// — its name is the thing still to be found.
+/// this album is for cannot read the word under it. A locked one says „Noch
+/// geheim" — its name is the thing still to be found.
+///
+/// **A collected bird has a lightbulb on its corner that says one fact about
+/// it** — „Bei der Amsel ist der Papa ganz schwarz und hat einen gelben
+/// Schnabel." Its own button rather than a second sentence after the name
+/// (Christian, 2026-11-14): a tap on the sticker still says the name and
+/// nothing else. Only where the pack has written a fact for the bird.
 struct CollectionScreen: View {
     /// The progress markers under a locked sticker, sized so that five of them
     /// and their gaps stay inside the disc above: 104 pt under a 128 pt
     /// sticker, 76 under an 80 pt one.
     private static let markerSize: CGFloat = 16
     private static let compactMarkerSize: CGFloat = 12
+
+    /// The lightbulb on a collected sticker: a small sticker of its own, so it
+    /// covers the rim of the photo and not the bird framed in its middle. A
+    /// quarter of the disc on the phone, a third of it on the iPad. The target
+    /// around it is ``ZSpacing/touchMinimum`` either way.
+    private static let factBadge: CGFloat = 44
+    private static let compactFactBadge: CGFloat = 32
 
     /// The avatar leading the headline, a little taller than the line of type
     /// beside it: 64 pt against the iPad's 48 pt display-2, 44 pt against the
@@ -202,9 +215,10 @@ struct CollectionScreen: View {
     }
 
     /// One sticker, and a button either way. A collected one says its own
-    /// name; the rest say „Noch geheim", what their caption reads — so a child
-    /// that taps a padlock is answered rather than met with silence it might
-    /// read as a broken screen, and still not told the name it has to earn.
+    /// name, and its lightbulb its fact; the rest say „Noch geheim", what
+    /// their caption reads — so a child that taps a padlock is answered rather
+    /// than met with silence it might read as a broken screen, and still not
+    /// told the name it has to earn.
     @ViewBuilder
     private func sticker(_ bird: Bird) -> some View {
         let found = isCollected(bird)
@@ -220,6 +234,11 @@ struct CollectionScreen: View {
             }
             .buttonStyle(.plain)
             .accessibilityLabel(bird.name)
+            .overlay(alignment: .top) {
+                if let fact = SpokenLine.fact(bird) {
+                    factButton(fact, about: bird, sticker: size)
+                }
+            }
         } else {
             Button {
                 say(.fixed("collection.locked"))
@@ -239,6 +258,47 @@ struct CollectionScreen: View {
             }
             .buttonStyle(.plain)
         }
+    }
+
+    /// The lightbulb that says a collected bird's fact, on a tap only.
+    ///
+    /// The lightbulb because it is a picture: a child who cannot read meets it
+    /// on the hint banner of a round already, as "here is something to know".
+    /// Not `info`, the ⓘ of the sketch — an „i" is a letter, and on the home
+    /// screen it is the grown-ups' door to „Über ZilpZalp". Not a speaker
+    /// either: the sticker itself already speaks when tapped.
+    ///
+    /// A ``GlyphBadge`` rather than an ``IconButton``, which never draws below
+    /// 64 pt and would hide most of a phone's 80 pt sticker. The badge stays
+    /// small and the button around it keeps the full 64 pt target. A sibling
+    /// of the sticker's button rather than inside its label, like the pencil
+    /// on a profile card, so the two taps never compete.
+    ///
+    /// Anchored to the disc, not to the caption, whose width follows the name:
+    /// from the disc's top centre out towards its top-right corner, so the
+    /// badge sits on the rim of the photo.
+    private func factButton(
+        _ fact: SpokenLine,
+        about bird: Bird,
+        sticker size: CGFloat,
+    ) -> some View {
+        Button {
+            say(fact)
+        } label: {
+            GlyphBadge(
+                .lightbulb,
+                diameter: isCompact ? Self.compactFactBadge : Self.factBadge,
+                rotation: .degrees(8),
+            )
+            .frame(width: ZSpacing.touchMinimum, height: ZSpacing.touchMinimum)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(String(
+            format: String(localized: "collection.fact.accessibility"),
+            bird.name,
+        ))
+        .offset(x: size * 0.42, y: size * 0.08 - ZSpacing.touchMinimum / 2)
     }
 
     /// Says one line, building the announcer the first time something is

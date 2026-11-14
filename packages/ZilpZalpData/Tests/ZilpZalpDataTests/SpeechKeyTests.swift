@@ -40,13 +40,15 @@ struct SpeechKeyTests {
         #expect(clips.url(for: SpeechKey.speciesName, about: nil) == nil)
     }
 
-    /// The clips are already rendered under this string —
-    /// `speech/collection.name/<species>.m4a` in every manifest and in
+    /// The clips are already rendered under these strings —
+    /// `speech/collection.name/<species>.m4a` and
+    /// `speech/species.fact/<species>.m4a` in the manifests and in
     /// `tools/fetch_media/speech` (#221). Changing the constant without
-    /// re-rendering them would leave every bird silent, so the literal is
+    /// re-rendering them would leave every bird silent, so the literals are
     /// pinned here rather than left to a rename to carry.
-    @Test("the key is the one the render tool writes")
+    @Test("the keys are the ones the render tool writes")
     func pinsTheRenderedKey() {
         #expect(SpeechKey.speciesName == "collection.name")
+        #expect(SpeechKey.speciesFact == "species.fact")
     }
 }
