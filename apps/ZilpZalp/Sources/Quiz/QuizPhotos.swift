@@ -82,8 +82,33 @@ struct QuizPhotos {
     /// that are there, and a pack whose files and manifest disagree is the
     /// grown-ups' area's business.
     func photo(_ species: String, question: Int) -> Image? {
+        shownIndex(species, question: question).flatMap { images[species]?[$0] }
+    }
+
+    /// Which of the species' photos ``photo(_:question:)`` shows: the dealt one
+    /// if it opened, else the portrait if that did, else `nil`. A feedback
+    /// report names this file, and reading through the same function keeps it
+    /// the one the child saw.
+    func shownIndex(_ species: String, question: Int) -> Int? {
         guard let photos = images[species] else { return nil }
-        return photos[dealt.photo(for: species, question: question)] ?? photos[0]
+        let index = dealt.photo(for: species, question: question)
+        if photos[index] != nil {
+            return index
+        }
+        return photos[0] == nil ? nil : 0
+    }
+
+    /// `bird`'s tile as a feedback report describes it: the pack and the file
+    /// it shows in the question at `question`.
+    func feedbackTile(for bird: Bird, question: Int) -> FeedbackSnapshot.Tile {
+        let photo = shownIndex(bird.id, question: question)
+            .flatMap { bird.photos.indices.contains($0) ? bird.photos[$0] : nil }
+        return .init(
+            species: bird.id,
+            name: bird.name,
+            pack: library.packID(for: bird),
+            photo: photo,
+        )
     }
 
     /// Opens the files of `needed` that are not open yet — the portrait

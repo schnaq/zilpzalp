@@ -6,7 +6,9 @@ import ZilpZalpCore
 /// Game 3 (feathers) and game 4 (habitat) are not cases: they are out of v1 for
 /// want of freely licensed material (spec §1), so nothing can route to them and
 /// nothing announces them — see ``HomeScreen``.
-enum Game: Hashable {
+///
+/// The raw value is how a feedback report spells the game.
+enum Game: String, Hashable {
     /// Game 1: the name is read out, the child taps the bird (#25).
     case names
     /// Game 2: the bird's recorded call plays and the child taps the bird
