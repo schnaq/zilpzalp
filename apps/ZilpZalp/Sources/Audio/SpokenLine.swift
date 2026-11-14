@@ -14,10 +14,11 @@ import ZilpZalpData
 /// product copy, and `ZilpZalpData` carries none of it. The keys are the
 /// catalog's, verbatim, and they are also the keys a manifest carries under
 /// `speech` — `tools/fetch_media/speech/sentences.py` renders exactly these
-/// sentences, filled exactly this way. Two of them are not catalog keys: see
-/// ``name(_:)`` and ``assembled(_:)``.
+/// sentences, filled exactly this way. A few are not catalog keys as they
+/// stand: see ``name(_:)``, ``packTitle(_:title:)``, ``counted(_:_:)`` and
+/// ``assembled(_:)``.
 struct SpokenLine: Sendable {
-    /// The sentence key, `nil` for the one line no single clip can say.
+    /// The sentence key, `nil` for words no clip can say — see ``assembled(_:)``.
     let key: String?
 
     /// The species the sentence is about, `nil` where it belongs to none. A
@@ -81,15 +82,26 @@ struct SpokenLine: Sendable {
         SpokenLine(key: SpeechKey.packTitle, bird: nil, pack: pack, text: title)
     }
 
-    /// A line no clip can say, and the reason ``key`` is optional at all: one
-    /// the app puts together at runtime. "Zeit fürs Nest! Heute hast du 7
-    /// Sterne gesammelt." is two catalog entries and a number.
+    /// „Heute hast du 7 Sterne gesammelt." — a catalog sentence that varies
+    /// by a count, recorded once per count under `<key>.<count>` (decision 4
+    /// of the recorded-speech plan, 2026-11-14). The words are the catalog's
+    /// plural rule, exactly as `String(format:)` picks them.
     ///
-    /// It carries no key — the plan's `SpokenLine` has a plain `String` there
-    /// and no such case. Decision 4 of the recorded-speech plan is whether the
-    /// sentence is reworded so that one clip could say it; until that is
-    /// answered this line always lands on the synthesiser, which is exactly
-    /// where it landed before.
+    /// Only the counts up to 30 are recorded — see the spec's screen 1k. A
+    /// higher count finds no clip and the synthesiser says the same words, so
+    /// nothing here needs to know where the recordings stop. `fixed_text` in
+    /// `tools/fetch_media/speech/sentences.py` reads the key the same way.
+    static func counted(_ key: String, _ count: Int) -> SpokenLine {
+        SpokenLine(
+            key: "\(key).\(count)",
+            bird: nil,
+            text: String(format: String(localized: String.LocalizationValue(key)), count),
+        )
+    }
+
+    /// A line no clip can say, and the reason ``key`` is optional at all:
+    /// words that are no sentence of the catalog — today only the previews'
+    /// collection titles.
     static func assembled(_ text: String) -> SpokenLine {
         SpokenLine(key: nil, bird: nil, text: text)
     }

@@ -138,8 +138,22 @@ infisical run --env=dev --path=/ -- mise run fetch-media speech render \
     --provider elevenlabs --voice AnvlJBAqSLDzEevYr9Ap=Ava --set fixed \
     --sentence roundEnd.title gate.spoken profile.picker.title \
     profile.create.title quiz.quit.question home.collection.title \
-    home.collection.all
+    home.collection.all home.title profile.create.avatar.title \
+    profile.picker.new collection.locked timeBudget.title timeBudget.farewell
 ```
+
+The star count on „Zeit fürs Nest" is one clip per count, `<key>.<n>`, its
+text the catalog's plural form for that count. 0 to 30 are recorded; the app
+reads any higher count with the synthesiser (spec, screen 1k):
+
+```
+infisical run --env=dev --path=/ -- mise run fetch-media speech render \
+    --provider elevenlabs --voice AnvlJBAqSLDzEevYr9Ap=Ava --set fixed \
+    --sentence timeBudget.starsToday.spoken.{0..30}
+```
+
+`{0..30}` is bash and zsh brace expansion; in fish, write
+`timeBudget.starsToday.spoken.(seq 0 30)` instead.
 
 Every species' name of a pack, or one with `--species amsel`:
 

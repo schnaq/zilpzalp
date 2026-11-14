@@ -889,10 +889,9 @@ def speech_work(
         if species:
             raise ValueError("--species belongs to a pack; the fixed sentences have no species")
         if not chosen:
-            # No default list on purpose: which sentences the fixed set holds
-            # still depends on decisions 4 and 7 of the plan and on #146's key,
-            # and rendering "every string in the catalogue" is not a default
-            # anybody wants.
+            # No default list on purpose: rendering "every string in the
+            # catalogue" is not a default anybody wants, and the star count
+            # is one clip per count up to wherever the docs say it stops.
             raise ValueError("--set fixed needs --sentence: name the sentences to produce")
 
         document = manifest.load(manifest.speech_manifest_path())

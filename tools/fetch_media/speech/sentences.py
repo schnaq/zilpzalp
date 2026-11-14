@@ -23,10 +23,12 @@ and the name one after the other, so nothing renders it.
 
 Every fixed sentence — „Super gemacht!", the eight rank ascents, the parental
 gate, the two profile screens — is whatever the catalog says under its key, and
-must carry no placeholder at all. The one sentence that does, the star count,
-is decision 4 of the plan: it is to be reworded so that nothing numeric is
-spoken, and until it is, this tool refuses it rather than recording „Heute hast
-du %lld Sterne gesammelt".
+must carry no placeholder at all. The one sentence that does, the star count on
+„Zeit fürs Nest", is recorded once per count (decision 4 of the plan, answered
+2026-11-14): `timeBudget.starsToday.spoken.7` is the catalog's plural entry
+`timeBudget.starsToday.spoken` with 7 filled in, „Heute hast du 7 Sterne
+gesammelt." `SpokenLine.counted` in the app forms the same key. The bare plural
+key is still refused rather than recorded with a hole in it.
 """
 
 from __future__ import annotations
@@ -55,9 +57,12 @@ PACK_SENTENCES = ("pack.title",)
 # `String(format:)` is given at the call sites this mirrors.
 PLACEHOLDER = re.compile(r"%(?:(\d+)\$)?@")
 
+# `<plural key>.<count>`: one clip per count of a sentence that varies by one.
+COUNTED = re.compile(r"(?P<key>.+)\.(?P<count>0|[1-9][0-9]*)")
 
-def german(key: str) -> str:
-    """The German value of one String Catalog key.
+
+def german(key: str, count: int | None = None) -> str:
+    """The German value of one String Catalog key, for `count` where it varies by one.
 
     Read from disk on every call rather than cached: twenty times for a whole
     pack, of a file the size of a photograph's thumbnail, against a command a
@@ -70,16 +75,28 @@ def german(key: str) -> str:
         raise LookupError(f"'{key}' is not a key in {CATALOG.name}")
 
     localised = (entry.get("localizations") or {}).get(LANGUAGE) or {}
-    if "variations" in localised:
-        raise ValueError(
-            f"'{key}' varies by a plural: a clip says one sentence, not one per count. "
-            "Reword it so that nothing numeric is spoken — decision 4 of the plan."
-        )
+    variations = localised.get("variations") or {}
+    plural = variations.get("plural")
+    if variations and plural is None:
+        raise ValueError(f"'{key}' varies by something other than a count: {', '.join(variations)}")
+    if plural is None and count is not None:
+        raise ValueError(f"'{key}' does not vary by a count, so '{key}.{count}' says nothing")
+    if plural is not None:
+        if count is None:
+            raise ValueError(
+                f"'{key}' varies by a plural: a clip says one sentence, not one per count. "
+                f"Name the count — '{key}.7' — to record one clip per count."
+            )
+        # German's integer rule: `one` for 1 and nothing else, `other` for every
+        # other count — what `String(format:)` picks for `%lld`. An explicit
+        # `zero` wins for 0, as it does in the app.
+        category = "zero" if count == 0 and "zero" in plural else "one" if count == 1 else "other"
+        localised = plural.get(category) or plural.get("other") or {}
 
     value = (localised.get("stringUnit") or {}).get("value")
     if not value:
         raise LookupError(f"'{key}' has no {LANGUAGE} value in {CATALOG.name}")
-    return str(value)
+    return str(value) if count is None else str(value).replace("%lld", str(count))
 
 
 def fill(template: str, *arguments: str) -> str:
@@ -142,5 +159,15 @@ def pack_text(document: dict, sentence: str) -> str:
 
 
 def fixed_text(sentence: str) -> str:
-    """What one of the sentences that belong to no species says."""
-    return fill(german(sentence))
+    """What one of the sentences that belong to no species says.
+
+    A catalog key as it stands, or `<plural key>.<count>` — the key itself
+    first, so a catalog key that happens to end in digits is never split.
+    """
+    try:
+        return fill(german(sentence))
+    except LookupError:
+        counted = COUNTED.fullmatch(sentence)
+        if counted is None:
+            raise
+    return fill(german(counted["key"], int(counted["count"])))

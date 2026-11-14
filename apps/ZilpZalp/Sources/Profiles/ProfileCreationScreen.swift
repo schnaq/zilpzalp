@@ -135,10 +135,19 @@ struct ProfileCreationScreen: View {
 
                     nameField
 
-                    Text("profile.create.avatar.title")
-                        .typeStyle(isCompact ? .bodyLarge : .headline, .display, weight: .bold)
-                        .foregroundStyle(ZColor.textBody)
-                        .multilineTextAlignment(.center)
+                    // On a tap only: the headline above speaks on arrival,
+                    // and a second line on its own would cut it off.
+                    HStack(spacing: ZSpacing.step3) {
+                        Text("profile.create.avatar.title")
+                            .typeStyle(isCompact ? .bodyLarge : .headline, .display, weight: .bold)
+                            .foregroundStyle(ZColor.textBody)
+                            .multilineTextAlignment(.center)
+
+                        ReadAloudButton(
+                            line: .fixed("profile.create.avatar.title"),
+                            speaksOnAppear: false,
+                        )
+                    }
 
                     avatarGrid
 

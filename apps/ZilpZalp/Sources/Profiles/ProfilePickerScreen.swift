@@ -111,6 +111,13 @@ struct ProfilePickerScreen: View {
                 ink: ZColor.textBody,
                 action: createNew,
             )
+            // Where a child's card has its pencil: the card acts on a tap, so
+            // the speaker says „Neues Nest" for it — on a tap only, since the
+            // headline is what speaks on arrival.
+            .overlay(alignment: .topTrailing) {
+                ReadAloudButton(line: .fixed("profile.picker.new"), speaksOnAppear: false)
+                    .offset(x: ZSpacing.step4, y: -ZSpacing.step4)
+            }
         }
     }
 

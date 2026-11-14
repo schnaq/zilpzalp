@@ -90,7 +90,7 @@ def padded(segment: str) -> bytes:
 
 # The catalogue keys these tests read, as the app's own catalogue spells
 # them: the praise that is VoiceOver-only since #264, the fixed praise, and
-# the one sentence that cannot become a clip.
+# the star count, which is one clip per count.
 CATALOG = {
     "sourceLanguage": "de",
     "strings": {
@@ -107,6 +107,12 @@ CATALOG = {
                 "de": {
                     "variations": {
                         "plural": {
+                            "one": {
+                                "stringUnit": {
+                                    "state": "translated",
+                                    "value": "Heute hast du einen Stern gesammelt.",
+                                }
+                            },
                             "other": {
                                 "stringUnit": {
                                     "state": "translated",
@@ -119,6 +125,28 @@ CATALOG = {
             }
         },
         "collection.birds": {"localizations": {}},
+        # A plural with an explicit `zero`, and a key that varies by device.
+        "zero.counted": {
+            "localizations": {
+                "de": {
+                    "variations": {
+                        "plural": {
+                            "zero": {"stringUnit": {"state": "translated", "value": "Noch keiner."}},
+                            "other": {"stringUnit": {"state": "translated", "value": "%lld Stück."}},
+                        }
+                    }
+                }
+            }
+        },
+        "device.only": {
+            "localizations": {
+                "de": {
+                    "variations": {
+                        "device": {"iphone": {"stringUnit": {"state": "translated", "value": "Tippe"}}}
+                    }
+                }
+            }
+        },
     },
 }
 
@@ -199,12 +227,51 @@ class SentenceTests(unittest.TestCase):
     def test_reads_a_fixed_sentence_as_the_catalogue_has_it(self) -> None:
         self.assertEqual(sentences.fixed_text("roundEnd.title"), "Super gemacht!")
 
-    def test_refuses_the_one_sentence_that_speaks_a_number(self) -> None:
+    def test_refuses_the_star_count_without_a_count(self) -> None:
         """Decision 4: one clip cannot say „7 Sterne" and „8 Sterne"."""
         with self.assertRaises(ValueError) as error:
             sentences.fixed_text("timeBudget.starsToday.spoken")
 
         self.assertIn("plural", str(error.exception))
+
+    def test_says_the_star_count_once_per_count(self) -> None:
+        """Decision 4 (b): `<key>.<n>` is the plural form for n, filled in."""
+        for count, text in (
+            (0, "Heute hast du 0 Sterne gesammelt."),
+            (1, "Heute hast du einen Stern gesammelt."),
+            (7, "Heute hast du 7 Sterne gesammelt."),
+            (30, "Heute hast du 30 Sterne gesammelt."),
+        ):
+            with self.subTest(count=count):
+                self.assertEqual(
+                    sentences.fixed_text(f"timeBudget.starsToday.spoken.{count}"), text
+                )
+
+    def test_refuses_a_count_on_a_sentence_without_one(self) -> None:
+        with self.assertRaises(ValueError) as error:
+            sentences.fixed_text("roundEnd.title.3")
+
+        self.assertIn("does not vary by a count", str(error.exception))
+
+    def test_still_refuses_a_key_that_is_not_there_with_a_number(self) -> None:
+        with self.assertRaises(LookupError):
+            sentences.fixed_text("nonsense.key.3")
+
+    def test_prefers_an_explicit_zero_form_for_zero(self) -> None:
+        """The app's plural rule uses a `zero` form for 0 where there is one."""
+        self.assertEqual(sentences.fixed_text("zero.counted.0"), "Noch keiner.")
+        self.assertEqual(sentences.fixed_text("zero.counted.3"), "3 Stück.")
+
+    def test_refuses_a_count_with_a_leading_zero(self) -> None:
+        """`….07` is a key the app never forms, so a clip under it is never heard."""
+        with self.assertRaises(LookupError):
+            sentences.fixed_text("timeBudget.starsToday.spoken.07")
+
+    def test_refuses_a_variation_that_is_not_a_count(self) -> None:
+        with self.assertRaises(ValueError) as error:
+            sentences.fixed_text("device.only")
+
+        self.assertIn("other than a count", str(error.exception))
 
     def test_refuses_a_key_the_catalogue_does_not_have(self) -> None:
         for key in ("nonsense.key", "collection.birds"):
@@ -234,6 +301,16 @@ class RealCatalogTests(unittest.TestCase):
 
     def test_the_praise_reads_as_the_app_speaks_it(self) -> None:
         self.assertEqual(sentences.fixed_text("roundEnd.title"), "Super gemacht!")
+
+    def test_the_star_count_reads_as_the_app_speaks_it(self) -> None:
+        self.assertEqual(
+            sentences.fixed_text("timeBudget.starsToday.spoken.1"),
+            "Heute hast du einen Stern gesammelt.",
+        )
+        self.assertEqual(
+            sentences.fixed_text("timeBudget.starsToday.spoken.12"),
+            "Heute hast du 12 Sterne gesammelt.",
+        )
 
 
 class ShortestTests(unittest.TestCase):

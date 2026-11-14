@@ -310,17 +310,21 @@ struct HomeScreen: View {
         .padding(.trailing, isCompact ? ZSpacing.step4 : ZSpacing.gutterScreen)
     }
 
-    /// The one line of text on the screen, and it is for the grown-up looking
-    /// over the shoulder: a child who cannot read navigates by the pictures.
+    /// The one line of text, said once per arrival rather than after every
+    /// round — the screen and the speaker's flag stay under it. No tile speaker:
+    /// game 2's glyph is one already, and two on one tile would confuse.
     private var headline: some View {
-        Text("home.title")
-            .typeStyle(titleStep, .display, weight: .extraBold)
-            .foregroundStyle(ZColor.textStrong)
-            .multilineTextAlignment(.center)
-            // The group around it has a fixed height and would otherwise
-            // offer the text one line's worth and let it truncate. It takes
-            // the height its own wrapping needs; the tiles get the rest.
-            .fixedSize(horizontal: false, vertical: true)
+        HStack(spacing: ZSpacing.step3) {
+            Text("home.title")
+                .typeStyle(titleStep, .display, weight: .extraBold)
+                .foregroundStyle(ZColor.textStrong)
+                .multilineTextAlignment(.center)
+                // The group around it has a fixed height and would otherwise
+                // offer the text one line's worth and let it truncate. It takes
+                // the height its own wrapping needs; the tiles get the rest.
+                .fixedSize(horizontal: false, vertical: true)
+            ReadAloudButton(line: .fixed("home.title"))
+        }
     }
 
     /// The games, side by side or stacked — whichever arrangement the space

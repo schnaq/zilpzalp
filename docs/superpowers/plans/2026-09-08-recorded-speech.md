@@ -57,6 +57,12 @@ while the tooling is built.
    child sees the day's count in a badge and never hears it. **Proposal:
    rephrase anyway** — the badge already shows it, and it saves recording 0…N
    variants of a sentence a child hears once a day.
+   **Answered 2026-11-14 (Christian): (b).** The number stays spoken, one clip
+   per count from 0 to 30 under `timeBudget.starsToday.spoken.<n>`; above 30
+   that one sentence falls back to the synthesiser. The screen says three
+   clips in a row — title, farewell, count — through
+   `SpeechAnnouncer.announce(_:)` with an array, which removes the technical
+   objection in 1.3. See §1.3 and the spec's screen 1k.
 5. **Fixed sentences: once, or per pack.** "Super gemacht!", the eight rank
    sentences, the two profile questions, the parental-gate hint — these do not
    belong to any pack. **Proposal: record them once, ship them in
@@ -162,6 +168,15 @@ is **224**, and **44** for the first shippable step.
   concatenates two sentences into one string. Two recorded clips would have to
   be played in sequence, and `announce(_:)` deliberately drops whatever is
   running rather than queueing. One sentence, one clip.
+  **Answered 2026-11-14: (b), 0…30.** Daily stars are not capped; a round
+  earns 1–3, and the screen only appears under a limit (presets 15, 30, 45,
+  60 minutes), so 30 covers a 15-minute day outright and most longer ones,
+  at about 35 characters per extra count. 0 is reachable — a day of rounds
+  left early earns none. The render tool expands `<key>.<n>` from the
+  catalog's plural forms (`one` for 1, `other` for the rest), and
+  `SpokenLine.counted` forms the same key; a count with no clip falls back
+  per sentence. The technical reason above no longer holds: #264 taught
+  `announce` to say several lines in a row.
 - **Profile names** are spoken nowhere today. They cannot be pre-recorded —
   a child types "Mäuschen" — so the rule is: **never speak a profile name.**
   Should a future screen want to, it takes the runtime fallback and says so.

@@ -201,10 +201,10 @@ struct CollectionScreen: View {
         }
     }
 
-    /// One sticker. Collected ones are buttons that say their own name; the
-    /// rest are pictures, so a child that taps a padlock is not answered with
-    /// silence it might read as a broken screen — it is answered with a
-    /// picture that plainly is not one of the bright ones.
+    /// One sticker, and a button either way. A collected one says its own
+    /// name; the rest say „Noch geheim", what their caption reads — so a child
+    /// that taps a padlock is answered rather than met with silence it might
+    /// read as a broken screen, and still not told the name it has to earn.
     @ViewBuilder
     private func sticker(_ bird: Bird) -> some View {
         let found = isCollected(bird)
@@ -221,18 +221,23 @@ struct CollectionScreen: View {
             .buttonStyle(.plain)
             .accessibilityLabel(bird.name)
         } else {
-            VStack(spacing: ZSpacing.step2) {
-                StickerCaption(caption: String(localized: "collection.locked"), earned: false) {
-                    RewardSticker(image: photos[bird.id], locked: true, size: size)
-                }
+            Button {
+                say(.fixed("collection.locked"))
+            } label: {
+                VStack(spacing: ZSpacing.step2) {
+                    StickerCaption(caption: String(localized: "collection.locked"), earned: false) {
+                        RewardSticker(image: photos[bird.id], locked: true, size: size)
+                    }
 
-                StickerMarkers(
-                    count: profile.recognitions[bird.id, default: 0],
-                    threshold: profile.stickerThreshold,
-                    markerSize: isCompact ? Self.compactMarkerSize : Self.markerSize,
-                )
+                    StickerMarkers(
+                        count: profile.recognitions[bird.id, default: 0],
+                        threshold: profile.stickerThreshold,
+                        markerSize: isCompact ? Self.compactMarkerSize : Self.markerSize,
+                    )
+                }
+                .accessibilityElement(children: .combine)
             }
-            .accessibilityElement(children: .combine)
+            .buttonStyle(.plain)
         }
     }
 
