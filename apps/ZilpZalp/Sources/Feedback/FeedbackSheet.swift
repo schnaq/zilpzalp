@@ -57,6 +57,10 @@ private struct FeedbackForm: View {
 
     private static let tileColumns = [GridItem(.adaptive(minimum: 140), spacing: ZSpacing.step3)]
 
+    /// Asked once: whether a mail account is set up cannot change while the
+    /// sheet is up, and the form redraws on every keystroke in the note.
+    private let canSendMail = MFMailComposeViewController.canSendMail()
+
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
     @State private var target = FeedbackTarget.other
@@ -248,7 +252,7 @@ private struct FeedbackForm: View {
     private var action: some View {
         let report = report
         Group {
-            if MFMailComposeViewController.canSendMail() {
+            if canSendMail {
                 ZButton(String(localized: "feedback.send"), leadingIcon: .mail) {
                     onSend(report, sendsScreenshot ? capture.screenshot : nil)
                 }
@@ -264,19 +268,19 @@ private struct FeedbackForm: View {
     /// no outcome, so the grown-up closes the sheet themselves afterwards.
     @ViewBuilder
     private func share(_ report: FeedbackReport) -> some View {
-        let message = Text(verbatim: report.body(recipient: FeedbackReport.recipient))
+        let body = report.body(recipient: FeedbackReport.recipient)
         let subject = subject(for: report)
         if sendsScreenshot {
             let image = Image(uiImage: capture.screenshot)
             ShareLink(
                 item: image,
                 subject: Text(verbatim: subject),
-                message: message,
+                message: Text(verbatim: body),
                 preview: SharePreview(subject, image: image),
             ) { shareLabel }
         } else {
             ShareLink(
-                item: report.body(recipient: FeedbackReport.recipient),
+                item: body,
                 subject: Text(verbatim: subject),
             ) {
                 shareLabel

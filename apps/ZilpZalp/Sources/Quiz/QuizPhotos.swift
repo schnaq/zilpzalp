@@ -91,11 +91,7 @@ struct QuizPhotos {
     /// the one the child saw.
     func shownIndex(_ species: String, question: Int) -> Int? {
         guard let photos = images[species] else { return nil }
-        let index = dealt.photo(for: species, question: question)
-        if photos[index] != nil {
-            return index
-        }
-        return photos[0] == nil ? nil : 0
+        return [dealt.photo(for: species, question: question), 0].first { photos[$0] != nil }
     }
 
     /// `bird`'s tile as a feedback report describes it: the pack and the file

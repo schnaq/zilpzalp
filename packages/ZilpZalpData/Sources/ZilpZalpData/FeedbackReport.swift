@@ -116,7 +116,7 @@ public struct FeedbackReport: Hashable, Sendable {
     public var birdName: String? {
         switch target {
         case let .tile(species): tile(species)?.name
-        case .call: snapshot.answer.flatMap(tile)?.name
+        case .call: answerTile?.name
         case .other: nil
         }
     }
@@ -140,7 +140,8 @@ public struct FeedbackReport: Hashable, Sendable {
     ///   preset one.
     public func body(recipient: String? = nil) -> String {
         [recipient, note.trimmingCharacters(in: .whitespacesAndNewlines), context]
-            .compactMap { $0?.isEmpty == false ? $0 : nil }
+            .compactMap(\.self)
+            .filter { !$0.isEmpty }
             .joined(separator: "\n\n")
     }
 
@@ -151,11 +152,15 @@ public struct FeedbackReport: Hashable, Sendable {
             return "pack: \(tile?.pack ?? "none") · bird: \(species) · photo: \(describe(tile?.photo))"
         case .call:
             let answer = snapshot.answer ?? "none"
-            let pack = snapshot.answer.flatMap(tile)?.pack ?? "none"
+            let pack = answerTile?.pack ?? "none"
             return "pack: \(pack) · bird: \(answer) · call: \(describe(snapshot.call))"
         case .other:
             return nil
         }
+    }
+
+    private var answerTile: FeedbackSnapshot.Tile? {
+        snapshot.answer.flatMap(tile)
     }
 
     private func tile(_ species: String) -> FeedbackSnapshot.Tile? {
