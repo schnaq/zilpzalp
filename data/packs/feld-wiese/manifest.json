@@ -304,6 +304,11 @@
           "file": "speech/collection.name/steinschmaetzer.m4a",
           "sha256": "bb3ed22020539299122d0c3f6b28d304b14ae314fee11b11e2b4989dfc38d2b5",
           "text": "Steinschmätzer"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/steinschmaetzer.m4a",
+          "sha256": "4f5a71e2345311792494361cc5ceee5e107e335eb481f69c6605157114230bfc",
+          "text": "Der Steinschmätzer wohnt zwischen Steinen und ruft „tschak“."
         }
       }
     },

@@ -888,6 +888,11 @@
           "file": "speech/collection.name/hoatzin.m4a",
           "sha256": "01567e7078f6bbcad1747cd5391086b2324aacd7e72fa894da06be4fca145787",
           "text": "Hoatzin"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/hoatzin.m4a",
+          "sha256": "4df3974fe63e74abdf8ac5fb87dc0b91e708d00278f5dd6681f8898cc4ae43e3",
+          "text": "Beim Hoatzin haben die Küken Krallen an den Flügeln zum Klettern."
         }
       }
     },

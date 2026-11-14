@@ -1239,6 +1239,11 @@
           "file": "speech/collection.name/turmfalke.m4a",
           "sha256": "156e7e557386d68b71f2b1cdc8aabddf39480dfbcea92730a15ebfa3a047461e",
           "text": "Turmfalke"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/turmfalke.m4a",
+          "sha256": "4c211c1bc4dfc6b798ab88b5e67b62b0b04be965bb34b5695635d929917cd9db",
+          "text": "Der Turmfalke kann in der Luft auf der Stelle flattern."
         }
       }
     },
