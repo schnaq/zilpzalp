@@ -19,8 +19,16 @@ import ZilpZalpUI
 /// The announcer is optional and built on first use: a `@State` default is
 /// evaluated again every time the view struct is rebuilt, and would allocate
 /// an `AVSpeechSynthesizer` per rebuild only to throw it away.
+///
+/// Several lines are said one after the other — „Zeit fürs Nest" says its
+/// headline, its farewell and the day's stars, each its own recording.
+///
+/// `speaksOnAppear: false` is a speaker that only answers a tap: on a card or
+/// a subheading, where the screen's headline already speaks on arrival and a
+/// second line on its own would cut the first one off.
 struct ReadAloudButton: View {
-    let line: SpokenLine
+    let lines: [SpokenLine]
+    var speaksOnAppear = true
 
     /// No pack: a headline a screen reads out belongs to no species, so
     /// this announcer only ever looks in the fixed set.
@@ -28,9 +36,9 @@ struct ReadAloudButton: View {
     @State private var hasSpoken = false
 
     var body: some View {
-        SpeakerButton(text: line.text) { say(unprompted: false) }
+        SpeakerButton(text: lines.map(\.text).joined(separator: " ")) { say(unprompted: false) }
             .onAppear {
-                guard !hasSpoken else { return }
+                guard speaksOnAppear, !hasSpoken else { return }
                 hasSpoken = true
                 say(unprompted: true)
             }
@@ -42,7 +50,13 @@ struct ReadAloudButton: View {
         guard SpeechAnnouncer.mode.speaks(unprompted: unprompted) else { return }
         let voice = announcer ?? SpeechAnnouncer()
         announcer = voice
-        voice.announce(line, unprompted: unprompted)
+        voice.announce(lines, unprompted: unprompted)
+    }
+}
+
+extension ReadAloudButton {
+    init(line: SpokenLine, speaksOnAppear: Bool = true) {
+        self.init(lines: [line], speaksOnAppear: speaksOnAppear)
     }
 }
 

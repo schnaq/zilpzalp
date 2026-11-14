@@ -79,7 +79,7 @@ struct TimeForTheNestScreen: View {
                     .typeStyle(isTight ? .display2 : .hero, .display, weight: .extraBold)
                     .foregroundStyle(ZColor.white)
 
-                ReadAloudButton(line: .assembled(spoken))
+                ReadAloudButton(lines: spoken)
             }
 
             Text("timeBudget.farewell")
@@ -126,15 +126,19 @@ struct TimeForTheNestScreen: View {
         String(format: String(localized: "timeBudget.starsToday"), stars)
     }
 
-    /// What the screen says out loud, once: the headline and the day's take,
-    /// in that order. The child this app is for cannot read either of them.
+    /// What the screen says out loud, once: the headline, the farewell and
+    /// the day's take, in the order the screen shows them. The child this app
+    /// is for cannot read any of them.
     ///
-    /// Two catalog entries and a number, which is why it is the one line no
-    /// clip can say — see ``SpokenLine/assembled(_:)``.
-    private var spoken: String {
-        String(localized: "timeBudget.title")
-            + " "
-            + String(format: String(localized: "timeBudget.starsToday.spoken"), stars)
+    /// Three recordings one after the other. The count is one clip per number
+    /// up to 30 — see ``SpokenLine/counted(_:_:)`` — and the synthesiser
+    /// beyond.
+    private var spoken: [SpokenLine] {
+        [
+            .fixed("timeBudget.title"),
+            .fixed("timeBudget.farewell"),
+            .counted("timeBudget.starsToday.spoken", stars),
+        ]
     }
 }
 

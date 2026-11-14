@@ -72,6 +72,191 @@
       "file": "quiz.tricky.m4a",
       "sha256": "fe5d62bd14cc036345f21617dfde80f63610c103705f5dfe0d2c03b9f2fa1378",
       "text": "Schau genau hin!"
+    },
+    "home.title": {
+      "file": "home.title.m4a",
+      "sha256": "2284604e2ef1b75f5651f17511958034602c0bd6cdb69a613a184ecf20909565",
+      "text": "Was möchtest du machen?"
+    },
+    "timeBudget.title": {
+      "file": "timeBudget.title.m4a",
+      "sha256": "67c406fd8502639477fee2eff413e409c0e5d81144295af484288aa24930a925",
+      "text": "Zeit fürs Nest!"
+    },
+    "timeBudget.farewell": {
+      "file": "timeBudget.farewell.m4a",
+      "sha256": "a684788cd47732d845b502ab002551fdda1000c5fa41671476e5133a70e8f325",
+      "text": "Für heute ist Schluss. Bis bald!"
+    },
+    "collection.locked": {
+      "file": "collection.locked.m4a",
+      "sha256": "920e647c88cf8459a962f5dc1fd6e0561084b95e466befad8f621e285fca3b30",
+      "text": "Noch geheim"
+    },
+    "profile.create.avatar.title": {
+      "file": "profile.create.avatar.title.m4a",
+      "sha256": "7d638fe5ee0a4905dc5f7535170c84db90ac9b5369fc88c83054fd1eeaeddd70",
+      "text": "Such dir einen Vogel aus"
+    },
+    "profile.picker.new": {
+      "file": "profile.picker.new.m4a",
+      "sha256": "ad6190da12b180a7122e89f0c04b36fcc136714e8c2629a357da16eceed0d629",
+      "text": "Neues Nest"
+    },
+    "timeBudget.starsToday.spoken.0": {
+      "file": "timeBudget.starsToday.spoken.0.m4a",
+      "sha256": "7e3d53d5e717fc8052441f922a07126e45300404e9f65cca5ecf5cf8cfeb14f6",
+      "text": "Heute hast du 0 Sterne gesammelt."
+    },
+    "timeBudget.starsToday.spoken.1": {
+      "file": "timeBudget.starsToday.spoken.1.m4a",
+      "sha256": "84d0808c1f084e33498f6d46fdfa17edb1ee5f2ae0d4c694acb56b170e577e78",
+      "text": "Heute hast du einen Stern gesammelt."
+    },
+    "timeBudget.starsToday.spoken.2": {
+      "file": "timeBudget.starsToday.spoken.2.m4a",
+      "sha256": "0246e1b81c6c1a1c9a8d0d5feac307e7f111d5b464580dc7793261f1fed4ad7e",
+      "text": "Heute hast du 2 Sterne gesammelt."
+    },
+    "timeBudget.starsToday.spoken.3": {
+      "file": "timeBudget.starsToday.spoken.3.m4a",
+      "sha256": "52ed6de074497bf6f9a31ad48ac81ac446a42a410a05003bee5f79da69ec7d11",
+      "text": "Heute hast du 3 Sterne gesammelt."
+    },
+    "timeBudget.starsToday.spoken.4": {
+      "file": "timeBudget.starsToday.spoken.4.m4a",
+      "sha256": "a257f73e3f1a800ad2d3e1677f9d94b29e6f704b9bf91beed279143b63bc2159",
+      "text": "Heute hast du 4 Sterne gesammelt."
+    },
+    "timeBudget.starsToday.spoken.5": {
+      "file": "timeBudget.starsToday.spoken.5.m4a",
+      "sha256": "b858e0b78a7bc19fccee90ea1a38717968d5dbacd0feaa690c1f56782dfbe080",
+      "text": "Heute hast du 5 Sterne gesammelt."
+    },
+    "timeBudget.starsToday.spoken.6": {
+      "file": "timeBudget.starsToday.spoken.6.m4a",
+      "sha256": "2a4387e76afb71ebc82aec94ce9e3ab3e76d1af5c7da3d617b977ed29f1e2788",
+      "text": "Heute hast du 6 Sterne gesammelt."
+    },
+    "timeBudget.starsToday.spoken.7": {
+      "file": "timeBudget.starsToday.spoken.7.m4a",
+      "sha256": "d956592d7d38fb4bd8bff0dbc0755e535a02b81b7d2fdf06e3e351f25470a63a",
+      "text": "Heute hast du 7 Sterne gesammelt."
+    },
+    "timeBudget.starsToday.spoken.8": {
+      "file": "timeBudget.starsToday.spoken.8.m4a",
+      "sha256": "781aafdde2b0394741e6e522efb5a8fc4bad268ad294406903aeb2933cca67b0",
+      "text": "Heute hast du 8 Sterne gesammelt."
+    },
+    "timeBudget.starsToday.spoken.9": {
+      "file": "timeBudget.starsToday.spoken.9.m4a",
+      "sha256": "7041f9fb3feee2ec7b1559d99d43a7a7803e78943689a4173305d6a90d4b4ae1",
+      "text": "Heute hast du 9 Sterne gesammelt."
+    },
+    "timeBudget.starsToday.spoken.10": {
+      "file": "timeBudget.starsToday.spoken.10.m4a",
+      "sha256": "24b9986ecad4cef6ec8e19a497164523589aac6e4c55ef4da2dca5c287cbdff2",
+      "text": "Heute hast du 10 Sterne gesammelt."
+    },
+    "timeBudget.starsToday.spoken.11": {
+      "file": "timeBudget.starsToday.spoken.11.m4a",
+      "sha256": "8f9cfb5cc859936d8e7950fef04c14daefe48cbdbfd870595042d05dbc222073",
+      "text": "Heute hast du 11 Sterne gesammelt."
+    },
+    "timeBudget.starsToday.spoken.12": {
+      "file": "timeBudget.starsToday.spoken.12.m4a",
+      "sha256": "e8739a8f8c27f54a6430fba8e50237689c369c85e636662d55ed67bc818f310d",
+      "text": "Heute hast du 12 Sterne gesammelt."
+    },
+    "timeBudget.starsToday.spoken.13": {
+      "file": "timeBudget.starsToday.spoken.13.m4a",
+      "sha256": "4041840dad751227ef2e81ba65c99e162aa91d9507924ae713e663c5927f61ec",
+      "text": "Heute hast du 13 Sterne gesammelt."
+    },
+    "timeBudget.starsToday.spoken.14": {
+      "file": "timeBudget.starsToday.spoken.14.m4a",
+      "sha256": "774627cdfd5b8f380d4124e6be9631841d26db7610f0d487e3afcc46bc7a406c",
+      "text": "Heute hast du 14 Sterne gesammelt."
+    },
+    "timeBudget.starsToday.spoken.15": {
+      "file": "timeBudget.starsToday.spoken.15.m4a",
+      "sha256": "bc6a093a7ec09f9a98fc6aa972d872b16e6e362dee31eae6e6f5a8c2890554da",
+      "text": "Heute hast du 15 Sterne gesammelt."
+    },
+    "timeBudget.starsToday.spoken.16": {
+      "file": "timeBudget.starsToday.spoken.16.m4a",
+      "sha256": "f5a5e32870c0ebac08ae1904346c55426bdcd57cf9646b58f7e6e00ad8f529a1",
+      "text": "Heute hast du 16 Sterne gesammelt."
+    },
+    "timeBudget.starsToday.spoken.17": {
+      "file": "timeBudget.starsToday.spoken.17.m4a",
+      "sha256": "9a095fecf37ccc80385f4c823334cebb1470c5c9fada4fe5b83d1bcd2cd3f873",
+      "text": "Heute hast du 17 Sterne gesammelt."
+    },
+    "timeBudget.starsToday.spoken.18": {
+      "file": "timeBudget.starsToday.spoken.18.m4a",
+      "sha256": "95481203d62782d3f68718ce91f0eaeb47783bbd50110189039b10547f7c3a1e",
+      "text": "Heute hast du 18 Sterne gesammelt."
+    },
+    "timeBudget.starsToday.spoken.19": {
+      "file": "timeBudget.starsToday.spoken.19.m4a",
+      "sha256": "3c214083c3ab6268a28a99c9fb2300eb25143b2daff05ad40e87727b3b56edb7",
+      "text": "Heute hast du 19 Sterne gesammelt."
+    },
+    "timeBudget.starsToday.spoken.20": {
+      "file": "timeBudget.starsToday.spoken.20.m4a",
+      "sha256": "2873aa6e1a632456f77c00771beba96ce6a159438ddfd0aac4f887861437d50e",
+      "text": "Heute hast du 20 Sterne gesammelt."
+    },
+    "timeBudget.starsToday.spoken.21": {
+      "file": "timeBudget.starsToday.spoken.21.m4a",
+      "sha256": "4e7648c551d96867f11099d54aefa02ac5526c4faeee5202f2a92436c2898833",
+      "text": "Heute hast du 21 Sterne gesammelt."
+    },
+    "timeBudget.starsToday.spoken.22": {
+      "file": "timeBudget.starsToday.spoken.22.m4a",
+      "sha256": "39e8483a8de5dc199bfbc1cb6538a792fe34d226c7292e2a6cff1b30761dcd11",
+      "text": "Heute hast du 22 Sterne gesammelt."
+    },
+    "timeBudget.starsToday.spoken.23": {
+      "file": "timeBudget.starsToday.spoken.23.m4a",
+      "sha256": "ea8aa5f59d4029762a9b65b05acf4ea9350f8ecc0dfa9b49251b82d2f010d8dc",
+      "text": "Heute hast du 23 Sterne gesammelt."
+    },
+    "timeBudget.starsToday.spoken.24": {
+      "file": "timeBudget.starsToday.spoken.24.m4a",
+      "sha256": "31145ec6155983bf2e100aa1162968ac6c6063e0007194ddd4ad5101f33b3f4c",
+      "text": "Heute hast du 24 Sterne gesammelt."
+    },
+    "timeBudget.starsToday.spoken.25": {
+      "file": "timeBudget.starsToday.spoken.25.m4a",
+      "sha256": "15f339751b43177fb7444da48fef2a73c4a09f0e7f1f064fd9bc95a1eed2f044",
+      "text": "Heute hast du 25 Sterne gesammelt."
+    },
+    "timeBudget.starsToday.spoken.26": {
+      "file": "timeBudget.starsToday.spoken.26.m4a",
+      "sha256": "fd8aae9690da18fccd02a961f4ea718f088816525f19e6386443ab2a03760118",
+      "text": "Heute hast du 26 Sterne gesammelt."
+    },
+    "timeBudget.starsToday.spoken.27": {
+      "file": "timeBudget.starsToday.spoken.27.m4a",
+      "sha256": "ead7c563f6f302fd6cf62885aec686847ac09dc34e00854f6ef27ca7b2fb893b",
+      "text": "Heute hast du 27 Sterne gesammelt."
+    },
+    "timeBudget.starsToday.spoken.28": {
+      "file": "timeBudget.starsToday.spoken.28.m4a",
+      "sha256": "2aac6a7baf0f7a5ec8d2e39e6277fe43d4c15369d572c523f759acea97e51c94",
+      "text": "Heute hast du 28 Sterne gesammelt."
+    },
+    "timeBudget.starsToday.spoken.29": {
+      "file": "timeBudget.starsToday.spoken.29.m4a",
+      "sha256": "f8b2b692d0e50538571e4a508a501c95a0cba30ab066af8e68409f65e88074be",
+      "text": "Heute hast du 29 Sterne gesammelt."
+    },
+    "timeBudget.starsToday.spoken.30": {
+      "file": "timeBudget.starsToday.spoken.30.m4a",
+      "sha256": "36391a89a57ee239c451f144967fdbdc525fd6a53b25fc48c9c92b437180794e",
+      "text": "Heute hast du 30 Sterne gesammelt."
     }
   }
 }
