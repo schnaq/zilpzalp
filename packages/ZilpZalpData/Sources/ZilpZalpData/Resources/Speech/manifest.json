@@ -42,6 +42,36 @@
       "file": "home.collection.all.m4a",
       "sha256": "7aef838a21e863155c35b9e8547da4ad9fa68eb9f85ac4045bd1145b4dc82842",
       "text": "Alle Vögel"
+    },
+    "home.difficulty.title": {
+      "file": "home.difficulty.title.m4a",
+      "sha256": "402b8f796fcc994e67910dbb79e42587cba972c558d3bff3ffd5bc65b97777a5",
+      "text": "Wie schwer?"
+    },
+    "home.difficulty.easy": {
+      "file": "home.difficulty.easy.m4a",
+      "sha256": "81ffb0c25085cf4103e5ac4692d70b9d998cb189f0e5f58efc912214465fbc1d",
+      "text": "Leicht"
+    },
+    "home.difficulty.medium": {
+      "file": "home.difficulty.medium.m4a",
+      "sha256": "9756c7c164c98d23271c73d5e60daefc64200f658d76c7539f2d29e6cde3a0e2",
+      "text": "Mittel"
+    },
+    "home.difficulty.hard": {
+      "file": "home.difficulty.hard.m4a",
+      "sha256": "7bbfd0b4f892a8a86b093abddcdb2b3e6b3eec1515c9d974b7d74cf1cb762f47",
+      "text": "Schwer"
+    },
+    "home.difficulty.classic": {
+      "file": "home.difficulty.classic.m4a",
+      "sha256": "524c45cab690d044366e0a4a0adc375958a6f6780d4caadff5164d8bf0da4161",
+      "text": "Klassisch"
+    },
+    "quiz.tricky": {
+      "file": "quiz.tricky.m4a",
+      "sha256": "fe5d62bd14cc036345f21617dfde80f63610c103705f5dfe0d2c03b9f2fa1378",
+      "text": "Schau genau hin!"
     }
   }
 }
