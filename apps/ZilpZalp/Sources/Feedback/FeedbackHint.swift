@@ -71,7 +71,10 @@ private struct FeedbackOnScreenshot: ViewModifier {
                 value: pending?.id,
             )
             .onReceive(Self.screenshots) { _ in
-                guard isActive, open == nil, let session, !session.isFinished else { return }
+                // Not while the hint is up either: the capture would draw the
+                // hint into the screenshot the grown-up is offered to send.
+                guard isActive, open == nil, pending == nil, let session,
+                      !session.isFinished else { return }
                 pending = .take(of: session)
             }
             .task(id: pending?.id) {
