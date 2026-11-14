@@ -85,10 +85,12 @@ of the child, stored per profile (`Profile.difficulty`, a raw string, default
   the name is dropped rather than wrapping the pills onto two rows: a row
   costs tile height, a word does not. Gap between the pills 12 pt on a phone
   (with „Alle Vögel" the pair fits the 343 pt of a 375 pt iPhone), 16 on an
-  iPad. Only where the collection's own title would not fit beside the level
-  pill at full size — „Vögel Deutschlands" on a phone — do the two pills
-  stack: shrinking that title under the 20 pt floor of a kid screen is not an
-  option, a few points of tile are.
+  iPad. Where the collection's own title would not fit beside the level pill
+  at full size — „Vögel Deutschlands" on a phone — the collection pill drops
+  its title too and shows its photos only: a second row would cost the game
+  tiles about 76 pt on a phone (on an iPhone SE they would fall from 159 to
+  about 102 pt), while the word is for the grown-up and VoiceOver still reads
+  it. The pills stack only if not even the pictures fit in one row.
 - **Picker:** tapping the pill opens „Wie schwer?" as a card over the dimmed
   home screen, the same shape as „Welche Vögel?" (max width 720, padding 32 on
   iPad and 24 on a phone): a speaker button for the question, a tap chooses at
@@ -113,8 +115,9 @@ of the child, stored per profile (`Profile.difficulty`, a raw string, default
   edge near the right corner and never over a bird. A child who cannot read
   can count them, and meets the quiz's badge before it appears in a round.
 - **Neutral tiles:** every tile and the Klassisch row use `ChoiceTile`'s
-  papier tone — sand-200 field, 5 pt sand-400 rim and ledge (10 pt on iPad,
-  6 on a phone), radius 40 on iPad and 28 on a phone. Sun means reward and
+  papier tone — sand-200 field, 5 pt sand-400 rim and ledge. The rungs take
+  radius 40 and a 10 pt ledge from 160 pt up, radius 28 and 6 pt below; the
+  Klassisch row is a row, not a tile, and keeps radius 28 and 6 pt everywhere. Sun means reward and
   "try again", clay is info, bark is a rubric, so none of them may mean a level;
   olive stays the one colour signal, and it means "chosen".
 - **Chosen** is `RewardSticker`'s chosen state: the rim turns olive-500 at the
@@ -157,7 +160,7 @@ A tricky question announces itself, playfully, never as a warning:
 | `home.difficulty.classic.hint` | Bunt gemischt |
 | `home.difficulty.change.accessibility` | Schwierigkeit: %@. Ändern |
 | `quiz.tricky` | Schau genau hin! |
-| `quiz.tricky.accessibility` | Knifflige Frage |
+| `quiz.tricky.accessibility` | %@. Knifflige Frage (the sound button's usual label first) |
 
 Spoken lines (`home.difficulty.title`, the four level names, `quiz.tricky`) use
 the synthesiser until clips are rendered with
