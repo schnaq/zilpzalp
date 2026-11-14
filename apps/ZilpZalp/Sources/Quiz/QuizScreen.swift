@@ -73,6 +73,11 @@ struct QuizScreen: View {
     /// ``LeaveRequest``.
     @State private var leaving = LeaveRequest()
 
+    /// Whether this round is the screen in front. It stays alive in the stack
+    /// under the round end, and a screenshot there must not offer feedback on
+    /// it; see ``SwiftUI/View/feedbackOnScreenshot(session:isActive:)``.
+    @State private var isOnScreen = false
+
     /// A phone, or an iPad sharing its screen. It settles how big the parts
     /// around the answers are drawn — type step, sound button, leaf row,
     /// margins, the feedback band. Where those parts *stand* is measured, not
@@ -90,6 +95,8 @@ struct QuizScreen: View {
             }
         }
         .background(ZColor.surfacePage)
+        // Under the quit card, so the card covers the hint.
+        .feedbackOnScreenshot(session: session, isActive: isOnScreen && !leaving.isAsking)
         .quitQuestion($leaving, round: session) { dismiss() }
         // Every screen brings its own `TopBar`; the system bar would stack a
         // second, smaller back button above it.
@@ -107,7 +114,10 @@ struct QuizScreen: View {
         // second puts the same question again, which is inaudible at that
         // distance — and it is what picks the round back up whenever
         // something covers this screen and `suspend()` cuts the question.
-        .onChange(of: askedFor) { session?.resume() }
+        .onChange(of: askedFor) {
+            isOnScreen = true
+            session?.resume()
+        }
         // Off we go: one tap of the phone as a round is dealt. Keyed to the
         // round and not to the appearance — this screen is told it came back
         // for reasons that are not a new round, and `resume()` renews
@@ -116,7 +126,10 @@ struct QuizScreen: View {
         // The question being spoken and the round waiting to move on both
         // outlive this view otherwise — a child who taps back would hear the
         // last question from the home screen.
-        .onDisappear { session?.suspend() }
+        .onDisappear {
+            isOnScreen = false
+            session?.suspend()
+        }
     }
 
     // MARK: - The round
@@ -366,6 +379,7 @@ struct QuizScreen: View {
     }
 
     private func open() {
+        isOnScreen = true
         if session == nil {
             do {
                 session = try QuizSession(library: library, game: game, difficulty: difficulty)

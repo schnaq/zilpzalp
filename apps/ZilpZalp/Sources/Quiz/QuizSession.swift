@@ -31,11 +31,11 @@ final class QuizSession {
     private(set) var praise = Praise()
 
     /// Which question this sitting asks: the spoken name, or the call.
-    private let game: Game
+    let game: Game
 
     /// The level every round of this sitting is dealt at, "Nochmal spielen"
     /// included.
-    private let difficulty: Difficulty
+    let difficulty: Difficulty
 
     /// The pack this round is drawn from, by species id — the only way back
     /// from a ``Round``'s identifiers to a bird with a name and a photo.
@@ -71,7 +71,7 @@ final class QuizSession {
     private var play: RoundPlay
 
     /// The photos the tiles draw from, and which of them this round shows.
-    private var photos: QuizPhotos
+    private(set) var photos: QuizPhotos
 
     /// What tells this round apart from the next one, so the round end books
     /// it exactly once. Renewed with every fresh round in ``resume()``.

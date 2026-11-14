@@ -125,7 +125,7 @@ struct QuitConfirmation: View {
 struct LeaveRequest {
     /// Whether the question is up. Only ever true over a round that is still
     /// under way.
-    fileprivate private(set) var isAsking = false
+    private(set) var isAsking = false
 
     /// Somebody wants out of the round.
     ///
