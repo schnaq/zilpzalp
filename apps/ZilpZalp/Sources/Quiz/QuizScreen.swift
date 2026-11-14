@@ -283,7 +283,7 @@ struct QuizScreen: View {
     /// the sentences ever change.
     private func feedbackBand(_ session: QuizSession, reserve: CGFloat) -> some View {
         ZStack {
-            template(correctBanner)
+            template(correctBanner(session))
             template(retryBanner)
             feedback(session)
         }
@@ -303,14 +303,18 @@ struct QuizScreen: View {
     @ViewBuilder
     private func feedback(_ session: QuizSession) -> some View {
         if session.isAnswered {
-            correctBanner.id(ChoiceTile.Phase.correct)
+            correctBanner(session).id(ChoiceTile.Phase.correct)
         } else if !session.wrongTaps.isEmpty {
             retryBanner.id(ChoiceTile.Phase.retry)
         }
     }
 
-    private var correctBanner: FeedbackBanner {
-        FeedbackBanner(String(localized: "quiz.feedback.correct"), kind: .correct)
+    /// The praise the voice says, in writing — see ``QuizSession/praise``.
+    private func correctBanner(_ session: QuizSession) -> FeedbackBanner {
+        FeedbackBanner(
+            String(localized: String.LocalizationValue(session.praise.key)),
+            kind: .correct,
+        )
     }
 
     private var retryBanner: FeedbackBanner {

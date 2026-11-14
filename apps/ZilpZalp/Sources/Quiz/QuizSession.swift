@@ -17,8 +17,8 @@ import ZilpZalpUI
 /// time here, so a tile cannot end up in a phase the round disagrees with.
 ///
 /// The two games differ in one thing and that thing lives here: game 1 reads
-/// the bird's name out, game 2 plays its recorded call and says nothing at all
-/// — the name would be the answer (#31).
+/// the bird's name out, game 2 plays its recorded call and never says the name
+/// — it would be the answer (#31).
 @MainActor
 @Observable
 final class QuizSession {
@@ -27,6 +27,8 @@ final class QuizSession {
     /// somebody who is four; `--dur-celebrate` is the token the design gives
     /// exactly that moment.
     private static let answerPause = ZMotion.celebrate
+
+    private(set) var praise = Praise()
 
     /// Which question this sitting asks: the spoken name, or the call.
     private let game: Game
@@ -323,22 +325,29 @@ final class QuizSession {
 
     /// A tile was tapped.
     ///
-    /// The wrong one costs nothing but the first try: no lock, no counter the
-    /// child sees, and the same tile may be tapped again. The right one ends
-    /// the question and, after the pause, moves the round on. What the tap was
-    /// worth is the play's answer; the pause is this type's, because a clock
-    /// has no business in Core.
+    /// The wrong one costs only the first try — no lock, no counter, the same
+    /// tile may be tapped again — and hears „Versuchs nochmal" into silence.
+    /// The right one is praised, bar the last one, which the round end praises;
+    /// after the pause it moves the round on. The tap's worth is the play's
+    /// answer; the pause is this type's, because a clock has no business in Core.
     func choose(_ bird: Bird) {
-        // `.ignored` covers the second tap during the pause and a tap on a
-        // finished round, and neither may arm the timer a second time.
-        guard case .correct = play.tap(bird.id) else { return }
+        let tap = play.tap(bird.id)
+        if tap == .wrong, announcer.isQuiet {
+            announcer.announce(.fixed("quiz.feedback.retry"), unprompted: true)
+        }
+        // `.ignored` (a second tap in the pause, a finished round) must not re-arm the timer.
+        guard case .correct = tap else { return }
 
         // The question has been answered, so it stops being asked. A call left
         // running would sound over the next question, and over the round end's
         // praise if this was the last one: that screen speaks as it appears,
-        // and nothing is spoken while a call plays (#30).
+        // and nothing is spoken while a call plays (#30), the praise included.
         player.stop()
         answeredLastQuestion = Date()
+        praise.next()
+        if play.index + 1 < play.round.questions.count {
+            announcer.announce(.fixed(praise.key), unprompted: true)
+        }
 
         advance?.cancel()
         advance = Task { [weak self] in
@@ -386,6 +395,6 @@ final class QuizSession {
             player.stop()
             return
         }
-        askQuestion(unprompted: true)
+        announcer.whenDone { [weak self] in self?.askQuestion(unprompted: true) }
     }
 }

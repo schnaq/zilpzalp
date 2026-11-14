@@ -44,24 +44,6 @@ final class SpeechAnnouncer: NSObject {
     /// things about a device that has never been to the grown-ups' area.
     static var mode = ParentalSettings().speechMode
 
-    /// A notch below the system default of 0.5. The default rattles the
-    /// question off faster than a child who is still learning the names can
-    /// follow it, and a compact voice is the one that rattles hardest: it
-    /// clips the pauses between words as it speeds up.
-    private static let compactRate = AVSpeechUtteranceDefaultSpeechRate * 0.9
-
-    /// Barely slower than the system default, for a downloaded voice.
-    ///
-    /// An enhanced or premium voice already stretches its own vowels and holds
-    /// its own pauses, so the same 0.9 that saves a compact voice makes this
-    /// one drag. Half the correction is enough.
-    ///
-    /// Judgement, not measurement: the simulator has compact voices only, so
-    /// this could not be listened to here. It is the value Christian should
-    /// turn first if a downloaded voice still reads too fast or too slowly on
-    /// his device (#151).
-    private static let downloadedRate = AVSpeechUtteranceDefaultSpeechRate * 0.95
-
     /// The breath between two lines said one after the other — „Super
     /// gemacht!", then „Amsel" (#264). The clips are trimmed to the voice, so
     /// without it the name would run straight into the praise. Judgement, not
@@ -96,10 +78,6 @@ final class SpeechAnnouncer: NSObject {
     /// accent is still better than silence.
     private let voice: AVSpeechSynthesisVoice?
 
-    /// The rate that suits ``voice``. Stored rather than recomputed per
-    /// sentence: the voice cannot change while the app runs.
-    private let speechRate: Float
-
     /// The utterance currently on its way to the speaker.
     ///
     /// Held as the object and not merely as its `ObjectIdentifier` so that the
@@ -126,6 +104,9 @@ final class SpeechAnnouncer: NSObject {
     /// first find and „Zeit fürs Nest", which says three lines in a row.
     private var queuedLines: [SpokenLine] = []
 
+    /// What comes a breath after the last line — see ``whenDone(_:)``.
+    private var afterwards: (() -> Void)?
+
     /// The pause before the next queued line, cancelled with the queue.
     private var pause: Task<Void, Never>?
 
@@ -137,13 +118,6 @@ final class SpeechAnnouncer: NSObject {
     init(library: PackLibrary = .empty) {
         clips = SpeechClips(library: library, fixed: Self.fixedSet)
         voice = SpeechVoice.forUtterance
-        // `.default` covers both the compact voice and the case where there
-        // was no voice to look at: today's rate is what the app has always
-        // used, and nothing about an unknown voice argues for changing it.
-        speechRate = switch voice?.quality {
-        case .enhanced, .premium: Self.downloadedRate
-        default: Self.compactRate
-        }
         super.init()
 
         synthesizer.delegate = self
@@ -171,8 +145,8 @@ final class SpeechAnnouncer: NSObject {
     /// too. A line that stays silent, or is cut off rather than finished,
     /// drops the rest: whoever cut it off wanted the speaker.
     ///
-    /// The queue is filled here and nowhere else, and only once the first line
-    /// has actually started; ``stop()`` is the one other place that empties it.
+    /// The queue is filled in ``sayInTurn(_:)`` alone, and only once the first
+    /// line has actually started; ``stop()`` is the one other place that empties it.
     func announce(_ lines: [SpokenLine], unprompted: Bool) {
         // A line that is not to be said still ends this announcer's last one:
         // the next question must not arrive under the name of the one before,
@@ -182,6 +156,29 @@ final class SpeechAnnouncer: NSObject {
             stop()
             return
         }
+        afterwards = nil
+        sayInTurn(lines)
+    }
+
+    /// Nothing of this announcer's is sounding, nor waiting in a pause.
+    var isQuiet: Bool {
+        spokenClip == nil && spokenUtterance == nil && pause == nil
+    }
+
+    /// Runs `next` a breath after everything this announcer is saying, at once
+    /// when it is quiet — the next question after the praise. Dropped with the
+    /// queue when the lines are cut off: whoever did that wanted the speaker.
+    func whenDone(_ next: @escaping () -> Void) {
+        if isQuiet {
+            next()
+        } else {
+            afterwards = next
+        }
+    }
+
+    /// The queue's way on: ``announce(_:unprompted:)`` without the switch, and
+    /// leaving ``afterwards`` standing.
+    private func sayInTurn(_ lines: [SpokenLine]) {
         pause?.cancel()
         pause = nil
         queuedLines = []
@@ -255,6 +252,7 @@ final class SpeechAnnouncer: NSObject {
     /// is a fresh ``announce(_:)``.
     func stop() {
         queuedLines = []
+        afterwards = nil
         pause?.cancel()
         pause = nil
         _ = synthesizer.stopSpeaking(at: .immediate)
@@ -303,7 +301,7 @@ final class SpeechAnnouncer: NSObject {
 
         let utterance = AVSpeechUtterance(string: sentence)
         utterance.voice = voice
-        utterance.rate = speechRate
+        utterance.rate = SpeechVoice.rate
 
         // Nothing came off disk, so nothing is left to stop: the player set
         // aside above may go now.
@@ -326,17 +324,22 @@ final class SpeechAnnouncer: NSObject {
         }
     }
 
-    /// Starts the next queued line after ``pauseBetweenLines``, if there is
-    /// one. Both voices end here, and only when the line ended on its own — a
-    /// clip that broke off undecodable counts, since nobody took the speaker.
+    /// Starts the next queued line after ``pauseBetweenLines``, or what
+    /// ``whenDone(_:)`` left once the queue is through. Both voices end here,
+    /// and only when the line ended on its own — a clip that broke off
+    /// undecodable counts, since nobody took the speaker.
     private func lineFinished() {
-        guard !queuedLines.isEmpty else { return }
+        guard !queuedLines.isEmpty || afterwards != nil else { return }
         let rest = queuedLines
         pause = Task { [weak self] in
             try? await Task.sleep(for: Self.pauseBetweenLines)
-            guard !Task.isCancelled else { return }
+            guard !Task.isCancelled, let self else { return }
             // Already let through: the queue only exists for a line that was.
-            self?.announce(rest, unprompted: false)
+            guard rest.isEmpty else { return sayInTurn(rest) }
+            let next = afterwards
+            afterwards = nil
+            pause = nil
+            next?()
         }
     }
 

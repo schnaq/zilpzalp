@@ -49,16 +49,26 @@ struct SwarmList: View {
     var body: some View {
         if profiles.count > 1 {
             VStack(spacing: ZSpacing.step4) {
-                VStack(spacing: ZSpacing.step2) {
-                    Text("leaderboard.title")
-                        .typeStyle(isCompact ? .headline : .title, .display, weight: .extraBold)
-                        .foregroundStyle(ZColor.textStrong)
+                HStack(spacing: ZSpacing.step3) {
+                    VStack(spacing: ZSpacing.step2) {
+                        Text("leaderboard.title")
+                            .typeStyle(isCompact ? .headline : .title, .display, weight: .extraBold)
+                            .foregroundStyle(ZColor.textStrong)
 
-                    Text("leaderboard.motto")
-                        .typeStyle(.body, .body, weight: .regular)
-                        .foregroundStyle(ZColor.textBody)
+                        Text("leaderboard.motto")
+                            .typeStyle(.body, .body, weight: .regular)
+                            .foregroundStyle(ZColor.textBody)
+                    }
+                    .multilineTextAlignment(.center)
+
+                    // On a tap only: the album opens on the stickers, and this
+                    // list is under them — said on arrival it would talk over
+                    // a child who has not scrolled down to it.
+                    ReadAloudButton(
+                        lines: [.fixed("leaderboard.title"), .fixed("leaderboard.motto")],
+                        speaksOnAppear: false,
+                    )
                 }
-                .multilineTextAlignment(.center)
 
                 ForEach(swarm) { profile in
                     row(profile)

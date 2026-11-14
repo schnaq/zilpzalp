@@ -257,6 +257,41 @@
       "file": "timeBudget.starsToday.spoken.30.m4a",
       "sha256": "36391a89a57ee239c451f144967fdbdc525fd6a53b25fc48c9c92b437180794e",
       "text": "Heute hast du 30 Sterne gesammelt."
+    },
+    "quiz.feedback.correct": {
+      "file": "quiz.feedback.correct.m4a",
+      "sha256": "6eae3da4410efe02efaceb21b96f5f9aa1f5af8ee2a51db4b1e5d1bd604744d2",
+      "text": "Genau!"
+    },
+    "quiz.feedback.correct.right": {
+      "file": "quiz.feedback.correct.right.m4a",
+      "sha256": "226fa5df82aac8f0801ef763f217ec82ac7b984074b214c63be56ea45f008515",
+      "text": "Richtig!"
+    },
+    "quiz.feedback.correct.excellent": {
+      "file": "quiz.feedback.correct.excellent.m4a",
+      "sha256": "574b580c9137b3c7d023510dcfae84381d41b449ae473db22f9f854983eb3870",
+      "text": "Prima!"
+    },
+    "quiz.feedback.correct.great": {
+      "file": "quiz.feedback.correct.great.m4a",
+      "sha256": "1541f2c417e09b862ac316ecdd52022002c285d823d7295cb2d1d09631865a60",
+      "text": "Toll!"
+    },
+    "quiz.feedback.retry": {
+      "file": "quiz.feedback.retry.m4a",
+      "sha256": "e610ff60c2c5c3e68cd4b88606d064931ae5eb286b34eb2f8bc9229acaa616f0",
+      "text": "Versuchs nochmal"
+    },
+    "leaderboard.title": {
+      "file": "leaderboard.title.m4a",
+      "sha256": "1b52b7b70bcea54ed21d5265bb2f88df62069c26403fa7673889cfb8549e7e70",
+      "text": "Unser Schwarm"
+    },
+    "leaderboard.motto": {
+      "file": "leaderboard.motto.m4a",
+      "sha256": "0186b640f0e47d690c694fa7bee8002950030898d33fe558944e575eb5aef908",
+      "text": "Jeder Stern zählt für den ganzen Schwarm."
     }
   }
 }
