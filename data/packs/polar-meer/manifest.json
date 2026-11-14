@@ -16,6 +16,7 @@
       "article": "der",
       "lookalike": "penguin",
       "pronunciation": null,
+      "fact": "Der Adeliepinguin hat weiße Ringe um die Augen.",
       "photos": [
         {
           "file": "photos/adeliepinguin.heic",
@@ -55,6 +56,11 @@
           "file": "speech/collection.name/adeliepinguin.m4a",
           "sha256": "6e7a317029c6a617d12f60ee6537ed755cfc040455fbd81c4b4be2c214fd8d5c",
           "text": "Adeliepinguin"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/adeliepinguin.m4a",
+          "sha256": "17fcd711cf1f7b186577796b0de73ff4c570d230dfc9111638aa6d928208b34c",
+          "text": "Der Adeliepinguin hat weiße Ringe um die Augen."
         }
       }
     },
@@ -66,6 +72,7 @@
       "article": "der",
       "lookalike": "penguin",
       "pronunciation": null,
+      "fact": "Beim Kaiserpinguin wärmt der Papa das Ei im Winter auf seinen Füßen.",
       "photos": [
         {
           "file": "photos/kaiserpinguin-3.heic",
@@ -105,6 +112,11 @@
           "file": "speech/collection.name/kaiserpinguin.m4a",
           "sha256": "47d4d9559a45f55c92d2443028b64d57697df2fdf83af10e2fed990a551977bd",
           "text": "Kaiserpinguin"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/kaiserpinguin.m4a",
+          "sha256": "d3c0c7761d20c1eae1b6718c5941a1ebe8e91d03018aa9390180e0e874eae94a",
+          "text": "Beim Kaiserpinguin wärmt der Papa das Ei im Winter auf seinen Füßen."
         }
       }
     },
@@ -116,6 +128,7 @@
       "article": "der",
       "lookalike": "penguin",
       "pronunciation": null,
+      "fact": "Der Eselspinguin schwimmt schneller als alle anderen Pinguine.",
       "photos": [
         {
           "file": "photos/eselspinguin.heic",
@@ -155,6 +168,11 @@
           "file": "speech/collection.name/eselspinguin.m4a",
           "sha256": "98e2f12682f436e7f30c6a18b9e2b9433e12da81da87840a091ecf2772e41d7a",
           "text": "Eselspinguin"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/eselspinguin.m4a",
+          "sha256": "a5f62bbbe5fa185d72258076aa22b98b49b87fa2a8745c3500075a4f5b4e24b1",
+          "text": "Der Eselspinguin schwimmt schneller als alle anderen Pinguine."
         }
       }
     },
@@ -166,6 +184,7 @@
       "article": "der",
       "lookalike": "penguin",
       "pronunciation": null,
+      "fact": "Der Zügelpinguin hat einen schwarzen Strich unterm Kinn.",
       "photos": [
         {
           "file": "photos/zuegelpinguin.heic",
@@ -205,6 +224,11 @@
           "file": "speech/collection.name/zuegelpinguin.m4a",
           "sha256": "dbe29b037598680e361846f27d96334ced3b4d2256938179c7bfaaa04a620d15",
           "text": "Zügelpinguin"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/zuegelpinguin.m4a",
+          "sha256": "98e342261cb468a3c54c88de6e58daf7b25a11fe7d40ac854c235577bfce1f5a",
+          "text": "Der Zügelpinguin hat einen schwarzen Strich unterm Kinn."
         }
       }
     },
@@ -216,6 +240,7 @@
       "article": "der",
       "lookalike": "penguin",
       "pronunciation": null,
+      "fact": "Der Gelbaugenpinguin hat gelbe Augen und ein gelbes Band um den Kopf.",
       "photos": [
         {
           "file": "photos/gelbaugenpinguin.heic",
@@ -240,6 +265,11 @@
           "file": "speech/collection.name/gelbaugenpinguin.m4a",
           "sha256": "758e73f9e561df1acfd67f65c3a732a0c24205267ce2ddccde4e56109a6551aa",
           "text": "Gelbaugenpinguin"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/gelbaugenpinguin.m4a",
+          "sha256": "de890e5352a14c268da598fe37feb624e823011fa2d980dc93d3b6be664cc24d",
+          "text": "Der Gelbaugenpinguin hat gelbe Augen und ein gelbes Band um den Kopf."
         }
       }
     },
@@ -251,6 +281,7 @@
       "article": "der",
       "lookalike": "diver",
       "pronunciation": null,
+      "fact": "Der Papageitaucher trägt viele Fische auf einmal im bunten Schnabel.",
       "photos": [
         {
           "file": "photos/papageitaucher.heic",
@@ -283,6 +314,11 @@
           "file": "speech/collection.name/papageitaucher.m4a",
           "sha256": "1629f21347c48eb6e0bc1fd68b7124534c418d071a8ca0094227273ae8a15c4b",
           "text": "Papageitaucher"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/papageitaucher.m4a",
+          "sha256": "c74473911b207a8e69193ce1352f5d87b60a6ba3a94a6fa60576f869d8f4023f",
+          "text": "Der Papageitaucher trägt viele Fische auf einmal im bunten Schnabel."
         }
       }
     },
@@ -294,6 +330,7 @@
       "article": "der",
       "lookalike": "diver",
       "pronunciation": null,
+      "fact": "Der Krabbentaucher ist klein wie ein Star und taucht nach Krebsen.",
       "photos": [
         {
           "file": "photos/krabbentaucher.heic",
@@ -326,6 +363,11 @@
           "file": "speech/collection.name/krabbentaucher.m4a",
           "sha256": "6de855b253b523cafe63ea82c46a1b50fd4fd9530387856bbe3b63c63d4ecab6",
           "text": "Krabbentaucher"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/krabbentaucher.m4a",
+          "sha256": "44c8e68c7ab688c20a859c4120e4fdc62186bb2322da0cbf379eb03f5010732a",
+          "text": "Der Krabbentaucher ist klein wie ein Star und taucht nach Krebsen."
         }
       }
     },
@@ -337,6 +379,7 @@
       "article": "die",
       "lookalike": "diver",
       "pronunciation": null,
+      "fact": "Bei der Trottellumme springen die Küken mutig vom Felsen ins Meer.",
       "photos": [
         {
           "file": "photos/trottellumme.heic",
@@ -360,6 +403,11 @@
           "file": "speech/collection.name/trottellumme.m4a",
           "sha256": "72cce27bd24a37b682303d1210660db2f6c71d45b11ec710f85ad634582fc618",
           "text": "Trottellumme"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/trottellumme.m4a",
+          "sha256": "02e17a411070d30670d15fe876aa0ef78fe9118592cc117820ebe2f7ed0ecfd1",
+          "text": "Bei der Trottellumme springen die Küken mutig vom Felsen ins Meer."
         }
       }
     },
@@ -371,6 +419,7 @@
       "article": "der",
       "lookalike": "seabird",
       "pronunciation": null,
+      "fact": "Der Wanderalbatros hat die längsten Flügel von allen Vögeln.",
       "photos": [
         {
           "file": "photos/wanderalbatros.heic",
@@ -403,6 +452,11 @@
           "file": "speech/collection.name/wanderalbatros.m4a",
           "sha256": "c55e14e27dbbcbc7996ed2e420ed70fd36aa0463640109b23c88b367225c0991",
           "text": "Wanderalbatros"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/wanderalbatros.m4a",
+          "sha256": "bc67b0398eda2b0974f6b609a2b58353840678fb29f27b61a4ea32b3b78f8585",
+          "text": "Der Wanderalbatros hat die längsten Flügel von allen Vögeln."
         }
       }
     },
@@ -414,6 +468,7 @@
       "article": "der",
       "lookalike": "seabird",
       "pronunciation": null,
+      "fact": "Der Schwarzbrauenalbatros hat dunkle Augenbrauen.",
       "photos": [
         {
           "file": "photos/schwarzbrauenalbatros.heic",
@@ -437,6 +492,11 @@
           "file": "speech/collection.name/schwarzbrauenalbatros.m4a",
           "sha256": "58bab67f020f0b2266f7ddcccb6cccc5aea748e4719431e5959e37cba89756a4",
           "text": "Schwarzbrauenalbatros"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/schwarzbrauenalbatros.m4a",
+          "sha256": "2f4372ff9dfd622314beadc1ac1c43a944d5caafd306d3deb3f3eea6e2c12ab1",
+          "text": "Der Schwarzbrauenalbatros hat dunkle Augenbrauen."
         }
       }
     },
@@ -448,6 +508,7 @@
       "article": "die",
       "lookalike": "gull",
       "pronunciation": null,
+      "fact": "Die Dreizehenmöwe hat Flügelspitzen wie in Tinte getaucht.",
       "photos": [
         {
           "file": "photos/dreizehenmoewe.heic",
@@ -471,6 +532,11 @@
           "file": "speech/collection.name/dreizehenmoewe.m4a",
           "sha256": "5c888ad1b2528c1792a0199027dbcc5d6f80957188996dfd4a428d6666917b88",
           "text": "Dreizehenmöwe"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/dreizehenmoewe.m4a",
+          "sha256": "acb27ab2b6cc2872e83aec8fbe15430e9774f2784de0fdcd22b4e263bb9b42b9",
+          "text": "Die Dreizehenmöwe hat Flügelspitzen wie in Tinte getaucht."
         }
       }
     },
@@ -482,6 +548,7 @@
       "article": "die",
       "lookalike": "gull",
       "pronunciation": null,
+      "fact": "Die Küstenseeschwalbe fliegt vom Nordpol bis zum Südpol und zurück.",
       "photos": [
         {
           "file": "photos/kuestenseeschwalbe.heic",
@@ -521,6 +588,11 @@
           "file": "speech/collection.name/kuestenseeschwalbe.m4a",
           "sha256": "a3a85123d7cfa7cbfc5b562ba3055f2c9b72a1ea297ce44e9652f96217ab24c3",
           "text": "Küstenseeschwalbe"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/kuestenseeschwalbe.m4a",
+          "sha256": "14a9899b72e33d709f5bde1f1988e4197cd316add50d011bd210e2f93333af4f",
+          "text": "Die Küstenseeschwalbe fliegt vom Nordpol bis zum Südpol und zurück."
         }
       }
     },
@@ -532,6 +604,7 @@
       "article": "die",
       "lookalike": "duck",
       "pronunciation": null,
+      "fact": "Bei der Prachteiderente hat der Papa einen orangen Höcker am Schnabel.",
       "photos": [
         {
           "file": "photos/prachteiderente.heic",
@@ -564,6 +637,11 @@
           "file": "speech/collection.name/prachteiderente.m4a",
           "sha256": "9320bddc46d07182cc28f05b2fd748335df8ac0530d559c9ee41a4cbab40ebad",
           "text": "Prachteiderente"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/prachteiderente.m4a",
+          "sha256": "64e768694c5cf7d515e5ae338072d24ec76a0ea6e5399e7bff843ef9486b5252",
+          "text": "Bei der Prachteiderente hat der Papa einen orangen Höcker am Schnabel."
         }
       }
     },
@@ -575,6 +653,7 @@
       "article": "die",
       "lookalike": "duck",
       "pronunciation": null,
+      "fact": "Bei der Eiderente polstert die Mama das Nest mit weichen Daunen.",
       "photos": [
         {
           "file": "photos/eiderente.heic",
@@ -606,6 +685,11 @@
           "file": "speech/collection.name/eiderente.m4a",
           "sha256": "5898efe90dc99edeca54041155bace3b227760d82e0853692712820b843f23a7",
           "text": "Eiderente"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/eiderente.m4a",
+          "sha256": "296e632545262924f2b3b1f05c12846e768078a976134e5e7e6749a99282e296",
+          "text": "Bei der Eiderente polstert die Mama das Nest mit weichen Daunen."
         }
       }
     },
@@ -617,6 +701,7 @@
       "article": "die",
       "lookalike": "duck",
       "pronunciation": null,
+      "fact": "Die Kragenente mag wilde Flüsse, und der Papa ist bunt wie ein Clown.",
       "photos": [
         {
           "file": "photos/kragenente.heic",
@@ -649,6 +734,11 @@
           "file": "speech/collection.name/kragenente.m4a",
           "sha256": "6beec99d37ccdc3a3f58b0d8e0df5c9d590ac6059c0424c35696d29ff25ef7f6",
           "text": "Kragenente"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/kragenente.m4a",
+          "sha256": "01252c9eb3e8ee4ed4b769feace08ef42267f6484419e8c15d24046390a2cf38",
+          "text": "Die Kragenente mag wilde Flüsse, und der Papa ist bunt wie ein Clown."
         }
       }
     },
@@ -660,6 +750,7 @@
       "article": "die",
       "lookalike": "owl",
       "pronunciation": null,
+      "fact": "Die Schnee-Eule wohnt im eisigen Norden, der Papa ist weiß wie Schnee.",
       "photos": [
         {
           "file": "photos/schnee-eule.heic",
@@ -692,6 +783,11 @@
           "file": "speech/collection.name/schnee-eule.m4a",
           "sha256": "7df23fca49f30371511b352a4edce4cf0affc16823ffb900a1d3351aa98893ac",
           "text": "Schnee-Eule"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/schnee-eule.m4a",
+          "sha256": "5f5adea68d00a7b001f32ba4def5467dcdfd49caa1fc10b7e732ff5e173a6128",
+          "text": "Die Schnee-Eule wohnt im eisigen Norden, der Papa ist weiß wie Schnee."
         }
       }
     },
@@ -703,6 +799,7 @@
       "article": "die",
       "lookalike": "finch",
       "pronunciation": null,
+      "fact": "Die Schneeammer brütet weiter im Norden als fast alle Singvögel.",
       "photos": [
         {
           "file": "photos/schneeammer.heic",
@@ -742,6 +839,11 @@
           "file": "speech/collection.name/schneeammer.m4a",
           "sha256": "4836df69fa0642066da1cbd9e7c8b43c303be153a4efe44cd3c067a226ea8fd9",
           "text": "Schneeammer"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/schneeammer.m4a",
+          "sha256": "7187dc48c4a0bdc258287b5288a6732580b71e9e86c1d27c160af2ea8c96cde8",
+          "text": "Die Schneeammer brütet weiter im Norden als fast alle Singvögel."
         }
       }
     },
@@ -753,6 +855,7 @@
       "article": "das",
       "lookalike": "gamebird",
       "pronunciation": null,
+      "fact": "Das Alpenschneehuhn ist im Winter schneeweiß, sogar an den Füßen.",
       "photos": [
         {
           "file": "photos/alpenschneehuhn.heic",
@@ -785,6 +888,11 @@
           "file": "speech/collection.name/alpenschneehuhn.m4a",
           "sha256": "01c1f2da90c0bd51704c893a1fcc52e7771a7ce61e61cfc02c6c3385f48cba83",
           "text": "Alpenschneehuhn"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/alpenschneehuhn.m4a",
+          "sha256": "a24ed91e6e002dc37021e6609444f4297e52fb20d73cc1f12ef3334261c5282b",
+          "text": "Das Alpenschneehuhn ist im Winter schneeweiß, sogar an den Füßen."
         }
       }
     },
@@ -796,6 +904,7 @@
       "article": "der",
       "lookalike": "diver",
       "pronunciation": null,
+      "fact": "Der Eistaucher heult über den See wie ein Wolf.",
       "photos": [
         {
           "file": "photos/eistaucher.heic",
@@ -835,6 +944,11 @@
           "file": "speech/collection.name/eistaucher.m4a",
           "sha256": "ce84721e0f4da6456fa2cb88be13beaac4e5847ad6fd64a210ef1831735a6d0c",
           "text": "Eistaucher"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/eistaucher.m4a",
+          "sha256": "6111395607e89d9328d3024abf76cf5e272f08b1f582a4c4ef011ddb627a6035",
+          "text": "Der Eistaucher heult über den See wie ein Wolf."
         }
       }
     },
@@ -846,6 +960,7 @@
       "article": "der",
       "lookalike": "seabird",
       "pronunciation": null,
+      "fact": "Beim Blaufußtölpel tanzt der Papa und zeigt stolz seine blauen Füße.",
       "photos": [
         {
           "file": "photos/blaufusstoelpel.heic",
@@ -878,6 +993,11 @@
           "file": "speech/collection.name/blaufusstoelpel.m4a",
           "sha256": "06ef6733311cd0a6c13144e7a5a775c0d1f08b3f0447f682372a40eefd2783eb",
           "text": "Blaufußtölpel"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/blaufusstoelpel.m4a",
+          "sha256": "a21e7f087eaf6fd0799a958da89d19b38d338060fc28b20cb7ed16f86135b854",
+          "text": "Beim Blaufußtölpel tanzt der Papa und zeigt stolz seine blauen Füße."
         }
       }
     },
@@ -889,6 +1009,7 @@
       "article": "der",
       "lookalike": "seabird",
       "pronunciation": null,
+      "fact": "Beim Prachtfregattvogel bläst der Papa einen roten Ballon am Hals auf.",
       "photos": [
         {
           "file": "photos/prachtfregattvogel.heic",
@@ -921,6 +1042,11 @@
           "file": "speech/collection.name/prachtfregattvogel.m4a",
           "sha256": "1fc932615ad07520edd56b245cbfcc2532ff8b11af905928d029d32b2ddeab9c",
           "text": "Prachtfregattvogel"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/prachtfregattvogel.m4a",
+          "sha256": "06b67bd04138d392e1691c47edde38b946346771568e19c6b60dd9ee2cc77530",
+          "text": "Beim Prachtfregattvogel bläst der Papa einen roten Ballon am Hals auf."
         }
       }
     },
@@ -932,6 +1058,7 @@
       "article": "der",
       "lookalike": "seabird",
       "pronunciation": null,
+      "fact": "Der Rotschnabel-Tropikvogel hat zwei ganz lange weiße Schwanzfedern.",
       "photos": [
         {
           "file": "photos/rotschnabeltropikvogel.heic",
@@ -964,6 +1091,11 @@
           "file": "speech/collection.name/rotschnabeltropikvogel.m4a",
           "sha256": "04108dda37bfa69bf9fff7c143508b0b3b2c93b721b38c74cb3dd2dd66926e7d",
           "text": "Rotschnabel-Tropikvogel"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/rotschnabeltropikvogel.m4a",
+          "sha256": "2706f8320366d2780e7871be7cfad717ee92b6e6b7119c86a68253fb7943cd47",
+          "text": "Der Rotschnabel-Tropikvogel hat zwei ganz lange weiße Schwanzfedern."
         }
       }
     },
@@ -975,6 +1107,7 @@
       "article": "der",
       "lookalike": "penguin",
       "pronunciation": null,
+      "fact": "Der Königspinguin hat am Kopf leuchtend orange Flecken wie Tropfen.",
       "photos": [
         {
           "file": "photos/koenigspinguin.heic",
@@ -998,6 +1131,11 @@
           "file": "speech/collection.name/koenigspinguin.m4a",
           "sha256": "1a001c59f53257d93526f206c8032ec5fb0a73deec1e661bac1c462911a6c133",
           "text": "Königspinguin"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/koenigspinguin.m4a",
+          "sha256": "c1565cafc14156c684c857b48674f5504f9d7df9f80658f307b9e3c24781f51b",
+          "text": "Der Königspinguin hat am Kopf leuchtend orange Flecken wie Tropfen."
         }
       }
     },
@@ -1009,6 +1147,7 @@
       "article": "der",
       "lookalike": "penguin",
       "pronunciation": null,
+      "fact": "Der Zwergpinguin ist der kleinste Pinguin und kommt abends an Land.",
       "photos": [
         {
           "file": "photos/zwergpinguin.heic",
@@ -1025,6 +1164,11 @@
           "file": "speech/collection.name/zwergpinguin.m4a",
           "sha256": "d15dbe10b5249c0cfe6b8cab075b5f1c0a2c35d27fabedf22c3d5f89b6584233",
           "text": "Zwergpinguin"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/zwergpinguin.m4a",
+          "sha256": "6399b0430bab7db18fadd679fffad77ef927c4197fab20cba0935dae20f9b451",
+          "text": "Der Zwergpinguin ist der kleinste Pinguin und kommt abends an Land."
         }
       }
     },
@@ -1036,6 +1180,7 @@
       "article": "der",
       "lookalike": "seabird",
       "pronunciation": null,
+      "fact": "Der Basstölpel hat einen gelben Kopf und taucht wie ein Pfeil.",
       "photos": [
         {
           "file": "photos/basstoelpel.heic",
@@ -1059,6 +1204,11 @@
           "file": "speech/collection.name/basstoelpel.m4a",
           "sha256": "cb9c7df93ade615966651b4df2e64f0fe561cc05b273aad5850b43eab1987805",
           "text": "Basstölpel"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/basstoelpel.m4a",
+          "sha256": "38dac3a45da2c5d6d0f9b3b56d33ad85fa21c1a9ccf3e645cbfa3d2f7f00826c",
+          "text": "Der Basstölpel hat einen gelben Kopf und taucht wie ein Pfeil."
         }
       }
     },
@@ -1070,6 +1220,7 @@
       "article": "der",
       "lookalike": "seabird",
       "pronunciation": null,
+      "fact": "Der Eissturmvogel spuckt zur Abwehr ein stinkendes Öl.",
       "photos": [
         {
           "file": "photos/eissturmvogel.heic",
@@ -1086,6 +1237,11 @@
           "file": "speech/collection.name/eissturmvogel.m4a",
           "sha256": "1c5fbe702a9d0a77e32bb635a8652d1241bfdb790f2fb629ac61f61ac6557720",
           "text": "Eissturmvogel"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/eissturmvogel.m4a",
+          "sha256": "773985ab6a47238a0f1c4a1102940e8d32bf3e6df3ba6f54e43c136e821614ff",
+          "text": "Der Eissturmvogel spuckt zur Abwehr ein stinkendes Öl."
         }
       }
     },
@@ -1097,6 +1253,7 @@
       "article": "die",
       "lookalike": "gull",
       "pronunciation": null,
+      "fact": "Die Südpolarskua jagt anderen Vögeln ihr Futter ab.",
       "photos": [
         {
           "file": "photos/suedpolarskua.heic",
@@ -1136,6 +1293,11 @@
           "file": "speech/collection.name/suedpolarskua.m4a",
           "sha256": "860fffcc80f7f0f2022c91e9d727c0cdade2046d0562f317c99a38e674ab4bf7",
           "text": "Südpolarskua"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/suedpolarskua.m4a",
+          "sha256": "66472f46ad35ae05098e8a353a84c23e4c134637a621826ed4095d6eea234b72",
+          "text": "Die Südpolarskua jagt anderen Vögeln ihr Futter ab."
         }
       }
     },
@@ -1147,6 +1309,7 @@
       "article": "die",
       "lookalike": "duck",
       "pronunciation": null,
+      "fact": "Bei der Eisente hat der Papa lange Schwanzspieße und jodelt laut.",
       "photos": [
         {
           "file": "photos/eisente.heic",
@@ -1171,6 +1334,11 @@
           "file": "speech/collection.name/eisente.m4a",
           "sha256": "d0523d3c64a6b6a5fc906cd349df389358749fe78f788300a407352f4460cdf9",
           "text": "Eisente"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/eisente.m4a",
+          "sha256": "275367aba7af5fa9f8ab029d413ca79d93dc1ecf31be3128f6ab329badd77e7e",
+          "text": "Bei der Eisente hat der Papa lange Schwanzspieße und jodelt laut."
         }
       }
     },
@@ -1182,6 +1350,7 @@
       "article": "der",
       "lookalike": "seabird",
       "pronunciation": null,
+      "fact": "Der Rotfußtölpel hat rote Füße und brütet oben in Büschen und Bäumen.",
       "photos": [
         {
           "file": "photos/rotfusstoelpel.heic",
@@ -1198,6 +1367,11 @@
           "file": "speech/collection.name/rotfusstoelpel.m4a",
           "sha256": "f9611a8557241713b347437036f2b36a4d368ef7c80a5ff76f855a24f4913afb",
           "text": "Rotfußtölpel"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/rotfusstoelpel.m4a",
+          "sha256": "2fbdd10f1d05374aafcb5d67f1da4754f5bc0f8e7793d32d6b48d7756f9ad7b6",
+          "text": "Der Rotfußtölpel hat rote Füße und brütet oben in Büschen und Bäumen."
         }
       }
     }

@@ -16,6 +16,7 @@
       "article": "der",
       "lookalike": "hornbill",
       "pronunciation": null,
+      "fact": "Der Riesentukan hat einen riesigen orangen Schnabel.",
       "photos": [
         {
           "file": "photos/riesentukan.heic",
@@ -48,6 +49,11 @@
           "file": "speech/collection.name/riesentukan.m4a",
           "sha256": "e6b8852578e2b3995d7c9c87adb01e09688cd7ba38b7bddaf22c38f8c1757d9d",
           "text": "Riesentukan"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/riesentukan.m4a",
+          "sha256": "d60b2b5f9e67332189e76d359606110fec1c2e8bd9afc987eb38c60231cd553a",
+          "text": "Der Riesentukan hat einen riesigen orangen Schnabel."
         }
       }
     },
@@ -59,6 +65,7 @@
       "article": "der",
       "lookalike": "penguin",
       "pronunciation": null,
+      "fact": "Der Humboldtpinguin hat rosa Haut am Schnabel und brütet in Erdhöhlen.",
       "photos": [
         {
           "file": "photos/humboldtpinguin.heic",
@@ -91,6 +98,11 @@
           "file": "speech/collection.name/humboldtpinguin.m4a",
           "sha256": "dbb15312769ad634e1a532bf73896fccfe4e7e97a12b6bf488cb1e2ba01f145a",
           "text": "Humboldtpinguin"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/humboldtpinguin.m4a",
+          "sha256": "9019ec0de98214c2aad6861db63faf369a22bcc0ee88514e45a84a014017d6b4",
+          "text": "Der Humboldtpinguin hat rosa Haut am Schnabel und brütet in Erdhöhlen."
         }
       }
     },
@@ -102,6 +114,7 @@
       "article": "der",
       "lookalike": "finch",
       "pronunciation": null,
+      "fact": "Beim Tiefland-Felsenhahn ist der Papa knallorange mit runder Haube.",
       "photos": [
         {
           "file": "photos/tiefland-felsenhahn.heic",
@@ -134,6 +147,11 @@
           "file": "speech/collection.name/tiefland-felsenhahn.m4a",
           "sha256": "08e02d5af1313db7d476369a9fb4067b4ed13297d3c040192549088115f54a78",
           "text": "Tiefland-Felsenhahn"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/tiefland-felsenhahn.m4a",
+          "sha256": "9a0b752b58ee5807d06165d74f37803599fb8f6f7c26e26280d077aa11f3bd30",
+          "text": "Beim Tiefland-Felsenhahn ist der Papa knallorange mit runder Haube."
         }
       }
     },
@@ -145,6 +163,7 @@
       "article": "die",
       "lookalike": "finch",
       "pronunciation": null,
+      "fact": "Die Siebenfarbentangare ist bunt wie ein Malkasten, mit grünem Kopf.",
       "photos": [
         {
           "file": "photos/siebenfarbentangare.heic",
@@ -184,6 +203,11 @@
           "file": "speech/collection.name/siebenfarbentangare.m4a",
           "sha256": "f6d7fbdf8caff3ddb54dd975f6e978e1aaeb1e0ba65fa227d99c878641ea4e00",
           "text": "Siebenfarbentangare"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/siebenfarbentangare.m4a",
+          "sha256": "6a5e3f326002693faf0c900662215a5962293ff09bb73ca0443c6a47488efb70",
+          "text": "Die Siebenfarbentangare ist bunt wie ein Malkasten, mit grünem Kopf."
         }
       }
     },
@@ -195,6 +219,7 @@
       "article": "der",
       "lookalike": "heron",
       "pronunciation": null,
+      "fact": "Der Chileflamingo hat graue Beine mit knallrosa Knien.",
       "photos": [
         {
           "file": "photos/chileflamingo.heic",
@@ -227,6 +252,11 @@
           "file": "speech/collection.name/chileflamingo.m4a",
           "sha256": "1cf2137b3580a202de1337ee5e74410e872c391046d08d6c77889808718128a3",
           "text": "Chileflamingo"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/chileflamingo.m4a",
+          "sha256": "ec83de8c3cba3e16c1e70041cbcaabd25d4bca5fae3b7ada8ae9f9a7a73317b9",
+          "text": "Der Chileflamingo hat graue Beine mit knallrosa Knien."
         }
       }
     },
@@ -238,6 +268,7 @@
       "article": "der",
       "lookalike": "hornbill",
       "pronunciation": null,
+      "fact": "Der Fischertukan hat einen Schnabel, so bunt wie ein Regenbogen.",
       "photos": [
         {
           "file": "photos/fischertukan.heic",
@@ -270,6 +301,11 @@
           "file": "speech/collection.name/fischertukan.m4a",
           "sha256": "2882e415a9c6ed3971a933ddd1fbf89a23ac96855f871e6f6790d6358c9712c2",
           "text": "Fischertukan"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/fischertukan.m4a",
+          "sha256": "35440947da64c4de0bf110b0ec7ba76adb112f38227fd69559752d2d7afa8c9e",
+          "text": "Der Fischertukan hat einen Schnabel, so bunt wie ein Regenbogen."
         }
       }
     },
@@ -281,6 +317,7 @@
       "article": "der",
       "lookalike": "vulture",
       "pronunciation": null,
+      "fact": "Der Königsgeier hat einen kunterbunten Kopf in Orange, Rot und Lila.",
       "photos": [
         {
           "file": "photos/koenigsgeier.heic",
@@ -313,6 +350,11 @@
           "file": "speech/collection.name/koenigsgeier.m4a",
           "sha256": "a5b4c9558d189387a8fe427e2142705e93f5ed3bbe80c703a6ad169134c6fb92",
           "text": "Königsgeier"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/koenigsgeier.m4a",
+          "sha256": "d6deb53d1c52dff457684666834022214296ab2b0b57d72d173a6c5f9d65d4a7",
+          "text": "Der Königsgeier hat einen kunterbunten Kopf in Orange, Rot und Lila."
         }
       }
     },
@@ -324,6 +366,7 @@
       "article": "das",
       "lookalike": "shorebird",
       "pronunciation": null,
+      "fact": "Das Rotstirn-Blatthühnchen läuft mit langen Zehen über Seerosen.",
       "photos": [
         {
           "file": "photos/rotstirn-blatthuehnchen.heic",
@@ -356,6 +399,11 @@
           "file": "speech/collection.name/rotstirn-blatthuehnchen.m4a",
           "sha256": "f73465a53ff43815315c4dd2a9e3773f0bc079ddc9446f70a639d8dcddb370ff",
           "text": "Rotstirn-Blatthühnchen"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/rotstirn-blatthuehnchen.m4a",
+          "sha256": "f7e5f24fef3683029ac4224fbd36dbfa86e577ec87375f7a049c9f82e0122f77",
+          "text": "Das Rotstirn-Blatthühnchen läuft mit langen Zehen über Seerosen."
         }
       }
     },
@@ -367,6 +415,7 @@
       "article": "der",
       "lookalike": "goose",
       "pronunciation": null,
+      "fact": "Der Halsband-Wehrvogel schreit so laut, dass man ihn weit hört.",
       "photos": [
         {
           "file": "photos/halsband-wehrvogel.heic",
@@ -399,6 +448,11 @@
           "file": "speech/collection.name/halsband-wehrvogel.m4a",
           "sha256": "765733b4c49c16c66aa97bc932f47df34fd31f853bec4b8b81c4775f3c1faaa6",
           "text": "Halsband-Wehrvogel"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/halsband-wehrvogel.m4a",
+          "sha256": "696485d7f849b950b1257f4328dea6a97405c8739534d1123868b6796a33ce17",
+          "text": "Der Halsband-Wehrvogel schreit so laut, dass man ihn weit hört."
         }
       }
     },
@@ -410,6 +464,7 @@
       "article": "die",
       "lookalike": "gull",
       "pronunciation": null,
+      "fact": "Die Inkaseeschwalbe ist dunkelgrau und hat einen weißen Schnurrbart.",
       "photos": [
         {
           "file": "photos/inkaseeschwalbe.heic",
@@ -442,6 +497,11 @@
           "file": "speech/collection.name/inkaseeschwalbe.m4a",
           "sha256": "60d473ae42a55154b81dd69a2182e7ee6ec6ed4247de6e616def167fe9a89dac",
           "text": "Inkaseeschwalbe"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/inkaseeschwalbe.m4a",
+          "sha256": "a8164c769b99fa9e8e847b11d0197d5c13e7c34a015669361cfe01157ad87d63",
+          "text": "Die Inkaseeschwalbe ist dunkelgrau und hat einen weißen Schnurrbart."
         }
       }
     },
@@ -453,6 +513,7 @@
       "article": "der",
       "lookalike": "kingfisher",
       "pronunciation": null,
+      "fact": "Der Amazonasfischer ist grün mit weißem Halsring und fängt Fische.",
       "photos": [
         {
           "file": "photos/amazonasfischer.heic",
@@ -485,6 +546,11 @@
           "file": "speech/collection.name/amazonasfischer.m4a",
           "sha256": "2a857fad663056806b56921c88a9fbbeca505af6a4361e9b391cca1ca6e487ec",
           "text": "Amazonasfischer"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/amazonasfischer.m4a",
+          "sha256": "37b73b5258bf2db5deba7b18c4bff93dad795099465fddcfe4400c7a81d7fb15",
+          "text": "Der Amazonasfischer ist grün mit weißem Halsring und fängt Fische."
         }
       }
     },
@@ -496,6 +562,7 @@
       "article": "der",
       "lookalike": "ratite",
       "pronunciation": null,
+      "fact": "Beim Nandu brütet der Papa die Eier von mehreren Mamas aus.",
       "photos": [
         {
           "file": "photos/nandu.heic",
@@ -528,6 +595,11 @@
           "file": "speech/collection.name/nandu.m4a",
           "sha256": "db31b9e6e329b45faa450c66d93f7b1e21f5fea79e35a62c2657f61bcb7268b1",
           "text": "Nandu"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/nandu.m4a",
+          "sha256": "140e4bd1ab1491c7a75a986f21c5d19789a8de90cf30e57aca933f8eb3d176ab",
+          "text": "Beim Nandu brütet der Papa die Eier von mehreren Mamas aus."
         }
       }
     },
@@ -539,6 +611,7 @@
       "article": "der",
       "lookalike": "parrot",
       "pronunciation": null,
+      "fact": "Der Hellrote Ara ist rot und hat gelbe Streifen auf den Flügeln.",
       "photos": [
         {
           "file": "photos/hellroter-ara-3.heic",
@@ -562,6 +635,11 @@
           "file": "speech/collection.name/hellroter-ara.m4a",
           "sha256": "c3dea31f0e0e1dadb995f23f082835056c9ca1dbaef63ed610fb79fc3f04ac3c",
           "text": "Hellroter Ara"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/hellroter-ara.m4a",
+          "sha256": "c7922681661348a5e128c43aa502577ab4978720c5fed408fa9bc9dc101f8ab3",
+          "text": "Der Hellrote Ara ist rot und hat gelbe Streifen auf den Flügeln."
         }
       }
     },
@@ -573,6 +651,7 @@
       "article": "der",
       "lookalike": "heron",
       "pronunciation": null,
+      "fact": "Der Rote Sichler wird knallrot, weil er viele Krebse frisst.",
       "photos": [
         {
           "file": "photos/roter-sichler.heic",
@@ -605,6 +684,11 @@
           "file": "speech/collection.name/roter-sichler.m4a",
           "sha256": "a8e17e8cbc60eb0a7007cd3e8104085f23315ea1981c15d80bf456011258f576",
           "text": "Roter Sichler"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/roter-sichler.m4a",
+          "sha256": "104d86d237fa5e13556c153e4fa77734770c8b9b8478292a523c44c66a96b15e",
+          "text": "Der Rote Sichler wird knallrot, weil er viele Krebse frisst."
         }
       }
     },
@@ -616,6 +700,7 @@
       "article": "der",
       "lookalike": "heron",
       "pronunciation": null,
+      "fact": "Der Rosalöffler ist rosa und hat einen Schnabel wie ein Löffel.",
       "photos": [
         {
           "file": "photos/rosaloeffler.heic",
@@ -648,6 +733,11 @@
           "file": "speech/collection.name/rosaloeffler.m4a",
           "sha256": "b18ff6e9cf1f9583ff6515681a60f007ff6794507a362ad1c1217b765faa8787",
           "text": "Rosalöffler"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/rosaloeffler.m4a",
+          "sha256": "c66108d165e77363ec1cdf2ed33185a9b65439d54157995bb0814b13cb638e61",
+          "text": "Der Rosalöffler ist rosa und hat einen Schnabel wie ein Löffel."
         }
       }
     },
@@ -659,6 +749,7 @@
       "article": "der",
       "lookalike": "parrot",
       "pronunciation": null,
+      "fact": "Beim Quetzal hat der Papa grüne Schwanzfedern, länger als sein Körper.",
       "photos": [
         {
           "file": "photos/quetzal.heic",
@@ -691,6 +782,11 @@
           "file": "speech/collection.name/quetzal.m4a",
           "sha256": "70d830f88ce0b0b1804f2a798d2cc5c993b5f1c5dedc8db78a401ba7a8c60ab1",
           "text": "Quetzal"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/quetzal.m4a",
+          "sha256": "12f1c93d0ef38898f359798eb8aaf9ef741fdb34e0921f12153c2fef6dbb8f26",
+          "text": "Beim Quetzal hat der Papa grüne Schwanzfedern, länger als sein Körper."
         }
       }
     },
@@ -702,6 +798,7 @@
       "article": "der",
       "lookalike": "parrot",
       "pronunciation": null,
+      "fact": "Der Hyazinthara ist der größte fliegende Papagei und ganz blau.",
       "photos": [
         {
           "file": "photos/hyazinthara.heic",
@@ -718,6 +815,11 @@
           "file": "speech/collection.name/hyazinthara.m4a",
           "sha256": "c6b2562e0954793347daa7e821f748b93474d92ed6e4bf5b1ea2fb5e479e40c9",
           "text": "Hyazinthara"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/hyazinthara.m4a",
+          "sha256": "5d16aaa42d176d4606e1a90e42b7730216187242f67e8a97ac9877cd8c22dcba",
+          "text": "Der Hyazinthara ist der größte fliegende Papagei und ganz blau."
         }
       }
     },
@@ -729,6 +831,7 @@
       "article": "der",
       "lookalike": "parrot",
       "pronunciation": null,
+      "fact": "Der Grünflügelara ist rot und hat grüne Streifen auf den Flügeln.",
       "photos": [
         {
           "file": "photos/gruenfluegelara.heic",
@@ -745,6 +848,11 @@
           "file": "speech/collection.name/gruenfluegelara.m4a",
           "sha256": "e55292e25eb47696ebceb5f297f57a0472e6d4a3f4fefbb106e79555ccfe8a99",
           "text": "Grünflügelara"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/gruenfluegelara.m4a",
+          "sha256": "021b8a7ed8f6a056f1b93632fd57491c920088fcf581a563e4181ed2733421f8",
+          "text": "Der Grünflügelara ist rot und hat grüne Streifen auf den Flügeln."
         }
       }
     },
@@ -756,6 +864,7 @@
       "article": "der",
       "lookalike": "cuckoo",
       "pronunciation": null,
+      "fact": "Beim Hoatzin haben die Küken Krallen an den Flügeln zum Klettern.",
       "photos": [
         {
           "file": "photos/hoatzin.heic",
@@ -790,6 +899,7 @@
       "article": "der",
       "lookalike": "hummingbird",
       "pronunciation": null,
+      "fact": "Der Schwertschnabelkolibri hat einen Schnabel, länger als sein Körper.",
       "photos": [
         {
           "file": "photos/schwertschnabelkolibri.heic",
@@ -829,6 +939,11 @@
           "file": "speech/collection.name/schwertschnabelkolibri.m4a",
           "sha256": "e1d4d4e735832bda0c110a03299b334844e3fcfb09ababfd7f2d0b92d37ee071",
           "text": "Schwertschnabelkolibri"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/schwertschnabelkolibri.m4a",
+          "sha256": "792cef5c122022d185b55ef82b63057137588a859131892398aac45ff8c438a7",
+          "text": "Der Schwertschnabelkolibri hat einen Schnabel, länger als sein Körper."
         }
       }
     },
@@ -840,6 +955,7 @@
       "article": "der",
       "lookalike": "hummingbird",
       "pronunciation": null,
+      "fact": "Der Veilchenohrkolibri ist grün und hat lila Flecken an den Ohren.",
       "photos": [
         {
           "file": "photos/veilchenohrkolibri.heic",
@@ -871,6 +987,11 @@
           "file": "speech/collection.name/veilchenohrkolibri.m4a",
           "sha256": "95653a0507e7c8c81e9e1f1a313ae33079786471d50a7f1e9cba462485325d2b",
           "text": "Veilchenohrkolibri"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/veilchenohrkolibri.m4a",
+          "sha256": "0095fc054d0ffd2e91777177d83fa36eaba89abdb5e4a70a3197571e15868eac",
+          "text": "Der Veilchenohrkolibri ist grün und hat lila Flecken an den Ohren."
         }
       }
     },
@@ -882,6 +1003,7 @@
       "article": "der",
       "lookalike": "warbler",
       "pronunciation": null,
+      "fact": "Der Schwefeltyrann hat einen gelben Bauch und einen gestreiften Kopf.",
       "photos": [
         {
           "file": "photos/schwefeltyrann.heic",
@@ -921,6 +1043,11 @@
           "file": "speech/collection.name/schwefeltyrann.m4a",
           "sha256": "f4433a0b10572822f000cf8840c2b5d8b83f6d335e1448156a6ade563ed1cc00",
           "text": "Schwefeltyrann"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/schwefeltyrann.m4a",
+          "sha256": "30b0101e8994554bc674d56d3e4ee981a27800167db1ee5f540be9a959a9c10b",
+          "text": "Der Schwefeltyrann hat einen gelben Bauch und einen gestreiften Kopf."
         }
       }
     },
@@ -932,6 +1059,7 @@
       "article": "der",
       "lookalike": "heron",
       "pronunciation": null,
+      "fact": "Der Jabiru ist ein riesiger Storch mit rotem Halsring.",
       "photos": [
         {
           "file": "photos/jabiru.heic",
@@ -956,6 +1084,11 @@
           "file": "speech/collection.name/jabiru.m4a",
           "sha256": "4bb24c3e32e9cc3b53de564c96f8602c109ff032f4ccd82a88c1685d43156ba7",
           "text": "Jabiru"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/jabiru.m4a",
+          "sha256": "50065f1ed52a93cf1501f5f475e2636a5238a8ca934de75ac8df7b687b153d87",
+          "text": "Der Jabiru ist ein riesiger Storch mit rotem Halsring."
         }
       }
     },
@@ -967,6 +1100,7 @@
       "article": "die",
       "lookalike": "heron",
       "pronunciation": null,
+      "fact": "Die Sonnenralle hat Muster wie Sonnen auf den Flügeln.",
       "photos": [
         {
           "file": "photos/sonnenralle.heic",
@@ -999,6 +1133,11 @@
           "file": "speech/collection.name/sonnenralle.m4a",
           "sha256": "013c8d0a37f7f227dcd9521cd090ebff5b2a501479c078bd4939ccd144340bf3",
           "text": "Sonnenralle"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/sonnenralle.m4a",
+          "sha256": "65810d1129b2ebbf96576a05967ed873bdbe4a604291bc1184e079ba534e25ac",
+          "text": "Die Sonnenralle hat Muster wie Sonnen auf den Flügeln."
         }
       }
     },
@@ -1010,6 +1149,7 @@
       "article": "der",
       "lookalike": "raptor",
       "pronunciation": null,
+      "fact": "Der Schopfkarakara hat eine schwarze Kappe und ein oranges Gesicht.",
       "photos": [
         {
           "file": "photos/schopfkarakara.heic",
@@ -1034,6 +1174,11 @@
           "file": "speech/collection.name/schopfkarakara.m4a",
           "sha256": "580b8f7407adc728098bc4c067c07f9bf957a35cfeaba8e5e19a3fda585e6bdc",
           "text": "Schopfkarakara"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/schopfkarakara.m4a",
+          "sha256": "fa3df458bc5135cc29f159168b3b087d45cac4fd558184a47f7802af0926ab58",
+          "text": "Der Schopfkarakara hat eine schwarze Kappe und ein oranges Gesicht."
         }
       }
     },
@@ -1045,6 +1190,7 @@
       "article": "der",
       "lookalike": "hornbill",
       "pronunciation": null,
+      "fact": "Der Halsbandarassari ist ein kleiner Tukan mit rotem Band am Bauch.",
       "photos": [
         {
           "file": "photos/halsbandarassari.heic",
@@ -1061,6 +1207,11 @@
           "file": "speech/collection.name/halsbandarassari.m4a",
           "sha256": "9fa69ef40c8d55244af00bb750e848a71f913ef99edbd6578570bfb8bc3fca45",
           "text": "Halsbandarassari"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/halsbandarassari.m4a",
+          "sha256": "25c0e17ebb71330a8fecb86822fab6941130069459a368c31c4278b7bbca2855",
+          "text": "Der Halsbandarassari ist ein kleiner Tukan mit rotem Band am Bauch."
         }
       }
     },
@@ -1072,6 +1223,7 @@
       "article": "der",
       "lookalike": "seabird",
       "pronunciation": null,
+      "fact": "Beim Schwimmen guckt beim Schlangenhalsvogel nur der Hals heraus.",
       "photos": [
         {
           "file": "photos/schlangenhalsvogel.heic",
@@ -1096,6 +1248,11 @@
           "file": "speech/collection.name/schlangenhalsvogel.m4a",
           "sha256": "2649f422bc3958efe5b1678b1df3730ee6f0edc581c7136058cedf0313230653",
           "text": "Schlangenhalsvogel"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/schlangenhalsvogel.m4a",
+          "sha256": "178d3cab07534082845dbd976c431f1a4b99c767169484ee9b04d368887d1e98",
+          "text": "Beim Schwimmen guckt beim Schlangenhalsvogel nur der Hals heraus."
         }
       }
     },
@@ -1107,6 +1264,7 @@
       "article": "der",
       "lookalike": "warbler",
       "pronunciation": null,
+      "fact": "Beim Purpurtyrann ist der Papa leuchtend rot mit dunkler Maske.",
       "photos": [
         {
           "file": "photos/purpurtyrann.heic",
@@ -1139,6 +1297,11 @@
           "file": "speech/collection.name/purpurtyrann.m4a",
           "sha256": "e6ef76b10a0d065cee6c83d973fc43cb6322f0230b8bc41d3a895919e3a999df",
           "text": "Purpurtyrann"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/purpurtyrann.m4a",
+          "sha256": "46f8accaff10c54b6a8ff91227c14c95dc20019c3827c5dc7e4cd56fbe934518",
+          "text": "Beim Purpurtyrann ist der Papa leuchtend rot mit dunkler Maske."
         }
       }
     },
@@ -1150,6 +1313,7 @@
       "article": "die",
       "lookalike": "finch",
       "pronunciation": null,
+      "fact": "Bei der Purpurtangare hat der Papa einen silbernen Schnabel.",
       "photos": [
         {
           "file": "photos/purpurtangare.heic",
@@ -1181,6 +1345,11 @@
           "file": "speech/collection.name/purpurtangare.m4a",
           "sha256": "2025903b3893f9630933aa6d73f3a6da68d39f2674475912b6ddddc6db372266",
           "text": "Purpurtangare"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/purpurtangare.m4a",
+          "sha256": "a8d253c2618c10fdeea55af27a43f4564170e25b05b0511d14c86eafb36252cd",
+          "text": "Bei der Purpurtangare hat der Papa einen silbernen Schnabel."
         }
       }
     },
@@ -1192,6 +1361,7 @@
       "article": "der",
       "lookalike": "corvid",
       "pronunciation": null,
+      "fact": "Der Kappenblaurabe hat eine samtige schwarze Haube und gelbe Augen.",
       "photos": [
         {
           "file": "photos/kappenblaurabe.heic",
@@ -1208,6 +1378,11 @@
           "file": "speech/collection.name/kappenblaurabe.m4a",
           "sha256": "6abf8eb7f63ab5dfdf4395d29f6e26763683b71e11171c90b90dd9fba7e2a937",
           "text": "Kappenblaurabe"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/kappenblaurabe.m4a",
+          "sha256": "cf5481882e041c0401ebacd9b35c63f96488c77f7d993271842597f9ce858f6e",
+          "text": "Der Kappenblaurabe hat eine samtige schwarze Haube und gelbe Augen."
         }
       }
     },
@@ -1219,6 +1394,7 @@
       "article": "der",
       "lookalike": "finch",
       "pronunciation": null,
+      "fact": "Der Graukardinal hat einen roten Kopf mit Haube und grauen Rücken.",
       "photos": [
         {
           "file": "photos/graukardinal.heic",
@@ -1258,6 +1434,11 @@
           "file": "speech/collection.name/graukardinal.m4a",
           "sha256": "13b7173989ed3b3d8b8134d1c57b821d989fccc94239c3d28426645e9708d962",
           "text": "Graukardinal"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/graukardinal.m4a",
+          "sha256": "d2e67b1a17810b5f088987b94144a6ec6fbabf26caa1f50cda80208a246fc272",
+          "text": "Der Graukardinal hat einen roten Kopf mit Haube und grauen Rücken."
         }
       }
     }

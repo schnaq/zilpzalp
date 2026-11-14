@@ -16,6 +16,7 @@
       "article": "der",
       "lookalike": "gamebird",
       "pronunciation": null,
+      "fact": "Beim Pfau schlägt der Papa ein Rad aus langen Federn mit Augen.",
       "photos": [
         {
           "file": "photos/pfau.heic",
@@ -47,6 +48,11 @@
           "file": "speech/collection.name/pfau.m4a",
           "sha256": "d06fc6223076cb3135cebfa4486da0ecb35e182ccadcf83074c5ac1010f14877",
           "text": "Pfau"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/pfau.m4a",
+          "sha256": "bfae4aea05f7d40b8c524ae485d9a58dbd810b573810071329a97a64cdff76f3",
+          "text": "Beim Pfau schlägt der Papa ein Rad aus langen Federn mit Augen."
         }
       }
     },
@@ -58,6 +64,7 @@
       "article": "der",
       "lookalike": "hornbill",
       "pronunciation": null,
+      "fact": "Der Doppelhornvogel hat einen gelben Helm auf seinem großen Schnabel.",
       "photos": [
         {
           "file": "photos/doppelhornvogel-4.heic",
@@ -90,6 +97,11 @@
           "file": "speech/collection.name/doppelhornvogel.m4a",
           "sha256": "d355c83247d3f23eca6d687398f24865e1d28890c4a3e03fb8c7d133cdc060e1",
           "text": "Doppelhornvogel"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/doppelhornvogel.m4a",
+          "sha256": "2378624d1c086d909f80f03a166a7c11e4d4718b3f53a92ae9efd5e67f72bb12",
+          "text": "Der Doppelhornvogel hat einen gelben Helm auf seinem großen Schnabel."
         }
       }
     },
@@ -101,6 +113,7 @@
       "article": "der",
       "lookalike": "heron",
       "pronunciation": null,
+      "fact": "Der Mandschurenkranich ist weiß und hat ein rotes Käppchen.",
       "photos": [
         {
           "file": "photos/mandschurenkranich.heic",
@@ -133,6 +146,11 @@
           "file": "speech/collection.name/mandschurenkranich.m4a",
           "sha256": "8a061c085ca09b7de1417983a78d44be647f96a82531ba77b37c1f012815f7aa",
           "text": "Mandschurenkranich"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/mandschurenkranich.m4a",
+          "sha256": "732e134f04b913900ab2e931efd7d1490f96fb0de0dee93672b668decec09a0f",
+          "text": "Der Mandschurenkranich ist weiß und hat ein rotes Käppchen."
         }
       }
     },
@@ -144,6 +162,7 @@
       "article": "der",
       "lookalike": "heron",
       "pronunciation": null,
+      "fact": "Der Jungfernkranich ist der kleinste Kranich.",
       "photos": [
         {
           "file": "photos/jungfernkranich.heic",
@@ -183,6 +202,11 @@
           "file": "speech/collection.name/jungfernkranich.m4a",
           "sha256": "6c348c5c914e3757b910f9cc0568642ecaf86d60052f3801caeda542c6d0c687",
           "text": "Jungfernkranich"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/jungfernkranich.m4a",
+          "sha256": "090f2ced68ab13e18b2d13899c2e5e9c8a987978fe68a19f058aba5c75337efc",
+          "text": "Der Jungfernkranich ist der kleinste Kranich."
         }
       }
     },
@@ -194,6 +218,7 @@
       "article": "die",
       "lookalike": "duck",
       "pronunciation": null,
+      "fact": "Die Mandarinente brütet in hohlen Bäumen, und der Papa ist kunterbunt.",
       "photos": [
         {
           "file": "photos/mandarinente.heic",
@@ -233,6 +258,11 @@
           "file": "speech/collection.name/mandarinente.m4a",
           "sha256": "8a38817f75187e5c4119b25a958934561552c269e8b43c4febe578b376e8f2e5",
           "text": "Mandarinente"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/mandarinente.m4a",
+          "sha256": "80038a450c909716a04594d38be307891917693a234cd8122d7b3f31fcf5a79d",
+          "text": "Die Mandarinente brütet in hohlen Bäumen, und der Papa ist kunterbunt."
         }
       }
     },
@@ -244,6 +274,7 @@
       "article": "der",
       "lookalike": "parrot",
       "pronunciation": null,
+      "fact": "Der Halsbandsittich ist grün und lebt sogar in deutschen Städten.",
       "photos": [
         {
           "file": "photos/halsbandsittich.heic",
@@ -275,6 +306,11 @@
           "file": "speech/collection.name/halsbandsittich.m4a",
           "sha256": "2351ef56570d1b9879ed4d5ebae803da060341c456c8a78fa8c9b550f0a0e133",
           "text": "Halsbandsittich"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/halsbandsittich.m4a",
+          "sha256": "ffdb290a7955cf1ac2fe649bfc98216fb45ba51e3b47f26a9fefb5361beed441",
+          "text": "Der Halsbandsittich ist grün und lebt sogar in deutschen Städten."
         }
       }
     },
@@ -286,6 +322,7 @@
       "article": "der",
       "lookalike": "thrush",
       "pronunciation": null,
+      "fact": "Der Hirtenmaina ist braun und hat gelbe Haut hinter dem Auge.",
       "photos": [
         {
           "file": "photos/hirtenmaina.heic",
@@ -325,6 +362,11 @@
           "file": "speech/collection.name/hirtenmaina.m4a",
           "sha256": "fca801bea6bc4d4fbe2612e5b26044b1357fa8212b9c9692224c02ff3c7cc248",
           "text": "Hirtenmaina"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/hirtenmaina.m4a",
+          "sha256": "f23e776b294aeee992699d3363bfa883e7d1d708d7878bf896fda2d8361d4859",
+          "text": "Der Hirtenmaina ist braun und hat gelbe Haut hinter dem Auge."
         }
       }
     },
@@ -336,6 +378,7 @@
       "article": "die",
       "lookalike": "duck",
       "pronunciation": null,
+      "fact": "Die Rostgans ist orange-braun wie Rost und hat einen hellen Kopf.",
       "photos": [
         {
           "file": "photos/rostgans.heic",
@@ -375,6 +418,11 @@
           "file": "speech/collection.name/rostgans.m4a",
           "sha256": "256ddc8f8bac9417f77e130536040281fdc69e1914dbf16cc623ada69729c9b1",
           "text": "Rostgans"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/rostgans.m4a",
+          "sha256": "a7b7c597524b1ad85378a03a2234d069341043d1c02edfa3e31251717202ceb6",
+          "text": "Die Rostgans ist orange-braun wie Rost und hat einen hellen Kopf."
         }
       }
     },
@@ -386,6 +434,7 @@
       "article": "die",
       "lookalike": "goose",
       "pronunciation": null,
+      "fact": "Die Schwanengans trägt einen braunen Streifen hinten am langen Hals.",
       "photos": [
         {
           "file": "photos/schwanengans.heic",
@@ -418,6 +467,11 @@
           "file": "speech/collection.name/schwanengans.m4a",
           "sha256": "4934657b91ee0def7296087a79b7410af23e42c37e3d8aa2bcc593193e4eef73",
           "text": "Schwanengans"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/schwanengans.m4a",
+          "sha256": "7763fda6295159092eedc83786a7f06dd586d01364fe5041a24416699ff80387",
+          "text": "Die Schwanengans trägt einen braunen Streifen hinten am langen Hals."
         }
       }
     },
@@ -429,6 +483,7 @@
       "article": "die",
       "lookalike": "goose",
       "pronunciation": null,
+      "fact": "Die Streifengans hat Streifen am Kopf und fliegt über den Himalaya.",
       "photos": [
         {
           "file": "photos/streifengans.heic",
@@ -468,6 +523,11 @@
           "file": "speech/collection.name/streifengans.m4a",
           "sha256": "dc07baac35a1d490e5413752af07e52adce39eacaaaf2cba600cfead984d77e6",
           "text": "Streifengans"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/streifengans.m4a",
+          "sha256": "c454ddebb06bdb958776eee8ea0e4cd6c8fcbde15acafd96f550253d22fb229b",
+          "text": "Die Streifengans hat Streifen am Kopf und fliegt über den Himalaya."
         }
       }
     },
@@ -479,6 +539,7 @@
       "article": "der",
       "lookalike": "raptor",
       "pronunciation": null,
+      "fact": "Der Brahminenweih ist rotbraun mit weißem Kopf und weißer Brust.",
       "photos": [
         {
           "file": "photos/brahminenweih.heic",
@@ -511,6 +572,11 @@
           "file": "speech/collection.name/brahminenweih.m4a",
           "sha256": "c5ebf0f915f20aaa522a772d5cc8acde838dec659ab603bb58bc14e05bb3bc67",
           "text": "Brahminenweih"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/brahminenweih.m4a",
+          "sha256": "f1435cab4be91f94069d7881a8fad2b127dc99ec60ab34f3e200fef109053d77",
+          "text": "Der Brahminenweih ist rotbraun mit weißem Kopf und weißer Brust."
         }
       }
     },
@@ -522,6 +588,7 @@
       "article": "das",
       "lookalike": "thrush",
       "pronunciation": null,
+      "fact": "Beim Rubinkehlchen hat der Papa eine glänzend rote Kehle.",
       "photos": [
         {
           "file": "photos/rubinkehlchen.heic",
@@ -561,6 +628,11 @@
           "file": "speech/collection.name/rubinkehlchen.m4a",
           "sha256": "e0551e8a403dfd169102f1c226a1f75a0e620f1b0d8f66e1bbc90d9b59e56b1e",
           "text": "Rubinkehlchen"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/rubinkehlchen.m4a",
+          "sha256": "4f923b1654e6dd3c2738b97c108deeefd79f2936e1840a4c4f8f109e89d32b3e",
+          "text": "Beim Rubinkehlchen hat der Papa eine glänzend rote Kehle."
         }
       }
     },
@@ -572,6 +644,7 @@
       "article": "die",
       "lookalike": "pigeon",
       "pronunciation": null,
+      "fact": "Die Glanzkäfertaube hat grün glänzende Flügel und läuft am Waldboden.",
       "photos": [
         {
           "file": "photos/glanzkaefertaube.heic",
@@ -596,6 +669,11 @@
           "file": "speech/collection.name/glanzkaefertaube.m4a",
           "sha256": "ba90acd6052e041141f2130c78db3a49d88b11bb3ec0a32220b2d52617fa54df",
           "text": "Glanzkäfertaube"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/glanzkaefertaube.m4a",
+          "sha256": "26ebc4b0da949cd043112b3b0031c163852f7f42647fcebad3f5bef2cabaf7ea",
+          "text": "Die Glanzkäfertaube hat grün glänzende Flügel und läuft am Waldboden."
         }
       }
     },
@@ -607,6 +685,7 @@
       "article": "der",
       "lookalike": "heron",
       "pronunciation": null,
+      "fact": "Der Buntstorch hat einen gelben Schnabel und rosa Flügelfedern.",
       "photos": [
         {
           "file": "photos/buntstorch.heic",
@@ -639,6 +718,11 @@
           "file": "speech/collection.name/buntstorch.m4a",
           "sha256": "85178bde81b8a0f871260d94241ed8573f4e6c246f110dbb010afac9a63b6ab3",
           "text": "Buntstorch"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/buntstorch.m4a",
+          "sha256": "b21498ca1f88a3ebd7acff80745f62d845deb44621124c82dab2019e69dae75c",
+          "text": "Der Buntstorch hat einen gelben Schnabel und rosa Flügelfedern."
         }
       }
     },
@@ -650,6 +734,7 @@
       "article": "der",
       "lookalike": "warbler",
       "pronunciation": null,
+      "fact": "Der Japanbrillenvogel ist grün und hat eine weiße Brille um die Augen.",
       "photos": [
         {
           "file": "photos/japanbrillenvogel.heic",
@@ -689,6 +774,11 @@
           "file": "speech/collection.name/japanbrillenvogel.m4a",
           "sha256": "775e7a687803176672a02e0b85b8368db561e117188c6c60c7d7aaa5ee93f167",
           "text": "Japanbrillenvogel"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/japanbrillenvogel.m4a",
+          "sha256": "3b3c9f65ee51e0bdb6428839bc115cb42daeddf6db13d2c49e3f250bc3cb56a9",
+          "text": "Der Japanbrillenvogel ist grün und hat eine weiße Brille um die Augen."
         }
       }
     },
@@ -700,6 +790,7 @@
       "article": "der",
       "lookalike": "heron",
       "pronunciation": null,
+      "fact": "Der Saruskranich ist so groß wie ein Mensch und hat einen roten Kopf.",
       "photos": [
         {
           "file": "photos/saruskranich.heic",
@@ -716,6 +807,11 @@
           "file": "speech/collection.name/saruskranich.m4a",
           "sha256": "0f3dfbd098f817814d20ed4f462542bdee76d0a7c964e307512aa13a040c9864",
           "text": "Saruskranich"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/saruskranich.m4a",
+          "sha256": "9411e8bada432652a2fc9dbdc77e5cf2cc1f1506e189436edde5da0018362cd9",
+          "text": "Der Saruskranich ist so groß wie ein Mensch und hat einen roten Kopf."
         }
       }
     },
@@ -727,6 +823,7 @@
       "article": "das",
       "lookalike": "gamebird",
       "pronunciation": null,
+      "fact": "Vom Bankivahuhn im Wald stammen unsere Haushühner ab.",
       "photos": [
         {
           "file": "photos/bankivahuhn.heic",
@@ -759,6 +856,11 @@
           "file": "speech/collection.name/bankivahuhn.m4a",
           "sha256": "8969d1503cf2b7459c1d776efa77ac0696c22fa8b84c522392d6f6f597a99352",
           "text": "Bankivahuhn"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/bankivahuhn.m4a",
+          "sha256": "32811a411bb875f3950688c9854722b976faf0e96898e96f062905ef16c77f76",
+          "text": "Vom Bankivahuhn im Wald stammen unsere Haushühner ab."
         }
       }
     },
@@ -770,6 +872,7 @@
       "article": "der",
       "lookalike": "warbler",
       "pronunciation": null,
+      "fact": "Der Rotohrbülbül hat eine spitze Haube und einen roten Fleck am Ohr.",
       "photos": [
         {
           "file": "photos/rotohrbuelbuel.heic",
@@ -809,6 +912,11 @@
           "file": "speech/collection.name/rotohrbuelbuel.m4a",
           "sha256": "ac78deebc1a7df5ad3d393822d45373211d28cb513c4f7664283328c1cee5d35",
           "text": "Rotohrbülbül"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/rotohrbuelbuel.m4a",
+          "sha256": "7d113bf867c43475c0a23ff0daa83e057543c7d3fdd3d38348a5307b7e3eb1af",
+          "text": "Der Rotohrbülbül hat eine spitze Haube und einen roten Fleck am Ohr."
         }
       }
     },
@@ -820,6 +928,7 @@
       "article": "der",
       "lookalike": "kingfisher",
       "pronunciation": null,
+      "fact": "Der Braunliest hat einen roten Schnabel und blaue Flügel.",
       "photos": [
         {
           "file": "photos/braunliest.heic",
@@ -851,6 +960,11 @@
           "file": "speech/collection.name/braunliest.m4a",
           "sha256": "79b831e5bd76898095b2bebde1ca5b05bc6689eac9f471f4de5eea7f7c3bf7e5",
           "text": "Braunliest"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/braunliest.m4a",
+          "sha256": "dc756a714cff5b4bb71217387f9c3aa60517dc35f230702cb38330f35f7285ce",
+          "text": "Der Braunliest hat einen roten Schnabel und blaue Flügel."
         }
       }
     },
@@ -862,6 +976,7 @@
       "article": "der",
       "lookalike": "kingfisher",
       "pronunciation": null,
+      "fact": "Der Smaragdspint ist grasgrün und hat zwei lange Spieße am Schwanz.",
       "photos": [
         {
           "file": "photos/smaragdspint.heic",
@@ -893,6 +1008,11 @@
           "file": "speech/collection.name/smaragdspint.m4a",
           "sha256": "7c84c99dc5f1f8eea8970af5d7e7acd9eb5168a73ddccbcd09f93eaaf4f018f5",
           "text": "Smaragdspint"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/smaragdspint.m4a",
+          "sha256": "7c723676e4254976ac2470bf292f90f71e4a446a9be90b6a8e802abffcc7dfa9",
+          "text": "Der Smaragdspint ist grasgrün und hat zwei lange Spieße am Schwanz."
         }
       }
     },
@@ -904,6 +1024,7 @@
       "article": "die",
       "lookalike": "corvid",
       "pronunciation": null,
+      "fact": "Die Azurelster hat eine schwarze Kappe und einen hellblauen Schwanz.",
       "photos": [
         {
           "file": "photos/azurelster.heic",
@@ -920,6 +1041,11 @@
           "file": "speech/collection.name/azurelster.m4a",
           "sha256": "3da9ca9eea693cc0819fab336b593c260b196c0f4743bb9a32a994806faa9106",
           "text": "Azurelster"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/azurelster.m4a",
+          "sha256": "bfae43a0e04e2877d3e3092ba82437a75eb368d63dc15f3ca8f035a11ca5bbd3",
+          "text": "Die Azurelster hat eine schwarze Kappe und einen hellblauen Schwanz."
         }
       }
     },
@@ -931,6 +1057,7 @@
       "article": "die",
       "lookalike": "corvid",
       "pronunciation": null,
+      "fact": "Die Glanzkrähe hat einen grauen Hals und lebt frech in der Stadt.",
       "photos": [
         {
           "file": "photos/glanzkraehe.heic",
@@ -962,6 +1089,11 @@
           "file": "speech/collection.name/glanzkraehe.m4a",
           "sha256": "20a840ee36c48ac19e2fc00fff0e1a2da0fec06409cf16823c8d351542a83d17",
           "text": "Glanzkrähe"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/glanzkraehe.m4a",
+          "sha256": "67c341a6cef5a3c9b0fa5646b1d96a8fd42501914b686f596d47156554af21f5",
+          "text": "Die Glanzkrähe hat einen grauen Hals und lebt frech in der Stadt."
         }
       }
     },
@@ -973,6 +1105,7 @@
       "article": "die",
       "lookalike": "thrush",
       "pronunciation": null,
+      "fact": "Die Dajaldrossel stellt den Schwanz hoch, der Papa ist schwarz-weiß.",
       "photos": [
         {
           "file": "photos/dajaldrossel.heic",
@@ -1005,6 +1138,11 @@
           "file": "speech/collection.name/dajaldrossel.m4a",
           "sha256": "027e5c44ba0198a593df15cae49bb94e2123bebc28a9ac5bfad1738da3b989dd",
           "text": "Dajaldrossel"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/dajaldrossel.m4a",
+          "sha256": "2c87cf5d2219e45bb9a882343bfa138cc505e0ab33ef069c1f893fcd02e3b008",
+          "text": "Die Dajaldrossel stellt den Schwanz hoch, der Papa ist schwarz-weiß."
         }
       }
     },
@@ -1016,6 +1154,7 @@
       "article": "der",
       "lookalike": "warbler",
       "pronunciation": null,
+      "fact": "Beim Hainparadiesschnäpper hat der Papa einen ganz langen Schwanz.",
       "photos": [
         {
           "file": "photos/hainparadiesschnaepper.heic",
@@ -1048,6 +1187,11 @@
           "file": "speech/collection.name/hainparadiesschnaepper.m4a",
           "sha256": "040090c03c5a05eb61a907dbbe0ea7af2b86068855442c805f3952aa416830e4",
           "text": "Hainparadiesschnäpper"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/hainparadiesschnaepper.m4a",
+          "sha256": "2d0051c6cc2e31eb2dacf9eadecf9538286ba2d10254e84d510131cbe16ac2bb",
+          "text": "Beim Hainparadiesschnäpper hat der Papa einen ganz langen Schwanz."
         }
       }
     },
@@ -1059,6 +1203,7 @@
       "article": "der",
       "lookalike": "thrush",
       "pronunciation": null,
+      "fact": "Der Spiegelrotschwanz hat einen weißen Fleck auf jedem Flügel.",
       "photos": [
         {
           "file": "photos/spiegelrotschwanz.heic",
@@ -1091,6 +1236,11 @@
           "file": "speech/collection.name/spiegelrotschwanz.m4a",
           "sha256": "af4b5fb4a33aec1ea988d9994bf3072e6a3f0e3ffe217aeeff0caf964aedb409",
           "text": "Spiegelrotschwanz"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/spiegelrotschwanz.m4a",
+          "sha256": "e4e95f2acbbb20a8150b7eabc78be3e7ba816763c6833f46b8d892af41838d1b",
+          "text": "Der Spiegelrotschwanz hat einen weißen Fleck auf jedem Flügel."
         }
       }
     },
@@ -1102,6 +1252,7 @@
       "article": "die",
       "lookalike": "pigeon",
       "pronunciation": null,
+      "fact": "Die Perlhalstaube hat einen schwarzen Nacken mit weißen Pünktchen.",
       "photos": [
         {
           "file": "photos/perlhalstaube.heic",
@@ -1133,6 +1284,11 @@
           "file": "speech/collection.name/perlhalstaube.m4a",
           "sha256": "9e62c4ad2a5e3602805826f36e372ab68bf72abf47dd00107c5ef69e93bd572a",
           "text": "Perlhalstaube"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/perlhalstaube.m4a",
+          "sha256": "55fa55e9e533fc0eccc2b3eea38125df7107bc5fc027169143ce29736c6af442",
+          "text": "Die Perlhalstaube hat einen schwarzen Nacken mit weißen Pünktchen."
         }
       }
     }

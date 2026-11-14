@@ -16,6 +16,7 @@
       "article": "die",
       "lookalike": "gull",
       "pronunciation": null,
+      "fact": "Die Silbermöwe hat einen roten Punkt am Schnabel, da picken die Küken.",
       "photos": [
         {
           "file": "photos/silbermoewe.heic",
@@ -55,6 +56,11 @@
           "file": "speech/collection.name/silbermoewe.m4a",
           "sha256": "26e2a73f3a1c766138bee35d2f835f2abd0e66596b959f69a044046f8f81ca5d",
           "text": "Silbermöwe"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/silbermoewe.m4a",
+          "sha256": "ab69d19854a00c1d4bfd15756c44d95f28e494d9ae15ee69e16b356da69e48a5",
+          "text": "Die Silbermöwe hat einen roten Punkt am Schnabel, da picken die Küken."
         }
       }
     },
@@ -66,6 +72,7 @@
       "article": "die",
       "lookalike": "gull",
       "pronunciation": null,
+      "fact": "Die Dreizehenmöwe hat Flügelspitzen wie in Tinte getaucht.",
       "photos": [
         {
           "file": "photos/dreizehenmoewe.heic",
@@ -97,6 +104,11 @@
           "file": "speech/collection.name/dreizehenmoewe.m4a",
           "sha256": "910dd6d4d96669fc0a0865cce576ef49fe79f7ec9546fc025ab88948750c1a01",
           "text": "Dreizehenmöwe"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/dreizehenmoewe.m4a",
+          "sha256": "4e840684c9f4d63940e421347487f6491adc3ffce5c2be409086b34f8ecfaa87",
+          "text": "Die Dreizehenmöwe hat Flügelspitzen wie in Tinte getaucht."
         }
       }
     },
@@ -108,6 +120,7 @@
       "article": "die",
       "lookalike": "diver",
       "pronunciation": null,
+      "fact": "Bei der Trottellumme springen die Küken mutig vom Felsen ins Meer.",
       "photos": [
         {
           "file": "photos/trottellumme.heic",
@@ -131,6 +144,11 @@
           "file": "speech/collection.name/trottellumme.m4a",
           "sha256": "372c45325ab2092c9cb3ba73528af19eee1f6559b9e22fa1f3a9e4f378495ee0",
           "text": "Trottellumme"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/trottellumme.m4a",
+          "sha256": "7b4a29d9f238273d4cfdcd20dbeeea44ce8e25b8f23feede0a340301f7f8524a",
+          "text": "Bei der Trottellumme springen die Küken mutig vom Felsen ins Meer."
         }
       }
     },
@@ -142,6 +160,7 @@
       "article": "der",
       "lookalike": "diver",
       "pronunciation": null,
+      "fact": "Der Tordalk hat einen dicken, schwarzen Schnabel mit weißem Streifen.",
       "photos": [
         {
           "file": "photos/tordalk.heic",
@@ -181,6 +200,11 @@
           "file": "speech/collection.name/tordalk.m4a",
           "sha256": "03bfd9498d8ea1c1d5e0ff6f2681d9609030279914634973f640ed55e363ad6e",
           "text": "Tordalk"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/tordalk.m4a",
+          "sha256": "729656f9306bb57eea7b41170b7b5bf265c6182214987adb91b64b6b6d4728ee",
+          "text": "Der Tordalk hat einen dicken, schwarzen Schnabel mit weißem Streifen."
         }
       }
     },
@@ -192,6 +216,7 @@
       "article": "der",
       "lookalike": "seabird",
       "pronunciation": null,
+      "fact": "Der Basstölpel hat einen gelben Kopf und taucht wie ein Pfeil.",
       "photos": [
         {
           "file": "photos/basstoelpel.heic",
@@ -223,6 +248,11 @@
           "file": "speech/collection.name/basstoelpel.m4a",
           "sha256": "0bf0abe61186eea2f1c2feb2267c72e9ee4abe2096b1f7e055670a4c27c9c272",
           "text": "Basstölpel"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/basstoelpel.m4a",
+          "sha256": "4f71c95858d27f653a6aa60f071aebdc05dc4da00176b71b3c15276a2a60893f",
+          "text": "Der Basstölpel hat einen gelben Kopf und taucht wie ein Pfeil."
         }
       }
     },
@@ -234,6 +264,7 @@
       "article": "der",
       "lookalike": "seabird",
       "pronunciation": null,
+      "fact": "Der Eissturmvogel spuckt zur Abwehr ein stinkendes Öl.",
       "photos": [
         {
           "file": "photos/eissturmvogel.heic",
@@ -250,6 +281,11 @@
           "file": "speech/collection.name/eissturmvogel.m4a",
           "sha256": "0e0ae7fbfee689496b67d1777075e4fc5299b4620dae827f761929a37d7fa129",
           "text": "Eissturmvogel"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/eissturmvogel.m4a",
+          "sha256": "75e752b0e91d9504466706e71cb902410c928b9765e33d9363cc619cac631117",
+          "text": "Der Eissturmvogel spuckt zur Abwehr ein stinkendes Öl."
         }
       }
     },
@@ -261,6 +297,7 @@
       "article": "die",
       "lookalike": "duck",
       "pronunciation": null,
+      "fact": "Bei der Eiderente polstert die Mama das Nest mit weichen Daunen.",
       "photos": [
         {
           "file": "photos/eiderente.heic",
@@ -292,6 +329,11 @@
           "file": "speech/collection.name/eiderente.m4a",
           "sha256": "7fc08a4d0ebb0b1c1ca5760abfea14898c959c2796c5987ab3f871620e5a2a38",
           "text": "Eiderente"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/eiderente.m4a",
+          "sha256": "d963ec530e570ed8bc5b190d18cac6dcf0f8a060942bf2ec753fc9c7fd6de4dc",
+          "text": "Bei der Eiderente polstert die Mama das Nest mit weichen Daunen."
         }
       }
     },
@@ -303,6 +345,7 @@
       "article": "die",
       "lookalike": "duck",
       "pronunciation": null,
+      "fact": "Die Brandgans ist weiß mit rotbraunem Band und rotem Schnabel.",
       "photos": [
         {
           "file": "photos/brandgans.heic",
@@ -342,6 +385,11 @@
           "file": "speech/collection.name/brandgans.m4a",
           "sha256": "96739fcb6f4c60500ed54e97bad581da0fb0b19dad5e1d6d83eae6021b056e26",
           "text": "Brandgans"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/brandgans.m4a",
+          "sha256": "a9798d48b5d3143abb3eefe55a2b5cbaded9d3ad0a01d9cdccbc7ea4d04b63b2",
+          "text": "Die Brandgans ist weiß mit rotbraunem Band und rotem Schnabel."
         }
       }
     },
@@ -353,6 +401,7 @@
       "article": "die",
       "lookalike": "goose",
       "pronunciation": null,
+      "fact": "Die Weißwangengans hat ein weißes Gesicht und einen schwarzen Hals.",
       "photos": [
         {
           "file": "photos/nonnengans.heic",
@@ -392,6 +441,11 @@
           "file": "speech/collection.name/nonnengans.m4a",
           "sha256": "ac9d33c4044f1809b45f1e32859cc8e42a2adfb652bd005812694e8557a7f7ef",
           "text": "Weißwangengans"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/nonnengans.m4a",
+          "sha256": "c33ec17249539667a7421feb485a75d41cb2850cf2e56bb300089c7a4f46217a",
+          "text": "Die Weißwangengans hat ein weißes Gesicht und einen schwarzen Hals."
         }
       }
     },
@@ -403,6 +457,7 @@
       "article": "der",
       "lookalike": "shorebird",
       "pronunciation": null,
+      "fact": "Der Säbelschnäbler hat einen dünnen, nach oben gebogenen Schnabel.",
       "photos": [
         {
           "file": "photos/saebelschnaebler.heic",
@@ -442,6 +497,11 @@
           "file": "speech/collection.name/saebelschnaebler.m4a",
           "sha256": "8b007856ba27e73ed4325228f36a950753912905d9d72fa5b04161b890bc626b",
           "text": "Säbelschnäbler"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/saebelschnaebler.m4a",
+          "sha256": "0f10a23cf46a25a68a194a7bd9fd746c2c57a3cf82fcd6327d9b660574a9391c",
+          "text": "Der Säbelschnäbler hat einen dünnen, nach oben gebogenen Schnabel."
         }
       }
     },
@@ -453,6 +513,7 @@
       "article": "der",
       "lookalike": "shorebird",
       "pronunciation": null,
+      "fact": "Der Rotschenkel hat rote Beine und warnt alle laut mit „tjü-tjü“.",
       "photos": [
         {
           "file": "photos/rotschenkel.heic",
@@ -484,6 +545,11 @@
           "file": "speech/collection.name/rotschenkel.m4a",
           "sha256": "ec52bb896f50bfe45666daf6fc450ce6d979f6141a3752c69c35d443f9f3f567",
           "text": "Rotschenkel"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/rotschenkel.m4a",
+          "sha256": "52dca1c8b806a590f0facf249db84ff6ea15b5a533df16da182a33bab3cea470",
+          "text": "Der Rotschenkel hat rote Beine und warnt alle laut mit „tjü-tjü“."
         }
       }
     },
@@ -495,6 +561,7 @@
       "article": "der",
       "lookalike": "shorebird",
       "pronunciation": null,
+      "fact": "Der Alpenstrandläufer fliegt in Schwärmen, die wie Wolken tanzen.",
       "photos": [
         {
           "file": "photos/alpenstrandlaeufer.heic",
@@ -534,6 +601,11 @@
           "file": "speech/collection.name/alpenstrandlaeufer.m4a",
           "sha256": "656eab28a33f75aa5deeff186755d774567652546878bfc7d949133b9365bb8d",
           "text": "Alpenstrandläufer"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/alpenstrandlaeufer.m4a",
+          "sha256": "a14921cd5367c06a1779774ec85383021b49191a698bd11779e6a01a6a350fcd",
+          "text": "Der Alpenstrandläufer fliegt in Schwärmen, die wie Wolken tanzen."
         }
       }
     },
@@ -545,6 +617,7 @@
       "article": "der",
       "lookalike": "shorebird",
       "pronunciation": null,
+      "fact": "Der Steinwälzer dreht mit dem Schnabel Steine um.",
       "photos": [
         {
           "file": "photos/steinwaelzer.heic",
@@ -576,6 +649,11 @@
           "file": "speech/collection.name/steinwaelzer.m4a",
           "sha256": "dc45cbcf5560edd1fb447b1538c5074fa3ab88f2362e304a474b8c0845f51b40",
           "text": "Steinwälzer"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/steinwaelzer.m4a",
+          "sha256": "083b98ed6b593a40ffcb085288146569454f800188ca70a9f4eb823a78b7180f",
+          "text": "Der Steinwälzer dreht mit dem Schnabel Steine um."
         }
       }
     },
@@ -587,6 +665,7 @@
       "article": "der",
       "lookalike": "shorebird",
       "pronunciation": null,
+      "fact": "Beim Kampfläufer tragen die Papas im Frühling bunte Federkragen.",
       "photos": [
         {
           "file": "photos/kampflaeufer.heic",
@@ -610,6 +689,11 @@
           "file": "speech/collection.name/kampflaeufer.m4a",
           "sha256": "2969d823ea63f5c919080c0c88825ed46b5ea2217ba5f9a0031f025ead9b1a77",
           "text": "Kampfläufer"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/kampflaeufer.m4a",
+          "sha256": "f59a91c123848c7f69f36742ecdd8bbdd2fbb5be06e76fb66130c558b3d245e3",
+          "text": "Beim Kampfläufer tragen die Papas im Frühling bunte Federkragen."
         }
       }
     },
@@ -621,6 +705,7 @@
       "article": "der",
       "lookalike": "shorebird",
       "pronunciation": null,
+      "fact": "Der Sandregenpfeifer hat ein schwarzes Halsband und flitzt am Strand.",
       "photos": [
         {
           "file": "photos/sandregenpfeifer.heic",
@@ -660,6 +745,11 @@
           "file": "speech/collection.name/sandregenpfeifer.m4a",
           "sha256": "c74143d60f617d521fe8e9504713a1914343f26a8c883a2d3dc78922e6112833",
           "text": "Sandregenpfeifer"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/sandregenpfeifer.m4a",
+          "sha256": "1fb0f491747003d9ff04de063eb4da4b5305914d6e835c0ee9a08fb65de9f364",
+          "text": "Der Sandregenpfeifer hat ein schwarzes Halsband und flitzt am Strand."
         }
       }
     },
@@ -671,6 +761,7 @@
       "article": "der",
       "lookalike": "shorebird",
       "pronunciation": null,
+      "fact": "Der Große Brachvogel hat einen langen, nach unten gebogenen Schnabel.",
       "photos": [
         {
           "file": "photos/grosser-brachvogel.heic",
@@ -710,6 +801,11 @@
           "file": "speech/collection.name/grosser-brachvogel.m4a",
           "sha256": "8a8ea3adaee39a515029fe2f59b2030d649d07138fc6f1bc2f220641e2fd948b",
           "text": "Großer Brachvogel"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/grosser-brachvogel.m4a",
+          "sha256": "2850b4234bf923eb167821383c15bceb3e350f707e9bbeeb0ca7da28feb991f9",
+          "text": "Der Große Brachvogel hat einen langen, nach unten gebogenen Schnabel."
         }
       }
     },
@@ -721,6 +817,7 @@
       "article": "der",
       "lookalike": "heron",
       "pronunciation": null,
+      "fact": "Der Silberreiher ist schneeweiß und jagt Fische und Frösche.",
       "photos": [
         {
           "file": "photos/silberreiher.heic",
@@ -752,6 +849,11 @@
           "file": "speech/collection.name/silberreiher.m4a",
           "sha256": "83925cd7af4639d982a1b799921e05b2b558ee3c9519975889f5018538c0d93d",
           "text": "Silberreiher"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/silberreiher.m4a",
+          "sha256": "0d865de6604771b37c1560c18365e8e179f89916ee25f0d1718214abbdfab19b",
+          "text": "Der Silberreiher ist schneeweiß und jagt Fische und Frösche."
         }
       }
     },
@@ -763,6 +865,7 @@
       "article": "der",
       "lookalike": "heron",
       "pronunciation": null,
+      "fact": "Der Löffler hat einen Schnabel wie ein Löffel.",
       "photos": [
         {
           "file": "photos/loeffler.heic",
@@ -795,6 +898,11 @@
           "file": "speech/collection.name/loeffler.m4a",
           "sha256": "f039f1b5e688d2015ec25c495af2c04098959a03e4f95ffe18430fe0f4449d64",
           "text": "Löffler"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/loeffler.m4a",
+          "sha256": "34ea6694421726d1ca5e135475de40ea631d981ba0942b664c90c31e9101a17b",
+          "text": "Der Löffler hat einen Schnabel wie ein Löffel."
         }
       }
     },
@@ -806,6 +914,7 @@
       "article": "der",
       "lookalike": "heron",
       "pronunciation": null,
+      "fact": "Der Purpurreiher hat einen rotbraunen Hals und lebt im Schilf.",
       "photos": [
         {
           "file": "photos/purpurreiher-3.heic",
@@ -837,6 +946,11 @@
           "file": "speech/collection.name/purpurreiher.m4a",
           "sha256": "a80528e57d22910259d991f68c0fc1a472796357a2e999382042750744dceef9",
           "text": "Purpurreiher"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/purpurreiher.m4a",
+          "sha256": "67a6954cb807e0b0e4f515fe417f15252e7f29f5656acd4f7a4e900af7d796cb",
+          "text": "Der Purpurreiher hat einen rotbraunen Hals und lebt im Schilf."
         }
       }
     },
@@ -848,6 +962,7 @@
       "article": "die",
       "lookalike": "heron",
       "pronunciation": null,
+      "fact": "Die Rohrdommel lebt im Schilf, und der Papa brüllt wie ein Ochse.",
       "photos": [
         {
           "file": "photos/rohrdommel.heic",
@@ -879,6 +994,11 @@
           "file": "speech/collection.name/rohrdommel.m4a",
           "sha256": "6fd71cdb8b2c3b22c7e5cdccb2c5de316e4deaedddd4edcf5172131188acf590",
           "text": "Rohrdommel"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/rohrdommel.m4a",
+          "sha256": "95c2cf7d2d128303814d2d5acbfbc3af0551daf34d3e03b5cd9d0293f6abc86d",
+          "text": "Die Rohrdommel lebt im Schilf, und der Papa brüllt wie ein Ochse."
         }
       }
     },
@@ -890,6 +1010,7 @@
       "article": "die",
       "lookalike": "gull",
       "pronunciation": null,
+      "fact": "Die Flussseeschwalbe hat eine schwarze Kappe und einen roten Schnabel.",
       "photos": [
         {
           "file": "photos/flussseeschwalbe.heic",
@@ -929,6 +1050,11 @@
           "file": "speech/collection.name/flussseeschwalbe.m4a",
           "sha256": "2d87c0c889130f81af618d6866aaccd5feceefff7eed103e30fb8671bacd0be0",
           "text": "Flussseeschwalbe"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/flussseeschwalbe.m4a",
+          "sha256": "28698308cc04dca803be24af5a75dc84c881940585a000369a0be3f169d45d7b",
+          "text": "Die Flussseeschwalbe hat eine schwarze Kappe und einen roten Schnabel."
         }
       }
     },
@@ -940,6 +1066,7 @@
       "article": "der",
       "lookalike": "diver",
       "pronunciation": null,
+      "fact": "Der Zwergtaucher ist klein und rund und taucht blitzschnell ab.",
       "photos": [
         {
           "file": "photos/zwergtaucher.heic",
@@ -979,6 +1106,11 @@
           "file": "speech/collection.name/zwergtaucher.m4a",
           "sha256": "61de44086c160d7f47b2062a695c7b9d87435655ad0604ab2d0fe1647b06fda0",
           "text": "Zwergtaucher"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/zwergtaucher.m4a",
+          "sha256": "0c681a28256a5d6b934133a2b9dbe98f8b5f6d39f5aac3bf784bd6d44b86509e",
+          "text": "Der Zwergtaucher ist klein und rund und taucht blitzschnell ab."
         }
       }
     },
@@ -990,6 +1122,7 @@
       "article": "die",
       "lookalike": "duck",
       "pronunciation": null,
+      "fact": "Die Reiherente hat gelbe Augen, der Papa einen langen Federzopf.",
       "photos": [
         {
           "file": "photos/reiherente.heic",
@@ -1029,6 +1162,11 @@
           "file": "speech/collection.name/reiherente.m4a",
           "sha256": "764dd37358e925d9e102b967d7100da7fb1af8b5360a9578f621806cd1fc16a6",
           "text": "Reiherente"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/reiherente.m4a",
+          "sha256": "1384ab46d6d6bec667daf1551e5ed1fe8c282333a1a2cd7b45f88d151b894119",
+          "text": "Die Reiherente hat gelbe Augen, der Papa einen langen Federzopf."
         }
       }
     },
@@ -1040,6 +1178,7 @@
       "article": "die",
       "lookalike": "duck",
       "pronunciation": null,
+      "fact": "Die Krickente ist die kleinste Ente bei uns.",
       "photos": [
         {
           "file": "photos/krickente.heic",
@@ -1079,6 +1218,11 @@
           "file": "speech/collection.name/krickente.m4a",
           "sha256": "e47a4b10bb7b59e60ab76786f72ef841c92c518b137f3eb7cf5ea13840eece59",
           "text": "Krickente"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/krickente.m4a",
+          "sha256": "d89e34607fdbb51e19fd7d2018506b56ab841df29c1260852a07591749d3454d",
+          "text": "Die Krickente ist die kleinste Ente bei uns."
         }
       }
     },
@@ -1090,6 +1234,7 @@
       "article": "die",
       "lookalike": "duck",
       "pronunciation": null,
+      "fact": "Die Löffelente hat einen breiten Schnabel wie eine Schaufel.",
       "photos": [
         {
           "file": "photos/loeffelente.heic",
@@ -1129,6 +1274,11 @@
           "file": "speech/collection.name/loeffelente.m4a",
           "sha256": "de7212bedf7e517ccbfa95f5a379f6606e72cb7aae453571d964ed7dc55d1705",
           "text": "Löffelente"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/loeffelente.m4a",
+          "sha256": "2d7021b7db3d5d63d8e6b411fd00da590b30b5630835fc04fc596b5f5cd63acf",
+          "text": "Die Löffelente hat einen breiten Schnabel wie eine Schaufel."
         }
       }
     },
@@ -1140,6 +1290,7 @@
       "article": "die",
       "lookalike": "duck",
       "pronunciation": null,
+      "fact": "Die Schellente klingelt beim Fliegen mit den Flügeln.",
       "photos": [
         {
           "file": "photos/schellente.heic",
@@ -1164,6 +1315,11 @@
           "file": "speech/collection.name/schellente.m4a",
           "sha256": "c49d709ad723c766b560044e05559e6a1f49c5a90e5e3b191973b8520ebdcaf4",
           "text": "Schellente"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/schellente.m4a",
+          "sha256": "34ccf9b626545de53ffa1e49882846a0d2ff25ededdb9574c40ec43354989e29",
+          "text": "Die Schellente klingelt beim Fliegen mit den Flügeln."
         }
       }
     },
@@ -1175,6 +1331,7 @@
       "article": "die",
       "lookalike": "duck",
       "pronunciation": null,
+      "fact": "Bei der Kolbenente hat der Papa einen orangen Kopf und roten Schnabel.",
       "photos": [
         {
           "file": "photos/kolbenente.heic",
@@ -1214,6 +1371,11 @@
           "file": "speech/collection.name/kolbenente.m4a",
           "sha256": "d8da528a4eeaa3273e8eecb918d7c882db95aabfb3bf1a8fc3620b55c3a120fa",
           "text": "Kolbenente"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/kolbenente.m4a",
+          "sha256": "4407909fe2d5fb50869ac941d1684fdda2e14eae3fab096f45e8b56bad707093",
+          "text": "Bei der Kolbenente hat der Papa einen orangen Kopf und roten Schnabel."
         }
       }
     },
@@ -1225,6 +1387,7 @@
       "article": "der",
       "lookalike": "duck",
       "pronunciation": null,
+      "fact": "Der Gänsesäger hat Zacken am Schnabel wie eine Säge.",
       "photos": [
         {
           "file": "photos/gaensesaeger.heic",
@@ -1256,6 +1419,11 @@
           "file": "speech/collection.name/gaensesaeger.m4a",
           "sha256": "66a7bcdd0d417ed4ca65c4e48bed9241f103ea4a8bd8a7aa53acb563992ea4ac",
           "text": "Gänsesäger"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/gaensesaeger.m4a",
+          "sha256": "c8b08d9cf31d1c3de4e6f9a511ba4f7fbf874a474939e87ba5418399020a3085",
+          "text": "Der Gänsesäger hat Zacken am Schnabel wie eine Säge."
         }
       }
     },
@@ -1267,6 +1435,7 @@
       "article": "der",
       "lookalike": "duck",
       "pronunciation": null,
+      "fact": "Beim Zwergsäger ist der Papa weiß mit schwarzer Augenmaske.",
       "photos": [
         {
           "file": "photos/zwergsaeger.heic",
@@ -1283,6 +1452,11 @@
           "file": "speech/collection.name/zwergsaeger.m4a",
           "sha256": "9776d712fa7a61016f3eb8c8097f5d9e8316c71a09f6600fa21be323555e0dbb",
           "text": "Zwergsäger"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/zwergsaeger.m4a",
+          "sha256": "eeb1f99f8559a25d286dfed126231f57e89ed621e03dafa30624ea32d66396b6",
+          "text": "Beim Zwergsäger ist der Papa weiß mit schwarzer Augenmaske."
         }
       }
     },
@@ -1294,6 +1468,7 @@
       "article": "der",
       "lookalike": "raptor",
       "pronunciation": null,
+      "fact": "Mit den Füßen voran stürzt sich der Fischadler ins Wasser.",
       "photos": [
         {
           "file": "photos/fischadler.heic",
@@ -1325,6 +1500,11 @@
           "file": "speech/collection.name/fischadler.m4a",
           "sha256": "f7d7aee08c9f083536791ca2162e35e913fad29fd7530ae1e435f7be9b28ad4c",
           "text": "Fischadler"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/fischadler.m4a",
+          "sha256": "038027e01e606e9d1dd1099503d0e2b696bf1a44f02d3d56d6e55f17cb788a1e",
+          "text": "Mit den Füßen voran stürzt sich der Fischadler ins Wasser."
         }
       }
     },
@@ -1336,6 +1516,7 @@
       "article": "der",
       "lookalike": "shorebird",
       "pronunciation": null,
+      "fact": "Der Flussuferläufer wippt ständig mit dem Po.",
       "photos": [
         {
           "file": "photos/flussuferlaeufer.heic",
@@ -1367,6 +1548,11 @@
           "file": "speech/collection.name/flussuferlaeufer.m4a",
           "sha256": "8eb5b5fe87c2eafcb319cf8968dc7cb943cf6276a9a9cc6ef1d7f98efeed2c34",
           "text": "Flussuferläufer"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/flussuferlaeufer.m4a",
+          "sha256": "d6b8605a9f2f97c31c0c3461eb70fbdc898f117f6bc7a727b4ef615c28516769",
+          "text": "Der Flussuferläufer wippt ständig mit dem Po."
         }
       }
     },
@@ -1378,6 +1564,7 @@
       "article": "die",
       "lookalike": "shorebird",
       "pronunciation": null,
+      "fact": "Bei der Bekassine meckert der Papa im Flug wie eine Ziege.",
       "photos": [
         {
           "file": "photos/bekassine.heic",
@@ -1417,6 +1604,11 @@
           "file": "speech/collection.name/bekassine.m4a",
           "sha256": "ef05262e85a8b1a6379b317e6c1872087b040d6448f0e281756d54f86c755efc",
           "text": "Bekassine"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/bekassine.m4a",
+          "sha256": "aa4a185f50d22f01958a974657bba4fac93bcfd096eef26ec22528acc7927c1a",
+          "text": "Bei der Bekassine meckert der Papa im Flug wie eine Ziege."
         }
       }
     },
@@ -1428,6 +1620,7 @@
       "article": "der",
       "lookalike": "diver",
       "pronunciation": null,
+      "fact": "Der Papageitaucher trägt viele Fische auf einmal im bunten Schnabel.",
       "photos": [
         {
           "file": "photos/papageitaucher.heic",
@@ -1460,6 +1653,11 @@
           "file": "speech/collection.name/papageitaucher.m4a",
           "sha256": "e6a512a6716045395eaca0b8a4d1080d5ca2f7ac393221049033e0762a023565",
           "text": "Papageitaucher"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/papageitaucher.m4a",
+          "sha256": "b77bd1cfbdbb109940d8a8cb810a5aa2e498dd7818f9fe7995982bb370bf4e51",
+          "text": "Der Papageitaucher trägt viele Fische auf einmal im bunten Schnabel."
         }
       }
     }

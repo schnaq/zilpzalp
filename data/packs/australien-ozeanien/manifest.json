@@ -16,6 +16,7 @@
       "article": "der",
       "lookalike": "parrot",
       "pronunciation": null,
+      "fact": "Der Rosakakadu hat eine rosa Brust und einen grauen Rücken.",
       "photos": [
         {
           "file": "photos/rosakakadu.heic",
@@ -48,6 +49,11 @@
           "file": "speech/collection.name/rosakakadu.m4a",
           "sha256": "f2e058459b1fff9f21e010dd39edc06e4a647084eb225c8974554ed97ca2c585",
           "text": "Rosakakadu"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/rosakakadu.m4a",
+          "sha256": "9a6714e5d476bb9ddd928b8261979194a0f90cdc15554f97b41034637c5c00dd",
+          "text": "Der Rosakakadu hat eine rosa Brust und einen grauen Rücken."
         }
       }
     },
@@ -59,6 +65,7 @@
       "article": "der",
       "lookalike": "parrot",
       "pronunciation": null,
+      "fact": "Der Gelbhaubenkakadu ist weiß, hat eine gelbe Haube und kreischt laut.",
       "photos": [
         {
           "file": "photos/gelbhaubenkakadu.heic",
@@ -75,6 +82,11 @@
           "file": "speech/collection.name/gelbhaubenkakadu.m4a",
           "sha256": "f148d25281083bac3262432d1369d6d95200e98d223c8ff06eb7ec6b9d122bc9",
           "text": "Gelbhaubenkakadu"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/gelbhaubenkakadu.m4a",
+          "sha256": "55f590624a7d79cf3e300c2c64b628079bc0060842ed97e740a79a3d436d6266",
+          "text": "Der Gelbhaubenkakadu ist weiß, hat eine gelbe Haube und kreischt laut."
         }
       }
     },
@@ -86,6 +98,7 @@
       "article": "der",
       "lookalike": "parrot",
       "pronunciation": null,
+      "fact": "Der Inkakakadu ist weiß-rosa und hat eine rot-gelb gestreifte Haube.",
       "photos": [
         {
           "file": "photos/inkakakadu.heic",
@@ -110,6 +123,11 @@
           "file": "speech/collection.name/inkakakadu.m4a",
           "sha256": "8049f5b85b2f92481b59c6df9541fb48c6193a25b02a9fbf4af4a3e316e43107",
           "text": "Inkakakadu"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/inkakakadu.m4a",
+          "sha256": "658abd753d236bf24aa2b1dce9decdb7c852b067d7330e32b06bf46b2f6b9f2f",
+          "text": "Der Inkakakadu ist weiß-rosa und hat eine rot-gelb gestreifte Haube."
         }
       }
     },
@@ -121,6 +139,7 @@
       "article": "der",
       "lookalike": "parrot",
       "pronunciation": null,
+      "fact": "Der Regenbogenlori ist kunterbunt und hat eine Zunge wie ein Pinsel.",
       "photos": [
         {
           "file": "photos/regenbogenlori.heic",
@@ -137,6 +156,11 @@
           "file": "speech/collection.name/regenbogenlori.m4a",
           "sha256": "ea4d570b51fc027ae44b6e34ce09ef390a7d4276db52445b4e28923e22f47b45",
           "text": "Regenbogenlori"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/regenbogenlori.m4a",
+          "sha256": "938c7f30279d1a07e3bac5c8b2cd6c2ed2e81f1033ea63ebdad000168846294d",
+          "text": "Der Regenbogenlori ist kunterbunt und hat eine Zunge wie ein Pinsel."
         }
       }
     },
@@ -148,6 +172,7 @@
       "article": "der",
       "lookalike": "parrot",
       "pronunciation": null,
+      "fact": "Beim Königssittich hat der Papa einen roten Kopf und grüne Flügel.",
       "photos": [
         {
           "file": "photos/koenigssittich.heic",
@@ -164,6 +189,11 @@
           "file": "speech/collection.name/koenigssittich.m4a",
           "sha256": "e2f79bdc90f334ccb46a872026bd9bf59940a80dc443ad5a0b08714d2e52035d",
           "text": "Königssittich"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/koenigssittich.m4a",
+          "sha256": "77c7a13be4b4c26eb9a8376f4790ea8d41090299d416e327f2c4650387d22973",
+          "text": "Beim Königssittich hat der Papa einen roten Kopf und grüne Flügel."
         }
       }
     },
@@ -175,6 +205,7 @@
       "article": "die",
       "lookalike": "parrot",
       "pronunciation": null,
+      "fact": "Die Rosella hat einen roten Kopf, weiße Wangen und einen gelben Bauch.",
       "photos": [
         {
           "file": "photos/rosella.heic",
@@ -207,6 +238,11 @@
           "file": "speech/collection.name/rosella.m4a",
           "sha256": "8bf0497015f36368f2083783baf4c6a980242a84b87fc88c7cb5d47b8f337e0b",
           "text": "Rosella"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/rosella.m4a",
+          "sha256": "fe52d71a05b970253845d2f21f57d3e3663f5a524f4715f325df217cfdb61d5e",
+          "text": "Die Rosella hat einen roten Kopf, weiße Wangen und einen gelben Bauch."
         }
       }
     },
@@ -218,6 +254,7 @@
       "article": "der",
       "lookalike": "parrot",
       "pronunciation": null,
+      "fact": "Der Wellensittich ist in der Wildnis grün und fliegt in Schwärmen.",
       "photos": [
         {
           "file": "photos/wellensittich.heic",
@@ -257,6 +294,11 @@
           "file": "speech/collection.name/wellensittich.m4a",
           "sha256": "6c5e3eadf220fa2a655bbd1adb0499ddd73ffd091bd7b7ef6771c02a03c04c32",
           "text": "Wellensittich"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/wellensittich.m4a",
+          "sha256": "f6e11bf9ff3f5152755ca2daf0a1afa2b1fe42f1ac17a0f7fbe1077dfba24d3c",
+          "text": "Der Wellensittich ist in der Wildnis grün und fliegt in Schwärmen."
         }
       }
     },
@@ -268,6 +310,7 @@
       "article": "der",
       "lookalike": "parrot",
       "pronunciation": null,
+      "fact": "Der Kea ist ein frecher Bergpapagei und knabbert sogar an Autos herum.",
       "photos": [
         {
           "file": "photos/kea.heic",
@@ -300,6 +343,11 @@
           "file": "speech/collection.name/kea.m4a",
           "sha256": "90cc47db40e3e009b110a4524e31f71f6cec42c61dfb38c95462143e73f0d81b",
           "text": "Kea"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/kea.m4a",
+          "sha256": "24d257c20ac975c7f92127e00fc75c8078afcb032dd89e8688995032d9725751",
+          "text": "Der Kea ist ein frecher Bergpapagei und knabbert sogar an Autos herum."
         }
       }
     },
@@ -311,6 +359,7 @@
       "article": "der",
       "lookalike": "ratite",
       "pronunciation": null,
+      "fact": "Beim Emu brütet der Papa die dunkelgrünen Eier ganz allein aus.",
       "photos": [
         {
           "file": "photos/emu.heic",
@@ -343,6 +392,11 @@
           "file": "speech/collection.name/emu.m4a",
           "sha256": "c33a1909372e7fd03d2f3e09be52b4105955c48f7d7ac9b4df860eec16175a1b",
           "text": "Emu"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/emu.m4a",
+          "sha256": "f512f24ddc1ea435d8ee7370e1747fc2fb64248ca9bc1405f32d6d464c2a7fb7",
+          "text": "Beim Emu brütet der Papa die dunkelgrünen Eier ganz allein aus."
         }
       }
     },
@@ -354,6 +408,7 @@
       "article": "der",
       "lookalike": "ratite",
       "pronunciation": null,
+      "fact": "Der Helmkasuar hat einen blauen Hals und einen Helm auf dem Kopf.",
       "photos": [
         {
           "file": "photos/helmkasuar-3.heic",
@@ -386,6 +441,11 @@
           "file": "speech/collection.name/helmkasuar.m4a",
           "sha256": "dbdc02ac3a4ba99f94675de3f28b29a4d68e529051ae331764ebd85e8e244ac4",
           "text": "Helmkasuar"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/helmkasuar.m4a",
+          "sha256": "a848ca6b7df5db2efbb0ca215b2d69c628893581378a92de51bc3b613c0a9937",
+          "text": "Der Helmkasuar hat einen blauen Hals und einen Helm auf dem Kopf."
         }
       }
     },
@@ -397,6 +457,7 @@
       "article": "der",
       "lookalike": "kingfisher",
       "pronunciation": null,
+      "fact": "Der Lachende Hans ruft so laut, als würde er sich kaputtlachen.",
       "photos": [
         {
           "file": "photos/lachender-hans.heic",
@@ -429,6 +490,11 @@
           "file": "speech/collection.name/lachender-hans.m4a",
           "sha256": "dc983fa1b7897554f78bc87659d6f03eedf8f1ae8946a665d20c6f7b0418a645",
           "text": "Lachender Hans"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/lachender-hans.m4a",
+          "sha256": "3bd8a1b44bec275b0f5ff825485e53878708aec7f7c1f3ab81c1e9d1480de290",
+          "text": "Der Lachende Hans ruft so laut, als würde er sich kaputtlachen."
         }
       }
     },
@@ -440,6 +506,7 @@
       "article": "der",
       "lookalike": "kingfisher",
       "pronunciation": null,
+      "fact": "Der Regenbogenspint schillert bunt und gräbt Höhlen in den Sand.",
       "photos": [
         {
           "file": "photos/regenbogenspint.heic",
@@ -472,6 +539,11 @@
           "file": "speech/collection.name/regenbogenspint.m4a",
           "sha256": "68dc66b2ee7bf2f39f4954f3bd5a6c0bb798e1ec2a58605d60f412e9b4ba0678",
           "text": "Regenbogenspint"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/regenbogenspint.m4a",
+          "sha256": "3dd42bd6435be3e3aabdca5e16bb8dbb7cfb4b8015b2a28bc1302195276a9d32",
+          "text": "Der Regenbogenspint schillert bunt und gräbt Höhlen in den Sand."
         }
       }
     },
@@ -483,6 +555,7 @@
       "article": "der",
       "lookalike": "thrush",
       "pronunciation": null,
+      "fact": "Beim Seidenlaubenvogel schmückt der Papa seine Laube mit Blauem.",
       "photos": [
         {
           "file": "photos/seidenlaubenvogel.heic",
@@ -514,6 +587,11 @@
           "file": "speech/collection.name/seidenlaubenvogel.m4a",
           "sha256": "c8146639a537dffafe44727681916ff718d259af0d654947dc331a9b0d13405e",
           "text": "Seidenlaubenvogel"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/seidenlaubenvogel.m4a",
+          "sha256": "c97b8a6c738f553477aee7098784da96ff0c53867a15663b5a85bbbd5f50d87a",
+          "text": "Beim Seidenlaubenvogel schmückt der Papa seine Laube mit Blauem."
         }
       }
     },
@@ -525,6 +603,7 @@
       "article": "der",
       "lookalike": "warbler",
       "pronunciation": null,
+      "fact": "Beim Prachtstaffelschwanz ist der Papa knallblau.",
       "photos": [
         {
           "file": "photos/prachtstaffelschwanz.heic",
@@ -557,6 +636,11 @@
           "file": "speech/collection.name/prachtstaffelschwanz.m4a",
           "sha256": "45cac3dcd358d41b8971ca3e97b12717483117eb6f9db0cea70e44e752b04c83",
           "text": "Prachtstaffelschwanz"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/prachtstaffelschwanz.m4a",
+          "sha256": "ff39886c9b28246f747c435278561d4a24bbaa743f4a95c91e59109f896a304b",
+          "text": "Beim Prachtstaffelschwanz ist der Papa knallblau."
         }
       }
     },
@@ -568,6 +652,7 @@
       "article": "der",
       "lookalike": "corvid",
       "pronunciation": null,
+      "fact": "Der Flötenvogel ist schwarz-weiß und singt wie eine Flöte.",
       "photos": [
         {
           "file": "photos/floetenvogel.heic",
@@ -607,6 +692,11 @@
           "file": "speech/collection.name/floetenvogel.m4a",
           "sha256": "86e2ee63d4e647cb3f3d0b552c4477fd2bcd60eb3428002107ab74b76f53d4ef",
           "text": "Flötenvogel"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/floetenvogel.m4a",
+          "sha256": "d8dd1d5b08346cdb16edbcbf30bb91cdc9a2e4ddb04a8da5b3483a600a42cd03",
+          "text": "Der Flötenvogel ist schwarz-weiß und singt wie eine Flöte."
         }
       }
     },
@@ -618,6 +708,7 @@
       "article": "der",
       "lookalike": "thrush",
       "pronunciation": null,
+      "fact": "Der Tui glänzt dunkel und trägt zwei weiße Federbüschel am Hals.",
       "photos": [
         {
           "file": "photos/tui.heic",
@@ -641,6 +732,11 @@
           "file": "speech/collection.name/tui.m4a",
           "sha256": "31ca5e10a4e66c4a0e1fcd97e7e4a56fa30feba897c0bb18b84ab580cf96580d",
           "text": "Tui"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/tui.m4a",
+          "sha256": "bc6193c04dbdc6073fd6370cf2721583a2979cf6740484fbb22fdb6ef14e822c",
+          "text": "Der Tui glänzt dunkel und trägt zwei weiße Federbüschel am Hals."
         }
       }
     },
@@ -652,6 +748,7 @@
       "article": "der",
       "lookalike": "warbler",
       "pronunciation": null,
+      "fact": "Der Neuseeland-Fächerschwanz folgt gern Wanderern.",
       "photos": [
         {
           "file": "photos/neuseeland-faecherschwanz.heic",
@@ -668,6 +765,11 @@
           "file": "speech/collection.name/neuseeland-faecherschwanz.m4a",
           "sha256": "dac40e495fce8326bcb252619a8cd960d004cead8908e199522f7b52be2a957a",
           "text": "Neuseeland-Fächerschwanz"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/neuseeland-faecherschwanz.m4a",
+          "sha256": "eeedd6fa46d9a98e8c881c6fbd406b328b9289667f3f0b920ef3648c60165fbc",
+          "text": "Der Neuseeland-Fächerschwanz folgt gern Wanderern."
         }
       }
     },
@@ -679,6 +781,7 @@
       "article": "der",
       "lookalike": "rail",
       "pronunciation": null,
+      "fact": "Der Pukeko ist lila-blau und hat einen roten Schnabel mit roter Stirn.",
       "photos": [
         {
           "file": "photos/pukeko.heic",
@@ -718,6 +821,11 @@
           "file": "speech/collection.name/pukeko.m4a",
           "sha256": "6d5daed036779b245d81f1c9286af7941091bee64623427d638bc6e2c47682d4",
           "text": "Pukeko"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/pukeko.m4a",
+          "sha256": "a88b4c0020df06ff6e705295a9bd6365ecbf9c11c7fa8b70fd52f86f4c5b6250",
+          "text": "Der Pukeko ist lila-blau und hat einen roten Schnabel mit roter Stirn."
         }
       }
     },
@@ -729,6 +837,7 @@
       "article": "die",
       "lookalike": "rail",
       "pronunciation": null,
+      "fact": "Die Wekaralle kann nicht fliegen und nimmt neugierig alles mit.",
       "photos": [
         {
           "file": "photos/wekaralle.heic",
@@ -768,6 +877,11 @@
           "file": "speech/collection.name/wekaralle.m4a",
           "sha256": "e00ea5ae27b3e6f7deaa1e23bf83ee776ea5b2c7a75cd3f3a8aa962542ce9d13",
           "text": "Wekaralle"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/wekaralle.m4a",
+          "sha256": "740f159d8faa25f434a53ac50999e10be1206b9facc0bed255d9a24266037dea",
+          "text": "Die Wekaralle kann nicht fliegen und nimmt neugierig alles mit."
         }
       }
     },
@@ -779,6 +893,7 @@
       "article": "die",
       "lookalike": "pigeon",
       "pronunciation": null,
+      "fact": "Die Maori-Fruchttaube hat einen weißen Bauch und rauscht beim Fliegen.",
       "photos": [
         {
           "file": "photos/maori-taube.heic",
@@ -811,6 +926,11 @@
           "file": "speech/collection.name/maori-taube.m4a",
           "sha256": "7380675e7dcd296eb445cde7a6da8a2c012e0df0253446c19846fb4cf342ec8f",
           "text": "Maori-Fruchttaube"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/maori-taube.m4a",
+          "sha256": "5382e33626d05fd88d80de9f23cd9047171c27637280323313bd18658f664280",
+          "text": "Die Maori-Fruchttaube hat einen weißen Bauch und rauscht beim Fliegen."
         }
       }
     },
@@ -822,6 +942,7 @@
       "article": "der",
       "lookalike": "goose",
       "pronunciation": null,
+      "fact": "Der Schwarzschwan ist fast ganz schwarz und hat einen roten Schnabel.",
       "photos": [
         {
           "file": "photos/schwarzschwan.heic",
@@ -861,6 +982,11 @@
           "file": "speech/collection.name/schwarzschwan.m4a",
           "sha256": "be676b63265449358dc805819c959f5d7b824baea4a2bbc44fba6ebb2c24220b",
           "text": "Schwarzschwan"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/schwarzschwan.m4a",
+          "sha256": "3927528e9d6ee1ec9c68bab27278b33efd1c4192dd4dcd104b7277e752cb4e5a",
+          "text": "Der Schwarzschwan ist fast ganz schwarz und hat einen roten Schnabel."
         }
       }
     },
@@ -872,6 +998,7 @@
       "article": "der",
       "lookalike": "seabird",
       "pronunciation": null,
+      "fact": "Der Brillenpelikan hat den längsten Schnabel von allen Vögeln.",
       "photos": [
         {
           "file": "photos/australischer-pelikan.heic",
@@ -904,6 +1031,11 @@
           "file": "speech/collection.name/australischer-pelikan.m4a",
           "sha256": "9d86a5b5037d2b0947f07aacafc94e57b8dbc7873e68e72638cbd4f4a1f755c5",
           "text": "Brillenpelikan"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/australischer-pelikan.m4a",
+          "sha256": "93e4d6cd0a044db3afbc2701f9541143818326f86b7d004b707ace287678cb27",
+          "text": "Der Brillenpelikan hat den längsten Schnabel von allen Vögeln."
         }
       }
     },
@@ -915,6 +1047,7 @@
       "article": "der",
       "lookalike": "heron",
       "pronunciation": null,
+      "fact": "Der Stachelibis hat am Hals Federn wie Strohhalme.",
       "photos": [
         {
           "file": "photos/strohhalsibis.heic",
@@ -947,6 +1080,11 @@
           "file": "speech/collection.name/strohhalsibis.m4a",
           "sha256": "f707b4f8721d36610871219aa6b551d99153a3f1a909ddf4d7df2b8b6a3a4d58",
           "text": "Stachelibis"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/strohhalsibis.m4a",
+          "sha256": "c191167815d1cbfa4fc9c27557749db55d267f91003d17cbc82ca5244b3aee4f",
+          "text": "Der Stachelibis hat am Hals Federn wie Strohhalme."
         }
       }
     },
@@ -958,6 +1096,7 @@
       "article": "der",
       "lookalike": "penguin",
       "pronunciation": null,
+      "fact": "Der Gelbaugenpinguin hat gelbe Augen und ein gelbes Band um den Kopf.",
       "photos": [
         {
           "file": "photos/gelbaugenpinguin.heic",
@@ -974,6 +1113,11 @@
           "file": "speech/collection.name/gelbaugenpinguin.m4a",
           "sha256": "bf6d81349d0c006b37477802394135ca5369ae3867b4924b3793ab3079b1c1fa",
           "text": "Gelbaugenpinguin"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/gelbaugenpinguin.m4a",
+          "sha256": "65e8b31c88787b0a23c48fca51a6d190d44762e184f331f2023e4d5b2a58c5b8",
+          "text": "Der Gelbaugenpinguin hat gelbe Augen und ein gelbes Band um den Kopf."
         }
       }
     },
@@ -985,6 +1129,7 @@
       "article": "der",
       "lookalike": "raptor",
       "pronunciation": null,
+      "fact": "Der Weißbauchseeadler ist weiß und grau und fängt Fische an der Küste.",
       "photos": [
         {
           "file": "photos/weissbauchseeadler.heic",
@@ -1017,6 +1162,11 @@
           "file": "speech/collection.name/weissbauchseeadler.m4a",
           "sha256": "3585ddbe659fcc0feffcde080b4e139cf156ab4792ce036dd2de752f5dcc1107",
           "text": "Weißbauchseeadler"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/weissbauchseeadler.m4a",
+          "sha256": "e764e2bb810b5336a432daa4dd895fb7e4cc573eaaabf4e832d48528cc2c3a37",
+          "text": "Der Weißbauchseeadler ist weiß und grau und fängt Fische an der Küste."
         }
       }
     }

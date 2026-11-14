@@ -16,6 +16,7 @@
       "article": "der",
       "lookalike": "finch",
       "pronunciation": null,
+      "fact": "Der Feldsperling hat ein braunes Käppchen und einen Wangenfleck.",
       "photos": [
         {
           "file": "photos/feldsperling.heic",
@@ -47,6 +48,11 @@
           "file": "speech/collection.name/feldsperling.m4a",
           "sha256": "16f1c6daacf6bd39f543199c8fe5ee845b899841c217f33ec7054ff313a82783",
           "text": "Feldsperling"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/feldsperling.m4a",
+          "sha256": "6806f5ad579f3edbb46fa298066296ac72a48f141d4b174c7a3803fbdcea795d",
+          "text": "Der Feldsperling hat ein braunes Käppchen und einen Wangenfleck."
         }
       }
     },
@@ -58,6 +64,7 @@
       "article": "das",
       "lookalike": "gamebird",
       "pronunciation": null,
+      "fact": "Das Rebhuhn lebt mit seiner Familie im Feld und duckt sich bei Gefahr.",
       "photos": [
         {
           "file": "photos/rebhuhn.heic",
@@ -97,6 +104,11 @@
           "file": "speech/collection.name/rebhuhn.m4a",
           "sha256": "6ee3aafaea99f36c69fc52157003ec4f525a3f16167b3ba3d09ab3369af30495",
           "text": "Rebhuhn"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/rebhuhn.m4a",
+          "sha256": "20d4a04064f9742f6aec479743dd04843400f95211aa69466dd3f18a01c913b7",
+          "text": "Das Rebhuhn lebt mit seiner Familie im Feld und duckt sich bei Gefahr."
         }
       }
     },
@@ -108,6 +120,7 @@
       "article": "die",
       "lookalike": "swallow",
       "pronunciation": null,
+      "fact": "Die Mehlschwalbe hat einen weißen Po und klebt ihr Nest unters Dach.",
       "photos": [
         {
           "file": "photos/mehlschwalbe.heic",
@@ -131,6 +144,11 @@
           "file": "speech/collection.name/mehlschwalbe.m4a",
           "sha256": "c24e7f71447224409749a9899e55d14e8f42a964ad0b7cb4c4dbc24924fde45d",
           "text": "Mehlschwalbe"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/mehlschwalbe.m4a",
+          "sha256": "e427812e83b2812e01fd6a50c19a82463c3c8723fc0b8f8665d78b52eb5bce09",
+          "text": "Die Mehlschwalbe hat einen weißen Po und klebt ihr Nest unters Dach."
         }
       }
     },
@@ -142,6 +160,7 @@
       "article": "das",
       "lookalike": "thrush",
       "pronunciation": null,
+      "fact": "Beim Blaukehlchen hat der Papa eine leuchtend blaue Kehle.",
       "photos": [
         {
           "file": "photos/blaukehlchen.heic",
@@ -181,6 +200,11 @@
           "file": "speech/collection.name/blaukehlchen.m4a",
           "sha256": "8420bfebe2fc86ba5c3e71e4dc5c777ef06d9fe3cfe4333086cb6645376b5689",
           "text": "Blaukehlchen"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/blaukehlchen.m4a",
+          "sha256": "5d489e1ace2025f374fd90e2236746d386e30f031c37fd5f54f82543147542c5",
+          "text": "Beim Blaukehlchen hat der Papa eine leuchtend blaue Kehle."
         }
       }
     },
@@ -192,6 +216,7 @@
       "article": "das",
       "lookalike": "thrush",
       "pronunciation": null,
+      "fact": "Das Schwarzkehlchen sitzt auf Büschen, der Papa mit schwarzem Kopf.",
       "photos": [
         {
           "file": "photos/schwarzkehlchen.heic",
@@ -231,6 +256,11 @@
           "file": "speech/collection.name/schwarzkehlchen.m4a",
           "sha256": "f41eb2e55fa9f8d23fc635eb31496014812159b2b3d6db1201ccc51b5d2b84c7",
           "text": "Schwarzkehlchen"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/schwarzkehlchen.m4a",
+          "sha256": "c65ca9f84092a88f1a2dc63e5eb1817b80d8cf10352b0733916a21c90e119300",
+          "text": "Das Schwarzkehlchen sitzt auf Büschen, der Papa mit schwarzem Kopf."
         }
       }
     },
@@ -242,6 +272,7 @@
       "article": "der",
       "lookalike": "thrush",
       "pronunciation": null,
+      "fact": "Der Steinschmätzer wohnt zwischen Steinen und ruft „tschak“.",
       "photos": [
         {
           "file": "photos/steinschmaetzer.heic",
@@ -284,6 +315,7 @@
       "article": "die",
       "lookalike": "warbler",
       "pronunciation": null,
+      "fact": "Die Schafstelze ist gelb und flitzt zwischen Kühen nach Insekten.",
       "photos": [
         {
           "file": "photos/schafstelze.heic",
@@ -323,6 +355,11 @@
           "file": "speech/collection.name/schafstelze.m4a",
           "sha256": "e8e8d3781d3ad020411e31e4507777503ec6acf9c6d59caeeeb6985afc51b74b",
           "text": "Schafstelze"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/schafstelze.m4a",
+          "sha256": "211164d3e7f6276c4073f0b87e26291241c9acd7757aa6457911cd58643e4083",
+          "text": "Die Schafstelze ist gelb und flitzt zwischen Kühen nach Insekten."
         }
       }
     },
@@ -334,6 +371,7 @@
       "article": "der",
       "lookalike": "finch",
       "pronunciation": null,
+      "fact": "Der Girlitz ist klein, gelb und singt klirrend wie ein Schlüsselbund.",
       "photos": [
         {
           "file": "photos/girlitz.heic",
@@ -365,6 +403,11 @@
           "file": "speech/collection.name/girlitz.m4a",
           "sha256": "391105751ab82434fb7625b2fb43d54977360bb95335b251b0212b3fba0e1c15",
           "text": "Girlitz"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/girlitz.m4a",
+          "sha256": "777e982de987d2b55117d62fb2f54c74f2e21ee96ad9e78180a64143f7a65992",
+          "text": "Der Girlitz ist klein, gelb und singt klirrend wie ein Schlüsselbund."
         }
       }
     },
@@ -376,6 +419,7 @@
       "article": "die",
       "lookalike": "pigeon",
       "pronunciation": null,
+      "fact": "Die Turteltaube gurrt leise „turr turr“ und hat gemusterte Flügel.",
       "photos": [
         {
           "file": "photos/turteltaube.heic",
@@ -407,6 +451,11 @@
           "file": "speech/collection.name/turteltaube.m4a",
           "sha256": "385c59e5996dc31599d06d6bde95b8d27ab14adee045f269038c383df1a9299f",
           "text": "Turteltaube"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/turteltaube.m4a",
+          "sha256": "ffb761ef1a4254238fb89e9431edc3ddd1f17d5f3f793ee4761720cc24474254",
+          "text": "Die Turteltaube gurrt leise „turr turr“ und hat gemusterte Flügel."
         }
       }
     },
@@ -418,6 +467,7 @@
       "article": "der",
       "lookalike": "goose",
       "pronunciation": null,
+      "fact": "Der Singschwan hat einen gelben Schnabel mit schwarzer Spitze.",
       "photos": [
         {
           "file": "photos/singschwan.heic",
@@ -457,6 +507,11 @@
           "file": "speech/collection.name/singschwan.m4a",
           "sha256": "bb7c5cf13d352346d6604a13d8eb0e2e64d5e9f396e3ee8f686de894cec42fad",
           "text": "Singschwan"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/singschwan.m4a",
+          "sha256": "e51f92db2be605afc7e142588227e088ad76a0820dd3bcb6817681104a15d11b",
+          "text": "Der Singschwan hat einen gelben Schnabel mit schwarzer Spitze."
         }
       }
     },
@@ -468,6 +523,7 @@
       "article": "die",
       "lookalike": "goose",
       "pronunciation": null,
+      "fact": "Die Blässgans hat eine weiße Stirn und schwarze Streifen am Bauch.",
       "photos": [
         {
           "file": "photos/blaessgans.heic",
@@ -491,6 +547,11 @@
           "file": "speech/collection.name/blaessgans.m4a",
           "sha256": "524b1e1bde64061bd58e8d383f06e088e1fca92dc6b5e2164ff619016856f91d",
           "text": "Blässgans"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/blaessgans.m4a",
+          "sha256": "3a183cabe7e872b2adc59e1e75a9f9476daa243111955e64066b22d7d4c8d52d",
+          "text": "Die Blässgans hat eine weiße Stirn und schwarze Streifen am Bauch."
         }
       }
     },
@@ -502,6 +563,7 @@
       "article": "die",
       "lookalike": "goose",
       "pronunciation": null,
+      "fact": "Die Weißwangengans hat ein weißes Gesicht und einen schwarzen Hals.",
       "photos": [
         {
           "file": "photos/nonnengans.heic",
@@ -525,6 +587,11 @@
           "file": "speech/collection.name/nonnengans.m4a",
           "sha256": "4ec320436b150847b384fa7b5368dfcbbee27224f1d88768883ebe7bbf404f54",
           "text": "Weißwangengans"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/nonnengans.m4a",
+          "sha256": "41031a0c29d261ee6230e0629de6a79d58dadb0126be1f2d7d3fb9a4f810def8",
+          "text": "Die Weißwangengans hat ein weißes Gesicht und einen schwarzen Hals."
         }
       }
     },
@@ -536,6 +603,7 @@
       "article": "die",
       "lookalike": "raptor",
       "pronunciation": null,
+      "fact": "Die Kornweihe gleitet tief über die Felder, der Papa ist hellgrau.",
       "photos": [
         {
           "file": "photos/kornweihe.heic",
@@ -575,6 +643,11 @@
           "file": "speech/collection.name/kornweihe.m4a",
           "sha256": "536428077117a3654f567f198786736ca0565004c571f4739215ce46ef1bb52d",
           "text": "Kornweihe"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/kornweihe.m4a",
+          "sha256": "04997ac15173496aec8ce1105969b80fb23b77e94af6c4c3dcf1b7ced03f245a",
+          "text": "Die Kornweihe gleitet tief über die Felder, der Papa ist hellgrau."
         }
       }
     },
@@ -586,6 +659,7 @@
       "article": "die",
       "lookalike": "raptor",
       "pronunciation": null,
+      "fact": "Die Rohrweihe segelt über dem Schilf und hält die Flügel wie ein V.",
       "photos": [
         {
           "file": "photos/rohrweihe.heic",
@@ -625,6 +699,11 @@
           "file": "speech/collection.name/rohrweihe.m4a",
           "sha256": "c75a1c5d3ac6bb9fdc1c756481698dd82886086bd333d6784e45876218ad1470",
           "text": "Rohrweihe"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/rohrweihe.m4a",
+          "sha256": "f9becca380eea1d82a1e4cb0d8cb7ecb1b8af44e2a5c3a3ca5f961a44b5ae026",
+          "text": "Die Rohrweihe segelt über dem Schilf und hält die Flügel wie ein V."
         }
       }
     },
@@ -636,6 +715,7 @@
       "article": "der",
       "lookalike": "heron",
       "pronunciation": null,
+      "fact": "Der Schwarzstorch ist schwarz mit roten Beinen und lebt scheu im Wald.",
       "photos": [
         {
           "file": "photos/schwarzstorch.heic",
@@ -660,6 +740,11 @@
           "file": "speech/collection.name/schwarzstorch.m4a",
           "sha256": "b6bff4db8ead887cb77c321d468638478b2b7b7c244674baff5079d636aaefe2",
           "text": "Schwarzstorch"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/schwarzstorch.m4a",
+          "sha256": "e2329e33e796deaa6851ffda7453c1c214f4085c20aa43d855de17d533e1e594",
+          "text": "Der Schwarzstorch ist schwarz mit roten Beinen und lebt scheu im Wald."
         }
       }
     },
@@ -671,6 +756,7 @@
       "article": "der",
       "lookalike": "shorebird",
       "pronunciation": null,
+      "fact": "Der Große Brachvogel hat einen langen, nach unten gebogenen Schnabel.",
       "photos": [
         {
           "file": "photos/grosser-brachvogel.heic",
@@ -702,6 +788,11 @@
           "file": "speech/collection.name/grosser-brachvogel.m4a",
           "sha256": "89106d535d36aaa007a59ba3c3a213130a423668710aa81fce49b375e3bc1596",
           "text": "Großer Brachvogel"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/grosser-brachvogel.m4a",
+          "sha256": "22e64697d3fbe5eda90c2e54409413ae306104a79d5cf33c9d2e8ac1e3c8ae92",
+          "text": "Der Große Brachvogel hat einen langen, nach unten gebogenen Schnabel."
         }
       }
     },
@@ -713,6 +804,7 @@
       "article": "die",
       "lookalike": "shorebird",
       "pronunciation": null,
+      "fact": "Die Uferschnepfe hat einen langen, geraden Schnabel.",
       "photos": [
         {
           "file": "photos/uferschnepfe.heic",
@@ -752,6 +844,11 @@
           "file": "speech/collection.name/uferschnepfe.m4a",
           "sha256": "3a433a4bbfc2595cb130f8ca98ac3b72141980db1ff45dfa4e74149ecf4c5078",
           "text": "Uferschnepfe"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/uferschnepfe.m4a",
+          "sha256": "d6729086f2b66403ba84b24851a28341304c51dc68f4c39ad48f4f2cd01fbb27",
+          "text": "Die Uferschnepfe hat einen langen, geraden Schnabel."
         }
       }
     },
@@ -763,6 +860,7 @@
       "article": "die",
       "lookalike": "shorebird",
       "pronunciation": null,
+      "fact": "Bei der Bekassine meckert der Papa im Flug wie eine Ziege.",
       "photos": [
         {
           "file": "photos/bekassine.heic",
@@ -794,6 +892,11 @@
           "file": "speech/collection.name/bekassine.m4a",
           "sha256": "b3a38485a8556bb32061cc1ce863c8b96a5b2c3eb021fbfe0afb8e1d1cffca01",
           "text": "Bekassine"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/bekassine.m4a",
+          "sha256": "67f0f6fd58f16adca7cba99021a490ad6c4f720c24f1b7cecadb9e2300d25163",
+          "text": "Bei der Bekassine meckert der Papa im Flug wie eine Ziege."
         }
       }
     },
@@ -805,6 +908,7 @@
       "article": "der",
       "lookalike": "finch",
       "pronunciation": null,
+      "fact": "Der Bergfink hat eine orange Brust und frisst gern Bucheckern.",
       "photos": [
         {
           "file": "photos/bergfink.heic",
@@ -836,6 +940,11 @@
           "file": "speech/collection.name/bergfink.m4a",
           "sha256": "8f9ac8a672d0e24ca3cd1672a0f46f7257a7d41bd10f0beb3eda02f86734484c",
           "text": "Bergfink"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/bergfink.m4a",
+          "sha256": "e5a059e91773c3d57d844ec1c741624cad5f87c1b9560b1be0e7d2a2fed6876e",
+          "text": "Der Bergfink hat eine orange Brust und frisst gern Bucheckern."
         }
       }
     },
@@ -847,6 +956,7 @@
       "article": "der",
       "lookalike": "heron",
       "pronunciation": null,
+      "fact": "Der Silberreiher ist schneeweiß und jagt Fische und Frösche.",
       "photos": [
         {
           "file": "photos/silberreiher.heic",
@@ -886,6 +996,11 @@
           "file": "speech/collection.name/silberreiher.m4a",
           "sha256": "139a0f415a22d2acc9908b1e542a3393a4bb0cc2e2c64b6d213b4bbffb374de4",
           "text": "Silberreiher"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/silberreiher.m4a",
+          "sha256": "f7813799c127ae71e381409ecf307ff29de38aabef587343db6ca541d7ac2d4a",
+          "text": "Der Silberreiher ist schneeweiß und jagt Fische und Frösche."
         }
       }
     },
@@ -897,6 +1012,7 @@
       "article": "der",
       "lookalike": "heron",
       "pronunciation": null,
+      "fact": "Der Löffler hat einen Schnabel wie ein Löffel.",
       "photos": [
         {
           "file": "photos/loeffler.heic",
@@ -929,6 +1045,11 @@
           "file": "speech/collection.name/loeffler.m4a",
           "sha256": "0305a6a0f7177add8c154bf84a202054d943859d422c7c5ec4242cdafdf8f12c",
           "text": "Löffler"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/loeffler.m4a",
+          "sha256": "de5fb584d7a13dcde35668ba0a4a81f97e6812d3845e37a799eb72746c687b13",
+          "text": "Der Löffler hat einen Schnabel wie ein Löffel."
         }
       }
     },
@@ -940,6 +1061,7 @@
       "article": "der",
       "lookalike": "cuckoo",
       "pronunciation": null,
+      "fact": "Der Kuckuck ruft seinen Namen und legt seine Eier in fremde Nester.",
       "photos": [
         {
           "file": "photos/kuckuck-4.heic",
@@ -979,6 +1101,11 @@
           "file": "speech/collection.name/kuckuck.m4a",
           "sha256": "ae43f1b74b7257e81ea24fa3988485cc5ac5dbc5d6faa422037773c58af187fa",
           "text": "Kuckuck"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/kuckuck.m4a",
+          "sha256": "093198db489bf7d3df1ecbf8e2ac957f9b4c38c3e47af7474d777445cd15b448",
+          "text": "Der Kuckuck ruft seinen Namen und legt seine Eier in fremde Nester."
         }
       }
     },
@@ -990,6 +1117,7 @@
       "article": "die",
       "lookalike": "swallow",
       "pronunciation": null,
+      "fact": "Die Rauchschwalbe hat eine rote Kehle und brütet gern im Kuhstall.",
       "photos": [
         {
           "file": "photos/rauchschwalbe.heic",
@@ -1021,6 +1149,11 @@
           "file": "speech/collection.name/rauchschwalbe.m4a",
           "sha256": "fb8dcd7f2882205a22217f7ad04ed9979fd708331662933ede422d0160f7b12d",
           "text": "Rauchschwalbe"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/rauchschwalbe.m4a",
+          "sha256": "53e65bb17518742f86236a6267df1ba70a16dc461d35408c5bd4e01db1a24da0",
+          "text": "Die Rauchschwalbe hat eine rote Kehle und brütet gern im Kuhstall."
         }
       }
     },
@@ -1032,6 +1165,7 @@
       "article": "der",
       "lookalike": "heron",
       "pronunciation": null,
+      "fact": "Der Weißstorch wohnt auf Dächern und klappert laut mit dem Schnabel.",
       "photos": [
         {
           "file": "photos/weissstorch.heic",
@@ -1071,6 +1205,11 @@
           "file": "speech/collection.name/weissstorch.m4a",
           "sha256": "8b369450ef8696359c9ae1ccea3f3581278081b46dba8ff4ef5e032d6aef1ed2",
           "text": "Weißstorch"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/weissstorch.m4a",
+          "sha256": "b05190a20ed80e33749b1b73730c028f28513923d18b0e80093dc95230a5b5d5",
+          "text": "Der Weißstorch wohnt auf Dächern und klappert laut mit dem Schnabel."
         }
       }
     },
@@ -1082,6 +1221,7 @@
       "article": "der",
       "lookalike": "heron",
       "pronunciation": null,
+      "fact": "Der Kranich tanzt im Frühling und ruft laut wie eine Trompete.",
       "photos": [
         {
           "file": "photos/kranich.heic",
@@ -1121,6 +1261,11 @@
           "file": "speech/collection.name/kranich.m4a",
           "sha256": "faa6224aba8beb8f9350c6dfeeb5055b5976773f14858d7db5335f5fc188d4a1",
           "text": "Kranich"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/kranich.m4a",
+          "sha256": "4b01ecc1752c948937e6999b2332a9a07d971f0c03b8dbabf8dec56ed4158500",
+          "text": "Der Kranich tanzt im Frühling und ruft laut wie eine Trompete."
         }
       }
     },
@@ -1132,6 +1277,7 @@
       "article": "der",
       "lookalike": "shorebird",
       "pronunciation": null,
+      "fact": "Der Kiebitz trägt eine lange Federlocke am Kopf und ruft „kiwitt“.",
       "photos": [
         {
           "file": "photos/kiebitz.heic",
@@ -1171,6 +1317,11 @@
           "file": "speech/collection.name/kiebitz.m4a",
           "sha256": "305ba25fbe728e51bab247bc04b3cc03d9515e9391c401e916e49c11a668e2f1",
           "text": "Kiebitz"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/kiebitz.m4a",
+          "sha256": "471a8f954f514692e4b1a9446b293811e34b404138d217c33de0cc57f842baef",
+          "text": "Der Kiebitz trägt eine lange Federlocke am Kopf und ruft „kiwitt“."
         }
       }
     },
@@ -1182,6 +1333,7 @@
       "article": "die",
       "lookalike": "finch",
       "pronunciation": null,
+      "fact": "Die Feldlerche steigt singend hoch in den Himmel über dem Feld.",
       "photos": [
         {
           "file": "photos/feldlerche.heic",
@@ -1221,6 +1373,11 @@
           "file": "speech/collection.name/feldlerche.m4a",
           "sha256": "c26e68e72bd00221e2d53e5b7c9284515a4d73cf32d5b67b187dddd14defc4fb",
           "text": "Feldlerche"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/feldlerche.m4a",
+          "sha256": "ddeca0c29f91c8736f8e0d9564c2863b4c2209ad440b35c5492ea721e92fc2b9",
+          "text": "Die Feldlerche steigt singend hoch in den Himmel über dem Feld."
         }
       }
     },
@@ -1232,6 +1389,7 @@
       "article": "der",
       "lookalike": "kingfisher",
       "pronunciation": null,
+      "fact": "Der Wiedehopf ruft „up up up“ und hat eine Federkrone wie ein Fächer.",
       "photos": [
         {
           "file": "photos/wiedehopf.heic",
@@ -1263,6 +1421,11 @@
           "file": "speech/collection.name/wiedehopf.m4a",
           "sha256": "c7c05a3120832ea6a241ca9e0882f9c9a9fe05b839f0e0c1b552b33ab56da907",
           "text": "Wiedehopf"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/wiedehopf.m4a",
+          "sha256": "e238f5192d83f927960d32316bf88e910b08051cacab3266142871c0d2225432",
+          "text": "Der Wiedehopf ruft „up up up“ und hat eine Federkrone wie ein Fächer."
         }
       }
     },
@@ -1274,6 +1437,7 @@
       "article": "der",
       "lookalike": "kingfisher",
       "pronunciation": null,
+      "fact": "Der Bienenfresser ist bunt wie ein Regenbogen und fängt Bienen.",
       "photos": [
         {
           "file": "photos/bienenfresser.heic",
@@ -1313,6 +1477,11 @@
           "file": "speech/collection.name/bienenfresser.m4a",
           "sha256": "ea0f110b06b2859da704242ba9888f5cfcfdc85ebb1d2ea130667d52395aea36",
           "text": "Bienenfresser"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/bienenfresser.m4a",
+          "sha256": "13d893a1af3514dd32d651c63da15d8e62fdbe182ce55dcf4c22083a4850a008",
+          "text": "Der Bienenfresser ist bunt wie ein Regenbogen und fängt Bienen."
         }
       }
     },
@@ -1324,6 +1493,7 @@
       "article": "der",
       "lookalike": "thrush",
       "pronunciation": null,
+      "fact": "Der Pirol flötet hoch oben in den Bäumen, und der Papa ist knallgelb.",
       "photos": [
         {
           "file": "photos/pirol.heic",
@@ -1363,6 +1533,11 @@
           "file": "speech/collection.name/pirol.m4a",
           "sha256": "ba55478adc57d0b53993f7e0cb243131b48ed3745b329ceca94f45aaa6782f47",
           "text": "Pirol"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/pirol.m4a",
+          "sha256": "5418865a7fcaf10fbb9a72f63e1844bb6c8f245d65d59b4e7a7473bf2bcfdc71",
+          "text": "Der Pirol flötet hoch oben in den Bäumen, und der Papa ist knallgelb."
         }
       }
     },
@@ -1374,6 +1549,7 @@
       "article": "der",
       "lookalike": "warbler",
       "pronunciation": null,
+      "fact": "Der Neuntöter trägt eine schwarze Augenmaske und jagt Käfer.",
       "photos": [
         {
           "file": "photos/neuntoeter-4.heic",
@@ -1413,6 +1589,11 @@
           "file": "speech/collection.name/neuntoeter.m4a",
           "sha256": "113fb7f8eeb94775edfbd6b87c42a0784b08a681f26a54f645e7924b3ae26161",
           "text": "Neuntöter"
+        },
+        "species.fact": {
+          "file": "speech/species.fact/neuntoeter.m4a",
+          "sha256": "09d5e094ff3a8533bb066700d355bea48bc70884b4c581828585c47822b59a52",
+          "text": "Der Neuntöter trägt eine schwarze Augenmaske und jagt Käfer."
         }
       }
     }
