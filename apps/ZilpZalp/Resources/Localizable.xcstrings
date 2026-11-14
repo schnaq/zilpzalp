@@ -1718,13 +1718,13 @@
       }
     },
     "quiz.tricky.accessibility" : {
-      "comment" : "Appended to the VoiceOver label of the round button while the question is a tricky one, because the binoculars badge on it is not read out. Says only that the question is hard, never which photo is right",
+      "comment" : "VoiceOver label of the round button while the question is a tricky one, because the binoculars badge on it is not read out. %@ is the button's usual label. Says only that the question is hard, never which photo is right",
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Knifflige Frage"
+            "value" : "%@. Knifflige Frage"
           }
         }
       }

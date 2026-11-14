@@ -67,6 +67,6 @@ struct QuizSoundButton: View {
             String(localized: "quiz.sound.call.accessibility")
         }
         guard session.isTricky else { return action }
-        return "\(action). \(String(localized: "quiz.tricky.accessibility"))"
+        return String(format: String(localized: "quiz.tricky.accessibility"), action)
     }
 }

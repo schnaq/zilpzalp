@@ -149,6 +149,7 @@ struct DifficultyPicker: View {
                 .padding(.bottom, Self.scrollMargin)
             }
             .scrollBounceBehavior(.basedOnSize)
+            .scrollIndicatorsFlash(onAppear: true)
         }
         // Measured here rather than on a ramp, so the width is the same
         // whichever of the three is showing.

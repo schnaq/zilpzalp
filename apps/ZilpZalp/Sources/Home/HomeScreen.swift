@@ -21,10 +21,11 @@ import ZilpZalpUI
 /// **A second pill for the level.** How hard the questions are is a taste of
 /// the child like its collection, chosen before a game, so it sits beside the
 /// collection pill and opens a card of its own rather than hiding in the
-/// grown-ups' room. On a phone it drops the level's name: the two pills then
-/// share one row on a 375 pt iPhone, and a second row would cost the tiles
-/// height where a word costs nothing a child who cannot read would miss — it
-/// finds its level by the mosaic.
+/// grown-ups' room. On a phone it drops the level's name, and the collection
+/// pill drops its title too wherever that title would not fit beside it: a
+/// second row would cost the tiles about 76 pt of height on a phone, where a
+/// word costs nothing a child who cannot read would miss — it finds its
+/// collection by the photos and its level by the mosaic.
 struct HomeScreen: View {
     /// The two cards that open over the games.
     private enum PickerCard {
@@ -210,31 +211,37 @@ struct HomeScreen: View {
             let chosen = collections.filter { $0.isChosen(in: chosenCollections) }
             let level = difficultyLevels.first { $0.difficulty == difficulty }
             if !chosen.isEmpty || level != nil {
-                // Side by side only while the collection's title fits at its
-                // full size — `ViewThatFits` measures ideal widths — and
-                // stacked otherwise: to share the row, a long title would
-                // shrink below the 20 pt no text on a child's screen goes under.
+                // One row with the words while they fit at full size —
+                // `ViewThatFits` measures ideal widths — then one row of
+                // pictures only, and two rows only where not even that fits.
                 ViewThatFits(in: .horizontal) {
-                    HStack(spacing: isCompact ? ZSpacing.step3 : ZSpacing.step4) {
-                        pills(chosen, level)
-                    }
-                    VStack(spacing: ZSpacing.step3) {
-                        pills(chosen, level)
-                    }
+                    HStack(spacing: pillGap) { pills(chosen, level, titles: true) }
+                    HStack(spacing: pillGap) { pills(chosen, level, titles: false) }
+                    VStack(spacing: ZSpacing.step3) { pills(chosen, level, titles: true) }
                 }
             }
         }
     }
 
+    private var pillGap: CGFloat {
+        isCompact ? ZSpacing.step3 : ZSpacing.step4
+    }
+
     /// The collection pill, where there is a collection, and the level pill,
-    /// where there are levels — the latter without its name on a phone.
+    /// where there are levels — the latter never with its name on a phone.
     @ViewBuilder
-    private func pills(_ chosen: [CollectionEntry], _ level: DifficultyLevel?) -> some View {
+    private func pills(
+        _ chosen: [CollectionEntry],
+        _ level: DifficultyLevel?,
+        titles: Bool,
+    ) -> some View {
         if !chosen.isEmpty {
-            CollectionChip(entries: chosen) { picker = .collection }
+            CollectionChip(entries: chosen, showsTitle: titles) { picker = .collection }
         }
         if let level {
-            DifficultyChip(level: level, showsTitle: !isCompact) { picker = .difficulty }
+            DifficultyChip(level: level, showsTitle: titles && !isCompact) {
+                picker = .difficulty
+            }
         }
     }
 

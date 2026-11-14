@@ -53,8 +53,8 @@ private let previewCollections: [CollectionEntry] = [
 
 // The bundled pack alone: its one entry stands for every bird and carries the
 // pack's title (#262). The longest title the packs have does not fit beside
-// the level pill at full size on a phone, so the two pills stack.
-#Preview("One pack, pills stacked", traits: .fixedLayout(width: 390, height: 844)) {
+// the level pill at full size on a phone, so both pills show pictures only.
+#Preview("One pack, pictures only", traits: .fixedLayout(width: 390, height: 844)) {
     HomeScreen(
         avatar: "feather",
         games: [.names, .calls],
