@@ -95,7 +95,8 @@ public struct FeedbackReport: Hashable, Sendable {
 
     private let snapshot: FeedbackSnapshot
     private let target: FeedbackTarget
-    private let reason: FeedbackReason
+    /// What is wrong — the app spells it out in the subject.
+    public let reason: FeedbackReason
     private let note: String
 
     public init(

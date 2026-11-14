@@ -385,6 +385,246 @@
         }
       }
     },
+    "feedback.mail.subject" : {
+      "comment" : "Mail subject of a feedback report without a bird. %@ is the reason",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ZilpZalp-Feedback: %@"
+          }
+        }
+      }
+    },
+    "feedback.mail.subject.bird" : {
+      "comment" : "Mail subject of a feedback report. %1$@ is the bird's name, %2$@ the reason",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ZilpZalp-Feedback: %1$@ – %2$@"
+          }
+        }
+      }
+    },
+    "feedback.note" : {
+      "comment" : "Feedback sheet for grown-ups: placeholder of the optional text field",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Möchten Sie etwas dazuschreiben?"
+          }
+        }
+      }
+    },
+    "feedback.reason.blurry" : {
+      "comment" : "Feedback sheet for grown-ups: reason, the photo is blurry or poor; also in the mail subject",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Foto unscharf oder schlecht"
+          }
+        }
+      }
+    },
+    "feedback.reason.call" : {
+      "comment" : "Feedback sheet for grown-ups: reason, the call recording is poor; also in the mail subject",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ruf schlecht"
+          }
+        }
+      }
+    },
+    "feedback.reason.crop" : {
+      "comment" : "Feedback sheet for grown-ups: reason, the crop cuts the bird off; also in the mail subject",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ausschnitt schlecht"
+          }
+        }
+      }
+    },
+    "feedback.reason.name" : {
+      "comment" : "Feedback sheet for grown-ups: reason, the name or its pronunciation is wrong; also in the mail subject",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name oder Aussprache"
+          }
+        }
+      }
+    },
+    "feedback.reason.other" : {
+      "comment" : "Feedback sheet for grown-ups: reason, anything else; also in the mail subject",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sonstiges"
+          }
+        }
+      }
+    },
+    "feedback.reason.title" : {
+      "comment" : "Feedback sheet for grown-ups: row and dialog title for what is wrong",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Was stimmt nicht?"
+          }
+        }
+      }
+    },
+    "feedback.reason.wrongBird" : {
+      "comment" : "Feedback sheet for grown-ups: reason, the photo shows another bird; also in the mail subject",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Falscher Vogel"
+          }
+        }
+      }
+    },
+    "feedback.screenshot.hint" : {
+      "comment" : "Feedback sheet for grown-ups: the one line under the screenshot row saying what is attached",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nur dieser Bildschirm von ZilpZalp, sonst nichts."
+          }
+        }
+      }
+    },
+    "feedback.screenshot.no" : {
+      "comment" : "Feedback sheet for grown-ups: the screenshot stays on the device; row value and dialog choice, the default",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nicht mitschicken"
+          }
+        }
+      }
+    },
+    "feedback.screenshot.title" : {
+      "comment" : "Feedback sheet for grown-ups: row and dialog title, whether the app's screenshot goes with the mail",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Screenshot mitschicken"
+          }
+        }
+      }
+    },
+    "feedback.screenshot.yes" : {
+      "comment" : "Feedback sheet for grown-ups: the screenshot goes with the mail; row value and dialog choice",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mitschicken"
+          }
+        }
+      }
+    },
+    "feedback.send" : {
+      "comment" : "Feedback sheet for grown-ups: button that opens the system mail composer",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "E-Mail schreiben"
+          }
+        }
+      }
+    },
+    "feedback.share" : {
+      "comment" : "Feedback sheet for grown-ups: button that opens the share sheet when no mail account is set up",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feedback teilen"
+          }
+        }
+      }
+    },
+    "feedback.target.call" : {
+      "comment" : "Feedback sheet for grown-ups: choice for the call the question played (game 2 only)",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Der Ruf"
+          }
+        }
+      }
+    },
+    "feedback.target.other" : {
+      "comment" : "Feedback sheet for grown-ups: choice when the report is about none of the tiles",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Etwas anderes"
+          }
+        }
+      }
+    },
+    "feedback.target.title" : {
+      "comment" : "Feedback sheet for grown-ups: heading above the round's tiles, pick the one the report is about",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Welches Bild?"
+          }
+        }
+      }
+    },
+    "feedback.title" : {
+      "comment" : "Heading of the feedback sheet for grown-ups, behind the parental gate",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feedback"
+          }
+        }
+      }
+    },
     "gate.hint.wrong" : {
       "comment" : "Shown under the parental gate's task after a wrong answer. Never a reprimand and never a lockout — the numbers have already changed",
       "extractionState" : "manual",
