@@ -19,14 +19,17 @@ export const metadata: Metadata = {
 // PackModel.checkForNews (fetches the pack index at launch, at most every few
 // hours, for the dot on the grown-ups' button), PacksSection (the index and
 // previews once the grown-ups' area is open), PackDownloader (downloads a
-// grown-up starts). A grep for MetricKit
+// grown-up starts), FeedbackSheet (a mail the grown-up sends from their own
+// mail app or share sheet, screenshot only if they choose). A grep for MetricKit
 // over apps and packages finds nothing, so no diagnostics claim appears here.
 export default function Datenschutz() {
   return (
     <LegalPage title="Datenschutzerklärung">
       <h2>Kurz gesagt</h2>
       <p>
-        Die App ZilpZalp erhebt keine personenbezogenen Daten. Es gibt kein
+        Die App ZilpZalp erhebt keine personenbezogenen Daten. Nur wenn Sie uns
+        aus der App selbst eine Rückmeldung per E-Mail schicken, erhalten wir,
+        was darin steht. Es gibt kein
         Konto, keine Anmeldung, keine Werbung, kein Tracking und kein
         Analysewerkzeug. Was ein Kind in der App anlegt, bleibt auf dem Gerät
         und in Ihrer eigenen iCloud.
@@ -64,7 +67,9 @@ export default function Datenschutz() {
         ZilpZalp erhebt keine personenbezogenen Daten und gibt keine an Dritte
         weiter. Das Privacy Manifest der App (<code>PrivacyInfo.xcprivacy</code>)
         deklariert dementsprechend: kein Tracking, keine erhobenen Datenarten,
-        keine Tracking-Domains.
+        keine Tracking-Domains. Eine Ausnahme machen nur Sie selbst: Schicken
+        Sie uns aus der App eine Rückmeldung per E-Mail, erhalten wir diese
+        Nachricht (siehe 3.3).
       </p>
 
       <h3>2.2 Was die App speichert</h3>
@@ -215,6 +220,19 @@ export default function Datenschutz() {
         wenn es um ein Vertragsverhältnis geht. Wir löschen die Nachricht, sobald
         sie erledigt ist und keine Aufbewahrungspflicht entgegensteht.
       </p>
+      <p>
+        Aus einer laufenden Runde können Sie uns nach einem Bildschirmfoto eine
+        Rückmeldung zu einem Bild oder Ruf schicken. Die App bereitet dafür eine
+        E-Mail vor; versendet wird sie von Ihrer eigenen Mail-App über Ihren
+        E-Mail-Anbieter, und erst, wenn Sie dort auf „Senden“ tippen. Sie
+        enthält Ihren Text, das gewählte Bild und den Grund, technische Angaben
+        zu App und Gerät (App- und iOS-Version, Gerätemodell, Spiel,
+        Schwierigkeit und Frage) und, nur wenn Sie es einschalten, ein
+        Bildschirmfoto der App. Profilnamen, Sterne oder Sticker enthält sie
+        nicht. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO, unser
+        berechtigtes Interesse, Fehler in Bildern und Rufen zu beheben. Wir
+        löschen die Nachricht, sobald die Meldung erledigt ist.
+      </p>
 
       <h2>4. Rechtsgrundlagen</h2>
       <ul>
@@ -235,7 +253,8 @@ export default function Datenschutz() {
       </ul>
       <p>
         Für die App selbst gibt es keine Verarbeitung durch uns, weil sie keine
-        Daten an uns übermittelt.
+        Daten an uns übermittelt. Rückmeldungen, die Sie aus der App per
+        E-Mail schicken, sind E-Mail-Kontakt im Sinne von 3.3.
       </p>
 
       <h2>5. Speicherdauer</h2>
