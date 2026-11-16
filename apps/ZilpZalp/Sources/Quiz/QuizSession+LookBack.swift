@@ -32,7 +32,9 @@ extension QuizSession {
     /// Holds the round for the card and says where it opens: the question
     /// being spoken or played stops, and so does the pause after an answer —
     /// the last answer's too, so the round end never opens behind the card.
-    func startLookBack(at question: Int) -> LookBack {
+    /// `nil` once the round is over and the round end is on its way.
+    func startLookBack(at question: Int) -> LookBack? {
+        guard !isFinished else { return nil }
         suspend()
         return LookBack(question: question)
     }

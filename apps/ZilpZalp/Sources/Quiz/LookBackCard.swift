@@ -66,6 +66,9 @@ struct LookBackCard: View {
             .tabViewStyle(.page(indexDisplayMode: .always))
             // On the page's cream the dots alone would be white on white.
             .indexViewStyle(.page(backgroundDisplayMode: .always))
+            // A call or name asked for on one page must not run on under
+            // the next, with the rings on a bird it is not about.
+            .onChange(of: page) { session.suspend() }
         }
         .padding(ZSpacing.step5)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -135,8 +138,11 @@ struct LookBackCard: View {
                     dimmed: bird.id != answer?.id,
                     edge: edge,
                 ) {}
-                    // Looking, not answering: a tap here is no answer.
+                    // Looking, not answering: a tap here is no answer, and
+                    // VoiceOver hears a picture, the answer as the chosen one.
                     .allowsHitTesting(false)
+                    .accessibilityRemoveTraits(.isButton)
+                    .accessibilityAddTraits(bird.id == answer?.id ? .isSelected : [])
             }
         }
     }
