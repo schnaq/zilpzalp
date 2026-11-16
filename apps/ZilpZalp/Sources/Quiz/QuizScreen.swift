@@ -28,12 +28,6 @@ struct QuizScreen: View {
     /// largest leaf that fits ten of them across a 390 pt screen.
     private static let compactLeaf: CGFloat = 24
 
-    /// The four rubric tints, one per position in the grid. Position rather
-    /// than species: the tints are there to tell four squares apart, and a
-    /// tint that travelled with a bird would be a second, quieter way of
-    /// naming it.
-    private static let tones: [ChoiceTile.Tone] = [.wald, .beeren, .rufe, .sumpf]
-
     let game: Game
     /// The level the round is dealt at; see ``QuizSession/init(library:game:difficulty:)``.
     let difficulty: Difficulty
@@ -78,6 +72,9 @@ struct QuizScreen: View {
     /// it; see ``SwiftUI/View/feedbackOnScreenshot(session:isActive:)``.
     @State private var isOnScreen = false
 
+    /// The answered question the look-back card is open on, if it is up.
+    @State private var lookingBack: LookBack?
+
     /// A phone, or an iPad sharing its screen. It settles how big the parts
     /// around the answers are drawn — type step, sound button, leaf row,
     /// margins, the feedback band. Where those parts *stand* is measured, not
@@ -96,7 +93,10 @@ struct QuizScreen: View {
         }
         .background(ZColor.surfacePage)
         // Under the quit card, so the card covers the hint.
-        .feedbackOnScreenshot(session: session, isActive: isOnScreen && !leaving.isAsking)
+        .feedbackOnScreenshot(
+            session: session,
+            isActive: isOnScreen && !leaving.isAsking && lookingBack == nil,
+        )
         .quitQuestion($leaving, round: session) { dismiss() }
         // Every screen brings its own `TopBar`; the system bar would stack a
         // second, smaller back button above it.
@@ -163,6 +163,7 @@ struct QuizScreen: View {
                 onFinished(session.result(playedBy: player()))
             }
         }
+        .lookBack($lookingBack, session: session)
     }
 
     @ViewBuilder
@@ -255,7 +256,7 @@ struct QuizScreen: View {
             // child who is meant to find it. The position is all the label can
             // honestly say about a photo the game is asking about.
             label: String(format: String(localized: "quiz.tile.accessibility"), position + 1),
-            tone: Self.tones[position % Self.tones.count],
+            tone: QuizTile.tones[position % QuizTile.tones.count],
             phase: session.phase(for: bird),
             dimmed: session.isDimmed(bird),
             edge: edge,
@@ -356,11 +357,13 @@ struct QuizScreen: View {
             // The leaf fills the moment the answer lands, not one question
             // later: it is the smallest reward the screen has.
             total: total,
-            completed: session.isAnswered ? asked : session.index,
+            completed: session.answeredCount,
             current: session.index,
             label: String(localized: "quiz.progress.label"),
             value: String(format: String(localized: "quiz.progress.value"), asked, total),
             leafSize: isCompact ? Self.compactLeaf : QuizProgress.defaultLeafSize,
+            openLabel: String(localized: "quiz.lookBack.action"),
+            onOpen: { lookingBack = session.startLookBack(at: $0) },
         )
     }
 

@@ -39,7 +39,7 @@ final class QuizSession {
 
     /// The pack this round is drawn from, by species id — the only way back
     /// from a ``Round``'s identifiers to a bird with a name and a photo.
-    private let birds: [String: Bird]
+    let birds: [String: Bird]
 
     /// Every bird's call, resolved once when the session is built — only the
     /// birds that carry one on disk are in here, and in game 2 those are
@@ -48,18 +48,18 @@ final class QuizSession {
     /// Resolved up front for the same reason the photos are: a round asks its
     /// question the moment it appears, and looking a file up on the way to the
     /// speaker would put the disk between the child and the sound.
-    private let calls: [String: URL]
+    let calls: [String: URL]
 
     /// The species pool in manifest order, so that a seeded round is
     /// reproducible.
     private let species: [QuizSpecies]
 
-    private let announcer: SpeechAnnouncer
+    let announcer: SpeechAnnouncer
 
     /// Built for both games and used by one. It holds no recording until a
     /// call is played, so game 1 carries an empty object rather than an
     /// optional that would need unwrapping at every call site.
-    private let player = CallPlayer()
+    let player = CallPlayer()
 
     /// The pending move to the next question. Held so that leaving the screen
     /// can cancel it — a round that advances behind the child's back is a
@@ -68,7 +68,7 @@ final class QuizSession {
 
     /// The round being played and everything tapped in it. Replaced wholesale
     /// by ``resume()`` once the previous one is over.
-    private var play: RoundPlay
+    private(set) var play: RoundPlay
 
     /// The photos the tiles draw from, and which of them this round shows.
     private(set) var photos: QuizPhotos

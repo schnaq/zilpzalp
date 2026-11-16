@@ -22,6 +22,12 @@ import ZilpZalpUI
 /// border in proportion to the photo instead of covering it: they are drawn
 /// at one size whatever the square is.
 struct QuizTile: View {
+    /// The four rubric tints, one per position in the grid. Position rather
+    /// than species: the tints are there to tell four squares apart, and a
+    /// tint that travelled with a bird would be a second, quieter way of
+    /// naming it.
+    static let tones: [ChoiceTile.Tone] = [.wald, .beeren, .rufe, .sumpf]
+
     let image: Image?
     let label: String
     let tone: ChoiceTile.Tone

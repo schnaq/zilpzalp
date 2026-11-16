@@ -1921,6 +1921,30 @@
         }
       }
     },
+    "quiz.lookBack.action" : {
+      "comment" : "VoiceOver action on the leaf row once a question is answered. Opens the card that shows the round's answered questions again, on the latest one",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Frühere Fragen ansehen"
+          }
+        }
+      }
+    },
+    "quiz.lookBack.close" : {
+      "comment" : "VoiceOver label of the button that closes the look-back card and goes back to the round",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schließen"
+          }
+        }
+      }
+    },
     "quiz.progress.label" : {
       "comment" : "VoiceOver name of the leaf row in the top bar. Names the row; where the round stands is quiz.progress.value",
       "extractionState" : "manual",
