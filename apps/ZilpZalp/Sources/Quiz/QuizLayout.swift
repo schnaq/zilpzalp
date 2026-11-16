@@ -117,7 +117,7 @@ struct QuizLayout {
     /// a component behaves in less room than it wants is the component's
     /// business and the screen's, not the arithmetic's — and raising this
     /// floor to the component's would not conjure the room either.
-    private static func tileEdge(across: CGFloat, down: CGFloat) -> CGFloat {
+    static func tileEdge(across: CGFloat, down: CGFloat) -> CGFloat {
         max(ZSpacing.touchMinimum, min(maximumTile, min(across, down) / 2).rounded(.down))
     }
 }

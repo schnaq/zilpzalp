@@ -81,6 +81,15 @@ public struct RoundPlay: Hashable, Sendable {
         index >= round.questions.count
     }
 
+    /// How many questions are answered: every one behind ``index``, and the
+    /// current one from the moment its answer is tapped. Questions
+    /// `0 ..< answeredCount` are the ones whose answer was found as long as
+    /// ``advance()`` only follows a right tap — which is the one way the app
+    /// moves a round on.
+    public var answeredCount: Int {
+        min(index + (isAnswered ? 1 : 0), round.questions.count)
+    }
+
     /// Answers right at the first attempt. The one number the stars come
     /// from; see ``Scoring/stars(firstTryCorrect:)``.
     public var firstTryCorrect: Int {
