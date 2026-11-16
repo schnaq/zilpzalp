@@ -160,6 +160,35 @@ func aFinishedRoundStandsStill() throws {
     #expect(!play.isDimmed(right))
 }
 
+// MARK: - Looking back
+
+@Test("Nothing is answered before the first right tap")
+func answeredCountStartsAtZero() throws {
+    var play = try dealt()
+    #expect(play.answeredCount == 0)
+    _ = try play.tap(distractor(of: play))
+    #expect(play.answeredCount == 0)
+}
+
+@Test("A right answer counts at once, before the round moves on")
+func answeredCountCountsTheAnswer() throws {
+    var play = try dealt()
+    _ = try play.tap(answer(of: play))
+    #expect(play.answeredCount == 1)
+    play.advance()
+    #expect(play.answeredCount == 1)
+}
+
+@Test("A finished round has every question answered")
+func answeredCountOfAFinishedRound() throws {
+    var play = try dealt(questionCount: 3)
+    while !play.isFinished {
+        _ = try play.tap(answer(of: play))
+        play.advance()
+    }
+    #expect(play.answeredCount == 3)
+}
+
 // MARK: - What the round comes to
 
 @Test("Only answers right at the first attempt are counted")
