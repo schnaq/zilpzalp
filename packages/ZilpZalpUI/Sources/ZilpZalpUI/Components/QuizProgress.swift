@@ -14,6 +14,10 @@ import SwiftUI
 /// Spoken, the row splits in two: ``label`` names it and never changes,
 /// ``value`` says where it stands. Both are finished text from the caller.
 ///
+/// Given `onOpen`, an answered leaf can be tapped to look back at its
+/// question. Which question that is, and what looking back shows, is the
+/// caller's business: the row only says which leaf was tapped.
+///
 /// ```swift
 /// TopBar(center: {
 ///     QuizProgress(
@@ -69,6 +73,8 @@ public struct QuizProgress: View {
     private let leafSize: CGFloat
     private let label: String
     private let value: String?
+    private let openLabel: String?
+    private let onOpen: ((Int) -> Void)?
 
     /// Questions in this round, never negative.
     let total: Int
@@ -99,6 +105,10 @@ public struct QuizProgress: View {
     ///     and this package holds neither. The screen has the String Catalog;
     ///     it says the sentence, and this component puts it in the right slot.
     ///   - leafSize: Diameter of one leaf.
+    ///   - openLabel: The name of the VoiceOver action that opens the latest
+    ///     answered leaf, as finished text. Without it the row offers none.
+    ///   - onOpen: Called with the index of an answered leaf that was tapped.
+    ///     Without it no leaf reacts to a tap.
     public init(
         total: Int,
         completed: Int,
@@ -106,6 +116,8 @@ public struct QuizProgress: View {
         label: String,
         value: String? = nil,
         leafSize: CGFloat = QuizProgress.defaultLeafSize,
+        openLabel: String? = nil,
+        onOpen: ((Int) -> Void)? = nil,
     ) {
         let clampedTotal = max(total, 0)
         self.total = clampedTotal
@@ -114,6 +126,14 @@ public struct QuizProgress: View {
         self.label = label
         self.value = value
         self.leafSize = leafSize
+        self.openLabel = openLabel
+        self.onOpen = onOpen
+    }
+
+    /// The leaves a tap opens: the answered ones, and none when nobody
+    /// listens.
+    var openableLeaves: Range<Int> {
+        onOpen == nil ? 0 ..< 0 : 0 ..< completed
     }
 
     /// What the row draws, left to right. The whole visible state of this
@@ -136,8 +156,8 @@ public struct QuizProgress: View {
 
     public var body: some View {
         HStack(spacing: ZSpacing.step3) {
-            ForEach(Array(leafStates.enumerated()), id: \.offset) { leafAtIndex in
-                leaf(leafAtIndex.element)
+            ForEach(Array(leafStates.enumerated()), id: \.offset) { index, state in
+                leaf(state).overlay { opener(index) }
             }
         }
         // One row, one announcement: five separate "leaf" elements would be
@@ -147,6 +167,31 @@ public struct QuizProgress: View {
         // An empty value is no value: VoiceOver skips it, so a caller that
         // passes none simply gets the name.
         .accessibilityValue(value ?? "")
+        // The row stays one element, so looking back is an action on it: the
+        // latest answered question, from where the others are a swipe away.
+        .accessibilityActions {
+            if let openLabel, let onOpen, !openableLeaves.isEmpty {
+                Button(openLabel) { onOpen(completed - 1) }
+            }
+        }
+    }
+
+    /// What a tap on an answered leaf lands on: its whole slot in the row,
+    /// half the gap to either side, and at least a finger's height — 24 pt
+    /// leaves on a phone are too small to aim at one by one. It overhangs the
+    /// leaf without taking room in the layout, so the row draws as before.
+    /// A plain tap rather than a button: no press style may change the leaf.
+    @ViewBuilder
+    private func opener(_ index: Int) -> some View {
+        if let onOpen, openableLeaves.contains(index) {
+            Color.clear
+                .frame(
+                    width: leafSize + ZSpacing.step3,
+                    height: max(leafSize, ZSpacing.touchMinimum),
+                )
+                .contentShape(Rectangle())
+                .onTapGesture { onOpen(index) }
+        }
     }
 
     private func leaf(_ state: LeafState) -> some View {
@@ -196,6 +241,21 @@ enum QuizProgressMetrics {
         // A smaller leaf, for the narrower top bar on iPhone.
         QuizProgress(total: 5, completed: 2, current: 2, label: "Fortschritt", leafSize: 32)
     }
+    .padding(ZSpacing.step6)
+    .frame(maxWidth: .infinity, maxHeight: .infinity)
+    .background(ZColor.surfacePage)
+}
+
+#Preview("Answered leaves that open") {
+    QuizProgress(
+        total: 10,
+        completed: 4,
+        current: 4,
+        label: "Fortschritt",
+        leafSize: 24,
+        openLabel: "Frühere Fragen ansehen",
+        onOpen: { _ in },
+    )
     .padding(ZSpacing.step6)
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .background(ZColor.surfacePage)
