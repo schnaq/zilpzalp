@@ -1,4 +1,4 @@
-import SwiftUI
+import ZilpZalpCore
 import ZilpZalpData
 
 /// What the look-back card needs from a round: the questions already
@@ -17,20 +17,16 @@ extension QuizSession {
     /// The birds `question` offered, in the order the round put them; empty
     /// for a question outside the round.
     func choices(inQuestion question: Int) -> [Bird] {
-        guard round.questions.indices.contains(question) else { return [] }
-        return round.questions[question].choices.compactMap { birds[$0] }
+        self.question(question)?.choices.compactMap { birds[$0] } ?? []
     }
 
     /// The bird `question` asked for, `nil` outside the round.
     func answer(ofQuestion question: Int) -> Bird? {
-        guard round.questions.indices.contains(question) else { return nil }
-        return birds[round.questions[question].answer]
+        self.question(question).flatMap { birds[$0.answer] }
     }
 
-    /// The photo `bird`'s tile showed in `question` — the same one the child
-    /// saw then, since a round deals its photos per question up front.
-    func photo(for bird: Bird, question: Int) -> Image? {
-        photos.photo(bird.id, question: question)
+    private func question(_ index: Int) -> Round.Question? {
+        round.questions.indices.contains(index) ? round.questions[index] : nil
     }
 
     /// Holds the round for the card and says where it opens: the question

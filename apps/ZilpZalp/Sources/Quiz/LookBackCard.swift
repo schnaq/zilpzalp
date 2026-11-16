@@ -125,7 +125,7 @@ struct LookBackCard: View {
         return LazyVGrid(columns: columns, spacing: ZSpacing.gapTiles) {
             ForEach(choices, id: \.element.id) { position, bird in
                 QuizTile(
-                    image: session.photo(for: bird, question: question),
+                    image: session.photos.photo(bird.id, question: question),
                     label: String(
                         format: String(localized: "quiz.tile.accessibility"),
                         position + 1,
@@ -141,12 +141,13 @@ struct LookBackCard: View {
         }
     }
 
-    /// Half of whichever runs out first, never above the design's tile.
-    /// Below the tile's own floor ``QuizTile`` scales it, as in the quiz.
+    /// The quiz's own sizing rule, for two rows of two in `area`. Below the
+    /// tile's floor ``QuizTile`` scales it, as in the quiz.
     private static func edge(in area: CGSize) -> CGFloat {
-        let across = area.width - ZSpacing.gapTiles
-        let down = area.height - ZSpacing.gapTiles - 2 * ZShadow.ledgeLargeOffset
-        return max(0, min(ChoiceTile.defaultSize, min(across, down) / 2).rounded(.down))
+        QuizLayout.tileEdge(
+            across: area.width - ZSpacing.gapTiles,
+            down: area.height - ZSpacing.gapTiles - 2 * ZShadow.ledgeLargeOffset,
+        )
     }
 }
 
