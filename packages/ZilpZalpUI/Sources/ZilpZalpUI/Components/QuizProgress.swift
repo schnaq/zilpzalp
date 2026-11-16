@@ -181,16 +181,24 @@ public struct QuizProgress: View {
     /// leaves on a phone are too small to aim at one by one. It overhangs the
     /// leaf without taking room in the layout, so the row draws as before.
     /// A plain tap rather than a button: no press style may change the leaf.
+    ///
+    /// Every leaf gets one, and the live and upcoming leaves do nothing with
+    /// the tap. Without a target of their own, a tap on the live leaf snapped
+    /// to the answered one beside it and opened that question instead.
     @ViewBuilder
     private func opener(_ index: Int) -> some View {
-        if let onOpen, openableLeaves.contains(index) {
+        if let onOpen {
             Color.clear
                 .frame(
                     width: leafSize + ZSpacing.step3,
                     height: max(leafSize, ZSpacing.touchMinimum),
                 )
                 .contentShape(Rectangle())
-                .onTapGesture { onOpen(index) }
+                .onTapGesture {
+                    if openableLeaves.contains(index) {
+                        onOpen(index)
+                    }
+                }
         }
     }
 

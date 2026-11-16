@@ -30,9 +30,24 @@ struct LookBackCard: View {
 
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
+    private var isCompact: Bool {
+        horizontalSizeClass == .compact
+    }
+
+    /// The name the question was put with: game 1 only — in game 2 it would
+    /// be the answer.
+    private var writtenName: String? {
+        session.game == .names ? session.answer(ofQuestion: page)?.name : nil
+    }
+
     var body: some View {
         VStack(spacing: ZSpacing.step5) {
             header
+            // On a phone the name gets a row of its own: between the sound
+            // button and the close button, „Bachstelze" broke mid-word.
+            if isCompact, let writtenName {
+                name(writtenName)
+            }
             // The dots are the page indicator, never digits: the audience
             // cannot read them.
             TabView(selection: $page) {
@@ -41,6 +56,9 @@ struct LookBackCard: View {
                         grid(question, edge: Self.edge(in: area.size))
                             .frame(width: area.size.width, height: area.size.height)
                     }
+                    // The answer's glow reaches past its tile, and a page
+                    // clips whatever leaves it.
+                    .padding(ZSpacing.step3)
                     .padding(.bottom, Self.dotsRoom)
                     .tag(question)
                 }
@@ -54,8 +72,8 @@ struct LookBackCard: View {
         .background(ZColor.surfacePage)
     }
 
-    /// The question as it was put: the sound button, the written name in
-    /// game 1 only — in game 2 it would be the answer — and the way out.
+    /// The question as it was put — the sound button, and on an iPad the
+    /// name beside it — and the way out.
     private var header: some View {
         HStack(spacing: ZSpacing.step4) {
             SoundButton(
@@ -64,16 +82,8 @@ struct LookBackCard: View {
                 diameter: SoundButton.minimumDiameter,
             ) { session.askAgain(question: page) }
 
-            if session.game == .names, let name = session.answer(ofQuestion: page)?.name {
-                Text(verbatim: name)
-                    .typeStyle(
-                        horizontalSizeClass == .compact ? .headline : .title,
-                        .display,
-                        weight: .extraBold,
-                    )
-                    .foregroundStyle(ZColor.textStrong)
-                    .lineLimit(2)
-                    .minimumScaleFactor(ZType.Step.body.size / ZType.Step.headline.size)
+            if !isCompact, let writtenName {
+                name(writtenName)
             }
 
             Spacer(minLength: 0)
@@ -88,10 +98,19 @@ struct LookBackCard: View {
         .frame(height: SoundButton.minimumDiameter + ZShadow.ledgeLargeOffset)
     }
 
+    /// The bird's name in writing, in the quiz's type.
+    private func name(_ name: String) -> some View {
+        Text(verbatim: name)
+            .typeStyle(isCompact ? .headline : .title, .display, weight: .extraBold)
+            .foregroundStyle(ZColor.textStrong)
+            .lineLimit(1)
+            .minimumScaleFactor(ZType.Step.body.size / ZType.Step.headline.size)
+    }
+
     /// As in the quiz: game 1's button names the bird, game 2's must not.
     private var soundLabel: String {
-        if session.game == .names, let name = session.answer(ofQuestion: page)?.name {
-            String(format: String(localized: "quiz.sound.name.accessibility"), name)
+        if let writtenName {
+            String(format: String(localized: "quiz.sound.name.accessibility"), writtenName)
         } else {
             String(localized: "quiz.sound.call.accessibility")
         }
