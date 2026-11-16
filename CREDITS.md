@@ -582,8 +582,7 @@ the source declared.
 | Uhu | Photo | Artemy Savko | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://www.inaturalist.org/observations/232657564> |
 | Uhu | Call | Lionel Triboulin (XC1070276) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/1070276> |
 | Schleiereule | Photo | Frank Sengpiel | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/103487807> |
-| Schleiereule | Photo | Nathan Mesnildrey | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/98811449> |
-| Schleiereule | Photo | Christoph Moning | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/125001826> |
+| Schleiereule | Photo | Paul Lewis | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/181256084> |
 | Schleiereule | Call | Sonothèque ADVL (XC707104) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | <https://xeno-canto.org/707104> |
 | Steinkauz | Photo | SteveM4560 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/151025147> |
 | Steinkauz | Photo | SteveM4560 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | <https://www.inaturalist.org/observations/151119696> |

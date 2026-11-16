@@ -2763,20 +2763,12 @@
           "retrieved": "2026-10-21"
         },
         {
-          "file": "photos/schleiereule.heic",
-          "sha256": "d3cfb36515882ff3bc36cf9321c6e6384d6ddc0ab1a9d4ccbff7aefae8a1a373",
+          "file": "photos/schleiereule-6.heic",
+          "sha256": "f9028fc9a3a7a4f8e9d97f956aedd84ffb47c5bba60bbec8bfdb38771fb9a2b3",
           "license": "CC-BY-4.0",
-          "attribution": "Nathan Mesnildrey",
-          "sourceURL": "https://www.inaturalist.org/observations/98811449",
-          "retrieved": "2026-09-10"
-        },
-        {
-          "file": "photos/schleiereule-2.heic",
-          "sha256": "ca5afa45c11822fc453835638165051d9e048e5e319cf16ffa01dec5d255b870",
-          "license": "CC-BY-4.0",
-          "attribution": "Christoph Moning",
-          "sourceURL": "https://www.inaturalist.org/observations/125001826",
-          "retrieved": "2026-09-10"
+          "attribution": "Paul Lewis",
+          "sourceURL": "https://www.inaturalist.org/observations/181256084",
+          "retrieved": "2026-10-21"
         }
       ],
       "call": {
